@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : struts.xml
+    Created on : 13 July, 2016, 12:17 PM
+    Author     : Savita Wadhwani
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="login" namespace="/" extends="struts-default">
+        <action name="login" class="com.myMoneyBuddy.ActionClasses.LoginAction">
+            <result name="success">/welcome.jsp</result>
+            <result name="error">/ThankYouForRegistration.jsp</result>
+            <result name="input">/loginPage.jsp</result>
+        </action>
+    </package>
+    <package name="register" namespace="/" extends="struts-default">
+        <action name="register" class="com.myMoneyBuddy.ActionClasses.RegisterAction">
+            <result name="success">/ThankYouForRegistration.jsp</result>
+            <result name="input">/register.jsp</result>
+        </action>
+    </package>
+    <package name="ForgottenPassword" namespace="/" extends="struts-default">
+        <action name="ForgottenPassword" class="com.myMoneyBuddy.ActionClasses.ForgotPasswordAction">
+            <result name="success">/ThankYouForPasswordReset.jsp</result>
+            <result name="input">/forgottenPassword.jsp</result>
+        </action>
+    </package>
+    
+    <package name="ResetPassword" namespace="" extends="struts-default">
+        <action name="resetPassword" class="com.myMoneyBuddy.ActionClasses.ResetPasswordAction">
+            <result name="success">/loginPage.jsp</result>
+            <result name="input">/resetPassword.jsp</result>
+        </action>
+    </package>
+
+    <package name="KYCCheck" namespace="" extends="struts-default">
+        <action name="kycCheck" class="com.myMoneyBuddy.ActionClasses.KycCheckAction">
+            <result name="success">/KycAlreadyDone.jsp</result>
+            <result name="error">/KycNotDone.jsp</result>
+            <result name="input">/panCardVerification.jsp</result>
+        </action>
+    </package>
+    <package name="KycAlreadyDone" namespace="" extends="struts-default">
+        <action name="KycAlreadyDone" class="com.myMoneyBuddy.ActionClasses.KycAlreadyDoneAction">
+            <result name="success">/Payment.jsp</result>
+
+            <result name="input">/KycAlreadyDone.jsp</result>
+        </action>
+    </package>
+    <package name="KycNotDone" namespace="" extends="struts-default">
+        <action name="KycNotDone" class="com.myMoneyBuddy.ActionClasses.KycNotDoneAction">
+            <result name="success">/DownloadForm.jsp</result>
+
+            <result name="input">/KycNotDone.jsp</result>
+        </action>
+    </package>
+
+    <package name="estimate" namespace="" extends="struts-default">
+        <action name="estimate" class="com.myMoneyBuddy.ActionClasses.EstimateAction">
+            <result name="success">/taxBenifitCalculation.jsp</result>
+            <result name="input">/MutualFundPlan.jsp</result>
+        </action>
+    </package>
+
+   <package name="default" namespace="/" extends="jfreechart-default">
+       <action name="displayChart" class="com.myMoneyBuddy.ActionClasses.JfreeChartAction">
+            <result name="success" type="chart">
+                <param name="value">chart</param>
+                <param name="type">jpeg</param>
+                <param name="width">600</param>
+                <param name="height">400</param>
+            </result>
+        </action>
+   </package>
+    <package name="SanityCheckAction" namespace="" extends="struts-default">
+        <action name="SanityCheckAction" class="com.myMoneyBuddy.ActionClasses.SanityCheckAction">
+            <result name="success">Comparison.jsp</result>
+            <result name="CorrectChoice">CorrectChoice.jsp</result>
+            
+        </action>
+    </package>
+
+</struts>
