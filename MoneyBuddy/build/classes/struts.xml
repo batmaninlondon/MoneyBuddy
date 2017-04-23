@@ -81,8 +81,20 @@
         <action name="SanityCheckAction" class="com.myMoneyBuddy.ActionClasses.SanityCheckAction">
             <result name="success">Comparison.jsp</result>
             <result name="CorrectChoice">CorrectChoice.jsp</result>
-            
         </action>
     </package>
+    
+    <constant name="struts.devMode" value="true" />
+    <package name="getJSONResult" namespace="/" extends="json-default">
+     	<action name="getJSONResult" class="com.myMoneyBuddy.ActionClasses.JSONDataAction">
+       	 	<result type="json"/>
+     	</action>
+  	</package>
+  	
+  	 <package name="ajaxAction" namespace="/" extends="json-default">
+     	<action name="ajaxAction" class="com.myMoneyBuddy.ActionClasses.AjaxJsonAction">
+       	 	<result type="json">helpCentre.jsp</result>
+     	</action>
+  	</package>
 
 </struts>

@@ -35,8 +35,8 @@ public class QueryCustomer {
 		{
 			session.beginTransaction();
 			QueryCustomer queryUser = new QueryCustomer();
-			String customerId = queryUser.getCustomerId(emailId);
-			CustomerPasswordsHistory customer = (CustomerPasswordsHistory)session.get(CustomerPasswordsHistory.class,customerId);
+			int customerId = queryUser.getCustomerId(emailId);
+			CustomerPasswordsHistory customer = (CustomerPasswordsHistory)session.get(CustomerPasswordsHistory.class,Integer.toString(customerId));
 			String password = customer.getPassword();
 			session.getTransaction().commit();
 			
@@ -73,8 +73,8 @@ public class QueryCustomer {
 		{
 			session.beginTransaction();
 			QueryCustomer queryCustomer = new QueryCustomer();
-			String customerId = queryCustomer.getCustomerId(emailId);
-			Customers user = (Customers)session.get(Customers.class,customerId);
+			int customerId = queryCustomer.getCustomerId(emailId);
+			Customers user = (Customers)session.get(Customers.class,Integer.toString(customerId));
 			String hashedPassword = user.getPassword();
 			session.getTransaction().commit();
 			
@@ -98,7 +98,7 @@ public class QueryCustomer {
 
 	}
         
-	public String getCustomerId(String emailId) throws MoneyBuddyException {
+	public int getCustomerId(String emailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class : getCustomerId method : start");
 		
@@ -108,7 +108,7 @@ public class QueryCustomer {
 										.buildSessionFactory();
 		Session session = factory.openSession();
 
-		String customerId =  null;
+		int customerId =0 ;
 
 		try
 		{
@@ -118,7 +118,7 @@ public class QueryCustomer {
 			List<Customers> customersList = query.list();
 
 			for(Customers customer : customersList){
-				customerId =   customer.getCustomerId();
+				customerId =   Integer.parseInt(customer.getCustomerId());
 			}
 
 			session.getTransaction().commit();
@@ -250,8 +250,8 @@ public class QueryCustomer {
 			session.beginTransaction();
 
 			QueryCustomer queryCustomer = new QueryCustomer();
-			String customerId = queryCustomer.getCustomerId(emailId);
-			Customers customer = (Customers)session.get(Customers.class,customerId);
+			int customerId = queryCustomer.getCustomerId(emailId);
+			Customers customer = (Customers)session.get(Customers.class,Integer.toString(customerId));
 			String verificationStatus = customer.getVerificationStatus();
 			session.getTransaction().commit();
 			
@@ -289,14 +289,15 @@ public class QueryCustomer {
 		{
 			session.beginTransaction();
 			QueryCustomer queryUser = new QueryCustomer();
-			String customerId = queryUser.getCustomerId(emailId);
+			int customerId = queryUser.getCustomerId(emailId);
 			System.out.println("QueryCustomer class : existsUser method : customerId : "+customerId);
-			Customers customer = (Customers)session.get(Customers.class,customerId);
-			System.out.println("QueryCustomer class : existsUser method : customer : "+customer.getCustomerId());
+			Customers customer = (Customers)session.get(Customers.class,Integer.toString(customerId));
+			//System.out.println("QueryCustomer class : existsUser method : customer : "+customer.getCustomerId());
 			if (customer == null ) {
+				System.out.println("QueryCustomer class : existsUser method : customer is null ");
 				return false;
 			}
-
+			System.out.println("QueryCustomer class : existsUser method : customer is not null");
 			session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : existsUser method : end");

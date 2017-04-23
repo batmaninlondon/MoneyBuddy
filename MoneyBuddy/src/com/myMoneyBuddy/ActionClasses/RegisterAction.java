@@ -82,6 +82,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	System.out.println("RegisterAction class : execute method : email Id : "+getEmailId());
     	
     	if (customer.existsCustomer(getEmailId())) {
+    		System.out.println("RegisterAction class : execute method : UserAlreadyExists");
     		String str = "UserAlreadyExists";
     	    stream = new ByteArrayInputStream(str.getBytes());
         	return SUCCESS;
@@ -115,6 +116,8 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	
     	logger.debug("RegisterAction class : execute method : mail sent to "+getEmailId()+" to complete user registration");
     	logger.debug("RegisterAction class : execute method : end");
+    	
+    	System.out.println("RegisterAction class : execute method : returning success ");
     	
     	String str = "success";
 	    stream = new ByteArrayInputStream(str.getBytes());

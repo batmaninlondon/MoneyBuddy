@@ -677,7 +677,7 @@ function login() {
 
 function register() {
 	
-	alert('register function called !! ');
+	/*alert('register function called !! ');*/
     
 	var firstName = document.getElementById("first-name").value;
 	var lastName = document.getElementById("last-name").value;
@@ -851,7 +851,7 @@ function register() {
 		return;
 	}
 	
-	alert('emailId : '+emailId);
+	/*alert('emailId : '+emailId);*/
 	
     $.ajax({
       	
@@ -880,7 +880,7 @@ function register() {
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
         	else {
-        		alert('Inside newLogin error !!');
+        		/*alert('Inside newLogin error !!');*/
         		window.location='/MoneyBuddy/errorPage';
         	}
         },

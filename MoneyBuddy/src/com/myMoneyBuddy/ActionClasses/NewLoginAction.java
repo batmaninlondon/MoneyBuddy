@@ -87,7 +87,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	System.out.println("Hi there 1  ");
 	    	QueryCustomer queryCustomer = new QueryCustomer();
 	    	System.out.println("Hi there 2  ");
-	    	String customerId = queryCustomer.getCustomerId(getEmailId());
+	    	int customerId = queryCustomer.getCustomerId(getEmailId());
 	    	String customerName = queryCustomer.getCustomerName(getEmailId());
 	    	String customerMobileNumber = queryCustomer.getCustomerMobileNumber(getEmailId());
 	
@@ -105,12 +105,12 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	System.out.println("Hi there 4  ");
 	    	// Updating Last login timestamp
 	    	UpdateLastLoginTimestamp lastLogin = new UpdateLastLoginTimestamp();
-	    	lastLogin.updateLastLoginTimestamp(customerId);
+	    	lastLogin.updateLastLoginTimestamp(Integer.toString(customerId));
 	
 	    	System.out.println("Hi there 5  ");
 	    	// Update Current login timestamp
 	    	UpdateCurrentLoginTimestamp currentLogin = new UpdateCurrentLoginTimestamp();
-	    	currentLogin.updateCurrentLoginTimestamp(customerId);
+	    	currentLogin.updateCurrentLoginTimestamp(Integer.toString(customerId));
 	
 	    	System.out.println("emailId : "+getEmailId());
 	    	sessionMap.put("emailId", getEmailId());
@@ -123,7 +123,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	logger.debug("NewLoginAction class : execute method : stored hashedPassword : "+hashedPassword+" in session id : "+sessionMap.getClass().getName());
 	    	
 	    	QueryCustomerPortfolio queryCustomerPortfolio = new QueryCustomerPortfolio();
-	    	groupNamesList = (ArrayList)queryCustomerPortfolio.getGroupNameList(customerId);
+	    	groupNamesList = (ArrayList)queryCustomerPortfolio.getGroupNameList(Integer.toString(customerId));
 	    	
 	    	sessionMap.put("groupNamesList", groupNamesList);
 	    	logger.debug("NewLoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());

@@ -12,6 +12,7 @@
 	<link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
 </head>
     <body>
+    <!-- <p> LogOff Page </p> -->
         <%
         session.invalidate();
         String redirectURL = "/MoneyBuddy/myIndex";

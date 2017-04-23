@@ -60,13 +60,13 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
 
     	//Set the current password as the old password
     	QueryCustomer customer = new QueryCustomer();
-    	String customerId = customer.getCustomerId(getEmailId());
+    	int customerId = customer.getCustomerId(getEmailId());
     	UpdateOldPassword updateOldPassword = new UpdateOldPassword();
-    	updateOldPassword.updateOldPassword(customerId);
+    	updateOldPassword.updateOldPassword(Integer.toString(customerId));
 
     	//Update the password for the user
     	UpdateCustomerPassword updateUserPassword = new UpdateCustomerPassword();
-    	updateUserPassword.updatePassword(customerId, getEmailId(), getNewPassword());
+    	updateUserPassword.updatePassword(Integer.toString(customerId), getEmailId(), getNewPassword());
 
     	logger.debug("ResetPasswordAction class : execute method : end");
     	String str = "success";

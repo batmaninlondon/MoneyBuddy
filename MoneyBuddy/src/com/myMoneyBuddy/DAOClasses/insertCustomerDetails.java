@@ -60,9 +60,9 @@ public class insertCustomerDetails {
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
 
     		QueryCustomer queryCustomer = new QueryCustomer();
-    		String customerId = queryCustomer.getCustomerId(emailId);
+    		int customerId = queryCustomer.getCustomerId(emailId);
 
-    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(customerId,password,null);
+    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
     		sessionCustomerPasswordsHistory.beginTransaction();
     		sessionCustomerPasswordsHistory.save(tempUserPasswords);
 
@@ -74,7 +74,7 @@ public class insertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(customerId,null,frmtdDate);
+    		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(Integer.toString(customerId),null,frmtdDate);
 
     		sessionCustomerLoginActivity.beginTransaction();
     		sessionCustomerLoginActivity.save(tempUserTimeDetails);
