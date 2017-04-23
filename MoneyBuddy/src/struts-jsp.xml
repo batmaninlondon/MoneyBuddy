@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : struts.xml
+    Created on : 19 Apr, 2017, 04:17 PM
+    Author     : Savita Wadhwani
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"   
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <package name="aboutUs" namespace="/" extends="struts-default">
+	    <action name="aboutUs">
+	    	<result>/aboutUs.jsp</result>
+		</action>
+	</package>
+	<package name="blog" namespace="/" extends="struts-default">
+	    <action name="blog">
+	    	<result>/blog.jsp</result>
+		</action>
+	</package>
+	<package name="bseDashboard" namespace="/" extends="struts-default">
+	    <action name="bseDashboard">
+	    	<result>/bseDashboard.jsp</result>
+		</action>
+	</package>
+	<package name="clientDetails" namespace="/" extends="struts-default">
+	    <action name="clientDetails">
+	    	<result>/clientDetails.jsp</result>
+		</action>
+	</package>
+	<package name="dashboard" namespace="/" extends="struts-default">
+	    <action name="dashboard">
+	    	<result>/dashboard.jsp</result>
+		</action>
+	</package>
+	<package name="downloadForm" namespace="/" extends="struts-default">
+	    <action name="downloadForm">
+	    	<result>/downloadForm.jsp</result>
+		</action>
+	</package>
+	
+	<package name="errorPage" namespace="/" extends="struts-default">
+	    <action name="errorPage">
+	    	<result>/errorPage.jsp</result>
+		</action>
+	</package>
+	<package name="forgottenPassword" namespace="/" extends="struts-default">
+	    <action name="forgottenPassword">
+	    	<result>/forgottenPassword.jsp</result>
+		</action>
+	</package>
+	<package name="headerLoggedIn" namespace="/" extends="struts-default">
+	    <action name="headerLoggedIn">
+	    	<result>/headerLoggedIn.jsp</result>
+		</action>
+	</package>
+	<package name="headerLoggedOff" namespace="/" extends="struts-default">
+	    <action name="headerLoggedOff">
+	    	<result>/headerLoggedOff.jsp</result>
+		</action>
+	</package>
+	<package name="help" namespace="/" extends="struts-default">
+	    <action name="help">
+	    	<result>/help.jsp</result>
+		</action>
+	</package>
+	
+	<package name="investmentStyle" namespace="/" extends="struts-default">
+	    <action name="investmentStyle">
+	    	<result>/investmentStyle.jsp</result>
+		</action>
+	</package>
+	<package name="kycNotDone" namespace="/" extends="struts-default">
+	    <action name="kycNotDone">
+	    	<result>/kycNotDone.jsp</result>
+		</action>
+	</package>
+	<package name="login" namespace="/" extends="struts-default">
+	    <action name="login">
+	    	<result>/login.jsp</result>
+		</action>
+	</package>
+	<package name="logOff" namespace="/" extends="struts-default">
+	    <action name="logOff">
+	    	<result>/logOff.jsp</result>
+		</action>
+	</package>
+	<package name="myIndex" namespace="/" extends="struts-default">
+	    <action name="myIndex">
+	    	<result>/myIndex.jsp</result>
+		</action>
+	</package>
+	
+	<package name="newErrorPage" namespace="/" extends="struts-default">
+	    <action name="newErrorPage">
+	    	<result>/newErrorPage.jsp</result>
+		</action>
+	</package>
+	<package name="paymentFailure" namespace="/" extends="struts-default">
+	    <action name="paymentFailure">
+	    	<result>/paymentFailure.jsp</result>
+		</action>
+	</package>
+	<package name="register" namespace="/" extends="struts-default">
+	    <action name="register">
+	    	<result>/register.jsp</result>
+		</action>
+	</package>
+	<package name="resetPassword" namespace="/" extends="struts-default">
+	    <action name="resetPassword">
+	    	<result>/resetPassword.jsp</result>
+		</action>
+	</package>
+	<package name="saveTax" namespace="/" extends="struts-default">
+	    <action name="saveTax">
+	    	<result>/saveTax.jsp</result>
+		</action>
+	</package>
+	
+	<package name="thankYou" namespace="/" extends="struts-default">
+	    <action name="thankYou">
+	    	<result>/thankYou.jsp</result>
+		</action>
+	</package>
+	<package name="thankYouForRegistration" namespace="/" extends="struts-default">
+	    <action name="thankYouForRegistration">
+	    	<result>/thankYouForRegistration.jsp</result>
+		</action>
+	</package>
+	<package name="upfrontInvestment" namespace="/" extends="struts-default">
+	    <action name="upfrontInvestment">
+	    	<result>/upfrontInvestment.jsp</result>
+		</action>
+	</package>
+	<package name="userVerification" namespace="/" extends="struts-default">
+	    <action name="userVerification">
+	    	<result>/userVerification.jsp</result>
+		</action>
+	</package>
+	<package name="whyInvest" namespace="/" extends="struts-default">
+	    <action name="whyInvest">
+	    	<result>/whyInvest.jsp</result>
+		</action>
+	</package>
+	
+
+</struts>

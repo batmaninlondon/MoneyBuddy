@@ -1,34 +1,31 @@
-<%-- 
-    Document   : userVerification
-    Created on : 18 Aug, 2016, 2:00:32 AM
-    Author     : ADMIN
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.myMoneyBuddy.queryClasses.UpdateUserVerification" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ page import="com.myMoneyBuddy.DAOClasses.insertCustomerDetails" %>
 <%@ page import="java.net.URL" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>userVerification Page</title>
-    </head>
-    <body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>User Verification Page</title>
+<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
+</head>
+<body>
 
-<%
-    //URL url = new URL(request.getRequestURL());
-    //if (request.getAttribute("hash")!=null) {
-    String hash = (String)request.getParameter("hash");
-    System.out.println("hello from jsp : value of hash : "+hash);
-    UpdateUserVerification user = new UpdateUserVerification();
-    user.UserVerification(hash);
-    //}
-    String redirectURL = "http://localhost:8080/MoneyBuddy/loginPage.jsp";
-    response.sendRedirect(redirectURL);
-%>
+	<%
+	    //URL url = new URL(request.getRequestURL());
+	    //if (request.getAttribute("hash")!=null) {
+	    String hashedPassword = (String)request.getParameter("hashedPassword");
+	    System.out.println("hello from  jsp : value of hashedPassword : "+hashedPassword);
+	    insertCustomerDetails customer = new insertCustomerDetails();
+	    customer.updateVerificationStatus(hashedPassword);
+	    //}
+	    String redirectURL = "http://localhost:8080/MoneyBuddy/login";
+	    response.sendRedirect(redirectURL);
+	%>
 
-
-    </body>
+	<script type="text/javascript" src="assets/js/JQuery.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>	
+</body>
 </html>

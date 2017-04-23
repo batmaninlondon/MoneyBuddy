@@ -1,44 +1,54 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.mailerClasses.sendMail;
-import com.myMoneyBuddy.queryClasses.QueryUser;
-import com.myMoneyBuddy.queryClasses.UpdateCurrentLoginTimestamp;
-import com.myMoneyBuddy.queryClasses.insertUser;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.insertCustomerDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.opensymphony.xwork2.ActionSupport;
-import java.text.SimpleDateFormat;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Map;
+
+/*import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.StringUtils;*/
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
-/**
- *
- * @author Savita Wadhwani
- */
-public class RegisterAction extends ActionSupport{
+public class RegisterAction extends ActionSupport  implements SessionAware{
 
-    private String firstName;
+	Logger logger = Logger.getLogger(RegisterAction.class);
+	private SessionMap<String, Object> sessionMap;
+	
+	private String firstName;
     private String lastName;
     private String password;
     private String confirmPassword;
-    private String email;
-    private String mobile;
+    private String emailId;
+    private String mobileNumber;
     public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/MoneyBuddy/userVerification.jsp";
-    QueryUser user = new QueryUser();
-    insertUser newUser = new insertUser();
+    QueryCustomer customer = new QueryCustomer();
+    insertCustomerDetails newCustomer = new insertCustomerDetails();
     
-
-    String regexEmail = "^(.+)@(.+)$";
+   /* String regexEmail = "^(.+)@(.+)$";
     String regexMobile = "\\d+";
     Pattern patternEmail = Pattern.compile(regexEmail);
-    Pattern patternMobile = Pattern.compile(regexMobile);
+    Pattern patternMobile = Pattern.compile(regexMobile);*/
 
-    public void validate() {
+    private InputStream stream;
+    
+/*    public void validate() {
+    	logger.debug("RegisterAction class : validate method : start");
+    	
         if ( StringUtils.isEmpty(getFirstName()) )
             addFieldError("firstName","first name can't be blank");
         else if (StringUtils.isEmpty(getLastName()))
@@ -49,53 +59,94 @@ public class RegisterAction extends ActionSupport{
             addFieldError("confirmPassword","Confirm Password can't be blank");
         else if (!getPassword().equals(getConfirmPassword()))
             addFieldError("confirmPassword","Confirm password doesn't match with the above password");
-        else  if (StringUtils.isEmpty(getEmail()) )
-            addFieldError("email","Email can't be blank");
-        else if (!patternEmail.matcher(email).matches())
-            addFieldError("email","Please enter a valid emil address");
-        else if (user.existsUser(getEmail()))
+        else  if (StringUtils.isEmpty(getEmailId()) )
+            addFieldError("emailId","Email can't be blank");
+        else if (!patternEmail.matcher(emailId).matches())
+            addFieldError("emailId","Please enter a valid emil address");
+        else if (customer.existsCustomer(getEmailId()))
             addFieldError("emailId"," User already exists. Please choose a different email Id");
-        else if( StringUtils.isEmpty(getMobile()))
-            addFieldError("mobile","Mobile No. can't be blank");
-        else if (getMobile().length()!=10)
-            addFieldError("mobile","Please enter a valid mobile number");
-        else if (!patternMobile.matcher(mobile).matches())
-            addFieldError("mobile","Please enter a valid mobile number");
+        else if( StringUtils.isEmpty(getMobileNumber()))
+            addFieldError("mobileNumber","Mobile No. can't be blank");
+        else if (getMobileNumber().length()!=10)
+            addFieldError("mobileNumber","Please enter a valid mobile number");
+        else if (!patternMobile.matcher(mobileNumber).matches())
+            addFieldError("mobileNumber","Please enter a valid mobile number");
 
-    }
+        logger.debug("RegisterAction class : validate method : end");
+    }*/
     public String execute() {
-        DesEncrypter desEncrypter = new DesEncrypter(getEmail());
-        String hash = desEncrypter.encrypt(getPassword());
-        String subject="[MoneyBuddy] Please verify your email address.";
+    	try {
+    	
+    	logger.debug("RegisterAction class : execute method : start");
+    	
+    	System.out.println("RegisterAction class : execute method : email Id : "+getEmailId());
+    	
+    	if (customer.existsCustomer(getEmailId())) {
+    		String str = "UserAlreadyExists";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+        	return SUCCESS;
+    	}
+    	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
+    	String hashedPassword = desEncrypter.encrypt(getPassword());
+    	String subject="[MoneyBuddy] Please verify your email address.";
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        String frmtdDate = dateFormat.format(date);
+    	/*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
+    	/*Date date = new Date();
+    	String frmtdDate = dateFormat.format(date);*/
 
-        
-        newUser.insertUser(getFirstName(), getLastName(), getPassword(), getEmail(), getMobile(),hash,"NO");
-        sendMail sendMail = new sendMail();
-        System.out.println(" Calling send email function from register user.");
-        //email.sendEmail("savita.wadhwani@gmail.com", "Test mail", "Hi there from java code.");
-        System.out.println(" email id is : "+getEmail());
-                   String link = MAIL_ForgotPassword_SITE_LINK+"?hash="+hash;
-           //link = link+"?hash="+hash;
-           StringBuilder bodyText = new StringBuilder();
-            bodyText.append("<div>")
-                 .append("  Dear User<br/><br/>")
-                 .append("  Thank you for registration. Your mail ("+getEmail()+") is under verification<br/>")
-                 .append("  Please click <a href=\""+link+"\">here</a> or open below link in browser<br/>")
-                 .append("  <a href=\""+link+"\">"+link+"</a>")
-                 .append("  <br/><br/>")
-                 .append("  Thanks,<br/>")
-                 .append("  SodhanaLibrary Team")
-                 .append("</div>");
+    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword, "NO");
+    	sendMail sendMail = new sendMail();
 
-        sendMail.MailSending(getEmail(),hash,link,bodyText,subject);
-        System.out.println(" send email function completed from register user.");
-        return SUCCESS;
+    	String link = MAIL_ForgotPassword_SITE_LINK+"?hashedPassword="+hashedPassword;
+
+    	StringBuilder bodyText = new StringBuilder();
+    	bodyText.append("<div>")
+		    	.append("  Dear User<br/><br/>")
+		    	.append("  Thank you for registration. Your mail ("+getEmailId()+") is under verification<br/>")
+		    	.append("  Please click <a href=\""+link+"\">here</a> or open below link in browser<br/>")
+		    	.append("  <a href=\""+link+"\">"+link+"</a>")
+		    	.append("  <br/><br/>")
+		    	.append("  Thanks,<br/>")
+		    	.append("  SodhanaLibrary Team")
+		    	.append("</div>");
+
+    	sendMail.MailSending(getEmailId(),bodyText,subject);
+    	System.out.println(" send email function completed from register user.");
+    	
+    	logger.debug("RegisterAction class : execute method : mail sent to "+getEmailId()+" to complete user registration");
+    	logger.debug("RegisterAction class : execute method : end");
+    	
+    	String str = "success";
+	    stream = new ByteArrayInputStream(str.getBytes());
+    	return SUCCESS;
+    	} catch (MoneyBuddyException e) {	
+    		logger.debug("RegisterAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+			e.printStackTrace();
+			
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+			return ERROR;
+		} 
+    	catch (Exception e) {	
+    		logger.debug("RegisterAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			e.printStackTrace();
+			
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+			return ERROR;
+		}
     }
 
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = (SessionMap<String, Object>)sessionMap;
+    }
+    
+    
+	public SessionMap<String, Object> getSession() {
+		return sessionMap;
+	}
+	
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -104,20 +155,20 @@ public class RegisterAction extends ActionSupport{
         this.confirmPassword = confirmPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getPassword() {
@@ -143,6 +194,12 @@ public class RegisterAction extends ActionSupport{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+	public InputStream getStream() {
+		return stream;
+	}
+	public void setStream(InputStream stream) {
+		this.stream = stream;
+	}
 
 
 }

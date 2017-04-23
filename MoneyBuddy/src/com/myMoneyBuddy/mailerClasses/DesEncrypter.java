@@ -1,28 +1,38 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package com.myMoneyBuddy.mailerClasses;
-
 /**
  *
  * @author ADMIN
  */
+
+package com.myMoneyBuddy.mailerClasses;
+
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
+import org.apache.log4j.Logger;
+
+import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+
 public class DesEncrypter {
 
-    Cipher ecipher;
+	Logger logger = Logger.getLogger(DesEncrypter.class);
+	
+	Cipher ecipher;
     Cipher dcipher;
 
     byte[] salt =  {
@@ -32,8 +42,10 @@ public class DesEncrypter {
 
     int iterationCount = 3;
 
-    public DesEncrypter(String passPhrase) {
+    public DesEncrypter(String passPhrase) throws MoneyBuddyException {
 
+    	logger.debug("DesEncrypter class : DesEncrypter method : start");
+    	
         try{
 
             KeySpec keySpec = new PBEKeySpec(passPhrase.toCharArray(), salt, iterationCount);
@@ -47,47 +59,83 @@ public class DesEncrypter {
             ecipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
             dcipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
 
-        } catch (java.security.InvalidAlgorithmParameterException e){
-        } catch (java.security.spec.InvalidKeySpecException e){
-        } catch (javax.crypto.NoSuchPaddingException e){
-        } catch (java.security.NoSuchAlgorithmException e){
-        } catch (java.security.InvalidKeyException e){
-        }
+            logger.debug("DesEncrypter class : DesEncrypter method : end");
+            
+        } 
+        catch (InvalidAlgorithmParameterException|InvalidKeySpecException|NoSuchPaddingException|NoSuchAlgorithmException|InvalidKeyException e)
+        {
+        	logger.error("DesEncrypter class : DesEncrypter method : Caught Exception");
+        	e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+        } 
+        catch (Exception e ) {
+        	logger.error("DesEncrypter class : DesEncrypter method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+        
     }
 
-    public String encrypt(String str){
+    public String encrypt(String str) throws MoneyBuddyException {
 
+    	logger.debug("DesEncrypter class : encrypt method : start");
+    	
         try{
 
             byte[] utf8 = str.getBytes("UTF8");
             byte[] enc  = ecipher.doFinal(utf8);
 
+            logger.debug("DesEncrypter class : encrypt method : end");
+            
             return new sun.misc.BASE64Encoder().encode(enc);
 
-        } catch (javax.crypto.BadPaddingException e){
-        } catch (IllegalBlockSizeException e){
-        } catch (UnsupportedEncodingException e){
-        }
+        } 
+        catch (BadPaddingException|IllegalBlockSizeException|UnsupportedEncodingException e)
+        {
+        	logger.error("DesEncrypter class : encrypt method : Caught Exception");
+        	e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+        } 
+        catch (Exception e ) {
+        	logger.error("DesEncrypter class : encrypt method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
 
-        return null;
     }
 
-    public String decrypt(String str){
+    public String decrypt(String str) throws MoneyBuddyException {
 
+    	logger.debug("DesEncrypter class : decrypt method : start");
+    	
         try{
 
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
             byte[] utf8 = dcipher.doFinal(dec);
 
+            logger.debug("DesEncrypter class : decrypt method : end");
+            
             return new String(utf8,"UTF8");
 
-        } catch (javax.crypto.BadPaddingException e){
-        } catch (IllegalBlockSizeException e){
-        } catch (UnsupportedEncodingException e){
-        } catch (java.io.IOException e){
-        }
+        } 
+        catch (BadPaddingException|IllegalBlockSizeException|UnsupportedEncodingException e)
+        {
+        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+        	e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+        } 
 
-        return null;
+        catch (IOException e)
+        {
+        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+        	e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+        }
+        catch (Exception e ) {
+        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
     }
 
     

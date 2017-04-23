@@ -1,73 +1,117 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package com.myMoneyBuddy.ActionClasses;
-
-import com.myMoneyBuddy.queryClasses.QueryUser;
-import com.myMoneyBuddy.queryClasses.UpdateOldPassword;
-import com.myMoneyBuddy.queryClasses.UpdateUserPassword;
-import com.opensymphony.xwork2.ActionSupport;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 /**
  *
  * @author Savita Wadhwani
  */
 
-public class ResetPasswordAction extends ActionSupport{
-    private String email;
-    private String hash;
+package com.myMoneyBuddy.ActionClasses;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateOldPassword;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerPassword;
+import com.opensymphony.xwork2.ActionSupport;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
+public class ResetPasswordAction extends ActionSupport implements SessionAware {
+	
+	Logger logger = Logger.getLogger(ResetPasswordAction.class);
+    private String emailId;
+    private String hashedPassword;
     private String newPassword;
     private String confirmPassword;
 
     HttpServletRequest request;
-    //public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/MoneyBuddy/forgottenPassword.jsp";
 
-    QueryUser user = new QueryUser();
+    QueryCustomer user = new QueryCustomer();
 
-    @Override
+    private SessionMap<String, Object> sessionMap;
+    private InputStream stream;
+    
+    /*@Override
     public void validate()  {
-         if(StringUtils.isEmpty(getNewPassword())  )
-            addFieldError("newPassword","Password can't be blank!");
+    	logger.debug("ResetPasswordAction class : validate method : start");
 
-         else if(StringUtils.isEmpty(getConfirmPassword())  )
-            addFieldError("confirmPassword","Password can't be blank!");
-         else if(!getNewPassword().equals(getConfirmPassword())  )
-            addFieldError("confirmPassword","The Password do not match.");
-    }
+    	if(StringUtils.isEmpty(getNewPassword())  )
+    		addFieldError("newPassword","Password can't be blank!");
+
+    	else if(StringUtils.isEmpty(getConfirmPassword())  )
+    		addFieldError("confirmPassword","Password can't be blank!");
+    	else if(!getNewPassword().equals(getConfirmPassword())  )
+    		addFieldError("confirmPassword","The Password do not match.");
+
+    	logger.debug("ResetPasswordAction class : validate method : end");
+    }*/
 
     @Override
-        public String execute() {
+    public String execute() {
         
-            System.out.println(" Inside ResetPasswordAction: Value of hash : "+getHash());
-            System.out.println(" Inside ResetPasswordAction: Value of email : "+getEmail());
-            //Set the current password as the old password
-            UpdateOldPassword updateOldPassword = new UpdateOldPassword();
-            updateOldPassword.updateOldPassword(getEmail());
+    	try {
+    	
+    	logger.debug("ResetPasswordAction class : execute method : start");
 
-            //Update the password for the user
-            UpdateUserPassword updateUserPassword = new UpdateUserPassword();
-            updateUserPassword.UpdatePassword(getEmail(), getNewPassword());
-            return SUCCESS;
+    	//Set the current password as the old password
+    	QueryCustomer customer = new QueryCustomer();
+    	String customerId = customer.getCustomerId(getEmailId());
+    	UpdateOldPassword updateOldPassword = new UpdateOldPassword();
+    	updateOldPassword.updateOldPassword(customerId);
+
+    	//Update the password for the user
+    	UpdateCustomerPassword updateUserPassword = new UpdateCustomerPassword();
+    	updateUserPassword.updatePassword(customerId, getEmailId(), getNewPassword());
+
+    	logger.debug("ResetPasswordAction class : execute method : end");
+    	String str = "success";
+	    stream = new ByteArrayInputStream(str.getBytes());
+	    if(sessionMap!=null){  
+            sessionMap.invalidate();  
+        } 
+
+    	return SUCCESS;
+    	}catch (MoneyBuddyException e) {	
+    		logger.debug("ResetPasswordAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+			e.printStackTrace();
+			
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+			return ERROR;
+		} 
+    	catch (Exception e) {	
+    		logger.debug("ResetPasswordAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			e.printStackTrace();
+			
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+			return ERROR;
+		}
     }
-
-    	public void setServletRequest(HttpServletRequest request) {
+ 
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = (SessionMap)sessionMap;
+    }
+    
+    public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-
+        
 	public HttpServletRequest getServletRequest() {
 		return this.request;
 	}
-    public String getHash() {
-        return hash;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public String getConfirmPassword() {
@@ -86,14 +130,20 @@ public class ResetPasswordAction extends ActionSupport{
         this.newPassword = newPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
+	public InputStream getStream() {
+		return stream;
+	}
 
+	public void setStream(InputStream stream) {
+		this.stream = stream;
+	}
 
 }
