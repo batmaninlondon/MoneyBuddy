@@ -93,7 +93,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	String subject ;
 	    	sendMail sendmail = new sendMail();
 	    	StringBuilder bodyText = new StringBuilder();
-	    	String MAIL_SITE_LINK = "http://localhost:8080/MoneyBuddy/";
+	    	String MAIL_SITE_LINK = "www.quantwealth.in/login";
     	
     	
 	    	System.out.println("Inside payment execute mehtod - start ");

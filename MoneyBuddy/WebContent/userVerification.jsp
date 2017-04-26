@@ -20,7 +20,7 @@
 	    insertCustomerDetails customer = new insertCustomerDetails();
 	    customer.updateVerificationStatus(hashedPassword);
 	    //}
-	    String redirectURL = "http://localhost:8080/MoneyBuddy/login";
+	    String redirectURL = "login";
 	    response.sendRedirect(redirectURL);
 	%>
 

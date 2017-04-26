@@ -42,12 +42,12 @@
 		<div   class="col-md-3"></div>
 		<div  class="InvestmentStyle-diamond-img col-md-3">
 			<!-- <img src="images/pattern.jpg" id="pattern-image"> -->
-			<p class="diamond-text" ><a href="upfrontInvestment?type=ONE_TIME" >Looking for One time Investment</a></p> 
+			<p class="diamond-text" ><a href="upfrontInvestment" >Looking for One time Investment</a></p> 
 		</div>
 		<!-- <div   class="col-md-2"></div> -->
 		<div   class="InvestmentStyle-diamond-img col-md-3">
 			<!-- <img src="images/pattern1.jpg" id="pattern-image"> -->
-			<p class="diamond-text"><a href="upfrontInvestment?type=MONTHLY" >Looking for Monthly Investment</a></p>
+			<p class="diamond-text"><a href="sipInvestment" >Looking for Monthly Investment</a></p>
 		</div>
 		<div   class="col-md-3"></div>
 	</div>

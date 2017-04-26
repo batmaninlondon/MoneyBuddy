@@ -35,7 +35,8 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     private String confirmPassword;
     private String emailId;
     private String mobileNumber;
-    public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/MoneyBuddy/userVerification.jsp";
+    //public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/userVerification";
+    public final String MAIL_ForgotPassword_SITE_LINK = "www.quantwealth.in/userVerification";
     QueryCustomer customer = new QueryCustomer();
     insertCustomerDetails newCustomer = new insertCustomerDetails();
     

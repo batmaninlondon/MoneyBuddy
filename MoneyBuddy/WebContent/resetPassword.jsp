@@ -45,11 +45,7 @@
 
     String emailId = (String)session.getAttribute("emailId");
     System.out.println("value of hash emailId: "+emailId);
-    //UpdateUserVerification user = new UpdateUserVerification();
-    //user.UserVerification(hash);
-    //}
-    //String redirectURL = "http://localhost:8080/MoneyBuddy/loginPage.jsp";
-    //response.sendRedirect(redirectURL);
+
 %>
 
 	<input type="hidden" id="email-id" name="emailId" value="<%=emailId%>">

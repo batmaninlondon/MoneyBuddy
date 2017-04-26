@@ -18,7 +18,7 @@
 
 </head>
 
-<body background="images/backgroundImage5.jpg" onload="setInitialUpfrontInvestment();">
+<body background="images/backgroundImage5.jpg" onload="setInitialSipInvestment();">
 
 	<div id="wrap">
 		<img class="bgfade" src="images/backgroundImage1.jpg" /> 
@@ -55,7 +55,7 @@
 					<p class="medium-text">Do you have a goal in mind?</p>
 				</div>
 			</div>
-			<div id="upfront-text" class="row row-fourth">
+			<%-- <div id="upfront-text" class="row row-fourth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
 					<p class="small-text">How much do you want to invest upfront?</p>
@@ -71,18 +71,21 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="upfrontInvestment">10000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						 <span id="upfrontInvestment"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
 					</div>
 				</div>
-			</div>
-			 <span id="sipPerMonth" class="hidden">0</span>
-			<!-- <div id="sip-text" class="row row-sixth">
+			</div> --%>
+			
+			<span id="upfrontInvestment" class="hidden">0</span>
+			<span id="years" class="hidden">5</span>
+			
+			<div id="sip-text" class="row row-sixth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
 					<p class="small-text">How much do you want to invest monthly?</p>
 				</div>
-			</div> -->
-			<%-- <div id="sip-value" class="row row-input row-seventh">
+			</div>
+			<div id="sip-value" class="row row-input row-seventh">
 				<div class="col-md-2"></div>
 				<div class="form-group">
 					<div class="col-md-6">
@@ -91,11 +94,11 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="sipPerMonth"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						 <span id="sipPerMonth">2000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
 					</div>
 				</div>
-			</div> --%>
-			<div id="duration-text" class="row row-eigth">
+			</div>
+			<%-- <div id="duration-text" class="row row-eigth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
 					<p class="small-text">How long do you expect to invest for?</p>
@@ -110,10 +113,10 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						<span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years 
+						<span id="years"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years 
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<div class="row row-tenth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
@@ -134,7 +137,7 @@
 
 		</div>
 		<div  id="invested-fund-list" class="col-md-6 hidden" style="margin-top:50px;padding-left:70px;padding-right:70px;">
-			<div id = "investment-fund-list-data" class ="row col-md-12">
+			<div id="investment-fund-list-data" class ="row col-md-12">
 			<table class="table table-striped table-bordered" >
 				<thead class="table-head">
 					<tr>
@@ -300,21 +303,11 @@
 					</div>
 					 
 				</div>
-				
 <!-- 			</div> -->
 		</div>
-		
 	</div>
 	<div id="button-1" class="row">
-		<div class="col-md-8"></div>
-		<div class="col-md-4">
-			<div class="row">
-				<!-- <div class="col-md-1"></div>
-				<div class="col-md-11"> -->
-					<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showPlan();">SEE YOUR PLAN</button>
-				<!-- </div> -->
-			</div>
-		</div>
+		<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showPlan();">SEE YOUR PLAN</button>
 	</div>
 
 		<script type="text/javascript" src="assets/js/JQuery.js"></script>

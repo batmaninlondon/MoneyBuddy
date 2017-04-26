@@ -59,11 +59,18 @@ function showPlan()
         	
         	if (result == "success") {
         	
-	        	document.getElementById('investment-options').style.display ='none';
+	        	/*document.getElementById('investment-options').style.display ='none';
 	        	document.getElementById('invested-fund-list').style.display ='block';
+	        	document.getElementById("submit-button-1").disabled = true;*/
+        		
+        		
+        		
+        		document.getElementById('investment-options').className += " hidden";
+	        	$("#invested-fund-list").removeClass('hidden');
+	        	/*document.getElementById('invested-fund-list').style.display ='block';*/
 	        	document.getElementById("submit-button-1").disabled = true;
+	        	$("#investment-fund-list-data").load("upfrontInvestment.jsp #investment-fund-list-data");
 	        	
-	        	$("#invested-fund-list").load("upfrontInvestment.jsp #invested-fund-list");
         	}
 
         }
@@ -72,11 +79,11 @@ function showPlan()
 
 function forgottenPassword()
 {
-	alert('forgottenPassword function called !! ');
+	/*alert('forgottenPassword function called !! ');*/
 	
 	var emailId = document.getElementById("email-id").value;
 	
-	alert('forgottenPassword function emailId :'+emailId );
+	/*alert('forgottenPassword function emailId :'+emailId );*/
 	
 	if ( emailId == '')  {
 		
@@ -93,15 +100,15 @@ function forgottenPassword()
 	}
 
     $.ajax({
-        url : "ForgottenPasswordAction",
+        url : "forgottenPasswordAction",
         type: 'post',
         
         data: { 'emailId' : emailId },
 
         success : function(result){
-        	
+        	/*alert('result : '+result);*/
         	if (result == "success") {
-        		window.location='/MoneyBuddy/thankYouForPasswordReset';
+        		window.location='thankYouForPasswordReset';
         	}
         	else if (result == "verificationNotDone")  {
         		document.getElementById("email-id").className += " formInvalid";
@@ -114,8 +121,8 @@ function forgottenPassword()
         		document.getElementById("email-id").value = null;
         	}
         	else {
-        		alert('Inside newLogin error !!');
-        		window.location='/MoneyBuddy/errorPage';
+        		/*alert('Inside ForgottenPassword error !!');*/
+        		window.location='errorPage';
         	}
 
         }
@@ -160,15 +167,15 @@ function checkKysStatus()
         	} 
         	else if (result == "kycNotDone")  {
         		/*alert('KYC not done for this pan card !! ');*/
-        		window.location='/MoneyBuddy/kycNotDone';
+        		window.location='kycNotDone';
         	}
         	else if (result == "success") {
         		/*alert('Inside kycCheck success !! ');*/
-        		window.location='/MoneyBuddy/clientDetails';
+        		window.location='clientDetails';
         	}	
         	else {
         		/*alert('Inside kycCheck error !! ');*/
-        		window.location='/MoneyBuddy/errorPage';
+        		window.location='errorPage';
         	}
         },
 
@@ -242,7 +249,7 @@ function checkDetails()
 		document.getElementById("account-number").placeholder = "Enter Account Number ";
 		document.getElementById("group-name").className = "form-control";
 		document.getElementById("group-name").placeholder = "Group Name ";
-		document.getElementById("residential-pin").className = "form-control";
+		$("#residential-pin").removeClass('formInvalid');
 		document.getElementById("residential-pin").placeholder = "Enter Pin ";
 		return;
 	}
@@ -354,17 +361,17 @@ function checkDetails()
         	}
         	else if (result == "paymentFailure") {
 
-        		window.location='/MoneyBuddy/paymentFailure';
+        		window.location='paymentFailure';
         	}
         	else {
         		/*alert('Inside checkDetails error !! ');*/
-        		window.location='/MoneyBuddy/errorPage';
+        		window.location='errorPage';
         	}
         },
     });
 }
 
-function setType() 
+/*function setType() 
 {
 
 	document.getElementById('diamond-text-2').style.display ='none';
@@ -384,9 +391,9 @@ function setType()
 	document.getElementById('payment-page').style.display ='none';
 	document.getElementById('login-page').style.display ='none';
 
-/*	document.getElementById("years").innerHTML= '5';
+	document.getElementById("years").innerHTML= '5';
 	document.getElementById("sipPerMonth").innerHTML = '2000';
-	document.getElementById("upfrontInvestment").innerHTML = '10000'; */
+	document.getElementById("upfrontInvestment").innerHTML = '10000'; 
 
 	document.getElementById("submit-button-2").disabled = false;
 	document.getElementById("submit-button-3").disabled = false;
@@ -415,6 +422,30 @@ function setType()
 		document.getElementById('duration-text').style.display ='none';
 		document.getElementById('duration-value').style.display ='none';
 	}
+}*/
+
+function setInitialUpfrontInvestment() 
+{
+
+	document.getElementById("submit-button-1").disabled = false;
+	document.getElementById("submit-button-2").disabled = false;
+	document.getElementById("submit-button-3").disabled = false;
+	document.getElementById("forgot-password-submit-button").disabled = false;
+	/*document.getElementById("years").innerHTML= '5';
+	document.getElementById("sipPerMonth").innerHTML = '0';
+	document.getElementById("upfrontInvestment").innerHTML = '10000';*/
+}
+
+function setInitialSipInvestment() 
+{
+	document.getElementById("submit-button-1").disabled = false;
+	document.getElementById("submit-button-2").disabled = false;
+	document.getElementById("submit-button-3").disabled = false;
+	document.getElementById("forgot-password-submit-button").disabled = false;
+	/*document.getElementById("years").innerHTML= '5';
+	document.getElementById("sipPerMonth").innerHTML = '2000';
+	document.getElementById("upfrontInvestment").innerHTML = '0';*/
+	
 }
 
 function resetPassword() {
@@ -432,7 +463,7 @@ function resetPassword() {
 		return;
 	}
 	else if ( !validatePassword(newPassword) )  {
-		alert('newPassword : '+newPassword);
+		/*alert('newPassword : '+newPassword);*/
 		document.getElementById("new-password").className += " formInvalid";
 		document.getElementById("new-password").placeholder = "Password shall contain min 8 charcters";
 		document.getElementById("new-password").value = null;
@@ -466,11 +497,11 @@ function resetPassword() {
 	        success : function(result){
 	        	
 	        	if (result == "success") {
-	        		window.location='/MoneyBuddy/login';
+	        		window.location='login';
 	        	}
 	        	else {
-	        		alert('Inside resetPassword error !!');
-	        		window.location='/MoneyBuddy/errorPage';
+	        		/*alert('Inside resetPassword error !!');*/
+	        		window.location='errorPage';
 	        	}
 
 	        },
@@ -485,13 +516,13 @@ function showPanCardVerification()
 	/*alert('showPanCardVerification : cusId : '+cusId);*/
 	if (cusId == "customerIdNull") {
 		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
-		document.getElementById('invested-fund-list').style.display ='none';	
-		document.getElementById('login-page').style.display ='block';
+		document.getElementById('invested-fund-list').className += " hidden";	
+		$("#login-page").removeClass('hidden');
 	} 
 	else  {
 		/*alert('Inside showPanCardVerification customerIdExist !! ');*/
-		document.getElementById('invested-fund-list').style.display ='none';	
-		document.getElementById('pancard-verification').style.display ='block';
+		document.getElementById('invested-fund-list').className += " hidden";
+		$("#pancard-verification").removeClass('hidden');
 	}
 	
 /*	var fundChoice = "UserChoice";
@@ -517,7 +548,7 @@ function showPanCardVerification()
         	}
         	else {
         		alert('Inside showPanCardVerification error !! ');
-        		window.location='/MoneyBuddy/errorPage.jsp';
+        		window.location='errorPage';
         	}	
     
         }
@@ -551,6 +582,8 @@ function newLogin() {
 		document.getElementById("password").placeholder = "Password can not be blank!";
 		return;
 	}
+	
+	/*alert ('newLogin() : emailId : '+emailId);*/
     $.ajax({
 
         url : "newLoginAction",
@@ -560,9 +593,11 @@ function newLogin() {
         
         success : function(result){
         	
+        	/*alert('result : '+result);*/
+        	
         	if (result == "success") {
-        		document.getElementById('login-page').style.display ='none';	
-        		document.getElementById('pancard-verification').style.display ='block';
+        		document.getElementById('login-page').className += " hidden";	
+        		$("#pancard-verification").removeClass('hidden');
         	}
         	else if (result == "verificationNotDone")  {
         		document.getElementById("email-id").className += " formInvalid";
@@ -586,8 +621,8 @@ function newLogin() {
         		document.getElementById("password").value = null;
         	}
         	else {
-        		alert('Inside newLogin error !!');
-        		window.location='/MoneyBuddy/errorPage';
+        		/*alert('Inside newLogin error !!');*/
+        		window.location='errorPage';
         	}
         	
         		
@@ -599,7 +634,7 @@ function newLogin() {
 }
 
 function signUp(){
-	window.location='/MoneyBuddy/register';
+	window.location='register';
 	
 }
 
@@ -641,9 +676,11 @@ function login() {
         
         success : function(result){
         	
+        	/*alert('result : '+result);*/
+        	
         	if (result == "success") {
         		/*alert('login success !! ');*/
-        		window.location='/MoneyBuddy/myIndex';
+        		window.location='myIndex';
         	}
         	else if (result == "verificationNotDone")  {
         		document.getElementById("email-id").className += " formInvalid";
@@ -667,8 +704,8 @@ function login() {
         		document.getElementById("password").value = null;
         	}
         	else {
-        		alert('Inside newLogin error !!');
-        		window.location='/MoneyBuddy/errorPage';
+        		/*alert('Inside login error !!');*/
+        		window.location='errorPage';
         	}
 
         },
@@ -862,11 +899,11 @@ function register() {
         
         success : function(result){
         	if (result == "success") {
-        		window.location='/MoneyBuddy/thankYouForRegistration';
+        		window.location='thankYouForRegistration';
         	}
         	else if (result == "UserAlreadyExists")  {
         		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy.com ";
+        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy ";
         		document.getElementById("email-id").value = null;
         		document.getElementById("first-name").className = "form-control";
         		document.getElementById("first-name").placeholder = "First Name";
@@ -881,7 +918,7 @@ function register() {
         	}
         	else {
         		/*alert('Inside newLogin error !!');*/
-        		window.location='/MoneyBuddy/errorPage';
+        		window.location='errorPage';
         	}
         },
 
@@ -904,6 +941,7 @@ function update(){
 	
 	var totalInvestment = parseInt(sip * years * 12)+parseInt(investment);
 
+	/*alert('sip : '+sip);*/
 	/*alert ('estimate function called ');*/
     $.ajax({
   	
@@ -919,10 +957,10 @@ function update(){
         	  /*alert ('success');*/
         	  if (sip != 0) {
         		  /*alert ('SIP is not 0 ');*/
-        		  document.getElementById('diamond-text-7').style.display ='block';
-        		  document.getElementById('diamond-text-8').style.display ='block';
-        		  document.getElementById('diamond-text-9').style.display ='block';
-        		  document.getElementById('diamond-text-10').style.display ='block';
+        		  $("#diamond-text-7").removeClass('hidden');
+				  $("#diamond-text-8").removeClass('hidden');
+				  $("#diamond-text-9").removeClass('hidden');
+				  $("#diamond-text-10").removeClass('hidden');
 
         		  $("#predicted-value-list-1").load("upfrontInvestment.jsp #predicted-value-list-1");
         		  $("#predicted-value-list-2").load("upfrontInvestment.jsp #predicted-value-list-2");
@@ -930,23 +968,23 @@ function update(){
         	  }
         	  else {
         		  /*alert ('SIP is 0 ');*/
-	        	  document.getElementById('diamond-text-2').style.display ='block';
-	        	  document.getElementById('diamond-text-3').style.display ='block';
-	        	  document.getElementById('diamond-text-4').style.display ='block';
-	        	  document.getElementById('diamond-text-5').style.display ='block';
-	        	  document.getElementById('diamond-text-6').style.display ='block';
+	        	  $("#diamond-text-2").removeClass('hidden');
+	        	  $("#diamond-text-3").removeClass('hidden');
+	        	  $("#diamond-text-4").removeClass('hidden');
+	        	  $("#diamond-text-5").removeClass('hidden');
+	        	  $("#diamond-text-6").removeClass('hidden');
 	        	  $("#predicted-value").load("upfrontInvestment.jsp #predicted-value");
 	           	  
 	         		document.getElementById("totalInvestment").innerHTML= totalInvestment;
 	       		document.getElementById("numberOfYears").innerHTML= years;
 	        	  
         	  }
-        	  document.getElementById('submit-button-1').style.display ='block';
+        	  $("#submit-button-1").removeClass('hidden');
     		
         	}
         	else {
-        		alert('Inside newLogin error !!');
-        		window.location='/MoneyBuddy/errorPage';
+        		/*alert('Inside estimate error !!');*/
+        		window.location='errorPage';
         	}  
 
         }
@@ -992,7 +1030,7 @@ function comparePasswords(password1,password2) {
 }*/
 
 // With JQuery
-$("#ex1").slider({
+/*$("#ex1").slider({
 		formatter: function(value) {
 		return 'Current value: ' + value;
 	}
@@ -1003,7 +1041,7 @@ $("#ex1").slider({
     // initializes the input fields
     $("#slider-right").sliderTextInput()
 	
-
+*/
 	
 /* .trigger('change');*/
     

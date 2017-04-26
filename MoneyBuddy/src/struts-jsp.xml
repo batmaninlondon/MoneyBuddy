@@ -136,6 +136,11 @@
 	    	<result>/upfrontInvestment.jsp</result>
 		</action>
 	</package>
+	<package name="sipInvestment" namespace="/" extends="struts-default">
+	    <action name="sipInvestment">
+	    	<result>/sipInvestment.jsp</result>
+		</action>
+	</package>
 	<package name="userVerification" namespace="/" extends="struts-default">
 	    <action name="userVerification">
 	    	<result>/userVerification.jsp</result>

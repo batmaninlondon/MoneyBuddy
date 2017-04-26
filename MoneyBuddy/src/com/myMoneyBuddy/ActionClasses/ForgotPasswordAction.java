@@ -24,7 +24,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> sessionMap;
     private String emailId;
 
-    public final String MAIL_ResetPassword_SITE_LINK = "http://localhost:8080/MoneyBuddy/resetPassword.jsp";
+    public final String MAIL_ResetPassword_SITE_LINK = "www.quantwealth.in/resetPassword";
 
     QueryCustomer customer = new QueryCustomer();
     
@@ -51,6 +51,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
     	
     	try {
 	    	logger.debug("ForgotPasswordAction class : execute method : start");
+	    	System.out.println("ForgotPasswordAction class : execute method called ");
 	
 	    	if (!customer.existsCustomer(getEmailId())) {
 	    		System.out.println("Verification not done for this email id ");

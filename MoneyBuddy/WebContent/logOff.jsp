@@ -15,7 +15,7 @@
     <!-- <p> LogOff Page </p> -->
         <%
         session.invalidate();
-        String redirectURL = "/MoneyBuddy/myIndex";
+        String redirectURL = "myIndex";
 	    response.sendRedirect(redirectURL);
 	    %>
 		<script type="text/javascript" src="assets/js/JQuery.js"></script>

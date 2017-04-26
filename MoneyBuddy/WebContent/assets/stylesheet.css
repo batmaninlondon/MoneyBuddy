@@ -2,7 +2,7 @@
 
 #wrap{
 	position:fixed;; 
-	z-index:-1; 
+	z-index:-3; 
 	top:0; 
 	left:0; 
 	background-color:black
@@ -10,7 +10,7 @@
 
 #pattern-image{
 	position:fixed;; 
-	z-index:-1; 
+	z-index:-2; 
 	top:0; 
 	left:0; 
 	background-color:black
@@ -30,9 +30,12 @@
 	display:none;
 	width:100%;
 	height:100%;
-	z-index:-1
+	z-index:-3
 }
 
+.hidden{
+	display: none;
+}
 .HeaderLogoName{
 	redalign: center;
 	margin:100px;
@@ -377,7 +380,7 @@ div.diamond-img {
   -webkit-transform:rotate(45deg); /* Safari & Chrome */
   -o-transform:rotate(45deg); 	/* Opera */
   border:5px solid #d69622;
-  z-index:-1;
+  z-index:-2;
   
 
 }
@@ -580,11 +583,12 @@ div.InvestmentStyle-diamond-img .diamond-text{
 
 #button-1{
 
-	margin-left: 1010px;
- 	margin-top:-40px;	 
+	/* margin-left: 1010px;
+ 	margin-top:-40px; */	 
 	font-family: Arial;
 	font-weight:bolder;
 	font-align: center;	
+	z-index:1;
 
 }
 

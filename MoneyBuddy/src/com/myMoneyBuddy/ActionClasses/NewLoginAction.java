@@ -92,7 +92,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	String customerMobileNumber = queryCustomer.getCustomerMobileNumber(getEmailId());
 	
 	    	System.out.println("Hi there 3  customerId : "+customerId);
-	    	sessionMap.put("customerId", customerId);
+	    	sessionMap.put("customerId", Integer.toString(customerId));
 	    	
 	    	logger.debug("LoginAction class : execute method : stored customerId : "+customerId+" in session id : "+sessionMap.getClass().getName());
 	    	

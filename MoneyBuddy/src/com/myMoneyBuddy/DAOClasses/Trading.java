@@ -195,7 +195,7 @@ public class Trading {
 			String passwordMFOrder;
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
-			String LOGOUT_URL = "http://localhost:8080/MoneyBuddy/ThankYou.jsp";
+			String LOGOUT_URL = "http://www.quantwealth.in/thankYou";
 			WebServiceMFUpload wbMFUpload = new WebServiceMFUpload();		
 			IMFUploadService imfUploadService = wbMFUpload.getWSHttpBindingIMFUploadService();
 			String PASSWORD_MFUPLOAD;
