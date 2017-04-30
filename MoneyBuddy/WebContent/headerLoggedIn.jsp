@@ -1,4 +1,4 @@
-	<div class="row row-first" id="headerLoggedIn">
+        <div class="row row-first" id="headerLoggedIn">
 		<div class="col-md-3">
 			<a href="/backgroundImage.html" class="HeaderLogoName">MoneyBuddy</a>
 		</div>
@@ -18,3 +18,5 @@
 		</div>
 
 	</div>
+	
+	  

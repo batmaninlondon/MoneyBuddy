@@ -2,51 +2,49 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Dashboard Page</title>
-<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Dashboard | Money Buddy</title>
+    <!-- core CSS -->
+	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+ 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/main.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+ 	<script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    
 
 <script src="assets/js/jquery-1.8.2.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-
-
 <script>
 var data1;
-
-
 google.load('visualization', '1', {packages:['table']});
-
-
 $(document).ready(function()
 		{
-		 /* $("#myTab li:eq(1) a").tab('show');
-		 $('#investmentTypeName').change(function(event) 
-						{ */
-						/* var investmentTypeName = $("select#investmentTypeName").val(); */
-						
-						/* $.getJSON('dashboardAction', {investmentTypeName : investmentTypeName}, function(jsonResponse)  */
 								$.getJSON('dashboardAction', {}, function(jsonResponse) 
 								{
-   
 									 data1 = new google.visualization.DataTable();
 									 data1.addColumn('string', 'Date of Payment');
 									 data1.addColumn('string', 'Client Id');
@@ -85,60 +83,82 @@ $(document).ready(function()
 						      	
 						    	var chart1 = new google.visualization.Table(document.getElementById('chart_div1'));
 						      	chart1.draw(data1, {showRowNumber: true, width: '100%', height: '100%'});  
-						      	
-			    		
 								});
 					});
-		/* }); */
-		
-
-		
 </script>
+    
+    
+    
+    
 </head>
-<body>
 
-	<div id="wrap">
-		<img class="bgfade" src="images/backgroundImage1.jpg" /> 
-		<img class="bgfade" src="images/backgroundImage2.jpg" />
-		<img class="bgfade" src="images/backgroundImage3.jpg" /> 
-		<img class="bgfade" src="images/backgroundImage4.jpg" /> 
-		<img class="bgfade" src="images/backgroundImage5.jpg" />
-	</div>
-	<div class="row row-first">
-		<div class="col-md-12" id="header">
-			<%  if(session.getAttribute("customerId") == null)
-			 	{   %> 
-			<%@ include file="headerLoggedOff.jsp"%>
-			<%	} else 
-			 	{	%>
-			<%@ include file="headerLoggedIn.jsp"%>
-			<%	}	%>
-		</div>
-	</div>
+<body class="homepage">
+   <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-4">
+                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                       <div class="social">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                       </div>
+                    </div>
+                </div>
+            </div><!--/.container-->
+        </div><!--/.top-bar-->
+
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+                </div>
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="whyInvest">Why Invest</a></li>
+                        <li><a href="aboutUs">About Us</a></li>
+                        <li ><a href="saveTax">Save Tax</a></li>
+                        <li ><a href="blog">Blog</a></li> 
+                        <li><a href="help">Help</a></li> 
+                       
+				         	<%  if(session.getAttribute("customerId") == null)
+							 	{   %> 
+										 	 <li><a href="login" >Sign in</a></li>
+										<li><a href="register" >Sign up</a></li> 
+							<%	} else 
+							 	{	%>
+							 			 <li class="active"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li><a href="logOff" >Log Out</a></li> 
+							<%	}	%>  
+				                            
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+		
+    </header>
+
+	
 	<div class="row">
 		<div class="col-md-12 well-sm large-text dashboard-row-1" >
 			<p style="margin-left:50px;">Dashboard</p>
 		</div>
 	</div>
-	<%-- <div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-11">
-			<p class="large-text">Select INVESTMENT TYPE NAME from dropdown to View or Edit</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-11">
-			<s:select list="#session.groupNamesList" name="investmentTypeName" style="height:50px;font-size:20px;"></s:select>
-		</div>
-	</div> --%>
-<!-- 	<div class="row">
-		<div class="col-md-12" style="margin:20px;">
-			<ul class="nav nav-tabs" id="myTab">
-				<li><a data-toggle="tab" class="small-text">Dashboard</a></li>
-			</ul>
-		</div>
-	</div> -->
 	<div class="row">
 		<div class="col-md-12" style="margin:20px;">
 			<div class="tab-pane fade-in active">
@@ -149,10 +169,36 @@ $(document).ready(function()
 			</div>
 		</div>
 	</div>
-	
+  
+      <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-	<script type="text/javascript" src="assets/js/JQuery.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>	
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

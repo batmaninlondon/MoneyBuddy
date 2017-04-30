@@ -1,20 +1,29 @@
-	<div class="row row-first" id="headerLoggedOff">
-		<div class="col-md-3">
-			<a href="/backgroundImage.html" class="HeaderLogoName">MoneyBuddy</a>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-8">
-			<div class="row">
-				<a href="myIndex" class="button">Home</a>
-				<a href="whyInvest" class="button">Why invest</a>
-				<a href="aboutUs" class="button">About us</a>
-				<a href="saveTax" class="button">Save Tax</a>
-				<a href="blog" class="button">Blog</a>
-				<a href="help" class="button">Help</a>
-				<a href="login" class="SignIn">Sign in</a>
-				<a href="register" class="Join">Sign up</a>
-			</div>
-		</div>
-
-	</div>
+	 
+	  <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="myIndex">Home</a></li>
+                        <li><a href="whyInvest">Why Invest</a></li>
+                        <li><a href="aboutUs">About us</a></li>
+                        <li><a href="blog">Blog</a></li>
+                      
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="blog-item.html">Blog Single</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="404.html">404</a></li>
+                                <li><a href="shortcodes.html">Shortcodes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li> 
+                        <li><a href="contact-us.html">Contact</a></li>     
+                          <li><a href="login" >Sign in</a></li>
+						<li><a href="register" >Sign up</a></li>                   
+                    </ul>
+                </div>
+            </div>
+        </nav>
