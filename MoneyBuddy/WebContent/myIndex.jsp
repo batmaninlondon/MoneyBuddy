@@ -114,7 +114,7 @@
                                 <div class="carousel-content">
                                     <h1 class="animation animated-item-1">Make your dreams reality</h1>
                                     <h2 class="animation animated-item-2"> The best thing money can buy is .....money</h2>
-                                    <a class="btn-slide animation animated-item-3" href="#">Try it out</a>
+                                    <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
                                     <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <div class="carousel-content">
                                     <h1 class="animation animated-item-1">The smart way to invest</h1>
                                     <h2 class="animation animated-item-2">We take the best elements of a high-end investing service, strip out the complexity and cost, and provide it to you online.</h2>
-                                    <a class="btn-slide animation animated-item-3" href="#">Try it out</a>
+                                    <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
                                     <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 <div class="carousel-content">
                                     <h1 class="animation animated-item-1">Give your money the chance to grow</h1>
                                     <h2 class="animation animated-item-2">Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
-                                    <a class="btn-slide animation animated-item-3" href="#">Try it out</a>
+                                    <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
                                     <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
                                 </div>
                             </div>
