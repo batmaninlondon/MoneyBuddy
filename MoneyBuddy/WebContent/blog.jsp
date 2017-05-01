@@ -162,7 +162,7 @@ The tax treatment depends on your individual circumstances and maybe subject to 
 
 Please remember that the value of your investments can go down as well as up and you can get back less than invested.
 
-If you're unsure which ISA type is suitable for you, please seek financial advice.</h3>
+If you're unsure which ISA types is suitable for you, please seek financial advice.</h3>
                                 <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>    
