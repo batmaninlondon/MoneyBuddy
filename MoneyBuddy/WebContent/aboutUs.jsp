@@ -113,7 +113,7 @@
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
 								<div class="pull-left">
-									<a href="#"><img class="media-object" src="images/man1.jpg" alt=""></a>
+									<a href="#"><img class="media-object" src="images/Kamal.JPG" alt="" ></a>
 								</div>
 								<div class="media-body">
 									<h4>Kamal Wadhwani</h4>
@@ -140,7 +140,7 @@
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
 								<div class="pull-left">
-									<a href="#"><img class="media-object" src="images/man2.jpg" alt=""></a>
+									<a href="#"><img class="media-object" src="images/Sail.JPG" ></a>
 								</div>
 								<div class="media-body">
 									<h4>Sail Wadhwani</h4>

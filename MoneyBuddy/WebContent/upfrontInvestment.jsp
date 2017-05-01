@@ -13,6 +13,7 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+ 	<link rel="stylesheet" href="assets/MoneyBuddyStyles.css" />
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
@@ -32,11 +33,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    <link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
 
 </head>
 
-<body lass="homepage" onload="setInitialUpfrontInvestment();">
+<body class="homepage" onload="setInitialUpfrontInvestment();">
    <header id="header">
         <div class="top-bar">
             <div class="container">
@@ -96,32 +96,31 @@
         </nav><!--/nav-->
 		
     </header>
-
 	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	<section class="bg-primary" id="one">
 	<div class="row">
 		<div  id="investment-options" class="col-md-6">
-
 			<div class="row row-second">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p  style="margin-top:80px;">CREATE YOUR PLAN</p>
+					<h2><a>Create Your Plan</a></h2>
 				</div>
 			</div>
 			<div class="row row-third">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p >Do you have a goal in mind?</p>
+					<p class="top-number">Do you have a goal in mind?</p>
 				</div>
 			</div>
 			<div id="upfront-text" class="row row-fourth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p >How much do you want to invest upfront?</p>
+					<p class="top-number">How much do you want to invest upfront?</p>
 				</div>
 			</div>
 			<div id="upfront-value" class="row row-input row-fifth">
 				<div class="col-md-2"></div>
-				<div ">
+				<div>
 					<div class="col-md-6">
 						<input id="range" type="range" min="0" max="100" step="10"
 							value="0" onchange="showUpfrontInvestment(this.value)" />
@@ -129,34 +128,15 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="upfrontInvestment">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						<p class="top-number"> <span id="upfrontInvestment">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
 					</div>
 				</div>
 			</div>
 			 <span id="sipPerMonth" class="hidden">0</span>
-			<!-- <div id="sip-text" class="row row-sixth">
-				<div class="col-md-2"></div>
-				<div class="col-md-10">
-					<p class="small-text">How much do you want to invest monthly?</p>
-				</div>
-			</div> -->
-			<%-- <div id="sip-value" class="row row-input row-seventh">
-				<div class="col-md-2"></div>
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="range" min="500" max="100000" step="500" value="2000"
-							onchange="showSipPerMonth(this.value)" />
-					</div>
-					<div class="col-md-2"></div>
-					<div class="underline small-text col-md-2">
-						 <span id="sipPerMonth"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
-					</div>
-				</div>
-			</div> --%>
 			<div id="duration-text" class="row row-eigth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p class="small-text">How long do you expect to invest for?</p>
+					<p class="top-number">How long do you expect to invest for?</p>
 				</div>
 			</div>
 			<div id="duration-value" class="row row-input row-ninth">
@@ -168,27 +148,39 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						<span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years 
+						<p class="top-number"><span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years </p>
 					</div>
 				</div>
 			</div>
 			<div class="row row-tenth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p class="small-text">What's your investment style?</p>
+					<p class="top-number">What's your investment style?</p>
 				</div>
 			</div>
 			<div class="row row-input row-eleventh">
 				<div class="col-md-2"></div>
 				<div class="form-group">
+				<p class="top-number">
 					<input type="radio" id="risk-category-1" name="riskCategory" value="1"> Cautious 
 					<input type="radio" id="risk-category-2" name="riskCategory" value="2"> Tentative 
 					<input type="radio" id="risk-category-3" name="riskCategory" value="3" checked> Confident 
 					<input type="radio" id="risk-category-4" name="riskCategory" value="4"> Ambitious 
 					<input type="radio" id="risk-category-5" name="riskCategory" value="5"> Adventurous
+					</p>
+						<p id="diamond-text-1" class="top-number" >Use the slider
+							and select an investment style to calculate how much your
+							investment could make.</p>
 				</div>
 			</div>
 			<%-- <span id="plan-name"><%=request.getParameter("planName")%></span> --%>
+
+	<div class="row row-second">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<h2><a>Create Your Plan</a></h2>
+				</div>
+			</div>
 
 		</div>
 		<div  id="invested-fund-list" class="col-md-6 hidden" style="margin-top:50px;padding-left:70px;padding-right:70px;">
@@ -294,42 +286,17 @@
             <label for="group-name" class="small-text" >Enter Group Name </label>
             <input class="form-control" name="groupName" id="group-name" type="text" placeholder="Group Name">
 			
-			<!-- <div id="button-4" class="row">
-				<button type="button" id="submit-button-4" class="btn btn-info btn-lg sharp raised" onClick="payment();" style="margin-top:50px;margin-left:200px;width:200px;">SUBMIT</button>
-			</div> --> 
 			<br/><br/>
 			<s:submit style="color:blue;"/>
 			</s:form>
 			
-<%-- 			<s:form action="payment">
 
-					<select name="bankName" id="bankName">
-					    <option value="-1">Select Your Bank</option>
-					    <option value="ICICI">ICICI</option>
-					    <option value="HDFC">HDFC</option>
-					    <option value="SBI">SBI</option>
-					    <option value="KOTAK">KOTAK</option>
-					</select>
-                	<s:textfield key="accountNumber" label ="Account Number" size="90" width="1000"/>
-                	<s:password label="Password" key="accountPassword" size="90" width="1000"/>
-                	<s:textfield label="CVV number" key="cvvNumber" size="90" width="1000"/>
-                	<s:textfield label="Group Name" key="groupName" size="90" width="1000"/>
-                	
-                	
-                	<br/><br/><br/>
-
-                <s:submit/>
-             </s:form> --%>
 		</div>
 		
 		<div class="diamond-img col-md-6">
-<!-- 			<div class=""> -->
-				<img src="images/pattern.jpg" id="pattern-image">
 				<div class="row">
 					<div id="diamond-shape" class="col-md-12">
-						<p id="diamond-text-1" class="diamond-text-1 " >Use the slider
-							and select an investment style to calculate how much your
-							investment could make.</p>
+					
 
 
 						<p id="diamond-text-2" class="diamond-text-2 hidden">
@@ -374,7 +341,7 @@
 			</div>
 		</div>
 	</div>
-  
+   </section>
       <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
