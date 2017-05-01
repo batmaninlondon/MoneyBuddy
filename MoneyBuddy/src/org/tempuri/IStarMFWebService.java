@@ -21,7 +21,7 @@ import org.datacontract.schemas._2004._07.starmfwebservice.Response;
  */
 @WebService(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/")
 @XmlSeeAlso({
-    com.microsoft.schemas._2003._10.serialization.ObjectFactoryMFUpload.class,
+    com.microsoft.schemas._2003._10.serialization.ObjectFactoryStarMF.class,
     com.bsestarmf._2016._01.ObjectFactory.class,
     org.datacontract.schemas._2004._07.starmfwebservice.ObjectFactory.class
 })

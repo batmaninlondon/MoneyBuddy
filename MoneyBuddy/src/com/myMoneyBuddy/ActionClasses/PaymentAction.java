@@ -25,7 +25,7 @@ import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.mailerClasses.sendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceMFUpload;
+import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;

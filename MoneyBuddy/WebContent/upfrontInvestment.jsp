@@ -19,23 +19,21 @@
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
+ 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
-	<script>
-   	 window.onload = setType;
-	</script>
+
 </head>
 
 <body lass="homepage" onload="setInitialUpfrontInvestment();">
@@ -99,7 +97,7 @@
 		
     </header>
 
-
+	<% session.setAttribute("transactionType", "UPFRONT"); %>
 	<div class="row">
 		<div  id="investment-options" class="col-md-6">
 
@@ -397,7 +395,7 @@
 
 
 
-		<script type="text/javascript" src="assets/js/JQuery.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>

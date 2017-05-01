@@ -18,9 +18,9 @@ import org.tempuri.StarMFWebService;
 
 
 @WebServiceClient(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/", wsdlLocation = "http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl")
-public class WebServiceMFUpload extends Service{
+public class WebServiceStarMF extends Service{
 
-	protected WebServiceMFUpload(URL wsdlDocumentLocation, QName serviceName) {
+	protected WebServiceStarMF(URL wsdlDocumentLocation, QName serviceName) {
 		super(wsdlDocumentLocation, serviceName);
 		// TODO Auto-generated constructor stub
 	}
@@ -42,24 +42,24 @@ public class WebServiceMFUpload extends Service{
         MFORDER_EXCEPTION = e;
     }
 
-    public WebServiceMFUpload() {
+    public WebServiceStarMF() {
         super(__getWsdlLocation(), MFORDER_QNAME);
     }
 
-    public WebServiceMFUpload(WebServiceFeature... features) {
+    public WebServiceStarMF(WebServiceFeature... features) {
         super(__getWsdlLocation(), MFORDER_QNAME, features);
     }
 
-    public WebServiceMFUpload(URL wsdlLocation) {
+    public WebServiceStarMF(URL wsdlLocation) {
         super(wsdlLocation, MFORDER_QNAME);
     }
 
-    public WebServiceMFUpload(URL wsdlLocation, WebServiceFeature... features) {
+    public WebServiceStarMF(URL wsdlLocation, WebServiceFeature... features) {
         super(wsdlLocation, MFORDER_QNAME, features);
     }
 
 
-    public WebServiceMFUpload(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public WebServiceStarMF(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 
@@ -69,7 +69,7 @@ public class WebServiceMFUpload extends Service{
      *     returns MFOrderEntry
      */
     @WebEndpoint(name = "WSHttpBinding_IStarMFWebService")
-    public IStarMFWebService getWSHttpBindingIMFUploadService() {
+    public IStarMFWebService getWSHttpBindingIStarMFService() {
         return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService"), IStarMFWebService.class, new javax.xml.ws.soap.AddressingFeature());
     }
 
@@ -81,8 +81,8 @@ public class WebServiceMFUpload extends Service{
      *     returns MFOrderEntry
      */
     @WebEndpoint(name = "WSHttpBinding_IStarMFWebService")
-    public IStarMFWebService getWSHttpBindingIMFUploadService(WebServiceFeature... features) {
-    	System.out.println("Inside getWSHttpBindingIMFUploadService : start ");
+    public IStarMFWebService getWSHttpBindingIStarMFService(WebServiceFeature... features) {
+    	System.out.println("Inside getWSHttpBindingIStarMFService : start ");
         return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService"), IStarMFWebService.class, new javax.xml.ws.soap.AddressingFeature());
         
     }

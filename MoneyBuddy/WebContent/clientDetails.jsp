@@ -190,7 +190,7 @@
 		<div class="col-md-6"></div>
 	</div>
 	
-	<script type="text/javascript" src="assets/js/JQuery.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
 

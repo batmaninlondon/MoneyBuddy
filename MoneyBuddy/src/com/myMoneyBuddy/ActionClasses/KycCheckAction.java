@@ -13,7 +13,7 @@ import java.util.Map;
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceMFUpload;
+import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;

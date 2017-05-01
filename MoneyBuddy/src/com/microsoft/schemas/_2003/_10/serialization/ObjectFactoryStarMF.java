@@ -26,7 +26,7 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlRegistry
-public class ObjectFactoryMFUpload {
+public class ObjectFactoryStarMF {
 
     private final static QName _AnyURI_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyURI");
     private final static QName _Char_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "char");
@@ -54,7 +54,7 @@ public class ObjectFactoryMFUpload {
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.microsoft.schemas._2003._10.serialization
      * 
      */
-    public ObjectFactoryMFUpload() {
+    public ObjectFactoryStarMF() {
     }
 
     /**

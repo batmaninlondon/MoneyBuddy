@@ -33,7 +33,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     
-		<script type="text/javascript" src="assets/js/JQuery.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/jquery.js"></script> --%>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </head>

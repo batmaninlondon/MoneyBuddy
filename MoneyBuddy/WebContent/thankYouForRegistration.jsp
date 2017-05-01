@@ -44,7 +44,7 @@
 		<p class="medium-text">Kindly check your mail box, and click the verification link to activate your account.</p>
 	</div>
 
-	<script type="text/javascript" src="assets/js/JQuery.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>	
 </body>

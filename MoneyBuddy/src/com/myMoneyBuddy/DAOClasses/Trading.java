@@ -31,7 +31,7 @@ import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceMFUpload;
+import com.myMoneyBuddy.webServices.WebServiceStarMF;
 
 import org.apache.log4j.Logger;
 
@@ -46,15 +46,15 @@ public class Trading {
 		
 
 		try {
-			String PASSWORD_MFUPLOAD;
+			String PASSWORD_STARMF;
 		
 		Properties properties = new Properties();
 		String propFilePath = "../../../config/client.properties";
 
 	    properties.load(Trading.class.getResourceAsStream(propFilePath));
 
-	    WebServiceMFUpload wbMFUpload = new WebServiceMFUpload();		
-	    IStarMFWebService iStarMFWebService = wbMFUpload.getWSHttpBindingIMFUploadService();
+	    WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+	    IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 		
 		String[] clientDetailsArray = {customerId,CLIENT_HOLDING,CLIENT_TAXSTATUS,CLIENT_OCCUPATIONCODE,CLIENT_APPNAME1,properties.getProperty("CLIENT_APPNAME2"),properties.getProperty("CLIENT_APPNAME3"),CLIENT_DOB,CLIENT_GENDER,properties.getProperty("CLIENT_GUARDIAN"),
 				CLIENT_PAN,properties.getProperty("CLIENT_NOMINEE"),properties.getProperty("CLIENT_NOMINEE_RELATION"),properties.getProperty("CLIENT_GUARDIANPAN"),properties.getProperty("CLIENT_TYPE"),properties.getProperty("CLIENT_DEFAULTDP"),properties.getProperty("CLIENT_CDSLDPID"),properties.getProperty("CLIENT_CDSLCLTID"),properties.getProperty("CLIENT_NSDLDPID"),properties.getProperty("CLIENT_NSDLCLTID"),
@@ -69,20 +69,20 @@ public class Trading {
 
 		System.out.println("clientDetails : "+clientDetails);
 	
-		String passwordMFUpload = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+		String passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 		
-		String[] resultsMFUpload = passwordMFUpload.split("\\|");
+		String[] resultsStarMF = passwordStarMF.split("\\|");
 		
-		for (int i = 0 ; i <resultsMFUpload.length ; i++ )   {
-			System.out.println("resultsMFUpload : "+i+" : " +resultsMFUpload[i]);
+		for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+			System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
 		}
 		
 		
-		System.out.println("passwordMFUpload : "+passwordMFUpload);
+		System.out.println("passwordStarMF : "+passwordStarMF);
 		
-		PASSWORD_MFUPLOAD = resultsMFUpload[1];
+		PASSWORD_STARMF = resultsStarMF[1];
 		
-		String ucc = iStarMFWebService.mfapi("02",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,clientDetails);
+		String ucc = iStarMFWebService.mfapi("02",properties.getProperty("USER_ID"),PASSWORD_STARMF,clientDetails);
 
 		System.out.println("ucc : "+ucc);
 
@@ -207,11 +207,11 @@ public class Trading {
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
 			String LOGOUT_URL = "http://www.quantwealth.in/thankYou";
-			WebServiceMFUpload wbMFUpload = new WebServiceMFUpload();		
-			IStarMFWebService iStarMFWebService = wbMFUpload.getWSHttpBindingIMFUploadService();
-			String PASSWORD_MFUPLOAD;
-	    	String passwordMFUpload;
-	    	String[] resultsMFUpload;
+			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			String PASSWORD_STARMF;
+	    	String passwordStarMF;
+	    	String[] resultsStarMF;
 	    	
 	    	String paymentDetails;
 	    	String entryParam;
@@ -353,20 +353,20 @@ public class Trading {
 
 			}
 			
-			passwordMFUpload = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+			passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 			
-			resultsMFUpload = passwordMFUpload.split("\\|");
+			resultsStarMF = passwordStarMF.split("\\|");
 			
-			for (int i = 0 ; i <resultsMFUpload.length ; i++ )   {
-				System.out.println("resultsMFUpload : "+i+" : " +resultsMFUpload[i]);
+			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
 			}
 			
 			
-			System.out.println("passwordMFUpload : "+passwordMFUpload);
+			System.out.println("passwordStarMF : "+passwordStarMF);
 			
-			PASSWORD_MFUPLOAD = resultsMFUpload[1];
+			PASSWORD_STARMF = resultsStarMF[1];
 
-			String paymentGateway = iStarMFWebService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,paymentDetails);
+			String paymentGateway = iStarMFWebService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_STARMF,paymentDetails);
 
 			System.out.println("paymentGateway : "+paymentGateway);
 			

@@ -311,7 +311,7 @@
 		<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showPlan();">SEE YOUR PLAN</button>
 	</div>
 
-		<script type="text/javascript" src="assets/js/JQuery.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
