@@ -1,5 +1,5 @@
 
-package com.bseindia.bsestarmfdemo._2016._01;
+package com.bsestarmf._2016._01;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -41,13 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "MFAPI")
 public class MFAPI {
 
-    @XmlElementRef(name = "Flag", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "Flag", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> flag;
-    @XmlElementRef(name = "UserId", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "UserId", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userId;
-    @XmlElementRef(name = "EncryptedPassword", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "EncryptedPassword", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> encryptedPassword;
-    @XmlElementRef(name = "param", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "param", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> param;
 
     /**

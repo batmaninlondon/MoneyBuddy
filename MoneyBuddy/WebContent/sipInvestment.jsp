@@ -13,13 +13,14 @@
 <link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
 
 <script>
-    window.onload = setType;
+
 </script>
 
 </head>
 
 <body background="images/backgroundImage5.jpg" onload="setInitialSipInvestment();">
 
+	<% session.setAttribute("transactionType", "SIP"); %>
 	<div id="wrap">
 		<img class="bgfade" src="images/backgroundImage1.jpg" /> 
 		<img class="bgfade" src="images/backgroundImage2.jpg" />
@@ -77,7 +78,7 @@
 			</div> --%>
 			
 			<span id="upfrontInvestment" class="hidden">0</span>
-			<span id="years" class="hidden">5</span>
+			<%-- <span id="years" class="hidden">5</span> --%>
 			
 			<div id="sip-text" class="row row-sixth">
 				<div class="col-md-2"></div>
@@ -89,16 +90,16 @@
 				<div class="col-md-2"></div>
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="range" min="500" max="100000" step="500" value="2000"
+						<input type="range" min="0" max="100" step="10" value="0"
 							onchange="showSipPerMonth(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="sipPerMonth">2000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						 <span id="sipPerMonth">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
 					</div>
 				</div>
 			</div>
-			<%-- <div id="duration-text" class="row row-eigth">
+			<div id="duration-text" class="row row-eigth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
 					<p class="small-text">How long do you expect to invest for?</p>
@@ -113,10 +114,10 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						<span id="years"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years 
+						<span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years 
 					</div>
 				</div>
-			</div> --%>
+			</div>
 			<div class="row row-tenth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">

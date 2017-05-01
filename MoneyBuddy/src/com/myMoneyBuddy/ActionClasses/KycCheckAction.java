@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
-import org.tempuri.IMFUploadService;
+import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
 /**

@@ -1,5 +1,5 @@
 
-package com.bseindia.bsestarmfdemo._2016._01;
+package com.bsestarmf._2016._01;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -41,13 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "getPassword")
 public class GetPassword {
 
-    @XmlElementRef(name = "UserId", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "UserId", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userId;
-    @XmlElementRef(name = "MemberId", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "MemberId", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> memberId;
-    @XmlElementRef(name = "Password", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "Password", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> password;
-    @XmlElementRef(name = "PassKey", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "PassKey", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> passKey;
 
     /**

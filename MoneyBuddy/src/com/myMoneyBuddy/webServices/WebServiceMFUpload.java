@@ -1,5 +1,5 @@
 package com.myMoneyBuddy.webServices;
-import com.bseindia.bsestarmfdemo._2016._01.GetPassword;
+import com.bsestarmf._2016._01.GetPassword;
 
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
@@ -12,12 +12,12 @@ import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 
-import org.tempuri.IMFUploadService;
+import org.tempuri.IStarMFWebService;
 
-import org.tempuri.MFUploadService;
+import org.tempuri.StarMFWebService;
 
 
-@WebServiceClient(name = "IMFUploadService", targetNamespace = "http://bsestarmfdemo.bseindia.com/2016/01/", wsdlLocation = "http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc?singleWsdl")
+@WebServiceClient(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/", wsdlLocation = "http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl")
 public class WebServiceMFUpload extends Service{
 
 	protected WebServiceMFUpload(URL wsdlDocumentLocation, QName serviceName) {
@@ -28,13 +28,13 @@ public class WebServiceMFUpload extends Service{
 	
 	private final static URL MFORDER_WSDL_LOCATION;
     private final static WebServiceException MFORDER_EXCEPTION;
-    private final static QName MFORDER_QNAME = new QName("http://bsestarmfdemo.bseindia.com/2016/01/", "MFUploadService");
+    private final static QName MFORDER_QNAME = new QName("http://www.bsestarmf.in/2016/01/", "StarMFWebService");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://bsestarmfdemo.bseindia.com/MFUploadService/MFUploadService.svc?singleWsdl");
+            url = new URL("http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -68,9 +68,9 @@ public class WebServiceMFUpload extends Service{
      * @return
      *     returns MFOrderEntry
      */
-    @WebEndpoint(name = "WSHttpBinding_IMFUploadService")
-    public IMFUploadService getWSHttpBindingIMFUploadService() {
-        return super.getPort(new QName("http://bsestarmfdemo.bseindia.com/2016/01/", "WSHttpBinding_IMFUploadService"), IMFUploadService.class, new javax.xml.ws.soap.AddressingFeature());
+    @WebEndpoint(name = "WSHttpBinding_IStarMFWebService")
+    public IStarMFWebService getWSHttpBindingIMFUploadService() {
+        return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService"), IStarMFWebService.class, new javax.xml.ws.soap.AddressingFeature());
     }
 
     /**
@@ -80,10 +80,10 @@ public class WebServiceMFUpload extends Service{
      * @return
      *     returns MFOrderEntry
      */
-    @WebEndpoint(name = "WSHttpBinding_IMFUploadService")
-    public IMFUploadService getWSHttpBindingIMFUploadService(WebServiceFeature... features) {
+    @WebEndpoint(name = "WSHttpBinding_IStarMFWebService")
+    public IStarMFWebService getWSHttpBindingIMFUploadService(WebServiceFeature... features) {
     	System.out.println("Inside getWSHttpBindingIMFUploadService : start ");
-        return super.getPort(new QName("http://bsestarmfdemo.bseindia.com/2016/01/", "WSHttpBinding_IMFUploadService"), IMFUploadService.class, new javax.xml.ws.soap.AddressingFeature());
+        return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService"), IStarMFWebService.class, new javax.xml.ws.soap.AddressingFeature());
         
     }
     
@@ -92,9 +92,9 @@ public class WebServiceMFUpload extends Service{
      * @returns
      *     returns RelevancePortType
      */
-    @WebEndpoint(name = "http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/getPassword")
+    @WebEndpoint(name = "http://www.bsestarmf.in/2016/01//IStarMFWebService/getPassword")
     public GetPassword getRelevancePort() {
-        return super.getPort(new QName("http://bsestarmfdemo.bseindia.com/2016/01/IMFUploadService/getPassword", "GetPassword"), GetPassword.class, new javax.xml.ws.soap.AddressingFeature());
+        return super.getPort(new QName("http://www.bsestarmf.in/2016/01//IStarMFWebService/getPassword", "GetPassword"), GetPassword.class, new javax.xml.ws.soap.AddressingFeature());
     }
 
     

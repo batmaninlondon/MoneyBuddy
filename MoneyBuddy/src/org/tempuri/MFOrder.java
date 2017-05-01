@@ -9,7 +9,6 @@ import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
-import javax.jws.HandlerChain;
 
 
 /**
@@ -18,21 +17,20 @@ import javax.jws.HandlerChain;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "MFOrder", targetNamespace = "http://bsestarmf.in/", wsdlLocation = "http://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc?singleWsdl")
-//@HandlerChain(file="./handler/handlers.xml")
+@WebServiceClient(name = "MFOrder", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://www.bsestarmf.in/MFOrderEntry/MFOrder.svc?wsdl")
 public class MFOrder
     extends Service
 {
 
     private final static URL MFORDER_WSDL_LOCATION;
     private final static WebServiceException MFORDER_EXCEPTION;
-    private final static QName MFORDER_QNAME = new QName("http://bsestarmf.in/", "MFOrder");
+    private final static QName MFORDER_QNAME = new QName("http://tempuri.org/", "MFOrder");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc?singleWsdl");
+            url = new URL("http://www.bsestarmf.in/MFOrderEntry/MFOrder.svc?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -71,7 +69,7 @@ public class MFOrder
      */
     @WebEndpoint(name = "WSHttpBinding_MFOrderEntry")
     public MFOrderEntry getWSHttpBindingMFOrderEntry() {
-        return super.getPort(new QName("http://bsestarmf.in/", "WSHttpBinding_MFOrderEntry"), MFOrderEntry.class);
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_MFOrderEntry"), MFOrderEntry.class);
     }
 
     /**
@@ -83,9 +81,7 @@ public class MFOrder
      */
     @WebEndpoint(name = "WSHttpBinding_MFOrderEntry")
     public MFOrderEntry getWSHttpBindingMFOrderEntry(WebServiceFeature... features) {
-    	System.out.println("Inside getWSHttpBindingMFOrderEntry : start ");
-        return super.getPort(new QName("http://bsestarmf.in/", "WSHttpBinding_MFOrderEntry"), MFOrderEntry.class, new javax.xml.ws.soap.AddressingFeature());
-        
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_MFOrderEntry"), MFOrderEntry.class, features);
     }
 
     private static URL __getWsdlLocation() {

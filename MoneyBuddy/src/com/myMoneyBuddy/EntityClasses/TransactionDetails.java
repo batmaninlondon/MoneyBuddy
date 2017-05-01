@@ -39,6 +39,12 @@ public class TransactionDetails {
     @Column(name="TRANSACTION_TYPE")
     private String transactionType;
     
+    @Column(name="TRANSACTION_CODE")
+    private String transactionCode;
+    
+    @Column(name="BUY_SELL")
+    private String buySell;
+    
     @Column(name="TRANSACTION_AMOUNT")
     private String transactionAmount;
 
@@ -74,7 +80,8 @@ public class TransactionDetails {
 
     }
 	public TransactionDetails(String transactionId, String bseOrderId,
-			String customerId, String transactionType, String transactionAmount,
+			String customerId, String transactionType, String transactionCode, 
+			String buySell, String transactionAmount,
 			String transactionStatus, String bseRemarks, String bseSuccessFlag,
 			String reverseFeed, String productId,   
 			String transactionDate, String updateDate) {
@@ -83,6 +90,8 @@ public class TransactionDetails {
 		this.bseOrderId = bseOrderId;
 		this.customerId = customerId;
 		this.transactionType = transactionType;
+		this.transactionCode = transactionCode;
+		this.buySell = buySell;
 		this.transactionAmount = transactionAmount;
 		this.transactionStatus = transactionStatus;
 		this.bseRemarks = bseRemarks;
@@ -155,6 +164,18 @@ public class TransactionDetails {
 		this.transactionType = transactionType;
 	}
 
+	public String getTransactionCode() {
+		return transactionCode;
+	}
+	public void setTransactionCode(String transactionCode) {
+		this.transactionCode = transactionCode;
+	}
+	public String getBuySell() {
+		return buySell;
+	}
+	public void setBuySell(String buySell) {
+		this.buySell = buySell;
+	}
 	public String getTransactionAmount() {
 		return transactionAmount;
 	}
@@ -265,6 +286,12 @@ public class TransactionDetails {
         if ((this.transactionType == null) ? (other.transactionType != null) : !this.transactionType.equals(other.transactionType)) {
             return false;
         }
+        if ((this.transactionCode == null) ? (other.transactionCode != null) : !this.transactionCode.equals(other.transactionCode)) {
+            return false;
+        }
+        if ((this.buySell == null) ? (other.buySell != null) : !this.buySell.equals(other.buySell)) {
+            return false;
+        }
         if ((this.transactionStatus == null) ? (other.transactionStatus != null) : !this.transactionStatus.equals(other.transactionStatus)) {
             return false;
         }
@@ -304,6 +331,8 @@ public class TransactionDetails {
         hash = 83 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 83 * hash + (this.transactionAmount != null ? this.transactionAmount.hashCode() : 0);
         hash = 83 * hash + (this.transactionType != null ? this.transactionType.hashCode() : 0);
+        hash = 83 * hash + (this.transactionCode != null ? this.transactionCode.hashCode() : 0);
+        hash = 83 * hash + (this.buySell != null ? this.buySell.hashCode() : 0);
         hash = 83 * hash + (this.transactionStatus != null ? this.transactionStatus.hashCode() : 0);
         hash = 83 * hash + (this.bseRemarks != null ? this.bseRemarks.hashCode() : 0);
         hash = 83 * hash + (this.bseSuccessFlag != null ? this.bseSuccessFlag.hashCode() : 0);

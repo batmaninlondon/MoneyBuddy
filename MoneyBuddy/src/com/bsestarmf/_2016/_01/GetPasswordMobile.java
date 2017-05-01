@@ -1,5 +1,5 @@
 
-package com.bseindia.bsestarmfdemo._2016._01;
+package com.bsestarmf._2016._01;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.datacontract.schemas._2004._07.starmfwebservice.PasswordRequest;
 
 
 /**
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="MFAPIResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Param" type="{http://schemas.datacontract.org/2004/07/StarMFWebService}PasswordRequest" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,36 +31,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "mfapiResult"
+    "param"
 })
-@XmlRootElement(name = "MFAPIResponse")
-public class MFAPIResponse {
+@XmlRootElement(name = "GetPasswordMobile")
+public class GetPasswordMobile {
 
-    @XmlElementRef(name = "MFAPIResult", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> mfapiResult;
+    @XmlElementRef(name = "Param", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
+    protected JAXBElement<PasswordRequest> param;
 
     /**
-     * Gets the value of the mfapiResult property.
+     * Gets the value of the param property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PasswordRequest }{@code >}
      *     
      */
-    public JAXBElement<String> getMFAPIResult() {
-        return mfapiResult;
+    public JAXBElement<PasswordRequest> getParam() {
+        return param;
     }
 
     /**
-     * Sets the value of the mfapiResult property.
+     * Sets the value of the param property.
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PasswordRequest }{@code >}
      *     
      */
-    public void setMFAPIResult(JAXBElement<String> value) {
-        this.mfapiResult = value;
+    public void setParam(JAXBElement<PasswordRequest> value) {
+        this.param = value;
     }
 
 }

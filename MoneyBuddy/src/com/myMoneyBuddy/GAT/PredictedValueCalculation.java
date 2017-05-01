@@ -10,9 +10,14 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.event.PreDeleteEventListener;
 
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class PredictedValueCalculation implements SessionAware {
@@ -54,7 +59,109 @@ public class PredictedValueCalculation implements SessionAware {
 		
 	}
 	
-	public HashMap<Integer,Double>  predictedAmountList( double sip,String riskCategory,String planName) throws MoneyBuddyException {
+	public HashMap<Integer,Double> predictedSipAmountList(double sip, String riskCategory,String planName) throws MoneyBuddyException {
+
+		try {
+			logger.debug("PredictedValueCalculation class : predictedSipAmount method : start");
+			
+			HashMap<Integer,Double> predictedValueList = new HashMap<Integer,Double>();
+			double sipInvestmentReturn = 0.0;
+
+			double predictedValue;
+			QueryProducts queryProduct = new QueryProducts();
+			double interestRate;
+
+			interestRate = queryProduct.getInterestRates(planName,riskCategory);
+			System.out.println("interestRate before deviding 100 : "+interestRate);
+			interestRate = interestRate /100;
+			
+			System.out.println("interestRate after deviding 100 : "+interestRate);
+			
+			double monthlyInterestRate =  Math.pow((1+interestRate), (1.0/12)); 
+			monthlyInterestRate = monthlyInterestRate-1.0;
+			
+			System.out.println("monthlyInterestRate before rounding off : "+monthlyInterestRate);
+			monthlyInterestRate = Math.round( monthlyInterestRate * 100.0 ) / 100.0;
+			System.out.println("monthlyInterestRate after rounding off : "+monthlyInterestRate);
+			//sipInvestmentReturn = sip *  (1+monthlyInterestRate)  *  ((Math.pow((1+monthlyInterestRate),(years*12 - 1)))/monthlyInterestRate);
+			
+			int years=1;
+			double duration = (years*12);
+			//System.out.println("duration 1 : "+duration);
+			duration = 	Math.pow((1+monthlyInterestRate),(duration-1));
+			//duration = duration -1;
+			//System.out.println("duration 2 : "+duration);
+			duration = duration/monthlyInterestRate;
+
+			//System.out.println("duration before rounding off : "+duration);
+			duration = Math.round( duration * 100.0 ) / 100.0;
+			System.out.println("duration after rounding off : "+duration);
+			
+			
+			sipInvestmentReturn = sip *  (1+monthlyInterestRate)  *  duration;
+			
+			predictedValue = sipInvestmentReturn ;
+			System.out.println("predictedValue of 1 year before rounding off : "+predictedValue);
+			predictedValue = Math.round( predictedValue * 100.0 ) / 100.0;
+			System.out.println("predictedValue of 1 year after rounding off : "+predictedValue);
+
+			predictedValueList.put(1,predictedValue);
+			
+			years=3;
+			
+			duration = (years*12);
+			//System.out.println("duration 1 : "+duration);
+			duration = 	Math.pow((1+monthlyInterestRate),(duration-1));
+			//duration = duration -1;
+			//System.out.println("duration 2 : "+duration);
+			duration = duration/monthlyInterestRate;
+
+			//System.out.println("duration before rounding off : "+duration);
+			duration = Math.round( duration * 100.0 ) / 100.0;
+			System.out.println("duration after rounding off : "+duration);
+			
+			sipInvestmentReturn = sip *  (1+monthlyInterestRate)  *  duration;
+			predictedValue = sipInvestmentReturn ;
+			predictedValue = Math.round( predictedValue * 100.0 ) / 100.0;
+
+			predictedValueList.put(3,predictedValue);
+			
+			years=5;
+			
+			duration = (years*12);
+			//System.out.println("duration 1 : "+duration);
+			duration = 	Math.pow((1+monthlyInterestRate),(duration-1));
+			//duration = duration -1;
+			//System.out.println("duration 2 : "+duration);
+			duration = duration/monthlyInterestRate;
+
+			//System.out.println("duration before rounding off : "+duration);
+			duration = Math.round( duration * 100.0 ) / 100.0;
+			System.out.println("duration after rounding off : "+duration);
+			
+			sipInvestmentReturn = sip *  (1+monthlyInterestRate)  *  duration;
+			predictedValue = sipInvestmentReturn ;
+			predictedValue = Math.round( predictedValue * 100.0 ) / 100.0;
+
+			predictedValueList.put(5,predictedValue);
+			
+			logger.debug("PredictedValueCalculation class : predictedSipAmount method : end");
+			
+			return predictedValueList;
+		} catch (NumberFormatException e) {
+			logger.debug("PredictedValueCalculation class : predictedSipAmount method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("PredictedValueCalculation class : predictedSipAmount method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+	
+	}
+	
+	/*public HashMap<Integer,Double>  predictedAmountList( double sip,String riskCategory,String planName) throws MoneyBuddyException {
 
 		try {
 			logger.debug("PredictedValueCalculation class : predictedAmountList method : start");
@@ -88,7 +195,7 @@ public class PredictedValueCalculation implements SessionAware {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 	
-}
+}*/
 	
     @Override
     public void setSession(Map<String, Object> sessionMap) {

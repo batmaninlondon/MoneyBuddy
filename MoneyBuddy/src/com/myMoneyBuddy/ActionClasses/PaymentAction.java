@@ -34,7 +34,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IMFUploadService;
+import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
 
@@ -88,6 +88,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     public String execute()  {
 
     	try {
+    		
+    		System.out.println("Payment Action class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
     		
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
 	    	String subject ;
@@ -162,7 +164,17 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		
 		if(true ) {
 			String paymentUrl = null;
-			paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), sessionMap.get("upfrontInvestment").toString(), productDetailsMapForBuy, "BUY", "Customer bought some mutual funds",getGroupName());
+			
+			String amount;
+			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
+				amount = sessionMap.get("upfrontInvestment").toString();
+			}
+			else {
+				amount = sessionMap.get("sip").toString();
+			}
+			paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
+					"NEW",sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
+					"Customer bought some mutual funds",getGroupName());
 			
 			sessionMap.put("paymentUrl", paymentUrl);
 	

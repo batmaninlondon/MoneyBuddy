@@ -125,13 +125,13 @@
 				<div class="col-md-2"></div>
 				<div ">
 					<div class="col-md-6">
-						<input id="range" type="range" min="5000" max="100000" step="1000"
-							value="7000" onchange="showUpfrontInvestment(this.value)" />
+						<input id="range" type="range" min="0" max="100" step="10"
+							value="0" onchange="showUpfrontInvestment(this.value)" />
 
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="upfrontInvestment">10000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						 <span id="upfrontInvestment">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
 					</div>
 				</div>
 			</div>
@@ -190,7 +190,7 @@
 					<input type="radio" id="risk-category-5" name="riskCategory" value="5"> Adventurous
 				</div>
 			</div>
-			<span id="plan-name"><%=request.getParameter("planName")%></span>
+			<%-- <span id="plan-name"><%=request.getParameter("planName")%></span> --%>
 
 		</div>
 		<div  id="invested-fund-list" class="col-md-6 hidden" style="margin-top:50px;padding-left:70px;padding-right:70px;">

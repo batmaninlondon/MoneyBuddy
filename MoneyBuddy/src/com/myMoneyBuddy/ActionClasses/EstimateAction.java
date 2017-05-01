@@ -68,6 +68,9 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     }
 */    public String execute() {
     	
+		System.out.println("EstimateAction class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
+		
+	
     	logger.debug("EstimateAction class : execute method : start");
     	
     	try {
@@ -85,7 +88,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				logger.debug("EstimateAction class : execute method : stored predictedValue : "+predictedValue+" in session id : "+sessionMap.getClass().getName());
 			}
 			else {
-				predictedValueList = calculatedValue.predictedAmountList(Double.parseDouble(getSip()), getRiskCategory(), getPlanName());
+				predictedValueList = calculatedValue.predictedSipAmountList(Double.parseDouble(getSip()), getRiskCategory(), getPlanName());
 				sessionMap.put("predictedValueList1", Double.toString(predictedValueList.get(1)));
 				sessionMap.put("predictedValueList3", Double.toString(predictedValueList.get(3)));
 				sessionMap.put("predictedValueList5", Double.toString(predictedValueList.get(5)));
@@ -115,7 +118,9 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			logger.debug("EstimateAction class : execute method : end");
 			
 			System.out.println("Estimate Action class : predictedValue : "+predictedValue);
-			
+			System.out.println("EstimateAction class : execute method : years : "+sessionMap.get("years").toString());
+			System.out.println("EstimateAction class : execute method : upfrontInvestment : "+sessionMap.get("upfrontInvestment").toString());
+			System.out.println("EstimateAction class : execute method : sip : "+sessionMap.get("sip").toString());
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    

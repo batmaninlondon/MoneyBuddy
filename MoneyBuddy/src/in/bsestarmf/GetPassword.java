@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "getPassword")
 public class GetPassword {
 
-
     @XmlElementRef(name = "UserId", namespace = "http://bsestarmf.in/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userId;
     @XmlElementRef(name = "Password", namespace = "http://bsestarmf.in/", type = JAXBElement.class, required = false)
@@ -56,7 +55,6 @@ public class GetPassword {
      *     
      */
     public JAXBElement<String> getUserId() {
-    	System.out.println("getUserId : "+userId);
         return userId;
     }
 
@@ -69,7 +67,6 @@ public class GetPassword {
      *     
      */
     public void setUserId(JAXBElement<String> value) {
-    	System.out.println("setUserId : "+value);
         this.userId = value;
     }
 
@@ -82,7 +79,6 @@ public class GetPassword {
      *     
      */
     public JAXBElement<String> getPassword() {
-    	System.out.println("getPassword : "+password);
         return password;
     }
 
@@ -107,7 +103,6 @@ public class GetPassword {
      *     
      */
     public JAXBElement<String> getPassKey() {
-    	System.out.println("getPassKey : "+passKey);
         return passKey;
     }
 

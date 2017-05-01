@@ -52,7 +52,7 @@ public class TestAction {
          
          try {
 
-        	 trading.executeTrade("12","1", productDetailsMapForBUy, "BUY", "Customer bought some mutual funds","abc");
+        	 trading.executeTrade("000012","1000", productDetailsMapForBUy,"NEW","UPFRONT", "BUY", 5,"Y","Customer bought some mutual funds","abc");
          String fromDate = "2016-10-05";
          String toDate = "2016-10-07";
          

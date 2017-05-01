@@ -19,12 +19,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IMFUploadService;
+import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
+import com.myMoneyBuddy.EntityClasses.ProductDetails;
 //import com.myMoneyBuddy.EntityClasses.PriceHistory;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
@@ -53,7 +54,7 @@ public class Trading {
 	    properties.load(Trading.class.getResourceAsStream(propFilePath));
 
 	    WebServiceMFUpload wbMFUpload = new WebServiceMFUpload();		
-		IMFUploadService imfUploadService = wbMFUpload.getWSHttpBindingIMFUploadService();
+	    IStarMFWebService iStarMFWebService = wbMFUpload.getWSHttpBindingIMFUploadService();
 		
 		String[] clientDetailsArray = {customerId,CLIENT_HOLDING,CLIENT_TAXSTATUS,CLIENT_OCCUPATIONCODE,CLIENT_APPNAME1,properties.getProperty("CLIENT_APPNAME2"),properties.getProperty("CLIENT_APPNAME3"),CLIENT_DOB,CLIENT_GENDER,properties.getProperty("CLIENT_GUARDIAN"),
 				CLIENT_PAN,properties.getProperty("CLIENT_NOMINEE"),properties.getProperty("CLIENT_NOMINEE_RELATION"),properties.getProperty("CLIENT_GUARDIANPAN"),properties.getProperty("CLIENT_TYPE"),properties.getProperty("CLIENT_DEFAULTDP"),properties.getProperty("CLIENT_CDSLDPID"),properties.getProperty("CLIENT_CDSLCLTID"),properties.getProperty("CLIENT_NSDLDPID"),properties.getProperty("CLIENT_NSDLCLTID"),
@@ -68,7 +69,7 @@ public class Trading {
 
 		System.out.println("clientDetails : "+clientDetails);
 	
-		String passwordMFUpload = imfUploadService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+		String passwordMFUpload = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 		
 		String[] resultsMFUpload = passwordMFUpload.split("\\|");
 		
@@ -81,7 +82,7 @@ public class Trading {
 		
 		PASSWORD_MFUPLOAD = resultsMFUpload[1];
 		
-		String ucc = imfUploadService.mfapi("02",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,clientDetails);
+		String ucc = iStarMFWebService.mfapi("02",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,clientDetails);
 
 		System.out.println("ucc : "+ucc);
 
@@ -99,16 +100,19 @@ public class Trading {
 		
 	}
 	
-	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionType, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
+	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, 
+			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
 		
 		SessionFactory factoryTransactions = null;
 		//SessionFactory factoryPriceHistory = null;
 		SessionFactory factoryTransactionDetails = null;
+		SessionFactory factoryProductDetails = null;
 		SessionFactory factoryPaymentDetails = null;
 		SessionFactory factoryCustomerPortfolio = null;
 		Session sessionTransactions = null;
 		//Session sessionPriceHistory = null;
 		Session sessionTransactionDetails = null;
+		Session sessionProductDetails = null;
 		Session sessionPaymentDetails = null;
 		Session sessionCustomerPortfolio = null;
 		Double totalAmount = 0.0;
@@ -156,7 +160,14 @@ public class Trading {
 															.buildSessionFactory();
 			sessionCustomerPortfolio = factoryCustomerPortfolio.openSession();
 	
+			factoryProductDetails = new AnnotationConfiguration()
+					.configure()
+					.addAnnotatedClass(ProductDetails.class)
+					.buildSessionFactory();
+			sessionProductDetails = factoryProductDetails.openSession();
+
 			sessionTransactions.beginTransaction();
+			sessionProductDetails.beginTransaction();
 			//sessionPriceHistory.beginTransaction();
 			
 			sessionPaymentDetails.beginTransaction();
@@ -197,7 +208,7 @@ public class Trading {
 			String PASSWORD_MFORDER;
 			String LOGOUT_URL = "http://www.quantwealth.in/thankYou";
 			WebServiceMFUpload wbMFUpload = new WebServiceMFUpload();		
-			IMFUploadService imfUploadService = wbMFUpload.getWSHttpBindingIMFUploadService();
+			IStarMFWebService iStarMFWebService = wbMFUpload.getWSHttpBindingIMFUploadService();
 			String PASSWORD_MFUPLOAD;
 	    	String passwordMFUpload;
 	    	String[] resultsMFUpload;
@@ -217,8 +228,12 @@ public class Trading {
 			    currentPrice = priceHistory.get(0).getPrice();*/
 			    //quantity = (int)(productDetailsMap.get(currentProductId)/Double.parseDouble(currentPrice));
 				
-			    tempTransactionDetail  = new TransactionDetails(transactionId, null, customerId,
-										transactionType, Double.toString(productDetailsMap.get(currentProductId)),
+				
+
+			    //List<CustomerPortfolio> customerPortfolio = query.list();
+			    
+			    tempTransactionDetail  = new TransactionDetails(transactionId, null, customerId,transactionType,
+										transactionCode,buySell, Double.toString(productDetailsMap.get(currentProductId)),
 						"Pending", null,null,"NO",currentProductId, frmtdDate, frmtdDate); 		
 				
 			    sessionTransactionDetails.beginTransaction();
@@ -244,28 +259,52 @@ public class Trading {
 				
 				PASSWORD_MFORDER = resultsMFOrder[1];
 				
+				String productName = (sessionProductDetails.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
+
+			    System.out.println(" productName result of productDetails is :  "+productName);
 				
 		/*		orderEntryParam(TransactionCode, UniqueReferenceNumber, OrderId, UserID
 					, MemberId, ClientCode, SchemeCode, BuySell, BuySellType, DPTxn, Amount, Qty, AllRedeem, FolioNo
 						, Remarks, KYCStatus, RefNo, SubBrCode, EUIN, EUINFlag, MinRedeem, DPC, IPAdd, Password
 						, PassKey, Param1 (Sub Broker ARN ), Param2, Param3 )*/
 				 
+				if (transactionType == "UPFRONT")  {
 				
-				entryParam = mfOrderEntry.orderEntryParam(properties.getProperty("TRANSACTION_CODE"),transactionDetailId,properties.getProperty("ORDER_ID"),properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),customerId,properties.getProperty("SCHEME_CODE"),properties.getProperty("BUY_SELL"),properties.getProperty("BUY_SELL_TYPE"),properties.getProperty("DP_TXN"),
-						amount,properties.getProperty("QTY"),properties.getProperty("ALL_REDEEM"),properties.getProperty("FOLIO_NUMBER"),properties.getProperty("REMARKS"),properties.getProperty("KYC_STATUS"),properties.getProperty("REF_NO"),properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
-						properties.getProperty("MIN_REDEEM"),properties.getProperty("DPC"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
-				
+					if (buySell == "BUY")  {
+						buySell = "P";
+					}
+					else {
+						buySell = "R";
+					}
+					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,properties.getProperty("ORDER_ID"),properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),customerId,productName,buySell,properties.getProperty("BUY_SELL_TYPE"),properties.getProperty("DP_TXN"),
+							amount,properties.getProperty("QTY"),properties.getProperty("ALL_REDEEM"),properties.getProperty("FOLIO_NUMBER"),properties.getProperty("REMARKS"),properties.getProperty("KYC_STATUS"),properties.getProperty("REF_NO"),properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
+							properties.getProperty("MIN_REDEEM"),properties.getProperty("DPC"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
+				}
+				else {
+					
+					entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, properties.getProperty("MEMBER_ID"),
+							customerId, properties.getProperty("USER_ID"), properties.getProperty("INTERNAL_REF_NUM"), properties.getProperty("TRANSMODE"), properties.getProperty("DP_TXN"), frmtdDate, 
+							properties.getProperty("FREQUENCY_TYPE"),properties.getProperty("FREQUENCY_ALLOWED"),amount,Integer.toString(years*12),properties.getProperty("REMARKS"),properties.getProperty("FOLIO_NUMBER"),firstOrderFlag,properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
+							properties.getProperty("DPC"),properties.getProperty("REGID"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
+					
+				}
+					
 				System.out.println("entryParam : "+entryParam);
+					
 				
 				resultsEntryParam = entryParam.split("\\|");
 				
 				for (int i = 0 ; i <resultsMFOrder.length ; i++ )   {
 					System.out.println("resultsEntryParam : "+i+" : " +resultsEntryParam[i]);
 				}
-
+				
 				sessionTransactionDetails.getTransaction().begin();
 				query = sessionTransactionDetails.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
-				query.setParameter("bseOrderId", resultsEntryParam[2]);
+				if (transactionType == "UPFRONT")
+					query.setParameter("bseOrderId", resultsEntryParam[2]);
+				else 
+					query.setParameter("bseOrderId", resultsEntryParam[5]);
+				
 				query.setParameter("bseRemarks", resultsEntryParam[6]);
 				query.setParameter("bseSuccessFlag", resultsEntryParam[7]);
 				query.setParameter("transactionDetailId", transactionDetailId);
@@ -314,7 +353,7 @@ public class Trading {
 
 			}
 			
-			passwordMFUpload = imfUploadService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+			passwordMFUpload = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 			
 			resultsMFUpload = passwordMFUpload.split("\\|");
 			
@@ -327,7 +366,7 @@ public class Trading {
 			
 			PASSWORD_MFUPLOAD = resultsMFUpload[1];
 
-			String paymentGateway = imfUploadService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,paymentDetails);
+			String paymentGateway = iStarMFWebService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_MFUPLOAD,paymentDetails);
 
 			System.out.println("paymentGateway : "+paymentGateway);
 			
@@ -371,6 +410,8 @@ public class Trading {
 		}
 
 	}
+	
+
 	
 	/*public double calculateProfit(String productId, String fromDate, String toDate) throws MoneyBuddyException {
 		

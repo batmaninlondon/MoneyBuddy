@@ -1,5 +1,5 @@
 
-package com.bseindia.bsestarmfdemo._2016._01;
+package com.bsestarmf._2016._01;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="getPasswordResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="TestResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,36 +30,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getPasswordResult"
+    "testResult"
 })
-@XmlRootElement(name = "getPasswordResponse")
-public class GetPasswordResponse {
+@XmlRootElement(name = "TestResponse")
+public class TestResponse {
 
-    @XmlElementRef(name = "getPasswordResult", namespace = "http://bsestarmfdemo.bseindia.com/2016/01/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> getPasswordResult;
+    @XmlElementRef(name = "TestResult", namespace = "http://www.bsestarmf.in/2016/01/", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> testResult;
 
     /**
-     * Gets the value of the getPasswordResult property.
+     * Gets the value of the testResult property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getGetPasswordResult() {
-        return getPasswordResult;
+    public JAXBElement<String> getTestResult() {
+        return testResult;
     }
 
     /**
-     * Sets the value of the getPasswordResult property.
+     * Sets the value of the testResult property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setGetPasswordResult(JAXBElement<String> value) {
-        this.getPasswordResult = value;
+    public void setTestResult(JAXBElement<String> value) {
+        this.testResult = value;
     }
 
 }
