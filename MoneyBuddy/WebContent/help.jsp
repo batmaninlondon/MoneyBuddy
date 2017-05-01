@@ -271,7 +271,7 @@ This tax year you are allowed to put up to £20,000 into your ISA.
 Previous Tax Year (2016/2017) — £15,240<br>
 Earlier Tax Year (2015/2016) – £15,000<br>
 <br><br>
-You can pay your whole allowance of £20,000 into a Stocks and shares ISA, a Cash ISA, or a combination of these. So even if you have a Cash ISA elsewhere, you can still open a Stocks and Shares ISA with Moneyfarm.
+You can pay ... whole allowance of £20,000 into a Stocks and shares ISA, a Cash ISA, or a combination of these. So even if you have a Cash ISA elsewhere, you can still open a Stocks and Shares ISA with Moneyfarm.
 <br><br>
 You can choose between making a lump sum investment and/or making regular or ad hoc contributions throughout the tax year.
 <br><br>
