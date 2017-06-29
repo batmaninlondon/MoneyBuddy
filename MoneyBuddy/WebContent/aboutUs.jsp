@@ -199,7 +199,7 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>Savi has over ten years of experience in software development. She believed that technology can .....</p>
+							<p>Savvy has over ten years of experience in software development. She believed that technology can .....</p>
 						</div>
 					</div>
 					

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <%@ page language="java"
 	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -168,9 +168,6 @@
 					<input type="radio" id="risk-category-4" name="riskCategory" value="4"> Ambitious 
 					<input type="radio" id="risk-category-5" name="riskCategory" value="5"> Adventurous
 					</p>
-						<p id="diamond-text-1" class="top-number" >Use the slider
-							and select an investment style to calculate how much your
-							investment could make.</p>
 				</div>
 			</div>
 			<%-- <span id="plan-name"><%=request.getParameter("planName")%></span> --%>
@@ -188,14 +185,14 @@
 			<table class="table table-striped table-bordered" >
 				<thead class="table-head">
 					<tr>
-						<th>Fund Name</th>
+						<th>Fund Nameee</th>
 						<th>Percentage</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table-body" >
 
 					<s:iterator value="#session.productList" var="productListElement">
-						<tr class="warning">
+						<tr>
 						    <td><s:property value="#productListElement.key"/></td>
 						    <td><s:property value="#productListElement.value"/></td>
 						</tr>
@@ -294,10 +291,15 @@
 		</div>
 		
 		<div class="diamond-img col-md-6">
+
+				<img src="images/pattern.jpg" id="pattern-image">
 				<div class="row">
 					<div id="diamond-shape" class="col-md-12">
 					
 
+						<p id="diamond-text-1" class="diamond-text-1" >Use the slider
+							and select an investment style to calculate how much your
+							investment could make.</p>
 
 						<p id="diamond-text-2" class="diamond-text-2 hidden">
 							Invest Rs. <span id="totalInvestment"></span>

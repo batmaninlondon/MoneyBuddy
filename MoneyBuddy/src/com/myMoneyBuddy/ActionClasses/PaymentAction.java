@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -186,7 +187,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			sessionMap.put("groupNamesList", groupNamesList);
 	    	logger.debug("PaymentAction class : execute method : updated groupNamesList in session id : "+sessionMap.getClass().getName());
 	    	
-	    	if ( (Integer.parseInt(getAccountNumber()) % 2) == 0)  {
+	    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
 	    		
 	    		System.out.println(" account number is even, considering payment successful !! ");
 	    		
@@ -203,7 +204,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	        	String str = "success|"+paymentUrl;
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
-	    	}
+	    	/*}
 	    	else {
 	    		
 	    		System.out.println(" account number is odd, considering payment failure !! ");
@@ -221,7 +222,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	        	String str = "paymentFailure";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
-	    	}
+	    	}*/
 		}
 		else {
 			String str = "clientCreationFailure";

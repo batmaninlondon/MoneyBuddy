@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,9 @@ public class Trading {
 	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, 
 			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
 		
+		
+		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
+		
 		SessionFactory factoryTransactions = null;
 		//SessionFactory factoryPriceHistory = null;
 		SessionFactory factoryTransactionDetails = null;
@@ -172,8 +176,12 @@ public class Trading {
 			
 			sessionPaymentDetails.beginTransaction();
 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
+			String frmtdDateForDB = dateFormat.format(date);
+			
+			dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			date = new Date();
 			String frmtdDate = dateFormat.format(date);
 			     
 			for ( Double currentAmount : productDetailsMap.values())  {
@@ -181,7 +189,7 @@ public class Trading {
 			}
 			
 			tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
-					transactionType, "Pending",frmtdDate,frmtdDate);
+					transactionType, "Pending",frmtdDateForDB,frmtdDateForDB);
 			
 			sessionTransactions.save(tempTransaction);
 			sessionTransactions.getTransaction().commit();
@@ -191,7 +199,7 @@ public class Trading {
 			String transactionId = tempTransaction.getTransactionId();
 			
 			tempPaymentDetail = new PaymentDetails( transactionId, 
-					paymentGatewayComment, frmtdDate,frmtdDate);
+					paymentGatewayComment, frmtdDateForDB,frmtdDateForDB);
 
 			sessionPaymentDetails.save(tempPaymentDetail);
 			sessionPaymentDetails.getTransaction().commit();
@@ -234,7 +242,7 @@ public class Trading {
 			    
 			    tempTransactionDetail  = new TransactionDetails(transactionId, null, customerId,transactionType,
 										transactionCode,buySell, Double.toString(productDetailsMap.get(currentProductId)),
-						"Pending", null,null,"NO",currentProductId, frmtdDate, frmtdDate); 		
+						"Pending", null,null,"NO",currentProductId, frmtdDateForDB, frmtdDateForDB); 		
 				
 			    sessionTransactionDetails.beginTransaction();
 			    sessionTransactionDetails.save(tempTransactionDetail);
@@ -287,6 +295,11 @@ public class Trading {
 							properties.getProperty("FREQUENCY_TYPE"),properties.getProperty("FREQUENCY_ALLOWED"),amount,Integer.toString(years*12),properties.getProperty("REMARKS"),properties.getProperty("FOLIO_NUMBER"),firstOrderFlag,properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
 							properties.getProperty("DPC"),properties.getProperty("REGID"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
 					
+					System.out.println("Trading class : executeTade method : inside SIP loop  ");
+					
+					System.out.println("Trading class : executeTade method : start Date : "+frmtdDate);
+
+				
 				}
 					
 				System.out.println("entryParam : "+entryParam);
@@ -332,14 +345,14 @@ public class Trading {
 
 			    	customerPortfolio.get(0).setPendingOrders(Integer.toString(pendingOrders));
 			    	customerPortfolio.get(0).setTransactionDetailId(transactionDetailId);
-			    	customerPortfolio.get(0).setUpdateDate(frmtdDate);
+			    	customerPortfolio.get(0).setUpdateDate(frmtdDateForDB);
 			    	
 			    }
 			    else {
 
 			    	tempCustomerPortfolio = new CustomerPortfolio(customerId, currentProductId,
 			    				"0", Integer.toString(pendingOrders),transactionDetailId,
-			    				null,groupName,null,frmtdDate,frmtdDate);
+			    				null,groupName,null,frmtdDateForDB,frmtdDateForDB);
 
 			    	
 			    	sessionCustomerPortfolio.save(tempCustomerPortfolio);

@@ -49,6 +49,7 @@ function showPlan()
 	
 	/*alert('showPLan function riskCategory :'+riskCategory );*/
 	
+	
     $.ajax({
         url : "productListAction",
         type: 'post',
@@ -63,14 +64,11 @@ function showPlan()
 	        	document.getElementById('invested-fund-list').style.display ='block';
 	        	document.getElementById("submit-button-1").disabled = true;*/
         		
-        		
-        		
         		document.getElementById('investment-options').className += " hidden";
 	        	$("#invested-fund-list").removeClass('hidden');
 	        	/*document.getElementById('invested-fund-list').style.display ='block';*/
 	        	document.getElementById("submit-button-1").disabled = true;
 	        	$("#investment-fund-list-data").load("upfrontInvestment.jsp #investment-fund-list-data");
-	        	
         	}
 
         }
