@@ -1,16 +1,12 @@
-<!doctype html>
+<!DOCTYPE html >
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Dialog - Default functionality</title>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="assets/js/jquery-ui.js"></script>
-  
-    
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Save Tax | Money Buddy</title>
+    <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -20,7 +16,7 @@
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery-3.2.1.min.js"></script>
+ 	<script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>
@@ -31,25 +27,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    
-
-<script src="assets/js/jquery-1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
-	
-</script> -->
-  
-  <script>
-  $( function() {
-    $( "#dialog" ).dialog();
-  } );
-  </script>
 </head>
-<body>
- 
-    <header id="header">
+
+<body class="homepage">
+   <header id="header">
         <div class="top-bar">
             <div class="container">
                 <div class="row">
@@ -88,7 +69,7 @@
                         <li><a href="myIndex">Home</a></li>
                         <li><a href="whyInvest">Why Invest</a></li>
                         <li><a href="aboutUs">About Us</a></li>
-                        <li ><a href="saveTax">Save Tax</a></li>
+                        <li class="active"><a href="saveTax">Save Tax</a></li>
                         <li ><a href="blog">Blog</a></li> 
                         <li><a href="help">Help</a></li> 
                        
@@ -98,7 +79,7 @@
 										<li><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li class="active"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
 							 			 <li><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
@@ -108,15 +89,14 @@
         </nav><!--/nav-->
 		
     </header>
-    
-    
-    
-<div id="dialog" title="Basic dialog">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
- 
- 
-       <footer id="footer" class="midnight-blue">
+	<div class="container">
+		 <ul class="nav nav-tabs">
+		  <li class="active"><a href="bseDashboard">Dashboard</a></li>
+		  <li><a href="#">Portfolio</a></li>
+		</ul>
+	</div>
+  
+      <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -133,6 +113,7 @@
             </div>
         </div>
     </footer>
- 
+
+
 </body>
 </html>

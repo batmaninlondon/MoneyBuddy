@@ -99,7 +99,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	String MAIL_SITE_LINK = "www.quantwealth.in/login";
     	
     	
-	    	System.out.println("Inside payment execute mehtod - start ");
+	    	//System.out.println("Inside payment execute mehtod - start ");
     	
 	    	if ( customerPortfolio.existsGroupName(getGroupName())) {
 	        	System.out.println("Payment Action : Group Name already exists. Please choose a different group Name : "+getGroupName());
@@ -134,76 +134,94 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			
 			
 		    customerId = sessionMap.get("customerId").toString();
-	    	System.out.println("CLIENT_CODE/customerId : "+customerId);
+	    	//System.out.println("CLIENT_CODE/customerId : "+customerId);
 	    	
 	    	CLIENT_APPNAME1 = sessionMap.get("customerName").toString();
-	    	System.out.println("CLIENT_APPNAME1 : "+CLIENT_APPNAME1);
+	    	//System.out.println("CLIENT_APPNAME1 : "+CLIENT_APPNAME1);
 	    	
 	    	CLIENT_EMAIL = sessionMap.get("emailId").toString();
-	    	System.out.println("CLIENT_EMAIL : "+CLIENT_EMAIL);
+	    	//System.out.println("CLIENT_EMAIL : "+CLIENT_EMAIL);
 
 	    	
 	    	CLIENT_PAN = sessionMap.get("panCard").toString();
-	    	System.out.println("CLIENT_PAN : "+CLIENT_PAN);
+	    	//System.out.println("CLIENT_PAN : "+CLIENT_PAN);
 	    	
 	    	CLIENT_CM_MOBILE = sessionMap.get("customerMobileNumber").toString();
-	    	System.out.println("CLIENT_CM_MOBILE : "+CLIENT_CM_MOBILE);
+	    	//System.out.println("CLIENT_CM_MOBILE : "+CLIENT_CM_MOBILE);
 
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy;
-	    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
-	    	
     	
-		sessionMap.put("groupName", getGroupName());
-		logger.debug("PaymentAction class : execute method : stored investmentTypeName : "+getGroupName()+" in session id : "+sessionMap.getClass().getName());
-		Trading trading = new Trading();
+	    	sessionMap.put("groupName", getGroupName());
+	    	logger.debug("PaymentAction class : execute method : stored investmentTypeName : "+getGroupName()+" in session id : "+sessionMap.getClass().getName());
+	    	Trading trading = new Trading();
 		
-		String ucc = trading.createClient(getClientHolding(), getTaxStatus(), getOccupationName(), getDateOfBirth(),
+	    	String ucc = trading.createClient(getClientHolding(), getTaxStatus(), getOccupationName(), getDateOfBirth(),
 				getGenderType(), "", getAccountType(), getAccountNumber(), getNeftCode(),
 				getResidentialAddress(), getResidentialCity(), getResidentialState(), getResidentialPin(), getResidentialCountry(),
 				customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
 		
-		if(true ) {
+	    	String[] uccSpilts = ucc.split("\\|");
+	    	
+	    	//System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+	    	
+		if(uccSpilts[0].equals("100") ) {
 			String paymentUrl = null;
 			
 			String amount;
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
+				
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
+		    	
 			}
 			else {
 				amount = sessionMap.get("sip").toString();
+				
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),Double.parseDouble(sessionMap.get("sip").toString()));
+		    	
 			}
 			paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 					"NEW",sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
 					"Customer bought some mutual funds",getGroupName());
 			
-			sessionMap.put("paymentUrl", paymentUrl);
-	
-	    	System.out.println("paymentUrl from session : "+sessionMap.get("paymentUrl").toString());
-	    	
-	    	logger.debug("PaymentAction class : execute method : stored paymentUrl : "+paymentUrl+" in session id : "+sessionMap.getClass().getName());
+			String str ;
+			if ( !paymentUrl.equals("NotSet")) {
 			
-			groupNamesList = (ArrayList)customerPortfolio.getGroupNameList(sessionMap.get("customerId").toString());
-			sessionMap.put("groupNamesList", groupNamesList);
-	    	logger.debug("PaymentAction class : execute method : updated groupNamesList in session id : "+sessionMap.getClass().getName());
-	    	
-	    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
+				sessionMap.put("paymentUrl", paymentUrl);
+		
+		    	System.out.println("paymentUrl from session : "+sessionMap.get("paymentUrl").toString());
+		    	
+		    	logger.debug("PaymentAction class : execute method : stored paymentUrl : "+paymentUrl+" in session id : "+sessionMap.getClass().getName());
+				
+				groupNamesList = (ArrayList)customerPortfolio.getGroupNameList(sessionMap.get("customerId").toString());
+				sessionMap.put("groupNamesList", groupNamesList);
+		    	logger.debug("PaymentAction class : execute method : updated groupNamesList in session id : "+sessionMap.getClass().getName());
+		    	
+		    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
+		    		
+		    		System.out.println(" account number is even, considering payment successful !! ");
+		    		
+			    	subject = "Payment recieved for your recent transaction";
+		        	bodyText.append("<div>")
+		        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
+		        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
+		        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
+		        	.append("  <h3>Thanks,</h3><br/><br/>")
+		        	.append("  <h3>MoneyBuddy Team</h3>")
+		        	.append("</div>");
+		        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);
+		        	
+		        	str = "success|"+paymentUrl;
+
 	    		
-	    		System.out.println(" account number is even, considering payment successful !! ");
-	    		
-		    	subject = "Payment recieved for your recent transaction";
-	        	bodyText.append("<div>")
-	        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
-	        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
-	        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
-	        	.append("  <h3>Thanks,</h3><br/><br/>")
-	        	.append("  <h3>MoneyBuddy Team</h3>")
-	        	.append("</div>");
-	        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);
-	        	
-	        	String str = "success|"+paymentUrl;
-	    	    stream = new ByteArrayInputStream(str.getBytes());
-	    		return SUCCESS;
+			}
+			else{
+				str = "allOrderFailed";
+
+			}
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    		return SUCCESS;
 	    	/*}
 	    	else {
 	    		

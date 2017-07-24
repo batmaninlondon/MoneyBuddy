@@ -27,12 +27,12 @@ public class insertCustomerAccountDetails {
 
     	logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : start");
     	
-    	SessionFactory factoryCustomerAccountDetails = new AnnotationConfiguration()
+    	SessionFactory factory = new AnnotationConfiguration()
     															.configure()
     															.addAnnotatedClass(CustomerAccountDetails.class)
     															.buildSessionFactory();
     															//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session sessionCustomerAccountDetails = factoryCustomerAccountDetails.openSession();
+    	Session session = factory.openSession();
 
 
     	try {
@@ -43,9 +43,9 @@ public class insertCustomerAccountDetails {
 
     		CustomerAccountDetails tempCustomerAccountDetail = new CustomerAccountDetails(transactionId,customerId,bankName,accountNumber,
     				accountPassword,cvvNumber,frmtdDate,frmtdDate);
-    		sessionCustomerAccountDetails.beginTransaction();
-    		sessionCustomerAccountDetails.save(tempCustomerAccountDetail);
-    		sessionCustomerAccountDetails.getTransaction().commit();
+    		session.beginTransaction();
+    		session.save(tempCustomerAccountDetail);
+    		session.getTransaction().commit();
     		
     		logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : inserted data to CustomerAccountDetails table for customerId : "+customerId);
     		logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : end");
@@ -62,8 +62,8 @@ public class insertCustomerAccountDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-			if(factoryCustomerAccountDetails!=null)
-				factoryCustomerAccountDetails.close();
+			if(factory != null)
+				factory.close();
 
     	}
 

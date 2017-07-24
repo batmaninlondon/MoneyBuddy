@@ -308,7 +308,7 @@
 		</div>
 	</div>
 	<div id="button-1" class="row">
-		<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showPlan();">SEE YOUR PLAN</button>
+		<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showSipPlan();">SEE YOUR PLAN</button>
 	</div>
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>

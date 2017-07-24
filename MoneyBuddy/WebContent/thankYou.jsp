@@ -31,6 +31,7 @@
 	<div class="row">
 		<div class="col-md-12 well-sm large-text help-row-1" >
 			<p>Thank for using MoneyBuddy</p>
+			
 		</div>
 	</div>
 

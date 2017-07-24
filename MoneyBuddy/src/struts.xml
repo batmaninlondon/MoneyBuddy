@@ -199,6 +199,26 @@
                        </result>
                 </action>
         </package>
+        
+        <package name="portfolioAction" extends="json-default">
+                <action name="portfolioAction" class="com.myMoneyBuddy.ActionClasses.PortfolioAction">
+                       <result name="error">/newErrorPage.jsp</result>
+                        <result type="json">
+                           <param name="excludeNullProperties">true</param>
+                          <param name="noCache">true</param>
+                       </result>
+                </action>
+        </package>
+        
+        <package name="investmentDetailsAction" extends="json-default">
+                <action name="investmentDetailsAction" class="com.myMoneyBuddy.ActionClasses.InvestmentDetailsAction">
+                       <result name="error">/newErrorPage.jsp</result>
+                        <result type="json">
+                           <param name="excludeNullProperties">true</param>
+                          <param name="noCache">true</param>
+                       </result>
+                </action>
+        </package>
 
 
   	

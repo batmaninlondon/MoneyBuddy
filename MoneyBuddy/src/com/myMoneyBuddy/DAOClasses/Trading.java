@@ -87,6 +87,7 @@ public class Trading {
 
 		System.out.println("ucc : "+ucc);
 
+
 		return ucc;
 		
 		}catch (IOException e) {
@@ -107,19 +108,11 @@ public class Trading {
 		
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
 		
-		SessionFactory factoryTransactions = null;
-		//SessionFactory factoryPriceHistory = null;
-		SessionFactory factoryTransactionDetails = null;
-		SessionFactory factoryProductDetails = null;
-		SessionFactory factoryPaymentDetails = null;
-		SessionFactory factoryCustomerPortfolio = null;
-		Session sessionTransactions = null;
-		//Session sessionPriceHistory = null;
-		Session sessionTransactionDetails = null;
-		Session sessionProductDetails = null;
-		Session sessionPaymentDetails = null;
-		Session sessionCustomerPortfolio = null;
+		SessionFactory factory = null;
+		Session session = null;
+		
 		Double totalAmount = 0.0;
+		String buySellType;
 		int quantity; 
 		String transactionDetailId;
 		String currentPrice;
@@ -132,49 +125,17 @@ public class Trading {
 		CustomerPortfolio tempCustomerPortfolio;
 		
 		try {
-			//TODO there should be no need to create so many SessionFactory objects, it is taken care by JPA/HIbernate by default... this needs changing
+
 			logger.debug("Trading class : executeTrade method : start");
-			factoryTransactions = new AnnotationConfiguration()
+			factory = new AnnotationConfiguration()
 											.configure()
-											.addAnnotatedClass(Transactions.class)
+											.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
+											.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
 											.buildSessionFactory();
-			sessionTransactions = factoryTransactions.openSession();
+			session = factory.openSession();
 			
-			/*factoryPriceHistory = new AnnotationConfiguration()
-														.configure()
-														.addAnnotatedClass(PriceHistory.class)
-														.buildSessionFactory();
-			sessionPriceHistory = factoryPriceHistory.openSession();*/
-			
-			factoryTransactionDetails = new AnnotationConfiguration()
-														.configure()
-														.addAnnotatedClass(TransactionDetails.class)
-														.buildSessionFactory();
-			sessionTransactionDetails = factoryTransactionDetails.openSession();
-			
-			factoryPaymentDetails = new AnnotationConfiguration()
-															.configure()
-															.addAnnotatedClass(PaymentDetails.class)
-															.buildSessionFactory();
-			sessionPaymentDetails = factoryPaymentDetails.openSession();
 
-			factoryCustomerPortfolio = new AnnotationConfiguration()
-															.configure()
-															.addAnnotatedClass(CustomerPortfolio.class)
-															.buildSessionFactory();
-			sessionCustomerPortfolio = factoryCustomerPortfolio.openSession();
-	
-			factoryProductDetails = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(ProductDetails.class)
-					.buildSessionFactory();
-			sessionProductDetails = factoryProductDetails.openSession();
-
-			sessionTransactions.beginTransaction();
-			sessionProductDetails.beginTransaction();
-			//sessionPriceHistory.beginTransaction();
-			
-			sessionPaymentDetails.beginTransaction();
+			session.beginTransaction();
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
@@ -185,14 +146,15 @@ public class Trading {
 			String frmtdDate = dateFormat.format(date);
 			     
 			for ( Double currentAmount : productDetailsMap.values())  {
+				System.out.println("currentAmount : "+currentAmount);
 				totalAmount = totalAmount + currentAmount;
 			}
 			
 			tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
 					transactionType, "Pending",frmtdDateForDB,frmtdDateForDB);
 			
-			sessionTransactions.save(tempTransaction);
-			sessionTransactions.getTransaction().commit();
+			session.save(tempTransaction);
+			session.getTransaction().commit();
 			
 			logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
 			
@@ -201,8 +163,9 @@ public class Trading {
 			tempPaymentDetail = new PaymentDetails( transactionId, 
 					paymentGatewayComment, frmtdDateForDB,frmtdDateForDB);
 
-			sessionPaymentDetails.save(tempPaymentDetail);
-			sessionPaymentDetails.getTransaction().commit();
+			session.beginTransaction();
+			session.save(tempPaymentDetail);
+			session.getTransaction().commit();
 			
 			Properties properties = new Properties();
 			String propFilePath = "../../../config/client.properties";
@@ -226,6 +189,9 @@ public class Trading {
 	    	String[] resultsEntryParam;
 	    	String[] paymentDetailsArray = {properties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
 			paymentDetails = String.join("|",paymentDetailsArray);
+			
+			boolean allOrderFailed = true ;
+			String paymentUrl;
 			 
 			for ( String currentProductId : productDetailsMap.keySet())  {
 									
@@ -240,16 +206,16 @@ public class Trading {
 
 			    //List<CustomerPortfolio> customerPortfolio = query.list();
 			    
-			    tempTransactionDetail  = new TransactionDetails(transactionId, null, customerId,transactionType,
+			    tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
 										transactionCode,buySell, Double.toString(productDetailsMap.get(currentProductId)),
-						"Pending", null,null,"NO",currentProductId, frmtdDateForDB, frmtdDateForDB); 		
+						null, null,null,"NO",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB); 		
 				
-			    sessionTransactionDetails.beginTransaction();
-			    sessionTransactionDetails.save(tempTransactionDetail);
+			    session.beginTransaction();
+			    session.save(tempTransactionDetail);
 
 			    logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
 			    
-			    sessionTransactionDetails.getTransaction().commit();
+			    session.getTransaction().commit();
 			    
 			    transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 			    
@@ -259,17 +225,18 @@ public class Trading {
 				
 				resultsMFOrder = passwordMFOrder.split("\\|");
 				
-				for (int i = 0 ; i <resultsMFOrder.length ; i++ )   {
+				/*for (int i = 0 ; i <resultsMFOrder.length ; i++ )   {
 					System.out.println("resultsMFOrder : "+i+" : " +resultsMFOrder[i]);
 				}
 				
-				System.out.println("passwordMFOrder : "+passwordMFOrder);
+				System.out.println("passwordMFOrder : "+passwordMFOrder);*/
 				
 				PASSWORD_MFORDER = resultsMFOrder[1];
 				
-				String productName = (sessionProductDetails.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
+				session.beginTransaction();
+				String productName = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
 
-			    System.out.println(" productName result of productDetails is :  "+productName);
+			    System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
 				
 		/*		orderEntryParam(TransactionCode, UniqueReferenceNumber, OrderId, UserID
 					, MemberId, ClientCode, SchemeCode, BuySell, BuySellType, DPTxn, Amount, Qty, AllRedeem, FolioNo
@@ -279,23 +246,25 @@ public class Trading {
 				if (transactionType == "UPFRONT")  {
 				
 					if (buySell == "BUY")  {
-						buySell = "P";
+						buySellType = "P";
 					}
 					else {
-						buySell = "R";
+						buySellType = "R";
 					}
-					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,properties.getProperty("ORDER_ID"),properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),customerId,productName,buySell,properties.getProperty("BUY_SELL_TYPE"),properties.getProperty("DP_TXN"),
-							amount,properties.getProperty("QTY"),properties.getProperty("ALL_REDEEM"),properties.getProperty("FOLIO_NUMBER"),properties.getProperty("REMARKS"),properties.getProperty("KYC_STATUS"),properties.getProperty("REF_NO"),properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
+					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
+					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,properties.getProperty("ORDER_ID"),properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),customerId,productName,buySellType,properties.getProperty("BUY_SELL_TYPE"),properties.getProperty("DP_TXN"),
+							Double.toString(productDetailsMap.get(currentProductId)),properties.getProperty("QTY"),properties.getProperty("ALL_REDEEM"),properties.getProperty("FOLIO_NUMBER"),properties.getProperty("REMARKS"),properties.getProperty("KYC_STATUS"),properties.getProperty("REF_NO"),properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
 							properties.getProperty("MIN_REDEEM"),properties.getProperty("DPC"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
 				}
 				else {
 					
+					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
 					entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, properties.getProperty("MEMBER_ID"),
 							customerId, properties.getProperty("USER_ID"), properties.getProperty("INTERNAL_REF_NUM"), properties.getProperty("TRANSMODE"), properties.getProperty("DP_TXN"), frmtdDate, 
-							properties.getProperty("FREQUENCY_TYPE"),properties.getProperty("FREQUENCY_ALLOWED"),amount,Integer.toString(years*12),properties.getProperty("REMARKS"),properties.getProperty("FOLIO_NUMBER"),firstOrderFlag,properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
+							properties.getProperty("FREQUENCY_TYPE"),properties.getProperty("FREQUENCY_ALLOWED"),Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),properties.getProperty("REMARKS"),properties.getProperty("FOLIO_NUMBER"),firstOrderFlag,properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
 							properties.getProperty("DPC"),properties.getProperty("REGID"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
 					
-					System.out.println("Trading class : executeTade method : inside SIP loop  ");
+					//System.out.println("Trading class : executeTade method : inside SIP loop  ");
 					
 					System.out.println("Trading class : executeTade method : start Date : "+frmtdDate);
 
@@ -307,25 +276,36 @@ public class Trading {
 				
 				resultsEntryParam = entryParam.split("\\|");
 				
-				for (int i = 0 ; i <resultsMFOrder.length ; i++ )   {
+				/*for (int i = 0 ; i <resultsEntryParam.length ; i++ )   {
 					System.out.println("resultsEntryParam : "+i+" : " +resultsEntryParam[i]);
-				}
+				}*/
 				
-				sessionTransactionDetails.getTransaction().begin();
-				query = sessionTransactionDetails.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
+				session.getTransaction().commit();
+				session.beginTransaction();
+				query = session.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
 				if (transactionType == "UPFRONT")
 					query.setParameter("bseOrderId", resultsEntryParam[2]);
 				else 
 					query.setParameter("bseOrderId", resultsEntryParam[5]);
 				
+				if ( resultsEntryParam[7].equals("1") ) 
+					query.setParameter("transactionStatus", "Failed");
+				else  
+				{
+					query.setParameter("transactionStatus", "Pending");
+					allOrderFailed = false;
+				}
+				
+				query.setParameter("uniqueReferenceNumber", resultsEntryParam[1]);
 				query.setParameter("bseRemarks", resultsEntryParam[6]);
 				query.setParameter("bseSuccessFlag", resultsEntryParam[7]);
 				query.setParameter("transactionDetailId", transactionDetailId);
 				int result = query.executeUpdate();
-				System.out.print(result + " rows updated in transactionDetails table ");
-				sessionTransactionDetails.getTransaction().commit();
+				System.out.println(result + " rows updated in transactionDetails table ");
+				session.getTransaction().commit();
 			    
-			    query = sessionCustomerPortfolio.createQuery("from CustomerPortfolio where productId = :productId and customerId = :customerId and investmentTypeName = :groupName");
+				session.beginTransaction();
+			    query = session.createQuery("from CustomerPortfolio where productId = :productId and customerId = :customerId and investmentTypeName = :groupName");
 			    query.setParameter("productId",currentProductId);
 			    query.setParameter("customerId",customerId);
 			    query.setParameter("groupName",groupName);
@@ -339,7 +319,8 @@ public class Trading {
 				else 
 					pendingOrders += quantity;*/
 				
-				sessionCustomerPortfolio.beginTransaction();
+			    session.getTransaction().commit();
+			    session.beginTransaction();
 			    if (query.list().size() != 0)  {
 			    	pendingOrders += Integer.parseInt(customerPortfolio.get(0).getPendingOrders());
 
@@ -355,10 +336,10 @@ public class Trading {
 			    				null,groupName,null,frmtdDateForDB,frmtdDateForDB);
 
 			    	
-			    	sessionCustomerPortfolio.save(tempCustomerPortfolio);
+			    	session.save(tempCustomerPortfolio);
 			    	
 			    }
-			    sessionCustomerPortfolio.getTransaction().commit();
+			    session.getTransaction().commit();
 			    
 			    logger.debug("Trading class : executeTrade method : inserted data to CustomerPortfolio table for customerId : "+customerId);
 			    
@@ -366,35 +347,42 @@ public class Trading {
 
 			}
 			
-			passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 			
-			resultsStarMF = passwordStarMF.split("\\|");
-			
-			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
-				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+			if (!allOrderFailed) {
+				passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+				
+				resultsStarMF = passwordStarMF.split("\\|");
+				
+				/*for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+					System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+				}
+				
+				
+				System.out.println("passwordStarMF : "+passwordStarMF);*/
+				
+				PASSWORD_STARMF = resultsStarMF[1];
+	
+				String paymentGateway = iStarMFWebService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_STARMF,paymentDetails);
+	
+				System.out.println("paymentGateway : "+paymentGateway);
+				
+				String[] resultsPaymentGateway = paymentGateway.split("\\|");
+				
+				/*for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
+					System.out.println("resultsPaymentGateway : "+i+" : " +resultsPaymentGateway[i]);
+				}*/
+				
+				paymentUrl = resultsPaymentGateway[1];
+				System.out.println("paymentUrl: "+paymentUrl);
+
 			}
-			
-			
-			System.out.println("passwordStarMF : "+passwordStarMF);
-			
-			PASSWORD_STARMF = resultsStarMF[1];
-
-			String paymentGateway = iStarMFWebService.mfapi("03",properties.getProperty("USER_ID"),PASSWORD_STARMF,paymentDetails);
-
-			System.out.println("paymentGateway : "+paymentGateway);
-			
-			String[] resultsPaymentGateway = paymentGateway.split("\\|");
-			
-			for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
-				System.out.println("resultsPaymentGateway : "+i+" : " +resultsPaymentGateway[i]);
+			else {
+				paymentUrl = "NotSet";
+				System.out.println("paymentUrl: "+paymentUrl);
 			}
-			
-			String paymentUrl = resultsPaymentGateway[1];
-			System.out.println("paymentUrl: "+paymentUrl);
-
-
 			
 			logger.debug("Trading class : executeTrade method : end");
+			
 			return paymentUrl;
 		} catch (NumberFormatException | HibernateException e) {
 			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
@@ -406,20 +394,9 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			if(sessionTransactions!=null)
-				sessionTransactions.close();
-			
-			/*if(sessionPriceHistory!=null)
-				sessionPriceHistory.close();*/
-			
-			if(sessionTransactionDetails!=null)
-				sessionTransactionDetails.close();
-			
-			if(sessionPaymentDetails!=null)
-				sessionPaymentDetails.close();
-			
-			if(sessionCustomerPortfolio!=null)
-				sessionCustomerPortfolio.close();
+			if(session!=null)
+				session.close();
+
 		}
 
 	}

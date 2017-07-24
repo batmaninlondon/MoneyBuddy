@@ -25,16 +25,16 @@ public class QueryCustomerPortfolio {
 		
 		logger.debug("QueryCustomerPortfolio class : existsGroupName method : start");
 		
-		SessionFactory factoryCustomerPortfolio = new AnnotationConfiguration()
+		SessionFactory factory = new AnnotationConfiguration()
 														.configure()
 														.addAnnotatedClass(CustomerPortfolio.class)
 														.buildSessionFactory();
-		Session sessionCustomerPortfolio = factoryCustomerPortfolio.openSession();
+		Session session = factory.openSession();
 
 		try
 		{
-			sessionCustomerPortfolio.beginTransaction();
-			Query query = sessionCustomerPortfolio.createQuery("from CustomerPortfolio where investmentTypeName = :groupName");
+			session.beginTransaction();
+			Query query = session.createQuery("from CustomerPortfolio where investmentTypeName = :groupName");
 			query.setParameter("groupName",groupName);
 			List<CustomerPortfolio> customerPortfolioList = query.list();
 
@@ -42,7 +42,7 @@ public class QueryCustomerPortfolio {
 			{
 				return true;
 			}
-			sessionCustomerPortfolio.getTransaction().commit();
+			session.getTransaction().commit();
 			
 			logger.debug("QueryCustomerPortfolio class : existsGroupName method : end");
 			return false;
@@ -58,8 +58,8 @@ public class QueryCustomerPortfolio {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factoryCustomerPortfolio!=null)
-				factoryCustomerPortfolio.close();
+			if(factory !=null)
+				factory.close();
 		}
 
 	}
@@ -84,9 +84,9 @@ public class QueryCustomerPortfolio {
 
 			List<String> groupNamesList = query.list();
 
-			for(String groupName : groupNamesList){
+			/*for(String groupName : groupNamesList){
 				System.out.println(" Group Name in the list is : "+groupName);
-			}
+			}*/
 			
 			session.getTransaction().commit();
 

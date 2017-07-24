@@ -32,6 +32,9 @@ public class TransactionDetails {
     @Column(name="BSE_ORDER_ID")
     private String bseOrderId;
     
+    @Column(name="UNIQUE_REFERENCE_NUMBER")
+    private String uniqueReferenceNumber;
+    
     @Column(name="CUSTOMER_ID")
     private String customerId;
 
@@ -79,15 +82,17 @@ public class TransactionDetails {
     public TransactionDetails() {
 
     }
-	public TransactionDetails(String transactionId, String bseOrderId,
-			String customerId, String transactionType, String transactionCode, 
-			String buySell, String transactionAmount,
-			String transactionStatus, String bseRemarks, String bseSuccessFlag,
-			String reverseFeed, String productId,   
-			String transactionDate, String updateDate) {
+
+    
+	
+public TransactionDetails(String transactionId, String bseOrderId, String uniqueReferenceNumber, String customerId, String transactionType,
+			String transactionCode, String buySell, String transactionAmount, String transactionStatus,
+			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
+			String unitPrice, String transactionDate, String updateDate) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
+		this.uniqueReferenceNumber = uniqueReferenceNumber;
 		this.customerId = customerId;
 		this.transactionType = transactionType;
 		this.transactionCode = transactionCode;
@@ -98,10 +103,14 @@ public class TransactionDetails {
 		this.bseSuccessFlag = bseSuccessFlag;
 		this.reverseFeed = reverseFeed;
 		this.productId = productId;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
 		this.transactionDate = transactionDate;
 		this.updateDate = updateDate;
 	}
-	
+
+
+
 /*	public TransactionDetails(String transactionId, String bseOrderId,
 			String customerId, String transactionType, String transactionAmount,
 			String transactionStatus, String bseRemarks, String bseSuccessFlag,
@@ -147,6 +156,19 @@ public class TransactionDetails {
 	public void setBseOrderId(String bseOrderId) {
 		this.bseOrderId = bseOrderId;
 	}
+
+	
+	public String getUniqueReferenceNumber() {
+		return uniqueReferenceNumber;
+	}
+
+
+
+	public void setUniqueReferenceNumber(String uniqueReferenceNumber) {
+		this.uniqueReferenceNumber = uniqueReferenceNumber;
+	}
+
+
 
 	public String getCustomerId() {
 		return customerId;
@@ -277,6 +299,9 @@ public class TransactionDetails {
         if ((this.bseOrderId == null) ? (other.bseOrderId != null) : !this.bseOrderId.equals(other.bseOrderId)) {
             return false;
         }
+        if ((this.uniqueReferenceNumber == null) ? (other.uniqueReferenceNumber != null) : !this.uniqueReferenceNumber.equals(other.uniqueReferenceNumber)) {
+            return false;
+        }       
         if ((this.customerId == null) ? (other.customerId != null) : !this.customerId.equals(other.customerId)) {
             return false;
         }
@@ -328,6 +353,7 @@ public class TransactionDetails {
         hash = 83 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
         hash = 83 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
         hash = 83 * hash + (this.bseOrderId != null ? this.bseOrderId.hashCode() : 0);
+        hash = 83 * hash + (this.uniqueReferenceNumber != null ? this.uniqueReferenceNumber.hashCode() : 0);
         hash = 83 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 83 * hash + (this.transactionAmount != null ? this.transactionAmount.hashCode() : 0);
         hash = 83 * hash + (this.transactionType != null ? this.transactionType.hashCode() : 0);

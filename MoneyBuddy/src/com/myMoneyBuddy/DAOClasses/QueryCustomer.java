@@ -21,6 +21,47 @@ public class QueryCustomer {
 
 	Logger logger = Logger.getLogger(QueryCustomer.class);
 		
+	public Customers getCustomer(String emailId) throws MoneyBuddyException {
+			
+		logger.debug("QueryCustomer class : getCustomer method : start");
+		
+		SessionFactory factory = new AnnotationConfiguration()
+										.configure()
+										.addAnnotatedClass(Customers.class)
+										.buildSessionFactory();
+		Session session = factory.openSession();
+	
+		Customers customer = new Customers();
+	
+	
+		try
+		{
+			session.beginTransaction();
+			customer = (Customers) session.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
+	
+			session.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class : getCustomer method : end");
+			return customer;
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryCustomer class : getCustomer method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryCustomer class : getCustomer method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(factory!=null)
+				factory.close();
+		}
+	}
+
+
+
 	public String getPassword(String emailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class : getPassword method : start");
@@ -113,15 +154,7 @@ public class QueryCustomer {
 		try
 		{
 			session.beginTransaction();
-			Query query = session.createQuery("from Customers where emailId = :emailId");
-			query.setParameter("emailId",emailId);
-			List<Customers> customersList = query.list();
-
-			for(Customers customer : customersList){
-				customerId =   Integer.parseInt(customer.getCustomerId());
-			}
-
-			session.getTransaction().commit();
+			customerId = Integer.parseInt(session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult().toString());
 			
 			logger.debug("QueryCustomer class : getCustomerId method : end");
 			return customerId;
@@ -154,7 +187,6 @@ public class QueryCustomer {
 		Session session = factory.openSession();
 
 		String customerName =  null;
-
 
 		try
 		{
@@ -205,13 +237,7 @@ public class QueryCustomer {
 		try
 		{
 			session.beginTransaction();
-			Query query = session.createQuery("from Customers where emailId = :emailId");
-			query.setParameter("emailId",emailId);
-			List<Customers> customersList = query.list();
-
-			for(Customers customer : customersList){
-				customerMobileNumber = customer.getMobileNumber();
-			}
+			customerMobileNumber = session.createQuery("select mobileNumber from Customers where emailId = '"+emailId+"'").uniqueResult().toString();
 
 			session.getTransaction().commit();
 			

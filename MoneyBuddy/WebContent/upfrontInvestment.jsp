@@ -182,7 +182,7 @@
 		</div>
 		<div  id="invested-fund-list" class="col-md-6 hidden" style="margin-top:50px;padding-left:70px;padding-right:70px;">
 			<div id = "investment-fund-list-data" class ="row col-md-12">
-			<table class="table table-striped table-bordered" >
+			<table class="table table-bordered" >
 				<thead class="table-head">
 					<tr>
 						<th>Fund Nameee</th>
@@ -338,7 +338,7 @@
 			<div class="row">
 				<!-- <div class="col-md-1"></div>
 				<div class="col-md-11"> -->
-					<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showPlan();">SEE YOUR PLAN</button>
+					<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised hidden" onClick="showUpfrontInvestmentPlan();">SEE YOUR PLAN</button>
 				<!-- </div> -->
 			</div>
 		</div>

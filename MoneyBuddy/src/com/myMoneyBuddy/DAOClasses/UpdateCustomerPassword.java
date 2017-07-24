@@ -26,45 +26,45 @@ public class UpdateCustomerPassword {
 
 		logger.debug("UpdateCustomerPassword class : UpdatePassword method : start");
 		
-		SessionFactory factoryCustomerPasswordsHistory = new AnnotationConfiguration()
+		SessionFactory factory = new AnnotationConfiguration()
 																.configure()
-																.addAnnotatedClass(CustomerPasswordsHistory.class)
+																.addAnnotatedClass(CustomerPasswordsHistory.class).addAnnotatedClass(Customers.class)
 																.buildSessionFactory();
 										//addAnnotationClass(Company.class).buildSessionFactory();
-		Session sessionCustomerPasswordsHistory = factoryCustomerPasswordsHistory.openSession();
+		Session session = factory.openSession();
 
-		SessionFactory factoryCustomers = new AnnotationConfiguration()
+/*		SessionFactory factoryCustomers = new AnnotationConfiguration()
 												.configure()
 												.addAnnotatedClass(Customers.class)
 												.buildSessionFactory();
 										//addAnnotationClass(Company.class).buildSessionFactory();
-		Session sessionCustomers = factoryCustomers.openSession();
+		Session sessionCustomers = factoryCustomers.openSession();*/
 
 		try {
 
 			DesEncrypter desEncrypter = new DesEncrypter(emailId);
 			newPassword = desEncrypter.encrypt(newPassword);
-			sessionCustomerPasswordsHistory.beginTransaction();
-			Query query = sessionCustomerPasswordsHistory.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
+			session.beginTransaction();
+			Query query = session.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
 
 			query.setParameter("newPassword", newPassword);
 
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			sessionCustomerPasswordsHistory.getTransaction().commit();
+			session.getTransaction().commit();
 
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : updated data of CustomerPasswordsHistory table to set password for customerId : "+customerId);
 			
-			sessionCustomers.beginTransaction();
-			query = sessionCustomers.createQuery("update Customers set password = :newPassword" + " where customerId = :customerId");
+			session.beginTransaction();
+			query = session.createQuery("update Customers set password = :newPassword" + " where customerId = :customerId");
 
 			query.setParameter("newPassword", newPassword);
 
 			query.setParameter("customerId", customerId);
 
 			result = query.executeUpdate();
-			sessionCustomers.getTransaction().commit();
+			session.getTransaction().commit();
 			
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : updated data of Customers table to set password for customerId : "+customerId);
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : end");
@@ -81,11 +81,9 @@ public class UpdateCustomerPassword {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factoryCustomerPasswordsHistory!=null)
-				factoryCustomerPasswordsHistory.close();
-			
-			if(factoryCustomers!=null)
-				factoryCustomers.close();
+			if(factory !=null)
+				factory.close();
+
 		}
 
 	}

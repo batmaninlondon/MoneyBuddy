@@ -11,6 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Dashboard | Money Buddy</title>
     <!-- core CSS -->
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="assets/js/jquery-ui.js"></script>
+  
+  
+  
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -20,7 +28,7 @@
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
+ 	<%-- <script src="assets/js/jquery.js"></script> --%>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>
@@ -36,58 +44,145 @@
 <script src="assets/js/jquery-1.8.2.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<%-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+	
+</script> --%>
+
 <script>
-var data1;
-google.load('visualization', '1', {packages:['table']});
-$(document).ready(function()
+
+var data;
+
+//google.load('visualization', '1', {packages:['table']});
+
+google.charts.load('current', {'packages':['table']});
+
+google.charts.setOnLoadCallback(drawTable);
+
+
+//$(document).ready(function()
+		function drawTable()
 		{
-								$.getJSON('dashboardAction', {}, function(jsonResponse) 
+								$.getJSON('portfolioAction', {}, function(jsonResponse) 
 								{
-									 data1 = new google.visualization.DataTable();
-									 data1.addColumn('string', 'Date of Payment');
-									 data1.addColumn('string', 'Client Id');
-									 data1.addColumn('string', 'Order Id');
-									 data1.addColumn('string', 'Paid/Dropped Off');
-									 data1.addColumn('string', 'PaymentSuccessful');
-									 data1.addColumn('string', 'BSE Payment Id');
-									 data1.addColumn('string', 'Amount Paid');
-									 data1.addColumn('string', 'Fund Name');
-									 data1.addColumn('string', 'Reverse Feed');
-									 data1.addColumn('string', 'Client Email Sent');
+									 data = new google.visualization.DataTable();
+									 data.addColumn('string', 'Fund Name');
+									 data.addColumn('string', 'InvestmentStartDate');
+									 data.addColumn('string', 'Unit');
+									 data.addColumn('string', 'Invested Amount');
+									 data.addColumn('string', 'Current Amount');
+									 data.addColumn('string', 'Rate Of Growth');
 									 
 									 var cusId ="<%=(String)session.getAttribute("customerId")%>";
 									 
-									 $.each(jsonResponse.dashboardDataModel , function(i,dashboardData) 
+									 $.each(jsonResponse.portfolioDataModel , function(i,portfolioData) 
 											{
 
-												 data1.addRow([dashboardData.transactionDate,
-													 			cusId,
-												               dashboardData.orderId,
-												               "paid",
-												               "Y",
-												               "bsePaymentId",
-												               dashboardData.transactionAmount,
-												               dashboardData.productName,
-												               dashboardData.reverseFeed,
-												               "NO",
+												 data.addRow([portfolioData.fundName,
+											 			portfolioData.transactionStartDate,
+											 			portfolioData.units,
+											 			portfolioData.investedAmount,
+											 			portfolioData.currentAmount,
+											 			portfolioData.rateOfGrowth,
 												               
 												                ]);
 											});  
 		 
-						         var options1 = {
+						        /*  var options1 = {
 						      	          title: jsonResponse.dummyMsg,
 						      	          pieHole: 0.4,
-						      	       };			      	
+						      	       }; */			      	
 						      	
-						    	var chart1 = new google.visualization.Table(document.getElementById('chart_div1'));
-						      	chart1.draw(data1, {showRowNumber: true, width: '100%', height: '100%'});  
+						    	var table = new google.visualization.Table(document.getElementById('chart_div1'));
+						      	       
+						      	     google.visualization.events.addListener(table, 'ready', onReady);
+
+						      	table.draw(data, {showRowNumber: true, width: '100%', height: '100%'}); 
+						      	
+						      	function onReady() {
+						      		//alert("On ready function called !!");
+								    google.visualization.events.addListener(table, 'select', fundDetailHandler);
+								  }
+
+								  // Called
+								  function fundDetailHandler() {
+								    //alert("Select event!");
+								    
+								    var selectedItem = table.getSelection()[0];
+								    
+								    if (selectedItem) {
+								      var value = data.getValue(selectedItem.row, 0);
+
+								      //alert("The user selected " + value);
+								    }
+								    
+								    var selectedItem =null;
+								    
+								    $.getJSON('investmentDetailsAction', {productName:value}, function(jsonResponse) 
+											{
+												 data1 = new google.visualization.DataTable();
+												 data1.addColumn('string', 'Date Of Purchase');
+												 data1.addColumn('string', 'Units Purchased');
+												 data1.addColumn('string', 'NAV Purchased');
+												 data1.addColumn('string', 'Purchase Type');
+												 
+												 var cusId ="<%=(String)session.getAttribute("customerId")%>";
+												 
+												 $.each(jsonResponse.investmentDetailsDataModel , function(i,investmentDetailsData) 
+														{
+
+															 data1.addRow([investmentDetailsData.transactionDate,
+																 investmentDetailsData.units,
+																 investmentDetailsData.navPurchased,
+																 investmentDetailsData.transactionType,
+															               
+															                ]);
+														});  
+					 
+		      	
+									      	
+									    	var chart = new google.visualization.Table(document.getElementById('chart_div2'));
+
+
+									      	chart.draw(data1, {showRowNumber: true, width: '100%', height: '100%'}); 
+									      	
+
+
+
+											});
+								    
+								    
+								    $( "#dialog" ).dialog({autoOpen: true,
+								    	title:value,
+								    	width: 800,
+								    	height:300,
+								    	scrollable: true});
+								    
+								    
+								    
+								    
+								   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
+								  }
+
+
 								});
-					});
+								
+								  
+								
+								
+					}
+
+
 </script>
     
-    
+  <script>
+
+$( function() {
+	 
+	 $( "#dialog" ).dialog({autoOpen: false});
+  } );
+  
+</script>  
     
     
 </head>
@@ -153,23 +248,109 @@ $(document).ready(function()
 		
     </header>
 
-	
-	<div class="row">
-		<div class="col-md-12 well-sm large-text dashboard-row-1" >
-			<p style="margin-left:50px;">Dashboard</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12" style="margin:20px;">
-			<div class="tab-pane fade-in active">
-				<div id="ajaxResponse"></div>
-				<div class="col-md-12">
-					<div id="chart_div1" class="chart"></div>
+	<ul class="nav nav-tabs">
+	    <li class="active"><a data-toggle="tab" href="#dashboard">Portfolio</a></li>
+	    <!-- <li><a data-toggle="tab" href="#portfolio">Portfolio</a></li> -->
+
+  	</ul>
+  <!-- <div class="tab-content"> -->
+	<div id="dashboard" class="tab-pane active">
+		<!-- <div class="row">
+			<div class="col-md-12 well-sm large-text dashboard-row-1" >
+				<p style="margin-left:50px;">PortFolio</p>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-md-12" style="margin:20px;">
+				<div class="tab-pane fade-in active">
+					<div id="ajaxResponse"></div>
+					<div class="col-md-12">
+						<div id="chart_div1" class="chart"></div>
+					</div>
 				</div>
 			</div>
 		</div>
+		
+		<div id="dialog" title="Basic dialog" style="display:none;">
+  			<!-- <table class="table table-striped table-bordered" >
+				<thead class="table-head">
+					<tr>
+						<th>Date</th>
+						<th>Units Purchased</th>
+						<th>NAV Purchased</th>
+						
+					</tr>
+				</thead>
+				<tbody class="table-body" >
+					<tr>
+						<td>2017-01-01</td>
+					    <td>10</td>
+					    <td>10</td>
+					</tr>
+					<tr>
+						<td>2017-01-05</td>
+					    <td>8</td>
+					    <td>8</td>
+					</tr>
+					<tr>
+						<td>2017-01-10</td>
+					    <td>-6</td>
+					    <td>20</td>
+					</tr>
+					<tr>
+						<td>2017-01-15</td>
+					    <td>-7</td>
+					    <td>18</td>
+					</tr>
+					<tr>
+						<td>2017-01-25</td>
+					    <td>5</td>
+					    <td>20</td>
+					</tr>
+					<tr>
+						<td>2017-01-30</td>
+					    <td>4</td>
+					    <td>22</td>
+					</tr>
+					
+
+				</tbody>
+   			</table> -->
+   			
+   			<div class="row">
+				<div class="col-md-12" style="margin:20px;">
+					<div class="tab-pane fade-in active">
+						<div id="ajaxResponse"></div>
+						<div class="col-md-12">
+							<div id="chart_div2" class="chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		</div>
+		
+		
 	</div>
-  
+<!-- 	<div id="portfolio" class="tab-pane">
+		<div class="row">
+			<div class="col-md-12 well-sm large-text dashboard-row-1" >
+				<p style="margin-left:50px;">PortFolio</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" style="margin:20px;">
+				<div class="tab-pane fade-in active">
+					<div id="ajaxResponse"></div>
+					<div class="col-md-12">
+						<div id="chart_div2" class="chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+  <!-- </div> -->
       <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">

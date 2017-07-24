@@ -596,9 +596,15 @@ left: 35%;
 	fonr-color:#e8a935;
 }
 .table-head{
-	background-color: green;
+	background-color: #d69622;
 	font-color:white;
 }
+
+
+/* .table-body{
+	background-color: red;
+	font-color:white;
+} */
 
 .table {
 	
@@ -627,12 +633,6 @@ left: 35%;
 	margin-top:-25px;
 	margin-left:-50px;
 }
-
-.table-body{
-	background-color: red;
-	font-color:white;
-}
-
 
 div.diamond-img {
   position: relative;

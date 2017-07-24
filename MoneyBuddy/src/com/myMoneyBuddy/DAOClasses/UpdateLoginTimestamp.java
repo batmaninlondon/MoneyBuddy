@@ -8,6 +8,9 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -16,11 +19,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 
-public class UpdateLastLoginTimestamp {
+public class UpdateLoginTimestamp {
 	
-	Logger logger = Logger.getLogger(UpdateLastLoginTimestamp.class);
+	Logger logger = Logger.getLogger(UpdateLoginTimestamp.class);
 
-	public void updateLastLoginTimestamp (String customerId) throws MoneyBuddyException {
+	public void updateLoginTimestamp (String customerId) throws MoneyBuddyException {
 
 		logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : start");
 		
@@ -47,17 +50,31 @@ public class UpdateLastLoginTimestamp {
 			int result = query.executeUpdate();
 			session.getTransaction().commit();
 
-			logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : updated data of CustomerLoginActivity table to set lastLoginTimestamp for customerId : "+customerId);
-			logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : end");
+			session.beginTransaction();
+
+			query = session.createQuery("update CustomerLoginActivity set currentLoginTimestamp = :currentLoginTimestamp" + " where customerId = :customerId");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String frmtdDate = dateFormat.format(date);
+
+			query.setParameter("currentLoginTimestamp", frmtdDate);
+
+			query.setParameter("customerId", customerId);
+
+			result = query.executeUpdate();
+			session.getTransaction().commit();
+
+			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : updated data of CustomerLoginActivity table to set lastLoginTimestamp for customerId : "+customerId);
+			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : end");
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : Caught Exception");
+			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : Caught Exception");
+			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

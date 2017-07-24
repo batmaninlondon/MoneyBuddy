@@ -26,28 +26,29 @@ public class FetchProductListAction  extends ActionSupport implements SessionAwa
     		logger.debug("LoginAction class : execute method : start");
     	
 	    	System.out.println("FetchProductListAction called ");
-	    	System.out.println("FetchProductListAction value of riskCategory : "+getRiskCategory());
+	    	System.out.println("FetchProductListAction: execute method : transactionType : "+sessionMap.get("transactionType").toString());
+	    	//System.out.println("FetchProductListAction value of riskCategory : "+getRiskCategory());
 	    	
 	    	QueryProducts queryProduct = new QueryProducts();
-	    	System.out.println("LoginAction class : execute method : riskCategory : "+getRiskCategory());
-	    	System.out.println("LoginAction class : execute method : planName : "+sessionMap.get("planName").toString());
+	    	//System.out.println("LoginAction class : execute method : riskCategory : "+getRiskCategory());
+	    	//System.out.println("LoginAction class : execute method : planName : "+sessionMap.get("planName").toString());
 	   	 	HashMap<String,Double> productList = queryProduct.getProductList(getRiskCategory(),sessionMap.get("planName").toString());
 	   	 	
-	    	System.out.println("FetchProductListAction Hi There 1 ");
+	    	//System.out.println("FetchProductListAction Hi There 1 ");
 	   	 
 	   	 	sessionMap.put("productList", productList);
 	   	 	logger.debug("LoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
 	       	logger.debug("LoginAction class : execute method : end");
 	  
 	       	
-		   	 for (String key : productList.keySet()) {
+		   	 /*for (String key : productList.keySet()) {
 		   		 System.out.println("key : "+key);
 		   		System.out.println("value : "+productList.get(key));
 		
-			 }
+			 }*/
 	   	 
 	   	 
-	    	System.out.println("FetchProductListAction Hi There 2 ");
+	    	//System.out.println("FetchProductListAction Hi There 2 ");
 	    	
 	    	String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());

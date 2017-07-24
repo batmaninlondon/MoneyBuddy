@@ -41,9 +41,9 @@ document.getElementById("years").innerHTML=newValue;
 update();
 
 }
-function showPlan()
+function showUpfrontInvestmentPlan()
 {
-	/*alert('showPLan function called !! ');*/
+	alert('showPLan function called !! ');
 	
 	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
 	
@@ -59,6 +59,7 @@ function showPlan()
         success : function(result){
         	
         	if (result == "success") {
+        		alert('HI There !! ');
         	
 	        	/*document.getElementById('investment-options').style.display ='none';
 	        	document.getElementById('invested-fund-list').style.display ='block';
@@ -74,6 +75,44 @@ function showPlan()
         }
     });
 }
+
+function showSipPlan()
+{
+	/*alert('showSipPLan function called !! ');*/
+	
+	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
+	
+	/*alert('showPLan function riskCategory :'+riskCategory );*/
+	
+	
+    $.ajax({
+        url : "productListAction",
+        type: 'post',
+        
+        data: { 'riskCategory' : riskCategory },
+
+        success : function(result){
+        	
+        	if (result == "success") {
+        		/*alert('HI There !!!! ');*/
+        	
+	        	/*document.getElementById('investment-options').style.display ='none';
+	        	document.getElementById('invested-fund-list').style.display ='block';
+	        	document.getElementById("submit-button-1").disabled = true;*/
+        		
+        		document.getElementById('investment-options').className += " hidden";
+	        	$("#invested-fund-list").removeClass('hidden');
+	        	/*document.getElementById('invested-fund-list').style.display ='block';*/
+	        	document.getElementById("submit-button-1").disabled = true;
+	        	$("#investment-fund-list-data").load("sipInvestment.jsp #investment-fund-list-data");
+        	}
+
+        }
+    });
+}
+
+
+
 
 function forgottenPassword()
 {
@@ -360,6 +399,10 @@ function checkDetails()
         	else if (result == "paymentFailure") {
 
         		window.location='paymentFailure';
+        	}
+        	else if (result == "allOrderFailed") {
+
+        		window.location='errorPage';
         	}
         	else {
         		/*alert('Inside checkDetails error !! ');*/
@@ -954,18 +997,18 @@ function update(){
         	  document.getElementById('diamond-text-1').style.display ='none';
         	  /*alert ('success');*/
         	  if (sip != 0) {
-        		  /*alert ('SIP is not 0 ');*/
+        		 /* alert ('SIP is not 0 ');*/
         		  $("#diamond-text-7").removeClass('hidden');
 				  $("#diamond-text-8").removeClass('hidden');
 				  $("#diamond-text-9").removeClass('hidden');
 				  $("#diamond-text-10").removeClass('hidden');
 
-        		  $("#predicted-value-list-1").load("upfrontInvestment.jsp #predicted-value-list-1");
-        		  $("#predicted-value-list-2").load("upfrontInvestment.jsp #predicted-value-list-2");
-        		  $("#predicted-value-list-3").load("upfrontInvestment.jsp #predicted-value-list-3");
+        		  $("#predicted-value-list-1").load("sipInvestment.jsp #predicted-value-list-1");
+        		  $("#predicted-value-list-2").load("sipInvestment.jsp #predicted-value-list-2");
+        		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
         	  }
         	  else {
-        		  /*alert ('SIP is 0 ');*/
+        		 /* alert ('SIP is 0 ');*/
 	        	  $("#diamond-text-2").removeClass('hidden');
 	        	  $("#diamond-text-3").removeClass('hidden');
 	        	  $("#diamond-text-4").removeClass('hidden');

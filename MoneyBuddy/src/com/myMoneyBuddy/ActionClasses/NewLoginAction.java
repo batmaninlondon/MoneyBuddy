@@ -14,7 +14,8 @@ import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.UpdateCurrentLoginTimestamp;
-import com.myMoneyBuddy.DAOClasses.UpdateLastLoginTimestamp;
+import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
@@ -30,7 +31,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     private String emailId;
     private String password;
 
-    QueryCustomer customer = new QueryCustomer();
+    QueryCustomer queryCustomer = new QueryCustomer();
 
     private List<String> groupNamesList = new ArrayList<String>();  
     
@@ -59,23 +60,25 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     public String execute() {
     	try {
     		
+    		
+    		Customers customer = queryCustomer.getCustomer(getEmailId());
 	    	logger.debug("NewLoginAction class : execute method : start");
-	    	System.out.println("Start - NewLoginAction execute method ");
-	    	if (!customer.existsCustomer(getEmailId())) {
-	    		System.out.println("Verification not done for this email id ");
+	    	//System.out.println("Start - NewLoginAction execute method ");
+	    	if (customer == null) {
+	    		System.out.println("Emaid id not valid ");
 	    		logger.debug("NewLoginAction class : execute method : Email Id does not exists "+getEmailId());
 	    		String str = "emailIdDoesNotExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	    	}
-	    	if(!(new DesEncrypter(getEmailId())).decrypt(customer.getPassword(getEmailId())).equals(getPassword())) {
+	    	if(!(new DesEncrypter(getEmailId())).decrypt(queryCustomer.getPassword(getEmailId())).equals(getPassword())) {
 	    		System.out.println("incorrectPassword ");
 	    		logger.debug("NewLoginAction class : execute method : incorrectPassword for "+getEmailId());
 	    		String str = "incorrectPassword";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	        }
-	    	if (customer.getVerificationStatus(getEmailId()).equalsIgnoreCase("NO"))  {
+	    	if (customer.getVerificationStatus().equalsIgnoreCase("NO"))  {
 	    		System.out.println("Verification not done for this email id ");
 	    		logger.debug("NewLoginAction class : execute method : verification is not done for "+getEmailId());
 	    		String str = "verificationNotDone";
@@ -84,14 +87,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	}
 	    	
 	
-	    	System.out.println("Hi there 1  ");
-	    	QueryCustomer queryCustomer = new QueryCustomer();
-	    	System.out.println("Hi there 2  ");
-	    	int customerId = queryCustomer.getCustomerId(getEmailId());
-	    	String customerName = queryCustomer.getCustomerName(getEmailId());
-	    	String customerMobileNumber = queryCustomer.getCustomerMobileNumber(getEmailId());
+	    	//System.out.println("Hi there 1  ");
+	    	//QueryCustomer queryCustomer = new QueryCustomer();
+	    	//System.out.println("Hi there 2  ");
+	    	int customerId = Integer.parseInt(customer.getCustomerId());
+	    	String customerName = customer.getFirstName()+" "+customer.getLastName();
+	    	String customerMobileNumber = customer.getMobileNumber();
 	
-	    	System.out.println("Hi there 3  customerId : "+customerId);
+	    	System.out.println("customerId : "+customerId);
 	    	sessionMap.put("customerId", Integer.toString(customerId));
 	    	
 	    	logger.debug("LoginAction class : execute method : stored customerId : "+customerId+" in session id : "+sessionMap.getClass().getName());
@@ -102,15 +105,15 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("customerMobileNumber", customerMobileNumber);
 	    	logger.debug("LoginAction class : execute method : stored customerMobileNumber : "+customerMobileNumber+" in session id : "+sessionMap.getClass().getName());
 	    	
-	    	System.out.println("Hi there 4  ");
+	    	//System.out.println("Hi there 4  ");
 	    	// Updating Last login timestamp
-	    	UpdateLastLoginTimestamp lastLogin = new UpdateLastLoginTimestamp();
-	    	lastLogin.updateLastLoginTimestamp(Integer.toString(customerId));
+	    	UpdateLoginTimestamp lastLogin = new UpdateLoginTimestamp();
+	    	lastLogin.updateLoginTimestamp(Integer.toString(customerId));
 	
-	    	System.out.println("Hi there 5  ");
+	    	//System.out.println("Hi there 5  ");
 	    	// Update Current login timestamp
-	    	UpdateCurrentLoginTimestamp currentLogin = new UpdateCurrentLoginTimestamp();
-	    	currentLogin.updateCurrentLoginTimestamp(Integer.toString(customerId));
+	    	/*UpdateCurrentLoginTimestamp currentLogin = new UpdateCurrentLoginTimestamp();
+	    	currentLogin.updateCurrentLoginTimestamp(Integer.toString(customerId));*/
 	
 	    	System.out.println("emailId : "+getEmailId());
 	    	sessionMap.put("emailId", getEmailId());
@@ -118,7 +121,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
 	    	String hashedPassword = desEncrypter.encrypt(getPassword());
-	    	System.out.println("hashedPassword : "+hashedPassword);
+	    	//System.out.println("hashedPassword : "+hashedPassword);
 	    	sessionMap.put("hashedPassword", hashedPassword);
 	    	logger.debug("NewLoginAction class : execute method : stored hashedPassword : "+hashedPassword+" in session id : "+sessionMap.getClass().getName());
 	    	

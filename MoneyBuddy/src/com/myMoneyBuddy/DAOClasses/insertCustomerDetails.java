@@ -29,14 +29,15 @@ public class insertCustomerDetails {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
     	
-    	SessionFactory factoryCustomers = new AnnotationConfiguration()
+    	SessionFactory factory = new AnnotationConfiguration()
     											.configure()
-    											.addAnnotatedClass(Customers.class)
+    											.addAnnotatedClass(Customers.class).addAnnotatedClass(CustomerPasswordsHistory.class)
+    											.addAnnotatedClass(CustomerLoginActivity.class)
     											.buildSessionFactory();
     											//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session sessionCustomers = factoryCustomers.openSession();
+    	Session session = factory.openSession();
 
-    	SessionFactory factoryCustomerPasswordsHistory = new AnnotationConfiguration()
+    	/*SessionFactory factoryCustomerPasswordsHistory = new AnnotationConfiguration()
     															.configure()
     															.addAnnotatedClass(CustomerPasswordsHistory.class)
     															.buildSessionFactory();
@@ -48,14 +49,14 @@ public class insertCustomerDetails {
     														.addAnnotatedClass(CustomerLoginActivity.class)
     														.buildSessionFactory();
     														//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session sessionCustomerLoginActivity = factoryCustomerLoginActivity.openSession();
+    	Session sessionCustomerLoginActivity = factoryCustomerLoginActivity.openSession();*/
 
     	try {
 
     		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus);
-    		sessionCustomers.beginTransaction();
-    		sessionCustomers.save(tempCustomer);
-    		sessionCustomers.getTransaction().commit();
+    		session.beginTransaction();
+    		session.save(tempCustomer);
+    		session.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
 
@@ -63,10 +64,10 @@ public class insertCustomerDetails {
     		int customerId = queryCustomer.getCustomerId(emailId);
 
     		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
-    		sessionCustomerPasswordsHistory.beginTransaction();
-    		sessionCustomerPasswordsHistory.save(tempUserPasswords);
+    		session.beginTransaction();
+    		session.save(tempUserPasswords);
 
-    		sessionCustomerPasswordsHistory.getTransaction().commit();
+    		session.getTransaction().commit();
 
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerPasswordsHistory table for customerId : "+customerId);
     		
@@ -76,9 +77,9 @@ public class insertCustomerDetails {
 
     		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(Integer.toString(customerId),null,frmtdDate);
 
-    		sessionCustomerLoginActivity.beginTransaction();
-    		sessionCustomerLoginActivity.save(tempUserTimeDetails);
-    		sessionCustomerLoginActivity.getTransaction().commit();
+    		session.beginTransaction();
+    		session.save(tempUserTimeDetails);
+    		session.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerLoginActivity table for customerId : "+customerId);
     		
@@ -96,14 +97,9 @@ public class insertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		if(factoryCustomers!=null)
-    			factoryCustomers.close();
+    		if(factory !=null)
+    			factory.close();
     		
-    		if(factoryCustomerPasswordsHistory!=null)
-    			factoryCustomerPasswordsHistory.close();
-    		
-    		if(factoryCustomerLoginActivity!=null)
-    			factoryCustomerLoginActivity.close();
     	}
 
     }

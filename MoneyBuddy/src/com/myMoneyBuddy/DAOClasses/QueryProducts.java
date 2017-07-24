@@ -5,12 +5,17 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
+import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 /*import com.myMoneyBuddy.EntityClasses.PriceHistory;*/
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
+import net.sf.ehcache.hibernate.HibernateUtil;
+
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +25,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+
+
 
 public class QueryProducts {
 	
@@ -97,6 +104,8 @@ public class QueryProducts {
 
 			session.beginTransaction();
 			
+			System.out.println(" riskCategory : "+riskCategory);
+			System.out.println("planName : "+planName);
 			Query query = session.createQuery("from ProductDetails where riskCategory = :riskCategory and planName =:planName");
 			query.setParameter("riskCategory",riskCategory);
 			query.setParameter("planName",planName);
@@ -104,15 +113,13 @@ public class QueryProducts {
 			HashMap<String,Double> hashMap = new HashMap<String,Double>();
 
 			for(ProductDetails productDetail : productDetailList){
+				System.out.println(" productName : "+productDetail.getProductType()+"-"+productDetail.getProductName());
+				System.out.println("Percentage : "+productDetail.getPercentage());
 				hashMap.put(productDetail.getProductType()+"-"+productDetail.getProductName(),Double.parseDouble(productDetail.getPercentage()));
 			}
 			session.getTransaction().commit();
 
-			int i =0 ;
 
-			for (String key : hashMap.keySet()) {
-				i++;
-			}
 			
 			logger.debug("QueryProducts class : getProductList method : end");
 			return hashMap;
@@ -154,22 +161,25 @@ public class QueryProducts {
 										.buildSessionFactory();
 		session = factory.openSession();
 			session.beginTransaction();
-			Query query = session.createQuery("from ProductDetails where riskCategory = :riskCategory and planName =:planName");
+			Query query = session.createQuery("select productId,percentage from ProductDetails where riskCategory = :riskCategory and planName =:planName");
 			query.setParameter("riskCategory",riskCategory);
 			query.setParameter("planName",planName);
-			List<ProductDetails> productDetailList = query.list();
+			
 			HashMap<String,Double> hashMap = new HashMap<String,Double>();
 
-			for(ProductDetails productDetail : productDetailList){
-				hashMap.put(productDetail.getProductId(),((upfrontInvestment*Double.parseDouble(productDetail.getPercentage()))/100));
+			for (Iterator it=query.iterate(); it.hasNext();)  {
+			    
+				Object[] productDetailRow = (Object[]) it.next();
+				
+				System.out.println("Product Id : "+productDetailRow[0].toString());
+				System.out.println("Percentage : "+productDetailRow[1].toString());
+				
+				hashMap.put(productDetailRow[0].toString(),((upfrontInvestment*Double.parseDouble(productDetailRow[1].toString()))/100));
+
 			}
+
 			session.getTransaction().commit();
 
-			int i =0 ;
-
-			for (String key : hashMap.keySet()) {
-				i++;
-			}
 			
 			logger.debug("QueryProducts class : getProductAmountList method : end");
 			return hashMap;
@@ -201,45 +211,46 @@ public class QueryProducts {
 	
 	public List<DashboardDataModel> getDashboardData(String customerId) throws MoneyBuddyException {
 		
-		SessionFactory factoryCustomerPortfolio = null;
-		SessionFactory factoryProductDetails = null;
+		SessionFactory factory = null;
+/*		SessionFactory factoryProductDetails = null;
 		//SessionFactory factoryPriceHistory = null;
-		SessionFactory factoryTransactionDetails = null;
-		Session sessionCustomerPortfolio  = null;
-		Session sessionProductDetails  = null;
+		SessionFactory factoryTransactionDetails = null;*/
+		Session session  = null;
+/*		Session sessionProductDetails  = null;
 		//Session sessionPriceHistory  = null;
-		Session sessionTransactionDetails  = null;
+		Session sessionTransactionDetails  = null;*/
 		try
 		{
 			logger.debug("QueryProducts class : getDashboardData method : start");
 		
-		factoryCustomerPortfolio = new AnnotationConfiguration()
+		factory = new AnnotationConfiguration()
 														.configure()
-														.addAnnotatedClass(CustomerPortfolio.class)
+														.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
+														.addAnnotatedClass(TransactionDetails.class)
 														.buildSessionFactory();
-		sessionCustomerPortfolio = factoryCustomerPortfolio.openSession();
+		session = factory.openSession();
 
-		factoryProductDetails = new AnnotationConfiguration()
+/*		factoryProductDetails = new AnnotationConfiguration()
 														.configure()
 														.addAnnotatedClass(ProductDetails.class)
 														.buildSessionFactory();
 		sessionProductDetails = factoryProductDetails.openSession();
 
-/*		factoryPriceHistory = new AnnotationConfiguration()
+		factoryPriceHistory = new AnnotationConfiguration()
 													.configure()
 													.addAnnotatedClass(PriceHistory.class)
 													.buildSessionFactory();
-		sessionPriceHistory = factoryPriceHistory.openSession();*/
+		sessionPriceHistory = factoryPriceHistory.openSession();
 		
 		factoryTransactionDetails = new AnnotationConfiguration()
 				.configure()
 				.addAnnotatedClass(TransactionDetails.class)
 				.buildSessionFactory();
-		sessionTransactionDetails = factoryTransactionDetails.openSession();
+		sessionTransactionDetails = factoryTransactionDetails.openSession();*/
 
 		
-			sessionCustomerPortfolio.beginTransaction();
-			Query query = sessionCustomerPortfolio.createQuery("from CustomerPortfolio where customerId = :customerId");
+			session.beginTransaction();
+			Query query = session.createQuery("from CustomerPortfolio where customerId = :customerId");
 			/*Query query = sessionCustomerPortfolio.createQuery("from CustomerPortfolio where customerId = :customerId and investmentTypeName=:investmentTypeName");*/
 			query.setParameter("customerId",customerId);
 			/*query.setParameter("investmentTypeName",investmentTypeName);*/
@@ -247,15 +258,16 @@ public class QueryProducts {
 			List<CustomerPortfolio> customerPortfolioList = query.list();
 			List<DashboardDataModel> dashboardDataModel = new LinkedList<DashboardDataModel>();
 
+			session.getTransaction().commit();
 			for(CustomerPortfolio customerPortfolio : customerPortfolioList){
 
-				sessionProductDetails.beginTransaction();
+				session.beginTransaction();
 														
-				query = sessionProductDetails.createQuery("from ProductDetails where productId = :productId");
+				query = session.createQuery("from ProductDetails where productId = :productId");
 				query.setParameter("productId",customerPortfolio.getProductId());
 				List<ProductDetails> productDetailsList = query.list();
 
-				sessionProductDetails.getTransaction().commit();
+				session.getTransaction().commit();
 
 /*				sessionPriceHistory.beginTransaction();
 				query = sessionPriceHistory.createQuery("from PriceHistory where productId = :productId  and date=curdate()");
@@ -266,14 +278,14 @@ public class QueryProducts {
 
 				sessionPriceHistory.getTransaction().commit();*/
 				
-				sessionTransactionDetails.beginTransaction();
-				query = sessionTransactionDetails.createQuery("from TransactionDetails where transactionDetailId = :TransactionDetailId");
+				session.beginTransaction();
+				query = session.createQuery("from TransactionDetails where transactionDetailId = :TransactionDetailId");
 				query.setParameter("TransactionDetailId",customerPortfolio.getTransactionDetailId());
 
 
 				List<TransactionDetails> TransactionDetailsList = query.list();
 
-				sessionTransactionDetails.getTransaction().commit();
+				session.getTransaction().commit();
 
 				int availableToSell = Integer.parseInt(customerPortfolio.getTotalQuantity());
 
@@ -305,7 +317,7 @@ public class QueryProducts {
 
 			}
 
-			sessionCustomerPortfolio.getTransaction().commit();
+			//sessionCustomerPortfolio.getTransaction().commit();
 
 			logger.debug("QueryProducts class : getDashboardData method : end");
 			return dashboardDataModel;
@@ -327,17 +339,218 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factoryCustomerPortfolio!=null)
-				factoryCustomerPortfolio.close();
-			
-			if(factoryProductDetails!=null)
-				factoryProductDetails.close();
-		
-/*			if(factoryPriceHistory!=null)
-				factoryPriceHistory.close();*/
+			if(factory!=null)
+				factory.close();
+
 
 		}
 
 	}
 
+	
+	
+	public List<PortfolioDataModel> getPortfolioData(String customerId) throws MoneyBuddyException {
+		
+		SessionFactory factory = null;
+		Session session  = null;
+		int soldUnit = 0;
+		double investedAmount = 0.0;
+		int availableUnits = 0;
+		double currentAmount = 0.0;
+		double rateOfGrowth = 0.0;
+		
+		try
+		{
+			logger.debug("QueryProducts class : getPortfolioData method : start");
+			
+			factory = new AnnotationConfiguration()
+					.configure()
+					.addAnnotatedClass(ProductDetails.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(NavHistory.class)
+					.buildSessionFactory();
+			session = factory.openSession();
+		
+			session.beginTransaction();
+
+			List<PortfolioDataModel> portfolioDataModel = new LinkedList<PortfolioDataModel>();
+			
+            Query buyRecordsQuery, sellRecordsQuery;
+			Query query = session.createQuery("select distinct(x.productName), x.productId from ProductDetails x, TransactionDetails y where x.productId = y.productId and y.customerId = :customerId");
+			
+			query.setParameter("customerId",customerId);
+			
+			//List<String> productsList = query.list();
+			
+			 for(Iterator it=query.iterate(); it.hasNext();){
+				 
+			       Object[] row = (Object[]) it.next();
+			       
+			       System.out.println("Product Name: " + row[0]);
+			       
+			       System.out.println("Product ID: " + row[1]);	
+			       
+			       String currentNavValue = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult().toString();
+			       
+			       System.out.println("Product Latest NAV Value : " + currentNavValue);
+			       
+			       String transactionStartDate = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"'").uniqueResult().toString();
+			       
+			       System.out.println("transactionStartDate : " + transactionStartDate);
+			       
+			       
+			       
+			       
+			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='SELL' ");
+			       
+			       for (Iterator sellIt=sellRecordsQuery.iterate(); sellIt.hasNext();)  {
+			    	   
+			    	   Object[] sellRecordRow = (Object[]) sellIt.next();
+				       
+			    	   soldUnit += Integer.parseInt(sellRecordRow[2].toString());
+				       System.out.println("Product transactionDetail for SEll - id : "+sellRecordRow[0]+" amount: "+sellRecordRow[1]+" unit: "+sellRecordRow[2]+" unitPrice: "+sellRecordRow[3]);
+			    	   
+			       }
+			       
+			       System.out.println("Total sold units : "+soldUnit);
+			       
+			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' ");
+			       
+			       for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
+			    	   
+			    	   Object[] buyRecordRow = (Object[]) buyIt.next();
+				       
+				       System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]);
+			    	   
+				       if (soldUnit != 0 )   {
+				    	   
+				    	   if (Integer.parseInt(buyRecordRow[2].toString()) > soldUnit)  {
+				    		   availableUnits += (Integer.parseInt(buyRecordRow[2].toString()) - soldUnit);
+				    		   investedAmount += (Integer.parseInt(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
+				    		   soldUnit = 0;
+				    		   
+				    	   }
+				    	   else {
+				    		   
+				    		   soldUnit -= Integer.parseInt(buyRecordRow[2].toString());
+				    		   
+				    	   }
+				       }
+				       
+				       else {
+				    	   availableUnits += Integer.parseInt(buyRecordRow[2].toString());
+				    	   investedAmount += (Integer.parseInt(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
+				       }
+				            
+			       }
+			       
+			       currentAmount = availableUnits* Double.parseDouble(currentNavValue);
+			       rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
+			       
+			       System.out.println("Total availableUnits : "+availableUnits);
+			       System.out.println("Total invested Amount : "+investedAmount);
+			       System.out.println("Current Amount : "+currentAmount);
+			       System.out.println("Rate of Growth : "+rateOfGrowth);
+			      
+			       
+			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),Integer.toString(availableUnits),Double.toString(investedAmount),Double.toString(currentAmount),Double.toString(rateOfGrowth),transactionStartDate));
+			 }
+
+
+			session.getTransaction().commit();
+
+			logger.debug("QueryProducts class : getPortfolioData method : end");
+			return portfolioDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryProducts class : getPortfolioData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class : getPortfolioData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class : getPortfolioData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(factory!=null)
+				factory.close();
+
+		}
+
+	}
+	
+	
+public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customerId, String productName) throws MoneyBuddyException {
+		
+		SessionFactory factory = null;
+		Session session  = null;
+		
+		try
+		{
+			logger.debug("QueryProducts class : getInvestmentDetailsData method : start");
+			
+			factory = new AnnotationConfiguration()
+					.configure()
+					.addAnnotatedClass(ProductDetails.class).addAnnotatedClass(TransactionDetails.class)
+					.buildSessionFactory();
+			session = factory.openSession();
+		
+			session.beginTransaction();
+
+			List<InvestmentDetailsDataModel> investmentDetailsDataModel = new LinkedList<InvestmentDetailsDataModel>();
+			
+			String productId = session.createQuery("select productId from ProductDetails  where productName='"+productName+"'").uniqueResult().toString();
+
+			Query query = session.createQuery("SELECT transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
+			       
+			String quantity;
+			for (Iterator it=query.iterate(); it.hasNext();)  {
+			    
+				Object[] transactionDetailsRow = (Object[]) it.next();
+				if ( transactionDetailsRow[4].toString().equals("SELL") ) {
+					quantity = "-"+transactionDetailsRow[1].toString();
+				}
+				else {
+					quantity = transactionDetailsRow[1].toString();
+				}
+
+				investmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString()));
+				
+			}
+
+
+			session.getTransaction().commit();
+
+			logger.debug("QueryProducts class : getInvestmentDetailsData method : end");
+			return investmentDetailsDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryProducts class : getInvestmentDetailsData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class : getInvestmentDetailsData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class : getInvestmentDetailsData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(factory!=null)
+				factory.close();
+
+		}
+
+	}
+	
 }

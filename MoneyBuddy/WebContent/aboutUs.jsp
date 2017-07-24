@@ -79,8 +79,16 @@
 										<li><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			  <li><a href="logOff" >Log Out</a></li> 
+							 			 <li><a href="cutomerPortfolio" >My PortFolio</a></li> 
+							 			  <!-- <li><a href="logOff" >Log Out</a></li> -->
+							 			              <li class="dropdown">
+							 			              	<a href="#" data-toggle="dropdown" class="dropdown-toggle">My Account<b class="caret"></b></a>
+														<ul class="dropdown-menu">
+															<li><a href="myProfile">My Profile</a></li>
+															<li class="divider"></li>
+															<li><a href="logOff">Log Out</a></li>
+														</ul>
+													</li>
 							<%	}	%>  
 				                            
                     </ul>

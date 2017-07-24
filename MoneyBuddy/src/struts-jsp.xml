@@ -22,6 +22,16 @@
 	    	<result>/blog.jsp</result>
 		</action>
 	</package>
+	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
+	    <action name="cutomerPortfolio">
+	    	<result>/cutomerPortfolio.jsp</result>
+		</action>
+	</package>
+	<package name="myProfile" namespace="/" extends="struts-default">
+	    <action name="myProfile">
+	    	<result>/myProfile.jsp</result>
+		</action>
+	</package>
 	<package name="bseDashboard" namespace="/" extends="struts-default">
 	    <action name="bseDashboard">
 	    	<result>/bseDashboard.jsp</result>

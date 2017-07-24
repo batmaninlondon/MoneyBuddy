@@ -124,6 +124,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    
+    	    System.out.println("EstimateAction class : execute method : end : transactionType : "+sessionMap.get("transactionType").toString());
 			return SUCCESS;
 		} catch (MoneyBuddyException e) {	
 			logger.debug("EstimateAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
