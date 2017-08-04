@@ -25,6 +25,7 @@ import org.tempuri.MFOrderEntry;
 
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
+import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 //import com.myMoneyBuddy.EntityClasses.PriceHistory;
@@ -33,6 +34,7 @@ import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import org.apache.log4j.Logger;
 
@@ -116,12 +118,12 @@ public class Trading {
 		int quantity; 
 		String transactionDetailId;
 		String currentPrice;
-		int pendingOrders;
+		double pendingOrders;
 		Query query;
 		//List<PriceHistory> priceHistory;
 		Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
-		PaymentDetails tempPaymentDetail;
+		
 		CustomerPortfolio tempCustomerPortfolio;
 		
 		try {
@@ -130,7 +132,7 @@ public class Trading {
 			factory = new AnnotationConfiguration()
 											.configure()
 											.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
-											.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
+											.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class).addAnnotatedClass(NavHistory.class)
 											.buildSessionFactory();
 			session = factory.openSession();
 			
@@ -159,13 +161,6 @@ public class Trading {
 			logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
 			
 			String transactionId = tempTransaction.getTransactionId();
-			
-			tempPaymentDetail = new PaymentDetails( transactionId, 
-					paymentGatewayComment, frmtdDateForDB,frmtdDateForDB);
-
-			session.beginTransaction();
-			session.save(tempPaymentDetail);
-			session.getTransaction().commit();
 			
 			Properties properties = new Properties();
 			String propFilePath = "../../../config/client.properties";
@@ -205,10 +200,29 @@ public class Trading {
 				
 
 			    //List<CustomerPortfolio> customerPortfolio = query.list();
+				
+				session.beginTransaction();
+				String productName = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
+
+			    System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
+				
+			    session.getTransaction().commit();
+			    
+			    session.beginTransaction();
+			    String latestNav = session.createQuery("select navValue from NavHistory where schemeCode = '"+productName+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult().toString();
+			    session.getTransaction().commit();
+			    
+			    Double currentTransactionAmount = productDetailsMap.get(currentProductId);
+			    Double currentTransactionQuantity = currentTransactionAmount / Double.parseDouble(latestNav);
+			    currentTransactionQuantity = (Math.round( currentTransactionQuantity * 10000.0 ) / 10000.0);
+			    
+			    System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
+			    System.out.println("Trading class : executeTrade method : unitPrice : "+latestNav);
+			    System.out.println("Trading class : executeTrade method : currentTransactionQuantity : "+currentTransactionQuantity);
 			    
 			    tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
-										transactionCode,buySell, Double.toString(productDetailsMap.get(currentProductId)),
-						null, null,null,"NO",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB); 		
+										transactionCode,buySell, Double.toString(currentTransactionAmount),
+						null, null,null,"NO",currentProductId, Double.toString(currentTransactionQuantity),latestNav,frmtdDateForDB, frmtdDateForDB); 		
 				
 			    session.beginTransaction();
 			    session.save(tempTransactionDetail);
@@ -233,11 +247,8 @@ public class Trading {
 				
 				PASSWORD_MFORDER = resultsMFOrder[1];
 				
-				session.beginTransaction();
-				String productName = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
-
-			    System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
 				
+			    
 		/*		orderEntryParam(TransactionCode, UniqueReferenceNumber, OrderId, UserID
 					, MemberId, ClientCode, SchemeCode, BuySell, BuySellType, DPTxn, Amount, Qty, AllRedeem, FolioNo
 						, Remarks, KYCStatus, RefNo, SubBrCode, EUIN, EUINFlag, MinRedeem, DPC, IPAdd, Password
@@ -280,7 +291,7 @@ public class Trading {
 					System.out.println("resultsEntryParam : "+i+" : " +resultsEntryParam[i]);
 				}*/
 				
-				session.getTransaction().commit();
+				
 				session.beginTransaction();
 				query = session.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
 				if (transactionType == "UPFRONT")
@@ -312,7 +323,7 @@ public class Trading {
 			    
 			    List<CustomerPortfolio> customerPortfolio = query.list();
 			    
-			    pendingOrders = 0;
+			    pendingOrders = 0.0;
 			    
 /*			    if ("SELL".equals(transactionType))  
 					pendingOrders -= quantity;
@@ -322,19 +333,18 @@ public class Trading {
 			    session.getTransaction().commit();
 			    session.beginTransaction();
 			    if (query.list().size() != 0)  {
-			    	pendingOrders += Integer.parseInt(customerPortfolio.get(0).getPendingOrders());
+			    	pendingOrders = Double.parseDouble(customerPortfolio.get(0).getPendingOrders()) + currentTransactionQuantity;
 
-			    	customerPortfolio.get(0).setPendingOrders(Integer.toString(pendingOrders));
+			    	customerPortfolio.get(0).setPendingOrders(Double.toString(pendingOrders));
 			    	customerPortfolio.get(0).setTransactionDetailId(transactionDetailId);
 			    	customerPortfolio.get(0).setUpdateDate(frmtdDateForDB);
 			    	
 			    }
 			    else {
-
+			    	
 			    	tempCustomerPortfolio = new CustomerPortfolio(customerId, currentProductId,
-			    				"0", Integer.toString(pendingOrders),transactionDetailId,
-			    				null,groupName,null,frmtdDateForDB,frmtdDateForDB);
-
+		    				"0",Double.toString(currentTransactionQuantity),transactionDetailId,
+		    				null,groupName,null,frmtdDateForDB,frmtdDateForDB);
 			    	
 			    	session.save(tempCustomerPortfolio);
 			    	
@@ -397,6 +407,163 @@ public class Trading {
 			if(session!=null)
 				session.close();
 
+		}
+
+	}
+	
+	
+	
+	
+	
+	public void checkPaymentStatus(String customerId ) throws MoneyBuddyException {
+		
+		SessionFactory factory = null;
+		Session session = null;
+		Query query;
+		List<Object[]> transactionDetails;
+		PaymentDetails tempPaymentDetail;
+		
+		System.out.println("Trading class : checkPaymentStatus method - start ");
+		
+		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+		IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+		String PASSWORD_STARMF;
+    	String passwordStarMF;
+    	String[] resultsStarMF;
+    	
+    	String paymentStatusDetails;
+    	
+		try {
+
+			logger.debug("Trading class : checkPaymentStatus method : start");
+			
+			factory = new AnnotationConfiguration()
+					.configure()
+					.addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
+					.addAnnotatedClass(CustomerPortfolio.class)
+					.buildSessionFactory();
+			session = factory.openSession();
+			
+			
+			session.beginTransaction();
+			query = session.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity from TransactionDetails where customerId='"+customerId+"' and transactionStatus='Pending'");
+			
+			transactionDetails = query.list();
+			
+			session.getTransaction().commit();
+			
+			for (Object[]  transactionDetail : transactionDetails)  {
+				System.out.println("Order number : "+transactionDetail[3]);
+
+
+			Properties properties = new Properties();
+			String propFilePath = "../../../config/client.properties";
+
+		    properties.load(PaymentAction.class.getResourceAsStream(propFilePath));
+		    
+		    
+
+	    	String[] paymentStatusDetailsArray = {customerId,transactionDetail[3].toString(),"BSEMF"};
+	    	paymentStatusDetails = String.join("|",paymentStatusDetailsArray);
+			
+
+
+				passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+				
+				resultsStarMF = passwordStarMF.split("\\|");
+				
+				/*for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+					System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+				}*/
+				
+				
+				//System.out.println("passwordStarMF : "+passwordStarMF);
+				
+				PASSWORD_STARMF = resultsStarMF[1];
+	
+				String paymentStatusResponse = iStarMFWebService.mfapi("11",properties.getProperty("USER_ID"),PASSWORD_STARMF,paymentStatusDetails);
+	
+				System.out.println("paymentStatusResponse : "+paymentStatusResponse);
+				
+				String[] resultsPaymentStatusResponse = paymentStatusResponse.split("\\|");
+				
+/*				for (int i = 0 ; i <resultsPaymentStatusResponse.length ; i++ )   {
+					System.out.println("resultsPaymentStatusResponse : "+i+" : " +resultsPaymentStatusResponse[i]);
+				}*/
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+				String frmtdDateForDB = dateFormat.format(date);
+				
+				String refNumber = null;
+				List<String> paymentDetailsList;
+				if (resultsPaymentStatusResponse[0].equals("100"))  {
+					
+					session.beginTransaction();
+					
+					query = session.createQuery("select paymentRefNum from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
+					paymentDetailsList = query.list();
+
+					session.getTransaction().commit();
+					
+					session.beginTransaction();
+					
+					if (paymentDetailsList.isEmpty())  {
+						tempPaymentDetail = new PaymentDetails( transactionDetail[0].toString(), transactionDetail[1].toString(), transactionDetail[3].toString(),
+							resultsPaymentStatusResponse[1], transactionDetail[2].toString(),frmtdDateForDB);
+						session.save(tempPaymentDetail);
+					}
+					else 
+					{
+						for (String paymentDetail : paymentDetailsList)  {
+							refNumber = paymentDetail;
+						}
+						session.createQuery("update PaymentDetails set paymentGatewayComment='"+resultsPaymentStatusResponse[1]+"' , updateDate='"+frmtdDateForDB+"' where PAYMENT_REF_NUM='"+refNumber+"'").executeUpdate();;
+					}
+					
+					session.getTransaction().commit();
+					
+					if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
+						System.out.println("Payment Successful");
+						session.beginTransaction();
+						session.createQuery("update TransactionDetails set transactionStatus='Complete' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+						session.getTransaction().commit();
+						
+						Double quantity = Double.parseDouble(transactionDetail[5].toString());
+						
+						session.beginTransaction();
+						Double pendingOrder = Double.parseDouble(session.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult().toString());
+						Double totalQuantity = Double.parseDouble(session.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult().toString());
+						
+						pendingOrder -= quantity;
+						totalQuantity += quantity;
+						session.getTransaction().commit();
+						
+						
+						session.beginTransaction();
+						session.createQuery("update ebdb.CUSTOMER_PORTFOLIO set PENDING_ORDERS='"+pendingOrder+"', TOTAL_QUANTITY='"+totalQuantity+"' where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").executeUpdate();
+						session.getTransaction().commit();
+					}
+
+				}
+				
+				/*paymentUrl = resultsPaymentGateway[1];
+				System.out.println("paymentUrl: "+paymentUrl);*/
+			}
+
+
+			
+			
+			logger.debug("Trading class : checkPaymentStatus method : end");
+
+		} catch (NumberFormatException | HibernateException e) {
+			logger.debug("Trading class : checkPaymentStatus method : Caught exception for customerId : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.debug("Trading class : checkPaymentStatus method : Caught exception for customerId : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 
 	}

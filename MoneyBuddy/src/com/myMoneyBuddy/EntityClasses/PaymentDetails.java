@@ -29,6 +29,12 @@ public class PaymentDetails {
     @Column (name="TRANSACTION_ID")
     private String transactionId;
     
+    @Column (name="TRANSACTION_DETAIL_ID")
+    private String transactionDetailId;
+    
+    @Column (name="BSE_ORDER_ID")
+    private String bseOrderID;
+    
     @Column(name="PAYMENT_GATEWAY_COMMENT")
     private String paymentGatewayComment;
     
@@ -42,15 +48,20 @@ public class PaymentDetails {
 
     }
 
-    public PaymentDetails(String transactionId, 
-			String paymentGatewayComment, String transactionDate,
-			String updateDate) {
+    
+
+	public PaymentDetails(String transactionId, String transactionDetailId, String bseOrderID,
+			String paymentGatewayComment, String transactionDate, String updateDate) {
 		super();
 		this.transactionId = transactionId;
+		this.transactionDetailId = transactionDetailId;
+		this.bseOrderID = bseOrderID;
 		this.paymentGatewayComment = paymentGatewayComment;
 		this.transactionDate = transactionDate;
 		this.updateDate = updateDate;
 	}
+
+
 
 	public String getTransactionId() {
 		return transactionId;
@@ -66,6 +77,23 @@ public class PaymentDetails {
 
 	public void setPaymentRefNum(String paymentRefNum) {
 		this.paymentRefNum = paymentRefNum;
+	}
+
+	
+	public String getTransactionDetailId() {
+		return transactionDetailId;
+	}
+
+	public void setTransactionDetailId(String transactionDetailId) {
+		this.transactionDetailId = transactionDetailId;
+	}
+
+	public String getBseOrderID() {
+		return bseOrderID;
+	}
+
+	public void setBseOrderID(String bseOrderID) {
+		this.bseOrderID = bseOrderID;
 	}
 
 	public String getPaymentGatewayComment() {
@@ -107,6 +135,12 @@ public class PaymentDetails {
         if ((this.paymentRefNum == null) ? (other.paymentRefNum != null) : !this.paymentRefNum.equals(other.paymentRefNum)) {
             return false;
         }
+        if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
+            return false;
+        }
+        if ((this.bseOrderID == null) ? (other.bseOrderID != null) : !this.bseOrderID.equals(other.bseOrderID)) {
+            return false;
+        }
         if ((this.paymentGatewayComment == null) ? (other.paymentGatewayComment != null) : !this.paymentGatewayComment.equals(other.paymentGatewayComment)) {
             return false;
         }
@@ -124,6 +158,8 @@ public class PaymentDetails {
         int hash = 3;
         hash = 83 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
         hash = 83 * hash + (this.paymentRefNum != null ? this.paymentRefNum.hashCode() : 0);
+        hash = 83 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
+        hash = 83 * hash + (this.bseOrderID != null ? this.bseOrderID.hashCode() : 0);
         hash = 83 * hash + (this.paymentGatewayComment != null ? this.paymentGatewayComment.hashCode() : 0);
         hash = 83 * hash + (this.transactionDate != null ? this.transactionDate.hashCode() : 0);
         hash = 83 * hash + (this.updateDate != null ? this.updateDate.hashCode() : 0);

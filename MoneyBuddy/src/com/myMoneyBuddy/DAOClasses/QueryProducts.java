@@ -287,10 +287,10 @@ public class QueryProducts {
 
 				session.getTransaction().commit();
 
-				int availableToSell = Integer.parseInt(customerPortfolio.getTotalQuantity());
+				double availableToSell = Double.parseDouble(customerPortfolio.getTotalQuantity());
 
-				if ( Integer.parseInt(customerPortfolio.getPendingOrders()) < 0 )   {
-					availableToSell = availableToSell + Integer.parseInt(customerPortfolio.getPendingOrders());
+				if ( Double.parseDouble(customerPortfolio.getPendingOrders()) < 0 )   {
+					availableToSell = availableToSell + Double.parseDouble(customerPortfolio.getPendingOrders());
 
 				}
 
@@ -311,7 +311,7 @@ public class QueryProducts {
 						TransactionDetailsList.get(0).getBseOrderId(),TransactionDetailsList.get(0).getReverseFeed(),customerPortfolio.getTransactionDate(),TransactionDetailsList.get(0).getTransactionAmount()));*/
 				dashboardDataModel.add(new DashboardDataModel(productDetailsList.get(0).getProductName(), 
 						customerPortfolio.getProductId(), customerPortfolio.getTotalQuantity(), 
-						customerPortfolio.getPendingOrders(), Integer.toString(availableToSell),
+						customerPortfolio.getPendingOrders(), Double.toString(availableToSell),
 						TransactionDetailsList.get(0).getBseOrderId(),TransactionDetailsList.get(0).getReverseFeed(),customerPortfolio.getTransactionDate(),TransactionDetailsList.get(0).getTransactionAmount()));
 				
 
@@ -353,9 +353,9 @@ public class QueryProducts {
 		
 		SessionFactory factory = null;
 		Session session  = null;
-		int soldUnit = 0;
+		double soldUnit = 0.0;
 		double investedAmount = 0.0;
-		int availableUnits = 0;
+		double availableUnits = 0.0;
 		double currentAmount = 0.0;
 		double rateOfGrowth = 0.0;
 		
@@ -405,7 +405,7 @@ public class QueryProducts {
 			    	   
 			    	   Object[] sellRecordRow = (Object[]) sellIt.next();
 				       
-			    	   soldUnit += Integer.parseInt(sellRecordRow[2].toString());
+			    	   soldUnit += Double.parseDouble(sellRecordRow[2].toString());
 				       System.out.println("Product transactionDetail for SEll - id : "+sellRecordRow[0]+" amount: "+sellRecordRow[1]+" unit: "+sellRecordRow[2]+" unitPrice: "+sellRecordRow[3]);
 			    	   
 			       }
@@ -422,22 +422,22 @@ public class QueryProducts {
 			    	   
 				       if (soldUnit != 0 )   {
 				    	   
-				    	   if (Integer.parseInt(buyRecordRow[2].toString()) > soldUnit)  {
-				    		   availableUnits += (Integer.parseInt(buyRecordRow[2].toString()) - soldUnit);
-				    		   investedAmount += (Integer.parseInt(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
+				    	   if (Double.parseDouble(buyRecordRow[2].toString()) > soldUnit)  {
+				    		   availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
+				    		   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
 				    		   soldUnit = 0;
 				    		   
 				    	   }
 				    	   else {
 				    		   
-				    		   soldUnit -= Integer.parseInt(buyRecordRow[2].toString());
+				    		   soldUnit -= Double.parseDouble(buyRecordRow[2].toString());
 				    		   
 				    	   }
 				       }
 				       
 				       else {
-				    	   availableUnits += Integer.parseInt(buyRecordRow[2].toString());
-				    	   investedAmount += (Integer.parseInt(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
+				    	   availableUnits += Double.parseDouble(buyRecordRow[2].toString());
+				    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
 				       }
 				            
 			       }
@@ -451,7 +451,7 @@ public class QueryProducts {
 			       System.out.println("Rate of Growth : "+rateOfGrowth);
 			      
 			       
-			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),Integer.toString(availableUnits),Double.toString(investedAmount),Double.toString(currentAmount),Double.toString(rateOfGrowth),transactionStartDate));
+			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),Double.toString(availableUnits),Double.toString(investedAmount),Double.toString(currentAmount),Double.toString(rateOfGrowth),transactionStartDate));
 			 }
 
 

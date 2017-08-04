@@ -122,13 +122,13 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="range" type="range" min="0" max="100" step="10"
-							value="0" onchange="showUpfrontInvestment(this.value)" />
+						<input id="range" type="range" min="2000" max="1000000" step="500"
+							value="4000" onchange="showUpfrontInvestment(this.value)" />
 
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						<p class="top-number"> <span id="upfrontInvestment">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+						<p class="top-number"> <span id="upfrontInvestment">4000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
 					</div>
 				</div>
 			</div>

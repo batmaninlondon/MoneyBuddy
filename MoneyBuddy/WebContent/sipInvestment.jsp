@@ -90,12 +90,12 @@
 				<div class="col-md-2"></div>
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="range" min="0" max="100" step="10" value="0"
+						<input type="range" min="500" max="50000" step="500" value="1000"
 							onchange="showSipPerMonth(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						 <span id="sipPerMonth">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
+						 <span id="sipPerMonth">1000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.
 					</div>
 				</div>
 			</div>

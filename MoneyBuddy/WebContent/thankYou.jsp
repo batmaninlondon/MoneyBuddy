@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-12 well-sm large-text help-row-1" >
 			<p>Thank for using MoneyBuddy</p>
-			
+			<button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="paymentStatus();" style="width:200px;">SUBMIT</button>
 		</div>
 	</div>
 
