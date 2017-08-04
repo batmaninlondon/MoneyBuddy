@@ -311,7 +311,7 @@ public class QueryProducts {
 						TransactionDetailsList.get(0).getBseOrderId(),TransactionDetailsList.get(0).getReverseFeed(),customerPortfolio.getTransactionDate(),TransactionDetailsList.get(0).getTransactionAmount()));*/
 				dashboardDataModel.add(new DashboardDataModel(productDetailsList.get(0).getProductName(), 
 						customerPortfolio.getProductId(), customerPortfolio.getTotalQuantity(), 
-						customerPortfolio.getPendingOrders(), Double.toString(availableToSell),
+						customerPortfolio.getPendingOrders(), String.format("%.4f",availableToSell),
 						TransactionDetailsList.get(0).getBseOrderId(),TransactionDetailsList.get(0).getReverseFeed(),customerPortfolio.getTransactionDate(),TransactionDetailsList.get(0).getTransactionAmount()));
 				
 
@@ -424,7 +424,10 @@ public class QueryProducts {
 				    	   
 				    	   if (Double.parseDouble(buyRecordRow[2].toString()) > soldUnit)  {
 				    		   availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
+				    		   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
 				    		   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
+				    		   System.out.println(" investedAmount : "+String.format("%.4f",investedAmount));
+				    		   
 				    		   soldUnit = 0;
 				    		   
 				    	   }
@@ -436,8 +439,11 @@ public class QueryProducts {
 				       }
 				       
 				       else {
-				    	   availableUnits += Double.parseDouble(buyRecordRow[2].toString());
+				    	   availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
+
+				    	   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
 				    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
+				    	   System.out.println(" investedAmount : "+String.format("%.4f",investedAmount));
 				       }
 				            
 			       }
@@ -445,13 +451,13 @@ public class QueryProducts {
 			       currentAmount = availableUnits* Double.parseDouble(currentNavValue);
 			       rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
 			       
-			       System.out.println("Total availableUnits : "+availableUnits);
-			       System.out.println("Total invested Amount : "+investedAmount);
-			       System.out.println("Current Amount : "+currentAmount);
-			       System.out.println("Rate of Growth : "+rateOfGrowth);
+			       System.out.println("Total availableUnits : "+ String.format("%.4f", availableUnits));
+			       System.out.println("Total invested Amount : "+ String.format("%.4f", investedAmount));
+			       System.out.println("Current Amount : "+ String.format("%.4f", currentAmount));
+			       System.out.println("Rate of Growth : "+ String.format("%.4f", rateOfGrowth));
 			      
 			       
-			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),Double.toString(availableUnits),Double.toString(investedAmount),Double.toString(currentAmount),Double.toString(rateOfGrowth),transactionStartDate));
+			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.4f",investedAmount),String.format("%.4f",currentAmount),String.format("%.4f",rateOfGrowth),transactionStartDate));
 			 }
 
 

@@ -214,7 +214,7 @@ public class Trading {
 			    
 			    Double currentTransactionAmount = productDetailsMap.get(currentProductId);
 			    Double currentTransactionQuantity = currentTransactionAmount / Double.parseDouble(latestNav);
-			    currentTransactionQuantity = (Math.round( currentTransactionQuantity * 10000.0 ) / 10000.0);
+			    //currentTransactionQuantity = (Math.round( currentTransactionQuantity * 10000.0 ) / 10000.0);
 			    
 			    System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
 			    System.out.println("Trading class : executeTrade method : unitPrice : "+latestNav);
@@ -222,7 +222,7 @@ public class Trading {
 			    
 			    tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
 										transactionCode,buySell, Double.toString(currentTransactionAmount),
-						null, null,null,"NO",currentProductId, Double.toString(currentTransactionQuantity),latestNav,frmtdDateForDB, frmtdDateForDB); 		
+						null, null,null,"NO",currentProductId, String.format("%.4f", currentTransactionQuantity),latestNav,frmtdDateForDB, frmtdDateForDB); 		
 				
 			    session.beginTransaction();
 			    session.save(tempTransactionDetail);
