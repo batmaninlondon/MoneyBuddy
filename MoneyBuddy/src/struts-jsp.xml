@@ -141,6 +141,11 @@
 	    	<result>/thankYouForRegistration.jsp</result>
 		</action>
 	</package>
+	<package name="thankYouForPasswordReset" namespace="/" extends="struts-default">
+	    <action name="thankYouForPasswordReset">
+	    	<result>/thankYouForPasswordReset.jsp</result>
+		</action>
+	</package>
 	<package name="upfrontInvestment" namespace="/" extends="struts-default">
 	    <action name="upfrontInvestment">
 	    	<result>/upfrontInvestment.jsp</result>

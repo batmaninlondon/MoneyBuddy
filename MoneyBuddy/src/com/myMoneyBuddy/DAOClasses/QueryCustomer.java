@@ -149,13 +149,16 @@ public class QueryCustomer {
 										.buildSessionFactory();
 		Session session = factory.openSession();
 
+		Object result;
 		int customerId =0 ;
 
 		try
 		{
 			session.beginTransaction();
-			customerId = Integer.parseInt(session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult().toString());
+			result = session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
 			
+			if (result != null)
+				customerId = Integer.parseInt(result.toString());
 			logger.debug("QueryCustomer class : getCustomerId method : end");
 			return customerId;
 		}
@@ -231,14 +234,18 @@ public class QueryCustomer {
 										.buildSessionFactory();
 		Session session = factory.openSession();
 
+		Object result;
 		String customerMobileNumber =  null;
 
 
 		try
 		{
 			session.beginTransaction();
-			customerMobileNumber = session.createQuery("select mobileNumber from Customers where emailId = '"+emailId+"'").uniqueResult().toString();
+			result = session.createQuery("select mobileNumber from Customers where emailId = '"+emailId+"'").uniqueResult();
 
+			if ( result != null )
+				customerMobileNumber = result.toString();
+			
 			session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomerMobileNumber method : end");

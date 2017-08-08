@@ -202,14 +202,25 @@ public class Trading {
 			    //List<CustomerPortfolio> customerPortfolio = query.list();
 				
 				session.beginTransaction();
-				String productName = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult()).toString();
+				String productName = null;
+				Object result;
+				result = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult());
 
+				if (result != null) 
+					productName = result.toString();
+				
 			    System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
 				
 			    session.getTransaction().commit();
 			    
 			    session.beginTransaction();
-			    String latestNav = session.createQuery("select navValue from NavHistory where schemeCode = '"+productName+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult().toString();
+			    
+			    result = session.createQuery("select navValue from NavHistory where schemeCode = '"+productName+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
+			    String latestNav = null;
+			    
+			    if (result != null)  
+			    	latestNav = result.toString();
+			    
 			    session.getTransaction().commit();
 			    
 			    Double currentTransactionAmount = productDetailsMap.get(currentProductId);
@@ -311,8 +322,8 @@ public class Trading {
 				query.setParameter("bseRemarks", resultsEntryParam[6]);
 				query.setParameter("bseSuccessFlag", resultsEntryParam[7]);
 				query.setParameter("transactionDetailId", transactionDetailId);
-				int result = query.executeUpdate();
-				System.out.println(result + " rows updated in transactionDetails table ");
+				int updateResult = query.executeUpdate();
+				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				session.getTransaction().commit();
 			    
 				session.beginTransaction();
@@ -532,8 +543,17 @@ public class Trading {
 						Double quantity = Double.parseDouble(transactionDetail[5].toString());
 						
 						session.beginTransaction();
-						Double pendingOrder = Double.parseDouble(session.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult().toString());
-						Double totalQuantity = Double.parseDouble(session.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult().toString());
+						
+						Object result = session.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
+						Double pendingOrder = 0.0;
+						Double totalQuantity = 0.0;
+						if (result != null) 
+							pendingOrder = Double.parseDouble(result.toString());
+						
+						result = session.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
+						
+						if (result != null)
+							totalQuantity  = Double.parseDouble(result.toString());
 						
 						pendingOrder -= quantity;
 						totalQuantity += quantity;

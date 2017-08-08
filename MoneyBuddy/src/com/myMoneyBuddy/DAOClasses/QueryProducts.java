@@ -386,13 +386,22 @@ public class QueryProducts {
 			       
 			       System.out.println("Product Name: " + row[0]);
 			       
-			       System.out.println("Product ID: " + row[1]);	
+			       System.out.println("Product ID: " + row[1]);
+			       Object result;
 			       
-			       String currentNavValue = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult().toString();
+			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
+			       String currentNavValue = null; 
+			       
+			       if (result != null )
+			    	   currentNavValue = result.toString();
 			       
 			       System.out.println("Product Latest NAV Value : " + currentNavValue);
 			       
-			       String transactionStartDate = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"'").uniqueResult().toString();
+			       result = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"'").uniqueResult();
+			       
+			       String transactionStartDate = null;
+			       if (result != null )
+			    	   transactionStartDate = result.toString();
 			       
 			       System.out.println("transactionStartDate : " + transactionStartDate);
 			       
@@ -510,8 +519,12 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 
 			List<InvestmentDetailsDataModel> investmentDetailsDataModel = new LinkedList<InvestmentDetailsDataModel>();
 			
-			String productId = session.createQuery("select productId from ProductDetails  where productName='"+productName+"'").uniqueResult().toString();
+			Object result = session.createQuery("select productId from ProductDetails  where productName='"+productName+"'").uniqueResult();
 
+			String productId = null;
+			if (result != null)
+				productId = result.toString();
+			
 			Query query = session.createQuery("SELECT transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
 			       
 			String quantity;
