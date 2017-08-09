@@ -990,6 +990,21 @@ function register() {
         		document.getElementById("mobile-number").className = "form-control";
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
+        	else if (result == "MobileNumberAlreadyExists")  {
+        		document.getElementById("mobile-number").className += " formInvalid";
+        		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - already registered with MoneyBuddy ";
+        		document.getElementById("mobile-number").value = null;
+        		document.getElementById("first-name").className = "form-control";
+        		document.getElementById("first-name").placeholder = "First Name";
+        		document.getElementById("last-name").className = "form-control";
+        		document.getElementById("last-name").placeholder = "Last Name";
+        		document.getElementById("password").className = "form-control";
+        		document.getElementById("password").placeholder = "Password";
+        		document.getElementById("confirm-password").className = "form-control";
+        		document.getElementById("confirm-password").placeholder = "Confirm Password";
+        		document.getElementById("email-id").className = "form-control";
+        		document.getElementById("email-id").placeholder = "Email ID";
+        	}
         	else {
         		/*alert('Inside newLogin error !!');*/
         		window.location='errorPage';

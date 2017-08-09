@@ -27,8 +27,8 @@ public class sendMail {
 	
 	private int port =587;
     private String host ="smtp.gmail.com";
-    private String username ="wadhwani.mail100@gmail.com";
-    private String password="Wadhwani@123";
+    private String username ="mf.moneybuddy@gmail.com";
+    private String password="Money@Buddy";
     private boolean debug=true;
 
     

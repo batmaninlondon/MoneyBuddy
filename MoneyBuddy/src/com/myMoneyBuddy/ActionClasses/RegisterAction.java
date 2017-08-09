@@ -88,6 +88,14 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	    stream = new ByteArrayInputStream(str.getBytes());
         	return SUCCESS;
     	}
+    	
+    	if (customer.existsMobileNumber(getMobileNumber())) {
+    		System.out.println("RegisterAction class : execute method : MobileNumberAlreadyExists");
+    		String str = "MobileNumberAlreadyExists";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+        	return SUCCESS;
+    	}
+    	
     	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
     	String hashedPassword = desEncrypter.encrypt(getPassword());
     	String subject="[MoneyBuddy] Please verify your email address.";

@@ -352,5 +352,55 @@ public class QueryCustomer {
 		}
 
 	}
+	
+public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class : existsMobileNumber method : start");
+		
+		SessionFactory factory = new AnnotationConfiguration()
+										.configure()
+										.addAnnotatedClass(Customers.class)
+										.buildSessionFactory();
+		Session session = factory.openSession();
+
+		try
+		{
+
+			session.beginTransaction();
+			
+			Query query = session.createQuery("select mobileNumber from Customers");
+			
+			List<String> mobileNumberList = query.list();
+			session.getTransaction().commit();
+			for (String mobileNum : mobileNumberList)  {
+
+				if (mobileNum.equals(mobileNumber) ) {
+					System.out.println("QueryCustomer class : existsMobileNumber method : Mobile number already exists ");
+					return true;
+				}
+			}
+
+			System.out.println("QueryCustomer class : existsMobileNumber method : Mobile number does not exists ");
+			
+			
+			logger.debug("QueryCustomer class : existsMobileNumber method : end");
+			return false;
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryCustomer class : existsMobileNumber method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryCustomer class : existsMobileNumber method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(factory!=null)
+				factory.close();
+		}
+
+	}
 
 }
