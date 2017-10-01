@@ -93,10 +93,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     		System.out.println("Payment Action class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
     		
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
-	    	String subject ;
+	    	/*String subject ;
 	    	sendMail sendmail = new sendMail();
 	    	StringBuilder bodyText = new StringBuilder();
-	    	String MAIL_SITE_LINK = "www.quantwealth.in/login";
+	    	String MAIL_SITE_LINK = "www.quantwealth.in/login";*/
     	
     	
 	    	//System.out.println("Inside payment execute mehtod - start ");
@@ -125,29 +125,33 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			String CLIENT_COUNTRY = getResidentialCountry(); // will take from Client
 */			
 	    	
+	    	System.out.println("Hi There 1 .");
 	    	String customerId;
 			String CLIENT_EMAIL;
 			String CLIENT_APPNAME1;
 			
+			System.out.println("Hi There 2 .");
 			String CLIENT_PAN;
 			String CLIENT_CM_MOBILE;
 			
 			
 		    customerId = sessionMap.get("customerId").toString();
-	    	//System.out.println("CLIENT_CODE/customerId : "+customerId);
+		    System.out.println("Hi There 3 .");
+		    System.out.println("CLIENT_CODE/customerId : "+customerId);
+		    System.out.println("Hi There 4 .");
 	    	
 	    	CLIENT_APPNAME1 = sessionMap.get("customerName").toString();
-	    	//System.out.println("CLIENT_APPNAME1 : "+CLIENT_APPNAME1);
+	    	System.out.println("CLIENT_APPNAME1 : "+CLIENT_APPNAME1);
 	    	
 	    	CLIENT_EMAIL = sessionMap.get("emailId").toString();
-	    	//System.out.println("CLIENT_EMAIL : "+CLIENT_EMAIL);
+	    	System.out.println("CLIENT_EMAIL : "+CLIENT_EMAIL);
 
 	    	
 	    	CLIENT_PAN = sessionMap.get("panCard").toString();
 	    	//System.out.println("CLIENT_PAN : "+CLIENT_PAN);
 	    	
 	    	CLIENT_CM_MOBILE = sessionMap.get("customerMobileNumber").toString();
-	    	//System.out.println("CLIENT_CM_MOBILE : "+CLIENT_CM_MOBILE);
+	    	System.out.println("CLIENT_CM_MOBILE : "+CLIENT_CM_MOBILE);
 
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy;
@@ -163,7 +167,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		
 	    	String[] uccSpilts = ucc.split("\\|");
 	    	
-	    	//System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+	    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
 	    	
 		if(uccSpilts[0].equals("100") ) {
 			String paymentUrl = null;
@@ -200,7 +204,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
 		    		
-		    		System.out.println(" account number is even, considering payment successful !! ");
+		    		/*System.out.println(" account number is even, considering payment successful !! ");
 		    		
 			    	subject = "Payment recieved for your recent transaction";
 		        	bodyText.append("<div>")
@@ -210,7 +214,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		        	.append("  <h3>Thanks,</h3><br/><br/>")
 		        	.append("  <h3>MoneyBuddy Team</h3>")
 		        	.append("</div>");
-		        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);
+		        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);*/
 		        	
 		        	str = "success|"+paymentUrl;
 

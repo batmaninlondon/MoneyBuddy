@@ -25,7 +25,16 @@ function getURLParameter(name) {
 function showUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
+alert('Call update function !!');
 update();
+}
+
+function showNewUpfrontInvestment(newValue)
+{
+document.getElementById("upfrontInvestment").innerHTML=newValue;
+document.getElementById("investedAmount").innerHTML=newValue;
+alert('Call new update function !!');
+newUpdate();
 }
 
 function showSipPerMonth(newValue)
@@ -583,6 +592,23 @@ function resetPassword() {
 	    });
 }
 
+
+function showCustomerDetails()  
+{
+
+	var cusId = document.getElementById('cusId').value;
+	/*alert('showPanCardVerification : cusId : '+cusId);*/
+	if (cusId == "customerIdNull") {
+		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
+		document.getElementById('investment-options').className += " hidden";	
+		$("#login-page").removeClass('hidden');
+	} 
+	else  {
+		/*alert('Inside showPanCardVerification customerIdExist !! ');*/
+		window.location='customerDetails';
+	}
+	
+}
 function showPanCardVerification()
 {
 	/*alert('showPanCardVerification function called !! ');*/
@@ -670,8 +696,10 @@ function newLogin() {
         	/*alert('result : '+result);*/
         	
         	if (result == "success") {
-        		document.getElementById('login-page').className += " hidden";	
-        		$("#pancard-verification").removeClass('hidden');
+        		/*document.getElementById('login-page').className += " hidden";	
+        		$("#pancard-verification").removeClass('hidden');*/
+        		
+        		window.location='customerDetails';
         	}
         	else if (result == "verificationNotDone")  {
         		document.getElementById("email-id").className += " formInvalid";
@@ -1021,28 +1049,83 @@ $("input[name=riskCategory]").click(function(){
 
 function update(){
 
-	   
+/*	alert('update called !! ');
 	var investment = document.getElementById("upfrontInvestment").innerHTML;
 	var sip = document.getElementById("sipPerMonth").innerHTML;
 	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
+	var riskCategory = "3";
 	var planName = "SAVE_TAX";
 	var years = document.getElementById("years").innerHTML;
 	
-	var totalInvestment = parseInt(sip * years * 12)+parseInt(investment);
+	var totalInvestment = parseInt(sip)+parseInt(investment);
 
-	/*alert('sip : '+sip);*/
-	/*alert ('estimate function called ');*/
+	alert('sip : '+sip);
+	alert ('estimate function called ');
     $.ajax({
   	
         url : "estimateAction",
         type: 'post',
         
-        data: {'upfrontInvestment' : investment , 'sip' : sip , 'years' : years , 'planName' : planName , 'riskCategory' : riskCategory },
+        data: {'upfrontInvestment' : investment , 'sip' : sip ,'planName' : planName , 'riskCategory' : riskCategory },
         
         success : function(result){
         	if (result == "success") {
         	    	
         	  document.getElementById('diamond-text-1').style.display ='none';
+        	  alert ('success');
+        	  if (sip != 0) {
+        		  alert ('SIP is not 0 ');
+        		  $("#diamond-text-7").removeClass('hidden');
+				  $("#diamond-text-8").removeClass('hidden');
+				  $("#diamond-text-9").removeClass('hidden');
+				  $("#diamond-text-10").removeClass('hidden');
+
+        		  $("#predicted-value-list-1").load("sipInvestment.jsp #predicted-value-list-1");
+        		  $("#predicted-value-list-2").load("sipInvestment.jsp #predicted-value-list-2");
+        		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
+        	  }
+        	  else {
+        		  alert ('SIP is 0 ');
+	        	  $("#diamond-text-2").removeClass('hidden');
+	        	  $("#diamond-text-3").removeClass('hidden');
+	        	  $("#diamond-text-4").removeClass('hidden');
+	        	  $("#diamond-text-5").removeClass('hidden');
+	        	  $("#diamond-text-6").removeClass('hidden');
+	        	  $("#predicted-value").load("upfrontInvestment.jsp #predicted-value");
+	           	  
+	         		document.getElementById("totalInvestment").innerHTML= totalInvestment;
+	       		document.getElementById("numberOfYears").innerHTML= years;
+	        	  
+        	  }
+        	  $("#submit-button-1").removeClass('hidden');
+    		
+        	}
+        	else {
+        		alert('Inside estimate error !!');
+        		window.location='errorPage';
+        	}  
+
+        }
+    });*/
+	
+	var investment = document.getElementById("upfrontInvestment").innerHTML;
+	var sip = document.getElementById("sipPerMonth").innerHTML;
+	var riskCategory = "3";
+	var planName = "SAVE_TAX";
+	
+	var totalInvestment = parseInt(sip)+parseInt(investment);
+
+	$.ajax({
+  	
+        url : "estimateAction",
+        type: 'post',
+        
+        data: {'upfrontInvestment' : investment , 'sip' : sip ,'planName' : planName , 'riskCategory' : riskCategory },
+        
+        success : function(result){
+        	if (result == "success") {
+        	    	
+        	  //document.getElementById('diamond-text-1').style.display ='none';
         	  /*alert ('success');*/
         	  if (sip != 0) {
         		 /* alert ('SIP is not 0 ');*/
@@ -1057,18 +1140,81 @@ function update(){
         	  }
         	  else {
         		 /* alert ('SIP is 0 ');*/
-	        	  $("#diamond-text-2").removeClass('hidden');
+	        	  /*$("#diamond-text-2").removeClass('hidden');
 	        	  $("#diamond-text-3").removeClass('hidden');
 	        	  $("#diamond-text-4").removeClass('hidden');
 	        	  $("#diamond-text-5").removeClass('hidden');
-	        	  $("#diamond-text-6").removeClass('hidden');
-	        	  $("#predicted-value").load("upfrontInvestment.jsp #predicted-value");
+	        	  $("#diamond-text-6").removeClass('hidden');*/
+	        	  $("#predicted-value-for-one-year").load("upfrontInvestment.jsp #predicted-value-for-one-year");
 	           	  
-	         		document.getElementById("totalInvestment").innerHTML= totalInvestment;
-	       		document.getElementById("numberOfYears").innerHTML= years;
+	         	//document.getElementById("totalInvestment").innerHTML= totalInvestment;
+	       		//document.getElementById("numberOfYears").innerHTML= years;
 	        	  
         	  }
-        	  $("#submit-button-1").removeClass('hidden');
+        	  //$("#submit-button-1").removeClass('hidden');
+    		
+        	}
+        	else {
+        		/*alert('Inside estimate error !!');*/
+        		window.location='errorPage';
+        	}  
+
+        }
+    });
+}
+
+
+function newUpdate(){
+
+	alert('new update called !! ');
+	var investment = document.getElementById("upfrontInvestment").innerHTML;
+	var sip = "0";
+	var riskCategory = "3";
+	var planName = "SAVE_TAX";
+	
+	var totalInvestment = parseInt(sip)+parseInt(investment);
+
+	$.ajax({
+  	
+        url : "newEstimateAction",
+        type: 'post',
+        
+        data: {'upfrontInvestment' : investment , 'sip' : sip ,'planName' : planName , 'riskCategory' : riskCategory },
+        
+        success : function(result){
+        	if (result == "success") {
+        	    	
+        	  //document.getElementById('diamond-text-1').style.display ='none';
+        	  /*alert ('success');*/
+        	  if (sip != 0) {
+        		 /* alert ('SIP is not 0 ');*/
+        		  $("#diamond-text-7").removeClass('hidden');
+				  $("#diamond-text-8").removeClass('hidden');
+				  $("#diamond-text-9").removeClass('hidden');
+				  $("#diamond-text-10").removeClass('hidden');
+
+        		  $("#predicted-value-list-1").load("sipInvestment.jsp #predicted-value-list-1");
+        		  $("#predicted-value-list-2").load("sipInvestment.jsp #predicted-value-list-2");
+        		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
+        		  $("#investment-fund-list-data").load("sipInvestment.jsp #investment-fund-list-data");
+        	  }
+        	  else {
+        		 /* alert ('SIP is 0 ');*/
+	        	  /*$("#diamond-text-2").removeClass('hidden');
+	        	  $("#diamond-text-3").removeClass('hidden');
+	        	  $("#diamond-text-4").removeClass('hidden');
+	        	  $("#diamond-text-5").removeClass('hidden');
+	        	  $("#diamond-text-6").removeClass('hidden');*/
+	        	  $("#predicted-value-for-one-year").load("newUpfrontInvestment.jsp #predicted-value-for-one-year");
+	        	  $("#predicted-value-for-three-year").load("newUpfrontInvestment.jsp #predicted-value-for-three-year");
+	        	  $("#predicted-value-for-five-year").load("newUpfrontInvestment.jsp #predicted-value-for-five-year");
+	        	  $("#investment-fund-list-data").load("newUpfrontInvestment.jsp #investment-fund-list-data");
+	           	  
+	         	//document.getElementById("totalInvestment").innerHTML= totalInvestment;
+	       		//document.getElementById("numberOfYears").innerHTML= years;
+	        	  
+        	  }
+        	  //$("#submit-button-1").removeClass('hidden');
     		
         	}
         	else {

@@ -22,6 +22,12 @@
 	    	<result>/blog.jsp</result>
 		</action>
 	</package>
+	<package name="customerDetails" namespace="/" extends="struts-default">
+	    <action name="customerDetails">
+	    	<result>/customerDetails.jsp</result>
+		</action>
+	</package>
+
 	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
 	    <action name="cutomerPortfolio">
 	    	<result>/cutomerPortfolio.jsp</result>

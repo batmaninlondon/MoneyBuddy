@@ -13,7 +13,7 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link rel="stylesheet" href="assets/MoneyBuddyStyles.css" />
+ 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
@@ -36,9 +36,9 @@
 
 </head>
 
-<body class="homepage" onload="setInitialUpfrontInvestment();">
+<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-        <div class="top-bar">
+<!--         <div class="top-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">
@@ -56,10 +56,10 @@
                        </div>
                     </div>
                 </div>
-            </div><!--/.container-->
-        </div><!--/.top-bar-->
+            </div>/.container
+        </div>/.top-bar -->
 
-        <nav class="navbar navbar-inverse" role="banner">
+        <nav class="navbar navbar-inverse" role="banner" >
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,21 +73,21 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li class="active"><a href="saveTax">Save Tax</a></li>
-                        <li ><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li class="active" id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Help</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										<li id="header-nav-li"><a href="register" >Sign up</a></li>
 							<%	} else 
 							 	{	%>
-							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -97,25 +97,21 @@
 		
     </header>
 	<% session.setAttribute("transactionType", "UPFRONT"); %>
-	<section class="bg-primary" id="one">
+	<section id="one">
 	<div class="row">
 		<div  id="investment-options" class="col-md-6">
-			<div class="row row-second">
+			
+			
+<!-- 			<div class="row row-third">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<h2><a>Create Your Plan</a></h2>
+					<p>Do you have a goal in mind?</p>
 				</div>
-			</div>
-			<div class="row row-third">
+			</div> -->
+			<div id="upfront-text" class="row row-fourth" style="margin-top:40px;margin-bottom:35px;">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p class="top-number">Do you have a goal in mind?</p>
-				</div>
-			</div>
-			<div id="upfront-text" class="row row-fourth">
-				<div class="col-md-2"></div>
-				<div class="col-md-10">
-					<p class="top-number">How much do you want to invest upfront?</p>
+					<p style="font-size:18px;">How much do you want to invest now?</p>
 				</div>
 			</div>
 			<div id="upfront-value" class="row row-input row-fifth">
@@ -123,20 +119,32 @@
 				<div>
 					<div class="col-md-6">
 						<input id="range" type="range" min="2000" max="1000000" step="500"
-							value="4000" onchange="showUpfrontInvestment(this.value)" />
+							value="4000" onchange="showNewUpfrontInvestment(this.value)" />
 
 					</div>
 					<div class="col-md-2"></div>
-					<div class="underline small-text col-md-2">
-						<p class="top-number"> <span id="upfrontInvestment">4000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
+						<p>Rs. <span id="upfrontInvestment">4000</span></p>
+						<!-- <input type="number" min="2000" max="1000000" step="500" value="4000"></input> -->
 					</div>
 				</div>
 			</div>
-			 <span id="sipPerMonth" class="hidden">0</span>
+			
+			<div class="row row-second" style="margin-top:30px;">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<h3 >** Use Slider or Enter the Amount</h3>
+				</div>
+			</div>
+			<div class="row row-third">
+			
+			</div>
+			
+<%-- 			 <span id="sipPerMonth" class="hidden">0</span>
 			<div id="duration-text" class="row row-eigth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p class="top-number">How long do you expect to invest for?</p>
+					<p>How long do you expect to invest for?</p>
 				</div>
 			</div>
 			<div id="duration-value" class="row row-input row-ninth">
@@ -148,20 +156,20 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2">
-						<p class="top-number"><span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years </p>
+						<p><span id="years">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years </p>
 					</div>
 				</div>
 			</div>
 			<div class="row row-tenth">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<p class="top-number">What's your investment style?</p>
+					<p>What's your investment style?</p>
 				</div>
-			</div>
-			<div class="row row-input row-eleventh">
+			</div> --%>
+<!-- 			<div class="row row-input row-eleventh">
 				<div class="col-md-2"></div>
 				<div class="form-group">
-				<p class="top-number">
+				<p>
 					<input type="radio" id="risk-category-1" name="riskCategory" value="1"> Cautious 
 					<input type="radio" id="risk-category-2" name="riskCategory" value="2"> Tentative 
 					<input type="radio" id="risk-category-3" name="riskCategory" value="3" checked> Confident 
@@ -169,34 +177,54 @@
 					<input type="radio" id="risk-category-5" name="riskCategory" value="5"> Adventurous
 					</p>
 				</div>
-			</div>
+			</div> -->
 			<%-- <span id="plan-name"><%=request.getParameter("planName")%></span> --%>
 
-	<div class="row row-second">
+<!-- 	<div class="row row-second">
 				<div class="col-md-2"></div>
 				<div class="col-md-10">
-					<h2><a>Create Your Plan</a></h2>
+					<p><b>Use the slider
+							and select an investment style to calculate how much your
+							investment could make.</p>
 				</div>
-			</div>
+			</div> -->
 
 		</div>
-		<div  id="invested-fund-list" class="col-md-6 hidden" style="margin-top:50px;padding-left:70px;padding-right:70px;">
+		<div  id="invested-fund-list" class="col-md-6" style="margin-top:10px;padding-left:70px;padding-right:70px;">
 			<div id = "investment-fund-list-data" class ="row col-md-12">
 			<table class="table table-bordered" >
 				<thead class="table-head">
 					<tr>
-						<th>Fund Nameee</th>
-						<th>Percentage</th>
+						<th class="center col-md-10">Fund Name</th>
+						<!-- <th class="center">Percentage</th> -->
+						<th class="center col-md-2">Amount</th>
 					</tr>
 				</thead>
 				<tbody class="table-body" >
 
-					<s:iterator value="#session.productList" var="productListElement">
+					<%-- <s:iterator value="#session.productList" var="productListElement"> --%>
 						<tr>
-						    <td><s:property value="#productListElement.key"/></td>
-						    <td><s:property value="#productListElement.value"/></td>
+						    <td class="center">Reliance</td>
+						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
+						    <td class="center">
+						    <p>Rs. <span id="">100</span></p>
+						    </td>
 						</tr>
-					</s:iterator> 
+						<tr>
+						    <td class="center">Kotak</td>
+						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
+						    <td class="center">
+						    <p>Rs. <span id="">200</span></p>
+						    </td>
+						</tr>
+						<tr>
+						    <td class="center">HDFC</td>
+						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
+						    <td class="center">
+						    <p>Rs. <span id="">150</span></p>
+						    </td>
+						</tr>
+					<%-- </s:iterator>  --%>
 
 				</tbody>
    			</table>
@@ -212,13 +240,118 @@
 				<input type="hidden" id="cusId" value="customerExists"/>
 				<%	}	%>
 			
+			
 			 
-				<button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="showPanCardVerification();" style="width:200px;">SUBMIT</button>
+				<!-- <button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="showPanCardVerification();" style="width:200px;">SUBMIT</button> -->
+			</div>
+			</div>
+			
+		</div>
+	
+	
+			<div  id="predicted-values-list" class="col-md-12" style="margin-top:20px;padding-left:130px;padding-right:70px;">
+			<div id = "predicted-values-list-data" class ="row col-md-12">
+			
+			<table class="table table-bordered" style="width:1200px;">
+			  <!-- <col>
+			  <colgroup span="2"></colgroup>
+			  <colgroup span="2"></colgroup> -->
+			  <thead class="table-head">
+				<tr >
+				    <th rowspan="2"  class="center col-md-3" style="vertical-align: middle;padding: 0px;">Invested Amount</th>
+				    <th colspan="3" rowspan="1"  class="center col-md-9" style="padding: 1px;">Predicted Future Value</th>
+			    </tr>
+			    <tr>
+				    <th colspan="1" rowspan="1"  class="center" style="font-size:17px;padding: 0px;"><p>After 1 year</p></th>
+				    <th colspan="1" rowspan="1"  class="center" style="font-size:17px;padding: 0px;"><p>After 3 year</p></th>
+				    <th colspan="1" rowspan="1"  class="center" style="font-size:17px;padding: 0px;"><p>After 5 year</p></th>
+				  </tr>
+			  </thead>
+			  <tbody>
+			  	<tr>
+			  		<td class="center">
+				    	<p>Rs. <span id="">2000</span></p>
+				    </td>
+				    <td class="center">
+				    	<p>Rs. <span id="predicted-value-for-one-year"><s:property value="#session.predictedValueForOneYear" /></span></p>
+				    </td>
+				    <td class="center">
+				    	<p>Rs. <span id="predicted-value-for-three-year"><s:property value="#session.predictedValueForThreeYear" /></span></p>
+				    </td>
+				    <td class="center">
+				    	<p>Rs. <span id="predicted-value-for-five-year"><s:property value="#session.predictedValueForFiveYear" /></span></p>
+				    </td>
+			  	</tr>
+			  </tbody>
+		  	</table>
+<%-- 			<table class="table table-bordered" style="width:1200px;" >
+				<thead class="table-head">
+					<tr>
+						<th class="center col-md-4">Invested Amount</th>
+						<th class="col-md-8">
+							<table>
+								<tr>
+									<td class="center"><p>Predicted Future Value</p></td>
+								</tr>
+								<tr>
+									<td class="center"><p>After 1 year</p></td>
+									<td class="center"><p>After 3 year</p></td>
+									<td class="center"><p>After 5 year</p></td>
+								</tr>
+							</table>
+						</th>
+						<!-- <th class="center">After 1 year</th>
+						<th class="center">After 3 year</th>
+						<th class="center">After 5 year</th> -->
+					</tr>
+				</thead>
+				<tbody class="table-body" >
+
+						<tr>
+						    <td class="center">
+						    	<p> <span id="">2000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+						    </td>
+						    <td class="center">
+						    	<p> <span id="">2500</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+						    </td>
+						    <td class="center">
+						    	<p> <span id="">3000</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+						    </td>
+						    <td class="center">
+						    	<p> <span id="">3500</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.</p>
+						    </td>
+						</tr>
+
+				</tbody>
+   			</table> --%>
+   			</div>
+			<div class ="row col-md-12">
+			<div id="button-2" class="row">
+			
+				<%  if(session.getAttribute("customerId") == null)
+				 	{   %> 
+				<input type="hidden" id="cusId" value="customerIdNull"/>
+				<%	} else 
+				 	{	%>
+				<input type="hidden" id="cusId" value="customerExists"/>
+				<%	}	%>
+			
+			
+			 
+				<!-- <button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="showPanCardVerification();" style="width:200px;">SUBMIT</button> -->
 			</div>
 			</div>
 			
 		</div>
 		
+		<div class="row">
+			<div class="col-md-5"></div>
+			<div class="col-md-2">
+				<button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="showPanCardVerification();" style="width:200px;">Continue</button>
+			</div>
+			<div class="col-md-5"></div>
+		</div>
+			
 		<div  id="login-page" class="col-md-6 hidden" style="margin-top:250px;padding-left:70px;padding-right:70px;">
 		
                		<%-- <s:textfield label="Email address" key="emailId" size="90" width="1000" id="email-id"/> --%>
@@ -290,7 +423,7 @@
 
 		</div>
 		
-		<div class="diamond-img col-md-6">
+		<div class="diamond-img col-md-6 hidden">
 
 				<img src="images/pattern.jpg" id="pattern-image">
 				<div class="row">
@@ -344,7 +477,7 @@
 		</div>
 	</div>
    </section>
-      <footer id="footer" class="midnight-blue">
+      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">

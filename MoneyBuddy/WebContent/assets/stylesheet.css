@@ -193,9 +193,9 @@
 	color: black;
 }
 
-#header{
+/* #header{
 	margin-top: 50px;
-}
+} */
 .row-second{
 	/* margin-top:-110px; */
 	/* margin-bottom:-100px; */
@@ -313,7 +313,6 @@
 .medium-text{
 	/* margin-top:80px; */
 	font-family: Aparajita;
-	color:white;
 	font-size: 35px;
 }
 .formInvalid::-webkit-input-placeholder {

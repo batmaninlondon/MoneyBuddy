@@ -5,6 +5,7 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.opensymphony.xwork2.ActionSupport;
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
@@ -27,13 +29,15 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	
 	private String upfrontInvestment;
     private String sip;
-    private String years;
+    //private String years;
     private String riskCategory;
     private String planName;
     private String totalInvestment;
     //private String numberOfYears;
 
-    String predictedValue;
+    String predictedValueForOneYear;
+    String predictedValueForThreeYear;
+    String predictedValueForFiveYear;
     HashMap<Integer,Double> predictedValueList = new HashMap<Integer,Double>();
     String regexDecimal = "(\\d+(?:\\.\\d+)?)";
     Pattern patternDecimal = Pattern.compile(regexDecimal);
@@ -76,18 +80,40 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     	try {
     		
     		//System.out.println("numberOfYears "+numberOfYears);
-			totalInvestment = Double.toString(Double.parseDouble(upfrontInvestment) + (Double.parseDouble(sip) * Double.parseDouble(years) * 12));
+			
 			upfrontInvestment = Double.toString(Math.round( Double.parseDouble(upfrontInvestment) * 100.0 ) / 100.0);
 			sip = Double.toString(Math.round( Double.parseDouble(sip) * 100.0 ) / 100.0); 
 			
 			PredictedValueCalculation calculatedValue = new PredictedValueCalculation();
 			
+    	    
+	    	QueryProducts queryProduct = new QueryProducts();
+	    	System.out.println("LoginAction class : execute method : riskCategory : "+getRiskCategory());
+	    	System.out.println("LoginAction class : execute method : planName : "+getPlanName());
+	   	 	HashMap<String,Double> productList = queryProduct.getProductList(getRiskCategory(),getPlanName());
+	   	 	
+	    	//System.out.println("FetchProductListAction Hi There 1 ");
+	   	 
+
+	   	 
 			if (Double.parseDouble(getSip()) == 0 ) {
-				predictedValue = Double.toString(calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), Double.parseDouble(getYears()),getPlanName()));    
-				sessionMap.put("predictedValue", predictedValue);
-				logger.debug("EstimateAction class : execute method : stored predictedValue : "+predictedValue+" in session id : "+sessionMap.getClass().getName());
+				totalInvestment = Double.toString(Double.parseDouble(upfrontInvestment)) ;
+				
+				predictedValueForOneYear = Double.toString(calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 1,getPlanName()));    
+				sessionMap.put("predictedValueForOneYear", predictedValueForOneYear);
+				logger.debug("EstimateAction class : execute method : stored predictedValue : "+predictedValueForOneYear+" in session id : "+sessionMap.getClass().getName());
+			
+				predictedValueForThreeYear = Double.toString(calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 3,getPlanName()));    
+				sessionMap.put("predictedValueForThreeYear", predictedValueForThreeYear);
+				logger.debug("EstimateAction class : execute method : stored predictedValue : "+predictedValueForThreeYear+" in session id : "+sessionMap.getClass().getName());
+			
+				predictedValueForFiveYear = Double.toString(calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 5,getPlanName()));    
+				sessionMap.put("predictedValueForFiveYear", predictedValueForFiveYear);
+				logger.debug("EstimateAction class : execute method : stored predictedValue : "+predictedValueForFiveYear+" in session id : "+sessionMap.getClass().getName());
+			
 			}
 			else {
+				totalInvestment = Double.toString( Double.parseDouble(sip) );
 				predictedValueList = calculatedValue.predictedSipAmountList(Double.parseDouble(getSip()), getRiskCategory(), getPlanName());
 				sessionMap.put("predictedValueList1", Double.toString(predictedValueList.get(1)));
 				sessionMap.put("predictedValueList3", Double.toString(predictedValueList.get(3)));
@@ -98,7 +124,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			}
 			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
 			sessionMap.put("sip", getSip());
-			sessionMap.put("years", getYears());
+			//sessionMap.put("years", getYears());
 			sessionMap.put("riskCategory", getRiskCategory());
 			sessionMap.put("planName", getPlanName());
 			sessionMap.put("totalInvestment", totalInvestment);
@@ -110,21 +136,43 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
 			logger.debug("EstimateAction class : execute method : stored upfrontInvestment : "+getUpfrontInvestment()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored sip : "+getSip()+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("EstimateAction class : execute method : stored years : "+getYears()+" in session id : "+sessionMap.getClass().getName());
+			//logger.debug("EstimateAction class : execute method : stored years : "+getYears()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored riskCategory : "+getRiskCategory()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored planName : "+getPlanName()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored totalInvestment : "+totalInvestment+" in session id : "+sessionMap.getClass().getName());
 
-			logger.debug("EstimateAction class : execute method : end");
 			
-			System.out.println("Estimate Action class : predictedValue : "+predictedValue);
-			System.out.println("EstimateAction class : execute method : years : "+sessionMap.get("years").toString());
+			System.out.println("Estimate Action class : predictedValueForOneYear : "+predictedValueForOneYear);
+			System.out.println("Estimate Action class : predictedValueForThreeYear : "+predictedValueForThreeYear);
+			System.out.println("Estimate Action class : predictedValueForFiveYear : "+predictedValueForFiveYear);
+			//System.out.println("EstimateAction class : execute method : years : "+sessionMap.get("years").toString());
 			System.out.println("EstimateAction class : execute method : upfrontInvestment : "+sessionMap.get("upfrontInvestment").toString());
 			System.out.println("EstimateAction class : execute method : sip : "+sessionMap.get("sip").toString());
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    
     	    System.out.println("EstimateAction class : execute method : end : transactionType : "+sessionMap.get("transactionType").toString());
+
+	   	    Iterator it = productList.entrySet().iterator();
+	   	    String productName;
+	   	    String key;
+	   	    while (it.hasNext()) {
+	   	        Map.Entry pair = (Map.Entry)it.next();
+	   	        Double amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(totalInvestment) ) /100);
+	   	        pair.setValue(amount);
+
+	   	        
+	   	    }
+	   	    it = productList.entrySet().iterator();
+		   	 while (it.hasNext()) {
+		   		Map.Entry pair = (Map.Entry)it.next();
+		   		System.out.println(pair.getKey() + " = " + pair.getValue()); 
+		   	 }
+	   	 	sessionMap.put("productList", productList);
+   	 	
+	   	 	logger.debug("EstimateAction class : execute method : stored productList in session id : "+sessionMap.getClass().getName());
+
+			logger.debug("EstimateAction class : execute method : end");
 			return SUCCESS;
 		} catch (MoneyBuddyException e) {	
 			logger.debug("EstimateAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
@@ -169,16 +217,40 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     }
 
 
-    public String getPredictedValue() {
+/*    public String getPredictedValue() {
         return predictedValue;
         
     }
 
     public void setPredictedValue(String predictedValue) {
         this.predictedValue = predictedValue;
-    }
+    }*/
 
-    public String getSip() {
+    public String getPredictedValueForOneYear() {
+		return predictedValueForOneYear;
+	}
+
+	public void setPredictedValueForOneYear(String predictedValueForOneYear) {
+		this.predictedValueForOneYear = predictedValueForOneYear;
+	}
+
+	public String getPredictedValueForThreeYear() {
+		return predictedValueForThreeYear;
+	}
+
+	public void setPredictedValueForThreeYear(String predictedValueForThreeYear) {
+		this.predictedValueForThreeYear = predictedValueForThreeYear;
+	}
+
+	public String getPredictedValueForFiveYear() {
+		return predictedValueForFiveYear;
+	}
+
+	public void setPredictedValueForFiveYear(String predictedValueForFiveYear) {
+		this.predictedValueForFiveYear = predictedValueForFiveYear;
+	}
+
+	public String getSip() {
         
         return sip;
         
@@ -197,7 +269,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     public void setUpfrontInvestment(String upfrontInvestment) {
         this.upfrontInvestment = upfrontInvestment;
     }
-
+/*
     public String getYears() {
         
         return years;
@@ -205,7 +277,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
     public void setYears(String years) {
         this.years = years;
-    }
+    }*/
 
     public String getPlanName() {
         return planName;

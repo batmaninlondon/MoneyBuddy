@@ -40,7 +40,7 @@
 
 <body class="homepage">
    <header id="header">
-        <div class="top-bar">
+        <!-- <div class="top-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">
@@ -58,8 +58,8 @@
                        </div>
                     </div>
                 </div>
-            </div><!--/.container-->
-        </div><!--/.top-bar-->
+            </div>/.container
+        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -75,21 +75,21 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="saveTax">Save Tax</a></li>
-                        <li ><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="myIndex">Home</a></li>
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="whyInvest">Why Invest</a></li>
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="aboutUs">About Us</a></li>
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="saveTax">Save Tax</a></li>
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="blog">Blog</a></li> 
+                        <li style="margin-top:-10px;margin-bottom:-20px;"><a href="help">Help</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li><a href="register" >Sign up</a></li> 
+										 	 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="login" >Sign in</a></li>
+										<li style="margin-top:-10px;margin-bottom:-20px;"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li><a href="logOff" >Log Out</a></li> 
+							 			 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -104,9 +104,9 @@
   
   <section class="pricing-page">
         <div class="container">
-            <div class="center">  
-                <h2>Investments Options</h2>
-                <p class="lead">What Kind of Investment You are looking for?</p>
+            <div class="center medium-text" style="margin-top:-30px;margin-bottom:-30px;">  
+               <!--  <h2>Investments Options</h2> -->
+                <p>What Kind of Investment You are looking for?</p>
             </div>  
             <div class="pricing-area text-center">
                 <div class="row">
@@ -119,7 +119,7 @@
                             <li>No monthly commitments</li>
                             <li>Effortless Investment</li>
                             <li>No minimum term commitment</li>
-                            <li>Anytime Withdraw</li>
+                            <li>Any time Withdraw</li>
                             <li>24/7 Support</li>
                             <li class="plan-action">
                                 <a class="btn btn-primary" href="upfrontInvestment" >Select this option</a>
@@ -131,18 +131,18 @@
                         <ul>
                             <li class="heading-two">
                                 <h1>Regular Investment (SIP)</h1>
-                                <span>Systemetic Investment Plan (SIP)</span>
+                                <span>Systematic Investment Plan (SIP)</span>
                             </li>
                             <li>No monthly commitments</li>
                             <li>Effortless Investment</li>
                             <li>No minimum term commitment</li>
-                            <li>Anytime Withdraw</li>
+                            <li>Any time Withdraw</li>
                             <li>24/7 Support</li>
                             <li class="plan-action">
                                 <a class="btn btn-primary" href="sipInvestment">Select this option</a>
                             </li>
                         </ul>
-                 
+                 	</div>
                 </div>
             </div><!--/pricing-area-->
         </div><!--/container-->

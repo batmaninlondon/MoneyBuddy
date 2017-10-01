@@ -23,7 +23,7 @@ public class FetchProductListAction  extends ActionSupport implements SessionAwa
     public String execute()  {
     	
     	try {
-    		logger.debug("LoginAction class : execute method : start");
+    		logger.debug("FetchProductListAction class : execute method : start");
     	
 	    	System.out.println("FetchProductListAction called ");
 	    	System.out.println("FetchProductListAction: execute method : transactionType : "+sessionMap.get("transactionType").toString());
@@ -37,8 +37,8 @@ public class FetchProductListAction  extends ActionSupport implements SessionAwa
 	    	//System.out.println("FetchProductListAction Hi There 1 ");
 	   	 
 	   	 	sessionMap.put("productList", productList);
-	   	 	logger.debug("LoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
-	       	logger.debug("LoginAction class : execute method : end");
+	   	 	logger.debug("FetchProductListAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
+	       	logger.debug("FetchProductListAction class : execute method : end");
 	  
 	       	
 		   	 /*for (String key : productList.keySet()) {

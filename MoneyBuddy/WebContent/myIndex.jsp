@@ -24,6 +24,7 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/sly.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>
     <script src="assets/js/main.js"></script>
@@ -33,6 +34,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link href="assets/css/table.css" rel="stylesheet">
+       <link rel="stylesheet" href="assets/Sly/style.css">
+  <script src="assets/js/index.js"></script>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  
+ <!-- Le styles -->
+    <link href="assets/css/flexslider.css" rel="stylesheet"> 
+  
 </head>
 
 <body class="homepage">
@@ -67,26 +77,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="myIndex">Home</a></li>
-                        <li><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="saveTax">Save Tax</a></li>
-                        <li><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li class="active"  id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Help</a></li> 
                       
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			   <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			   <li><a href="logOff" >Log Out</a></li> 
+							 			   <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			   <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -107,7 +117,7 @@
             </ol>
             <div class="carousel-inner">
 
-                <div class="item active" style="background-image: url(images/slider/bg1.jpg)">
+                <div class="item active" style="background-image: url(images/slider/bg4.jpg)">
                     <div class="container">
                         <div class="row slide-margin">
                             <div class="col-sm-6">
@@ -121,7 +131,7 @@
 
                             <div class="col-sm-6 hidden-xs animation animated-item-4">
                                 <div class="slider-img">
-                                    <img src="images/slider/img1.png" class="img-responsive">
+                                    <img src="images/slider/img11.png" class="img-responsive">
                                 </div>
                             </div>
 
@@ -129,7 +139,7 @@
                     </div>
                 </div><!--/.item-->
 
-                <div class="item" style="background-image: url(images/slider/bg2.jpg)">
+                <div class="item" style="background-image: url(images/slider/bg6.jpg)">
                     <div class="container">
                         <div class="row slide-margin">
                             <div class="col-sm-6">
@@ -143,7 +153,7 @@
 
                             <div class="col-sm-6 hidden-xs animation animated-item-4">
                                 <div class="slider-img">
-                                    <img src="images/slider/img2.png" class="img-responsive">
+                                    <img src="images/slider/img233.png" class="img-responsive">
                                 </div>
                             </div>
 
@@ -164,7 +174,7 @@
                             </div>
                             <div class="col-sm-6 hidden-xs animation animated-item-4">
                                 <div class="slider-img">
-                                    <img src="images/slider/img3.png" class="img-responsive">
+                                    <img src="images/slider/img34.png" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -183,6 +193,154 @@
     <section id="feature" >
         <div class="container">
            <div class="center wow fadeInDown">
+           
+           
+        
+           <div class="container">
+      		<div class="row">
+      			<div class="col-sm-3 col-lg-3">
+      				<div id="hosting-table">
+						<div class="table_style4"> 
+							<div class="column">
+								<ul>
+				                  	<li><strong>Select Your Portfolio</strong></li>
+									<li class="header_row">
+										 <div class="pull-left">
+                        </div>
+                        High Risk High Returns Portfolio
+									</li>
+									<li>
+						
+                         <img class="img-responsive" src="images/services/services1.png"><div class="progress-wrap">
+                         Risk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+									</li>
+									
+									
+									<li class="footer_row">
+									
+									<a href="#" class="hosting-button">Select this portfolio</a>
+									
+									
+									</li>
+								</ul>
+							</div><!--/ column-->
+						</div><!--/ Table Style-->
+					</div><!--/ Hosting Table-->	
+      			</div><!-- /span3 -->	
+      			
+      			
+      			<div class="col-sm-3 col-lg-3">
+      				<div id="hosting-table">
+						<div class="table_style4"> 
+							<div class="column">
+								<ul>
+				                  	<li><strong>Select Your Portfolio</strong></li>
+									<li class="header_row">
+										 <div class="pull-left">
+                        </div>
+                        High Risk High Returns Portfolio
+									</li>
+									<li>
+						
+                         <img class="img-responsive" src="images/services/services2.png"><div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+									</li>
+									
+									
+									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
+								</ul>
+							</div><!--/ column-->
+						</div><!--/ Table Style-->
+					</div><!--/ Hosting Table-->	
+      			</div><!-- /span3 -->
+      			
+      			
+      			<div class="col-sm-3 col-lg-3">
+      				<div id="hosting-table">
+						<div class="table_style4"> 
+							<div class="column">
+								<ul>
+				                  	<li><strong>Select Your Portfolio</strong></li>
+									<li class="header_row">
+										 <div class="pull-left">
+                        </div>
+                        High Risk High Returns Portfolio
+									</li>
+									<li>
+						
+                         <img class="img-responsive" src="images/services/services3.png"><div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+									</li>
+									
+									
+									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
+								</ul>
+							</div><!--/ column-->
+						</div><!--/ Table Style-->
+					</div><!--/ Hosting Table-->	
+      			</div><!-- /span3 -->
+      			
+      			
+      			<div class="col-sm-3 col-lg-3">
+      				<div id="hosting-table">
+						<div class="table_style4"> 
+							<div class="column">
+								<ul>
+				                  	<li><strong>Select Your Portfolio</strong></li>
+									<li class="header_row">
+										 <div class="pull-left">
+                        </div>
+                        High Risk High Returns Portfolio
+									</li>
+									<li>
+						
+                         <img class="img-responsive" src="images/services/services4.png"><div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+									</li>
+									
+									
+									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
+								</ul>
+							</div><!--/ column-->
+						</div><!--/ Table Style-->
+					</div><!--/ Hosting Table-->	
+      			</div><!-- /span3 -->
+      			
+      			
+      			
+
+      		</div><!-- /row -->
+      	</div>
+        
+           
+           
                 <h2>Features</h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
             </div>
@@ -354,11 +512,52 @@
                 </div>   
             </div><!--/.row-->
         </div><!--/.container-->
+        
+        
+      
+        
+        
+        
+        
     </section><!--/#recent-works-->
 
     <section id="services" class="service-item">
 	   <div class="container">
             <div class="center wow fadeInDown">
+            
+            
+            <div class="frame">
+	<div class="slidee">
+		<h2>This in here...</h2>
+		<p>...can be anything. <strong>Anything!</strong></p>
+	</div>
+</div>
+<div class="wrap">
+
+			<div class="scrollbar">
+				<div class="handle">
+					<div class="mousearea"></div>
+				</div>
+			</div>
+
+			<div class="frame" id="forcecentered">
+				<ul class="clearfix">
+					<li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li>
+					<li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li>
+					<li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li>
+					<li>28</li><li>29</li>
+				</ul>
+			</div>
+
+			<div class="controls center">
+				<button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
+				<button class="btn next">next <i class="icon-chevron-right"></i></button>
+			</div>
+		</div>
+
+
+
+            
                 <h2>Our Service</h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
             </div>
@@ -371,71 +570,222 @@
                             <img class="img-responsive" src="images/services/services1.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio 11</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
+     
+     
+     	
                 </div>
 
-                <div class="col-sm-6 col-md-4">
+<div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
                         <div class="pull-left">
                             <img class="img-responsive" src="images/services/services2.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio 12</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk 11
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
+     
                 </div>
-
+                
                 <div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
                         <div class="pull-left">
                             <img class="img-responsive" src="images/services/services3.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
-                </div>  
+     
+                </div>
 
-                <div class="col-sm-6 col-md-4">
+
+  <div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
                         <div class="pull-left">
                             <img class="img-responsive" src="images/services/services4.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
+     
                 </div>
-
-                <div class="col-sm-6 col-md-4">
+                
+                
+                  <div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
                         <div class="pull-left">
                             <img class="img-responsive" src="images/services/services5.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
+     
                 </div>
-
-                <div class="col-sm-6 col-md-4">
+                
+                
+                  <div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
                         <div class="pull-left">
                             <img class="img-responsive" src="images/services/services6.png">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">SEO Marketing</h3>
-                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
+                            
                         </div>
+				         <br/>
+				             <br/>
+				         <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        <br/>
+				             <br/>
+                        <div class="progress-wrap">
+                         RIsk
+                            <div class="progress">
+                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
+                                <span class="bar-width">90%</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
-                </div>                                                
+     
+                </div>
+                
+              
+           
+                
+
+                
+
+                                                              
             </div><!--/.row-->
         </div><!--/.container-->
     </section><!--/#services-->
@@ -765,7 +1115,7 @@
         </div>
     </section><!--/#bottom-->
 
-      <footer id="footer" class="midnight-blue">
+      <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">

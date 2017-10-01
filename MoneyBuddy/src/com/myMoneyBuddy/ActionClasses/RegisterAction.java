@@ -117,7 +117,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 		    	.append("  <a href=\""+link+"\">"+link+"</a>")
 		    	.append("  <br/><br/>")
 		    	.append("  Thanks,<br/>")
-		    	.append("  SodhanaLibrary Team")
+		    	.append("  MoneyBuddy Team")
 		    	.append("</div>");
 
     	sendMail.MailSending(getEmailId(),bodyText,subject);

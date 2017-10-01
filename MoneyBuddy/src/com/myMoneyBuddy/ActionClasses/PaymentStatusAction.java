@@ -21,20 +21,15 @@ import org.apache.struts2.interceptor.SessionAware;
 
 public class PaymentStatusAction extends ActionSupport implements SessionAware  {
 
-	
-	
 	Logger logger = Logger.getLogger(PaymentStatusAction.class);
 	private Map<String, Object> sessionMap;
 	
-	
-    
     private InputStream stream;
 
         public String execute() {
     	
 		System.out.println("PaymentStatusAction class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
-		
-	
+
     	logger.debug("PaymentStatusAction class : execute method : start");
     	
     	try {
@@ -68,13 +63,11 @@ public class PaymentStatusAction extends ActionSupport implements SessionAware  
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
-    }
-    
+    }    
 
     public Map<String, Object> getSession() {
 		return sessionMap;
 	}
-
 
 	public InputStream getStream() {
 		return stream;
@@ -83,7 +76,5 @@ public class PaymentStatusAction extends ActionSupport implements SessionAware  
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
-
-
 
 }

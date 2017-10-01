@@ -113,9 +113,9 @@ public class QueryProducts {
 			HashMap<String,Double> hashMap = new HashMap<String,Double>();
 
 			for(ProductDetails productDetail : productDetailList){
-				System.out.println(" productName : "+productDetail.getProductType()+"-"+productDetail.getProductName());
+				System.out.println(" productName : "+productDetail.getProductDescription());
 				System.out.println("Percentage : "+productDetail.getPercentage());
-				hashMap.put(productDetail.getProductType()+"-"+productDetail.getProductName(),Double.parseDouble(productDetail.getPercentage()));
+				hashMap.put(productDetail.getProductDescription(),Double.parseDouble(productDetail.getPercentage()));
 			}
 			session.getTransaction().commit();
 
