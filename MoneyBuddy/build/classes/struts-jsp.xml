@@ -22,6 +22,22 @@
 	    	<result>/blog.jsp</result>
 		</action>
 	</package>
+	<package name="customerDetails" namespace="/" extends="struts-default">
+	    <action name="customerDetails">
+	    	<result>/customerDetails.jsp</result>
+		</action>
+	</package>
+
+	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
+	    <action name="cutomerPortfolio">
+	    	<result>/cutomerPortfolio.jsp</result>
+		</action>
+	</package>
+	<package name="myProfile" namespace="/" extends="struts-default">
+	    <action name="myProfile">
+	    	<result>/myProfile.jsp</result>
+		</action>
+	</package>
 	<package name="bseDashboard" namespace="/" extends="struts-default">
 	    <action name="bseDashboard">
 	    	<result>/bseDashboard.jsp</result>
@@ -129,6 +145,11 @@
 	<package name="thankYouForRegistration" namespace="/" extends="struts-default">
 	    <action name="thankYouForRegistration">
 	    	<result>/thankYouForRegistration.jsp</result>
+		</action>
+	</package>
+	<package name="thankYouForPasswordReset" namespace="/" extends="struts-default">
+	    <action name="thankYouForPasswordReset">
+	    	<result>/thankYouForPasswordReset.jsp</result>
 		</action>
 	</package>
 	<package name="upfrontInvestment" namespace="/" extends="struts-default">
