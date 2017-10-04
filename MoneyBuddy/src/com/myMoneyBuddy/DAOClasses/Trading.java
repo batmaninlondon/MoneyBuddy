@@ -37,6 +37,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
@@ -50,6 +51,7 @@ import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
 import com.mysql.fabric.xmlrpc.base.Array;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.derby.iapi.services.info.ProductGenusNames;
 import org.apache.log4j.Logger;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFactory;
@@ -142,6 +144,7 @@ public class Trading {
 		//List<PriceHistory> priceHistory;
 		Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
+		DbfDataDetails tempDbfDataDetails;
 
 		CustomerPortfolio tempCustomerPortfolio;
 
@@ -152,6 +155,7 @@ public class Trading {
 					.configure()
 					.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
 					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class).addAnnotatedClass(NavHistory.class)
+					.addAnnotatedClass(DbfDataDetails.class)
 					.buildSessionFactory();
 			session = factory.openSession();
 
@@ -163,10 +167,19 @@ public class Trading {
 			String frmtdDateForDB = dateFormat.format(date);
 
 			System.out.println("frmtdDateForDB : "+frmtdDateForDB);
+			
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date dateForDbf = new Date();
+
 
 			dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			date = new Date();
 			String frmtdDate = dateFormat.format(date);
+			
+			
+
+
+			
 
 			for ( Double currentAmount : productDetailsMap.values())  {
 				System.out.println("currentAmount : "+currentAmount);
@@ -265,7 +278,31 @@ public class Trading {
 
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 
+				dateFormat = new SimpleDateFormat("HH:mm:ss");
+				Date CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
+				
+				Date closingTime = dateFormat.parse("14:30:00");
 
+				String frmtdDateForDBF;
+				if (CurrentTime.after(closingTime))
+				{
+					dateForDbf = DateUtils.addDays(dateForDbf, 1);
+					frmtdDateForDBF = dateFormat.format(dateForDbf);
+				}
+				else
+				{
+					frmtdDateForDBF = dateFormat.format(dateForDbf);
+				}
+			    
+				tempDbfDataDetails  = new DbfDataDetails(transactionDetailId, customerId,frmtdDateForDB,frmtdDateForDB,"NO"); 		
+
+				session.beginTransaction();
+				session.save(tempDbfDataDetails);
+
+				logger.debug("Trading class : executeTrade method : inserted data to DbfDataDetails table for customerId : "+customerId);
+
+				session.getTransaction().commit();
+				
 
 				passwordMFOrder = mfOrderEntry.getPassword(properties.getProperty("USER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
 

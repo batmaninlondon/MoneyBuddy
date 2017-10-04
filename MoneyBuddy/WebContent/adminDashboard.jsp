@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
+<body class="homepage bg-warning" onload="setData();">
    <header id="header">
 <!--         <div class="top-bar">
             <div class="container">
@@ -102,119 +102,50 @@
 	<div class="row" style="margin-top:-60px;margin-bottom:50px;">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>Let's link your bank account with your Mutual funds</b></h2>
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Admin Dashboard</b></h2>
 		</div>
 		<div class="col-md-3"></div>
 	</div>	
-	<div class="row" style="margin-top:-20px;">
-		<div class="col-md-1"></div>
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-5"><label for="bank-name" style="font-family:Aparajita;font-size:25px;" class="pull-right">Select your Bank </label></div>
-			<div  id="bank-name" class="col-md-6" >				  
-				<select class="form-control" id="bank-name" name="bankName">
-			        <option value="ICICI">ICICI Bank</option>
-			        <option value="SBI">SBI Bank</option>
-			        <option value="HDFC">HDFC Bank</option>
-			        <option value="KOTAK">KOTAK Bank</option>
-	      		</select>
-			</div>
-		</div>
-		<div class="col-md-3">
 
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-1"></div>
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-5"><label for="account-number" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Account Number </label></div>
-			<div  id="account-number" class="col-md-6" >
-				  
-				  <input class="form-control" id="account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
-			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-1"></div>
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-5"><label for="re-account-number" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Re-enter Account Number </label></div>
-			<div  id="re-account-number" class="col-md-6" >
-				  
-				  <input class="form-control" id="re-account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
-			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-1"></div>
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-5"><label for="ifsc-code" style="font-family:Aparajita;font-size:25px;" class="pull-right" >IFSC Code </label></div>
-			<div  id="ifsc-code" class="col-md-6" >
-				  
-				  <input class="form-control" id="ifsc-code" type="text" placeholder="Enter IFSC Code" style="margin-top:-10px;">
-			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
 		<div  id="invested-fund-list" class="row" style="margin-top:20px;padding-left:70px;padding-right:70px;">
-			<div class="col-md-2"></div>
-			<div id = "investment-fund-list-data" class ="col-md-8">
+			<div class="col-md-1"></div>
+			<div id = "investment-fund-list-data" class ="col-md-10">
 			<table class="table table-bordered" >
 				<thead class="table-head">
 					<tr>
-						<th class="center col-md-9">Fund Name</th>
-						<!-- <th class="center">Percentage</th> -->
-						<th class="center col-md-3">Amount</th>
+						<th class="center col-md-2">Date</th>
+						<th class="center col-md-5">Download Button</th>
+						<th class="center col-md-5">Upload Status Button</th>
 					</tr>
 				</thead>
 				<tbody class="table-body" >
 
-					<%-- <s:iterator value="#session.productList" var="productListElement"> --%>
+					 <s:iterator value="#session.dbfDataDateList" var="dbfDataDateListElement">
 						<tr >
-						    <td class="center" style="padding:0px;">Reliance</td>
+						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfDataDateListElement"/></td>
 						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="">100</span></p>
+						    	<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="downloadDbfFile(this);">Download DBF File</button>
 						    </td>
-						</tr>
-						<tr>
-						    <td class="center" style="padding:0px;">Kotak</td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="" >200</span></p>
+						    	<button type="button" id="submit-button-2" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="changeUploadStatus(this);">Update Uploaded Status</button>
 						    </td>
 						</tr>
-						<tr>
-						    <td class="center" style="padding:0px;">HDFC</td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
+						<%-- <tr >
+						    <td class="center" style="padding:0px;vertical-align: middle;">2 Sep 17</td>
+						    <td class="center"><s:property value="#productListElement.value"/></td>
 						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="">150</span></p>
+						    	<button type="button" id="submit-button-1" value="2" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="downloadDbfFile(this);">Download DBF File</button>
 						    </td>
-						</tr>
-						<tr>
-						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. 450</b></td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
-						    <button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="">Pay Now</button>
+						    	<button type="button" id="submit-button-2" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="">Update Uploaded Status</button>
 						    </td>
-						</tr>
-					<%-- </s:iterator>  --%>
-
+						</tr> --%>
+					</s:iterator>
 				</tbody>
    			</table>
    			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 		</div>
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >

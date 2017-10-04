@@ -29,6 +29,66 @@ alert('Call update function !!');
 update();
 }
 
+function changeUploadStatus(el)  
+{
+	var date = $(el).closest("tr").find('td:eq(0)').text();
+	alert('Call changeUploadStatus function : date : '+date);
+	$.ajax({
+        url : "fileUploadStatusChangeAction",
+        type: 'post',
+        
+        data: { 'date' : date },
+
+        success : function(result){
+        	
+        	if (result == "success") {
+        		
+        		//do nothing 
+        	}
+        	else {
+        		/*alert('Inside resetPassword error !!');*/
+        		window.location='errorPage';
+        	}
+
+        }
+    });
+	
+}
+
+
+function downloadDbfFile(el)
+{
+	/*alert('showPLan function called !! ');*/
+	
+	var date = $(el).closest("tr").find('td:eq(0)').text();
+	
+	
+	/*alert('Date is : '+date);*/
+	
+	/*alert('showPLan function riskCategory :'+riskCategory );*/
+	
+	
+    $.ajax({
+        url : "downloadDbfFileAction",
+        type: 'post',
+        
+        data: { 'date' : date },
+
+        success : function(result){
+        	
+        	if (result == "success") {
+        		
+        		//do nothing 
+        	}
+        	else {
+        		/*alert('Inside resetPassword error !!');*/
+        		window.location='errorPage';
+        	}
+
+        }
+    });
+}
+
 function showNewUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
@@ -517,6 +577,31 @@ function setInitialUpfrontInvestment()
 	/*document.getElementById("years").innerHTML= '5';
 	document.getElementById("sipPerMonth").innerHTML = '0';
 	document.getElementById("upfrontInvestment").innerHTML = '10000';*/
+}
+
+
+function setData() 
+{
+	$.ajax({
+
+        url : "populateAdminDashboardDataAction",
+        type: 'post',
+
+        data: {},
+        
+        success : function(result){
+        	
+        	if (result == "success") {
+        		// do nothing
+        	}
+        	else {
+        		/*alert('Inside resetPassword error !!');*/
+        		window.location='errorPage';
+        	}
+
+        },
+
+    });
 }
 
 function setInitialSipInvestment() 
