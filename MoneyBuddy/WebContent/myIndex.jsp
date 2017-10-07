@@ -135,13 +135,13 @@
                     </div>
                 </div><!--/.item-->
 
-                <div class="item" style="background-image: url(images/slider/bg4.jpg)">
+                <div class="item" style="background-image: url(images/slider/bg56.jpg)">
                     <div class="container">
                         <div class="row slide-margin">
                             <div class="col-sm-6">
                                 <div class="carousel-content">
-                                    <h1 class="animation animated-item-1">The smart way to invest</h1>
-                                    <h2 class="animation animated-item-2">We take the best elements of a high-end investing service, strip out the complexity and cost, and provide it to you online.</h2>
+                                    <h1 class="animation animated-item-1">Your money with our support</h1>
+                                    <h2 class="animation animated-item-2">We will support you to grow your money so that you can focus on what matters most to you</h2>
                                     <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
                                     <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
                                 </div>
@@ -152,7 +152,7 @@
                     </div>
                 </div><!--/.item-->
 
-                <div class="item" style="background-image: url(images/slider/bg6.jpg)">
+                <div class="item" style="background-image: url(images/slider/bg67.jpg)">
                     <div class="container">
                         <div class="row slide-margin">
                             <div class="col-sm-6">
@@ -179,162 +179,85 @@
 
 
 
-    <section id="feature" >
-        <div class="container">
-           <div class="center wow fadeInDown">
-           
-           
-        
-           <div class="container">
-      		<div class="row">
-      			<div class="col-sm-3 col-lg-3">
-      				<div id="hosting-table">
-						<div class="table_style4"> 
-							<div class="column">
-								<ul>
-				                  	<li><strong>Select Your Portfolio</strong></li>
-									<li class="header_row">
-										 <div class="pull-left">
-                        </div>
-                        High Risk High Returns Portfolio
-									</li>
-									<li>
-						
-                         <img class="img-responsive" src="images/services/services1.png"><div class="progress-wrap">
-                         Risk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-									</li>
-									
-									
-									<li class="footer_row">
-									
-									<a href="#" class="hosting-button">Select this portfolio</a>
-									
-									
-									</li>
-								</ul>
-							</div><!--/ column-->
-						</div><!--/ Table Style-->
-					</div><!--/ Hosting Table-->	
-      			</div><!-- /span3 -->	
-      			
-      			
-      			<div class="col-sm-3 col-lg-3">
-      				<div id="hosting-table">
-						<div class="table_style4"> 
-							<div class="column">
-								<ul>
-				                  	<li><strong>Select Your Portfolio</strong></li>
-									<li class="header_row">
-										 <div class="pull-left">
-                        </div>
-                        High Risk High Returns Portfolio
-									</li>
-									<li>
-						
-                         <img class="img-responsive" src="images/services/services2.png"><div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-									</li>
-									
-									
-									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
-								</ul>
-							</div><!--/ column-->
-						</div><!--/ Table Style-->
-					</div><!--/ Hosting Table-->	
-      			</div><!-- /span3 -->
-      			
-      			
-      			<div class="col-sm-3 col-lg-3">
-      				<div id="hosting-table">
-						<div class="table_style4"> 
-							<div class="column">
-								<ul>
-				                  	<li><strong>Select Your Portfolio</strong></li>
-									<li class="header_row">
-										 <div class="pull-left">
-                        </div>
-                        High Risk High Returns Portfolio
-									</li>
-									<li>
-						
-                         <img class="img-responsive" src="images/services/services3.png"><div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-									</li>
-									
-									
-									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
-								</ul>
-							</div><!--/ column-->
-						</div><!--/ Table Style-->
-					</div><!--/ Hosting Table-->	
-      			</div><!-- /span3 -->
-      			
-      			
-      			<div class="col-sm-3 col-lg-3">
-      				<div id="hosting-table">
-						<div class="table_style4"> 
-							<div class="column">
-								<ul>
-				                  	<li><strong>Select Your Portfolio</strong></li>
-									<li class="header_row">
-										 <div class="pull-left">
-                        </div>
-                        High Risk High Returns Portfolio
-									</li>
-									<li>
-						
-                         <img class="img-responsive" src="images/services/services4.png"><div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-									</li>
-									
-									
-									<li class="footer_row"><a href="#" class="hosting-button">Select this portfolio</a></li>
-								</ul>
-							</div><!--/ column-->
-						</div><!--/ Table Style-->
-					</div><!--/ Hosting Table-->	
-      			</div><!-- /span3 -->
-      			
-      			
-      			
+    
 
-      		</div><!-- /row -->
-      	</div>
-        
+     <section id="services" class="service-item">
+	   <div class="container">
+            <div class="center wow fadeInDown">
            
-           
-                <h2>Features</h2>
-                <p class="lead">
-                A simpler way to grow your wealth</p>
+          <h2>Some of our most populor Portfolios</h2>
             </div>
 
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="recent-work-wrap">
+                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
+                        <div class="overlay">
+                            <div class="recent-work-inner">
+                                <h3><a href="#">Daredevils</a> </h3>
+                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
+                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>  
+                
+                
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="recent-work-wrap">
+                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
+                        <div class="overlay">
+                            <div class="recent-work-inner">
+                                <h3><a href="#">Reasonable</a> </h3>
+                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
+                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>   
+                
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="recent-work-wrap">
+                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
+                        <div class="overlay">
+                            <div class="recent-work-inner">
+                                <h3><a href="#">Balanced</a> </h3>
+                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
+                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>   
+                
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="recent-work-wrap">
+                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
+                        <div class="overlay">
+                            <div class="recent-work-inner">
+                                <h3><a href="#">Cautious</a> </h3>
+                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
+                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>    	
+
+              
+
+                 
+            </div><!--/.row-->
+        </div><!--/.container-->
+        
+        
+      
+        
+        
+        
+        
+    </section><!--/#recent-works-->
+
+   <section id="feature" >
+        <div class="container">
             <div class="row">
                 <div class="features">
                     <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
@@ -348,7 +271,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                         <div class="feature-wrap">
                             <i class="fa fa-comments"></i>
-                            <h2>Low-cost</h2>
+                            <h2>No Fee at all</h2>
                             <h3>No subscription fees. No trading fees. No exit fees. No management fee.</h3>
                         </div>
                     </div><!--/.col-md-4-->
@@ -356,7 +279,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                         <div class="feature-wrap">
                             <i class="fa fa-cloud-download"></i>
-                            <h2>Hands-free</h2>
+                            <h2>Anywhere, anytime</h2>
                             <h3>Our experienced investment professionals monitor your portfolio.</h3>
                         </div>
                     </div><!--/.col-md-4-->
@@ -365,460 +288,9 @@
                 </div><!--/.services-->
             </div><!--/.row-->    
         </div><!--/.container-->
-    </section><!--/#feature-->
+    </section><!--/#feature--> 
 
-    <section id="recent-works">
-        <div class="container">
-            <div class="center wow fadeInDown">
-                <h2>Recent Works</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item1.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme</a> </h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item2.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme</a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item2.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item3.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme </a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item3.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item4.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme </a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item4.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-                
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item5.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme</a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item5.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item6.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme </a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item6.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item7.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme </a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item7.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/item8.png" alt="">
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Business theme </a></h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                                <a class="preview" href="images/portfolio/full/item8.png" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-            </div><!--/.row-->
-        </div><!--/.container-->
-        
-        
-      
-        
-        
-        
-        
-    </section><!--/#recent-works-->
-
-    <section id="services" class="service-item">
-	   <div class="container">
-            <div class="center wow fadeInDown">
-           
-
-
-            
-                <h2>Our Service</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-
-            <div class="row">
-
-                <div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services1.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio 11</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-     
-     	
-                </div>
-
-<div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services2.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio 12</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk 11
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-                </div>
-                
-                <div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services3.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-                </div>
-
-
-  <div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services4.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-                </div>
-                
-                
-                  <div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services5.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-                </div>
-                
-                
-                  <div class="col-sm-6 col-md-4">
-                    <div class="media services-wrap wow fadeInDown">
-                        <div class="pull-left">
-                            <img class="img-responsive" src="images/services/services6.png">
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">High Risk High Returns Portfolio</h3>
-                            
-                        </div>
-				         <br/>
-				             <br/>
-				         <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        <br/>
-				             <br/>
-                        <div class="progress-wrap">
-                         RIsk
-                            <div class="progress">
-                              <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="10" style="width: 90%">
-                                <span class="bar-width">90%</span>
-                              </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-     
-                </div>
-                
-              
-           
-                
-
-                
-
-                                                              
-            </div><!--/.row-->
-        </div><!--/.container-->
-    </section><!--/#services-->
-
-    <section id="middle">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 wow fadeInDown">
-                    
-
-                </div><!--/.col-sm-6-->
-
-                <div class="col-sm-12 wow fadeInDown">
-                    <div class="accordion">
-                        <h2>Why People like us?</h2>
-                        <div class="panel-group" id="accordion1">
-                          <div class="panel panel-default">
-                            <div class="panel-heading active">
-                              <h3 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1">
-                                  Lorem ipsum dolor sit amet
-                                  <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                              </h3>
-                            </div>
-
-                            <div id="collapseOne1" class="panel-collapse collapse in">
-                              <div class="panel-body">
-                                  <div class="media accordion-inner">
-                                        <div class="pull-left">
-                                            <img class="img-responsive" src="images/accordion1.png">
-                                        </div>
-                                        <div class="media-body">
-                                             <h4>Adipisicing elit</h4>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                                        </div>
-                                  </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo1">
-                                  Lorem ipsum dolor sit amet
-                                  <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                              </h3>
-                            </div>
-                            <div id="collapseTwo1" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree1">
-                                  Lorem ipsum dolor sit amet
-                                  <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                              </h3>
-                            </div>
-                            <div id="collapseThree1" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseFour1">
-                                  Lorem ipsum dolor sit amet
-                                  <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                              </h3>
-                            </div>
-                            <div id="collapseFour1" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                              </div>
-                            </div>
-                          </div>
-                        </div><!--/#accordion1-->
-                    </div>
-                </div>
-
-            </div><!--/.row-->
-        </div><!--/.container-->
-    </section><!--/#middle-->
+    
 
     <section id="content">
         <div class="container">
@@ -828,11 +300,11 @@
                         <div class="media">
                             <div class="parrent pull-left">
                                 <ul class="nav nav-tabs nav-stacked">
-                                    <li class=""><a href="#tab1" data-toggle="tab" class="analistic-01">Responsive Web Design</a></li>
-                                    <li class="active"><a href="#tab2" data-toggle="tab" class="analistic-02">Premium Plugin Included</a></li>
-                                    <li class=""><a href="#tab3" data-toggle="tab" class="tehnical">Predefine Layout</a></li>
-                                    <li class=""><a href="#tab4" data-toggle="tab" class="tehnical">Our Philosopy</a></li>
-                                    <li class=""><a href="#tab5" data-toggle="tab" class="tehnical">What We Do?</a></li>
+                                    <li class=""><a href="#tab1" data-toggle="tab" class="analistic-01">Experience</a></li>
+                                    <li class="active"><a href="#tab2" data-toggle="tab" class="analistic-02">Expertise</a></li>
+                                    <li class=""><a href="#tab3" data-toggle="tab" class="tehnical">Relavance</a></li>
+                                    <li class=""><a href="#tab4" data-toggle="tab" class="tehnical">Research</a></li>
+                                    <li class=""><a href="#tab5" data-toggle="tab" class="tehnical">Technology</a></li>
                                 </ul>
                             </div>
 
@@ -840,12 +312,8 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade" id="tab1">
                                         <div class="media">
-                                           <div class="pull-left">
-                                                <img class="img-responsive" src="images/tab2.png">
-                                            </div>
                                             <div class="media-body">
-                                                 <h2>Adipisicing elit</h2>
-                                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use.</p>
+                                                  <p>Our team has years of experience in investment in indian market</p>
                                             </div>
                                         </div>
                                     </div>
@@ -853,26 +321,25 @@
                                      <div class="tab-pane fade active in" id="tab2">
                                         <div class="media">
                                            <div class="pull-left">
-                                                <img class="img-responsive" src="images/tab1.png">
                                             </div>
                                             <div class="media-body">
-                                                 <h2>Adipisicing elit</h2>
-                                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use.
+                                                 <p> Our team has expertise in analysing market and designing...
                                                  </p>
                                             </div>
                                         </div>
                                      </div>
 
                                      <div class="tab-pane fade" id="tab3">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
+                                        <p> We leverage technology to assess your specific needs and recommend a bespoke portfolio meeting your needs and requirements
+                            </p>
                                      </div>
                                      
                                      <div class="tab-pane fade" id="tab4">
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
+                                        <p>  We spend thousands of hour researching and selecting...</p>
                                      </div>
 
                                      <div class="tab-pane fade" id="tab5">
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,</p>
+										  <p>  We spend thousands of hour researching and selecting...</p>
                                      </div>
                                 </div> <!--/.tab-content-->  
                             </div> <!--/.media-body--> 
@@ -888,8 +355,8 @@
                                 <img class="img-responsive img-circle" src="images/testimonials1.png">
                             </div>
                             <div class="media-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                                <span><strong>-John Doe/</strong> Director of corlate.com</span>
+                                <p>MoneyBuddy truly helped me make most of my investments, while giving back hours back </p>
+                                <span><strong>-John Doe/</strong> Director, Amazon India</span>
                             </div>
                          </div>
 
@@ -897,9 +364,9 @@
                             <div class="pull-left">
                                 <img class="img-responsive img-circle" src="images/testimonials1.png">
                             </div>
-                            <div class="media-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                                <span><strong>-John Doe/</strong> Director of corlate.com</span>
+                             <div class="media-body">
+                                <p>MoneyBuddy truly helped me make most of my investments, while giving back hours back </p>
+                                <span><strong>-John Doe/</strong> Director, Amazon India</span>
                             </div>
                          </div>
 
