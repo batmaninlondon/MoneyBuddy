@@ -186,6 +186,11 @@
             <div class="center wow fadeInDown">
            
           <h2>Some of our most populor Portfolios</h2>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          
             </div>
 
             <div class="row">
@@ -255,10 +260,21 @@
         
         
     </section><!--/#recent-works-->
-
+<section id="services" class="service-item">
+	   <div class="container">
+            <div class="center wow fadeInDown">
+   </div>     </div>     
+   </section><!--/#recent-works-->          
+            
+            
    <section id="feature" >
         <div class="container">
             <div class="row">
+            <br/>
+          <br/>
+          <br/>
+          <br/> <br/>
+                   
                 <div class="features">
                     <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                         <div class="feature-wrap">
@@ -286,7 +302,15 @@
                 
                     
                 </div><!--/.services-->
+                 <br/>
+ <br/>
+          <br/>
+          <br/>
             </div><!--/.row-->    
+             <br/>
+ <br/>
+          <br/>
+          <br/>
         </div><!--/.container-->
     </section><!--/#feature--> 
 
@@ -295,6 +319,11 @@
     <section id="content">
         <div class="container">
             <div class="row">
+            <br/>
+          <br/>
+          <br/>
+          <br/>
+          
                 <div class="col-xs-12 col-sm-8 wow fadeInDown">
                    <div class="tab-wrap"> 
                         <div class="media">
