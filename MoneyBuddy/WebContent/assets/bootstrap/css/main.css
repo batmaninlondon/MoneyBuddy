@@ -2760,4 +2760,8 @@ input[type=range]:focus::-ms-fill-upper {
   margin:5px;
   padding:8px 25px 8px 25px;
 }
+.input-group-addon{
+	width:100px;
+	background-color:#e6b862;
+}
 

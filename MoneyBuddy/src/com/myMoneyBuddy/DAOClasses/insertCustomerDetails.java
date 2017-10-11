@@ -53,7 +53,7 @@ public class insertCustomerDetails {
 
     	try {
 
-    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus);
+    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,null,null,null,null,"NOT DONE");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();

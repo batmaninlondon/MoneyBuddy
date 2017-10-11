@@ -73,10 +73,10 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
                         <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li class="active" id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
                         <li id="header-nav-li"><a href="help">Help</a></li> 
                        
@@ -97,7 +97,7 @@
 		
     </header>
 	<% session.setAttribute("transactionType", "UPFRONT"); %>
-	<section id="one">
+	<section id="bankDetails">
 	
 	<div class="row" style="margin-top:-60px;margin-bottom:50px;">
 		<div class="col-md-3"></div>
@@ -111,7 +111,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-5"><label for="bank-name" style="font-family:Aparajita;font-size:25px;" class="pull-right">Select your Bank </label></div>
-			<div  id="bank-name" class="col-md-6" >				  
+			<div  class="col-md-6" >				  
 				<select class="form-control" id="bank-name" name="bankName">
 			        <option value="ICICI">ICICI Bank</option>
 			        <option value="SBI">SBI Bank</option>
@@ -131,7 +131,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-5"><label for="account-number" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Account Number </label></div>
-			<div  id="account-number" class="col-md-6" >
+			<div  class="col-md-6" >
 				  
 				  <input class="form-control" id="account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
 			</div>
@@ -145,7 +145,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-5"><label for="re-account-number" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Re-enter Account Number </label></div>
-			<div  id="re-account-number" class="col-md-6" >
+			<div class="col-md-6" >
 				  
 				  <input class="form-control" id="re-account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
 			</div>
@@ -159,7 +159,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-5"><label for="ifsc-code" style="font-family:Aparajita;font-size:25px;" class="pull-right" >IFSC Code </label></div>
-			<div  id="ifsc-code" class="col-md-6" >
+			<div class="col-md-6" >
 				  
 				  <input class="form-control" id="ifsc-code" type="text" placeholder="Enter IFSC Code" style="margin-top:-10px;">
 			</div>
@@ -180,36 +180,20 @@
 				</thead>
 				<tbody class="table-body" >
 
-					<%-- <s:iterator value="#session.productList" var="productListElement"> --%>
-						<tr >
-						    <td class="center" style="padding:0px;">Reliance</td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
-						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="">100</span></p>
-						    </td>
-						</tr>
+						<s:iterator value="#session.productList" var="productListElement">
+							<tr>
+							    <td class="center"><s:property value="#productListElement.key"/></td>
+							    <td class="center"><s:property value="#productListElement.value"/></td>
+							</tr>
+						</s:iterator>
 						<tr>
-						    <td class="center" style="padding:0px;">Kotak</td>
+						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. <s:property value="#session.upfrontInvestment"/></b></td>
 						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="" >200</span></p>
+						    <button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="populateBankDetails();">Pay Now</button>
 						    </td>
 						</tr>
-						<tr>
-						    <td class="center" style="padding:0px;">HDFC</td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
-						    <td class="center" style="padding:0px;">
-						    <p>Rs. <span id="">150</span></p>
-						    </td>
-						</tr>
-						<tr>
-						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. 450</b></td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
-						    <td class="center" style="padding:0px;">
-						    <button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="">Pay Now</button>
-						    </td>
-						</tr>
-					<%-- </s:iterator>  --%>
+
 
 				</tbody>
    			</table>

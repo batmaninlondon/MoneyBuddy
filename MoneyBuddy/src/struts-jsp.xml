@@ -32,7 +32,16 @@
 	    	<result>/customerDetails.jsp</result>
 		</action>
 	</package>
-
+	<package name="bankDetails" namespace="/" extends="struts-default">
+	    <action name="bankDetails">
+	    	<result>/bankDetails.jsp</result>
+		</action>
+	</package>
+	<package name="newUpfrontInvestment" namespace="/" extends="struts-default">
+	    <action name="newUpfrontInvestment">
+	    	<result>/newUpfrontInvestment.jsp</result>
+		</action>
+	</package>
 	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
 	    <action name="cutomerPortfolio">
 	    	<result>/cutomerPortfolio.jsp</result>

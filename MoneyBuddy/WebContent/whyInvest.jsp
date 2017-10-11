@@ -5,36 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Why Invest | Money Buddy</title>
+    <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+ 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
+ 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    
-    
-    
+
 </head>
 
-<body class="homepage">
+<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-        <div class="top-bar">
+<!--         <div class="top-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">
@@ -52,8 +51,8 @@
                        </div>
                     </div>
                 </div>
-            </div><!--/.container-->
-        </div><!--/.top-bar-->
+            </div>/.container
+        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -69,21 +68,21 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
-                        <li class="active"><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="saveTax">Save Tax</a></li>
-                        <li><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active" id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Help</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -92,6 +91,9 @@
         </nav><!--/nav-->
 		
     </header>
+    
+    <section id="whyInvest">
+    
    <section id="feature" class="transparent-bg">
       <div class="container">
            <div class="center wow fadeInDown">
@@ -255,11 +257,8 @@
                 </div>
            </div>
 
-    
-
-
-  
-      <footer id="footer" class="midnight-blue">
+   </section>
+      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -278,5 +277,9 @@
     </footer>
 
 
+
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>

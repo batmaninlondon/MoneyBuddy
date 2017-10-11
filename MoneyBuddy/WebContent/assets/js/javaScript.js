@@ -270,18 +270,64 @@ function forgottenPassword()
 
 function checkKysStatus()
 {
-	/*alert('checkKysStatus function called !! ');*/
+	alert('checkKysStatus function called !! ');
 	
+	var fatherName = document.getElementById("father-name").value;
+	var motherName = document.getElementById("mother-name").value;
+	var dateOfBirth = document.getElementById("date-of-birth").value;
 	var panCard = document.getElementById("pancard-number").value;
-	if ( panCard == '')  {
+	
+	alert ("fatherName : "+fatherName);
+	
+	if ( fatherName == '')  {
+		document.getElementById("father-name").className += " formInvalid";
+		document.getElementById("father-name").placeholder = "Father's Name can not be blank ";
+		document.getElementById("mother-name").className = "form-control";
+		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
+		document.getElementById("date-of-birth").className = "form-control";
+		document.getElementById("date-of-birth").placeholder = "Enter DoB";
+		document.getElementById("pancard-number").className = "form-control";
+		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
+		return;
+	}
+	else if ( motherName == '')  {
+		document.getElementById("mother-name").className += " formInvalid";
+		document.getElementById("mother-name").placeholder = "Mother's Name can not be blank ";
+		document.getElementById("father-name").className = "form-control";
+		document.getElementById("father-name").placeholder = "Enter Father's Name";
+		document.getElementById("date-of-birth").className = "form-control";
+		document.getElementById("date-of-birth").placeholder = "Enter DoB";
+		document.getElementById("pancard-number").className = "form-control";
+		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
+		return;
+	}
+	else if ( dateOfBirth == '')  {
+		document.getElementById("date-of-birth").className += " formInvalid";
+		document.getElementById("date-of-birth").placeholder = "DoB can not be blank ";
+		document.getElementById("father-name").className = "form-control";
+		document.getElementById("father-name").placeholder = "Enter Father's Name";
+		document.getElementById("mother-name").className = "form-control";
+		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
+		document.getElementById("pancard-number").className = "form-control";
+		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
+		return;
+	}
+	else if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
-		document.getElementById("pancard-number").placeholder = "Pan Card Number can not be blank ";
+		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
+		document.getElementById("mother-name").className = "form-control";
+		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
+		document.getElementById("father-name").className = "form-control";
+		document.getElementById("father-name").placeholder = "Enter Father's Name";
+		document.getElementById("date-of-birth").className = "form-control";
+		document.getElementById("date-of-birth").placeholder = "Enter DoB";
 		return;
 	}
 	else if (!validatePanCard(panCard)) {
 		document.getElementById("pancard-number").className += " formInvalid";
 		document.getElementById("pancard-number").placeholder = document.getElementById("pancard-number").value + " - is not a valid Pan Card Number ";
 		document.getElementById("pancard-number").value = null;
+		
 		return;
 	}
 	
@@ -292,7 +338,7 @@ function checkKysStatus()
         url : "kycCheckAction",
         type: 'post',
         
-        data: { 'panCard' : panCard },
+        data: { 'fatherName' : fatherName , 'motherName' : motherName , 'dateOfBirth' : dateOfBirth , 'panCard' : panCard},
 
         success : function(result){
 
@@ -310,7 +356,7 @@ function checkKysStatus()
         	}
         	else if (result == "success") {
         		/*alert('Inside kycCheck success !! ');*/
-        		window.location='clientDetails';
+        		window.location='bankDetails';
         	}	
         	else {
         		/*alert('Inside kycCheck error !! ');*/
@@ -682,23 +728,51 @@ function showCustomerDetails()
 {
 
 	var cusId = document.getElementById('cusId').value;
-	/*alert('showPanCardVerification : cusId : '+cusId);*/
+	alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('investment-options').className += " hidden";	
 		$("#login-page").removeClass('hidden');
 	} 
 	else  {
-		/*alert('Inside showPanCardVerification customerIdExist !! ');*/
-		window.location='customerDetails';
+		
+	    $.ajax({
+
+	        url : "kycStatusCheckAction",
+	        type: 'post',
+	        
+	        data: {},
+	        
+	        success : function(result){
+	        	
+	        	/*alert('result : '+result);*/
+	        	
+	        	if (result == "kycNotDone") {
+	        		
+	        		window.location='customerDetails';
+	        	}
+	        	else if (result == "success") {
+	        		
+	        		window.location='bankDetails';
+	        	}
+	        	else {
+	        		/*alert('Inside newLogin error !!');*/
+	        		window.location='errorPage';
+	        	}
+	        	
+	        },
+
+	    });
+		
+
 	}
 	
 }
 function showPanCardVerification()
 {
-	/*alert('showPanCardVerification function called !! ');*/
+	alert('showPanCardVerification function called !! ');
 	var cusId = document.getElementById('cusId').value;
-	/*alert('showPanCardVerification : cusId : '+cusId);*/
+	alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('invested-fund-list').className += " hidden";	
@@ -780,7 +854,13 @@ function newLogin() {
         	
         	/*alert('result : '+result);*/
         	
-        	if (result == "success") {
+        	if (result == "kycAlreadyDone") {
+        		/*document.getElementById('login-page').className += " hidden";	
+        		$("#pancard-verification").removeClass('hidden');*/
+        		
+        		window.location='bankDetails';
+        	}
+        	else if (result == "success") {
         		/*document.getElementById('login-page').className += " hidden";	
         		$("#pancard-verification").removeClass('hidden');*/
         		
@@ -1365,8 +1445,138 @@ function comparePasswords(password1,password2) {
 	
 /* .trigger('change');*/
     
-    
-    
+function populateBankDetails() 
+{
+	
+	var bankName = document.getElementById("bank-name").value;
+	var accountNumber = document.getElementById("account-number").value;
+	var reAccountNumber = document.getElementById("re-account-number").value;
+	var ifscCode = document.getElementById("ifsc-code").value;
+	
+	if ( accountNumber == '')  {
+		
+		document.getElementById("account-number").className += " formInvalid";
+		document.getElementById("account-number").placeholder = "Account Number can not be blank!";
+		document.getElementById("re-account-number").className = "form-control";
+		document.getElementById("re-account-number").placeholder = "Enter Account Number";
+		document.getElementById("ifsc-code").className = "form-control";
+
+		return;
+	}
+	else if ( reAccountNumber == '')  {
+		
+		document.getElementById("re-account-number").className += " formInvalid";
+		document.getElementById("re-account-number").placeholder = "Account Number can not be blank!";
+		document.getElementById("account-number").className = "form-control";
+		document.getElementById("account-number").placeholder = "Enter Account Number";
+		document.getElementById("ifsc-code").className = "form-control";
+		
+		return;
+	}
+	
+	else if (accountNumber != reAccountNumber) {
+		
+		document.getElementById("re-account-number").className += " formInvalid";
+		document.getElementById("re-account-number").placeholder = "Account Number does not match!";
+		document.getElementById("account-number").className = "form-control";
+		document.getElementById("account-number").placeholder = "Enter Account Number";
+		document.getElementById("ifsc-code").className = "form-control";
+		
+		return;
+	}
+	else if ( ifscCode == '')  {
+		
+		document.getElementById("ifsc-code").className += " formInvalid";
+		document.getElementById("ifsc-code").placeholder = "IFSC Code can not be blank!";
+		document.getElementById("re-account-number").className = "form-control";
+		document.getElementById("account-number").className = "form-control";
+		
+		return;
+	}
+	
+	
+	$.ajax({
+	  	
+        url : "populateBankDetailsAction",
+        type: 'post',
+        
+        data: {'bankName' : bankName , 'accountNumber' : accountNumber ,'reAccountNumber' : reAccountNumber , 'ifscCode' : ifscCode },
+        
+        success : function(result){
+        	if (result == "success") {
+
+        		window.location='thankYou';
+    		
+        	}
+        	else {
+        		/*alert('Inside estimate error !!');*/
+        		window.location='errorPage';
+        	}  
+
+        }
+    });
+	
+	
+	
+	
+	
+}
+
+
+
+
+function testDummyEkyc () {
+	alert("testDummyEkyc called !! ");
+	
+	var callingUrl =window.location.href;
+	
+	var pan = "AAXPW9277C";
+	var mobileno = '';
+	var email = '';
+	var APP_ID = "MoneyBuddy";
+	var USER_ID = "ECH_MBUDDY";
+	var password = "nc$81MC";
+	var INTERMEDIARY_ID = "B";
+	var RETURN_DATA_STRU = '';
+/*	var Sess_id="svsdsdqw21dscsddsvsdvsdvsdvsd";*/
+	var Sess_id = '';
+	var Aadhar='';
+	var ekyctype='';
+	
+	var kycdatatext = pan + "|" + email + "|" + mobileno + "|" + APP_ID + "|" + USER_ID + "|" + password + "|" + INTERMEDIARY_ID ;
+	
+	var url = 'https://eiscuat1.camsonline.com/ekycuat3/eKYCVal_Aadhar.aspx';
+	var form = $('<form action="' + url + '" method="post">' +
+	  '<input type="hidden" name="url" value="' + callingUrl + '" />' +
+	  '<input type="hidden" name="ekyctype" value="' + ekyctype + '" />' +
+	  '<input type="hidden" name="kyc_data" value="' + kycdatatext + '" />' +
+	  '</form>');
+	$('body').append(form);
+	form.attr('target', '_top').submit();
+	
+	
+/*	$.ajax({
+        type: 'POST',
+        url: "https://eiscuat1.camsonline.com/ekycuat3/eKYCVal_Aadhar.aspx",
+        dataType: JSON,
+        data: {
+        	"sess_id": Sess_id,
+        	"Aadhar": Aadhar,
+            "url": callingUrl,
+            "ekyctype": ekyctype,
+            "kyc_data": kycdatatext
+
+            
+        },
+        success: function (data) {
+            alert("success");
+        }
+
+    });*/
+	
+}
+
+
     
 
 		

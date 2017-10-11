@@ -73,10 +73,10 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
                         <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li class="active" id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
                         <li id="header-nav-li"><a href="help">Help</a></li> 
                        
@@ -111,7 +111,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="father-name" style="font-family:Aparajita;font-size:25px;" class="pull-right">Father's Name </label></div>
 
-			<div  id="father-name" class="col-md-6" >
+			<div  class="col-md-6" >
 				  
 				  <input class="form-control" id="father-name" type="text" placeholder="Enter Father's Name" style="margin-top:-10px;">
 			</div>
@@ -127,7 +127,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="mother-name" style="font-family:Aparajita;font-size:25px;"  class="pull-right">Mother's Name </label></div>
-			<div  id="father-name" class="col-md-6" >
+			<div  class="col-md-6" >
 				  
 				  <input class="form-control" id="mother-name" type="text" placeholder="Enter Mother's Name" style="margin-top:-10px;">
 			</div>
@@ -141,7 +141,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="date-of-birth" style="font-family:Aparajita;font-size:25px;"  class="pull-right">DoB </label></div>
-			<div  id="date-of-birth" class="col-md-6" >
+			<div class="col-md-6" >
 				  
 				  <input class="form-control" id="date-of-birth" type="text" placeholder="Enter DoB" style="margin-top:-10px;">
 			</div>
@@ -157,7 +157,7 @@
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
-			<div  id="pancard-number" class="col-md-6" >
+			<div  class="col-md-6" >
 				  
 				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
 			</div>
@@ -170,7 +170,7 @@
 	<div id="button-1" class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="showPanCardVerification();">SUBMIT</button>
+			<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="checkKysStatus();">SUBMIT</button>
 		</div>
 		<div class="col-md-5"></div>
 	</div>

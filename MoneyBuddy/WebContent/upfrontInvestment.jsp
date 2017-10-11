@@ -348,6 +348,7 @@
 			<div class="col-md-5"></div>
 			<div class="col-md-2">
 				<button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised" onClick="showPanCardVerification();" style="width:200px;">Continue</button>
+						    
 			</div>
 			<div class="col-md-5"></div>
 		</div>
@@ -422,6 +423,7 @@
 			
 
 		</div>
+		
 		
 		<div class="diamond-img col-md-6 hidden">
 

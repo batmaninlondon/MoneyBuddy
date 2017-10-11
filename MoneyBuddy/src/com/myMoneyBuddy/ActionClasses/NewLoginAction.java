@@ -86,6 +86,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return SUCCESS;
 	    	}
 	    	
+	    	
 	
 	    	//System.out.println("Hi there 1  ");
 	    	//QueryCustomer queryCustomer = new QueryCustomer();
@@ -130,7 +131,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	sessionMap.put("groupNamesList", groupNamesList);
 	    	logger.debug("NewLoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
-	    
+	    	
+	    	if (customer.getKycStatus().equalsIgnoreCase("DONE"))  {
+	    		System.out.println("KYC is done for this customer ");
+	    		logger.debug("NewLoginAction class : execute method : kyc is done for "+getEmailId());
+	    		String str = "kycAlreadyDone";
+	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		return SUCCESS;
+	    	}
 	    	
 	    	logger.debug("NewLoginAction class : execute method : end");
 	    	

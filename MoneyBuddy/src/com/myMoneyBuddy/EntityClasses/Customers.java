@@ -42,22 +42,43 @@ public class Customers {
 
     @Column(name="VERIFICATION_STATUS")
     private String verificationStatus;
+    
+    @Column(name="FATHER_NAME")
+    private String fatherName;
+    
+    @Column(name="MOTHER_NAME")
+    private String motherName;
+    
+    @Column(name="DATE_OF_BIRTH")
+    private String dateOfBirth;
+    
+    @Column(name="PAN_CARD")
+    private String panCard;
+    
+    @Column(name="KYC_STATUS")
+    private String kycStatus;
 
     public Customers() {
         
     }
 
-    public Customers(String firstName,String lastName, String emailId, String mobileNumber, String password, String verificationStatus) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.mobileNumber = mobileNumber;
-        this.password = password;
-        this.verificationStatus = verificationStatus;
-        
-    }
+    public Customers(String emailId, String firstName, String lastName, String mobileNumber, String password,
+			String verificationStatus, String fatherName, String motherName, String dateOfBirth, String panCard, String kycStatus) {
+		super();
+		this.emailId = emailId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileNumber = mobileNumber;
+		this.password = password;
+		this.verificationStatus = verificationStatus;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.dateOfBirth = dateOfBirth;
+		this.panCard = panCard;
+		this.kycStatus = kycStatus;
+	}
 
-    public String getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
@@ -112,6 +133,46 @@ public class Customers {
 	public void setVerificationStatus(String verificationStatus) {
 		this.verificationStatus = verificationStatus;
 	}
+	
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPanCard() {
+		return panCard;
+	}
+
+	public void setPanCard(String panCard) {
+		this.panCard = panCard;
+	}
+
+	public String getKycStatus() {
+		return kycStatus;
+	}
+
+	public void setKycStatus(String kycStatus) {
+		this.kycStatus = kycStatus;
+	}
 
 	@Override
     public boolean equals(Object obj) {
@@ -143,6 +204,21 @@ public class Customers {
         if ((this.verificationStatus == null) ? (other.verificationStatus != null) : !this.verificationStatus.equals(other.verificationStatus)) {
             return false;
         }
+        if ((this.fatherName == null) ? (other.fatherName != null) : !this.fatherName.equals(other.fatherName)) {
+            return false;
+        }
+        if ((this.motherName == null) ? (other.motherName != null) : !this.motherName.equals(other.motherName)) {
+            return false;
+        }
+        if ((this.dateOfBirth == null) ? (other.dateOfBirth != null) : !this.dateOfBirth.equals(other.dateOfBirth)) {
+            return false;
+        }
+        if ((this.panCard == null) ? (other.panCard != null) : !this.panCard.equals(other.panCard)) {
+            return false;
+        }
+        if ((this.kycStatus == null) ? (other.kycStatus != null) : !this.kycStatus.equals(other.kycStatus)) {
+            return false;
+        }
         return true;
     }
 
@@ -156,6 +232,11 @@ public class Customers {
         hash = 79 * hash + (this.mobileNumber != null ? this.mobileNumber.hashCode() : 0);
         hash = 79 * hash + (this.password != null ? this.password.hashCode() : 0);
         hash = 79 * hash + (this.verificationStatus != null ? this.verificationStatus.hashCode() : 0);
+        hash = 79 * hash + (this.fatherName != null ? this.fatherName.hashCode() : 0);
+        hash = 79 * hash + (this.motherName != null ? this.motherName.hashCode() : 0);
+        hash = 79 * hash + (this.dateOfBirth != null ? this.dateOfBirth.hashCode() : 0);
+        hash = 79 * hash + (this.panCard != null ? this.panCard.hashCode() : 0);
+        hash = 79 * hash + (this.kycStatus != null ? this.kycStatus.hashCode() : 0);
         return hash;
     }
 

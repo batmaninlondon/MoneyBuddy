@@ -64,10 +64,10 @@
 
 				<div class="collapse navbar-collapse navbar-right">
 					<ul class="nav navbar-nav">
-						<li id="header-nav-li"><a href="myIndex">Home</a></li>
+						<li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
 						<li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
 						<li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-						<li class="active" id="header-nav-li"><a href="saveTax">Save
+						<li id="header-nav-li"><a href="saveTax">Save
 								Tax</a></li>
 						<li id="header-nav-li"><a href="blog">Blog</a></li>
 						<li id="header-nav-li"><a href="help">Help</a></li>

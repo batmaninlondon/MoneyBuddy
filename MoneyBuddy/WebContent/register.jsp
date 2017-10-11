@@ -1,4 +1,3 @@
-
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -6,33 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Register | Money Buddy</title>
+    <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+ 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
+ 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
 </head>
 
-<body class="homepage">
+<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-        <div class="top-bar">
+<!--         <div class="top-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">
@@ -50,8 +51,8 @@
                        </div>
                     </div>
                 </div>
-            </div><!--/.container-->
-        </div><!--/.top-bar-->
+            </div>/.container
+        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -67,21 +68,21 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="saveTax">Save Tax</a></li>
-                        <li ><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Help</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li class="active"><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										<li class="active" id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -90,107 +91,101 @@
         </nav><!--/nav-->
 		
     </header>
-
-
+    
+    <section id="register">
 	
-	
-<div class="row">
-		<div class="col-md-12 well-sm large-text login-row-1" >
-		<div class="col-md-2"></div>
-			<p>Register</p>
+	<div class="row" style="margin-top:-60px;margin-bottom:50px;">
+		<div class="col-md-4"></div>
+		<div class="col-md-7">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide basic details</b></h2>
 		</div>
 	</div>
-	<br/><br/><br/>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="first-name">First&nbspName:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="firstName" id="first-name" type="text" placeholder="First Name" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="first-name" style="font-family:Aparajita;font-size:25px;" class="pull-right">First Name </label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="firstName" id="first-name" type="text" placeholder="Enter First Name" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="last-name">Last&nbspName:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="lastName" id="last-name" type="text" placeholder="Last Name" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="last-name" style="font-family:Aparajita;font-size:25px;" class="pull-right">Last Name </label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="lastName" id="last-name" type="text" placeholder="Enter Last Name" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="email-id">Email&nbspID:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="emailId" id="email-id" type="text" placeholder="Email ID" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="email-id" style="font-family:Aparajita;font-size:25px;" class="pull-right">Email Id</label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="emailId" id="email-id" type="text" placeholder="Email Id" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="password">Password:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="password" id="password" type="password" placeholder="Password" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="password" style="font-family:Aparajita;font-size:25px;" class="pull-right">Password</label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="password" id="password" type="text" placeholder="Password" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="confirm-password">Confirm&nbspPassword:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="confirmPassword" id="confirm-password" type="password" placeholder="Confirm Password" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="confirm-password" style="font-family:Aparajita;font-size:25px;" class="pull-right">Confirm Password</label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="confirmPassword" id="confirm-password" type="text" placeholder="Confirm Password" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-6">
-			<div class="form-group">
-	    		<label class="control-label col-md-2 small-text" for="mobile-number">Contact&nbspNumber:</label>
-	    		<div class="col-md-10">
-	    			<input class="form-control" name="mobileNumber" id="mobile-number" type="text" placeholder="Contact Number" style="margin-left:50px;">
-	      			
-	    		</div>
-	  		</div>
-  		</div>
-  		<div class="col-md-5"></div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-2"></div>
+			<div class="col-md-4"><label for="mobile-number" style="font-family:Aparajita;font-size:25px;" class="pull-right">Contact Number</label></div>
+
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name="mobileNumber" id="mobile-number" type="text" placeholder="Contact Number" style="margin-top:-10px;">
+			</div>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
+	
 	<div class="row">
 	
-		<div class="col-md-3"></div>
-		<div class="col-md-9">
+		<div class="col-md-5"></div>
+		<div class="col-md-7">
 			<div id="button-5" class="row">
-				<button type="button" id="btn btn-primary readmore" class="btn btn-primary readmore" onClick="register();" style="margin-top:50px; width:200px;">Register</button>
+				<button type="button" id="submit-button-1" class="btn btn-info btn-lg sharp raised" onClick="register();" style="margin-top:50px; width:200px;">Register</button>
 			</div>
 		</div>
 	</div>
   <br/>
     <br/>  <br/>
-      <footer id="footer" class="midnight-blue">
+   </section>
+      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -209,6 +204,10 @@
     </footer>
 
 
+
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>
 

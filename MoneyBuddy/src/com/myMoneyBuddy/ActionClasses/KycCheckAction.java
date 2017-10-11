@@ -7,10 +7,15 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
+import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
@@ -18,6 +23,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
@@ -30,6 +39,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	Logger logger = Logger.getLogger(KycCheckAction.class);
 	private Map<String, Object> sessionMap;
 	
+	private String fatherName;
+	private String motherName;
+	private String dateOfBirth;
     private String panCard;
     QueryKycStatus kyc = new QueryKycStatus();
 
@@ -58,6 +70,11 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	logger.debug("KycCheckAction class : execute method : start");
     	System.out.println(" KycCheckAction execute method Called !!");
     	
+    	System.out.println(" KycCheckAction execute method : Father Name : "+getFatherName());
+    	System.out.println(" KycCheckAction execute method : Mother Name : "+getMotherName());
+    	System.out.println(" KycCheckAction execute method : Date Of Birth : "+getDateOfBirth());
+    	System.out.println(" KycCheckAction execute method : Pan Card : "+getPanCard());
+    	
     	// Savita Wadhwani - Start - Added this block to validate input panCard through ajax call
     	
     	/*if (!kyc.existsPanCard(getPanCard())) {
@@ -79,6 +96,44 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     		return SUCCESS;
     	}*/
 
+    	
+    	/*DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	Date frmtDateOfBirth = format.parse(getDateOfBirth());*/ 
+    	
+	    SessionFactory factory = new AnnotationConfiguration()
+				.configure()
+				.addAnnotatedClass(Customers.class)
+				.buildSessionFactory();
+	    Session session = factory.openSession(); 
+	    
+    	session.beginTransaction();
+		Query query = session.createQuery("update Customers set fatherName = :fatherName , motherName = :motherName , dateOfBirth = :dateOfBirth ,panCard = :panCard  where customerId = :customerId");
+		
+		query.setParameter("fatherName", getFatherName());
+		query.setParameter("motherName", getMotherName());
+		query.setParameter("dateOfBirth", getDateOfBirth()); 
+		query.setParameter("panCard", getPanCard());
+		query.setParameter("customerId", sessionMap.get("customerId").toString());
+		
+		int updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in Customers table ");
+		session.getTransaction().commit();
+		
+		
+		// UPDATE ONLY IN CASE OF KYC DONE FOR CUSTOMER 
+		
+		session.beginTransaction();
+		query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
+		
+		query.setParameter("kycStatus", "DONE");
+		query.setParameter("customerId", sessionMap.get("customerId").toString());
+		
+		updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in Customers table ");
+		session.getTransaction().commit();
+		
+		
+    	
     	sessionMap.put("panCard", panCard);
     	System.out.println("Kyc is done for panCard : "+panCard);
     	
@@ -132,6 +187,30 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 
