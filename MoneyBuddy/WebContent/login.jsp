@@ -121,7 +121,7 @@
 	<div class="row">
 		<div class="col-md-5"></div>
 		<div class="col-md-7">
-				<button type="button" id="submit-button-5" class="btn btn-info btn-lg sharp raised" onClick="login();" style="margin-top:50px; width:200px;">SIGN IN</button>
+				<button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="login();" style="margin-top:50px; width:200px;">SIGN IN</button>
 		</div>
 
 	</div>

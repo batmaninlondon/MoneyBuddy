@@ -49,7 +49,7 @@ public class sendMail {
 	private int port =587;
     private String host ="smtp.gmail.com";
     private String username ="mf.moneybuddy@gmail.com";
-    private String password="Money@Buddy";
+    private String password="banaras23";
     private boolean debug=true;
 
     
@@ -91,6 +91,11 @@ public class sendMail {
     		message.setContent(bodyText.toString(), "text/html; charset=utf-8");
 
     		// Send message
+    		
+    		System.out.println("sendMail class : username : "+username);
+    		System.out.println("sendMail class : password : "+password);
+    		System.out.println("sendMail class : emailId : "+emailId);
+    		
     		Transport.send(message);
     		
     		logger.debug("sendMail class : MailSending method : end");

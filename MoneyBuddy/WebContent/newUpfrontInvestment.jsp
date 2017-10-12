@@ -34,6 +34,7 @@
 <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
 <script type="text/javascript" src="assets/js/main.js"></script>
 <script type="text/javascript" src="assets/js/wow.min.js"></script>
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>
 <link rel="shortcut icon" href="images/ico/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="images/ico/apple-touch-icon-144-precomposed.png">
@@ -47,7 +48,7 @@
 </head>
 
 <body class="homepage bg-warning"
-	onload="setInitialUpfrontInvestment();">
+	onload="showNewUpfrontInvestment('4000');">
 	<header id="header">
 		<nav class="navbar navbar-inverse" role="banner">
 			<div class="container">
@@ -116,11 +117,10 @@
 					<div class="col-md-6">
 						<input id="range" type="range" min="2000" max="1000000" step="500"
 							value="4000" onchange="showNewUpfrontInvestment(this.value)" />
-
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
-						<p>Rs. <span id="upfrontInvestment">4000</span></p>
+						<p>Rs. <span id="upfrontInvestment"></span></p>
 						<!-- <input type="number" min="2000" max="1000000" step="500" value="4000"></input> -->
 					</div>
 				</div>
@@ -163,11 +163,11 @@
 	            	<div id="button-5" class="row">
 	            		<div class="col-md-5"></div>
 	            		<div class="col-md-4">
-							<button type="button" id="submit-button-5" class="btn btn-info btn-lg sharp raised" onClick="newLogin();" style="margin-top:20px;padding:5px 15px 5px 15px;">Sign in</button>
+							<button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="newLogin();" style="margin-top:20px;padding:5px 15px 5px 15px;">Sign in</button>
 						</div>
 <!-- 						<div class="col-md-2"></div> -->
 						<div class="col-md-3">
-							<button type="button" id="submit-button-5" class="btn btn-info btn-lg sharp raised" onClick="signUp();" style="margin-top:20px;padding:5px 15px 5px 15px;">Sign up</button>
+							<button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="signUp();" style="margin-top:20px;padding:5px 15px 5px 15px;">Sign up</button>
 						</div>
 						<!-- <div class="col-md-1"></div> -->
 					</div>
@@ -334,8 +334,8 @@
 			<div class="row">
 				<div class="col-md-5"></div>
 				<div class="col-md-2">
-					<button type="button" id="submit-button-2" class="btn btn-info btn-lg sharp raised"
-						onClick="showCustomerDetails();" style="width: 200px;">Continue</button>
+					<button type="button" id="submit-button-2" class="btn btn-primary readmore"
+						 onClick="showCustomerDetails();" style="width: 200px;">Continue</button>
 				</div>
 				<div class="col-md-5"></div>
 			</div>
@@ -367,6 +367,6 @@
 
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+
 </body>
 </html>

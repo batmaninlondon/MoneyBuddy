@@ -147,7 +147,7 @@
 			<div class="col-md-5"><label for="re-account-number" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Re-enter Account Number </label></div>
 			<div class="col-md-6" >
 				  
-				  <input class="form-control" id="re-account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
+				  <input class="form-control" id="re-account-number" type="password" placeholder="Enter Account Number" style="margin-top:-10px;">
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -190,7 +190,7 @@
 						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. <s:property value="#session.upfrontInvestment"/></b></td>
 						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
-						    <button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="populateBankDetails();">Pay Now</button>
+						    <button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="populateBankDetails();">Pay Now</button>
 						    </td>
 						</tr>
 

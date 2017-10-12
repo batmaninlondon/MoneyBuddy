@@ -10,7 +10,7 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link rel="stylesheet" href="assets/MoneyBuddyStyles.css" />
+ 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
@@ -70,10 +70,10 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
                         <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li class="active" id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
                         <li id="header-nav-li"><a href="help">Help</a></li> 
                        
@@ -94,11 +94,12 @@
 		
     </header>
     <section id="errorPage">
-	<div class="row">
-		<div class="col-md-12 well-sm large-text blog-row-1" style="margin-top:-20px;">
-			<p>CAUGHT ERROR</p>
+    
+    <div class="row" style="margin-top:50px;">
+		<div class="center">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>CAUGHT ERROR</b></h2>
 		</div>
-	</div>
+	</div>	
 
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >

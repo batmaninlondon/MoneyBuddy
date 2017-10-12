@@ -62,7 +62,7 @@ public class Customers {
         
     }
 
-    public Customers(String emailId, String firstName, String lastName, String mobileNumber, String password,
+    public Customers( String firstName, String lastName, String emailId, String mobileNumber, String password,
 			String verificationStatus, String fatherName, String motherName, String dateOfBirth, String panCard, String kycStatus) {
 		super();
 		this.emailId = emailId;

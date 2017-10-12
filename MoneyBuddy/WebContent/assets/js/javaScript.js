@@ -25,14 +25,14 @@ function getURLParameter(name) {
 function showUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
-alert('Call update function !!');
+//alert('Call update function !!');
 update();
 }
 
 function changeUploadStatus(el)  
 {
 	var date = $(el).closest("tr").find('td:eq(0)').text();
-	alert('Call changeUploadStatus function : date : '+date);
+	//alert('Call changeUploadStatus function : date : '+date);
 	$.ajax({
         url : "fileUploadStatusChangeAction",
         type: 'post',
@@ -93,7 +93,7 @@ function showNewUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
 document.getElementById("investedAmount").innerHTML=newValue;
-alert('Call new update function !!');
+//alert('Call new update function !!');
 newUpdate();
 }
 
@@ -270,14 +270,14 @@ function forgottenPassword()
 
 function checkKysStatus()
 {
-	alert('checkKysStatus function called !! ');
+	//alert('checkKysStatus function called !! ');
 	
 	var fatherName = document.getElementById("father-name").value;
 	var motherName = document.getElementById("mother-name").value;
 	var dateOfBirth = document.getElementById("date-of-birth").value;
 	var panCard = document.getElementById("pancard-number").value;
 	
-	alert ("fatherName : "+fatherName);
+	//alert ("fatherName : "+fatherName);
 	
 	if ( fatherName == '')  {
 		document.getElementById("father-name").className += " formInvalid";
@@ -616,6 +616,7 @@ function checkDetails()
 function setInitialUpfrontInvestment() 
 {
 
+
 	document.getElementById("submit-button-1").disabled = false;
 	document.getElementById("submit-button-2").disabled = false;
 	document.getElementById("submit-button-3").disabled = false;
@@ -728,7 +729,7 @@ function showCustomerDetails()
 {
 
 	var cusId = document.getElementById('cusId').value;
-	alert('showPanCardVerification : cusId : '+cusId);
+	//alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('investment-options').className += " hidden";	
@@ -770,9 +771,9 @@ function showCustomerDetails()
 }
 function showPanCardVerification()
 {
-	alert('showPanCardVerification function called !! ');
+	//alert('showPanCardVerification function called !! ');
 	var cusId = document.getElementById('cusId').value;
-	alert('showPanCardVerification : cusId : '+cusId);
+	//alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('invested-fund-list').className += " hidden";	
@@ -818,6 +819,7 @@ function showPanCardVerification()
 function newLogin() {	
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
+	var login = "loopedLogin";
 
 	if ( emailId == '')  {
 		document.getElementById("email-id").className += " formInvalid";
@@ -848,7 +850,7 @@ function newLogin() {
         url : "newLoginAction",
         type: 'post',
         
-        data: {'emailId' : emailId , 'password' : password},
+        data: {'emailId' : emailId , 'password' : password , 'login' : login },
         
         success : function(result){
         	
@@ -909,6 +911,7 @@ function login() {
 	
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
+	var login = "login";
 	
 	if ( emailId == '')  {
 		
@@ -939,7 +942,7 @@ function login() {
         url : "newLoginAction",
         type: 'post',
         
-        data: {'emailId' : emailId , 'password' : password},
+        data: {'emailId' : emailId , 'password' : password , 'login' : login},
         
         success : function(result){
         	
@@ -1331,7 +1334,7 @@ function update(){
 
 function newUpdate(){
 
-	alert('new update called !! ');
+	//alert('new update called !! ');
 	var investment = document.getElementById("upfrontInvestment").innerHTML;
 	var sip = "0";
 	var riskCategory = "3";
@@ -1526,7 +1529,7 @@ function populateBankDetails()
 
 
 function testDummyEkyc () {
-	alert("testDummyEkyc called !! ");
+	//alert("testDummyEkyc called !! ");
 	
 	var callingUrl =window.location.href;
 	

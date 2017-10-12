@@ -187,9 +187,9 @@ $( function() {
     
 </head>
 
-<body class="homepage">
+<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-        <div class="top-bar">
+<!--         <div class="top-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xs-4">
@@ -207,8 +207,8 @@ $( function() {
                        </div>
                     </div>
                 </div>
-            </div><!--/.container-->
-        </div><!--/.top-bar-->
+            </div>/.container
+        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -224,21 +224,21 @@ $( function() {
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="whyInvest">Why Invest</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li ><a href="saveTax">Save Tax</a></li>
-                        <li ><a href="blog">Blog</a></li> 
-                        <li><a href="help">Help</a></li> 
+                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Help</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li><a href="login" >Sign in</a></li>
-										<li><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li class="active"><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -247,6 +247,7 @@ $( function() {
         </nav><!--/nav-->
 		
     </header>
+<%--     <section id="bseDashboard"> --%>
 
 	<ul class="nav nav-tabs">
 	    <li class="active"><a data-toggle="tab" href="#dashboard">Portfolio</a></li>
@@ -351,7 +352,8 @@ $( function() {
 		</div>
 	</div> -->
   <!-- </div> -->
-      <footer id="footer" class="midnight-blue">
+<%--    </section> --%>
+      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">

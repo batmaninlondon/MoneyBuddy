@@ -30,6 +30,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	
     private String emailId;
     private String password;
+    private String login;
 
     QueryCustomer queryCustomer = new QueryCustomer();
 
@@ -132,12 +133,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("groupNamesList", groupNamesList);
 	    	logger.debug("NewLoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
 	    	
-	    	if (customer.getKycStatus().equalsIgnoreCase("DONE"))  {
-	    		System.out.println("KYC is done for this customer ");
-	    		logger.debug("NewLoginAction class : execute method : kyc is done for "+getEmailId());
-	    		String str = "kycAlreadyDone";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
-	    		return SUCCESS;
+	    	if ("loopedLogin".equals(getLogin())) {
+		    	if (customer.getKycStatus().equalsIgnoreCase("DONE"))  {
+		    		System.out.println("KYC is done for this customer ");
+		    		logger.debug("NewLoginAction class : execute method : kyc is done for "+getEmailId());
+		    		String str = "kycAlreadyDone";
+		    	    stream = new ByteArrayInputStream(str.getBytes());
+		    		return SUCCESS;
+		    	}
 	    	}
 	    	
 	    	logger.debug("NewLoginAction class : execute method : end");
@@ -190,6 +193,15 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+   
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public List<String> getGroupNamesList() {
 		return groupNamesList;
 	}

@@ -2615,7 +2615,7 @@ input[type="range"]::-moz-range-progress {
   height: 6px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #ffa705;
+  background: #fe6d71;
   border-radius: 3px;
   border: 0.2px solid #010101;
   /* background-color: #3071a9;  */
@@ -2626,7 +2626,7 @@ input[type=range]::-moz-range-track {
   height: 6px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #ffd27f;
+  background: #ffddde;
   border-radius: 3px;
   border: 0.2px solid #010101;
 }
@@ -2645,7 +2645,7 @@ input[type=range]::-ms-track {
 input[type=range]::-ms-fill-lower {
   width: 100%;
   height: 6px;
-  background: #ffa705;
+  background: #fe6d71;
   border: 0.2px solid #010101;
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
@@ -2653,12 +2653,12 @@ input[type=range]::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-lower {
 	width: 100%;
   height: 6px;
-  background: #ffa705;
+  background: #fe6d71;
 }
 input[type=range]::-ms-fill-upper {
 	width: 100%;
   height: 6px;
-  background: #ffd27f;
+  background: #ffddde;
   border: 0.2px solid #010101;
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
@@ -2666,7 +2666,7 @@ input[type=range]::-ms-fill-upper {
 input[type=range]:focus::-ms-fill-upper {
 	width: 100%;
   height: 6px;
-  background: #ffd27f;
+  background: #ffddde;
 }
 
 
@@ -2705,7 +2705,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .table-head{
-	background-color: #efd19a;
+	background-color: #fe6d71;
 	font-color:white;
 
 }
@@ -2762,6 +2762,6 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .input-group-addon{
 	width:100px;
-	background-color:#e6b862;
+	background-color:#d9595c;
 }
 

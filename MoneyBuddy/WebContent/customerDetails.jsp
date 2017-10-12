@@ -170,7 +170,7 @@
 	<div id="button-1" class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="checkKysStatus();">SUBMIT</button>
+			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="checkKysStatus();">SUBMIT</button>
 		</div>
 		<div class="col-md-5"></div>
 	</div>

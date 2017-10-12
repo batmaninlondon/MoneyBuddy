@@ -121,7 +121,7 @@
 		<div class="col-md-5"></div>
 		<div class="col-md-7">
 			<div id="button-5" class="row">
-				<button type="button" id="submit-button-forgotten-password" class="btn btn-info btn-lg sharp raised" onClick="forgottenPassword();" style="margin-top:50px; width:200px;">SUBMIT</button>
+				<button type="button" id="submit-button-forgotten-password" class="btn btn-primary readmore" onClick="forgottenPassword();" style="margin-top:50px; width:200px;">SUBMIT</button>
 			</div>
 		</div>
 	</div>

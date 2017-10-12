@@ -5,6 +5,7 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -13,6 +14,7 @@ import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
+import com.myMoneyBuddy.mailerClasses.sendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.BufferedInputStream;
@@ -84,6 +86,28 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 
 				logger.debug("PopulateBankDetailsAction class : execute method : stored BankDetails in session id : "+sessionMap.getClass().getName());
 				session.getTransaction().commit();
+				
+				QueryCustomer customer = new QueryCustomer();
+				String emailId = sessionMap.get("emailId").toString();
+				
+				sendMail sendmail = new sendMail();
+				StringBuilder bodyText = new StringBuilder();
+				String MAIL_SITE_LINK = "www.quantwealth.in/login";
+				
+				String subject = "Payment recieved for your recent transaction";
+	        	bodyText.append("<div>")
+	        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
+	        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
+	        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
+	        	.append("  <h3>Thanks,</h3><br/><br/>")
+	        	.append("  <h3>MoneyBuddy Team</h3>")
+	        	.append("</div>");
+	        	sendmail.MailSending(emailId, bodyText,subject);
+	        	
+ 
+		    	
+		    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+emailId+" to reset password for session id : "+sessionMap.getClass().getName());
+		    	
 				
 			logger.debug("PopulateBankDetailsAction class : execute method : end");
 			

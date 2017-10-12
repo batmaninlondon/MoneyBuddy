@@ -143,7 +143,7 @@
 
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" name="password" id="password" type="text" placeholder="Password" style="margin-top:-10px;">
+				  <input class="form-control" name="password" id="password" type="password" placeholder="Password" style="margin-top:-10px;">
 			</div>
 		</div>
 		<div class="col-md-4"></div>
@@ -155,7 +155,7 @@
 
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" name="confirmPassword" id="confirm-password" type="text" placeholder="Confirm Password" style="margin-top:-10px;">
+				  <input class="form-control" name="confirmPassword" id="confirm-password" type="password" placeholder="Confirm Password" style="margin-top:-10px;">
 			</div>
 		</div>
 		<div class="col-md-4"></div>
@@ -178,7 +178,7 @@
 		<div class="col-md-5"></div>
 		<div class="col-md-7">
 			<div id="button-5" class="row">
-				<button type="button" id="submit-button-1" class="btn btn-info btn-lg sharp raised" onClick="register();" style="margin-top:50px; width:200px;">Register</button>
+				<button type="button" id="submit-button-1" class="btn btn-primary readmore" onClick="register();" style="margin-top:50px; width:200px;">Register</button>
 			</div>
 		</div>
 	</div>
