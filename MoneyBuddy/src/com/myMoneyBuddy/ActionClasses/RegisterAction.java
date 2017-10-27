@@ -104,7 +104,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	/*Date date = new Date();
     	String frmtdDate = dateFormat.format(date);*/
 
-    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword, "NO");
+    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword,null,null,null,null,null, "NO");
     	sendMail sendMail = new sendMail();
 
     	String link = MAIL_ForgotPassword_SITE_LINK+"?hashedPassword="+hashedPassword;

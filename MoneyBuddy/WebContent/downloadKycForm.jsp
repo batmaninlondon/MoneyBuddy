@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
+	import="com.myMoneyBuddy.GAT.PredictedValueCalculation,java.util.*,java.text.SimpleDateFormat,org.apache.commons.lang.time.DateUtils"%>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -73,7 +73,7 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
                         <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
@@ -87,7 +87,7 @@
 							<%	} else 
 							 	{	%>
 							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
+							 			 <li class="active" id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -97,169 +97,52 @@
 		
     </header>
 	<% session.setAttribute("transactionType", "UPFRONT"); %>
-	<section  id="one">
-
-	<div class="row" style="margin-top:-60px;margin-bottom:20px;">
+	<section id="one">
+	
+	<div class="row" style="margin-top:-40px;">
 		<div class="col-md-3"></div>
-		<div class="col-md-6">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide basic details</b></h2>
+		<div class="col-md-6 center">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Welcome Back - <s:property value="#session.customerName" /></b></h2>
 		</div>
 		<div class="col-md-3"></div>
+	</div>
+	<div class="row" >
+		<!-- <div class="col-md-3"></div> -->
+		<div class="col-md-12 center" style="margin-top:-50px;">
+			<h2 style="font-family:Aparajita;font-size:30px;"><b>Please download the Kyc form.</b></h2>
+		</div>
+		<!-- <div class="col-md-3"></div> -->
 	</div>	
-	<div class="row">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="first-name" class="small-text pull-right">First Name </label></div>
 
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="first-name" type="text" placeholder="Enter First Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
+
+		<div  class="row" style="padding-left:70px;padding-right:70px;">
+			<div class="col-md-5"></div>
+			<div class ="col-md-5">
+				<button type="button" class="btn btn-primary readmore submit-button-1" onClick="window.open('${pageContext.request.contextPath}/assets/KycForms/1/KYC_Application_Form.pdf')">Download KYC Form</button>
+				<!-- <a href="D:\DelMe\1\KYC_Application_Form.pdf">Download!</a> -->
+
+				<%-- <a href="download?filename=<%= fileName %>" >download</a> --%>
+				
+				<%-- <form method="post" action="${pageContext.request.contextPath}/assets/KycForms/1/KYC_Application_Form.pdf">
+   					<button type="submit">Download!</button>
+				</form> --%>
+
+
+   			</div>
+			<div class="col-md-2"></div>
 		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="last-name" class="small-text pull-right">Last Name </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="last-name" type="text" placeholder="Enter Last Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gender" class="small-text pull-right">Gender</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gender" style="margin-top:-10px;">
-			        <option value="M" selected>Male</option>
-			        <option value="F">Female</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div class="row" style="margin-top:20px;">
 		
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
+	<div class="row" >
+		<!-- <div class="col-md-3"></div> -->
+		<div class="col-md-12 center" style="margin-top:50px;">
+			<h2 style="font-family:Aparajita;font-size:25px;"><b>
 
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="occupation" class="small-text pull-right">Occupation</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="occupation" style="margin-top:-10px;">
-			        <option value="PriSecJob" selected>Private Sector job</option>
-			        <option value="PubSecJob">Public Sector job</option>
-			        <option value="GovSer">Government Service</option>
-			        <option value="Business">Business</option>
-			        <option value="Professional">Professional</option>
-			        <option value="Agriculturist">Agriculturist</option>
-			        <option value="Retired">Retired</option>
-			        <option value="Student">Student</option>
-			        <option value="ForexDeal">Forex Dealer</option>
-			        <option value="HouseWife">Housewife</option>
-			        <option value="Others">Others</option>
+      
+     		We have sent you a mail</b></h2>
+		</div>
+		<!-- <div class="col-md-3"></div> -->
+	</div>	
 	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gross-annual-income" class="small-text pull-right">Gross Annual Income</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
-			        <option value="LesThaOneLak">less than 1 lakh</option>
-			        <option value="OneToFivLak">1 to 5 lakhs</option>
-			        <option value="FivToTenLak">5 to 10 lakhs</option>
-			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
-			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="politically-exposed" class="small-text pull-right">Politically Exposed Person</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="Yes" selected>No</option>
-			        <option value="PoliticExposed">Politically Exposed Person</option>
-			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div id="button-1" class="row" style="margin-top:25px;">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="checkKysStatus();">SUBMIT</button>
-		</div>
-		<div class="col-md-5"></div>
-	</div>
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">

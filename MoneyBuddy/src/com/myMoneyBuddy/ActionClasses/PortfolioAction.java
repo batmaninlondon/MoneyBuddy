@@ -54,6 +54,31 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		portfolioDataModel = queryProducts.getPortfolioData(sessionMap.get("customerId").toString());
 
+		sessionMap.put("portfolioDataModel", portfolioDataModel);
+		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
+
+		Double TotalInvestedAmount = 0.0;
+		Double TotalCurrentAmount = 0.0;
+		for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
+			
+			
+			TotalInvestedAmount = TotalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
+			TotalCurrentAmount = TotalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
+		}
+		
+		Double TotalrateOfGrowth = ((TotalCurrentAmount - TotalInvestedAmount)/TotalInvestedAmount)*100;
+	
+		
+		sessionMap.put("TotalInvestedAmount", String.format("%.2f", TotalInvestedAmount));
+		logger.debug("PortfolioAction class : execute method : stored TotalInvestedAmount in session id : "+sessionMap.getClass().getName());
+
+		sessionMap.put("TotalCurrentAmount", String.format("%.2f", TotalCurrentAmount));
+		logger.debug("PortfolioAction class : execute method : stored TotalCurrentAmount in session id : "+sessionMap.getClass().getName());
+		
+		sessionMap.put("TotalrateOfGrowth", String.format("%.2f", TotalrateOfGrowth));
+		logger.debug("PortfolioAction class : execute method : stored TotalrateOfGrowth in session id : "+sessionMap.getClass().getName());
+		
+		
 		System.out.println("portfolio action class called - end ");
 		
 		logger.debug("PortfolioAction class : execute method : end");

@@ -105,8 +105,8 @@ google.charts.setOnLoadCallback(drawTable);
 								  }
 
 								  // Called
-								  function fundDetailHandler() {
-								    //alert("Select event!");
+<%-- 								  function fundDetailHandler() {
+								    alert("Select event!");
 								    
 								    var selectedItem = table.getSelection()[0];
 								    
@@ -162,7 +162,7 @@ google.charts.setOnLoadCallback(drawTable);
 								    
 								    
 								   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
-								  }
+								  } --%>
 
 
 								});
@@ -173,6 +173,68 @@ google.charts.setOnLoadCallback(drawTable);
 					}
 
 
+		  function fundDetailHandler(el) {
+			    alert("Select event!");
+			    
+			    //var selectedItem = table.getSelection()[0];
+			    var selectedItem = $(el).closest("tr").find('td:eq(0)').text();
+			    //var selectedItem = $(el).closest("tr").find('td:eq(1)').text();
+			    
+			    alert("The user selected .. " + selectedItem);
+			    if (selectedItem) {
+			    	alert("HI");
+			      var value = data.getValue(selectedItem.row, 0);
+
+			      alert("The user selected " + value);
+			    }
+			    
+			    var selectedItem =null;
+			    
+			    $.getJSON('investmentDetailsAction', {productName:value}, function(jsonResponse) 
+						{
+							 data1 = new google.visualization.DataTable();
+							 data1.addColumn('string', 'Date Of Purchase');
+							 data1.addColumn('string', 'Units Purchased');
+							 data1.addColumn('string', 'NAV Purchased');
+							 data1.addColumn('string', 'Purchase Type');
+							 
+							 var cusId ="<%=(String)session.getAttribute("customerId")%>";
+							 
+							 $.each(jsonResponse.investmentDetailsDataModel , function(i,investmentDetailsData) 
+									{
+
+										 data1.addRow([investmentDetailsData.transactionDate,
+											 investmentDetailsData.units,
+											 investmentDetailsData.navPurchased,
+											 investmentDetailsData.transactionType,
+										               
+										                ]);
+									});  
+
+
+				      	
+				    	var chart = new google.visualization.Table(document.getElementById('chart_div2'));
+
+
+				      	chart.draw(data1, {showRowNumber: true, width: '100%', height: '100%'}); 
+				      	
+
+
+
+						});
+			    
+			    
+			    $( "#dialog" ).dialog({autoOpen: true,
+			    	title:value,
+			    	width: 800,
+			    	height:300,
+			    	scrollable: true});
+			    
+			    
+			    
+			    
+			   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
+			  }
 </script>
     
   <script>
@@ -187,7 +249,7 @@ $( function() {
     
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
+<body class="homepage bg-warning" onload="setDashboardData();">
    <header id="header">
 <!--         <div class="top-bar">
             <div class="container">
@@ -264,10 +326,56 @@ $( function() {
 		<div class="row">
 			<div class="col-md-12" style="margin:20px;">
 				<div class="tab-pane fade-in active">
-					<div id="ajaxResponse"></div>
+				
+									 
+				<table class="table table-bordered" >
+					<thead class="table-head">
+						<tr>
+							<th class="center col-md-2">Fund Name</th>
+							<th class="center col-md-2">InvestmentStartDate</th>
+							<th class="center col-md-2">Unit</th>
+							<th class="center col-md-2">Invested Amount</th>
+							<th class="center col-md-2">Current Amount</th>
+							<th class="center col-md-2">Rate Of Growth</th>
+						</tr>
+					</thead>
+					<tbody class="table-body" >
+	
+							<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
+								    </td>
+								    <td class="center"><s:property value="#portfolioDataModelElement.transactionStartDate"/></td>
+								    <td class="center"><s:property value="#portfolioDataModelElement.units"/></td>
+								    <td class="center"><s:property value="#portfolioDataModelElement.investedAmount"/></td>
+								    <td class="center"><s:property value="#portfolioDataModelElement.currentAmount"/></td>
+								    <td class="center"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
+								</tr>
+							</s:iterator>
+							<tr  >
+								<td class="center" style="padding:0px;vertical-align: middle;" >
+									<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">Total</button>
+								</td>
+								<td class="center" style="padding:0px;vertical-align: middle;"></td>
+							    <td class="center" style="padding:0px;vertical-align: middle;"></td>
+							    <td class="center" style="padding:0px;vertical-align: middle;"><b><s:property value="#session.TotalInvestedAmount"/></b></td>
+							    <td class="center" style="padding:0px;vertical-align: middle;"><b><s:property value="#session.TotalCurrentAmount"/></b></td>
+							    <td class="center" style="padding:0px;vertical-align: middle;"><b><s:property value="#session.TotalrateOfGrowth"/></b></td>
+
+							</tr>
+	
+	
+					</tbody>
+	   			</table>
+				
+				
+				
+				
+<!-- 					<div id="ajaxResponse"></div>
 					<div class="col-md-12">
 						<div id="chart_div1" class="chart"></div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -102,34 +102,18 @@
 	<div class="row" style="margin-top:-60px;margin-bottom:20px;">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide basic details</b></h2>
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide additional details</b></h2>
 		</div>
 		<div class="col-md-3"></div>
-	</div>	
-	<div class="row">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="first-name" class="small-text pull-right">First Name </label></div>
-
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="first-name" type="text" placeholder="Enter First Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
 	</div>
 	
-	<div class="row" style="margin-top:20px;">
+	<div class="row" >
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="last-name" class="small-text pull-right">Last Name </label></div>
+			<div class="col-md-4"><label for="father-name"  class="small-text pull-right">Father's Name</label></div>
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" id="last-name" type="text" placeholder="Enter Last Name" style="margin-top:-10px;">
+				  <input class="form-control" id="father-name" type="text" placeholder="Enter Father's Name" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -140,14 +124,28 @@
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gender" class="small-text pull-right">Gender</label>
+			<div class="col-md-4"><label for="date-of-birth"  class="small-text pull-right">Date of Birth</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" name = "date" id="date-of-birth" type="text" placeholder="Enter Date of Birth" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+		
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="marital-status" class="small-text pull-right">Marital Status</label>
 	      	</div>
 
 			<div  class="col-md-6" >
 				  
-			  	<select class="form-control" id="gender" style="margin-top:-10px;">
-			        <option value="M" selected>Male</option>
-			        <option value="F">Female</option>
+			  	<select class="form-control" id="marital-status" style="margin-top:-10px;">
+			        <option value="Single">Single</option>
+			        <option value="Married" selected>Married</option>
 	
 		      	</select>
 			</div>
@@ -155,6 +153,99 @@
 		</div>
 		<div class="col-md-4">
 
+		</div>
+
+	</div>
+
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="nationality" class="small-text pull-right">Nationality</label>
+	      	</div>
+
+			<div  class="col-md-6" >
+				  
+			  	<select class="form-control" id="nationality" style="margin-top:-10px;">
+			        <option value="Indian" selected>Indian</option>
+			        <option value="Other">Other</option>
+	
+		      	</select>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+
+		</div>
+
+	</div>
+
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="status" class="small-text pull-right">Status</label>
+	      	</div>
+
+			<div  class="col-md-6" >
+				  
+			  	<select class="form-control" id="status" style="margin-top:-10px;">
+			        <option value="LivInInd" selected>Living in India</option>
+			        <option value="NonResInd">Non Resident Indian (NRI)</option>
+					<option value="ForNat">Foreign National</option>
+		      	</select>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+
+		</div>
+
+	</div>
+
+	<div class="row" >
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h2 class="small-text"><b>Address, as per the address proof**</b></h2>
+		</div>
+	</div>
+	
+	<div class="row" style="margin-top:10px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="address-line-one"  class="small-text pull-right">Line 1</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" id="address-line-one" type="text" placeholder="Enter Address Line 1" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="address-line-two"  class="small-text pull-right">Line 2</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" id="address-line-two" type="text" placeholder="Enter Address Line 2" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-city" class="small-text pull-right">City</label></div>
+			<div class="col-md-6" >
+				  
+				  <input class="form-control" id="residential-city" type="text" placeholder="Enter City" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
 		</div>
 
 	</div>
@@ -163,44 +254,66 @@
 		
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
+			<div class="col-md-4"><label for="residential-state" class="small-text pull-right">State</label></div>
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="occupation" class="small-text pull-right">Occupation</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="occupation" style="margin-top:-10px;">
-			        <option value="PriSecJob" selected>Private Sector job</option>
-			        <option value="PubSecJob">Public Sector job</option>
-			        <option value="GovSer">Government Service</option>
-			        <option value="Business">Business</option>
-			        <option value="Professional">Professional</option>
-			        <option value="Agriculturist">Agriculturist</option>
-			        <option value="Retired">Retired</option>
-			        <option value="Student">Student</option>
-			        <option value="ForexDeal">Forex Dealer</option>
-			        <option value="HouseWife">Housewife</option>
+			  	<select class="form-control" id="residential-state" style="margin-top:-10px;">
+			        <option value="AndamanAndNicobar">Andaman & Nicobar</option>
+			        <option value="ArunachalPradesh">Arunachal Pradesh</option>
+			        <option value="AndhraPradesh">Andhra Pradesh</option>
+			        <option value="Assam">Assam</option>
+			        <option value="Bihar">Bihar</option>
+			        <option value="Chandigarh">Chandigarh</option>
+			        <option value="Chhattisgarh">Chhattisgarh</option>
+			        <option value="GOA">GOA</option>
+			        <option value="Gujarat" selected>Gujarat</option>
+			        <option value="Haryana">Haryana</option>
+			        <option value="HimachalPradesh">Himachal Pradesh</option>
+			        <option value="JammuAndKashmir">Jammu & Kashmir</option>
+			        <option value="Jharkhand">Jharkhand</option>
+			        <option value="Karnataka">Karnataka</option>
+			        <option value="Kerala">Kerala</option>
+			        <option value="MadhyaPradesh">Madhya Pradesh</option>
+			        <option value="Maharashtra">Maharashtra</option>
+			        <option value="Manipur">Manipur</option>
+			        <option value="Meghalaya">Meghalaya</option>
+			        <option value="Mizoram">Mizoram</option>
+			        <option value="Nagaland">Nagaland</option>
+			        <option value="NewDelhi">New Delhi</option>
+			        <option value="Orissa">Orissa</option>
+			        <option value="Pondicherry">Pondicherry</option>
+			        <option value="Punjab">Punjab</option>
+			        <option value="Rajasthan">Rajasthan</option>
+			        <option value="Sikkim">Sikkim</option>
+			        <option value="Telengana">Telengana</option>
+			        <option value="TamilNadu">Tamil Nadu</option>
+			        <option value="Tripura">Tripura</option>
+			        <option value="UttarPradesh">Uttar Pradesh</option>
+			        <option value="Uttaranchal">Uttaranchal</option>
+			        <option value="WestBengal">West Bengal</option>
+			        <option value="DadraAndNagarHaveli">Dadra and Nagar Haveli</option>
+			        <option value="DamanAndDiu">Daman and Diu</option>
+			        <option value="Lakshadweep">Lakshadweep</option>
 			        <option value="Others">Others</option>
-	
 		      	</select>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 		<div class="col-md-4">
+		</div>
+	</div>
 
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-country" class="small-text pull-right">Country</label></div>
+			<div class="col-md-6" >
+				  
+				  <input class="form-control" id="residential-country" type="text" placeholder="Enter Country" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
 		</div>
 
 	</div>
@@ -208,55 +321,22 @@
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gross-annual-income" class="small-text pull-right">Gross Annual Income</label>
-	      	</div>
-
-			<div  class="col-md-6" >
+			<div class="col-md-4"><label for="residential-pin" class="small-text pull-right">Pin</label></div>
+			<div class="col-md-6" >
 				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
-			        <option value="LesThaOneLak">less than 1 lakh</option>
-			        <option value="OneToFivLak">1 to 5 lakhs</option>
-			        <option value="FivToTenLak">5 to 10 lakhs</option>
-			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
-			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
-	
-		      	</select>
+				  <input class="form-control" id="residential-pin" type="text" placeholder="Enter Pin" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 		<div class="col-md-4">
-
 		</div>
 
 	</div>
 	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="politically-exposed" class="small-text pull-right">Politically Exposed Person</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="Yes" selected>No</option>
-			        <option value="PoliticExposed">Politically Exposed Person</option>
-			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
 	<div id="button-1" class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="checkKysStatus();">SUBMIT</button>
+			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="prepareKyc();">Continue</button>
 		</div>
 		<div class="col-md-5"></div>
 	</div>

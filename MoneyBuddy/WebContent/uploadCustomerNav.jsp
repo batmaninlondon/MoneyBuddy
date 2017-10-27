@@ -97,169 +97,80 @@
 		
     </header>
 	<% session.setAttribute("transactionType", "UPFRONT"); %>
-	<section  id="one">
-
-	<div class="row" style="margin-top:-60px;margin-bottom:20px;">
+	<section id="bankDetails">
+	
+	
+	<div id="upload-nav" class="">
+		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<h2 style="font-family:Aparajita;font-size:35px;"><b>Upload NAV</b></h2>
+			</div>
+			<div class="col-md-3"></div>
+		</div>	
+	
+		
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+				<div class="col-md-1"></div>
+				<div class="col-md-5"><label for="bse-order-id" style="font-family:Aparajita;font-size:25px;" class="pull-right" >BSE OrderId </label></div>
+				<div  class="col-md-6" >
+					  
+					  <input class="form-control" id="bse-order-id" type="text" placeholder="Enter BSE Order Id" style="margin-top:-10px;">
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+		
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+				<div class="col-md-1"></div>
+				<div class="col-md-5"><label for="nav-value" style="font-family:Aparajita;font-size:25px;" class="pull-right" >NAV </label></div>
+				<div class="col-md-6" >
+					  
+					  <input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" style="margin-top:-10px;">
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+	
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+				<div class="col-md-1"></div>
+				<div class="col-md-5"><label for="units-purchased" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Units </label></div>
+				<div class="col-md-6" >
+					  
+					  <input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" style="margin-top:-10px;">
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+	
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-6"></div>
+			<div class="col-md-6">
+				<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav();">Upload NAV</button>
+			</div>
+	
+		</div>
+	
+	</div>
+	
+	<div id="successfully-uploaded-nav" class="row hidden" style="margin-top:-60px;margin-bottom:50px;">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide basic details</b></h2>
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Successfully Uploaded NAV</b></h2>
 		</div>
 		<div class="col-md-3"></div>
-	</div>	
-	<div class="row">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="first-name" class="small-text pull-right">First Name </label></div>
-
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="first-name" type="text" placeholder="Enter First Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
 	</div>
 	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="last-name" class="small-text pull-right">Last Name </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="last-name" type="text" placeholder="Enter Last Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
 	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gender" class="small-text pull-right">Gender</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gender" style="margin-top:-10px;">
-			        <option value="M" selected>Male</option>
-			        <option value="F">Female</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="occupation" class="small-text pull-right">Occupation</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="occupation" style="margin-top:-10px;">
-			        <option value="PriSecJob" selected>Private Sector job</option>
-			        <option value="PubSecJob">Public Sector job</option>
-			        <option value="GovSer">Government Service</option>
-			        <option value="Business">Business</option>
-			        <option value="Professional">Professional</option>
-			        <option value="Agriculturist">Agriculturist</option>
-			        <option value="Retired">Retired</option>
-			        <option value="Student">Student</option>
-			        <option value="ForexDeal">Forex Dealer</option>
-			        <option value="HouseWife">Housewife</option>
-			        <option value="Others">Others</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gross-annual-income" class="small-text pull-right">Gross Annual Income</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
-			        <option value="LesThaOneLak">less than 1 lakh</option>
-			        <option value="OneToFivLak">1 to 5 lakhs</option>
-			        <option value="FivToTenLak">5 to 10 lakhs</option>
-			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
-			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="politically-exposed" class="small-text pull-right">Politically Exposed Person</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="Yes" selected>No</option>
-			        <option value="PoliticExposed">Politically Exposed Person</option>
-			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div id="button-1" class="row" style="margin-top:25px;">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="checkKysStatus();">SUBMIT</button>
-		</div>
-		<div class="col-md-5"></div>
-	</div>
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">

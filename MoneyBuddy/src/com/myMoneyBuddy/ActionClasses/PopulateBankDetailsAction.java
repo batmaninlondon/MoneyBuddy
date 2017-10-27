@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -65,6 +66,8 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     	
     	try {
  
+    		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
+    		
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			String frmtdDateForDB = dateFormat.format(date);

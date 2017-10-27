@@ -104,7 +104,11 @@
 		<div class="col-md-6">
 			<h2 style="font-family:Aparajita;font-size:35px;"><b>Admin Dashboard</b></h2>
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-3">
+		
+			<a href="uploadCustomerNav"><b>UploadCustomerNav</b></a>
+		
+		</div>
 	</div>	
 
 		<div  id="invested-fund-list" class="row" style="margin-top:20px;padding-left:70px;padding-right:70px;">

@@ -24,7 +24,8 @@ public class insertCustomerDetails {
 
 	Logger logger = Logger.getLogger(insertCustomerDetails.class);
 	
-    public void insertCustomer (String emailId,String firstName,String lastName,String mobileNumber,String password,String verificationStatus) throws MoneyBuddyException
+    public void insertCustomer (String emailId,String firstName,String lastName,String mobileNumber,
+    		String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String password,String verificationStatus) throws MoneyBuddyException
     {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
@@ -53,7 +54,7 @@ public class insertCustomerDetails {
 
     	try {
 
-    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,null,null,null,null,"NOT DONE");
+    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();

@@ -17,9 +17,24 @@
 	    	<result>/aboutUs.jsp</result>
 		</action>
 	</package>
+	<package name="additionalCustomerDetails" namespace="/" extends="struts-default">
+	    <action name="additionalCustomerDetails">
+	    	<result>/additionalCustomerDetails.jsp</result>
+		</action>
+	</package>
+	<package name="downloadKycForm" namespace="/" extends="struts-default">
+	    <action name="downloadKycForm">
+	    	<result>/downloadKycForm.jsp</result>
+		</action>
+	</package>
 	<package name="blog" namespace="/" extends="struts-default">
 	    <action name="blog">
 	    	<result>/blog.jsp</result>
+		</action>
+	</package>
+	<package name="uploadCustomerNav" namespace="/" extends="struts-default">
+	    <action name="uploadCustomerNav">
+	    	<result>/uploadCustomerNav.jsp</result>
 		</action>
 	</package>
 	<package name="adminDashboard" namespace="/" extends="struts-default">

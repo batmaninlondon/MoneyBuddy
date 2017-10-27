@@ -2,6 +2,7 @@ package com.myMoneyBuddy.mailerClasses;
 
 /* requires itextpdf-5.1.2.jar or similar */
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,21 +28,48 @@ public class AddContentToPDF {
            document.add(new Paragraph("Hello "+userName));
            document.close();
            writer.close();*/
-           PdfReader reader = new PdfReader("D://DelMe/Invoice_Template.pdf");
+    	
+    	try {
+           PdfReader reader = new PdfReader("D://DelMe/KYC.pdf");
            //Rectangle pagesize = reader.getPageSize(1);
-           PdfStamper stamper = new PdfStamper(reader,
-        	          new FileOutputStream("D://DelMe/Invoice_Template_modified.pdf")); // output PDF
+           String directoryName = "D://DelMe/123";
+           File directory = new File(String.valueOf(directoryName));
+           
+           if(!directory.exists()){
 
+               directory.mkdir();
+           }
+           
+           PdfStamper stamper = new PdfStamper(reader,
+        	          new FileOutputStream(directoryName+"/KYC_Application_Form.pdf")); // output PDF
            AcroFields form = stamper.getAcroFields();
            
            HashMap map = new HashMap();
            map = (HashMap) form.getFields();
            Iterator iterator = map.keySet().iterator();
            System.out.println("iterator size : "+map.size());
-           while(iterator.hasNext())
-               System.out.println("Field is >>>"+iterator.next());
+          /* while(iterator.hasNext())
+               System.out.println("Field is >>>"+iterator.next());*/
            
-           form.setField("Your Company Name", "MoneyBuddy");
+           form.setField("Name", "Savita wadhwani");
+           form.setField("FathersSpouse Name", "BhagChandra Wadhwani");           
+           form.setField("F ema","On");
+           form.setField("Marr","On");
+           form.setField("Indian","On");
+           form.setField("5 PAN", "AAXAB4321A");
+           
+          
+          stamper.setFormFlattening(true);
+          stamper.close();
+          reader.close();
+          System.out.println("End!!");
+          
+    	} catch (Exception e )  {
+    		
+    		System.out.println("Caught Exception");
+    	}
+          
+           /*form.setField("Your Company Name", "MoneyBuddy");
            form.setField("Your Name", "MoneyBuddy");
            form.removeField("Address Line 1");
            form.removeField("Address Line 2");
@@ -54,7 +82,7 @@ public class AddContentToPDF {
            form.removeField("Issue Date");
            form.removeField("PO Number");
            form.removeField("Due Date");
-           form.removeField("Subject");
+           form.removeField("Subject");*/
 
            
           
@@ -83,10 +111,8 @@ public class AddContentToPDF {
                status = triggerNewPage(stamper, pagesize, column, rectPage2, ++pagecount);
            }*/
            
-           stamper.setFormFlattening(true);
-           stamper.close();
-
-    	
+           
+          
     	
     	
         /*PdfReader reader = new PdfReader("D://DelMe/test.pdf"); // input PDF
@@ -158,6 +184,8 @@ public class AddContentToPDF {
         stamper.close();
         reader.close();
 */
+           
+          
     }
     
     public static int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {

@@ -554,10 +554,7 @@
 				<button class="btn next">next <i class="icon-chevron-right"></i></button>
 			</div>
 		</div>
-
-
-
-            
+  
                 <h2>Our Service</h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
             </div>

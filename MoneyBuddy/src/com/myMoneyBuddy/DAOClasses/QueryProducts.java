@@ -435,13 +435,12 @@ public class QueryProducts {
 				    		   availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
 				    		   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
 				    		   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
-				    		   System.out.println(" investedAmount : "+String.format("%.4f",investedAmount));
+				    		   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 				    		   
 				    		   soldUnit = 0;
 				    		   
 				    	   }
 				    	   else {
-				    		   
 				    		   soldUnit -= Double.parseDouble(buyRecordRow[2].toString());
 				    		   
 				    	   }
@@ -450,9 +449,9 @@ public class QueryProducts {
 				       else {
 				    	   availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
 
-				    	   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
+				    	   System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
 				    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
-				    	   System.out.println(" investedAmount : "+String.format("%.4f",investedAmount));
+				    	   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 				       }
 				            
 			       }
@@ -466,7 +465,7 @@ public class QueryProducts {
 			       System.out.println("Rate of Growth : "+ String.format("%.4f", rateOfGrowth));
 			      
 			       
-			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.4f",investedAmount),String.format("%.4f",currentAmount),String.format("%.4f",rateOfGrowth),transactionStartDate));
+			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",rateOfGrowth),transactionStartDate));
 			 }
 
 

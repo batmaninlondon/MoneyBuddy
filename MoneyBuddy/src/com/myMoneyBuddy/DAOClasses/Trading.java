@@ -38,7 +38,7 @@ import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
-import com.myMoneyBuddy.EntityClasses.NavHistory;
+//import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 //import com.myMoneyBuddy.EntityClasses.PriceHistory;
@@ -154,7 +154,7 @@ public class Trading {
 			factory = new AnnotationConfiguration()
 					.configure()
 					.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
-					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class).addAnnotatedClass(NavHistory.class)
+					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
 					.addAnnotatedClass(DbfDataDetails.class)
 					.buildSessionFactory();
 			session = factory.openSession();
@@ -247,7 +247,7 @@ public class Trading {
 
 				session.getTransaction().commit();
 
-				session.beginTransaction();
+				/*session.beginTransaction();
 
 				result = session.createQuery("select navValue from NavHistory where schemeCode = '"+productName+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
 				String latestNav = null;
@@ -255,19 +255,19 @@ public class Trading {
 				if (result != null)  
 					latestNav = result.toString();
 
-				session.getTransaction().commit();
+				session.getTransaction().commit();*/
 
 				Double currentTransactionAmount = productDetailsMap.get(currentProductId);
-				Double currentTransactionQuantity = currentTransactionAmount / Double.parseDouble(latestNav);
+				//Double currentTransactionQuantity = currentTransactionAmount / Double.parseDouble(latestNav);
 				//currentTransactionQuantity = (Math.round( currentTransactionQuantity * 10000.0 ) / 10000.0);
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
-				System.out.println("Trading class : executeTrade method : unitPrice : "+latestNav);
-				System.out.println("Trading class : executeTrade method : currentTransactionQuantity : "+currentTransactionQuantity);
+				//System.out.println("Trading class : executeTrade method : unitPrice : "+latestNav);
+				//System.out.println("Trading class : executeTrade method : currentTransactionQuantity : "+currentTransactionQuantity);
 
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
 						transactionCode,buySell, Double.toString(currentTransactionAmount),
-						null, null,null,"NO",currentProductId, String.format("%.4f", currentTransactionQuantity),latestNav,frmtdDateForDB, frmtdDateForDB); 		
+						null, null,null,"NO",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB); 		
 
 				session.beginTransaction();
 				session.save(tempTransactionDetail);
@@ -372,7 +372,7 @@ public class Trading {
 					query.setParameter("transactionStatus", "Failed");
 				else  
 				{
-					query.setParameter("transactionStatus", "Pending");
+					query.setParameter("transactionStatus", "OrderPlaced");
 					allOrderFailed = false;
 				}
 
@@ -384,7 +384,7 @@ public class Trading {
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				session.getTransaction().commit();
 
-				session.beginTransaction();
+/*				session.beginTransaction();
 				query = session.createQuery("from CustomerPortfolio where productId = :productId and customerId = :customerId and investmentTypeName = :groupName");
 				query.setParameter("productId",currentProductId);
 				query.setParameter("customerId",customerId);
@@ -394,10 +394,10 @@ public class Trading {
 
 				pendingOrders = 0.0;
 
-				/*			    if ("SELL".equals(transactionType))  
+							    if ("SELL".equals(transactionType))  
 					pendingOrders -= quantity;
 				else 
-					pendingOrders += quantity;*/
+					pendingOrders += quantity;
 
 				session.getTransaction().commit();
 				session.beginTransaction();
@@ -418,7 +418,7 @@ public class Trading {
 					session.save(tempCustomerPortfolio);
 
 				}
-				session.getTransaction().commit();
+				session.getTransaction().commit();*/
 
 				logger.debug("Trading class : executeTrade method : inserted data to CustomerPortfolio table for customerId : "+customerId);
 
@@ -676,7 +676,7 @@ public class Trading {
 							if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
 								System.out.println("Payment Successful");
 								session.beginTransaction();
-								session.createQuery("update TransactionDetails set transactionStatus='Complete' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+								session.createQuery("update TransactionDetails set transactionStatus='PaymentReceived' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
 								session.getTransaction().commit();
 
 								Double quantity = Double.parseDouble(transactionDetail[5].toString());

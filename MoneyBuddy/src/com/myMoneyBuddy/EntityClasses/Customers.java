@@ -43,14 +43,17 @@ public class Customers {
     @Column(name="VERIFICATION_STATUS")
     private String verificationStatus;
     
-    @Column(name="FATHER_NAME")
-    private String fatherName;
+    @Column(name="GENDER")
+    private String gender;
     
-    @Column(name="MOTHER_NAME")
-    private String motherName;
+    @Column(name="OCCUPATION")
+    private String occupation;
     
-    @Column(name="DATE_OF_BIRTH")
-    private String dateOfBirth;
+    @Column(name="GROSS_ANNUAL_INCOME")
+    private String grossAnnualIncome;
+    
+    @Column(name="POLITICALLY_EXPOSED")
+    private String politicallyExposed;
     
     @Column(name="PAN_CARD")
     private String panCard;
@@ -63,7 +66,7 @@ public class Customers {
     }
 
     public Customers( String firstName, String lastName, String emailId, String mobileNumber, String password,
-			String verificationStatus, String fatherName, String motherName, String dateOfBirth, String panCard, String kycStatus) {
+			String verificationStatus, String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String kycStatus) {
 		super();
 		this.emailId = emailId;
 		this.firstName = firstName;
@@ -71,9 +74,10 @@ public class Customers {
 		this.mobileNumber = mobileNumber;
 		this.password = password;
 		this.verificationStatus = verificationStatus;
-		this.fatherName = fatherName;
-		this.motherName = motherName;
-		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.occupation = occupation;
+		this.grossAnnualIncome = grossAnnualIncome;
+		this.politicallyExposed = politicallyExposed;
 		this.panCard = panCard;
 		this.kycStatus = kycStatus;
 	}
@@ -134,28 +138,38 @@ public class Customers {
 		this.verificationStatus = verificationStatus;
 	}
 	
-	public String getFatherName() {
-		return fatherName;
+	
+
+	public String getGender() {
+		return gender;
 	}
 
-	public void setFatherName(String fatherName) {
-		this.fatherName = fatherName;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public String getMotherName() {
-		return motherName;
+	public String getOccupation() {
+		return occupation;
 	}
 
-	public void setMotherName(String motherName) {
-		this.motherName = motherName;
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
 	}
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public String getGrossAnnualIncome() {
+		return grossAnnualIncome;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setGrossAnnualIncome(String grossAnnualIncome) {
+		this.grossAnnualIncome = grossAnnualIncome;
+	}
+
+	public String getPoliticallyExposed() {
+		return politicallyExposed;
+	}
+
+	public void setPoliticallyExposed(String politicallyExposed) {
+		this.politicallyExposed = politicallyExposed;
 	}
 
 	public String getPanCard() {
@@ -204,13 +218,16 @@ public class Customers {
         if ((this.verificationStatus == null) ? (other.verificationStatus != null) : !this.verificationStatus.equals(other.verificationStatus)) {
             return false;
         }
-        if ((this.fatherName == null) ? (other.fatherName != null) : !this.fatherName.equals(other.fatherName)) {
+        if ((this.gender == null) ? (other.gender != null) : !this.gender.equals(other.gender)) {
             return false;
         }
-        if ((this.motherName == null) ? (other.motherName != null) : !this.motherName.equals(other.motherName)) {
+        if ((this.occupation == null) ? (other.occupation != null) : !this.occupation.equals(other.occupation)) {
             return false;
         }
-        if ((this.dateOfBirth == null) ? (other.dateOfBirth != null) : !this.dateOfBirth.equals(other.dateOfBirth)) {
+        if ((this.grossAnnualIncome == null) ? (other.grossAnnualIncome != null) : !this.grossAnnualIncome.equals(other.grossAnnualIncome)) {
+            return false;
+        }
+        if ((this.politicallyExposed == null) ? (other.politicallyExposed != null) : !this.politicallyExposed.equals(other.politicallyExposed)) {
             return false;
         }
         if ((this.panCard == null) ? (other.panCard != null) : !this.panCard.equals(other.panCard)) {
@@ -232,9 +249,10 @@ public class Customers {
         hash = 79 * hash + (this.mobileNumber != null ? this.mobileNumber.hashCode() : 0);
         hash = 79 * hash + (this.password != null ? this.password.hashCode() : 0);
         hash = 79 * hash + (this.verificationStatus != null ? this.verificationStatus.hashCode() : 0);
-        hash = 79 * hash + (this.fatherName != null ? this.fatherName.hashCode() : 0);
-        hash = 79 * hash + (this.motherName != null ? this.motherName.hashCode() : 0);
-        hash = 79 * hash + (this.dateOfBirth != null ? this.dateOfBirth.hashCode() : 0);
+        hash = 79 * hash + (this.gender != null ? this.gender.hashCode() : 0);
+        hash = 79 * hash + (this.occupation != null ? this.occupation.hashCode() : 0);
+        hash = 79 * hash + (this.grossAnnualIncome != null ? this.grossAnnualIncome.hashCode() : 0);
+        hash = 79 * hash + (this.politicallyExposed != null ? this.politicallyExposed.hashCode() : 0);
         hash = 79 * hash + (this.panCard != null ? this.panCard.hashCode() : 0);
         hash = 79 * hash + (this.kycStatus != null ? this.kycStatus.hashCode() : 0);
         return hash;

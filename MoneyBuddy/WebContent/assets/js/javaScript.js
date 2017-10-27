@@ -1,4 +1,16 @@
-
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+    
+    
 
 $(document).ready(function(){
 
@@ -272,55 +284,36 @@ function checkKysStatus()
 {
 	//alert('checkKysStatus function called !! ');
 	
-	var fatherName = document.getElementById("father-name").value;
-	var motherName = document.getElementById("mother-name").value;
-	var dateOfBirth = document.getElementById("date-of-birth").value;
+	var firstName = document.getElementById("first-name").value;
+	var lastName = document.getElementById("last-name").value;
+	var gender = document.getElementById("gender").value;
 	var panCard = document.getElementById("pancard-number").value;
-	
-	//alert ("fatherName : "+fatherName);
-	
-	if ( fatherName == '')  {
-		document.getElementById("father-name").className += " formInvalid";
-		document.getElementById("father-name").placeholder = "Father's Name can not be blank ";
-		document.getElementById("mother-name").className = "form-control";
-		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
-		document.getElementById("date-of-birth").className = "form-control";
-		document.getElementById("date-of-birth").placeholder = "Enter DoB";
-		document.getElementById("pancard-number").className = "form-control";
-		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
+	var occupation = document.getElementById("occupation").value;
+	var grossAnnualIncome = document.getElementById("gross-annual-income").value;
+	var politicallyExposed = document.getElementById("politically-exposed").value;
+
+	if ( firstName == '')  {
+		document.getElementById("first-name").className += " formInvalid";
+		document.getElementById("first-name").placeholder = "First Name can not be blank ";
+		$("#last-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+
 		return;
 	}
-	else if ( motherName == '')  {
-		document.getElementById("mother-name").className += " formInvalid";
-		document.getElementById("mother-name").placeholder = "Mother's Name can not be blank ";
-		document.getElementById("father-name").className = "form-control";
-		document.getElementById("father-name").placeholder = "Enter Father's Name";
-		document.getElementById("date-of-birth").className = "form-control";
-		document.getElementById("date-of-birth").placeholder = "Enter DoB";
-		document.getElementById("pancard-number").className = "form-control";
-		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
-		return;
-	}
-	else if ( dateOfBirth == '')  {
-		document.getElementById("date-of-birth").className += " formInvalid";
-		document.getElementById("date-of-birth").placeholder = "DoB can not be blank ";
-		document.getElementById("father-name").className = "form-control";
-		document.getElementById("father-name").placeholder = "Enter Father's Name";
-		document.getElementById("mother-name").className = "form-control";
-		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
-		document.getElementById("pancard-number").className = "form-control";
-		document.getElementById("pancard-number").placeholder = "Enter Pancard Number";
+	else if ( lastName == '')  {
+		document.getElementById("last-name").className += " formInvalid";
+		document.getElementById("last-name").placeholder = "Last Name can not be blank ";
+		$("#first-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+
 		return;
 	}
 	else if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
-		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
-		document.getElementById("mother-name").className = "form-control";
-		document.getElementById("mother-name").placeholder = "Enter Mother's Name";
-		document.getElementById("father-name").className = "form-control";
-		document.getElementById("father-name").placeholder = "Enter Father's Name";
-		document.getElementById("date-of-birth").className = "form-control";
-		document.getElementById("date-of-birth").placeholder = "Enter DoB";
+		document.getElementById("pancard-number").placeholder = "Pancard number can not be blank ";
+		$("#first-name").removeClass('formInvalid');
+		$("#last-name").removeClass('formInvalid');
+
 		return;
 	}
 	else if (!validatePanCard(panCard)) {
@@ -331,14 +324,12 @@ function checkKysStatus()
 		return;
 	}
 	
-	/*alert('checkKysStatus function panCard :'+panCard);*/
-	
     $.ajax({
       	
         url : "kycCheckAction",
         type: 'post',
         
-        data: { 'fatherName' : fatherName , 'motherName' : motherName , 'dateOfBirth' : dateOfBirth , 'panCard' : panCard},
+        data: { 'firstName' : firstName , 'lastName' : lastName , 'gender' : gender , 'panCard' : panCard , 'occupation' : occupation , 'grossAnnualIncome' : grossAnnualIncome , 'politicallyExposed' : politicallyExposed},
 
         success : function(result){
 
@@ -352,9 +343,9 @@ function checkKysStatus()
         	} 
         	else if (result == "kycNotDone")  {
         		/*alert('KYC not done for this pan card !! ');*/
-        		window.location='kycNotDone';
+        		window.location='additionalCustomerDetails';
         	}
-        	else if (result == "success") {
+        	else if (result == "kycDone") {
         		/*alert('Inside kycCheck success !! ');*/
         		window.location='bankDetails';
         	}	
@@ -369,6 +360,137 @@ function checkKysStatus()
 
 	
 }
+
+
+
+
+function prepareKyc()
+{
+	//alert('checkKysStatus function called !! ');
+	
+	var fatherName = document.getElementById("father-name").value;
+	var dateOfBirth = document.getElementById("date-of-birth").value;
+	var maritalStatus = document.getElementById("marital-status").value;
+	var nationality = document.getElementById("nationality").value;
+	var status = document.getElementById("status").value;
+	var addressLineOne = document.getElementById("address-line-one").value;
+	var addressLineTwo = document.getElementById("address-line-two").value;
+	var residentialCity = document.getElementById("residential-city").value;
+	var residentialState = document.getElementById("residential-state").value;
+	var residentialPin = document.getElementById("residential-pin").value;
+	var residentialCountry = document.getElementById("residential-country").value;
+
+
+	if ( fatherName == '')  {
+		document.getElementById("father-name").className += " formInvalid";
+		document.getElementById("father-name").placeholder = "Father's name can not be blank ";
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+
+		return;
+	}
+	else if ( dateOfBirth == '')  {
+		document.getElementById("date-of-birth").className += " formInvalid";
+		document.getElementById("date-of-birth").placeholder = "Date of Birth can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( addressLineOne == '')  {
+		document.getElementById("address-line-one").className += " formInvalid";
+		document.getElementById("address-line-one").placeholder = "Line 1 can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( addressLineTwo == '')  {
+		document.getElementById("address-line-two").className += " formInvalid";
+		document.getElementById("address-line-two").placeholder = "Line 2 can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( residentialCity == '')  {
+		document.getElementById("residential-city").className += " formInvalid";
+		document.getElementById("residential-city").placeholder = "Residential City can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( residentialPin == '')  {
+		document.getElementById("residential-pin").className += " formInvalid";
+		document.getElementById("residential-pin").placeholder = "Residential Pin can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( residentialCountry == '')  {
+		document.getElementById("residential-country").className += " formInvalid";
+		document.getElementById("residential-country").placeholder = "Residential Country can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		
+		return;
+	}
+
+    $.ajax({
+      	
+        url : "prepareKycFormAction",
+        type: 'post',
+    	
+        data: { 'fatherName' : fatherName , 'dateOfBirth' : dateOfBirth , 'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status ,'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
+
+        success : function(result){
+        	//alert('result : '+result);
+        	if (result == "success") {
+        		/*alert('Inside kycCheck success !! ');*/
+        		window.location='downloadKycForm';
+        	}	
+        	else {
+        		/*alert('Inside kycCheck error !! ');*/
+        		window.location='errorPage';
+        	}
+        },
+
+    });
+    
+
+	
+}
+
 
 function checkDetails()
 {
@@ -632,6 +754,31 @@ function setData()
 	$.ajax({
 
         url : "populateAdminDashboardDataAction",
+        type: 'post',
+
+        data: {},
+        
+        success : function(result){
+        	
+        	if (result == "success") {
+        		// do nothing
+        	}
+        	else {
+        		/*alert('Inside resetPassword error !!');*/
+        		window.location='errorPage';
+        	}
+
+        },
+
+    });
+}
+
+
+function setDashboardData() 
+{
+	$.ajax({
+
+        url : "portfolioAction",
         type: 'post',
 
         data: {},
@@ -1509,6 +1656,73 @@ function populateBankDetails()
         	if (result == "success") {
 
         		window.location='thankYou';
+    		
+        	}
+        	else {
+        		/*alert('Inside estimate error !!');*/
+        		window.location='errorPage';
+        	}  
+
+        }
+    });
+	
+	
+	
+	
+	
+}
+
+
+
+function uploadCutsomerNav() 
+{
+	
+	var bseOrderId = document.getElementById("bse-order-id").value;
+	var navValue = document.getElementById("nav-value").value;
+	var unitsPurchased = document.getElementById("units-purchased").value;
+	
+	if ( bseOrderId == '')  {
+		
+		document.getElementById("bse-order-id").className += " formInvalid";
+		document.getElementById("bse-order-id").placeholder = "Bse Order Id can not be blank!";
+		document.getElementById("nav-value").className = "form-control";
+		document.getElementById("units-purchased").className = "form-control";
+
+		return;
+	}
+	else if ( navValue == '')  {
+		
+		document.getElementById("nav-value").className += " formInvalid";
+		document.getElementById("nav-value").placeholder = "NAV Value can not be blank!";
+		document.getElementById("bse-order-id").className = "form-control";
+		document.getElementById("units-purchased").className = "form-control";
+		
+		return;
+	}
+
+	else if ( unitsPurchased == '')  {
+		
+		document.getElementById("units-purchased").className += " formInvalid";
+		document.getElementById("units-purchased").placeholder = "NAV Value can not be blank!";
+		document.getElementById("bse-order-id").className = "form-control";
+		document.getElementById("nav-value").className = "form-control";
+		
+		return;
+	}
+	
+	
+	$.ajax({
+	  	
+        url : "uploadCustomerNavAction",
+        type: 'post',
+        
+        data: {'bseOrderId' : bseOrderId , 'navValue' : navValue ,'unitsPurchased' : unitsPurchased  },
+        
+        success : function(result){
+        	if (result == "success") {
+
+        		document.getElementById('upload-nav').className += " hidden";
+	        	$("#successfully-uploaded-nav").removeClass('hidden');
     		
         	}
         	else {

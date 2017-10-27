@@ -39,10 +39,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	Logger logger = Logger.getLogger(KycCheckAction.class);
 	private Map<String, Object> sessionMap;
 	
-	private String fatherName;
-	private String motherName;
-	private String dateOfBirth;
+	private String firstName;
+	private String lastName;
+	private String gender;
     private String panCard;
+	private String occupation;
+	private String grossAnnualIncome;
+    private String politicallyExposed; 
+   
     QueryKycStatus kyc = new QueryKycStatus();
 
     private InputStream stream;
@@ -70,10 +74,13 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	logger.debug("KycCheckAction class : execute method : start");
     	System.out.println(" KycCheckAction execute method Called !!");
     	
-    	System.out.println(" KycCheckAction execute method : Father Name : "+getFatherName());
-    	System.out.println(" KycCheckAction execute method : Mother Name : "+getMotherName());
-    	System.out.println(" KycCheckAction execute method : Date Of Birth : "+getDateOfBirth());
-    	System.out.println(" KycCheckAction execute method : Pan Card : "+getPanCard());
+    	System.out.println(" KycCheckAction execute method : First Name : "+getFirstName());
+    	System.out.println(" KycCheckAction execute method : Last Name : "+getLastName());
+    	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
+    	System.out.println(" KycCheckAction execute method : PanCard : "+getPanCard());
+    	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
+    	System.out.println(" KycCheckAction execute method : Gross Annual Income : "+getGrossAnnualIncome());
+    	System.out.println(" KycCheckAction execute method : Politically Exposed : "+getPoliticallyExposed());
     	
     	// Savita Wadhwani - Start - Added this block to validate input panCard through ajax call
     	
@@ -107,25 +114,43 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    Session session = factory.openSession(); 
 	    
     	session.beginTransaction();
-		Query query = session.createQuery("update Customers set fatherName = :fatherName , motherName = :motherName , dateOfBirth = :dateOfBirth ,panCard = :panCard  where customerId = :customerId");
+		Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
 		
-		query.setParameter("fatherName", getFatherName());
-		query.setParameter("motherName", getMotherName());
-		query.setParameter("dateOfBirth", getDateOfBirth()); 
+		query.setParameter("firstName", getFirstName());
+		query.setParameter("lastName", getLastName());
+		query.setParameter("gender", getGender()); 
 		query.setParameter("panCard", getPanCard());
+		query.setParameter("occupation", getOccupation());
+		query.setParameter("grossAnnualIncome", getGrossAnnualIncome()); 
+		query.setParameter("politicallyExposed", getPoliticallyExposed());
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		int updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
 		session.getTransaction().commit();
 		
-		
-		// UPDATE ONLY IN CASE OF KYC DONE FOR CUSTOMER 
+		String customerName = getFirstName()+" "+getLastName();
+		sessionMap.put("customerName", customerName);
+    	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
 		session.beginTransaction();
 		query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
 		
-		query.setParameter("kycStatus", "DONE");
+		// Savita Wadhwani - We need to update this piece of code with real API - start 
+		
+		String num1 = getPanCard().substring(5,9);
+		String str;
+		if ( (Integer.parseInt(num1) /2) == 0) {
+			query.setParameter("kycStatus", "DONE");
+			str = "kycDone";
+		}
+		else {
+			query.setParameter("kycStatus", "NOT DONE");
+			str = "kycNotDone";
+		}
+		// Savita Wadhwani - We need to update this piece of code with real API - end
+		
+
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		updateResult = query.executeUpdate();
@@ -142,7 +167,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	System.out.println(" Returned Success !!");
 
-    	String str = "success";
+    	
     	stream = new ByteArrayInputStream(str.getBytes());
 
     	return SUCCESS;
@@ -189,30 +214,52 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		this.stream = stream;
 	}
 
-	public String getFatherName() {
-		return fatherName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFatherName(String fatherName) {
-		this.fatherName = fatherName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getMotherName() {
-		return motherName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setMotherName(String motherName) {
-		this.motherName = motherName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
+	public String getOccupation() {
+		return occupation;
+	}
 
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public String getGrossAnnualIncome() {
+		return grossAnnualIncome;
+	}
+
+	public void setGrossAnnualIncome(String grossAnnualIncome) {
+		this.grossAnnualIncome = grossAnnualIncome;
+	}
+
+	public String getPoliticallyExposed() {
+		return politicallyExposed;
+	}
+
+	public void setPoliticallyExposed(String politicallyExposed) {
+		this.politicallyExposed = politicallyExposed;
+	}
 
 }
