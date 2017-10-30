@@ -139,7 +139,7 @@
                             <li>Any time Withdraw</li>
                             <li>24/7 Support</li>
                             <li class="plan-action">
-                                <a class="btn btn-primary" href="sipInvestment">Select this option</a>
+                                <a class="btn btn-primary" href="newSipInvestment">Select this option</a>
                             </li>
                         </ul>
                  	</div>

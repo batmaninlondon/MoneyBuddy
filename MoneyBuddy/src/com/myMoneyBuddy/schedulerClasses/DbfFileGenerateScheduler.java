@@ -41,16 +41,30 @@ public class DbfFileGenerateScheduler {
 		
 			scheduler.start();
 			
-			JobDetail job = JobBuilder.newJob(DbfFileGenerator.class)
+			JobDetail dbfFileGeneratorJob = JobBuilder.newJob(DbfFileGenerator.class)
 					.withIdentity("DbfFileGeneratorJob", "Group").build();
 			
-			Trigger trigger = TriggerBuilder
+			// This Trigger will work at 3 pm (15 hours) everyday
+			
+			Trigger dbfFileGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("DbfFileGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 15 * * ?"))
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 15 * * ?")) 
+					.build();
+			
+			JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
+					.withIdentity("SipInstallmentGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 10 am (10 hours) everyday
+			
+			Trigger sipInstallmentGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("SipInstallmentGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 10 * * ?"))
 					.build();
 	
-			scheduler.scheduleJob(job, trigger);
+			scheduler.scheduleJob(dbfFileGeneratorJob, dbfFileGeneratorTrigger);
+			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

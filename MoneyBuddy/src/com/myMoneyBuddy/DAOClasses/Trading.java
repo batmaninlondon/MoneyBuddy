@@ -41,6 +41,7 @@ import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 //import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
+import com.myMoneyBuddy.EntityClasses.SipDetails;
 //import com.myMoneyBuddy.EntityClasses.PriceHistory;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
@@ -125,7 +126,7 @@ public class Trading {
 
 	}
 
-	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, 
+	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipEndDate,
 			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
 
 
@@ -144,6 +145,7 @@ public class Trading {
 		//List<PriceHistory> priceHistory;
 		Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
+		SipDetails tempSipDetail;
 		DbfDataDetails tempDbfDataDetails;
 
 		CustomerPortfolio tempCustomerPortfolio;
@@ -155,7 +157,7 @@ public class Trading {
 					.configure()
 					.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
 					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
-					.addAnnotatedClass(DbfDataDetails.class)
+					.addAnnotatedClass(DbfDataDetails.class).addAnnotatedClass(SipDetails.class)
 					.buildSessionFactory();
 			session = factory.openSession();
 
@@ -175,11 +177,7 @@ public class Trading {
 			dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			date = new Date();
 			String frmtdDate = dateFormat.format(date);
-			
-			
 
-
-			
 
 			for ( Double currentAmount : productDetailsMap.values())  {
 				System.out.println("currentAmount : "+currentAmount);
@@ -191,11 +189,21 @@ public class Trading {
 
 			session.save(tempTransaction);
 			session.getTransaction().commit();
-
+			
+			
+			
 			logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
 
 			String transactionId = tempTransaction.getTransactionId();
 
+			session.beginTransaction();
+			
+			tempSipDetail = new SipDetails(customerId, transactionId,
+					sipDate, sipEndDate,"No","No");
+
+			session.save(tempSipDetail);
+			session.getTransaction().commit();
+			
 			Properties properties = new Properties();
 			String propFilePath = "../../../config/client.properties";
 

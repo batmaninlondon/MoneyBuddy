@@ -96,7 +96,7 @@
         </nav><!--/nav-->
 		
     </header>
-	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	
 	<section id="bankDetails">
 	
 	

@@ -191,6 +191,11 @@
 	    	<result>/sipInvestment.jsp</result>
 		</action>
 	</package>
+	<package name="newSipInvestment" namespace="/" extends="struts-default">
+	    <action name="newSipInvestment">
+	    	<result>/newSipInvestment.jsp</result>
+		</action>
+	</package>
 	<package name="userVerification" namespace="/" extends="struts-default">
 	    <action name="userVerification">
 	    	<result>/userVerification.jsp</result>

@@ -96,7 +96,7 @@
         </nav><!--/nav-->
 		
     </header>
-	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	
 	<section  id="one">
 
 	<div class="row" style="margin-top:-60px;margin-bottom:20px;">
@@ -239,7 +239,7 @@
 			<div  class="col-md-6" >
 				  
 			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="Yes" selected>No</option>
+			        <option value="No" selected>No</option> 
 			        <option value="PoliticExposed">Politically Exposed Person</option>
 			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
 	

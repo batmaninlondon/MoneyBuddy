@@ -140,7 +140,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		
 		String num1 = getPanCard().substring(5,9);
 		String str;
-		if ( (Integer.parseInt(num1) /2) == 0) {
+		System.out.println(" num1 is : "+num1);
+		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
+		if ( (Integer.parseInt(num1) % 2) == 0) {
 			query.setParameter("kycStatus", "DONE");
 			str = "kycDone";
 		}

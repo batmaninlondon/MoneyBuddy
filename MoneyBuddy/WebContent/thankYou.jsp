@@ -96,7 +96,7 @@
         </nav><!--/nav-->
 		
     </header>
-	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	
 	<section id="one">
 	
 	<div class="row" style="margin-top:-40px;">
@@ -137,7 +137,7 @@
 						</s:iterator> 
 							<tr>
 							    <td class="center "><b>Total Investment</b></td>
-							    <td class="center"><b><s:property value="#session.upfrontInvestment"/></b></td>
+							    <td class="center"><b><s:property value="#session.totalInvestment"/></b></td>
 							</tr>
 
 						</tbody>

@@ -109,17 +109,28 @@ document.getElementById("investedAmount").innerHTML=newValue;
 newUpdate();
 }
 
-function showSipPerMonth(newValue)
+function fillSipData()
 {
-
+	document.getElementById("sip-duration").innerHTML='5';
+	showSipAmountPerMonth('2000');
+	
+}
+function showSipAmountPerMonth(newValue)
+{
 document.getElementById("sipPerMonth").innerHTML=newValue;
-update();
+document.getElementById("investedAmount").innerHTML=newValue;
+newUpdate();
 }
 
-function showYears(newValue)
+function showDuration(newValue)
 {
-document.getElementById("years").innerHTML=newValue;
-update();
+document.getElementById("sip-duration").innerHTML=newValue;
+newUpdate();
+
+}
+function showDate()
+{
+newUpdate();
 
 }
 function showUpfrontInvestmentPlan()
@@ -1482,36 +1493,49 @@ function update(){
 function newUpdate(){
 
 	//alert('new update called !! ');
-	var investment = document.getElementById("upfrontInvestment").innerHTML;
-	var sip = "0";
+	var transactionType = document.getElementById('transactionType').value;
+	
+	if (transactionType == "SIP") {
+		var sipAmount = document.getElementById("sip-amount-range").value;
+		var investment = "0";
+		var sipDuration = document.getElementById('sip-duration-range').value; // in years
+		var sipDate = document.getElementById('sip-date').value;
+		/*var totalInvestment = parseInt(sip)*12*parseInt(years)+parseInt(sip);*/
+	} else{
+		alert('UPFRONT');
+		var sipAmount = "0";
+		var investment = document.getElementById("upfrontInvestment").innerHTML;
+		var sipDuration = "0"; // in years
+		var sipDate = "0";
+		/*var totalInvestment = parseInt(investment);*/
+	}
+
 	var riskCategory = "3";
 	var planName = "SAVE_TAX";
-	
-	var totalInvestment = parseInt(sip)+parseInt(investment);
 
 	$.ajax({
   	
         url : "newEstimateAction",
         type: 'post',
         
-        data: {'upfrontInvestment' : investment , 'sip' : sip ,'planName' : planName , 'riskCategory' : riskCategory },
+        data: {'upfrontInvestment' : investment , 'sipAmount' : sipAmount , 'sipDuration' : sipDuration , 'sipDate' : sipDate ,'planName' : planName , 'riskCategory' : riskCategory },
         
         success : function(result){
         	if (result == "success") {
         	    	
         	  //document.getElementById('diamond-text-1').style.display ='none';
         	  /*alert ('success');*/
-        	  if (sip != 0) {
+        	  if (sipAmount != 0) {
         		 /* alert ('SIP is not 0 ');*/
         		  $("#diamond-text-7").removeClass('hidden');
 				  $("#diamond-text-8").removeClass('hidden');
 				  $("#diamond-text-9").removeClass('hidden');
 				  $("#diamond-text-10").removeClass('hidden');
 
-        		  $("#predicted-value-list-1").load("sipInvestment.jsp #predicted-value-list-1");
-        		  $("#predicted-value-list-2").load("sipInvestment.jsp #predicted-value-list-2");
-        		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
-        		  $("#investment-fund-list-data").load("sipInvestment.jsp #investment-fund-list-data");
+				  $("#predicted-value-for-one-year").load("newSipInvestment.jsp #predicted-value-for-one-year");
+	        	  $("#predicted-value-for-three-year").load("newSipInvestment.jsp #predicted-value-for-three-year");
+	        	  $("#predicted-value-for-five-year").load("newSipInvestment.jsp #predicted-value-for-five-year");
+	        	  $("#investment-fund-list-data").load("newSipInvestment.jsp #investment-fund-list-data");
         	  }
         	  else {
         		 /* alert ('SIP is 0 ');*/

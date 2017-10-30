@@ -47,8 +47,7 @@
 
 </head>
 
-<body class="homepage bg-warning"
-	onload="showNewUpfrontInvestment('4000');">
+<body class="homepage bg-warning" onLoad="fillSipData();">
 	<header id="header">
 		<nav class="navbar navbar-inverse" role="banner">
 			<div class="container">
@@ -96,37 +95,82 @@
 
 	</header>
 	<%
-		session.setAttribute("transactionType", "UPFRONT");
+		session.setAttribute("transactionType", "SIP");
 	%>
-	<input type="hidden" id="transactionType" value="UPFRONT" />
+	<input type="hidden" id="transactionType" value="SIP" />
 	<section id="one">
 		<div class="row">
 			<div id="investment-options" class="col-md-6 ">
-				<div id="upfront-text" class="row row-fourth"
-					style="margin-top: 40px; margin-bottom: 35px;">
+				<div id="sip-text" class="row row-fourth"
+					style="margin-top: 10px; margin-bottom: 20px;">
 					<div class="col-md-2"></div>
 					<div class="col-md-10">
-						<p style="font-size: 18px;">How much do you want to invest now?</p>
+						<p style="font-size: 18px;">How much do you want to invest monthly?</p>
 					</div>
 				</div>
 				
 				
 				
-				<div id="upfront-value" class="row row-input row-fifth">
+				<div id="sip-value" class="row row-input row-fifth">
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="range" type="range" min="2000" max="1000000" step="500"
-							value="4000" onchange="showNewUpfrontInvestment(this.value)" />
+						<input id="sip-amount-range" type="range" min="500" max="50000" step="500"
+							value="2000" onchange="showSipAmountPerMonth(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
-						<p>Rs. <span id="upfrontInvestment"></span></p>
+						<p>Rs. <span id="sipPerMonth"></span></p>
+						<!-- <input type="number" min="2000" max="1000000" step="500" value="4000"></input> -->
+					</div>
+				</div>
+			</div>
+			
+			
+			<div id="duration-text" class="row row-fourth"
+					style="margin-top: 20px; margin-bottom: 20px;">
+					<div class="col-md-2"></div>
+					<div class="col-md-10">
+						<p style="font-size: 18px;">How long do you expect to invest for?</p>
+					</div>
+				</div>
+				
+				
+				
+			<div id="duration-value" class="row row-input row-fifth">
+				<div class="col-md-2"></div>
+				<div>
+					<div class="col-md-6">
+						<input id="sip-duration-range" type="range" min="3" max="50" step="1"
+							value="5" onchange="showDuration(this.value)" />
+					</div>
+					<div class="col-md-2"></div>
+					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
+						<p><span id="sip-duration"></span>&nbsp;&nbsp;&nbsp;years</p>
 						<!-- <input type="number" min="2000" max="1000000" step="500" value="4000"></input> -->
 					</div>
 				</div>
 			</div>
 
+			<div class="row" style="margin-top:30px;">
+				<div  class="col-md-1" ></div>
+				<div  class="col-md-11" >
+					<div class="col-md-7"><label for="sip-date" style="font-family:Aparajita;font-size:25px;" class="pull-right">Please select SIP installment Date </label></div>
+					<div  class="col-md-1" ></div>
+					<div  class="col-md-2" >				  
+						<select class="form-control" id="sip-date" name="sipDate" onChange="showDate()">
+					        <option value="1">1</option>
+					        <option value="5" selected>5</option>
+					        <option value="10">10</option>
+					        <option value="15">15</option>
+					        <option value="20">20</option>
+					        <option value="25">25</option>
+			      		</select>
+					</div>
+					<div  class="col-md-2" ></div>
+				</div>
+				
+			</div>
 
 				<div class="row row-second" style="margin-top: 30px;">
 					<div class="col-md-2"></div>

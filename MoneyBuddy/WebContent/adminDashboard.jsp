@@ -96,7 +96,7 @@
         </nav><!--/nav-->
 		
     </header>
-	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	
 	<section id="one">
 	
 	<div class="row" style="margin-top:-60px;margin-bottom:50px;">

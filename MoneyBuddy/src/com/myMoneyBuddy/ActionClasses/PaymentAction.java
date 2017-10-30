@@ -186,7 +186,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 			}
 			paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
-					"NEW",sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
+					"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipEndDate").toString(),sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
 					"Customer bought some mutual funds",getGroupName());
 			
 			String str ;

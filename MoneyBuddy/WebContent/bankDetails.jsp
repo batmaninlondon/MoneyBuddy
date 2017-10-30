@@ -96,7 +96,7 @@
         </nav><!--/nav-->
 		
     </header>
-	<% session.setAttribute("transactionType", "UPFRONT"); %>
+	
 	<section id="bankDetails">
 	
 	<div class="row" style="margin-top:-60px;margin-bottom:50px;">
@@ -187,7 +187,7 @@
 							</tr>
 						</s:iterator>
 						<tr>
-						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. <s:property value="#session.upfrontInvestment"/></b></td>
+						    <td class="center" style="padding:0px;vertical-align: middle;"><b>Total : Rs. <s:property value="#session.totalInvestment"/></b></td>
 						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
 						    <td class="center" style="padding:0px;">
 						    <button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="populateBankDetails();">Pay Now</button>
