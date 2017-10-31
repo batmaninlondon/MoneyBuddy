@@ -5,6 +5,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,8 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 	private String dummyMsg;
 	private String productName;
 
-
+	private InputStream stream;
+	
 	public String execute() {
 
 		try {
@@ -36,25 +38,37 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 
 		QueryProducts queryProducts = new QueryProducts();
 		/*dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);*/
-		
 		System.out.println("InvestmentDetails action class called - start ");
+		System.out.println("InvestmentDetails action class :  productName : "+getProductName());
+		System.out.println("InvestmentDetails action class :  productName.length() : "+getProductName().length());
 		
 		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),getProductName());
 
+		sessionMap.put("investmentDetailsDataModel", investmentDetailsDataModel);
+		logger.debug("InvestmentDetailsAction class : execute method : stored investmentDetailsDataModel : "+investmentDetailsDataModel+" in session id : "+sessionMap.getClass().getName());
+		
+		System.out.println("InvestmentDetailsAction class : execute method : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
+		
 		System.out.println("InvestmentDetails action class called - end ");
 		
 		logger.debug("InvestmentDetailsAction class : execute method : end");
 
+		String str = "success";
+	    stream = new ByteArrayInputStream(str.getBytes());
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
 			logger.debug("InvestmentDetailsAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
     	catch (Exception e) {	
     		logger.debug("InvestmentDetailsAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
 	}
@@ -92,5 +106,12 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 		this.productName = productName;
 	}
 
+	public InputStream getStream() {
+		return stream;
+	}
+
+	public void setStream(InputStream stream) {
+		this.stream = stream;
+	}
 
 }

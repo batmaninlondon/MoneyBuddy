@@ -508,6 +508,8 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		{
 			logger.debug("QueryProducts class : getInvestmentDetailsData method : start");
 			
+			System.out.println("getInvestmentDetailsData : customerId : "+customerId);
+			System.out.println("getInvestmentDetailsData : productName : "+productName);
 			factory = new AnnotationConfiguration()
 					.configure()
 					.addAnnotatedClass(ProductDetails.class).addAnnotatedClass(TransactionDetails.class)
@@ -523,7 +525,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			String productId = null;
 			if (result != null)
 				productId = result.toString();
-			
+			System.out.println("getInvestmentDetailsData : productId : "+productId);
 			Query query = session.createQuery("SELECT transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
 			       
 			String quantity;
@@ -544,6 +546,8 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 
 			session.getTransaction().commit();
 
+			System.out.println("getInvestmentDetailsData : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
+			
 			logger.debug("QueryProducts class : getInvestmentDetailsData method : end");
 			return investmentDetailsDataModel;
 		}

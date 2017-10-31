@@ -1,6 +1,8 @@
 package com.myMoneyBuddy.DAOClasses;
 
-public class PortfolioDataModel {
+import java.io.Serializable;
+
+public class PortfolioDataModel implements Serializable{
 
 	private String fundName;
 	private String units;

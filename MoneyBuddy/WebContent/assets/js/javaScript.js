@@ -68,6 +68,39 @@ function changeUploadStatus(el)
 }
 
 
+function fundDetailHandler(el) {
+
+	    var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
+
+	    //alert ('selectedItem : '+selectedItem);
+	    $.ajax({
+	        url : "investmentDetailsAction",
+	        type: 'post',
+	        
+	        data: { 'productName' : selectedItem  },
+
+	        success : function(result){
+	        	
+	        	if (result == "success") {
+	        		
+	        		$( "#dialog" ).dialog({autoOpen: true,
+	        	    	title:selectedItem,
+	        	    	width: 800,
+	        	    	height:300,
+	        	    	scrollable: true});
+
+	        	}
+	        	else {
+	        		/*alert('Inside resetPassword error !!');*/
+	        		window.location='errorPage';
+	        	}
+
+	        }
+	    });
+	    
+	    
+	  }
+
 function downloadDbfFile(el)
 {
 	/*alert('showPLan function called !! ');*/
@@ -1502,7 +1535,7 @@ function newUpdate(){
 		var sipDate = document.getElementById('sip-date').value;
 		/*var totalInvestment = parseInt(sip)*12*parseInt(years)+parseInt(sip);*/
 	} else{
-		alert('UPFRONT');
+		//alert('UPFRONT');
 		var sipAmount = "0";
 		var investment = document.getElementById("upfrontInvestment").innerHTML;
 		var sipDuration = "0"; // in years

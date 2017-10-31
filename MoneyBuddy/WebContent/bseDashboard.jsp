@@ -173,20 +173,20 @@ google.charts.setOnLoadCallback(drawTable);
 					}
 
 
-		  function fundDetailHandler(el) {
-			    alert("Select event!");
+<%-- 		  function fundDetailHandler(el) {
+			    //alert("Select event!");
 			    
 			    //var selectedItem = table.getSelection()[0];
 			    var selectedItem = $(el).closest("tr").find('td:eq(0)').text();
 			    //var selectedItem = $(el).closest("tr").find('td:eq(1)').text();
 			    
-			    alert("The user selected .. " + selectedItem);
-			    if (selectedItem) {
-			    	alert("HI");
-			      var value = data.getValue(selectedItem.row, 0);
+			    //alert("selectedItem " + selectedItem);
+			    /* if (selectedItem) {
+			    //	alert("HI");
+			      var value = selectedItem;
 
-			      alert("The user selected " + value);
-			    }
+			      //alert("The user selected " + value);
+			    } */
 			    
 			    var selectedItem =null;
 			    
@@ -225,7 +225,7 @@ google.charts.setOnLoadCallback(drawTable);
 			    
 			    
 			    $( "#dialog" ).dialog({autoOpen: true,
-			    	title:value,
+			    	title:selectedItem,
 			    	width: 800,
 			    	height:300,
 			    	scrollable: true});
@@ -234,7 +234,7 @@ google.charts.setOnLoadCallback(drawTable);
 			    
 			    
 			   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
-			  }
+			  } --%>
 </script>
     
   <script>
@@ -379,6 +379,56 @@ $( function() {
 				</div>
 			</div>
 		</div>
+		
+		
+		<div id="dialog" title="Basic dialog" style="display:none;">
+			<div class="row" id="fund-history">
+				<div class="col-md-12" style="margin:20px;">
+					<div class="tab-pane fade-in active">
+				 
+					<table class="table table-bordered" >
+						<thead class="table-head">
+							<tr>
+								<th class="center col-md-3">Date Of Purchase</th>
+								<th class="center col-md-3">Units Purchased</th>
+								<th class="center col-md-3">NAV Purchased</th>
+								<th class="center col-md-3">Transaction Type</th>
+							</tr>
+						</thead>
+						<tbody class="table-body" >
+		
+								<s:iterator value="#session.investmentDetailsDataModel" var="investmentDetailsDataModelElement">
+									
+									<tr>
+									    <td class="center"><s:property value="#investmentDetailsDataModelElement.transactionDate"/></td>
+									    <td class="center"><s:property value="#investmentDetailsDataModelElement.units"/></td>
+									    <td class="center"><s:property value="#investmentDetailsDataModelElement.navPurchased"/></td>
+									    <td class="center"><s:property value="#investmentDetailsDataModelElement.transactionType"/></td>
+									</tr>
+								</s:iterator>
+								
+<!-- 								<tr>
+									    <td class="center">1</td>
+									    <td class="center">2</td>
+									    <td class="center">3</td>
+									    <td class="center">4</td>
+									</tr> -->
+		
+						</tbody>
+		   			</table>
+					
+					
+					
+					
+	<!-- 					<div id="ajaxResponse"></div>
+						<div class="col-md-12">
+							<div id="chart_div1" class="chart"></div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		
 		<div id="dialog" title="Basic dialog" style="display:none;">
   			<!-- <table class="table table-striped table-bordered" >

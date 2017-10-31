@@ -1,6 +1,8 @@
 package com.myMoneyBuddy.DAOClasses;
 
-public class InvestmentDetailsDataModel {
+import java.io.Serializable;
+
+public class InvestmentDetailsDataModel implements Serializable{
 
 	private String transactionDate;
 	private String units;
