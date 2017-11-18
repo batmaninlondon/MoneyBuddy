@@ -3,7 +3,7 @@ package com.myMoneyBuddy.mailerClasses;
 import java.util.HashMap;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.mailerClasses.sendMail;;
+import com.myMoneyBuddy.mailerClasses.SendMail;;
 public class SendingMailWithPdfTest {
 	
 	public static void main(String args[]) throws MoneyBuddyException  {
@@ -12,7 +12,7 @@ public class SendingMailWithPdfTest {
 		map.put("Fund1", "400");
 		map.put("Fund2", "500");
 		map.put("Fund3", "600");
-		sendMail abc = new sendMail();
+		SendMail abc = new SendMail();
 		abc.sendMailwithAttachement(map, "Invoice_Template","savita.wadhwani@gmail.com");
 		
 	}

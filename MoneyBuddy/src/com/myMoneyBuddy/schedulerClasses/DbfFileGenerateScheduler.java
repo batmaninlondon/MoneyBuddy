@@ -62,9 +62,57 @@ public class DbfFileGenerateScheduler {
 					.withIdentity("SipInstallmentGeneratorTrigger", "Group")
 					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 10 * * ?"))
 					.build();
+			
+			JobDetail karvyCustomerDbfFileGeneratorJob = JobBuilder.newJob(KarvyCustomerDbfFileGenerator.class)
+					.withIdentity("KarvyCustomerDbfFileGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 10 am (10 hours) everyday
+			
+			Trigger karvyCustomerDbfFileGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("KarvyCustomerDbfFileGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 02 18 * * ?"))
+					.build();
+			
+			JobDetail karvyTransactionDbfFileGeneratorJob = JobBuilder.newJob(KarvyTransactionDbfFileGenerator.class)
+					.withIdentity("KarvyTransactionDbfFileGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 10 am (10 hours) everyday
+			
+			Trigger karvyTransactionDbfFileGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("KarvyTransactionDbfFileGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 33 23 * * ?"))
+					.build();
+			
+			JobDetail camsTransactionDbfFileGeneratorJob = JobBuilder.newJob(CamsTransactionDbfFileGenerator.class)
+					.withIdentity("CamsTransactionDbfFileGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 10 am (10 hours) everyday
+			
+			Trigger camsTransactionDbfFileGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("CamsTransactionDbfFileGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 14 0 * * ?"))
+					.build();
+			
+			JobDetail transactionNavValuesUpdaterJob = JobBuilder.newJob(TransactionNavValuesUpdater.class)
+					.withIdentity("TransactionNavValuesUpdater", "Group").build();
+			
+			// This Trigger will work at 10 am (10 hours) everyday
+			
+			Trigger transactionNavValuesUpdaterTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("TransactionNavValuesUpdaterTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 45 12 * * ?"))
+					.build();
 	
 			scheduler.scheduleJob(dbfFileGeneratorJob, dbfFileGeneratorTrigger);
 			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
+			scheduler.scheduleJob(karvyCustomerDbfFileGeneratorJob, karvyCustomerDbfFileGeneratorTrigger);
+			scheduler.scheduleJob(karvyTransactionDbfFileGeneratorJob, karvyTransactionDbfFileGeneratorTrigger);
+			scheduler.scheduleJob(camsTransactionDbfFileGeneratorJob, camsTransactionDbfFileGeneratorTrigger);
+			scheduler.scheduleJob(transactionNavValuesUpdaterJob, transactionNavValuesUpdaterTrigger);
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

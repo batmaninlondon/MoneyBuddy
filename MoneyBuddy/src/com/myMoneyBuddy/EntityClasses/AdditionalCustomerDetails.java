@@ -45,6 +45,9 @@ public class AdditionalCustomerDetails {
     @Column(name="ADDRESS_LINE_2")
     private String addressLineTwo;
     
+    @Column(name="ADDRESS_LINE_3")
+    private String addressLineThree;
+    
     @Column(name="RESIDENTIAL_CITY")
     private String residentialCity;
     
@@ -57,13 +60,16 @@ public class AdditionalCustomerDetails {
     @Column(name="RESIDENTIAL_COUNTRY")
     private String residentialCountry;
     
+    @Column(name="TAX_STATUS")
+    private String taxStatus;
+    
     public AdditionalCustomerDetails() {
         
     }
 
 	public AdditionalCustomerDetails(String customerId, String fatherName, String dateOfBirth, String maritalStatus,
-			String nationality, String status, String addressLineOne, String addressLineTwo, String residentialCity,
-			String residentialState, String residentialPin, String residentialCountry) {
+			String nationality, String status, String addressLineOne, String addressLineTwo, String addressLineThree, String residentialCity,
+			String residentialState, String residentialPin, String residentialCountry, String taxStatus) {
 		super();
 		this.customerId = customerId;
 		this.fatherName = fatherName;
@@ -73,10 +79,12 @@ public class AdditionalCustomerDetails {
 		this.status = status;
 		this.addressLineOne = addressLineOne;
 		this.addressLineTwo = addressLineTwo;
+		this.addressLineThree = addressLineThree;
 		this.residentialCity = residentialCity;
 		this.residentialState = residentialState;
 		this.residentialPin = residentialPin;
 		this.residentialCountry = residentialCountry;
+		this.taxStatus = taxStatus;
 	}
 
 	
@@ -145,6 +153,14 @@ public class AdditionalCustomerDetails {
 		this.addressLineTwo = addressLineTwo;
 	}
 
+	public String getAddressLineThree() {
+		return addressLineThree;
+	}
+
+	public void setAddressLineThree(String addressLineThree) {
+		this.addressLineThree = addressLineThree;
+	}
+
 	public String getResidentialCity() {
 		return residentialCity;
 	}
@@ -175,6 +191,14 @@ public class AdditionalCustomerDetails {
 
 	public void setResidentialCountry(String residentialCountry) {
 		this.residentialCountry = residentialCountry;
+	}
+
+	public String getTaxStatus() {
+		return taxStatus;
+	}
+
+	public void setTaxStatus(String taxStatus) {
+		this.taxStatus = taxStatus;
 	}
 
 	@Override
@@ -210,6 +234,9 @@ public class AdditionalCustomerDetails {
         if ((this.addressLineTwo == null) ? (other.addressLineTwo != null) : !this.addressLineTwo.equals(other.addressLineTwo)) {
             return false;
         }
+        if ((this.addressLineThree == null) ? (other.addressLineThree != null) : !this.addressLineThree.equals(other.addressLineThree)) {
+            return false;
+        }
         if ((this.residentialCity == null) ? (other.residentialCity != null) : !this.residentialCity.equals(other.residentialCity)) {
             return false;
         }
@@ -220,6 +247,9 @@ public class AdditionalCustomerDetails {
             return false;
         }
         if ((this.residentialCountry == null) ? (other.residentialCountry != null) : !this.residentialCountry.equals(other.residentialCountry)) {
+            return false;
+        }
+        if ((this.taxStatus == null) ? (other.taxStatus != null) : !this.taxStatus.equals(other.taxStatus)) {
             return false;
         }
         
@@ -237,10 +267,12 @@ public class AdditionalCustomerDetails {
         hash = 79 * hash + (this.status != null ? this.status.hashCode() : 0);
         hash = 79 * hash + (this.addressLineOne != null ? this.addressLineOne.hashCode() : 0);
         hash = 79 * hash + (this.addressLineTwo != null ? this.addressLineTwo.hashCode() : 0);
+        hash = 79 * hash + (this.addressLineThree != null ? this.addressLineThree.hashCode() : 0);
         hash = 79 * hash + (this.residentialCity != null ? this.residentialCity.hashCode() : 0);
         hash = 79 * hash + (this.residentialState != null ? this.residentialState.hashCode() : 0);
         hash = 79 * hash + (this.residentialPin != null ? this.residentialPin.hashCode() : 0);
         hash = 79 * hash + (this.residentialCountry != null ? this.residentialCountry.hashCode() : 0);
+        hash = 79 * hash + (this.taxStatus != null ? this.taxStatus.hashCode() : 0);
         return hash;
     }
 

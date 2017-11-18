@@ -27,6 +27,7 @@ import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.io.*;
 import com.linuxense.javadbf.*;
@@ -73,15 +74,8 @@ public class Test {
 		    writer.setFields( fields);
 
         
-		    SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(DbfDataDetails.class)
-					.buildSessionFactory();
-		    Session session = factory.openSession();
+		    Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-
-
-		    
 		   try
 			{
 				session.beginTransaction();
@@ -114,7 +108,7 @@ public class Test {
 					rowData = new Object[4];
 				}
 				
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 				
 				Properties properties = new Properties();
 				String propFilePath = "../../../config/config.properties";
@@ -146,8 +140,10 @@ public class Test {
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				if(factory!=null)
-					factory.close();
+				/*if(factory!=null)
+				factory.close();*/
+				//HibernateUtil.getSessionAnnotationFactory().close();
+				session.close();
 			}
 
 

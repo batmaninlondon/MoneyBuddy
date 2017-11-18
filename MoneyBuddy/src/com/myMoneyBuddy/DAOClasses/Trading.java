@@ -46,7 +46,8 @@ import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.mailerClasses.sendMail;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
@@ -126,13 +127,12 @@ public class Trading {
 
 	}
 
-	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipEndDate,
+	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipStartDate, String sipEndDate,
 			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
 
 
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
 
-		SessionFactory factory = null;
 		Session session = null;
 
 		Double totalAmount = 0.0;
@@ -153,13 +153,8 @@ public class Trading {
 		try {
 
 			logger.debug("Trading class : executeTrade method : start");
-			factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(Transactions.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
-					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
-					.addAnnotatedClass(DbfDataDetails.class).addAnnotatedClass(SipDetails.class)
-					.buildSessionFactory();
-			session = factory.openSession();
+			
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
 			session.beginTransaction();
@@ -196,13 +191,7 @@ public class Trading {
 
 			String transactionId = tempTransaction.getTransactionId();
 
-			session.beginTransaction();
 			
-			tempSipDetail = new SipDetails(customerId, transactionId,
-					sipDate, sipEndDate,"No","No");
-
-			session.save(tempSipDetail);
-			session.getTransaction().commit();
 			
 			Properties properties = new Properties();
 			String propFilePath = "../../../config/client.properties";
@@ -253,7 +242,7 @@ public class Trading {
 
 				System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
 
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 
 				/*session.beginTransaction();
 
@@ -275,9 +264,9 @@ public class Trading {
 
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
 						transactionCode,buySell, Double.toString(currentTransactionAmount),
-						null, null,null,"NO",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB); 		
+						null, null,null,"N",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB,"N"); 		
 
-				session.beginTransaction();
+				//session.beginTransaction();
 				session.save(tempTransactionDetail);
 
 				logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
@@ -286,6 +275,14 @@ public class Trading {
 
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 
+				session.beginTransaction();
+				
+				tempSipDetail = new SipDetails(customerId, transactionDetailId,
+						sipDate, sipStartDate, sipEndDate,"N","N");
+
+				session.save(tempSipDetail);
+				session.getTransaction().commit();
+				
 				dateFormat = new SimpleDateFormat("HH:mm:ss");
 				Date CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
 				
@@ -302,7 +299,7 @@ public class Trading {
 					frmtdDateForDBF = dateFormat.format(dateForDbf);
 				}
 			    
-				tempDbfDataDetails  = new DbfDataDetails(transactionDetailId, customerId,frmtdDateForDB,frmtdDateForDB,"NO"); 		
+				tempDbfDataDetails  = new DbfDataDetails(transactionDetailId, customerId,frmtdDateForDB,frmtdDateForDB,"N"); 		
 
 				session.beginTransaction();
 				session.save(tempDbfDataDetails);
@@ -507,6 +504,7 @@ public class Trading {
 				System.out.println("paymentUrl: "+paymentUrl);
 			}
 
+			
 			logger.debug("Trading class : executeTrade method : end");
 
 			return paymentUrl;
@@ -520,8 +518,10 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			if(session!=null)
-				session.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 
@@ -533,7 +533,6 @@ public class Trading {
 
 	public void checkPaymentStatus(String customerId) throws MoneyBuddyException {
 
-		SessionFactory factory = null;
 		Session session = null;
 		Query query;
 		List<Object[]> transactionDetails;
@@ -556,13 +555,7 @@ public class Trading {
 
 			logger.debug("Trading class : checkPaymentStatus method : start");
 
-			factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(PaymentDetails.class)
-					.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(Customers.class)
-					.addAnnotatedClass(ProductDetails.class)
-					.buildSessionFactory();
-			session = factory.openSession();
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
 			session.beginTransaction();
@@ -570,19 +563,19 @@ public class Trading {
 
 			customerIds = query.list();
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 			for (String customerid : customerIds)  {
 				System.out.println("customerid : "+customerid);
 
 
 			}
-				session.beginTransaction();
+				//session.beginTransaction();
 				query = session.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='Pending'");
 
 				transactionDetails = query.list();
 
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 
 				for (Object[]  transactionDetail : transactionDetails)  {
 
@@ -607,7 +600,7 @@ public class Trading {
 
 					if (moreThanDay)  {
 
-						session.beginTransaction();
+						//session.beginTransaction();
 						session.createQuery("update TransactionDetails set transactionStatus='Rejected' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
 						session.getTransaction().commit();
 
@@ -662,9 +655,9 @@ public class Trading {
 							query = session.createQuery("select paymentRefNum from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
 							paymentDetailsList = query.list();
 
-							session.getTransaction().commit();
+							//session.getTransaction().commit();
 
-							session.beginTransaction();
+							//session.beginTransaction();
 
 							if (paymentDetailsList.isEmpty())  {
 								tempPaymentDetail = new PaymentDetails( transactionDetail[0].toString(), transactionDetail[1].toString(), transactionDetail[3].toString(),
@@ -697,9 +690,9 @@ public class Trading {
 								if (result != null) 
 									pendingOrder = Double.parseDouble(result.toString());
 
-								session.getTransaction().commit();
+								//session.getTransaction().commit();
 								
-								session.beginTransaction();
+								//session.beginTransaction();
 								result = session.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
 
 								if (result != null)
@@ -707,10 +700,10 @@ public class Trading {
 
 								pendingOrder -= quantity;
 								totalQuantity += quantity;
-								session.getTransaction().commit();
+								//session.getTransaction().commit();
 
 
-								session.beginTransaction();
+								//session.beginTransaction();
 								session.createQuery("update ebdb.CUSTOMER_PORTFOLIO set PENDING_ORDERS='"+pendingOrder+"', TOTAL_QUANTITY='"+totalQuantity+"' where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").executeUpdate();
 								session.getTransaction().commit();
 
@@ -720,19 +713,19 @@ public class Trading {
 
 								if (result != null) 
 									productName = result.toString();
-								session.getTransaction().commit();
+								//session.getTransaction().commit();
 
 								successfulPayment.put(productName, transactionDetail[6].toString());
 								
 							}
 							else {
-								session.beginTransaction();
+								//session.beginTransaction();
 								Object result = session.createQuery("select productName from ProductDetails where productId='"+transactionDetail[4].toString()+"'").uniqueResult();
 								String productName = null;
 
 								if (result != null) 
 									productName = result.toString();
-								session.getTransaction().commit();
+								//session.getTransaction().commit();
 								
 								pendingPayment.put(productName, transactionDetail[6].toString());
 								
@@ -747,17 +740,17 @@ public class Trading {
 
 				if (!successfulPayment.isEmpty())
 				{
-					session.beginTransaction();
+					//session.beginTransaction();
 					Object result = session.createQuery("select emailId from Customers where customerId='"+customerId+"'").uniqueResult();
 					String emailId = null;
 
 					if (result != null) 
 						emailId = result.toString();
 
-					session.getTransaction().commit();
+					//session.getTransaction().commit();
 
 					String subject="[MoneyBuddy] Thank you for the payment.";
-					sendMail sendMail = new sendMail();
+					SendMail sendMail = new SendMail();
 					StringBuilder bodyText = new StringBuilder();
 					bodyText.append("<div>")
 					.append("  Dear User<br/><br/>")
@@ -821,7 +814,7 @@ public class Trading {
 					sendMail.MailSending(emailId,bodyText,subject);
 
 				}*/
-
+				
 			logger.debug("Trading class : checkPaymentStatus method : end");
 
 		} catch (NumberFormatException | HibernateException e) {
@@ -832,6 +825,12 @@ public class Trading {
 			logger.debug("Trading class : checkPaymentStatus method : Caught exception  ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}

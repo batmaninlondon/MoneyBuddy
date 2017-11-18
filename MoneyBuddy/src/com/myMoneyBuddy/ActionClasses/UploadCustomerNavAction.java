@@ -23,6 +23,7 @@ import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -47,19 +48,13 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 
     public String execute() {
     	
-    	SessionFactory factory = null;
-		Session session = null;
+    	Session session = null;
 		
     	try {
     		
     		logger.debug("UploadCustomerNavAction class : execute method : end");
-    		
-    		factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(TransactionDetails.class)
-					.buildSessionFactory();
-			session = factory.openSession();
-			
+
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
     		session.beginTransaction();
 			Query query = session.createQuery("update TransactionDetails set unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
 
@@ -90,6 +85,12 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		}
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+    	}
     }
     
     @Override

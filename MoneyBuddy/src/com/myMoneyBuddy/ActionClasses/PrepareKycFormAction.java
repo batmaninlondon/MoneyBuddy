@@ -19,6 +19,8 @@ import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,8 +48,10 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 	private String maritalStatus;
     private String nationality;
     private String status;
+    private String taxStatus;
     private String addressLineOne;
 	private String addressLineTwo;
+	private String addressLineThree;
 	private String residentialCity;
     private String residentialState;
     private String residentialPin;
@@ -58,6 +62,8 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     private InputStream stream;
 	
     public String execute() {
+    	Session session = null;
+    	
     	try {
     		
     	logger.debug("PrepareKycFormAction class : execute method : start");
@@ -74,34 +80,27 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     	System.out.println(" PrepareKycFormAction execute method :residentialState : "+getResidentialState());
     	System.out.println(" PrepareKycFormAction execute method :residentialPin : "+getResidentialPin());
     	System.out.println(" PrepareKycFormAction execute method :residentialCountry : "+getResidentialCountry());
+    	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
     	
     	String customerId = sessionMap.get("customerId").toString();
     	
-    	SessionFactory factory = new AnnotationConfiguration()
-				.configure()
-				.addAnnotatedClass(AdditionalCustomerDetails.class)
-				.buildSessionFactory();
-	    Session session = factory.openSession(); 
+    	session = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(getDateOfBirth());
 		String frmtdDateForDB = dateFormat.format(date);
 		
 	    AdditionalCustomerDetails tempAdditionalCustomer = new AdditionalCustomerDetails(customerId, getFatherName(), frmtdDateForDB, getMaritalStatus(),
-				getNationality(), getStatus(), getAddressLineOne(), getAddressLineTwo(), getResidentialCity(),
-				getResidentialState(), getResidentialPin(),getResidentialCountry());
+				getNationality(), getStatus(), getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), getResidentialCity(),
+				getResidentialState(), getResidentialPin(),getResidentialCountry(), getTaxStatus());
 		session.beginTransaction();
 		session.saveOrUpdate(tempAdditionalCustomer);
 		session.getTransaction().commit();
 		
 		
     	GenerateKycForm generateKycForm = new GenerateKycForm();
-    	generateKycForm.generateKycFormPdf(customerId);
+    	generateKycForm.generateKycFormAndSendMail(customerId);
 
-
-
-    	
-		
     	logger.debug("PrepareKycFormAction class : execute method : end");
     	
     	System.out.println(" Returned Success !!");
@@ -124,6 +123,12 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
     		return ERROR;
+    	}
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
     	}
     }
     
@@ -201,6 +206,14 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		this.addressLineTwo = addressLineTwo;
 	}
 
+	public String getAddressLineThree() {
+		return addressLineThree;
+	}
+
+	public void setAddressLineThree(String addressLineThree) {
+		this.addressLineThree = addressLineThree;
+	}
+
 	public String getResidentialCity() {
 		return residentialCity;
 	}
@@ -231,6 +244,14 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 
 	public void setResidentialCountry(String residentialCountry) {
 		this.residentialCountry = residentialCountry;
+	}
+
+	public String getTaxStatus() {
+		return taxStatus;
+	}
+
+	public void setTaxStatus(String taxStatus) {
+		this.taxStatus = taxStatus;
 	}
 
 

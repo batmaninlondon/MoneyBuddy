@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-import com.myMoneyBuddy.mailerClasses.sendMail;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.opensymphony.xwork2.ActionSupport;
@@ -60,7 +60,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	    	}
-	    	if (customer.getVerificationStatus(getEmailId()).equalsIgnoreCase("NO"))  {
+	    	if (customer.getVerificationStatus(getEmailId()).equalsIgnoreCase("N"))  {
 	    		System.out.println("Verification not done for this email id ");
 	    		logger.debug("ForgotPasswordAction class : execute method : verification is not done for "+getEmailId());
 	    		String str = "verificationNotDone";
@@ -71,7 +71,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	logger.debug("ForgotPasswordAction class : execute method : stored emailId : "+getEmailId()+" in session id : "+sessionMap.getClass().getName());
 	    	
 	    	String subject="Reset your MoneyBuddy password.";
-	    	sendMail sendmail = new sendMail();
+	    	SendMail sendMail = new SendMail();
 	    	String hashedPassword = customer.getPassword(getEmailId());
 	    	String link = MAIL_ResetPassword_SITE_LINK+"?emailId="+emailId+"&hashedPassword="+hashedPassword;
 	    	StringBuilder bodyText = new StringBuilder();
@@ -84,7 +84,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	.append("  <h3>Thanks,</h3><br/><br/>")
 	    	.append("  <h3>MoneyBuddy Team</h3>")
 	    	.append("</div>");
-	    	sendmail.MailSending(getEmailId(), bodyText,subject);
+	    	sendMail.MailSending(getEmailId(), bodyText,subject);
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");

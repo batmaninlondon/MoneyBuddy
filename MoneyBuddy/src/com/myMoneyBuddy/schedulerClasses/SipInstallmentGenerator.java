@@ -28,6 +28,7 @@ import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class SipInstallmentGenerator implements org.quartz.Job{
 
@@ -35,15 +36,10 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
-		SessionFactory factory = null;
 		Session session = null;
 		
 		try {
-			factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(SipDetails.class)
-					.buildSessionFactory();
-			session = factory.openSession();
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
 			session.beginTransaction();
 			
@@ -55,11 +51,11 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 			Query query = session.createQuery("from SipDetails where sipDate = :sipDate and sipCompletionStatus = :sipCompletionStatus and sipFormSubmission = :sipFormSubmission ");
 
 			query.setParameter("sipDate", todayDate);
-			query.setParameter("sipCompletionStatus", "No");
-			query.setParameter("sipFormSubmission", "Yes");
+			query.setParameter("sipCompletionStatus", "N");
+			query.setParameter("sipFormSubmission", "Y");
 			
 			List<SipDetails> sipDetailsList = query.list();
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
@@ -77,10 +73,10 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        
 
 		        if (currentDate.compareTo(sipEndDate) > 0) {
-		        	session.beginTransaction();
-		        	query = session.createQuery("update SipDetails set sipCompletionStatus='Yes' where customerId= :customerId and transactionId = :transactionId ");
+		        	//session.beginTransaction();
+		        	query = session.createQuery("update SipDetails set sipCompletionStatus='Y' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
 		        	query.setParameter("customerId", sipDetail.getCustomerId());
-		        	query.setParameter("transactionId", sipDetail.getTransactionId());
+		        	query.setParameter("transactionDetailId", sipDetail.getTransactionDetailId());
 		        	
 		        	int updateResult = query.executeUpdate();
 					System.out.println(updateResult + " rows updated in SipDetails table ");
@@ -104,6 +100,12 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 			e.printStackTrace();
 
 		} 
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+		}
 	}
 
 }

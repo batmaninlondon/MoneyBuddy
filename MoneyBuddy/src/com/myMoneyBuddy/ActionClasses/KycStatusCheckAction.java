@@ -14,6 +14,7 @@ import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
@@ -41,17 +42,16 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
     private InputStream stream;
 
     public String execute() {
+    	
+    	Session session = null;
+    	
     	try {
     		
     	logger.debug("KycStatusCheckAction class : execute method : start");
     	System.out.println(" KycStatusCheckAction execute method Called !!");
 
 
-	    SessionFactory factory = new AnnotationConfiguration()
-				.configure()
-				.addAnnotatedClass(Customers.class)
-				.buildSessionFactory();
-	    Session session = factory.openSession();
+    	session = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    	
 		session.beginTransaction();
 		
@@ -62,7 +62,7 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
 		if (result != null)  
 			kycStatus = result.toString();
 
-		session.getTransaction().commit();
+		//session.getTransaction().commit();
 		
     	if ("NOT DONE".equalsIgnoreCase(kycStatus))  {
     		System.out.println("KYC is not done for this customer ");
@@ -94,6 +94,12 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
     		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
     		return ERROR;
+    	}
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
     	}
     }
     

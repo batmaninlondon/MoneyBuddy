@@ -46,6 +46,18 @@ public class ProductDetails {
 
     @Column(name="PERCENTAGE")
     private String percentage;
+    
+    @Column(name="AMC_CODE")
+    private String amcCode;
+    
+    @Column(name="RTA")
+    private String rta;
+    
+    @Column(name="KARVY_SCHEME_CODE")
+    private String karvySchemeCode;
+    
+    @Column(name="CAMS_SCHEME_CODE")
+    private String camsSchemeCode;
 
     public ProductDetails() {
 
@@ -53,7 +65,8 @@ public class ProductDetails {
 
     public ProductDetails(String riskCategory, String planName,
 			String productType, String productName, String productDescription,
-			String interestRate, String percentage) {
+			String interestRate, String percentage, String amcCode, String rta, 
+			String karvySchemeCode, String camsSchemeCode) {
 		super();
 		this.riskCategory = riskCategory;
 		this.planName = planName;
@@ -62,6 +75,10 @@ public class ProductDetails {
 		this.productDescription = productDescription;
 		this.interestRate = interestRate;
 		this.percentage = percentage;
+		this.amcCode = amcCode;
+		this.rta = rta;
+		this.karvySchemeCode = karvySchemeCode;
+		this.camsSchemeCode = camsSchemeCode;
 	}
 
 
@@ -129,6 +146,38 @@ public class ProductDetails {
 		this.percentage = percentage;
 	}
 
+	public String getAmcCode() {
+		return amcCode;
+	}
+
+	public void setAmcCode(String amcCode) {
+		this.amcCode = amcCode;
+	}
+
+	public String getRta() {
+		return rta;
+	}
+
+	public void setRta(String rta) {
+		this.rta = rta;
+	}
+
+	public String getKarvySchemeCode() {
+		return karvySchemeCode;
+	}
+
+	public void setKarvySchemeCode(String karvySchemeCode) {
+		this.karvySchemeCode = karvySchemeCode;
+	}
+
+	public String getCamsSchemeCode() {
+		return camsSchemeCode;
+	}
+
+	public void setCamsSchemeCode(String camsSchemeCode) {
+		this.camsSchemeCode = camsSchemeCode;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -163,6 +212,18 @@ public class ProductDetails {
         if ((this.percentage == null) ? (other.percentage != null) : !this.percentage.equals(other.percentage)) {
             return false;
         }
+        if ((this.amcCode == null) ? (other.amcCode != null) : !this.amcCode.equals(other.amcCode)) {
+            return false;
+        }
+        if ((this.rta == null) ? (other.rta != null) : !this.rta.equals(other.rta)) {
+            return false;
+        }
+        if ((this.karvySchemeCode == null) ? (other.karvySchemeCode != null) : !this.karvySchemeCode.equals(other.karvySchemeCode)) {
+            return false;
+        }
+        if ((this.camsSchemeCode == null) ? (other.camsSchemeCode != null) : !this.camsSchemeCode.equals(other.camsSchemeCode)) {
+            return false;
+        }
         return true;
     }
 
@@ -177,6 +238,10 @@ public class ProductDetails {
         hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
         hash = 83 * hash + (this.productDescription != null ? this.productDescription.hashCode() : 0);
         hash = 83 * hash + (this.percentage != null ? this.percentage.hashCode() : 0);
+        hash = 83 * hash + (this.amcCode != null ? this.amcCode.hashCode() : 0);
+        hash = 83 * hash + (this.rta != null ? this.rta.hashCode() : 0);
+        hash = 83 * hash + (this.karvySchemeCode != null ? this.karvySchemeCode.hashCode() : 0);
+        hash = 83 * hash + (this.camsSchemeCode != null ? this.camsSchemeCode.hashCode() : 0);
         return hash;
     }
 

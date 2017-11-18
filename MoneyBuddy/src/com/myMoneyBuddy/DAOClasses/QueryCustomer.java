@@ -7,6 +7,7 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.util.List;
 
@@ -24,12 +25,7 @@ public class QueryCustomer {
 	public Customers getCustomer(String emailId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomer class : getCustomer method : start");
-		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
 		Customers customer = new Customers();
 	
@@ -39,7 +35,7 @@ public class QueryCustomer {
 			session.beginTransaction();
 			customer = (Customers) session.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
 	
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomer method : end");
 			return customer;
@@ -55,8 +51,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 	}
 
@@ -66,11 +64,8 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getPassword method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(CustomerPasswordsHistory.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session =  HibernateUtil.getSessionAnnotationFactory().openSession();
+	
 
 		try
 		{
@@ -79,7 +74,7 @@ public class QueryCustomer {
 			int customerId = queryUser.getCustomerId(emailId);
 			CustomerPasswordsHistory customer = (CustomerPasswordsHistory)session.get(CustomerPasswordsHistory.class,Integer.toString(customerId));
 			String password = customer.getPassword();
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getPassword method : end");
 			return password;
@@ -95,8 +90,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 	}
 
@@ -104,11 +101,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getHashedPassword method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -117,7 +110,7 @@ public class QueryCustomer {
 			int customerId = queryCustomer.getCustomerId(emailId);
 			Customers user = (Customers)session.get(Customers.class,Integer.toString(customerId));
 			String hashedPassword = user.getPassword();
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getHashedPassword method : end");
 			return hashedPassword;
@@ -133,8 +126,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -143,11 +138,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getCustomerId method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		Object result;
 		int customerId =0 ;
@@ -173,8 +164,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -183,11 +176,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getCustomerName method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		String customerName =  null;
 
@@ -202,7 +191,7 @@ public class QueryCustomer {
 				customerName = customer.getFirstName()+customer.getLastName();
 			}
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomerName method : end");
 			return customerName;
@@ -218,8 +207,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -228,11 +219,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getCustomerMobileNumber method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		Object result;
 		String customerMobileNumber =  null;
@@ -246,7 +233,7 @@ public class QueryCustomer {
 			if ( result != null )
 				customerMobileNumber = result.toString();
 			
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomerMobileNumber method : end");
 			return customerMobileNumber;
@@ -262,8 +249,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -272,11 +261,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getVerificationStatus method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -286,7 +271,7 @@ public class QueryCustomer {
 			int customerId = queryCustomer.getCustomerId(emailId);
 			Customers customer = (Customers)session.get(Customers.class,Integer.toString(customerId));
 			String verificationStatus = customer.getVerificationStatus();
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getVerificationStatus method : end");
 			return verificationStatus;
@@ -302,8 +287,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -312,11 +299,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : existsUser method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -331,7 +314,7 @@ public class QueryCustomer {
 				return false;
 			}
 			System.out.println("QueryCustomer class : existsUser method : customer is not null");
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : existsUser method : end");
 			return true;
@@ -347,8 +330,10 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -357,11 +342,7 @@ public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyExceptio
 		
 		logger.debug("QueryCustomer class : existsMobileNumber method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -371,7 +352,7 @@ public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyExceptio
 			Query query = session.createQuery("select mobileNumber from Customers");
 			
 			List<String> mobileNumberList = query.list();
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			for (String mobileNum : mobileNumberList)  {
 
 				if (mobileNum.equals(mobileNumber) ) {
@@ -397,8 +378,10 @@ public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyExceptio
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}

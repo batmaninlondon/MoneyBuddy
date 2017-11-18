@@ -10,6 +10,7 @@ import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.BufferedInputStream;
@@ -49,19 +50,15 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 	
     	System.out.println("FileUploadStatusChangeAction class : execute method : date : "+date);
     	logger.debug("FileUploadStatusChangeAction class : execute method : start");
-    	
+    	Session session = null;
     	try {
 
-    		SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(DbfDataDetails.class)
-					.buildSessionFactory();
-		    Session session = factory.openSession();
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 				session.beginTransaction();
 
 			Query query = session.createQuery("update DbfDataDetails set uploadedStatus = :uploadedStatus where dbfDataDate = :dbfDataDate");
-			query.setParameter("uploadedStatus", "YES");
+			query.setParameter("uploadedStatus", "Y");
 			query.setParameter("dbfDataDate", getDate());
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
@@ -80,6 +77,12 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+    	}
 
     }
     

@@ -13,6 +13,7 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/datepicker.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -24,16 +25,34 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
     <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/wow.min.js"></script>
+    <%-- <script type="text/javascript" src="assets/js/jquery-ui.js"></script> --%>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-
+	<style type="text/css">
+		.ui-datepicker {
+		   background: #333;
+		   border: 1px solid #555;
+		   color: #EEE;
+		   width:200px;
+		   heigth:300px;
+		 }
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$('.datepicker').datepicker({
+				dateFormat: "yy-mm-dd"
+				
+			});
+		});
+	</script>
 </head>
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
@@ -126,8 +145,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="date-of-birth"  class="small-text pull-right">Date of Birth</label></div>
 			<div  class="col-md-6" >
-				  
-				  <input class="form-control" name = "date" id="date-of-birth" type="text" placeholder="Enter Date of Birth" style="margin-top:-10px;">
+                <input class="form-control datepicker" name = "date" id="date-of-birth"  placeholder="Enter Date of Birth" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -200,6 +218,60 @@
 		</div>
 
 	</div>
+	
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="tax-status" class="small-text pull-right">Tax Status</label>
+	      	</div>
+
+			<div  class="col-md-6" >
+				  
+			  	<select class="form-control" id="tax-status" style="margin-top:-10px;">
+			        <option value="Individual" selected>Individual</option>
+			        <option value="OnBeOfMinor">On Behalf Of Minor</option>
+			        <option value="Huf">HUF</option>
+			        <option value="Company">Company</option>
+			        <option value="AopBoi">AOP/BOI</option>
+			        <option value="Partnership">Partnership</option>
+			        <option value="BodyCorporate">Body Corporate</option>
+			        <option value="Trust">Trust</option>
+			        <option value="Society">Society</option>
+			        <option value="NriNre">NRI - Repatriable(NRE)</option>
+			        <option value="OverCorpoBody">Oversea Corporate Body</option>
+			        <option value="ForeInstiInvest">Foreign Institutional Investor</option>
+			        <option value="OverCorpoBodyOthers">Oversea Corporate Body - Others</option>
+			        <option value="ProviFundEpf">Provident Fund - EPF</option>
+			        <option value="SuperAnnuFund">Super Annuation Fund</option>
+			        <option value="GratuityFund">Gratuity Fund</option>
+			        <option value="BankFinanInsti">Bank/Finanacial Institution</option>
+			        <option value="SolePropri">Sole Proprietorship</option>
+			        <option value="PensionFund">Pension Fund</option>
+			        <option value="NriNro">NRI - Repatriable(NRO)</option>
+			        <option value="NriMinorNre">NRI - Minor (NRE)</option>
+			        <option value="NriHufNro">NRI-HUF(NRO)</option>
+			        <option value="NriThruNroAc">NRI Through NRO A/c</option>
+			        <option value="GloDevelopNet">Global Development Network</option>
+			        <option value="NriHufNre">NRI-HUF(NRE)</option>
+			        <option value="LimLiaParter">Limited Liability Partnership</option>
+			        <option value="PubLimCompany">Public Limited Company</option>
+			        <option value="PriLimCompany">Private Limited Company</option>
+			        <option value="UnlisCompany">Unlisted Company</option>
+			        <option value="OciRepatri">OCI - Repatriation</option>
+			        <option value="OciNonRepatri">OCI - Non Repatriation</option>
+			        <option value="Pio">Person of Indian Origin [PIO]</option>
+			        <option value="Ngo">Non-Government Organisation [NGO]</option>
+			        <option value="Others">Others</option>
+			        
+		      	</select>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+
+		</div>
+
+	</div>
 
 	<div class="row" >
 		<div class="col-md-3"></div>
@@ -234,6 +306,19 @@
 		<div class="col-md-4">
 		</div>
 	</div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="address-line-three"  class="small-text pull-right">Line 3</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" id="address-line-three" type="text" placeholder="Enter Address Line 3" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
 	
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
@@ -241,7 +326,78 @@
 			<div class="col-md-4"><label for="residential-city" class="small-text pull-right">City</label></div>
 			<div class="col-md-6" >
 				  
-				  <input class="form-control" id="residential-city" type="text" placeholder="Enter City" style="margin-top:-10px;">
+			  	<select class="form-control" id="residential-city" style="margin-top:-10px;">
+	  		      	<option value="Agra">Agra</option>
+					<option value="Ahmedabad">Ahmedabad</option>
+					<option value="Ajmer">Ajmer</option>
+					<option value="Allahabad">Allahabad</option>
+					<option value="Amritsar">Amritsar</option>
+					<option value="Anand">Anand</option>
+					<option value="Asansol">Asansol</option>
+					<option value="Aurangabad">Aurangabad</option>
+					<option value="Bangalore">Bangalore</option>
+					<option value="Baroda">Baroda</option>
+					<option value="Bharuch">Bharuch</option>
+					<option value="Bhavnagar">Bhavnagar</option>
+					<option value="Bhopal">Bhopal</option>
+					<option value="Bhubaneswar">Bhubaneswar</option>
+					<option value="Calicut">Calicut</option>
+					<option value="Chandigarh">Chandigarh</option>
+					<option value="Chennai">Chennai</option>
+					<option value="Coimbatore">Coimbatore</option>
+					<option value="Dehradun">Dehradun</option>
+					<option value="Dharwad">Dharwad</option>
+					<option value="Dubai">Dubai</option>
+					<option value="Durgapur">Durgapur</option>
+					<option value="Erode">Erode</option>
+					<option value="Guntur">Guntur</option>
+					<option value="Guwahati">Guwahati</option>
+					<option value="Hubli">Hubli</option>
+					<option value="Hyderabad">Hyderabad</option>
+					<option value="Indore">Indore</option>
+					<option value="Jaipur">Jaipur</option>
+					<option value="Jalandhar">Jalandhar</option>
+					<option value="Jalgaon">Jalgaon</option>
+					<option value="Jamnagar">Jamnagar</option>
+					<option value="Jamshedpur">Jamshedpur</option>
+					<option value="Jodpur">Jodpur</option>
+					<option value="Kanpur">Kanpur</option>
+					<option value="Karaikudi">Karaikudi</option>
+					<option value="Kochi">Kochi</option>
+					<option value="Kolkata">Kolkata</option>
+					<option value="Kota">Kota</option>
+					<option value="Kottayam">Kottayam</option>
+					<option value="Lucknow">Lucknow</option>
+					<option value="Ludhiana">Ludhiana</option>
+					<option value="Mangalore">Mangalore</option>
+					<option value="Meerut">Meerut</option>
+					<option value="Moradabad">Moradabad</option>
+					<option value="Mumbai">Mumbai</option>
+					<option value="Mysore">Mysore</option>
+					<option value="Nagpur">Nagpur</option>
+					<option value="Nasik">Nasik</option>
+					<option value="NewDelhi">New Delhi</option>
+					<option value="Panjim">Panjim</option>
+					<option value="Patna">Patna</option>
+					<option value="Pondicherry">Pondicherry</option>
+					<option value="Pune">Pune</option>
+					<option value="Raipur">Raipur</option>
+					<option value="Rajahmundry">Rajahmundry</option>
+					<option value="Rajkot">Rajkot</option>
+					<option value="Ranchi">Ranchi</option>
+					<option value="Salem">Salem</option>
+					<option value="Siliguri">Siliguri</option>
+					<option value="Surat">Surat</option>
+					<option value="Tirunelveli">Tirunelveli</option>
+					<option value="Tirupur">Tirupur</option>
+					<option value="Trichy">Trichy</option>
+					<option value="Trivandrum">Trivandrum</option>
+					<option value="Udaipur">Udaipur</option>
+					<option value="Varanasi">Varanasi</option>
+					<option value="Vashi">Vashi</option>
+					<option value="Vijayawada">Vijayawada</option>
+					<option value="Others">Others</option>
+			  </select>       
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -359,10 +515,6 @@
         </div>
     </footer>
 
-
-
-		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>

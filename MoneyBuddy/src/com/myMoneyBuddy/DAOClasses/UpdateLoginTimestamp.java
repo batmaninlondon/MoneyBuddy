@@ -7,6 +7,7 @@ package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,12 +28,7 @@ public class UpdateLoginTimestamp {
 
 		logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(CustomerLoginActivity.class)
-										.buildSessionFactory();
-							//addAnnotationClass(Company.class).buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
@@ -79,8 +75,10 @@ public class UpdateLoginTimestamp {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}

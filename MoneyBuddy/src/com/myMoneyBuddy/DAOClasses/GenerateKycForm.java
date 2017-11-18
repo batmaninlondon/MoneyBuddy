@@ -13,6 +13,8 @@ import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,22 +34,18 @@ public class GenerateKycForm {
 
 	Logger logger = Logger.getLogger(GenerateKycForm.class);
 	
-    public void generateKycFormPdf (String customerId) throws MoneyBuddyException
+    public void generateKycFormAndSendMail (String customerId) throws MoneyBuddyException
     {
 
     	logger.debug("GenerateKycForm class : generateKycFormPdf method : start");
     	PdfReader reader = null;
     	PdfStamper stamper = null;
-    	
+    	Session session = null;
     	
     	try {
 
     		
-    		SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(Customers.class).addAnnotatedClass(AdditionalCustomerDetails.class)
-					.buildSessionFactory();
-    		Session session = factory.openSession();
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
     		Customers customer = new Customers();
     		AdditionalCustomerDetails additionalDetails = new AdditionalCustomerDetails();
@@ -79,12 +77,12 @@ public class GenerateKycForm {
             session.beginTransaction();
 			customer = (Customers) session.createQuery("from Customers where customerId = '"+customerId+"'").uniqueResult();
 	
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
-			session.beginTransaction();
+			//session.beginTransaction();
 			additionalDetails = (AdditionalCustomerDetails) session.createQuery("from AdditionalCustomerDetails where customerId = '"+customerId+"'").uniqueResult();
 	
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
             
             String customerName = customer.getFirstName() + " " + customer.getLastName();
             form.setField("Name", customerName.toUpperCase());
@@ -126,8 +124,8 @@ public class GenerateKycForm {
             form.setField("PAN", customer.getPanCard().toUpperCase());
             
             form.setField("Address 1.0", "Updated");
-            form.setField("Address 1.1", additionalDetails.getAddressLineOne().toUpperCase());
-            form.setField("Address 1.2", additionalDetails.getAddressLineTwo().toUpperCase());
+            form.setField("Address 1.1", additionalDetails.getAddressLineOne().toUpperCase()+" "+additionalDetails.getAddressLineTwo().toUpperCase());
+            form.setField("Address 1.2", additionalDetails.getAddressLineThree().toUpperCase());
             form.setField("City", additionalDetails.getResidentialCity().toUpperCase());
             form.setField("Pin Code", additionalDetails.getResidentialPin());
             form.setField("State", additionalDetails.getResidentialState().toUpperCase());
@@ -181,6 +179,11 @@ public class GenerateKycForm {
            stamper.setFormFlattening(true);
            stamper.close();
            reader.close();
+           
+
+       		SendMail sendMail = new SendMail();
+       		sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId());
+       	
            System.out.println("End!!");
            
     	}
@@ -199,6 +202,10 @@ public class GenerateKycForm {
 
     		if(reader !=null)
     			reader.close();
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
     		
     	}
 

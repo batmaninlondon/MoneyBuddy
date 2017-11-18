@@ -79,7 +79,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	        }
-	    	if (customer.getVerificationStatus().equalsIgnoreCase("NO"))  {
+	    	if (customer.getVerificationStatus().equalsIgnoreCase("N"))  {
 	    		System.out.println("Verification not done for this email id ");
 	    		logger.debug("NewLoginAction class : execute method : verification is not done for "+getEmailId());
 	    		String str = "verificationNotDone";

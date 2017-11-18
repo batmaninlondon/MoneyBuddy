@@ -9,6 +9,7 @@ import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,31 +31,12 @@ public class insertCustomerDetails {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
     	
-    	SessionFactory factory = new AnnotationConfiguration()
-    											.configure()
-    											.addAnnotatedClass(Customers.class).addAnnotatedClass(CustomerPasswordsHistory.class)
-    											.addAnnotatedClass(CustomerLoginActivity.class)
-    											.buildSessionFactory();
-    											//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session session = factory.openSession();
+    	Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-    	/*SessionFactory factoryCustomerPasswordsHistory = new AnnotationConfiguration()
-    															.configure()
-    															.addAnnotatedClass(CustomerPasswordsHistory.class)
-    															.buildSessionFactory();
-    															//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session sessionCustomerPasswordsHistory = factoryCustomerPasswordsHistory.openSession();
-
-    	SessionFactory factoryCustomerLoginActivity = new AnnotationConfiguration()
-    														.configure()
-    														.addAnnotatedClass(CustomerLoginActivity.class)
-    														.buildSessionFactory();
-    														//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session sessionCustomerLoginActivity = factoryCustomerLoginActivity.openSession();*/
-
+    	
     	try {
 
-    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE");
+    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE",null,"N","N");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();
@@ -101,8 +83,10 @@ public class insertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		if(factory !=null)
-    			factory.close();
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
     		
     	}
 
@@ -111,12 +95,7 @@ public class insertCustomerDetails {
     public void updateVerificationStatus (String password) throws MoneyBuddyException {
 
 		logger.debug("insertCustomerDetails class : updateVerificationStatus method : start");
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(Customers.class)
-										.buildSessionFactory();
-							//addAnnotationClass(Company.class).buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
@@ -124,7 +103,7 @@ public class insertCustomerDetails {
 
 			Query query = session.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
 
-			query.setParameter("verificationStatus", "YES");
+			query.setParameter("verificationStatus", "Y");
 
 			query.setParameter("password", password);
 
@@ -132,7 +111,7 @@ public class insertCustomerDetails {
 
 			session.getTransaction().commit();
     		
-    		logger.debug("insertCustomerDetails class : updateVerificationStatus method : updated data of Customers table to set verificationStatus YES");
+    		logger.debug("insertCustomerDetails class : updateVerificationStatus method : updated data of Customers table to set verificationStatus Y");
     		
     		logger.debug("insertCustomerDetails class : updateVerificationStatus method : end");
 		}
@@ -147,8 +126,10 @@ public class insertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}

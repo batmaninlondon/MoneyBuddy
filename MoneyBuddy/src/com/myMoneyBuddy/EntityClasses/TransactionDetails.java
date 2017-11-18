@@ -78,6 +78,9 @@ public class TransactionDetails {
     
     @Column(name="UPDATE_DATE")
     private String updateDate;
+    
+    @Column(name="RTA_FILE_GENERATED ")
+    private String rtaFileGenerated;
 
     public TransactionDetails() {
 
@@ -88,7 +91,7 @@ public class TransactionDetails {
 public TransactionDetails(String transactionId, String bseOrderId, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String transactionAmount, String transactionStatus,
 			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
-			String unitPrice, String transactionDate, String updateDate) {
+			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
@@ -107,6 +110,7 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
 		this.unitPrice = unitPrice;
 		this.transactionDate = transactionDate;
 		this.updateDate = updateDate;
+		this.rtaFileGenerated = rtaFileGenerated;
 	}
 
 
@@ -280,6 +284,18 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
 		this.updateDate = updateDate;
 	}
 
+	public String getRtaFileGenerated() {
+		return rtaFileGenerated;
+	}
+
+
+
+	public void setRtaFileGenerated(String rtaFileGenerated) {
+		this.rtaFileGenerated = rtaFileGenerated;
+	}
+
+
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -344,6 +360,9 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
         if ((this.updateDate == null) ? (other.updateDate != null) : !this.updateDate.equals(other.updateDate)) {
             return false;
         }
+        if ((this.rtaFileGenerated == null) ? (other.rtaFileGenerated != null) : !this.rtaFileGenerated.equals(other.rtaFileGenerated)) {
+            return false;
+        }
         return true;
     }
 
@@ -368,6 +387,7 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
         hash = 83 * hash + (this.unitPrice != null ? this.unitPrice.hashCode() : 0);
         hash = 83 * hash + (this.transactionDate != null ? this.transactionDate.hashCode() : 0);
         hash = 83 * hash + (this.updateDate != null ? this.updateDate.hashCode() : 0);
+        hash = 83 * hash + (this.rtaFileGenerated != null ? this.rtaFileGenerated.hashCode() : 0);
         return hash;
     }
 

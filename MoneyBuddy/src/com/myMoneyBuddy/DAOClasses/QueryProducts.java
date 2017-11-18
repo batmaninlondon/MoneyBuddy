@@ -11,7 +11,7 @@ import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 /*import com.myMoneyBuddy.EntityClasses.PriceHistory;*/
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
-import net.sf.ehcache.hibernate.HibernateUtil;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -34,18 +34,13 @@ public class QueryProducts {
 
 	public double getInterestRates(String planName, String riskCategory) throws MoneyBuddyException{
 
-		SessionFactory factory = null;
 		Session session = null;
 		
 		try
 		{
 		logger.debug("QueryProducts class : getInterestRates method : start");
 
-		factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(ProductDetails.class)
-										.buildSessionFactory();
-		session = factory.openSession();
+		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		double avgInterestRate = 0.0;
 
@@ -58,7 +53,7 @@ public class QueryProducts {
 			for(ProductDetails productDetail : productDetailsList){
 				avgInterestRate = avgInterestRate+(Double.parseDouble(productDetail.getPercentage()) * Double.parseDouble(productDetail.getInterestRate()));
 			}
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			avgInterestRate = avgInterestRate/100;
 			
 			logger.debug("QueryProducts class : getInterestRates method : end");
@@ -80,8 +75,10 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -89,18 +86,13 @@ public class QueryProducts {
     
 	public HashMap<String,Double> getProductList(String riskCategory,String planName) throws MoneyBuddyException{
 
-		SessionFactory factory  = null;
 		Session session = null;
 		
 		try
 		{		
 		logger.debug("QueryProducts class : getProductList method : start");
 		
-		factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(ProductDetails.class)
-										.buildSessionFactory();
-		session = factory.openSession();
+		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 			session.beginTransaction();
 			
@@ -117,7 +109,7 @@ public class QueryProducts {
 				System.out.println("Percentage : "+productDetail.getPercentage());
 				hashMap.put(productDetail.getProductDescription(),Double.parseDouble(productDetail.getPercentage()));
 			}
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 
 			
@@ -140,8 +132,10 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 
@@ -149,17 +143,12 @@ public class QueryProducts {
     
 	public HashMap<String,Double> getProductAmountList(String riskCategory,String planName,Double upfrontInvestment) throws MoneyBuddyException
 	{
-		SessionFactory factory = null;
 		Session session = null;
 		try
 		{
 		logger.debug("QueryProducts class : getProductAmountList method : start");
 		
-		factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(ProductDetails.class)
-										.buildSessionFactory();
-		session = factory.openSession();
+		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 			session.beginTransaction();
 			Query query = session.createQuery("select productId,percentage from ProductDetails where riskCategory = :riskCategory and planName =:planName");
 			query.setParameter("riskCategory",riskCategory);
@@ -178,7 +167,7 @@ public class QueryProducts {
 
 			}
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 			
 			logger.debug("QueryProducts class : getProductAmountList method : end");
@@ -200,8 +189,10 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 
@@ -210,44 +201,13 @@ public class QueryProducts {
 	/*public List<DashboardDataModel> getDashboardData(String customerId, String investmentTypeName) throws MoneyBuddyException {*/
 	
 	public List<DashboardDataModel> getDashboardData(String customerId) throws MoneyBuddyException {
-		
-		SessionFactory factory = null;
-/*		SessionFactory factoryProductDetails = null;
-		//SessionFactory factoryPriceHistory = null;
-		SessionFactory factoryTransactionDetails = null;*/
+
 		Session session  = null;
-/*		Session sessionProductDetails  = null;
-		//Session sessionPriceHistory  = null;
-		Session sessionTransactionDetails  = null;*/
 		try
 		{
 			logger.debug("QueryProducts class : getDashboardData method : start");
 		
-		factory = new AnnotationConfiguration()
-														.configure()
-														.addAnnotatedClass(CustomerPortfolio.class).addAnnotatedClass(ProductDetails.class)
-														.addAnnotatedClass(TransactionDetails.class)
-														.buildSessionFactory();
-		session = factory.openSession();
-
-/*		factoryProductDetails = new AnnotationConfiguration()
-														.configure()
-														.addAnnotatedClass(ProductDetails.class)
-														.buildSessionFactory();
-		sessionProductDetails = factoryProductDetails.openSession();
-
-		factoryPriceHistory = new AnnotationConfiguration()
-													.configure()
-													.addAnnotatedClass(PriceHistory.class)
-													.buildSessionFactory();
-		sessionPriceHistory = factoryPriceHistory.openSession();
-		
-		factoryTransactionDetails = new AnnotationConfiguration()
-				.configure()
-				.addAnnotatedClass(TransactionDetails.class)
-				.buildSessionFactory();
-		sessionTransactionDetails = factoryTransactionDetails.openSession();*/
-
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			session.beginTransaction();
 			Query query = session.createQuery("from CustomerPortfolio where customerId = :customerId");
@@ -258,16 +218,16 @@ public class QueryProducts {
 			List<CustomerPortfolio> customerPortfolioList = query.list();
 			List<DashboardDataModel> dashboardDataModel = new LinkedList<DashboardDataModel>();
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			for(CustomerPortfolio customerPortfolio : customerPortfolioList){
 
-				session.beginTransaction();
+				//session.beginTransaction();
 														
 				query = session.createQuery("from ProductDetails where productId = :productId");
 				query.setParameter("productId",customerPortfolio.getProductId());
 				List<ProductDetails> productDetailsList = query.list();
 
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 
 /*				sessionPriceHistory.beginTransaction();
 				query = sessionPriceHistory.createQuery("from PriceHistory where productId = :productId  and date=curdate()");
@@ -278,14 +238,14 @@ public class QueryProducts {
 
 				sessionPriceHistory.getTransaction().commit();*/
 				
-				session.beginTransaction();
+				//session.beginTransaction();
 				query = session.createQuery("from TransactionDetails where transactionDetailId = :TransactionDetailId");
 				query.setParameter("TransactionDetailId",customerPortfolio.getTransactionDetailId());
 
 
 				List<TransactionDetails> TransactionDetailsList = query.list();
 
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 
 				double availableToSell = Double.parseDouble(customerPortfolio.getTotalQuantity());
 
@@ -339,8 +299,10 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 
 		}
@@ -351,7 +313,6 @@ public class QueryProducts {
 	
 	public List<PortfolioDataModel> getPortfolioData(String customerId) throws MoneyBuddyException {
 		
-		SessionFactory factory = null;
 		Session session  = null;
 		double soldUnit = 0.0;
 		double investedAmount = 0.0;
@@ -363,11 +324,7 @@ public class QueryProducts {
 		{
 			logger.debug("QueryProducts class : getPortfolioData method : start");
 			
-			factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(ProductDetails.class).addAnnotatedClass(TransactionDetails.class).addAnnotatedClass(NavHistory.class)
-					.buildSessionFactory();
-			session = factory.openSession();
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			session.beginTransaction();
 
@@ -469,7 +426,7 @@ public class QueryProducts {
 			 }
 
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 			logger.debug("QueryProducts class : getPortfolioData method : end");
 			return portfolioDataModel;
@@ -491,8 +448,10 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 
@@ -500,8 +459,7 @@ public class QueryProducts {
 	
 	
 public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customerId, String productName) throws MoneyBuddyException {
-		
-		SessionFactory factory = null;
+
 		Session session  = null;
 		
 		try
@@ -510,11 +468,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			
 			System.out.println("getInvestmentDetailsData : customerId : "+customerId);
 			System.out.println("getInvestmentDetailsData : productName : "+productName);
-			factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(ProductDetails.class).addAnnotatedClass(TransactionDetails.class)
-					.buildSessionFactory();
-			session = factory.openSession();
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			session.beginTransaction();
 
@@ -526,7 +480,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			if (result != null)
 				productId = result.toString();
 			System.out.println("getInvestmentDetailsData : productId : "+productId);
-			Query query = session.createQuery("SELECT transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
+			Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
 			       
 			String quantity;
 			for (Iterator it=query.iterate(); it.hasNext();)  {
@@ -544,7 +498,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			}
 
 
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 			System.out.println("getInvestmentDetailsData : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
 			
@@ -568,8 +522,10 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 

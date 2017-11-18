@@ -6,7 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-import com.myMoneyBuddy.mailerClasses.sendMail;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.insertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -104,8 +104,8 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	/*Date date = new Date();
     	String frmtdDate = dateFormat.format(date);*/
 
-    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword,null,null,null,null,null, "NO");
-    	sendMail sendMail = new sendMail();
+    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword,null,null,null,null,null, "N");
+    	SendMail sendMail = new SendMail();
 
     	String link = MAIL_ForgotPassword_SITE_LINK+"?hashedPassword="+hashedPassword;
 

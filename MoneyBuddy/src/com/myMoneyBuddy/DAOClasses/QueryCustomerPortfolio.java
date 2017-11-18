@@ -6,6 +6,7 @@ package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,11 +26,7 @@ public class QueryCustomerPortfolio {
 		
 		logger.debug("QueryCustomerPortfolio class : existsGroupName method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-														.configure()
-														.addAnnotatedClass(CustomerPortfolio.class)
-														.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -42,7 +39,7 @@ public class QueryCustomerPortfolio {
 			{
 				return true;
 			}
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomerPortfolio class : existsGroupName method : end");
 			return false;
@@ -58,8 +55,10 @@ public class QueryCustomerPortfolio {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory !=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 		}
 
 	}
@@ -67,14 +66,7 @@ public class QueryCustomerPortfolio {
 	public List<String> getGroupNameList(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomerPortfolio class : getGroupNameList method : start");
-		
-		SessionFactory factory = new AnnotationConfiguration()
-										.configure()
-										.addAnnotatedClass(CustomerPortfolio.class)
-										.buildSessionFactory();
-		Session session = factory.openSession();
-
-
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -88,7 +80,7 @@ public class QueryCustomerPortfolio {
 				System.out.println(" Group Name in the list is : "+groupName);
 			}*/
 			
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 
 			logger.debug("QueryCustomerPortfolio class : getGroupNameList method : end");
 			return groupNamesList;
@@ -104,8 +96,10 @@ public class QueryCustomerPortfolio {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory!=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 

@@ -1,4 +1,4 @@
-    $(document).ready(function(){
+/*    $(document).ready(function(){
       var date_input=$('input[name="date"]'); //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
@@ -8,7 +8,7 @@
         autoclose: true,
       };
       date_input.datepicker(options);
-    })
+    })*/
     
     
 
@@ -33,6 +33,8 @@ anim();
 function getURLParameter(name) {
 	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 	}
+
+
 
 function showUpfrontInvestment(newValue)
 {
@@ -417,8 +419,10 @@ function prepareKyc()
 	var maritalStatus = document.getElementById("marital-status").value;
 	var nationality = document.getElementById("nationality").value;
 	var status = document.getElementById("status").value;
+	var taxStatus = document.getElementById("tax-status").value;
 	var addressLineOne = document.getElementById("address-line-one").value;
 	var addressLineTwo = document.getElementById("address-line-two").value;
+	var addressLineThree = document.getElementById("address-line-three").value;
 	var residentialCity = document.getElementById("residential-city").value;
 	var residentialState = document.getElementById("residential-state").value;
 	var residentialPin = document.getElementById("residential-pin").value;
@@ -431,6 +435,7 @@ function prepareKyc()
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
@@ -443,6 +448,7 @@ function prepareKyc()
 		$("#father-name").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
@@ -455,6 +461,7 @@ function prepareKyc()
 		$("#father-name").removeClass('formInvalid');
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
@@ -467,6 +474,20 @@ function prepareKyc()
 		$("#father-name").removeClass('formInvalid');
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
+		$("#residential-city").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+		$("#residential-country").removeClass('formInvalid');
+		
+		return;
+	}
+	else if ( addressLineThree == '')  {
+		document.getElementById("address-line-three").className += " formInvalid";
+		document.getElementById("address-line-three").placeholder = "Line 3 can not be blank ";
+		$("#father-name").removeClass('formInvalid');
+		$("#date-of-birth").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
@@ -480,6 +501,7 @@ function prepareKyc()
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
 		
@@ -492,6 +514,7 @@ function prepareKyc()
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-country").removeClass('formInvalid');
 		
@@ -504,6 +527,7 @@ function prepareKyc()
 		$("#date-of-birth").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-city").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
 		
@@ -515,7 +539,7 @@ function prepareKyc()
         url : "prepareKycFormAction",
         type: 'post',
     	
-        data: { 'fatherName' : fatherName , 'dateOfBirth' : dateOfBirth , 'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status ,'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
+        data: { 'fatherName' : fatherName , 'dateOfBirth' : dateOfBirth , 'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
 
         success : function(result){
         	//alert('result : '+result);
@@ -1654,11 +1678,14 @@ function comparePasswords(password1,password2) {
     
 function populateBankDetails() 
 {
-	
+	//alert ( " Hi There, I have been called !! ");
 	var bankName = document.getElementById("bank-name").value;
+	var accountType = document.getElementById("account-type").value;
 	var accountNumber = document.getElementById("account-number").value;
 	var reAccountNumber = document.getElementById("re-account-number").value;
 	var ifscCode = document.getElementById("ifsc-code").value;
+	//alert ('accountType :  '+accountType);
+	
 	
 	if ( accountNumber == '')  {
 		
@@ -1707,7 +1734,7 @@ function populateBankDetails()
         url : "populateBankDetailsAction",
         type: 'post',
         
-        data: {'bankName' : bankName , 'accountNumber' : accountNumber ,'reAccountNumber' : reAccountNumber , 'ifscCode' : ifscCode },
+        data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'reAccountNumber' : reAccountNumber , 'ifscCode' : ifscCode },
         
         success : function(result){
         	if (result == "success") {

@@ -21,6 +21,7 @@ import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class DbfFileGenerator implements org.quartz.Job{
 
@@ -61,11 +62,7 @@ public class DbfFileGenerator implements org.quartz.Job{
 		    writer.setFields( fields);
 
         
-		    SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(DbfDataDetails.class)
-					.buildSessionFactory();
-		    Session session = factory.openSession();
+		    Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		    
 		   try
 			{
@@ -89,7 +86,7 @@ public class DbfFileGenerator implements org.quartz.Job{
 					rowData = new Object[4];
 				}
 				
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 				
 				Properties properties = new Properties();
 				String propFilePath = "../../../config/config.properties";
@@ -121,8 +118,10 @@ public class DbfFileGenerator implements org.quartz.Job{
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				if(factory!=null)
-					factory.close();
+				/*if(factory!=null)
+				factory.close();*/
+				//HibernateUtil.getSessionAnnotationFactory().close();
+				session.close();
 			}
 
 

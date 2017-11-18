@@ -46,7 +46,7 @@ public class KYCRestservice {
     	
     	// Savita Wadhwani - End - Added this block to validate input panCard through ajax call
     	
-    	if (kyc.getKycStatusForPanCard(pan).equalsIgnoreCase("NO"))  {
+    	if (kyc.getKycStatusForPanCard(pan).equalsIgnoreCase("N"))  {
     		logger.debug("KycCheckAction class : execute method : KYC is not done for "+pan);
     		System.out.println(" Returned error !!");
     		return "{'result':'error'}";

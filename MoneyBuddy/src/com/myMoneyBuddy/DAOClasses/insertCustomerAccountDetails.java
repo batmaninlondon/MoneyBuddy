@@ -17,6 +17,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 //import com.myMoneyBuddy.ActionClasses.LoginAction;
 import com.myMoneyBuddy.EntityClasses.CustomerAccountDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 
 public class insertCustomerAccountDetails {
@@ -27,12 +28,7 @@ public class insertCustomerAccountDetails {
 
     	logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : start");
     	
-    	SessionFactory factory = new AnnotationConfiguration()
-    															.configure()
-    															.addAnnotatedClass(CustomerAccountDetails.class)
-    															.buildSessionFactory();
-    															//addAnnotationClass(Company.class).buildSessionFactory();
-    	Session session = factory.openSession();
+    	Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
     	try {
@@ -62,8 +58,10 @@ public class insertCustomerAccountDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-			if(factory != null)
-				factory.close();
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
     	}
 

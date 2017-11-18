@@ -15,7 +15,8 @@ import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
-import com.myMoneyBuddy.mailerClasses.sendMail;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.BufferedInputStream;
@@ -55,6 +56,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 	
 	
 	private String bankName;
+	private String accountType;
 	private String accountNumber;
 	private String reAccountNumber;
 	private String ifscCode;
@@ -63,7 +65,13 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     public String execute() {
 
     	logger.debug("PopulateBankDetailsAction class : execute method : start");
+    	Session session = null;
     	
+    	System.out.println("bankName : "+getBankName());
+    	System.out.println("accountType : "+getAccountType());
+    	System.out.println("accountNumber : "+getAccountNumber());
+    	System.out.println("reAccountNumber : "+getReAccountNumber());
+    	System.out.println("ifscCode : "+getIfscCode());
     	try {
  
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
@@ -74,15 +82,11 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 			
 			String customerId = sessionMap.get("customerId").toString();
 			
-			SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(BankDetails.class)
-					.buildSessionFactory();
-		    Session session = factory.openSession();
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 				session.beginTransaction();
 				
-				BankDetails tempBankDetails = new BankDetails(customerId, getBankName(),
+				BankDetails tempBankDetails = new BankDetails(customerId, getBankName(),getAccountType(),
 						getAccountNumber(),getIfscCode(),frmtdDateForDB);
 
 				session.save(tempBankDetails);
@@ -93,7 +97,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 				QueryCustomer customer = new QueryCustomer();
 				String emailId = sessionMap.get("emailId").toString();
 				
-				sendMail sendmail = new sendMail();
+				SendMail sendmail = new SendMail();
 				StringBuilder bodyText = new StringBuilder();
 				String MAIL_SITE_LINK = "www.quantwealth.in/login";
 				
@@ -126,6 +130,12 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+    	}
 
     }
     
@@ -138,6 +148,13 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 		this.bankName = bankName;
 	}
 
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
 	public String getAccountNumber() {
 		return accountNumber;

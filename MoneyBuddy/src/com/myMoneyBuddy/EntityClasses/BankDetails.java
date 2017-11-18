@@ -31,6 +31,9 @@ public class BankDetails {
     @Column(name="BANK_NAME")
     private String bankName;
     
+    @Column(name="ACCOUNT_TYPE")
+    private String accountType;
+    
     @Column (name="ACCOUNT_NUMBER")
     private String accountNumber;
 
@@ -45,10 +48,11 @@ public class BankDetails {
         
     }
 
-	public BankDetails(String customerId, String bankName, String accountNumber, String ifscCode, String updateDate) {
+	public BankDetails(String customerId, String bankName,  String accountType, String accountNumber, String ifscCode, String updateDate) {
 		super();
 		this.customerId = customerId;
 		this.bankName = bankName;
+		this.accountType = accountType;
 		this.accountNumber = accountNumber;
 		this.ifscCode = ifscCode;
 		this.updateDate = updateDate;
@@ -83,6 +87,13 @@ public class BankDetails {
 		this.bankName = bankName;
 	}
 
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -133,6 +144,9 @@ public class BankDetails {
         if ((this.bankName == null) ? (other.bankName != null) : !this.bankName.equals(other.bankName)) {
             return false;
         }
+        if ((this.accountType == null) ? (other.accountType != null) : !this.accountType.equals(other.accountType)) {
+            return false;
+        }
         if ((this.accountNumber == null) ? (other.accountNumber != null) : !this.accountNumber.equals(other.accountNumber)) {
             return false;
         }
@@ -152,6 +166,7 @@ public class BankDetails {
         hash = 79 * hash + (this.bankDetailsId != null ? this.bankDetailsId.hashCode() : 0);
         hash = 79 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 79 * hash + (this.bankName != null ? this.bankName.hashCode() : 0);
+        hash = 79 * hash + (this.accountType != null ? this.accountType.hashCode() : 0);
         hash = 79 * hash + (this.accountNumber != null ? this.accountNumber.hashCode() : 0);
         hash = 79 * hash + (this.ifscCode != null ? this.ifscCode.hashCode() : 0);
         hash = 79 * hash + (this.updateDate != null ? this.updateDate.hashCode() : 0);

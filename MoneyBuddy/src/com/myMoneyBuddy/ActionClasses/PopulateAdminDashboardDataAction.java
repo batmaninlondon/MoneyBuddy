@@ -11,6 +11,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.BufferedInputStream;
@@ -50,6 +51,8 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 
     	logger.debug("PopulateAdminDashboardDataAction class : execute method : start");
     	
+    	Session session = null;
+    	
     	try {
     		
 /*    		Properties properties = new Properties();
@@ -58,16 +61,12 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 			properties.load(Trading.class.getResourceAsStream(propFilePath));*/
 
  
-			SessionFactory factory = new AnnotationConfiguration()
-					.configure()
-					.addAnnotatedClass(DbfDataDetails.class)
-					.buildSessionFactory();
-		    Session session = factory.openSession();
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 				session.beginTransaction();
 				
 				
-				Query query =  session.createQuery("select dbfDataDate from DbfDataDetails where uploadedStatus='NO' group by dbfDataDate");
+				Query query =  session.createQuery("select dbfDataDate from DbfDataDetails where uploadedStatus='N' group by dbfDataDate");
 				List<String> dbfDataDateList = query.list();
 				
 				for (String date : dbfDataDateList)  {
@@ -76,7 +75,7 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 				
 				sessionMap.put("dbfDataDateList", dbfDataDateList);
 				logger.debug("PopulateAdminDashboardDataAction class : execute method : stored dbfDataDateList in session id : "+sessionMap.getClass().getName());
-				session.getTransaction().commit();
+				//session.getTransaction().commit();
 				
 			logger.debug("PopulateAdminDashboardDataAction class : execute method : end");
 			
@@ -92,6 +91,12 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+    	}
 
     }
     

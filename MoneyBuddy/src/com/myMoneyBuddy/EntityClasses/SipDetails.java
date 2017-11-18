@@ -21,8 +21,8 @@ import javax.persistence.Table;
 public class SipDetails {
 
     @Id
-    @Column (name="TRANSACTION_ID")
-    private String transactionId;
+    @Column (name="TRANSACTION_DETAIL_ID")
+    private String transactionDetailId;
     
     @Column(name="CUSTOMER_ID")
     private String customerId;
@@ -30,6 +30,9 @@ public class SipDetails {
     @Column (name="SIP_DATE")
     private String sipDate;
 
+    @Column (name="SIP_START_DATE")
+    private String sipStartDate;
+    
     @Column (name="SIP_END_DATE")
     private String sipEndDate;
 
@@ -44,11 +47,12 @@ public class SipDetails {
         
     }
 
-	public SipDetails(String customerId, String transactionId, String sipDate, String sipEndDate, String sipCompletionStatus,
+	public SipDetails(String customerId, String transactionDetailId, String sipStartDate, String sipDate, String sipEndDate, String sipCompletionStatus,
 			String sipFormSubmission) {
 		super();
 		this.customerId = customerId;
-		this.transactionId = transactionId;
+		this.transactionDetailId = transactionDetailId;
+		this.sipStartDate = sipStartDate;
 		this.sipDate = sipDate;
 		this.sipEndDate = sipEndDate;
 		this.sipCompletionStatus = sipCompletionStatus;
@@ -63,12 +67,13 @@ public class SipDetails {
 		this.customerId = customerId;
 	}
 
-	public String getTransactionId() {
-		return transactionId;
+
+	public String getTransactionDetailId() {
+		return transactionDetailId;
 	}
 
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
+	public void setTransactionDetailId(String transactionDetailId) {
+		this.transactionDetailId = transactionDetailId;
 	}
 
 	public String getSipDate() {
@@ -77,6 +82,14 @@ public class SipDetails {
 
 	public void setSipDate(String sipDate) {
 		this.sipDate = sipDate;
+	}
+
+	public String getSipStartDate() {
+		return sipStartDate;
+	}
+
+	public void setSipStartDate(String sipStartDate) {
+		this.sipStartDate = sipStartDate;
 	}
 
 	public String getSipEndDate() {
@@ -115,10 +128,13 @@ public class SipDetails {
         if ((this.customerId == null) ? (other.customerId != null) : !this.customerId.equals(other.customerId)) {
             return false;
         }
-        if ((this.transactionId == null) ? (other.transactionId != null) : !this.transactionId.equals(other.transactionId)) {
+        if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
             return false;
         }
         if ((this.sipDate == null) ? (other.sipDate != null) : !this.sipDate.equals(other.sipDate)) {
+            return false;
+        }
+        if ((this.sipStartDate == null) ? (other.sipStartDate != null) : !this.sipStartDate.equals(other.sipStartDate)) {
             return false;
         }
         if ((this.sipEndDate == null) ? (other.sipEndDate != null) : !this.sipEndDate.equals(other.sipEndDate)) {
@@ -138,8 +154,9 @@ public class SipDetails {
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
-        hash = 79 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
+        hash = 79 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
         hash = 79 * hash + (this.sipDate != null ? this.sipDate.hashCode() : 0);
+        hash = 79 * hash + (this.sipStartDate != null ? this.sipStartDate.hashCode() : 0);
         hash = 79 * hash + (this.sipEndDate != null ? this.sipEndDate.hashCode() : 0);
         hash = 79 * hash + (this.sipCompletionStatus != null ? this.sipCompletionStatus.hashCode() : 0);
         hash = 79 * hash + (this.sipFormSubmission != null ? this.sipFormSubmission.hashCode() : 0);

@@ -60,13 +60,23 @@ public class Customers {
     
     @Column(name="KYC_STATUS")
     private String kycStatus;
+    
+    @Column(name="FOLIO_NUMBER")
+    private String folioNumber;
+    
+    @Column(name="KARVY_FILE_GENERATED")
+    private String karvyFileGenerated;
+    
+    @Column(name="CAMS_FILE_GENERATED")
+    private String camsFileGenerated;
 
     public Customers() {
         
     }
 
     public Customers( String firstName, String lastName, String emailId, String mobileNumber, String password,
-			String verificationStatus, String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String kycStatus) {
+			String verificationStatus, String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String kycStatus,
+			String folioNumber, String karvyFileGenerated, String camsFileGenerated) {
 		super();
 		this.emailId = emailId;
 		this.firstName = firstName;
@@ -80,6 +90,9 @@ public class Customers {
 		this.politicallyExposed = politicallyExposed;
 		this.panCard = panCard;
 		this.kycStatus = kycStatus;
+		this.folioNumber = folioNumber;
+		this.karvyFileGenerated = karvyFileGenerated;
+		this.camsFileGenerated = camsFileGenerated;
 	}
 
 	public String getCustomerId() {
@@ -188,6 +201,30 @@ public class Customers {
 		this.kycStatus = kycStatus;
 	}
 
+	public String getFolioNumber() {
+		return folioNumber;
+	}
+
+	public void setFolioNumber(String folioNumber) {
+		this.folioNumber = folioNumber;
+	}
+
+	public String getKarvyFileGenerated() {
+		return karvyFileGenerated;
+	}
+
+	public void setKarvyFileGenerated(String karvyFileGenerated) {
+		this.karvyFileGenerated = karvyFileGenerated;
+	}
+
+	public String getCamsFileGenerated() {
+		return camsFileGenerated;
+	}
+
+	public void setCamsFileGenerated(String camsFileGenerated) {
+		this.camsFileGenerated = camsFileGenerated;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -236,6 +273,15 @@ public class Customers {
         if ((this.kycStatus == null) ? (other.kycStatus != null) : !this.kycStatus.equals(other.kycStatus)) {
             return false;
         }
+        if ((this.folioNumber == null) ? (other.folioNumber != null) : !this.folioNumber.equals(other.folioNumber)) {
+            return false;
+        }
+        if ((this.karvyFileGenerated == null) ? (other.karvyFileGenerated != null) : !this.karvyFileGenerated.equals(other.karvyFileGenerated)) {
+            return false;
+        }
+        if ((this.camsFileGenerated == null) ? (other.camsFileGenerated != null) : !this.camsFileGenerated.equals(other.camsFileGenerated)) {
+            return false;
+        }
         return true;
     }
 
@@ -255,6 +301,9 @@ public class Customers {
         hash = 79 * hash + (this.politicallyExposed != null ? this.politicallyExposed.hashCode() : 0);
         hash = 79 * hash + (this.panCard != null ? this.panCard.hashCode() : 0);
         hash = 79 * hash + (this.kycStatus != null ? this.kycStatus.hashCode() : 0);
+        hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
+        hash = 79 * hash + (this.karvyFileGenerated != null ? this.karvyFileGenerated.hashCode() : 0);
+        hash = 79 * hash + (this.camsFileGenerated != null ? this.camsFileGenerated.hashCode() : 0);
         return hash;
     }
 

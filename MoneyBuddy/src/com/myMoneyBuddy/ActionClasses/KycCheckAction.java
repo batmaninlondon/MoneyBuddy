@@ -17,6 +17,7 @@ import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
@@ -69,6 +70,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
     }*/
     public String execute() {
+    	
+    	Session session = null;
+    	
     	try {
     		
     	logger.debug("KycCheckAction class : execute method : start");
@@ -95,7 +99,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	// Savita Wadhwani - End - Added this block to validate input panCard through ajax call
     	
-    	if (kyc.getKycStatusForPanCard(getPanCard()).equalsIgnoreCase("NO"))  {
+    	if (kyc.getKycStatusForPanCard(getPanCard()).equalsIgnoreCase("N"))  {
     		logger.debug("KycCheckAction class : execute method : KYC is not done for "+getPanCard());
     		System.out.println(" Returned KYC not done !!");
     		String str = "kycNotDone";
@@ -107,11 +111,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	/*DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	Date frmtDateOfBirth = format.parse(getDateOfBirth());*/ 
     	
-	    SessionFactory factory = new AnnotationConfiguration()
-				.configure()
-				.addAnnotatedClass(Customers.class)
-				.buildSessionFactory();
-	    Session session = factory.openSession(); 
+    	session = HibernateUtil.getSessionAnnotationFactory().openSession(); 
 	    
     	session.beginTransaction();
 		Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
@@ -127,13 +127,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		
 		int updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
-		session.getTransaction().commit();
 		
 		String customerName = getFirstName()+" "+getLastName();
 		sessionMap.put("customerName", customerName);
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
-		session.beginTransaction();
+		//session.beginTransaction();
 		query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
 		
 		// Savita Wadhwani - We need to update this piece of code with real API - start 
@@ -157,14 +156,13 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		
 		updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
-		session.getTransaction().commit();
 		
-		
-    	
     	sessionMap.put("panCard", panCard);
     	System.out.println("Kyc is done for panCard : "+panCard);
     	
     	logger.debug("KycCheckAction class : execute method : stored panCard : "+panCard+" in session id : "+sessionMap.getClass().getName());
+    	
+    	session.getTransaction().commit();
     	logger.debug("KycCheckAction class : execute method : end");
     	
     	System.out.println(" Returned Success !!");
@@ -187,6 +185,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
     		return ERROR;
+    	}
+    	finally {
+    		/*if(factory!=null)
+			factory.close();*/
+    		//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
     	}
     }
     

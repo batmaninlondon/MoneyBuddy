@@ -8,6 +8,7 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 
 import org.apache.log4j.Logger;
@@ -26,19 +27,7 @@ public class UpdateCustomerPassword {
 
 		logger.debug("UpdateCustomerPassword class : UpdatePassword method : start");
 		
-		SessionFactory factory = new AnnotationConfiguration()
-																.configure()
-																.addAnnotatedClass(CustomerPasswordsHistory.class).addAnnotatedClass(Customers.class)
-																.buildSessionFactory();
-										//addAnnotationClass(Company.class).buildSessionFactory();
-		Session session = factory.openSession();
-
-/*		SessionFactory factoryCustomers = new AnnotationConfiguration()
-												.configure()
-												.addAnnotatedClass(Customers.class)
-												.buildSessionFactory();
-										//addAnnotationClass(Company.class).buildSessionFactory();
-		Session sessionCustomers = factoryCustomers.openSession();*/
+		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
@@ -81,8 +70,10 @@ public class UpdateCustomerPassword {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			if(factory !=null)
-				factory.close();
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
 
 		}
 
