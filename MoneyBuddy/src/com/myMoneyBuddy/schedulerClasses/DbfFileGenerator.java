@@ -19,7 +19,7 @@ import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFWriter;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
@@ -71,14 +71,14 @@ public class DbfFileGenerator implements org.quartz.Job{
 				
 			   Query query =  session.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
 				query.setParameter("dbfDataDate", frmtdDate);
-				List<DbfDataDetails> dbfDataDetailsList = query.list();
+				List<DbfFileStatusDetails> dbfDataDetailsList = query.list();
 				Object rowData[] = new Object[4];
 				
-				for(DbfDataDetails dbfDataDetail : dbfDataDetailsList){
+				for(DbfFileStatusDetails dbfDataDetail : dbfDataDetailsList){
 
-				    rowData[0] = dbfDataDetail.getTransactionDetailId();
+				    /*rowData[0] = dbfDataDetail.getTransactionDetailId();
 				    rowData[1] = dbfDataDetail.getCustomerId();
-				    rowData[2] = dbfDataDetail.getTransactionDetailDate();
+				    rowData[2] = dbfDataDetail.getTransactionDetailDate();*/
 				    rowData[3] = dbfDataDetail.getDbfDataDate();
 
 				    writer.addRecord( rowData);

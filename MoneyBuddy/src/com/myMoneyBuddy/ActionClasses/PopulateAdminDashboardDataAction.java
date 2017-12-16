@@ -5,10 +5,12 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import com.myMoneyBuddy.DAOClasses.DbfStatusDataModel;
+import com.myMoneyBuddy.DAOClasses.PortfolioDataModel;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -24,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -44,7 +47,8 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 	
 	Logger logger = Logger.getLogger(PopulateAdminDashboardDataAction.class);
 	private Map<String, Object> sessionMap;
-
+	
+	
 	private InputStream stream;
 	
     public String execute() {
@@ -52,6 +56,10 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
     	logger.debug("PopulateAdminDashboardDataAction class : execute method : start");
     	
     	Session session = null;
+    	
+    	List<DbfStatusDataModel> dbfStatusDataModel = new LinkedList<DbfStatusDataModel>();
+    	
+    	HashMap<String,String> dbfDataList = new HashMap<String,String>();
     	
     	try {
     		
@@ -66,15 +74,22 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 				session.beginTransaction();
 				
 				
-				Query query =  session.createQuery("select dbfDataDate from DbfDataDetails where uploadedStatus='N' group by dbfDataDate");
-				List<String> dbfDataDateList = query.list();
+				Query query =  session.createQuery(" from DbfFileStatusDetails where uploadedStatus = :uploadedStatus ");
+				query.setParameter("uploadedStatus", "N");
+				List<DbfFileStatusDetails> dbfFileStatusDetailsList = query.list();
 				
-				for (String date : dbfDataDateList)  {
-					System.out.println(" date in list is : "+date);
+				for (DbfFileStatusDetails dbfFileStatusDetails : dbfFileStatusDetailsList)  {
+					System.out.println(" date in list is : "+dbfFileStatusDetails.getDbfDataDate()+" rta : "+dbfFileStatusDetails.getRta()+ " file type : "+dbfFileStatusDetails.getDbfFileType());
+					dbfStatusDataModel.add(new DbfStatusDataModel(dbfFileStatusDetails.getDbfDataDate(),dbfFileStatusDetails.getRta(),dbfFileStatusDetails.getDbfFileType()));
+					dbfDataList.put(dbfFileStatusDetails.getDbfDataDate(), dbfFileStatusDetails.getRta()+"-"+dbfFileStatusDetails.getDbfFileType());
 				}
+				System.out.println(" dbfDataList size : "+dbfDataList.size()); 
 				
-				sessionMap.put("dbfDataDateList", dbfDataDateList);
-				logger.debug("PopulateAdminDashboardDataAction class : execute method : stored dbfDataDateList in session id : "+sessionMap.getClass().getName());
+				sessionMap.put("dbfStatusDataModel", dbfStatusDataModel);
+				logger.debug("PopulateAdminDashboardDataAction class : execute method : stored dbfStatusDataModel in session id : "+sessionMap.getClass().getName());
+				
+				sessionMap.put("dbfDataList", dbfDataList);
+				logger.debug("PopulateAdminDashboardDataAction class : execute method : stored dbfDataList in session id : "+sessionMap.getClass().getName());
 				//session.getTransaction().commit();
 				
 			logger.debug("PopulateAdminDashboardDataAction class : execute method : end");
@@ -119,8 +134,6 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
-
-
 
 
 }

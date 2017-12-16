@@ -65,12 +65,11 @@
 				<div class="collapse navbar-collapse navbar-right">
 					<ul class="nav navbar-nav">
 						<li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
-						<li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
-						<li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-						<li id="header-nav-li"><a href="saveTax">Save
-								Tax</a></li>
-						<li id="header-nav-li"><a href="blog">Blog</a></li>
-						<li id="header-nav-li"><a href="help">Help</a></li>
+                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
+                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
+                        <li id="header-nav-li"><a href="help">Contact Us</a></li> 
 
 						<%
 							if (session.getAttribute("customerId") == null) {
@@ -115,7 +114,7 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="sip-amount-range" type="range" min="500" max="50000" step="500"
+						<input id="sip-amount-range" type="range" min="500" max="25000" step="500"
 							value="2000" onchange="showSipAmountPerMonth(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
@@ -141,8 +140,8 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="sip-duration-range" type="range" min="3" max="50" step="1"
-							value="5" onchange="showDuration(this.value)" />
+						<input id="sip-duration-range" type="range" min="1" max="50" step="1"
+							value="3" onchange="showDuration(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
@@ -175,7 +174,7 @@
 				<div class="row row-second" style="margin-top: 30px;">
 					<div class="col-md-2"></div>
 					<div class="col-md-10">
-						<h3>** Use Slider or Enter the Amount</h3>
+						<h3>** Use Slider to select the Amount</h3>
 					</div>
 				</div>
 				<div class="row row-third"></div>
@@ -392,16 +391,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li><a href="myIndex">Home</a></li>
+                        <li><a href="aboutUs">About Us</a></li>
+                        <li><a href="help">Contact Us</a></li>
+                        <li><a href="register">Sign Up</a></li>
 					</ul>
 				</div>
 			</div>

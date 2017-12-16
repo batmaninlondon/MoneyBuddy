@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
+
+<%
+response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+response.setHeader("Pragma","no-cache");
+%>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
@@ -286,20 +291,20 @@ $( function() {
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
-                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
+										 	 <li class="active" id="header-nav-li"><a href="login" >Sign in</a></li>
 										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li class="active" id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
 							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
@@ -317,7 +322,16 @@ $( function() {
 
   	</ul>
   <!-- <div class="tab-content"> -->
-	<div id="dashboard" class="tab-pane active">
+  <div id="please-wait-msg" class="row" style="margin-top:100px;margin-bottom:20px;">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please wait ......</b></h2>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	
+	<!-- <form id="dashboardForm"> -->
+	<div id="dashboard" class="tab-pane active" style="display: none" >
 		<!-- <div class="row">
 			<div class="col-md-12 well-sm large-text dashboard-row-1" >
 				<p style="margin-left:50px;">PortFolio</p>
@@ -353,7 +367,7 @@ $( function() {
 								    <td class="center"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
 								</tr>
 							</s:iterator>
-							<tr  >
+<%-- 							<tr  >
 								<td class="center" style="padding:0px;vertical-align: middle;" >
 									<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">Total</button>
 								</td>
@@ -363,7 +377,7 @@ $( function() {
 							    <td class="center" style="padding:0px;vertical-align: middle;"><b><s:property value="#session.TotalCurrentAmount"/></b></td>
 							    <td class="center" style="padding:0px;vertical-align: middle;"><b><s:property value="#session.TotalrateOfGrowth"/></b></td>
 
-							</tr>
+							</tr> --%>
 	
 	
 					</tbody>
@@ -492,6 +506,7 @@ $( function() {
 		
 		
 	</div>
+	<!-- </form> -->
 <!-- 	<div id="portfolio" class="tab-pane">
 		<div class="row">
 			<div class="col-md-12 well-sm large-text dashboard-row-1" >
@@ -515,14 +530,14 @@ $( function() {
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="aboutUs">About Us</a></li>
+                        <li><a href="help">Contact Us</a></li>
+                        <li><a href="register">Sign Up</a></li>
                     </ul>
                 </div>
             </div>
@@ -532,14 +547,3 @@ $( function() {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

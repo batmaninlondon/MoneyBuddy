@@ -19,7 +19,7 @@ import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFWriter;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
@@ -27,7 +27,8 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
-		try {			
+		try {	
+			DbfFileStatusDetails tempDbfFileStatusDetails;
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
 			String frmtdDate = dateFormat.format(date);
@@ -178,6 +179,11 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 			    FileOutputStream fos = new FileOutputStream(srcDirName+"Karvy_Customer"+frmtdDate+".dbf");
 			    writer.write( fos);
 			    fos.close();
+				
+			    tempDbfFileStatusDetails = new DbfFileStatusDetails("KARVY", "CUSTOMER",frmtdDate,"N");
+
+				session.save(tempDbfFileStatusDetails);
+				session.getTransaction().commit();
 				
 				System.out.println("Done ! ");
 

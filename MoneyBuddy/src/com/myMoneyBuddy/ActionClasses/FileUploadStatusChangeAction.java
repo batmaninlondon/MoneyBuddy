@@ -7,7 +7,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -44,6 +44,8 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 	private Map<String, Object> sessionMap;
 	
 	private String date;
+	private String rta;
+	private String fileType;
 	private InputStream stream;
 	
     public String execute() {
@@ -56,12 +58,14 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
     		session = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 				session.beginTransaction();
-
-			Query query = session.createQuery("update DbfDataDetails set uploadedStatus = :uploadedStatus where dbfDataDate = :dbfDataDate");
+			Query query = session.createQuery("update DbfFileStatusDetails set uploadedStatus = :uploadedStatus where dbfDataDate = :dbfDataDate and rta = :rta and dbfFileType = :dbfFileType");
 			query.setParameter("uploadedStatus", "Y");
 			query.setParameter("dbfDataDate", getDate());
+			query.setParameter("rta", getRta());
+			query.setParameter("dbfFileType", getFileType());
+			
 			int updateResult = query.executeUpdate();
-			System.out.println(updateResult + " rows updated in transactionDetails table ");
+			System.out.println(updateResult + " rows updated in DbfFileStatusDetails table ");
 			session.getTransaction().commit();
 
 			logger.debug("FileUploadStatusChangeAction class : execute method : end");
@@ -124,6 +128,26 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
+	}
+
+
+	public String getRta() {
+		return rta;
+	}
+
+
+	public void setRta(String rta) {
+		this.rta = rta;
+	}
+
+
+	public String getFileType() {
+		return fileType;
+	}
+
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
 

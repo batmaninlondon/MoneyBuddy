@@ -12,7 +12,7 @@ import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;

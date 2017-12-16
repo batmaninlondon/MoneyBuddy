@@ -21,7 +21,7 @@ import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.RtaSpecificCodes;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
@@ -37,6 +37,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 		
 		try {	
 			
+			DbfFileStatusDetails tempDbfFileStatusDetails;
 		   session.beginTransaction();
 		   
 		   Query query =  session.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from ProductDetails where rta = :rta)");
@@ -984,6 +985,11 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 				    FileOutputStream fos = new FileOutputStream(srcDirName+"Cams_Transaction"+frmtdDate+".dbf");
 				    writer.write( fos);
 				    fos.close();
+					
+				    tempDbfFileStatusDetails = new DbfFileStatusDetails("CAMS", "TRANSACTION",frmtdDate,"N");
+
+					session.save(tempDbfFileStatusDetails);
+					session.getTransaction().commit();
 					
 					System.out.println("Done ! ");
 		   		}

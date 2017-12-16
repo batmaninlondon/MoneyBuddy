@@ -21,11 +21,12 @@ import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.RtaSpecificCodes;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
+import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
@@ -37,7 +38,9 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 	    
 	    
 		try {	
+
 			
+			DbfFileStatusDetails tempDbfFileStatusDetails;
 			session.beginTransaction();
 			   
 		   Query query =  session.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from ProductDetails where rta = :rta)");
@@ -757,7 +760,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						
 						//session.beginTransaction();
 						
-						query = session.createQuery("from BankDetails where customerId = :customerId");
+						query = session.createQuery("from BankDetails where customerId = :customerId and updateDate= (select max(updateDate) from BankDetails where customerId= :customerId)");
 						query.setParameter("customerId", transactionDetail.getCustomerId());
 						BankDetails bankDetails =  (BankDetails) query.uniqueResult();
 						//session.getTransaction().commit();
@@ -982,6 +985,11 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 				    FileOutputStream fos = new FileOutputStream(srcDirName+"Kyc_Transaction"+frmtdDate+".dbf");
 				    writer.write( fos);
 				    fos.close();
+					
+				    tempDbfFileStatusDetails = new DbfFileStatusDetails("KARVY", "TRANSACTION",frmtdDate,"N");
+
+					session.save(tempDbfFileStatusDetails);
+					session.getTransaction().commit();
 					
 					System.out.println("Done ! ");
 		   		}

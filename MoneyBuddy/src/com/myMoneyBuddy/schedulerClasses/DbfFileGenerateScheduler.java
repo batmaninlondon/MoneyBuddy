@@ -71,7 +71,7 @@ public class DbfFileGenerateScheduler {
 			Trigger karvyCustomerDbfFileGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("KarvyCustomerDbfFileGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 02 18 * * ?"))
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 54 22 * * ?"))
 					.build();
 			
 			JobDetail karvyTransactionDbfFileGeneratorJob = JobBuilder.newJob(KarvyTransactionDbfFileGenerator.class)
@@ -82,7 +82,7 @@ public class DbfFileGenerateScheduler {
 			Trigger karvyTransactionDbfFileGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("KarvyTransactionDbfFileGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 33 23 * * ?"))
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 54 22 * * ?"))
 					.build();
 			
 			JobDetail camsTransactionDbfFileGeneratorJob = JobBuilder.newJob(CamsTransactionDbfFileGenerator.class)
@@ -104,7 +104,7 @@ public class DbfFileGenerateScheduler {
 			Trigger transactionNavValuesUpdaterTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("TransactionNavValuesUpdaterTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 45 12 * * ?"))
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 24 11 * * ?"))
 					.build();
 	
 			scheduler.scheduleJob(dbfFileGeneratorJob, dbfFileGeneratorTrigger);

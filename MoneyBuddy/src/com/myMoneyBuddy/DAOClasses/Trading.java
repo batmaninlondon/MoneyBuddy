@@ -37,7 +37,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 //import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
@@ -146,7 +146,7 @@ public class Trading {
 		Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
 		SipDetails tempSipDetail;
-		DbfDataDetails tempDbfDataDetails;
+		//DbfFileStatusDetails tempDbfDataDetails;
 
 		CustomerPortfolio tempCustomerPortfolio;
 
@@ -299,14 +299,14 @@ public class Trading {
 					frmtdDateForDBF = dateFormat.format(dateForDbf);
 				}
 			    
-				tempDbfDataDetails  = new DbfDataDetails(transactionDetailId, customerId,frmtdDateForDB,frmtdDateForDB,"N"); 		
+				/*tempDbfDataDetails  = new DbfFileStatusDetails(transactionDetailId, customerId,frmtdDateForDB,frmtdDateForDB,"N"); 		
 
 				session.beginTransaction();
 				session.save(tempDbfDataDetails);
 
 				logger.debug("Trading class : executeTrade method : inserted data to DbfDataDetails table for customerId : "+customerId);
 
-				session.getTransaction().commit();
+				session.getTransaction().commit();*/
 				
 
 				passwordMFOrder = mfOrderEntry.getPassword(properties.getProperty("USER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));

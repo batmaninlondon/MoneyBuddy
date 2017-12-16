@@ -17,7 +17,7 @@
 	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPortfolio"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.Customers"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.DbfDataDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.KycStatus"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.NavHistory"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.PaymentDetails"/>

@@ -69,11 +69,11 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
-                        <li class="active" id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li class="active" id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
@@ -81,7 +81,7 @@
 										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" >Portfoio</a></li> 
 							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
 							<%	}	%>  
 				                            
@@ -93,10 +93,12 @@
     </header>
  <section id="about-us">
         <div class="container">
-			<div class="center wow fadeInDown">
-				<h2>Hello, We're MoneyBuddy</h2>
-				<p class="lead">We're a group of like-minded investment experts, technologists and entrepreneurs with a shared ambition to shake things up and make investing easy and affordable for everyone. We're challenging people to think differently and do more with their savings.
-                Our promise is simple: No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
+			<div class="center wow fadeInDown" style="margin-top:-50px;">
+				<h2>Our Vision</h2>
+				<p class="lead">MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.</p>
+				<p class="lead">Our vision is to ensure every person is able to plan and save for his retirement, new house, children's marriage and other essential financial needs.</p>
+				<p class="lead">While we truly understand the audacity of our vision we strongly believe how it can lead to a happier world. This website is just a first baby step to realise our vision and we are super excited to see people fall in love with our services.</p>
+				<p class="lead">We are based in Pune and are bootstrapping to achieve our goal. Our team consists of following people and we are looking to add more people who believe in our vision.</p>
 			</div>
         <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
            	<!-- Our Skill -->
@@ -105,11 +107,12 @@
 			
 			<!-- our-team -->
 			<div class="team" class="">
-				<div class="center wow fadeInDown">
+				<!-- <div class="center wow fadeInDown">
 					<h2>Meet the team</h2>
 					<p class="lead">Started with a simeple dream...</p>
-				</div>
+				</div> -->
 				<div class="row clearfix">
+					<div class="col-md-1"></div>
 					<div class="col-md-4 col-sm-6">	
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
@@ -148,7 +151,7 @@
 									<h5>Co - Founder and CTO</h5>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Investment</a></li>
-										<li class="btn"><a href="#">Technology</a></li>
+										<li class="btn"><a href="#">Tech</a></li>
 										<li class="btn"><a href="#">Strategy</a></li>
 									</ul>
 									<ul class="social_icons">
@@ -158,11 +161,11 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>A born entrepreneurs. With over tweleve years of international consulting experience ... Sail has worked with spend most of his time working with C suites to .... </p>
+							<p>A born entrepreneurs. With over tweleve years of international consulting experience ... Sail has worked with spend most of his time working with</p>
 						</div>
 					</div><!--/.col-lg-4 -->					
 				</div> <!--/.row -->
-				<div class="row team-bar">
+				<!-- <div class="row team-bar">
 					<div class="first-one-arrow hidden-xs">
 						<hr>
 					</div>
@@ -175,9 +178,10 @@
 					<div class="third-arrow hidden-xs">
 						<hr> <i class="fa fa-angle-up"></i>
 					</div>
-				</div> <!--skill_border-->       
+				</div> --> <!--skill_border-->       
 
-				<div class="row clearfix">   
+				<div class="row clearfix" style="margin-top:40px;">   
+					<div class="col-md-2"></div>
 					<div class="col-md-4 col-sm-6 col-md-offset-2">	
 						<div class="single-profile-bottom wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
 							<div class="media">
@@ -214,14 +218,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="aboutUs">About Us</a></li>
+                        <li><a href="help">Contact Us</a></li>
+                        <li><a href="register">Sign Up</a></li>
                     </ul>
                 </div>
             </div>

@@ -46,12 +46,14 @@ update();
 function changeUploadStatus(el)  
 {
 	var date = $(el).closest("tr").find('td:eq(0)').text();
+	var rta = $(el).closest("tr").find('td:eq(1)').text();
+	var fileType = $(el).closest("tr").find('td:eq(2)').text();
 	//alert('Call changeUploadStatus function : date : '+date);
 	$.ajax({
         url : "fileUploadStatusChangeAction",
         type: 'post',
         
-        data: { 'date' : date },
+        data: { 'date' : date , 'rta' : rta , 'fileType' : fileType},
 
         success : function(result){
         	
@@ -81,7 +83,19 @@ function fundDetailHandler(el) {
 	        
 	        data: { 'productName' : selectedItem  },
 
-	        success : function(result){
+	        success : function(){
+	        	$( "#dialog" ).dialog({autoOpen: true,
+        	    	title:selectedItem,
+        	    	width: 800,
+        	    	height:300,
+        	    	scrollable: true});
+	          },
+	          error : function(){
+	        		alert('Inside investmentDetailsAction error !!');
+	        		window.location='errorPage';
+	        	}
+	          
+	        /*success : function(result){
 	        	
 	        	if (result == "success") {
 	        		
@@ -93,11 +107,11 @@ function fundDetailHandler(el) {
 
 	        	}
 	        	else {
-	        		/*alert('Inside resetPassword error !!');*/
+	        		alert('Inside resetPassword error !!');
 	        		window.location='errorPage';
 	        	}
 
-	        }
+	        }*/
 	    });
 	    
 	    
@@ -146,7 +160,7 @@ newUpdate();
 
 function fillSipData()
 {
-	document.getElementById("sip-duration").innerHTML='5';
+	document.getElementById("sip-duration").innerHTML='3';
 	showSipAmountPerMonth('2000');
 	
 }
@@ -819,6 +833,7 @@ function setInitialUpfrontInvestment()
 
 function setData() 
 {
+	
 	$.ajax({
 
         url : "populateAdminDashboardDataAction",
@@ -830,6 +845,8 @@ function setData()
         	
         	if (result == "success") {
         		// do nothing
+        		alert('Hii');
+        		$('#body_holder').show();
         	}
         	else {
         		/*alert('Inside resetPassword error !!');*/
@@ -844,6 +861,7 @@ function setData()
 
 function setDashboardData() 
 {
+	// alert ("calling fun !! ");
 	$.ajax({
 
         url : "portfolioAction",
@@ -854,6 +872,13 @@ function setDashboardData()
         success : function(result){
         	
         	if (result == "success") {
+        		setTimeout(function(){
+        			document.getElementById("please-wait-msg").style.display = "none";
+            		document.getElementById("dashboard").style.display = "block";	
+
+        		}, 10000); 
+        		//alert(' HI Func completed successfully !! ');
+        		
         		// do nothing
         	}
         	else {
@@ -861,9 +886,10 @@ function setDashboardData()
         		window.location='errorPage';
         	}
 
+        	//alert("in here vivekkk");
         },
 
-    });
+    }); 
 }
 
 function setInitialSipInvestment() 

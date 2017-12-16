@@ -69,11 +69,11 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
-                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
+                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
+                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li class="active" id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Help</a></li> 
+                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
@@ -93,33 +93,42 @@
     </header>
  <section id="blog" class="container">
         <div class="center">
-            <h2>Blogs</h2>
+            <h2 style="margin-top:-40px;">Knowledge Hub</h2>
         </div>
 
-        <div class="blog">
+        <div class="blog" style="margin-top:-40px;">
             <div class="row">
                  <div class="col-md-8">
                     <div class="blog-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-2 text-center">
                                 <div class="entry-meta">
-                                    <span id="publish_date">07  NOV</span>
-                                    <span><i class="fa fa-user"></i> <a href="#">John Doe</a></span>
+                                    <span id="publish_date">13 Dec 2017</span>
+                                    <span><i class="fa fa-user"></i> <a href="#">Kamal Wadhwani</a></span>
                                 </div>
                             </div>
                                 
                             <div class="col-xs-12 col-sm-10 blog-content">
                                 <a href="#"><img class="img-responsive img-blog" src="images/blog/blog1.jpg" width="100%" alt="" /></a>
-                                <h2><a href="blog-item.html">Could you save enough for your dream holiday in 5 years?</a></h2>
-                                <h3>Everyone loves escaping the hum-drum of modern life once in a while. For most of us, two weeks relaxing around the pool in the sun is enough to keep us ticking over from one year to the next. Sometimes though, it’s nice to dream about that once-in-a-lifetime ‘when I win the lottery’ super-holiday. We each have our own version of what it is, from reading Robinson Crusoe on a palm fringed beach to that back-packing trip you never made after university. Whatever it is, it won’t be cheap. But, if you don’t fancy waiting until retirement to satisfy your urge, you could start saving now and be off on your foreign adventures sooner than you think. For some inspiration, we’ve looked at five unique experiences and worked out what you might need to invest, if you’re willing to take a moderate level of risk with your money, to reach your goal in the next 5 years.</h3>
-                                <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
+                                <h2><a href="blog-item.html">Why to be a part of MoneyBuddy family</a></h2>
+                                <h3 class="small-text" style="color:black;">Wealth creation is as much about saving as it&#39;s about growing those savings in a tax efficient manner.  We understand there&#39;s a limit to how much an individual can save in today&#39;s high cost of living environment thus we pay special attention to growing our customer&#39;s money in a risk adjusted and tax efficient way.</h3>
+                                <h3 class="small-text" style="margin-top:-20px;color:black;">Following are the key features enjoyed by the members of MoneyBuddy family.</h3>
+                                 <ol style="margin-top:-20px;" >
+								  <li class="small-text" style="margin-top:-20px;color:black;"><b>Superior fund selection </b> There are over 1,000 mutual funds in India, We do a lot of data crunching to find funds that are expected to perform better than their peers.</li>
+								  <li class="small-text" style="color:black;"><b>Income Tax optimisation</b> Special attention is paid to the current income tax status of our customers and funds are recommend according to the unique needs of our customers. We&#39;ve also created algorithm to ensure you pay the least (if any) income tax if and when you withdraw your money and profits. </li>
+								  <li class="small-text" style="color:black;"><b>Easy Liquidity</b> You can withdraw all or part of your money as and when you want; Your bank account will be credited in the next 2-3 working days</li>
+								  <li class="small-text" style="color:black;"><b>Online portfolio tracking</b> You can track the value of your portfolio 24*7 by logging into our website. You can also track the performance of individual funds in your portfolio as well.</li>
+								  <li class="small-text" style="color:black;"><b>Secure and Automated</b> Once your investment planning is complete, everything else is taken care via automated softwares. We use the most secure payment gateway and do the periodic audit of our software to ensure the security of your data.</li>
+								  <li class="small-text" style="color:black;"><b>Impeccable team</b> Customer advisory and fund selection is done by our founder Mr. Kamal Wadhwani himself. He has around 10 years of experience in Indian and International financial markets. He completed his engineering from IIT Bombay and is pursuing CFA, USA.</li>
+								</ol> 
+                                <!-- <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a> -->
                             </div>
                         </div>    
                     </div>
                     
                     
                         
-                    <div class="blog-item">
+<!--                     <div class="blog-item">
                         <div class="row">
                              <div class="col-sm-2 text-center">
                                 <div class="entry-meta"> 
@@ -166,7 +175,7 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
                                 <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>    
-                    </div><!--/.blog-item-->
+                    </div> --><!--/.blog-item-->
                         
                 </div><!--/.col-md-8-->
 
@@ -180,14 +189,14 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="aboutUs">About Us</a></li>
+                        <li><a href="help">Contact Us</a></li>
+                        <li><a href="register">Sign Up</a></li>
                     </ul>
                 </div>
             </div>

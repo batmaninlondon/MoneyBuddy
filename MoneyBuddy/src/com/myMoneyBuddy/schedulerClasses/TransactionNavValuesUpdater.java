@@ -32,16 +32,16 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 
 			if(karvyFile.exists())  {
 
-				Vector KarvyDataHolder=read(karvyFileName);
-				saveToDatabase(KarvyDataHolder);
+				Vector KarvyDataHolder=read(karvyFileName,"Karvy");
+				saveToDatabase(KarvyDataHolder,"Karvy");
 
 				karvyFile.delete();
 			}
 
 			if(camsFile.exists())  {
 
-				Vector camsDataHolder=read(camsFileName);
-				saveToDatabase(camsDataHolder);
+				Vector camsDataHolder=read(camsFileName,"Cams");
+				saveToDatabase(camsDataHolder,"Cams");
 
 				camsFile.delete();
 			}
@@ -51,7 +51,7 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 		}
 	}
 
-	public static Vector read(String fileName)    {
+	public static Vector read(String fileName, String rta)    {
 		Vector cellVectorHolder = new Vector();
 		try{
 			FileInputStream myInput = new FileInputStream(fileName);
@@ -69,21 +69,40 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 				HSSFRow myRow = (HSSFRow) rowIter.next();
 				fcell = myRow.getFirstCellNum();
 				lcell = myRow.getLastCellNum();
-				if(containsValue(myRow, fcell, lcell) == true & 
-						!("TRANSACTION REPORT".equals(myRow.getCell(0).toString())) & 
-						!("Product Code".equals(myRow.getCell(0).toString()))){
-					//System.out.println("Outside if FirstColumn :"+myRow.getCell(0)+":");
-
-					Iterator cellIter = myRow.cellIterator();
-					//Vector cellStoreVector=new Vector();
-					List list = new ArrayList();
-
-					while(cellIter.hasNext()){
-						HSSFCell myCell = (HSSFCell) cellIter.next();
-						list.add(myCell);
+				
+				if ("Karvy".equals(rta)) {
+					if(containsValue(myRow, fcell, lcell) == true & 
+							!("TRANSACTION REPORT".equals(myRow.getCell(0).toString())) & 
+							!("Product Code".equals(myRow.getCell(0).toString())) ){
+						//System.out.println("Outside if FirstColumn :"+myRow.getCell(0)+":");
+	
+						Iterator cellIter = myRow.cellIterator();
+						//Vector cellStoreVector=new Vector();
+						List list = new ArrayList();
+	
+						while(cellIter.hasNext()){
+							HSSFCell myCell = (HSSFCell) cellIter.next();
+							list.add(myCell);
+						}
+						cellVectorHolder.addElement(list);
+	
 					}
-					cellVectorHolder.addElement(list);
-
+				}
+				else {
+					if(containsValue(myRow, fcell, lcell) == true & 
+							!("amc_code".equals(myRow.getCell(0).toString()))){
+						//System.out.println("Outside if FirstColumn :"+myRow.getCell(0)+":");
+	
+						Iterator cellIter = myRow.cellIterator();
+						//Vector cellStoreVector=new Vector();
+						List list = new ArrayList();
+	
+						while(cellIter.hasNext()){
+							HSSFCell myCell = (HSSFCell) cellIter.next();
+							list.add(myCell);
+						}
+						cellVectorHolder.addElement(list);
+					}
 				}
 			}
 
@@ -93,7 +112,7 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 		}
 		return cellVectorHolder;
 	}
-	private static void saveToDatabase(Vector dataHolder) {
+	private static void saveToDatabase(Vector dataHolder, String rta) {
 		//String ClientAdd="";
 		String price="";
 		String units="";
@@ -108,10 +127,19 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
             for (int i = 0 ;i<list.size();i++) {
             	System.out.println(" list : "+i+" = "+list.get(i).toString());
             }*/
-			transactionNumber = list.get(7).toString();
-			transactionNumber = transactionNumber.substring(0, transactionNumber.length() - 2);
-			price = list.get(17).toString();
-			units = list.get(19).toString();
+			if ("Karvy".equals(rta))  {
+				transactionNumber = list.get(7).toString();
+				transactionNumber = transactionNumber.substring(0, transactionNumber.length() - 2);
+				price = list.get(17).toString();
+				units = list.get(19).toString();
+			}
+			else {
+				transactionNumber = list.get(10).toString();
+				//transactionNumber = transactionNumber.substring(0, transactionNumber.length() - 2);
+				price = list.get(13).toString();
+				units = list.get(14).toString();
+			}
+			
 
 
 			System.out.println("transactionNumber : "+transactionNumber);

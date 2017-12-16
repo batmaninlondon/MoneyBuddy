@@ -25,7 +25,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfDataDetails;
+import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
@@ -92,15 +92,15 @@ public class Test {
 				
 				Query query =  session.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
 				query.setParameter("dbfDataDate", "2017-10-05");
-				List<DbfDataDetails> dbfDataDetailsList = query.list();
+				List<DbfFileStatusDetails> dbfDataDetailsList = query.list();
 
 				Object rowData[] = new Object[4];
 				
-				for(DbfDataDetails dbfDataDetail : dbfDataDetailsList){
+				for(DbfFileStatusDetails dbfDataDetail : dbfDataDetailsList){
 
-				    rowData[0] = dbfDataDetail.getTransactionDetailId();
+				   /* rowData[0] = dbfDataDetail.getTransactionDetailId();
 				    rowData[1] = dbfDataDetail.getCustomerId();
-				    rowData[2] = dbfDataDetail.getTransactionDetailDate();
+				    rowData[2] = dbfDataDetail.getTransactionDetailDate();*/
 				    rowData[3] = dbfDataDetail.getDbfDataDate();
 
 				    writer.addRecord( rowData);

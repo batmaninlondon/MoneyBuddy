@@ -13,11 +13,19 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -32,6 +40,8 @@ public class QueryProducts {
 	
 	Logger logger = Logger.getLogger(QueryProducts.class);
 
+	public final double tol = 0.001;  
+	
 	public double getInterestRates(String planName, String riskCategory) throws MoneyBuddyException{
 
 		Session session = null;
@@ -319,7 +329,13 @@ public class QueryProducts {
 		double availableUnits = 0.0;
 		double currentAmount = 0.0;
 		double rateOfGrowth = 0.0;
-		
+		//HashMap xirrHashMap = new HashMap<String,Double>();
+		//HashMap totalXirrHashMap = new HashMap<Double,String>();
+		double xirr = 0.0;
+		double totalXirr = 0.0;
+		List<Double> totalAmounts = new ArrayList<Double>();
+	    List<Date> totalDates = new ArrayList<Date>();
+	       
 		try
 		{
 			logger.debug("QueryProducts class : getPortfolioData method : start");
@@ -337,14 +353,35 @@ public class QueryProducts {
 			
 			//List<String> productsList = query.list();
 			
+			String totalCurrentNavValue = null; 
+			
+			totalDates.add(strToDate("11/12/2017"));
+	           totalAmounts.add(Double.parseDouble("2000000")*-1);
+	           
 			 for(Iterator it=query.iterate(); it.hasNext();){
-				 
+				 List<Double> amounts = new ArrayList<Double>();
+			       List<Date> dates = new ArrayList<Date>();
+			       
+			       
+		           
+		           
+		           
+			       String oldstring;
+			       
 			       Object[] row = (Object[]) it.next();
 			       
 			       System.out.println("Product Name: " + row[0]);
 			       
 			       System.out.println("Product ID: " + row[1]);
 			       Object result;
+			       
+			       result = session.createQuery("select max(navDate) from NavHistory").uniqueResult();
+			       String currentNavDate = null; 
+			       
+			       if (result != null )
+			    	   currentNavDate = result.toString();
+			       
+			       System.out.println("Product Latest NAV Date : " + currentNavDate);
 			       
 			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
 			       String currentNavValue = null; 
@@ -353,6 +390,12 @@ public class QueryProducts {
 			    	   currentNavValue = result.toString();
 			       
 			       System.out.println("Product Latest NAV Value : " + currentNavValue);
+			       
+			       
+			       dates.add(strToDate("11/12/2017"));
+		           amounts.add(Double.parseDouble(currentNavValue)*-1);
+		           
+		           
 			       
 			       result = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"'").uniqueResult();
 			       
@@ -365,26 +408,44 @@ public class QueryProducts {
 			       
 			       
 			       
-			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='SELL' ");
+			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='SELL' ");
 			       
 			       for (Iterator sellIt=sellRecordsQuery.iterate(); sellIt.hasNext();)  {
 			    	   
 			    	   Object[] sellRecordRow = (Object[]) sellIt.next();
 				       
 			    	   soldUnit += Double.parseDouble(sellRecordRow[2].toString());
-				       System.out.println("Product transactionDetail for SEll - id : "+sellRecordRow[0]+" amount: "+sellRecordRow[1]+" unit: "+sellRecordRow[2]+" unitPrice: "+sellRecordRow[3]);
-			    	   
+				       System.out.println("Product transactionDetail for SEll - id : "+sellRecordRow[0]+" amount: "+sellRecordRow[1]+" unit: "+sellRecordRow[2]+" unitPrice: "+sellRecordRow[3] +" : transactionDate : "+sellRecordRow[4]);
+				       //xirrHashMap.put(sellRecordRow[4].toString(), (Double.parseDouble(sellRecordRow[1].toString())*-1));
+				       
+				       oldstring = sellRecordRow[4].toString().substring(0, 10);
+			           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			           
+			           
+				       	DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+				       	Date date = (Date)formatter.parse(oldstring);
+				       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+				       	String transactionDate = newFormat.format(date);
+				       	System.out.println("transactionDate : "+transactionDate);
+			       	
+			           dates.add(strToDate(transactionDate));
+			           amounts.add(Double.parseDouble(sellRecordRow[1].toString())*-1);
+			           
+			           totalDates.add(strToDate(transactionDate));
+			           totalAmounts.add(Double.parseDouble(sellRecordRow[1].toString())*-1);
+			           
+			           System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(sellRecordRow[1].toString())*-1));
 			       }
 			       
 			       System.out.println("Total sold units : "+soldUnit);
 			       
-			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' ");
+			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' ");
 			       
 			       for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
 			    	   
 			    	   Object[] buyRecordRow = (Object[]) buyIt.next();
 				       
-				       System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]);
+				       System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]+" : transactionDate : "+buyRecordRow[4]);
 			    	   
 				       if (soldUnit != 0 )   {
 				    	   
@@ -410,21 +471,79 @@ public class QueryProducts {
 				    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
 				    	   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 				       }
-				            
+				       //xirrHashMap.put(buyRecordRow[4].toString(),Double.parseDouble(buyRecordRow[1].toString()));  
+				       
+				       oldstring = buyRecordRow[4].toString().substring(0, 10);
+			           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			           
+			           DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+				       	Date date = (Date)formatter.parse(oldstring);
+				       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+				       	
+				       	String transactionDate = newFormat.format(date);
+				       	System.out.println("transactionDate : "+transactionDate);
+				       	
+			           dates.add(strToDate(transactionDate));
+			           amounts.add(Double.parseDouble(buyRecordRow[1].toString()));
+			           
+			           totalDates.add(strToDate(transactionDate));
+			           totalAmounts.add(Double.parseDouble(buyRecordRow[1].toString()));
+			           
+			           System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));
+			       
 			       }
 			       
 			       currentAmount = availableUnits* Double.parseDouble(currentNavValue);
 			       rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
 			       
+			      /* List<Double> amounts = new ArrayList<Double>();
+			       List<Date> dates = new ArrayList<Date>();
+			       Iterator xirrIterator = xirrHashMap.entrySet().iterator();
+			       int i = 0;
+			       String oldstring;
+			       while (xirrIterator.hasNext()) {
+			           Map.Entry pair = (Map.Entry)xirrIterator.next();
+			           System.out.println(pair.getKey() + " = " + pair.getValue());
+			           
+			           oldstring = pair.getKey().toString();
+			           LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.S"));
+			           
+			           dates.add(Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant()));
+			           amounts.add(Double.parseDouble(pair.getValue().toString()));
+			           
+			           totalDates.add(Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant()));
+			           totalAmounts.add(Double.parseDouble(pair.getValue().toString()));
+			           
+			           xirrIterator.remove(); // avoids a ConcurrentModificationException
+			       }*/
+			       
+			       xirr = Newtons_method(0.1, amounts, dates);
 			       System.out.println("Total availableUnits : "+ String.format("%.4f", availableUnits));
 			       System.out.println("Total invested Amount : "+ String.format("%.4f", investedAmount));
 			       System.out.println("Current Amount : "+ String.format("%.4f", currentAmount));
-			       System.out.println("Rate of Growth : "+ String.format("%.4f", rateOfGrowth));
+			       System.out.println("XIRR : "+ String.format("%.4f", xirr));
 			      
 			       
-			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",rateOfGrowth),transactionStartDate));
+			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",xirr),transactionStartDate));
 			 }
+			 
+			 totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
+			 
+			 Double TotalInvestedAmount = 0.0;
+				Double TotalCurrentAmount = 0.0;
+				for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
+					
+					
+					TotalInvestedAmount = TotalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
+					TotalCurrentAmount = TotalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
+				}
+				
+				Double TotalrateOfGrowth = ((TotalCurrentAmount - TotalInvestedAmount)/TotalInvestedAmount)*100;
+			
+				/*query = session.createQuery("select min(transactionDate) from TransactionDetails where customerId='"+customerId+"'");
 
+				String allTransactionStartDate = query.uniqueResult().toString();*/
+				portfolioDataModel.add(new PortfolioDataModel("Total","",String.format("%.2f",TotalInvestedAmount),String.format("%.2f",TotalCurrentAmount),String.format("%.2f",totalXirr),""));
 
 			//session.getTransaction().commit();
 
@@ -530,5 +649,62 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		}
 
 	}
+
+
+	public double dateDiff(Date d1, Date d2){
+	    long day = 24*60*60*1000;
 	
+	    return (d1.getTime() - d2.getTime())/day;
+	}
+	
+	public double f_xirr(double p, Date dt, Date dt0, double x) {        
+	    return p * Math.pow((1.0 + x), (dateDiff(dt0,dt) / 365.0));
+	}
+	
+	public double df_xirr(double p, Date dt, Date dt0, double x) {        
+	    return (1.0 / 365.0) * dateDiff(dt0,dt) * p * Math.pow((x + 1.0), ((dateDiff(dt0,dt) / 365.0) - 1.0));
+	}
+	
+	public double total_f_xirr(List<Double> payments, List<Date> dates, double x) {
+	    double resf = 0.0;
+	
+	    for (int i = 0; i < payments.size(); i++) {
+	        resf = resf + f_xirr(payments.get(i), dates.get(i), dates.get(0), x);
+	    }
+	
+	    return resf;
+	}
+	
+	public double total_df_xirr(List<Double> payments, List<Date> dates, double x) {
+	    double resf = 0.0;
+	
+	    for (int i = 0; i < payments.size(); i++) {
+	        resf = resf + df_xirr(payments.get(i), dates.get(i), dates.get(0), x);
+	    }
+	
+	    return resf;
+	}
+	
+	public double Newtons_method(double guess, List<Double> payments, List<Date> dates) {
+	    double x0 = guess;
+	    double x1 = 0.0;
+	    double err = 1e+100;
+	
+	    while (err > tol) {
+	        x1 = x0 - total_f_xirr(payments, dates, x0) / total_df_xirr(payments, dates, x0);
+	        err = Math.abs(x1 - x0);
+	        x0 = x1;
+	    }
+	
+	    return x0;
+	}
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	public Date strToDate(String str){
+	    try {
+	        return sdf.parse(str);
+	    } catch (ParseException ex) {
+	        return null;
+	    }
+	}
 }
