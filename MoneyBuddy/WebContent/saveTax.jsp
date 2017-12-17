@@ -39,28 +39,7 @@
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
-
-        <nav class="navbar navbar-inverse" role="banner">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -74,21 +53,20 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
-                        <li class="active" id="header-nav-li"><a href="saveTax">Save Tax</a></li>
-                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Contact Us</a></li> 
-                       
+                        <li id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
+                        <li class="active"  id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
+                        <li id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
+                        <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
+                        <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> 
+                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
-										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>
+										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" >Portfolio</a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" ><b>Dashboard</b></a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -97,6 +75,7 @@
         </nav><!--/nav-->
 		
     </header>
+   
 
 
 		
@@ -570,18 +549,22 @@
     
     
 
-      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
+     <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
+                    &copy; 2017 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
+                
+                
+                
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="help">Contact Us</a></li>
-                        <li><a href="register">Sign Up</a></li>
+                       <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="fa fa-linkedin"></i></a></li> 
+                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="fa fa-youtube"></i></a></li>
+                                
                     </ul>
                 </div>
             </div>

@@ -17,9 +17,29 @@
 	    	<result>/aboutUs.jsp</result>
 		</action>
 	</package>
+	<package name="startSip" namespace="/" extends="struts-default">
+	    <action name="startSip">
+	    	<result>/startSip.jsp</result>
+		</action>
+	</package>
+	<package name="additionalCustomerDetails" namespace="/" extends="struts-default">
+	    <action name="additionalCustomerDetails">
+	    	<result>/additionalCustomerDetails.jsp</result>
+		</action>
+	</package>
+	<package name="downloadKycForm" namespace="/" extends="struts-default">
+	    <action name="downloadKycForm">
+	    	<result>/downloadKycForm.jsp</result>
+		</action>
+	</package>
 	<package name="blog" namespace="/" extends="struts-default">
 	    <action name="blog">
 	    	<result>/blog.jsp</result>
+		</action>
+	</package>
+	<package name="uploadCustomerNav" namespace="/" extends="struts-default">
+	    <action name="uploadCustomerNav">
+	    	<result>/uploadCustomerNav.jsp</result>
 		</action>
 	</package>
 	<package name="adminDashboard" namespace="/" extends="struts-default">
@@ -32,7 +52,16 @@
 	    	<result>/customerDetails.jsp</result>
 		</action>
 	</package>
-
+	<package name="bankDetails" namespace="/" extends="struts-default">
+	    <action name="bankDetails">
+	    	<result>/bankDetails.jsp</result>
+		</action>
+	</package>
+	<package name="newUpfrontInvestment" namespace="/" extends="struts-default">
+	    <action name="newUpfrontInvestment">
+	    	<result>/newUpfrontInvestment.jsp</result>
+		</action>
+	</package>
 	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
 	    <action name="cutomerPortfolio">
 	    	<result>/cutomerPortfolio.jsp</result>
@@ -147,9 +176,15 @@
 	    	<result>/thankYou.jsp</result>
 		</action>
 	</package>
+	
 	<package name="thankYouForRegistration" namespace="/" extends="struts-default">
 	    <action name="thankYouForRegistration">
 	    	<result>/thankYouForRegistration.jsp</result>
+		</action>
+	</package>
+	<package name="thankYouForSubscribing" namespace="/" extends="struts-default">
+	    <action name="thankYouForSubscribing">
+	    	<result>/thankYouForSubscribing.jsp</result>
 		</action>
 	</package>
 	<package name="thankYouForPasswordReset" namespace="/" extends="struts-default">
@@ -165,6 +200,11 @@
 	<package name="sipInvestment" namespace="/" extends="struts-default">
 	    <action name="sipInvestment">
 	    	<result>/sipInvestment.jsp</result>
+		</action>
+	</package>
+	<package name="newSipInvestment" namespace="/" extends="struts-default">
+	    <action name="newSipInvestment">
+	    	<result>/newSipInvestment.jsp</result>
 		</action>
 	</package>
 	<package name="userVerification" namespace="/" extends="struts-default">

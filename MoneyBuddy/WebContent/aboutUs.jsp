@@ -5,56 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Investment Details Page | Money Buddy</title>
+    <title>About Us | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
-    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+ 	<script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/wow.min.js"></script>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
-   <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
-
-        <nav class="navbar navbar-inverse" role="banner">
+<body class="homepage">
+    <header id="header">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -68,21 +45,20 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
-                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
-                        <li class="active" id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
-                       
+                        <li id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
+                        <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
+                        <li class="active" id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
+                        <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
+                        <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> 
+                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
-										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
+										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>
+										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" >Portfoio</a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
+							 			 <li id="header-nav-li"><a href="bseDashboard" ><b>Dashboard</b></a></li> 
+							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
 							<%	}	%>  
 				                            
                     </ul>
@@ -91,15 +67,26 @@
         </nav><!--/nav-->
 		
     </header>
- <section id="about-us">
+
+ <section id="about-us" class="container" >
         <div class="container">
-			<div class="center wow fadeInDown" style="margin-top:-50px;">
-				<h2>Our Vision</h2>
-				<p class="lead">MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.</p>
-				<p class="lead">Our vision is to ensure every person is able to plan and save for his retirement, new house, children's marriage and other essential financial needs.</p>
-				<p class="lead">While we truly understand the audacity of our vision we strongly believe how it can lead to a happier world. This website is just a first baby step to realise our vision and we are super excited to see people fall in love with our services.</p>
-				<p class="lead">We are based in Pune and are bootstrapping to achieve our goal. Our team consists of following people and we are looking to add more people who believe in our vision.</p>
+			<div class="center wow fadeInDown">
+				<h2>Hello, We're MoneyBuddy</h2>
+				<p class="lead">We're a group of like-minded investment experts, technologists and entrepreneurs with a shared ambition to shake things up and make investing easy and affordable for everyone. We're challenging people to think differently and do more with their savings.
+                Our promise is simple: No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
 			</div>
+			
+			<div class="center wow fadeInDown">
+				<h2>Our Vision</h2>
+				<p class="lead">MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.
+
+Our vision is to ensure every person is able to plan and save for his retirement, new house, children's marriage and other essential financial needs.
+
+While we truly understand the audacity of our vision we strongly believe how it can lead to a happier world. This website is just a first baby step to realise our vision and we are super excited to see people fall in love with our services.
+
+We are based in Pune and are bootstrapping to achieve our goal. Our team consists of following people and we are looking to add more people who believe in our vision.</p>
+			</div>
+			
         <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
            	<!-- Our Skill -->
 			
@@ -107,12 +94,11 @@
 			
 			<!-- our-team -->
 			<div class="team" class="">
-				<!-- <div class="center wow fadeInDown">
+				<div class="center wow fadeInDown">
 					<h2>Meet the team</h2>
 					<p class="lead">Started with a simeple dream...</p>
-				</div> -->
+				</div>
 				<div class="row clearfix">
-					<div class="col-md-1"></div>
 					<div class="col-md-4 col-sm-6">	
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
@@ -151,7 +137,7 @@
 									<h5>Co - Founder and CTO</h5>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Investment</a></li>
-										<li class="btn"><a href="#">Tech</a></li>
+										<li class="btn"><a href="#">Technology</a></li>
 										<li class="btn"><a href="#">Strategy</a></li>
 									</ul>
 									<ul class="social_icons">
@@ -161,11 +147,11 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>A born entrepreneurs. With over tweleve years of international consulting experience ... Sail has worked with spend most of his time working with</p>
+							<p>A born entrepreneurs. With over tweleve years of international consulting experience ... Sail has worked with spend most of his time working with C suites to .... </p>
 						</div>
 					</div><!--/.col-lg-4 -->					
 				</div> <!--/.row -->
-				<!-- <div class="row team-bar">
+				<div class="row team-bar">
 					<div class="first-one-arrow hidden-xs">
 						<hr>
 					</div>
@@ -178,10 +164,9 @@
 					<div class="third-arrow hidden-xs">
 						<hr> <i class="fa fa-angle-up"></i>
 					</div>
-				</div> --> <!--skill_border-->       
+				</div> <!--skill_border-->       
 
-				<div class="row clearfix" style="margin-top:40px;">   
-					<div class="col-md-2"></div>
+				<div class="row clearfix">   
 					<div class="col-md-4 col-sm-6 col-md-offset-2">	
 						<div class="single-profile-bottom wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
 							<div class="media">
@@ -214,23 +199,27 @@
     </section><!--/about-us-->
 	
    
-    <footer id="footer" class="midnight-blue">
+   <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
+                    &copy; 2017 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
+                
+                
+                
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="help">Contact Us</a></li>
-                        <li><a href="register">Sign Up</a></li>
+                       <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="fa fa-linkedin"></i></a></li> 
+                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="fa fa-youtube"></i></a></li>
+                                
                     </ul>
                 </div>
             </div>
         </div>
-    </footer><!--/#footer-->
+    </footer>
     
 
     <script src="js/jquery.js"></script>

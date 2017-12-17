@@ -8,5 +8,25 @@
      <!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ebdb</property> -->
     <property name="hibernate.connection.username">moneybuddy</property>
     <property name="hibernate.connection.password">Moneybuddy123</property>
+     <property name="hibernate.show_sql">true</property>
+     <!-- Mapping with model class containing annotations -->
+	 <mapping class="com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.BankDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerAccountDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerLoginActivity"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPortfolio"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.Customers"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.KycStatus"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.NavHistory"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.PaymentDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.PriceHistory"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.ProductDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.RtaSpecificCodes"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.SipDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.TransactionDetails"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.Transactions"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.Subscriber"/>
   </session-factory>
 </hibernate-configuration>
