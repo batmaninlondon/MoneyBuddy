@@ -497,6 +497,36 @@ public class Trading {
 
 				paymentUrl = paymentGateway.getResponseString().getValue();
 				System.out.println("paymentUrl: "+paymentUrl);
+				
+				session.beginTransaction();
+
+				query = session.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
+
+				query.setParameter("subscriberType", "INVESTOR");
+
+				query.setParameter("customerId", customerId);
+
+				int result = query.executeUpdate();
+
+				session.getTransaction().commit();
+				
+				session.beginTransaction();
+				Object emailIdObj = session.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
+				String emailId = null;
+				if (emailIdObj != null)
+					emailId = emailIdObj.toString();
+								
+				session.beginTransaction();
+
+				query = session.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
+
+				query.setParameter("subscriberType", "INVESTOR");
+
+				query.setParameter("emailId", emailId);
+
+				result = query.executeUpdate();
+
+				session.getTransaction().commit();
 
 			}
 			else {

@@ -8,6 +8,7 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.Subscriber;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
@@ -36,9 +37,18 @@ public class insertCustomerDetails {
     	
     	try {
 
-    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE",null,"N","N");
+    		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		Date date = new Date();
+    		String frmtdDate = dateFormat.format(date);
+    		
+    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE",null,"N","N","CUSTOMER");
     		session.beginTransaction();
     		session.save(tempCustomer);
+    		session.getTransaction().commit();
+    		
+    		Subscriber tempSubscriber = new Subscriber(emailId,mobileNumber,"CUSTOMER",frmtdDate);
+    		session.beginTransaction();
+    		session.save(tempSubscriber);
     		session.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
@@ -56,10 +66,6 @@ public class insertCustomerDetails {
     		session.getTransaction().commit();
 
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerPasswordsHistory table for customerId : "+customerId);
-    		
-    		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    		Date date = new Date();
-    		String frmtdDate = dateFormat.format(date);
 
     		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(Integer.toString(customerId),null,frmtdDate);
 

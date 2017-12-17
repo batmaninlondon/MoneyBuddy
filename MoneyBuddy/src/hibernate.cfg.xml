@@ -27,5 +27,6 @@
 	 <mapping class="com.myMoneyBuddy.EntityClasses.SipDetails"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.TransactionDetails"/>
 	 <mapping class="com.myMoneyBuddy.EntityClasses.Transactions"/>
+	 <mapping class="com.myMoneyBuddy.EntityClasses.Subscriber"/>
   </session-factory>
 </hibernate-configuration>

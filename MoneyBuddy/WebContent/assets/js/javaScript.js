@@ -1148,6 +1148,48 @@ function signUp(){
 	
 }
 
+function saveSubscriber() {
+	
+	var emailId = document.getElementById("subscriber-email-id").value;
+	var mobileNumber = null;
+
+	if ( emailId == '')  {
+		
+		document.getElementById("subscriber-email-id").className += " formInvalid";
+		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
+		return;
+	}
+	else if (!validateEmail(emailId)) {
+		document.getElementById("email-id").className += " formInvalid";
+		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id ";
+		document.getElementById("email-id").value = null;
+		return;
+	}
+	
+	$.ajax({
+
+        url : "saveSubscriberAction",
+        type: 'post',
+        
+        data: {'emailId' : emailId , 'mobileNumber' : mobileNumber},
+        
+        success : function(result){
+        	
+        	/*alert('result : '+result);*/
+        	
+        	if (result == "success") {
+        		/*alert('login success !! ');*/
+        		window.location='thankYouForSubscribing';
+        	}
+        	else {
+        		/*alert('Inside login error !!');*/
+        		window.location='errorPage';
+        	}
+
+        },
+    });	
+}
+
 function login() {
 	
 	var emailId = document.getElementById("email-id").value;

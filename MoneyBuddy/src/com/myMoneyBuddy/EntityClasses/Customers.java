@@ -69,6 +69,9 @@ public class Customers {
     
     @Column(name="CAMS_FILE_GENERATED")
     private String camsFileGenerated;
+    
+    @Column(name="SUBSCRIBER_TYPE")
+    private String subscriberType;
 
     public Customers() {
         
@@ -76,7 +79,7 @@ public class Customers {
 
     public Customers( String firstName, String lastName, String emailId, String mobileNumber, String password,
 			String verificationStatus, String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String kycStatus,
-			String folioNumber, String karvyFileGenerated, String camsFileGenerated) {
+			String folioNumber, String karvyFileGenerated, String camsFileGenerated, String subscriberType) {
 		super();
 		this.emailId = emailId;
 		this.firstName = firstName;
@@ -93,6 +96,7 @@ public class Customers {
 		this.folioNumber = folioNumber;
 		this.karvyFileGenerated = karvyFileGenerated;
 		this.camsFileGenerated = camsFileGenerated;
+		this.subscriberType = subscriberType;
 	}
 
 	public String getCustomerId() {
@@ -225,6 +229,14 @@ public class Customers {
 		this.camsFileGenerated = camsFileGenerated;
 	}
 
+	public String getSubscriberType() {
+		return subscriberType;
+	}
+
+	public void setSubscriberType(String subscriberType) {
+		this.subscriberType = subscriberType;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -282,6 +294,9 @@ public class Customers {
         if ((this.camsFileGenerated == null) ? (other.camsFileGenerated != null) : !this.camsFileGenerated.equals(other.camsFileGenerated)) {
             return false;
         }
+        if ((this.subscriberType == null) ? (other.subscriberType != null) : !this.subscriberType.equals(other.subscriberType)) {
+            return false;
+        }
         return true;
     }
 
@@ -304,6 +319,7 @@ public class Customers {
         hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
         hash = 79 * hash + (this.karvyFileGenerated != null ? this.karvyFileGenerated.hashCode() : 0);
         hash = 79 * hash + (this.camsFileGenerated != null ? this.camsFileGenerated.hashCode() : 0);
+        hash = 79 * hash + (this.subscriberType != null ? this.subscriberType.hashCode() : 0);
         return hash;
     }
 

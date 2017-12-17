@@ -176,9 +176,15 @@
 	    	<result>/thankYou.jsp</result>
 		</action>
 	</package>
+	
 	<package name="thankYouForRegistration" namespace="/" extends="struts-default">
 	    <action name="thankYouForRegistration">
 	    	<result>/thankYouForRegistration.jsp</result>
+		</action>
+	</package>
+	<package name="thankYouForSubscribing" namespace="/" extends="struts-default">
+	    <action name="thankYouForSubscribing">
+	    	<result>/thankYouForSubscribing.jsp</result>
 		</action>
 	</package>
 	<package name="thankYouForPasswordReset" namespace="/" extends="struts-default">

@@ -461,7 +461,7 @@
     </section><!--/#content-->
 
     <section id="partner">
-        <div class="container">
+        <div class="container" style="background-color:red">
             <div class="center wow fadeInDown" style="margin-top:-110px;">
                 <h2 style="color:black;">Our Partners</h2>
                 <p class="lead" style="color:black;">All the leading financial services firms in India have entered into partnership agreements with MoneyBuddy. Thus providing our customers widest range of mutual funds to chose from (For the record, we’ve over 25 AMCs and 1200 Mutual funds on our website at the moment)</p>
@@ -491,17 +491,17 @@
                         
                         	<div class="col-md-4">
                             	<h2 style="font-size:25px;">Learn with MoneyBuddy</h2>
-                            	<p>Interested in learning about personal finance to maximise your wealth and to protect your near and dear ones?  Subscribe to our newsletter and we’ll periodically send you curated list of articles/ videos prepared exclusively by our founding team PS: We create wealth not spam</p>
+                            	<p>Interested in learning about personal finance to maxmise your wealth and to protect your near and dear ones?  Subscribe to our newsletter and we’ll periodically send you curated list of articles/ videos prepared exclusively by our founding team PS: We create wealth not spam</p>
 							</div>
 							<div class="col-md-5">
 									<div class="row input-group input-group-lg" style="margin-top:20px;">
 						    			<%-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> --%>
-						    			<input id="email-id" type="text" class="form-control" name="emailId" placeholder="Provide us your email/phone, we will get back to you!" style="width:500px;" >
+						    			<input id="subscriber-email-id" type="text" class="form-control" name="subscriberEmailId" placeholder="Provide us your email, we will get back to you!" style="width:500px;" >
 						    			
 						  			</div>
 						  			<div class="row">
 						 	<div class="center col-md-12">
-						  		<button type="button" class="btn btn-primary readmore" style="margin-top:50px; width:200px;">SUBMIT</button>
+						  		<button type="button" class="btn btn-primary readmore" style="margin-top:50px; width:200px;" onClick="saveSubscriber();">SUBMIT</button>
 						  	</div>
 						 </div>
 						  	</div>
