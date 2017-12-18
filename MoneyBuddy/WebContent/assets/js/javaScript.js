@@ -83,7 +83,7 @@ function fundDetailHandler(el) {
 	        
 	        data: { 'productName' : selectedItem  },
 
-	        success : function(){
+	        /*success : function(){
 	        	$( "#dialog" ).dialog({autoOpen: true,
         	    	title:selectedItem,
         	    	width: 800,
@@ -93,17 +93,18 @@ function fundDetailHandler(el) {
 	          error : function(){
 	        		alert('Inside investmentDetailsAction error !!');
 	        		window.location='errorPage';
-	        	}
+	        	}*/
 	          
-	        /*success : function(result){
+	        success : function(result){
 	        	
 	        	if (result == "success") {
-	        		
+	        		alert ('Inside success of investmentDetails!! ');
 	        		$( "#dialog" ).dialog({autoOpen: true,
 	        	    	title:selectedItem,
 	        	    	width: 800,
 	        	    	height:300,
 	        	    	scrollable: true});
+	        		//$("#investment-details-data-list").load("bseDashboard.jsp #investment-details-data-list");
 
 	        	}
 	        	else {
@@ -111,7 +112,7 @@ function fundDetailHandler(el) {
 	        		window.location='errorPage';
 	        	}
 
-	        }*/
+	        }
 	    });
 	    
 	    
@@ -872,11 +873,14 @@ function setDashboardData()
         success : function(result){
         	
         	if (result == "success") {
-        		setTimeout(function(){
-        			document.getElementById("please-wait-msg").style.display = "none";
-            		document.getElementById("dashboard").style.display = "block";	
+        		//alert('got success!!');
+        		$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
+        		/*setTimeout(function(){
+        			//document.getElementById("please-wait-msg").style.display = "none";
+        			
+            		//document.getElementById("dashboard").style.display = "block";	
 
-        		}, 10000); 
+        		}, 10000); */
         		//alert(' HI Func completed successfully !! ');
         		
         		// do nothing

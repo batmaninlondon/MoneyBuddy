@@ -27,7 +27,7 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 	private String dummyMsg;
 	private String productName;
 
-	//private InputStream stream;
+	private InputStream stream;
 	
 	public String execute() {
 
@@ -55,22 +55,22 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 		
 		logger.debug("InvestmentDetailsAction class : execute method : end");
 
-		/*String str = "success";
-	    stream = new ByteArrayInputStream(str.getBytes());*/
+		String str = "success";
+	    stream = new ByteArrayInputStream(str.getBytes());
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
 			logger.debug("InvestmentDetailsAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
-			/*String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
     	catch (Exception e) {	
     		logger.debug("InvestmentDetailsAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
-			/*String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
 	}

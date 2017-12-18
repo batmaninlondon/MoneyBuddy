@@ -292,15 +292,15 @@ $( function() {
         </nav><!--/nav-->
 		
     </header>
-<%--     <section id="bseDashboard"> --%>
+    <section id="bseDashboard">
 
 	<ul class="nav nav-tabs">
 	    <li class="active"><a data-toggle="tab" href="#dashboard">Portfolio</a></li>
 	    <!-- <li><a data-toggle="tab" href="#portfolio">Portfolio</a></li> -->
 
   	</ul>
-  <!-- <div class="tab-content"> -->
-  <div id="please-wait-msg" class="row" style="margin-top:100px;margin-bottom:20px;">
+  <div class="tab-content">
+  <div id="please-wait-msg" class="row" style="margin-top:100px;margin-bottom:20px;display: none">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please wait ......</b></h2>
@@ -309,13 +309,13 @@ $( function() {
 	</div>
 	
 	<!-- <form id="dashboardForm"> -->
-	<div id="dashboard" class="tab-pane active" style="display: none" >
+	<div id="dashboard" class="tab-pane active" style="" >
 		<!-- <div class="row">
 			<div class="col-md-12 well-sm large-text dashboard-row-1" >
 				<p style="margin-left:50px;">PortFolio</p>
 			</div>
 		</div> -->
-		<div class="row">
+		<div class="row" id="dashboard-data-list">
 			<div class="col-md-12" style="margin:20px;">
 				<div class="tab-pane fade-in active">
 				
@@ -376,7 +376,7 @@ $( function() {
 		<div id="dialog" title="Basic dialog" style="display:none;">
 			<div class="row" id="fund-history">
 				<div class="col-md-12" style="margin:20px;">
-					<div class="tab-pane fade-in active">
+					<div class="tab-pane fade-in active" id="investment-details-data-list">
 				 
 					<table class="table table-bordered" >
 						<thead class="table-head">
@@ -502,8 +502,8 @@ $( function() {
 			</div>
 		</div>
 	</div> -->
-  <!-- </div> -->
-<%--    </section> --%>
+  </div>
+   </section>
         <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">

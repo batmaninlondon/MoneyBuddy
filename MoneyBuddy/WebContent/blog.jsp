@@ -83,7 +83,7 @@
                             <div class="col-xs-12 col-sm-2 text-center">
                                 <div class="entry-meta">
                                     <span id="publish_date">07  NOV</span>
-                                    <span><i class="fa fa-user"></i> <a href="#">John Doe</a></span>
+                                    <span><i class="fa fa-user"></i> <a href="#">Kamal Wadhwani</a></span>
                                 </div>
                             </div>
                                 
@@ -109,9 +109,9 @@ Impeccable team Customer advisory and fund selection is done by our founder Mr. 
                         </div>    
                     </div>
                     
-                    
+<%-- Savita Wadhwani - Commented this section for bse testing - Start --%>
                         
-                    <div class="blog-item">
+                    <!-- <div class="blog-item">
                         <div class="row">
                              <div class="col-sm-2 text-center">
                                 <div class="entry-meta"> 
@@ -158,7 +158,9 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
                                 <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>    
-                    </div><!--/.blog-item-->
+                    </div>/.blog-item -->
+                    
+<%-- Savita Wadhwani - Commented this section for bse testing - End --%>
                         
                 </div><!--/.col-md-8-->
 

@@ -159,9 +159,9 @@
 
 
 
-    
+ <%-- Savita Wadhwani - Commented this section for bse testing - Start --%>   
 
-     <section id="services" class="service-item">
+<%--      <section id="services" class="service-item">
 	   <div class="container">
             <div class="center wow fadeInDown">
            
@@ -239,7 +239,10 @@
         
         
         
-    </section><!--/#recent-works-->
+    </section><!--/#recent-works--> --%>
+    
+<%-- Savita Wadhwani - Commented this section for bse testing - End --%>    
+
 <section id="services" class="service-item">
 	   <div class="container">
             <div class="center wow fadeInDown">
@@ -351,7 +354,9 @@
                     </div><!--/.tab-wrap-->               
                 </div><!--/.col-sm-6-->
 
-                <div class="col-xs-12 col-sm-4 wow fadeInDown">
+<%-- Savita Wadhwani - Commented this section for bse testing - Start --%>
+
+                <%-- <div class="col-xs-12 col-sm-4 wow fadeInDown">
                     <div class="testimonial">
                         <h2>What our customer says</h2>
                          <div class="media testimonial-inner">
@@ -375,7 +380,9 @@
                          </div>
 
                     </div>
-                </div>
+                </div> --%>
+
+<%-- Savita Wadhwani - Commented this section for bse testing - End --%>
 
             </div><!--/.row-->
         </div><!--/.container-->
@@ -449,19 +456,20 @@ We use funds from leading providers to build your portfolio</p>
 
 
   
+<%-- Savita Wadhwani - Changes done on this section for bse testing - Start --%>
 
     <section id="conatcat-info">
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-bottom:40px;">
                 <div class="col-sm-8">
                     <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                         <div class="pull-left">
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="media-body">
-                            <h2>Have a question or need a custom quote?</h2>
+                            <h2>Have a question, contact us on </h2>
                             <p>
-                            +91 9971648736
+                            +91 9971648736 / info.moneybuddy@gmail.com
                            </p>
                         </div>
                     </div>
@@ -470,7 +478,7 @@ We use funds from leading providers to build your portfolio</p>
         </div><!--/.container-->    
     </section><!--/#conatcat-info-->
 
-    
+<%-- Savita Wadhwani - Changes done on this section for bse testing - End --%>  
 
       <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">

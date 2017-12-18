@@ -162,7 +162,9 @@
 		
     </header>
 
- <article id="post-44" class="post-44 page type-page status-publish hentry" style="margin-top:80px">
+<%-- Savita Wadhwani - Commented this section for bse testing - Start --%>
+
+<!--  <article id="post-44" class="post-44 page type-page status-publish hentry" style="margin-top:80px">
 	
 	<div class="entry-content">
 		<section class="hero hero-faqs">
@@ -602,11 +604,30 @@ Compensation under the FSCS is also triggered in the event of losses arising fro
         </div>
       </div>
     </div>
-  </section>	</div><!-- .entry-content -->
+  </section>	</div>.entry-content
 
-</article><!-- #post-## -->
+</article>#post-## -->
 
-  
+<%-- Savita Wadhwani - Commented this section for bse testing - End --%> 
+
+
+<%-- Savita Wadhwani - Added this section for bse testing - Start --%> 
+
+    <section id="help">
+	
+	
+	
+	<div class="row" style="margin-top:100px;">
+		<div class="center">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>This page is under construction...</b></h2>
+		</div>
+	</div>
+	
+
+	</section>
+
+<%-- Savita Wadhwani - Added this section for bse testing - Start --%>
+
      <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
         <div class="container">
             <div class="row">
