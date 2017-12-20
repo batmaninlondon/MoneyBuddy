@@ -6,9 +6,11 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.myMoneyBuddy.DAOClasses.InvestmentDetailsDataModel;
 import com.myMoneyBuddy.DAOClasses.PortfolioDataModel;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -24,6 +26,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	private List<PortfolioDataModel> portfolioDataModel;
 	private String dummyMsg;
+	private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
+	
+	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
 	
 	private InputStream stream;
 
@@ -45,6 +50,29 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		session.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+session.getClass().getName());
 
+		String productName = null;
+		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
+			productName = portfolioDataModelElement.getFundName();
+			System.out.println("productName : "+productName);
+			
+			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),productName);
+			investmentDetailsDataModelList.put(productName,investmentDetailsDataModel);
+			
+		}
+		
+		for (String key : investmentDetailsDataModelList.keySet())  {
+			System.out.println("key : "+key);
+			for (InvestmentDetailsDataModel dataMadel : investmentDetailsDataModelList.get(key))  {
+				System.out.println("dataMadel.getTransactionDate() : "+dataMadel.getTransactionDate());
+				System.out.println("dataMadel.getUnits() : "+dataMadel.getUnits());
+				System.out.println("dataMadel.getNavPurchased() : "+dataMadel.getNavPurchased());
+				System.out.println("dataMadel.getTransactionType() : "+dataMadel.getTransactionType());
+				
+			}
+		}
+		session.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
+		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+session.getClass().getName());
+		
 		/*Double TotalInvestedAmount = 0.0;
 		Double TotalCurrentAmount = 0.0;
 		for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
@@ -126,5 +154,28 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
+
+
+	public HashMap<String, List<InvestmentDetailsDataModel>> getInvestmentDetailsDataModelList() {
+		return investmentDetailsDataModelList;
+	}
+
+
+	public void setInvestmentDetailsDataModelList(
+			HashMap<String, List<InvestmentDetailsDataModel>> investmentDetailsDataModelList) {
+		this.investmentDetailsDataModelList = investmentDetailsDataModelList;
+	}
+
+
+	public List<InvestmentDetailsDataModel> getInvestmentDetailsDataModel() {
+		return investmentDetailsDataModel;
+	}
+
+
+	public void setInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> investmentDetailsDataModel) {
+		this.investmentDetailsDataModel = investmentDetailsDataModel;
+	}
+
+
 
 }

@@ -98,13 +98,19 @@ function fundDetailHandler(el) {
 	        success : function(result){
 	        	
 	        	if (result == "success") {
-	        		alert ('Inside success of investmentDetails!! ');
+	        		//alert ('Inside success of investmentDetails!! ');
+	        		
+	        		/*$( "#dialog-1" ).dialog({autoOpen: true,
+	        	    	title:selectedItem,
+	        	    	width: 800,
+	        	    	height:300,
+	        	    	scrollable: true});*/
+	        		$("#investment-details-data-list").load("bseDashboard.jsp #investment-details-data-list");
 	        		$( "#dialog" ).dialog({autoOpen: true,
 	        	    	title:selectedItem,
 	        	    	width: 800,
 	        	    	height:300,
 	        	    	scrollable: true});
-	        		//$("#investment-details-data-list").load("bseDashboard.jsp #investment-details-data-list");
 
 	        	}
 	        	else {
@@ -873,8 +879,9 @@ function setDashboardData()
         success : function(result){
         	
         	if (result == "success") {
+        		window.location='bseDashboard';
         		//alert('got success!!');
-        		$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
+        		//$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
         		/*setTimeout(function(){
         			//document.getElementById("please-wait-msg").style.display = "none";
         			

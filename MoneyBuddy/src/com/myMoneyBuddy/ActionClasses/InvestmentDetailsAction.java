@@ -6,6 +6,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,39 +33,35 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 	public String execute() {
 
 		try {
-		logger.debug("InvestmentDetailsAction class : execute method : start");
-		dummyMsg = "InvestmentDetails representation";
-		
-
-		QueryProducts queryProducts = new QueryProducts();
-		/*dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);*/
-		System.out.println("InvestmentDetails action class called - start ");
-		System.out.println("InvestmentDetails action class :  productName : "+getProductName());
-		System.out.println("InvestmentDetails action class :  productName.length() : "+getProductName().length());
-		
-		//sessionMap.remove("investmentDetailsDataModel");
-		
-		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),getProductName());
-
-		sessionMap.put("investmentDetailsDataModel", investmentDetailsDataModel);
-		logger.debug("InvestmentDetailsAction class : execute method : stored investmentDetailsDataModel : "+investmentDetailsDataModel+" in session id : "+sessionMap.getClass().getName());
-		
-		System.out.println("InvestmentDetailsAction class : execute method : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
-		
-		System.out.println("InvestmentDetails action class called - end ");
-		
-		logger.debug("InvestmentDetailsAction class : execute method : end");
-
-		String str = "success";
-	    stream = new ByteArrayInputStream(str.getBytes());
-		return SUCCESS;
-		}
-		catch (MoneyBuddyException e) {	
-			logger.debug("InvestmentDetailsAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
-			e.printStackTrace();
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-			return ERROR;
+			logger.debug("InvestmentDetailsAction class : execute method : start");
+			dummyMsg = "InvestmentDetails representation";
+			
+			HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = (HashMap<String,List<InvestmentDetailsDataModel>>) sessionMap.get("investmentDetailsDataModelList");
+			
+			investmentDetailsDataModel = investmentDetailsDataModelList.get(getProductName());
+	
+			/*QueryProducts queryProducts = new QueryProducts();
+			dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);
+			System.out.println("InvestmentDetails action class called - start ");
+			System.out.println("InvestmentDetails action class :  productName : "+getProductName());
+			System.out.println("InvestmentDetails action class :  productName.length() : "+getProductName().length());
+			
+			//sessionMap.remove("investmentDetailsDataModel");
+			
+			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),getProductName());*/
+	
+			sessionMap.put("investmentDetailsDataModel", investmentDetailsDataModel);
+			logger.debug("InvestmentDetailsAction class : execute method : stored investmentDetailsDataModel : "+investmentDetailsDataModel+" in session id : "+sessionMap.getClass().getName());
+			
+			System.out.println("InvestmentDetailsAction class : execute method : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
+			
+			System.out.println("InvestmentDetails action class called - end ");
+			
+			logger.debug("InvestmentDetailsAction class : execute method : end");
+	
+			String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());
+			return SUCCESS;
 		} 
     	catch (Exception e) {	
     		logger.debug("InvestmentDetailsAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
@@ -108,12 +105,12 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 		this.productName = productName;
 	}
 
-	/*public InputStream getStream() {
+	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}*/
+	}
 
 }

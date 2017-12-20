@@ -73,7 +73,7 @@
 										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
 							<%	} else 
 							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" ><b>Dashboard</b></a></li> 
+							 			 <li id="header-nav-li"><a href="javascript:setDashboardData()" ><b>Dashboard</b></a></li> 
 							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
 							<%	}	%>  
 				                            

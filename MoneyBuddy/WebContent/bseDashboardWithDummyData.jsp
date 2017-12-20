@@ -80,17 +80,27 @@ google.charts.setOnLoadCallback(drawTable);
 									 
 									 var cusId ="<%=(String)session.getAttribute("customerId")%>";
 									 
+									 
+									 
 									 $.each(jsonResponse.portfolioDataModel , function(i,portfolioData) 
 											{
 
-												 data.addRow([portfolioData.fundName,
+										 data.addRow(['RELLFCP-GR',
+									 			'2017-01-01 00:00:00.0',
+									 			'12.0000',
+									 			'104.00',
+									 			'31181.86',
+									 			'58.47',
+										               
+										                ]);
+												 /* data.addRow([portfolioData.fundName,
 											 			portfolioData.transactionStartDate,
 											 			portfolioData.units,
 											 			portfolioData.investedAmount,
 											 			portfolioData.currentAmount,
 											 			portfolioData.rateOfGrowth,
 												               
-												                ]);
+												                ]); */
 											});  
 		 
 						        /*  var options1 = {
@@ -254,7 +264,7 @@ $( function() {
     
 </head>
 
-<body class="homepage bg-warning" >
+<body class="homepage bg-warning" onload="setDashboardData();">
    <header id="header">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
             <div class="container">
@@ -315,7 +325,7 @@ $( function() {
 				<p style="margin-left:50px;">PortFolio</p>
 			</div>
 		</div> -->
-		<div class="row" id="dashboard-data-list">
+		<div class="row" >
 			<div class="col-md-12" style="margin:20px;">
 				<div class="tab-pane fade-in active">
 				
@@ -333,24 +343,75 @@ $( function() {
 					</thead>
 					<tbody class="table-body" >
 	
-							<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
+<%-- Savita Wadhwani - Commented to create dummy data in the dashboard table - start  --%>
+							<%-- <s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
+							
 								<tr>
 								    <td class="center">
-								    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
-								    	<s:if test="fundName.equals('Total')">
-								    		<button type="button" class="btn btn-link" onClick=""><s:property value="#portfolioDataModelElement.fundName"/></button>
-								    	</s:if>
-								    	<s:else>
-								    		<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
-								    	</s:else>
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
 								    </td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.transactionStartDate"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.units"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.investedAmount"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.currentAmount"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
+								</tr>							
+							</s:iterator> --%>
+<%-- Savita Wadhwani - Commented to create dummy data in the dashboard table - end  --%>	
+
+<%-- Savita Wadhwani - Added to create dummy data in the dashboard table - start  --%>
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">RELLFCP-GR</button>
+								    </td>
+								    <td class="center">2017-01-01 00:00:00.0</td>
+								    <td class="center">12.0000</td>
+								    <td class="center">104.00</td>
+								    <td class="center">31181.86</td>
+								    <td class="center">58.47</td>
 								</tr>
-							</s:iterator>
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">ABCD</button>
+								    </td>
+								    <td class="center">2017-01-12 00:00:00.0</td>
+								    <td class="center">25.0000</td>
+								    <td class="center">241.00</td>
+								    <td class="center">50002.54</td>
+								    <td class="center">34.71</td>
+								</tr>
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">HDLFGN-GR</button>
+								    </td>
+								    <td class="center">2017-08-16 16:51:14.0</td>
+								    <td class="center">25.8544</td>
+								    <td class="center">3040.60</td>
+								    <td class="center">84716.59</td>
+								    <td class="center">0.19</td>
+								</tr>
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">K462-GR</button>
+								    </td>
+								    <td class="center">2017-08-16 16:51:14.0</td>
+								    <td class="center">26.6848</td>
+								    <td class="center">5840.15</td>
+								    <td class="center">89963.28</td>
+								    <td class="center">0.23</td>
+								</tr>
+								<tr>
+								    <td class="center">
+								    	<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">Total</button>
+								    </td>
+								    <td class="center"></td>
+								    <td class="center"></td>
+								    <td class="center">9225.75</td>
+								    <td class="center">255864.27</td>
+								    <td class="center">658.11</td>
+								</tr>
+<%-- Savita Wadhwani - Added to create dummy data in the dashboard table - end  --%>	
+													
 <%-- 							<tr  >
 								<td class="center" style="padding:0px;vertical-align: middle;" >
 									<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);">Total</button>
@@ -395,16 +456,15 @@ $( function() {
 						</thead>
 						<tbody class="table-body" >
 		
-								<s:iterator value="#session.investmentDetailsDataModel" var="investmentDetailsDataModelElement">
-								
+								<%-- <s:iterator value="#session.investmentDetailsDataModel" var="investmentDetailsDataModelElement"> --%>
 									
 									<tr>
-									    <td class="center"><s:property value="#investmentDetailsDataModelElement.transactionDate"/></td>
-									    <td class="center"><s:property value="#investmentDetailsDataModelElement.units"/></td>
-									    <td class="center"><s:property value="#investmentDetailsDataModelElement.navPurchased"/></td>
-									    <td class="center"><s:property value="#investmentDetailsDataModelElement.transactionType"/></td>
+									    <td class="center">2017-08-16 16:51:14.0</td>
+									    <td class="center">0.2136</td>
+									    <td class="center">3276.6799</td>
+									    <td class="center">UPFRONT</td>
 									</tr>
-								</s:iterator>
+								<%-- </s:iterator> --%>
 								
 <!-- 								<tr>
 									    <td class="center">1</td>
@@ -426,20 +486,10 @@ $( function() {
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12" style="margin:20px;">
-					<div class="tab-pane fade-in active">
-						<div id="ajaxResponse"></div>
-						<div class="col-md-12">
-							<div id="chart_div2" class="chart"></div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		
 		
-		<!-- <div id="dialog-2" title="Basic dialog" style="display:none;"> -->
+		<div id="dialog" title="Basic dialog" style="display:none;">
   			<!-- <table class="table table-striped table-bordered" >
 				<thead class="table-head">
 					<tr>
@@ -485,7 +535,7 @@ $( function() {
 				</tbody>
    			</table> -->
    			
-   			<!-- <div class="row">
+<!--    			<div class="row">
 				<div class="col-md-12" style="margin:20px;">
 					<div class="tab-pane fade-in active">
 						<div id="ajaxResponse"></div>
@@ -497,7 +547,7 @@ $( function() {
 			</div> -->
 		
 		
-		<!-- </div> -->
+		</div>
 		
 		
 	</div>
