@@ -324,7 +324,6 @@ $( function() {
 					<thead class="table-head">
 						<tr>
 							<th class="center col-md-2">Fund Name</th>
-							<th class="center col-md-2">InvestmentStartDate</th>
 							<th class="center col-md-2">Unit</th>
 							<th class="center col-md-2">Invested Amount</th>
 							<th class="center col-md-2">Current Amount</th>
@@ -344,7 +343,6 @@ $( function() {
 								    		<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
 								    	</s:else>
 								    </td>
-								    <td class="center"><s:property value="#portfolioDataModelElement.transactionStartDate"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.units"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.investedAmount"/></td>
 								    <td class="center"><s:property value="#portfolioDataModelElement.currentAmount"/></td>

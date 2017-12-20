@@ -13,7 +13,6 @@
     
 
 $(document).ready(function(){
-
 	
 /*$('img.bgfade').hide();*/
 var dg_H = $(window).height();
