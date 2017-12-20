@@ -254,7 +254,7 @@ $( function() {
     
 </head>
 
-<body class="homepage bg-warning" >
+<body class="homepage" >
    <header id="header">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
             <div class="container">
