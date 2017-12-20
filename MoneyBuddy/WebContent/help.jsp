@@ -619,7 +619,7 @@ Compensation under the FSCS is also triggered in the event of losses arising fro
 	
 	<div class="row" style="margin-top:100px;">
 		<div class="center">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>This development-Savvy page is under construction...</b></h2>
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>This dev page is under construction...</b></h2>
 		</div>
 	</div>
 	
