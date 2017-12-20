@@ -78,7 +78,7 @@
 			
 			<div class="center wow fadeInDown">
 				<h2>Our Vision</h2>
-				<p class="lead">MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.
+				<p class="lead"> MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.
 
 Our vision is to ensure every person is able to plan and save for his retirement, new house, children's marriage and other essential financial needs.
 
