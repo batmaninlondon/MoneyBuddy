@@ -18,10 +18,15 @@ import java.util.Properties;
 import javax.mail.Session;
 import javax.ws.rs.core.Request;
 
+import com.myMoneyBuddy.DAOClasses.QueryAdditionalCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.DAOClasses.insertBankDetails;
 import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
+import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.mailerClasses.SendMail;
@@ -44,23 +49,24 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	Logger logger = Logger.getLogger(PaymentAction.class);
 	private SessionMap<String, Object> sessionMap;
 	
-	private String clientHolding;
-	private String taxStatus;
-	private String occupationName;
-	private String genderType;
-	private String dateOfBirth;
+	//private String clientHolding;
+	//private String taxStatus;
+	//private String occupationName;
+	//private String genderType;
+	//private String dateOfBirth;
 	private String accountType;
-	private String residentialAddress;
+	//private String residentialAddress;
 	private String accountNumber;
-	private String residentialCity;
+	//private String residentialCity;
 	private String neftCode;
-	private String residentialState;
-	private String residentialPin;
-	private String residentialCountry;
-	private String groupName;
+	private String bankName;
+	//private String residentialState;
+	//private String residentialPin;
+	//private String residentialCountry;
+	//private String groupName;
 	
 	private InputStream stream;
-	private List<String> groupNamesList = new ArrayList<String>(); 
+	//private List<String> groupNamesList = new ArrayList<String>(); 
     
 /*    public void validate() {
     	
@@ -101,13 +107,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     	
 	    	//System.out.println("Inside payment execute mehtod - start ");
     	
-	    	if ( customerPortfolio.existsGroupName(getGroupName())) {
+	    	/*if ( customerPortfolio.existsGroupName(getGroupName())) {
 	        	System.out.println("Payment Action : Group Name already exists. Please choose a different group Name : "+getGroupName());
 	        	String str = "groupNameAlreadyExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	            
-	        }
+	        }*/
 
 			/*String CLIENT_HOLDING = ; // Considering Single account
 			String CLIENT_TAXSTATUS = getTaxStatus(); // Considering Individual
@@ -127,6 +133,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	
 	    	System.out.println("Hi There 1 .");
 	    	String customerId;
+	    	String CLIENT_HOLDING = "SI"; // Considering Single account
 			String CLIENT_EMAIL;
 			String CLIENT_APPNAME1;
 			
@@ -156,13 +163,27 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy;
     	
-	    	sessionMap.put("groupName", getGroupName());
-	    	logger.debug("PaymentAction class : execute method : stored investmentTypeName : "+getGroupName()+" in session id : "+sessionMap.getClass().getName());
+	    	//sessionMap.put("groupName", getGroupName());
+	    	//logger.debug("PaymentAction class : execute method : stored investmentTypeName : "+getGroupName()+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	insertBankDetails bankDetails = new insertBankDetails();
+	    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), getAccountNumber(), getNeftCode());
+	    	
+	    	QueryCustomer queryCustomer = new QueryCustomer();
+	    	
+	    	Customers customer = queryCustomer.getCustomer(CLIENT_EMAIL);
+	    	
+	    	QueryAdditionalCustomerDetails queryAddCusDetails = new QueryAdditionalCustomerDetails();
+	    	
+	    	AdditionalCustomerDetails addCusDetails = queryAddCusDetails.getAddCusDetails(customerId);
+	    	
+	    	
 	    	Trading trading = new Trading();
 		
-	    	String ucc = trading.createClient(getClientHolding(), getTaxStatus(), getOccupationName(), getDateOfBirth(),
-				getGenderType(), "", getAccountType(), getAccountNumber(), getNeftCode(),
-				getResidentialAddress(), getResidentialCity(), getResidentialState(), getResidentialPin(), getResidentialCountry(),
+	    	String ucc = trading.createClient(CLIENT_HOLDING, addCusDetails.getTaxStatus(), customer.getOccupation(), addCusDetails.getDateOfBirth(),
+	    			customer.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
+				addCusDetails.getAddressLineOne()+" "+addCusDetails.getAddressLineTwo()+" "+addCusDetails.getAddressLineThree(), addCusDetails.getResidentialCity(), 
+				addCusDetails.getResidentialState(), addCusDetails.getResidentialPin(), addCusDetails.getResidentialCountry(),
 				customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
 		
 	    	String[] uccSpilts = ucc.split("\\|");
@@ -176,18 +197,26 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
 				
-		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),
+		    			Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
+		    	
+		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
+						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,"Y",
+						"Customer bought some mutual funds");
 		    	
 			}
 			else {
 				amount = sessionMap.get("sip").toString();
 				
-		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),Double.parseDouble(sessionMap.get("sip").toString()));
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),
+		    			Double.parseDouble(sessionMap.get("sip").toString()));
 		    	
+		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
+						"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipStartDate").toString(),sessionMap.get("sipEndDate").toString(),
+						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
+						"Customer bought some mutual funds");
 			}
-			paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
-					"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipStartDate").toString(),sessionMap.get("sipEndDate").toString(),sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
-					"Customer bought some mutual funds",getGroupName());
+			
 			
 			String str ;
 			if ( !paymentUrl.equals("NotSet")) {
@@ -197,9 +226,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	System.out.println("paymentUrl from session : "+sessionMap.get("paymentUrl").toString());
 		    	
 		    	logger.debug("PaymentAction class : execute method : stored paymentUrl : "+paymentUrl+" in session id : "+sessionMap.getClass().getName());
-				
+/*				
 				groupNamesList = (ArrayList)customerPortfolio.getGroupNameList(sessionMap.get("customerId").toString());
-				sessionMap.put("groupNamesList", groupNamesList);
+				sessionMap.put("groupNamesList", groupNamesList);*/
 		    	logger.debug("PaymentAction class : execute method : updated groupNamesList in session id : "+sessionMap.getClass().getName());
 		    	
 		    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
@@ -217,6 +246,20 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);*/
 		        	
 		        	str = "success|"+paymentUrl;
+		        	
+		        	SendMail sendmail = new SendMail();
+					StringBuilder bodyText = new StringBuilder();
+					String MAIL_SITE_LINK = "www.quantwealth.in/login";
+					
+					String subject = "Payment recieved for your recent transaction";
+		        	bodyText.append("<div>")
+		        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
+		        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
+		        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
+		        	.append("  <h3>Thanks,</h3><br/><br/>")
+		        	.append("  <h3>MoneyBuddy Team</h3>")
+		        	.append("</div>");
+		        	sendmail.MailSending(CLIENT_EMAIL, bodyText,subject);
 
 	    		
 			}
@@ -283,45 +326,12 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		return sessionMap;
 	}
 	
-
-	public String getClientHolding() {
-		return clientHolding;
+	public String getBankName() {
+		return bankName;
 	}
 
-	public void setClientHolding(String clientHolding) {
-		this.clientHolding = clientHolding;
-	}
-
-	public String getTaxStatus() {
-		return taxStatus;
-	}
-
-	public void setTaxStatus(String taxStatus) {
-		this.taxStatus = taxStatus;
-	}
-
-	public String getOccupationName() {
-		return occupationName;
-	}
-
-	public void setOccupationName(String occupationName) {
-		this.occupationName = occupationName;
-	}
-
-	public String getGenderType() {
-		return genderType;
-	}
-
-	public void setGenderType(String genderType) {
-		this.genderType = genderType;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 	public String getAccountType() {
@@ -332,14 +342,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		this.accountType = accountType;
 	}
 
-	public String getResidentialAddress() {
-		return residentialAddress;
-	}
-
-	public void setResidentialAddress(String residentialAddress) {
-		this.residentialAddress = residentialAddress;
-	}
-
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -348,52 +350,12 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		this.accountNumber = accountNumber;
 	}
 
-	public String getResidentialCity() {
-		return residentialCity;
-	}
-
-	public void setResidentialCity(String residentialCity) {
-		this.residentialCity = residentialCity;
-	}
-
 	public String getNeftCode() {
 		return neftCode;
 	}
 
 	public void setNeftCode(String neftCode) {
 		this.neftCode = neftCode;
-	}
-
-	public String getResidentialState() {
-		return residentialState;
-	}
-
-	public void setResidentialState(String residentialState) {
-		this.residentialState = residentialState;
-	}
-
-	public String getResidentialPin() {
-		return residentialPin;
-	}
-
-	public void setResidentialPin(String residentialPin) {
-		this.residentialPin = residentialPin;
-	}
-
-	public String getResidentialCountry() {
-		return residentialCountry;
-	}
-
-	public void setResidentialCountry(String residentialCountry) {
-		this.residentialCountry = residentialCountry;
-	}
-
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
 	}
 
 	public InputStream getStream() {

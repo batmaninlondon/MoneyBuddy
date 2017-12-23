@@ -173,7 +173,6 @@
 		<div class="col-md-4">
 		</div>
 	</div>
-
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
@@ -183,17 +182,17 @@
 			<div  class="col-md-6" >
 				  
 			  	<select class="form-control" id="occupation" style="margin-top:-10px;">
-			        <option value="PriSecJob" selected>Private Sector job</option>
-			        <option value="PubSecJob">Public Sector job</option>
-			        <option value="GovSer">Government Service</option>
-			        <option value="Business">Business</option>
-			        <option value="Professional">Professional</option>
-			        <option value="Agriculturist">Agriculturist</option>
-			        <option value="Retired">Retired</option>
-			        <option value="Student">Student</option>
-			        <option value="ForexDeal">Forex Dealer</option>
-			        <option value="HouseWife">Housewife</option>
-			        <option value="Others">Others</option>
+			        <option value="41" selected>Private Sector job</option>
+			        <option value="42">Public Sector job</option>
+			        <option value="44">Government Service</option>
+			        <option value="01">Business</option>
+			        <option value="03">Professional</option>
+			        <option value="04">Agriculturist</option>
+			        <option value="05">Retired</option>
+			        <option value="07">Student</option>
+			        <option value="43">Forex Dealer</option>
+			        <option value="06">Housewife</option>
+			        <option value="08">Others</option>
 	
 		      	</select>
 			</div>

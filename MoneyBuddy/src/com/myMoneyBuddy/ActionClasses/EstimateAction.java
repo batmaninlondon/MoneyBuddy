@@ -91,8 +91,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			
     	    
 	    	QueryProducts queryProduct = new QueryProducts();
-	    	System.out.println("LoginAction class : execute method : riskCategory : "+getRiskCategory());
-	    	System.out.println("LoginAction class : execute method : planName : "+getPlanName());
+	    	System.out.println("EstimateAction class : execute method : riskCategory : "+getRiskCategory());
+	    	System.out.println("EstimateAction class : execute method : planName : "+getPlanName());
 	   	 	HashMap<String,Double> productList = queryProduct.getProductList(getRiskCategory(),getPlanName());
 	   	 	
 	    	//System.out.println("FetchProductListAction Hi There 1 ");

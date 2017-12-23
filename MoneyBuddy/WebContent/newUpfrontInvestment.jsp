@@ -335,7 +335,7 @@
 				<div class="col-md-5"></div>
 				<div class="col-md-2">
 					<button type="button" id="submit-button-2" class="btn btn-primary readmore"
-						 onClick="showCustomerDetails();" style="width: 200px;">Continue</button>
+						 onClick="openCustomerDetailsPage();" style="width: 200px;">Continue</button>
 				</div>
 				<div class="col-md-5"></div>
 			</div>

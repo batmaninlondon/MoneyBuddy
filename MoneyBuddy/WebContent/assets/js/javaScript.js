@@ -407,14 +407,17 @@ function checkKysStatus()
         		document.getElementById("pancard-number").placeholder = document.getElementById("pancard-number").value + " - is not a valid Pan Card Number ";
         		document.getElementById("pancard-number").value = null;
         	} 
-        	else if (result == "kycNotDone")  {
-        		/*alert('KYC not done for this pan card !! ');*/
+        	else if (result == "success")  {
+        		window.location='additionalCustomerDetails';
+        	}
+        	/*else if (result == "kycNotDone")  {
+        		alert('KYC not done for this pan card !! ');
         		window.location='additionalCustomerDetails';
         	}
         	else if (result == "kycDone") {
-        		/*alert('Inside kycCheck success !! ');*/
+        		alert('Inside kycCheck success !! ');
         		window.location='bankDetails';
-        	}	
+        	}*/	
         	else {
         		/*alert('Inside kycCheck error !! ');*/
         		window.location='errorPage';
@@ -563,10 +566,18 @@ function prepareKyc()
 
         success : function(result){
         	//alert('result : '+result);
-        	if (result == "success") {
-        		/*alert('Inside kycCheck success !! ');*/
+        	if (result == "kycDone") {
+        		
+        		window.location='bankDetails';
+        	}
+        	else if (result == "kycNotDone") {
+        		
         		window.location='downloadKycForm';
-        	}	
+        	}
+        	/*if (result == "success") {
+        		alert('Inside kycCheck success !! ');
+        		window.location='downloadKycForm';
+        	}*/	
         	else {
         		/*alert('Inside kycCheck error !! ');*/
         		window.location='errorPage';
@@ -1002,10 +1013,12 @@ function showCustomerDetails()
 	        	if (result == "kycNotDone") {
 	        		
 	        		window.location='customerDetails';
+	        		//window.location='clientDetails';
 	        	}
 	        	else if (result == "success") {
 	        		
-	        		window.location='bankDetails';
+	        		//window.location='bankDetails';
+	        		window.location='clientDetails';
 	        	}
 	        	else {
 	        		/*alert('Inside newLogin error !!');*/
@@ -1020,6 +1033,23 @@ function showCustomerDetails()
 	}
 	
 }
+
+function openCustomerDetailsPage()  
+{
+      
+	var cusId = document.getElementById('cusId').value;
+	//alert('showPanCardVerification : cusId : '+cusId);
+	if (cusId == "customerIdNull") {
+		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
+		document.getElementById('investment-options').className += " hidden";	
+		$("#login-page").removeClass('hidden');
+	} 
+	else {
+		window.location='customerDetails';
+	}
+	
+}
+
 function showPanCardVerification()
 {
 	//alert('showPanCardVerification function called !! ');
@@ -1809,15 +1839,19 @@ function populateBankDetails()
 	
 	$.ajax({
 	  	
-        url : "populateBankDetailsAction",
+        //url : "populateBankDetailsAction",
+        url : "paymentAction",
         type: 'post',
         
-        data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'reAccountNumber' : reAccountNumber , 'ifscCode' : ifscCode },
+        data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'neftCode' : ifscCode },
         
         success : function(result){
-        	if (result == "success") {
-
-        		window.location='thankYou';
+        	//if (result == "success") {
+        	if (result.startsWith("success")) {
+        		//window.location='thankYou';
+        		var paymentUrl = result.substring(8);
+	
+        		window.location=paymentUrl;
     		
         	}
         	else {

@@ -55,6 +55,9 @@ public class UpdateCustomerPassword {
 			result = query.executeUpdate();
 			session.getTransaction().commit();
 			
+
+			System.out.println("newPassword : "+newPassword);
+			
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : updated data of Customers table to set password for customerId : "+customerId);
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : end");
 

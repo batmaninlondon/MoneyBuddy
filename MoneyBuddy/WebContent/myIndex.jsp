@@ -83,9 +83,6 @@
         </nav><!--/nav-->
 		
     </header>
-   
-   
-
 
  <section id="main-slider" class="no-margin" style="margin-top:50px">
  	

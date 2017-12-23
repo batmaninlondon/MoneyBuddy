@@ -128,6 +128,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		int updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
+		
 		String customerName = getFirstName()+" "+getLastName();
 		sessionMap.put("customerName", customerName);
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
@@ -141,13 +142,17 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		String str;
 		System.out.println(" num1 is : "+num1);
 		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
-		if ( (Integer.parseInt(num1) % 2) == 0) {
+		if ( (Integer.parseInt(num1) % 2) != 0) {
 			query.setParameter("kycStatus", "DONE");
-			str = "kycDone";
+			//str = "kycDone";
+			sessionMap.put("kycStatus", "DONE");
+			str = "success";
 		}
 		else {
 			query.setParameter("kycStatus", "NOT DONE");
-			str = "kycNotDone";
+			//str = "kycNotDone";
+			sessionMap.put("kycStatus", "NOT_DONE");
+			str = "success";
 		}
 		// Savita Wadhwani - We need to update this piece of code with real API - end
 		

@@ -133,10 +133,10 @@
 			<div class="col-md-5"><label for="account-type" style="font-family:Aparajita;font-size:25px;" class="pull-right">Account Type </label></div>
 			<div  class="col-md-6" >				  
 				<select class="form-control" id="account-type" name="accountType">
-			        <option value="CA">Current Account</option>
+			        <option value="CB">Current Account</option>
 			        <option value="SB">Saving Account</option>
-			        <option value="NRI">NRI - Repatriable (NRE)</option>
-			        <option value="NRO">NRI - Repatriable (NRO)</option>
+			        <option value="NE">NRI - Repatriable (NRE)</option>
+			        <option value="NO">NRI - Repatriable (NRO)</option>
 	      		</select>
 			</div>
 		</div>

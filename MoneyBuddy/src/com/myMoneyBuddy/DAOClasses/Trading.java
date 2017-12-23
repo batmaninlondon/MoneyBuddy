@@ -73,29 +73,55 @@ public class Trading {
 
 		try {
 			String PASSWORD_STARMF;
+			
+			String dob = CLIENT_DOB.substring(8,10)+"/"+CLIENT_DOB.substring(5,7)+"/"+CLIENT_DOB.substring(0,4);
+			System.out.println("dob : "+dob);
 
-			Properties properties = new Properties();
-			String propFilePath = "../../../config/client.properties";
+			Properties clientProperties = new Properties();
+			String clientPropFilePath = "../../../config/client.properties";
 
-			properties.load(Trading.class.getResourceAsStream(propFilePath));
+			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 
-			String[] clientDetailsArray = {customerId,CLIENT_HOLDING,CLIENT_TAXSTATUS,CLIENT_OCCUPATIONCODE,CLIENT_APPNAME1,properties.getProperty("CLIENT_APPNAME2"),properties.getProperty("CLIENT_APPNAME3"),CLIENT_DOB,CLIENT_GENDER,properties.getProperty("CLIENT_GUARDIAN"),
-					CLIENT_PAN,properties.getProperty("CLIENT_NOMINEE"),properties.getProperty("CLIENT_NOMINEE_RELATION"),properties.getProperty("CLIENT_GUARDIANPAN"),properties.getProperty("CLIENT_TYPE"),properties.getProperty("CLIENT_DEFAULTDP"),properties.getProperty("CLIENT_CDSLDPID"),properties.getProperty("CLIENT_CDSLCLTID"),properties.getProperty("CLIENT_NSDLDPID"),properties.getProperty("CLIENT_NSDLCLTID"),
-					CLIENT_ACCTYPE_1,CLIENT_ACCNO_1,properties.getProperty("CLIENT_MICRNO_1"),CLIENT_NEFT_IFSCCODE_1,properties.getProperty("CLIENT_DEFAULT_BANK_FLAG_1"),properties.getProperty("CLIENT_ACCTYPE_2"),properties.getProperty("CLIENT_ACCNO_2"),properties.getProperty("CLIENT_MICRNO_2"),properties.getProperty("CLIENT_NEFT_IFSCCODE_2"),properties.getProperty("CLIENT_DEFAULT_BANK_FLAG_2"),
-					properties.getProperty("CLIENT_ACCTYPE_3"),properties.getProperty("CLIENT_ACCNO_3"),properties.getProperty("CLIENT_MICRNO_3"),properties.getProperty("CLIENT_NEFT_IFSCCODE_3"),properties.getProperty("CLIENT_DEFAULT_BANK_FLAG_3"),properties.getProperty("CLIENT_ACCTYPE_4"),properties.getProperty("CLIENT_ACCNO_4"),properties.getProperty("CLIENT_MICRNO_4"),properties.getProperty("CLIENT_NEFT_IFSCCODE_4"),properties.getProperty("CLIENT_DEFAULT_BANK_FLAG_4"),
-					properties.getProperty("CLIENT_ACCTYPE_5"),properties.getProperty("CLIENT_ACCNO_5"),properties.getProperty("CLIENT_MICRNO_5"),properties.getProperty("CLIENT_NEFT_IFSCCODE_5"),properties.getProperty("CLIENT_DEFAULT_BANK_FLAG_5"),properties.getProperty("CLIENT_CHEQUENAME_5"),CLIENT_ADD_1,properties.getProperty("CLIENT_ADD_2"),properties.getProperty("CLIENT_ADD_3"),CLIENT_CITY,
-					CLIENT_STATE,CLIENT_PINCODE,CLIENT_COUNTRY,properties.getProperty("CLIENT_RESIPHONE"),properties.getProperty("CLIENT_RESIFAX"),properties.getProperty("CLIENT_OFFICEPHONE"),properties.getProperty("CLIENT_OFFICEFAX"),CLIENT_EMAIL,properties.getProperty("CLIENT_COMMMODE"),properties.getProperty("CLIENT_DIVPAYMODE"), 
-					properties.getProperty("CLIENT_PAN_2"),properties.getProperty("CLIENT_PAN_3"),properties.getProperty("CLIENT_MAPIN_NO"),properties.getProperty("CLIENT_CM_FORADD_1"),properties.getProperty("CLIENT_CM_FORADD_2"),properties.getProperty("CLIENT_CM_FORADD_3"),properties.getProperty("CLIENT_CM_FORCITY"),properties.getProperty("CLIENT_CM_FORPINCODE"),properties.getProperty("CLIENT_CM_FORSTATE"),properties.getProperty("CLIENT_CM_FORCOUNTRY"),
-					properties.getProperty("CLIENT_CM_FORRESIPHONE"),properties.getProperty("CLIENT_CM_FORRESIFAX"),properties.getProperty("CLIENT_CM_FOROFFPHONE"),properties.getProperty("CLIENT_CM_FOROFFFAX"),CLIENT_CM_MOBILE};
+			String[] clientDetailsArray = {customerId,CLIENT_HOLDING,CLIENT_TAXSTATUS,CLIENT_OCCUPATIONCODE,CLIENT_APPNAME1,clientProperties.getProperty("CLIENT_APPNAME2"),
+					clientProperties.getProperty("CLIENT_APPNAME3"),dob,CLIENT_GENDER,clientProperties.getProperty("CLIENT_GUARDIAN"),CLIENT_PAN,
+					clientProperties.getProperty("CLIENT_NOMINEE"),clientProperties.getProperty("CLIENT_NOMINEE_RELATION"),clientProperties.getProperty("CLIENT_GUARDIANPAN"),
+					clientProperties.getProperty("CLIENT_TYPE"),clientProperties.getProperty("CLIENT_DEFAULTDP"),clientProperties.getProperty("CLIENT_CDSLDPID"),
+					clientProperties.getProperty("CLIENT_CDSLCLTID"),clientProperties.getProperty("CLIENT_NSDLDPID"),clientProperties.getProperty("CLIENT_NSDLCLTID"),
+					CLIENT_ACCTYPE_1,CLIENT_ACCNO_1,clientProperties.getProperty("CLIENT_MICRNO_1"),CLIENT_NEFT_IFSCCODE_1,clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_1"),
+					clientProperties.getProperty("CLIENT_ACCTYPE_2"),clientProperties.getProperty("CLIENT_ACCNO_2"),clientProperties.getProperty("CLIENT_MICRNO_2"),
+					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_2"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_2"),clientProperties.getProperty("CLIENT_ACCTYPE_3"),
+					clientProperties.getProperty("CLIENT_ACCNO_3"),clientProperties.getProperty("CLIENT_MICRNO_3"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_3"),
+					clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_3"),clientProperties.getProperty("CLIENT_ACCTYPE_4"),clientProperties.getProperty("CLIENT_ACCNO_4"),
+					clientProperties.getProperty("CLIENT_MICRNO_4"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_4"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_4"),
+					clientProperties.getProperty("CLIENT_ACCTYPE_5"),clientProperties.getProperty("CLIENT_ACCNO_5"),clientProperties.getProperty("CLIENT_MICRNO_5"),
+					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_5"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_5"),clientProperties.getProperty("CLIENT_CHEQUENAME_5"),
+					CLIENT_ADD_1,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),CLIENT_CITY,CLIENT_STATE,CLIENT_PINCODE,CLIENT_COUNTRY,
+					clientProperties.getProperty("CLIENT_RESIPHONE"),clientProperties.getProperty("CLIENT_RESIFAX"),clientProperties.getProperty("CLIENT_OFFICEPHONE"),
+					clientProperties.getProperty("CLIENT_OFFICEFAX"),CLIENT_EMAIL,clientProperties.getProperty("CLIENT_COMMMODE"),clientProperties.getProperty("CLIENT_DIVPAYMODE"), 
+					clientProperties.getProperty("CLIENT_PAN_2"),clientProperties.getProperty("CLIENT_PAN_3"),clientProperties.getProperty("CLIENT_MAPIN_NO"),
+					clientProperties.getProperty("CLIENT_CM_FORADD_1"),clientProperties.getProperty("CLIENT_CM_FORADD_2"),clientProperties.getProperty("CLIENT_CM_FORADD_3"),
+					clientProperties.getProperty("CLIENT_CM_FORCITY"),clientProperties.getProperty("CLIENT_CM_FORPINCODE"),clientProperties.getProperty("CLIENT_CM_FORSTATE"),
+					clientProperties.getProperty("CLIENT_CM_FORCOUNTRY"),clientProperties.getProperty("CLIENT_CM_FORRESIPHONE"),clientProperties.getProperty("CLIENT_CM_FORRESIFAX"),
+					clientProperties.getProperty("CLIENT_CM_FOROFFPHONE"),clientProperties.getProperty("CLIENT_CM_FOROFFFAX"),CLIENT_CM_MOBILE};
 
 			String clientDetails = String.join("|",clientDetailsArray);
 
 			System.out.println("clientDetails : "+clientDetails);
+			
+			System.out.println(" USER_ID : "+configProperties.getProperty("USER_ID"));
+			System.out.println(" MEMBER_ID : "+configProperties.getProperty("MEMBER_ID"));
+			System.out.println(" PASSWORD : "+configProperties.getProperty("PASSWORD"));
+			System.out.println(" PASS_KEY : "+configProperties.getProperty("PASS_KEY"));
 
-			String passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+			String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
 			String[] resultsStarMF = passwordStarMF.split("\\|");
 
@@ -108,7 +134,7 @@ public class Trading {
 
 			PASSWORD_STARMF = resultsStarMF[1];
 
-			String ucc = iStarMFWebService.mfapi("02",properties.getProperty("USER_ID"),PASSWORD_STARMF,clientDetails);
+			String ucc = iStarMFWebService.mfapi("02",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,clientDetails);
 
 			System.out.println("ucc : "+ucc);
 
@@ -128,7 +154,7 @@ public class Trading {
 	}
 
 	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipStartDate, String sipEndDate,
-			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String groupName) throws MoneyBuddyException {
+			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment) throws MoneyBuddyException {
 
 
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
@@ -193,17 +219,22 @@ public class Trading {
 
 			
 			
-			Properties properties = new Properties();
-			String propFilePath = "../../../config/client.properties";
+			Properties clientProperties = new Properties();
+			String clientPropFilePath = "../../../config/client.properties";
 
-			properties.load(PaymentAction.class.getResourceAsStream(propFilePath));
+			clientProperties.load(PaymentAction.class.getResourceAsStream(clientPropFilePath));
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(PaymentAction.class.getResourceAsStream(configPropFilePath));
 
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
 			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
 			String passwordMFOrder;
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
-			String LOGOUT_URL = "http://www.quantwealth.in/thankYou";
+			String LOGOUT_URL = "http://localhost:8080/MoneyBuddy/thankYou";
 			WebServiceStarMFPaymentGateway webServiceStarMFPaymentGateway = new WebServiceStarMFPaymentGateway();		
 			IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
 			String PASSWORD_STARMF;
@@ -213,7 +244,7 @@ public class Trading {
 			String paymentDetails;
 			String entryParam;
 			String[] resultsEntryParam;
-			String[] paymentDetailsArray = {properties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
+			String[] paymentDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
 			paymentDetails = String.join("|",paymentDetailsArray);
 
 			boolean allOrderFailed = true ;
@@ -275,13 +306,15 @@ public class Trading {
 
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 
-				session.beginTransaction();
-				
-				tempSipDetail = new SipDetails(customerId, transactionDetailId,
-						sipDate, sipStartDate, sipEndDate,"N","N");
-
-				session.save(tempSipDetail);
-				session.getTransaction().commit();
+				if ("SIP".equals(transactionType ))  {
+					session.beginTransaction();
+					
+					tempSipDetail = new SipDetails(customerId, transactionDetailId,
+							sipDate, sipStartDate, sipEndDate,"N","N");
+	
+					session.save(tempSipDetail);
+					session.getTransaction().commit();
+				}
 				
 				dateFormat = new SimpleDateFormat("HH:mm:ss");
 				Date CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
@@ -309,7 +342,7 @@ public class Trading {
 				session.getTransaction().commit();*/
 				
 
-				passwordMFOrder = mfOrderEntry.getPassword(properties.getProperty("USER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
+				passwordMFOrder = mfOrderEntry.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
 				resultsMFOrder = passwordMFOrder.split("\\|");
 
@@ -337,17 +370,26 @@ public class Trading {
 						buySellType = "R";
 					}
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
-					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,properties.getProperty("ORDER_ID"),properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),customerId,productName,buySellType,properties.getProperty("BUY_SELL_TYPE"),properties.getProperty("DP_TXN"),
-							Double.toString(productDetailsMap.get(currentProductId)),properties.getProperty("QTY"),properties.getProperty("ALL_REDEEM"),properties.getProperty("FOLIO_NUMBER"),properties.getProperty("REMARKS"),properties.getProperty("KYC_STATUS"),properties.getProperty("REF_NO"),properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
-							properties.getProperty("MIN_REDEEM"),properties.getProperty("DPC"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
+					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
+							configProperties.getProperty("MEMBER_ID"),customerId,productName,buySellType,clientProperties.getProperty("BUY_SELL_TYPE"),
+							clientProperties.getProperty("DP_TXN"),Double.toString(productDetailsMap.get(currentProductId)),clientProperties.getProperty("QTY"),
+							clientProperties.getProperty("ALL_REDEEM"),clientProperties.getProperty("FOLIO_NUMBER"),clientProperties.getProperty("REMARKS"),
+							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
+							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
+							clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
+							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
 				}
 				else {
 
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
-					entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, properties.getProperty("MEMBER_ID"),
-							customerId, properties.getProperty("USER_ID"), properties.getProperty("INTERNAL_REF_NUM"), properties.getProperty("TRANSMODE"), properties.getProperty("DP_TXN"), frmtdDate, 
-							properties.getProperty("FREQUENCY_TYPE"),properties.getProperty("FREQUENCY_ALLOWED"),Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),properties.getProperty("REMARKS"),properties.getProperty("FOLIO_NUMBER"),firstOrderFlag,properties.getProperty("SUB_BR_CODE"),properties.getProperty("EUIN"),properties.getProperty("EUIN_FLAG"),
-							properties.getProperty("DPC"),properties.getProperty("REGID"),properties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,properties.getProperty("PASS_KEY"),properties.getProperty("PARAM_1"),properties.getProperty("PARAM_2"),properties.getProperty("PARAM_3"));
+					entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, configProperties.getProperty("MEMBER_ID"),
+								customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
+								clientProperties.getProperty("DP_TXN"), frmtdDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
+								Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
+								clientProperties.getProperty("FOLIO_NUMBER"),firstOrderFlag,clientProperties.getProperty("SUB_BR_CODE"),clientProperties.getProperty("EUIN"),
+								clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
+								PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),clientProperties.getProperty("PARAM_2"),
+								clientProperties.getProperty("PARAM_3"));
 
 					//System.out.println("Trading class : executeTade method : inside SIP loop  ");
 
@@ -434,22 +476,57 @@ public class Trading {
 
 			if (!allOrderFailed) {
 				
-				PasswordRequest passwordRequest = new PasswordRequest();
+				WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+				IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+				
+				String[] paymentGatewayDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
+				
+				String paymentGatewayDetails = String.join("|",paymentGatewayDetailsArray);
+
+				System.out.println("paymentGatewayDetails : "+paymentGatewayDetails);
+				
+				
+				String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+				String[] resultsStarMF = passwordStarMF.split("\\|");
+
+				for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+					System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+				}
+
+
+				System.out.println("passwordStarMF : "+passwordStarMF);
+
+				PASSWORD_STARMF = resultsStarMF[1];
+
+				String paymentGatewayRes = iStarMFWebService.mfapi("03",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,paymentGatewayDetails);
+
+				String[] resultPaymentGatewayRes = paymentGatewayRes.split("\\|");
+
+				for (int i = 0 ; i <resultPaymentGatewayRes.length ; i++ )   {
+					System.out.println("resultPaymentGatewayRes : "+i+" : " +resultPaymentGatewayRes[i]);
+				}
+				
+				paymentUrl = resultPaymentGatewayRes[1];
+				
+				System.out.println("paymentUrl : "+paymentUrl);
+				
+				/*PasswordRequest passwordRequest = new PasswordRequest();
 				ObjectFactory objFact = ObjectFactory.class.newInstance();
 				//JAXBElement<String> memberId = objFact.createPasswordRequestMemberId(properties.getProperty("MEMBER_ID")); 
 				
-				passwordRequest.setMemberId(objFact.createPasswordRequestMemberId(properties.getProperty("MEMBER_ID")));
-				passwordRequest.setPassKey(objFact.createPasswordRequestPassKey(properties.getProperty("PASS_KEY")));
+				passwordRequest.setMemberId(objFact.createPasswordRequestMemberId(configProperties.getProperty("MEMBER_ID")));
+				passwordRequest.setPassKey(objFact.createPasswordRequestPassKey(configProperties.getProperty("PASS_KEY")));
 				passwordRequest.setPassword(objFact.createPasswordRequestPassword("Money@1"));
-				passwordRequest.setUserId(objFact.createPasswordRequestUserId("1239801"));	
+				passwordRequest.setUserId(objFact.createPasswordRequestUserId("1239802"));	
 				
 				passwordStarMFPaymentGateway = iStarMFPaymentGatewayService.getPassword(passwordRequest);
 							
-				/*resultsStarMFPaymentGateway = passwordStarMFPaymentGateway.split("\\|");
+				resultsStarMFPaymentGateway = passwordStarMFPaymentGateway.split("\\|");
 
 				for (int i = 0 ; i <resultsStarMFPaymentGateway.length ; i++ )   {
 					System.out.println("resultsStarMF : "+i+" : " +resultsStarMFPaymentGateway[i]);
-				}*/
+				}
 				
 				System.out.println("UserId Passed : "+ passwordRequest.getUserId().getValue());
 				System.out.println("MemberId Passed : "+ passwordRequest.getMemberId().getValue());
@@ -480,7 +557,7 @@ public class Trading {
 				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));
 				requestParam.setIFSC(objFact.createRequestParamIFSC("ICIC0000073"));
 				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(LOGOUT_URL));
-				requestParam.setMemberCode(objFact.createRequestParamMemberCode(properties.getProperty("MEMBER_ID")));
+				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
 				requestParam.setMode(objFact.createRequestParamMode("DIRECT"));
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
 				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount("2"));
@@ -489,14 +566,14 @@ public class Trading {
 
 				System.out.println("paymentGateway : "+paymentGateway);
 
-				/*String[] resultsPaymentGateway = paymentGateway.split("\\|");
+				String[] resultsPaymentGateway = paymentGateway.split("\\|");
 
 				for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
 					System.out.println("resultsPaymentGateway : "+i+" : " +resultsPaymentGateway[i]);
-				}*/
+				}
 
 				paymentUrl = paymentGateway.getResponseString().getValue();
-				System.out.println("paymentUrl: "+paymentUrl);
+				System.out.println("paymentUrl: "+paymentUrl);*/
 				
 				session.beginTransaction();
 
@@ -516,7 +593,6 @@ public class Trading {
 				if (emailIdObj != null)
 					emailId = emailIdObj.toString();
 								
-				session.beginTransaction();
 
 				query = session.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
 

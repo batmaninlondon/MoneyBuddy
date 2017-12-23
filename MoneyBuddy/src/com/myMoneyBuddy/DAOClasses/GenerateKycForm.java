@@ -52,10 +52,10 @@ public class GenerateKycForm {
 
 
     		
-    		reader = new PdfReader("D://DelMe/KYC.pdf");
+    		reader = new PdfReader("D://PdfFiles/KYC.pdf");
             //Rectangle pagesize = reader.getPageSize(1);
     		
-    		String directoryName = "D://DelMe/"+customerId;
+    		String directoryName = "D://PdfFiles/"+customerId;
             File directory = new File(String.valueOf(directoryName));
             
             if(!directory.exists()){

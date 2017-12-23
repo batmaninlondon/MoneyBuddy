@@ -270,7 +270,7 @@
 			  <tbody>
 			  	<tr>
 			  		<td class="center">
-				    	<p>Rs. <span id="">2000</span></p>
+				    	<p>Rs. <span id="investedAmount">2000</span></p>
 				    </td>
 				    <td class="center">
 				    	<p>Rs. <span id="predicted-value-for-one-year"><s:property value="#session.predictedValueForOneYear" /></span></p>

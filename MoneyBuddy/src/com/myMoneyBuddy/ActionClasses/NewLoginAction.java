@@ -73,6 +73,9 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return SUCCESS;
 	    	}
 	    	if(!(new DesEncrypter(getEmailId())).decrypt(queryCustomer.getPassword(getEmailId())).equals(getPassword())) {
+	    		String pswd = new DesEncrypter(getEmailId()).decrypt(queryCustomer.getPassword(getEmailId()));
+	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);
+	    		
 	    		System.out.println("incorrectPassword ");
 	    		logger.debug("NewLoginAction class : execute method : incorrectPassword for "+getEmailId());
 	    		String str = "incorrectPassword";

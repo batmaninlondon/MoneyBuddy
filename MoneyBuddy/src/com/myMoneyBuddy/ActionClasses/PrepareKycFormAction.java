@@ -83,11 +83,15 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
     	
     	String customerId = sessionMap.get("customerId").toString();
+    	String kycStatus = sessionMap.get("kycStatus").toString();
     	
     	session = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = dateFormat.parse(getDateOfBirth());
+
+	    String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
+		Date date = dateFormat.parse(dob);
+		
 		String frmtdDateForDB = dateFormat.format(date);
 		
 	    AdditionalCustomerDetails tempAdditionalCustomer = new AdditionalCustomerDetails(customerId, getFatherName(), frmtdDateForDB, getMaritalStatus(),
@@ -97,15 +101,25 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		session.saveOrUpdate(tempAdditionalCustomer);
 		session.getTransaction().commit();
 		
+		String str = null;
 		
-    	GenerateKycForm generateKycForm = new GenerateKycForm();
-    	generateKycForm.generateKycFormAndSendMail(customerId);
+		System.out.println("kycStatus : "+kycStatus);
+		if ("DONE".equals(kycStatus))  {
+			str = "kycDone";
+		}
+		else {
+			
+	    	GenerateKycForm generateKycForm = new GenerateKycForm();
+	    	generateKycForm.generateKycFormAndSendMail(customerId);	
+	    	str = "kycNotDone";
+		}
+
 
     	logger.debug("PrepareKycFormAction class : execute method : end");
     	
     	System.out.println(" Returned Success !!");
     	
-    	String str = "success";
+    	
     	stream = new ByteArrayInputStream(str.getBytes());
 
     	return SUCCESS;
