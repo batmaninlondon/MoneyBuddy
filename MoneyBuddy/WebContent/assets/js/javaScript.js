@@ -1141,7 +1141,8 @@ function newLogin() {
         		/*document.getElementById('login-page').className += " hidden";	
         		$("#pancard-verification").removeClass('hidden');*/
         		
-        		window.location='bankDetails';
+        		//window.location='bankDetails';
+        		window.location='customerDetails';
         	}
         	else if (result == "success") {
         		/*document.getElementById('login-page').className += " hidden";	

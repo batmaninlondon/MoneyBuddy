@@ -70,8 +70,31 @@ public class Trading {
 			String CLIENT_ADD_1, String CLIENT_CITY, String CLIENT_STATE, String CLIENT_PINCODE, String CLIENT_COUNTRY,
 			String customerId, String CLIENT_APPNAME1, String CLIENT_EMAIL, String CLIENT_PAN, String CLIENT_CM_MOBILE) throws MoneyBuddyException {
 
+		
+			Session session = null;
 
 		try {
+			
+			
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", CLIENT_TAXSTATUS);
+			
+			String taxStatus = query.uniqueResult().toString();
+			
+			query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", CLIENT_STATE);
+			
+			String state = query.uniqueResult().toString();
+			
+			query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", CLIENT_OCCUPATIONCODE);
+			
+			String occupation = query.uniqueResult().toString();
+
+			
 			String PASSWORD_STARMF;
 			
 			String dob = CLIENT_DOB.substring(8,10)+"/"+CLIENT_DOB.substring(5,7)+"/"+CLIENT_DOB.substring(0,4);
@@ -90,7 +113,7 @@ public class Trading {
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 
-			String[] clientDetailsArray = {customerId,CLIENT_HOLDING,CLIENT_TAXSTATUS,CLIENT_OCCUPATIONCODE,CLIENT_APPNAME1,clientProperties.getProperty("CLIENT_APPNAME2"),
+			String[] clientDetailsArray = {customerId,CLIENT_HOLDING,taxStatus,occupation,CLIENT_APPNAME1,clientProperties.getProperty("CLIENT_APPNAME2"),
 					clientProperties.getProperty("CLIENT_APPNAME3"),dob,CLIENT_GENDER,clientProperties.getProperty("CLIENT_GUARDIAN"),CLIENT_PAN,
 					clientProperties.getProperty("CLIENT_NOMINEE"),clientProperties.getProperty("CLIENT_NOMINEE_RELATION"),clientProperties.getProperty("CLIENT_GUARDIANPAN"),
 					clientProperties.getProperty("CLIENT_TYPE"),clientProperties.getProperty("CLIENT_DEFAULTDP"),clientProperties.getProperty("CLIENT_CDSLDPID"),
@@ -103,7 +126,7 @@ public class Trading {
 					clientProperties.getProperty("CLIENT_MICRNO_4"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_4"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_4"),
 					clientProperties.getProperty("CLIENT_ACCTYPE_5"),clientProperties.getProperty("CLIENT_ACCNO_5"),clientProperties.getProperty("CLIENT_MICRNO_5"),
 					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_5"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_5"),clientProperties.getProperty("CLIENT_CHEQUENAME_5"),
-					CLIENT_ADD_1,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),CLIENT_CITY,CLIENT_STATE,CLIENT_PINCODE,CLIENT_COUNTRY,
+					CLIENT_ADD_1,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),CLIENT_CITY,state,CLIENT_PINCODE,CLIENT_COUNTRY,
 					clientProperties.getProperty("CLIENT_RESIPHONE"),clientProperties.getProperty("CLIENT_RESIFAX"),clientProperties.getProperty("CLIENT_OFFICEPHONE"),
 					clientProperties.getProperty("CLIENT_OFFICEFAX"),CLIENT_EMAIL,clientProperties.getProperty("CLIENT_COMMMODE"),clientProperties.getProperty("CLIENT_DIVPAYMODE"), 
 					clientProperties.getProperty("CLIENT_PAN_2"),clientProperties.getProperty("CLIENT_PAN_3"),clientProperties.getProperty("CLIENT_MAPIN_NO"),

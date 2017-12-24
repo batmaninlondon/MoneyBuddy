@@ -37,18 +37,22 @@ public class RtaSpecificCodes {
     
     @Column(name="CAMS_CODE")
     private String camsCode;
+    
+    @Column(name="BSE_CODE")
+    private String bseCode;
 
 
     public RtaSpecificCodes() {
 
     }
 
-	public RtaSpecificCodes(String fieldType, String fieldValue, String karvyCode, String camsCode) {
+	public RtaSpecificCodes(String fieldType, String fieldValue, String karvyCode, String camsCode, String bseCode) {
 		super();
 		this.fieldType = fieldType;
 		this.fieldValue = fieldValue;
 		this.karvyCode = karvyCode;
 		this.camsCode = camsCode;
+		this.bseCode = bseCode;
 	}
 
 	public String getRtaSpecificCodesId() {
@@ -90,6 +94,15 @@ public class RtaSpecificCodes {
 	public void setCamsCode(String camsCode) {
 		this.camsCode = camsCode;
 	}
+	
+
+	public String getBseCode() {
+		return bseCode;
+	}
+
+	public void setBseCode(String bseCode) {
+		this.bseCode = bseCode;
+	}
 
 	@Override
     public boolean equals(Object obj) {
@@ -116,6 +129,9 @@ public class RtaSpecificCodes {
         if ((this.camsCode == null) ? (other.camsCode != null) : !this.camsCode.equals(other.camsCode)) {
             return false;
         }
+        if ((this.bseCode == null) ? (other.bseCode != null) : !this.bseCode.equals(other.bseCode)) {
+            return false;
+        }
         return true;
     }
 
@@ -127,6 +143,7 @@ public class RtaSpecificCodes {
         hash = 83 * hash + (this.fieldValue != null ? this.fieldValue.hashCode() : 0);
         hash = 83 * hash + (this.karvyCode != null ? this.karvyCode.hashCode() : 0);
         hash = 83 * hash + (this.camsCode != null ? this.camsCode.hashCode() : 0);
+        hash = 83 * hash + (this.bseCode != null ? this.bseCode.hashCode() : 0);
         return hash;
     }
 
