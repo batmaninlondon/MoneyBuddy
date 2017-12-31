@@ -28,11 +28,9 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(RegisterAction.class);
 	private SessionMap<String, Object> sessionMap;
-	
-	private String firstName;
-    private String lastName;
+
     private String password;
-    private String confirmPassword;
+    //private String confirmPassword;
     private String emailId;
     private String mobileNumber;
     //public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/userVerification";
@@ -104,7 +102,8 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	/*Date date = new Date();
     	String frmtdDate = dateFormat.format(date);*/
 
-    	newCustomer.insertCustomer(getEmailId(), getFirstName(), getLastName(), getMobileNumber(),hashedPassword,null,null,null,null,null, "N");
+    	newCustomer.insertCustomer(getEmailId(),null,null, getMobileNumber(),null,null,null,null,null,null,null,null,
+    						null,null,null,hashedPassword,"N");
     	SendMail sendMail = new SendMail();
 
     	String link = MAIL_ForgotPassword_SITE_LINK+"?hashedPassword="+hashedPassword;
@@ -159,13 +158,13 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 		return sessionMap;
 	}
 	
-    public String getConfirmPassword() {
+/*    public String getConfirmPassword() {
         return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-    }
+    }*/
 
     public String getEmailId() {
         return emailId;
@@ -191,21 +190,6 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 	public InputStream getStream() {
 		return stream;
 	}

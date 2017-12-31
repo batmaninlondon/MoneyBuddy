@@ -222,6 +222,30 @@ function showUpfrontInvestmentPlan()
     });
 }
 
+function ongoingSipList()
+{
+
+    $.ajax({
+        url : "ongoingSipListAction",
+        type: 'post',
+        
+        data: { },
+
+        success : function(result){
+        	
+        	if (result == "success") {
+        		alert('Inside ongoing sip success !! ');
+        		
+        		window.location='ongoingSips';
+        	}
+        	else {
+        		window.location='errorPage';
+        	}
+
+        }
+    });
+}
+
 function showSipPlan()
 {
 	/*alert('showSipPLan function called !! ');*/
@@ -350,35 +374,85 @@ function checkKysStatus()
 {
 	//alert('checkKysStatus function called !! ');
 	
-	var firstName = document.getElementById("first-name").value;
-	var lastName = document.getElementById("last-name").value;
-	var gender = document.getElementById("gender").value;
+	var customerName = document.getElementById("customer-name").value;
+	var dateOfBirth = document.getElementById("date-of-birth").value;
 	var panCard = document.getElementById("pancard-number").value;
+	var gender = document.getElementById("gender").value;
 	var occupation = document.getElementById("occupation").value;
-	var grossAnnualIncome = document.getElementById("gross-annual-income").value;
-	var politicallyExposed = document.getElementById("politically-exposed").value;
+	var taxStatus = document.getElementById("tax-status").value;
+	var addressLineOne = document.getElementById("address-line-one").value;
+	var addressLineTwo = document.getElementById("address-line-two").value;
+	var addressLineThree = document.getElementById("address-line-three").value;
+	var residentialCity = document.getElementById("residential-city").value;
+	var residentialState = document.getElementById("residential-state").value;
+	var residentialPin = document.getElementById("residential-pin").value;
+	var residentialCountry = document.getElementById("residential-country").value;
 
-	if ( firstName == '')  {
-		document.getElementById("first-name").className += " formInvalid";
-		document.getElementById("first-name").placeholder = "First Name can not be blank ";
-		$("#last-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
 
-		return;
-	}
-	else if ( lastName == '')  {
-		document.getElementById("last-name").className += " formInvalid";
-		document.getElementById("last-name").placeholder = "Last Name can not be blank ";
-		$("#first-name").removeClass('formInvalid');
+	if ( customerName == '')  {
+		document.getElementById("customer-name").className += " formInvalid";
+		document.getElementById("customer-name").placeholder = "Customer Name can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
 		$("#pancard-number").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
 
 		return;
 	}
 	else if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
-		document.getElementById("pancard-number").placeholder = "Pancard number can not be blank ";
-		$("#first-name").removeClass('formInvalid');
-		$("#last-name").removeClass('formInvalid');
+		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+
+		return;
+	}
+	else if ( addressLineOne == '')  {
+		document.getElementById("address-line-one").className += " formInvalid";
+		document.getElementById("address-line-one").placeholder = "Address Line One can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+
+		return;
+	}
+	else if ( addressLineTwo == '')  {
+		document.getElementById("address-line-two").className += " formInvalid";
+		document.getElementById("address-line-two").placeholder = "Address Line Two can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+
+		return;
+	}
+	else if ( addressLineThree == '')  {
+		document.getElementById("address-line-three").className += " formInvalid";
+		document.getElementById("address-line-three").placeholder = "Address Line Three can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#residential-pin").removeClass('formInvalid');
+
+		return;
+	}
+	else if ( residentialPin == '')  {
+		document.getElementById("residential-pin").className += " formInvalid";
+		document.getElementById("residential-pin").placeholder = "Residential Pin can not be blank ";
+		$("#customer-name").removeClass('formInvalid');
+		$("#pancard-number").removeClass('formInvalid');
+		$("#address-line-one").removeClass('formInvalid');
+		$("#address-line-two").removeClass('formInvalid');
+		$("#address-line-three").removeClass('formInvalid');
 
 		return;
 	}
@@ -395,19 +469,17 @@ function checkKysStatus()
         url : "kycCheckAction",
         type: 'post',
         
-        data: { 'firstName' : firstName , 'lastName' : lastName , 'gender' : gender , 'panCard' : panCard , 'occupation' : occupation , 'grossAnnualIncome' : grossAnnualIncome , 'politicallyExposed' : politicallyExposed},
+        data: { 'customerName' : customerName , 'dateOfBirth' : dateOfBirth , 'gender' : gender , 'panCard' : panCard , 'occupation' : occupation , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
 
         success : function(result){
 
         	/*alert('Inside Success ');*/
         	/*alert('result : '+result);*/
         	
-        	if (result == "invalid") {
-        		document.getElementById("pancard-number").className += " formInvalid";
-        		document.getElementById("pancard-number").placeholder = document.getElementById("pancard-number").value + " - is not a valid Pan Card Number ";
-        		document.getElementById("pancard-number").value = null;
+        	if (result == "kycDone") {
+        		window.location='bankDetails';
         	} 
-        	else if (result == "success")  {
+        	else if (result == "kycNotDone")  {
         		window.location='additionalCustomerDetails';
         	}
         	/*else if (result == "kycNotDone")  {
@@ -438,139 +510,31 @@ function prepareKyc()
 	//alert('checkKysStatus function called !! ');
 	
 	var fatherName = document.getElementById("father-name").value;
-	var dateOfBirth = document.getElementById("date-of-birth").value;
 	var maritalStatus = document.getElementById("marital-status").value;
 	var nationality = document.getElementById("nationality").value;
 	var status = document.getElementById("status").value;
-	var taxStatus = document.getElementById("tax-status").value;
-	var addressLineOne = document.getElementById("address-line-one").value;
-	var addressLineTwo = document.getElementById("address-line-two").value;
-	var addressLineThree = document.getElementById("address-line-three").value;
-	var residentialCity = document.getElementById("residential-city").value;
-	var residentialState = document.getElementById("residential-state").value;
-	var residentialPin = document.getElementById("residential-pin").value;
-	var residentialCountry = document.getElementById("residential-country").value;
+	var grossAnnualIncome = document.getElementById("gross-annual-income").value;
+	var politicallyExposed = document.getElementById("politically-exposed").value;
 
 
 	if ( fatherName == '')  {
 		document.getElementById("father-name").className += " formInvalid";
 		document.getElementById("father-name").placeholder = "Father's name can not be blank ";
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
 
 		return;
 	}
-	else if ( dateOfBirth == '')  {
-		document.getElementById("date-of-birth").className += " formInvalid";
-		document.getElementById("date-of-birth").placeholder = "Date of Birth can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( addressLineOne == '')  {
-		document.getElementById("address-line-one").className += " formInvalid";
-		document.getElementById("address-line-one").placeholder = "Line 1 can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( addressLineTwo == '')  {
-		document.getElementById("address-line-two").className += " formInvalid";
-		document.getElementById("address-line-two").placeholder = "Line 2 can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( addressLineThree == '')  {
-		document.getElementById("address-line-three").className += " formInvalid";
-		document.getElementById("address-line-three").placeholder = "Line 3 can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( residentialCity == '')  {
-		document.getElementById("residential-city").className += " formInvalid";
-		document.getElementById("residential-city").placeholder = "Residential City can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( residentialPin == '')  {
-		document.getElementById("residential-pin").className += " formInvalid";
-		document.getElementById("residential-pin").placeholder = "Residential Pin can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-country").removeClass('formInvalid');
-		
-		return;
-	}
-	else if ( residentialCountry == '')  {
-		document.getElementById("residential-country").className += " formInvalid";
-		document.getElementById("residential-country").placeholder = "Residential Country can not be blank ";
-		$("#father-name").removeClass('formInvalid');
-		$("#date-of-birth").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-city").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-		
-		return;
-	}
+	
 
     $.ajax({
       	
         url : "prepareKycFormAction",
         type: 'post',
     	
-        data: { 'fatherName' : fatherName , 'dateOfBirth' : dateOfBirth , 'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
+        data: { 'fatherName' : fatherName ,  'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status ,'grossAnnualIncome' : grossAnnualIncome ,'politicallyExposed' : politicallyExposed },
 
         success : function(result){
         	//alert('result : '+result);
-        	if (result == "kycDone") {
-        		
-        		window.location='bankDetails';
-        	}
-        	else if (result == "kycNotDone") {
+        	if (result == "success") {
         		
         		window.location='downloadKycForm';
         	}
@@ -1309,58 +1273,20 @@ function login() {
 function register() {
 	
 	/*alert('register function called !! ');*/
-    
-	var firstName = document.getElementById("first-name").value;
-	var lastName = document.getElementById("last-name").value;
+
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
-	var confirmPassword = document.getElementById("confirm-password").value;
+	//var confirmPassword = document.getElementById("confirm-password").value;
 	var mobileNumber = document.getElementById("mobile-number").value;
-	
-	if ( firstName == '')  {
-		
-		document.getElementById("first-name").className += " formInvalid";
-		document.getElementById("first-name").placeholder = "First Name can not be blank!";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
-		document.getElementById("mobile-number").className = "form-control";
-		document.getElementById("mobile-number").placeholder = "Contact Number";
-		return;
-	}
-	else if ( lastName == '')  {
-		
-		document.getElementById("last-name").className += " formInvalid";
-		document.getElementById("last-name").placeholder = "Last Name can not be blank!";
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
-		document.getElementById("mobile-number").className = "form-control";
-		document.getElementById("mobile-number").placeholder = "Contact Number";
-		return;
-	}
-	else if ( emailId == '')  {
+
+	if ( emailId == '')  {
 		
 		document.getElementById("email-id").className += " formInvalid";
 		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("password").className = "form-control";
 		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+		/*document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1370,14 +1296,10 @@ function register() {
 		document.getElementById("email-id").className += " formInvalid";
 		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id";
 		document.getElementById("email-id").value = null;
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("password").className = "form-control";
 		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*		document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1386,14 +1308,10 @@ function register() {
 	
 		document.getElementById("password").className += " formInvalid";
 		document.getElementById("password").placeholder = "Password can not be blank!";
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("email-id").className = "form-control";
 		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*		document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1403,19 +1321,15 @@ function register() {
 		document.getElementById("password").className += " formInvalid";
 		document.getElementById("password").placeholder = "Password shall contain min 8 charcters";
 		document.getElementById("password").value = null;
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("email-id").className = "form-control";
 		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*		document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
-	else if ( confirmPassword == '')  {
+/*	else if ( confirmPassword == '')  {
 		
 		document.getElementById("confirm-password").className += " formInvalid";
 		document.getElementById("confirm-password").placeholder = "Password can not be blank!";
@@ -1430,8 +1344,8 @@ function register() {
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
-	}
-	else if ( !comparePasswords(password,confirmPassword) )  {
+	}*/
+/*	else if ( !comparePasswords(password,confirmPassword) )  {
 		
 		document.getElementById("confirm-password").className += " formInvalid";
 		document.getElementById("confirm-password").placeholder = "Password and Confirm Password shall be same";
@@ -1447,21 +1361,17 @@ function register() {
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
-	}
+	}*/
 	else if ( mobileNumber == '')  {
 		
 		document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = "Mobile Number can not be blank!";
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("email-id").className = "form-control";
 		document.getElementById("email-id").placeholder = "Email ID";
 		document.getElementById("password").className = "form-control";
 		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*		document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
 	}
 	else if ( !validateMobileNumber(mobileNumber))  {
@@ -1469,16 +1379,12 @@ function register() {
 		document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - Not a valid mobile number";
 		document.getElementById("mobile-number").value = null;
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
 		document.getElementById("email-id").className = "form-control";
 		document.getElementById("email-id").placeholder = "Email ID";
 		document.getElementById("password").className = "form-control";
 		document.getElementById("password").placeholder = "Password";
-		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*		document.getElementById("confirm-password").className = "form-control";
+		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
 	}
 	
@@ -1489,7 +1395,7 @@ function register() {
         url : "registerAction",
         type: 'post',
         
-        data: {'firstName' : firstName , 'lastName' : lastName, 'emailId' : emailId, 'password' : password, 'confirmPassword' : confirmPassword, 'mobileNumber' : mobileNumber},
+        data: {'emailId' : emailId, 'password' : password,'mobileNumber' : mobileNumber},
         
         success : function(result){
         	if (result == "success") {
@@ -1499,14 +1405,10 @@ function register() {
         		document.getElementById("email-id").className += " formInvalid";
         		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy ";
         		document.getElementById("email-id").value = null;
-        		document.getElementById("first-name").className = "form-control";
-        		document.getElementById("first-name").placeholder = "First Name";
-        		document.getElementById("last-name").className = "form-control";
-        		document.getElementById("last-name").placeholder = "Last Name";
         		document.getElementById("password").className = "form-control";
         		document.getElementById("password").placeholder = "Password";
-        		document.getElementById("confirm-password").className = "form-control";
-        		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*        		document.getElementById("confirm-password").className = "form-control";
+        		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
         		document.getElementById("mobile-number").className = "form-control";
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
@@ -1514,14 +1416,10 @@ function register() {
         		document.getElementById("mobile-number").className += " formInvalid";
         		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - already registered with MoneyBuddy ";
         		document.getElementById("mobile-number").value = null;
-        		document.getElementById("first-name").className = "form-control";
-        		document.getElementById("first-name").placeholder = "First Name";
-        		document.getElementById("last-name").className = "form-control";
-        		document.getElementById("last-name").placeholder = "Last Name";
         		document.getElementById("password").className = "form-control";
         		document.getElementById("password").placeholder = "Password";
-        		document.getElementById("confirm-password").className = "form-control";
-        		document.getElementById("confirm-password").placeholder = "Confirm Password";
+/*        		document.getElementById("confirm-password").className = "form-control";
+        		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
         		document.getElementById("email-id").className = "form-control";
         		document.getElementById("email-id").placeholder = "Email ID";
         	}
@@ -1666,6 +1564,7 @@ function newUpdate(){
 		var investment = "0";
 		var sipDuration = document.getElementById('sip-duration-range').value; // in years
 		var sipDate = document.getElementById('sip-date').value;
+		var planName = "SIP";
 		/*var totalInvestment = parseInt(sip)*12*parseInt(years)+parseInt(sip);*/
 	} else{
 		//alert('UPFRONT');
@@ -1673,11 +1572,12 @@ function newUpdate(){
 		var investment = document.getElementById("upfrontInvestment").innerHTML;
 		var sipDuration = "0"; // in years
 		var sipDate = "0";
+		var planName = "SAVE_TAX";
 		/*var totalInvestment = parseInt(investment);*/
 	}
 
 	var riskCategory = "3";
-	var planName = "SAVE_TAX";
+	
 
 	$.ajax({
   	

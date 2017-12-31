@@ -40,13 +40,19 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	Logger logger = Logger.getLogger(KycCheckAction.class);
 	private Map<String, Object> sessionMap;
 	
-	private String firstName;
-	private String lastName;
+	private String customerName;
 	private String gender;
     private String panCard;
 	private String occupation;
-	private String grossAnnualIncome;
-    private String politicallyExposed; 
+	private String dateOfBirth;
+    private String taxStatus;
+    private String addressLineOne;
+	private String addressLineTwo;
+	private String addressLineThree;
+	private String residentialCity;
+    private String residentialState;
+    private String residentialPin;
+    private String residentialCountry;
    
     QueryKycStatus kyc = new QueryKycStatus();
 
@@ -78,13 +84,18 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	logger.debug("KycCheckAction class : execute method : start");
     	System.out.println(" KycCheckAction execute method Called !!");
     	
-    	System.out.println(" KycCheckAction execute method : First Name : "+getFirstName());
-    	System.out.println(" KycCheckAction execute method : Last Name : "+getLastName());
+    	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
     	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
     	System.out.println(" KycCheckAction execute method : PanCard : "+getPanCard());
     	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
-    	System.out.println(" KycCheckAction execute method : Gross Annual Income : "+getGrossAnnualIncome());
-    	System.out.println(" KycCheckAction execute method : Politically Exposed : "+getPoliticallyExposed());
+    	System.out.println(" PrepareKycFormAction execute method :dateOfBirth : "+getDateOfBirth());
+    	System.out.println(" PrepareKycFormAction execute method :addressLineOne : "+getAddressLineOne());
+    	System.out.println(" PrepareKycFormAction execute method :addressLineTwo : "+getAddressLineTwo());
+    	System.out.println(" PrepareKycFormAction execute method :residentialCity : "+getResidentialCity());
+    	System.out.println(" PrepareKycFormAction execute method :residentialState : "+getResidentialState());
+    	System.out.println(" PrepareKycFormAction execute method :residentialPin : "+getResidentialPin());
+    	System.out.println(" PrepareKycFormAction execute method :residentialCountry : "+getResidentialCountry());
+    	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
     	
     	// Savita Wadhwani - Start - Added this block to validate input panCard through ajax call
     	
@@ -113,8 +124,29 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	session = HibernateUtil.getSessionAnnotationFactory().openSession(); 
 	    
+    	Customers customer = new Customers();
+    	customer.setCustomerId(sessionMap.get("customerId").toString());
+    	customer.setCustomerName(getCustomerName());
+    	customer.setDateOfBirth(getDateOfBirth());
+    	customer.setAddressLineOne(getAddressLineOne());
+    	customer.setAddressLineTwo(getAddressLineTwo());
+    	customer.setAddressLineThree(getAddressLineThree());
+    	customer.setResidentialCity(getResidentialCity());
+    	customer.setResidentialState(getResidentialState());
+    	customer.setResidentialCountry(getResidentialCountry());
+    	customer.setResidentialPin(getResidentialPin());
+    	customer.setTaxStatus(getTaxStatus());
+    	customer.setGender(getGender());
+    	customer.setOccupation(getOccupation());
+    	customer.setPanCard(getPanCard());
+    	
     	session.beginTransaction();
-		Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
+    	
+    	session.update(customer);
+    	
+    	session.getTransaction().commit();
+    	
+		/*Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
 		
 		query.setParameter("firstName", getFirstName());
 		query.setParameter("lastName", getLastName());
@@ -123,18 +155,16 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		query.setParameter("occupation", getOccupation());
 		query.setParameter("grossAnnualIncome", getGrossAnnualIncome()); 
 		query.setParameter("politicallyExposed", getPoliticallyExposed());
-		query.setParameter("customerId", sessionMap.get("customerId").toString());
+		query.setParameter("customerId", sessionMap.get("customerId").toString());*/
 		
-		int updateResult = query.executeUpdate();
-		System.out.println(updateResult + " rows updated in Customers table ");
-		
-		
-		String customerName = getFirstName()+" "+getLastName();
-		sessionMap.put("customerName", customerName);
+		/*int updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in Customers table ");*/
+
+		sessionMap.put("customerName", getCustomerName());
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
 		//session.beginTransaction();
-		query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
+		Query query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
 		
 		// Savita Wadhwani - We need to update this piece of code with real API - start 
 		
@@ -146,20 +176,20 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			query.setParameter("kycStatus", "DONE");
 			//str = "kycDone";
 			sessionMap.put("kycStatus", "DONE");
-			str = "success";
+			str = "kycDone";
 		}
 		else {
 			query.setParameter("kycStatus", "NOT DONE");
 			//str = "kycNotDone";
 			sessionMap.put("kycStatus", "NOT_DONE");
-			str = "success";
+			str = "kycNotDone";
 		}
 		// Savita Wadhwani - We need to update this piece of code with real API - end
 		
 
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
-		updateResult = query.executeUpdate();
+		int updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
     	sessionMap.put("panCard", panCard);
@@ -225,20 +255,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		this.stream = stream;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public String getGender() {
@@ -257,20 +279,77 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		this.occupation = occupation;
 	}
 
-	public String getGrossAnnualIncome() {
-		return grossAnnualIncome;
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setGrossAnnualIncome(String grossAnnualIncome) {
-		this.grossAnnualIncome = grossAnnualIncome;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getPoliticallyExposed() {
-		return politicallyExposed;
+	public String getTaxStatus() {
+		return taxStatus;
 	}
 
-	public void setPoliticallyExposed(String politicallyExposed) {
-		this.politicallyExposed = politicallyExposed;
+	public void setTaxStatus(String taxStatus) {
+		this.taxStatus = taxStatus;
 	}
+
+	public String getAddressLineOne() {
+		return addressLineOne;
+	}
+
+	public void setAddressLineOne(String addressLineOne) {
+		this.addressLineOne = addressLineOne;
+	}
+
+	public String getAddressLineTwo() {
+		return addressLineTwo;
+	}
+
+	public void setAddressLineTwo(String addressLineTwo) {
+		this.addressLineTwo = addressLineTwo;
+	}
+
+	public String getAddressLineThree() {
+		return addressLineThree;
+	}
+
+	public void setAddressLineThree(String addressLineThree) {
+		this.addressLineThree = addressLineThree;
+	}
+
+	public String getResidentialCity() {
+		return residentialCity;
+	}
+
+	public void setResidentialCity(String residentialCity) {
+		this.residentialCity = residentialCity;
+	}
+
+	public String getResidentialState() {
+		return residentialState;
+	}
+
+	public void setResidentialState(String residentialState) {
+		this.residentialState = residentialState;
+	}
+
+	public String getResidentialPin() {
+		return residentialPin;
+	}
+
+	public void setResidentialPin(String residentialPin) {
+		this.residentialPin = residentialPin;
+	}
+
+	public String getResidentialCountry() {
+		return residentialCountry;
+	}
+
+	public void setResidentialCountry(String residentialCountry) {
+		this.residentialCountry = residentialCountry;
+	}
+	
 
 }

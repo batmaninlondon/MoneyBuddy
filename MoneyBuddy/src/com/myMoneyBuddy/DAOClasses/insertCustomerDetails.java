@@ -26,8 +26,10 @@ public class insertCustomerDetails {
 
 	Logger logger = Logger.getLogger(insertCustomerDetails.class);
 	
-    public void insertCustomer (String emailId,String firstName,String lastName,String mobileNumber,
-    		String gender, String occupation, String grossAnnualIncome, String politicallyExposed, String panCard, String password,String verificationStatus) throws MoneyBuddyException
+    public void insertCustomer (String emailId,String customerName,String dateOfBirth,String mobileNumber,
+    		String gender, String occupation, String taxStatus, String addressLineOne, String addressLineTwo,
+    		String addressLineThree, String residentialCity, String residentialState, String residentialPin,
+    		String residentialCountry, String panCard, String password,String verificationStatus) throws MoneyBuddyException
     {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
@@ -41,7 +43,9 @@ public class insertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
     		
-    		Customers tempCustomer = new Customers(firstName,lastName,emailId,mobileNumber,password,verificationStatus,gender,occupation,grossAnnualIncome,politicallyExposed,panCard,"NOT DONE",null,"N","N","CUSTOMER");
+    		Customers tempCustomer = new Customers(emailId,customerName,mobileNumber,password,verificationStatus,gender,occupation,
+    				dateOfBirth,addressLineOne,addressLineTwo,addressLineThree,residentialCity,residentialState,residentialPin,residentialCountry,
+    				taxStatus,panCard,"NOT DONE",null,"N","N","CUSTOMER");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();

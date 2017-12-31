@@ -84,7 +84,7 @@ public class GenerateKycForm {
 	
 			//session.getTransaction().commit();
             
-            String customerName = customer.getFirstName() + " " + customer.getLastName();
+            String customerName = customer.getCustomerName();
             form.setField("Name", customerName.toUpperCase());
             form.setField("FathersSpouse Name", additionalDetails.getFatherName().toUpperCase());  
             
@@ -100,7 +100,7 @@ public class GenerateKycForm {
             
             // assuming dob will come in dd/mm/yyyy format
             
-            String dob = additionalDetails.getDateOfBirth();
+            String dob = customer.getDateOfBirth();
             
             System.out.println("Date : "+dob.substring(8,10));
             System.out.println(" Month : "+dob.substring(5,7));
@@ -124,17 +124,17 @@ public class GenerateKycForm {
             form.setField("PAN", customer.getPanCard().toUpperCase());
             
             form.setField("Address 1.0", "Updated");
-            form.setField("Address 1.1", additionalDetails.getAddressLineOne().toUpperCase()+" "+additionalDetails.getAddressLineTwo().toUpperCase());
-            form.setField("Address 1.2", additionalDetails.getAddressLineThree().toUpperCase());
-            form.setField("City", additionalDetails.getResidentialCity().toUpperCase());
-            form.setField("Pin Code", additionalDetails.getResidentialPin());
-            form.setField("State", additionalDetails.getResidentialState().toUpperCase());
-            form.setField("Country", additionalDetails.getResidentialCountry().toUpperCase());
+            form.setField("Address 1.1", customer.getAddressLineOne().toUpperCase()+" "+customer.getAddressLineTwo().toUpperCase());
+            form.setField("Address 1.2", customer.getAddressLineThree().toUpperCase());
+            form.setField("City", customer.getResidentialCity().toUpperCase());
+            form.setField("Pin Code", customer.getResidentialPin());
+            form.setField("State", customer.getResidentialState().toUpperCase());
+            form.setField("Country", customer.getResidentialCountry().toUpperCase());
             form.setField("Mobile No",customer.getMobileNumber());
             form.setField("Email ID",customer.getEmailId());
             
             
-            String grossAnnualIncome = customer.getGrossAnnualIncome();
+            String grossAnnualIncome = additionalDetails.getGrossAnnualIncome();
             if ( "LesThaOneLak".equals(grossAnnualIncome))
             	form.setField("Below 1 lac","On");
             else if ( "OneToFivLak".equals(grossAnnualIncome))
@@ -171,9 +171,9 @@ public class GenerateKycForm {
            else
         	   form.setField("Others Please specify","On");
            
-           if ("PoliticExposed".equals(customer.getPoliticallyExposed()))
+           if ("PoliticExposed".equals(additionalDetails.getPoliticallyExposed()))
         	   form.setField("Politically Exposed Person","On");
-           else if ("RelToPoliticExposed".equals(customer.getPoliticallyExposed()))
+           else if ("RelToPoliticExposed".equals(additionalDetails.getPoliticallyExposed()))
         	   form.setField("Related to a Politically Exposed Person","On");
            
            stamper.setFormFlattening(true);

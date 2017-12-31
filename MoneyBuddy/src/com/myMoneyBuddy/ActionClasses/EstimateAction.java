@@ -134,6 +134,9 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
 			//DateTime datetime = new DateTime(date);
 			String sipDate = getSipDate();
+			if (sipDate.length() == 1) {
+				sipDate = "0"+sipDate;
+			}
 			System.out.println(" sipDate : "+sipDate);
 			String sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
 			String sipEndMonth = theMonth(cal.get(Calendar.MONTH));

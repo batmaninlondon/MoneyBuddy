@@ -175,12 +175,80 @@ public class Trading {
 		}
 
 	}
+	
+	public String generateMandateId(String customerId, String amount, String mandateType, String accountNum, String accountType, 
+						String ifscCode, String sipStartDate, String sipEndDate) throws MoneyBuddyException {
+
+		try {
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			String PASSWORD_STARMF;
+
+			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+
+			String[] mandateIdDetailsArray = {customerId,amount,mandateType,accountNum,accountType,ifscCode,"",sipStartDate,sipEndDate};
+
+			String mandateIdDetails = String.join("|",mandateIdDetailsArray);
+
+			System.out.println("customerId : "+customerId);
+			System.out.println("amount : "+amount);
+			System.out.println("mandateType : "+mandateType);
+			System.out.println("accountNum : "+accountNum);
+			System.out.println("accountType : "+accountType);
+			System.out.println("ifscCode : "+ifscCode);
+			System.out.println("sipStartDate : "+sipStartDate);
+			System.out.println("sipEndDate : "+sipEndDate);
+			System.out.println("mandateIdDetails : "+mandateIdDetails);
+			
+			System.out.println(" USER_ID : "+configProperties.getProperty("USER_ID"));
+			System.out.println(" MEMBER_ID : "+configProperties.getProperty("MEMBER_ID"));
+			System.out.println(" PASSWORD : "+configProperties.getProperty("PASSWORD"));
+			System.out.println(" PASS_KEY : "+configProperties.getProperty("PASS_KEY"));
+
+			String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+			String[] resultsStarMF = passwordStarMF.split("\\|");
+
+			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+			}
+
+
+			System.out.println("passwordStarMF : "+passwordStarMF);
+
+			PASSWORD_STARMF = resultsStarMF[1];
+
+			String mandateIdResponse = iStarMFWebService.mfapi("06",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,mandateIdDetails);
+
+			System.out.println("mandateIdResponse : "+mandateIdResponse);
+
+
+			return mandateIdResponse;
+
+		}catch (IOException e) {
+			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+
+	}
+
 
 	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipStartDate, String sipEndDate,
-			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment) throws MoneyBuddyException {
+			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String mandateId) throws MoneyBuddyException {
 
 
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
+		System.out.println("Trading class : executeTade method : years : "+years);
 
 		Session session = null;
 
@@ -332,8 +400,25 @@ public class Trading {
 				if ("SIP".equals(transactionType ))  {
 					session.beginTransaction();
 					
+					System.out.println("customerId for SipDetails is : "+customerId);
+					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
+					System.out.println("sipDate for SipDetails is : "+sipDate);
+					System.out.println("sipStartDate for SipDetails is : "+sipStartDate);
+					System.out.println("sipEndDate for SipDetails is : "+sipEndDate);
+					
+/*					Date sipDataDate = new SimpleDateFormat("yyyy-MM-dd").parse(sipStartDate);
+					String frmtdStartDateForSip = dateFormat.format(sipDataDate);
+					
+					sipDataDate = new SimpleDateFormat("yyyy-MM-dd").parse(sipEndDate);
+					String frmtdEndDateForSip = dateFormat.format(sipDataDate);
+					
+					*/
+					
+					String frmtdStartDateForSip = sipStartDate.substring(6,10)+"-"+sipStartDate.substring(0,2)+"-"+sipStartDate.substring(3,5);
+					String frmtdEndDateForSip = sipEndDate.substring(6,10)+"-"+sipEndDate.substring(0,2)+"-"+sipEndDate.substring(3,5);
+					
 					tempSipDetail = new SipDetails(customerId, transactionDetailId,
-							sipDate, sipStartDate, sipEndDate,"N","N");
+							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,"N","N");
 	
 					session.save(tempSipDetail);
 					session.getTransaction().commit();
@@ -405,18 +490,32 @@ public class Trading {
 				else {
 
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
-					entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, configProperties.getProperty("MEMBER_ID"),
+					System.out.println(" start Date  : "+frmtdDate );
+					System.out.println(" sip start Date  : "+sipStartDate );
+
+					String startDate = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
+				
+					System.out.println(" startDate  : "+startDate );
+					System.out.println(" numOfInstallments  : "+Integer.toString(years*12) );
+					
+					/*entryParam = mfOrderEntry.sipOrderEntryParam(transactionCode, transactionDetailId, productName, configProperties.getProperty("MEMBER_ID"),
 								customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
-								clientProperties.getProperty("DP_TXN"), frmtdDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
+								clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
 								Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
 								clientProperties.getProperty("FOLIO_NUMBER"),firstOrderFlag,clientProperties.getProperty("SUB_BR_CODE"),clientProperties.getProperty("EUIN"),
 								clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
 								PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),clientProperties.getProperty("PARAM_2"),
-								clientProperties.getProperty("PARAM_3"));
+								clientProperties.getProperty("PARAM_3"));*/
+					
+					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, productName, configProperties.getProperty("MEMBER_ID"),
+							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
+							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
+							Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
+							clientProperties.getProperty("FOLIO_NUMBER"),firstOrderFlag,clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),clientProperties.getProperty("EUIN"),
+							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
+							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
+							clientProperties.getProperty("PARAM_3"));
 
-					//System.out.println("Trading class : executeTade method : inside SIP loop  ");
-
-					System.out.println("Trading class : executeTade method : start Date : "+frmtdDateForDB);
 
 
 				}
@@ -426,9 +525,9 @@ public class Trading {
 
 				resultsEntryParam = entryParam.split("\\|");
 
-				/*for (int i = 0 ; i <resultsEntryParam.length ; i++ )   {
+				for (int i = 0 ; i <resultsEntryParam.length ; i++ )   {
 					System.out.println("resultsEntryParam : "+i+" : " +resultsEntryParam[i]);
-				}*/
+				}
 
 
 				session.beginTransaction();

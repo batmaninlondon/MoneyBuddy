@@ -46,17 +46,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		QueryProducts queryProducts = new QueryProducts();
 		/*dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);*/
 		
-		System.out.println("portfolio action class called - start 123 ");
+		System.out.println("portfolio action class called - start ");
 
-		System.out.println("size:: ");
-		
 		//session.remove("portfolioDataModel");
 		portfolioDataModel = queryProducts.getPortfolioData(session.get("customerId").toString());
-		
-		System.out.println("size:: "+ portfolioDataModel.size());
-		
-		System.out.println("portfolio action class called - start ");
-		
 		setPortfolioDataModel(portfolioDataModel);
 		
 		// Savita Wadhwani - Added this for chart testing - start 
@@ -131,7 +124,6 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
-			System.out.println("error 123"+e);
 			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
 			String str = "error";
@@ -139,7 +131,6 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		System.out.println("error "+e);
     		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
 			String str = "error";

@@ -188,7 +188,7 @@ public class QueryCustomer {
 			List<Customers> customersList = query.list();
 
 			for(Customers customer : customersList){
-				customerName = customer.getFirstName()+customer.getLastName();
+				customerName = customer.getCustomerName();
 			}
 
 			//session.getTransaction().commit();

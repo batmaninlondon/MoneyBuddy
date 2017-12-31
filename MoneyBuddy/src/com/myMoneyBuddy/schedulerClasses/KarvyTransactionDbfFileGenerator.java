@@ -791,7 +791,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						String  taxStatus;
 						query = session.createQuery("select karvyCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "TaxStatus");	
-						query.setParameter("fieldValue", additionalCustomerDetails.getTaxStatus());	
+						query.setParameter("fieldValue", customer.getTaxStatus());	
 						result =  query.uniqueResult();
 						taxStatus = result.toString();
 						
@@ -802,7 +802,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						String  state;
 						query = session.createQuery("select karvyCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "State");	
-						query.setParameter("fieldValue", additionalCustomerDetails.getResidentialState());	
+						query.setParameter("fieldValue", customer.getResidentialState());	
 						result = query.uniqueResult();  
 						state = result.toString();
 						
@@ -813,7 +813,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						String  locationCode;
 						query =   session.createQuery("select karvyCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "LocationCode");	
-						query.setParameter("fieldValue", additionalCustomerDetails.getResidentialCity());
+						query.setParameter("fieldValue", customer.getResidentialCity());
 						result = query.uniqueResult();  
 						locationCode = result.toString();
 						
@@ -832,14 +832,14 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[8] = (("BUY".equals(transactionDetail.getBuySell())) ? "P" : "R"); 
 						rowData[9] = productDetails.getProductName(); 
 	
-						rowData[10] = customer.getFirstName(); 
+						rowData[10] = customer.getCustomerName(); 
 						rowData[11] = null; 
 						rowData[12] = null; 
-						rowData[13] = additionalCustomerDetails.getAddressLineOne(); 
-						rowData[14] = additionalCustomerDetails.getAddressLineTwo(); 
-						rowData[15] = additionalCustomerDetails.getAddressLineThree(); 
-						rowData[16] = additionalCustomerDetails.getResidentialCity(); 
-						rowData[17] = additionalCustomerDetails.getResidentialPin(); 
+						rowData[13] = customer.getAddressLineOne(); 
+						rowData[14] = customer.getAddressLineTwo(); 
+						rowData[15] = customer.getAddressLineThree(); 
+						rowData[16] = customer.getResidentialCity(); 
+						rowData[17] = customer.getResidentialPin(); 
 						rowData[18] = null; 
 						rowData[19] = customer.getMobileNumber(); 
 	
@@ -855,7 +855,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[22] = ""; 
 						rowData[23] = transactionDetail.getTransactionAmount(); 
 						rowData[24] = "";
-						String dateOfBirth = additionalCustomerDetails.getDateOfBirth();
+						String dateOfBirth = customer.getDateOfBirth();
 						rowData[25] = dateOfBirth.substring(5,7)+"/"+dateOfBirth.substring(8,10)+"/"+dateOfBirth.substring(0,4);
 						rowData[26] = null; 
 						rowData[27] = customer.getPanCard(); 
@@ -941,13 +941,13 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 	
 						rowData[100] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : "M"); 
 						rowData[101] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : transactionDetail.getTransactionAmount());
-						rowData[102] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getAddressLineOne() : null);  
-						rowData[103] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getAddressLineTwo() : null); 
-						rowData[104] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getAddressLineThree() : null);
-						rowData[105] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getResidentialCity() : null);
-						rowData[106] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getResidentialState() : null);
-						rowData[107] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getResidentialCountry() : null);
-						rowData[108] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? additionalCustomerDetails.getResidentialPin() : null);
+						rowData[102] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getAddressLineOne() : null);  
+						rowData[103] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getAddressLineTwo() : null); 
+						rowData[104] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getAddressLineThree() : null);
+						rowData[105] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getResidentialCity() : null);
+						rowData[106] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getResidentialState() : null);
+						rowData[107] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getResidentialCountry() : null);
+						rowData[108] = (("NonResInd".equals(additionalCustomerDetails.getStatus())) ? customer.getResidentialPin() : null);
 						rowData[109] = null;
 	
 						rowData[110] = null;

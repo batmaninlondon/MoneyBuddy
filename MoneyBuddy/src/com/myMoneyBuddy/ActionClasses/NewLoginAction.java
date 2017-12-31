@@ -96,7 +96,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	//QueryCustomer queryCustomer = new QueryCustomer();
 	    	//System.out.println("Hi there 2  ");
 	    	int customerId = Integer.parseInt(customer.getCustomerId());
-	    	String customerName = customer.getFirstName()+" "+customer.getLastName();
+	    	String customerName = customer.getCustomerName();
 	    	String customerMobileNumber = customer.getMobileNumber();
 	
 	    	System.out.println("customerId : "+customerId);

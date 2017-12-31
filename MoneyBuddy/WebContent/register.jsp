@@ -72,7 +72,7 @@
 
 	
 	
-<div class="row" style="margin-top:100px">
+	<!-- <div class="row" style="margin-top:100px">
 		
 	
 		<div class="col-md-1"></div>
@@ -89,8 +89,8 @@
 	  		
   		</div>
   		<div class="col-md-5"></div>
-	</div>
-	<div class="row">
+	</div> -->
+	<!-- <div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
 			<div class="form-group">
@@ -102,8 +102,8 @@
 	  		</div>
   		</div>
   		<div class="col-md-5"></div>
-	</div>
-	<div class="row">
+	</div> -->
+	<div class="row" style="margin-top:100px">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
 			<div class="form-group">
@@ -129,7 +129,7 @@
   		</div>
   		<div class="col-md-5"></div>
 	</div>
-	<div class="row">
+<!-- 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
 			<div class="form-group">
@@ -141,7 +141,7 @@
 	  		</div>
   		</div>
   		<div class="col-md-5"></div>
-	</div>
+	</div> -->
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">

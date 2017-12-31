@@ -47,7 +47,7 @@ public class SipDetails {
         
     }
 
-	public SipDetails(String customerId, String transactionDetailId, String sipStartDate, String sipDate, String sipEndDate, String sipCompletionStatus,
+	public SipDetails(String customerId, String transactionDetailId, String sipDate, String sipStartDate,  String sipEndDate, String sipCompletionStatus,
 			String sipFormSubmission) {
 		super();
 		this.customerId = customerId;

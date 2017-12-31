@@ -109,11 +109,11 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="first-name" class="small-text pull-right">First Name </label></div>
+			<div class="col-md-4"><label for="customer-name" class="small-text pull-right">Name </label></div>
 
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" id="first-name" type="text" placeholder="Enter First Name" style="margin-top:-10px;">
+				  <input class="form-control" id="customer-name" type="text" placeholder="Enter Name as per PAN CARD" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -126,10 +126,25 @@
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="last-name" class="small-text pull-right">Last Name </label></div>
+			<div class="col-md-4"><label for="date-of-birth"  class="small-text pull-right">Date of Birth</label></div>
+			<div  class="col-md-6" >
+                <input class="form-control datepicker" name = "date" id="date-of-birth"  placeholder="Enter Date of Birth" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	
+	
+	<div class="row" style="margin-top:20px;">
+		
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
 			<div  class="col-md-6" >
 				  
-				  <input class="form-control" id="last-name" type="text" placeholder="Enter Last Name" style="margin-top:-10px;">
+				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -160,20 +175,6 @@
 	</div>
 
 	<div class="row" style="margin-top:20px;">
-		
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="occupation" class="small-text pull-right">Occupation</label>
@@ -203,22 +204,50 @@
 		</div>
 
 	</div>
-	
-	<div class="row" style="margin-top:20px;">
+		<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gross-annual-income" class="small-text pull-right">Gross Annual Income</label>
+			<div class="col-md-4"><label for="tax-status" class="small-text pull-right">Tax Status</label>
 	      	</div>
 
 			<div  class="col-md-6" >
 				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
-			        <option value="LesThaOneLak">less than 1 lakh</option>
-			        <option value="OneToFivLak">1 to 5 lakhs</option>
-			        <option value="FivToTenLak">5 to 10 lakhs</option>
-			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
-			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
-	
+			  	<select class="form-control" id="tax-status" style="margin-top:-10px;">
+			        <option value="Individual" selected>Individual</option>
+			        <option value="OnBeOfMinor">On Behalf Of Minor</option>
+			        <option value="Huf">HUF</option>
+			        <option value="Company">Company</option>
+			        <option value="AopBoi">AOP/BOI</option>
+			        <option value="Partnership">Partnership</option>
+			        <option value="BodyCorporate">Body Corporate</option>
+			        <option value="Trust">Trust</option>
+			        <option value="Society">Society</option>
+			        <option value="NriNre">NRI - Repatriable(NRE)</option>
+			        <option value="OverCorpoBody">Oversea Corporate Body</option>
+			        <option value="ForeInstiInvest">Foreign Institutional Investor</option>
+			        <option value="OverCorpoBodyOthers">Oversea Corporate Body - Others</option>
+			        <option value="ProviFundEpf">Provident Fund - EPF</option>
+			        <option value="SuperAnnuFund">Super Annuation Fund</option>
+			        <option value="GratuityFund">Gratuity Fund</option>
+			        <option value="BankFinanInsti">Bank/Finanacial Institution</option>
+			        <option value="SolePropri">Sole Proprietorship</option>
+			        <option value="PensionFund">Pension Fund</option>
+			        <option value="NriNro">NRI - Repatriable(NRO)</option>
+			        <option value="NriMinorNre">NRI - Minor (NRE)</option>
+			        <option value="NriHufNro">NRI-HUF(NRO)</option>
+			        <option value="NriThruNroAc">NRI Through NRO A/c</option>
+			        <option value="GloDevelopNet">Global Development Network</option>
+			        <option value="NriHufNre">NRI-HUF(NRE)</option>
+			        <option value="LimLiaParter">Limited Liability Partnership</option>
+			        <option value="PubLimCompany">Public Limited Company</option>
+			        <option value="PriLimCompany">Private Limited Company</option>
+			        <option value="UnlisCompany">Unlisted Company</option>
+			        <option value="OciRepatri">OCI - Repatriation</option>
+			        <option value="OciNonRepatri">OCI - Non Repatriation</option>
+			        <option value="Pio">Person of Indian Origin [PIO]</option>
+			        <option value="Ngo">Non-Government Organisation [NGO]</option>
+			        <option value="Others">Others</option>
+			        
 		      	</select>
 			</div>
 			<div class="col-md-1"></div>
@@ -229,28 +258,226 @@
 
 	</div>
 	
+	
+	<div class="row" >
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h2 class="small-text"><b>Address, as per the address proof**</b></h2>
+		</div>
+	</div>
+	
+	<div class="row" style="margin-top:10px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="address-line-one"  class="small-text pull-right">Line 1</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" id="address-line-one" type="text" placeholder="Enter Address Line 1" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="politically-exposed" class="small-text pull-right">Politically Exposed Person</label>
-	      	</div>
-
+			<div class="col-md-4"><label for="address-line-two"  class="small-text pull-right">Line 2</label></div>
 			<div  class="col-md-6" >
 				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="No" selected>No</option> 
-			        <option value="PoliticExposed">Politically Exposed Person</option>
-			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
+				  <input class="form-control" id="address-line-two" type="text" placeholder="Enter Address Line 2" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="address-line-three"  class="small-text pull-right">Line 3</label></div>
+			<div  class="col-md-6" >
+				  
+				  <input class="form-control" id="address-line-three" type="text" placeholder="Enter Address Line 3" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
 	
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-city" class="small-text pull-right">City</label></div>
+			<div class="col-md-6" >
+				  
+			  	<select class="form-control" id="residential-city" style="margin-top:-10px;">
+	  		      	<option value="Agra">Agra</option>
+					<option value="Ahmedabad">Ahmedabad</option>
+					<option value="Ajmer">Ajmer</option>
+					<option value="Allahabad">Allahabad</option>
+					<option value="Amritsar">Amritsar</option>
+					<option value="Anand">Anand</option>
+					<option value="Asansol">Asansol</option>
+					<option value="Aurangabad">Aurangabad</option>
+					<option value="Bangalore">Bangalore</option>
+					<option value="Baroda">Baroda</option>
+					<option value="Bharuch">Bharuch</option>
+					<option value="Bhavnagar">Bhavnagar</option>
+					<option value="Bhopal">Bhopal</option>
+					<option value="Bhubaneswar">Bhubaneswar</option>
+					<option value="Calicut">Calicut</option>
+					<option value="Chandigarh">Chandigarh</option>
+					<option value="Chennai">Chennai</option>
+					<option value="Coimbatore">Coimbatore</option>
+					<option value="Dehradun">Dehradun</option>
+					<option value="Dharwad">Dharwad</option>
+					<option value="Dubai">Dubai</option>
+					<option value="Durgapur">Durgapur</option>
+					<option value="Erode">Erode</option>
+					<option value="Guntur">Guntur</option>
+					<option value="Guwahati">Guwahati</option>
+					<option value="Hubli">Hubli</option>
+					<option value="Hyderabad">Hyderabad</option>
+					<option value="Indore">Indore</option>
+					<option value="Jaipur">Jaipur</option>
+					<option value="Jalandhar">Jalandhar</option>
+					<option value="Jalgaon">Jalgaon</option>
+					<option value="Jamnagar">Jamnagar</option>
+					<option value="Jamshedpur">Jamshedpur</option>
+					<option value="Jodpur">Jodpur</option>
+					<option value="Kanpur">Kanpur</option>
+					<option value="Karaikudi">Karaikudi</option>
+					<option value="Kochi">Kochi</option>
+					<option value="Kolkata">Kolkata</option>
+					<option value="Kota">Kota</option>
+					<option value="Kottayam">Kottayam</option>
+					<option value="Lucknow">Lucknow</option>
+					<option value="Ludhiana">Ludhiana</option>
+					<option value="Mangalore">Mangalore</option>
+					<option value="Meerut">Meerut</option>
+					<option value="Moradabad">Moradabad</option>
+					<option value="Mumbai">Mumbai</option>
+					<option value="Mysore">Mysore</option>
+					<option value="Nagpur">Nagpur</option>
+					<option value="Nasik">Nasik</option>
+					<option value="NewDelhi">New Delhi</option>
+					<option value="Panjim">Panjim</option>
+					<option value="Patna">Patna</option>
+					<option value="Pondicherry">Pondicherry</option>
+					<option value="Pune">Pune</option>
+					<option value="Raipur">Raipur</option>
+					<option value="Rajahmundry">Rajahmundry</option>
+					<option value="Rajkot">Rajkot</option>
+					<option value="Ranchi">Ranchi</option>
+					<option value="Salem">Salem</option>
+					<option value="Siliguri">Siliguri</option>
+					<option value="Surat">Surat</option>
+					<option value="Tirunelveli">Tirunelveli</option>
+					<option value="Tirupur">Tirupur</option>
+					<option value="Trichy">Trichy</option>
+					<option value="Trivandrum">Trivandrum</option>
+					<option value="Udaipur">Udaipur</option>
+					<option value="Varanasi">Varanasi</option>
+					<option value="Vashi">Vashi</option>
+					<option value="Vijayawada">Vijayawada</option>
+					<option value="Others">Others</option>
+			  </select>       
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+
+	</div>
+
+	<div class="row" style="margin-top:20px;">
+		
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-state" class="small-text pull-right">State</label></div>
+			<div  class="col-md-6" >
+				  
+			  	<select class="form-control" id="residential-state" style="margin-top:-10px;">
+			        <option value="AndamanAndNicobar">Andaman & Nicobar</option>
+			        <option value="ArunachalPradesh">Arunachal Pradesh</option>
+			        <option value="AndhraPradesh">Andhra Pradesh</option>
+			        <option value="Assam">Assam</option>
+			        <option value="Bihar">Bihar</option>
+			        <option value="Chandigarh">Chandigarh</option>
+			        <option value="Chhattisgarh">Chhattisgarh</option>
+			        <option value="GOA">GOA</option>
+			        <option value="Gujarat" selected>Gujarat</option>
+			        <option value="Haryana">Haryana</option>
+			        <option value="HimachalPradesh">Himachal Pradesh</option>
+			        <option value="JammuAndKashmir">Jammu & Kashmir</option>
+			        <option value="Jharkhand">Jharkhand</option>
+			        <option value="Karnataka">Karnataka</option>
+			        <option value="Kerala">Kerala</option>
+			        <option value="MadhyaPradesh">Madhya Pradesh</option>
+			        <option value="Maharashtra">Maharashtra</option>
+			        <option value="Manipur">Manipur</option>
+			        <option value="Meghalaya">Meghalaya</option>
+			        <option value="Mizoram">Mizoram</option>
+			        <option value="Nagaland">Nagaland</option>
+			        <option value="NewDelhi">New Delhi</option>
+			        <option value="Orissa">Orissa</option>
+			        <option value="Pondicherry">Pondicherry</option>
+			        <option value="Punjab">Punjab</option>
+			        <option value="Rajasthan">Rajasthan</option>
+			        <option value="Sikkim">Sikkim</option>
+			        <option value="Telengana">Telengana</option>
+			        <option value="TamilNadu">Tamil Nadu</option>
+			        <option value="Tripura">Tripura</option>
+			        <option value="UttarPradesh">Uttar Pradesh</option>
+			        <option value="Uttaranchal">Uttaranchal</option>
+			        <option value="WestBengal">West Bengal</option>
+			        <option value="DadraAndNagarHaveli">Dadra and Nagar Haveli</option>
+			        <option value="DamanAndDiu">Daman and Diu</option>
+			        <option value="Lakshadweep">Lakshadweep</option>
+			        <option value="Others">Others</option>
 		      	</select>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 		<div class="col-md-4">
+		</div>
+	</div>
 
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-country" class="small-text pull-right">Country</label></div>
+			<div class="col-md-6" >
+				  
+				  <input class="form-control" id="residential-country" type="text" placeholder="Enter Country" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
 		</div>
 
 	</div>
+	
+		
+	<div class="row" style="margin-top:20px;">
+		<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-4"><label for="residential-pin" class="small-text pull-right">Pin</label></div>
+			<div class="col-md-6" >
+				  
+				  <input class="form-control" id="residential-pin" type="text" placeholder="Enter Pin" style="margin-top:-10px;">
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="col-md-4">
+		</div>
+
+	</div>
+	
+
+
 
 	<div id="button-1" class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>

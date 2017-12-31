@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
+	import="com.myMoneyBuddy.GAT.PredictedValueCalculation,java.util.*,java.text.SimpleDateFormat,org.apache.commons.lang.time.DateUtils"%>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -13,7 +13,6 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/datepicker.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -25,34 +24,16 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
     <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/wow.min.js"></script>
-    <%-- <script type="text/javascript" src="assets/js/jquery-ui.js"></script> --%>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	<style type="text/css">
-		.ui-datepicker {
-		   background: #333;
-		   border: 1px solid #555;
-		   color: #EEE;
-		   width:200px;
-		   heigth:300px;
-		 }
-	</style>
-	<script type="text/javascript">
-		$(function(){
-			$('.datepicker').datepicker({
-				dateFormat: "yy-mm-dd"
-				
-			});
-		});
-	</script>
+
 </head>
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
@@ -97,7 +78,7 @@
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
+                        <li id="header-nav-li"><a href="help">Contact Us</a></li> 
                        
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
@@ -116,152 +97,67 @@
 		
     </header>
 	
-	<section  id="one">
+	<section id="ongoingSips">
 
-	<div class="row" style="margin-top:-60px;margin-bottom:20px;">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>Please provide additional details</b></h2>
-		</div>
-		<div class="col-md-3"></div>
-	</div>
-	
 	<div class="row" >
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="father-name"  class="small-text pull-right">Father's Name</label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="father-name" type="text" placeholder="Enter Father's Name" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
+		<!-- <div class="col-md-3"></div> -->
+		<div class="col-md-12 center" style="margin-top:-50px;">
+			<h2 style="font-family:Aparajita;font-size:30px;"><b>You have following running Sips</b></h2>
 		</div>
-		<div class="col-md-4">
+		<!-- <div class="col-md-3"></div> -->
+	</div>	
+
+
+		<div  id="invested-fund-list" class="row" style="padding-left:70px;padding-right:70px;">
+			<div class="col-md-2"></div>
+			<div id = "investment-fund-list-data" class ="col-md-8">
+			<table class="table table-bordered" style="margin-top:-50px;">
+				<thead class="table-head">
+					<tr>
+						<th class="center col-md-9">Sip Date</th>
+						<th class="center col-md-3">Sip Start Date</th>
+						<th class="center col-md-3">Sip End Date</th>
+						<th class="center col-md-3">Cancel</th>
+					</tr>
+				</thead>
+						<tbody class="table-body">
+
+						<s:iterator value="#session.sipDetailsList" var="sipDetailsListElement">
+							<tr>
+							    <td class="center"><s:property value="#productListElement.sipDate"/></td>
+							    <td class="center"><s:property value="#productListElement.sipStartDate"/></td>
+							    <td class="center"><s:property value="#productListElement.sipEndDate"/></td>
+							    <td class="center">
+							    	<button type="button" class="btn btn-link" onClick="">Cancel</button>
+							    </td>
+							</tr>
+						</s:iterator> 
+
+						</tbody>
+   			</table>
+   			</div>
+			<div class="col-md-2"></div>
 		</div>
-	</div>
-	
-	
 		
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="marital-status" class="small-text pull-right">Marital Status</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="marital-status" style="margin-top:-10px;">
-			        <option value="Single">Single</option>
-			        <option value="Married" selected>Married</option>
+	<div class="row" >
+		<!-- <div class="col-md-3"></div> -->
+		<div class="col-md-12 center" style="margin-top:50px;">
+			<h2 style="font-family:Aparajita;font-size:25px;"><b>
+			
+			     <%
+			     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date date = new Date();
+					date = DateUtils.addDays(date, 1);
+					String frmtdDateForDB = dateFormat.format(date);
+			     
+         /* out.print( "<h2 align = \"center\">" +date.toString()+"</h2>"); */
+      %>
+      
+      Your investment will be processed by <u><%=frmtdDateForDB %></u>, and we will send you an email. You can track your portfolio by visiting the following link.</b></h2>
+		</div>
+		<!-- <div class="col-md-3"></div> -->
+	</div>	
 	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="nationality" class="small-text pull-right">Nationality</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="nationality" style="margin-top:-10px;">
-			        <option value="Indian" selected>Indian</option>
-			        <option value="Other">Other</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="status" class="small-text pull-right">Status</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="status" style="margin-top:-10px;">
-			        <option value="LivInInd" selected>Living in India</option>
-			        <option value="NonResInd">Non Resident Indian (NRI)</option>
-					<option value="ForNat">Foreign National</option>
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-		<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="gross-annual-income" class="small-text pull-right">Gross Annual Income</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
-			        <option value="LesThaOneLak">less than 1 lakh</option>
-			        <option value="OneToFivLak">1 to 5 lakhs</option>
-			        <option value="FivToTenLak">5 to 10 lakhs</option>
-			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
-			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-		
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="politically-exposed" class="small-text pull-right">Politically Exposed Person</label>
-	      	</div>
-
-			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
-			        <option value="No" selected>No</option> 
-			        <option value="PoliticExposed">Politically Exposed Person</option>
-			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
-	
-		      	</select>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-
-		</div>
-
-	</div>
-	
-	<div id="button-1" class="row" style="margin-top:25px;">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="prepareKyc();">Continue</button>
-		</div>
-		<div class="col-md-5"></div>
-	</div>
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
@@ -281,6 +177,10 @@
         </div>
     </footer>
 
+
+
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>

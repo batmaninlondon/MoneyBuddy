@@ -156,7 +156,7 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 				    rowData[6] = "";
 				    rowData[7] = customer.getFolioNumber();
 				    
-				    rowData[8] = customer.getFirstName()+" "+customer.getLastName();
+				    rowData[8] = customer.getCustomerName();
 				    rowData[9] = "1";
 				    rowData[10] = "N";
 				    rowData[11] = "ON";

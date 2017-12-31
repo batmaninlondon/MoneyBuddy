@@ -175,15 +175,15 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	
 	    	QueryAdditionalCustomerDetails queryAddCusDetails = new QueryAdditionalCustomerDetails();
 	    	
-	    	AdditionalCustomerDetails addCusDetails = queryAddCusDetails.getAddCusDetails(customerId);
+	    	//AdditionalCustomerDetails addCusDetails = queryAddCusDetails.getAddCusDetails(customerId);
 	    	
 	    	
 	    	Trading trading = new Trading();
 		
-	    	String ucc = trading.createClient(CLIENT_HOLDING, addCusDetails.getTaxStatus(), customer.getOccupation(), addCusDetails.getDateOfBirth(),
+	    	String ucc = trading.createClient(CLIENT_HOLDING, customer.getTaxStatus(), customer.getOccupation(), customer.getDateOfBirth(),
 	    			customer.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
-				addCusDetails.getAddressLineOne()+" "+addCusDetails.getAddressLineTwo()+" "+addCusDetails.getAddressLineThree(), addCusDetails.getResidentialCity(), 
-				addCusDetails.getResidentialState(), addCusDetails.getResidentialPin(), addCusDetails.getResidentialCountry(),
+	    			customer.getAddressLineOne()+" "+customer.getAddressLineTwo()+" "+customer.getAddressLineThree(), customer.getResidentialCity(), 
+	    			customer.getResidentialState(), customer.getResidentialPin(), customer.getResidentialCountry(),
 				customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
 		
 	    	String[] uccSpilts = ucc.split("\\|");
@@ -202,19 +202,33 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,"Y",
-						"Customer bought some mutual funds");
+						"Customer bought some mutual funds",null);
 		    	
 			}
 			else {
-				amount = sessionMap.get("sip").toString();
+				amount = sessionMap.get("sipAmount").toString();
+				
+				String mandateIdResponse = trading.generateMandateId(customerId, amount, "I", getAccountNumber(), getAccountType(), getNeftCode(), 
+								sessionMap.get("sipStartDate").toString(), sessionMap.get("sipEndDate").toString());
+				
+				String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 
+		    	
+		    	System.out.println("mandateIdResponseSpilts[0] : "+mandateIdResponseSpilts[0]);
+		    	System.out.println("mandateIdResponseSpilts[1] : "+mandateIdResponseSpilts[1]);
+		    	System.out.println("mandateIdResponseSpilts[2] : "+mandateIdResponseSpilts[2]);
+		    	
+		    	String mandateId = mandateIdResponseSpilts[2];
+		    	
+		    	System.out.println("mandateId : "+mandateId);
+		    	
 				
 		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),
-		    			Double.parseDouble(sessionMap.get("sip").toString()));
+		    			Double.parseDouble(sessionMap.get("sipAmount").toString()));
 		    	
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipStartDate").toString(),sessionMap.get("sipEndDate").toString(),
-						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("years").toString()),"Y",
-						"Customer bought some mutual funds");
+						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("sipDuration").toString()),"Y",
+						"Customer bought some mutual funds",mandateId);
 			}
 			
 			
