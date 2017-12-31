@@ -375,7 +375,7 @@ public class QueryProducts {
 			       System.out.println("Product ID: " + row[1]);
 			       Object result;
 			       
-			       result = session.createQuery("select max(navDate) from NavHistory").uniqueResult();
+			       result = session.createQuery("select max(navDate) from NavHistory where schemeCode = '"+row[0]+"'").uniqueResult();
 			       String currentNavDate = null; 
 			       
 			       if (result != null )
@@ -383,7 +383,7 @@ public class QueryProducts {
 			       
 			       System.out.println("Product Latest NAV Date : " + currentNavDate);
 			       
-			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
+			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[0]+"') ").uniqueResult();
 			       String currentNavValue = null; 
 			       
 			       if (result != null )
@@ -408,7 +408,7 @@ public class QueryProducts {
 			       
 			       
 			       
-			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='SELL' ");
+			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='SELL'  and unitPrice is not null ");
 			       
 			       for (Iterator sellIt=sellRecordsQuery.iterate(); sellIt.hasNext();)  {
 			    	   
@@ -439,57 +439,58 @@ public class QueryProducts {
 			       
 			       System.out.println("Total sold units : "+soldUnit);
 			       
-			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' ");
+			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
 			       
 			       for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
 			    	   
 			    	   Object[] buyRecordRow = (Object[]) buyIt.next();
 				       
 				       System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]+" : transactionDate : "+buyRecordRow[4]);
-			    	   
-				       if (soldUnit != 0 )   {
-				    	   
-				    	   if (Double.parseDouble(buyRecordRow[2].toString()) > soldUnit)  {
-				    		   availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
-				    		   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
-				    		   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
-				    		   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
-				    		   
-				    		   soldUnit = 0;
-				    		   
-				    	   }
-				    	   else {
-				    		   soldUnit -= Double.parseDouble(buyRecordRow[2].toString());
-				    		   
-				    	   }
-				       }
-				       
-				       else {
-				    	   availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
 
-				    	   System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
-				    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
-				    	   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
-				       }
-				       //xirrHashMap.put(buyRecordRow[4].toString(),Double.parseDouble(buyRecordRow[1].toString()));  
 				       
-				       oldstring = buyRecordRow[4].toString().substring(0, 10);
-			           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			           
-			           DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
-				       	Date date = (Date)formatter.parse(oldstring);
-				       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
-				       	
-				       	String transactionDate = newFormat.format(date);
-				       	System.out.println("transactionDate : "+transactionDate);
-				       	
-			           dates.add(strToDate(transactionDate));
-			           amounts.add(Double.parseDouble(buyRecordRow[1].toString()));
-			           
-			           totalDates.add(strToDate(transactionDate));
-			           totalAmounts.add(Double.parseDouble(buyRecordRow[1].toString()));
-			           
-			           System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));
+					       if (soldUnit != 0 )   {
+					    	   
+					    	   if (Double.parseDouble(buyRecordRow[2].toString()) > soldUnit)  {
+					    		   availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
+					    		   System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
+					    		   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
+					    		   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
+					    		   
+					    		   soldUnit = 0;
+					    		   
+					    	   }
+					    	   else {
+					    		   soldUnit -= Double.parseDouble(buyRecordRow[2].toString());
+					    		   
+					    	   }
+					       }
+					       
+					       else {
+					    	   availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
+	
+					    	   System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
+					    	   investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
+					    	   System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
+					       }
+					       //xirrHashMap.put(buyRecordRow[4].toString(),Double.parseDouble(buyRecordRow[1].toString()));  
+					       
+					       oldstring = buyRecordRow[4].toString().substring(0, 10);
+				           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				           
+				           DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+					       	Date date = (Date)formatter.parse(oldstring);
+					       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+					       	
+					       	String transactionDate = newFormat.format(date);
+					       	System.out.println("transactionDate : "+transactionDate);
+					       	
+				           dates.add(strToDate(transactionDate));
+				           amounts.add(Double.parseDouble(buyRecordRow[1].toString()));
+				           
+				           totalDates.add(strToDate(transactionDate));
+				           totalAmounts.add(Double.parseDouble(buyRecordRow[1].toString()));
+				           
+				           System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));
 			       
 			       }
 			       
@@ -599,7 +600,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			if (result != null)
 				productId = result.toString();
 			System.out.println("getInvestmentDetailsData : productId : "+productId);
-			Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"'");
+			Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 			       
 			String quantity;
 			for (Iterator it=query.iterate(); it.hasNext();)  {

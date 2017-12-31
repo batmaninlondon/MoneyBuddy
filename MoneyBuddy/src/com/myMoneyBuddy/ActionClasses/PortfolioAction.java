@@ -25,6 +25,11 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 
 	private List<PortfolioDataModel> portfolioDataModel;
+	
+	// Savita Wadhwani - Added this for chart testing - start 
+	private List<PortfolioDataModel> newPortfolioDataModel;
+	// Savita Wadhwani - Added this for chart testing - end
+	
 	private String dummyMsg;
 	private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
 	
@@ -41,11 +46,24 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		QueryProducts queryProducts = new QueryProducts();
 		/*dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);*/
 		
-		System.out.println("portfolio action class called - start ");
+		System.out.println("portfolio action class called - start 123 ");
 
+		System.out.println("size:: ");
+		
 		//session.remove("portfolioDataModel");
 		portfolioDataModel = queryProducts.getPortfolioData(session.get("customerId").toString());
+		
+		System.out.println("size:: "+ portfolioDataModel.size());
+		
+		System.out.println("portfolio action class called - start ");
+		
 		setPortfolioDataModel(portfolioDataModel);
+		
+		// Savita Wadhwani - Added this for chart testing - start 
+		newPortfolioDataModel = portfolioDataModel;
+		setNewPortfolioDataModel(newPortfolioDataModel);
+		// Savita Wadhwani - Added this for chart testing - end
+		
 		//session.put("portfolioDataModel", null);
 		session.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+session.getClass().getName());
@@ -59,6 +77,14 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			investmentDetailsDataModelList.put(productName,investmentDetailsDataModel);
 			
 		}
+		// Savita Wadhwani - Added this for chart testing - start
+		
+		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),"RELLFCP-GR");
+		setInvestmentDetailsDataModel(investmentDetailsDataModel);
+		
+		System.out.println("Size of investmentDetailsDataModel : "+investmentDetailsDataModel.size());
+		
+		// Savita Wadhwani - Added this for chart testing - end
 		
 		for (String key : investmentDetailsDataModelList.keySet())  {
 			System.out.println("key : "+key);
@@ -105,6 +131,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
+			System.out.println("error 123"+e);
 			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
 			String str = "error";
@@ -112,6 +139,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			return ERROR;
 		} 
     	catch (Exception e) {	
+    		System.out.println("error "+e);
     		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
 			String str = "error";
@@ -129,10 +157,23 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			List<PortfolioDataModel> pMdl) {
 		this.portfolioDataModel = pMdl;
 	}
+	// Savita Wadhwani - Added this for chart testing - start 
+
+	public List<PortfolioDataModel> getNewPortfolioDataModel() {
+		return newPortfolioDataModel;
+	}
+
+
+	public void setNewPortfolioDataModel(List<PortfolioDataModel> newPortfolioDataModel) {
+		this.newPortfolioDataModel = newPortfolioDataModel;
+	}	
+	// Savita Wadhwani - Added this for chart testing - end
 
 	public String getDummyMsg() {
 		return dummyMsg;
 	}
+
+
 
 	public void setDummyMsg(String dummyMsg) {
 		this.dummyMsg = dummyMsg;

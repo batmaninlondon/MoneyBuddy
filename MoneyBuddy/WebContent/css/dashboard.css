@@ -1,0 +1,367 @@
+.dash-header {
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, .4);
+    padding: 24px 0 10px
+}
+
+.dash-value {
+    font-family: brandonText;
+    font-weight: 700
+}
+.dash-value svg {
+    fill: rgba(255, 255, 255, .4)
+}
+@media all and (max-width: 46.24em) {
+    .dash-value__label {
+        font-size: 20px;
+        font-size: 1.25rem
+    }
+    .dash-value__label svg {
+        width: 19px;
+        height: 17px
+    }
+    .dash-value__value {
+        font-size: 50px;
+        font-size: 3.125rem;
+        line-height: 50px;
+        line-height: 3.125rem
+    }
+}
+@media all and (min-width: 46.25em) {
+    .dash-value {
+        width: 49.15254%;
+        float: left;
+        margin-right: 1.69492%;
+        padding-bottom: 25px
+    }
+    .dash-value__info {
+        font-size: 90px;
+        font-size: 5.625rem;
+        line-height: 90px;
+        line-height: 5.625rem
+    }
+    .dash-value__label {
+        font-size: 20px;
+        font-size: 1.25rem;
+        line-height: 50px;
+        line-height: 3.125rem
+    }
+    .dash-value__label svg {
+        margin: 0 0 -5px 6px
+    }
+}
+@media all and (min-width: 46.25em) and (max-width: 61.24em) {
+    .dash-value__value {
+        font-size: 70px;
+        font-size: 4.375rem;
+        line-height: 70px;
+        line-height: 4.375rem
+    }
+}
+.dash-growth {
+    font-family: brandonText;
+    font-weight: 700
+}
+.dash-growth__value {
+    font-weight: 400
+}
+.dash-growth__label {
+    white-space: nowrap
+}
+.dash-growth__label svg {
+    fill: rgba(255, 255, 255, .4)
+}
+.dash-growth__toggle {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-family: ptsans, sans-serif
+}
+.dash-growth__toggle:after {
+    content: "";
+    display: table;
+    clear: both
+}
+.dash-growth__toggle li {
+    float: left;
+    padding: 0 10px;
+    color: #fff
+}
+.dash-growth__toggle li:first-child {
+    border-radius: 8px 0 0 8px
+}
+.dash-growth__toggle li:last-child {
+    border-radius: 0 8px 8px 0
+}
+.dash-growth__toggle li.is-selected {
+    background: #fff;
+    color: #28b1dc
+}
+.dash-growth .icon--info {
+    border-color: #fff
+}
+@media all and (max-width: 46.24em) {
+    .dash-growth {
+        margin-top: 25px
+    }
+    .dash-growth__label {
+        font-size: 20px;
+        font-size: 1.25rem
+    }
+    .dash-growth__label svg {
+        width: 22px;
+        height: 19px
+    }
+    .dash-growth__toggle {
+        margin-top: 7px;
+        font-size: 12px;
+        font-size: .75rem
+    }
+    .dash-growth__toggle li {
+        cursor: pointer;
+        width: 33.3%;
+        text-align: center;
+        padding: 7px 10px
+    }
+    .dash-growth__value {
+        margin-top: 10px;
+        font-size: 50px;
+        font-size: 3.125rem;
+        line-height: 50px;
+        line-height: 3.125rem;
+        min-height: 65px
+    }
+    .dash-growth__info {
+        position: relative;
+        min-height: 95px
+    }
+    .dash-growth__info .icon--info {
+        float: right;
+        margin-top: -50px
+    }
+    .dash-growth__info-side {
+        margin-top: 2px;
+        font-size: 25px;
+        font-size: 1.5625rem;
+        line-height: 25px;
+        line-height: 1.5625rem;
+        font-weight: 400;
+        display: none
+    }
+    .dash-growth__info-side .icon--circle {
+        float: right;
+        margin-top: -5px
+    }
+    .dash-growth__info-side .icon--circle svg {
+        margin-top: -7px
+    }
+    .dash-growth__change {
+        margin-top: 5px
+    }
+}
+@media all and (min-width: 46.25em) {
+    .dash-growth {
+        width: 49.15254%;
+        float: right;
+        margin-right: 0
+    }
+    .dash-growth__value {
+        font-weight: 400;
+        font-size: 90px;
+        font-size: 5.625rem;
+        line-height: 90px;
+        line-height: 5.625rem;
+        float: left;
+        margin-right: 20px;
+        padding-bottom: 25px
+    }
+    .dash-growth__label {
+        font-size: 20px;
+        font-size: 1.25rem;
+        line-height: 50px;
+        line-height: 3.125rem
+    }
+    .dash-growth__label svg {
+        margin: 0 0 -5px 6px
+    }
+    .dash-growth__toggle {
+        display: inline-block;
+        font-size: 13px;
+        font-size: .8125rem;
+        line-height: 20px;
+        line-height: 1.25rem;
+        margin: 0 0 -5px 20px
+    }
+    .dash-growth__toggle li {
+        cursor: pointer
+    }
+    .dash-growth__info {
+        font-family: brandonText;
+        font-weight: 400;
+        position: relative
+    }
+    .dash-growth__info-side {
+        position: absolute;
+        right: 0;
+        font-size: 30px;
+        font-size: 1.875rem;
+        line-height: 50px;
+        line-height: 3.125rem;
+        vertical-align: bottom;
+        display: none
+    }
+    .dash-growth__info-side:after {
+        content: "";
+        display: table;
+        clear: both
+    }
+    .dash-growth__info-side .icon--circle {
+        margin-left: 0
+    }
+    .dash-growth__info-side .icon--circle:hover {
+        border-width: 2px
+    }
+    .dash-growth__change {
+        vertical-align: bottom
+    }
+}
+@media all and (min-width: 46.25em) and (max-width: 61.24em) {
+    .dash-growth__value {
+        font-size: 70px;
+        font-size: 4.375rem;
+        line-height: 70px;
+        line-height: 4.375rem
+    }
+    .dash-growth__toggle {
+        margin: 0
+    }
+    .dash-growth__change {
+        font-size: 22px;
+        font-size: 1.375rem;
+        line-height: 22px;
+        line-height: 1.375rem;
+        margin-top: 5px
+    }
+    .dash-growth__info-side {
+        top: -20px;
+        vertical-align: bottom
+    }
+    .dash-growth__info-side .icon--info svg {
+        width: 5px;
+        height: 10px;
+        margin-top: -5px;
+        margin-left: -2px
+    }
+}
+.dash-actions {
+    clear: both
+}
+.dash-actions__nav {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+.dash-actions__nav:after {
+    content: "";
+    display: table;
+    clear: both
+}
+@media all and (max-width: 29.99em) {
+    .dash-actions__nav li {
+        display: block;
+        width: 44.44444%;
+        float: left;
+        margin-right: 11.11111%
+    }
+    .dash-actions__nav li a {
+        width: 100%;
+        display: block;
+        padding: 8px 0 8px 40px;
+        position: relative
+    }
+    .dash-actions__nav li a .icon--circle {
+        position: absolute;
+        left: 0
+    }
+    .dash-actions__nav li:last-child {
+        margin-right: 0
+    }
+}
+@media all and (min-width: 30em) {
+    .dash-actions__nav li {
+        margin-right: 25px;
+        display: inline-block
+    }
+    .dash-actions__nav li:last-child {
+        margin-right: 0
+    }
+    .dash-actions__nav li.last {
+        float: right
+    }
+}
+.dash-actions__nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-size: .875rem
+}
+.dash-actions__nav a:hover .icon--circle {
+    border: 2px solid #fff
+}
+.dash-actions__nav a:hover svg {
+    fill: #fff
+}
+@media all and (max-width: 46.24em) {
+    .dash-actions {
+        border-top: 1px solid rgba(255, 255, 255, .4);
+        margin-top: 15px
+    }
+    .dash-actions__nav {
+        padding: 14px 0 10px
+    }
+    .dash-actions__nav li {
+        margin-right: 5px
+    }
+    .dash-actions__nav li.last {
+        display: none
+    }
+    .dash-actions__nav a {
+        font-size: 13px;
+        font-size: .8125rem
+    }
+    .dash-actions__nav .icon--circle {
+        width: 24px;
+        height: 24px;
+        margin-left: 5px
+    }
+    .dash-actions__nav .icon--download,
+    .dash-actions__nav .icon--withdraw {
+        width: 13px;
+        height: 12px;
+        margin: -6px 0 0 -7px;
+        position: absolute;
+        top: 50%;
+        left: 50%
+    }
+    .dash-actions__nav .icon--transfer-in {
+        width: 16px;
+        height: 14px;
+        margin: -7px 0 0 -8px;
+        position: absolute;
+        top: 50%;
+        left: 50%
+    }
+}
+@media all and (min-width: 46.25em) and (max-width: 61.24em) {
+    .dash-actions {
+        padding-bottom: 10px
+    }
+}
+@media all and (min-width: 46.25em) {
+    .dash-actions {
+        border-top: 1px solid rgba(255, 255, 255, .4);
+        padding-top: 30px
+    }
+}
