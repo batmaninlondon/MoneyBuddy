@@ -30,6 +30,7 @@
     	<link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     	<link href="assets/bootstrap/css/main.css" rel="stylesheet">
 		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
+		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet">
 		
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -43,203 +44,24 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	        
-        <script>
+	     
+	    <!--  <Style>
+	     .table {
+  font-size: 10px;
+}
 
-		var data;
+.table tr,.table td {
+   height: 50px;
+   text-align: center
+}
 
-		//google.load('visualization', '1', {packages:['table']});
-
-		google.charts.load('current', {'packages':['table']});
-
-		google.charts.setOnLoadCallback(drawTable);
-	
-
-//$(document).ready(function()
-		function drawTable()
-		{
-								$.getJSON('portfolioAction', {}, function(jsonResponse) 
-								{
-									 data = new google.visualization.DataTable();
-									 data.addColumn('string', 'Fund Name');
-									 data.addColumn('string', 'InvestmentStartDate');
-									 data.addColumn('string', 'Unit');
-									 data.addColumn('string', 'Invested Amount');
-									 data.addColumn('string', 'Current Amount');
-									 data.addColumn('string', 'Rate Of Growth');
-									 
-									 var cusId ="<%=(String)session.getAttribute("customerId")%>";
-									 
-									 $.each(jsonResponse.portfolioDataModel , function(i,portfolioData) 
-											{
-
-												 data.addRow([portfolioData.fundName,
-											 			portfolioData.transactionStartDate,
-											 			portfolioData.units,
-											 			portfolioData.investedAmount,
-											 			portfolioData.currentAmount,
-											 			portfolioData.rateOfGrowth,
-												               
-												                ]);
-											});  
-		 
-						        /*  var options1 = {
-						      	          title: jsonResponse.dummyMsg,
-						      	          pieHole: 0.4,
-						      	       }; */			      	
-						      	
-						    	var table = new google.visualization.Table(document.getElementById('chart_div1'));
-						      	       
-						      	     google.visualization.events.addListener(table, 'ready', onReady);
-
-						      	table.draw(data, {showRowNumber: true, width: '100%', height: '100%'}); 
-						      	
-						      	function onReady() {
-						      		//alert("On ready function called !!");
-								    google.visualization.events.addListener(table, 'select', fundDetailHandler);
-								  }
-
-								  // Called
-<%-- 								  function fundDetailHandler() {
-								    alert("Select event!");
-								    
-								    var selectedItem = table.getSelection()[0];
-								    
-								    if (selectedItem) {
-								      var value = data.getValue(selectedItem.row, 0);
-
-								      //alert("The user selected " + value);
-								    }
-								    
-								    var selectedItem =null;
-								    
-								    $.getJSON('investmentDetailsAction', {productName:value}, function(jsonResponse) 
-											{
-												 data1 = new google.visualization.DataTable();
-												 data1.addColumn('string', 'Date Of Purchase');
-												 data1.addColumn('string', 'Units Purchased');
-												 data1.addColumn('string', 'NAV Purchased');
-												 data1.addColumn('string', 'Purchase Type');
-												 
-												 var cusId ="<%=(String)session.getAttribute("customerId")%>";
-												 
-												 $.each(jsonResponse.investmentDetailsDataModel , function(i,investmentDetailsData) 
-														{
-
-															 data1.addRow([investmentDetailsData.transactionDate,
-																 investmentDetailsData.units,
-																 investmentDetailsData.navPurchased,
-																 investmentDetailsData.transactionType,
-															               
-															                ]);
-														});  
-					 
-		      	
-									      	
-									    	var chart = new google.visualization.Table(document.getElementById('chart_div2'));
-
-
-									      	chart.draw(data1, {showRowNumber: true, width: '100%', height: '100%'}); 
-									      	
-
-
-
-											});
-								    
-								    
-								    $( "#dialog" ).dialog({autoOpen: true,
-								    	title:value,
-								    	width: 800,
-								    	height:300,
-								    	scrollable: true});
-								    
-								    
-								    
-								    
-								   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
-								  } --%>
-
-
-								});
-								
-								  
-								
-								
-					}
-
-
-<%-- 		  function fundDetailHandler(el) {
-			    //alert("Select event!");
-			    
-			    //var selectedItem = table.getSelection()[0];
-			    var selectedItem = $(el).closest("tr").find('td:eq(0)').text();
-			    //var selectedItem = $(el).closest("tr").find('td:eq(1)').text();
-			    
-			    //alert("selectedItem " + selectedItem);
-			    /* if (selectedItem) {
-			    //	alert("HI");
-			      var value = selectedItem;
-
-			      //alert("The user selected " + value);
-			    } */
-			    
-			    var selectedItem =null;
-			    
-			    $.getJSON('investmentDetailsAction', {productName:value}, function(jsonResponse) 
-						{
-							 data1 = new google.visualization.DataTable();
-							 data1.addColumn('string', 'Date Of Purchase');
-							 data1.addColumn('string', 'Units Purchased');
-							 data1.addColumn('string', 'NAV Purchased');
-							 data1.addColumn('string', 'Purchase Type');
-							 
-							 var cusId ="<%=(String)session.getAttribute("customerId")%>";
-							 
-							 $.each(jsonResponse.investmentDetailsDataModel , function(i,investmentDetailsData) 
-									{
-
-										 data1.addRow([investmentDetailsData.transactionDate,
-											 investmentDetailsData.units,
-											 investmentDetailsData.navPurchased,
-											 investmentDetailsData.transactionType,
-										               
-										                ]);
-									});  
-
-
-				      	
-				    	var chart = new google.visualization.Table(document.getElementById('chart_div2'));
-
-
-				      	chart.draw(data1, {showRowNumber: true, width: '100%', height: '100%'}); 
-				      	
-
-
-
-						});
-			    
-			    
-			    $( "#dialog" ).dialog({autoOpen: true,
-			    	title:selectedItem,
-			    	width: 800,
-			    	height:300,
-			    	scrollable: true});
-			    
-			    
-			    
-			    
-			   // window.open("test.jsp",null,"height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
-			  } --%>
-</script>
-    
-  <script>
-
-$( function() {
-	 
-	 $( "#dialog" ).dialog({autoOpen: false});
-  } );
-  
-</script>  
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th
+{
+  padding:10; 
+}
+	     </Style>  -->
+        
+ 
     </head>
     <!-- End Head -->
 
@@ -281,7 +103,7 @@ $( function() {
                                     <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="nfaq.jsp" class="s-header-v2__nav-link">FAQs</a></li>
                                     <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
-                                   <!--  <li class="s-header-v2__nav-item"><a href="contacts.html" class="s-header-v2__nav-link s-header-v2__nav-link--dark">Contact Us</a></li> -->
+                                   
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign in</a></li>
@@ -309,6 +131,9 @@ $( function() {
         </header>
         <!--========== END HEADER ==========-->
 		
+	 	
+		
+		
 		<div class="g-bg-color--dark" style="padding-bottom: 0.8rem" >
             <div class="g-container--md g-text-center--xs  ">
             <br/><br/><br/>
@@ -330,7 +155,6 @@ $( function() {
         <div style="background-color: #eeeeee">
              <div class="container ">
                <div class="g-text-center--xs g-margin-b-10--xs">
-                    <!-- <h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1  text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3> -->
                 </div> 
                 <div class="row" style="padding: 0px; margin: 20px;">
                 	<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
@@ -369,102 +193,124 @@ $( function() {
                 </div> 
                 
                 <div class="row" style="padding: 0px; margin: 20px;">
-                	<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
-                    <div class="col-md-10 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4">
-                       
-                       
-                      <%-- <div class="g-container--md g-text-center--xs g-padding-y-20--xs">
-				<table class="table table-condensed" cellspacing="0" width="100%" style="border-color: white;" >
-					<thead class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-						<tr class="g-bg-color--dark">
-							<th class="text-center" ><span class="g-color--white g-font-size-18--xs">Fund Name</span></th>
-							<th class="text-center" ><span class="g-color--white g-font-size-18--xs">Unit</span></th>
-							<th class="text-center" ><span class="g-color--white g-font-size-18--xs">Invested Amount</span></th>
-							<th class="text-center" ><span class="g-color--white g-font-size-18--xs">Current Amount</span></th>
-							<th class="text-center" ><span class="g-color--white g-font-size-18--xs">Rate Of Growth</span></th>
-						</tr>
-					</thead>
-					<tbody class="table-body g-bg-color--white" >
-							<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
-								<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-									<s:if test="fundName.equals('Total')">
-									    <td class="g-bg-color--gray-light " >
-									    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
-									    		<button type="button" class="btn btn-link" onClick=""><s:property value="#portfolioDataModelElement.fundName"/></button>
-									    </td>
-									    <td class="g-bg-color--gray-light "><s:property value="#portfolioDataModelElement.units"/></td>
-									    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.investedAmount"/></td>
-									    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.currentAmount"/></td>
-									    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
-									    </s:if>
-									    <s:else>
-									    <td>
-									    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
-									    		<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
-									    </td>
-									    <td ><s:property value="#portfolioDataModelElement.units"/></td>
-									    <td ><s:property value="#portfolioDataModelElement.investedAmount"/></td>
-									    <td ><s:property value="#portfolioDataModelElement.currentAmount"/></td>
-									    <td ><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
-									    </s:else>
-									    
-								</tr>
-							</s:iterator>
-					</tbody>
-	   			</table>
-	   			<div id="dialog" title="Basic dialog" style="display:none;">
-				<div class="row" id="fund-history">
-				<div class="col-md-12" style="margin:20px;">
-					<div class="tab-pane fade-in active" id="investment-details-data-list">
-					<table class="table table-striped table-inverse" >
-						<thead >
-							<tr>
-								<th >Date Of Purchase</th>
-								<th >Units Purchased</th>
-								<th >NAV Purchased</th>
-								<th >Transaction Type</th>
-							</tr>
-						</thead>
-						<tbody  >
-								<s:iterator value="#session.investmentDetailsDataModel" var="investmentDetailsDataModelElement">
-									<tr>
-									    <td ><s:property value="#investmentDetailsDataModelElement.transactionDate"/></td>
-									    <td ><s:property value="#investmentDetailsDataModelElement.units"/></td>
-									    <td ><s:property value="#investmentDetailsDataModelElement.navPurchased"/></td>
-									    <td ><s:property value="#investmentDetailsDataModelElement.transactionType"/></td>
-									</tr>
-								</s:iterator>
-						</tbody>
-		   			</table>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12" style="margin:20px;">
-					<div class="tab-pane fade-in active">
-						<div id="ajaxResponse"></div>
-						<div class="col-md-12">
-							<div id="chart_div" class="chart"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-				</div>  --%>
-                       
-              </div>
+                	<!-- <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
+                    </div> -->
                     
-                  <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
+              <div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4">
+                        <!-- <div class="s-faq g-bg-color--white" style="width:100%;height:60%"> -->
+            <!-- <div class="container g-padding-y-25--xs" > -->
+                <canvas id="canvas" style="position: relative; height:40vh; width:80vw"></canvas>
+          <!--   </div> -->
+      <!--   </div> -->
+        
+                    </div> 
                 </div>
+                
+                
+             <div class="row" style="padding: 0px; margin: 20px;">
+                	<!-- <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
+                    </div> -->
+                    <div class="col-md-6 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+			                  	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
+							<!-- 	<table class=" table table-condensed table-hover  table-striped table-bordered dt-responsive nowrap"> -->
+								<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+									<tr class="g-bg-color--primary">
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
+									</tr>
+								</thead>
+								<tbody >
+										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
+											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
+												<s:if test="fundName.equals('Total')">
+												    <td class="g-bg-color--gray-light " >
+												    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
+												    		<button type="button" class="btn btn-link" onClick=""><s:property value="#portfolioDataModelElement.fundName"/></button>
+												    </td>
+												    <td class="g-bg-color--gray-light "><s:property value="#portfolioDataModelElement.units"/></td>
+												    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.investedAmount"/></td>
+												    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.currentAmount"/></td>
+												    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
+												    </s:if>
+												    <s:else>
+												    <td>
+												    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
+												    		<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>
+												    </td>
+												    <td ><s:property value="#portfolioDataModelElement.units"/></td>
+												    <td ><s:property value="#portfolioDataModelElement.investedAmount"/></td>
+												    <td ><s:property value="#portfolioDataModelElement.currentAmount"/></td>
+												    <td ><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
+												    </s:else>
+												    
+											</tr>
+										</s:iterator>
+								</tbody>
+				   			</table>
+				   			<div id="dialog" title="Basic dialog" style="display:none;">
+							<div class="row" id="fund-history">
+							<div class="col-md-12" style="margin:20px;">
+								<div class="tab-pane fade-in active" id="investment-details-data-list">
+								<table class="table table-striped table-inverse" >
+									<thead >
+										<tr>
+											<th >Date Of Purchase</th>
+											<th >Units Purchased</th>
+											<th >NAV Purchased</th>
+											<th >Transaction Type</th>
+										</tr>
+									</thead>
+									<tbody  >
+											<s:iterator value="#session.investmentDetailsDataModel" var="investmentDetailsDataModelElement">
+												<tr>
+												    <td ><s:property value="#investmentDetailsDataModelElement.transactionDate"/></td>
+												    <td ><s:property value="#investmentDetailsDataModelElement.units"/></td>
+												    <td ><s:property value="#investmentDetailsDataModelElement.navPurchased"/></td>
+												    <td ><s:property value="#investmentDetailsDataModelElement.transactionType"/></td>
+												</tr>
+											</s:iterator>
+									</tbody>
+					   			</table>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+							</div> 
+	              </div>
+                    
+                  	<div class="col-md-1 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
+                    </div>
+                    
+              <div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4 " style=" position: relative; height:70vh;">
+               
+               <div class="g-row-col--5 g-margin-b-2--xs g-margin-b-2--md">
+              
+               <h3>Investment Breakdown</h3>
+               </div>    
+                    
+                        
+        <!-- <div class="s-faq g-bg-color--white">
+            <div class="container g-padding-y-25--xs" style="width:100%;height:60%"> -->
+                <!-- <canvas id="canvas1" style="position: relative; height:40vh; width:80vw"></canvas> -->
+                <canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
+            <!-- </div>
+        </div> --> 
+                    </div> 
+                </div>   
+                
+                
                  
             </div>
         </div>
         <!-- End Counter -->
      
 
-	<div class="g-bg-color--white">
+	<%-- <div class="g-bg-color--white">
 	 		<div class="container ">
 	 		<div class="g-text-center--xs g-margin-b-10--xs">
                     <h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--white  ">Portfolio</h3>
@@ -548,7 +394,7 @@ $( function() {
 			</div>
 		</div>
 				</div>
-			</div>
+			</div> --%>
 
 
         <!--========== FOOTER ==========-->
@@ -651,6 +497,12 @@ $( function() {
          <script src="assets/js/jquery-1.8.2.js" type="text/javascript"></script>
 		 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		 
+		    <!--========== Chart.js scripts ==========-->
+		 <script src="assets/js/jquery-ui.js"></script>
+		 <!-- <script type="text/javascript" src="assets/js/Chart.js"></script> -->
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+		<script type="text/javascript" src="assets/js/ts-chart-script2.js"></script>
         
 
     </body>

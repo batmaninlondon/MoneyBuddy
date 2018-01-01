@@ -33,7 +33,7 @@
 
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
+<body onload="setInitialUpfrontInvestment();">
    <header id="header">
 <!--         <div class="top-bar">
             <div class="container">

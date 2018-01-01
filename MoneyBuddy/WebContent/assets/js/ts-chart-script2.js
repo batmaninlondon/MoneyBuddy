@@ -59,12 +59,13 @@ var TUTORIAL_SAVVY ={
 										data: currentValue
 								}
 							],
-							options: {
+				options: {
 							    legend: {
 							      display: true,
 							      position: 'left',
 							      labels: {
 							        fontColor: "#000080",
+							        maintainAspectRatio: false
 							      }
 							    },
 							    scales: {
@@ -88,6 +89,9 @@ var TUTORIAL_SAVVY ={
 		  scaleShowLabels : false,
 	      pointLabelFontSize : 10
 	});
+	  window.addEventListener('resize', function () {
+      	myLineChart.resize()
+      })
   return myChart;
   },
   
@@ -119,6 +123,9 @@ var TUTORIAL_SAVVY ={
 				backgroundColor : bgColorArray,
 			// hoverBackgroundColor: hoverBgColorArray
 			}, ]
+			
+		
+		
 		};
 	},
 
@@ -129,12 +136,18 @@ var TUTORIAL_SAVVY ={
 			type : 'doughnut',
 			tooltipFillColor : "rgba(51, 51, 51, 0.55)",
 			data : ChartData,
+			options: {
+                maintainAspectRatio: false
+              },
 			legend : {
-				display : false,
+				display : true,
 				position : "right",
 			// labels: {fontColor: 'rgb(255, 99, 132)'},
 			},
 		});
+		window.addEventListener('resize', function () {
+        	myLineChart.resize()
+		 })
 		return myChart;
 	},
   
