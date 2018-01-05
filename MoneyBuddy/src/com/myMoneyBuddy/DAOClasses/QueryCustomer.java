@@ -32,9 +32,11 @@ public class QueryCustomer {
 	
 		try
 		{
+			System.out.println("Email id is : "+emailId);
 			session.beginTransaction();
 			customer = (Customers) session.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
 	
+			System.out.println("customer.getEmailId() : "+customer.getEmailId());
 			//session.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomer method : end");
@@ -146,10 +148,14 @@ public class QueryCustomer {
 		try
 		{
 			session.beginTransaction();
+			System.out.println("HI there 1 + emailID : "+emailId);
 			result = session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
 			
-			if (result != null)
+			if (result != null) {
+				System.out.println("HI there 1"+result.toString());
 				customerId = Integer.parseInt(result.toString());
+			}
+				
 			logger.debug("QueryCustomer class : getCustomerId method : end");
 			return customerId;
 		}

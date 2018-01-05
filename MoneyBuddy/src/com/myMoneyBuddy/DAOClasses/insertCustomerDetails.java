@@ -63,6 +63,7 @@ public class insertCustomerDetails {
     		System.out.println("insertCustomerDetails class : insertCustomer method : emailId : "+emailId);
     		System.out.println("insertCustomerDetails class : insertCustomer method : customerId : "+customerId);
 
+
     		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
     		session.beginTransaction();
     		session.save(tempUserPasswords);

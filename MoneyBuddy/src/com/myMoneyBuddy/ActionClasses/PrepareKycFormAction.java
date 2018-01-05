@@ -73,7 +73,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     	
     	session = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	    //String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
 		//Date date = dateFormat.parse(dob);

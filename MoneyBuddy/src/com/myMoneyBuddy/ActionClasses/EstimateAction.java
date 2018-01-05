@@ -191,7 +191,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	   	    it = productList.entrySet().iterator();
 		   	 while (it.hasNext()) {
 		   		Map.Entry pair = (Map.Entry)it.next();
-		   		System.out.println(pair.getKey() + " = " + pair.getValue()); 
+		   		System.out.println(" Entry in productList : "+pair.getKey() + " = " + pair.getValue()); 
 		   	 }
 	   	 	sessionMap.put("productList", productList);
    	 	

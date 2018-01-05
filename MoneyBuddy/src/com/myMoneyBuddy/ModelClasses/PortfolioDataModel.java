@@ -1,4 +1,4 @@
-package com.myMoneyBuddy.DAOClasses;
+package com.myMoneyBuddy.ModelClasses;
 
 import java.io.Serializable;
 

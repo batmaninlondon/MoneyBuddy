@@ -8,9 +8,9 @@ import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.DashboardDataModel;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.DashboardDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.log4j.Logger;

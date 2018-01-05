@@ -1,13 +1,15 @@
-package com.myMoneyBuddy.DAOClasses;
+package com.myMoneyBuddy.ModelClasses;
 
 import java.io.Serializable;
 
 public class InvestmentDetailsDataModel implements Serializable{
 
+	private String fundName;
 	private String transactionDate;
 	private String units;
 	private String navPurchased;
 	private String transactionType;
+	private String buySell;
 	
 	
 	public InvestmentDetailsDataModel() {
@@ -15,12 +17,24 @@ public class InvestmentDetailsDataModel implements Serializable{
 	}
 
 
-	public InvestmentDetailsDataModel(String transactionDate, String units, String navPurchased, String transactionType) {
+	public InvestmentDetailsDataModel(String fundName, String transactionDate, String units, String navPurchased, String transactionType, String buySell) {
 		super();
+		this.fundName = fundName;
 		this.transactionDate = transactionDate;
 		this.units = units;
 		this.navPurchased = navPurchased;
 		this.transactionType = transactionType;
+		this.buySell = buySell;
+	}
+
+
+	public String getFundName() {
+		return fundName;
+	}
+
+
+	public void setFundName(String fundName) {
+		this.fundName = fundName;
 	}
 
 
@@ -61,6 +75,16 @@ public class InvestmentDetailsDataModel implements Serializable{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+	}
+
+
+	public String getBuySell() {
+		return buySell;
+	}
+
+
+	public void setBuySell(String buySell) {
+		this.buySell = buySell;
 	}
 
 

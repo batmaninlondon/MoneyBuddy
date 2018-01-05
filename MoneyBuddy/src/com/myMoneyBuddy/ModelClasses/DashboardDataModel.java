@@ -2,7 +2,7 @@
  *
  * @author Savita Wadhwani
  */
-package com.myMoneyBuddy.DAOClasses;
+package com.myMoneyBuddy.ModelClasses;
 
 public class DashboardDataModel {
 

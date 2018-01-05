@@ -123,11 +123,18 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	Date frmtDateOfBirth = format.parse(getDateOfBirth());*/ 
     	
     	session = HibernateUtil.getSessionAnnotationFactory().openSession(); 
+    	
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+	    String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
+		Date date = dateFormat.parse(dob);
+		
+		String frmtdDateForDB = dateFormat.format(date);
 	    
-    	Customers customer = new Customers();
+    	/*Customers customer = new Customers();
     	customer.setCustomerId(sessionMap.get("customerId").toString());
     	customer.setCustomerName(getCustomerName());
-    	customer.setDateOfBirth(getDateOfBirth());
+    	customer.setDateOfBirth(frmtdDateForDB);
     	customer.setAddressLineOne(getAddressLineOne());
     	customer.setAddressLineTwo(getAddressLineTwo());
     	customer.setAddressLineThree(getAddressLineThree());
@@ -144,7 +151,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	session.update(customer);
     	
-    	session.getTransaction().commit();
+    	session.getTransaction().commit();*/
     	
 		/*Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
 		
@@ -163,8 +170,6 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		sessionMap.put("customerName", getCustomerName());
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
-		//session.beginTransaction();
-		Query query = session.createQuery("update Customers set kycStatus = :kycStatus where customerId = :customerId");
 		
 		// Savita Wadhwani - We need to update this piece of code with real API - start 
 		
@@ -172,19 +177,44 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		String str;
 		System.out.println(" num1 is : "+num1);
 		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
+		String kycStatus = null;
 		if ( (Integer.parseInt(num1) % 2) != 0) {
-			query.setParameter("kycStatus", "DONE");
+			
+			kycStatus= "DONE";
 			//str = "kycDone";
 			sessionMap.put("kycStatus", "DONE");
 			str = "kycDone";
 		}
 		else {
-			query.setParameter("kycStatus", "NOT DONE");
+			kycStatus = "NOT DONE";
 			//str = "kycNotDone";
 			sessionMap.put("kycStatus", "NOT_DONE");
 			str = "kycNotDone";
 		}
 		// Savita Wadhwani - We need to update this piece of code with real API - end
+		
+		session.beginTransaction();
+		Query query = session.createQuery("update Customers set kycStatus = :kycStatus , customerName = :customerName , dateOfBirth = :dateOfBirth ,"
+				+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
+				+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
+				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation , "
+				+ "panCard = :panCard where customerId = :customerId");
+		
+		query.setParameter("customerName", getCustomerName());
+		query.setParameter("dateOfBirth", frmtdDateForDB);
+		query.setParameter("addressLineOne", getAddressLineOne());
+		query.setParameter("addressLineTwo", getAddressLineTwo());
+		query.setParameter("addressLineThree", getAddressLineThree());
+		query.setParameter("residentialCity", getResidentialCity());
+		query.setParameter("residentialState", getResidentialState());
+		query.setParameter("residentialCountry", getResidentialCountry());
+		query.setParameter("residentialPin", getResidentialPin());
+		query.setParameter("taxStatus", getTaxStatus());
+		query.setParameter("gender", getGender());
+		query.setParameter("occupation", getOccupation());
+		query.setParameter("panCard", getPanCard());
+		query.setParameter("kycStatus", kycStatus);
+
 		
 
 		query.setParameter("customerId", sessionMap.get("customerId").toString());

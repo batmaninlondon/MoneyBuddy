@@ -13,6 +13,7 @@
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/datepicker.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -24,6 +25,7 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
     <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
@@ -34,6 +36,23 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 
+	<style type="text/css">
+		.ui-datepicker {
+		   background: #333;
+		   border: 1px solid #555;
+		   color: #EEE;
+		   width:200px;
+		   heigth:300px;
+		 }
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$('.datepicker').datepicker({
+				dateFormat: "yy-mm-dd"
+				
+			});
+		});
+	</script>
 </head>
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
@@ -507,8 +526,8 @@
 
 
 
-		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<%-- 		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script> --%>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>

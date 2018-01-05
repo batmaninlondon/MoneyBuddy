@@ -5,14 +5,14 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.DbfStatusDataModel;
-import com.myMoneyBuddy.DAOClasses.PortfolioDataModel;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
+import com.myMoneyBuddy.ModelClasses.DbfStatusDataModel;
+import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 

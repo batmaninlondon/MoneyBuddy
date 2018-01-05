@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.DAOClasses.PortfolioDataModel;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
+import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
+import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 
 	private List<PortfolioDataModel> portfolioDataModel;
+	private List<SipDataModel> sipDataModel;
 	
 	// Savita Wadhwani - Added this for chart testing - start 
 	private List<PortfolioDataModel> newPortfolioDataModel;
@@ -34,6 +36,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
 	
 	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
+	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
 	
 	private InputStream stream;
 
@@ -52,6 +55,15 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		portfolioDataModel = queryProducts.getPortfolioData(session.get("customerId").toString());
 		setPortfolioDataModel(portfolioDataModel);
 		
+		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
+			if ("Total".equals(portfolioDataModelElement.getFundName())) {
+				session.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
+				logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+session.getClass().getName());
+				session.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
+				logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+session.getClass().getName());
+			}
+		}
+		
 		// Savita Wadhwani - Added this for chart testing - start 
 		newPortfolioDataModel = portfolioDataModel;
 		setNewPortfolioDataModel(newPortfolioDataModel);
@@ -60,6 +72,14 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		//session.put("portfolioDataModel", null);
 		session.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+session.getClass().getName());
+		
+		sipDataModel = queryProducts.getSipData(session.get("customerId").toString());
+		setSipDataModel(sipDataModel);
+
+		
+		//session.put("portfolioDataModel", null);
+		session.put("sipDataModel", sipDataModel);
+		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+session.getClass().getName());
 
 		String productName = null;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
@@ -78,6 +98,14 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		System.out.println("Size of investmentDetailsDataModel : "+investmentDetailsDataModel.size());
 		
 		// Savita Wadhwani - Added this for chart testing - end
+		
+		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(session.get("customerId").toString());
+		setAllFundsInvestmentDetailsDataModel(allFundsInvestmentDetailsDataModel);
+		
+		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
+		
+		session.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
+		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+session.getClass().getName());
 		
 		for (String key : investmentDetailsDataModelList.keySet())  {
 			System.out.println("key : "+key);
@@ -137,6 +165,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
+	}
+
+
+	public List<SipDataModel> getSipDataModel() {
+		return sipDataModel;
+	}
+
+
+	public void setSipDataModel(List<SipDataModel> sipDataModel) {
+		this.sipDataModel = sipDataModel;
 	}
 
 
@@ -206,6 +244,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> investmentDetailsDataModel) {
 		this.investmentDetailsDataModel = investmentDetailsDataModel;
+	}
+
+
+	public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsDataModel() {
+		return allFundsInvestmentDetailsDataModel;
+	}
+
+
+	public void setAllFundsInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel) {
+		this.allFundsInvestmentDetailsDataModel = allFundsInvestmentDetailsDataModel;
 	}
 
 

@@ -173,6 +173,9 @@ public class Trading {
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
+		finally {
+			session.close();
+		}
 
 	}
 	

@@ -164,7 +164,7 @@
                              <h4 class="g-font-size-18--xs  ti-bar-chart g-margin-b-10--xs  g-text-left--xs g-margin-t-20--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
                              <div >
                                 <span class="g-font-size-60--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-100--xs g-font-family--brandonText js__counter" style="line-height: 1;">500</figure>
+                                <figure class="g-display-inline-block--xs g-font-size-60--xs g-font-family--brandonText js__counter" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
                             </div>
                         </div>
                     </div>
@@ -175,12 +175,12 @@
                              <h4 class="g-font-size-18--xs ti-pulse g-margin-b-10--xs g-text-left--xs g-margin-t-20--xs font-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
                              <div >
                                 <span class="g-font-size-60--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-100--xs g-font-family--brandonText  js__counter" style="line-height: 1;">40</figure>
+                                <figure class="g-display-inline-block--xs g-font-size-60--xs g-font-family--brandonText  js__counter" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
                                  <div class="tooltipOuter">
                                 <div class="tooltipInner"></div>
                                 </div>
                                  <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;!&nbsp;</span>
-                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--primary">&nbsp;&nbsp;10% </span>
+                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--primary">&nbsp;&nbsp; </span>
                             </div>
                         </div>
                     </div>
@@ -251,6 +251,7 @@
 										</s:iterator>
 								</tbody>
 				   			</table>
+
 				   			<div id="dialog" title="Basic dialog" style="display:none;">
 							<div class="row" id="fund-history">
 							<div class="col-md-12" style="margin:20px;">
@@ -282,6 +283,71 @@
 					</div>
 							</div> 
 	              </div>
+	              
+	              <!-- Added Table for SIP - start  -->
+	              
+	                                  <div class="col-md-6 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+			                  	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
+							<!-- 	<table class=" table table-condensed table-hover  table-striped table-bordered dt-responsive nowrap"> -->
+								<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+									<tr class="g-bg-color--primary">
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Start Date</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Next Sip Date</span></th>
+									</tr>
+								</thead>
+								<tbody >
+										<s:iterator value="#session.sipDataModel" var="sipDataModelElement">
+											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
+												    <td ><s:property value="#sipDataModelElement.fundName"/></td>
+												    <td ><s:property value="#sipDataModelElement.investedAmount"/></td>
+												    <td ><s:property value="#sipDataModelElement.sipStartDate"/></td>
+												    <td ><s:property value="#sipDataModelElement.nextSipDate"/></td>
+    
+											</tr>
+										</s:iterator>
+								</tbody>
+				   			</table>
+
+							</div> 
+	              </div>
+	              
+	              <!-- Added Table for SIP - end  -->
+	              
+	              <!-- Added Table for Investment History - start -->
+	              
+	              	                                  <div class="col-md-6 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+			                  	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
+							<!-- 	<table class=" table table-condensed table-hover  table-striped table-bordered dt-responsive nowrap"> -->
+								<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+									<tr class="g-bg-color--primary">
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">NAV</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
+									</tr>
+								</thead>
+								<tbody >
+										<s:iterator value="#session.allFundsInvestmentDetailsDataModel" var="allFundsElement">
+											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
+												    <td ><s:property value="#allFundsElement.fundName"/></td>
+												    <td ><s:property value="#allFundsElement.transactionDate"/></td>
+												    <td ><s:property value="#allFundsElement.units"/></td>
+												    <td ><s:property value="#allFundsElement.navPurchased"/></td>
+    												<td ><s:property value="#allFundsElement.buySell"/></td>
+											</tr>
+										</s:iterator>
+								</tbody>
+				   			</table>
+
+							</div> 
+	              </div>
+	              
+	              <!-- Added Table for Investment History - end -->
                     
                   	<div class="col-md-1 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
                     </div>
