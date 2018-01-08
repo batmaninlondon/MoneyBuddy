@@ -65,7 +65,8 @@
                         <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
                         <li id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
                         <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
-                        <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> 
+                        <!-- <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> -->
+                        <li id="header-nav-li"><a href="javascript:getMfData()"><b>Funds</b></a></li> 
                         <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 

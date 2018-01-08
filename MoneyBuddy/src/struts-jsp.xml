@@ -27,6 +27,11 @@
 	    	<result>/startSip.jsp</result>
 		</action>
 	</package>
+	<package name="allFunds" namespace="/" extends="struts-default">
+	    <action name="allFunds">
+	    	<result>/allFunds.jsp</result>
+		</action>
+	</package>
 	<package name="additionalCustomerDetails" namespace="/" extends="struts-default">
 	    <action name="additionalCustomerDetails">
 	    	<result>/additionalCustomerDetails.jsp</result>

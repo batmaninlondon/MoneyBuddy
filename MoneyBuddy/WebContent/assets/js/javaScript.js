@@ -877,6 +877,43 @@ function setDashboardData()
     }); 
 }
 
+function getMfData() 
+{
+	// alert ("calling fun !! ");
+	$.ajax({
+
+        url : "fetchFundDetailsAction",
+        type: 'post',
+
+        data: {},
+        
+        success : function(result){
+        	
+        	if (result == "success") {
+        		window.location='allFunds';
+        		//alert('got success!!');
+        		//$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
+        		/*setTimeout(function(){
+        			//document.getElementById("please-wait-msg").style.display = "none";
+        			
+            		//document.getElementById("dashboard").style.display = "block";	
+
+        		}, 10000); */
+        		//alert(' HI Func completed successfully !! ');
+        		
+        		// do nothing
+        	}
+        	else {
+        		/*alert('Inside resetPassword error !!');*/
+        		window.location='errorPage';
+        	}
+
+        	//alert("in here vivekkk");
+        },
+
+    }); 
+}
+
 function setInitialSipInvestment() 
 {
 	document.getElementById("submit-button-1").disabled = false;
