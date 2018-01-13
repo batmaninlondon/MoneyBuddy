@@ -17,9 +17,19 @@
 	    	<result>/aboutUs.jsp</result>
 		</action>
 	</package>
+	<package name="ongoingSips" namespace="/" extends="struts-default">
+	    <action name="ongoingSips">
+	    	<result>/ongoingSips.jsp</result>
+		</action>
+	</package>
 	<package name="startSip" namespace="/" extends="struts-default">
 	    <action name="startSip">
 	    	<result>/startSip.jsp</result>
+		</action>
+	</package>
+	<package name="allFunds" namespace="/" extends="struts-default">
+	    <action name="allFunds">
+	    	<result>/allFunds.jsp</result>
 		</action>
 	</package>
 	<package name="additionalCustomerDetails" namespace="/" extends="struts-default">

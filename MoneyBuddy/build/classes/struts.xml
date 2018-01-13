@@ -49,6 +49,42 @@
   			<result name="input" type="dispatcher">/newErrorPage.jsp</result>
         </action>
     </package>
+    
+    <package name="FetchFundDetailsAction" namespace="/" extends="struts-default">
+        <action name="fetchFundDetailsAction" class="com.myMoneyBuddy.ActionClasses.FetchFundDetailsAction">
+           <!--  <result name="success">/ThankYouForPasswordReset.jsp</result>
+            <result name="input">/forgottenPassword.jsp</result> -->
+            <result type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">stream</param>
+  			</result>
+  			<result name="input" type="dispatcher">/newErrorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="GeneratePackageAction" namespace="/" extends="struts-default">
+        <action name="generatePackageAction" class="com.myMoneyBuddy.ActionClasses.GeneratePackageAction">
+           <!--  <result name="success">/ThankYouForPasswordReset.jsp</result>
+            <result name="input">/forgottenPassword.jsp</result> -->
+            <result type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">stream</param>
+  			</result>
+  			<result name="input" type="dispatcher">/newErrorPage.jsp</result>
+        </action>
+    </package>
+    
+   	<package name="BuyFundAction" namespace="/" extends="struts-default">
+        <action name="buyFundAction" class="com.myMoneyBuddy.ActionClasses.BuyFundAction">
+           <!--  <result name="success">/ThankYouForPasswordReset.jsp</result>
+            <result name="input">/forgottenPassword.jsp</result> -->
+            <result type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">stream</param>
+  			</result>
+  			<result name="input" type="dispatcher">/newErrorPage.jsp</result>
+        </action>
+    </package>
  
      <!-- <package name="portfolioAction" namespace="/" extends="struts-default">
         <action name="portfolioAction" class="com.myMoneyBuddy.ActionClasses.PortfolioAction">
@@ -74,17 +110,17 @@
         </action>
     </package>   
     
-    <!-- <package name="ongoingSipListAction" namespace="/" extends="struts-default">
+    <package name="ongoingSipListAction" namespace="/" extends="struts-default">
         <action name="ongoingSipListAction" class="com.myMoneyBuddy.ActionClasses.OngoingSipListAction">
-            <result name="success">/ThankYouForPasswordReset.jsp</result>
-            <result name="input">/forgottenPassword.jsp</result>
+           <!--  <result name="success">/ThankYouForPasswordReset.jsp</result>
+            <result name="input">/forgottenPassword.jsp</result> -->
             <result type="stream">
     			<param name="contentType">text/html</param>
     			<param name="inputName">stream</param>
   			</result>
   			<result name="input" type="dispatcher">/newErrorPage.jsp</result>
         </action>
-    </package>  -->
+    </package> 
     
     
             
