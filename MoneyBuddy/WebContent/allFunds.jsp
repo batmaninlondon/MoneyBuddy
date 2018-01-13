@@ -42,7 +42,7 @@
     <!-- End Head -->
 
     <!-- Body -->
-    <body onload="getMFDetails()">
+    <body >
 <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
@@ -132,86 +132,61 @@
                  
             
                 <!-- ITEM 1 -->
-                <div class="s-portfolio__item cbp-item motion graphic">
-                    <div class="s-portfolio__img-effect">
-                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
-		                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
-		                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2">News</p>
-		                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><a href="http://keenthemes.com/">Create Something Great.</a></h3>
-		                            <p>The time has come to bring those ideas and plans to life.</p>
+                <s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
+		                <div class="s-portfolio__item cbp-item motion graphic">
+		                    <div class="s-portfolio__img-effect">
+		                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
+				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
+				                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2"> <s:property value="#fundDetailsDataModelElement.fundId"/> . <s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><s:property value="#fundDetailsDataModelElement.sector"/></h3>
+				                          	<p class="g-text-left--xs "><s:property value="#fundDetailsDataModelElement.subSector"/></p>
+				                            <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
+				                            <p class="g-text-left--xs ">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
+				                            <p class="g-text-left--xs ">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
+				                            <p class="g-text-left--xs ">3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
+				                            <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
+				                            <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
+				                            <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+				                        </div>
+		                    </div>
+		                    <div class="s-portfolio__caption-hover--cc">
+		                        <div class="g-margin-b-25--xs">
+		                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
+		                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
 		                        </div>
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                           		<br/>
-                           		<br/>
-                                 <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                            <li>
+		                            <s:set var="sector" value="#fundDetailsDataModelElement.sector" />
+		                            <s:if test="sector.equals('Equity')">
+		                                <a href="images/portfolio/recent/slide/Slide1.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
+		                             </s:if>
+		                             <s:else>
+		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
+		                             
+									 </s:else>       
+		                                    
+		                                    
+		                           		<br/>
+		                           		<br/>
+		                                 <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+                 </s:iterator>
                 <!-- End ITEM -->
-                
+               
 	              
-	           <div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
-                  	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-							
-							<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-									<tr class="g-bg-color--primary">
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Name</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sector</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sub Sector</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Start Date</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Rating</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Risk</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">3 Years Returns</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Sip Amount</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Sip Duration</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Lumsum Amount</span></th>
-									</tr>
-								</thead>
-								<tbody >
-										<s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
-											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-												    <td >
-												    	<button type="button" class="btn btn-link" onClick="buyFundHandler(this);">
-												    		<s:property value="#fundDetailsDataModelElement.fundId"/>
-												    	</button>
-												    </td>
-												    <td ><s:property value="#fundDetailsDataModelElement.fundName"/></td>
-												    <td ><s:property value="#fundDetailsDataModelElement.sector"/></td>
-												    <td ><s:property value="#fundDetailsDataModelElement.subSector"/></td>
-    												<td ><s:property value="#fundDetailsDataModelElement.fundStartDate"/></td>
-    												<td ><s:property value="#fundDetailsDataModelElement.rating"/></td>
-												    <td ><s:property value="#fundDetailsDataModelElement.risk"/></td>
-												    <td ><s:property value="#fundDetailsDataModelElement.returnsThreeYears"/></td>
-												    <td ><s:property value="#fundDetailsDataModelElement.minSipAmount"/></td>
-    												<td ><s:property value="#fundDetailsDataModelElement.minSipDuration"/></td>
-    												<td ><s:property value="#fundDetailsDataModelElement.minLumsumAmount"/></td>
-											</tr>
-										</s:iterator>
-								</tbody>
-				   			</table>
-
-						</div> 
-	              </div>
+	           
                 
             </div>
             <!-- End Portfolio Gallery -->
         </div>
         <!-- End Portfolio -->
-        
-        
         
         
 
@@ -310,7 +285,6 @@
         <script type="text/javascript" src="js/components/parallax.min.js"></script>
         <script type="text/javascript" src="js/components/google-map.min.js"></script>
         <script type="text/javascript" src="js/components/wow.min.js"></script>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
 
     </body>

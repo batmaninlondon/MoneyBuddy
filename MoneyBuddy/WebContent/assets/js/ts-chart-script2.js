@@ -38,11 +38,14 @@ var TUTORIAL_SAVVY ={
 	  var currentValue =[];
 	  
 	  for(var i = 0; i < jsonData.length; i++) {
-		    var obj = jsonData[i];
-		    console.log(obj[0]);
-		    funds.push(obj[0]);
-		    investedValue.push(obj[2]);
-		    currentValue.push(obj[3]);
+		  var obj = jsonData[i];
+		  if(obj[0]!="Total")
+			  {	
+			    console.log(obj[0]);
+			    funds.push(obj[0]);
+			    investedValue.push(obj[2]);
+			    currentValue.push(obj[3]);
+			   }
 		}
 	 
 	  return {
@@ -105,15 +108,18 @@ var TUTORIAL_SAVVY ={
 
 		for (var i = 0; i < jsonData.length; i++) {
 			var obj = jsonData[i];
-			funds.push(obj[0]);
-			currentValue.push(obj[3]);
-			var bgClrIndex = 0;
-			if (i > 6) {
-				bgClrIndex = i - 6;
-
-			} else
-				(bgClrIndex = i);
-			bgColorArray.push(colors[bgClrIndex]);
+			if(obj[0]!="Total")
+			{
+				funds.push(obj[0]);
+				currentValue.push(obj[3]);
+				var bgClrIndex = 0;
+				if (i > 6) {
+					bgClrIndex = i - 6;
+	
+				} else
+					(bgClrIndex = i);
+				bgColorArray.push(colors[bgClrIndex]);
+			}
 		}
 
 		return {
