@@ -176,14 +176,18 @@
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Risk</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">3 Years Returns</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Sip Amount</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Sip Years</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Sip Duration</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Min Lumsum Amount</span></th>
 									</tr>
 								</thead>
 								<tbody >
 										<s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
 											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-												    <td ><s:property value="#fundDetailsDataModelElement.fundId"/></td>
+												    <td >
+												    	<button type="button" class="btn btn-link" onClick="buyFundHandler(this);">
+												    		<s:property value="#fundDetailsDataModelElement.fundId"/>
+												    	</button>
+												    </td>
 												    <td ><s:property value="#fundDetailsDataModelElement.fundName"/></td>
 												    <td ><s:property value="#fundDetailsDataModelElement.sector"/></td>
 												    <td ><s:property value="#fundDetailsDataModelElement.subSector"/></td>
@@ -192,7 +196,7 @@
 												    <td ><s:property value="#fundDetailsDataModelElement.risk"/></td>
 												    <td ><s:property value="#fundDetailsDataModelElement.returnsThreeYears"/></td>
 												    <td ><s:property value="#fundDetailsDataModelElement.minSipAmount"/></td>
-    												<td ><s:property value="#fundDetailsDataModelElement.minSipYears"/></td>
+    												<td ><s:property value="#fundDetailsDataModelElement.minSipDuration"/></td>
     												<td ><s:property value="#fundDetailsDataModelElement.minLumsumAmount"/></td>
 											</tr>
 										</s:iterator>
@@ -306,6 +310,7 @@
         <script type="text/javascript" src="js/components/parallax.min.js"></script>
         <script type="text/javascript" src="js/components/google-map.min.js"></script>
         <script type="text/javascript" src="js/components/wow.min.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
 
     </body>

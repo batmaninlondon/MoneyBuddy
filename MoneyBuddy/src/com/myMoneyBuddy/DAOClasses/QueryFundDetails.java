@@ -73,7 +73,7 @@ public class QueryFundDetails {
 				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
 						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
-						fundDetailsListElement.getMinSipYears()));
+						fundDetailsListElement.getMinSipDuration()));
 			}
 
 			//session.getTransaction().commit();

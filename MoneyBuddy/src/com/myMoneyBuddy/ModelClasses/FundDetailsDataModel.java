@@ -14,7 +14,7 @@ public class FundDetailsDataModel implements Serializable{
 	private String returnsThreeYears;
 	private String minSipAmount;
 	private String minLumsumAmount;
-	private String minSipYears;
+	private String minSipDuration;
 	
 	
 	public FundDetailsDataModel() {
@@ -24,7 +24,7 @@ public class FundDetailsDataModel implements Serializable{
 
 	public FundDetailsDataModel(String fundId, String fundName, String sector, String subSector, String fundStartDate,
 			String rating, String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount,
-			String minSipYears) {
+			String minSipDuration) {
 		super();
 		this.fundId = fundId;
 		this.fundName = fundName;
@@ -36,7 +36,7 @@ public class FundDetailsDataModel implements Serializable{
 		this.returnsThreeYears = returnsThreeYears;
 		this.minSipAmount = minSipAmount;
 		this.minLumsumAmount = minLumsumAmount;
-		this.minSipYears = minSipYears;
+		this.minSipDuration = minSipDuration;
 	}
 
 
@@ -140,14 +140,16 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
-	public String getMinSipYears() {
-		return minSipYears;
+	public String getMinSipDuration() {
+		return minSipDuration;
 	}
 
 
-	public void setMinSipYears(String minSipYears) {
-		this.minSipYears = minSipYears;
+	public void setMinSipDuration(String minSipDuration) {
+		this.minSipDuration = minSipDuration;
 	}
+
+
 
 
 

@@ -53,8 +53,8 @@ public class FundDetails {
     @Column(name="MIN_LUMSUM_AMOUNT")
     private String minLumsumAmount;
     
-    @Column(name="MIN_SIP_YEARS")
-    private String minSipYears;
+    @Column(name="MIN_SIP_DURATION")
+    private String minSipDuration;
 
 
     public FundDetails() {
@@ -64,7 +64,7 @@ public class FundDetails {
 
 
 	public FundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipYears) {
+			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration) {
 		super();
 		this.fundName = fundName;
 		this.sector = sector;
@@ -75,7 +75,7 @@ public class FundDetails {
 		this.returnsThreeYears = returnsThreeYears;
 		this.minSipAmount = minSipAmount;
 		this.minLumsumAmount = minLumsumAmount;
-		this.minSipYears = minSipYears;
+		this.minSipDuration = minSipDuration;
 	}
 
 
@@ -200,14 +200,15 @@ public class FundDetails {
 
 
 
-	public String getMinSipYears() {
-		return minSipYears;
+
+	public String getMinSipDuration() {
+		return minSipDuration;
 	}
 
 
 
-	public void setMinSipYears(String minSipYears) {
-		this.minSipYears = minSipYears;
+	public void setMinSipDuration(String minSipDuration) {
+		this.minSipDuration = minSipDuration;
 	}
 
 
@@ -252,7 +253,7 @@ public class FundDetails {
         if ((this.minLumsumAmount == null) ? (other.minLumsumAmount != null) : !this.minLumsumAmount.equals(other.minLumsumAmount)) {
             return false;
         }
-        if ((this.minSipYears == null) ? (other.minSipYears != null) : !this.minSipYears.equals(other.minSipYears)) {
+        if ((this.minSipDuration == null) ? (other.minSipDuration != null) : !this.minSipDuration.equals(other.minSipDuration)) {
             return false;
         }
         return true;
@@ -271,7 +272,7 @@ public class FundDetails {
         hash = 83 * hash + (this.returnsThreeYears != null ? this.returnsThreeYears.hashCode() : 0);
         hash = 83 * hash + (this.minSipAmount != null ? this.minSipAmount.hashCode() : 0);
         hash = 83 * hash + (this.minLumsumAmount != null ? this.minLumsumAmount.hashCode() : 0);
-        hash = 83 * hash + (this.minSipYears != null ? this.minSipYears.hashCode() : 0);
+        hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
         return hash;
     }
     

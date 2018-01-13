@@ -48,7 +48,7 @@
 </head>
 
 <body class="homepage bg-warning"
-	onload="showNewUpfrontInvestment('4000');">
+	onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmt"/>');">
 	<header id="header">
 		<nav class="navbar navbar-inverse" role="banner">
 			<div class="container">
@@ -115,8 +115,10 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="range" type="range" min="2000" max="150000" step="500"
-							value="4000" onchange="showNewUpfrontInvestment(this.value)" />
+						<!-- <input id="range" type="range" min="2000" max="150000" step="500"
+							value="4000" onchange="showNewUpfrontInvestment(this.value)" /> -->
+						<input id="range" type="range" min="<s:property value="#session.minLumsumAmt"/>" max="150000" step="500"
+							value="<s:property value="#session.minLumsumAmt"/>" onchange="showNewUpfrontInvestment(this.value)"/>
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">

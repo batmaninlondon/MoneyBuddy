@@ -103,6 +103,9 @@ public class QueryProducts {
 	public HashMap<String,Double> getProductList(String riskCategory,String planName) throws MoneyBuddyException{
 
 		Session session = null;
+		Double minLumsumAmount = 0.0;
+		Double minSipAmount = 0.0;
+		int minSipDuration = 0;
 		
 		try
 		{		
@@ -124,7 +127,29 @@ public class QueryProducts {
 				System.out.println(" productName : "+productDetail.getProductDescription());
 				System.out.println("Percentage : "+productDetail.getPercentage());
 				hashMap.put(productDetail.getProductDescription(),Double.parseDouble(productDetail.getPercentage()));
+				
+				query = session.createQuery("select minLumsumAmount from FundDetails where fundId = :fundId");
+		    	
+		    	query.setParameter("fundId", productDetail.getProductId());
+		    	minLumsumAmount += Double.parseDouble(query.uniqueResult().toString()); 
+		    	
+		    	query = session.createQuery("select minSipAmount from FundDetails where fundId = :fundId");
+		    	
+		    	query.setParameter("fundId", productDetail.getProductId());
+		    	minSipAmount += Double.parseDouble(query.uniqueResult().toString()); 	
+
+		    	
+		    	query = session.createQuery("select minSipDuration from FundDetails where fundId = :fundId");
+		    	
+		    	query.setParameter("fundId", productDetail.getProductId());
+		    	if (minSipDuration < Integer.parseInt(query.uniqueResult().toString()))
+		    		minSipDuration = Integer.parseInt(query.uniqueResult().toString()); 
+		    	
 			}
+			
+			hashMap.put("minLumsumAmount", minLumsumAmount);
+			hashMap.put("minSipAmount", minSipAmount);
+			hashMap.put("minSipDuration", (double)minSipDuration);
 			//session.getTransaction().commit();
 
 

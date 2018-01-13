@@ -47,7 +47,7 @@
 
 </head>
 
-<body class="homepage bg-warning" onLoad="fillSipData();">
+<body class="homepage bg-warning" onLoad="fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');">
 	<header id="header">
 		<nav class="navbar navbar-inverse" role="banner">
 			<div class="container">
@@ -114,8 +114,8 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="sip-amount-range" type="range" min="500" max="25000" step="500"
-							value="2000" onchange="showSipAmountPerMonth(this.value)" />
+						<input id="sip-amount-range" type="range" min="<s:property value="#session.minSipAmount"/>" max="25000" step="500"
+							value="<s:property value="#session.minSipAmount"/>" onchange="showSipAmountPerMonth(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">
@@ -140,8 +140,8 @@
 				<div class="col-md-2"></div>
 				<div>
 					<div class="col-md-6">
-						<input id="sip-duration-range" type="range" min="1" max="50" step="1"
-							value="3" onchange="showDuration(this.value)" />
+						<input id="sip-duration-range" type="range" min="<s:property value="#session.minSipDuration"/>" max="50" step="1"
+							value="<s:property value="#session.minSipDuration"/>" onchange="showDuration(this.value)" />
 					</div>
 					<div class="col-md-2"></div>
 					<div class="underline small-text col-md-2"  style="padding:1px;margin-left:20px;margin-top:-10px;">

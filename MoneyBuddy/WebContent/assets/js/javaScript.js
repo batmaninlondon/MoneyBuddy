@@ -123,6 +123,34 @@ function fundDetailHandler(el) {
 	    
 	  }
 
+function buyFundHandler(el) {
+
+	alert('function called !!');
+    var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
+
+    alert ('selectedItem : fund id : '+selectedItem);
+    $.ajax({
+        url : "buyFundAction",
+        type: 'post',
+        
+        data: { 'fundId' : selectedItem  },
+          
+        success : function(result){
+        	
+        	if (result == "success") {
+        		window.location='investmentStyle';
+        	}
+        	else {
+        		window.location='errorPage';
+        	}
+
+        }
+    });
+    
+    
+  }
+
+
 function downloadDbfFile(el)
 {
 	/*alert('showPLan function called !! ');*/
@@ -164,10 +192,10 @@ document.getElementById("investedAmount").innerHTML=newValue;
 newUpdate();
 }
 
-function fillSipData()
+function fillSipData(minSipAmt,minSipDur)
 {
-	document.getElementById("sip-duration").innerHTML='3';
-	showSipAmountPerMonth('2000');
+	document.getElementById("sip-duration").innerHTML=minSipDur;
+	showSipAmountPerMonth(minSipAmt);
 	
 }
 function showSipAmountPerMonth(newValue)
@@ -1307,6 +1335,35 @@ function login() {
     });	
 }
 
+function generatePackage() {
+
+	alert('generatePackage func called !! ');
+
+$.ajax({
+
+    url : "generatePackageAction",
+    type: 'post',
+    
+    data: {},
+    
+    success : function(result){
+    	
+    	/*alert('result : '+result);*/
+    	
+    	if (result == "success") {
+    		/*alert('login success !! ');*/
+    		window.location='investmentStyle';
+    	}
+    	else {
+    		/*alert('Inside login error !!');*/
+    		window.location='errorPage';
+    	}
+
+    },
+});	
+}
+
+
 function register() {
 	
 	/*alert('register function called !! ');*/
@@ -1903,7 +1960,22 @@ function testDummyEkyc () {
 	  '<input type="hidden" name="kyc_data" value="' + kycdatatext + '" />' +
 	  '</form>');
 	$('body').append(form);
+	alert ('submitting for !');
 	form.attr('target', '_top').submit();
+	
+/*	
+	form.attr('target', '_top').submit(function(){
+	    $.ajax({
+	      url: $('#form'),
+	      type: 'POST',
+	      data : $('#form').serialize(),
+	      success: function(){
+	        alert('form submitted.');
+	      }
+	    });
+	    return false;
+	});*/
+	
 	
 	
 /*	$.ajax({

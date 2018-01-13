@@ -93,7 +93,16 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	    	QueryProducts queryProduct = new QueryProducts();
 	    	System.out.println("EstimateAction class : execute method : riskCategory : "+getRiskCategory());
 	    	System.out.println("EstimateAction class : execute method : planName : "+getPlanName());
-	   	 	HashMap<String,Double> productList = queryProduct.getProductList(getRiskCategory(),getPlanName());
+	    	
+	    	// Changes to generate productList at the click of "try it out" button in myIndex page - start
+	    	
+	   	 	//HashMap<String,Double> productList = queryProduct.getProductList(getRiskCategory(),getPlanName());
+	    	
+	    	HashMap<String,Double> productRatioList =  (HashMap<String,Double>)sessionMap.get("productRatioList");
+	    	
+	    	HashMap<String,Double> productList = new HashMap<String,Double>();
+	    			
+	    	// Changes to generate productList at the click of "try it out" button in myIndex page - end
 	   	 	
 	    	//System.out.println("FetchProductListAction Hi There 1 ");
 	   	 
@@ -178,13 +187,15 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     	    
     	    System.out.println("EstimateAction class : execute method : end : transactionType : "+sessionMap.get("transactionType").toString());
 
-	   	    Iterator it = productList.entrySet().iterator();
+	   	    Iterator it = productRatioList.entrySet().iterator();
 	   	    String productName;
 	   	    String key;
 	   	    while (it.hasNext()) {
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        Double amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(totalInvestment) ) /100);
-	   	        pair.setValue(amount);
+	   	        //pair.setValue(amount);
+	   	        
+	   	        productList.put(pair.getKey().toString(), amount);
 
 	   	        
 	   	    }
