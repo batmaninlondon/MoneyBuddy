@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>About Us | Money Buddy</title>
+    <title>About Us latest | Money Buddy</title>
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
