@@ -35,79 +35,42 @@
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     </head>
 
-<body class="profile-page">
+<body style="background-color:#cecece">
     
-    <div class="s-header-v2__logo">
-                                <a href="nhome.jsp" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-dark.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-red-dark.png" alt="Dublin Logo">
-                                </a>
-                            </div>
-
-    <div class="wrapper">
-		<div class="header header-filter" style="height: 10px;"></div>
-		<div class="main main-raised">
-			<div class="profile-content">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="profile">
-	                        
-	                        <div class="name">
-	                            <h3 class="title">Christian Louboutin</h3>
-								<h6>Designer</h6>
-	                        </div>
-	                    </div>
-	                </div>
-                    
-                    
-	                
-
-					<br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                   
-
+   <div class="container ">
+   		<a href="nhome.jsp" class="s-header-v2__logo-link">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+		</a>
+	</div>
+	<br/>
+	<br/>
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--dark ">
+	    	<div class="profile">
+	        	<div class="name">
+	                	<h3 class="title g-color--white">Christian Louboutin</h3>
+						<h6>Designer</h6>
 	            </div>
-	        </div>
-		</div>
-
-    </div>
-    <footer class="footer">
-        <div class="container">
-            <nav class="pull-left">
-				<ul>
-					<li>
-						<a href="http://www.creative-tim.com">
-							Creative Tim
-						</a>
-					</li>
-					<li>
-						<a href="http://presentation.creative-tim.com">
-						   About Us
-						</a>
-					</li>
-					<li>
-						<a href="http://blog.creative-tim.com">
-						   Blog
-						</a>
-					</li>
-					<li>
-						<a href="http://www.creative-tim.com/license">
-							Licenses
-						</a>
-					</li>
-				</ul>
-            </nav>
-            <div class="copyright pull-right">
-                &copy; 2016, made with <i class="fa fa-heart heart"></i> by Creative Tim
-            </div>
-        </div>
-    </footer>
-
+	       	</div>
+	     </div>
+	     <div class="col-md-1 col-xs-1"></div>
+	</div>
+	<div class="row" >
+		<div class="col-md-1 col-xs-1" style="height:500px"></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--white " style="height:500px">
+	    	<div class="profile">
+	        	<div class="name">
+	                	<h3 class="title">Christian Louboutin</h3>
+						<h6>Designer</h6>
+						<br/>
+						
+	            </div>
+	       	</div>
+	     </div>
+	     <div class="col-md-1 col-xs-1" style="height:500px"></div>
+	</div>
 
 </body>
 	

@@ -132,6 +132,8 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Give your money<br>A chance to grow</h1>
+                            
+                            
 	                            <!-- <div id="intro" >
 							<div class="container">
 									<div class="table">
@@ -146,20 +148,29 @@
 				</div> -->
                             
                         </div>
-                        <a class="js__popup__youtube" href="https://www.youtube.com/watch?v=lcFYdgZKZxY" title="Intro Video">
-                            <i class="s-icon s-icon--lg s-icon--white-bg g-radius--circle ti-control-play"></i>
-                        </a>
+                       
+                    </div>
+                    
+                </div>
+                
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(images/slider/bg56.jpg);">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <div class="g-margin-b-30--xs">
+                                <h2 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Your money with our support<br></h2>
+                                <span class ="g-color--white">We will support you to grow your money so that you can focus on what matters most to you<</span>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
+                
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/1920x1080/01.jpg');">
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
                                 <h2 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">We Craft Experience<br>That Help Brands<br>Stand Out</h2>
                             </div>
-                            <a class="js__popup__youtube" href="https://www.youtube.com/watch?v=lcFYdgZKZxY" title="Intro Video">
-                                <i class="s-icon s-icon--lg s-icon--white-bg g-radius--circle ti-control-play"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -182,6 +193,7 @@
             </a>
         </div>
         <!--========== END SWIPER SLIDER ==========-->
+
 
         <!--========== PAGE CONTENT ==========-->
         <!-- Features -->
@@ -276,7 +288,79 @@
             <!-- // end row  -->
         </div>
         <!-- End Features -->
+<!-- Process -->
+        
+        <div class="g-bg-color--dark">
+        <!-- <div class="g-bg-color--primary-ltr"> -->
+            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-text-center--xs g-margin-b-100--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Process</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">How it Works</h2>
+                </div>
+                <ul class="list-inline row g-margin-b-100--xs">
+                    <!-- Process -->
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">01</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Assess</h3>
+                                <p class="g-color--white-opacity">The first step is to assess your special characteristics by understanding your financial situation, your economic goals and your short to medium term commitments.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Process -->
 
+                    <!-- Process -->
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">02</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Measure</h3>
+                                <p class="g-color--white-opacity">This is where we use intelligence questionnaire based algorithm to assess your risk appetite</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Process -->
+
+                    <!-- Process -->
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--sm">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">03</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Design</h3>
+                                <p class="g-color--white-opacity">We use Artificial Intelligence and machine learning to design your investment portfolio by picking the funds matching your goals and risks appetite </p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Process -->
+
+                    <!-- Process -->
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">04</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Monitor</h3>
+                                <p class="g-color--white-opacity">Pro-active monitoring to ensure your investment remains in-line with your goals and risk appetite.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Process -->
+                </ul>
+
+                <div class="g-text-center--xs">
+                    <a href="#js__scroll-to-appointment" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Process -->
         <!-- Parallax -->
         <div class="js__parallax-window" style="background: url(img/1920x1080/03.jpg) 50% 0 no-repeat fixed;">
             <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
@@ -335,173 +419,7 @@
         <!-- End Subscribe -->
 
         <!-- Portfolio Filter -->
-        <div class="container g-padding-y-80--xs">
-            <div class="g-text-center--xs g-margin-b-40--xs">
-                <h2 class="g-font-size-32--xs g-font-size-36--md">Projects</h2>
-            </div>
-            <div class="s-portfolio">
-                <div id="js__filters-portfolio-gallery" class="s-portfolio__filter-v1 cbp-l-filters-text cbp-l-filters-center">
-                    <div data-filter="*" class="s-portfolio__filter-v1-item cbp-filter-item cbp-filter-item-active">Show All</div>
-                    <div data-filter=".graphic" class="s-portfolio__filter-v1-item cbp-filter-item">Graphic</div>
-                    <div data-filter=".logos" class="s-portfolio__filter-v1-item cbp-filter-item">Logo</div>
-                    <div data-filter=".motion" class="s-portfolio__filter-v1-item cbp-filter-item">Motion</div>
-                </div>
-            </div>
-        </div>
-        <!-- End Portfolio Filter -->
-
-        <!-- Portfolio Gallery -->
-        <div class="container g-margin-b-100--xs">
-            <div id="js__grid-portfolio-gallery" class="cbp">
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item logos motion">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/05.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/05.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item graphic">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/06.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/06.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item logos">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/07.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/07.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item motion graphic">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/08.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/08.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item logos graphic">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/09.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/09.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Item -->
-                <div class="s-portfolio__item cbp-item motion graphic">
-                    <div class="s-portfolio__img-effect">
-                        <img src="img/970x647/04.jpg" alt="Portfolio Image">
-                    </div>
-                    <div class="s-portfolio__caption-hover--cc">
-                        <div class="g-margin-b-25--xs">
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-                        </div>
-                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-                            <li>
-                                <a href="img/970x647/04.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item <br/> by KeenThemes Inc.">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="s-icon s-icon--sm s-icon s-icon--white-bg g-radius--circle">
-                                    <i class="ti-link"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- End Item -->
-            </div>
-            <!-- End Portfolio Gallery -->
-        </div>
-        <!-- End Portfolio -->
+        
 
         <!-- Testimonials -->
         <div class="js__parallax-window" style="background: url(img/1920x1080/04.jpg) 50% 0 no-repeat fixed;">
@@ -678,41 +596,7 @@
         </div>
         <!-- End Counter -->
 
-        <!-- Feedback Form -->
-        <div class="g-bg-color--sky-light">
-            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
-                <div class="g-text-center--xs g-margin-b-80--xs">
-                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Feedback</p>
-                    <h2 class="g-font-size-32--xs g-font-size-36--md">Send us a note</h2>
-                </div>
-                <form>
-                    <div class="row g-margin-b-40--xs">
-                        <div class="col-sm-6 g-margin-b-20--xs g-margin-b-0--md">
-                            <div class="g-margin-b-20--xs">
-                                <input type="text" class="form-control s-form-v2__input g-radius--50" placeholder="* Name">
-                            </div>
-                            <div class="g-margin-b-20--xs">
-                                <input type="email" class="form-control s-form-v2__input g-radius--50" placeholder="* Email">
-                            </div>
-                            <input type="text" class="form-control s-form-v2__input g-radius--50" placeholder="* Phone">
-                        </div>
-                        <div class="col-sm-6">
-                            <textarea class="form-control s-form-v2__input g-radius--10 g-padding-y-20--xs" rows="8" placeholder="* Your message"></textarea>
-                        </div>
-                    </div>
-                    <div class="g-text-center--xs">
-                        <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-80--xs">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- End Feedback Form -->
-
-        <!-- Google Map -->
-        <section class="s-google-map">
-            <div id="js__google-container" class="s-google-container g-height-400--xs"></div>
-        </section>
-        <!-- End Google Map -->
+        
         <!--========== END PAGE CONTENT ==========-->
 
         <!--========== FOOTER ==========-->
