@@ -106,46 +106,28 @@
 	%>
   <section class="pricing-page">
         <div class="container">
-            <div class="center medium-text" style="margin-top:-30px;margin-bottom:-30px;">  
-               <!--  <h2>Investments Options</h2> -->
-                <p>What Kind of Investment You are looking for?</p>
-            </div>  
+        	<div class="row">
+        		<%
+					if (session.getAttribute("customerId") == null) {
+				%>
+				<input type="hidden" id="cusId" value="customerIdNull" />
+				<%
+					} else {
+				%>
+				<input type="hidden" id="cusId" value="customerExists" />
+				<%
+					}
+				%>
+        	</div>
+  
             <div class="pricing-area text-center">
                 <div class="row">
                     <div class="col-sm-6 plan price-one wow fadeInDown">
-                        <ul>
-                            <li class="heading-one">
-                                <h1>One time Investment</h1>
-                                <span>LumpSum INvestment</span>
-                            </li>
-                            <li>No monthly commitments</li>
-                            <li>Effortless Investment</li>
-                            <li>No minimum term commitment</li>
-                            <li>Any time Withdraw</li>
-                            <li>24/7 Support</li>
-                            <li class="plan-action">
-                                <a class="btn btn-primary" href="newUpfrontInvestment" >Select this option</a>                               
-                            </li>
-                        </ul>
+                                <!-- <a class="btn btn-primary" href="newUpfrontInvestment" >Select this option</a> -->
+                                <button type="button" class="btn btn-primary readmore" onClick="checkLoggedInStatus();" style="margin-top:20px;padding:5px 15px 5px 15px;">Investment now</button>
                     </div>
 
-                    <div class="col-sm-6 plan price-two wow fadeInDown">
-                        <ul>
-                            <li class="heading-two">
-                                <h1>Regular Investment (SIP)</h1>
-                                <span>Systematic Investment Plan (SIP)</span>
-                            </li>
-                            <li>No monthly commitments</li>
-                            <li>Effortless Investment</li>
-                            <li>No minimum term commitment</li>
-                            <li>Any time Withdraw</li>
-                            <li>24/7 Support</li>
-                            <li class="plan-action">
-                                <a class="btn btn-primary" href="newSipInvestment">Select this option</a>
-                            </li>
-                        </ul>
-                 	</div>
-                </div>
+                  </div>
             </div><!--/pricing-area-->
         </div><!--/container-->
     </section><!--/pricing-page-->

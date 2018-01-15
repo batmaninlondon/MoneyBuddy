@@ -86,6 +86,9 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		session.saveOrUpdate(tempAdditionalCustomer);
 		session.getTransaction().commit();
 		
+		sessionMap.put("addCustDetUploaded", "Y");
+		logger.debug("PrepareKycFormAction class : execute method : stored addCustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
+		
 		String str = null;
 		
 	    	GenerateKycForm generateKycForm = new GenerateKycForm();

@@ -36,7 +36,7 @@ public class GeneratePackageAction extends ActionSupport implements SessionAware
 		System.out.println("generatePackageAction call called ");
 		
 	
-    	logger.debug("EstimateAction class : execute method : start");
+    	logger.debug("GeneratePackageAction class : execute method : start");
     	
     	try {
 
@@ -78,7 +78,6 @@ public class GeneratePackageAction extends ActionSupport implements SessionAware
 	   	        
 	   	        /*Double amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf("4000") ) /100);
 	   	        pair.setValue(amount);*/
-
 	   	        
 	   	    }
 	   	    it = productRatioList.entrySet().iterator();
@@ -88,12 +87,12 @@ public class GeneratePackageAction extends ActionSupport implements SessionAware
 		   	 }
 	   	 	sessionMap.put("productRatioList", productRatioList);
    	 	
-	   	 	logger.debug("EstimateAction class : execute method : stored productRatioList in session id : "+sessionMap.getClass().getName());
+	   	 	logger.debug("GeneratePackageAction class : execute method : stored productRatioList in session id : "+sessionMap.getClass().getName());
 
-			logger.debug("EstimateAction class : execute method : end");
+			logger.debug("GeneratePackageAction class : execute method : end");
 			return SUCCESS;
 		} catch (MoneyBuddyException e) {	
-			logger.debug("EstimateAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+			logger.debug("GeneratePackageAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";
@@ -101,7 +100,7 @@ public class GeneratePackageAction extends ActionSupport implements SessionAware
 			return ERROR;
 		} 
     	catch (Exception e) {	
-			logger.debug("EstimateAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.debug("GeneratePackageAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";

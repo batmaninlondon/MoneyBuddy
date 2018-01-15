@@ -191,6 +191,7 @@
 			<div id="invested-fund-list" class="col-md-6"
 				style="margin-top: 10px; padding-left: 70px; padding-right: 70px;">
 				<div id="investment-fund-list-data" class="row col-md-12">
+					<div id="investmentFundData">
 					<table class="table table-bordered">
 						<thead class="table-head">
 							<tr>
@@ -208,53 +209,10 @@
 							    <td class="center"><s:property value="#productListElement.value"/></td>
 							</tr>
 						</s:iterator> 
-							<%-- <s:iterator value="#session.productList" var="productListElement"> --%>
-<%-- 							<tr>
-								<td class="center">Reliance</td>
-								<td class="center"><s:property value="#productListElement.value"/></td>
-								<td class="center">
-									<p>
-										Rs. <span id="">100</span>
-									</p>
-								</td>
-							</tr>
-							<tr>
-								<td class="center">Kotak</td>
-								<td class="center"><s:property value="#productListElement.value"/></td>
-								<td class="center">
-									<p>
-										Rs. <span id="">200</span>
-									</p>
-								</td>
-							</tr>
-							<tr>
-								<td class="center">HDFC</td>
-								<td class="center"><s:property value="#productListElement.value"/></td>
-								<td class="center">
-									<p>
-										Rs. <span id="">150</span>
-									</p>
-								</td>
-							</tr> --%>
-							<%-- </s:iterator>  --%>
+
 
 						</tbody>
 					</table>
-				</div>
-				<div class="row col-md-12">
-					<div id="button-2" class="row">
-
-						<%
-							if (session.getAttribute("customerId") == null) {
-						%>
-						<input type="hidden" id="cusId" value="customerIdNull" />
-						<%
-							} else {
-						%>
-						<input type="hidden" id="cusId" value="customerExists" />
-						<%
-							}
-						%>
 					</div>
 				</div>
 
@@ -287,51 +245,90 @@
 							<tr>
 								<td class="center">
 									<p>
-										Rs. <span id="investedAmount">2000</span>
+										Rs. <span id="investedAmount"></span>
 									</p>
 								</td>
 								<td class="center">
+									<div id="predictedValue1">
 									<p>
 										Rs. <span id="predicted-value-for-one-year"><s:property
 												value="#session.predictedValueList1" /></span>
 									</p>
+									</div>
 								</td>
 								<td class="center">
+									<div id="predictedValue2">
 									<p>
 										Rs. <span id="predicted-value-for-three-year"><s:property
 												value="#session.predictedValueList3" /></span>
 									</p>
+									</div>
 								</td>
 								<td class="center">
+									<div id="predictedValue3">
 									<p>
 										Rs. <span id="predicted-value-for-five-year"><s:property
 												value="#session.predictedValueList5" /></span>
 									</p>
+									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="row col-md-12">
-					<div id="button-2" class="row">
-
-						<%
-							if (session.getAttribute("customerId") == null) {
-						%>
-						<input type="hidden" id="cusId" value="customerIdNull" />
-						<%
-							} else {
-						%>
-						<input type="hidden" id="cusId" value="customerExists" />
-						<%
-							}
-						%>
-					</div>
-				</div>
+				
 				
 				
 
 			</div>
+			
+			<div class="row ">
+
+
+								<%
+								if ("NC".equals(session.getAttribute("kycStatus"))) {
+									System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
+							    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
+							    	System.out.println("addCustDetUploaded in session in jsp : "+session.getAttribute("addCustDetUploaded"));
+								
+								%>
+							
+									<input type="hidden" id="redirectingPage" value="panCardVerifiction" />
+								<%
+								} else if ("DONE".equals(session.getAttribute("kycStatus"))) {
+									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
+								%>
+										<input type="hidden" id="redirectingPage" value="bankDetails" />
+								<%
+									}
+									else {
+								%>
+										<input type="hidden" id="redirectingPage" value="customerDetails" />
+								<%
+									}
+								} else  {
+									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
+										if("Y".equals(session.getAttribute("addCustDetUploaded"))) {
+								%>
+											<input type="hidden" id="redirectingPage" value="bankDetails" />
+								<%
+										}
+										else {
+								%>
+											<input type="hidden" id="redirectingPage" value="addCustomerDetails" />
+								<%		
+										}
+									}
+									else {
+								%>
+										<input type="hidden" id="redirectingPage" value="customerDetails" />
+								<%
+									}
+									
+								}
+								%>
+				</div>
+				
 
 			<div class="row">
 				<div class="col-md-5"></div>

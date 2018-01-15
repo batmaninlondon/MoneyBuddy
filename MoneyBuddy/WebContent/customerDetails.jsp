@@ -155,22 +155,6 @@
 		</div>
 	</div>
 	
-	
-	<div class="row" style="margin-top:20px;">
-		
-		<div class="col-md-8">
-			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="pancard-number" style="font-family:Aparajita;font-size:25px;"  class="pull-right">PAN </label></div>
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-	
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>

@@ -113,7 +113,7 @@ function fundDetailHandler(el) {
 
 	        	}
 	        	else {
-	        		alert('Inside resetPassword error !!');
+	        		//alert('Inside resetPassword error !!');
 	        		window.location='errorPage';
 	        	}
 
@@ -125,10 +125,10 @@ function fundDetailHandler(el) {
 
 function buyFundHandler(el) {
 
-	alert('function called !!');
+	//alert('function called !!');
     var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
 
-    alert ('selectedItem : fund id : '+selectedItem);
+    //alert ('selectedItem : fund id : '+selectedItem);
     $.ajax({
         url : "buyFundAction",
         type: 'post',
@@ -262,7 +262,7 @@ function ongoingSipList()
         success : function(result){
         	
         	if (result == "success") {
-        		alert('Inside ongoing sip success !! ');
+        		//alert('Inside ongoing sip success !! ');
         		
         		window.location='ongoingSips';
         	}
@@ -404,7 +404,6 @@ function checkKysStatus()
 	
 	var customerName = document.getElementById("customer-name").value;
 	var dateOfBirth = document.getElementById("date-of-birth").value;
-	var panCard = document.getElementById("pancard-number").value;
 	var gender = document.getElementById("gender").value;
 	var occupation = document.getElementById("occupation").value;
 	var taxStatus = document.getElementById("tax-status").value;
@@ -421,18 +420,6 @@ function checkKysStatus()
 		document.getElementById("customer-name").className += " formInvalid";
 		document.getElementById("customer-name").placeholder = "Customer Name can not be blank ";
 		$("#customer-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
-		$("#address-line-one").removeClass('formInvalid');
-		$("#address-line-two").removeClass('formInvalid');
-		$("#address-line-three").removeClass('formInvalid');
-		$("#residential-pin").removeClass('formInvalid');
-
-		return;
-	}
-	else if ( panCard == '')  {
-		document.getElementById("pancard-number").className += " formInvalid";
-		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
-		$("#customer-name").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
 		$("#address-line-three").removeClass('formInvalid');
@@ -444,7 +431,6 @@ function checkKysStatus()
 		document.getElementById("address-line-one").className += " formInvalid";
 		document.getElementById("address-line-one").placeholder = "Address Line One can not be blank ";
 		$("#customer-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
 		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
@@ -455,7 +441,6 @@ function checkKysStatus()
 		document.getElementById("address-line-two").className += " formInvalid";
 		document.getElementById("address-line-two").placeholder = "Address Line Two can not be blank ";
 		$("#customer-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-three").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
@@ -466,7 +451,6 @@ function checkKysStatus()
 		document.getElementById("address-line-three").className += " formInvalid";
 		document.getElementById("address-line-three").placeholder = "Address Line Three can not be blank ";
 		$("#customer-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
 		$("#residential-pin").removeClass('formInvalid');
@@ -477,18 +461,10 @@ function checkKysStatus()
 		document.getElementById("residential-pin").className += " formInvalid";
 		document.getElementById("residential-pin").placeholder = "Residential Pin can not be blank ";
 		$("#customer-name").removeClass('formInvalid');
-		$("#pancard-number").removeClass('formInvalid');
 		$("#address-line-one").removeClass('formInvalid');
 		$("#address-line-two").removeClass('formInvalid');
 		$("#address-line-three").removeClass('formInvalid');
 
-		return;
-	}
-	else if (!validatePanCard(panCard)) {
-		document.getElementById("pancard-number").className += " formInvalid";
-		document.getElementById("pancard-number").placeholder = document.getElementById("pancard-number").value + " - is not a valid Pan Card Number ";
-		document.getElementById("pancard-number").value = null;
-		
 		return;
 	}
 	
@@ -497,7 +473,7 @@ function checkKysStatus()
         url : "kycCheckAction",
         type: 'post',
         
-        data: { 'customerName' : customerName , 'dateOfBirth' : dateOfBirth , 'gender' : gender , 'panCard' : panCard , 'occupation' : occupation , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
+        data: { 'customerName' : customerName , 'dateOfBirth' : dateOfBirth , 'gender' : gender , 'occupation' : occupation , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
 
         success : function(result){
 
@@ -854,7 +830,7 @@ function setData()
         	
         	if (result == "success") {
         		// do nothing
-        		alert('Hii');
+        		//alert('Hii');
         		$('#body_holder').show();
         	}
         	else {
@@ -1066,16 +1042,82 @@ function showCustomerDetails()
 function openCustomerDetailsPage()  
 {
       
-	var cusId = document.getElementById('cusId').value;
+	var redirectingPage = document.getElementById('redirectingPage').value;
 	//alert('showPanCardVerification : cusId : '+cusId);
-	if (cusId == "customerIdNull") {
-		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
-		document.getElementById('investment-options').className += " hidden";	
-		$("#login-page").removeClass('hidden');
+	if (redirectingPage == "panCardVerifiction") {
+		window.location='panCardVerification';
 	} 
+	else if (redirectingPage == "bankDetails"){
+		window.location='bankDetails';
+	}
+	else if (redirectingPage == "addCustomerDetails"){
+		window.location='additionalCustomerDetails';
+	}
 	else {
 		window.location='customerDetails';
 	}
+	
+}
+
+function checkLoggedInStatus()  
+{
+      
+	var cusId = document.getElementById('cusId').value;
+
+	/*alert('checkLoggedInStatus : cusId : '+cusId);*/
+	if (cusId == "customerIdNull") {
+		window.location='login';
+	} 
+	else {
+		window.location='investmentStyle';
+	}
+	
+}
+
+function verifyPancard()  
+{
+      
+	var panCard = document.getElementById("pancard-number").value;
+	//alert('panCard : '+panCard);
+	if ( panCard == '')  {
+		document.getElementById("pancard-number").className += " formInvalid";
+		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
+
+		return;
+	}
+	else if (!validatePanCard(panCard)) {
+		document.getElementById("pancard-number").className += " formInvalid";
+		document.getElementById("pancard-number").placeholder = document.getElementById("pancard-number").value + " - is not a valid Pan Card Number ";
+		document.getElementById("pancard-number").value = null;
+		
+		return;
+	}
+	
+	$.ajax({
+
+        url : "panCardVerificationAction",
+        type: 'post',
+        
+        data: {'panCard' : panCard },
+        
+        success : function(result){
+        	
+        	/*alert('result : '+result);*/
+        	
+        	if (result == "kycDone") {
+        		/*alert('login success !! ');*/
+        		window.location='customerDetails';
+        	}
+        	else if (result == "kycNotDone")  {
+        		window.location='customerDetails';
+        	}
+        	else {
+        		/*alert('Inside login error !!');*/
+        		window.location='errorPage';
+        	}
+
+        },
+    });
 	
 }
 
@@ -1326,6 +1368,9 @@ function login() {
         		document.getElementById("password").placeholder = "Incorrect Password";
         		document.getElementById("password").value = null;
         	}
+        	else if (result == "fundSelected")  {
+        		window.location='investmentStyle';
+        	}
         	else {
         		/*alert('Inside login error !!');*/
         		window.location='errorPage';
@@ -1337,7 +1382,7 @@ function login() {
 
 function generatePackage() {
 
-	alert('generatePackage func called !! ');
+	//alert('generatePackage func called !! ');
 
 $.ajax({
 
@@ -1352,7 +1397,8 @@ $.ajax({
     	
     	if (result == "success") {
     		/*alert('login success !! ');*/
-    		window.location='investmentStyle';
+    		//window.location='investmentStyle';
+    		window.location='selectedFundDetails';
     	}
     	else {
     		/*alert('Inside login error !!');*/
@@ -1698,16 +1744,19 @@ function newUpdate(){
 	        	  $("#investment-fund-list-data").load("newSipInvestment.jsp #investment-fund-list-data");
         	  }
         	  else {
-        		 /* alert ('SIP is 0 ');*/
+        		  //alert ('SIP is 0 ');
 	        	  /*$("#diamond-text-2").removeClass('hidden');
 	        	  $("#diamond-text-3").removeClass('hidden');
 	        	  $("#diamond-text-4").removeClass('hidden');
 	        	  $("#diamond-text-5").removeClass('hidden');
 	        	  $("#diamond-text-6").removeClass('hidden');*/
-	        	  $("#predicted-value-for-one-year").load("newUpfrontInvestment.jsp #predicted-value-for-one-year");
-	        	  $("#predicted-value-for-three-year").load("newUpfrontInvestment.jsp #predicted-value-for-three-year");
-	        	  $("#predicted-value-for-five-year").load("newUpfrontInvestment.jsp #predicted-value-for-five-year");
-	        	  $("#investment-fund-list-data").load("newUpfrontInvestment.jsp #investment-fund-list-data");
+
+	        	  $("#predictedValue1").load("newUpfrontInvestment.jsp #predictedValue1");
+	        	  $("#predictedValue2").load("newUpfrontInvestment.jsp #predictedValue2");
+	        	  $("#predictedValue3").load("newUpfrontInvestment.jsp #predictedValue3");
+	        	  /*$("#predicted-value-for-three-year").load("newUpfrontInvestment.jsp #predicted-value-for-three-year");
+	        	  $("#predicted-value-for-five-year").load("newUpfrontInvestment.jsp #predicted-value-for-five-year");*/
+	        	  $("#investmentFundData").load("newUpfrontInvestment.jsp #investmentFundData");
 	           	  
 	         	//document.getElementById("totalInvestment").innerHTML= totalInvestment;
 	       		//document.getElementById("numberOfYears").innerHTML= years;
@@ -1960,7 +2009,7 @@ function testDummyEkyc () {
 	  '<input type="hidden" name="kyc_data" value="' + kycdatatext + '" />' +
 	  '</form>');
 	$('body').append(form);
-	alert ('submitting for !');
+	//alert ('submitting for !');
 	form.attr('target', '_top').submit();
 	
 /*	

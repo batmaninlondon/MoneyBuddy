@@ -45,7 +45,7 @@ public class insertCustomerDetails {
     		
     		Customers tempCustomer = new Customers(emailId,customerName,mobileNumber,password,verificationStatus,gender,occupation,
     				dateOfBirth,addressLineOne,addressLineTwo,addressLineThree,residentialCity,residentialState,residentialPin,residentialCountry,
-    				taxStatus,panCard,"NOT DONE",null,"N","N","CUSTOMER");
+    				taxStatus,panCard,"NC",null,"N","N","CUSTOMER");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();

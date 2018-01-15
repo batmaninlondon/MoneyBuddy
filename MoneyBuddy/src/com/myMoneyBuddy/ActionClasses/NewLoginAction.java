@@ -98,7 +98,16 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	int customerId = Integer.parseInt(customer.getCustomerId());
 	    	String customerName = customer.getCustomerName();
 	    	String customerMobileNumber = customer.getMobileNumber();
-	
+	    	String panCard = customer.getPanCard();
+	    	String kycStatus = customer.getKycStatus();
+	    	
+	    	// Savita Wadhwani - need to add two columns in Customer table - custDetUploaded and addCustDetUploaded, and fetch the same here - start
+	    	// this is a temporary workaroubnd 
+	    	
+	    	String custDetUploaded = customer.getDateOfBirth();
+	    	String addCustDetUploaded = customer.getOccupation();
+	    	
+	    	// Savita Wadhwani - need to add two columns in Customer table - custDetUploaded and addCustDetUploaded, and fetch the same here - end
 	    	System.out.println("customerId : "+customerId);
 	    	sessionMap.put("customerId", Integer.toString(customerId));
 	    	
@@ -109,6 +118,34 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	sessionMap.put("customerMobileNumber", customerMobileNumber);
 	    	logger.debug("LoginAction class : execute method : stored customerMobileNumber : "+customerMobileNumber+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	sessionMap.put("panCard", panCard);
+	    	logger.debug("LoginAction class : execute method : stored panCard : "+panCard+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	sessionMap.put("kycStatus", kycStatus);
+	    	logger.debug("LoginAction class : execute method : stored kycStatus : "+kycStatus+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	if (custDetUploaded == null )  {
+	    		custDetUploaded = "N";
+	    	}
+	    	else {
+	    		custDetUploaded = "Y";
+	    	}
+	    	sessionMap.put("custDetUploaded", custDetUploaded);
+	    	logger.debug("LoginAction class : execute method : stored custDetUploaded : "+custDetUploaded+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	if (addCustDetUploaded == null )  {
+	    		addCustDetUploaded = "N";
+	    	}
+	    	else {
+	    		addCustDetUploaded = "Y";
+	    	}
+	    	sessionMap.put("addCustDetUploaded", addCustDetUploaded);
+	    	logger.debug("LoginAction class : execute method : stored addCustDetUploaded : "+addCustDetUploaded+" in session id : "+sessionMap.getClass().getName());
+	    	
+	    	System.out.println("kycStaus in session : "+sessionMap.get("kycStatus"));
+	    	System.out.println("custDetUploaded in session : "+sessionMap.get("custDetUploaded"));
+	    	System.out.println("addCustDetUploaded in session : "+sessionMap.get("addCustDetUploaded"));
 	    	
 	    	//System.out.println("Hi there 4  ");
 	    	// Updating Last login timestamp
@@ -147,6 +184,13 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	}
 	    	
 	    	logger.debug("NewLoginAction class : execute method : end");
+	    	
+	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
+	    	if ("TRUE".equals(sessionMap.get("fundSelected"))) {
+	    		String str = "fundSelected";
+	    		stream = new ByteArrayInputStream(str.getBytes());
+		    	return SUCCESS;
+	    	}
 	    	
 	    	String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());

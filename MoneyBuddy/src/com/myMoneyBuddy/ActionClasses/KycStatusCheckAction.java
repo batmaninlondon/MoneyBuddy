@@ -64,7 +64,7 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
 
 		//session.getTransaction().commit();
 		
-    	if ("NOT DONE".equalsIgnoreCase(kycStatus))  {
+    	if ("NOTDONE".equalsIgnoreCase(kycStatus))  {
     		System.out.println("KYC is not done for this customer ");
     		logger.debug("KycStatusCheckAction class : execute method : kyc is not done for "+sessionMap.get("customerId").toString());
     		String str = "kycNotDone";

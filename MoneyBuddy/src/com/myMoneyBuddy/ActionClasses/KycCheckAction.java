@@ -42,7 +42,6 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	
 	private String customerName;
 	private String gender;
-    private String panCard;
 	private String occupation;
 	private String dateOfBirth;
     private String taxStatus;
@@ -86,7 +85,6 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
     	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
-    	System.out.println(" KycCheckAction execute method : PanCard : "+getPanCard());
     	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
     	System.out.println(" PrepareKycFormAction execute method :dateOfBirth : "+getDateOfBirth());
     	System.out.println(" PrepareKycFormAction execute method :addressLineOne : "+getAddressLineOne());
@@ -171,34 +169,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
 		
-		// Savita Wadhwani - We need to update this piece of code with real API - start 
-		
-		String num1 = getPanCard().substring(5,9);
-		String str;
-		System.out.println(" num1 is : "+num1);
-		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
-		String kycStatus = null;
-		if ( (Integer.parseInt(num1) % 2) != 0) {
-			
-			kycStatus= "DONE";
-			//str = "kycDone";
-			sessionMap.put("kycStatus", "DONE");
-			str = "kycDone";
-		}
-		else {
-			kycStatus = "NOT DONE";
-			//str = "kycNotDone";
-			sessionMap.put("kycStatus", "NOT_DONE");
-			str = "kycNotDone";
-		}
-		// Savita Wadhwani - We need to update this piece of code with real API - end
-		
 		session.beginTransaction();
 		Query query = session.createQuery("update Customers set kycStatus = :kycStatus , customerName = :customerName , dateOfBirth = :dateOfBirth ,"
 				+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
 				+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
-				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation , "
-				+ "panCard = :panCard where customerId = :customerId");
+				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
+				+ " where customerId = :customerId");
 		
 		query.setParameter("customerName", getCustomerName());
 		query.setParameter("dateOfBirth", frmtdDateForDB);
@@ -212,27 +188,30 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		query.setParameter("taxStatus", getTaxStatus());
 		query.setParameter("gender", getGender());
 		query.setParameter("occupation", getOccupation());
-		query.setParameter("panCard", getPanCard());
-		query.setParameter("kycStatus", kycStatus);
 
-		
 
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		int updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
-    	sessionMap.put("panCard", panCard);
-    	System.out.println("Kyc is done for panCard : "+panCard);
-    	
-    	logger.debug("KycCheckAction class : execute method : stored panCard : "+panCard+" in session id : "+sessionMap.getClass().getName());
-    	
+		if (updateResult == 1) {
+			sessionMap.put("CustDetUploaded", "Y");
+			logger.debug("PrepareKycFormAction class : execute method : stored CustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
+		}
+		else {
+			sessionMap.put("CustDetUploaded", "N");
+			logger.debug("PrepareKycFormAction class : execute method : stored CustDetUploaded : N in session id : "+sessionMap.getClass().getName());
+		}
+		
+		
+
     	session.getTransaction().commit();
     	logger.debug("KycCheckAction class : execute method : end");
     	
     	System.out.println(" Returned Success !!");
 
-    	
+    	String str="success";
     	stream = new ByteArrayInputStream(str.getBytes());
 
     	return SUCCESS;
@@ -268,14 +247,6 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     public Map<String, Object> getSession() {
 		return sessionMap;
 	}
-    
-	public String getPanCard() {
-        return panCard;
-    }
-
-    public void setPanCard(String panCard) {
-        this.panCard = panCard;
-    }
 
 	public InputStream getStream() {
 		return stream;
