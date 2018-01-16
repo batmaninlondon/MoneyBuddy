@@ -286,10 +286,11 @@
 
 
 								<%
+								System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
+						    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
+						    	System.out.println("addCustDetUploaded in session in jsp : "+session.getAttribute("addCustDetUploaded"));
 								if ("NC".equals(session.getAttribute("kycStatus"))) {
-									System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
-							    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
-							    	System.out.println("addCustDetUploaded in session in jsp : "+session.getAttribute("addCustDetUploaded"));
+									
 								
 								%>
 							
@@ -309,17 +310,20 @@
 								} else  {
 									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
 										if("Y".equals(session.getAttribute("addCustDetUploaded"))) {
+											System.out.println("DownloadKycForm page ");
 								%>
-											<input type="hidden" id="redirectingPage" value="bankDetails" />
+											<input type="hidden" id="redirectingPage" value="downloadKycForm" />
 								<%
 										}
 										else {
+											System.out.println("addCustomerDetails page ");
 								%>
 											<input type="hidden" id="redirectingPage" value="addCustomerDetails" />
 								<%		
 										}
 									}
 									else {
+										System.out.println("customerDetails page ");
 								%>
 										<input type="hidden" id="redirectingPage" value="customerDetails" />
 								<%

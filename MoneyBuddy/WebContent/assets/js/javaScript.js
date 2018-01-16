@@ -123,22 +123,22 @@ function fundDetailHandler(el) {
 	    
 	  }
 
-function buyFundHandler(el) {
+function buyFundHandler(fundId) {
 
 	//alert('function called !!');
-    var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
-
-    //alert ('selectedItem : fund id : '+selectedItem);
+    //var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
+	//var selectedItem = $("#selectedFundId").val();
+    //alert ('selectedItem : fund id : '+fundId);
     $.ajax({
         url : "buyFundAction",
         type: 'post',
         
-        data: { 'fundId' : selectedItem  },
+        data: { 'fundId' : fundId  },
           
         success : function(result){
         	
         	if (result == "success") {
-        		window.location='investmentStyle';
+        		window.location='selectedFundDetails';
         	}
         	else {
         		window.location='errorPage';
@@ -1053,6 +1053,9 @@ function openCustomerDetailsPage()
 	else if (redirectingPage == "addCustomerDetails"){
 		window.location='additionalCustomerDetails';
 	}
+	else if (redirectingPage == "downloadKycForm"){
+		window.location='downloadKycForm';
+	}
 	else {
 		window.location='customerDetails';
 	}
@@ -1078,7 +1081,7 @@ function verifyPancard()
 {
       
 	var panCard = document.getElementById("pancard-number").value;
-	//alert('panCard : '+panCard);
+	alert('panCard : '+panCard);
 	if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
 		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
@@ -1092,6 +1095,8 @@ function verifyPancard()
 		
 		return;
 	}
+	alert('before generatePackageAction jax call !! ');
+	
 	
 	$.ajax({
 
@@ -1102,17 +1107,17 @@ function verifyPancard()
         
         success : function(result){
         	
-        	/*alert('result : '+result);*/
+        	alert('result : '+result);
         	
         	if (result == "kycDone") {
-        		/*alert('login success !! ');*/
+        		alert('login success !! ');
         		window.location='customerDetails';
         	}
         	else if (result == "kycNotDone")  {
         		window.location='customerDetails';
         	}
         	else {
-        		/*alert('Inside login error !!');*/
+        		alert('Inside login error !!');
         		window.location='errorPage';
         	}
 

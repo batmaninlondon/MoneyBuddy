@@ -23,18 +23,22 @@ public class UpdateCustomerPancard {
 	
 	Logger logger = Logger.getLogger(UpdateCustomerPancard.class);
 
-	public void updatePancard (String customerId, String pancard, String kycStatus) throws MoneyBuddyException {
+	public void updatePancard (String customerId, String panCard, String kycStatus) throws MoneyBuddyException {
 
 		logger.debug("UpdateCustomerPancard class : updatePancard method : start");
 		
 		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		System.out.println("customerId : in updatePancard : "+customerId);
+		System.out.println("panCard : in updatePancard : "+panCard);
+		System.out.println("kycStatus : in updatePancard : "+kycStatus);
 
 		try {
 
 			session.beginTransaction();
-			Query query = session.createQuery("update Customers set panCard = :panCard and kycStatus = :kycStatus " + " where customerId = :customerId");
+			Query query = session.createQuery("update Customers set panCard = :panCard , kycStatus = :kycStatus where customerId = :customerId");
 
-			query.setParameter("panCard", pancard);
+			query.setParameter("panCard", panCard);
 
 			query.setParameter("kycStatus", kycStatus);
 			query.setParameter("customerId", customerId);

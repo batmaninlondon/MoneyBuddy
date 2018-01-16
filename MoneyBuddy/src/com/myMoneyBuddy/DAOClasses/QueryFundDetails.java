@@ -73,7 +73,7 @@ public class QueryFundDetails {
 				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
 						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
-						fundDetailsListElement.getMinSipDuration()));
+						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory()));
 			}
 
 			//session.getTransaction().commit();
@@ -95,6 +95,64 @@ public class QueryFundDetails {
 		}
 		catch (Exception e ) {
 			logger.error("QueryFundDetails class : getFundDetailsData method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			session.close();
+
+		}
+
+	}
+	
+public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
+		
+		Session session  = null;
+	       
+		try
+		{
+			logger.debug("QueryFundDetails class : getSelectedFundDetailsData method : start");
+			
+			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+			session.beginTransaction();
+
+			FundDetailsDataModel selectedFundDetailsDataModel = new FundDetailsDataModel();
+
+			Query query = session.createQuery("from FundDetails where fundId = :fundId");
+			query.setParameter("fundId", fundId);
+			
+			List<FundDetails> fundDetailsList = query.list();
+			
+			if (fundDetailsList != null)  {
+				selectedFundDetailsDataModel= new FundDetailsDataModel(fundDetailsList.get(0).getFundId(),fundDetailsList.get(0).getFundName(),fundDetailsList.get(0).getSector(),
+						fundDetailsList.get(0).getSubSector(),fundDetailsList.get(0).getFundStartDate(),fundDetailsList.get(0).getRating(),fundDetailsList.get(0).getRisk(),
+						fundDetailsList.get(0).getReturnsThreeYears(),fundDetailsList.get(0).getMinSipAmount(),fundDetailsList.get(0).getMinLumsumAmount(),
+						fundDetailsList.get(0).getMinSipDuration(),fundDetailsList.get(0).getFundCategory());
+			}
+
+			//session.getTransaction().commit();
+
+			logger.debug("QueryFundDetails class : getSelectedFundDetailsData method : end");
+			
+			return selectedFundDetailsDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

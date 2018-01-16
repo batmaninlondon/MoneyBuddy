@@ -55,6 +55,9 @@ public class FundDetails {
     
     @Column(name="MIN_SIP_DURATION")
     private String minSipDuration;
+    
+    @Column(name="FUND_CATEGORY")
+    private String fundCategory;
 
 
     public FundDetails() {
@@ -64,7 +67,7 @@ public class FundDetails {
 
 
 	public FundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration) {
+			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory) {
 		super();
 		this.fundName = fundName;
 		this.sector = sector;
@@ -76,6 +79,7 @@ public class FundDetails {
 		this.minSipAmount = minSipAmount;
 		this.minLumsumAmount = minLumsumAmount;
 		this.minSipDuration = minSipDuration;
+		this.fundCategory = fundCategory;
 	}
 
 
@@ -213,6 +217,18 @@ public class FundDetails {
 
 
 
+	public String getFundCategory() {
+		return fundCategory;
+	}
+
+
+
+	public void setFundCategory(String fundCategory) {
+		this.fundCategory = fundCategory;
+	}
+
+
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -256,6 +272,9 @@ public class FundDetails {
         if ((this.minSipDuration == null) ? (other.minSipDuration != null) : !this.minSipDuration.equals(other.minSipDuration)) {
             return false;
         }
+        if ((this.fundCategory == null) ? (other.fundCategory != null) : !this.fundCategory.equals(other.fundCategory)) {
+            return false;
+        }
         return true;
     }
 
@@ -273,6 +292,7 @@ public class FundDetails {
         hash = 83 * hash + (this.minSipAmount != null ? this.minSipAmount.hashCode() : 0);
         hash = 83 * hash + (this.minLumsumAmount != null ? this.minLumsumAmount.hashCode() : 0);
         hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
+        hash = 83 * hash + (this.fundCategory != null ? this.fundCategory.hashCode() : 0);
         return hash;
     }
     

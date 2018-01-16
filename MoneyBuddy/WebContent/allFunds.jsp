@@ -36,7 +36,19 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
        
-        
+                <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+ 	<script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/sly.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/index.js"></script>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         
     </head>
     <!-- End Head -->
@@ -137,6 +149,8 @@
 		                    <div class="s-portfolio__img-effect">
 		                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
 				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
+				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+				                           
 				                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2"> <s:property value="#fundDetailsDataModelElement.fundId"/> . <s:property value="#fundDetailsDataModelElement.fundName"/></p>
 				                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><s:property value="#fundDetailsDataModelElement.sector"/></h3>
 				                          	<p class="g-text-left--xs "><s:property value="#fundDetailsDataModelElement.subSector"/></p>
@@ -147,6 +161,7 @@
 				                            <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
 				                            <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
 				                            <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+				                            <p class="g-text-left--xs ">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
 				                        </div>
 		                    </div>
 		                    <div class="s-portfolio__caption-hover--cc">
@@ -172,7 +187,8 @@
 		                                    
 		                           		<br/>
 		                           		<br/>
-		                                 <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a>
+		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                                 <!-- <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a> -->
 		                            </li>
 		                        </ul>
 		                    </div>

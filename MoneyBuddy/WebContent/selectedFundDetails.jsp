@@ -120,6 +120,66 @@
 				%>
         	</div>
   
+          <div class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
+  <div id="js__grid-portfolio-gallery" class="cbp">
+            
+                 
+            
+                <!-- ITEM 1 -->
+		                <div class="s-portfolio__item cbp-item motion graphic">
+		                    <div class="s-portfolio__img-effect">
+		                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
+		                        			<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
+				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
+				                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2"> <s:property value="#fundDetails.fundId"/> . <s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><s:property value="#fundDetails.sector"/></h3>
+				                          	<p class="g-text-left--xs "><s:property value="#fundDetails.subSector"/></p>
+				                            <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetails.fundStartDate"/></p>
+				                            <p class="g-text-left--xs ">Rating : <s:property value="#fundDetails.rating"/></p>
+				                            <p class="g-text-left--xs ">Risk : <s:property value="#fundDetails.risk"/></p>
+				                            <p class="g-text-left--xs ">3 yrs returns : <s:property value="#fundDetails.returnsThreeYears"/>%</p>
+				                            <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetails.minSipAmount"/>INR </p>
+				                            <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetails.minSipYears"/> years</p>
+				                            <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetails.minLumsumAmount"/> INR</p>
+				                            <p class="g-text-left--xs ">Fund Category : <s:property value="#fundDetails.fundCategory"/></p>
+				                        </div>
+		                    </div>
+		                    <div class="s-portfolio__caption-hover--cc">
+		                        <div class="g-margin-b-25--xs">
+		                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
+		                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
+		                        </div>
+		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                            <li>
+		                            <s:set var="sector" value="#fundDetailsDataModelElement.sector" />
+		                            <s:if test="sector.equals('Equity')">
+		                                <a href="images/portfolio/recent/slide/Slide1.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
+		                             </s:if>
+		                             <s:else>
+		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
+		                             
+									 </s:else>       
+		                                    
+		                                    
+		                           		<br/>
+		                           		<br/>
+		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                                 <!-- <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a> -->
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+                <!-- End ITEM -->
+               
+	              
+	           
+                
+            </div>
+            </div>
             <div class="pricing-area text-center">
                 <div class="row">
                     <div class="col-sm-6 plan price-one wow fadeInDown">

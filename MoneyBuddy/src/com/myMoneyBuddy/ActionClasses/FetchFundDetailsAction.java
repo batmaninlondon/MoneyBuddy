@@ -64,7 +64,7 @@ public class FetchFundDetailsAction extends ActionSupport implements SessionAwar
     	logger.debug("FetchFundDetailsAction class : execute method : start");
     	
     	try {
-				
+			System.out.println("Calling FetchFundDetailsAction class - start ");
 			QueryFundDetails queryFundDetails = new QueryFundDetails();
 
 			fundDetailsDataModel = queryFundDetails.getFundDetailsData();

@@ -50,6 +50,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     	try {
     		logger.debug("PanCardVerificationAction class : execute method : start");
         	System.out.println(" PanCardVerificationAction execute method Called !!");
+        	System.out.println(" PanCardVerificationAction execute method : panCard : "+getPanCard());
     		
     		UpdateCustomerPancard updatecustomerPancard = new UpdateCustomerPancard();
     		

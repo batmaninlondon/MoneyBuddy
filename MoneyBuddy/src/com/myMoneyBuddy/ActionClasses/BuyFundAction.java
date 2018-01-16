@@ -7,6 +7,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
+import com.myMoneyBuddy.DAOClasses.QueryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -15,6 +16,7 @@ import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
@@ -56,6 +58,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	
 	private String fundId;
 	
+	private FundDetailsDataModel selectedFundDetailsDataModel;
 	
     public String execute() {
 
@@ -114,6 +117,14 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	sessionMap.put("productRatioList", productRatioList);
 	    	
 	    	System.out.println("productDescription : "+productDescription);
+	    	
+	    	QueryFundDetails queryFundDetails = new QueryFundDetails();
+
+	    	selectedFundDetailsDataModel = queryFundDetails.getSelectedFundDetailsData(getFundId());
+			setSelectedFundDetailsDataModel(selectedFundDetailsDataModel);
+			
+			sessionMap.put("selectedFundDetailsDataModel", selectedFundDetailsDataModel);
+			logger.debug("BuyFundAction class : execute method : stored selectedFundDetailsDataModel in session id : "+sessionMap.getClass().getName());
 	    	//System.out.println("amount : "+amount);
 	    	
 	    	logger.debug("BuyFundAction class : execute method : end");
@@ -173,6 +184,16 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
+	}
+
+
+	public FundDetailsDataModel getSelectedFundDetailsDataModel() {
+		return selectedFundDetailsDataModel;
+	}
+
+
+	public void setSelectedFundDetailsDataModel(FundDetailsDataModel selectedFundDetailsDataModel) {
+		this.selectedFundDetailsDataModel = selectedFundDetailsDataModel;
 	}
 
 
