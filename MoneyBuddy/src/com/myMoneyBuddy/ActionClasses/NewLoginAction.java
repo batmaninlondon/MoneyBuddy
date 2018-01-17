@@ -12,9 +12,11 @@ import java.util.Map;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.UpdateCurrentLoginTimestamp;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.opensymphony.xwork2.ActionSupport;
@@ -104,8 +106,8 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	// Savita Wadhwani - need to add two columns in Customer table - custDetUploaded and addCustDetUploaded, and fetch the same here - start
 	    	// this is a temporary workaroubnd 
 	    	
-	    	String custDetUploaded = customer.getDateOfBirth();
-	    	String addCustDetUploaded = customer.getOccupation();
+	    	String custDetUploaded = customer.getCusDetailsUploaded();
+	    	String addCustDetUploaded = customer.getAddCusDetailsUploaded();
 	    	
 	    	// Savita Wadhwani - need to add two columns in Customer table - custDetUploaded and addCustDetUploaded, and fetch the same here - end
 	    	System.out.println("customerId : "+customerId);

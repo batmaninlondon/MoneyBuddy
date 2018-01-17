@@ -1039,6 +1039,34 @@ function showCustomerDetails()
 	
 }
 
+function createCart()  
+{
+	$.ajax({
+
+        url : "createCartAction",
+        type: 'post',
+        
+        data: {},
+        
+        success : function(result){
+        	
+        	alert('result : '+result);
+        	if (result == "success") {
+        		
+        		//window.location='bankDetails';
+        		window.location='customerCart';
+        	}
+        	else {
+        		/*alert('Inside newLogin error !!');*/
+        		window.location='errorPage';
+        	}
+        	
+        },
+
+    });	
+
+}
+
 function openCustomerDetailsPage()  
 {
       

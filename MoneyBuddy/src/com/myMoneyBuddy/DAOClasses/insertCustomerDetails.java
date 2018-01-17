@@ -25,11 +25,9 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class insertCustomerDetails {
 
 	Logger logger = Logger.getLogger(insertCustomerDetails.class);
-	
-    public void insertCustomer (String emailId,String customerName,String dateOfBirth,String mobileNumber,
-    		String gender, String occupation, String taxStatus, String addressLineOne, String addressLineTwo,
-    		String addressLineThree, String residentialCity, String residentialState, String residentialPin,
-    		String residentialCountry, String panCard, String password,String verificationStatus) throws MoneyBuddyException
+
+    public void insertCustomer (String emailId,String mobileNumber,
+    		String password) throws MoneyBuddyException
     {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
@@ -42,10 +40,8 @@ public class insertCustomerDetails {
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
-    		
-    		Customers tempCustomer = new Customers(emailId,customerName,mobileNumber,password,verificationStatus,gender,occupation,
-    				dateOfBirth,addressLineOne,addressLineTwo,addressLineThree,residentialCity,residentialState,residentialPin,residentialCountry,
-    				taxStatus,panCard,"NC",null,"N","N","CUSTOMER");
+
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N");
     		session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();

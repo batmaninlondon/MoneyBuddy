@@ -72,6 +72,11 @@
 	    	<result>/customerDetails.jsp</result>
 		</action>
 	</package>
+	<package name="customerCart" namespace="/" extends="struts-default">
+	    <action name="customerCart">
+	    	<result>/customerCart.jsp</result>
+		</action>
+	</package>
 	<package name="bankDetails" namespace="/" extends="struts-default">
 	    <action name="bankDetails">
 	    	<result>/bankDetails.jsp</result>

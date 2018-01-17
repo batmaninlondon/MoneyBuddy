@@ -27,8 +27,8 @@ import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.Response;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetPasswordParam_QNAME = new QName("http://tempuri.org/", "Param");
     private final static QName _PaymentGatewayAPIResponsePaymentGatewayAPIResult_QNAME = new QName("http://tempuri.org/", "PaymentGatewayAPIResult");
-    private final static QName _PaymentGatewayAPIParam_QNAME = new QName("http://tempuri.org/", "Param");
     private final static QName _GetPasswordResponseGetPasswordResult_QNAME = new QName("http://tempuri.org/", "GetPasswordResult");
 
     /**
@@ -71,12 +71,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Response }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PasswordRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "PaymentGatewayAPIResult", scope = PaymentGatewayAPIResponse.class)
-    public JAXBElement<Response> createPaymentGatewayAPIResponsePaymentGatewayAPIResult(Response value) {
-        return new JAXBElement<Response>(_PaymentGatewayAPIResponsePaymentGatewayAPIResult_QNAME, Response.class, PaymentGatewayAPIResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "Param", scope = GetPassword.class)
+    public JAXBElement<PasswordRequest> createGetPasswordParam(PasswordRequest value) {
+        return new JAXBElement<PasswordRequest>(_GetPasswordParam_QNAME, PasswordRequest.class, GetPassword.class, value);
     }
 
     /**
@@ -85,16 +85,16 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "Param", scope = PaymentGatewayAPI.class)
     public JAXBElement<RequestParam> createPaymentGatewayAPIParam(RequestParam value) {
-        return new JAXBElement<RequestParam>(_PaymentGatewayAPIParam_QNAME, RequestParam.class, PaymentGatewayAPI.class, value);
+        return new JAXBElement<RequestParam>(_GetPasswordParam_QNAME, RequestParam.class, PaymentGatewayAPI.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PasswordRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Response }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "Param", scope = GetPassword.class)
-    public JAXBElement<PasswordRequest> createGetPasswordParam(PasswordRequest value) {
-        return new JAXBElement<PasswordRequest>(_PaymentGatewayAPIParam_QNAME, PasswordRequest.class, GetPassword.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "PaymentGatewayAPIResult", scope = PaymentGatewayAPIResponse.class)
+    public JAXBElement<Response> createPaymentGatewayAPIResponsePaymentGatewayAPIResult(Response value) {
+        return new JAXBElement<Response>(_PaymentGatewayAPIResponsePaymentGatewayAPIResult_QNAME, Response.class, PaymentGatewayAPIResponse.class, value);
     }
 
     /**

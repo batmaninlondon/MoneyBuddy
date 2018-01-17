@@ -170,13 +170,19 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		
 		
 		session.beginTransaction();
-		Query query = session.createQuery("update Customers set kycStatus = :kycStatus , customerName = :customerName , dateOfBirth = :dateOfBirth ,"
+		Query query = session.createQuery("update Customers set customerName = :customerName where customerId = :customerId");
+		query.setParameter("customerName", getCustomerName());
+		query.setParameter("customerId", sessionMap.get("customerId").toString());
+		
+		int updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in Customers table ");
+		
+		query = session.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
 				+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
 				+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
 				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
 				+ " where customerId = :customerId");
-		
-		query.setParameter("customerName", getCustomerName());
+
 		query.setParameter("dateOfBirth", frmtdDateForDB);
 		query.setParameter("addressLineOne", getAddressLineOne());
 		query.setParameter("addressLineTwo", getAddressLineTwo());
@@ -192,7 +198,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
-		int updateResult = query.executeUpdate();
+		updateResult = query.executeUpdate();
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
 		if (updateResult == 1) {

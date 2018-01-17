@@ -32,9 +32,6 @@ public class ObjectFactory {
     private final static QName _PasswordRequestUserId_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "UserId");
     private final static QName _PasswordRequestPassword_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Password");
     private final static QName _PasswordRequestPassKey_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "PassKey");
-    private final static QName _ResponseStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Status");
-    private final static QName _ResponseFiller_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Filler");
-    private final static QName _ResponseResponseString_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "ResponseString");
     private final static QName _RequestParamOrders_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Orders");
     private final static QName _RequestParamAccNo_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "AccNo");
     private final static QName _RequestParamMode_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Mode");
@@ -45,6 +42,9 @@ public class ObjectFactory {
     private final static QName _RequestParamLogOutURL_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "LogOutURL");
     private final static QName _RequestParamMemberCode_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "MemberCode");
     private final static QName _RequestParamBankID_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "BankID");
+    private final static QName _ResponseStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Status");
+    private final static QName _ResponseFiller_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "Filler");
+    private final static QName _ResponseResponseString_QNAME = new QName("http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", "ResponseString");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.datacontract.schemas._2004._07.starmfpaymentgatewayservice
@@ -141,33 +141,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "Status", scope = Response.class)
-    public JAXBElement<String> createResponseStatus(String value) {
-        return new JAXBElement<String>(_ResponseStatus_QNAME, String.class, Response.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "Filler", scope = Response.class)
-    public JAXBElement<String> createResponseFiller(String value) {
-        return new JAXBElement<String>(_ResponseFiller_QNAME, String.class, Response.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "ResponseString", scope = Response.class)
-    public JAXBElement<String> createResponseResponseString(String value) {
-        return new JAXBElement<String>(_ResponseResponseString_QNAME, String.class, Response.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}}
      * 
      */
@@ -255,6 +228,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "BankID", scope = RequestParam.class)
     public JAXBElement<String> createRequestParamBankID(String value) {
         return new JAXBElement<String>(_RequestParamBankID_QNAME, String.class, RequestParam.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "Status", scope = Response.class)
+    public JAXBElement<String> createResponseStatus(String value) {
+        return new JAXBElement<String>(_ResponseStatus_QNAME, String.class, Response.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "Filler", scope = Response.class)
+    public JAXBElement<String> createResponseFiller(String value) {
+        return new JAXBElement<String>(_ResponseFiller_QNAME, String.class, Response.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/StarMFPaymentGatewayService", name = "ResponseString", scope = Response.class)
+    public JAXBElement<String> createResponseResponseString(String value) {
+        return new JAXBElement<String>(_ResponseResponseString_QNAME, String.class, Response.class, value);
     }
 
 }

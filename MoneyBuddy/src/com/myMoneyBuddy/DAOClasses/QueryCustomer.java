@@ -26,7 +26,8 @@ public class QueryCustomer {
 			
 		logger.debug("QueryCustomer class : getCustomer method : start");
 		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
-	
+		session.clear();
+		
 		Customers customer = new Customers();
 	
 	

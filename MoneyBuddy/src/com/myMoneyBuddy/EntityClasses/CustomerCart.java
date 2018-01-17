@@ -21,6 +21,7 @@ import javax.persistence.Table;
 public class CustomerCart {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column (name="CART_ID")
     private String cartId;
     
@@ -38,22 +39,23 @@ public class CustomerCart {
 
     @Column(name="CART_CREATION_DATE")
     private String cartCreationDate;
-
-
     
+    @Column(name="STATUS")
+    private String status;
+
     public CustomerCart() {
         
     }
 
-	public CustomerCart(String cartId, String customerId, String productId, String productName, String amount,
-			String cartCreationDate) {
+	public CustomerCart( String customerId, String productId, String productName, String amount,
+			String cartCreationDate, String status) {
 		super();
-		this.cartId = cartId;
 		this.customerId = customerId;
 		this.productId = productId;
 		this.productName = productName;
 		this.amount = amount;
 		this.cartCreationDate = cartCreationDate;
+		this.status = status;
 	}
 
 
@@ -105,6 +107,14 @@ public class CustomerCart {
 		this.cartCreationDate = cartCreationDate;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -132,7 +142,9 @@ public class CustomerCart {
         if ((this.cartCreationDate == null) ? (other.cartCreationDate != null) : !this.cartCreationDate.equals(other.cartCreationDate)) {
             return false;
         }
-
+        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+            return false;
+        }
         return true;
     }
 
@@ -145,7 +157,7 @@ public class CustomerCart {
         hash = 79 * hash + (this.productName != null ? this.productName.hashCode() : 0);
         hash = 79 * hash + (this.amount != null ? this.amount.hashCode() : 0);
         hash = 79 * hash + (this.cartCreationDate != null ? this.cartCreationDate.hashCode() : 0);
-        
+        hash = 79 * hash + (this.status != null ? this.status.hashCode() : 0);
         return hash;
     }
 

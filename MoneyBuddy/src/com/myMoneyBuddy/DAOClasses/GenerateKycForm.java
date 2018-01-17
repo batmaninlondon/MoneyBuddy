@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -46,9 +47,10 @@ public class GenerateKycForm {
 
     		
     		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-
-    		Customers customer = new Customers();
-    		AdditionalCustomerDetails additionalDetails = new AdditionalCustomerDetails();
+    		session.beginTransaction();
+    		Customers customer = (Customers) session.get(Customers.class, customerId);
+    		CustomerDetails customerDetail = (CustomerDetails) session.get(CustomerDetails.class, customerId);
+    		AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) session.get(AdditionalCustomerDetails.class, customerId);
 
 
     		
@@ -74,21 +76,21 @@ public class GenerateKycForm {
             while(iterator.hasNext())
                 System.out.println("Field is >>>"+iterator.next());
             
-            session.beginTransaction();
+           /* session.beginTransaction();
 			customer = (Customers) session.createQuery("from Customers where customerId = '"+customerId+"'").uniqueResult();
 	
 			//session.getTransaction().commit();
 			
 			//session.beginTransaction();
 			additionalDetails = (AdditionalCustomerDetails) session.createQuery("from AdditionalCustomerDetails where customerId = '"+customerId+"'").uniqueResult();
-	
+	*/
 			//session.getTransaction().commit();
             
             String customerName = customer.getCustomerName();
             form.setField("Name", customerName.toUpperCase());
             form.setField("FathersSpouse Name", additionalDetails.getFatherName().toUpperCase());  
             
-            if ( "F".equals(customer.getGender()))
+            if ( "F".equals(customerDetail.getGender()))
             	form.setField("Female","On");
             else 
             	form.setField("Male","On");
@@ -100,7 +102,7 @@ public class GenerateKycForm {
             
             // assuming dob will come in dd/mm/yyyy format
             
-            String dob = customer.getDateOfBirth();
+            String dob = customerDetail.getDateOfBirth();
             
             System.out.println("Date : "+dob.substring(8,10));
             System.out.println(" Month : "+dob.substring(5,7));
@@ -124,12 +126,12 @@ public class GenerateKycForm {
             form.setField("PAN", customer.getPanCard().toUpperCase());
             
             form.setField("Address 1.0", "Updated");
-            form.setField("Address 1.1", customer.getAddressLineOne().toUpperCase()+" "+customer.getAddressLineTwo().toUpperCase());
-            form.setField("Address 1.2", customer.getAddressLineThree().toUpperCase());
-            form.setField("City", customer.getResidentialCity().toUpperCase());
-            form.setField("Pin Code", customer.getResidentialPin());
-            form.setField("State", customer.getResidentialState().toUpperCase());
-            form.setField("Country", customer.getResidentialCountry().toUpperCase());
+            form.setField("Address 1.1", customerDetail.getAddressLineOne().toUpperCase()+" "+customerDetail.getAddressLineTwo().toUpperCase());
+            form.setField("Address 1.2", customerDetail.getAddressLineThree().toUpperCase());
+            form.setField("City", customerDetail.getResidentialCity().toUpperCase());
+            form.setField("Pin Code", customerDetail.getResidentialPin());
+            form.setField("State", customerDetail.getResidentialState().toUpperCase());
+            form.setField("Country", customerDetail.getResidentialCountry().toUpperCase());
             form.setField("Mobile No",customer.getMobileNumber());
             form.setField("Email ID",customer.getEmailId());
             
@@ -147,7 +149,7 @@ public class GenerateKycForm {
             	form.setField("25 Lacs","On");
             
            
-           String occupation = customer.getOccupation();
+           String occupation = customerDetail.getOccupation();
            if ( "PriSecJob".equals(occupation))
         	   form.setField("Private Sector Service","On");
            else if ( "PubSecJob".equals(occupation))

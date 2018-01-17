@@ -20,6 +20,7 @@ import com.linuxense.javadbf.DBFWriter;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
@@ -741,18 +742,22 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 	
 						//session.beginTransaction();
 						
-						query = session.createQuery("from Customers where customerId = :customerId");
+						/*query = session.createQuery("from Customers where customerId = :customerId");
 						query.setParameter("customerId", transactionDetail.getCustomerId());	
-						Customers customer =  (Customers) query.uniqueResult();
+						Customers customer =  (Customers) query.uniqueResult();*/
 						//session.getTransaction().commit();
 						
 						//session.beginTransaction();
 						
-						query = session.createQuery("from AdditionalCustomerDetails where customerId = :customerId");
+						/*query = session.createQuery("from AdditionalCustomerDetails where customerId = :customerId");
 						query.setParameter("customerId", transactionDetail.getCustomerId());
-						AdditionalCustomerDetails additionalCustomerDetails =  (AdditionalCustomerDetails) query.uniqueResult();
+						AdditionalCustomerDetails additionalCustomerDetails =  (AdditionalCustomerDetails) query.uniqueResult();*/
 						//session.getTransaction().commit();
 						
+						Customers customer = (Customers) session.get(Customers.class, transactionDetail.getCustomerId());
+			    		CustomerDetails customerDetail = (CustomerDetails) session.get(CustomerDetails.class,  transactionDetail.getCustomerId());
+			    		//AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) session.get(AdditionalCustomerDetails.class,  transactionDetail.getCustomerId());
+			    		
 						//session.beginTransaction();
 						
 						query = session.createQuery("from ProductDetails where productId = :productId");
@@ -781,7 +786,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						String  occuCode;
 						query = session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "Occupation");	
-						query.setParameter("fieldValue", customer.getOccupation());	
+						query.setParameter("fieldValue", customerDetail.getOccupation());	
 						result = query.uniqueResult();
 						occuCode = result.toString();
 						
@@ -792,7 +797,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						String  taxStatus;
 						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "TaxStatus");	
-						query.setParameter("fieldValue", customer.getTaxStatus());	
+						query.setParameter("fieldValue", customerDetail.getTaxStatus());	
 						result = query.uniqueResult();
 						taxStatus = result.toString();
 						
@@ -803,7 +808,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						String  state;
 						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "State");	
-						query.setParameter("fieldValue", customer.getResidentialState());	
+						query.setParameter("fieldValue", customerDetail.getResidentialState());	
 						result = query.uniqueResult();
 						state = result.toString();
 						
@@ -814,7 +819,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						String  locationCode;
 						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "LocationCode");	
-						query.setParameter("fieldValue", customer.getResidentialCity());	
+						query.setParameter("fieldValue", customerDetail.getResidentialCity());	
 						result = query.uniqueResult();
 						locationCode = result.toString();
 						
@@ -835,11 +840,11 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[10] = customer.getCustomerName(); 
 						rowData[11] = null; 
 						rowData[12] = null; 
-						rowData[13] = customer.getAddressLineOne(); 
-						rowData[14] = customer.getAddressLineTwo(); 
-						rowData[15] = customer.getAddressLineThree(); 
-						rowData[16] = customer.getResidentialCity(); 
-						rowData[17] = customer.getResidentialPin(); 
+						rowData[13] = customerDetail.getAddressLineOne(); 
+						rowData[14] = customerDetail.getAddressLineTwo(); 
+						rowData[15] = customerDetail.getAddressLineThree(); 
+						rowData[16] = customerDetail.getResidentialCity(); 
+						rowData[17] = customerDetail.getResidentialPin(); 
 						rowData[18] = null; 
 						
 						transactionDetailDate = transactionDetail.getTransactionDate();
@@ -855,7 +860,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[21] = (("BUY".equals(transactionDetail.getBuySell())) ? null : transactionDetail.getQuantity()); 
 						rowData[22] = transactionDetail.getTransactionAmount(); 
 						rowData[23] = null;
-						rowData[24] = customer.getDateOfBirth(); 
+						rowData[24] = customerDetail.getDateOfBirth(); 
 						rowData[25] = null;
 						rowData[26] = customer.getPanCard();  
 						rowData[27] = null;

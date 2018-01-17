@@ -60,6 +60,7 @@ public interface IStarMFWebService {
      * @return
      *     returns java.lang.String
      */
+    
     @WebMethod(operationName = "MFAPI", action = "http://www.bsestarmf.in/2016/01/IStarMFWebService/MFAPI")
     @WebResult(name = "MFAPIResult", targetNamespace = "http://www.bsestarmf.in/2016/01/")
     @RequestWrapper(localName = "MFAPI", targetNamespace = "http://www.bsestarmf.in/2016/01/", className = "in.bsestarmf._2016._01.MFAPI")

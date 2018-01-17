@@ -126,7 +126,7 @@ public class QueryProducts {
 			for(ProductDetails productDetail : productDetailList){
 				System.out.println(" productName : "+productDetail.getProductDescription());
 				System.out.println("Percentage : "+productDetail.getPercentage());
-				hashMap.put(productDetail.getProductDescription(),Double.parseDouble(productDetail.getPercentage()));
+				hashMap.put(productDetail.getProductId(),Double.parseDouble(productDetail.getPercentage()));
 				
 				query = session.createQuery("select minLumsumAmount from FundDetails where fundId = :fundId");
 		    	
@@ -874,6 +874,47 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 	}
 
 }
+
+	public String getProductName( String productId) throws MoneyBuddyException  {
+		Session hibernateSession = null;
+		try {
+			logger.debug("QueryProducts class : getProductName method : end");
+			
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select productDescription from ProductDetails where productId = :productId");
+    	
+			query.setParameter("productId", productId);
+			String productDescription = query.uniqueResult().toString();
+			logger.debug("QueryProducts class : getProductName method : end");
+			
+			return productDescription;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryProducts class : getProductName method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class : getProductName method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class : getProductName method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			hibernateSession.close();
+
+		}
+	}
 
 
 	public double dateDiff(Date d1, Date d2){

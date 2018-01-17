@@ -17,7 +17,7 @@ import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.StarMFPaymentGatewayService;
 
 
-@WebServiceClient(name = "IStarMFPaymentGatewayService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://bsestarmfdemo.bseindia.com/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl")
+@WebServiceClient(name = "StarMFPaymentGatewayService", targetNamespace = "http://tempuri.org/", wsdlLocation = "https://www.bsestarmf.in/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl")
 public class WebServiceStarMFPaymentGateway extends Service{
 
 	protected WebServiceStarMFPaymentGateway(URL wsdlDocumentLocation, QName serviceName) {
@@ -34,7 +34,7 @@ public class WebServiceStarMFPaymentGateway extends Service{
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://bsestarmfdemo.bseindia.com/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl");
+            url = new URL("https://www.bsestarmf.in/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

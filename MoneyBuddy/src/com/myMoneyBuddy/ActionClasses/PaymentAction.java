@@ -20,12 +20,14 @@ import javax.ws.rs.core.Request;
 
 import com.myMoneyBuddy.DAOClasses.QueryAdditionalCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.insertBankDetails;
 import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -173,6 +175,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	
 	    	Customers customer = queryCustomer.getCustomer(CLIENT_EMAIL);
 	    	
+	    	QueryCustomerDetails queryCustomerDetails = new QueryCustomerDetails();
+	    	
+	    	CustomerDetails customerDetails = queryCustomerDetails.getCustomerDetails(customerId);
+	    	
 	    	QueryAdditionalCustomerDetails queryAddCusDetails = new QueryAdditionalCustomerDetails();
 	    	
 	    	//AdditionalCustomerDetails addCusDetails = queryAddCusDetails.getAddCusDetails(customerId);
@@ -180,10 +186,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	
 	    	Trading trading = new Trading();
 		
-	    	String ucc = trading.createClient(CLIENT_HOLDING, customer.getTaxStatus(), customer.getOccupation(), customer.getDateOfBirth(),
-	    			customer.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
-	    			customer.getAddressLineOne()+" "+customer.getAddressLineTwo()+" "+customer.getAddressLineThree(), customer.getResidentialCity(), 
-	    			customer.getResidentialState(), customer.getResidentialPin(), customer.getResidentialCountry(),
+	    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
+	    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
+	    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
+	    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
 				customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
 		
 	    	String[] uccSpilts = ucc.split("\\|");

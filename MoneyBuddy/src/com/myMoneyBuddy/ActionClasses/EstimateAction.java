@@ -188,14 +188,13 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     	    System.out.println("EstimateAction class : execute method : end : transactionType : "+sessionMap.get("transactionType").toString());
 
 	   	    Iterator it = productRatioList.entrySet().iterator();
-	   	    String productName;
-	   	    String key;
+
 	   	    while (it.hasNext()) {
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        Double amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(totalInvestment) ) /100);
 	   	        //pair.setValue(amount);
-	   	        
-	   	        productList.put(pair.getKey().toString(), amount);
+
+	   	        productList.put(queryProduct.getProductName(pair.getKey().toString()), amount);
 
 	   	        
 	   	    }

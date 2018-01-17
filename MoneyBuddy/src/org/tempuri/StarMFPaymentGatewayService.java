@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "StarMFPaymentGatewayService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://bsestarmfdemo.bseindia.com/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?wsdl")
+@WebServiceClient(name = "StarMFPaymentGatewayService", targetNamespace = "http://tempuri.org/", wsdlLocation = "https://www.bsestarmf.in/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl")
 public class StarMFPaymentGatewayService
     extends Service
 {
@@ -30,7 +30,7 @@ public class StarMFPaymentGatewayService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://bsestarmfdemo.bseindia.com/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?wsdl");
+            url = new URL("https://www.bsestarmf.in/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

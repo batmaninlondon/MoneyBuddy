@@ -31,7 +31,7 @@ import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
-import org.tempuri.StarMFPaymentGatewayService;
+//import org.tempuri.StarMFPaymentGatewayService;
 
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
