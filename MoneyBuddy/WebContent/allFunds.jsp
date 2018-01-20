@@ -49,6 +49,18 @@
     <script src="assets/js/index.js"></script>
   
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  
+  
+ <script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#js__grid-portfolio-gallery div").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+</script>
         
     </head>
     <!-- End Head -->
@@ -124,13 +136,17 @@
             <br/><br/><br/>
                 <div class="g-margin-b-10--xs">
                     <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-70--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">Mutual Funds</h1>
+                     <input class="form-control" id="myInput" type="text" placeholder="Search..">
+				  <br>
+				        
                     <!-- <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2">Your Questions. Answered.</p> -->
                	<div id="js__filters-portfolio-gallery" class="s-portfolio__filter-v1 cbp-l-filters-text cbp-l-filters-center">
                     <div data-filter="*" class="s-portfolio__filter-v1-item cbp-filter-item cbp-filter-item-active">Show All</div>
-                    <div data-filter=".graphic" class="s-portfolio__filter-v1-item cbp-filter-item">Graphic</div>
-                    <div data-filter=".logos" class="s-portfolio__filter-v1-item cbp-filter-item">Logo</div>
-                    <div data-filter=".motion" class="s-portfolio__filter-v1-item cbp-filter-item">Motion</div>
+                    <div data-filter=".HighRisk" class="s-portfolio__filter-v1-item cbp-filter-item">High Risk</div>
+                    <div data-filter=".MediumRisk" class="s-portfolio__filter-v1-item cbp-filter-item">Medium Risk</div>
+                    <div data-filter=".LowRisk" class="s-portfolio__filter-v1-item cbp-filter-item">Low Risk</div>
                 </div>
+                
 				</div>
             </div>
         </div>
@@ -138,53 +154,70 @@
 
 		 
         <!-- Portfolio Gallery -->
-        <div class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
-            <div id="js__grid-portfolio-gallery" class="cbp">
-            
-                 
+        <div  class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
+            	<div id="js__grid-portfolio-gallery" class="cbp">
             
                 <!-- ITEM 1 -->
                 <s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
-		                <div class="s-portfolio__item cbp-item motion graphic">
-		                    <div class="s-portfolio__img-effect">
-		                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
-				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
+                	<s:if test="#fundDetailsDataModelElement.risk.equals('High')">
+                	 		<div  class="s-portfolio__item cbp-item  HighRisk g-line-height--normal">
+                	 		<div class="s-portfolio__img-effect g-line-height--normal">
+		                        <!-- <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image"> -->
+				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
 				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
-				                           
-				                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2"> <s:property value="#fundDetailsDataModelElement.fundId"/> . <s:property value="#fundDetailsDataModelElement.fundName"/></p>
-				                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><s:property value="#fundDetailsDataModelElement.sector"/></h3>
-				                          	<p class="g-text-left--xs "><s:property value="#fundDetailsDataModelElement.subSector"/></p>
-				                            <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
-				                            <p class="g-text-left--xs ">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
-				                            <p class="g-text-left--xs ">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
-				                            <p class="g-text-left--xs ">3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
-				                            <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
-				                            <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
-				                            <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
-				                            <p class="g-text-left--xs ">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
+				                            <p class=" g-font-size-14--xs g-font-weight--700 g-color--primary g-line-height--exs"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/></h3>
+				                            <p class="g-text-left--xs g-line-height--exs">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
 				                        </div>
 		                    </div>
 		                    <div class="s-portfolio__caption-hover--cc">
-		                        <div class="g-margin-b-25--xs">
-		                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-		                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-		                        </div>
-		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                        <ul class="list-inline">
 		                            <li>
-		                            <s:set var="sector" value="#fundDetailsDataModelElement.sector" />
-		                            <s:if test="sector.equals('Equity')">
-		                                <a href="images/portfolio/recent/slide/Slide1.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
-		                             	<i class="ti-fullscreen"></i>
-		                                </a>
-		                             </s:if>
-		                             <s:else>
 		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
 		                             	<i class="ti-fullscreen"></i>
 		                                </a>
-		                             
-									 </s:else>       
-		                                    
-		                                    
+		                           		<br/>
+		                           		<br/>
+		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                			</li>
+		                     </ul>
+		                    </div>
+		                    </div>
+		             </s:if> 
+		             
+		             
+		             <s:if test="#fundDetailsDataModelElement.risk.equals('Medium')">
+                	 		<div  class="s-portfolio__item cbp-item  MediumRisk">
+                	 		<div class="s-portfolio__img-effect g-line-height--normal">
+		                        <!-- <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image"> -->
+				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
+				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+				                            <p class=" g-font-size-14--xs g-font-weight--700 g-color--primary g-line-height--exs"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/></h3>
+				                          	<p class="g-text-left--xs g-line-height--exs"><s:property value="#fundDetailsDataModelElement.subSector"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
+				                        </div>
+		                    </div>
+		                    <div class="s-portfolio__caption-hover--cc">
+		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                            <li>
+		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
 		                           		<br/>
 		                           		<br/>
 		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
@@ -192,7 +225,42 @@
 		                            </li>
 		                        </ul>
 		                    </div>
-		                </div>
+		                    </div>
+		             </s:if>  
+		             
+		              <s:if test="#fundDetailsDataModelElement.risk.equals('Low')">
+                	 		<div  class="s-portfolio__item cbp-item  LowRisk">
+                	 		<div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
+				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+				                            <p class=" g-font-size-14--xs g-font-weight--700 g-color--primary g-line-height--exs"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/></h3>
+				                          	<p class="g-text-left--xs g-line-height--exs"><s:property value="#fundDetailsDataModelElement.subSector"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
+				                            <p class="g-text-left--xs g-line-height--exs">3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+				                            <p class="g-text-left--xs g-line-height--exs">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
+				                        </div>
+		                    <div class="s-portfolio__caption-hover--cc">
+		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                            <li>
+		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" >
+		                             	<i class="ti-fullscreen"></i>
+		                                </a>
+		                           		<br/>
+		                           		<br/>
+		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                    </div>
+		             </s:if>  
+		                       
+		            
+                	
                  </s:iterator>
                 <!-- End ITEM -->
                
@@ -281,14 +349,9 @@
         <script type="text/javascript" src="vendor/counterup.min.js"></script>
         <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsXUGTFS09pLVdsYEE9YrO2y4IAncAO2U"></script>
         <script type="text/javascript" src="vendor/jquery.wow.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
-      	<!-- <script src="js/typewriter.js"></script>
-		<script>
-		    $(".typed").typewriter({speed: 60});
-		</script> -->
-		
+      	
 
         <!-- General Components and Settings -->
         <script type="text/javascript" src="js/global.min.js"></script>
