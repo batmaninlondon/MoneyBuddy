@@ -185,23 +185,21 @@
 		                                </a>
 		                           		<br/>
 		                           		<br/>
-		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                           		<button type="button" class="btn " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
 		                			</li>
 		                     </ul>
 		                    </div>
 		                    </div>
 		             </s:if> 
 		             
-		             
 		             <s:if test="#fundDetailsDataModelElement.risk.equals('Medium')">
-                	 		<div  class="s-portfolio__item cbp-item  MediumRisk">
+                	 		<div  class="s-portfolio__item cbp-item  MediumRisk g-line-height--normal">
                 	 		<div class="s-portfolio__img-effect g-line-height--normal">
 		                        <!-- <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image"> -->
 				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
 				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
 				                            <p class=" g-font-size-14--xs g-font-weight--700 g-color--primary g-line-height--exs"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
-				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/></h3>
-				                          	<p class="g-text-left--xs g-line-height--exs"><s:property value="#fundDetailsDataModelElement.subSector"/></p>
+				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/></h3>
 				                            <p class="g-text-left--xs g-line-height--exs">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
 				                            <p class="g-text-left--xs g-line-height--exs">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
 				                            <p class="g-text-left--xs g-line-height--exs">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
@@ -213,20 +211,22 @@
 				                        </div>
 		                    </div>
 		                    <div class="s-portfolio__caption-hover--cc">
-		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                        <ul class="list-inline">
 		                            <li>
 		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
 		                             	<i class="ti-fullscreen"></i>
 		                                </a>
 		                           		<br/>
 		                           		<br/>
-		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
-		                                 <!-- <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a> -->
-		                            </li>
-		                        </ul>
+		                           		<button type="button" class="btn " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                			</li>
+		                     </ul>
 		                    </div>
 		                    </div>
-		             </s:if>  
+		             </s:if> 
+		             
+		             
+		             
 		             
 		              <s:if test="#fundDetailsDataModelElement.risk.equals('Low')">
                 	 		<div  class="s-portfolio__item cbp-item  LowRisk">
@@ -252,7 +252,7 @@
 		                                </a>
 		                           		<br/>
 		                           		<br/>
-		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
+		                           		<button type="button" class="btn " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
 		                            </li>
 		                        </ul>
 		                    </div>
@@ -263,10 +263,6 @@
                 	
                  </s:iterator>
                 <!-- End ITEM -->
-               
-	              
-	           
-                
             </div>
             <!-- End Portfolio Gallery -->
         </div>

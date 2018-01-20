@@ -1069,9 +1069,9 @@ function createCart()
 
 function openCustomerDetailsPage()  
 {
-      
+	alert('showPanCardVerification : cusId : ');
 	var redirectingPage = document.getElementById('redirectingPage').value;
-	//alert('showPanCardVerification : cusId : '+cusId);
+	alert('showPanCardVerification : cusId : '+cusId);
 	if (redirectingPage == "panCardVerifiction") {
 		window.location='panCardVerification';
 	} 
@@ -1090,17 +1090,30 @@ function openCustomerDetailsPage()
 	
 }
 
-function checkLoggedInStatus()  
+function callOneTimeInvestment()  
 {
-      
 	var cusId = document.getElementById('cusId').value;
-
-	/*alert('checkLoggedInStatus : cusId : '+cusId);*/
+	alert('checkLoggedInStatus : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		window.location='login';
 	} 
 	else {
-		window.location='investmentStyle';
+		window.location='newUpfrontInvestment';
+	}
+	
+}
+
+
+function callSIPInvestment()  
+{
+      
+	var cusId = document.getElementById('cusId').value;
+	//alert('checkLoggedInStatus : cusId : '+cusId);
+	if (cusId == "customerIdNull") {
+		window.location='login';
+	} 
+	else {
+		window.location='newSipInvestment';
 	}
 	
 }
@@ -1202,6 +1215,7 @@ function showPanCardVerification()
 }
 
 function newLogin() {	
+	alert("login new");
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
 	var login = "loopedLogin";
@@ -1337,9 +1351,12 @@ function saveSubscriber() {
 
 function login() {
 	
+	alert("login");
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
 	var login = "login";
+	alert(emailId);
+	alert(password);
 	
 	if ( emailId == '')  {
 		
@@ -1401,8 +1418,11 @@ function login() {
         		document.getElementById("password").placeholder = "Incorrect Password";
         		document.getElementById("password").value = null;
         	}
-        	else if (result == "fundSelected")  {
-        		window.location='investmentStyle';
+        	else if (result == "fundOnetimeSelected")  {
+        		window.location='newUpfrontInvestment';
+        	}
+        	else if (result == "fundSIPSelected")  {
+        		window.location='newSipInvestment';
         	}
         	else {
         		/*alert('Inside login error !!');*/

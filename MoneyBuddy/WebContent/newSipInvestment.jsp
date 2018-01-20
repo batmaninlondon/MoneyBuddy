@@ -381,7 +381,7 @@
 					<!-- <button type="button" id="submit-button-2" class="btn btn-primary readmore"
 						 onClick="showCustomerDetails();" style="width: 200px;">Continue</button> -->
 						<button type="button" id="submit-button-2" class="btn btn-primary readmore"
-						 onClick="openCustomerDetailsPage();" style="width: 200px;">Continue</button>
+						 onClick="openCustomerDetailsPage();" style="width: 200px;">Continue123</button>
 				</div>
 				<div class="col-md-5"></div>
 			</div>

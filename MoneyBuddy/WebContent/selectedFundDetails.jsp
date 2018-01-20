@@ -10,14 +10,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Try it | Money Buddy</title>
+    <title>Fund Details | Money Buddy</title>
     <!-- core CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+   	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    
+    
+    
+    
+    
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
@@ -39,74 +50,82 @@
 </head>
 
 <body class="homepage">
-   <header id="header">
-        <!-- <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
+   <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="container g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
 
-        <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="nhome.jsp" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="nhome.jsp" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="nsavetax.jsp" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Blog</a></li>
+                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="nfaq.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                    </li>
+                                    <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign in</a></li>
+													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign up</a></li>
+										<%	} else 
+										 	{	%>
+										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+                                
+                                
+                                
+                                </ul>
+                            </div>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
                 </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
-                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
-                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
-                       
-				         	<%  if(session.getAttribute("customerId") == null)
-							 	{   %> 
-										 	 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="login" >Sign in</a></li>
-										<li style="margin-top:-10px;margin-bottom:-20px;"><a href="register" >Sign up</a></li> 
-							<%	} else 
-							 	{	%>
-							 			 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li style="margin-top:-10px;margin-bottom:-20px;"><a href="logOff" >Log Out</a></li> 
-							<%	}	%>  
-				                            
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
-
-	
-  
-  <%
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+			<%-- <%
 		session.setAttribute("fundSelected", "TRUE");
-	%>
-  <section class="pricing-page">
-        <div class="container">
-        	<div class="row">
+	%> --%>
+	<%-- <%session.setAttribute("fundSIPSelected", "TRUE");%> --%>
+	<%session.setAttribute("fundOnetimeSelected", "TRUE");%>
+	
+	
+		<div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
+		
+        	<br/>
+        	 <br/>
+        	 <br/>
+        	 
+        	<br/>
+        	 <br/>
+        	 <br/>
+          <div class="row">
         		<%
 					if (session.getAttribute("customerId") == null) {
 				%>
@@ -118,104 +137,130 @@
 				<%
 					}
 				%>
-        	</div>
-  
-          <div class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
-  <div id="js__grid-portfolio-gallery" class="cbp">
-            
-                 
-            
-                <!-- ITEM 1 -->
-		                <div class="s-portfolio__item cbp-item motion graphic">
-		                    <div class="s-portfolio__img-effect">
-		                        <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image">
-		                        			<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
-				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs" style="background-color: #eeeeee">
-				                            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2"> <s:property value="#fundDetails.fundId"/> . <s:property value="#fundDetailsDataModelElement.fundName"/></p>
-				                            <h3 class="g-font-size-22--xs g-letter-spacing--1"><s:property value="#fundDetails.sector"/></h3>
-				                          	<p class="g-text-left--xs "><s:property value="#fundDetails.subSector"/></p>
-				                            <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetails.fundStartDate"/></p>
-				                            <p class="g-text-left--xs ">Rating : <s:property value="#fundDetails.rating"/></p>
-				                            <p class="g-text-left--xs ">Risk : <s:property value="#fundDetails.risk"/></p>
-				                            <p class="g-text-left--xs ">3 yrs returns : <s:property value="#fundDetails.returnsThreeYears"/>%</p>
-				                            <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetails.minSipAmount"/>INR </p>
-				                            <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetails.minSipYears"/> years</p>
-				                            <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetails.minLumsumAmount"/> INR</p>
-				                            <p class="g-text-left--xs ">Fund Category : <s:property value="#fundDetails.fundCategory"/></p>
-				                        </div>
+        	</div> 
+        	
+        	<div class="g-bg-color--primary-ltr">
+		 		<div class="container ">
+			 		<div class="row g-text-center--xs ">
+					 		<div class="col-md-8 col-xs-12 ">
+				             	<h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em"> ICICI Wealth Management</h3>
+				            </div>
+		            		<div class="col-md-2 col-xs-6  g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
+		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">One Time</button>
 		                    </div>
-		                    <div class="s-portfolio__caption-hover--cc">
-		                        <div class="g-margin-b-25--xs">
-		                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Portfolio Item</h4>
-		                            <p class="g-color--white-opacity">by KeenThemes Inc.</p>
-		                        </div>
-		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-		                            <li>
-		                            <s:set var="sector" value="#fundDetailsDataModelElement.sector" />
-		                            <s:if test="sector.equals('Equity')">
-		                                <a href="images/portfolio/recent/slide/Slide1.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
-		                             	<i class="ti-fullscreen"></i>
-		                                </a>
-		                             </s:if>
-		                             <s:else>
-		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
-		                             	<i class="ti-fullscreen"></i>
-		                                </a>
-		                             
-									 </s:else>       
-		                                    
-		                                    
-		                           		<br/>
-		                           		<br/>
-		                           		<button type="button" class="btn btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
-		                                 <!-- <a class="text-uppercase btn-block s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs" href="investmentStyle">Try it out</a> -->
-		                            </li>
-		                        </ul>
+		             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
+		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">SIP</button>
 		                    </div>
-		                </div>
-                <!-- End ITEM -->
-               
-	              
-	           
+		            </div> 
+	             </div> 
+			</div>
+			<br/><br/>
+			<div class="row g-text-center--xs ">
+			 	<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                </div>
+			 	
+			 	<div class="col-md-5 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4">
+              		<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
+              		<div class="g-padding-x-40--xs g-padding-y-40--xs" >
+				    	<p class=" g-font-size-14--xs g-font-weight--700 g-color--white g-letter-spacing--2"> <s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				        <h3 class="g-font-size-22--xs g-letter-spacing--1 g-color--white"><s:property value="#fundDetails.sector"/></h3>
+				        <p class="g-text-left--xs "><s:property value="#fundDetails.subSector"/></p>
+				        <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetails.fundStartDate"/></p>
+				        <p class="g-text-left--xs ">Rating : <s:property value="#fundDetails.rating"/></p>
+				        <p class="g-text-left--xs ">Risk : <s:property value="#fundDetails.risk"/></p>
+				        <p class="g-text-left--xs ">3 yrs returns : <s:property value="#fundDetails.returnsThreeYears"/>%</p>
+				        <p class="g-text-left--xs ">Minimum SIP Amount : <s:property value="#fundDetails.minSipAmount"/>INR </p>
+				        <p class="g-text-left--xs ">Minimum SIP time : <s:property value="#fundDetails.minSipYears"/> years</p>
+				        <p class="g-text-left--xs ">Minimum Lumpsup Amount : <s:property value="#fundDetails.minLumsumAmount"/> INR</p>
+				        <p class="g-text-left--xs ">Fund Category : <s:property value="#fundDetails.fundCategory"/></p>
+				     </div> 
+                 </div>
+                 <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                </div>
+                <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  g-box-shadow__dark-lightest-v4" style="background-color: #eeeeee">
+                	
+                	<div class="row">
+                		<div class="col-md-12 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                			<p >Past Return Calculator</p>
+                		</div>
+                		<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                		</div>
+                	</div>
+                	
+                	<div class="row">
+                		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                			<input id="range" type="range" min="<s:property value="#session.minLumsumAmt"/>" max="150000" step="500"
+							value="<s:property value="#session.minLumsumAmt"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+                		</div>
+                		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                		</div>
+                		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                			<p>Rs. <span id="upfrontInvestment"></span></p>
+                		</div>
+                	</div>
+                	
+                	
+                	
+					<div id="predicted-values-list" class="col-md-12"
+				style="margin-top: 20px; padding-left: 130px; padding-right: 70px;">
+				<div id="predicted-values-list-data" class="row col-md-12">
+
+					<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+						<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+							<tr class="g-bg-color--primary">
+								<th rowspan="2" class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Invested Amount</span></th>
+								<th colspan="3" rowspan="1" class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Predicted Amount</span></th>
+							</tr>
+							<tr>
+								<th colspan="1" rowspan="1" class="text-center" ><span class=" g-font-size-8--xs g-font-size-5--xs">After 1 year</span></th>
+								<th colspan="1" rowspan="1" class="text-center" ><span class=" g-font-size-8--xs g-font-size-5--xs">After 3 year</span></th>
+								<th colspan="1" rowspan="1" class="text-center" ><span class= g-font-size-8--xs g-font-size-5--xs">After 5 year</span></th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md g-color--white">
+								<td class="center">
+									<p>Rs. <span id="investedAmount"></span></p>
+								</td>
+								<td class="center">
+									<div id="predictedValue1">
+										<p>Rs. <span id="predicted-value-for-one-year"><s:property value="#session.predictedValueList1" /></span></p>
+									</div>
+								</td>
+								<td class="center">
+									<div id="predictedValue2">
+										<p>Rs. <span id="predicted-value-for-three-year"><s:property value="#session.predictedValueList3" /></span></p>
+									</div>
+								</td>
+								<td class="center">
+									<div id="predictedValue3">
+										<p>Rs. <span id="predicted-value-for-five-year"><s:property value="#session.predictedValueList5" /></span></p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+                 </div>
+                 <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
+                </div>
                 
-            </div>
-            </div>
-            <div class="pricing-area text-center">
-                <div class="row">
-                    <div class="col-sm-6 plan price-one wow fadeInDown">
-                                <!-- <a class="btn btn-primary" href="newUpfrontInvestment" >Select this option</a> -->
-                                <button type="button" class="btn btn-primary readmore" onClick="checkLoggedInStatus();" style="margin-top:20px;padding:5px 15px 5px 15px;">Investment now</button>
-                    </div>
-
-                  </div>
-            </div><!--/pricing-area-->
-        </div><!--/container-->
-    </section><!--/pricing-page-->
+                
+		    </div> 
+        	
+                
+            </div>                     			
+	
+  
+  
+<input type="hidden" id="transactionType" value="UPFRONT" />	
   
   
   
-  
-  
-  
-  
-      <footer id="footer" class="midnight-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="myIndex">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="help">Contact Us</a></li>
-                        <li><a href="register">Sign Up</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+      
 
 </body>
 </html>

@@ -84,9 +84,9 @@
 					<table class="table table-bordered">
 						<thead class="table-head">
 							<tr>
-								<th class="center col-md-4">Fund Name</th>
-								<th class="center col-md-4">Amount</th>
-								<th class="center col-md-4">Creation Date</th>
+								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
+								<th class="center col-md-4 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-4 g-bg-color--gray-light">Creation Date</th>
 							</tr>
 						</thead>
 						<tbody class="table-body">
@@ -160,7 +160,9 @@
 				</div>
 			<div  class="row" >
 				
-				&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onClick="openCustomerDetailsPage();" style="padding:5px 15px 5px 15px;">Continue</button>
+				&nbsp;&nbsp;&nbsp;
+				
+				<button type="button"  class="btn  " onClick="openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;">Pay Now</button>
 			</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1" style="height:500px"></div>

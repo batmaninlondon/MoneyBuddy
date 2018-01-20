@@ -22,6 +22,16 @@
 	    	<result>/ongoingSips.jsp</result>
 		</action>
 	</package>
+	<package name="selectedFundDetails" namespace="/" extends="struts-default">
+	    <action name="selectedFundDetails">
+	    	<result>/selectedFundDetails.jsp</result>
+		</action>
+	</package>
+	<package name="panCardVerification" namespace="/" extends="struts-default">
+	    <action name="panCardVerification">
+	    	<result>/panCardVerification.jsp</result>
+		</action>
+	</package>
 	<package name="startSip" namespace="/" extends="struts-default">
 	    <action name="startSip">
 	    	<result>/startSip.jsp</result>
@@ -60,6 +70,11 @@
 	<package name="customerDetails" namespace="/" extends="struts-default">
 	    <action name="customerDetails">
 	    	<result>/customerDetails.jsp</result>
+		</action>
+	</package>
+	<package name="customerCart" namespace="/" extends="struts-default">
+	    <action name="customerCart">
+	    	<result>/customerCart.jsp</result>
 		</action>
 	</package>
 	<package name="bankDetails" namespace="/" extends="struts-default">

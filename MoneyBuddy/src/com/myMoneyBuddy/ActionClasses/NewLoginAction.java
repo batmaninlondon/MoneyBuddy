@@ -187,9 +187,16 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	logger.debug("NewLoginAction class : execute method : end");
 	    	
-	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
-	    	if ("TRUE".equals(sessionMap.get("fundSelected"))) {
-	    		String str = "fundSelected";
+	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundOnetimeSelected"));
+	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSIPSelected"));
+	    	if ("TRUE".equals(sessionMap.get("fundOnetimeSelected"))) {
+	    		String str = "fundOnetimeSelected";
+	    		stream = new ByteArrayInputStream(str.getBytes());
+		    	return SUCCESS;
+	    	}
+	    	
+	    	if ("TRUE".equals(sessionMap.get("fundSIPSelected"))) {
+	    		String str = "fundSIPSelected";
 	    		stream = new ByteArrayInputStream(str.getBytes());
 		    	return SUCCESS;
 	    	}
