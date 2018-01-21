@@ -50,17 +50,130 @@
   
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   
-  
  <script>
 		$(document).ready(function(){
 		  $("#myInput").on("keyup", function() {
 		    var value = $(this).val().toLowerCase();
-		    $("#js__grid-portfolio-gallery div").filter(function() {
+		    $("#myDiv1 div").filter(function() {
 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		    });
 		  });
 		});
 </script>
+
+
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  background: #ffffff;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.snip1418 img {
+  max-width: 100%;
+  vertical-align: top;
+  position: relative;
+}
+.snip1418 .add-to-cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+  background-color: #409ad5;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+.snip1418 .add-to-cart i {
+  display: inline-block;
+  margin-right: 10px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #164666;
+  color: #ffffff;
+  font-size: 1.4em;
+}
+.snip1418 figcaption {
+  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 .price {
+  font-weight: 500;
+  font-size: 1.5em;
+  line-height: 48px;
+  letter-spacing: 1px;
+}
+.snip1418 .price s {
+  margin-right: 5px;
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+/* Demo purposes only */
+body {
+  background-color: #212121;
+}
+</style>
+
         
     </head>
     <!-- End Head -->
@@ -150,11 +263,53 @@
 				</div>
             </div>
         </div>
+        
+        <div id="myDiv1" class="g-bg-color--white ">
+			<div id="myDiv2" class="row  g-container--md ">
+				<s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
+					<div id="myDiv3" class="col-md-4  g-box-shadow__dark-lightest-v4 g-bg-color--white">
+						<div  class=" HighRisk g-line-height--normal">
+						<figure class="snip1418">
+							<span id="myDiv5" class="add-to-cart"> <i class="ion-android-add"></i><span>More Details</span></span>
+	  					<figcaption>
+	  						<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+	    					<h3><s:property value="#fundDetailsDataModelElement.fundName"/></h3>
+	    					<h3>
+	      						<s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/>
+	      					</h3>	
+					    	<p>Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>                       
+					        <p >Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
+					        <p >Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
+					        <p >3 yrs returns : <s:property value="#fundDetailsDataModelElement.returnsThreeYears"/>%</p>
+					        <p >Minimum SIP Amount : <s:property value="#fundDetailsDataModelElement.minSipAmount"/>INR </p>
+					        <p >Minimum SIP time : <s:property value="#fundDetailsDataModelElement.minSipYears"/> years</p>
+					       	<p >Minimum Onetime Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
+					       	<p >Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
+	  				 </figcaption>
+	  				
+	  				<a href="#"></a>
+	  				<%-- <button type="button" class="add-to-cart " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button> --%>
+					</figure>
+				</div></div>
+			</s:iterator> 
+			
+			
+		</div>	
+	  	</div>
+	  	<br/>
+	  	<br/>
+		
+		
+		
+		
+		
+		 
+
 
 
 		 
         <!-- Portfolio Gallery -->
-        <div  class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
+        <%-- <div  id="myDIV" class="container g-margin-b-100--xs g-hor-border-4__solid--white ">
             	<div id="js__grid-portfolio-gallery" class="cbp">
             
                 <!-- ITEM 1 -->
@@ -177,7 +332,7 @@
 				                            <p class="g-text-left--xs g-line-height--exs">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
 				                        </div>
 		                    </div>
-		                    <div class="s-portfolio__caption-hover--cc">
+		                    <span class="s-portfolio__caption-hover--cc">
 		                        <ul class="list-inline">
 		                            <li>
 		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
@@ -188,7 +343,7 @@
 		                           		<button type="button" class="btn " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
 		                			</li>
 		                     </ul>
-		                    </div>
+		                    </span> 
 		                    </div>
 		             </s:if> 
 		             
@@ -228,13 +383,14 @@
 		             
 		             
 		             
-		              <s:if test="#fundDetailsDataModelElement.risk.equals('Low')">
-                	 		<div  class="s-portfolio__item cbp-item  LowRisk">
-                	 		<div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
+		             <s:if test="#fundDetailsDataModelElement.risk.equals('Low')">
+                	 		<div  class="s-portfolio__item cbp-item  LowRisk g-line-height--normal">
+                	 		<div class="s-portfolio__img-effect g-line-height--normal">
+		                        <!-- <img src="images/portfolio/recent/portfolio2.png"  alt="Portfolio Image"> -->
+				                           <div class="	 g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-20--xs g-line-height--normal" style="background-color: #eeeeee">
 				                           <s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
 				                            <p class=" g-font-size-14--xs g-font-weight--700 g-color--primary g-line-height--exs"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
-				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/></h3>
-				                          	<p class="g-text-left--xs g-line-height--exs"><s:property value="#fundDetailsDataModelElement.subSector"/></p>
+				                            <h3 class="g-font-size-22--xs g-line-height--exs "><s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/></h3>
 				                            <p class="g-text-left--xs g-line-height--exs">Start Date : <s:property value="#fundDetailsDataModelElement.fundStartDate"/></p>
 				                            <p class="g-text-left--xs g-line-height--exs">Rating : <s:property value="#fundDetailsDataModelElement.rating"/></p>
 				                            <p class="g-text-left--xs g-line-height--exs">Risk : <s:property value="#fundDetailsDataModelElement.risk"/></p>
@@ -244,28 +400,28 @@
 				                            <p class="g-text-left--xs g-line-height--exs">Minimum Lumpsup Amount : <s:property value="#fundDetailsDataModelElement.minLumsumAmount"/> INR</p>
 				                            <p class="g-text-left--xs g-line-height--exs">Fund Category : <s:property value="#fundDetailsDataModelElement.fundCategory"/></p>
 				                        </div>
-		                    <div class="s-portfolio__caption-hover--cc">
-		                        <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+		                    </div>
+		                    <span class="s-portfolio__caption-hover--cc">
+		                        <ul class="list-inline">
 		                            <li>
-		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" >
+		                             	<a href="images/portfolio/recent/slide/Slide2.jpg" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="Portfolio Item  <br/>  by KeenThemes Inc.">
 		                             	<i class="ti-fullscreen"></i>
 		                                </a>
 		                           		<br/>
 		                           		<br/>
 		                           		<button type="button" class="btn " onClick="buyFundHandler(<s:property value="selectedFundId" />);">Invest Now</button>
-		                            </li>
-		                        </ul>
+		                			</li>
+		                     </ul>
+		                    </span>
 		                    </div>
-		                    </div>
-		             </s:if>  
-		                       
+		             </s:if> 
 		            
                 	
                  </s:iterator>
                 <!-- End ITEM -->
             </div>
             <!-- End Portfolio Gallery -->
-        </div>
+        </div> --%>
         <!-- End Portfolio -->
         
         

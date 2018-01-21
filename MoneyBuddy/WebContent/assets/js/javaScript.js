@@ -1351,15 +1351,9 @@ function saveSubscriber() {
 
 function login() {
 	
-	alert("login");
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
-	var login = "login";
-	alert(emailId);
-	alert(password);
-	
 	if ( emailId == '')  {
-		
 		document.getElementById("email-id").className += " formInvalid";
 		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
 		document.getElementById("password").className = "form-control";
@@ -1467,17 +1461,19 @@ function register() {
 	
 	/*alert('register function called !! ');*/
 
-	var emailId = document.getElementById("email-id").value;
-	var password = document.getElementById("password").value;
+	var emailId = document.getElementById("email-id1").value;
+	var password = document.getElementById("password1").value;
+	alert(emailId);
+	alert(password);
 	//var confirmPassword = document.getElementById("confirm-password").value;
 	var mobileNumber = document.getElementById("mobile-number").value;
 
 	if ( emailId == '')  {
 		
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
+		//document.getElementById("email-id1").className += " formInvalid";
+		document.getElementById("email-id1").placeholder = "Email Id can not be blank!";
+		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").placeholder = "Password";
 		/*document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
@@ -1486,39 +1482,39 @@ function register() {
 	}
 	else if ( !validateEmail(emailId) )  {
 		
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id";
-		document.getElementById("email-id").value = null;
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
+		//document.getElementById("email-id1").className += " formInvalid";
+		document.getElementById("email-id1").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id";
+		document.getElementById("email-id1").value = null;
+		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		document.getElementById("mobile-number").className = "form-control";
+		//document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
 	else if ( password == '')  {
 	
-		document.getElementById("password").className += " formInvalid";
-		document.getElementById("password").placeholder = "Password can not be blank!";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
+		//document.getElementById("password1").className += " formInvalid";
+		document.getElementById("password1").placeholder = "Password can not be blank!";
+		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").placeholder = "Email ID";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		document.getElementById("mobile-number").className = "form-control";
+		//document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
 	else if ( !validatePassword(password))  {
 	
-		document.getElementById("password").className += " formInvalid";
+		//document.getElementById("password").className += " formInvalid";
 		document.getElementById("password").placeholder = "Password shall contain min 8 charcters";
 		document.getElementById("password").value = null;
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
+		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").placeholder = "Email ID";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		document.getElementById("mobile-number").className = "form-control";
+		//document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
@@ -1557,25 +1553,25 @@ function register() {
 	}*/
 	else if ( mobileNumber == '')  {
 		
-		document.getElementById("mobile-number").className += " formInvalid";
+		//document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = "Mobile Number can not be blank!";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
+		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").placeholder = "Email ID";
+		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
 	}
 	else if ( !validateMobileNumber(mobileNumber))  {
 		
-		document.getElementById("mobile-number").className += " formInvalid";
+		//document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - Not a valid mobile number";
 		document.getElementById("mobile-number").value = null;
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
+		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").placeholder = "Email ID";
+		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
@@ -1595,26 +1591,26 @@ function register() {
         		window.location='thankYouForRegistration';
         	}
         	else if (result == "UserAlreadyExists")  {
-        		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy ";
-        		document.getElementById("email-id").value = null;
-        		document.getElementById("password").className = "form-control";
-        		document.getElementById("password").placeholder = "Password";
+        		//document.getElementById("email-id1").className += " formInvalid";
+        		document.getElementById("email-id1").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy ";
+        		document.getElementById("email-id1").value = null;
+        		//document.getElementById("password1").className = "form-control";
+        		document.getElementById("password1").placeholder = "Password";
 /*        		document.getElementById("confirm-password").className = "form-control";
         		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-        		document.getElementById("mobile-number").className = "form-control";
+        		//document.getElementById("mobile-number").className = "form-control";
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
         	else if (result == "MobileNumberAlreadyExists")  {
-        		document.getElementById("mobile-number").className += " formInvalid";
-        		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - already registered with MoneyBuddy ";
+        		//document.getElementById("mobile-number").className += " formInvalid";
+        		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - already registered with MoneyBuddy 123";
         		document.getElementById("mobile-number").value = null;
-        		document.getElementById("password").className = "form-control";
-        		document.getElementById("password").placeholder = "Password";
+        		//document.getElementById("password1").className = "form-control";
+        		document.getElementById("password1").placeholder = "Password";
 /*        		document.getElementById("confirm-password").className = "form-control";
         		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-        		document.getElementById("email-id").className = "form-control";
-        		document.getElementById("email-id").placeholder = "Email ID";
+        		//document.getElementById("email-id1").className = "form-control";
+        		document.getElementById("email-id1").placeholder = "Email ID";
         	}
         	else {
         		/*alert('Inside newLogin error !!');*/

@@ -100,7 +100,7 @@
 							<div id="investment-options" class="col-md-5 ">
 							</div>
 	  					</div>
-	  					<div class="row">
+	  					<div class="row g-container--sm ">
 							<div id="investment-options" class="col-md-3 ">
 								<h6 class="title" style="margin-top: 20px; margin-bottom: 15px;">Account Type</h6>
 							</div>

@@ -31,9 +31,6 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	    
-	    
-	    <link rel="stylesheet" href="css/style4.css">
 </head>
 
 <body >
@@ -99,106 +96,56 @@
         <!--========== END HEADER ==========-->
 
 	<!--========== PROMO BLOCK ==========-->
-         <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
-         <br/><br/><br/><br/>
-         <div class="form">
-      
-      <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
+        <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;"> -->
+         <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
+            <div class="g-container--md g-text-center--xs g-padding-y-80--xs">
+            <br/>
             </div>
-        
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					 <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2">Enter your email id and password</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<div class="input-group input-group-lg">
+    					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    					<input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;">
+  					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<div class="input-group input-group-lg">
+    					<span class="input-group-addon" ><i class="glyphicon glyphicon-lock"></i></span>
+    					<input id="password" type="password" class="form-control" name="password" placeholder="Password" style="width:600px;">
+  					</div>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"> <button type="button" id="submit-button-5" class="btn btn-primary readmore"  onClick="login();" style="width: 200px;">SIGN IN</button>
+				</div>
+				<div class="col-md-2">
+				 	<a class="btn btn-primary readmore" href="forgottenPassword">Forgot Password? <i class="fa fa-angle-right"></i></a>
+				</div>
+				<div class="col-md-6"></div>
+			</div>
+			
+			
+			
+			
+			
           </div>
-
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input id="email-id1" type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input id="password1"  type="password"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Phone Number<span class="req">*</span>
-            </label>
-            <input id="mobile-number"  type="password"required autocomplete="off"/>
-          </div>
-          
-          <button type="submit" class="button button-block" onClick="register();"/>Get Started</button>
-          
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          
-          <form action="/" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input id="email-id"  type="email"required autocomplete="off"/>
-           <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input  id="password" type="password" required autocomplete="off"/>
-            <!-- <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="width:600px;"> -->
-          </div>
-          
-          <p class="forgot"><a href="forgottenPassword">Forgot Password?</a></p>
-          
-          <button id="submit-button-5"  class="button button-block" onClick="login();" />Log In</button>
-         <!--  <button type="button" id="submit-button-5" class="btn btn-primary readmore"  onClick="login();" style="width: 200px;">SIGN IN</button> -->
-          
-          
-          
-          
-          
-          </form>
-
-        </div>
-        
-      </div><!-- tab-content -->
-      
-</div>
-</div>
         <!--========== END PROMO BLOCK ==========-->
 	
 
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
@@ -225,7 +172,6 @@
         <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
         <script type="text/javascript" src="js/components/faq.min.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
-         <script  src="js/index.js"></script>
 </body>
 </html>
 
