@@ -124,11 +124,13 @@
 								<%
 								} else if ("DONE".equals(session.getAttribute("kycStatus"))) {
 									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
+										System.out.println("bankDetails page ");
 								%>
 										<input type="hidden" id="redirectingPage" value="bankDetails" />
 								<%
 									}
 									else {
+										System.out.println("customerDetails page ");
 								%>
 										<input type="hidden" id="redirectingPage" value="customerDetails" />
 								<%

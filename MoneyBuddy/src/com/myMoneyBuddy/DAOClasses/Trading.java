@@ -5,6 +5,7 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +54,7 @@ import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
 import com.mysql.fabric.xmlrpc.base.Array;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.derby.iapi.services.info.ProductGenusNames;
 import org.apache.log4j.Logger;
@@ -337,7 +339,7 @@ public class Trading {
 
 			String paymentDetails;
 			String entryParam;
-			String[] resultsEntryParam;
+			String[] resultsEntryParam = null;
 			String[] paymentDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
 			paymentDetails = String.join("|",paymentDetailsArray);
 
@@ -601,7 +603,7 @@ public class Trading {
 
 			if (!allOrderFailed) {
 				
-				WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+				/*WebServiceStarMF wbStarMF = new WebServiceStarMF();	
 				IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 				
 				String[] paymentGatewayDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
@@ -634,20 +636,21 @@ public class Trading {
 				
 				paymentUrl = resultPaymentGatewayRes[1];
 				
-				System.out.println("paymentUrl : "+paymentUrl);
+				System.out.println("paymentUrl : "+paymentUrl);*/
 				
-				/*PasswordRequest passwordRequest = new PasswordRequest();
+				PasswordRequest passwordRequest = new PasswordRequest();
 				ObjectFactory objFact = ObjectFactory.class.newInstance();
 				//JAXBElement<String> memberId = objFact.createPasswordRequestMemberId(properties.getProperty("MEMBER_ID")); 
 				
 				passwordRequest.setMemberId(objFact.createPasswordRequestMemberId(configProperties.getProperty("MEMBER_ID")));
 				passwordRequest.setPassKey(objFact.createPasswordRequestPassKey(configProperties.getProperty("PASS_KEY")));
-				passwordRequest.setPassword(objFact.createPasswordRequestPassword("Money@1"));
-				passwordRequest.setUserId(objFact.createPasswordRequestUserId("1239802"));	
+				passwordRequest.setPassword(objFact.createPasswordRequestPassword(configProperties.getProperty("PASSWORD")));
+				passwordRequest.setUserId(objFact.createPasswordRequestUserId(configProperties.getProperty("USER_ID")));	
 				
 				passwordStarMFPaymentGateway = iStarMFPaymentGatewayService.getPassword(passwordRequest);
-							
-				resultsStarMFPaymentGateway = passwordStarMFPaymentGateway.split("\\|");
+					
+				
+				resultsStarMFPaymentGateway = passwordStarMFPaymentGateway.toString().split("\\|");
 
 				for (int i = 0 ; i <resultsStarMFPaymentGateway.length ; i++ )   {
 					System.out.println("resultsStarMF : "+i+" : " +resultsStarMFPaymentGateway[i]);
@@ -670,13 +673,17 @@ public class Trading {
 				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
 				
 				ArrayOfstring orderNums = new ArrayOfstring();
-				orderNums.getString().add("1234");
-				orderNums.getString().add("5678");
-				
+				orderNums.getString().add(resultsEntryParam[2].toString());
+				//orderNums.getString().add("5678");			
 
+				Iterator it = orderNums.getString().iterator();
+				
+				while(it.hasNext())  {
+					System.out.println("oredrNums : "+it.next().toString());
+				}
 				
 				RequestParam requestParam = new RequestParam();
-				requestParam.setAccNo(objFact.createRequestParamAccNo("1234567890"));
+				requestParam.setAccNo(objFact.createRequestParamAccNo("007301555808"));
 				requestParam.setBankID(objFact.createRequestParamBankID("ICI"));
 				requestParam.setClientCode(objFact.createRequestParamClientCode(customerId));
 				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));
@@ -685,20 +692,26 @@ public class Trading {
 				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
 				requestParam.setMode(objFact.createRequestParamMode("DIRECT"));
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
-				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount("2"));
+				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(Double.toString(productDetailsMap.get("32"))));
 
 				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
 
-				System.out.println("paymentGateway : "+paymentGateway);
+				/*System.out.println("paymentGateway : "+paymentGateway);*/
 
-				String[] resultsPaymentGateway = paymentGateway.split("\\|");
+				String[] resultsPaymentGateway = paymentGateway.toString().split("\\|");
 
 				for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
 					System.out.println("resultsPaymentGateway : "+i+" : " +resultsPaymentGateway[i]);
 				}
 
 				paymentUrl = paymentGateway.getResponseString().getValue();
-				System.out.println("paymentUrl: "+paymentUrl);*/
+				/*System.out.println("paymentUrl: "+paymentUrl);*/
+				
+				
+				
+				/*Document doc = Jsoup.parse(paymentUrl);
+				
+				System.out.println("doc: "+doc);*/
 				
 				session.beginTransaction();
 
@@ -735,10 +748,13 @@ public class Trading {
 				System.out.println("paymentUrl: "+paymentUrl);
 			}
 
+			String paymentUrlFile = "D://HTMLFile/payment.html";
+			File newHtmlFile = new File(paymentUrlFile);
+			FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
 			
 			logger.debug("Trading class : executeTrade method : end");
 
-			return paymentUrl;
+			return paymentUrlFile;
 		} catch (NumberFormatException | HibernateException e) {
 			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
 			e.printStackTrace();

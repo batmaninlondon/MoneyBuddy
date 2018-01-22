@@ -114,7 +114,7 @@
           
           <form action="/" method="post">
           
-          <div class="top-row">
+          <!-- <div class="top-row">
             <div class="field-wrap">
               <label>
                 First Name<span class="req">*</span>
@@ -128,7 +128,7 @@
               </label>
               <input type="text"required autocomplete="off"/>
             </div>
-          </div>
+          </div> -->
 
           <div class="field-wrap">
             <label>
@@ -166,7 +166,7 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input id="email-id"  type="email"required autocomplete="off"/>
+            <input id="email-id"  type="email" required autocomplete="off"/>
            <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
           </div>
           

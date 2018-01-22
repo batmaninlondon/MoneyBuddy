@@ -141,16 +141,17 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getCustomerId method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		hibernateSession.flush();
 
 		Object result;
 		int customerId =0 ;
 
 		try
 		{
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			System.out.println("HI there 1 + emailID : "+emailId);
-			result = session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
+			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
 			
 			if (result != null) {
 				System.out.println("HI there 1"+result.toString());
@@ -174,7 +175,8 @@ public class QueryCustomer {
 			/*if(factory!=null)
 			factory.close();*/
 			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.clear();
+			hibernateSession.close();
 		}
 
 	}

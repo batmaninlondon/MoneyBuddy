@@ -109,11 +109,11 @@
             <!-- End Navbar -->
         </header>
         <!--========== END HEADER ==========-->
-			<%-- <%
+			<%
 		session.setAttribute("fundSelected", "TRUE");
-	%> --%>
+	%>
 	<%-- <%session.setAttribute("fundSIPSelected", "TRUE");%> --%>
-	<%session.setAttribute("fundOnetimeSelected", "TRUE");%>
+	<%-- <%session.setAttribute("fundOnetimeSelected", "TRUE");%> --%>
 	
 	
 		<div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
@@ -138,15 +138,16 @@
 					}
 				%>
         	</div> 
+        	<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
         	
         	<div class="g-bg-color--primary-ltr">
 		 		<div class="container ">
 			 		<div class="row g-text-center--xs ">
 					 		<div class="col-md-8 col-xs-12 ">
-				             	<h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em"> ICICI Wealth Management</h3>
+				             	<h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em"><s:property value="#fundDetails.fundName"/></h3>
 				            </div>
 		            		<div class="col-md-2 col-xs-6  g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
-		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">One Time</button>
+		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="<%session.setAttribute("OnetimeInvestment", "TRUE");%>;callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">One Time</button>
 		                    </div>
 		             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
 		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">SIP</button>
@@ -160,10 +161,10 @@
                 </div>
 			 	
 			 	<div class="col-md-5 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4">
-              		<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
+              		
               		<div class="g-padding-x-40--xs g-padding-y-40--xs" >
-				    	<p class=" g-font-size-14--xs g-font-weight--700 g-color--white g-letter-spacing--2"> <s:property value="#fundDetailsDataModelElement.fundName"/></p>
-				        <h3 class="g-font-size-22--xs g-letter-spacing--1 g-color--white"><s:property value="#fundDetails.sector"/></h3>
+				    	<p class=" g-font-size-14--xs g-font-weight--700 g-letter-spacing--2"> <s:property value="#fundDetails.fundName"/></p>
+				        <h3 class="g-font-size-22--xs g-letter-spacing--1 "><s:property value="#fundDetails.sector"/></h3>
 				        <p class="g-text-left--xs "><s:property value="#fundDetails.subSector"/></p>
 				        <p class="g-text-left--xs ">Start Date : <s:property value="#fundDetails.fundStartDate"/></p>
 				        <p class="g-text-left--xs ">Rating : <s:property value="#fundDetails.rating"/></p>

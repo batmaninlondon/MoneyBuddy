@@ -128,7 +128,7 @@ function buyFundHandler(fundId) {
 	//alert('function called !!');
     //var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
 	//var selectedItem = $("#selectedFundId").val();
-    //alert ('selectedItem : fund id : '+fundId);
+    //alert ('buyFundHandler : selectedItem : fund id : '+fundId);
     $.ajax({
         url : "buyFundAction",
         type: 'post',
@@ -187,7 +187,7 @@ function downloadDbfFile(el)
 function showNewUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
-document.getElementById("investedAmount").innerHTML=newValue;
+//document.getElementById("investedAmount").innerHTML=newValue;
 //alert('Call new update function !!');
 newUpdate();
 }
@@ -1050,7 +1050,7 @@ function createCart()
         
         success : function(result){
         	
-        	alert('result : '+result);
+        	//alert('result : '+result);
         	if (result == "success") {
         		
         		//window.location='bankDetails';
@@ -1069,9 +1069,9 @@ function createCart()
 
 function openCustomerDetailsPage()  
 {
-	alert('showPanCardVerification : cusId : ');
+	//alert('showPanCardVerification');
 	var redirectingPage = document.getElementById('redirectingPage').value;
-	alert('showPanCardVerification : cusId : '+cusId);
+
 	if (redirectingPage == "panCardVerifiction") {
 		window.location='panCardVerification';
 	} 
@@ -1093,7 +1093,7 @@ function openCustomerDetailsPage()
 function callOneTimeInvestment()  
 {
 	var cusId = document.getElementById('cusId').value;
-	alert('checkLoggedInStatus : cusId : '+cusId);
+	//alert('checkLoggedInStatus : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
 		window.location='login';
 	} 
@@ -1214,7 +1214,7 @@ function showPanCardVerification()
     	
 }
 
-function newLogin() {	
+/*function newLogin() {	
 	alert("login new");
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
@@ -1243,7 +1243,7 @@ function newLogin() {
 		return;
 	}
 	
-	/*alert ('newLogin() : emailId : '+emailId);*/
+	alert ('newLogin() : emailId : '+emailId);
     $.ajax({
 
         url : "newLoginAction",
@@ -1253,18 +1253,18 @@ function newLogin() {
         
         success : function(result){
         	
-        	/*alert('result : '+result);*/
+        	alert('result : '+result);
         	
         	if (result == "kycAlreadyDone") {
-        		/*document.getElementById('login-page').className += " hidden";	
-        		$("#pancard-verification").removeClass('hidden');*/
+        		document.getElementById('login-page').className += " hidden";	
+        		$("#pancard-verification").removeClass('hidden');
         		
         		//window.location='bankDetails';
         		window.location='customerDetails';
         	}
         	else if (result == "success") {
-        		/*document.getElementById('login-page').className += " hidden";	
-        		$("#pancard-verification").removeClass('hidden');*/
+        		document.getElementById('login-page').className += " hidden";	
+        		$("#pancard-verification").removeClass('hidden');
         		
         		window.location='customerDetails';
         	}
@@ -1290,7 +1290,7 @@ function newLogin() {
         		document.getElementById("password").value = null;
         	}
         	else {
-        		/*alert('Inside newLogin error !!');*/
+        		alert('Inside newLogin error !!');
         		window.location='errorPage';
         	}
         	
@@ -1300,7 +1300,7 @@ function newLogin() {
 
     });
 	
-}
+}*/
 
 function signUp(){
 	window.location='register';
@@ -1381,12 +1381,11 @@ function login() {
         url : "newLoginAction",
         type: 'post',
         
-        data: {'emailId' : emailId , 'password' : password , 'login' : login},
+        data: {'emailId' : emailId , 'password' : password },
         
         success : function(result){
         	
         	/*alert('result : '+result);*/
-        	
         	if (result == "success") {
         		/*alert('login success !! ');*/
         		window.location='myIndex';
@@ -1411,6 +1410,9 @@ function login() {
         		document.getElementById("password").className += " formInvalid";
         		document.getElementById("password").placeholder = "Incorrect Password";
         		document.getElementById("password").value = null;
+        	}
+        	else if (result == "fundSelected")  {
+        		window.location='investmentStyle';
         	}
         	else if (result == "fundOnetimeSelected")  {
         		window.location='newUpfrontInvestment';
@@ -1470,9 +1472,9 @@ function register() {
 
 	if ( emailId == '')  {
 		
-		//document.getElementById("email-id1").className += " formInvalid";
+		document.getElementById("email-id1").className += " formInvalid";
 		document.getElementById("email-id1").placeholder = "Email Id can not be blank!";
-		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
 		/*document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
@@ -1482,39 +1484,39 @@ function register() {
 	}
 	else if ( !validateEmail(emailId) )  {
 		
-		//document.getElementById("email-id1").className += " formInvalid";
+		document.getElementById("email-id1").className += " formInvalid";
 		document.getElementById("email-id1").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id";
 		document.getElementById("email-id1").value = null;
-		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		//document.getElementById("mobile-number").className = "form-control";
+		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
 	else if ( password == '')  {
 	
-		//document.getElementById("password1").className += " formInvalid";
+		document.getElementById("password1").className += " formInvalid";
 		document.getElementById("password1").placeholder = "Password can not be blank!";
-		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		//document.getElementById("mobile-number").className = "form-control";
+		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
 	else if ( !validatePassword(password))  {
 	
-		//document.getElementById("password").className += " formInvalid";
+		document.getElementById("password").className += " formInvalid";
 		document.getElementById("password").placeholder = "Password shall contain min 8 charcters";
 		document.getElementById("password").value = null;
-		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-		//document.getElementById("mobile-number").className = "form-control";
+		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
@@ -1553,11 +1555,11 @@ function register() {
 	}*/
 	else if ( mobileNumber == '')  {
 		
-		//document.getElementById("mobile-number").className += " formInvalid";
+		document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = "Mobile Number can not be blank!";
-		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
-		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
@@ -1565,12 +1567,12 @@ function register() {
 	}
 	else if ( !validateMobileNumber(mobileNumber))  {
 		
-		//document.getElementById("mobile-number").className += " formInvalid";
+		document.getElementById("mobile-number").className += " formInvalid";
 		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - Not a valid mobile number";
 		document.getElementById("mobile-number").value = null;
-		//document.getElementById("email-id1").className = "form-control";
+		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
-		//document.getElementById("password1").className = "form-control";
+		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
 /*		document.getElementById("confirm-password").className = "form-control";
 		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
@@ -1591,25 +1593,25 @@ function register() {
         		window.location='thankYouForRegistration';
         	}
         	else if (result == "UserAlreadyExists")  {
-        		//document.getElementById("email-id1").className += " formInvalid";
+        		document.getElementById("email-id1").className += " formInvalid";
         		document.getElementById("email-id1").placeholder = document.getElementById("email-id").value + " - already registered with MoneyBuddy ";
         		document.getElementById("email-id1").value = null;
-        		//document.getElementById("password1").className = "form-control";
+        		document.getElementById("password1").className = "form-control";
         		document.getElementById("password1").placeholder = "Password";
 /*        		document.getElementById("confirm-password").className = "form-control";
         		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-        		//document.getElementById("mobile-number").className = "form-control";
+        		document.getElementById("mobile-number").className = "form-control";
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
         	else if (result == "MobileNumberAlreadyExists")  {
-        		//document.getElementById("mobile-number").className += " formInvalid";
+        		document.getElementById("mobile-number").className += " formInvalid";
         		document.getElementById("mobile-number").placeholder = document.getElementById("mobile-number").value + " - already registered with MoneyBuddy 123";
         		document.getElementById("mobile-number").value = null;
-        		//document.getElementById("password1").className = "form-control";
+        		document.getElementById("password1").className = "form-control";
         		document.getElementById("password1").placeholder = "Password";
 /*        		document.getElementById("confirm-password").className = "form-control";
         		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
-        		//document.getElementById("email-id1").className = "form-control";
+        		document.getElementById("email-id1").className = "form-control";
         		document.getElementById("email-id1").placeholder = "Email ID";
         	}
         	else {
@@ -1879,7 +1881,7 @@ function comparePasswords(password1,password2) {
     
 function populateBankDetails() 
 {
-	//alert ( " Hi There, I have been called !! ");
+	//alert ( " Hi There, populateBankDetails been called !! ");
 	var bankName = document.getElementById("bank-name").value;
 	var accountType = document.getElementById("account-type").value;
 	var accountNumber = document.getElementById("account-number").value;
@@ -1943,9 +1945,9 @@ function populateBankDetails()
         	if (result.startsWith("success")) {
         		//window.location='thankYou';
         		var paymentUrl = result.substring(8);
-	
-        		window.location=paymentUrl;
-    		
+        		alert('paymentUrl   : '+paymentUrl);
+        		//window.location=paymentUrl;
+        		window.open(paymentUrl, "_self");
         	}
         	else {
         		/*alert('Inside estimate error !!');*/

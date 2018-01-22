@@ -269,10 +269,11 @@ body {
 				<s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
 					<div id="myDiv3" class="col-md-4  g-box-shadow__dark-lightest-v4 g-bg-color--white">
 						<div  class=" HighRisk g-line-height--normal">
-						<figure class="snip1418">
+						<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+						<figure class="snip1418" onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
 							<span id="myDiv5" class="add-to-cart"> <i class="ion-android-add"></i><span>More Details</span></span>
 	  					<figcaption>
-	  						<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
+	  						
 	    					<h3><s:property value="#fundDetailsDataModelElement.fundName"/></h3>
 	    					<h3>
 	      						<s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/>

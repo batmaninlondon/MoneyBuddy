@@ -140,7 +140,7 @@
 								<h6 class="title" style="margin-top: 20px; margin-bottom: 15px;">IFSC Code </h6>
 							</div>
 							<div id="investment-options" class="col-md-4 ">
-								<input class="form-control" id="account-number" type="text" placeholder="Enter Account Number" style="margin-top:-10px;">
+								<input class="form-control" id="ifsc-code" type="text" placeholder="Enter IFSC Code" style="margin-top:-10px;">
 							</div>
 							<div id="investment-options" class="col-md-5 ">
 							</div>

@@ -40,6 +40,24 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>
+		window.Modernizr
+			|| document
+					.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="assets/js/main.js"></script>
+	<script type="text/javascript" src="assets/js/wow.min.js"></script>
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	
 </head>
 
 <body style="background-color:#cecece"
@@ -58,6 +76,7 @@
 	</div>
 	<br/>
 	<br/>
+	<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--dark ">
@@ -65,7 +84,7 @@
 	    		<s:iterator value="#session.productList" var="productListElement">
 	        	</s:iterator> 
 	        	<div class="name g-color--white">
-	                	<h3 class="title g-color--white"><s:property value="#productListElement.key"/> </h3>
+	                	<h3 class="title g-color--white"><s:property value="#fundDetails.fundName"/> </h3>
 	            </div>
 	       	</div>
 	     </div>
@@ -108,22 +127,7 @@
 	     <div class="col-md-1 col-xs-1" style="height:500px"></div>
 	</div>
 
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>
-		window.Modernizr
-			|| document
-					.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');
-	</script>
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-	<script type="text/javascript" src="assets/js/main.js"></script>
-	<script type="text/javascript" src="assets/js/wow.min.js"></script>
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+
 
 </body>
 </html>

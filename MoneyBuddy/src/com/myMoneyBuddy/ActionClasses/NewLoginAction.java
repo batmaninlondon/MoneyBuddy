@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
+
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
@@ -32,7 +34,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	
     private String emailId;
     private String password;
-    private String login;
+    //private String login;
 
     QueryCustomer queryCustomer = new QueryCustomer();
 
@@ -61,6 +63,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
         logger.debug("NewLoginAction class : validate method : end");
     }*/
     public String execute() {
+    	String str = null;
     	try {
     		
     		
@@ -70,7 +73,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	if (customer == null) {
 	    		System.out.println("Emaid id not valid ");
 	    		logger.debug("NewLoginAction class : execute method : Email Id does not exists "+getEmailId());
-	    		String str = "emailIdDoesNotExists";
+	    		str = "emailIdDoesNotExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	    	}
@@ -80,14 +83,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		
 	    		System.out.println("incorrectPassword ");
 	    		logger.debug("NewLoginAction class : execute method : incorrectPassword for "+getEmailId());
-	    		String str = "incorrectPassword";
+	    		str = "incorrectPassword";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	        }
 	    	if (customer.getVerificationStatus().equalsIgnoreCase("N"))  {
 	    		System.out.println("Verification not done for this email id ");
 	    		logger.debug("NewLoginAction class : execute method : verification is not done for "+getEmailId());
-	    		String str = "verificationNotDone";
+	    		str = "verificationNotDone";
 	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		return SUCCESS;
 	    	}
@@ -175,33 +178,40 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("groupNamesList", groupNamesList);
 	    	logger.debug("NewLoginAction class : execute method : stored groupNamesList in session id : "+sessionMap.getClass().getName());
 	    	
-	    	if ("loopedLogin".equals(getLogin())) {
-		    	if (customer.getKycStatus().equalsIgnoreCase("DONE"))  {
+	    	/*if (customer.getKycStatus().equalsIgnoreCase("DONE"))  {
 		    		System.out.println("KYC is done for this customer ");
 		    		logger.debug("NewLoginAction class : execute method : kyc is done for "+getEmailId());
-		    		String str = "kycAlreadyDone";
+		    		str = "kycAlreadyDone";
 		    	    stream = new ByteArrayInputStream(str.getBytes());
 		    		return SUCCESS;
-		    	}
-	    	}
+	    	}*/
 	    	
 	    	logger.debug("NewLoginAction class : execute method : end");
 	    	
-	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundOnetimeSelected"));
-	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSIPSelected"));
-	    	if ("TRUE".equals(sessionMap.get("fundOnetimeSelected"))) {
-	    		String str = "fundOnetimeSelected";
-	    		stream = new ByteArrayInputStream(str.getBytes());
-		    	return SUCCESS;
-	    	}
+	    	/*System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundOnetimeSelected"));
+	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSIPSelected"));*/
 	    	
-	    	if ("TRUE".equals(sessionMap.get("fundSIPSelected"))) {
-	    		String str = "fundSIPSelected";
-	    		stream = new ByteArrayInputStream(str.getBytes());
-		    	return SUCCESS;
-	    	}
+	    	System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
 	    	
-	    	String str = "success";
+	    	System.out.println("Value of session variale OnetimeInvestment : "+ sessionMap.get("OnetimeInvestment"));
+	    	if ("TRUE".equals(sessionMap.get("fundSelected"))) {
+	    		/*str = "fundSelected";
+	    		stream = new ByteArrayInputStream(str.getBytes());
+		    	return SUCCESS;*/
+	    		if ("TRUE".equals(sessionMap.get("OnetimeInvestment"))) {
+		    		str = "fundOnetimeSelected";
+		    		stream = new ByteArrayInputStream(str.getBytes());
+			    	return SUCCESS;
+		    	}
+	    		else {
+	    			str = "fundSIPSelected";
+		    		stream = new ByteArrayInputStream(str.getBytes());
+			    	return SUCCESS;
+	    		}
+	    	}
+
+	    	
+	    	str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());
 	    	return SUCCESS;
 	    	
@@ -209,7 +219,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     		logger.debug("NewLoginAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
-			String str = "error";
+			str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		} 
@@ -217,7 +227,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     		logger.debug("NewLoginAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
-			String str = "error";
+			str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return ERROR;
 		}
@@ -250,13 +260,13 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
         this.emailId = emailId;
     }
    
-	public String getLogin() {
+/*	public String getLogin() {
 		return login;
 	}
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
+	}*/
 
 	public List<String> getGroupNamesList() {
 		return groupNamesList;
