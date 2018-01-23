@@ -216,6 +216,7 @@
 								<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
+									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
@@ -227,6 +228,7 @@
 										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
 											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
 												<s:if test="fundName.equals('Total')">
+													<td class="g-bg-color--gray-light "><s:property value="#portfolioDataModelElement.fundId"/></td>
 												    <td class="g-bg-color--gray-light " >
 												    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
 												    		<button type="button" class="btn btn-link" onClick=""><s:property value="#portfolioDataModelElement.fundName"/></button>
@@ -237,6 +239,7 @@
 												    <td class="g-bg-color--gray-light"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></td>
 												    </s:if>
 												    <s:else>
+												    <td class="g-bg-color--gray-light "><s:property value="#portfolioDataModelElement.fundId"/></td>
 												    <td>
 												    	<s:set var="fundName" value="#portfolioDataModelElement.fundName" />
 												    		<button type="button" class="btn btn-link" onClick="fundDetailHandler(this);"><s:property value="#portfolioDataModelElement.fundName"/></button>

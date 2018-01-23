@@ -199,11 +199,13 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		stream = new ByteArrayInputStream(str.getBytes());
 		    	return SUCCESS;*/
 	    		if ("TRUE".equals(sessionMap.get("OnetimeInvestment"))) {
+	    			System.out.println("fundOnetimeSelected");
 		    		str = "fundOnetimeSelected";
 		    		stream = new ByteArrayInputStream(str.getBytes());
 			    	return SUCCESS;
 		    	}
 	    		else {
+	    			System.out.println("fundSIPSelected ... ");
 	    			str = "fundSIPSelected";
 		    		stream = new ByteArrayInputStream(str.getBytes());
 			    	return SUCCESS;

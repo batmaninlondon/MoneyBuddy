@@ -605,7 +605,7 @@ public class QueryProducts {
 			       System.out.println("XIRR : "+ String.format("%.4f", xirr));
 			      
 			       
-			       portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",xirr),transactionStartDate));
+			       portfolioDataModel.add(new PortfolioDataModel(row[1].toString(),row[0].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",xirr),transactionStartDate));
 			 }
 			 
 			 totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
@@ -624,7 +624,7 @@ public class QueryProducts {
 				/*query = session.createQuery("select min(transactionDate) from TransactionDetails where customerId='"+customerId+"'");
 
 				String allTransactionStartDate = query.uniqueResult().toString();*/
-				portfolioDataModel.add(new PortfolioDataModel("Total","",String.format("%.2f",TotalInvestedAmount),String.format("%.2f",TotalCurrentAmount),String.format("%.2f",totalXirr),""));
+				portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",TotalInvestedAmount),String.format("%.2f",TotalCurrentAmount),String.format("%.2f",totalXirr),""));
 
 			//session.getTransaction().commit();
 

@@ -877,7 +877,7 @@ function setData()
 
 function setDashboardData() 
 {
-	// alert ("calling fun !! ");
+	 alert ("calling setDashboardData !! ");
 	$.ajax({
 
         url : "portfolioAction",
@@ -886,7 +886,7 @@ function setDashboardData()
         data: {},
         
         success : function(result){
-        	
+        	alert('result: '+result);
         	if (result == "success") {
         		window.location='bseDashboard';
         		//alert('got success!!');
@@ -1129,7 +1129,7 @@ function callOneTimeInvestment()
 		window.location='login';
 	} 
 	else {
-		window.location='newUpfrontInvestment';
+		window.location='amountConfirmation';
 	}
 	
 }
@@ -1144,7 +1144,7 @@ function callSIPInvestment()
 		window.location='login';
 	} 
 	else {
-		window.location='newSipInvestment';
+		window.location='amountConfirmation';
 	}
 	
 }
@@ -1416,7 +1416,7 @@ function login() {
         
         success : function(result){
         	
-        	/*alert('result : '+result);*/
+        	alert('result : '+result);
         	if (result == "success") {
         		/*alert('login success !! ');*/
         		window.location='myIndex';
@@ -1446,10 +1446,10 @@ function login() {
         		window.location='investmentStyle';
         	}
         	else if (result == "fundOnetimeSelected")  {
-        		window.location='newUpfrontInvestment';
+        		window.location='amountConfirmation';
         	}
         	else if (result == "fundSIPSelected")  {
-        		window.location='newSipInvestment';
+        		window.location='amountConfirmation';
         	}
         	else {
         		/*alert('Inside login error !!');*/
