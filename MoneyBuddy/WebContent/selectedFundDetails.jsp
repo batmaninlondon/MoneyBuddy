@@ -49,7 +49,7 @@
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </head>
 
-<body class="homepage">
+<body class="homepage" onLoad="showPredictedSipValues(<s:property value="#session.selectedFundDetailsDataModel.minSipAmount"/>)">
    <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -150,7 +150,7 @@
 		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="<%session.setAttribute("OnetimeInvestment", "TRUE");%>;callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">One Time</button>
 		                    </div>
 		             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
-		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">SIP</button>
+		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="<%session.setAttribute("OnetimeInvestment", "FALSE");%>;callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">SIP</button>
 		                    </div>
 		            </div> 
 	             </div> 
@@ -163,6 +163,7 @@
 			 	<div class="col-md-5 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4">
               		
               		<div class="g-padding-x-40--xs g-padding-y-40--xs" >
+              			<input type="hidden" id="fundId" value="<s:property value="#fundDetails.fundId"/>" />
 				    	<p class=" g-font-size-14--xs g-font-weight--700 g-letter-spacing--2"> <s:property value="#fundDetails.fundName"/></p>
 				        <h3 class="g-font-size-22--xs g-letter-spacing--1 "><s:property value="#fundDetails.sector"/></h3>
 				        <p class="g-text-left--xs "><s:property value="#fundDetails.subSector"/></p>
@@ -190,13 +191,13 @@
                 	
                 	<div class="row">
                 		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
-                			<input id="range" type="range" min="<s:property value="#session.minLumsumAmt"/>" max="150000" step="500"
-							value="<s:property value="#session.minLumsumAmt"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+                			<input id="range" type="range" min="<s:property value="#fundDetails.minSipAmount"/>" max="150000" step="500"
+							value="<s:property value="#fundDetails.minSipAmount"/>" onchange="showPredictedSipValues(this.value)"/>
                 		</div>
                 		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
                 		</div>
                 		<div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg  ">
-                			<p>Rs. <span id="upfrontInvestment"></span></p>
+                			<p>Rs. <span id="investmentAmount"></span></p>
                 		</div>
                 	</div>
                 	
@@ -222,21 +223,21 @@
 						<tbody>
 							<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md g-color--white">
 								<td class="center">
-									<p>Rs. <span id="investedAmount"></span></p>
+									<p>Rs. <span id="sipAmount"><s:property value="#session.sipAmount" /></span></p>
 								</td>
 								<td class="center">
 									<div id="predictedValue1">
-										<p>Rs. <span id="predicted-value-for-one-year"><s:property value="#session.predictedValueList1" /></span></p>
+										<p>Rs. <span id="predicted-value-for-one-year"><s:property value="#session.predictedValueForOneYear" /></span></p>
 									</div>
 								</td>
 								<td class="center">
 									<div id="predictedValue2">
-										<p>Rs. <span id="predicted-value-for-three-year"><s:property value="#session.predictedValueList3" /></span></p>
+										<p>Rs. <span id="predicted-value-for-three-year"><s:property value="#session.predictedValueForThreeYear" /></span></p>
 									</div>
 								</td>
 								<td class="center">
 									<div id="predictedValue3">
-										<p>Rs. <span id="predicted-value-for-five-year"><s:property value="#session.predictedValueList5" /></span></p>
+										<p>Rs. <span id="predicted-value-for-five-year"><s:property value="#session.predictedValueForFiveYear" /></span></p>
 									</div>
 								</td>
 							</tr>

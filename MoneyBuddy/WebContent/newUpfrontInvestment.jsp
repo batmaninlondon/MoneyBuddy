@@ -100,7 +100,7 @@
 								<h6 class="title" style="margin-top: 20px; margin-bottom: 35px;">Select slider to enter amount you want to Invest</h6>
 							</div>
 	  					</div>
-							<div id="investment-options">
+						<div id="investment-options">
 								<div id="upfront-value" >
 									<div class="row">
 										<div class="col-md-4 g-color--primary">

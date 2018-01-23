@@ -201,7 +201,7 @@ function fillSipData(minSipAmt,minSipDur)
 function showSipAmountPerMonth(newValue)
 {
 document.getElementById("sipPerMonth").innerHTML=newValue;
-document.getElementById("investedAmount").innerHTML=newValue;
+//document.getElementById("investedAmount").innerHTML=newValue;
 newUpdate();
 }
 
@@ -216,6 +216,37 @@ function showDate()
 newUpdate();
 
 }
+
+function showPredictedSipValues(newValue)
+{
+document.getElementById("investmentAmount").innerHTML=newValue;
+
+var sipAmount = newValue;
+var fundId = document.getElementById("fundId").value;
+
+//alert('sipAmount : '+sipAmount+' : fundId : '+fundId);
+
+	$.ajax({
+	    url : "sipCalculatorAction",
+	    type: 'post',
+	    
+	    data: { 'sipAmount' : sipAmount , 'fundId' : fundId },
+	
+	    success : function(result){
+	    	
+	    	if (result == "success") {
+	    		
+	        	$("#predicted-values-list-data").load("selectedFundDetails.jsp #predicted-values-list-data");
+	    	}
+	    	else {
+        		window.location='errorPage';
+        	}
+	
+	    }
+	});
+}
+
+
 function showUpfrontInvestmentPlan()
 {
 	/*alert('showPLan function called !! ');*/
@@ -1122,7 +1153,7 @@ function verifyPancard()
 {
       
 	var panCard = document.getElementById("pancard-number").value;
-	alert('panCard : '+panCard);
+	//alert('panCard : '+panCard);
 	if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
 		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
@@ -1136,7 +1167,7 @@ function verifyPancard()
 		
 		return;
 	}
-	alert('before generatePackageAction jax call !! ');
+	//alert('before generatePackageAction jax call !! ');
 	
 	
 	$.ajax({
@@ -1148,17 +1179,17 @@ function verifyPancard()
         
         success : function(result){
         	
-        	alert('result : '+result);
+        	//alert('result : '+result);
         	
         	if (result == "kycDone") {
-        		alert('login success !! ');
+        		//alert('login success !! ');
         		window.location='customerDetails';
         	}
         	else if (result == "kycNotDone")  {
         		window.location='customerDetails';
         	}
         	else {
-        		alert('Inside login error !!');
+        		//alert('Inside login error !!');
         		window.location='errorPage';
         	}
 

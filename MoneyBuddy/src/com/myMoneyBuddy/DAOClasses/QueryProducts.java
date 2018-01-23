@@ -98,6 +98,55 @@ public class QueryProducts {
 		}
 
 	}
+	
+	public double getInterestRateOfOneFund(String fundId) throws MoneyBuddyException{
+
+		Session hibernateSession = null;
+		
+		try
+		{
+		logger.debug("QueryProducts class : getInterestRateOfOneFund method : start");
+
+		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		double interestRate = 0.0;
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select interestRate from ProductDetails where productId = :productId ");
+			query.setParameter("productId",fundId);
+			System.out.println("query.list().size() : "+query.list().size());
+			if (query.list().size() != 0) {
+				interestRate = Double.parseDouble(query.uniqueResult().toString());
+			}
+
+			//session.getTransaction().commit();
+			
+			logger.debug("QueryProducts class : getInterestRateOfOneFund method : end");
+			return interestRate;
+		}
+		catch ( NumberFormatException e)  {
+			logger.debug("QueryProducts class : getInterestRateOfOneFund method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryProducts class : getInterestRateOfOneFund method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryProducts class : getInterestRateOfOneFund method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			hibernateSession.clear();
+			hibernateSession.close();
+		}
+
+	}
 
     
 	public HashMap<String,Double> getProductList(String riskCategory,String planName) throws MoneyBuddyException{

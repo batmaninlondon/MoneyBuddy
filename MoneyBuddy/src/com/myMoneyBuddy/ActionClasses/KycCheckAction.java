@@ -170,8 +170,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		
 		
 		session.beginTransaction();
-		Query query = session.createQuery("update Customers set customerName = :customerName where customerId = :customerId");
+		Query query = session.createQuery("update Customers set customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
 		query.setParameter("customerName", getCustomerName());
+		query.setParameter("cusDetailsUploaded", "Y");
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		int updateResult = query.executeUpdate();
@@ -217,10 +218,19 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	
     	System.out.println(" Returned Success !!");
 
-    	String str="success";
-    	stream = new ByteArrayInputStream(str.getBytes());
+    	if (sessionMap.get("kycStatus").toString().equalsIgnoreCase("DONE"))  {
+    		System.out.println(" Returned KYC  done !!");
+    		String str = "kycDone";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    		return SUCCESS;
+    	}
+    	else {
+			System.out.println(" Returned KYC not done !!");
+			String str = "kycNotDone";
+		    stream = new ByteArrayInputStream(str.getBytes());
+			return SUCCESS;
+    	}
 
-    	return SUCCESS;
     	} 
     	/*catch ( MoneyBuddyException e )  {
     		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());

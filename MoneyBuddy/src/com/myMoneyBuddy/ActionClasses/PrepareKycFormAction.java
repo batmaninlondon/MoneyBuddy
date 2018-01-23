@@ -89,6 +89,14 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		sessionMap.put("addCustDetUploaded", "Y");
 		logger.debug("PrepareKycFormAction class : execute method : stored addCustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
 		
+		Query query = session.createQuery("update Customers set addCusDetailsUploaded = :addCusDetailsUploaded where customerId = :customerId");
+
+		query.setParameter("addCusDetailsUploaded", "Y");
+		query.setParameter("customerId", sessionMap.get("customerId").toString());
+		
+		int updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in Customers table ");
+		
 		String str = null;
 		
 	    	GenerateKycForm generateKycForm = new GenerateKycForm();
