@@ -104,11 +104,48 @@
          <div class="form">
       
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab "><a href="#signup">Sign Up</a></li>
       </ul>
       
       <div class="tab-content">
+        
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form action="/" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input id="email-id"  type="email" required autocomplete="off"/>
+           <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input  id="password" type="password" required autocomplete="off"/>
+            <!-- <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="width:600px;"> -->
+          </div>
+          
+          <p class="forgot"><a href="forgottenPassword">Forgot Password???</a></p>
+          
+          <!-- <button id="submit-button-51"  class="button button-block" onClick="login();" >Log In</button> -->
+          <button type="button" id="submit-button-5" class="button button-block"  onClick="login();" ">SIGN IN</button>
+         <!--  <button type="button" id="submit-button-5" class="btn btn-primary readmore"  onClick="login();" style="width: 200px;">SIGN IN</button> -->
+          
+          
+          
+          
+          
+          </form>
+
+        </div>
+        
         <div id="signup">   
           <h1>Sign Up for Free</h1>
           
@@ -153,41 +190,6 @@
           
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
 			<button type="button"  class="button button-block" onClick="register();">Get Started</button>        
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          
-          <form action="/" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input id="email-id"  type="email" required autocomplete="off"/>
-           <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input  id="password" type="password" required autocomplete="off"/>
-            <!-- <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="width:600px;"> -->
-          </div>
-          
-          <p class="forgot"><a href="forgottenPassword">Forgot Password???</a></p>
-          
-          <!-- <button id="submit-button-51"  class="button button-block" onClick="login();" >Log In</button> -->
-          <button type="button" id="submit-button-5" class="button button-block"  onClick="login();" ">SIGN IN</button>
-         <!--  <button type="button" id="submit-button-5" class="btn btn-primary readmore"  onClick="login();" style="width: 200px;">SIGN IN</button> -->
-          
-          
-          
-          
-          
           </form>
 
         </div>

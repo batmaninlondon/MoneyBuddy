@@ -32,10 +32,15 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
         <link href="css/material-kit.css" rel="stylesheet"/>
+        
+        
+        
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        
         
         <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -49,7 +54,30 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/index.js"></script>
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  
+  
+  
+  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
+		<script>
+		
+		$(document).ready(function() {
+		    $('#cartData').DataTable( {
+		        "paging":   true,
+		        "ordering": false,
+		        "info":     true,
+		        "searching": false,
+		        "responsive": true,
+		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+		        
+		        
+		    } );
+		} );
+		
+		</script>
     </head>
 
 <body style="background-color:#cecece">
@@ -60,11 +88,9 @@
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
 		</a>
 	</div>
-	<br/>
-	<br/>
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:120px;">
+		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:100px;">
 	    	<div class="profile">
 	        	<div class="name">
 	                	<h3 class="title g-color--white"><s:property value="#session.emailId" /></h3>
@@ -74,41 +100,47 @@
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
 	</div>
-	<div class="row" >
-		<div class="col-md-1 col-xs-1" style="height:500px"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " style="height:500px">
-			<div id="customer-cart-list" 
-				style="margin-top: 10px; padding-left: 70px; padding-right: 70px;">
-				<div id="customer-cart-list-data" class="row col-md-12">
-					<div id="investmentFundData">
-					<table class="table table-bordered">
-						<thead class="table-head">
+	<div class="row g-height-auto--lg" >
+		<div class="col-md-1 col-xs-1" ></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
+					<table id="cartData" class="table table-bordered stripe ">
+						<thead class="table-head g-font-size-14--xs">
 							<tr>
 								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Amount</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Creation Date</th>
 							</tr>
 						</thead>
-						<tbody class="table-body">
-
-
-						<s:iterator value="#session.customerCartList" var="customerCartListElement">
-							<tr>
-							    <td class="center"><s:property value="#customerCartListElement.productName"/></td>
-							    <td class="center"><s:property value="#customerCartListElement.amount"/></td>
-							    <td class="center"><s:property value="#customerCartListElement.cartCreationDate"/></td>
-							</tr>
-						</s:iterator> 
-
-
+						<tbody class="table-body g-font-size-14--xs">
+							<s:iterator value="#session.customerCartList" var="customerCartListElement">
+								<tr>
+								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.cartCreationDate"/></td>
+								</tr>
+							</s:iterator> 
 						</tbody>
 					</table>
-					</div>
-				</div>
-
 			</div>
-
-			<div class="row ">
+	     </div>
+	     <div class="col-md-1 col-xs-1" ></div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:100px;">
+	    	<div class="profile">
+	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
+	                	<button type="button"  class="btn " onClick="openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;">Pay Now</button>
+	            </div>
+	       	</div>
+	     </div>
+	     <div class="col-md-1 col-xs-1"></div>
+	</div>
+	
+	<div class="row ">
 
 
 								<%
@@ -160,15 +192,6 @@
 								}
 								%>
 				</div>
-			<div  class="row" >
-				
-				&nbsp;&nbsp;&nbsp;
-				
-				<button type="button"  class="btn  " onClick="openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;">Pay Now</button>
-			</div>
-	     </div>
-	     <div class="col-md-1 col-xs-1" style="height:500px"></div>
-	</div>
 
 </body>
 	
