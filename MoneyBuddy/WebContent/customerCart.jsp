@@ -130,10 +130,10 @@
 	
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:100px;">
+		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn " onClick="openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;">Pay Now</button>
+	                	<button type="button"  class="btn " onClick="openCustomerDetailsPage();" style="background-color:black; ">Pay Now</button>
 	            </div>
 	       	</div>
 	     </div>
