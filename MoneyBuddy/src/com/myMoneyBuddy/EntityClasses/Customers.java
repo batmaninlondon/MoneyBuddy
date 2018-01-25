@@ -63,6 +63,9 @@ public class Customers {
     
     @Column(name="ADD_CUS_DETAILS_UPLOADED")
     private String addCusDetailsUploaded;
+    
+    @Column(name="BSE_CLIENT_CREATED")
+    private String bseClientCreated;
 
     public Customers() {
         
@@ -70,7 +73,7 @@ public class Customers {
 
 	public Customers(String emailId, String customerName, String mobileNumber, String password, String verificationStatus, 
 			String panCard, String kycStatus, String folioNumber, String karvyFileGenerated, 
-			String camsFileGenerated, String subscriberType, String cusDetailsUploaded, String addCusDetailsUploaded) {
+			String camsFileGenerated, String subscriberType, String cusDetailsUploaded, String addCusDetailsUploaded, String bseClientCreated) {
 		super();
 		this.emailId = emailId;
 		this.customerName = customerName;
@@ -85,6 +88,7 @@ public class Customers {
 		this.subscriberType = subscriberType;
 		this.cusDetailsUploaded = cusDetailsUploaded;
 		this.addCusDetailsUploaded = addCusDetailsUploaded;
+		this.bseClientCreated = bseClientCreated;
 	}
 
 
@@ -201,6 +205,14 @@ public class Customers {
 		this.addCusDetailsUploaded = addCusDetailsUploaded;
 	}
 
+	public String getBseClientCreated() {
+		return bseClientCreated;
+	}
+
+	public void setBseClientCreated(String bseClientCreated) {
+		this.bseClientCreated = bseClientCreated;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -252,6 +264,9 @@ public class Customers {
         if ((this.addCusDetailsUploaded == null) ? (other.addCusDetailsUploaded != null) : !this.addCusDetailsUploaded.equals(other.addCusDetailsUploaded)) {
             return false;
         }
+        if ((this.bseClientCreated == null) ? (other.bseClientCreated != null) : !this.bseClientCreated.equals(other.bseClientCreated)) {
+            return false;
+        }
         return true;
     }
 
@@ -272,6 +287,7 @@ public class Customers {
         hash = 79 * hash + (this.subscriberType != null ? this.subscriberType.hashCode() : 0);
         hash = 79 * hash + (this.cusDetailsUploaded != null ? this.cusDetailsUploaded.hashCode() : 0);
         hash = 79 * hash + (this.addCusDetailsUploaded != null ? this.addCusDetailsUploaded.hashCode() : 0);
+        hash = 79 * hash + (this.bseClientCreated != null ? this.bseClientCreated.hashCode() : 0);
         return hash;
     }
 

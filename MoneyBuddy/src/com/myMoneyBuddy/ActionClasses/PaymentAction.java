@@ -24,6 +24,7 @@ import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.insertBankDetails;
 import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
@@ -31,6 +32,7 @@ import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
@@ -40,6 +42,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.tempuri.IStarMFWebService;
@@ -68,6 +71,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	//private String groupName;
 	
 	private InputStream stream;
+
 	//private List<String> groupNamesList = new ArrayList<String>(); 
     
 /*    public void validate() {
@@ -97,7 +101,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     public String execute()  {
 
     	try {
-    		
+    		    		
     		System.out.println("Payment Action class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
     		
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
@@ -186,17 +190,36 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	
 	    	Trading trading = new Trading();
 		
-	    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
-	    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
-	    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
-	    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
-				customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
-		
-	    	String[] uccSpilts = ucc.split("\\|");
+	    	String bseClientCreatedStatus = "N";
 	    	
-	    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+	    	bseClientCreatedStatus = queryCustomer.getBseClientCreationStatus(customerId);
 	    	
-		if(uccSpilts[0].equals("100") ) {
+	    	if ("N".equals(bseClientCreatedStatus))  {
+		    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
+		    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
+		    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
+		    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
+					customerId, CLIENT_APPNAME1, CLIENT_EMAIL, CLIENT_PAN, CLIENT_CM_MOBILE);
+			
+		    	String[] uccSpilts = ucc.split("\\|");
+		    	
+		    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+		    	
+		    	if(uccSpilts[0].equals("100") ) {
+		    		
+		    		if(uccSpilts[1].contains("RECORD INSERTED SUCCESSFULLY") ) {
+			    		
+			    		UpdateCustomer updateCustomer = new UpdateCustomer();
+			    		updateCustomer.updateBseClientCreationStatus(customerId, "Y");
+			    		bseClientCreatedStatus = "Y";
+		    		}
+		    		
+		    	}
+	    	
+	    	}
+	    	
+	    	
+		if("Y".equals(bseClientCreatedStatus)) {
 			String paymentUrl = null;
 			
 			String amount;

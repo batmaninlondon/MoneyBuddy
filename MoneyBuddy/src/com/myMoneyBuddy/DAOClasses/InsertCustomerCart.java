@@ -34,16 +34,20 @@ public class InsertCustomerCart {
 
     	logger.debug("insertCustomerCart class : addCustomerCart method : start");
     	
-    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	Session hibernateSession = null;
     	CustomerCart tempCustomerCart = null;
     	
     	try {
-
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		hibernateSession.beginTransaction();
    	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount.toString(),cartCreationDate,status);
    	        hibernateSession.save(tempCustomerCart);
+   	        hibernateSession.refresh(tempCustomerCart);
+   	        
    	        hibernateSession.getTransaction().commit();
-    		
+   	        
+   	        hibernateSession.close();
+   	        System.out.println("inserted and refreshed record in customer cart table !!");
     		logger.debug("insertCustomerCart class : addCustomerCart method : end");
 
     	}
@@ -57,14 +61,14 @@ public class InsertCustomerCart {
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
-    	finally {
-    		/*if(factory!=null)
-			factory.close();*/
+    	/*finally {
+    		if(factory!=null)
+			factory.close();
     		//HibernateUtil.getSessionAnnotationFactory().close();
-    		hibernateSession.clear();
+    		//hibernateSession.clear();
     		hibernateSession.close();
     		
-    	}
+    	}*/
 
     }
  

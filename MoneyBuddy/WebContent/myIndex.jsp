@@ -24,7 +24,7 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-     <script src="assets/js/sly.min.js"></script>
+    <script src="assets/js/sly.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>
     <script src="assets/js/main.js"></script>

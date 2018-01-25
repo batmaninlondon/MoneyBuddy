@@ -26,17 +26,21 @@ public class QueryCustomerCart {
 	public List<CustomerCart> getCustomerCart(String customerId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomerCart class : getCustomerCart method : start");
-		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		hibernateSession.clear();
+		Session hibernateSession = null;
+		//hibernateSession.clear();
 		try
 		{
+			
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession.flush();
 			System.out.println("customerId is : "+customerId);
 			hibernateSession.beginTransaction();
 			
 			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId ");
 			query.setParameter("customerId", customerId);
-	
+			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
+			
 			
 			/*for (int i=0; i<customerCartList.size(); i++){
     			CustomerCart row = (CustomerCart) customerCartList.get(i);

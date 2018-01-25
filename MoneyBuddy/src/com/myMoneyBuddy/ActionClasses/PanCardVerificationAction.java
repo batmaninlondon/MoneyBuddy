@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomerPancard;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -52,7 +52,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
         	System.out.println(" PanCardVerificationAction execute method Called !!");
         	System.out.println(" PanCardVerificationAction execute method : panCard : "+getPanCard());
     		
-    		UpdateCustomerPancard updatecustomerPancard = new UpdateCustomerPancard();
+    		UpdateCustomer updatecustomerPancard = new UpdateCustomer();
     		
     		String customerId = sessionMap.get("customerId").toString();
     		

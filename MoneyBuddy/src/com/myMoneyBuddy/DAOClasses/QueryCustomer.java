@@ -16,6 +16,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 public class QueryCustomer {
@@ -99,6 +100,41 @@ public class QueryCustomer {
 			session.close();
 		}
 	}
+	
+public String getBseClientCreationStatus(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class : getBseClientCreationStatus method : start");
+		
+		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String bseClientCreationStatus = customer.getBseClientCreated();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class : getBseClientCreationStatus method : end");
+			return bseClientCreationStatus;
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryCustomer class : getBseClientCreationStatus method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryCustomer class : getBseClientCreationStatus method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			/*if(factory!=null)
+			factory.close();*/
+			//HibernateUtil.getSessionAnnotationFactory().close();
+			hibernateSession.close();
+		}
+	}
 
 	public String getHashedPassword(String emailId) throws MoneyBuddyException {
 		
@@ -140,19 +176,27 @@ public class QueryCustomer {
 	public int getCustomerId(String emailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class : getCustomerId method : start");
-		
-		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		hibernateSession.flush();
+    	//SessionFactory sessionFactory = null;
+		Session session = null;
+		//Transaction tx = null;
+		//Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		//hibernateSession.flush();
 
 		Object result;
 		int customerId =0 ;
 
 		try
 		{
-			hibernateSession.beginTransaction();
+    		//sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			//hibernateSession.beginTransaction();
+			//tx = session.beginTransaction();
+    		session.beginTransaction();
 			System.out.println("HI there 1 + emailID : "+emailId);
-			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
+			result = session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
+			session.getTransaction().commit();
 			
+			//tx.commit();
 			if (result != null) {
 				System.out.println("HI there 1"+result.toString());
 				customerId = Integer.parseInt(result.toString());
@@ -175,8 +219,8 @@ public class QueryCustomer {
 			/*if(factory!=null)
 			factory.close();*/
 			//HibernateUtil.getSessionAnnotationFactory().close();
-			hibernateSession.clear();
-			hibernateSession.close();
+			session.clear();
+			session.close();
 		}
 
 	}

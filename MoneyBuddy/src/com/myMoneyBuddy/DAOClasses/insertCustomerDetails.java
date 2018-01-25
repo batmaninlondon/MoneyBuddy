@@ -20,6 +20,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 public class insertCustomerDetails {
@@ -32,24 +33,39 @@ public class insertCustomerDetails {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
     	
-    	Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
-
-    	
+    	//SessionFactory sessionFactory = null;
+		Session session = null;
+		//Transaction tx = null;
+		
     	try {
-
+    		//Get Session
+    		//sessionFactory = HibernateUtil.getSessionAnnotationFactory();
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		//start transaction
+    		//tx = session.beginTransaction();
+    		session.beginTransaction();
+        	
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N");
-    		session.beginTransaction();
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N","N");
+    		//session.beginTransaction();
     		session.save(tempCustomer);
     		session.getTransaction().commit();
+    		//tx.commit();
+    		session.close();
+    		
+    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		//start transaction
+    		//tx = session.beginTransaction();
+    		session.beginTransaction();
     		
     		Subscriber tempSubscriber = new Subscriber(emailId,mobileNumber,"CUSTOMER",frmtdDate);
-    		session.beginTransaction();
+    		//session.beginTransaction();
     		session.save(tempSubscriber);
     		session.getTransaction().commit();
+    		//tx.commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
 
@@ -58,7 +74,6 @@ public class insertCustomerDetails {
     		
     		System.out.println("insertCustomerDetails class : insertCustomer method : emailId : "+emailId);
     		System.out.println("insertCustomerDetails class : insertCustomer method : customerId : "+customerId);
-
 
     		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
     		session.beginTransaction();
