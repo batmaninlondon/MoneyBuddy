@@ -37,6 +37,17 @@
 </head>
 
 <body >
+
+	<%
+	
+	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
+	    	session.setAttribute("OnetimeInvestment", "TRUE");
+	    	System.out.println("In login jsp : OnetimeInvestment set to TRUE .");
+	    } else if ("FALSE".equals(request.getParameter("OnetimeInvestment"))) {
+	    	session.setAttribute("OnetimeInvestment", "FALSE");
+	    	System.out.println("In login jsp : OnetimeInvestment set to FALSE .");
+	    }
+	%>
    <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->

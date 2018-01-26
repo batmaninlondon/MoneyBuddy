@@ -1072,6 +1072,7 @@ function showCustomerDetails()
 
 function createCart()  
 {
+
 	$.ajax({
 
         url : "createCartAction",
@@ -1125,11 +1126,12 @@ function callOneTimeInvestment()
 {
 	var cusId = document.getElementById('cusId').value;
 	//alert('checkLoggedInStatus : cusId : '+cusId);
+	var OnetimeInvestment = "TRUE";
 	if (cusId == "customerIdNull") {
-		window.location='login';
+		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
 	} 
 	else {
-		window.location='amountConfirmation';
+		window.location='amountConfirmation.jsp?OnetimeInvestment='+OnetimeInvestment;
 	}
 	
 }
@@ -1140,11 +1142,12 @@ function callSIPInvestment()
       
 	var cusId = document.getElementById('cusId').value;
 	//alert('checkLoggedInStatus : cusId : '+cusId);
+	var OnetimeInvestment = "FALSE";
 	if (cusId == "customerIdNull") {
-		window.location='login';
+		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
 	} 
 	else {
-		window.location='amountConfirmation';
+		window.location='amountConfirmation.jsp?OnetimeInvestment='+OnetimeInvestment;
 	}
 	
 }
@@ -1780,6 +1783,7 @@ function newUpdate(){
 
 	//alert('new update called !! ');
 	var transactionType = document.getElementById('transactionType').value;
+	alert('transactionType : '+transactionType);
 	
 	if (transactionType == "SIP") {
 		var sipAmount = document.getElementById("sip-amount-range").value;

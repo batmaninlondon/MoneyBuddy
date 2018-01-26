@@ -32,6 +32,11 @@
 	    	<result>/amountConfirmation.jsp</result>
 		</action>
 	</package>
+	<package name="orderInvoice" namespace="/" extends="struts-default">
+	    <action name="orderInvoice">
+	    	<result>/orderInvoice.jsp</result>
+		</action>
+	</package>
 	<package name="panCardVerification" namespace="/" extends="struts-default">
 	    <action name="panCardVerification">
 	    	<result>/panCardVerification.jsp</result>

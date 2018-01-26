@@ -803,6 +803,8 @@ public class Trading {
 
 				while(it.hasNext())  {
 					
+					
+					
 					hibernateSession.beginTransaction();
 					
 					query = hibernateSession.createQuery("select productId,quantity,transactionAmount,transactionDate,transactionStatus from TransactionDetails");
@@ -812,6 +814,7 @@ public class Trading {
 					query.setParameter("productId", transactionDetailQueryResult.get(0)[0]);
 					fundName = query.uniqueResult().toString();
 					
+					System.out.println(" Adding a new row in orderDataModelList for fundName : "+fundName);
 					orderDataModel.add(new OrderDataModel(it.next().toString(), fundName, transactionDetailQueryResult.get(0)[1].toString(), 
 											transactionDetailQueryResult.get(0)[2].toString(), transactionDetailQueryResult.get(0)[3].toString(),
 											transactionDetailQueryResult.get(0)[4].toString()));

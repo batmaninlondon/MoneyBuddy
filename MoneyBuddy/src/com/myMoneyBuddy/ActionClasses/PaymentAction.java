@@ -226,6 +226,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			String paymentUrl = null;
 			
 			String amount;
+			System.out.println("transactionType : "+sessionMap.get("transactionType").toString());
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
 				

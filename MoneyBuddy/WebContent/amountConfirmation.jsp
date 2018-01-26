@@ -44,10 +44,19 @@
 <body style="background-color:#cecece"
 	onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmt"/>');fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');">
 	
+<%session.setAttribute("transactionType", "SIP");%>;
+
 	<%
-		session.setAttribute("transactionType", "UPFRONT");
+	
+	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
+	    	session.setAttribute("OnetimeInvestment", "TRUE");
+	    	System.out.println("In login jsp : OnetimeInvestment set to TRUE .");
+	    } else if ("FALSE".equals(request.getParameter("OnetimeInvestment"))) {
+	    	session.setAttribute("OnetimeInvestment", "FALSE");
+	    	System.out.println("In login jsp : OnetimeInvestment set to FALSE .");
+	    }
 	%>
-	<input type="hidden" id="transactionType" value="UPFRONT" />
+	
 	<input type="hidden" id="investmentType" value="<s:property value="#session.OnetimeInvestment"/>" />
 	<div class="container ">
    		<a href="nhome.jsp" class="s-header-v2__logo-link">
@@ -82,6 +91,7 @@
       </div>
       	<div class="tab-content">
 	    	<div  id="upfrontInvestmentDetails" >
+	    		<input type="hidden" id="transactionType" value="UPFRONT" />
 	        	<div class="name">
 						<div class="row">
 							<div id="investment-options" class="col-md-6 ">
@@ -106,13 +116,13 @@
 	  					</div>
 	  					<div class="row">
 							<div id="investment-options" class="col-md-6 ">
-								<button type="button" class="btn  " onClick="<%session.setAttribute("transactionType", "UPFRONT");%>;createCart();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;color:white;">Add to Cart</button>
+								<button type="button" class="btn  " onClick="createCart();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;color:white;">Add to Cart</button>
 							</div>
 	  					</div>
 					</div>
 	       	</div>
 	       	<div  id="sipInvestmentDetails" >
-   			
+   				<input type="hidden" id="transactionType" value="SIP" />
 	       			<div class="name">
 						<div class="row">
 							<div id="investment-options" class="col-md-6 ">
@@ -224,7 +234,7 @@
 				</div>
 	  					<div class="row">
 							<div id="investment-options" class="col-md-6 ">
-								<button type="button" id="submit-button-2" class="btn  " onClick="<%session.setAttribute("transactionType", "SIP");%>;openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;color:white;">Continue</button>
+								<button type="button" id="submit-button-2" class="btn  " onClick="openCustomerDetailsPage();" style="background-color:black; margin-top: 20px; margin-bottom: 35px;color:white;">Continue</button>
 							</div>
 	  					</div>
 					</div>

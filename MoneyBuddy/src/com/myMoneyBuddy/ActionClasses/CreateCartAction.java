@@ -57,6 +57,8 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     	logger.debug("CreateCartAction class : execute method : start");
     	System.out.println(" CreateCartAction execute method Called !!");
     	
+    	sessionMap.put("transactionType", "UPFRONT");
+    	
     	String customerId = sessionMap.get("customerId").toString();
     	String totalInvestment = sessionMap.get("totalInvestment").toString();
     	HashMap<String,Double> productRatioList = (HashMap<String,Double>)sessionMap.get("productRatioList");
