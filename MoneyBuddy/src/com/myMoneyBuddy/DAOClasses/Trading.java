@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -47,6 +48,7 @@ import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.OrderDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
@@ -58,6 +60,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.derby.iapi.services.info.ProductGenusNames;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFactory;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.RequestParam;
@@ -249,13 +252,13 @@ public class Trading {
 
 
 	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, String sipStartDate, String sipEndDate,
-			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String mandateId) throws MoneyBuddyException {
+			String transactionType, String buySell, int years, String firstOrderFlag, String paymentGatewayComment, String mandateId, SessionMap<String, Object> sessionMap) throws MoneyBuddyException {
 
 
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
 		System.out.println("Trading class : executeTade method : years : "+years);
 
-		Session session = null;
+		Session hibernateSession = null;
 
 		Double totalAmount = 0.0;
 		String buySellType;
@@ -271,15 +274,18 @@ public class Trading {
 		//DbfFileStatusDetails tempDbfDataDetails;
 
 		CustomerPortfolio tempCustomerPortfolio;
+		ArrayList<String> transactionDetailIdList = new ArrayList<String>();
+		List<OrderDataModel> orderDataModel;
 
 		try {
 
 			logger.debug("Trading class : executeTrade method : start");
+			orderDataModel = new LinkedList<OrderDataModel>();
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			
 
-
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
@@ -304,8 +310,8 @@ public class Trading {
 			tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
 					transactionType, "Pending",frmtdDateForDB,frmtdDateForDB);
 
-			session.save(tempTransaction);
-			session.getTransaction().commit();
+			hibernateSession.save(tempTransaction);
+			hibernateSession.getTransaction().commit();
 			
 			
 			
@@ -345,6 +351,8 @@ public class Trading {
 
 			boolean allOrderFailed = true ;
 			String paymentUrl;
+			
+			ArrayOfstring orderNums = new ArrayOfstring();
 
 			for ( String currentProductId : productDetailsMap.keySet())  {
 
@@ -359,20 +367,20 @@ public class Trading {
 
 				//List<CustomerPortfolio> customerPortfolio = query.list();
 
-				session.beginTransaction();
+				hibernateSession.beginTransaction();
 				String productName = null;
 				Object result;
-				result = (session.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult());
+				result = (hibernateSession.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult());
 
 				if (result != null) 
 					productName = result.toString();
 
 				System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
 
-				//session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
-				/*session.beginTransaction();
-
+				hibernateSession.beginTransaction();
+				/*
 				result = session.createQuery("select navValue from NavHistory where schemeCode = '"+productName+"' and navDate = (select max(navDate) from NavHistory) ").uniqueResult();
 				String latestNav = null;
 
@@ -394,16 +402,18 @@ public class Trading {
 						null, null,null,"N",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB,"N"); 		
 
 				//session.beginTransaction();
-				session.save(tempTransactionDetail);
+				hibernateSession.save(tempTransactionDetail);
 
 				logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
 
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
+				
+				transactionDetailIdList.add(transactionDetailId);
 
 				if ("SIP".equals(transactionType ))  {
-					session.beginTransaction();
+					hibernateSession.beginTransaction();
 					
 					System.out.println("customerId for SipDetails is : "+customerId);
 					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
@@ -425,8 +435,8 @@ public class Trading {
 					tempSipDetail = new SipDetails(customerId, transactionDetailId,
 							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,"N","N");
 	
-					session.save(tempSipDetail);
-					session.getTransaction().commit();
+					hibernateSession.save(tempSipDetail);
+					hibernateSession.getTransaction().commit();
 				}
 				
 				dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -535,18 +545,18 @@ public class Trading {
 				}
 
 
-				session.beginTransaction();
-				query = session.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
 				if (transactionType == "UPFRONT")
 					query.setParameter("bseOrderId", resultsEntryParam[2]);
 				else 
 					query.setParameter("bseOrderId", resultsEntryParam[5]);
 
 				if ( resultsEntryParam[7].equals("1") ) 
-					query.setParameter("transactionStatus", "Failed");
+					query.setParameter("transactionStatus", "OrderFailedFromBse");
 				else  
 				{
-					query.setParameter("transactionStatus", "OrderPlaced");
+					query.setParameter("transactionStatus", "OrderPlacedToBse");
 					allOrderFailed = false;
 				}
 
@@ -556,7 +566,7 @@ public class Trading {
 				query.setParameter("transactionDetailId", transactionDetailId);
 				int updateResult = query.executeUpdate();
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 /*				session.beginTransaction();
 				query = session.createQuery("from CustomerPortfolio where productId = :productId and customerId = :customerId and investmentTypeName = :groupName");
@@ -672,7 +682,7 @@ public class Trading {
 				PASSWORD_STARMF = passwordStarMFPaymentGateway.getResponseString().getValue();
 				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
 				
-				ArrayOfstring orderNums = new ArrayOfstring();
+				
 				orderNums.getString().add(resultsEntryParam[2].toString());
 				//orderNums.getString().add("5678");			
 
@@ -713,9 +723,9 @@ public class Trading {
 				
 				System.out.println("doc: "+doc);*/
 				
-				session.beginTransaction();
+				hibernateSession.beginTransaction();
 
-				query = session.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
+				query = hibernateSession.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
 
 				query.setParameter("subscriberType", "INVESTOR");
 
@@ -723,16 +733,18 @@ public class Trading {
 
 				int result = query.executeUpdate();
 
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 				
-				session.beginTransaction();
-				Object emailIdObj = session.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
+				hibernateSession.beginTransaction();
+				Object emailIdObj = hibernateSession.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
 				String emailId = null;
 				if (emailIdObj != null)
 					emailId = emailIdObj.toString();
 								
-
-				query = session.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
+				hibernateSession.getTransaction().commit();
+				
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
 
 				query.setParameter("subscriberType", "INVESTOR");
 
@@ -740,7 +752,7 @@ public class Trading {
 
 				result = query.executeUpdate();
 
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 			}
 			else {
@@ -751,6 +763,67 @@ public class Trading {
 			String paymentUrlFile = "D://HTMLFile/payment.html";
 			File newHtmlFile = new File(paymentUrlFile);
 			FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
+			
+			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - start 
+			
+			
+				
+				Iterator it = orderNums.getString().iterator();
+				String bseOrderId = null;
+				int result;
+				while(it.hasNext())  {
+					
+					bseOrderId = it.next().toString();
+					System.out.println("bseOrderId : "+bseOrderId);
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus = :transactionStatus where bseOrderId = :bseOrderId and customerId = :customerId");
+
+					if ( !"NotSet".equals(paymentUrl))  {
+						query.setParameter("transactionStatus", "PAYMENTSUCCESS");
+					}
+					else {
+						query.setParameter("transactionStatus", "PAYMENTFAILURE");
+					}
+
+					query.setParameter("bseOrderId", bseOrderId);
+					query.setParameter("customerId", customerId);
+
+					result = query.executeUpdate();
+
+					hibernateSession.getTransaction().commit();
+					
+					
+					
+				}
+				
+				it = transactionDetailIdList.iterator();
+				
+				List<Object[]> transactionDetailQueryResult;
+				String fundName;
+
+				while(it.hasNext())  {
+					
+					hibernateSession.beginTransaction();
+					
+					query = hibernateSession.createQuery("select productId,quantity,transactionAmount,transactionDate,transactionStatus from TransactionDetails");
+					transactionDetailQueryResult = query.list();
+					
+					query = hibernateSession.createQuery("select productName from ProductDetails where productId = :productId");
+					query.setParameter("productId", transactionDetailQueryResult.get(0)[0]);
+					fundName = query.uniqueResult().toString();
+					
+					orderDataModel.add(new OrderDataModel(it.next().toString(), fundName, transactionDetailQueryResult.get(0)[1].toString(), 
+											transactionDetailQueryResult.get(0)[2].toString(), transactionDetailQueryResult.get(0)[3].toString(),
+											transactionDetailQueryResult.get(0)[4].toString()));
+					
+				}
+				
+				sessionMap.put("orderDataModel", orderDataModel);
+		    	
+		    	logger.debug("Trading class : executeTrade method : stored orderDataModel : in session id : "+sessionMap.getClass().getName());
+			
+			
+			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - end
 			
 			logger.debug("Trading class : executeTrade method : end");
 
@@ -768,7 +841,7 @@ public class Trading {
 			/*if(factory!=null)
 			factory.close();*/
 			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 

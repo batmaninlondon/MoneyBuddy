@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -32,6 +33,8 @@ import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.OrderDataModel;
+import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
@@ -71,7 +74,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	//private String groupName;
 	
 	private InputStream stream;
-
+	
 	//private List<String> groupNamesList = new ArrayList<String>(); 
     
 /*    public void validate() {
@@ -103,7 +106,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     	try {
     		    		
     		System.out.println("Payment Action class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
-    		
+
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
 	    	/*String subject ;
 	    	sendMail sendmail = new sendMail();
@@ -231,7 +234,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,"Y",
-						"Customer bought some mutual funds",null);
+						"Customer bought some mutual funds",null, sessionMap);
 		    	
 			}
 			else {
@@ -257,7 +260,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipStartDate").toString(),sessionMap.get("sipEndDate").toString(),
 						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("sipDuration").toString()),"Y",
-						"Customer bought some mutual funds",mandateId);
+						"Customer bought some mutual funds",mandateId,sessionMap);
 			}
 			
 			
@@ -310,6 +313,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				str = "allOrderFailed";
 
 			}
+			
+		
+			
     	    stream = new ByteArrayInputStream(str.getBytes());
     		return SUCCESS;
 	    	/*}
@@ -408,5 +414,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
+
 	
 }
