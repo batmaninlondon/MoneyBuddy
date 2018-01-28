@@ -760,7 +760,7 @@ public class Trading {
 				System.out.println("paymentUrl: "+paymentUrl);
 			}
 
-			String paymentUrlFile = "D://HTMLFile/payment.html";
+			String paymentUrlFile = "http://localhost:8080/MoneyBuddy/thankYou.jsp";
 			File newHtmlFile = new File(paymentUrlFile);
 			FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
 			

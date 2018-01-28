@@ -26,12 +26,12 @@
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
         
-        <link href="css/material-bootstrap-wizard.css" rel="stylesheet" />
+      <!--   <link href="css/material-bootstrap-wizard.css" rel="stylesheet" /> -->
 
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-        <link href="css/material-kit.css" rel="stylesheet"/>
+       <!--  <link href="css/material-kit.css" rel="stylesheet"/> -->
         
         
         
@@ -66,9 +66,9 @@
 		
 		$(document).ready(function() {
 		    $('#cartData').DataTable( {
-		        "paging":   true,
+		        "paging":   false,
 		        "ordering": false,
-		        "info":     true,
+		        "info":     false,
 		        "searching": false,
 		        "responsive": true,
 		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
@@ -80,8 +80,8 @@
 		</script>
     </head>
 
-<body style="background-color:#cecece">
-    
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
+   <!--  <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> -->
    <div class="container ">
    		<a href="nhome.jsp" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo.png" alt="Dublin Logo">
@@ -133,7 +133,7 @@
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn " onClick="openCustomerDetailsPage();" style="background-color:black; ">Pay Now</button>
+	                	<button type="button"  class="btn g-color--white g-margin-t-15--xs " onClick="openCustomerDetailsPage();" style="background-color:black; ">Continue</button>
 	            </div>
 	       	</div>
 	     </div>

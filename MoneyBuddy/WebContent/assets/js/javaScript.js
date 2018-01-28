@@ -877,7 +877,7 @@ function setData()
 
 function setDashboardData() 
 {
-	 alert ("calling setDashboardData !! ");
+	 //alert ("calling setDashboardData !! ");
 	$.ajax({
 
         url : "portfolioAction",
@@ -886,7 +886,7 @@ function setDashboardData()
         data: {},
         
         success : function(result){
-        	alert('result: '+result);
+        	//alert('result: '+result);
         	if (result == "success") {
         		window.location='bseDashboard';
         		//alert('got success!!');
