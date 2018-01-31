@@ -308,22 +308,6 @@ $( function() {
         </header>
         <!--========== END HEADER ==========-->
 		
-		<!-- <div class="g-bg-color--dark">
-            <div class="g-container--md g-text-center--xs g-padding-y-20--xs">
-            <br/><br/><br/><br/><br/>
-                <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">Dashboard</h1>
-                </div>
-            </div>
-        </div>
-         -->
-        <!-- <div class="g-bg-color--primary">
-            <div class="g-container--md g-text-center--xs g-padding-y-20--xs">
-                <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">This is fun</h1>
-                </div>
-            </div>
-        </div> -->
 		
        <!-- Counter -->
          <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/12.jpg) 50% 0 no-repeat fixed;"> -->

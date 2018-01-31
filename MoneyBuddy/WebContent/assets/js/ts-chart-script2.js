@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	alert("loaded");
 	TUTORIAL_SAVVY.initChart();
 });
 
@@ -160,11 +161,12 @@ var TUTORIAL_SAVVY ={
   
   /* Initalization Student render chart */
   	initChart : function(){
-	var rawData 		= TUTORIAL_SAVVY.loadData();
-	barChartData 		= TUTORIAL_SAVVY.createBarChartData(rawData);
-    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
-    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(rawData);
-    DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
+  		alert("hello");
+		var rawData 		= TUTORIAL_SAVVY.loadData();
+		barChartData 		= TUTORIAL_SAVVY.createBarChartData(rawData);
+	    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
+	    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(rawData);
+	    DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
   }
 };
 

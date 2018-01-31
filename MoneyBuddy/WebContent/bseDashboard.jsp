@@ -23,22 +23,27 @@
 
         <!-- Vendor Styles -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+       <!--  <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
     	<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     	<link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    	<link href="assets/bootstrap/css/main.css" rel="stylesheet">
+    	<link href="assets/bootstrap/css/main.css" rel="stylesheet"> -->
 		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
 		
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
+  		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>	
+
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/> 
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
-        
+       <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
+       
+         -->
         <!-- data table CSS-->
-         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -47,11 +52,128 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	     
 	    
-        
- 
     </head>
+    
+         <style>
+	    
+	    
+	    /*custom font*/
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+/*form styles*/
+#msform {
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	
+	/*stacking fieldsets above each other*/
+	position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+	background: #13b1cd; 
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #13b1cd;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #13b1cd;
+	color: white;
+}
+	    </style> 
     <!-- End Head -->
 
     <!-- Body -->
@@ -119,22 +241,103 @@
             <!-- End Navbar -->
         </header>
         <!--========== END HEADER ==========-->
-		
-		<div class="g-bg-color--dark" style="padding-bottom: 0.8rem" >
-            <div class="g-container--md g-text-center--xs  ">
-            <br/><br/><br/>
-               
+        
+        
+        
+        
+        <div class="g-bg-color--dark">
+           <!-- <div class="container g-padding-y-80--xs g-padding-y-125--sm"> -->
+             <div class="container ">
+               <div class="g-text-center--xs g-margin-b-10--xs">
+					<br/><br/><br/><br/>
+                    <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
+                </div> 
+                <div class="row" style="padding: 0px; margin: 0px;">
+                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
+                             <div >
+                                <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
+                             <div >
+                                <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
+                                 <div class="tooltipOuter">
+                                <div class="tooltipInner"></div>
+                                </div>
+                            
+                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;!&nbsp;</span>
+                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp;10% </span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+                 <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--white text-left font-weight-bold g-hor-divider__solid--white  "></h3>
+                 <div class="row" >
+                     <div class="col-md-1 col-xs-0" >&nbsp;</div>
+                      <div class="col-md-4 col-xs-12 g-full-width--xs g-margin-b-30--xs g-margin-b-0--lg g-color--white">
+                        <div class="g-color--white g-text-center--xs ">
+                                 <ul class="list-inline ">
+                                <li class="g-color--white">
+                                    <a class="g-color--white" href="https://www.behance.net/keenthemes">
+                                        <i class="g-padding-r-5--xs ti-arrow-circle-up"></i>
+                                        <span class="font-weight-bold"><a href="javascript:getMfData()"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </a>
+                                </li>
+                                <li class="g-color--white">
+                                    <a class="g-color--white" href="https://twitter.com/keenthemes">
+                                        <i class="g-padding-r-5--xs ti-arrow-circle-down"></i>
+                                        <span class="font-weight-bold">Withdraw</span>
+                                     </a>
+                                </li>
+                    
+                                </ul>
+                                 
+                                 </div>
+                        </div>
+                    
+                        <div class="col-md-7 col-xs-0 g-full-width--xs g-">
+                        &nbsp;
+                        &nbsp;
+                        </div>
+                    
+                </div>
+                  
             </div>
+              
+            
+            
         </div>
         
         
-        <div class="g-bg-color--primary-ltr">
+		
+		<!-- <div class="g-bg-color--dark" style="padding-bottom: 0.8rem" >
+            <div class="g-container--md g-text-center--xs  ">
+            <br/>
+               
+            </div>
+        </div> -->
+        
+        
+        <!-- <div class="g-bg-color--primary-ltr">
 	 		<div class="container ">
 	 		<div class="g-text-center--xs g-margin-b-10--xs">
                     <h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em">Dashboard</h3>
                 </div> 
                 </div> 
-			</div>
+			</div> -->
 		
        <!-- Counter -->
        	<div class="js__parallax-window" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> 
@@ -145,26 +348,26 @@
                 
               <!--   Total Value and Total Growth Start-->
                 
-                <div class="row" style="padding: 0px; margin: 20px;">
+                <%-- <div class="row" style="padding: 0px; margin: 20px;">
                 	<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
                     </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4">
+                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:20vh;">
                         <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs  ti-bar-chart g-margin-b-10--xs  g-text-left--xs g-margin-t-20--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
+                             <h4 class="g-font-size-16--xs  ti-bar-chart g-margin-b-10--xs  g-text-left--xs g-margin-t-20--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
                              <div >
-                                <span class="g-font-size-60--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-60--xs g-font-family--brandonText js__counter" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
+                                <span class="g-font-size-40--md g-font-size-20--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
+                                 <figure class="g-display-inline-block--xs g-font-size-50--md g-font-size-30--xs g-font-family--brandonText  js__counter g-margin-t-10--xs" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
                     </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4">
+                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:20vh;">
                         <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs ti-pulse g-margin-b-10--xs g-text-left--xs g-margin-t-20--xs font-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
+                             <h4 class="g-font-size-16--xs ti-pulse g-margin-b-10--xs g-text-left--xs g-margin-t-20--xs font-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
                              <div >
-                                <span class="g-font-size-60--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-60--xs g-font-family--brandonText  js__counter" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
+                                <span class="g-font-size-40--xs g-font-family--playfair" style="line-height: 1;">&#8377; </span>
+                                <figure class="g-display-inline-block--xs g-font-size-50--md g-font-size-30--xs g-font-family--brandonText  js__counter g-margin-t-10--xs" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
                                  <div class="tooltipOuter">
                                 <div class="tooltipInner"></div>
                                 </div>
@@ -175,32 +378,73 @@
                     </div>
                   <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
                     </div>
-                </div>
+                </div> --%>
                 
                 <!--   Total Value and Total Growth End-->
                 
                 <!--  Portfolio Summary Chart Start-->
                 
-                <div class="row" style="padding: 0px; margin: 20px;">
-	              	<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+                <div class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
+	              	<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
 	              		<div class="g-text-center--xs g-margin-b-10--xs">
-	                    	<h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Portfolio Summary Chart</h3>
+	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary Chart</h3>
 	                	</div>
-	                	<canvas id="canvas" style="position: relative; height:40vh; width:80vw"></canvas>
+	                	<canvas id="canvas" style="position: relative; height:40vh;"></canvas>
 	                </div> 
+	                
+	                <div class="col-md-2 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
+                    </div>
+	                
+             		<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Investment Breakdown Chart </h3>
+                		</div> 
+			     		<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
+							<canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
+						</div> 
+	              	</div>
+	             </div>
+	                
                 </div>
                	<!--  Portfolio Summary Chart End -->
                 
                 <!--  Portfolio Summary Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Portfolio Summary</h3>
+                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
                 		</div> 
 			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
-								<table id="portfoliosummary" class="table table-bordered stripe ">
-									<thead class="text-center ">
+								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
+								<table id="portfoliosummary" class="display" cellspacing="0" width="100%">
+							        <thead>
+							            <tr class="g-bg-color--primary" >
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
+							            </tr>
+							        </thead>
+							    </table>
+							</div> 
+	              		</div>
+                	</div>   
+                <!-- Portfolio Summary Table End -->
+                
+                
+                 <!--  Portfolio Summary Table Start -->
+                
+                <div class="row" style="padding: 0px; margin: 20px;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
+                		</div> 
+							<div class="g-text-center--xs g-padding-y-20--xs table-responsive">
+								<table id="portfoliosummary1" class="display" cellspacing="0" width="100%">
+								 <thead class="text-center ">
 										<tr class="g-bg-color--primary" >
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
@@ -211,7 +455,7 @@
 									</thead>
 									<tbody class="table-body ">
 										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
-											<tr class="text-center ">
+											<tr class="g-text-right--xs ">
 												<s:if test="fundName.equals('Total')">
 													<td class="g-bg-color--gray-light ">
 												    	<span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.fundName"/></span>
@@ -222,21 +466,19 @@
 												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></span></td>
 												  </s:if>
 												  <s:else>
-												    <%-- <td class="g-bg-color--gray-light "><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.fundId"/></span></td> --%>
 												    <td>
 												    	<s:set var="selectedFundId" value="#portfolioDataModelElement.fundId" />
-												    	<span class="g-font-size-14--xs g-font-size-5--xs"> <button type="button" class=" btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><s:property value="#portfolioDataModelElement.fundName"/></button></span>
-														<%-- <span class="g-font-size-14--xs g-font-size-5--xs g-color--primary " onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><u><s:property value="#portfolioDataModelElement.fundName"/></u></span> --%>
+												    	<span class="g-font-size-14--xs g-font-size-5--xs "> <button type="button" class="  btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><s:property value="#portfolioDataModelElement.fundName"/></button></span>
 												    </td>
 												  
 												    <td><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
 												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
 												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/> %</span></td>
 												  </s:else>
 											</tr>
 										</s:iterator> 
-									</tbody>
+									</tbody> 
 								</table>
 							</div> 
 	              		</div>
@@ -245,12 +487,12 @@
                 
                 <!-- Sip Summary Table Start -->
                 <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">SIP Summary</h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">SIP Summary</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-						<table id="siptable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+						<table id="siptable" class="display" cellspacing="0" width="100%">
 							<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 								<tr class="g-bg-color--primary">
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
@@ -259,13 +501,13 @@
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Next Sip Date</span></th>
 								</tr>
 							</thead>
-							<tbody >
+							<tbody class="table-body " >
 								<s:iterator value="#session.sipDataModel" var="sipDataModelElement">
-									<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-										<td ><s:property value="#sipDataModelElement.fundName"/></td>
-										<td ><s:property value="#sipDataModelElement.investedAmount"/></td>
-										<td ><s:property value="#sipDataModelElement.sipStartDate"/></td>
-										<td ><s:property value="#sipDataModelElement.nextSipDate"/></td>
+									<tr class="class="g-text-right--xs ">
+										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.fundName"/></span></td>
+										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.investedAmount"/></span></td>
+										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.sipStartDate"/></span></td>
+										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.nextSipDate"/></span></td>
 									</tr>
 								</s:iterator>
 							</tbody>
@@ -279,12 +521,12 @@
 	              <!-- Transaction Hidtory Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Transction History </h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Transction History </h3>
                 		</div> 
 			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-						<table id="transctionhistory" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+						<table id="transctionhistory" class="display" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
@@ -294,14 +536,14 @@
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
 									</tr>
 								</thead>
-								<tbody >
+								<tbody table-body>
 										<s:iterator value="#session.allFundsInvestmentDetailsDataModel" var="allFundsElement">
-											<tr class="text-center g-font-size-15--xs g-font-size-15--sm g-font-size-15--md ">
-												    <td ><s:property value="#allFundsElement.fundName"/></td>
-												    <td ><s:property value="#allFundsElement.transactionDate"/></td>
-												    <td ><s:property value="#allFundsElement.units"/></td>
-												    <td ><s:property value="#allFundsElement.navPurchased"/></td>
-    												<td ><s:property value="#allFundsElement.buySell"/></td>
+											<tr class="class="g-text-right--xs ">
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundName"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.transactionDate"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.units"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.navPurchased"/></span></td>
+    												<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.buySell"/></span></td>
 											</tr>
 										</s:iterator>
 								</tbody>
@@ -312,16 +554,16 @@
                 <!-- Transaction History End -->
                 
                 <!-- Investment Breakdown Chart Start-->
-                <div class="row" style="padding: 0px; margin: 20px;">
+                <!-- <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-36--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Investment Breakdown Chart </h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Investment Breakdown Chart </h3>
                 		</div> 
 			     		<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
 						<canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
 						</div> 
 	              	</div>
-	             </div>
+	             </div> -->
                 <!-- Investment Breakdown Chart End -->
                     
                 
@@ -329,7 +571,6 @@
                 
                  
             </div>
-        </div>
         <!-- End Counter -->
      
 
@@ -388,6 +629,7 @@
             </div>
             <!-- End Copyright -->
         </footer>
+      </body>
         <!--========== END FOOTER ==========-->
 
         <!-- Back To Top -->
@@ -395,7 +637,10 @@
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+    
+		  
+		
+		<script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -415,70 +660,331 @@
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
     	<script src="assets/js/jquery.isotope.min.js"></script>
     	<script src="assets/js/main.js"></script>
-   	 <script src="assets/js/wow.min.js"></script>
-        <!--========== END JAVASCRIPTS ==========-->
-        
-        
-        
-        <!--========== END FOOTER ==========-->
-
-       
-
-        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <!-- Vendor -->
-        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
-        <script type="text/javascript" src="vendor/counterup.min.js"></script>
-        <script type="text/javascript" src="js/components/swiper.min.js"></script>
-        <script type="text/javascript" src="js/components/counter.min.js"></script>
-        <!--========== END JAVASCRIPTS ==========-->
-         <script type="text/javascript" src="js/nmoneybuddy.js"></script>
-         <%-- <script src="assets/js/jquery-1.8.2.js" type="text/javascript"></script> --%>
-		 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		 
+   	 	<script src="assets/js/wow.min.js"></script>
+   	 
+   	 
 		    <!--========== Chart.js scripts ==========-->
-		 <script src="assets/js/jquery-ui.js"></script>
-		 <!-- <script type="text/javascript" src="assets/js/Chart.js"></script> -->
 		 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-		<script type="text/javascript" src="assets/js/ts-chart-script2.js"></script>
+		
 		
 		<!-- data table -->
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
-		<script>
+		
+		
+		
+		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		
+		
+		
+	 <script>
 		
 		$(document).ready(function() {
-		    $('#portfoliosummary').DataTable( {
-		        "paging":   true,
-		        "ordering": false,
-		        "info":     false,
-		        "searching": true,
-		        "responsive": true,
-		        "lengthMenu": [ [ 10, 25, 50, -1], [10, 25, 50, "All"] ]
-		    } ),
-		    $('#transctionhistory').DataTable( {
-		        "paging":   true,
-		        "ordering": false,
-		        "info":     false,
-		        "searching": true,
-		        "responsive": true,
-		        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-		    } ),
-		    $('#siptable').DataTable( {
-		        "paging":   true,
-		        "ordering": false,
-		        "info":     false,
-		        "searching": true,
-		        "responsive": true,
-		        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-		    } );
+		    TUTORIAL_SAVVY.initChart(),
+			alert("hi agains123");
 		} );
 		
+		var TUTORIAL_SAVVY ={
+		  /*Makes the AJAX calll (synchronous) to load a Student Data*/
+				
+				 
+				  /* Initalization Student render chart */
+				  		initChart : function(){
+				  		alert("hello");
+						var rawData 		= TUTORIAL_SAVVY.loadData();
+						barChartData 		= TUTORIAL_SAVVY.createBarChartData(rawData);
+					    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
+					    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(rawData);
+					    DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
+					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata(rawData);
+					    
+					   
+					    $('#portfoliosummary1').DataTable( {
+					        "paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+					    } );
+					    $('#transctionhistory').DataTable( {
+					        "paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+					    } );
+					    $('#siptable').DataTable( {
+					        "paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+					    } );
+				  },
+		  
+				  loadPortfoliodata : function(portfolioTableData)
+				  {
+					 var table =  $('#portfoliosummary').DataTable( {
+					    	data: portfolioTableData,
+					    	"paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					  		"columnDefs": [ { "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" }  ],
+					  		dom: 'lBfrtip',
+					  		//buttons: [ 'print', 'excelHtml5', 'csvHtml5', 'pdfHtml5'],
+					  		/* "buttons": [
+					            {
+					                extend: 'collection',
+					                text: 'Export',
+					                buttons: [
+					                    'copy',
+					                    'excel',
+					                    'csv',
+					                    'pdf',
+					                    'print'
+					                ]
+					            }
+					        ], */
+					        
+					        
+					        "buttons": [
+					        	{
+					        	extend: 'excelHtml5',
+					        	text: '<i class="fa fa-file-excel-o"></i> Excel',
+					        	titleAttr: 'Export to Excel',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	}
+					        	},
+					        	{
+					        	extend: 'csvHtml5',
+					        	text: '<i class="fa fa-file-text-o"></i> CSV',
+					        	titleAttr: 'CSV',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	}
+					        	},
+					        	{
+					        	extend: 'pdfHtml5',
+					        	text: '<i class="fa fa-file-pdf-o"></i> PDF',
+					        	titleAttr: 'PDF',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	},
+					        	},
+					        	{
+					        	extend: 'print',
+					        	exportOptions: {
+					        	columns: ':visible'
+					        	},
+					        	customize: function(win) {
+					        	$(win.document.body).find( 'table' ).find('td:last-child, th:last-child').remove();
+					        	}
+					        	},
+					        	],
+					        
+							"language": {
+							            "lengthMenu": "Display _MENU_ records per page",
+							            "zeroRecords": "Nothing found - sorry",
+							            "info": "Showing page _PAGE_ of _PAGES_",
+							            "infoEmpty": "No records available",
+							            "infoFiltered": "(filtered from _MAX_ total records)"
+				        				},
+				       		createdRow: function (row, data, index) {
+				       						$(row).addClass("g-font-size-12--xs g-text-right--xs");
+				        			        var totalRecords= data.length;
+				        			        $('td', row).eq(totalRecords).addClass('g-text-center--xs');
+				        			        $('td', row).eq(0).addClass('g-text-left--xs');
+				        			    },
+				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
+					    } ); 
+					 
+				  
+					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
+					        var data = table.row( $(this).parents('tr') ).data();
+					        alert( data[0] +"'s Fund ID is: "+ data[ 1 ] );
+					        buyFundHandler('32');
+					    } ); 
+					  
+				
+				  },
+		  
+		  loadData : function(){
+				var portfolioDataModelListArray =[];
+				$.ajax({
+						async: false,
+						url: "portfolioAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							console.log(jsonResponse);
+							$.each(jsonResponse.portfolioDataModel,function(index,dataElement){
+								portfolioDataModelListArray.push([dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
+							});
+								$.each(jsonResponse.newPortfolioDataModel,function(index,dataElement){
+							});
+								$.each(jsonResponse.investmentDetailsDataModel,function(index,dataElement){
+							});
+						}
+				});
+				console.log(portfolioDataModelListArray);
+		   return portfolioDataModelListArray;
+		  },
+		  
+		  
+		  
+		  /*Crate the custom Object with the data*/
+		  createBarChartData : function(jsonData)
+		  {
+
+			 // console.log(jsonData);
+			  var funds =[];
+			  var investedValue =[];
+			  var currentValue =[];
+			  
+			  for(var i = 0; i < jsonData.length; i++) {
+				  var obj = jsonData[i];
+				  if(obj[0]!="Total")
+					  {	
+					   // console.log(obj[0]);
+					    funds.push(obj[0]);
+					    investedValue.push(obj[2]);
+					    currentValue.push(obj[3]);
+					   }
+				}
+			 
+			  return {
+				  		labels: funds,
+				  		datasets: [
+										{
+												label: 'Invested Value',
+												backgroundColor: "##1a49fb",
+												data: investedValue
+										}, 
+										{
+												label: 'Current Value',
+												backgroundColor: "#13b1cd",
+												data: currentValue
+										}
+									],
+						options: {
+									    legend: {
+									      display: true,
+									      position: 'left',
+									      labels: {
+									        fontColor: "#000080",
+									        maintainAspectRatio: false
+									      }
+									    },
+									    scales: {
+									      yAxes: [{
+									        ticks: {
+									          beginAtZero: true
+									        }
+									      }]
+									    }
+									  }		
+			  		};
+		  },
+		  
+		  /*Renders the BarChart on a canvas and returns the reference to chart*/
+		  renderBarChart:function(ChartData)
+		  {
+			  var context2D = document.getElementById("canvas").getContext("2d");
+			  var myChart = new Chart(context2D,{
+				  type: 'bar',
+				  data: ChartData,
+				  scaleShowLabels : false,
+			      pointLabelFontSize : 10
+			});
+			  window.addEventListener('resize', function () {
+				  myChart.resize()
+		      })
+		  return myChart;
+		  },
+		  
+
+			  createDoughnutChartData : function(jsonData) {
+				var funds = [];
+				var currentValue = [];
+				var colors = [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ];
+				var bgColorArray = [];
+				var hoverBgColorArray = [];
+
+				for (var i = 0; i < jsonData.length; i++) {
+					var obj = jsonData[i];
+					if(obj[0]!="Total")
+					{
+						funds.push(obj[0]);
+						currentValue.push(obj[3]);
+						var bgClrIndex = 0;
+						if (i > 6) {
+							bgClrIndex = i - 6;
+			
+						} else
+							(bgClrIndex = i);
+						bgColorArray.push(colors[bgClrIndex]);
+					}
+				}
+
+				return {
+					labels : funds,
+					datasets : [ {
+						data : currentValue,
+						backgroundColor : bgColorArray,
+					// hoverBackgroundColor: hoverBgColorArray
+					}, ]
+					
+				
+				
+				};
+			},
+
+			/* Renders the Doughnut Chart on a canvas and returns the reference to chart */
+			renderDoughnutChart : function(ChartData) {
+				var context2D = document.getElementById("canvas1").getContext("2d");
+				var myChart = new Chart(context2D, {
+					type : 'doughnut',
+					tooltipFillColor : "rgba(51, 51, 51, 0.55)",
+					data : ChartData,
+					options: {
+		                maintainAspectRatio: false
+		              },
+					legend : {
+						display : true,
+						position : "right",
+					// labels: {fontColor: 'rgb(255, 99, 132)'},
+					},
+				});
+				window.addEventListener('resize', function () {
+					myChart.resize()
+				 })
+				return myChart;
+			},
+		  
+		 
+		};
 		</script>
         
 
-    </body>
+ 
     <!-- End Body -->
 </html>
