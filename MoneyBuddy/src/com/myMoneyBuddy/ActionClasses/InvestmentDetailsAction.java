@@ -26,7 +26,8 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 
 	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
 	private String dummyMsg;
-	private String productName;
+	//private String productName;
+	private String productId;
 
 	private InputStream stream;
 	
@@ -38,7 +39,7 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 			
 			HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = (HashMap<String,List<InvestmentDetailsDataModel>>) sessionMap.get("investmentDetailsDataModelList");
 			
-			investmentDetailsDataModel = investmentDetailsDataModelList.get(getProductName());
+			investmentDetailsDataModel = investmentDetailsDataModelList.get(getProductId());
 	
 			/*QueryProducts queryProducts = new QueryProducts();
 			dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);
@@ -97,16 +98,26 @@ public class InvestmentDetailsAction extends ActionSupport implements SessionAwa
 		return sessionMap;
 	}
 
-	public String getProductName() {
+/*	public String getProductName() {
 		return productName;
 	}
 
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
+	}*/
+	
+	
 
 	public InputStream getStream() {
 		return stream;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public void setStream(InputStream stream) {

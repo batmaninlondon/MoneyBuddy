@@ -80,7 +80,7 @@ function fundDetailHandler(el) {
 	        url : "investmentDetailsAction",
 	        type: 'post',
 	        
-	        data: { 'productName' : selectedItem  },
+	        data: { 'productId' : selectedItem  },
 
 	        /*success : function(){
 	        	$( "#dialog" ).dialog({autoOpen: true,
@@ -186,10 +186,12 @@ function downloadDbfFile(el)
 
 function showNewUpfrontInvestment(newValue)
 {
+	alert('upfrontInvestment :  '+newValue);
 document.getElementById("upfrontInvestment").innerHTML=newValue;
 //document.getElementById("investedAmount").innerHTML=newValue;
 //alert('Call new update function !!');
-newUpdate();
+var transactionType="UPFRONT";
+newUpdate(transactionType);
 }
 
 function fillSipData(minSipAmt,minSipDur)
@@ -202,18 +204,21 @@ function showSipAmountPerMonth(newValue)
 {
 document.getElementById("sipPerMonth").innerHTML=newValue;
 //document.getElementById("investedAmount").innerHTML=newValue;
-newUpdate();
+var transactionType="SIP";
+newUpdate(transactionType);
 }
 
 function showDuration(newValue)
 {
 document.getElementById("sip-duration").innerHTML=newValue;
-newUpdate();
+var transactionType="SIP";
+newUpdate(transactionType);
 
 }
 function showDate()
 {
-newUpdate();
+	var transactionType="SIP";
+newUpdate(transactionType);
 
 }
 
@@ -1779,10 +1784,11 @@ function update(){
 }
 
 
-function newUpdate(){
+function newUpdate(transactionType){
 
-	//alert('new update called !! ');
-	var transactionType = document.getElementById('transactionType').value;
+	alert('new update called !! ');
+	//var transactionType = document.getElementById('transactionType').value;
+	var transactionType = transactionType;
 	alert('transactionType : '+transactionType);
 	
 	if (transactionType == "SIP") {
@@ -1804,13 +1810,13 @@ function newUpdate(){
 
 	var riskCategory = "3";
 	
-
+	alert('Calling ajax : transactionType : '+transactionType);
 	$.ajax({
   	
         url : "newEstimateAction",
         type: 'post',
         
-        data: {'upfrontInvestment' : investment , 'sipAmount' : sipAmount , 'sipDuration' : sipDuration , 'sipDate' : sipDate ,'planName' : planName , 'riskCategory' : riskCategory },
+        data: {'upfrontInvestment' : investment , 'sipAmount' : sipAmount , 'sipDuration' : sipDuration , 'sipDate' : sipDate ,'planName' : planName , 'riskCategory' : riskCategory , 'transactionType' : transactionType },
         
         success : function(result){
         	if (result == "success") {

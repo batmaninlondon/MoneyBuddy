@@ -61,7 +61,7 @@
 </head>
 
 <body style="background-color:#cecece"
-	onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmt"/>');">
+	onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmount"/>');">
 	
 	<%
 		session.setAttribute("transactionType", "UPFRONT");
@@ -104,8 +104,8 @@
 								<div id="upfront-value" >
 									<div class="row">
 										<div class="col-md-4 g-color--primary">
-												<input id="range" type="range" min="<s:property value="#session.minLumsumAmt"/>" max="150000" step="500"
-												 value="<s:property value="#session.minLumsumAmt"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+												<input id="range" type="range" min="<s:property value="#session.minLumsumAmount"/>" max="150000" step="500"
+												 value="<s:property value="#session.minLumsumAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
 										</div>
 										
 										<div class="col-md-4"  style="padding:1px;margin-left:20px;margin-top:-10px;">

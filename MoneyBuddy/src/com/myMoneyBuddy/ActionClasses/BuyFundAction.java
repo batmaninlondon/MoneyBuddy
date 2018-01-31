@@ -7,7 +7,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
-import com.myMoneyBuddy.DAOClasses.QueryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -78,21 +78,22 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	//query.setParameter("productId", fundId);
 	    	//String productDescription = query.uniqueResult().toString();
 	    	
-	    	Query query = hibernateSession.createQuery("select minLumsumAmount from FundDetails where fundId = :fundId");
+	    	Query query = hibernateSession.createQuery("select minLumsumAmount from PrimaryFundDetails where fundId = :fundId");
 	    	
 	    	query.setParameter("fundId", fundId);
 	    	String minLumsumAmount = query.uniqueResult().toString(); 	
 	    	
-	    	sessionMap.put("minLumsumAmt", minLumsumAmount);
+	    	System.out.println("MIN LUMSUM AMOUNT ........ "+minLumsumAmount);
+	    	sessionMap.put("minLumsumAmount", minLumsumAmount);
 	    	
-	    	query = hibernateSession.createQuery("select minSipAmount from FundDetails where fundId = :fundId");
+	    	query = hibernateSession.createQuery("select minSipAmount from PrimaryFundDetails where fundId = :fundId");
 	    	
 	    	query.setParameter("fundId", fundId);
 	    	String minSipAmount = query.uniqueResult().toString(); 	
 	    	
 	    	sessionMap.put("minSipAmount", minSipAmount);
 	    	
-	    	query = hibernateSession.createQuery("select minSipDuration from FundDetails where fundId = :fundId");
+	    	query = hibernateSession.createQuery("select minSipDuration from PrimaryFundDetails where fundId = :fundId");
 	    	
 	    	query.setParameter("fundId", fundId);
 	    	String minSipDuration = query.uniqueResult().toString(); 	
@@ -118,9 +119,9 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	
 	    	System.out.println("productId : "+fundId);
 	    	
-	    	QueryFundDetails queryFundDetails = new QueryFundDetails();
+	    	QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 
-	    	selectedFundDetailsDataModel = queryFundDetails.getSelectedFundDetailsData(getFundId());
+	    	selectedFundDetailsDataModel = queryPrimaryFundDetails.getSelectedFundDetailsData(getFundId());
 			setSelectedFundDetailsDataModel(selectedFundDetailsDataModel);
 			
 			sessionMap.put("selectedFundDetailsDataModel", selectedFundDetailsDataModel);

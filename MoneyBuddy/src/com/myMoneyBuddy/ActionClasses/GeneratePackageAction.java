@@ -54,7 +54,7 @@ public class GeneratePackageAction extends ActionSupport implements SessionAware
 	   	    while (it.hasNext()) {
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        if ("minLumsumAmount".equals(pair.getKey())) {
-	   	        	sessionMap.put("minLumsumAmt", pair.getValue());
+	   	        	sessionMap.put("minLumsumAmount", pair.getValue());
 	   	        	it.remove();
 	   	        }
 	   	        else  if ("minSipAmount".equals(pair.getKey())) {

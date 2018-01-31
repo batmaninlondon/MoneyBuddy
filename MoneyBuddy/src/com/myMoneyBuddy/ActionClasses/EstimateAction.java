@@ -36,6 +36,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     private String riskCategory;
     private String planName;
     private String totalInvestment;
+    private String transactionType;
     //private String numberOfYears;
 
 /*    String predictedValueForOneYear;
@@ -75,7 +76,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     }
 */    public String execute() {
     	
-		System.out.println("EstimateAction class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
+		System.out.println("EstimateAction class : execute method : start");
+		System.out.println("EstimateAction class : execute method : transactionType : "+getTransactionType());
 		
 	
     	logger.debug("EstimateAction class : execute method : start");
@@ -105,13 +107,15 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	    	// Changes to generate productList at the click of "try it out" button in myIndex page - end
 	   	 	
 	    	//System.out.println("FetchProductListAction Hi There 1 ");
+	    	System.out.println("transactionType in EstimateAction : "+getTransactionType());
+	    	sessionMap.put("transactionType", getTransactionType());
+			logger.debug("EstimateAction class : execute method : stored transactionType : "+getTransactionType()+" in session id : "+sessionMap.getClass().getName());
+			
 	   	 
-
-	   	 
-			if (Double.parseDouble(getSipAmount()) == 0 ) {
+			if ("UPFRONT".equals(getTransactionType())) {
 				totalInvestment = Double.toString(Double.parseDouble(getUpfrontInvestment())) ;
 				
-				predictedValueList.put(1, calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 1,getPlanName()));    
+				/*predictedValueList.put(1, calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 1,getPlanName()));    
 				predictedValueList.put(3, calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 3,getPlanName()));    
 				predictedValueList.put(5, calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 5,getPlanName()));    
 				
@@ -121,19 +125,20 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				logger.debug("EstimateAction class : execute method : stored predictedValueList1 : "+predictedValueList.get(1)+" in session id : "+sessionMap.getClass().getName());
 				logger.debug("EstimateAction class : execute method : stored predictedValueList3 : "+predictedValueList.get(3)+" in session id : "+sessionMap.getClass().getName());
 				logger.debug("EstimateAction class : execute method : stored predictedValueList5 : "+predictedValueList.get(5)+" in session id : "+sessionMap.getClass().getName());
-			
+			*/
 			}
 			else {
 				//totalInvestment = Double.toString( (Double.parseDouble(getSipAmount())* Integer.parseInt(getSipDuration())*12)+Double.parseDouble(getSipAmount()) );
 				totalInvestment = Double.toString( Double.parseDouble(getSipAmount()));
-				predictedValueList = calculatedValue.predictedSipAmountList(Double.parseDouble(getSipAmount()), getRiskCategory(), getPlanName());
+				/*predictedValueList = calculatedValue.predictedSipAmountList(Double.parseDouble(getSipAmount()), getRiskCategory(), getPlanName());
 				sessionMap.put("predictedValueList1", Double.toString(predictedValueList.get(1)));
 				sessionMap.put("predictedValueList3", Double.toString(predictedValueList.get(3)));
 				sessionMap.put("predictedValueList5", Double.toString(predictedValueList.get(5)));
 				logger.debug("EstimateAction class : execute method : stored predictedValueList1 : "+predictedValueList.get(1)+" in session id : "+sessionMap.getClass().getName());
 				logger.debug("EstimateAction class : execute method : stored predictedValueList3 : "+predictedValueList.get(3)+" in session id : "+sessionMap.getClass().getName());
 				logger.debug("EstimateAction class : execute method : stored predictedValueList5 : "+predictedValueList.get(5)+" in session id : "+sessionMap.getClass().getName());
-			}
+			*/
+				}
 			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
 			sessionMap.put("sipAmount", getSipAmount());
 			sessionMap.put("sipDuration", getSipDuration());
@@ -166,9 +171,9 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			sessionMap.put("planName", getPlanName());
 			sessionMap.put("totalInvestment", totalInvestment);
 			
-			System.out.println("predictedValueList.get(1) : "+predictedValueList.get(1));
+			/*System.out.println("predictedValueList.get(1) : "+predictedValueList.get(1));
 			System.out.println("predictedValueList.get(3) : "+predictedValueList.get(3));
-			System.out.println("predictedValueList.get(5) : "+predictedValueList.get(5));
+			System.out.println("predictedValueList.get(5) : "+predictedValueList.get(5));*/
 			
 
 			logger.debug("EstimateAction class : execute method : stored upfrontInvestment : "+getUpfrontInvestment()+" in session id : "+sessionMap.getClass().getName());
@@ -302,6 +307,14 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     public void setPlanName(String planName) {
         this.planName = planName;
     }
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
 
 	public InputStream getStream() {
 		return stream;
