@@ -240,7 +240,6 @@
         </header>
         
 	
-<!--========== END PROMO BLOCK ==========-->
       
 	<div class="row g-margin-t-100--xs">    	
 	    	<form id="msform">
@@ -252,7 +251,7 @@
 	</ul>
 	<!-- fieldsets -->
 	<fieldset>
-		<h2 class="fs-title">Create your account</h2>
+		<h1>Create your account</h1>
 		<h3 class="fs-subtitle">This is step 1</h3>
 		
 		<input type="text" name="email" placeholder="Email" />
