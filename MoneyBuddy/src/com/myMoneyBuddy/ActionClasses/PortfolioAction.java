@@ -37,8 +37,8 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	
 	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
 	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
-	
-	private InputStream stream;
+/*	
+	private InputStream stream;*/
 
 	public String execute() {
 
@@ -81,13 +81,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		session.put("sipDataModel", sipDataModel);
 		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+session.getClass().getName());
 
-		String productName = null;
+		String fundId = null;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
-			productName = portfolioDataModelElement.getFundName();
-			System.out.println("productName : "+productName);
+			fundId = portfolioDataModelElement.getFundId();
+			System.out.println("fundId : "+fundId);
 			
-			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),productName);
-			investmentDetailsDataModelList.put(productName,investmentDetailsDataModel);
+			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),fundId);
+			investmentDetailsDataModelList.put(fundId,investmentDetailsDataModel);
 			
 		}
 		// Savita Wadhwani - Added this for chart testing - start
@@ -146,23 +146,23 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		logger.debug("PortfolioAction class : execute method : end");
 
-		String str = "success";
-    	stream = new ByteArrayInputStream(str.getBytes());
+/*		String str = "success";
+    	stream = new ByteArrayInputStream(str.getBytes());*/
     	
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
 			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+/*			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
 			return ERROR;
 		} 
     	catch (Exception e) {	
     		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+session.get("customerId").toString());
 			e.printStackTrace();
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+/*			String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
 			return ERROR;
 		} 
 	}
@@ -216,7 +216,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public Map<String, Object> getSession() {
 		return session;
 	}
-
+/*
 	public InputStream getStream() {
 		return stream;
 	}
@@ -225,7 +225,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		this.stream = stream;
 	}
 
-
+*/
 	public HashMap<String, List<InvestmentDetailsDataModel>> getInvestmentDetailsDataModelList() {
 		return investmentDetailsDataModelList;
 	}

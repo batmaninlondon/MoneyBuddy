@@ -10,14 +10,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.event.PreDeleteEventListener;
 
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class PredictedValueCalculation implements SessionAware {

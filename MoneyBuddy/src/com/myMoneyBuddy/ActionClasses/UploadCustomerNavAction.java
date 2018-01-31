@@ -6,32 +6,14 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
-import com.myMoneyBuddy.DAOClasses.UpdateCurrentLoginTimestamp;
-import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
-import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.EntityClasses.PaymentDetails;
-import com.myMoneyBuddy.EntityClasses.ProductDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.EntityClasses.Transactions;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 
 public class UploadCustomerNavAction extends ActionSupport implements SessionAware {

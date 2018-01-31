@@ -80,8 +80,8 @@
 		</script>
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmt"/>');fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');">
-<%session.setAttribute("transactionType", "SIP");%>;
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmount"/>');fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');">
+<%-- <%session.setAttribute("transactionType", "SIP");%>; --%>
 	<%
 	
 	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
@@ -94,7 +94,7 @@
 	%>
 	
 	<input type="hidden" id="investmentType" value="<s:property value="#session.OnetimeInvestment"/>" />
-	
+	<!-- <input type="hidden" id="transactionType" value="UPFRONT" /> -->
 	
 	<div class="container ">
    		<a href="nhome.jsp" class="s-header-v2__logo-link">
@@ -129,8 +129,8 @@
 			    	<div class="container">
 			    	<br/>
   						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#onetime">One Time</a></li>
-   							<li><a data-toggle="tab" href="#sip">SIP</a></li>
+    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="newUpdate('UPFRONT');">One Time</a></li>
+   							<li><a data-toggle="tab" href="#sip" onClick="newUpdate('SIP');">SIP</a></li>
  						</ul>
   					</div>
   				</div>
@@ -145,15 +145,15 @@
 	    <div class="tab-content">
     		<div id="onetime" class="tab-pane fade in active g-margin-t-30--xs">
       			<div id="upfrontInvestmentDetails">
-	    			<input type="hidden" id="transactionType" value="UPFRONT" />
+	    			<!-- <input type="hidden" id="transactionType" value="UPFRONT" /> -->
 	        		<div class="name g-margin-t-40--xs">
 						<div class="row g-margin-t-50--xs g-margin-b-50--xs">
 								<div id="investment-options" class="col-md-4 col-xs-12">
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
 								</div>
 								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-								<input id="range" type="range" min="<s:property value="#session.minLumsumAmt"/>" max="150000" step="500"
-												 value="<s:property value="#session.minLumsumAmt"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+								<input id="upfront-investment-range" type="range" min="<s:property value="#session.minLumsumAmount"/>" max="150000" step="500"
+												 value="<s:property value="#session.minLumsumAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
 								</div>
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
 								<div class="col-md-5"></div>
@@ -173,14 +173,14 @@
     		</div>
    		 	<div id="sip" class="tab-pane fade">
       			<div  id="sipInvestmentDetails" >
-   					<input type="hidden" id="transactionType" value="SIP" />
+   					<!-- <input type="hidden" id="transactionType" value="SIP" /> -->
 	       				<div class="name">
 							<div class="row g-margin-t-50--xs g-margin-b-50--xs">
 								<div id="investment-options" class="col-md-5 col-xs-12">
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >How much do you want to invest monthly?</p>
 								</div>
 								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-								<input id="range" type="range" min="<s:property value="#session.minSipAmount"/>" max="150000" step="500"
+								<input id="sip-amount-range" type="range" min="<s:property value="#session.minSipAmount"/>" max="150000" step="500"
 												 value="<s:property value="#session.minSipAmount"/>" onchange="showSipAmountPerMonth(this.value)"/>
 								</div>
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="sipPerMonth" class="g-color--black"></span></p>
@@ -191,7 +191,7 @@
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >How long do you expect to invest for?</p>
 								</div>
 								<div id="duration-value"  class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-								<input id="range" type="range" min="<s:property value="#session.minSipDuration"/>" max="50" step="1"
+								<input id="sip-duration-range" type="range" min="<s:property value="#session.minSipDuration"/>" max="50" step="1"
 												 value="<s:property value="#session.minSipDuration"/>" onchange="showDuration(this.value)"/>
 								</div>
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Yr. <span id="sip-duration" class="g-color--black"></span></p>

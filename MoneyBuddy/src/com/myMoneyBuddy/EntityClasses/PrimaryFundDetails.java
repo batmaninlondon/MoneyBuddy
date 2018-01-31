@@ -17,8 +17,8 @@ import javax.persistence.Table;
  * @author Savita Wadhwani
  */
 @Entity
-@Table (name="FUND_DETAILS")
-public class FundDetails {
+@Table (name="PRIMARY_FUND_DETAILS")
+public class PrimaryFundDetails {
 
 
     @Id
@@ -58,16 +58,17 @@ public class FundDetails {
     
     @Column(name="FUND_CATEGORY")
     private String fundCategory;
+    
+    @Column(name="INTEREST_RATE")
+    private String interestRate;
 
-
-    public FundDetails() {
+    public PrimaryFundDetails() {
 
     }
-
-
-
-	public FundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory) {
+    
+	public PrimaryFundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
+			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory,
+			String interestRate ) {
 		super();
 		this.fundName = fundName;
 		this.sector = sector;
@@ -80,27 +81,20 @@ public class FundDetails {
 		this.minLumsumAmount = minLumsumAmount;
 		this.minSipDuration = minSipDuration;
 		this.fundCategory = fundCategory;
+		this.interestRate = interestRate;
 	}
-
-
 
 	public String getFundId() {
 		return fundId;
 	}
 
-
-
 	public void setFundId(String fundId) {
 		this.fundId = fundId;
 	}
 
-
-
 	public String getFundName() {
 		return fundName;
 	}
-
-
 
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
@@ -229,6 +223,16 @@ public class FundDetails {
 
 
 
+	public String getInterestRate() {
+		return interestRate;
+	}
+
+
+
+	public void setInterestRate(String interestRate) {
+		this.interestRate = interestRate;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -238,7 +242,7 @@ public class FundDetails {
             return false;
         }
 
-        final FundDetails other = (FundDetails) obj;
+        final PrimaryFundDetails other = (PrimaryFundDetails) obj;
         if ((this.fundId == null) ? (other.fundId != null) : !this.fundId.equals(other.fundId)) {
             return false;
         }
@@ -275,6 +279,9 @@ public class FundDetails {
         if ((this.fundCategory == null) ? (other.fundCategory != null) : !this.fundCategory.equals(other.fundCategory)) {
             return false;
         }
+        if ((this.interestRate == null) ? (other.interestRate != null) : !this.interestRate.equals(other.interestRate)) {
+            return false;
+        }
         return true;
     }
 
@@ -293,6 +300,7 @@ public class FundDetails {
         hash = 83 * hash + (this.minLumsumAmount != null ? this.minLumsumAmount.hashCode() : 0);
         hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
         hash = 83 * hash + (this.fundCategory != null ? this.fundCategory.hashCode() : 0);
+        hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
         return hash;
     }
     

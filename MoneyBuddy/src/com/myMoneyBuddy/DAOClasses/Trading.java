@@ -355,6 +355,7 @@ public class Trading {
 			ArrayOfstring orderNums = new ArrayOfstring();
 
 			for ( String currentProductId : productDetailsMap.keySet())  {
+				System.out.println("currentProductId : "+currentProductId);
 
 				/*query = sessionPriceHistory.createQuery("from PriceHistory where productId = :productId and date = curdate()");
 			    query.setParameter("productId",currentProductId);
@@ -368,14 +369,14 @@ public class Trading {
 				//List<CustomerPortfolio> customerPortfolio = query.list();
 
 				hibernateSession.beginTransaction();
-				String productName = null;
+				String fundName = null;
 				Object result;
-				result = (hibernateSession.createQuery("select productName from ProductDetails where productId = :productId").setParameter("productId",currentProductId).uniqueResult());
+				result = (hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId").setParameter("fundId",currentProductId).uniqueResult());
 
 				if (result != null) 
-					productName = result.toString();
+					fundName = result.toString();
 
-				System.out.println(" productName :  "+productName +" for product Id : "+currentProductId);
+				System.out.println(" fundName :  "+fundName +" for fund Id : "+currentProductId);
 
 				hibernateSession.getTransaction().commit();
 
@@ -494,7 +495,7 @@ public class Trading {
 					}
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
 					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
-							configProperties.getProperty("MEMBER_ID"),customerId,productName,buySellType,clientProperties.getProperty("BUY_SELL_TYPE"),
+							configProperties.getProperty("MEMBER_ID"),customerId,fundName,buySellType,clientProperties.getProperty("BUY_SELL_TYPE"),
 							clientProperties.getProperty("DP_TXN"),Double.toString(productDetailsMap.get(currentProductId)),clientProperties.getProperty("QTY"),
 							clientProperties.getProperty("ALL_REDEEM"),clientProperties.getProperty("FOLIO_NUMBER"),clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
@@ -522,7 +523,7 @@ public class Trading {
 								PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),clientProperties.getProperty("PARAM_2"),
 								clientProperties.getProperty("PARAM_3"));*/
 					
-					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, productName, configProperties.getProperty("MEMBER_ID"),
+					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, fundName, configProperties.getProperty("MEMBER_ID"),
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
 							Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
@@ -810,11 +811,11 @@ public class Trading {
 					query = hibernateSession.createQuery("select productId,quantity,transactionAmount,transactionDate,transactionStatus from TransactionDetails");
 					transactionDetailQueryResult = query.list();
 					
-					query = hibernateSession.createQuery("select productName from ProductDetails where productId = :productId");
-					query.setParameter("productId", transactionDetailQueryResult.get(0)[0]);
+					query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+					query.setParameter("fundId", transactionDetailQueryResult.get(0)[0]);
 					fundName = query.uniqueResult().toString();
 					
-					System.out.println(" Adding a new row in orderDataModelList for fundName : "+fundName);
+					System.out.println(" Adding a new row in orderDataModelList for fundName : "+fundName+" and fund id : "+transactionDetailQueryResult.get(0)[0]);
 					orderDataModel.add(new OrderDataModel(it.next().toString(), fundName, transactionDetailQueryResult.get(0)[1].toString(), 
 											transactionDetailQueryResult.get(0)[2].toString(), transactionDetailQueryResult.get(0)[3].toString(),
 											transactionDetailQueryResult.get(0)[4].toString()));
@@ -1031,26 +1032,26 @@ public class Trading {
 								session.getTransaction().commit();
 
 								session.beginTransaction();
-								result = session.createQuery("select productName from ProductDetails where productId='"+transactionDetail[4].toString()+"'").uniqueResult();
-								String productName = null;
+								result = session.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+								String fundName = null;
 
 								if (result != null) 
-									productName = result.toString();
+									fundName = result.toString();
 								//session.getTransaction().commit();
 
-								successfulPayment.put(productName, transactionDetail[6].toString());
+								successfulPayment.put(fundName, transactionDetail[6].toString());
 								
 							}
 							else {
 								//session.beginTransaction();
-								Object result = session.createQuery("select productName from ProductDetails where productId='"+transactionDetail[4].toString()+"'").uniqueResult();
-								String productName = null;
+								Object result = session.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+								String fundName = null;
 
 								if (result != null) 
-									productName = result.toString();
+									fundName = result.toString();
 								//session.getTransaction().commit();
 								
-								pendingPayment.put(productName, transactionDetail[6].toString());
+								pendingPayment.put(fundName, transactionDetail[6].toString());
 								
 							}
 

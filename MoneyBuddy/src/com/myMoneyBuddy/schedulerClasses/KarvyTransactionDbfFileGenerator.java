@@ -25,6 +25,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.RtaSpecificCodes;
+import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Transactions;
@@ -44,7 +45,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 			DbfFileStatusDetails tempDbfFileStatusDetails;
 			session.beginTransaction();
 			   
-		   Query query =  session.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from ProductDetails where rta = :rta)");
+		   Query query =  session.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from SecondaryFundDetails where rta = :rta)");
 		   query.setParameter("rta", "KARVY");
 		   query.setParameter("transactionStatus", "COMPLETE");
 		   query.setParameter("rtaFileGenerated", "N");
@@ -759,9 +760,9 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 			    		AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) session.get(AdditionalCustomerDetails.class,  transactionDetail.getCustomerId());
 			    		
 			    		
-						query = session.createQuery("from ProductDetails where productId = :productId");
+						query = session.createQuery("from SecondaryFundDetails where productId = :productId");
 						query.setParameter("productId", transactionDetail.getProductId());	
-						ProductDetails productDetails =  (ProductDetails) query.uniqueResult();
+						SecondaryFundDetails secondaryFundDetails =  (SecondaryFundDetails) query.uniqueResult();
 						//session.getTransaction().commit();
 						
 						//session.beginTransaction();
@@ -789,6 +790,12 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						query.setParameter("fieldValue", customerDetail.getOccupation());	
 						result =  query.uniqueResult();
 						occuCode = result.toString();
+						
+						String  fundName;
+						query = session.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+						query.setParameter("fundId", transactionDetail.getProductId());		
+						result = query.uniqueResult();
+						fundName = result.toString();
 						
 						//session.getTransaction().commit();
 						
@@ -826,7 +833,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						//session.getTransaction().commit();
 						
 						   
-						rowData[0] = productDetails.getAmcCode(); 
+						rowData[0] = secondaryFundDetails.getAmcCode(); 
 						System.out.println("Broke code : "+properties.getProperty("ARN_CODE"));
 						rowData[1] = properties.getProperty("ARN_CODE"); 
 						rowData[2] = null; 
@@ -836,7 +843,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[6] = customer.getFolioNumber(); 
 						rowData[7] = null; 
 						rowData[8] = (("BUY".equals(transactionDetail.getBuySell())) ? "P" : "R"); 
-						rowData[9] = productDetails.getProductName(); 
+						rowData[9] = fundName; 
 	
 						rowData[10] = customer.getCustomerName(); 
 						rowData[11] = null; 

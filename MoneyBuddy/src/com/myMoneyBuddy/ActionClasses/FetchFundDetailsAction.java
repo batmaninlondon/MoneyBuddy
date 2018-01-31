@@ -7,7 +7,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
-import com.myMoneyBuddy.DAOClasses.QueryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -65,9 +65,9 @@ public class FetchFundDetailsAction extends ActionSupport implements SessionAwar
     	
     	try {
 			System.out.println("Calling FetchFundDetailsAction class - start ");
-			QueryFundDetails queryFundDetails = new QueryFundDetails();
+			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 
-			fundDetailsDataModel = queryFundDetails.getFundDetailsData();
+			fundDetailsDataModel = queryPrimaryFundDetails.getFundDetailsData();
 			setFundDetailsDataModel(fundDetailsDataModel);
 			
 			sessionMap.put("fundDetailsDataModel", fundDetailsDataModel);

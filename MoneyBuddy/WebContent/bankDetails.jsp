@@ -81,6 +81,10 @@
     </head>
 
 <body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
+	<%
+	System.out.println("transactionType : "+session.getAttribute("transactionType"));
+	System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
+	%>
    <!--  <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> -->
    <div class="container ">
    		<a href="nhome.jsp" class="s-header-v2__logo-link">

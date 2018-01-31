@@ -32,26 +32,26 @@ public class ProductDetails {
     @Column(name="PLAN_NAME")
     private String planName;
     
-    @Column(name="PRODUCT_TYPE")
+    /*@Column(name="PRODUCT_TYPE")
     private String productType;
     
     @Column(name="PRODUCT_NAME")
     private String productName;
     
     @Column(name="PRODUCT_DESCRIPTION")
-    private String productDescription;
+    private String productDescription;*/
 
-    @Column(name="INTEREST_RATE")
-    private String interestRate;
+    /*@Column(name="INTEREST_RATE")
+    private String interestRate;*/
 
     @Column(name="PERCENTAGE")
     private String percentage;
     
-    @Column(name="AMC_CODE")
+    /*@Column(name="AMC_CODE")
     private String amcCode;
     
     @Column(name="RTA")
-    private String rta;
+    private String rta;*/
     
     @Column(name="KARVY_SCHEME_CODE")
     private String karvySchemeCode;
@@ -63,7 +63,7 @@ public class ProductDetails {
 
     }
 
-    public ProductDetails(String riskCategory, String planName,
+   /* public ProductDetails(String riskCategory, String planName,
 			String productType, String productName, String productDescription,
 			String interestRate, String percentage, String amcCode, String rta, 
 			String karvySchemeCode, String camsSchemeCode) {
@@ -79,8 +79,17 @@ public class ProductDetails {
 		this.rta = rta;
 		this.karvySchemeCode = karvySchemeCode;
 		this.camsSchemeCode = camsSchemeCode;
-	}
+	}*/
 
+	public ProductDetails(String riskCategory, String planName, String percentage,
+			String karvySchemeCode, String camsSchemeCode) {
+		super();
+		this.riskCategory = riskCategory;
+		this.planName = planName;
+		this.percentage = percentage;
+		this.karvySchemeCode = karvySchemeCode;
+		this.camsSchemeCode = camsSchemeCode;
+	}    
 
 	public String getProductId() {
 		return productId;
@@ -106,7 +115,7 @@ public class ProductDetails {
 		this.planName = planName;
 	}
 
-	public String getProductType() {
+/*	public String getProductType() {
 		return productType;
 	}
 
@@ -128,16 +137,16 @@ public class ProductDetails {
 
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
-	}
+	}*/
 
-	public String getInterestRate() {
+	/*public String getInterestRate() {
 		return interestRate;
 	}
 
 	public void setInterestRate(String interestRate) {
 		this.interestRate = interestRate;
 	}
-
+*/
 	public String getPercentage() {
 		return percentage;
 	}
@@ -146,7 +155,7 @@ public class ProductDetails {
 		this.percentage = percentage;
 	}
 
-	public String getAmcCode() {
+/*	public String getAmcCode() {
 		return amcCode;
 	}
 
@@ -160,7 +169,7 @@ public class ProductDetails {
 
 	public void setRta(String rta) {
 		this.rta = rta;
-	}
+	}*/
 
 	public String getKarvySchemeCode() {
 		return karvySchemeCode;
@@ -197,27 +206,27 @@ public class ProductDetails {
         if ((this.planName == null) ? (other.planName != null) : !this.planName.equals(other.planName)) {
             return false;
         }
-        if ((this.productType == null) ? (other.productType != null) : !this.productType.equals(other.productType)) {
+        /*if ((this.productType == null) ? (other.productType != null) : !this.productType.equals(other.productType)) {
             return false;
         }
         if ((this.productName == null) ? (other.productName != null) : !this.productName.equals(other.productName)) {
             return false;
-        }
-        if ((this.interestRate == null) ? (other.interestRate != null) : !this.interestRate.equals(other.interestRate)) {
+        }*/
+        /*if ((this.interestRate == null) ? (other.interestRate != null) : !this.interestRate.equals(other.interestRate)) {
             return false;
-        }
-        if ((this.productDescription == null) ? (other.productDescription != null) : !this.productDescription.equals(other.productDescription)) {
+        }*/
+        /*if ((this.productDescription == null) ? (other.productDescription != null) : !this.productDescription.equals(other.productDescription)) {
             return false;
-        }
+        }*/
         if ((this.percentage == null) ? (other.percentage != null) : !this.percentage.equals(other.percentage)) {
             return false;
         }
-        if ((this.amcCode == null) ? (other.amcCode != null) : !this.amcCode.equals(other.amcCode)) {
+        /*if ((this.amcCode == null) ? (other.amcCode != null) : !this.amcCode.equals(other.amcCode)) {
             return false;
         }
         if ((this.rta == null) ? (other.rta != null) : !this.rta.equals(other.rta)) {
             return false;
-        }
+        }*/
         if ((this.karvySchemeCode == null) ? (other.karvySchemeCode != null) : !this.karvySchemeCode.equals(other.karvySchemeCode)) {
             return false;
         }
@@ -233,13 +242,13 @@ public class ProductDetails {
         hash = 83 * hash + (this.productId != null ? this.productId.hashCode() : 0);
         hash = 83 * hash + (this.riskCategory != null ? this.riskCategory.hashCode() : 0);
         hash = 83 * hash + (this.planName != null ? this.planName.hashCode() : 0);
-        hash = 83 * hash + (this.productType != null ? this.productType.hashCode() : 0);
-        hash = 83 * hash + (this.productName != null ? this.productName.hashCode() : 0);
-        hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
-        hash = 83 * hash + (this.productDescription != null ? this.productDescription.hashCode() : 0);
+        /*hash = 83 * hash + (this.productType != null ? this.productType.hashCode() : 0);
+        hash = 83 * hash + (this.productName != null ? this.productName.hashCode() : 0);*/
+        /*hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);*/
+        /*hash = 83 * hash + (this.productDescription != null ? this.productDescription.hashCode() : 0);*/
         hash = 83 * hash + (this.percentage != null ? this.percentage.hashCode() : 0);
-        hash = 83 * hash + (this.amcCode != null ? this.amcCode.hashCode() : 0);
-        hash = 83 * hash + (this.rta != null ? this.rta.hashCode() : 0);
+        /*hash = 83 * hash + (this.amcCode != null ? this.amcCode.hashCode() : 0);
+        hash = 83 * hash + (this.rta != null ? this.rta.hashCode() : 0);*/
         hash = 83 * hash + (this.karvySchemeCode != null ? this.karvySchemeCode.hashCode() : 0);
         hash = 83 * hash + (this.camsSchemeCode != null ? this.camsSchemeCode.hashCode() : 0);
         return hash;

@@ -4,49 +4,24 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
-import com.myMoneyBuddy.EntityClasses.FundDetails;
-import com.myMoneyBuddy.EntityClasses.NavHistory;
-import com.myMoneyBuddy.EntityClasses.ProductDetails;
-import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-/*import com.myMoneyBuddy.EntityClasses.PriceHistory;*/
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.DashboardDataModel;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.ScrollMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 
 
-public class QueryFundDetails {
+public class QueryPrimaryFundDetails {
 	
-	Logger logger = Logger.getLogger(QueryFundDetails.class);
+	Logger logger = Logger.getLogger(QueryPrimaryFundDetails.class);
 	
 	
 	public List<FundDetailsDataModel> getFundDetailsData() throws MoneyBuddyException {
@@ -63,12 +38,12 @@ public class QueryFundDetails {
 
 			List<FundDetailsDataModel> fundDetailsDataModel = new LinkedList<FundDetailsDataModel>();
 
-			Query query = session.createQuery("from FundDetails");
+			Query query = session.createQuery("from PrimaryFundDetails");
 
 			
-			List<FundDetails> fundDetailsList = query.list();
+			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
 
-			for (FundDetails fundDetailsListElement : fundDetailsList)  {
+			for (PrimaryFundDetails fundDetailsListElement : primaryFundDetailsList)  {
 				
 				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
 						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
@@ -122,16 +97,16 @@ public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws Mon
 
 			FundDetailsDataModel selectedFundDetailsDataModel = new FundDetailsDataModel();
 
-			Query query = session.createQuery("from FundDetails where fundId = :fundId");
+			Query query = session.createQuery("from PrimaryFundDetails where fundId = :fundId");
 			query.setParameter("fundId", fundId);
 			
-			List<FundDetails> fundDetailsList = query.list();
+			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
 			
-			if (fundDetailsList != null)  {
-				selectedFundDetailsDataModel= new FundDetailsDataModel(fundDetailsList.get(0).getFundId(),fundDetailsList.get(0).getFundName(),fundDetailsList.get(0).getSector(),
-						fundDetailsList.get(0).getSubSector(),fundDetailsList.get(0).getFundStartDate(),fundDetailsList.get(0).getRating(),fundDetailsList.get(0).getRisk(),
-						fundDetailsList.get(0).getReturnsThreeYears(),fundDetailsList.get(0).getMinSipAmount(),fundDetailsList.get(0).getMinLumsumAmount(),
-						fundDetailsList.get(0).getMinSipDuration(),fundDetailsList.get(0).getFundCategory());
+			if (primaryFundDetailsList != null)  {
+				selectedFundDetailsDataModel= new FundDetailsDataModel(primaryFundDetailsList.get(0).getFundId(),primaryFundDetailsList.get(0).getFundName(),primaryFundDetailsList.get(0).getSector(),
+						primaryFundDetailsList.get(0).getSubSector(),primaryFundDetailsList.get(0).getFundStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
+						primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinLumsumAmount(),
+						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory());
 			}
 
 			//session.getTransaction().commit();
