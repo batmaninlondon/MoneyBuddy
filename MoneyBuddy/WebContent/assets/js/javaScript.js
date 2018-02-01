@@ -882,7 +882,9 @@ function setData()
 
 function setDashboardData() 
 {
-	 //alert ("calling setDashboardData !! ");
+	document.getElementById('load').style.visibility="visible";
+	   // document.getElementById('contents').style.visibility="hidden";
+	//alert ("calling setDashboardData !! ");
 	$.ajax({
 
         url : "portfolioAction",
@@ -919,6 +921,7 @@ function setDashboardData()
 
 function getMfData() 
 {
+	document.getElementById('load').style.visibility="visible";
 	// alert ("calling fun !! ");
 	$.ajax({
 
@@ -1389,6 +1392,8 @@ function saveSubscriber() {
 }
 
 function login() {
+	document.getElementById('load').style.visibility="visible";
+   // document.getElementById('contents').style.visibility="hidden";
 	
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
@@ -1424,7 +1429,7 @@ function login() {
         
         success : function(result){
         	
-        	alert('result : '+result);
+        	//alert('result : '+result);
         	if (result == "success") {
         		/*alert('login success !! ');*/
         		window.location='myIndex';

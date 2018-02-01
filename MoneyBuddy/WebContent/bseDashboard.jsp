@@ -173,11 +173,18 @@
 	background: #13b1cd;
 	color: white;
 }
+
+
+}
 	    </style> 
     <!-- End Head -->
 
     <!-- Body -->
     <body>
+    <div id="load" class="load"></div>
+    
+          
+  
 
         <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -384,7 +391,7 @@
                 
                 <!--  Portfolio Summary Chart Start-->
                 
-                <div class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
+                <div  id="contents" class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
 	              	<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
 	              		<div class="g-text-center--xs g-margin-b-10--xs">
 	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary Chart</h3>
@@ -629,6 +636,7 @@
             </div>
             <!-- End Copyright -->
         </footer>
+       
       </body>
         <!--========== END FOOTER ==========-->
 
@@ -690,8 +698,7 @@
 	 <script>
 		
 		$(document).ready(function() {
-		    TUTORIAL_SAVVY.initChart(),
-			alert("hi agains123");
+		    TUTORIAL_SAVVY.initChart()
 		} );
 		
 		var TUTORIAL_SAVVY ={
@@ -700,7 +707,6 @@
 				 
 				  /* Initalization Student render chart */
 				  		initChart : function(){
-				  		alert("hello");
 						var rawData 		= TUTORIAL_SAVVY.loadData();
 						barChartData 		= TUTORIAL_SAVVY.createBarChartData(rawData);
 					    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
@@ -982,6 +988,20 @@
 		  
 		 
 		};
+		
+		
+		document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
 		</script>
         
 

@@ -37,7 +37,8 @@
 </head>
 
 <body >
-
+<div id="load" class="load"></div>
+<div id="content">
 	<%
 	
 	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
@@ -208,7 +209,7 @@
       </div><!-- tab-content -->
       
 </div>
-			
+	</div>		
           </div>
         <!--========== END PROMO BLOCK ==========-->
 	
@@ -243,6 +244,21 @@
         <script type="text/javascript" src="js/components/faq.min.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
          <script  src="js/index.js"></script>
+         <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         
+         </script>
 </body>
 </html>
 

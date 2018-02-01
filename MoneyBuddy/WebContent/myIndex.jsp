@@ -42,10 +42,14 @@
   
  <!-- Le styles -->
     <link href="assets/css/flexslider.css" rel="stylesheet"> 
+     <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
   
 </head>
 
 <body class="homepage">
+
+<div id="load" class="load"></div>
+<div id="content">
    <header id="header">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
             <div class="container">
@@ -506,6 +510,21 @@ We use funds from leading providers to build your portfolio</p>
         </div>
     </footer>
 
-
+</div>
 </body>
+  <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         
+         </script>
 </html>
