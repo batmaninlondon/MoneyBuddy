@@ -72,12 +72,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	hibernateSession.beginTransaction();
 	    	
 	    	HashMap<String,Double> productRatioList =  new HashMap<String,Double>();
-	    	
-	    	//Query query = hibernateSession.createQuery("select productDescription from ProductDetails where productId = :productId");
-	    	
-	    	//query.setParameter("productId", fundId);
-	    	//String productDescription = query.uniqueResult().toString();
-	    	
+
 	    	Query query = hibernateSession.createQuery("select minLumsumAmount from PrimaryFundDetails where fundId = :fundId");
 	    	
 	    	query.setParameter("fundId", fundId);
@@ -91,6 +86,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	query.setParameter("fundId", fundId);
 	    	String minSipAmount = query.uniqueResult().toString(); 	
 	    	
+	    	System.out.println("MIN SIP AMOUNT ........ "+minSipAmount);
 	    	sessionMap.put("minSipAmount", minSipAmount);
 	    	
 	    	query = hibernateSession.createQuery("select minSipDuration from PrimaryFundDetails where fundId = :fundId");
@@ -109,6 +105,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	        	}
 	        	System.out.println("minSipDuration : "+i);
 	    	
+	        	System.out.println("MIN SIP DURATION ........ "+i);
 	    	sessionMap.put("minSipDuration", i);
 	    	
 	    	

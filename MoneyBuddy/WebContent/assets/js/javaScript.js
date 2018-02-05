@@ -1,20 +1,5 @@
-/*    $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })*/
-    
-    
-
 $(document).ready(function(){
 	
-/*$('img.bgfade').hide();*/
 var dg_H = $(window).height();
 var dg_W = $(window).width();
 $('#wrap').css({'height':dg_H,'width':dg_W});
@@ -24,21 +9,15 @@ function anim() {
     setTimeout(anim, 6000);
 }
 anim();
-
-/*  $("#footer").load("footer.html");*/
-
 });
 
 function getURLParameter(name) {
 	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 	}
 
-
-
 function showUpfrontInvestment(newValue)
 {
 document.getElementById("upfrontInvestment").innerHTML=newValue;
-//alert('Call update function !!');
 update();
 }
 
@@ -47,7 +26,6 @@ function changeUploadStatus(el)
 	var date = $(el).closest("tr").find('td:eq(0)').text();
 	var rta = $(el).closest("tr").find('td:eq(1)').text();
 	var fileType = $(el).closest("tr").find('td:eq(2)').text();
-	//alert('Call changeUploadStatus function : date : '+date);
 	$.ajax({
         url : "fileUploadStatusChangeAction",
         type: 'post',
@@ -61,7 +39,6 @@ function changeUploadStatus(el)
         		//do nothing 
         	}
         	else {
-        		/*alert('Inside resetPassword error !!');*/
         		window.location='errorPage';
         	}
 
@@ -70,50 +47,28 @@ function changeUploadStatus(el)
 	
 }
 
-
 function fundDetailHandler(el) {
 
 	    var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
 
-	    //alert ('selectedItem : '+selectedItem);
 	    $.ajax({
 	        url : "investmentDetailsAction",
 	        type: 'post',
 	        
 	        data: { 'productId' : selectedItem  },
-
-	        /*success : function(){
-	        	$( "#dialog" ).dialog({autoOpen: true,
-        	    	title:selectedItem,
-        	    	width: 800,
-        	    	height:300,
-        	    	scrollable: true});
-	          },
-	          error : function(){
-	        		alert('Inside investmentDetailsAction error !!');
-	        		window.location='errorPage';
-	        	}*/
-	          
+	        
 	        success : function(result){
 	        	
 	        	if (result == "success") {
-	        		//alert ('Inside success of investmentDetails!! ');
-	        		
-	        		/*$( "#dialog-1" ).dialog({autoOpen: true,
-	        	    	title:selectedItem,
-	        	    	width: 800,
-	        	    	height:300,
-	        	    	scrollable: true});*/
+
 	        		$("#investment-details-data-list").load("bseDashboard.jsp #investment-details-data-list");
 	        		$( "#dialog" ).dialog({autoOpen: true,
 	        	    	title:selectedItem,
 	        	    	width: 800,
 	        	    	height:300,
 	        	    	scrollable: true});
-
 	        	}
 	        	else {
-	        		//alert('Inside resetPassword error !!');
 	        		window.location='errorPage';
 	        	}
 
@@ -125,10 +80,6 @@ function fundDetailHandler(el) {
 
 function buyFundHandler(fundId) {
 
-	//alert('function called !!');
-    //var selectedItem = $(el).closest("tr").find('td:eq(0)').text().trim();
-	//var selectedItem = $("#selectedFundId").val();
-    //alert ('buyFundHandler : selectedItem : fund id : '+fundId);
     $.ajax({
         url : "buyFundAction",
         type: 'post',
@@ -150,19 +101,10 @@ function buyFundHandler(fundId) {
     
   }
 
-
 function downloadDbfFile(el)
 {
-	/*alert('showPLan function called !! ');*/
-	
 	var date = $(el).closest("tr").find('td:eq(0)').text();
-	
-	
-	/*alert('Date is : '+date);*/
-	
-	/*alert('showPLan function riskCategory :'+riskCategory );*/
-	
-	
+
     $.ajax({
         url : "downloadDbfFileAction",
         type: 'post',
@@ -176,7 +118,6 @@ function downloadDbfFile(el)
         		//do nothing 
         	}
         	else {
-        		/*alert('Inside resetPassword error !!');*/
         		window.location='errorPage';
         	}
 
@@ -186,12 +127,9 @@ function downloadDbfFile(el)
 
 function showNewUpfrontInvestment(newValue)
 {
-	alert('upfrontInvestment :  '+newValue);
-document.getElementById("upfrontInvestment").innerHTML=newValue;
-//document.getElementById("investedAmount").innerHTML=newValue;
-//alert('Call new update function !!');
-var transactionType="UPFRONT";
-newUpdate(transactionType);
+	document.getElementById("upfrontInvestment").innerHTML=newValue;
+	var transactionType="UPFRONT";
+	newUpdate(transactionType);
 }
 
 function fillSipData(minSipAmt,minSipDur)
@@ -202,35 +140,30 @@ function fillSipData(minSipAmt,minSipDur)
 }
 function showSipAmountPerMonth(newValue)
 {
-document.getElementById("sipPerMonth").innerHTML=newValue;
-//document.getElementById("investedAmount").innerHTML=newValue;
-var transactionType="SIP";
-newUpdate(transactionType);
+	document.getElementById("sipPerMonth").innerHTML=newValue;
+	var transactionType="SIP";
+	newUpdate(transactionType);
 }
 
 function showDuration(newValue)
 {
-document.getElementById("sip-duration").innerHTML=newValue;
-var transactionType="SIP";
-newUpdate(transactionType);
+	document.getElementById("sip-duration").innerHTML=newValue;
+	var transactionType="SIP";
+	newUpdate(transactionType);
 
 }
 function showDate()
 {
 	var transactionType="SIP";
-newUpdate(transactionType);
-
+	newUpdate(transactionType);
 }
 
 function showPredictedSipValues(newValue)
 {
-document.getElementById("investmentAmount").innerHTML=newValue;
+	document.getElementById("investmentAmount").innerHTML=newValue;
 
-var sipAmount = newValue;
-var fundId = document.getElementById("fundId").value;
-
-//alert('sipAmount : '+sipAmount+' : fundId : '+fundId);
-
+	var sipAmount = newValue;
+	var fundId = document.getElementById("fundId").value;
 	$.ajax({
 	    url : "sipCalculatorAction",
 	    type: 'post',
@@ -253,15 +186,10 @@ var fundId = document.getElementById("fundId").value;
 
 
 function showUpfrontInvestmentPlan()
-{
-	/*alert('showPLan function called !! ');*/
-	
+{	
 	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
 	
-	/*alert('showPLan function riskCategory :'+riskCategory );*/
-	
-	
-    $.ajax({
+	$.ajax({
         url : "productListAction",
         type: 'post',
         
@@ -271,13 +199,8 @@ function showUpfrontInvestmentPlan()
         	
         	if (result == "success") {
         		
-	        	/*document.getElementById('investment-options').style.display ='none';
-	        	document.getElementById('invested-fund-list').style.display ='block';
-	        	document.getElementById("submit-button-1").disabled = true;*/
-        		
         		document.getElementById('investment-options').className += " hidden";
 	        	$("#invested-fund-list").removeClass('hidden');
-	        	/*document.getElementById('invested-fund-list').style.display ='block';*/
 	        	document.getElementById("submit-button-1").disabled = true;
 	        	$("#investment-fund-list-data").load("upfrontInvestment.jsp #investment-fund-list-data");
         	}
@@ -298,8 +221,6 @@ function ongoingSipList()
         success : function(result){
         	
         	if (result == "success") {
-        		//alert('Inside ongoing sip success !! ');
-        		
         		window.location='ongoingSips';
         	}
         	else {
@@ -312,14 +233,9 @@ function ongoingSipList()
 
 function showSipPlan()
 {
-	/*alert('showSipPLan function called !! ');*/
-	
 	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
 	
-	/*alert('showPLan function riskCategory :'+riskCategory );*/
-	
-	
-    $.ajax({
+	$.ajax({
         url : "productListAction",
         type: 'post',
         
@@ -328,15 +244,9 @@ function showSipPlan()
         success : function(result){
         	
         	if (result == "success") {
-        		/*alert('HI There !!!! ');*/
-        	
-	        	/*document.getElementById('investment-options').style.display ='none';
-	        	document.getElementById('invested-fund-list').style.display ='block';
-	        	document.getElementById("submit-button-1").disabled = true;*/
         		
         		document.getElementById('investment-options').className += " hidden";
 	        	$("#invested-fund-list").removeClass('hidden');
-	        	/*document.getElementById('invested-fund-list').style.display ='block';*/
 	        	document.getElementById("submit-button-1").disabled = true;
 	        	$("#investment-fund-list-data").load("sipInvestment.jsp #investment-fund-list-data");
         	}
@@ -348,14 +258,7 @@ function showSipPlan()
 
 function paymentStatus()
 {
-	/*alert('paymentStatus function called !! ');*/
-	
-	//var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
-	
-	/*alert('showPLan function riskCategory :'+riskCategory );*/
-	
-	
-    $.ajax({
+	$.ajax({
         url : "paymentStatusAction",
         type: 'post',
         
@@ -363,20 +266,10 @@ function paymentStatus()
 
         success : function(result){
         	
-        	//if (result == "success") {
-
-        	
-	        	/*document.getElementById('investment-options').style.display ='none';
-	        	document.getElementById('invested-fund-list').style.display ='block';
-	        	document.getElementById("submit-button-1").disabled = true;*/
-        		
-        		/*document.getElementById('investment-options').className += " hidden";
-	        	$("#invested-fund-list").removeClass('hidden');
-	        	document.getElementById('invested-fund-list').style.display ='block';
-	        	document.getElementById("submit-button-1").disabled = true;
-	        	$("#investment-fund-list-data").load("upfrontInvestment.jsp #investment-fund-list-data");
+        	if (result == "success") {
+        		// Do nothing
         	}
-*/
+
         }
     });
 }
@@ -384,12 +277,8 @@ function paymentStatus()
 
 function forgottenPassword()
 {
-	/*alert('forgottenPassword function called !! ');*/
-	
 	var emailId = document.getElementById("email-id").value;
-	
-	/*alert('forgottenPassword function emailId :'+emailId );*/
-	
+
 	if ( emailId == '')  {
 		
 		document.getElementById("email-id").className += " formInvalid";
@@ -411,7 +300,6 @@ function forgottenPassword()
         data: { 'emailId' : emailId },
 
         success : function(result){
-        	/*alert('result : '+result);*/
         	if (result == "success") {
         		window.location='thankYouForPasswordReset';
         	}
@@ -426,7 +314,6 @@ function forgottenPassword()
         		document.getElementById("email-id").value = null;
         	}
         	else {
-        		/*alert('Inside ForgottenPassword error !!');*/
         		window.location='errorPage';
         	}
 
@@ -436,8 +323,6 @@ function forgottenPassword()
 
 function checkKysStatus()
 {
-	//alert('checkKysStatus function called !! ');
-	
 	var customerName = document.getElementById("customer-name").value;
 	var dateOfBirth = document.getElementById("date-of-birth").value;
 	var gender = document.getElementById("gender").value;
@@ -513,42 +398,24 @@ function checkKysStatus()
 
         success : function(result){
 
-        	/*alert('Inside Success ');*/
-        	/*alert('result : '+result);*/
-        	
         	if (result == "kycDone") {
         		window.location='bankDetails';
         	} 
         	else if (result == "kycNotDone")  {
         		window.location='additionalCustomerDetails';
         	}
-        	/*else if (result == "kycNotDone")  {
-        		alert('KYC not done for this pan card !! ');
-        		window.location='additionalCustomerDetails';
-        	}
-        	else if (result == "kycDone") {
-        		alert('Inside kycCheck success !! ');
-        		window.location='bankDetails';
-        	}*/	
+
         	else {
-        		/*alert('Inside kycCheck error !! ');*/
         		window.location='errorPage';
         	}
         },
 
     });
-    
 
-	
 }
-
-
-
 
 function prepareKyc()
 {
-	//alert('checkKysStatus function called !! ');
-	
 	var fatherName = document.getElementById("father-name").value;
 	var maritalStatus = document.getElementById("marital-status").value;
 	var nationality = document.getElementById("nationality").value;
@@ -573,32 +440,21 @@ function prepareKyc()
         data: { 'fatherName' : fatherName ,  'maritalStatus' : maritalStatus , 'nationality' : nationality , 'status' : status ,'grossAnnualIncome' : grossAnnualIncome ,'politicallyExposed' : politicallyExposed },
 
         success : function(result){
-        	//alert('result : '+result);
         	if (result == "success") {
         		
         		window.location='downloadKycForm';
-        	}
-        	/*if (result == "success") {
-        		alert('Inside kycCheck success !! ');
-        		window.location='downloadKycForm';
-        	}*/	
+        	}	
         	else {
-        		/*alert('Inside kycCheck error !! ');*/
         		window.location='errorPage';
         	}
         },
 
     });
-    
 
-	
 }
-
 
 function checkDetails()
 {
-	/*alert('checkDetails function called !!');*/
-	
 	var clientHolding = document.getElementById("client-holding").value;
 	var taxStatus = document.getElementById("tax-status").value;
 	var occupationName = document.getElementById("occupation-name").value;
@@ -614,9 +470,7 @@ function checkDetails()
 	var residentialPin = document.getElementById("residential-pin").value;
 	var residentialCountry = document.getElementById("residential-country").value;
 	var groupName = document.getElementById("group-name").value;
-	
-	/*alert('payment function clientHolding :'+clientHolding);*/
-	
+
 	if ( accountNumber == '')  {
 		document.getElementById("account-number").className += " formInvalid";
 		document.getElementById("account-number").placeholder = "Acc No can not be blank!";
@@ -733,24 +587,9 @@ function checkDetails()
 
         success : function(result){
 
-        	/*alert('Inside Success ');
-        	alert('result : '+result);*/
-        	
         	if (result.startsWith("success")) {
-        		
-        		/*var paymentUrl1 = document.getElementById("payment-url1").value;
-        		alert('paymentUrl1 is : '+paymentUrl1);
-
-        		$("#payment-url-div").load("clientDetails.jsp #payment-url-div"); 
-        		$("#payment-url").load("clientDetails.jsp #payment-url");
-        		
-        		var paymentUrl = document.getElementById("payment-url").value;*/
-        		
+       		
         		var paymentUrl = result.substring(8);
-        		
-        		/*alert (' result : ' + result);
-        		alert (' Fetching paymentUrl from result : ' + paymentUrl);*/
-	
         		window.location=paymentUrl;
         	}
         	else if (result == "groupNameAlreadyExists")  {
@@ -778,65 +617,11 @@ function checkDetails()
         		window.location='errorPage';
         	}
         	else {
-        		/*alert('Inside checkDetails error !! ');*/
         		window.location='errorPage';
         	}
         },
     });
 }
-
-/*function setType() 
-{
-
-	document.getElementById('diamond-text-2').style.display ='none';
-	document.getElementById('diamond-text-3').style.display ='none';
-	document.getElementById('diamond-text-4').style.display ='none';
-	document.getElementById('diamond-text-5').style.display ='none';
-	document.getElementById('diamond-text-6').style.display ='none';
-	document.getElementById('diamond-text-7').style.display ='none';
-	document.getElementById('diamond-text-8').style.display ='none';
-	document.getElementById('diamond-text-9').style.display ='none';
-	document.getElementById('diamond-text-10').style.display ='none';
-
-	document.getElementById("submit-button-1").disabled = false;
-	document.getElementById('submit-button-1').style.display ='none';
-	document.getElementById('invested-fund-list').style.display ='none';
-	document.getElementById('pancard-verification').style.display ='none';
-	document.getElementById('payment-page').style.display ='none';
-	document.getElementById('login-page').style.display ='none';
-
-	document.getElementById("years").innerHTML= '5';
-	document.getElementById("sipPerMonth").innerHTML = '2000';
-	document.getElementById("upfrontInvestment").innerHTML = '10000'; 
-
-	document.getElementById("submit-button-2").disabled = false;
-	document.getElementById("submit-button-3").disabled = false;
-	document.getElementById("forgot-password-submit-button").disabled = false;
-
-	
-	var type = getURLParameter('type');
-	
-	if (type == "ONE_TIME")  {
-
-		document.getElementById("years").innerHTML= '5';
-		document.getElementById("sipPerMonth").innerHTML = '0';
-		document.getElementById("upfrontInvestment").innerHTML = '10000'; 
-		
-		document.getElementById('sip-text').style.display ='none';
-		document.getElementById('sip-value').style.display ='none';
-	}
-	
-	else {
-		document.getElementById("years").innerHTML= '5';
-		document.getElementById("sipPerMonth").innerHTML = '2000';
-		document.getElementById("upfrontInvestment").innerHTML = '0'; 
-		
-		document.getElementById('upfront-text').style.display ='none';
-		document.getElementById('upfront-value').style.display ='none';
-		document.getElementById('duration-text').style.display ='none';
-		document.getElementById('duration-value').style.display ='none';
-	}
-}*/
 
 function setInitialUpfrontInvestment() 
 {
@@ -846,9 +631,6 @@ function setInitialUpfrontInvestment()
 	document.getElementById("submit-button-2").disabled = false;
 	document.getElementById("submit-button-3").disabled = false;
 	document.getElementById("forgot-password-submit-button").disabled = false;
-	/*document.getElementById("years").innerHTML= '5';
-	document.getElementById("sipPerMonth").innerHTML = '0';
-	document.getElementById("upfrontInvestment").innerHTML = '10000';*/
 }
 
 
@@ -865,12 +647,9 @@ function setData()
         success : function(result){
         	
         	if (result == "success") {
-        		// do nothing
-        		//alert('Hii');
         		$('#body_holder').show();
         	}
         	else {
-        		/*alert('Inside resetPassword error !!');*/
         		window.location='errorPage';
         	}
 
@@ -879,12 +658,8 @@ function setData()
     });
 }
 
-
 function setDashboardData() 
 {
-	document.getElementById('load').style.visibility="visible";
-	   // document.getElementById('contents').style.visibility="hidden";
-	//alert ("calling setDashboardData !! ");
 	$.ajax({
 
         url : "portfolioAction",
@@ -893,27 +668,12 @@ function setDashboardData()
         data: {},
         
         success : function(result){
-        	//alert('result: '+result);
         	if (result == "success") {
         		window.location='bseDashboard';
-        		//alert('got success!!');
-        		//$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
-        		/*setTimeout(function(){
-        			//document.getElementById("please-wait-msg").style.display = "none";
-        			
-            		//document.getElementById("dashboard").style.display = "block";	
-
-        		}, 10000); */
-        		//alert(' HI Func completed successfully !! ');
-        		
-        		// do nothing
         	}
         	else {
-        		/*alert('Inside resetPassword error !!');*/
         		window.location='errorPage';
         	}
-
-        	//alert("in here vivekkk");
         },
 
     }); 
@@ -921,8 +681,6 @@ function setDashboardData()
 
 function getMfData() 
 {
-	document.getElementById('load').style.visibility="visible";
-	// alert ("calling fun !! ");
 	$.ajax({
 
         url : "fetchFundDetailsAction",
@@ -934,24 +692,10 @@ function getMfData()
         	
         	if (result == "success") {
         		window.location='allFunds';
-        		//alert('got success!!');
-        		//$("#dashboard-data-list").load("bseDashboard.jsp #dashboard-data-list");
-        		/*setTimeout(function(){
-        			//document.getElementById("please-wait-msg").style.display = "none";
-        			
-            		//document.getElementById("dashboard").style.display = "block";	
-
-        		}, 10000); */
-        		//alert(' HI Func completed successfully !! ');
-        		
-        		// do nothing
         	}
         	else {
-        		/*alert('Inside resetPassword error !!');*/
         		window.location='errorPage';
         	}
-
-        	//alert("in here vivekkk");
         },
 
     }); 
@@ -963,9 +707,6 @@ function setInitialSipInvestment()
 	document.getElementById("submit-button-2").disabled = false;
 	document.getElementById("submit-button-3").disabled = false;
 	document.getElementById("forgot-password-submit-button").disabled = false;
-	/*document.getElementById("years").innerHTML= '5';
-	document.getElementById("sipPerMonth").innerHTML = '2000';
-	document.getElementById("upfrontInvestment").innerHTML = '0';*/
 	
 }
 
@@ -984,7 +725,6 @@ function resetPassword() {
 		return;
 	}
 	else if ( !validatePassword(newPassword) )  {
-		/*alert('newPassword : '+newPassword);*/
 		document.getElementById("new-password").className += " formInvalid";
 		document.getElementById("new-password").placeholder = "Password shall contain min 8 charcters";
 		document.getElementById("new-password").value = null;
@@ -1021,7 +761,6 @@ function resetPassword() {
 	        		window.location='login';
 	        	}
 	        	else {
-	        		/*alert('Inside resetPassword error !!');*/
 	        		window.location='errorPage';
 	        	}
 
@@ -1035,9 +774,7 @@ function showCustomerDetails()
 {
 
 	var cusId = document.getElementById('cusId').value;
-	//alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
-		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('investment-options').className += " hidden";	
 		$("#login-page").removeClass('hidden');
 	} 
@@ -1051,29 +788,21 @@ function showCustomerDetails()
 	        data: {},
 	        
 	        success : function(result){
-	        	
-	        	/*alert('result : '+result);*/
-	        	
+
 	        	if (result == "kycNotDone") {
 	        		
 	        		window.location='customerDetails';
-	        		//window.location='clientDetails';
 	        	}
 	        	else if (result == "success") {
-	        		
-	        		//window.location='bankDetails';
 	        		window.location='clientDetails';
 	        	}
 	        	else {
-	        		/*alert('Inside newLogin error !!');*/
 	        		window.location='errorPage';
 	        	}
 	        	
 	        },
 
 	    });
-		
-
 	}
 	
 }
@@ -1089,15 +818,36 @@ function createCart()
         data: {},
         
         success : function(result){
-        	
-        	//alert('result : '+result);
         	if (result == "success") {
-        		
-        		//window.location='bankDetails';
         		window.location='customerCart';
         	}
         	else {
-        		/*alert('Inside newLogin error !!');*/
+        		window.location='errorPage';
+        	}
+        	
+        },
+
+    });	
+
+}
+
+function deleteCartEntry(cartId)  
+{
+	var cartId = cartId;
+
+	$.ajax({
+
+        url : "deleteCartEntryAction",
+        type: 'post',
+        
+        data: { 'cartId' : cartId },
+        
+        success : function(result){
+        	if (result == "success") {
+        		window.location='customerCart';
+
+        	}
+        	else {
         		window.location='errorPage';
         	}
         	
@@ -1109,7 +859,6 @@ function createCart()
 
 function openCustomerDetailsPage()  
 {
-	//alert('showPanCardVerification');
 	var redirectingPage = document.getElementById('redirectingPage').value;
 
 	if (redirectingPage == "panCardVerifiction") {
@@ -1133,7 +882,6 @@ function openCustomerDetailsPage()
 function callOneTimeInvestment()  
 {
 	var cusId = document.getElementById('cusId').value;
-	//alert('checkLoggedInStatus : cusId : '+cusId);
 	var OnetimeInvestment = "TRUE";
 	if (cusId == "customerIdNull") {
 		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
@@ -1149,7 +897,6 @@ function callSIPInvestment()
 {
       
 	var cusId = document.getElementById('cusId').value;
-	//alert('checkLoggedInStatus : cusId : '+cusId);
 	var OnetimeInvestment = "FALSE";
 	if (cusId == "customerIdNull") {
 		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
@@ -1164,7 +911,6 @@ function verifyPancard()
 {
       
 	var panCard = document.getElementById("pancard-number").value;
-	//alert('panCard : '+panCard);
 	if ( panCard == '')  {
 		document.getElementById("pancard-number").className += " formInvalid";
 		document.getElementById("pancard-number").placeholder = "Pancard Number can not be blank ";
@@ -1178,9 +924,7 @@ function verifyPancard()
 		
 		return;
 	}
-	//alert('before generatePackageAction jax call !! ');
-	
-	
+
 	$.ajax({
 
         url : "panCardVerificationAction",
@@ -1189,18 +933,13 @@ function verifyPancard()
         data: {'panCard' : panCard },
         
         success : function(result){
-        	
-        	//alert('result : '+result);
-        	
         	if (result == "kycDone") {
-        		//alert('login success !! ');
         		window.location='customerDetails';
         	}
         	else if (result == "kycNotDone")  {
         		window.location='customerDetails';
         	}
         	else {
-        		//alert('Inside login error !!');
         		window.location='errorPage';
         	}
 
@@ -1211,138 +950,17 @@ function verifyPancard()
 
 function showPanCardVerification()
 {
-	//alert('showPanCardVerification function called !! ');
 	var cusId = document.getElementById('cusId').value;
-	//alert('showPanCardVerification : cusId : '+cusId);
 	if (cusId == "customerIdNull") {
-		/*alert('Inside showPanCardVerification customerIdNotExist !! ');*/
 		document.getElementById('invested-fund-list').className += " hidden";	
 		$("#login-page").removeClass('hidden');
 	} 
 	else  {
-		/*alert('Inside showPanCardVerification customerIdExist !! ');*/
 		document.getElementById('invested-fund-list').className += " hidden";
 		$("#pancard-verification").removeClass('hidden');
 	}
-	
-/*	var fundChoice = "UserChoice";
-    $.ajax({
-      	
-        url : "panCardVerification",
-        type: 'post',
-        
-        data: {'fundChoice' : fundChoice },
-        
-        success : function(result){
-        	alert('Inside showPanCardVerification Success ');
-        	alert('result : '+result);
-        	if (result == "customerIdNotExist") {
-        		alert('Inside showPanCardVerification customerIdNotExist !! ');
-        		document.getElementById('invested-fund-list').style.display ='none';	
-        		document.getElementById('login-page').style.display ='block';
-        	} 
-        	else if (result == "customerIdExist") {
-        		alert('Inside showPanCardVerification customerIdExist !! ');
-        		document.getElementById('invested-fund-list').style.display ='none';	
-        		document.getElementById('pancard-verification').style.display ='block';
-        	}
-        	else {
-        		alert('Inside showPanCardVerification error !! ');
-        		window.location='errorPage';
-        	}	
-    
-        }
-    });*/
     	
 }
-
-/*function newLogin() {	
-	alert("login new");
-	var emailId = document.getElementById("email-id").value;
-	var password = document.getElementById("password").value;
-	var login = "loopedLogin";
-
-	if ( emailId == '')  {
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Enter Password ";
-		return;
-	}
-	else if (!validateEmail(emailId)) {
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id ";
-		document.getElementById("email-id").value = null;
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Enter Password ";
-		return;
-	}
-	else if ( password == '') {
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Enter Email Id ";
-		document.getElementById("password").className += " formInvalid";
-		document.getElementById("password").placeholder = "Password can not be blank!";
-		return;
-	}
-	
-	alert ('newLogin() : emailId : '+emailId);
-    $.ajax({
-
-        url : "newLoginAction",
-        type: 'post',
-        
-        data: {'emailId' : emailId , 'password' : password , 'login' : login },
-        
-        success : function(result){
-        	
-        	alert('result : '+result);
-        	
-        	if (result == "kycAlreadyDone") {
-        		document.getElementById('login-page').className += " hidden";	
-        		$("#pancard-verification").removeClass('hidden');
-        		
-        		//window.location='bankDetails';
-        		window.location='customerDetails';
-        	}
-        	else if (result == "success") {
-        		document.getElementById('login-page').className += " hidden";	
-        		$("#pancard-verification").removeClass('hidden');
-        		
-        		window.location='customerDetails';
-        	}
-        	else if (result == "verificationNotDone")  {
-        		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + "Verification pending for this Email Id ";
-        		document.getElementById("email-id").value = null;
-        		document.getElementById("password").className = "form-control";
-        		document.getElementById("password").placeholder = "Enter Password ";
-        	}
-        	else if (result == "emailIdDoesNotExists")  {
-        		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " is not registered with MoneyBuddy";
-        		document.getElementById("email-id").value = null;
-        		document.getElementById("password").className = "form-control";
-        		document.getElementById("password").placeholder = "Enter Password ";
-        	}
-        	else if (result == "incorrectPassword")  {
-        		document.getElementById("email-id").className = "form-control";
-        		document.getElementById("email-id").placeholder = "Enter Email Id ";
-        		document.getElementById("password").className += " formInvalid";
-        		document.getElementById("password").placeholder = "Incorrect Password";
-        		document.getElementById("password").value = null;
-        	}
-        	else {
-        		alert('Inside newLogin error !!');
-        		window.location='errorPage';
-        	}
-        	
-        		
-
-        },
-
-    });
-	
-}*/
 
 function signUp(){
 	window.location='register';
@@ -1375,15 +993,10 @@ function saveSubscriber() {
         data: {'emailId' : emailId , 'mobileNumber' : mobileNumber},
         
         success : function(result){
-        	
-        	/*alert('result : '+result);*/
-        	
         	if (result == "success") {
-        		/*alert('login success !! ');*/
         		window.location='thankYouForSubscribing';
         	}
         	else {
-        		/*alert('Inside login error !!');*/
         		window.location='errorPage';
         	}
 
@@ -1392,8 +1005,6 @@ function saveSubscriber() {
 }
 
 function login() {
-	document.getElementById('load').style.visibility="visible";
-   // document.getElementById('contents').style.visibility="hidden";
 	
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
@@ -1428,10 +1039,7 @@ function login() {
         data: {'emailId' : emailId , 'password' : password },
         
         success : function(result){
-        	
-        	//alert('result : '+result);
         	if (result == "success") {
-        		/*alert('login success !! ');*/
         		window.location='myIndex';
         	}
         	else if (result == "verificationNotDone")  {
@@ -1465,7 +1073,6 @@ function login() {
         		window.location='amountConfirmation';
         	}
         	else {
-        		/*alert('Inside login error !!');*/
         		window.location='errorPage';
         	}
 
@@ -1475,43 +1082,30 @@ function login() {
 
 function generatePackage() {
 
-	//alert('generatePackage func called !! ');
-
-$.ajax({
-
-    url : "generatePackageAction",
-    type: 'post',
-    
-    data: {},
-    
-    success : function(result){
-    	
-    	/*alert('result : '+result);*/
-    	
-    	if (result == "success") {
-    		/*alert('login success !! ');*/
-    		//window.location='investmentStyle';
-    		window.location='selectedFundDetails';
-    	}
-    	else {
-    		/*alert('Inside login error !!');*/
-    		window.location='errorPage';
-    	}
-
-    },
-});	
+	$.ajax({
+	
+	    url : "generatePackageAction",
+	    type: 'post',
+	    
+	    data: {},
+	    
+	    success : function(result){
+	    	if (result == "success") {
+	    		window.location='selectedFundDetails';
+	    	}
+	    	else {
+	    		window.location='errorPage';
+	    	}
+	
+	    },
+	});	
 }
 
 
 function register() {
-	
-	/*alert('register function called !! ');*/
 
 	var emailId = document.getElementById("email-id1").value;
 	var password = document.getElementById("password1").value;
-	alert(emailId);
-	alert(password);
-	//var confirmPassword = document.getElementById("confirm-password").value;
 	var mobileNumber = document.getElementById("mobile-number").value;
 
 	if ( emailId == '')  {
@@ -1520,8 +1114,6 @@ function register() {
 		document.getElementById("email-id1").placeholder = "Email Id can not be blank!";
 		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
-		/*document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1533,8 +1125,6 @@ function register() {
 		document.getElementById("email-id1").value = null;
 		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
-/*		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1545,8 +1135,6 @@ function register() {
 		document.getElementById("password1").placeholder = "Password can not be blank!";
 		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
-/*		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
@@ -1558,45 +1146,10 @@ function register() {
 		document.getElementById("password").value = null;
 		document.getElementById("email-id1").className = "form-control";
 		document.getElementById("email-id1").placeholder = "Email ID";
-/*		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
 		return;
 	}
-/*	else if ( confirmPassword == '')  {
-		
-		document.getElementById("confirm-password").className += " formInvalid";
-		document.getElementById("confirm-password").placeholder = "Password can not be blank!";
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
-		document.getElementById("mobile-number").className = "form-control";
-		document.getElementById("mobile-number").placeholder = "Contact Number";
-		return;
-	}*/
-/*	else if ( !comparePasswords(password,confirmPassword) )  {
-		
-		document.getElementById("confirm-password").className += " formInvalid";
-		document.getElementById("confirm-password").placeholder = "Password and Confirm Password shall be same";
-		document.getElementById("confirm-password").value = null;
-		document.getElementById("first-name").className = "form-control";
-		document.getElementById("first-name").placeholder = "First Name";
-		document.getElementById("last-name").className = "form-control";
-		document.getElementById("last-name").placeholder = "Last Name";
-		document.getElementById("email-id").className = "form-control";
-		document.getElementById("email-id").placeholder = "Email ID";
-		document.getElementById("password").className = "form-control";
-		document.getElementById("password").placeholder = "Password";
-		document.getElementById("mobile-number").className = "form-control";
-		document.getElementById("mobile-number").placeholder = "Contact Number";
-		return;
-	}*/
 	else if ( mobileNumber == '')  {
 		
 		document.getElementById("mobile-number").className += " formInvalid";
@@ -1605,8 +1158,6 @@ function register() {
 		document.getElementById("email-id1").placeholder = "Email ID";
 		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
-/*		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
 	}
 	else if ( !validateMobileNumber(mobileNumber))  {
@@ -1618,13 +1169,9 @@ function register() {
 		document.getElementById("email-id1").placeholder = "Email ID";
 		document.getElementById("password1").className = "form-control";
 		document.getElementById("password1").placeholder = "Password";
-/*		document.getElementById("confirm-password").className = "form-control";
-		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
 		return;
 	}
-	
-	/*alert('emailId : '+emailId);*/
-	
+
     $.ajax({
       	
         url : "registerAction",
@@ -1642,8 +1189,6 @@ function register() {
         		document.getElementById("email-id1").value = null;
         		document.getElementById("password1").className = "form-control";
         		document.getElementById("password1").placeholder = "Password";
-/*        		document.getElementById("confirm-password").className = "form-control";
-        		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
         		document.getElementById("mobile-number").className = "form-control";
         		document.getElementById("mobile-number").placeholder = "Contact Number";
         	}
@@ -1653,13 +1198,10 @@ function register() {
         		document.getElementById("mobile-number").value = null;
         		document.getElementById("password1").className = "form-control";
         		document.getElementById("password1").placeholder = "Password";
-/*        		document.getElementById("confirm-password").className = "form-control";
-        		document.getElementById("confirm-password").placeholder = "Confirm Password";*/
         		document.getElementById("email-id1").className = "form-control";
         		document.getElementById("email-id1").placeholder = "Email ID";
         	}
         	else {
-        		/*alert('Inside newLogin error !!');*/
         		window.location='errorPage';
         	}
         },
@@ -1673,65 +1215,6 @@ $("input[name=riskCategory]").click(function(){
 });
 
 function update(){
-
-/*	alert('update called !! ');
-	var investment = document.getElementById("upfrontInvestment").innerHTML;
-	var sip = document.getElementById("sipPerMonth").innerHTML;
-	var riskCategory = document.querySelector('input[name="riskCategory"]:checked').value;;
-	var riskCategory = "3";
-	var planName = "SAVE_TAX";
-	var years = document.getElementById("years").innerHTML;
-	
-	var totalInvestment = parseInt(sip)+parseInt(investment);
-
-	alert('sip : '+sip);
-	alert ('estimate function called ');
-    $.ajax({
-  	
-        url : "estimateAction",
-        type: 'post',
-        
-        data: {'upfrontInvestment' : investment , 'sip' : sip ,'planName' : planName , 'riskCategory' : riskCategory },
-        
-        success : function(result){
-        	if (result == "success") {
-        	    	
-        	  document.getElementById('diamond-text-1').style.display ='none';
-        	  alert ('success');
-        	  if (sip != 0) {
-        		  alert ('SIP is not 0 ');
-        		  $("#diamond-text-7").removeClass('hidden');
-				  $("#diamond-text-8").removeClass('hidden');
-				  $("#diamond-text-9").removeClass('hidden');
-				  $("#diamond-text-10").removeClass('hidden');
-
-        		  $("#predicted-value-list-1").load("sipInvestment.jsp #predicted-value-list-1");
-        		  $("#predicted-value-list-2").load("sipInvestment.jsp #predicted-value-list-2");
-        		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
-        	  }
-        	  else {
-        		  alert ('SIP is 0 ');
-	        	  $("#diamond-text-2").removeClass('hidden');
-	        	  $("#diamond-text-3").removeClass('hidden');
-	        	  $("#diamond-text-4").removeClass('hidden');
-	        	  $("#diamond-text-5").removeClass('hidden');
-	        	  $("#diamond-text-6").removeClass('hidden');
-	        	  $("#predicted-value").load("upfrontInvestment.jsp #predicted-value");
-	           	  
-	         		document.getElementById("totalInvestment").innerHTML= totalInvestment;
-	       		document.getElementById("numberOfYears").innerHTML= years;
-	        	  
-        	  }
-        	  $("#submit-button-1").removeClass('hidden');
-    		
-        	}
-        	else {
-        		alert('Inside estimate error !!');
-        		window.location='errorPage';
-        	}  
-
-        }
-    });*/
 	
 	var investment = document.getElementById("upfrontInvestment").innerHTML;
 	var sip = document.getElementById("sipPerMonth").innerHTML;
@@ -1749,11 +1232,8 @@ function update(){
         
         success : function(result){
         	if (result == "success") {
-        	    	
-        	  //document.getElementById('diamond-text-1').style.display ='none';
-        	  /*alert ('success');*/
+
         	  if (sip != 0) {
-        		 /* alert ('SIP is not 0 ');*/
         		  $("#diamond-text-7").removeClass('hidden');
 				  $("#diamond-text-8").removeClass('hidden');
 				  $("#diamond-text-9").removeClass('hidden');
@@ -1764,23 +1244,11 @@ function update(){
         		  $("#predicted-value-list-3").load("sipInvestment.jsp #predicted-value-list-3");
         	  }
         	  else {
-        		 /* alert ('SIP is 0 ');*/
-	        	  /*$("#diamond-text-2").removeClass('hidden');
-	        	  $("#diamond-text-3").removeClass('hidden');
-	        	  $("#diamond-text-4").removeClass('hidden');
-	        	  $("#diamond-text-5").removeClass('hidden');
-	        	  $("#diamond-text-6").removeClass('hidden');*/
 	        	  $("#predicted-value-for-one-year").load("upfrontInvestment.jsp #predicted-value-for-one-year");
-	           	  
-	         	//document.getElementById("totalInvestment").innerHTML= totalInvestment;
-	       		//document.getElementById("numberOfYears").innerHTML= years;
 	        	  
         	  }
-        	  //$("#submit-button-1").removeClass('hidden');
-    		
         	}
         	else {
-        		/*alert('Inside estimate error !!');*/
         		window.location='errorPage';
         	}  
 
@@ -1791,31 +1259,24 @@ function update(){
 
 function newUpdate(transactionType){
 
-	alert('new update called !! ');
-	//var transactionType = document.getElementById('transactionType').value;
 	var transactionType = transactionType;
-	alert('transactionType : '+transactionType);
 	
 	if (transactionType == "SIP") {
-		var sipAmount = document.getElementById("sip-amount-range").value;
+		var sipAmount = document.getElementById("sipPerMonth").innerHTML;
 		var investment = "0";
-		var sipDuration = document.getElementById('sip-duration-range').value; // in years
+		var sipDuration = document.getElementById('sip-duration').innerHTML; // in years
 		var sipDate = document.getElementById('sip-date').value;
 		var planName = "SIP";
-		/*var totalInvestment = parseInt(sip)*12*parseInt(years)+parseInt(sip);*/
 	} else{
-		//alert('UPFRONT');
 		var sipAmount = "0";
 		var investment = document.getElementById("upfrontInvestment").innerHTML;
 		var sipDuration = "0"; // in years
 		var sipDate = "0";
 		var planName = "SAVE_TAX";
-		/*var totalInvestment = parseInt(investment);*/
 	}
 
 	var riskCategory = "3";
-	
-	alert('Calling ajax : transactionType : '+transactionType);
+
 	$.ajax({
   	
         url : "newEstimateAction",
@@ -1825,11 +1286,8 @@ function newUpdate(transactionType){
         
         success : function(result){
         	if (result == "success") {
-        	    	
-        	  //document.getElementById('diamond-text-1').style.display ='none';
-        	  /*alert ('success');*/
+
         	  if (sipAmount != 0) {
-        		 /* alert ('SIP is not 0 ');*/
         		  $("#diamond-text-7").removeClass('hidden');
 				  $("#diamond-text-8").removeClass('hidden');
 				  $("#diamond-text-9").removeClass('hidden');
@@ -1841,29 +1299,14 @@ function newUpdate(transactionType){
 	        	  $("#investment-fund-list-data").load("newSipInvestment.jsp #investment-fund-list-data");
         	  }
         	  else {
-        		  //alert ('SIP is 0 ');
-	        	  /*$("#diamond-text-2").removeClass('hidden');
-	        	  $("#diamond-text-3").removeClass('hidden');
-	        	  $("#diamond-text-4").removeClass('hidden');
-	        	  $("#diamond-text-5").removeClass('hidden');
-	        	  $("#diamond-text-6").removeClass('hidden');*/
-
 	        	  $("#predictedValue1").load("newUpfrontInvestment.jsp #predictedValue1");
 	        	  $("#predictedValue2").load("newUpfrontInvestment.jsp #predictedValue2");
 	        	  $("#predictedValue3").load("newUpfrontInvestment.jsp #predictedValue3");
-	        	  /*$("#predicted-value-for-three-year").load("newUpfrontInvestment.jsp #predicted-value-for-three-year");
-	        	  $("#predicted-value-for-five-year").load("newUpfrontInvestment.jsp #predicted-value-for-five-year");*/
 	        	  $("#investmentFundData").load("newUpfrontInvestment.jsp #investmentFundData");
-	           	  
-	         	//document.getElementById("totalInvestment").innerHTML= totalInvestment;
-	       		//document.getElementById("numberOfYears").innerHTML= years;
 	        	  
         	  }
-        	  //$("#submit-button-1").removeClass('hidden');
-    		
         	}
         	else {
-        		/*alert('Inside estimate error !!');*/
         		window.location='errorPage';
         	}  
 
@@ -1902,38 +1345,14 @@ function comparePasswords(password1,password2) {
     }
     return false;
 }
-
-//sleep time expects milliseconds
-/*function sleep (time) {
-	alert('Inside sleep function !');
-  return new Promise((resolve) => setTimeout(resolve, time));
-}*/
-
-// With JQuery
-/*$("#ex1").slider({
-		formatter: function(value) {
-		return 'Current value: ' + value;
-	}
-});
-
-    $("#slider-right").slider()
-
-    // initializes the input fields
-    $("#slider-right").sliderTextInput()
-	
-*/
-	
-/* .trigger('change');*/
-    
+ 
 function populateBankDetails() 
 {
-	//alert ( " Hi There, populateBankDetails been called !! ");
 	var bankName = document.getElementById("bank-name").value;
 	var accountType = document.getElementById("account-type").value;
 	var accountNumber = document.getElementById("account-number").value;
 	var reAccountNumber = document.getElementById("re-account-number").value;
 	var ifscCode = document.getElementById("ifsc-code").value;
-	//alert ('accountType :  '+accountType);
 	
 	
 	if ( accountNumber == '')  {
@@ -1979,37 +1398,26 @@ function populateBankDetails()
 	
 	
 	$.ajax({
-	  	
-        //url : "populateBankDetailsAction",
-        url : "paymentAction",
+        
+		url : "paymentAction",
         type: 'post',
         
         data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'neftCode' : ifscCode },
         
         success : function(result){
-        	//if (result == "success") {
         	if (result.startsWith("success")) {
-        		//window.location='thankYou';
         		var paymentUrl = result.substring(8);
         		alert('paymentUrl   : '+paymentUrl);
-        		//window.location=paymentUrl;
         		window.open(paymentUrl, "_self");
         	}
         	else {
-        		/*alert('Inside estimate error !!');*/
         		window.location='errorPage';
         	}  
 
         }
     });
-	
-	
-	
-	
-	
+
 }
-
-
 
 function uploadCutsomerNav() 
 {
@@ -2063,24 +1471,15 @@ function uploadCutsomerNav()
     		
         	}
         	else {
-        		/*alert('Inside estimate error !!');*/
         		window.location='errorPage';
         	}  
 
         }
     });
-	
-	
-	
-	
-	
+
 }
 
-
-
-
 function testDummyEkyc () {
-	//alert("testDummyEkyc called !! ");
 	
 	var callingUrl =window.location.href;
 	
@@ -2092,7 +1491,6 @@ function testDummyEkyc () {
 	var password = "nc$81MC";
 	var INTERMEDIARY_ID = "B";
 	var RETURN_DATA_STRU = '';
-/*	var Sess_id="svsdsdqw21dscsddsvsdvsdvsdvsd";*/
 	var Sess_id = '';
 	var Aadhar='';
 	var ekyctype='';
@@ -2106,43 +1504,8 @@ function testDummyEkyc () {
 	  '<input type="hidden" name="kyc_data" value="' + kycdatatext + '" />' +
 	  '</form>');
 	$('body').append(form);
-	//alert ('submitting for !');
 	form.attr('target', '_top').submit();
-	
-/*	
-	form.attr('target', '_top').submit(function(){
-	    $.ajax({
-	      url: $('#form'),
-	      type: 'POST',
-	      data : $('#form').serialize(),
-	      success: function(){
-	        alert('form submitted.');
-	      }
-	    });
-	    return false;
-	});*/
-	
-	
-	
-/*	$.ajax({
-        type: 'POST',
-        url: "https://eiscuat1.camsonline.com/ekycuat3/eKYCVal_Aadhar.aspx",
-        dataType: JSON,
-        data: {
-        	"sess_id": Sess_id,
-        	"Aadhar": Aadhar,
-            "url": callingUrl,
-            "ekyctype": ekyctype,
-            "kyc_data": kycdatatext
 
-            
-        },
-        success: function (data) {
-            alert("success");
-        }
-
-    });*/
-	
 }
 
 

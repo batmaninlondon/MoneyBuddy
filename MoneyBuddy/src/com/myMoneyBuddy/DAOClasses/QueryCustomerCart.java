@@ -10,7 +10,9 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -40,6 +42,15 @@ public class QueryCustomerCart {
 			query.setParameter("customerId", customerId);
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
+			
+			Double totalAmount = 0.0;
+			
+			for (int i = 0; i < customerCartList.size(); i++) {
+				CustomerCart customerCartListElement = customerCartList.get(i);
+				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
+			}
+			
+			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null));
 			
 			
 			/*for (int i=0; i<customerCartList.size(); i++){

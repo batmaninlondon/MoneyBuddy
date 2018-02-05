@@ -80,13 +80,15 @@
 		</script>
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="showNewUpfrontInvestment('<s:property value="#session.minLumsumAmount"/>');fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');">
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');showNewUpfrontInvestment('<s:property value="#session.minLumsumAmount"/>');">
 <%-- <%session.setAttribute("transactionType", "SIP");%>; --%>
 	<%
 	
 	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
 	    	session.setAttribute("OnetimeInvestment", "TRUE");
 	    	System.out.println("In login jsp : OnetimeInvestment set to TRUE .");
+
+	    	
 	    } else if ("FALSE".equals(request.getParameter("OnetimeInvestment"))) {
 	    	session.setAttribute("OnetimeInvestment", "FALSE");
 	    	System.out.println("In login jsp : OnetimeInvestment set to FALSE .");
@@ -129,8 +131,8 @@
 			    	<div class="container">
 			    	<br/>
   						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="newUpdate('UPFRONT');">One Time</a></li>
-   							<li><a data-toggle="tab" href="#sip" onClick="newUpdate('SIP');">SIP</a></li>
+    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="newUpdate('UPFRONT');">Invest Lumsum</a></li>
+   							<li><a data-toggle="tab" href="#sip" onClick="newUpdate('SIP');">Start SIP</a></li>
  						</ul>
   					</div>
   				</div>

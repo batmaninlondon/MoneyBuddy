@@ -230,11 +230,11 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
 				
-		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>) sessionMap.get("productRatioList"),
 		    			Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
 		    	
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
-						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,"Y",
+						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,getAccountNumber(),getBankName(),getNeftCode(),getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",null, sessionMap);
 		    	
 			}
@@ -255,12 +255,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	System.out.println("mandateId : "+mandateId);
 		    	
 				
-		    	productDetailsMapForBuy = queryProducts.getProductAmountList(sessionMap.get("riskCategory").toString(),sessionMap.get("planName").toString(),
+		    	productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>)sessionMap.get("productRatioList"),
 		    			Double.parseDouble(sessionMap.get("sipAmount").toString()));
 		    	
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",sessionMap.get("sipDate").toString(),sessionMap.get("sipStartDate").toString(),sessionMap.get("sipEndDate").toString(),
-						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("sipDuration").toString()),"Y",
+						sessionMap.get("transactionType").toString(),"BUY",Integer.parseInt(sessionMap.get("sipDuration").toString()),
+						getAccountNumber(),getBankName(),getNeftCode(),getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",mandateId,sessionMap);
 			}
 			
@@ -314,8 +315,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				str = "allOrderFailed";
 
 			}
-			
-		
 			
     	    stream = new ByteArrayInputStream(str.getBytes());
     		return SUCCESS;
@@ -414,6 +413,23 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
+	}
+	
+	public String getBankMode(String bankName)  {
+		
+		String bankMode;
+		
+		switch (bankName)  {
+			case "ICI" : 
+			case "SBI" : 
+			case "162" :
+				bankMode="DIRECT";break;
+			case "HDF" :
+				bankMode="NODAL";break;
+			default : 
+				bankMode="INVALID";
+		}
+		return bankMode;
 	}
 
 	

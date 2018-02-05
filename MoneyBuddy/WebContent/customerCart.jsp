@@ -107,17 +107,25 @@
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Creation Date</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Creation Date</th>
+								<th class="center col-md-3 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
 							<s:iterator value="#session.customerCartList" var="customerCartListElement">
 								<tr>
 								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+								    <td class="center g-font-size-14--xs">
+								    
+								    <s:property value="#customerCartListElement.amount"/>
+								    </td>
 								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.cartCreationDate"/></td>
+								    <td>
+								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
+								    	<button type="button" class="  btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button>
+								    </td>
 								</tr>
 							</s:iterator> 
 						</tbody>

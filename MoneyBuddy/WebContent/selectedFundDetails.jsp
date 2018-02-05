@@ -147,10 +147,10 @@
 				             	<h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em"><s:property value="#fundDetails.fundName"/></h3>
 				            </div>
 		            		<div class="col-md-2 col-xs-6  g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
-		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">One Time</button>
+		                     	<button name ="onetime" type="button" class="btn btn-primary readmore" onClick="callOneTimeInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">Invest Lumsum</button>
 		                    </div>
 		             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-b-10--xs g-margin-b-0--lg ">
-		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">SIP</button>
+		                    	<button name= "sip" type="button" class="btn btn-primary readmore" onClick="callSIPInvestment();" style="margin-top:30px;padding:5px 15px 5px 15px;">Start SIP</button>
 		                    </div>
 		            </div> 
 	             </div> 

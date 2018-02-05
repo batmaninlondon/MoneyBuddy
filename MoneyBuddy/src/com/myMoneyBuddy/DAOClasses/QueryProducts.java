@@ -240,35 +240,25 @@ public class QueryProducts {
 
 	}
     
-	public HashMap<String,Double> getProductAmountList(String riskCategory,String planName,Double upfrontInvestment) throws MoneyBuddyException
+	public HashMap<String,Double> getProductAmountList(HashMap<String,Double> productRatioList,Double amount) throws MoneyBuddyException
 	{
-		Session session = null;
+
 		try
 		{
 		logger.debug("QueryProducts class : getProductAmountList method : start");
 		
-		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-			session.beginTransaction();
-			Query query = session.createQuery("select productId,percentage from ProductDetails where riskCategory = :riskCategory and planName =:planName");
-			query.setParameter("riskCategory",riskCategory);
-			query.setParameter("planName",planName);
-			
+			System.out.println("amount passed to getProductAmountList is : "+amount);
 			HashMap<String,Double> hashMap = new HashMap<String,Double>();
-
-			for (Iterator it=query.iterate(); it.hasNext();)  {
-			    
-				Object[] productDetailRow = (Object[]) it.next();
-				
-				System.out.println("Product Id : "+productDetailRow[0].toString());
-				System.out.println("Percentage : "+productDetailRow[1].toString());
-				
-				hashMap.put(productDetailRow[0].toString(),((upfrontInvestment*Double.parseDouble(productDetailRow[1].toString()))/100));
+			
+			Iterator it=productRatioList.entrySet().iterator();
+			
+			while ( it.hasNext())  {
+				Map.Entry pair = (Map.Entry)it.next();		
+				hashMap.put(pair.getKey().toString(),((amount*Double.parseDouble(pair.getValue().toString()))/100));
+				System.out.println("product id : "+pair.getKey().toString()+" and amount : "+((amount*Double.parseDouble(pair.getValue().toString()))/100)+" stored in ProductAmountList");
 
 			}
 
-			//session.getTransaction().commit();
-
-			
 			logger.debug("QueryProducts class : getProductAmountList method : end");
 			return hashMap;
 		}
@@ -286,13 +276,6 @@ public class QueryProducts {
 			logger.debug("QueryProducts class : getProductAmountList method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
-		}
-		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
-
 		}
 
 	}

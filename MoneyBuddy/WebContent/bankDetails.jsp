@@ -110,7 +110,7 @@
 	    	<div class="profile">
 			        	<div class="name">
 			        		<div class="row">
-			        			<div  class="col-md-8 g-margin-t-40--xs" >
+			        			<div  class="col-md-6 g-margin-t-40--xs" >
 								<div class="row">
 									<div id="investment-options" class="col-md-5 ">
 										<h6 class="title g-margin-b-5--xs " >Total Amount to Pay</h6>
@@ -127,10 +127,10 @@
 									</div>
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
 										<select class="form-control" id="bank-name" name="bankName">
-									        <option value="ICICI">ICICI Bank</option>
+									        <option value="ICI">ICICI Bank</option>
 									        <option value="SBI">SBI Bank</option>
-									        <option value="HDFC">HDFC Bank</option>
-									        <option value="KOTAK">KOTAK Bank</option>
+									        <option value="HDF">HDFC Bank</option>
+									        <option value="162">KOTAK Bank</option>
 							      		</select>
 									</div>
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
@@ -156,7 +156,7 @@
 										<h6 class="title" style="margin-top: 20px; margin-bottom: 15px;">Account Number</h6>
 									</div>
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs ">
-										<input class="form-control" id="account-number" type="text" placeholder="Enter Account Number" ">
+										<input class="form-control" id="account-number" type="text" placeholder="Enter Account Number" >
 									</div>
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs ">
 									</div>
@@ -181,6 +181,27 @@
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
 									</div>
 			  					</div>
+							</div>
+							
+							<div  class="col-md-6 g-margin-t-40--xs" >
+								<div class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
+									<table id="cartData" class="table table-bordered stripe ">
+										<thead class="table-head g-font-size-14--xs">
+											<tr>
+												<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
+												<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
+											</tr>
+										</thead>
+										<tbody class="table-body g-font-size-14--xs">
+											<s:iterator value="#session.customerCartList" var="customerCartListElement">
+												<tr>
+												    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+												    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+												</tr>
+											</s:iterator> 
+										</tbody>
+									</table>
+							</div>
 							</div>
 							
 					</div>

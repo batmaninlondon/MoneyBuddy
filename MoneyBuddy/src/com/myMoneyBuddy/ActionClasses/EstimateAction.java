@@ -85,10 +85,11 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     	try {
     		
     		//System.out.println("numberOfYears "+numberOfYears);
-			
+			System.out.println("Before calculation : upfrontInvestment : "+getUpfrontInvestment()+ " and sipAmount : "+getSipAmount());
 			upfrontInvestment = Double.toString(Math.round( Double.parseDouble(getUpfrontInvestment()) * 100.0 ) / 100.0);
 			sipAmount = Double.toString(Math.round( Double.parseDouble(getSipAmount()) * 100.0 ) / 100.0); 
-
+			System.out.println("After calculation : upfrontInvestment : "+getUpfrontInvestment()+ " and sipAmount : "+getSipAmount());
+			
 			PredictedValueCalculation calculatedValue = new PredictedValueCalculation();
 			
     	    
@@ -138,34 +139,41 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				logger.debug("EstimateAction class : execute method : stored predictedValueList3 : "+predictedValueList.get(3)+" in session id : "+sessionMap.getClass().getName());
 				logger.debug("EstimateAction class : execute method : stored predictedValueList5 : "+predictedValueList.get(5)+" in session id : "+sessionMap.getClass().getName());
 			*/
+				Calendar cal = Calendar.getInstance();
+
+				//DateTime datetime = new DateTime(date);
+				String sipDate = getSipDate();
+				if (sipDate.length() == 1) {
+					sipDate = "0"+sipDate;
 				}
+				System.out.println(" sipDate : "+sipDate);
+				String sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
+				String sipEndMonth = theMonth(cal.get(Calendar.MONTH));
+				System.out.println(" sipEndMonth : "+sipEndMonth);
+				System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
+				String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(getSipDuration()));
+				String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+				System.out.println(" sipEndYear : "+sipEndYear);
+				String sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
+				String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
+				sessionMap.put("sipStartDate", sipStartDate);
+				sessionMap.put("sipEndDate", sipEndDate);
+				
+				System.out.println(" sipStartDate : "+sipStartDate);
+				System.out.println(" sipEndDate : "+sipEndDate);
+				}
+			
+			System.out.println("upfrontInvestment in sessionMap is : "+getUpfrontInvestment());
+			System.out.println("sipAmount in sessionMap is : "+ getSipAmount());
+			System.out.println("sipDuration in sessionMap is : "+ getSipDuration());
+			System.out.println("sipDate in sessionMap is : "+ getSipDate());
+			
 			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
 			sessionMap.put("sipAmount", getSipAmount());
 			sessionMap.put("sipDuration", getSipDuration());
 			sessionMap.put("sipDate", getSipDate());
 			
-			Calendar cal = Calendar.getInstance();
-
-			//DateTime datetime = new DateTime(date);
-			String sipDate = getSipDate();
-			if (sipDate.length() == 1) {
-				sipDate = "0"+sipDate;
-			}
-			System.out.println(" sipDate : "+sipDate);
-			String sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
-			String sipEndMonth = theMonth(cal.get(Calendar.MONTH));
-			System.out.println(" sipEndMonth : "+sipEndMonth);
-			System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
-			String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(getSipDuration()));
-			String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
-			System.out.println(" sipEndYear : "+sipEndYear);
-			String sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
-			String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
-			sessionMap.put("sipStartDate", sipStartDate);
-			sessionMap.put("sipEndDate", sipEndDate);
 			
-			System.out.println(" sipStartDate : "+sipStartDate);
-			System.out.println(" sipEndDate : "+sipEndDate);
 			
 			sessionMap.put("riskCategory", getRiskCategory());
 			sessionMap.put("planName", getPlanName());
