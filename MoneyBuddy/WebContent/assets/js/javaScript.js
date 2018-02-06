@@ -132,6 +132,13 @@ function showNewUpfrontInvestment(newValue)
 	newUpdate(transactionType);
 }
 
+
+function filldata(minSipAmt,minSipDur,minLumsumAmount)
+{
+	document.getElementById("sip-duration").innerHTML=minSipDur;
+	document.getElementById("sipPerMonth").innerHTML=minSipAmt;
+	showNewUpfrontInvestment(minLumsumAmount);
+}
 function fillSipData(minSipAmt,minSipDur)
 {
 	document.getElementById("sip-duration").innerHTML=minSipDur;

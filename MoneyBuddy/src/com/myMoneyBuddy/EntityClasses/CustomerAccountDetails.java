@@ -21,8 +21,8 @@ import javax.persistence.Table;
 public class CustomerAccountDetails {
 
     @Id
-    @Column(name="TRANSACTION_ID")
-    private String transactionId;;
+    @Column(name="TRANSACTION_DETAIL_ID")
+    private String transactionDetailId;;
     
     @Column(name="CUSTOMER_ID")
     private String customerId;;
@@ -53,11 +53,11 @@ public class CustomerAccountDetails {
 
 
 
-	public CustomerAccountDetails(String transactionId, String customerId,
+	public CustomerAccountDetails(String transactionDetailId, String customerId,
 			String bankName, String accountNumber, String accountPassword,
 			String cvvNumber, String transactionDate, String updateDate) {
 		super();
-		this.transactionId = transactionId;
+		this.transactionDetailId = transactionDetailId;
 		this.customerId = customerId;
 		this.bankName = bankName;
 		this.accountNumber = accountNumber;
@@ -65,6 +65,18 @@ public class CustomerAccountDetails {
 		this.cvvNumber = cvvNumber;
 		this.transactionDate = transactionDate;
 		this.updateDate = updateDate;
+	}
+
+
+
+	public String getTransactionDetailId() {
+		return transactionDetailId;
+	}
+
+
+
+	public void setTransactionDetailId(String transactionDetailId) {
+		this.transactionDetailId = transactionDetailId;
 	}
 
 
@@ -90,19 +102,6 @@ public class CustomerAccountDetails {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-
-
-
-	public String getTransactionId() {
-		return transactionId;
-	}
-
-
-
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
-	}
-
 
 
 	public String getCustomerId() {
@@ -174,7 +173,7 @@ public class CustomerAccountDetails {
             return false;
         }
         final CustomerAccountDetails other = (CustomerAccountDetails) obj;
-        if ((this.transactionId == null) ? (other.transactionId != null) : !this.transactionId.equals(other.transactionId)) {
+        if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
             return false;
         }
         if ((this.customerId == null) ? (other.customerId != null) : !this.customerId.equals(other.customerId)) {
@@ -204,7 +203,7 @@ public class CustomerAccountDetails {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
+        hash = 79 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
         hash = 79 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 79 * hash + (this.bankName != null ? this.bankName.hashCode() : 0);
         hash = 79 * hash + (this.accountNumber != null ? this.accountNumber.hashCode() : 0);

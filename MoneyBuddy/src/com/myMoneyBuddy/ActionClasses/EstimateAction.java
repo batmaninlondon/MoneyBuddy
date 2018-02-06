@@ -113,7 +113,18 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			logger.debug("EstimateAction class : execute method : stored transactionType : "+getTransactionType()+" in session id : "+sessionMap.getClass().getName());
 			
 	   	 
+			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
+			sessionMap.put("sipAmount", getSipAmount());
+			sessionMap.put("sipDuration", getSipDuration());
+			sessionMap.put("sipDate", getSipDate());
+			
+			logger.debug("EstimateAction class : execute method : stored upfrontInvestment : "+getUpfrontInvestment()+" in session id : "+sessionMap.getClass().getName());
+			logger.debug("EstimateAction class : execute method : stored sipAmount : "+getSipAmount()+" in session id : "+sessionMap.getClass().getName());
+			logger.debug("EstimateAction class : execute method : stored sipDuration : "+getSipDuration()+" in session id : "+sessionMap.getClass().getName());
+			logger.debug("EstimateAction class : execute method : stored sipDate : "+getSipDate()+" in session id : "+sessionMap.getClass().getName());
+			
 			if ("UPFRONT".equals(getTransactionType())) {
+				System.out.println("EstimateAction class : execute method : Inside UPFRONT loop .... ");
 				totalInvestment = Double.toString(Double.parseDouble(getUpfrontInvestment())) ;
 				
 				/*predictedValueList.put(1, calculatedValue.predictedAmount(Double.parseDouble(getUpfrontInvestment()), getRiskCategory(), 1,getPlanName()));    
@@ -130,6 +141,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			}
 			else {
 				//totalInvestment = Double.toString( (Double.parseDouble(getSipAmount())* Integer.parseInt(getSipDuration())*12)+Double.parseDouble(getSipAmount()) );
+				System.out.println("EstimateAction class : execute method : Inside SIP loop .... ");
 				totalInvestment = Double.toString( Double.parseDouble(getSipAmount()));
 				/*predictedValueList = calculatedValue.predictedSipAmountList(Double.parseDouble(getSipAmount()), getRiskCategory(), getPlanName());
 				sessionMap.put("predictedValueList1", Double.toString(predictedValueList.get(1)));
@@ -168,10 +180,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			System.out.println("sipDuration in sessionMap is : "+ getSipDuration());
 			System.out.println("sipDate in sessionMap is : "+ getSipDate());
 			
-			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
-			sessionMap.put("sipAmount", getSipAmount());
-			sessionMap.put("sipDuration", getSipDuration());
-			sessionMap.put("sipDate", getSipDate());
+			
 			
 			
 			
@@ -184,10 +193,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			System.out.println("predictedValueList.get(5) : "+predictedValueList.get(5));*/
 			
 
-			logger.debug("EstimateAction class : execute method : stored upfrontInvestment : "+getUpfrontInvestment()+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("EstimateAction class : execute method : stored sipAmount : "+getSipAmount()+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("EstimateAction class : execute method : stored sipDuration : "+getSipDuration()+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("EstimateAction class : execute method : stored sipDate : "+getSipDate()+" in session id : "+sessionMap.getClass().getName());
+
 			logger.debug("EstimateAction class : execute method : stored riskCategory : "+getRiskCategory()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored planName : "+getPlanName()+" in session id : "+sessionMap.getClass().getName());
 			logger.debug("EstimateAction class : execute method : stored totalInvestment : "+totalInvestment+" in session id : "+sessionMap.getClass().getName());

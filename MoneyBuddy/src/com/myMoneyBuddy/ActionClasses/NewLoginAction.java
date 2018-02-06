@@ -116,6 +116,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	System.out.println("customerId : "+customerId);
 	    	sessionMap.put("customerId", Integer.toString(customerId));
 	    	
+	    	System.out.println("customer id "+customerId+" put inro session ...");
 	    	logger.debug("LoginAction class : execute method : stored customerId : "+customerId+" in session id : "+sessionMap.getClass().getName());
 	    	
 	    	sessionMap.put("customerName", customerName);

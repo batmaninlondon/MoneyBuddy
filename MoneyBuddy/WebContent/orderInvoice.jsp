@@ -103,6 +103,7 @@
 	<div class="row g-height-auto--lg" >
 		<div class="col-md-1 col-xs-1" ></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+		<p>MIn SIP amount <s:property value="#session.minSipAmount"/></p>
 			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">

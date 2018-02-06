@@ -23,11 +23,8 @@ public class PaymentDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="PAYMENT_REF_NUM")
-    private String paymentRefNum;
-    
-    @Column (name="TRANSACTION_ID")
-    private String transactionId;
+    @Column(name="PAYMENT_DETAILS_ID")
+    private String paymentDetailsId;
     
     @Column (name="TRANSACTION_DETAIL_ID")
     private String transactionDetailId;
@@ -50,10 +47,9 @@ public class PaymentDetails {
 
     
 
-	public PaymentDetails(String transactionId, String transactionDetailId, String bseOrderID,
+	public PaymentDetails(String transactionDetailId, String bseOrderID,
 			String paymentGatewayComment, String transactionDate, String updateDate) {
 		super();
-		this.transactionId = transactionId;
 		this.transactionDetailId = transactionDetailId;
 		this.bseOrderID = bseOrderID;
 		this.paymentGatewayComment = paymentGatewayComment;
@@ -61,25 +57,18 @@ public class PaymentDetails {
 		this.updateDate = updateDate;
 	}
 
-
-
-	public String getTransactionId() {
-		return transactionId;
+	public String getPaymentDetailsId() {
+		return paymentDetailsId;
 	}
 
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
+
+
+	public void setPaymentDetailsId(String paymentDetailsId) {
+		this.paymentDetailsId = paymentDetailsId;
 	}
 
-	public String getPaymentRefNum() {
-		return paymentRefNum;
-	}
 
-	public void setPaymentRefNum(String paymentRefNum) {
-		this.paymentRefNum = paymentRefNum;
-	}
 
-	
 	public String getTransactionDetailId() {
 		return transactionDetailId;
 	}
@@ -129,10 +118,7 @@ public class PaymentDetails {
             return false;
         }
         final PaymentDetails other = (PaymentDetails) obj;
-        if ((this.transactionId == null) ? (other.transactionId != null) : !this.transactionId.equals(other.transactionId)) {
-            return false;
-        }
-        if ((this.paymentRefNum == null) ? (other.paymentRefNum != null) : !this.paymentRefNum.equals(other.paymentRefNum)) {
+        if ((this.paymentDetailsId == null) ? (other.paymentDetailsId != null) : !this.paymentDetailsId.equals(other.paymentDetailsId)) {
             return false;
         }
         if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
@@ -156,8 +142,7 @@ public class PaymentDetails {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
-        hash = 83 * hash + (this.paymentRefNum != null ? this.paymentRefNum.hashCode() : 0);
+        hash = 83 * hash + (this.paymentDetailsId != null ? this.paymentDetailsId.hashCode() : 0);
         hash = 83 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
         hash = 83 * hash + (this.bseOrderID != null ? this.bseOrderID.hashCode() : 0);
         hash = 83 * hash + (this.paymentGatewayComment != null ? this.paymentGatewayComment.hashCode() : 0);

@@ -80,7 +80,7 @@
 		</script>
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="fillSipData('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>');showNewUpfrontInvestment('<s:property value="#session.minLumsumAmount"/>');">
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minLumsumAmount"/>');">
 <%-- <%session.setAttribute("transactionType", "SIP");%>; --%>
 	<%
 	

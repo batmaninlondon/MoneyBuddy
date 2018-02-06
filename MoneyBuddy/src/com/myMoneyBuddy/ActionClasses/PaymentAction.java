@@ -5,19 +5,10 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Session;
-import javax.ws.rs.core.Request;
 
 import com.myMoneyBuddy.DAOClasses.QueryAdditionalCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
@@ -27,29 +18,15 @@ import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.insertBankDetails;
-import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
-import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.OrderDataModel;
-import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
-import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceStarMF;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IStarMFWebService;
-import org.tempuri.MFOrderEntry;
 
 
 public class PaymentAction extends ActionSupport implements SessionAware {
@@ -170,7 +147,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	System.out.println("CLIENT_CM_MOBILE : "+CLIENT_CM_MOBILE);
 
 	    	QueryProducts queryProducts = new QueryProducts();
-	    	Map<String, Double> productDetailsMapForBuy;
+	    	Map<String, Double> productDetailsMapForBuy = new HashMap<String, Double>();
     	
 	    	//sessionMap.put("groupName", getGroupName());
 	    	//logger.debug("PaymentAction class : execute method : stored investmentTypeName : "+getGroupName()+" in session id : "+sessionMap.getClass().getName());
@@ -230,9 +207,18 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
 				
-		    	productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>) sessionMap.get("productRatioList"),
-		    			Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));
+		    	/*productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>) sessionMap.get("productRatioList"),
+		    			Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));*/
 		    	
+		    	List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartList");
+		    	
+
+		    	for (int i =0 ; i< customerCartList.size() ;i++) {
+		    		System.out.println("Value of i is : "+i+" customerCartList.get(i).getProductName : "+customerCartList.get(i).getProductName());
+		    		if ( !"Total".equals(customerCartList.get(i).getProductName()))  {
+		    			productDetailsMapForBuy.put(customerCartList.get(i).getProductId(), Double.parseDouble(customerCartList.get(i).getAmount()));
+		    		}
+		    	}
 		    	paymentUrl = trading.executeTrade(sessionMap.get("customerId").toString(), amount, productDetailsMapForBuy,
 						"NEW",null,null,null,sessionMap.get("transactionType").toString(),"BUY",0,getAccountNumber(),getBankName(),getNeftCode(),getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",null, sessionMap);

@@ -128,10 +128,12 @@
           <div class="row">
         		<%
 					if (session.getAttribute("customerId") == null) {
+						System.out.println("customerId is null ");
 				%>
 				<input type="hidden" id="cusId" value="customerIdNull" />
 				<%
 					} else {
+						System.out.println("customerId is not null ");
 				%>
 				<input type="hidden" id="cusId" value="customerExists" />
 				<%

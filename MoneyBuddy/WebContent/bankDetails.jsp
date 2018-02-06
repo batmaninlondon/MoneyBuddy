@@ -193,12 +193,26 @@
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-14--xs">
-											<s:iterator value="#session.customerCartList" var="customerCartListElement">
-												<tr>
-												    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
-												    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
-												</tr>
-											</s:iterator> 
+											<s:set var="transactionType" value="#session.transactionType" />
+											<s:if test="#transactionType.equals('UPFRONT')">
+												<% System.out.println("Inside Upfront"); %>
+												<s:iterator value="#session.customerCartList" var="customerCartListElement">
+													<tr>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+													</tr>
+												</s:iterator>
+											</s:if>
+											<s:else>
+												<% System.out.println("Inside Sip"); %>
+												<s:iterator value="#session.productList" var="productListElement">
+													<tr>
+													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.key"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.value"/></td>
+													</tr>
+												</s:iterator>
+											</s:else>
+											 
 										</tbody>
 									</table>
 							</div>

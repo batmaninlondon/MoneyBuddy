@@ -46,7 +46,6 @@ import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 //import com.myMoneyBuddy.EntityClasses.PriceHistory;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.EntityClasses.Transactions;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -266,10 +265,10 @@ public class Trading {
 		String buySellType; 
 		String transactionDetailId;
 		Query query;
-		Transactions tempTransaction;
+		//Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
 		SipDetails tempSipDetail;
-		ArrayList<String> transactionDetailIdList = new ArrayList<String>();
+		//ArrayList<String> transactionDetailIdList = new ArrayList<String>();
 		List<OrderDataModel> orderDataModel;
 
 		try {
@@ -279,7 +278,7 @@ public class Trading {
 			
 			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-			hibernateSession.beginTransaction();
+			//hibernateSession.beginTransaction();
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
@@ -301,18 +300,26 @@ public class Trading {
 				totalAmount = totalAmount + currentAmount;
 			}
 
-			tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
+			/*tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
 					transactionType, "Pending",frmtdDateForDB,frmtdDateForDB);
 
 			hibernateSession.save(tempTransaction);
+			hibernateSession.getTransaction().commit();*/
+			
+			
+			
+			//logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
+
+			//String transactionId = tempTransaction.getTransactionId();
+			
+			hibernateSession.beginTransaction();
+			
+			query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+			
+			String transactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			
+			
 			hibernateSession.getTransaction().commit();
-			
-			
-			
-			logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
-
-			String transactionId = tempTransaction.getTransactionId();
-
 			
 			
 			Properties clientProperties = new Properties();
@@ -383,10 +390,20 @@ public class Trading {
 				logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
 
 				hibernateSession.getTransaction().commit();
+				
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and productId = :productId ");
+				query.setParameter("customerId", customerId);
+				query.setParameter("productId", currentProductId);
+				
+				query.executeUpdate();
+				
+				hibernateSession.getTransaction().commit();
 
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 				
-				transactionDetailIdList.add(transactionDetailId);
+				//transactionDetailIdList.add(transactionDetailId);
 
 				if ("SIP".equals(transactionType ))  {
 					hibernateSession.beginTransaction();
@@ -496,9 +513,11 @@ public class Trading {
 				{
 					if (transactionType == "UPFRONT") {
 						orderNums.getString().add(resultsEntryParam[2].toString());
+						System.out.println(resultsEntryParam[2].toString()+" added in orderNums");
 					}
 					else {
 						orderNums.getString().add(resultsEntryParam[5].toString());
+						System.out.println(resultsEntryParam[5].toString()+" added in orderNums");
 					}
 					totalPaymentAmount += productDetailsMap.get(currentProductId);
 					query.setParameter("transactionStatus", "OrderPlacedToBse");
@@ -629,8 +648,16 @@ public class Trading {
 			
 				
 				Iterator it = orderNums.getString().iterator();
+				
+				while(it.hasNext())  {
+					System.out.println("oredrNums : "+it.next().toString());
+				}
+				
 				String bseOrderId = null;
 				int result;
+				List<Object[]> transactionDetailQueryResult;
+				String fundName;
+				
 				while(it.hasNext())  {
 					
 					bseOrderId = it.next().toString();
@@ -652,35 +679,29 @@ public class Trading {
 
 					hibernateSession.getTransaction().commit();
 					
-					
-					
-				}
-				
-				it = transactionDetailIdList.iterator();
-				
-				List<Object[]> transactionDetailQueryResult;
-				String fundName;
-
-				while(it.hasNext())  {
-					
-					
-					
 					hibernateSession.beginTransaction();
 					
-					query = hibernateSession.createQuery("select productId,quantity,transactionAmount,transactionDate,transactionStatus from TransactionDetails");
+					query = hibernateSession.createQuery("select productId,quantity,transactionAmount,transactionDate,transactionStatus,transactionDetailId"
+											+ " from TransactionDetails where bseOrderId = :bseOrderId and customerId = :customerId ");
+					query.setParameter("bseOrderId", bseOrderId);
+					query.setParameter("customerId", customerId);
 					transactionDetailQueryResult = query.list();
 					
 					query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
 					query.setParameter("fundId", transactionDetailQueryResult.get(0)[0]);
 					fundName = query.uniqueResult().toString();
 					
+					hibernateSession.getTransaction().commit();
+					
 					System.out.println(" Adding a new row in orderDataModelList for fundName : "+fundName+" and fund id : "+transactionDetailQueryResult.get(0)[0]);
-					orderDataModel.add(new OrderDataModel(it.next().toString(), fundName, transactionDetailQueryResult.get(0)[1].toString(), 
+					orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[5].toString(), fundName, transactionDetailQueryResult.get(0)[1].toString(), 
 											transactionDetailQueryResult.get(0)[2].toString(), transactionDetailQueryResult.get(0)[3].toString(),
 											transactionDetailQueryResult.get(0)[4].toString()));
 					
+					
 				}
 				
+			
 				sessionMap.put("orderDataModel", orderDataModel);
 		    	
 		    	logger.debug("Trading class : executeTrade method : stored orderDataModel : in session id : "+sessionMap.getClass().getName());
@@ -822,7 +843,7 @@ public class Trading {
 							//session.beginTransaction();
 
 							if (paymentDetailsList.isEmpty())  {
-								tempPaymentDetail = new PaymentDetails( transactionDetail[0].toString(), transactionDetail[1].toString(), transactionDetail[3].toString(),
+								tempPaymentDetail = new PaymentDetails( transactionDetail[1].toString(), transactionDetail[3].toString(),
 										resultsPaymentStatusResponse[1], transactionDetail[2].toString(),frmtdDateForDB);
 								session.save(tempPaymentDetail);
 							}
