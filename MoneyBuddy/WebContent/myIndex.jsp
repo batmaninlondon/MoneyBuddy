@@ -1,518 +1,655 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <!-- Begin Head -->
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Megakit - HTML5 Theme</title>
+        <meta name="keywords" content="HTML5 Theme" />
+        <meta name="description" content="Megakit - HTML5 Theme">
+        <meta name="author" content="keenthemes.com">
 
-<!DOCTYPE html >
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Home | Money Buddy</title>
-    <!-- core CSS -->
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/main.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/sly.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    <link href="assets/css/table.css" rel="stylesheet">
-       <link rel="stylesheet" href="assets/Sly/style.css">
-  <script src="assets/js/index.js"></script>
-  
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-  
- <!-- Le styles -->
-    <link href="assets/css/flexslider.css" rel="stylesheet"> 
-     <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-  
-</head>
+        <!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
 
-<body class="homepage">
+        <!-- Vendor Styles -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
+         <link href="assets/css/table.css" rel="stylesheet">
 
-<div id="load" class="load"></div>
-<div id="content">
-   <header id="header">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class ="active" id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
-                        <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
-                        <li id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
-                        <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
-                        <!-- <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> -->
-                        <li id="header-nav-li"><a href="javascript:getMfData()"><b>Funds</b></a></li> 
-                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
-				         	<%  if(session.getAttribute("customerId") == null)
-							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>
-										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
-							<%	} else 
-							 	{	%>
-							 			 <li id="header-nav-li"><a href="javascript:setDashboardData()" ><b>Dashboard</b></a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
-							<%	}	%>  
-				                            
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
+        <!-- Theme Styles -->
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->
+        <link href="assets/bootstrap/css/main.css" rel="stylesheet">
 
- <section id="main-slider" class="no-margin" style="margin-top:50px">
- 	
-        <div class="carousel slide">
-            <ol class="carousel-indicators">
-                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
-                <li data-target="#main-slider" data-slide-to="1"></li>
-                <li data-target="#main-slider" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <style>
+      div .typed {
+        	display: inline-block;
+        	margin: 0;
+        }
+        div .typed-cursor {
+        	font-size: 60px;
+        	display: inline-block;
+        	margin: 0 10px;
+        	color: #00a8ff;
+        	-webkit-animation-name: flash;
+        	animation-name: flash;
+        	-webkit-animation-duration: 1s;
+        	animation-duration: 1s;
+        	-webkit-animation-iteration-count: infinite;
+        	animation-iteration-count: infinite;
+        }
+        .white {
+        	color: white;
+        }
+        </style> 
+        
+        
+    </head>
+    <!-- End Head -->
 
-                <div class="item active" style="background-image: url(images/slider/bg78.jpg)">
-                    <div class="container">
-                        <div class="row slide-margin">
-                            <div class="col-sm-6">
-                                <div class="carousel-content">
-                                    <h1 class="animation animated-item-1">Make your dreams reality</h1>
-                                    <h2 class="animation animated-item-2"> The best thing money can buy is .....money</h2>
-                                    <!-- Changes to generate productList at the click of "try it out" button in myIndex page - start -->
-                                    <!-- <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a> -->
-                                    <button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="generatePackage();" style="margin-top:20px;padding:5px 15px 5px 15px;">Try it out</button>
-                                    <!-- <button type="button" id="submit-button-5" class="btn btn-info btn-lg submit-button-5 sharp raised " onClick="testDummyEkyc();">Click for kyc</button> -->
-                                    <!-- Changes to generate productList at the click of "try it out" button in myIndex page - end -->
-                                    <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
-                                </div>
+    <!-- Body -->
+    <body>
+    <div id="load" class="load"></div>
+	<div id="content">
+<!--========== HEADER ==========-->
+        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="container g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="nhome.jsp" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
                             </div>
-
-                           
-
+                            <!-- End Logo -->
                         </div>
-                    </div>
-                </div><!--/.item-->
-                
-                
-
-                <div class="item" style="background-image: url(images/slider/bg56.jpg)">
-                    <div class="container">
-                        <div class="row slide-margin">
-                            <div class="col-sm-6">
-                                <div class="carousel-content">
-                                    <h1 class="animation animated-item-1">Your money with our support</h1>
-                                    <h2 class="animation animated-item-2">We will support you to grow your money so that you can focus on what matters most to you</h2>
-                                    <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
-                                    <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
-                                </div>
-                            </div>
-
-                           
-                        </div>
-                    </div>
-                </div><!--/.item-->
-
-                <div class="item" style="background-image: url(images/slider/bg67.jpg)">
-                    <div class="container">
-                        <div class="row slide-margin">
-                            <div class="col-sm-6">
-                                <div class="carousel-content">
-                                    <h1 class="animation animated-item-1">Give your money the chance to grow</h1>
-                                    <h2 class="animation animated-item-2">Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
-                                    <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a>
-                                    <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
-                                </div>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div><!--/.item-->
-            </div><!--/.carousel-inner-->
-        </div><!--/.carousel-->
-        <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
-            <i class="fa fa-chevron-left"></i>
-        </a>
-        <a class="next hidden-xs" href="#main-slider" data-slide="next">
-            <i class="fa fa-chevron-right"></i>
-        </a>
-    </section><!--/#main-slider-->
-
-
-
- <%-- Savita Wadhwani - Commented this section for bse testing - Start --%>   
-
-<%--      <section id="services" class="service-item">
-	   <div class="container">
-            <div class="center wow fadeInDown">
-           
-          <h2>Some of our most populor Portfolios</h2>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Daredevils</a> </h3>
-                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
-                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>  
-                
-                
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Reasonable</a> </h3>
-                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
-                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-                
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Balanced</a> </h3>
-                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
-                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>   
-                
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="recent-work-wrap">
-                        <img class="img-responsive" src="images/portfolio/recent/portfolio1.png" >
-                        <div class="overlay">
-                            <div class="recent-work-inner">
-                                <h3><a href="#">Cautious</a> </h3>
-                                <p>This is a perfect portfolio for someone willing to take higher risk for better returns </p>
-                                <a class="preview" href="images/portfolio/full/item1.png" rel="prettyPhoto"><i class="fa fa-eye"></i> Select this portfolio</a>
-                            </div> 
-                        </div>
-                    </div>
-                </div>    	
-
-              
-
-                 
-            </div><!--/.row-->
-        </div><!--/.container-->
-        
-        
-      
-        
-        
-        
-        
-    </section><!--/#recent-works--> --%>
-    
-<%-- Savita Wadhwani - Commented this section for bse testing - End --%>    
-
-<section id="services" class="service-item">
-	   <div class="container">
-            <div class="center wow fadeInDown">
-   </div>     </div>     
-   </section><!--/#recent-works-->          
-            
-            
-   <section id="feature" >
-        <div class="container">
-            <div class="row">
-            <br/>
-          <br/>
-          <br/>
-          <br/> <br/>
-                   
-                <div class="features">
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-bullhorn"></i>
-                            <h2>Transparent</h2>
-                            <h3>See exactly what you’re invested in and how you’re performing— any time of day</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-comments"></i>
-                            <h2>No Fee at all</h2>
-                            <h3>No subscription fees. No trading fees. No exit fees. No management fee.</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-cloud-download"></i>
-                            <h2>Anywhere, anytime</h2>
-                            <h3>Our experienced investment professionals monitor your portfolio.</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-                
-                    
-                </div><!--/.services-->
-                 <br/>
- <br/>
-          <br/>
-          <br/>
-            </div><!--/.row-->    
-             <br/>
- <br/>
-        </div><!--/.container-->
-    </section><!--/#feature--> 
-
-    
-
-    <section id="content">
-    <div class="center wow fadeInDown">  <h2>Why MoneyBuddy</h2> </div>
-        <div class="container">
-        
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 wow fadeInDown">
-                   <div class="tab-wrap"> 
-                        <div class="media">
-                            <div class="parrent pull-left">
-                                <ul class="nav nav-tabs nav-stacked">
-                                    <li class=""><a href="#tab1" data-toggle="tab" class="analistic-01">Experience</a></li>
-                                    <li class="active"><a href="#tab2" data-toggle="tab" class="analistic-02">Expertise</a></li>
-                                    <li class=""><a href="#tab3" data-toggle="tab" class="tehnical">Relavance</a></li>
-                                    <li class=""><a href="#tab4" data-toggle="tab" class="tehnical">Research</a></li>
-                                    <li class=""><a href="#tab5" data-toggle="tab" class="tehnical">Technology</a></li>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="nhome.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                    </li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+										<%	} else 
+										 	{	%>
+										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
                                 </ul>
                             </div>
-
-                            <div class="parrent media-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane fade" id="tab1">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                  <p>Our team has years of experience in investment in indian market</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                     <div class="tab-pane fade active in" id="tab2">
-                                        <div class="media">
-                                           <div class="pull-left">
-                                            </div>
-                                            <div class="media-body">
-                                                 <p> Our team has expertise in analysing market and designing...
-                                                 </p>
-                                            </div>
-                                        </div>
-                                     </div>
-
-                                     <div class="tab-pane fade" id="tab3">
-                                        <p> We leverage technology to assess your specific needs and recommend a bespoke portfolio meeting your needs and requirements
-                            </p>
-                                     </div>
-                                     
-                                     <div class="tab-pane fade" id="tab4">
-                                        <p>  We spend thousands of hour researching and selecting...</p>
-                                     </div>
-
-                                     <div class="tab-pane fade" id="tab5">
-										  <p>  We spend thousands of hour researching and selecting...</p>
-                                     </div>
-                                </div> <!--/.tab-content-->  
-                            </div> <!--/.media-body--> 
-                        </div> <!--/.media-->     
-                    </div><!--/.tab-wrap-->               
-                </div><!--/.col-sm-6-->
-
-<%-- Savita Wadhwani - Commented this section for bse testing - Start --%>
-
-                <%-- <div class="col-xs-12 col-sm-4 wow fadeInDown">
-                    <div class="testimonial">
-                        <h2>What our customer says</h2>
-                         <div class="media testimonial-inner">
-                            <div class="pull-left">
-                                <img class="img-responsive img-circle" src="images/testimonials1.png">
-                            </div>
-                            <div class="media-body">
-                                <p>MoneyBuddy truly helped me make most of my investments, while giving back hours back </p>
-                                <span><strong>-John Doe/</strong> Director, Amazon India</span>
-                            </div>
-                         </div>
-
-                         <div class="media testimonial-inner">
-                            <div class="pull-left">
-                                <img class="img-responsive img-circle" src="images/testimonials1.png">
-                            </div>
-                             <div class="media-body">
-                                <p>MoneyBuddy truly helped me make most of my investments, while giving back hours back </p>
-                                <span><strong>-John Doe/</strong> Director, Amazon India</span>
-                            </div>
-                         </div>
-
+                            <!-- End Nav Menu -->
+                        </div>
                     </div>
-                </div> --%>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+    	
+    	
+    	
+    	
+        <!--========== SWIPER SLIDER ==========-->
+        <div class="s-swiper js__swiper-one-item">
+            <!-- Swiper Wrapper -->
+            <div class="swiper-wrapper">
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/970x970/04.jpg');">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Give your money<br>A chance to grow</h1>
+                             <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
+                        </div>
+						<div class="g-text-center--xs">
+                       		<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       		<br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		   </div>
+                    </div>
+                </div>
+                
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(images/slider/bg56.jpg);">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <div class="g-margin-b-30--xs">
+                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Your money with our support<br></h1>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you to grow your money so that you can focus on what matters most to you</h2>
+                            </div>
+                            <div class="g-text-center--xs">
+                       			<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		  		</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/1920x1080/01.jpg');">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <div class="g-margin-b-30--xs">
+                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Make your dreams reality</h1>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >The best thing money can buy is .....money</h2>
+                            </div>
+                            <div class="g-text-center--xs">
+                       			<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		  		</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Swiper Wrapper -->
 
-<%-- Savita Wadhwani - Commented this section for bse testing - End --%>
-
-            </div><!--/.row-->
-        </div><!--/.container-->
-    </section><!--/#content-->
-
-
-
-
-
-
-<section id="services" class="service-item">
-	   <div class="container">
-            <div class="center wow fadeInDown">
-           
-
-
+            <!-- Arrows -->
+            <a href="javascript:void(0);" class="s-swiper__arrow-v1--right s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-right js__swiper-btn--next"></a>
+            <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
+            <!-- End Arrows -->
             
-               <h2>Our Partners</h2>
-                <p class="lead">
-We use funds from leading providers to build your portfolio</p>
+            <a href="javascript:getMfData()" " class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+                <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
+                <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
+            </a>
+        </div>
+        <!--========== END SWIPER SLIDER ==========-->
 
-            <marquee behavior="scroll" direction="left">
-				 
- 				  <img src="images/partners/birla.jpg"  height="42" alt="Birla">
- 				   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
-				<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">
- 				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				<img src="images/partners/icici.jpg" height="42" alt="ICICI">
- 				  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
- 				  <img src="images/partners/dhfl_fd.png" height="35" alt="DHFL">
- 				  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/reliance.png"  height="42" alt="Reliance">
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/BSE.jpg"  height="42" alt="BSE">
- 				   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/axis.jpg"  height="42" alt="Axix">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/dhfl_fd.jpg"  height="42" alt="dhfl_fd">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/dsp.jpg"  height="42" alt="Dsp">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/franklin.jpg"  height="42" alt="Franklin">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/grun_fd.jpg"  height="42" alt="Grun_fd">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/housing_fd.jpg"  height="42" alt="Housing">
- 				    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/birla.jpg"  height="42" alt="Birla">
- 				  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/kotak.jpg"  height="42" alt="Kotak">
- 				  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/icici.jpg"  height="42" alt="ICICI">
- 				   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/mahindra_fd.jpg"  height="42" alt="Mahindra">
- 				   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
- 				  <img src="images/partners/hdfc.jpg"  height="42" alt="HDFS">
- 				  
- 				  
-			</marquee>
-          
-          
+		<div class="container-fluid g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="g-text-center--xs g-margin-b-80--xs">
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Some of Our Most Popular Funds</p>
             </div>
 
-          
-                
-        </div><!--/.container-->
-    </section><!--/#services-->
-
-
-
-
-
-  
-<%-- Savita Wadhwani - Changes done on this section for bse testing - Start --%>
-
-    <section id="conatcat-info">
-        <div class="container">
-            <div class="row" style="margin-bottom:40px;">
-                <div class="col-sm-8">
-                    <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="pull-left">
-                            <i class="fa fa-phone"></i>
+            <!-- Swiper -->
+            <div class="s-swiper js__swiper-news">
+                <!-- Wrapper -->
+                <div class="swiper-wrapper g-margin-b-60--xs">
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="buyFundHandler(32)" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
                         </div>
-                        <div class="media-body">
-                            <h2>Have a question, contact us on </h2>
-                            <p>
-                            +91 9971648736 / info.moneybuddy@gmail.com
-                           </p>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
                         </div>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide">
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
+                        </div>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
+                        </div>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
+                        </div>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
+                        </div>
+                    </article>
+                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
+                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                            <div class="g-margin-b-25--xs">
+                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
+                                <p class="g-color--white">Fund Details will come here</p>
+                            </div>
+                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
+                        </div>
+                    </article>
+                </div>
+                <!-- End Wrapper -->
+
+                <!-- Pagination -->
+                <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--dark g-text-center--xs js__swiper-pagination"></div>
+            </div>
+            <!-- End Swiper -->
+        </div>
+
+
+		
+		<!-- Mutual Funds -->
+        
+        <!-- End News -->
+
+       
+<!-- Process -->
+        
+        <!-- <div class="g-bg-color--dark">
+        <div class="g-bg-color--primary-ltr">
+            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-text-center--xs g-margin-b-100--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Process</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">How it Works</h2>
+                </div>
+                <ul class="list-inline row g-margin-b-100--xs">
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">01</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Assess</h3>
+                                <p class="g-color--white-opacity">The first step is to assess your special characteristics by understanding your financial situation, your economic goals and your short to medium term commitments.</p>
+                            </div>
+                        </div>
+                    </li>
+                    End Process
+
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">02</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Measure</h3>
+                                <p class="g-color--white-opacity">This is where we use intelligence questionnaire based algorithm to assess your risk appetite</p>
+                            </div>
+                        </div>
+                    </li>
+                    End Process
+
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--sm">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">03</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Design</h3>
+                                <p class="g-color--white-opacity">We use Artificial Intelligence and machine learning to design your investment portfolio by picking the funds matching your goals and risks appetite </p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">04</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Monitor</h3>
+                                <p class="g-color--white-opacity">Pro-active monitoring to ensure your investment remains in-line with your goals and risk appetite.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="g-text-center--xs">
+                    <a href="#js__scroll-to-appointment" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- End Process -->
+        <!-- Parallax -->
+        <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed;">
+            <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-margin-b-80--xs">
+                    <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--primary">The Most Efficient and Easiest Way to Save Tax</h2>
+                </div>
+                <a  href="saveTax" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">Learn More</a>
+            </div>
+        </div>
+        <!-- End Parallax -->
+
+        <!-- Culture -->
+        <div class="g-promo-section">
+            <div class="container g-padding-y-80--xs g-padding-y-60--sm">
+                <div class="row">
+                    <div class="col-md-4 g-margin-t-15--xs g-margin-b-60--xs g-margin-b-0--lg">
+                        <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".1s">
+                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">Why</h2>
+                        </div>
+                        <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s">
+                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">MoneyBuddy</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <p class="g-font-size-16--xs">We aim high at being focused on building relationships with our clients and community. </p>
+                        <p class="g-font-size-16--xs">With more than 40 years of experience in financial investments, consulting and technology, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
+                    	<div class="row ">
+                        <ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Wealth Management</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Tax Saving</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Portfolio Tracking</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Financial Planning</li>
+                        </ul>
+                  		<ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>No Fee</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Any time, any where</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Proven Track Record</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Mobile, web and more</li>
+                        </ul> 
+                    </div>
                     </div>
                 </div>
             </div>
-        </div><!--/.container-->    
-    </section><!--/#conatcat-info-->
+            <div class="col-sm-3 g-promo-section__img-right--lg g-bg-position--center g-height-100-percent--md js__fullwidth-img">
+                <img class="img-responsive" src="img/970x970/03.jpg" alt="Image">
+            </div>
+        </div>
+        <!-- End Culture -->
 
-<%-- Savita Wadhwani - Changes done on this section for bse testing - End --%>  
-
-      <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
-                </div>
-                
-                
-                
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                       <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="fa fa-youtube"></i></a></li>
-                                
-                    </ul>
+        
+        <!-- Portfolio Filter -->
+        
+        <!-- Counter -->
+        <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;">
+            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="row">
+                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">30</figure>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">40</figure>
+                                <span class="g-font-size-40--xs g-color--white">+</span>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Yrs experience</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">4</figure>
+                                <span class="g-font-size-40--xs g-color--white">x</span>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+        <!-- End Counter -->
 
-</div>
-</body>
-  <script>
+        <section id="services" class="g-bg-color--dark">
+	   		<div class="container ">
+	            <div class="center wow fadeInDown g-margin-t-50--xs ">
+	            	<h2 class="">Our Partners..</h2>
+	                <p class="lead">We use funds from leading providers to build your portfolio</p>
+	            	<marquee behavior="scroll" direction="left" >
+	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+						<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 					<img src="images/partners/icici.jpg" height="42" alt="ICICI"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	 				  	<!-- <img src="images/partners/dhfl_fd.png" height="35" alt="DHFL"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/reliance.png"  height="42" alt="Reliance"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   -->
+	 				  	<img src="images/partners/BSE.jpg"  height="42" alt="BSE"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				 	<!-- <img src="images/partners/axis.jpg"  height="42" alt="Axix">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->  
+	 				  	<img src="images/partners/dhfl_fd.jpg"  height="42" alt="dhfl_fd">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/dsp.jpg"  height="42" alt="Dsp"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/franklin.jpg"  height="42" alt="Franklin"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/grun_fd.jpg"  height="42" alt="Grun_fd">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/housing_fd.jpg"  height="42" alt="Housing">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/icici.jpg"  height="42" alt="ICICI">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/mahindra_fd.jpg"  height="42" alt="Mahindra">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/hdfc.jpg"  height="42" alt="HDFS">
+					</marquee>
+	            </div>
+        </div><!--/.container-->
+    </section><!--/#services-->
+    
+    <!-- Subscribe -->
+        <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;">
+            <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-margin-b-80--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Join Over 1000+ People</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                        <form class="input-group">
+                            <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" placeholder="Enter your email">
+                            <span class="input-group-btn">
+                                <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50"><i class="ti-arrow-right"></i></button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Subscribe -->
+    
+
+	<div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">
+                <div class="row">
+                    <!-- Form -->
+                    <div class="col-md-8 js__form-eqaul-height-v1">
+                        <div class="g-padding-x-40--xs g-padding-y-50--xs">
+                            <h2 class="g-font-size-24--xs g-color--primary ">Have a question? Write to us</h2>
+                            <form>
+                                <div class="row g-margin-b-30--xs ">
+                                    <div class="col-sm-6  g-margin-b-0--md">
+                                        <input type="text" class="form-control s-form-v4__input g-padding-l-0--xs" placeholder="* Full Name">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control s-form-v4__input g-padding-l-0--xs" placeholder="* Phone Number">
+                                    </div>
+                                </div>
+                                
+                                <div class="g-margin-b-50--xs">
+                                    <textarea class="form-control s-form-v4__input g-padding-l-0--xs" rows="4" placeholder="* What is your query?"></textarea>
+                                </div>
+                                <div class="g-text-center--xs">
+                                    <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-70--xs ">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Contacts -->
+                    <div class="col-md-4 g-bg-color--primary-ltr js__form-eqaul-height-v1">
+                        <div class="g-overflow--hidden g-padding-x-40--xs g-padding-y-50--xs">
+                            <h2 class="g-font-size-24--xs g-color--white g-margin-b-50--xs">Contact Us</h2>
+                            <ul class="list-unstyled g-margin-b-70--xs">
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-location-pin"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        A 1204, Partk Royale, <br> Rahantani, Pune 411017, India
+                                    </div>
+                                </li>
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-headphone-alt"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        + (91) 997 164 8736
+                                    </div>
+                                </li>
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-email"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        info.moneybuddy@gmail.com
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="list-inline g-ul-li-lr-15--xs">
+                                <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="g-font-size-20--xs g-color--white-opacity ti-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="g-font-size-20--xs g-color--white-opacity ti-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="g-font-size-20--xs g-color--white-opacity fa fa-linkedin"></i></a></li>
+                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="g-font-size-20--xs g-color--white-opacity fa fa-youtube"></i></a></li>
+                            </ul>
+                            <i class="g-font-size-150--xs g-color--white-opacity-lightest ti-comments" style="position: absolute; bottom: -1.25rem; right: -1.25rem;"></i>
+                        </div>
+                    </div>
+                    <!-- End Contacts -->
+                </div>
+            </div>
+        </div>
+     
+        <!--========== END PAGE CONTENT ==========-->
+
+        <!--========== FOOTER ==========-->
+        <footer class="g-bg-color--dark">
+            <!-- Links -->
+            <div class="g-hor-divider__dashed--white-opacity-lightest">
+                <div class="container g-padding-y-80--xs">
+                    <div class="row">
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">About</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Work</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Twitter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Facebook</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Instagram</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">YouTube</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Subscribe to Our Newsletter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                            <h3 class="g-font-size-18--xs g-color--white">Megakit</h3>
+                            <p class="g-color--white-opacity">We are a creative studio focusing on culture, luxury, editorial &amp; art. Somewhere between sophistication and simplicity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Links -->
+
+            <!-- Copyright -->
+            <div class="container g-padding-y-50--xs">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="index.html">
+                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo.png" alt="Megakit Logo">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 g-text-right--xs">
+                        <p class="g-font-size-14--xs g-margin-b-0--xs g-color--white-opacity-light"><a href="http://keenthemes.com/preview/Megakit/">Megakit</a> Theme Powered by: <a href="http://www.keenthemes.com/">KeenThemes.com</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Copyright -->
+        </footer>
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+
+       <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+        <!-- Vendor -->
+        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
+        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="vendor/swiper/swiper.jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
+        <script type="text/javascript" src="vendor/counterup.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsXUGTFS09pLVdsYEE9YrO2y4IAncAO2U"></script>
+        <script type="text/javascript" src="vendor/jquery.wow.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+      	
+
+        <!-- General Components and Settings -->
+        <script type="text/javascript" src="js/global.min.js"></script>
+        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
+        <script type="text/javascript" src="js/components/magnific-popup.min.js"></script>
+        <script type="text/javascript" src="js/components/swiper.min.js"></script>
+        <script type="text/javascript" src="js/components/counter.min.js"></script>
+        <script type="text/javascript" src="js/components/portfolio-3-col.min.js"></script>
+        <script type="text/javascript" src="js/components/parallax.min.js"></script>
+        <script type="text/javascript" src="js/components/google-map.min.js"></script>
+        <script type="text/javascript" src="js/components/wow.min.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        
+        <!--========== END JAVASCRIPTS ==========-->
+         <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -527,4 +664,7 @@ We use funds from leading providers to build your portfolio</p>
 			}
          
          </script>
+	</div>
+    </body>
+    <!-- End Body -->
 </html>

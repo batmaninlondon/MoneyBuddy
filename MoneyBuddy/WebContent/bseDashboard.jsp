@@ -424,7 +424,7 @@
                 		</div> 
 			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
-								<table id="portfoliosummary" class="display" cellspacing="0" width="100%">
+								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
 							        <thead>
 							            <tr class="g-bg-color--primary" >
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>

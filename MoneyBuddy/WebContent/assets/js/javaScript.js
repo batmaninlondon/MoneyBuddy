@@ -80,7 +80,8 @@ function fundDetailHandler(el) {
 
 function buyFundHandler(fundId) {
 
-    $.ajax({
+	document.getElementById('load').style.visibility="visible";
+	$.ajax({
         url : "buyFundAction",
         type: 'post',
         
@@ -667,6 +668,7 @@ function setData()
 
 function setDashboardData() 
 {
+	document.getElementById('load').style.visibility="visible";
 	$.ajax({
 
         url : "portfolioAction",
@@ -688,6 +690,7 @@ function setDashboardData()
 
 function getMfData() 
 {
+	document.getElementById('load').style.visibility="visible";
 	$.ajax({
 
         url : "fetchFundDetailsAction",

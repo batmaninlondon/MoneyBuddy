@@ -1,656 +1,454 @@
-<!DOCTYPE html >
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Help | Money Buddy</title>
-    <!-- core CSS -->
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/main.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    
-   <style type="text/css">
-            h2.frq-main-title{
-               font-size: 15px;
-            }
-            .hrf-entry{
-               margin-bottom: 0px !important;
-               padding-bottom: 0px !important;
-               border-bottom:1px solid #e9eaeb;
-            }
-            .hrf-content{
-               display:none;
-               color: #444444;
-               background: ffffff;
-               font-size: 15px;
-               padding: 10px 0;
-               word-break: normal;
-            }
-            h3.hrf-title{
-               font-size: 15px ;
-               color: #444444;
-               background: #ffffff;
-               padding: 10px 0;
-               margin: 0;
-               -webkit-touch-callout: none;
-               -webkit-user-select: none;
-               -khtml-user-select: none;
-               -moz-user-select: none;
-               -ms-user-select: none;
-               user-select: none;
-               outline-style:none;
-            }
-            .hrf-title.close-faq{
-               cursor: pointer;
-            }
-            .hrf-title.close-faq span{
-               width: 30px;
-               height: 30px;
-               display: block;
-               position: relative;
-               right: 0;
-               float:right;
-               top: 0;
-               margin-right: -8px;
-               margin-left: -42px;
-            }
-            }.hrf-title.open-faq{
-            
-            }
-            .hrf-title.open-faq span{
-               width: 30px;
-               height: 30px;
-               display: block;
-               position: relative;
-               right: 0;
-               float:right;
-               top: 0;
-               margin-right: -8px;
-               margin-left: -42px;
-            }
-            .hrf-entry p{
-            
-            }
-            .hrf-entry ul{
-            
-            }
-            .hrf-entry ul li{
-            
-            }</style> 
-         
-         
-         <script>
-         jQuery(function($){
-        	   $(document).ready(function(){
-        	      
-        	      $('.hrf-title').click(function(){
-        	         var my_content_id = $(this).attr('data-content-id');
-        	         $('#' + my_content_id ).slideToggle();
-        	         $(this).toggleClass(function(){
-        	            if( $(this).is('.close-faq')){
-        	               return 'open-faq';
-        	            }else{
-        	               return 'close-faq';
-        	            }
-        	            
-        	         });
-        	      }); //.hrf-title click
-        	   });
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <!-- Begin Head -->
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Megakit - HTML5 Theme</title>
+        <meta name="keywords" content="HTML5 Theme" />
+        <meta name="description" content="Megakit - HTML5 Theme">
+        <meta name="author" content="keenthemes.com">
 
-        	});
-         
-         
-         </script>   
-           
-</head>
+        <!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
-<body class="homepage">
-    <header id="header">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
-                        <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
-                        <li  id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
-                        <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
-                        <li class="active" id="header-nav-li"><a href="help"><b>FAQs</b></a></li> 
-                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
-				         	<%  if(session.getAttribute("customerId") == null)
-							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>
-										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
-							<%	} else 
-							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" ><b>Dashboard</b></a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
-							<%	}	%>  
-				                            
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
+        <!-- Vendor Styles -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
 
-<%-- Savita Wadhwani - Commented this section for bse testing - Start --%>
+        <!-- Theme Styles -->
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
 
-<!--  <article id="post-44" class="post-44 page type-page status-publish hentry" style="margin-top:80px">
-	
-	<div class="entry-content">
-		<section class="hero hero-faqs">
-    <div class="container">
-      <div class="col-lg-6 col-md-5 col-sm-5 col-xs-12 p0">
-      </div>
-      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 p0"></div>
-    </div>
-  </section>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    </head>
+    <!-- End Head -->
 
-  <section class="stripe-white">
-    <div class="container">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 p0">
+    <!-- Body -->
+    <body>
 
-        <div class="faqs-sidebar">
-          <a href="#faq-group-1" ><h4><span>1. </span>Investments</h4></a>
-          <a href="#faq-group-2" id="faq-side-2"><h4><span>2. </span>ISA</h4></a>
-          <a href="#faq-group-3" id="faq-side-3"><h4><span>3. </span>Profiling</h4></a>
-          <a href="#faq-group-4" id="faq-side-4"><h4><span>4. </span>ETFs</h4></a>
-          <a href="#faq-group-5" id="faq-side-5"><h4><span>5. </span>Fees</h4></a>
-          <a href="#faq-group-6" id="faq-side-6"><h4><span>6. </span>Funding your Account</h4></a>
-          <a href="#faq-group-7" id="faq-side-7"><h4><span>7. </span>Withdrawing from your Account</h4></a>
-          <a href="#faq-group-8" id="faq-side-8"><h4><span>8. </span>Terms of Service</h4></a>
-          <a href="#faq-group-9" id="faq-side-9"><h4><span>9. </span>Security</h4></a>
-        </div>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 p0">
-        <div class="faqs-list">
+        <!--========== HEADER ==========-->
+        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="container g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
 
-<h4 id="id="faq-group-1">1. Investments</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12504">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12504"><span></span><b>How much do I have to invest with Moneyfarm?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12504">There is no minimum level of investment to open an account with Moneyfarm. You can start from Â£1 and top up as much as you want.
-
-We suggest to invest at least Â£1500 so that you have an optimally balanced portfolio. 
-
-To be assigned a portfolio the minimum investment is Â£1. However, if your initial lump sum investment is lower than Â£1500 we will suggest you top-up either with a regular payment or an additional lump sum.
-
-Having an amount under Â£1500 would mean that the asset allocation of the portfolio will not be balanced and the risk level may not match your investor profile. 
-</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12505">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12505"><span></span><b>Can I add or remove cash from my initial investment?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12505">Yes, you can always increase or decrease the invested amount, but donât forget that your portfolio is tied to your objective. So itâs always best to contact us if you would like to move a large amount of money.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12525">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12525"><span></span><b>Can I customise the suggested portfolio?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12525">No, at the moment we only offer a discretionary service. You can ask for a different portfolio from the one advised but we always suggest to speak to one of our advisors first.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12527">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12527"><span></span><b>What stops me from copying your portfolios and doing it myself?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12527">Nothing. You could replicate our portfolios on your own brokerage account, but rebalancing and monitoring your portfolio takes time and effort. You would also be subject to additional trading fees thereby potentially reducing your returns over time.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12528">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12528"><span></span><b>Do you give investment advice?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12528">Yes. Although we also manage your investments. Initially, you will be asked a series of questions to determine your knowledge, experience, risk appetite and objectives (amongst other factors). We then recommend an investment portfolio which is in keeping with the factors in your profile. This constitutes the provision of investment advice (as we take your personal circumstances into account in providing you with a recommendation). Once you select the portfolio, Moneyfarm is a discretionary investment manager. This means that once you have taken the decision to invest in the recommended portfolio with Moneyfarm, our investment team makes decisions to buy and sell your investments on your behalf. We will always bear in mind your objectives and risk profile. You do not have to give your consent for every transaction; instead, you agree that weâll take responsibility for your investments when you accept our Terms and Conditions. We manage your account with experience, care and in accordance with the information you give us. Our goals are totally aligned to yours and our service is completely unbiased.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12530">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12530"><span></span><b>What is a model portfolio?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12530">A Model Portfolio is a theoretical approach that is used by the portfolio management team as a basis for your asset allocation. Your investments will therefore be managed following the model portfolio that suits your profile, having assessed your risk appetite and investment goals. For smaller investment amounts (below Â£3,000), the composition of your portfolio may differ from the model. Please contact us if you would like to know more.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12531">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12531"><span></span><b>How is the performance of my portfolio calculated?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12531">We calculate portfolio performance using a money-weighted calculation, this is in-line with international standards. This calculation represents the actual performance, taking into account any cash flows; these could be dividends, account top-ups or disinvestments. That means if you were to invest, or indeed disinvest, an amount from your portfolio this would impact the performance number. 
-<br/>
-Technically speaking your performance corresponds to a well-known concept in finance called the internal rate of return (IRR) of an investment. We compute the IRR of your portfolio every day, this starts from the day your first investment was made. Since this is an industry standard it enables you to compare performance easily to make our service as transparent as possible.
-<br/>
-On our demo portfolios we use a time-weighted calculation. If you invest a certain amount and never add more money, or disinvest, time-weighted and money-weighted performance would be the same. This is why time-weighted works for the demo portfolio.
-
-</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12532">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12532"><span></span><b>Can I use Moneyfarm if I am not a UK resident?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12532">Currently we can only open accounts for individuals over the age of 18 living in the UK or Italy. If you have any questions regarding this please contact us via email or telephone.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12534">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12534"><span></span><b>I am a US Citizen, can I invest with Moneyfarm?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12534">Yes, provided you are a UK resident. Moneyfarm is FATCA compliant and a registered FFI with the U.S. Internal Revenue Service. As a US Citizen you will be asked to provide a FATCA self-certification form: please refer to the <a href="https://www.moneyfarm.com/uk/fatca" target="_blank">FATCA FAQs</a> section for more information. Always seek advice from your tax advisor to understand the implications of investing whilst living abroad.</div>
-                  </article></div>
-<h4 id="faq-group-2">2. ISA</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12538">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12538"><span></span><b>What is an ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12538">An Individual Savings Account (ISA) is a form of investment created by the UK government that gives you a tax-free allowance. There are two main types of ISAs: Cash ISAs and Stocks and Shares ISAs. You can only pay into one Stocks and Shares ISA and one Cash ISA in each tax year, but you can open a new ISA with a different provider each year if you want to.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12540">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12540"><span></span><b>How much is the ISA allowance?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12540">Every tax year runs from 6 April until 5 April of the following year. The government can change the ISA allowance every year.
-<br><br>
-This tax year you are allowed to put up to Â£20,000 into your ISA.
-<br><br>
-<strong>Current Tax Year (2017/2018) â Â£20,000</strong><br>
-Previous Tax Year (2016/2017) â Â£15,240<br>
-Earlier Tax Year (2015/2016) â Â£15,000<br>
-<br><br>
-You can pay around whole allowance of Â£20,000 into a Stocks and shares ISA, a Cash ISA, or a combination of these. So even if you have a Cash ISA elsewhere, you can still open a Stocks and Shares ISA with Moneyfarm.
-<br><br>
-You can choose between making a lump sum investment and/or making regular or ad hoc contributions throughout the tax year.
-<br><br>
-Your yearly ISA allowance expires at the end of the tax year and any unused allowance will be lost. It canât be rolled over to the following year.
-<br><br>
-With MoneyFarm you can invest more than the ISA allowance but any investments outside the ISA allowance will not be sheltered from tax.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12542">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12542"><span></span><b>Can I withdraw from my ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12542">You can take money out of your Moneyfarm ISA whenever you want. When you do this it will not impact your ISA allowance from that tax year. 
-
-From 6th April 2016 you can take money out of a Cash ISA or a Stocks and Shares ISA and put it back in without losing that part of your allowance, provided you put it back in the same tax year.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12544">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12544"><span></span><b>What are the requisites to open an ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12544">To open a Stocks and Shares ISA you must be at least 18 years old and must be a UK resident for tax purposes.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12545">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12545"><span></span><b>What are the tax benefits of an ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12545">Any gains made by selling investments within your Stocks and Shares ISA are not subject to capital gains tax. 
-
-Any losses made on your investments in your Stocks and Shares ISAs canât be used to offset capital gains on your other investments. Remember, there is an annual Capital Gains Tax exemption amount (Â£11,100 for the 2017/18 tax year) which you can claim on your annual tax return.
-
-If youâre likely to make capital gains of more than this, youâll benefit from using an ISA. Investments that pay interest (e.g. government and corporate bonds), or rental income (such as some property funds) provide 100% tax-free income if held within an ISA and therefore offer tax benefits for everyone. 
-
-Outside of an ISA, you donât pay tax on the first Â£5,000 of dividends you get in the tax year. Above this allowance, you pay tax of 7.5-38.1%, depending on your income tax band. Dividends that fall within your personal allowance donât count towards your Â£5,000 allowance. 
-
-The tax treatment of a Moneyfarm Stocks and Shares ISA depends on your individual circumstances and may be subject to change in the future.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12546">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12546"><span></span><b>Do you offer a Cash ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12546">No, we currently only offer a Stocks and Shares ISA. We are an investment manager so will be primarily focus our work on providing the best possible Stocks and Shares ISA to our customers.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12547">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12547"><span></span><b>Do you offer a help-to-buy ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12547">No, the help-to-buy ISA is currently a Cash ISA, not a Stocks and Shares ISA. The government has said that help-to-buy ISAs will be made available through banks and building societies. Despite this we are reviewing all regulations surrounding the help-to-buy ISA scheme in detail and will let you know if anything changes. </div>
-                  </article><article class="hrf-entry" id="hrf-entry-12548">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12548"><span></span><b>Do you offer a Junior ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12548">No, not at this current time. We hope to bring a junior ISA to our customers in the near future but for now we do not offer this type of account. Please keep an eye on our mailings for indication to when we will be releasing the Junior ISA.</div>
-                  </article></div>
-<h4 id="faq-group-2b">ISA Transfer</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12549">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12549"><span></span><b>Can I transfer existing ISAs with other providers to the MoneyFarm ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12549">Yes. You can transfer existing ISAs from other providers by simply completing a <a href="https://www.moneyfarm.com/uk/wp-content/uploads/2016/12/Moneyfarm-ISA-Transfer.pdf">MoneyFarm ISA transfer form</a>.
-This should be returned to us and we will then contact your existing ISA provider to arrange the transfer.
-
-It will be possible to transfer both Cash ISAs and Stocks &#038; Shares ISAs to MoneyFarm, however we will always hold your investments in a Stocks &#038; Shares ISA. We do not currently offer a Cash ISA.
-
-Any Stocks and Shares ISA that is transferred wonât hold the same investments as before. We instruct the current ISA manager to sell the investments and transfer the ISA as cash for us to invest. This preserves your ISAâs tax-efficient status and allows us to manage it in the most appropriate way for your goals, timeframe and attitude to risk.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12552">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12552"><span></span><b>If I transfer an ISA will it count towards my ISA allowance?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12552">ISA transfers do not count towards your annual ISA allowance.
-
-Any additional savings or investments you make within the tax year on top of your existing ISA savings and investments, will count towards your annual allowance for the tax year.
-
-An ISA transfer does not count as a new ISA subscription, so if you are transferring ISAs from previous tax years, this has no impact on your ISA allowance for the current tax year.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12555">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12555"><span></span><b>How much of my ISA can I transfer?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12555">It is possible to transfer all or only part of your ISA allowance to a different provider.
-However, if you have already made an ISA subscription for the current tax year, and wish to transfer that money to a new provider, you will have to transfer the total ISA.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12556">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12556"><span></span><b>How long does it take to transfer an ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12556">Once your Moneyfarm ISA transfer form is received, weâll work with your current provider to transfer your ISA to our service â safely and securely. This normally takes between 15 and 30 days, but is completely dependent on your current provider. </div>
-                  </article><article class="hrf-entry" id="hrf-entry-12558">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12558"><span></span><b>When can I transfer my ISA?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12558">You can transfer an ISA at any time, and you can transfer as often as you like. Remember, if you have saved into a fixed rate Cash ISA there may be a penalty if you transfer before the end of the fixed term.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12560">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12560"><span></span><b>How do I transfer my ISA investments to another manager?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12560">If you would like to transfer your investments to another manager, please contact them and ask them to arrange the transfer with us.
-
-Please be aware of the following:
-<ul>
- 	<li>We cannot transfer your holdings as funds, only cash.</li>
- 	<li>In accordance with this, all assets will be liquidated within 7 days upon your request to transfer.</li>
- 	<li>There is no dealing commission charged when we sell your funds.</li>
- 	<li>There will be no charge for closing your account with us.</li>
-</ul></div>
-                  </article></div>
-<h4 id="faq-group-3">3. Profiling</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12562">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12562"><span></span><b>How do you understand my attitude to risk?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12562">We developed a questionnaire based algorithm that measures your financial risk aversion, and combines it with other psychological characteristics that influence your relationship with investments e.g. anxiety, confidence, auto control etc. The final result will be your risk profile which will be assigned to one of our 6 profiles available.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12564">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12564"><span></span><b>Why do you need to assess my risk profile?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12564">Your risk profile represents you as an investor in terms of your risk aversion, income and financial situation. By profiling you we can understand your characteristics, give you a better advice and optimise your portfolio by suggesting the one that would suit you the best.</div>
-                  </article></div>
-<a name="faq-group-4"></a>
-<h4 id="faq-group-4">4. ETFs</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12570">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12570"><span></span><b>What is an ETF?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12570">An Exchange Traded Fund (ETF) is an investment fund, traded like shares, which hold assets such as shares, commodities or bonds. They normally closely track the performance of a financial index, and as such, their value can go down as well as up and you may get back less than you originally invested. </div>
-                  </article><article class="hrf-entry" id="hrf-entry-12572">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12572"><span></span><b>Why do you use ETFs?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12572">ETFs are a great instrument to pursue our long-term investment strategy. They are low-cost, transparent, liquid and provide a native diversification that enables us to create an optimally diversified portfolio even with low capital.
-
-A passive approach is by far the best strategy for an investor and ETFs represent the best tool for indexing and building the right asset allocation mix.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12573">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12573"><span></span><b>How do you select ETFs?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12573">Moneyfarm evaluates thousands of ETFs for optimal investments based on low cost, tax efficiency, and stock-like features. We look for ETFs with the lowest annual expense ratios, minimal tracking error, and sufficient liquidity. Unfortunately, many investors only focus on cost and end up with an ETF that doesnât track its benchmark well. This defeats the purpose of optimising the mix of asset classes.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12574">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12574"><span></span><b>Are ETFs secure?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12574">Fund assets are generally held in safekeeping on investorsâ behalf by a trustee or depositary.
-
-If Moneyfarm goes into default, your assets are protected. You continue to own your investment and the fundâs assets are still invested as before.
-
-If your money is mismanaged â for example, the fund manager invests it in something the fund shouldnât invest in â then the firm would be required to compensate investors. If it did not have enough money and, therefore, went out of business, then the outstanding compensation would be covered by the Financial Services Compensation Scheme (FSCS) up to Â£50,000 per person.
-
-You cannot claim compensation simply because the value of your investment falls. All investments involve some risk. An index tracker will lose money if the index it is tracking goes down.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12575">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12575"><span></span><b>Do ETFs come with any fees?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12575">ETFs are one of the most efficient ways of investing, however, they do have a small cost. On average youâll incur a cost of 0.25% per annum deducted directly from the value of your portfolio. This is very low compared to other instruments, such as mutual funds, where this fee can be as much as 1%.
-
-For example:
-If you invest Â£20,000: You will be charged 0% on the first Â£10,000 and then 0.6% on the remaining Â£10,000.
-This results in a total annual fee of: <strong>(0.6 x 10,000 = Â£60) from Moneyfarm directly</strong>.
-Plus then the additional ETF charge of 0.25% (per annum) on top of the 0.6%, which will be deducted on an ongoing basis, directly from the value of your portfolio.
-
-<strong>Please note</strong>: There will always be an inherent ongoing charge with ETFs regardless of who you invest with.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12576">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12576"><span></span><b>What is the taxation on ETFs?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12576">ETFs are not given special treatment in the UK. In general, when it comes to taxes, ETFs and traditional funds are treated the same. 
-
-The most important thing to consider before buying an ETF is the country of issue. If an ETF was issued in the US or France, you may have to pay more tax on that investment than you otherwise would if you bought the ETF in the UK. Specifically France and the US have tax regimes that enforce withholding tax, which often taxâs ETF dividends at a very high rate. Dividends from ETFs domiciled in France can be subject to a 30% tax deduction at source, which is not always fully reclaimable. Dividends paid by American-based ETFs can be subject to a withholding tax of 30%. This withholding tax takes a big bite out of your investment gains.
-
-There is an important classification system that investors should be aware of that govern taxes for ETFs.  It is very important to check an ETFâs classification before making a purchase.
-
-Roughly 75% of ETFs in the UK are given either âreportingâ or âdistributorâ status. When an ETF has either of these classifications, it means that any ETF gains are subject to capital gains tax, which is generally a cheaper alternative to income tax. Capital gains tax rates are either 18% or 28%, instead of income tax rates which can be as high as 50%. (Keep in mind, this capital gains tax is not only applied to ETFs, but to other traditional investments such as funds and shares.)
-
-It is critical to know that roughly 25% of ETFs in the UK and most ETFs listed on US or European exchanges do not have the âreportingâ or âdistributorâ status. Without this status, investment gains can be charged as income tax, which can become very expensive.
-
-ETF gains in an ISA or another tax-efficient wrapper are generally tax-free. Wherever possible these are likely to be the most tax advantageous ways to hold ETFs. However, you have to be aware that a withholding tax can be applied if the funds are domiciled in France or the US.
-
-MoneyFarm only uses ETFs domiciled in the UK with a âreportingâ or âdistributorâ status.</div>
-                  </article></div>
-<h4 id="faq-group-5">5. Fees</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12577">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12577"><span></span><b>How do you calculate fees?</b></h3>
-                     <div class="hrf-content" id="hrf-content-12577">The fees are as follows:
-<ul>
-	<li>The first Â£10,000 will be charged at 0%</li>
-	<li>Any amount from Â£10,000 up to Â£100,000 will be charged at 0.6%.</li>
-	<li>Any amount from Â£100,000 up to Â£1,000,000 will be charged at 0.4%.</li>
-	<li>Any amount over Â£1,000,000 will be charged at 0%.</li>
-</ul>
-
-Your <strong>first Â£10,000 will always be managed for free</strong>. For example, if you invest Â£50,000 youâll be charged only on the difference (i.e. Â£40,000).
-
-Fees are charged quarterly and calculated as the sum of the daily portfolio value minus Â£10,000, multiplied by the annual fee, divided by 365.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12604">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12604"><span></span>What is included/excluded from the annual fee?</h3>
-                     <div class="hrf-content" id="hrf-content-12604">All the costs related to an investment, disinvestment, rebalance or any kind of operation on your portfolio are included, as well as the entry and exit fees.
-
-Funds costs are not included in the annual fee and will not appear as a charge, but is factored into the performance of your investment. Moneyfarm uses ETFs, these have a small cost payable to the ETF provider, also known as the Total Expense Ratio.This is very low compared to other instruments, such as mutual funds, where this fee can be as much as 1%. On average by investing with Moneyfarm you will incur a cost of 0.25% deducted directly from the value of your investment.
-
-Here is whatâs included:
-<br><br>
-<div class="compare-table">
-<table>
-<tbody>
-<tr>
-<th style="visibility:hidden !important;border:0;"></th>
-<th>Moneyfarm</th>
-<th>IFAâs &amp; DIY accounts</th>
-</tr>
-<tr>
-<td>Management fee</td>
-<td>Included</td>
-<td>Included</td>
-</tr>
-<tr>
-<td>Underlying funds cost</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Set-up fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Trading fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Rebalancing fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Transfer fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Custodian fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Trading fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Withdrawal fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Urgent withdrawal fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Direct debit fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Platform fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Inactivity fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-<tr>
-<td>Subscription fee</td>
-<td>Included</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div></div>
-                  </article><article class="hrf-entry" id="hrf-entry-12605">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12605"><span></span>How do I pay the fees?</h3>
-                     <div class="hrf-content" id="hrf-content-12605">You donât have to do anything. If you have invested any money with Moneyfarm, we will charge you the fees automatically and deduct them from the cash held on your account. You will always have a small percentage of liquidity (Cash) within your portfolio, around 2-3%, which we will use to take the fees. Liquidity will also act as an important, optimally weighed asset class within your portfolio. </div>
-                  </article><article class="hrf-entry" id="hrf-entry-12606">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12606"><span></span>Do ETFs come with any charges?</h3>
-                     <div class="hrf-content" id="hrf-content-12606">ETFs are a low cost way of investing. On average youâll incur a cost of 0.25% per annum deducted directly from the value of your portfolio. This is very low compared to other instruments, such as mutual funds, where this fee can be as much as 1.42% (<a href="http://www.theinvestmentassociation.org/assets/files/press/2016/IAInvestmentCostsPerformance.pdf" target="_blank">Investment Association</a>).
-
-<span style="text-decoration: underline;">For example:</span>
-If you invest Â£20,000 with Moneyfarm: You will not be charged any management fees on the first Â£10,000 and then youâll be charged 0.6% on the remaining Â£10,000.
-This results in a total annual fee of: <strong>(0.6% x 10,000 = Â£60) to Moneyfarm directly</strong>.
-You will also be charged 0.25% (per annum) on your entire portfolio, this is separate to the 0.6% and will be deducted on an ongoing basis, directly from the value of your portfolio.
-
-<strong>Please note</strong>: There will always be an inherent ongoing charge with ETFs regardless of who you invest with.</div>
-                  </article></div>
-<h4 id="faq-group-6">6. Funding your Account</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12608">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12608"><span></span>How do I add funds to my account?</h3>
-                     <div class="hrf-content" id="hrf-content-12608">There are several quick and easy ways for you to make contributions to your MoneyFarm account.
-
-If you are setting up a monthly contribution you can do this direct debit. Simply click on âAdd fundsâ, select the date you would like to make the contribution and âDirect Debitâ as the Payment Method. If you would prefer you can set up a standing order with your bank, please call our Investment Consultants team on 0800 433 4574 if you wish to do this.
-
-If you are setting up a one time contribution you can do this via Direct Debit or bank transfer. If you select Direct Debit you donât have to do anything, we will debit your account the amount you select. If you select Bank Transfer you will need to manually transfer the funds to us using the reference code and bank details we provide during the setup.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12609">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12609"><span></span>Can I transfer funds from another bank account?</h3>
-                     <div class="hrf-content" id="hrf-content-12609">No. Due to regulation we can only accept contributions that come from the bank account you signed up with.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12610">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12610"><span></span>How do I change the bank details linked to my account?</h3>
-                     <div class="hrf-content" id="hrf-content-12610">To change the bank details you signed up with you will need to email our Investment Consultants team (support@moneyfarm.com) with any official document showing your name, sort code and account number. If is easier this can be a screenshot or a photo of the document. We donât need to know any details of any previous transactions, you can crop these out of the document you send.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12611">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12611"><span></span>Can I use Direct Debit to make a one time payment?</h3>
-                     <div class="hrf-content" id="hrf-content-12611">Yes. Although Direct Debit is most commonly used for monthly payments, you can also set up a one time Direct Debit through our platform. When you add funds simply select one time payment and Direct Debit and we will guide you through the rest.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12612">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12612"><span></span>Can I set up more than one Direct Debit?</h3>
-                     <div class="hrf-content" id="hrf-content-12612">If you have multiple portfolios you can set up a separate direct debit for each one. Due to regulation all payments must come from the same bank account. If you need to change your bank account on record you can contact the Investment Consultant team and they will guide you through updating it.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12613">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12613"><span></span>When will you take the Direct Debit?</h3>
-                     <div class="hrf-content" id="hrf-content-12613">For monthly contributions, we will collect the money from your bank on or around the date you chose when you set up the Direct Debit. For example, if you chose the 6th of every month we will take the payment sometime between the 4th and 8th of that month. For one time contributions we will take the payment as soon as possible.
-
-Please note that it may take up to 6 days to set up your Direct Debit mandate, therefore your first payment will take slightly longer.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12614">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12614"><span></span>When will the funds appear in my Moneyfarm account?</h3>
-                     <div class="hrf-content" id="hrf-content-12614">If you have sent funds to us via bank transfer, it normally takes 1 working day for the money to show up in your account. However some banks can take up to 2-3 working days. Once received, funds are then normally traded the next working day.
-
-For direct debit payments (both one-off and monthly), it can take up to 4 working days for the money to show up in your account and an additional working day for the funds to be invested.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12615">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12615"><span></span>What is the Direct Debit Guarantee?</h3>
-                     <div class="hrf-content" id="hrf-content-12615">Organisations using the Direct Debit Scheme go through a careful vetting process before they&#8217;re authorised, and are closely monitored by the banking industry. The efficiency and security of Direct Debit is monitored and protected by your own bank or building society.
-
-The Direct Debit Guarantee applies to all Direct Debits. It protects you in the rare event that there is an error in the payment of your Direct Debit*.
-
-The Guarantee is offered by all banks and building societies that accept instructions to pay Direct Debits
-If there are any changes to the amount, date or frequency of your Direct Debit the organisation will notify you (normally 10 working days) in advance of your account being debited or as otherwise agreed. If you request the organisation to collect a payment, confirmation of the amount and date will be given to you at the time of the request
-If an error is made in the payment of your Direct Debit, by the organisation or your bank or building society, you are entitled to a full and immediate refund of the amount paid from your bank or building society
-If you receive a refund you are not entitled to, you must pay it back when the organisation asks you to
-You can cancel a Direct Debit at any time by simply contacting your bank or building society. Written confirmation may be required. Please also notify the organisation.
-* The Guarantee covers Direct Debit payments. It cannot be used to address contractual disputes between you and the billing organisation.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12617">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12617"><span></span>Is there a limit to how much I can deposit in my Moneyfarm account using Direct Debit?</h3>
-                     <div class="hrf-content" id="hrf-content-12617">Yes. There is currently a Â£16,000 monthly limit if you chose to pay in via Direct Debit. If you wish to contribute larger sums on a monthly basis please set up a standing order with your bank or contact our investment consultant team to discuss.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12618">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12618"><span></span>How do I cancel a monthly Direct Debit?</h3>
-                     <div class="hrf-content" id="hrf-content-12618">You can cancel a monthly Direct Debit by going to your Funding Details page. From there you can cancel a specific Direct Debit by clicking on the âxâ in the table.</div>
-                  </article></div>
-<h4 id="faq-group-7">7. Withdrawing from your Account</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-13040">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-13040"><span></span>How do I withdraw from available cash?</h3>
-                     <div class="hrf-content" id="hrf-content-13040">Click into the âFunding detailsâ section of your account, this can be found on the bottom tab of your mobile app, or by clicking on the arrow next to your name on the website. Click on the âWithdrawals requestâ button, input the amount you would like to withdraw, and the bank account you would like this to be sent to. This creates a request, and the money is sent to your nominated bank account. This can take up to two working days to appear in your nominated bank account.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-13041">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-13041"><span></span>How long does it take to get my money back?</h3>
-                     <div class="hrf-content" id="hrf-content-13041">From disinvestment through to having the money back in your nominated account it can take up to seven working days. This is a two-step process, the disinvestment can take up to five working days, and the withdrawal will not take longer than two working days.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-13039">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-13039"><span></span>How do I disinvest?</h3>
-                     <div class="hrf-content" id="hrf-content-13039">The process differs slightly depending on whether you are doing this via the website or via the mobile app.
-
-<em>On mobile</em>
-Once you have logged into your Moneyfarm account, click into your portfolio, select edit, and then click âDecrease investmentâ. You then put in the amount you would like to withdraw, click âContinueâ, and youâll then see a pop-up asking you to confirm. This sends a note to our portfolio management team who will act on your request. It can take up to five working days for this money to appear in your available cash.
-
- 
-<em>On the website</em>
-Once you have logged into your Moneyfarm account, click into your portfolio (the âDetailsâ button), select âActionsâ, and then click âDecrease investmentâ. You then put in the amount you would like to withdraw, click âContinueâ, and youâll then see a pop-up asking you to confirm. This sends a note to our portfolio management team who will act on your request. It can take up to five working days for this money to appear in your available cash.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-13038">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-13038"><span></span>How do I get my money into my personal bank account?</h3>
-                     <div class="hrf-content" id="hrf-content-13038">In order to get your money back into your nominated bank account the money needs to be in your available cash. That means you first need to make a disinvestment. Your money will then appear in available cash and you can either choose to add it to a new portfolio or to withdraw it and have it sent to your bank account. This will be the bank account nominated during the sign-up process.</div>
-                  </article></div>
-<h4 id="faq-group-8">8. Terms of Service</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12620">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12620"><span></span>Am I locked in?</h3>
-                     <div class="hrf-content" id="hrf-content-12620">No, you can withdraw whenever you like without paying any additional fees. With Moneyfarm thereâs no minimum investment period but keep in mind that when investing you should have a long term approach.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12621">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12621"><span></span>How can I cancel my account?</h3>
-                     <div class="hrf-content" id="hrf-content-12621">Signing up is free and carries no obligation to invest. We donât charge you anything until you transfer money into your MoneyfarmÂ account. You can close your accountÂ and withdraw your money whenever you want.Â After we close your account, we hold your personal information for a time as required by law. You should always remember that investments are subject to market risk and if you do invest you may not get back the sum you invested.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12622">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12622"><span></span>I&#8217;m subject to personal account dealing rules, what happens?</h3>
-                     <div class="hrf-content" id="hrf-content-12622">If you work in certain professions (e.g. financial services, consulting, legal and accounting firms or government departments) you could beÂ subject to restrictions on the types on securities that youÂ can invest in. These restrictions may prevent you from holding certain securities, enforce a minimum holding period, restrict trading periods, force the sale of a security and so on.
-
-Generally, discretionary investment accounts â like the oneÂ thatÂ MoneyfarmÂ offers â are exempt from these rules as the decisions about which underlying securities to invest in are made by the investment manager, not the individual. This usually makesÂ your investment choice greater and your life easier, since you may no longer need to seek approval from your employer for any investment transactions made by Moneyfarm. This depends on the personal account dealing rules to which you are subject and not all employers have the same requirements.</div>
-                  </article></div>
-<h4 id="faq-group-9">9. Security</h4>
-<div class="hrf-faq-list"><article class="hrf-entry" id="hrf-entry-12623">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12623"><span></span>Is my personal information secure with you?</h3>
-                     <div class="hrf-content" id="hrf-content-12623">Your privacy is important to us. Moneyfarm takes serious precautionary measures to ensure that your personal details are held in absolute confidence. Your personal details and your account data are always encrypted and stored on secure servers.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12624">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12624"><span></span>Is Moneyfarm regulated?</h3>
-                     <div class="hrf-content" id="hrf-content-12624">Yes. Moneyfarm is authorised and regulated by the <a href="https://www.fca.org.uk/" target="_blank">Financial Conduct Authority</a> (FCA) no. 629539. Details of our authorisation can be found on the Financial Services Register by clicking <a href="https://register.fca.org.uk/ShPo_FirmDetailsPage?id=001b000000aQtQkAAK" target="_blank">here</a>.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12625">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12625"><span></span>Is my money safe?</h3>
-                     <div class="hrf-content" id="hrf-content-12625">As an investment firm authorised and regulated by the FCA, Moneyfarm is obligated to segregate client funds and assets. This means that your money and investments are held separately from Moneyfarmâs own bank account and cannot be mixed with our own funds.
-
-We believe that the safest way of looking after your investments is to appoint a custodian bank which holds your money and the investments we purchase for you. We hold your money and investments using carefully selected, regulated financial institutions such as Barclays and Saxo Capital Markets UK Ltd, and we ensure that they meet the relevant criteria to keep your money safe at all times.</div>
-                  </article><article class="hrf-entry" id="hrf-entry-12626">
-                      <h3 class="hrf-title close-faq" data-content-id="hrf-content-12626"><span></span>What if Moneyfarm goes bust?</h3>
-                     <div class="hrf-content" id="hrf-content-12626">In the unlikely event of Moneyfarm entering into administration, retail clients will have their funds and market value of assets returned to them from the client money bank account/ custodian account. As these bank accounts are held by Moneyfarm in trust for underlying clients, no other general creditor can access or make claim to the funds contained therein.
-
-Furthermore your money and investments are eligible for compensation under the Financial Services Compensation Scheme (FSCS) for up to Â£50,000 if the company is unable to repay investments or money.
-
-Compensation under the FSCS is also triggered in the event of losses arising from bad investment advice, poor investment management or misrepresentation. For further information on the FSCS please click on the following link <a href="http://www.fscs.org.uk/what-we-cover/products/investments/" target="_blank">http://www.fscs.org.uk/what-we-cover/products/investments/</a>.</div>
-                  </article></div>
-
-        </div>
-      </div>
-    </div>
-  </section>	</div>.entry-content
-
-</article>#post-## -->
-
-<%-- Savita Wadhwani - Commented this section for bse testing - End --%> 
-
-
-<%-- Savita Wadhwani - Added this section for bse testing - Start --%> 
-
-    <section id="help">
-	
-	
-	
-	<div class="row" style="margin-top:100px;">
-		<div class="center">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>This dev page is under construction...</b></h2>
-		</div>
-	</div>
-	
-
-	</section>
-
-<%-- Savita Wadhwani - Added this section for bse testing - Start --%>
-
-     <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
-                </div>
-                
-                
-                
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                       <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="fa fa-youtube"></i></a></li>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="nhome.jsp" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="nhome.jsp" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="nsavetax.jsp" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Blog</a></li>
+                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="nfaq.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                    </li>
+                                    <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign in</a></li>
+													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign up</a></li>
+										<%	} else 
+										 	{	%>
+										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Log Ouu</a></li>
+										<%	}	%>  
                                 
-                    </ul>
+                                
+                                
+                                </ul>
+                            </div>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+
+        <!--========== PROMO BLOCK ==========-->
+        <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;"> -->
+         <div class="g-bg-color--dark">
+            <div class="g-container--md g-text-center--xs g-padding-y-80--xs">
+            <br/><br/><br/>
+                <div class="g-margin-b-10--xs">
+                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-70--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">FAQ</h1>
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2">Your Questions. Answered.</p>
                 </div>
             </div>
         </div>
-    </footer>
+        <!--========== END PROMO BLOCK ==========-->
 
-<!-- row-offcanvas -->
+        <!--========== PAGE CONTENT ==========-->
 
-</body>
+        <!-- Accordion -->
+        <div class="s-faq g-bg-color--primary">
+            <div class="container g-padding-y-25--xs">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="cbp cbp-l-grid-faq js__grid-faq">
+                            <div class="cbp-item buying">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+                                        </svg>
+                                        <h2 class="s-faq-grid__title">Where can I find my Purchase Code?</h2>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Every item purchased on Envato Market has a unique code, called a purchase code.
+                                            <br>
+                                            A purchase code is used by authors to verify you have purchased a licence for the item. The purchase code may be required to access an author’s support site (if support is offered) or to enable automatic updates.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item community">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1062 150q-317 121-556 362.5t-358 560.5q-20-89-20-176 0-208 102.5-384.5t278.5-279 384-102.5q82 0 169 19zm269 119q93 65 164 155-389 113-674.5 400.5t-396.5 676.5q-93-72-155-162 112-386 395-671t667-399zm-733 1334q115-356 379.5-622t619.5-384q40 92 54 195-292 120-516 345t-343 518q-103-14-194-52zm1066 58q-193-50-367-115-135 84-290 107 109-205 274-370.5t369-275.5q-21 152-101 284 65 175 115 370z"/>
+                                        </svg>
+                                        <h3 class="s-faq-grid__title">Forum Comments by Envato Staff &amp; Moderators</h3>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Envato is extremely fortunate to have a huge community with highly engaged users. Part of our community’s time on Envato Market is spent within our forums, our common grounds for communication. In order to clarify the different roles and responsibilities of the various people and roles that post in our forums we hope you find the following information useful.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item buying">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">How Do I Get Support For An Item I've Purchased?</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Authors who are designers, developers and creatives from all over the globe are responsible for the work you see on Envato Market.
+
+                                            Authors are not obligated to provide support, however most do. You will know if an author provides support, simply by viewing the “Support” tab on the item page.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item author">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1696 128q66 0 113 47t47 113v1216q0 66-47 113t-113 47h-1600q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1600zm-1600 128q-13 0-22.5 9.5t-9.5 22.5v224h1664v-224q0-13-9.5-22.5t-22.5-9.5h-1600zm1600 1280q13 0 22.5-9.5t9.5-22.5v-608h-1664v608q0 13 9.5 22.5t22.5 9.5h1600zm-1504-128v-128h256v128h-256zm384 0v-128h384v128h-384z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Which Author Payment Option Do I Choose?</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            As an Envato Market author you need to select the most appropriate payment method in order to receive your earnings.
+                                            <br>
+                                            Each payment method and provider may have restrictions regarding which countries they pay to, for legal and / or commercial reasons.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item copyright">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1278 1074v109q0 50-36.5 89t-94 60.5-118 32.5-117.5 11q-205 0-342.5-139t-137.5-346q0-203 136-339t339-136q34 0 75.5 4.5t93 18 92.5 34 69 56.5 28 81v109q0 16-16 16h-118q-16 0-16-16v-70q0-43-65.5-67.5t-137.5-24.5q-140 0-228.5 91.5t-88.5 237.5q0 151 91.5 249.5t233.5 98.5q68 0 138-24t70-66v-70q0-7 4.5-11.5t10.5-4.5h119q6 0 11 4.5t5 11.5zm-382-818q-130 0-248.5 51t-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5-51-248.5-136.5-204-204-136.5-248.5-51zm768 640q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Can I use trademarked names in my items?</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            When deciding whether or not to use a trademarked name as a title or tag you should ask yourself this question; "Am I describing what it is or what it the item is like?"
+                                            <br>
+                                            Using trademarked names to describe what your file actually is is acceptable. Using them to describe what your file is like is not.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item author">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1664 896q0 156-61 298t-164 245-245 164-298 61q-172 0-327-72.5t-264-204.5q-7-10-6.5-22.5t8.5-20.5l137-138q10-9 25-9 16 2 23 12 73 95 179 147t225 52q104 0 198.5-40.5t163.5-109.5 109.5-163.5 40.5-198.5-40.5-198.5-109.5-163.5-163.5-109.5-198.5-40.5q-98 0-188 35.5t-160 101.5l137 138q31 30 14 69-17 40-59 40h-448q-26 0-45-19t-19-45v-448q0-42 40-59 39-17 69 14l130 129q107-101 244.5-156.5t284.5-55.5q156 0 298 61t245 164 164 245 61 298zm-640-288v448q0 14-9 23t-23 9h-320q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h224v-352q0-14 9-23t23-9h64q14 0 23 9t9 23z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Historical Payment Rates</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Over the years Envato Market has changed fees &amp; rates several times – always in favour of our authoring community! If you have been selling files for some time, these rates may apply to you. If you are a new author, you should review our Current Rates or read about our author program If you are interested in Selling Your Work.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item account">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1600 1405q0 120-73 189.5t-194 69.5h-874q-121 0-194-69.5t-73-189.5q0-53 3.5-103.5t14-109 26.5-108.5 43-97.5 62-81 85.5-53.5 111.5-20q9 0 42 21.5t74.5 48 108 48 133.5 21.5 133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5t-271.5 112.5-271.5-112.5-112.5-271.5 112.5-271.5 271.5-112.5 271.5 112.5 112.5 271.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">How Do I Change My Username?</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Sign in to your Envato Account via the button at the top right of the Envato Market sites.
+                                            <br>
+                                            Frequent username changes are not permitted
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="cbp cbp-l-grid-faq js__grid-faq">
+                            <div class="cbp-item account">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1376 768q40 0 68 28t28 68v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-320q0-185 131.5-316.5t316.5-131.5 316.5 131.5 131.5 316.5q0 26-19 45t-45 19h-64q-26 0-45-19t-19-45q0-106-75-181t-181-75-181 75-75 181v320h736z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">How Do I Change My Password?</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            It is important that your Envato Account has a secure, private password at all times.
+                                            <br>
+                                            Sign in to your Envato Account via the button at the top right of the Envato Market sites.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item author">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1152 640q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm256 0q0 109-33 179l-364 774q-16 33-47.5 52t-67.5 19-67.5-19-46.5-52l-365-774q-33-70-33-179 0-212 150-362t362-150 362 150 150 362z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">An Author’s Introduction to Envato Market</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Becoming an author on Envato Market carries certain legal implications. Everything you sell must be your own original content. If you use any assets that are owned by someone else, you must have a license that grants you permission to use and resell them.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item copyright">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M320 1168v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm128-256v96q0 16-16 16h-224q-16 0-16-16v-96q0-16 16-16h224q16 0 16 16zm-128-256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm1024 512v96q0 16-16 16h-864q-16 0-16-16v-96q0-16 16-16h864q16 0 16 16zm-640-256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm-128-256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm384 256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm-128-256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm384 256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm384 256v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm-512-512v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm256 0v96q0 16-16 16h-96q-16 0-16-16v-96q0-16 16-16h96q16 0 16 16zm256 0v352q0 16-16 16h-224q-16 0-16-16v-96q0-16 16-16h112v-240q0-16 16-16h96q16 0 16 16zm128 752v-896h-1664v896h1664zm128-896v896q0 53-37.5 90.5t-90.5 37.5h-1664q-53 0-90.5-37.5t-37.5-90.5v-896q0-53 37.5-90.5t90.5-37.5h1664q53 0 90.5 37.5t37.5 90.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">How to use the Whois Lookup Tool</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Whois is a widely used Internet record listing that contains the details of who owns a domain name and how to get in touch with them.
+                                            <br>
+                                            The contact details can be for both the domain’s registrar or the web hosting company providing space or storage for that specific website.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item copyright">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1596 380q28 28 48 76t20 88v1152q0 40-28 68t-68 28h-1344q-40 0-68-28t-28-68v-1600q0-40 28-68t68-28h896q40 0 88 20t76 48zm-444-244v376h376q-10-29-22-41l-313-313q-12-12-41-22zm384 1528v-1024h-416q-40 0-68-28t-28-68v-416h-768v1536h1280zm-979-234v106h281v-106h-75l103-161q5-7 10-16.5t7.5-13.5 3.5-4h2q1 4 5 10 2 4 4.5 7.5t6 8 6.5 8.5l107 161h-76v106h291v-106h-68l-192-273 195-282h67v-107h-279v107h74l-103 159q-4 7-10 16.5t-9 13.5l-2 3h-2q-1-4-5-10-6-11-17-23l-106-159h76v-107h-290v107h68l189 272-194 283h-68z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Illegal Distribution Of Files</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Envato Market is not a legal body which is qualified to give you advice on these matters.  Any suggestions on this page are to be considered general and not specific to your situation. When sending legal documentation or taking any form of legal action, we recommend you consult with a legal professional. We can take no responsibility for the repercussions of following the suggestions in this document.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item copyright">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm128 1247v-190q0-14-9-23.5t-22-9.5h-192q-13 0-23 10t-10 23v190q0 13 10 23t23 10h192q13 0 22-9.5t9-23.5zm-2-344l18-621q0-12-10-18-10-8-24-8h-220q-14 0-24 8-10 6-10 18l17 621q0 10 10 17.5t24 7.5h185q14 0 23.5-7.5t10.5-17.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Protecting Your Copyright</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Some seek to fight all piracy they come across, some want to find ways to motivate users of content to pay for it, and some choose to focus on what they do sell and not change the ways of users who want all their content for free. Ultimately, this is your personal choice (and more below on the path Envato takes on the piracy issue).
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item buying">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M1408 256h-1024v1242l423-406 89-85 89 85 423 406v-1242zm12-128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Buyers Guide to YouTube Content ID &amp; Copyright Notices</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Content ID is a popular digital fingerprinting system that content creators can use to easily identify and manage their copyrighted content on YouTube. Videos uploaded to YouTube are compared against audio and video files registered with Content ID by content owners, looking for any matches.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cbp-item community">
+                                <div class="cbp-caption">
+                                    <div class="s-faq-grid__divider cbp-caption-defaultWrap">
+                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#fff" d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z"/>
+                                        </svg>
+                                        <h4 class="s-faq-grid__title">Forum and Community Rules</h4>
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="g-color--white-opacity">
+                                            Envato takes great pride in it’s global and thriving community! They're part of what makes the Envato Market sites fun and friendly. The forum rules and guidelines focus on mutual respect.
+                                            <br>
+                                            All users who wish to participate or give feedback are invited to do so.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Accordion -->
+
+        <!-- Subscribe -->
+        <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="g-margin-b-60--xs">
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
+                <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1">Join Over 1000+ People</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                    <form class="input-group">
+                        <input type="email" class="form-control s-form-v5__input g-radius--left-50" name="email" placeholder="Enter your email">
+                        <span class="input-group-btn">
+                            <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--dark-brd s-btn--dark-brd g-radius--right-50"><i class="ti-arrow-right"></i></button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Subscribe -->
+        <!--========== END PAGE CONTENT ==========-->
+
+        <!--========== FOOTER ==========-->
+        <footer class="g-bg-color--dark">
+            <!-- Links -->
+            <div class="g-hor-divider__dashed--white-opacity-lightest">
+                <div class="container g-padding-y-80--xs">
+                    <div class="row">
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">About</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Work</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Twitter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Facebook</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Instagram</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">YouTube</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Subscribe to Our Newsletter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                            <h3 class="g-font-size-18--xs g-color--white">Megakit</h3>
+                            <p class="g-color--white-opacity">We are a creative studio focusing on culture, luxury, editorial &amp; art. Somewhere between sophistication and simplicity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Links -->
+
+            <!-- Copyright -->
+            <div class="container g-padding-y-50--xs">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="index.html">
+                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo.png" alt="Megakit Logo">
+                        </a>
+                    </div>
+                    <div class="col-xs-6 g-text-right--xs">
+                        <p class="g-font-size-14--xs g-margin-b-0--xs g-color--white-opacity-light"><a href="http://keenthemes.com/preview/Megakit/">Megakit</a> Theme Powered by: <a href="http://www.keenthemes.com/">KeenThemes.com</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Copyright -->
+        </footer>
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+
+        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+        <!-- Vendor -->
+        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
+        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+
+        <!-- General Components and Settings -->
+        <script type="text/javascript" src="js/global.min.js"></script>
+        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
+        <script type="text/javascript" src="js/components/faq.min.js"></script>
+        <!--========== END JAVASCRIPTS ==========-->
+
+    </body>
+    <!-- End Body -->
 </html>
