@@ -43,7 +43,7 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 			query.setParameter("unitPrice", getNavValue());
 			query.setParameter("quantity", getUnitsPurchased());
 			query.setParameter("bseOrderId", getBseOrderId());
-			query.setParameter("transactionStatus", "COMPLETE");
+			query.setParameter("transactionStatus", "8");
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
 			session.getTransaction().commit();

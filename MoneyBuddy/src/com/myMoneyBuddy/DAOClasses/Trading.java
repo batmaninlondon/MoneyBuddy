@@ -382,7 +382,7 @@ public class Trading {
 
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null, customerId,transactionType,
 						transactionCode,buySell, Double.toString(currentTransactionAmount),
-						null, null,null,"N",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB,"N"); 		
+						"1", null,null,"N",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB,"N"); 		
 
 				//session.beginTransaction();
 				hibernateSession.save(tempTransactionDetail);
@@ -508,7 +508,7 @@ public class Trading {
 					query.setParameter("bseOrderId", resultsEntryParam[5]);
 
 				if ( resultsEntryParam[7].equals("1") ) 
-					query.setParameter("transactionStatus", "OrderFailedFromBse");
+					query.setParameter("transactionStatus", "2");
 				else  
 				{
 					if (transactionType == "UPFRONT") {
@@ -520,7 +520,7 @@ public class Trading {
 						System.out.println(resultsEntryParam[5].toString()+" added in orderNums");
 					}
 					totalPaymentAmount += productDetailsMap.get(currentProductId);
-					query.setParameter("transactionStatus", "OrderPlacedToBse");
+					query.setParameter("transactionStatus", "3");
 					allOrderFailed = false;
 				}
 
@@ -666,10 +666,10 @@ public class Trading {
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus = :transactionStatus where bseOrderId = :bseOrderId and customerId = :customerId");
 
 					if ( !"NotSet".equals(paymentUrl))  {
-						query.setParameter("transactionStatus", "PAYMENTSUCCESS");
+						query.setParameter("transactionStatus", "5");
 					}
 					else {
-						query.setParameter("transactionStatus", "PAYMENTFAILURE");
+						query.setParameter("transactionStatus", "4");
 					}
 
 					query.setParameter("bseOrderId", bseOrderId);
@@ -768,7 +768,7 @@ public class Trading {
 
 			}
 				//session.beginTransaction();
-				query = session.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='Pending'");
+				query = session.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='5'");
 
 				transactionDetails = query.list();
 
@@ -789,13 +789,13 @@ public class Trading {
 					String frmtdDate = dateFormat.format(date);
 					Date todayDate = dateFormat.parse(frmtdDate);
 
-					boolean moreThanDay = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
-					System.out.println("moreThanDay is : "+moreThanDay+" for transactionDetailId : "+transactionDetail[1]);
+					boolean lessThanToday = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
+					System.out.println("lessThanToday is : "+lessThanToday+" for transactionDetailId : "+transactionDetail[1]);
 
-					if (moreThanDay)  {
+					if (lessThanToday)  {
 
 						//session.beginTransaction();
-						session.createQuery("update TransactionDetails set transactionStatus='Rejected' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+						session.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
 						session.getTransaction().commit();
 
 					}
@@ -860,7 +860,7 @@ public class Trading {
 							if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
 								System.out.println("Payment Successful");
 								session.beginTransaction();
-								session.createQuery("update TransactionDetails set transactionStatus='PaymentReceived' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+								session.createQuery("update TransactionDetails set transactionStatus='7' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
 								session.getTransaction().commit();
 
 								Double quantity = Double.parseDouble(transactionDetail[5].toString());
