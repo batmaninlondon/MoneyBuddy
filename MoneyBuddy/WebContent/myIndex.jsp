@@ -57,6 +57,91 @@
         </style> 
         
         
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1418 .add-to-cart {
+  position: absolute;
+  height:50px;
+  top: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+ // background-color: #409ad5;
+   background-color: black;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.snip1418 figcaption {
+//  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+
+</style>
+        
     </head>
     <!-- End Head -->
 
@@ -186,78 +271,181 @@
         </div>
         <!--========== END SWIPER SLIDER ==========-->
 
-		<div class="container-fluid g-padding-y-80--xs g-padding-y-125--sm">
-            <div class="g-text-center--xs g-margin-b-80--xs">
-                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Some of Our Most Popular Funds</p>
+		<div class="container-fluid g-padding-y-10--xs g-padding-y-20--sm">
+            <div class="g-text-center--xs g-margin-b-10--xs">
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-5--xs">Some of Our Most Popular Funds</p>
             </div>
 
             <!-- Swiper -->
             <div class="s-swiper js__swiper-news">
                 <!-- Wrapper -->
-                <div class="swiper-wrapper g-margin-b-60--xs">
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="buyFundHandler(32)" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide">
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
-                    <article class="s-promo-block-v6 g-bg-position--center swiper-slide" >
-                        <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
-                            <div class="g-margin-b-25--xs">
-                                <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">Fund Name</h3>
-                                <p class="g-color--white">Fund Details will come here</p>
-                            </div>
-                            <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Select this fund</a>
-                        </div>
-                    </article>
+                <div class="swiper-wrapper g-margin-b-3s0--xs">
+                	<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+                
+                <div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+						<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+						<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+                
                 </div>
                 <!-- End Wrapper -->
 
