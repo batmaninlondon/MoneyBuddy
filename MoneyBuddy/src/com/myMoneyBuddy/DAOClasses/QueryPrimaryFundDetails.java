@@ -9,9 +9,14 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -30,7 +35,7 @@ public class QueryPrimaryFundDetails {
 	       
 		try
 		{
-			logger.debug("QueryFundDetails class : getFundDetailsData method : start");
+			logger.debug("QueryPrimaryFundDetails class : getFundDetailsData method : start");
 			
 			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
@@ -53,23 +58,23 @@ public class QueryPrimaryFundDetails {
 
 			//session.getTransaction().commit();
 
-			logger.debug("QueryFundDetails class : getFundDetailsData method : end");
+			logger.debug("QueryPrimaryFundDetails class : getFundDetailsData method : end");
 			
 			return fundDetailsDataModel;
 		}
 		catch (NumberFormatException e)
 		{
-			logger.error("QueryFundDetails class : getFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.error("QueryFundDetails class : getFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("QueryFundDetails class : getFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -83,13 +88,13 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
-public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
+	public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
 		
 		Session session  = null;
 	       
 		try
 		{
-			logger.debug("QueryFundDetails class : getSelectedFundDetailsData method : start");
+			logger.debug("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : start");
 			
 			session = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
@@ -111,23 +116,23 @@ public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws Mon
 
 			//session.getTransaction().commit();
 
-			logger.debug("QueryFundDetails class : getSelectedFundDetailsData method : end");
+			logger.debug("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : end");
 			
 			return selectedFundDetailsDataModel;
 		}
 		catch (NumberFormatException e)
 		{
-			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("QueryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -136,6 +141,70 @@ public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws Mon
 			factory.close();*/
 			//HibernateUtil.getSessionAnnotationFactory().close();
 			session.close();
+
+		}
+
+	}
+	
+	public boolean checkBufferDays(String sipStartDate, Set<String> fundIds) throws MoneyBuddyException {
+		
+		Session hibernateSession  = null;
+	       
+		try
+		{
+			logger.debug("QueryPrimaryFundDetails class : checkBufferDays method : start");
+
+			List<String> abc = new ArrayList<String>();
+			abc.add("1");
+			abc.add("2");
+			abc.add("3");
+			
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+			hibernateSession.beginTransaction();
+
+			Query query = hibernateSession.createQuery("select max(sipBufferDays) from PrimaryFundDetails where fundId in :fundIds ");
+			query.setParameterList("fundIds", abc);
+			
+			String maxSipBufferDays = query.uniqueResult().toString();
+			
+			System.out.println("maxSipBufferDays : "+maxSipBufferDays);
+			
+			long MILLIS_IN_BUFFER_DAYS = Integer.parseInt(maxSipBufferDays) * 24 * 60 * 60 * 1000L;
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date startDate = dateFormat.parse(sipStartDate);
+			
+			Date date = new Date();
+			String frmtdDate = dateFormat.format(date);
+			Date todayDate = dateFormat.parse(frmtdDate);
+			
+			boolean changeSipDate = Math.abs(startDate.getTime() - todayDate.getTime()) < MILLIS_IN_BUFFER_DAYS;
+			
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("QueryPrimaryFundDetails class : checkBufferDays method : end");
+			
+			return changeSipDate;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryPrimaryFundDetails class : checkBufferDays method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class : checkBufferDays method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class : checkBufferDays method : Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
 
 		}
 

@@ -127,7 +127,7 @@ public class ExcelToDb {
 				query = session.createQuery("update TransactionDetails set quantity = :quantity , unitPrice = :unitPrice , transactionStatus = :transactionStatus where transactionDetailId = :transactionDetailId");
 				query.setParameter("quantity", units);
 				query.setParameter("unitPrice", price);
-				query.setParameter("transactionStatus", "COMPLETE");
+				query.setParameter("transactionStatus", "8");
 				query.setParameter("transactionDetailId", transactionNumber);
 				int updateResult = query.executeUpdate();
 				System.out.println(updateResult + " rows updated in transactionDetails table ");

@@ -61,6 +61,9 @@ public class PrimaryFundDetails {
     
     @Column(name="INTEREST_RATE")
     private String interestRate;
+    
+    @Column(name="SIP_BUFFER_DAYS")
+    private String sipBufferDays;
 
     public PrimaryFundDetails() {
 
@@ -68,7 +71,7 @@ public class PrimaryFundDetails {
     
 	public PrimaryFundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
 			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory,
-			String interestRate ) {
+			String interestRate, String sipBufferDays ) {
 		super();
 		this.fundName = fundName;
 		this.sector = sector;
@@ -82,6 +85,7 @@ public class PrimaryFundDetails {
 		this.minSipDuration = minSipDuration;
 		this.fundCategory = fundCategory;
 		this.interestRate = interestRate;
+		this.sipBufferDays = sipBufferDays;
 	}
 
 	public String getFundId() {
@@ -233,6 +237,14 @@ public class PrimaryFundDetails {
 		this.interestRate = interestRate;
 	}
 
+	public String getSipBufferDays() {
+		return sipBufferDays;
+	}
+
+	public void setSipBufferDays(String sipBufferDays) {
+		this.sipBufferDays = sipBufferDays;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -282,6 +294,9 @@ public class PrimaryFundDetails {
         if ((this.interestRate == null) ? (other.interestRate != null) : !this.interestRate.equals(other.interestRate)) {
             return false;
         }
+        if ((this.sipBufferDays == null) ? (other.sipBufferDays != null) : !this.sipBufferDays.equals(other.sipBufferDays)) {
+            return false;
+        }
         return true;
     }
 
@@ -301,6 +316,7 @@ public class PrimaryFundDetails {
         hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
         hash = 83 * hash + (this.fundCategory != null ? this.fundCategory.hashCode() : 0);
         hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
+        hash = 83 * hash + (this.sipBufferDays != null ? this.sipBufferDays.hashCode() : 0);
         return hash;
     }
     

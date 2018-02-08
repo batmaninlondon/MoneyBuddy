@@ -5,6 +5,7 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
@@ -13,12 +14,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -159,15 +159,43 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 					sipDate = "0"+sipDate;
 				}
 				System.out.println(" sipDate : "+sipDate);
-				String sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
-				String sipEndMonth = theMonth(cal.get(Calendar.MONTH));
+				
+				String sipStartMonth;
+				String sipEndMonth;
+				
+				if ( Integer.parseInt(sipDate) <=   (cal.get(Calendar.DATE)) ) {
+					sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
+					sipEndMonth = theMonth(cal.get(Calendar.MONTH));
+				}
+				else {
+					sipStartMonth = theMonth(cal.get(Calendar.MONTH));
+					sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(11) : theMonth(cal.get(Calendar.MONTH)-1));
+				}
 				System.out.println(" sipEndMonth : "+sipEndMonth);
 				System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
 				String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(getSipDuration()));
 				String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
 				System.out.println(" sipEndYear : "+sipEndYear);
+				
 				String sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
 				String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
+				
+				Set<String> fundIds = productRatioList.keySet();
+				QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+				
+				boolean changeSipDate = queryPrimaryFundDetails.checkBufferDays(sipStartDate,fundIds);
+
+				System.out.println("changeSipDate : "+changeSipDate);
+				if (changeSipDate) {
+					
+					System.out.println("BEFORE CHANGE : sipStartMonth : "+sipStartMonth+" and sipEndMonth : "+sipEndMonth);
+					sipStartMonth = (("12".equals(sipStartMonth)) ? theMonth(0) : theMonth(Integer.parseInt(sipStartMonth)));
+					sipEndMonth = (("12".equals(sipEndMonth)) ? theMonth(0) : theMonth(Integer.parseInt(sipEndMonth)));
+					System.out.println("AFTER CHANGE : sipStartMonth : "+sipStartMonth+" and sipEndMonth : "+sipEndMonth);
+					sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
+					sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
+				}
+				
 				sessionMap.put("sipStartDate", sipStartDate);
 				sessionMap.put("sipEndDate", sipEndDate);
 				
