@@ -33,8 +33,9 @@
 
     <!-- Body -->
     <body>
-
-        <!--========== HEADER ==========-->
+		<div id="load" class="load"></div>
+	<div id="content">
+    <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -51,7 +52,7 @@
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
-                                <a href="nhome.jsp" class="s-header-v2__logo-link">
+                                <a href="myIndex" class="s-header-v2__logo-link">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
                                 </a>
@@ -63,26 +64,24 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="nhome.jsp" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="nsavetax.jsp" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Blog</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="nfaq.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                        <a href="help" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
-                                    <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
+                                  
+                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign in</a></li>
-													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign up</a></li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Log Ouu</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
-                                
-                                
-                                
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -431,9 +430,26 @@
         <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
-        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+       
+	</div>
+    </body>
+     <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         </script>
+         <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
@@ -441,6 +457,7 @@
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
         <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
 
         <!-- General Components and Settings -->
         <script type="text/javascript" src="js/global.min.js"></script>
@@ -448,7 +465,5 @@
         <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
         <script type="text/javascript" src="js/components/faq.min.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
-
-    </body>
     <!-- End Body -->
 </html>

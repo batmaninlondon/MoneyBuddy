@@ -1,15 +1,15 @@
-$(document).ready(function(){
-	
-var dg_H = $(window).height();
-var dg_W = $(window).width();
-$('#wrap').css({'height':dg_H,'width':dg_W});
-function anim() {
-    $("#wrap img.bgfade").first().appendTo('#wrap').fadeOut(3000);
-    $("#wrap img").first().fadeIn(3000);
-    setTimeout(anim, 6000);
-}
-anim();
-});
+//$(document).ready(function(){
+//	
+//var dg_H = $(window).height();
+//var dg_W = $(window).width();
+//$('#wrap').css({'height':dg_H,'width':dg_W});
+//function anim() {
+//    $("#wrap img.bgfade").first().appendTo('#wrap').fadeOut(3000);
+//    $("#wrap img").first().fadeIn(3000);
+//    setTimeout(anim, 6000);
+//}
+//anim();
+//});
 
 function getURLParameter(name) {
 	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -1220,9 +1220,9 @@ function register() {
 	
 }
 
-$("input[name=riskCategory]").click(function(){
-	update();
-});
+//$("input[name=riskCategory]").click(function(){
+//	update();
+//});
 
 function update(){
 	

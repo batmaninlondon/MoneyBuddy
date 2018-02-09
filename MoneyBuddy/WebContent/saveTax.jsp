@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Infinity Coming Soon Bootstrap 4 Template </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-         <!-- Web Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
-        
+    	<meta charset="utf-8"/>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	    <meta name="description" content=""/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	    <title>Save Tax | Money Buddy</title>
+	    <!-- core CSS -->
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+	 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+	   
+	    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+	    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+	    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+    
         <!-- CSS -->
-     	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/style2.css">
        
-        <!-- Responsive Stylesheet -->
-        <link rel="stylesheet" href="css/responsive.css">
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
         <!-- Theme Styles -->
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
@@ -31,10 +30,6 @@
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
 
         <!-- Theme Styles -->
-
-        <!-- Theme Skins -->
-        <!-- <link href="css/theme/gold.css" rel="stylesheet" type="text/css"/> -->
-
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -42,15 +37,9 @@
     </head>
 
     <body>
-	<!-- <div id="preloader">
-    		<div class="book">
-    		  <div class="book__page"></div>
-    		  <div class="book__page"></div>
-    		  <div class="book__page"></div>
-    		</div>
-    	</div> -->
-    	
-    	 <!--========== HEADER ==========-->
+	<div id="load" class="load"></div>
+	<div id="content">
+    <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -67,7 +56,7 @@
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
-                                <a href="nhome.jsp" class="s-header-v2__logo-link">
+                                <a href="myIndex" class="s-header-v2__logo-link">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
                                 </a>
@@ -79,27 +68,23 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="nhome.jsp" class="s-header-v2__nav-link">Home</a></li>
-                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="nsavetax.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save Tax<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                    <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="saveTax" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save Tax<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
-                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="nfaq.jsp" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="ncontact.jsp" class="s-header-v2__nav-link">Contact Us</a></li>
-                                   <!--  <li class="s-header-v2__nav-item"><a href="contacts.html" class="s-header-v2__nav-link s-header-v2__nav-link--dark">Contact Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign in</a></li>
-													<li class="s-header-v2__nav-item"><a href="nlogin.jsp" class="s-header-v2__nav-link">Sign up</a></li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="index_portfolio.html" class="s-header-v2__nav-link">Log Ouu</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
-                                
-                                
-                                
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -110,6 +95,7 @@
             </nav>
             <!-- End Navbar -->
         </header>
+        <!--========== END HEADER ==========-->
         <!--========== END HEADER ==========-->
     	
         <section class="hero-area bg-1">
@@ -122,7 +108,7 @@
 	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 1,50,000/-</b></span> 
 	                        from your taxable income to effectively reduce your tax liability.</p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
-	                        	<a class="btn btn-home" href="#about" role="button">Get Started</a>
+	                        	<a class="btn btn-home" href="javascript:getMfData()" " role="button">Get Started</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -232,29 +218,33 @@
         </div>
         <!-- End Tab -->
     	
-    	
-    	
-    	
-    	
-	    
-
-
-        <!-- Js -->
+    	 <!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+   </div>
+    </body>
+       <!-- Js -->
         <script src="js/vendor/jquery-2.1.1.min.js"></script>
         <script src="js/jquery.lwtCountdown-1.0.js"></script>
         <script src="js/jquery.nav.js"></script>
         <script src="js/wow.min.js"></script>
     	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
-        
-        
-        
-        
-        <!-- Back To Top -->
-        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        
+        <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         </script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
@@ -279,6 +269,6 @@
         <script type="text/javascript" src="js/components/wow.min.js"></script>
         <script src="js/owl.carousel.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
-    </body>
 </html>

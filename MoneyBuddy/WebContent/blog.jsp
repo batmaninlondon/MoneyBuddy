@@ -6,78 +6,90 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Blog | Money Buddy</title>
-    <!-- core CSS -->
+   <!-- core CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+ 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+   
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+    <!-- <link href="assets/bootstrap/css/main.css" rel="stylesheet"> -->
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/main.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
-<body class="homepage">
-    <header id="header">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
-                        <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
-                        <li  id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
-                        <li class="active" id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
-                        <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> 
-                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
-				         	<%  if(session.getAttribute("customerId") == null)
-							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>
-										<li id="header-nav-li"><a href="register" ><b>Sign up</b></a></li> 
-							<%	} else 
-							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" ><b>Dashboard</b></a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" ><b>Log Out</b></a></li> 
-							<%	}	%>  
-				                            
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
+<body>
+	<div id="load" class="load"></div>
+	<div id="content">
+    <!--========== HEADER ==========-->
+        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="container g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
 
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="myIndex" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="blog" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                    </li>
+                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+										<%	} else 
+										 	{	%>
+										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+                                </ul>
+                            </div>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+        
+        <div class="g-bg-color--dark">
+            <div class="container g-padding-y-45--xs">
+            </div>
+        </div>
 
 
  <section id="blog" class="container" >
-        <div class="center">
-            <h2>Blogs</h2>
-        </div>
+	<h1 class="g-font-size-15--xs g-font-size-25--sm g-font-size-30--lg  g-color--primary  g-margin-t-20--xs">Blogs</h1>
 
         <div class="blog">
             <div class="row">
-                 <div class="col-md-8">
+                 <div class="col-md-10">
                     <div class="blog-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-2 text-center">
@@ -87,10 +99,10 @@
                                 </div>
                             </div>
                                 
-                            <div class="col-xs-12 col-sm-10 blog-content">
+                            <div class="col-xs-12 col-sm-10 ">
                                 <a href="#"><img class="img-responsive img-blog" src="images/blog/blog1.jpg" width="100%" alt="" /></a>
                                 <h2><a href="blog-item.html">Why to be a part of MoneyBuddy family?</a></h2>
-                                <h3>
+                                <p class="g-font-size-14--xs g-font-size-10--sm g-font-size-16--lg   g-margin-t-20--xs" style="text-align: justify;">
                                 Wealth creation is as much about saving as it's about growing those savings in a tax efficient manner. We understand there's a limit to how much an individual can save in today's high cost of living environment thus we pay special attention to growing our customer's money in a risk adjusted and tax efficient way.
 
 Following are the key features enjoyed by the members of MoneyBuddy family.
@@ -103,8 +115,8 @@ Secure and Automated Once your investment planning is complete, everything else 
 Impeccable team Customer advisory and fund selection is done by our founder Mr. Kamal Wadhwani himself. He has around 10 years of experience in Indian and International financial markets. He completed his engineering from IIT Bombay and is pursuing CFA, USA.
                                 
                                 
-                                </h3>
-                                <a class="btn btn-primary readmore" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
+                                </p>
+                                <a class="s-btn s-btn--md g-bg-color--primary  g-color--white" href="blog-item.html">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>    
                     </div>
@@ -170,28 +182,26 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
     </section><!--/#blog-->
 
   
-     <footer id="footer" class="midnight-blue  navbar navbar-fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
-                </div>
-                
-                
-                
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                       <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="fa fa-youtube"></i></a></li>
-                                
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
+</div>
 </body>
+		<!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+        <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         </script>
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+ 		<script src="assets/js/jquery.js"></script>
+    	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
 </html>
