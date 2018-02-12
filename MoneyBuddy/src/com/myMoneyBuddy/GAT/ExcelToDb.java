@@ -119,27 +119,26 @@ public class ExcelToDb {
             System.out.println("price : "+price);
             System.out.println("units : "+units);
             
-            Session session = null;
+            Session hibernateSession = null;
             Query query = null;
             try {
-            	session = HibernateUtil.getSessionAnnotationFactory().openSession();
-            	session.beginTransaction();
-				query = session.createQuery("update TransactionDetails set quantity = :quantity , unitPrice = :unitPrice , transactionStatus = :transactionStatus where transactionDetailId = :transactionDetailId");
+            	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+            	hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("update TransactionDetails set quantity = :quantity , unitPrice = :unitPrice , transactionStatus = :transactionStatus where transactionDetailId = :transactionDetailId");
 				query.setParameter("quantity", units);
 				query.setParameter("unitPrice", price);
 				query.setParameter("transactionStatus", "8");
 				query.setParameter("transactionDetailId", transactionNumber);
 				int updateResult = query.executeUpdate();
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
             }
             catch (Exception e) {	
     			e.printStackTrace();
 
     		} 
         	finally {
-        		//HibernateUtil.getSessionAnnotationFactory().close();
-    			session.close();
+        		hibernateSession.close();
         	}
 
         }

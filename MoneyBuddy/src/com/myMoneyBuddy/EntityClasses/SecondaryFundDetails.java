@@ -33,7 +33,7 @@ public class SecondaryFundDetails {
     
     @Column(name="SCHEME_CODE")
     private String schemeCode;
-
+    
 
     public SecondaryFundDetails() {
 
@@ -87,7 +87,6 @@ public class SecondaryFundDetails {
 	public void setSchemeCode(String schemeCode) {
 		this.schemeCode = schemeCode;
 	}
-
 
 	@Override
     public boolean equals(Object obj) {

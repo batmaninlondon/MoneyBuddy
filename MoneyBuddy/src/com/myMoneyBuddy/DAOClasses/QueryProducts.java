@@ -426,7 +426,7 @@ public class QueryProducts {
 			List<PortfolioDataModel> portfolioDataModel = new LinkedList<PortfolioDataModel>();
 			
             Query buyRecordsQuery, sellRecordsQuery;
-			Query query = session.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.productId and y.customerId = :customerId");
+			Query query = session.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.productId and y.customerId = :customerId and y.transactionStatus = '8' ");
 			
 			query.setParameter("customerId",customerId);
 			
@@ -434,17 +434,13 @@ public class QueryProducts {
 			
 			String totalCurrentNavValue = null; 
 			
-			totalDates.add(strToDate("11/12/2017"));
-	           totalAmounts.add(Double.parseDouble("2000000")*-1);
+			//totalDates.add(strToDate("11/12/2017"));
+	           //totalAmounts.add(Double.parseDouble("2000000")*-1);
 	           
 			 for(Iterator it=query.iterate(); it.hasNext();){
 				 List<Double> amounts = new ArrayList<Double>();
 			       List<Date> dates = new ArrayList<Date>();
-			       
-			       
-		           
-		           
-		           
+  
 			       String oldstring;
 			       
 			       Object[] row = (Object[]) it.next();
@@ -454,13 +450,13 @@ public class QueryProducts {
 			       
 			       Object result;
 			       
-			       result = session.createQuery("select max(navDate) from NavHistory where schemeCode = '"+row[1]+"'").uniqueResult();
+			       /*result = session.createQuery("select max(navDate) from NavHistory where schemeCode = '"+row[1]+"'").uniqueResult();
 			       String currentNavDate = null; 
 			       
 			       if (result != null )
 			    	   currentNavDate = result.toString();
 			       
-			       System.out.println("Product Latest NAV Date : " + currentNavDate);
+			       System.out.println("Product Latest NAV Date : " + currentNavDate);*/
 			       
 			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[1]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[1]+"') ").uniqueResult();
 			       String currentNavValue = null; 
@@ -469,13 +465,7 @@ public class QueryProducts {
 			    	   currentNavValue = result.toString();
 			       
 			       System.out.println("Product Latest NAV Value : " + currentNavValue);
-			       
-			       
-			       dates.add(strToDate("11/12/2017"));
-		           amounts.add(Double.parseDouble(currentNavValue)*-1);
-		           
-		           
-			       
+
 			       result = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"'").uniqueResult();
 			       
 			       String transactionStartDate = null;
@@ -484,7 +474,14 @@ public class QueryProducts {
 			       
 			       System.out.println("transactionStartDate : " + transactionStartDate);
 			       
+			       	DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+			       	Date date = (Date)formatter.parse(transactionStartDate);
+			       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+			       	transactionStartDate = newFormat.format(date);
+			       	System.out.println("transactionStartDate : "+transactionStartDate);
 			       
+			       dates.add(strToDate(transactionStartDate));
+		           amounts.add(Double.parseDouble(currentNavValue)*-1);
 			       
 			       
 			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='SELL'  and unitPrice is not null ");
@@ -499,11 +496,8 @@ public class QueryProducts {
 				       
 				       oldstring = sellRecordRow[4].toString().substring(0, 10);
 			           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			           
-			           
-				       	DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
-				       	Date date = (Date)formatter.parse(oldstring);
-				       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+				       	date = (Date)formatter.parse(oldstring);
 				       	String transactionDate = newFormat.format(date);
 				       	System.out.println("transactionDate : "+transactionDate);
 			       	
@@ -518,7 +512,7 @@ public class QueryProducts {
 			       
 			       System.out.println("Total sold units : "+soldUnit);
 			       
-			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[1]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
+			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
 			       
 			       for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
 			    	   
@@ -555,10 +549,8 @@ public class QueryProducts {
 					       
 					       oldstring = buyRecordRow[4].toString().substring(0, 10);
 				           //LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-				           
-				           DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
-					       	Date date = (Date)formatter.parse(oldstring);
-					       	SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+ 
+					       	date = (Date)formatter.parse(oldstring);
 					       	
 					       	String transactionDate = newFormat.format(date);
 					       	System.out.println("transactionDate : "+transactionDate);
@@ -792,7 +784,8 @@ public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String 
 				String fundName = query.setParameter("fundId",productId).uniqueResult().toString();
 				
 				
-				query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
+				query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+								+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 				       
 				String quantity;
 				for (Iterator it=query.iterate(); it.hasNext();)  {
@@ -805,7 +798,7 @@ public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String 
 						quantity = transactionDetailsRow[1].toString();
 					}
 
-					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
+					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
 					
 				}
 			}
@@ -872,7 +865,8 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		if (result != null)
 			productId = result.toString();
 		System.out.println("getInvestmentDetailsData : productId : "+productId);
-		Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
+		Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+				+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 		       
 		String quantity;
 		for (Iterator it=query.iterate(); it.hasNext();)  {
@@ -885,7 +879,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 				quantity = transactionDetailsRow[1].toString();
 			}
 
-			investmentDetailsDataModel.add(new InvestmentDetailsDataModel(fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
+			investmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
 			
 		}
 

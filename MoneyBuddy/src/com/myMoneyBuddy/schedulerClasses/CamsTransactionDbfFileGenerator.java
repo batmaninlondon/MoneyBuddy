@@ -35,18 +35,19 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		try {	
 			
 			DbfFileStatusDetails tempDbfFileStatusDetails;
-		   session.beginTransaction();
+			hibernateSession.beginTransaction();
 		   
-		   Query query =  session.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from SecondaryFundDetails where rta = :rta)");
+		   Query query =  hibernateSession.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from SecondaryFundDetails where rta = :rta)");
 		   query.setParameter("rta", "CAMS");
 		   query.setParameter("transactionStatus", "COMPLETE");
 		   query.setParameter("rtaFileGenerated", "N");
 		   List<TransactionDetails> transactionDetailsList = query.list();
+		   hibernateSession.getTransaction().commit();
 			   
 		   if (transactionDetailsList.size() != 0)  {
 
@@ -755,82 +756,90 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						AdditionalCustomerDetails additionalCustomerDetails =  (AdditionalCustomerDetails) query.uniqueResult();*/
 						//session.getTransaction().commit();
 						
-						Customers customer = (Customers) session.get(Customers.class, transactionDetail.getCustomerId());
-			    		CustomerDetails customerDetail = (CustomerDetails) session.get(CustomerDetails.class,  transactionDetail.getCustomerId());
+						hibernateSession.beginTransaction();
+						Customers customer = (Customers) hibernateSession.get(Customers.class, transactionDetail.getCustomerId());
+						hibernateSession.getTransaction().commit();
+						
+						hibernateSession.beginTransaction();
+			    		CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class,  transactionDetail.getCustomerId());
+			    		hibernateSession.getTransaction().commit();
 			    		//AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) session.get(AdditionalCustomerDetails.class,  transactionDetail.getCustomerId());
 			    		
-						//session.beginTransaction();
+			    		hibernateSession.beginTransaction();
 						
-						query = session.createQuery("from SecondaryFundDetails where productId = :productId");
+						query = hibernateSession.createQuery("from SecondaryFundDetails where productId = :productId");
 						query.setParameter("productId", transactionDetail.getProductId());	
 						SecondaryFundDetails secondaryFundDetails =  (SecondaryFundDetails) query.uniqueResult();
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
-						query = session.createQuery("from BankDetails where customerId = :customerId");
+						query = hibernateSession.createQuery("from BankDetails where customerId = :customerId");
 						query.setParameter("customerId", transactionDetail.getCustomerId());
 						BankDetails bankDetails =  (BankDetails) query.uniqueResult();
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
-						query = session.createQuery("from SipDetails where transactionDetailId = :transactionDetailId");
+						query = hibernateSession.createQuery("from SipDetails where transactionDetailId = :transactionDetailId");
 						query.setParameter("transactionDetailId", transactionDetail.getTransactionDetailId());	
 						SipDetails sipDetails =  (SipDetails) query.uniqueResult();
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
 						Object result;
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
 						String  occuCode;
-						query = session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
+						query = hibernateSession.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "Occupation");	
 						query.setParameter("fieldValue", customerDetail.getOccupation());	
 						result = query.uniqueResult();
 						occuCode = result.toString();
+						hibernateSession.getTransaction().commit();
 						
 						String  fundName;
-						query = session.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+						
+						hibernateSession.beginTransaction();
+						query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
 						query.setParameter("fundId", transactionDetail.getProductId());		
 						result = query.uniqueResult();
 						fundName = result.toString();
 						
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
 						String  taxStatus;
-						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
+						query =   hibernateSession.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "TaxStatus");	
 						query.setParameter("fieldValue", customerDetail.getTaxStatus());	
 						result = query.uniqueResult();
 						taxStatus = result.toString();
 						
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
 						String  state;
-						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
+						query =   hibernateSession.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "State");	
 						query.setParameter("fieldValue", customerDetail.getResidentialState());	
 						result = query.uniqueResult();
 						state = result.toString();
 						
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						
-						//session.beginTransaction();
+						hibernateSession.beginTransaction();
 						
 						String  locationCode;
-						query =   session.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
+						query =   hibernateSession.createQuery("select camsCode from RtaSpecificCodes where fieldType = :fieldType and fieldValue = :fieldValue");
 						query.setParameter("fieldType", "LocationCode");	
 						query.setParameter("fieldValue", customerDetail.getResidentialCity());	
 						result = query.uniqueResult();
 						locationCode = result.toString();
 						
-						//session.getTransaction().commit();
+						hibernateSession.getTransaction().commit();
 						   
 						rowData[0] = secondaryFundDetails.getAmcCode(); 
 						System.out.println("Broke code : "+properties.getProperty("ARN_CODE"));
@@ -998,10 +1007,11 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 				    writer.write( fos);
 				    fos.close();
 					
+				    hibernateSession.beginTransaction();
 				    tempDbfFileStatusDetails = new DbfFileStatusDetails("CAMS", "TRANSACTION",frmtdDate,"N");
 
-					session.save(tempDbfFileStatusDetails);
-					session.getTransaction().commit();
+				    hibernateSession.save(tempDbfFileStatusDetails);
+				    hibernateSession.getTransaction().commit();
 					
 					System.out.println("Done ! ");
 		   		}
@@ -1023,10 +1033,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 				//throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				/*if(factory!=null)
-					factory.close();*/
-				//HibernateUtil.getSessionAnnotationFactory().close();
-				session.close();
+				hibernateSession.close();
 			}
 
 		} 

@@ -76,7 +76,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     }*/
     public String execute() {
     	
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	try {
     		
@@ -120,7 +120,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	/*DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	Date frmtDateOfBirth = format.parse(getDateOfBirth());*/ 
     	
-    	session = HibernateUtil.getSessionAnnotationFactory().openSession(); 
+    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession(); 
     	
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -169,16 +169,20 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
 		
 		
-		session.beginTransaction();
-		Query query = session.createQuery("update Customers set customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
+    	hibernateSession.beginTransaction();
+		Query query = hibernateSession.createQuery("update Customers set customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
 		query.setParameter("customerName", getCustomerName());
 		query.setParameter("cusDetailsUploaded", "Y");
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		int updateResult = query.executeUpdate();
+		hibernateSession.getTransaction().commit();
+		
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
-		query = session.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
+		hibernateSession.beginTransaction();
+		
+		query = hibernateSession.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
 				+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
 				+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
 				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
@@ -200,6 +204,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		updateResult = query.executeUpdate();
+
+		hibernateSession.getTransaction().commit();
+		
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
 		if (updateResult == 1) {
@@ -210,10 +217,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			sessionMap.put("CustDetUploaded", "N");
 			logger.debug("PrepareKycFormAction class : execute method : stored CustDetUploaded : N in session id : "+sessionMap.getClass().getName());
 		}
-		
-		
 
-    	session.getTransaction().commit();
     	logger.debug("KycCheckAction class : execute method : end");
     	
     	System.out.println(" Returned Success !!");
@@ -247,10 +251,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     		return ERROR;
     	}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
     }
     

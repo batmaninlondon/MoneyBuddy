@@ -43,10 +43,9 @@ public class Subscriber {
     }
 
 
-	public Subscriber(String emailId, String mobileNumber, String subscriberType, String entryDate) {
+	public Subscriber(String emailId, String subscriberType, String entryDate) {
 		super();
 		this.emailId = emailId;
-		this.mobileNumber = mobileNumber;
 		this.subscriberType = subscriberType;
 		this.entryDate = entryDate;
 	}

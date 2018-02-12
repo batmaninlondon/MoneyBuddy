@@ -55,7 +55,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     private InputStream stream;
 	
     public String execute() {
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	try {
     		
@@ -71,7 +71,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     	
     	String customerId = sessionMap.get("customerId").toString();
     	
-    	session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    
 	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -82,19 +82,22 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		
 	    AdditionalCustomerDetails tempAdditionalCustomer = new AdditionalCustomerDetails(customerId, getFatherName(), getMaritalStatus(),
 				getNationality(), getStatus(), getGrossAnnualIncome(),getPoliticallyExposed());
-		session.beginTransaction();
-		session.saveOrUpdate(tempAdditionalCustomer);
-		session.getTransaction().commit();
+	    hibernateSession.beginTransaction();
+	    hibernateSession.saveOrUpdate(tempAdditionalCustomer);
+	    hibernateSession.getTransaction().commit();
 		
 		sessionMap.put("addCustDetUploaded", "Y");
 		logger.debug("PrepareKycFormAction class : execute method : stored addCustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
 		
-		Query query = session.createQuery("update Customers set addCusDetailsUploaded = :addCusDetailsUploaded where customerId = :customerId");
+		Query query = hibernateSession.createQuery("update Customers set addCusDetailsUploaded = :addCusDetailsUploaded where customerId = :customerId");
 
 		query.setParameter("addCusDetailsUploaded", "Y");
 		query.setParameter("customerId", sessionMap.get("customerId").toString());
 		
 		int updateResult = query.executeUpdate();
+		
+		hibernateSession.getTransaction().commit();
+		
 		System.out.println(updateResult + " rows updated in Customers table ");
 		
 		String str = null;
@@ -128,10 +131,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     		return ERROR;
     	}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
     }
     

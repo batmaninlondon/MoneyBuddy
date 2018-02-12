@@ -62,17 +62,18 @@ public class DbfFileGenerator implements org.quartz.Job{
 		    writer.setFields( fields);
 
         
-		    Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		    Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		    
 		   try
 			{
-			   session.beginTransaction();
+			   hibernateSession.beginTransaction();
 				
 				
-			   Query query =  session.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
+			   Query query =  hibernateSession.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
 				query.setParameter("dbfDataDate", frmtdDate);
 				List<DbfFileStatusDetails> dbfDataDetailsList = query.list();
 				Object rowData[] = new Object[4];
+				hibernateSession.getTransaction().commit();
 				
 				for(DbfFileStatusDetails dbfDataDetail : dbfDataDetailsList){
 
@@ -118,10 +119,7 @@ public class DbfFileGenerator implements org.quartz.Job{
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				/*if(factory!=null)
-				factory.close();*/
-				//HibernateUtil.getSessionAnnotationFactory().close();
-				session.close();
+				hibernateSession.close();
 			}
 
 

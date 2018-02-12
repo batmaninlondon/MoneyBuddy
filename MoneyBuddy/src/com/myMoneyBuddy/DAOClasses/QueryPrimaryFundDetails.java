@@ -50,10 +50,12 @@ public class QueryPrimaryFundDetails {
 
 			for (PrimaryFundDetails fundDetailsListElement : primaryFundDetailsList)  {
 				
+			
 				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
 						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
-						fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
-						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory()));
+						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
+						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
+						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory(),fundDetailsListElement.getPdfFilePath()));
 			}
 
 			//session.getTransaction().commit();
@@ -108,10 +110,12 @@ public class QueryPrimaryFundDetails {
 			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
 			
 			if (primaryFundDetailsList != null)  {
+				
 				selectedFundDetailsDataModel= new FundDetailsDataModel(primaryFundDetailsList.get(0).getFundId(),primaryFundDetailsList.get(0).getFundName(),primaryFundDetailsList.get(0).getSector(),
 						primaryFundDetailsList.get(0).getSubSector(),primaryFundDetailsList.get(0).getFundStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
-						primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinLumsumAmount(),
-						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory());
+						primaryFundDetailsList.get(0).getReturnsOneYear(),primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getReturnsFiveYears(),
+						primaryFundDetailsList.get(0).getReturnsSinceInception(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinLumsumAmount(),
+						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory(),primaryFundDetailsList.get(0).getPdfFilePath());
 			}
 
 			//session.getTransaction().commit();

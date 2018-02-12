@@ -324,11 +324,11 @@
                 
                 <div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
 							<div  class="  g-line-height--normal  ">
-								<figure class="snip1418   swiper-slide" style="height:300px;">
+								<figure class="snip1418   swiper-slide"  onClick="buyFundHandler('1');" style="height:300px;">
 									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
 				  					<figcaption>
 				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name - 1</p>
 				    						<br/>
 				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
 				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
@@ -651,7 +651,7 @@
     </section><!--/#services-->
     
     <!-- Subscribe -->
-        <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;">
+        <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
             <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
                 <div class="g-margin-b-80--xs">
                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
@@ -659,12 +659,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                        <form class="input-group">
-                            <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" placeholder="Enter your email">
+                        <div class="input-group">
+                            <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email">
                             <span class="input-group-btn">
-                                <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50"><i class="ti-arrow-right"></i></button>
+                                <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" onClick="saveSubscriber();"><i class="ti-arrow-right"></i></button>
                             </span>
-                        </form>
+                        </div>
+                        <br/><br/>
+                        <p id="subscription-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
                     </div>
                 </div>
             </div>

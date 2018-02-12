@@ -24,26 +24,26 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
-		Session session = null;
+		Session hibernateSession = null;
 		
 		try {
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			
 			Calendar cal = Calendar.getInstance();
 			String todayDate = Integer.toString(cal.get(Calendar.DATE));
 			
 			System.out.println("todayDate : "+todayDate);
 			
-			Query query = session.createQuery("from SipDetails where sipDate = :sipDate and sipCompletionStatus = :sipCompletionStatus and sipFormSubmission = :sipFormSubmission ");
+			Query query = hibernateSession.createQuery("from SipDetails where sipDate = :sipDate and sipCompletionStatus = :sipCompletionStatus and sipFormSubmission = :sipFormSubmission ");
 
 			query.setParameter("sipDate", todayDate);
 			query.setParameter("sipCompletionStatus", "N");
 			query.setParameter("sipFormSubmission", "Y");
 			
 			List<SipDetails> sipDetailsList = query.list();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
@@ -61,15 +61,15 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        
 
 		        if (currentDate.compareTo(sipEndDate) > 0) {
-		        	//session.beginTransaction();
-		        	query = session.createQuery("update SipDetails set sipCompletionStatus='Y' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
+		        	hibernateSession.beginTransaction();
+		        	query = hibernateSession.createQuery("update SipDetails set sipCompletionStatus='Y' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
 		        	query.setParameter("customerId", sipDetail.getCustomerId());
 		        	query.setParameter("transactionDetailId", sipDetail.getTransactionDetailId());
 		        	
 		        	int updateResult = query.executeUpdate();
 					System.out.println(updateResult + " rows updated in SipDetails table ");
 					
-		        	session.getTransaction().commit();
+					hibernateSession.getTransaction().commit();
 	
 		        } 
 		        else {
@@ -89,10 +89,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 		} 
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 	}
 

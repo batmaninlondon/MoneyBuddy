@@ -52,6 +52,7 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	    <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
 	    
     </head>
     
@@ -435,6 +436,32 @@
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
 							            </tr>
 							        </thead>
+    								<tbody class="table-body ">
+										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
+											<tr class="g-text-right--xs ">
+												<s:if test="fundName.equals('Total')">
+													<td class="g-bg-color--gray-light ">
+												    	<span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.fundName"/></span>
+												    </td>
+												     <td class="g-bg-color--gray-light "><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
+												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
+												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
+												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></span></td>
+												  </s:if>
+												  <s:else>
+												    <td>
+												    	<s:set var="selectedFundId" value="#portfolioDataModelElement.fundId" />
+												    	<span class="g-font-size-14--xs g-font-size-5--xs "> <button type="button" class="  btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><s:property value="#portfolioDataModelElement.fundName"/></button></span>
+												    </td>
+												  
+												    <td><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
+												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/> %</span></td>
+												  </s:else>
+											</tr>
+										</s:iterator> 
+									</tbody> 
 							    </table>
 							</div> 
 	              		</div>
@@ -444,7 +471,7 @@
                 
                  <!--  Portfolio Summary Table Start -->
                 
-                <div class="row" style="padding: 0px; margin: 20px;">
+<%--                 <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
                     		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
@@ -489,14 +516,14 @@
 								</table>
 							</div> 
 	              		</div>
-                	</div>   
+                	</div>   --%> 
                 <!-- Portfolio Summary Table End -->
                 
                 <!-- Sip Summary Table Start -->
                 <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">SIP Summary</h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Running SIP</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
 						<table id="siptable" class="display" cellspacing="0" width="100%">
@@ -536,6 +563,7 @@
 						<table id="transctionhistory" class="display" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
@@ -546,6 +574,7 @@
 								<tbody table-body>
 										<s:iterator value="#session.allFundsInvestmentDetailsDataModel" var="allFundsElement">
 											<tr class="class="g-text-right--xs ">
+													<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundId"/></span></td>
 												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundName"/></span></td>
 												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.transactionDate"/></span></td>
 												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.units"/></span></td>
@@ -848,6 +877,9 @@
 								$.each(jsonResponse.newPortfolioDataModel,function(index,dataElement){
 							});
 								$.each(jsonResponse.investmentDetailsDataModel,function(index,dataElement){
+							});
+							$.each(jsonResponse.doughnutChartData,function(index,dataElement){
+								alert('key is : '+dataElement.key);
 							});
 						}
 				});

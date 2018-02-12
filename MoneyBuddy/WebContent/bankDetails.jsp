@@ -111,7 +111,7 @@
 			        	<div class="name">
 			        		<div class="row">
 			        			<div  class="col-md-6 g-margin-t-40--xs" >
-								<div class="row">
+								<%-- <div class="row">
 									<div id="investment-options" class="col-md-5 ">
 										<h6 class="title g-margin-b-5--xs " >Total Amount to Pay</h6>
 									</div>
@@ -120,7 +120,7 @@
 									</div>
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
 									</div>
-			  					</div>
+			  					</div> --%>
 			  					<div class="row">
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
 										<h6 class="title" style="margin-top: 20px; margin-bottom: 15px;">Select your Bank</h6>
@@ -218,20 +218,31 @@
 							</div>
 							</div>
 							
+							
 					</div>
+					
+				     <div class="row">
+						<div class="col-md-6 col-xs-4">
+							<div class="checkbox">
+				  				<label><input type="checkbox" value="" onClick="activatePayNowButton();">I accept terms & condition</label>
+							</div>
+						</div>
+					</div>
+		
 					</div>
 	       	</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
+	
 	</div>
 	
-	
+
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn g-color--white g-margin-t-15--xs " onClick="populateBankDetails();" style="background-color:black; ">Pay Now</button>
+	                	<button type="button"  id="pay-now-button" class="disabled btn g-color--white g-margin-t-15--xs " onClick="populateBankDetails();" style="background-color:black; ">Pay Now</button>
 	            </div>
 	       	</div>
 	     </div>

@@ -6,6 +6,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
 /*	
 	private InputStream stream;*/
+	
+	private HashMap<String,HashMap<String,String>> doughnutChartData = new HashMap<>();
+	
+	private HashMap<String,List<HashMap<String,String>>> completeDashboardData= new HashMap<>();
 
 	public String execute() {
 
@@ -55,6 +60,11 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		portfolioDataModel = queryProducts.getPortfolioData(session.get("customerId").toString());
 		setPortfolioDataModel(portfolioDataModel);
 		
+		HashMap<String,String> dataSet = new HashMap<String,String>();
+		
+		
+		String[] colors = { "Red", "Blue", "Yellow", "Green", "Purple", "Orange" };
+		int i =0;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
 			if ("Total".equals(portfolioDataModelElement.getFundName())) {
 				session.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
@@ -62,7 +72,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				session.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
 				logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+session.getClass().getName());
 			}
+			else {
+				dataSet.put(colors[i],portfolioDataModelElement.getCurrentAmount());
+				i = (i == 5) ? i=0 : i++;
+				
+			}
 		}
+		
+		doughnutChartData.put("doughnutChartData",dataSet);
+		
+		setDoughnutChartData(doughnutChartData);
 		
 		// Savita Wadhwani - Added this for chart testing - start 
 		newPortfolioDataModel = portfolioDataModel;
@@ -119,6 +138,8 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		}
 		session.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
 		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+session.getClass().getName());
+		
+		
 		
 		/*Double TotalInvestedAmount = 0.0;
 		Double TotalCurrentAmount = 0.0;
@@ -255,6 +276,27 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public void setAllFundsInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel) {
 		this.allFundsInvestmentDetailsDataModel = allFundsInvestmentDetailsDataModel;
 	}
+
+
+	public HashMap<String, HashMap<String, String>> getDoughnutChartData() {
+		return doughnutChartData;
+	}
+
+
+	public void setDoughnutChartData(HashMap<String, HashMap<String, String>> doughnutChartData) {
+		this.doughnutChartData = doughnutChartData;
+	}
+
+
+	public HashMap<String, List<HashMap<String, String>>> getCompleteDashboardData() {
+		return completeDashboardData;
+	}
+
+
+	public void setCompleteDashboardData(HashMap<String, List<HashMap<String, String>>> completeDashboardData) {
+		this.completeDashboardData = completeDashboardData;
+	}
+
 
 
 

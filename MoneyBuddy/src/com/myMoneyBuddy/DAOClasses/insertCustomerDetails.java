@@ -61,7 +61,7 @@ public class insertCustomerDetails {
     		//tx = session.beginTransaction();
     		session.beginTransaction();
     		
-    		Subscriber tempSubscriber = new Subscriber(emailId,mobileNumber,"CUSTOMER",frmtdDate);
+    		Subscriber tempSubscriber = new Subscriber(emailId,"CUSTOMER",frmtdDate);
     		//session.beginTransaction();
     		session.save(tempSubscriber);
     		session.getTransaction().commit();

@@ -44,7 +44,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 	private Map<String, Object> sessionMap;
 	
 	private String emailId;
-	private String mobileNumber;
+	//private String mobileNumber;
    
     QueryKycStatus kyc = new QueryKycStatus();
 
@@ -52,7 +52,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 
     public String execute() {
     	
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	try {
     		
@@ -60,16 +60,18 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
     	System.out.println(" SaveSubscriberAction execute method Called !!");
     	
     	System.out.println(" SaveSubscriberAction execute method : First Name : "+getEmailId());
-    	System.out.println(" SaveSubscriberAction execute method : Last Name : "+getMobileNumber());
+    	//System.out.println(" SaveSubscriberAction execute method : Last Name : "+getMobileNumber());
     	
-    	session = HibernateUtil.getSessionAnnotationFactory().openSession(); 
+    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession(); 
 	    
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		String frmtdDate = dateFormat.format(date);
 		
-		session.beginTransaction();
-		Object result = session.createQuery("select count(*) from Subscriber where emailId = '"+getEmailId()+"' and mobileNumber = '"+getMobileNumber()+"' ").uniqueResult();
+		hibernateSession.beginTransaction();
+		Object result = hibernateSession.createQuery("select count(*) from Subscriber where emailId = '"+getEmailId()+"' ").uniqueResult();
+		
+		hibernateSession.getTransaction().commit();
 		
 		SendMail sendMail = new SendMail();
 		String subject="[MoneyBuddy] ThankYou for your subscription";
@@ -79,10 +81,10 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
     	System.out.println(" result : "+result.toString());
     	
 		if ( "0".equals(result.toString()) )  {
-			Subscriber tempSubscriber = new Subscriber(getEmailId(),getMobileNumber(),"SUBSCRIBER",frmtdDate);
-			//session.beginTransaction();
-			session.save(tempSubscriber);
-			session.getTransaction().commit();
+			Subscriber tempSubscriber = new Subscriber(getEmailId(),"SUBSCRIBER",frmtdDate);
+			hibernateSession.beginTransaction();
+			hibernateSession.save(tempSubscriber);
+			hibernateSession.getTransaction().commit();
 			bodyText.append("<div>")
 	    	.append("  Dear User<br/><br/>")
 	    	.append("  Thank you for subscribing with MoneyBuddy. <br/>")
@@ -90,6 +92,11 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 	    	.append("  Thanks,<br/>")
 	    	.append("  MoneyBuddy Team")
 	    	.append("</div>");
+			
+			System.out.println("str set to subscribedSuccessfully ");
+			String str = "subscribedSuccessfully";
+	    	stream = new ByteArrayInputStream(str.getBytes());
+			
 		}
 		else {
 		
@@ -100,6 +107,10 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 			    	.append("  Thanks,<br/>")
 			    	.append("  MoneyBuddy Team")
 			    	.append("</div>");
+	    	
+	    	System.out.println("str set to alreadySubscribed ");
+	    	String str = "alreadySubscribed";
+	    	stream = new ByteArrayInputStream(str.getBytes());
 		}
 
     	sendMail.MailSending(getEmailId(),bodyText,subject);
@@ -109,8 +120,8 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
     	
     	System.out.println(" Returned Success !!");
 
-    	String str = "success";
-    	stream = new ByteArrayInputStream(str.getBytes());
+    	/*String str = "success";
+    	stream = new ByteArrayInputStream(str.getBytes());*/
 
     	return SUCCESS;
     	} 
@@ -129,10 +140,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
     		return ERROR;
     	}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
     }
     
@@ -146,6 +154,15 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 		return sessionMap;
 	}
 
+	public InputStream getStream() {
+		return stream;
+	}
+
+	public void setStream(InputStream stream) {
+		this.stream = stream;
+	}
+
+	
 	public String getEmailId() {
 		return emailId;
 	}
@@ -154,7 +171,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 		this.emailId = emailId;
 	}
 
-	public String getMobileNumber() {
+/*	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
@@ -163,5 +180,5 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 	}
     
 
-
+*/
 }

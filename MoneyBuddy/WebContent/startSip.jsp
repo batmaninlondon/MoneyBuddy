@@ -134,21 +134,21 @@
                 </div>
                 <form class="center-block g-width-500--sm g-width-550--md">
                     <div class="g-margin-b-20--xs">
-                        <input type="text" class="form-control s-form-v3__input" placeholder="* Name">
+                        <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name">
                     </div>
                     <div class="row g-row-col-5 g-margin-b-50--xs">
                         <div class="col-sm-6 g-margin-b-30--xs g-margin-b-0--md">
-                            <input type="email" class="form-control s-form-v3__input" placeholder="* Email">
+                            <input type="email" class="form-control s-form-v3__input" id="sender-emailId" placeholder="* Email">
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control s-form-v3__input" placeholder="* Phone">
+                            <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone">
                         </div>
                     </div>
                     <div class="g-margin-b-10--xs">
-                        <textarea class="form-control s-form-v3__input" rows="5" placeholder="* Your message"></textarea>
+                        <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
                     </div>
                     <div class="g-text-center--xs">
-                        <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs">Submit</button>
+                        <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" onClick="sendcontactMail();" >Submit</button>
                     </div>
                 </form>
             </div>

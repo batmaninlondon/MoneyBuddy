@@ -641,6 +641,11 @@ function setInitialUpfrontInvestment()
 	document.getElementById("forgot-password-submit-button").disabled = false;
 }
 
+function activatePayNowButton()
+{
+	$("#pay-now-button").removeClass('disabled');
+	
+}
 
 function setData() 
 {
@@ -676,14 +681,21 @@ function setDashboardData()
 
         data: {},
         
-        success : function(result){
+        success : function()  {
+        	window.location='bseDashboard';
+        },
+        error : function()  {
+        	window.location='errorPage';
+        }
+        
+/*        success : function(result){
         	if (result == "success") {
         		window.location='bseDashboard';
         	}
         	else {
         		window.location='errorPage';
         	}
-        },
+        },*/
 
     }); 
 }
@@ -978,20 +990,19 @@ function signUp(){
 }
 
 function saveSubscriber() {
-	
+
 	var emailId = document.getElementById("subscriber-email-id").value;
-	var mobileNumber = null;
 
 	if ( emailId == '')  {
 		
 		document.getElementById("subscriber-email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
+		document.getElementById("subscriber-email-id").placeholder = "Email Id can not be blank!";
 		return;
 	}
 	else if (!validateEmail(emailId)) {
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id ";
-		document.getElementById("email-id").value = null;
+		document.getElementById("subscriber-email-id").className += " formInvalid";
+		document.getElementById("subscriber-email-id").placeholder = document.getElementById("subscriber-email-id").value + " - Not a valid Email Id ";
+		document.getElementById("subscriber-email-id").value = null;
 		return;
 	}
 	
@@ -1000,11 +1011,78 @@ function saveSubscriber() {
         url : "saveSubscriberAction",
         type: 'post',
         
-        data: {'emailId' : emailId , 'mobileNumber' : mobileNumber},
+        data: {'emailId' : emailId},
+        
+        success : function(result){
+        	if (result == "subscribedSuccessfully") {
+        		document.getElementById("subscription-text").innerHTML = "Thank You for subscribing with MoneyBuddy";
+
+        	}
+        	else if (result == "alreadySubscribed") {
+        		document.getElementById("subscription-text").innerHTML = "You have already subscribed with MoneyBuddy";
+        	}
+        	else {
+        		window.location='errorPage';
+        	}
+
+        },
+    });	
+}
+
+
+function sendcontactMail() {
+	
+	var senderName = document.getElementById("sender-name").value;
+	var senderEmailId = document.getElementById("sender-emailId").value;
+	var senderMobileNum = document.getElementById("sender-mobile-number").value;
+	var senderMessage = document.getElementById("sender-message").value;
+	
+
+	if ( senderName == '')  {
+		
+		document.getElementById("sender-name").className += " formInvalid";
+		document.getElementById("sender-name").placeholder = "Name can not be blank!";
+		return;
+	}
+	else if ( senderEmailId == '' )  {
+		document.getElementById("sender-emailId").className += " formInvalid";
+		document.getElementById("sender-emailId").placeholder = "Email Id can not be blank";
+		return;
+	}
+	else if (!validateEmail(senderEmailId)) {
+		document.getElementById("sender-emailId").className += " formInvalid";
+		document.getElementById("sender-emailId").placeholder = document.getElementById("sender-emailId").value + " - Not a valid Email Id ";
+		document.getElementById("sender-emailId").value = null;
+		return;
+	}
+	else if ( senderMobileNum == '' )  {
+		document.getElementById("sender-mobile-number").className += " formInvalid";
+		document.getElementById("sender-mobile-number").placeholder = "Phone Num can not be blank";
+		return;
+	}
+	else if ( !validateMobileNumber(senderMobileNum) )  {
+		document.getElementById("sender-mobile-number").className += " formInvalid";
+		document.getElementById("sender-mobile-number").placeholder = document.getElementById("sender-mobile-number").value + " - Not a valid Number ";
+		document.getElementById("sender-mobile-number").value = null;
+		return;
+	}
+	else if ( senderMessage == '' )  {
+		document.getElementById("sender-message").className += " formInvalid";
+		document.getElementById("sender-message").placeholder = "Message can not be blank";
+		return;
+	}
+	
+	$.ajax({
+
+        url : "sendMailAction",
+        type: 'post',
+        
+        data: {'senderName' : senderName, 'senderEmailId' : senderEmailId, 'senderMobileNum' : senderMobileNum, 'senderMessage' : senderMessage},
         
         success : function(result){
         	if (result == "success") {
-        		window.location='thankYouForSubscribing';
+
+        		window.location='startSip';
         	}
         	else {
         		window.location='errorPage';

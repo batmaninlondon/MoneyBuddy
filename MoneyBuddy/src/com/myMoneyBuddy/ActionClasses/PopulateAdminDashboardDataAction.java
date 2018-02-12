@@ -55,7 +55,7 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 
     	logger.debug("PopulateAdminDashboardDataAction class : execute method : start");
     	
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	List<DbfStatusDataModel> dbfStatusDataModel = new LinkedList<DbfStatusDataModel>();
     	
@@ -69,14 +69,15 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 			properties.load(Trading.class.getResourceAsStream(propFilePath));*/
 
  
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-				session.beginTransaction();
+    		hibernateSession.beginTransaction();
 				
 				
-				Query query =  session.createQuery(" from DbfFileStatusDetails where uploadedStatus = :uploadedStatus ");
+				Query query =  hibernateSession.createQuery(" from DbfFileStatusDetails where uploadedStatus = :uploadedStatus ");
 				query.setParameter("uploadedStatus", "N");
 				List<DbfFileStatusDetails> dbfFileStatusDetailsList = query.list();
+				hibernateSession.getTransaction().commit();
 				
 				for (DbfFileStatusDetails dbfFileStatusDetails : dbfFileStatusDetailsList)  {
 					System.out.println(" date in list is : "+dbfFileStatusDetails.getDbfDataDate()+" rta : "+dbfFileStatusDetails.getRta()+ " file type : "+dbfFileStatusDetails.getDbfFileType());
@@ -107,10 +108,7 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 			return ERROR;
 		} 
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
 
     }

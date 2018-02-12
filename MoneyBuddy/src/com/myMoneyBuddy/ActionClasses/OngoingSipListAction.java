@@ -68,6 +68,8 @@ public class OngoingSipListAction extends ActionSupport  implements SessionAware
 		
 		sipDetailsList = query.list();
 		
+		hibernateSession.getTransaction().commit();
+		
 		sessionMap.put("sipDetailsList", sipDetailsList);
 		
     	logger.debug("OngoingSipListAction class : execute method : end");
@@ -94,9 +96,6 @@ public class OngoingSipListAction extends ActionSupport  implements SessionAware
     		return ERROR;
     	}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
     		hibernateSession.close();
     	}
     }

@@ -10,13 +10,13 @@ public class TestClass {
 	public static void main(String[] args) {
 		
 		//Get Session
-		Session session = HibernateUtil.getSessionAnnotationFactory().getCurrentSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().getCurrentSession();
 		//start transaction
-		session.beginTransaction();
+		hibernateSession.beginTransaction();
 		//Save the Model object
 		//session.save(emp);
 		//Commit transaction
-		session.getTransaction().commit();
+		hibernateSession.getTransaction().commit();
 		//System.out.println("Employee ID="+emp.getId());
 		
 		//terminate session factory, otherwise program won't end

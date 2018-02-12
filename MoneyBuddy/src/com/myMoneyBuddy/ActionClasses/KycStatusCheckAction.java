@@ -43,7 +43,7 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
 
     public String execute() {
     	
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	try {
     		
@@ -51,18 +51,18 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
     	System.out.println(" KycStatusCheckAction execute method Called !!");
 
 
-    	session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	    	
-		session.beginTransaction();
+    	hibernateSession.beginTransaction();
 		
 		
-		Object result = session.createQuery("select kycStatus from Customers where customerId = '"+sessionMap.get("customerId").toString()+"'").uniqueResult();
+		Object result = hibernateSession.createQuery("select kycStatus from Customers where customerId = '"+sessionMap.get("customerId").toString()+"'").uniqueResult();
 		String kycStatus = null;
 
 		if (result != null)  
 			kycStatus = result.toString();
 
-		//session.getTransaction().commit();
+		hibernateSession.getTransaction().commit();
 		
     	if ("NOTDONE".equalsIgnoreCase(kycStatus))  {
     		System.out.println("KYC is not done for this customer ");
@@ -96,10 +96,7 @@ public class KycStatusCheckAction extends ActionSupport  implements SessionAware
     		return ERROR;
     	}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
     }
     

@@ -30,15 +30,15 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 
     public String execute() {
     	
-    	Session session = null;
+    	Session hibernateSession = null;
 		
     	try {
     		
     		logger.debug("UploadCustomerNavAction class : execute method : end");
 
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-    		session.beginTransaction();
-			Query query = session.createQuery("update TransactionDetails set unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update TransactionDetails set unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
 
 			query.setParameter("unitPrice", getNavValue());
 			query.setParameter("quantity", getUnitsPurchased());
@@ -46,7 +46,7 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 			query.setParameter("transactionStatus", "8");
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			
  
@@ -68,10 +68,7 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 			return ERROR;
 		}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
     }
     

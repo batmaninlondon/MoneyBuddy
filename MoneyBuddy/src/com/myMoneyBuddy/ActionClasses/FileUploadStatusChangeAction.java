@@ -52,13 +52,13 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 	
     	System.out.println("FileUploadStatusChangeAction class : execute method : date : "+date);
     	logger.debug("FileUploadStatusChangeAction class : execute method : start");
-    	Session session = null;
+    	Session hibernateSession = null;
     	try {
 
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-				session.beginTransaction();
-			Query query = session.createQuery("update DbfFileStatusDetails set uploadedStatus = :uploadedStatus where dbfDataDate = :dbfDataDate and rta = :rta and dbfFileType = :dbfFileType");
+    		hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update DbfFileStatusDetails set uploadedStatus = :uploadedStatus where dbfDataDate = :dbfDataDate and rta = :rta and dbfFileType = :dbfFileType");
 			query.setParameter("uploadedStatus", "Y");
 			query.setParameter("dbfDataDate", getDate());
 			query.setParameter("rta", getRta());
@@ -66,7 +66,7 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 			
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in DbfFileStatusDetails table ");
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("FileUploadStatusChangeAction class : execute method : end");
 			String str = "success";
@@ -82,10 +82,7 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 			return ERROR;
 		} 
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
 
     }

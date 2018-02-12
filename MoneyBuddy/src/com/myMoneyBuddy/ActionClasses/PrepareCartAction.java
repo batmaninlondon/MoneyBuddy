@@ -64,7 +64,7 @@ public class PrepareCartAction extends ActionSupport implements SessionAware  {
     public String execute() {
 
     	logger.debug("PopulateBankDetailsAction class : execute method : start");
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	System.out.println("bankName : "+getBankName());
     	System.out.println("accountType : "+getAccountType());
@@ -81,17 +81,17 @@ public class PrepareCartAction extends ActionSupport implements SessionAware  {
 			
 			String customerId = sessionMap.get("customerId").toString();
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-				session.beginTransaction();
+			hibernateSession.beginTransaction();
 				
 				BankDetails tempBankDetails = new BankDetails(customerId, getBankName(),getAccountType(),
 						getAccountNumber(),getIfscCode(),frmtdDateForDB);
 
-				session.save(tempBankDetails);
+				hibernateSession.save(tempBankDetails);
 
 				logger.debug("PopulateBankDetailsAction class : execute method : stored BankDetails in session id : "+sessionMap.getClass().getName());
-				session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 				
 				QueryCustomer customer = new QueryCustomer();
 				String emailId = sessionMap.get("emailId").toString();
@@ -130,10 +130,7 @@ public class PrepareCartAction extends ActionSupport implements SessionAware  {
 			return ERROR;
 		} 
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     	}
 
     }

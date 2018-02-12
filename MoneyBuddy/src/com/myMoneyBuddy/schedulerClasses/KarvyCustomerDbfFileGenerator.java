@@ -127,17 +127,17 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 			System.out.println("BATCH_IMAGE_NUMBER : "+properties.getProperty("BATCH_IMAGE_NUMBER"));
 			
         
-			Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		    
 		   try
 			{
 				
-			   session.beginTransaction();
+			   hibernateSession.beginTransaction();
 				
-			   Query query =  session.createQuery("from Customers where karvyFileGenerated = :karvyFileGenerated");
+			   Query query =  hibernateSession.createQuery("from Customers where karvyFileGenerated = :karvyFileGenerated");
 			   query.setParameter("karvyFileGenerated", "N");
 			   List<Customers> customersList = query.list();		
-			   //session.getTransaction().commit();
+			   hibernateSession.getTransaction().commit();
 				
 				
 				Object rowData[] = new Object[16];
@@ -180,10 +180,11 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 			    writer.write( fos);
 			    fos.close();
 				
+			    hibernateSession.beginTransaction();
 			    tempDbfFileStatusDetails = new DbfFileStatusDetails("KARVY", "CUSTOMER",frmtdDate,"N");
 
-				session.save(tempDbfFileStatusDetails);
-				session.getTransaction().commit();
+			    hibernateSession.save(tempDbfFileStatusDetails);
+			    hibernateSession.getTransaction().commit();
 				
 				System.out.println("Done ! ");
 
@@ -204,10 +205,7 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				/*if(factory!=null)
-				factory.close();*/
-				//HibernateUtil.getSessionAnnotationFactory().close();
-				session.close();
+				hibernateSession.close();
 			}
 
 

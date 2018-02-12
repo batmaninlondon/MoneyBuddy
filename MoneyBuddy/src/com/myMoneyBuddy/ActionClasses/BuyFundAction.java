@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -43,27 +44,18 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	hibernateSession.beginTransaction();
 	    	
 	    	HashMap<String,Double> productRatioList =  new HashMap<String,Double>();
+	    	
+	    	PrimaryFundDetails primaryFundDetails = (PrimaryFundDetails) hibernateSession.get(PrimaryFundDetails.class, getFundId());
 
-	    	Query query = hibernateSession.createQuery("select minLumsumAmount from PrimaryFundDetails where fundId = :fundId");
+	    	hibernateSession.getTransaction().commit();
+	    	System.out.println("MIN LUMSUM AMOUNT ........ "+primaryFundDetails.getMinLumsumAmount());
+	    	sessionMap.put("minLumsumAmount", primaryFundDetails.getMinLumsumAmount());
 	    	
-	    	query.setParameter("fundId", fundId);
-	    	String minLumsumAmount = query.uniqueResult().toString(); 	
+	    	System.out.println("MIN SIP AMOUNT ........ "+primaryFundDetails.getMinSipAmount());
+	    	sessionMap.put("minSipAmount", primaryFundDetails.getMinSipAmount());
 	    	
-	    	System.out.println("MIN LUMSUM AMOUNT ........ "+minLumsumAmount);
-	    	sessionMap.put("minLumsumAmount", minLumsumAmount);
-	    	
-	    	query = hibernateSession.createQuery("select minSipAmount from PrimaryFundDetails where fundId = :fundId");
-	    	
-	    	query.setParameter("fundId", fundId);
-	    	String minSipAmount = query.uniqueResult().toString(); 	
-	    	
-	    	System.out.println("MIN SIP AMOUNT ........ "+minSipAmount);
-	    	sessionMap.put("minSipAmount", minSipAmount);
-	    	
-	    	query = hibernateSession.createQuery("select minSipDuration from PrimaryFundDetails where fundId = :fundId");
-	    	
-	    	query.setParameter("fundId", fundId);
-	    	String minSipDuration = query.uniqueResult().toString(); 	
+	    	String minSipDuration = primaryFundDetails.getMinSipDuration(); 	
+
 	    	
 	    	int i = (int)Double.parseDouble(minSipDuration);
    	        
@@ -113,9 +105,6 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 			return ERROR;
 		}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
 			hibernateSession.close();
     	}
 

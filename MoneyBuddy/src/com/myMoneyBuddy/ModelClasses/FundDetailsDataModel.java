@@ -11,11 +11,15 @@ public class FundDetailsDataModel implements Serializable{
 	private String fundStartDate;
 	private String rating;
 	private String risk;
+	private String returnsOneYear;
 	private String returnsThreeYears;
+	private String returnsFiveYears;
+	private String returnsSinceInception;
 	private String minSipAmount;
 	private String minLumsumAmount;
 	private String minSipDuration;
 	private String fundCategory;
+	private String pdfFilePath;
 	
 	
 	public FundDetailsDataModel() {
@@ -24,8 +28,9 @@ public class FundDetailsDataModel implements Serializable{
 
 
 	public FundDetailsDataModel(String fundId, String fundName, String sector, String subSector, String fundStartDate,
-			String rating, String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount,
-			String minSipDuration, String fundCategory) {
+			String rating, String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears, 
+			String returnsSinceInception, String minSipAmount, String minLumsumAmount,
+			String minSipDuration, String fundCategory, String pdfFilePath) {
 		super();
 		this.fundId = fundId;
 		this.fundName = fundName;
@@ -34,11 +39,15 @@ public class FundDetailsDataModel implements Serializable{
 		this.fundStartDate = fundStartDate;
 		this.rating = rating;
 		this.risk = risk;
+		this.returnsOneYear = returnsOneYear;
 		this.returnsThreeYears = returnsThreeYears;
+		this.returnsFiveYears = returnsFiveYears;
+		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
 		this.minLumsumAmount = minLumsumAmount;
 		this.minSipDuration = minSipDuration;
 		this.fundCategory = fundCategory;
+		this.pdfFilePath = pdfFilePath;
 	}
 
 
@@ -112,6 +121,16 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
+	public String getReturnsOneYear() {
+		return returnsOneYear;
+	}
+
+
+	public void setReturnsOneYear(String returnsOneYear) {
+		this.returnsOneYear = returnsOneYear;
+	}
+
+
 	public String getReturnsThreeYears() {
 		return returnsThreeYears;
 	}
@@ -119,6 +138,26 @@ public class FundDetailsDataModel implements Serializable{
 
 	public void setReturnsThreeYears(String returnsThreeYears) {
 		this.returnsThreeYears = returnsThreeYears;
+	}
+
+
+	public String getReturnsFiveYears() {
+		return returnsFiveYears;
+	}
+
+
+	public void setReturnsFiveYears(String returnsFiveYears) {
+		this.returnsFiveYears = returnsFiveYears;
+	}
+
+
+	public String getReturnsSinceInception() {
+		return returnsSinceInception;
+	}
+
+
+	public void setReturnsSinceInception(String returnsSinceInception) {
+		this.returnsSinceInception = returnsSinceInception;
 	}
 
 
@@ -159,6 +198,16 @@ public class FundDetailsDataModel implements Serializable{
 
 	public void setFundCategory(String fundCategory) {
 		this.fundCategory = fundCategory;
+	}
+
+
+	public String getPdfFilePath() {
+		return pdfFilePath;
+	}
+
+
+	public void setPdfFilePath(String pdfFilePath) {
+		this.pdfFilePath = pdfFilePath;
 	}
 
 

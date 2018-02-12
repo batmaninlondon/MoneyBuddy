@@ -216,15 +216,19 @@
 										            </tr> --%>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 1 YR 	 </span></td>
-														<td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#session.predictedValueForOneYear" /></span></td>
+														<td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#fundDetails.returnsOneYear"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 3 YR </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#session.predictedValueForThreeYear" /></span></td>
+										                 <td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#fundDetails.returnsThreeYears" /></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs"> 5 YR</span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &#8377;<s:property value="#session.predictedValueForFiveYear" /></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &#8377;<s:property value="#fundDetails.returnsFiveYears" /></span></td>
+										            </tr>
+										            <tr style=" border-bottom: solid 0.5px gray;">
+										                <td class="" ><span class=" g-font-size-14--xs"> Since Inception</span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &#8377;<s:property value="#fundDetails.returnsSinceInception" /></span></td>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -240,7 +244,7 @@
 	               <div class="g-text-center--xs ">
 	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Fund Details</b></h3>
 	                	</div>
-	                	  <iframe src="img/riskometer/4373-A-fact-sheet.pdf" style="width:100%; height:800px;" ></iframe>
+	                	  <iframe src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%; height:800px;" ></iframe>
 	               </div> 
 	               
 	               <!-- <div class="g-box-shadow__dark-lightest-v4">

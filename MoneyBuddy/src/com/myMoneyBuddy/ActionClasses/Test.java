@@ -74,11 +74,11 @@ public class Test {
 		    writer.setFields( fields);
 
         
-		    Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		    Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		   try
 			{
-				session.beginTransaction();
+			   hibernateSession.beginTransaction();
 				
 /*				
 				query = session.createQuery("from CustomerPortfolio where productId = :productId and customerId = :customerId and investmentTypeName = :groupName");
@@ -90,9 +90,10 @@ public class Test {
 
 				
 				
-				Query query =  session.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
+				Query query =  hibernateSession.createQuery("from DbfDataDetails where dbfDataDate = :dbfDataDate");
 				query.setParameter("dbfDataDate", "2017-10-05");
 				List<DbfFileStatusDetails> dbfDataDetailsList = query.list();
+				hibernateSession.getTransaction().commit();
 
 				Object rowData[] = new Object[4];
 				
@@ -140,10 +141,7 @@ public class Test {
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}
 			finally {
-				/*if(factory!=null)
-				factory.close();*/
-				//HibernateUtil.getSessionAnnotationFactory().close();
-				session.close();
+				hibernateSession.close();
 			}
 
 

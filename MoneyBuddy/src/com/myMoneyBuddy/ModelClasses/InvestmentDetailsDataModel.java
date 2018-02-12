@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class InvestmentDetailsDataModel implements Serializable{
 
+	private String fundId;
 	private String fundName;
 	private String transactionDate;
 	private String units;
@@ -17,14 +18,26 @@ public class InvestmentDetailsDataModel implements Serializable{
 	}
 
 
-	public InvestmentDetailsDataModel(String fundName, String transactionDate, String units, String navPurchased, String transactionType, String buySell) {
+	public InvestmentDetailsDataModel( String fundId, String fundName, String transactionDate, String units, String navPurchased, 
+				String transactionType, String buySell ) {
 		super();
+		this.fundId = fundId;
 		this.fundName = fundName;
 		this.transactionDate = transactionDate;
 		this.units = units;
 		this.navPurchased = navPurchased;
 		this.transactionType = transactionType;
 		this.buySell = buySell;
+	}
+
+
+	public String getFundId() {
+		return fundId;
+	}
+
+
+	public void setFundId(String fundId) {
+		this.fundId = fundId;
 	}
 
 
