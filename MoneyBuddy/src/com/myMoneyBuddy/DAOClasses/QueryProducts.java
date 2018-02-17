@@ -13,6 +13,7 @@ import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.DashboardDataModel;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
+import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
 import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -50,33 +51,35 @@ public class QueryProducts {
 	
 	public double getInterestRates(String planName, String riskCategory) throws MoneyBuddyException{
 
-		Session session = null;
+		Session hibernateSession = null;
 		
 		try
 		{
 		logger.debug("QueryProducts class : getInterestRates method : start");
 
-		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		double avgInterestRate = 0.0;
 
-			session.beginTransaction();
-			Query query = session.createQuery("from ProductDetails where riskCategory = :riskCategory and planName = :planName");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("from ProductDetails where riskCategory = :riskCategory and planName = :planName");
 			query.setParameter("riskCategory",riskCategory);
 			query.setParameter("planName",planName);
 			List<ProductDetails> productDetailsList = query.list();
-
+			hibernateSession.getTransaction().commit();
+			
 			String  interestRate;
 			Object result;
 			
 			for(ProductDetails productDetail : productDetailsList){
-				
+				hibernateSession.beginTransaction();
 				System.out.println("FUND ID IS ...... : "+productDetail.getProductId());
-				query = session.createQuery("select interestRate from PrimaryFundDetails where fundId = :fundId");
+				query = hibernateSession.createQuery("select interestRate from PrimaryFundDetails where fundId = :fundId");
 				query.setParameter("fundId", productDetail.getProductId());		
 				result = query.uniqueResult();
 				interestRate = result.toString();
 				avgInterestRate = avgInterestRate+(Double.parseDouble(productDetail.getPercentage()) * Double.parseDouble(interestRate));
+				hibernateSession.getTransaction().commit();
 			}
 			//session.getTransaction().commit();
 			avgInterestRate = avgInterestRate/100;
@@ -100,10 +103,7 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -127,7 +127,7 @@ public class QueryProducts {
 				interestRate = Double.parseDouble(query.uniqueResult().toString());
 			}
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryProducts class : getInterestRateOfOneFund method : end");
 			return interestRate;
@@ -148,9 +148,6 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
 			hibernateSession.clear();
 			hibernateSession.close();
 		}
@@ -160,25 +157,27 @@ public class QueryProducts {
     
 	public HashMap<String,Double> getProductList(String riskCategory,String planName) throws MoneyBuddyException{
 
-		Session session = null;
+		Session hibernateSession = null;
 		Double minLumsumAmount = 0.0;
 		Double minSipAmount = 0.0;
 		int minSipDuration = 0;
 		
 		try
 		{		
-		logger.debug("QueryProducts class : getProductList method : start");
+			logger.debug("QueryProducts class : getProductList method : start");
 		
-		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			
 			System.out.println(" riskCategory : "+riskCategory);
 			System.out.println("planName : "+planName);
-			Query query = session.createQuery("from ProductDetails where riskCategory = :riskCategory and planName =:planName");
+			Query query = hibernateSession.createQuery("from ProductDetails where riskCategory = :riskCategory and planName =:planName");
 			query.setParameter("riskCategory",riskCategory);
 			query.setParameter("planName",planName);
 			List<ProductDetails> productDetailList = query.list();
+			hibernateSession.getTransaction().commit();
+			
 			HashMap<String,Double> hashMap = new HashMap<String,Double>();
 
 			for(ProductDetails productDetail : productDetailList){
@@ -186,22 +185,26 @@ public class QueryProducts {
 				System.out.println("Percentage : "+productDetail.getPercentage());
 				hashMap.put(productDetail.getProductId(),Double.parseDouble(productDetail.getPercentage()));
 				
-				query = session.createQuery("select minLumsumAmount from PrimaryFundDetails where fundId = :fundId");
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("select minLumsumAmount from PrimaryFundDetails where fundId = :fundId");
 		    	
 		    	query.setParameter("fundId", productDetail.getProductId());
 		    	minLumsumAmount += Double.parseDouble(query.uniqueResult().toString()); 
 		    	
-		    	query = session.createQuery("select minSipAmount from PrimaryFundDetails where fundId = :fundId");
+		    	
+		    	query = hibernateSession.createQuery("select minSipAmount from PrimaryFundDetails where fundId = :fundId");
 		    	
 		    	query.setParameter("fundId", productDetail.getProductId());
 		    	minSipAmount += Double.parseDouble(query.uniqueResult().toString()); 	
 
 		    	
-		    	query = session.createQuery("select minSipDuration from PrimaryFundDetails where fundId = :fundId");
+		    	query = hibernateSession.createQuery("select minSipDuration from PrimaryFundDetails where fundId = :fundId");
 		    	
 		    	query.setParameter("fundId", productDetail.getProductId());
 		    	if (minSipDuration < Integer.parseInt(query.uniqueResult().toString()))
-		    		minSipDuration = Integer.parseInt(query.uniqueResult().toString()); 
+		    		minSipDuration = Integer.parseInt(query.uniqueResult().toString());
+		    	
+		    	hibernateSession.getTransaction().commit();
 		    	
 			}
 			
@@ -231,10 +234,7 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
@@ -284,15 +284,15 @@ public class QueryProducts {
 	
 	public List<DashboardDataModel> getDashboardData(String customerId) throws MoneyBuddyException {
 
-		Session session  = null;
+		Session hibernateSession  = null;
 		try
 		{
 			logger.debug("QueryProducts class : getDashboardData method : start");
 		
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
-			Query query = session.createQuery("from CustomerPortfolio where customerId = :customerId");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("from CustomerPortfolio where customerId = :customerId");
 			/*Query query = sessionCustomerPortfolio.createQuery("from CustomerPortfolio where customerId = :customerId and investmentTypeName=:investmentTypeName");*/
 			query.setParameter("customerId",customerId);
 			/*query.setParameter("investmentTypeName",investmentTypeName);*/
@@ -300,23 +300,23 @@ public class QueryProducts {
 			List<CustomerPortfolio> customerPortfolioList = query.list();
 			List<DashboardDataModel> dashboardDataModel = new LinkedList<DashboardDataModel>();
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			Object result= null;
 			for(CustomerPortfolio customerPortfolio : customerPortfolioList){
 
-				//session.beginTransaction();
+				hibernateSession.beginTransaction();
 														
-				query = session.createQuery("from ProductDetails where productId = :productId");
+				query = hibernateSession.createQuery("from ProductDetails where productId = :productId");
 				query.setParameter("productId",customerPortfolio.getProductId());
 				List<ProductDetails> productDetailsList = query.list();
 				
 				String  fundName;
-				query = session.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+				query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
 				query.setParameter("fundId", customerPortfolio.getProductId());		
 				result = query.uniqueResult();
 				fundName = result.toString();
 
-				//session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 /*				sessionPriceHistory.beginTransaction();
 				query = sessionPriceHistory.createQuery("from PriceHistory where productId = :productId  and date=curdate()");
@@ -327,14 +327,14 @@ public class QueryProducts {
 
 				sessionPriceHistory.getTransaction().commit();*/
 				
-				//session.beginTransaction();
-				query = session.createQuery("from TransactionDetails where transactionDetailId = :TransactionDetailId");
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("from TransactionDetails where transactionDetailId = :TransactionDetailId");
 				query.setParameter("TransactionDetailId",customerPortfolio.getTransactionDetailId());
 
 
 				List<TransactionDetails> TransactionDetailsList = query.list();
 
-				//session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 				double availableToSell = Double.parseDouble(customerPortfolio.getTotalQuantity());
 
@@ -388,10 +388,7 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 
 		}
@@ -402,7 +399,7 @@ public class QueryProducts {
 	
 	public List<PortfolioDataModel> getPortfolioData(String customerId) throws MoneyBuddyException {
 		
-		Session session  = null;
+		Session hibernateSession  = null;
 		double soldUnit = 0.0;
 		double investedAmount = 0.0;
 		double availableUnits = 0.0;
@@ -419,14 +416,14 @@ public class QueryProducts {
 		{
 			logger.debug("QueryProducts class : getPortfolioData method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			List<PortfolioDataModel> portfolioDataModel = new LinkedList<PortfolioDataModel>();
 			
             Query buyRecordsQuery, sellRecordsQuery;
-			Query query = session.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.productId and y.customerId = :customerId and y.transactionStatus = '8' ");
+			Query query = hibernateSession.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.productId and y.customerId = :customerId and y.transactionStatus = '8' ");
 			
 			query.setParameter("customerId",customerId);
 			
@@ -458,7 +455,7 @@ public class QueryProducts {
 			       
 			       System.out.println("Product Latest NAV Date : " + currentNavDate);*/
 			       
-			       result = session.createQuery("select navValue from NavHistory where schemeCode = '"+row[1]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[1]+"') ").uniqueResult();
+			       result = hibernateSession.createQuery("select navValue from NavHistory where schemeCode = '"+row[1]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[1]+"') ").uniqueResult();
 			       String currentNavValue = null; 
 			       
 			       if (result != null )
@@ -466,7 +463,7 @@ public class QueryProducts {
 			       
 			       System.out.println("Product Latest NAV Value : " + currentNavValue);
 
-			       result = session.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"'").uniqueResult();
+			       result = hibernateSession.createQuery("select min(transactionDate) from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"'").uniqueResult();
 			       
 			       String transactionStartDate = null;
 			       if (result != null )
@@ -484,7 +481,7 @@ public class QueryProducts {
 		           amounts.add(Double.parseDouble(currentNavValue)*-1);
 			       
 			       
-			       sellRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='SELL'  and unitPrice is not null ");
+			       sellRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='SELL'  and unitPrice is not null ");
 			       
 			       for (Iterator sellIt=sellRecordsQuery.iterate(); sellIt.hasNext();)  {
 			    	   
@@ -512,7 +509,7 @@ public class QueryProducts {
 			       
 			       System.out.println("Total sold units : "+soldUnit);
 			       
-			       buyRecordsQuery = session.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
+			       buyRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
 			       
 			       for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
 			    	   
@@ -639,10 +636,63 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
+
+		}
+
+	}
+	
+	
+public List<PendingOrderDataModel> getPendingOrderData(String customerId) throws MoneyBuddyException {
+		
+		Session hibernateSession  = null;
+		double investedAmount = 0.0;
+	       
+		try
+		{
+			logger.debug("QueryProducts class : getPendingOrderData method : start");
+			
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+			hibernateSession.beginTransaction();
+
+			List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
+			
+            Query buyRecordsQuery, sellRecordsQuery;
+			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.fundName , t.transactionAmount, t.transactionDate "
+										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='3' and t.productId = p.fundId");
+			
+			query.setParameter("customerId",customerId);
+	           
+			 for(Iterator it=query.iterate(); it.hasNext();){		      
+				 Object[] row = (Object[]) it.next();
+				 
+				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),row[4].toString()));
+			 }
+
+			 hibernateSession.getTransaction().commit();
+
+			logger.debug("QueryProducts class : getPendingOrderData method : end");
+			return pendingOrderDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryProducts class : getPendingOrderData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class : getPendingOrderData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class : getPendingOrderData method : Caught Exception for customer id : "+customerId);
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
 
 		}
 
@@ -651,7 +701,7 @@ public class QueryProducts {
 	
 public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyException {
 		
-		Session session  = null;
+		Session hibernateSession  = null;
 		double soldUnit = 0.0;
 		double investedAmount = 0.0;
 		double availableUnits = 0.0;
@@ -668,18 +718,20 @@ public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyExcepti
 		{
 			logger.debug("QueryProducts class : getPortfolioData method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			List<SipDataModel> sipDataModel = new LinkedList<SipDataModel>();
 			
             Query buyRecordsQuery, sellRecordsQuery;
-			Query query = session.createQuery("from SipDetails where customerId = :customerId and sipEndDate  > curdate()");
+			Query query = hibernateSession.createQuery("from SipDetails where customerId = :customerId and sipEndDate  > curdate()");
 			
 			query.setParameter("customerId",customerId);
 			
 			List<SipDetails> sipDetailsList = query.list();
+			
+			hibernateSession.getTransaction().commit();
 			
 			List<Object[]> rows = null;
 			String sipDate = null;
@@ -715,18 +767,16 @@ public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyExcepti
 				}
 				
 
-	            
-				query = session.createQuery("select f.fundName,t.transactionAmount from TransactionDetails t, PrimaryFundDetails f where t.transactionDetailId= :transactionDetailId and t.productId = f.fundId ");
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("select f.fundName,t.transactionAmount from TransactionDetails t, PrimaryFundDetails f where t.transactionDetailId= :transactionDetailId and t.productId = f.fundId ");
 				query.setParameter("transactionDetailId", sipDetailsListElement.getTransactionDetailId());
 							
 				rows = query.list();
+				hibernateSession.getTransaction().commit();
 				
 				sipDataModel.add(new SipDataModel(sipDetailsListElement.getSipStartDate(),rows.get(0)[0].toString(),
 									rows.get(0)[1].toString(),nextSipDate));
 			}
-
-			//session.getTransaction().commit();
-
 			logger.debug("QueryProducts class : getPortfolioData method : end");
 			
 			return sipDataModel;
@@ -748,10 +798,7 @@ public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyExcepti
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
@@ -760,31 +807,34 @@ public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyExcepti
 	
 public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String customerId) throws MoneyBuddyException {
 
-		Session session  = null;
+		Session hibernateSession  = null;
 		
 		try
 		{
 			logger.debug("QueryProducts class : getInvestmentDetailsData method : start");
 			
 			System.out.println("getInvestmentDetailsData : customerId : "+customerId);
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			Query query = session.createQuery("select distinct(productId) from TransactionDetails  where customerId = :customerId ");
+			Query query = hibernateSession.createQuery("select distinct(productId) from TransactionDetails  where customerId = :customerId ");
 			query.setParameter("customerId",customerId);
 			
 			List<String> productIdList = query.list();
+			hibernateSession.getTransaction().commit();
 			
 			List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel = new LinkedList<InvestmentDetailsDataModel>();
 			
 			for (String productId : productIdList)  {
 				System.out.println("getInvestmentDetailsData : productId : "+productId);
-				query = session.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+				
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
 				String fundName = query.setParameter("fundId",productId).uniqueResult().toString();
 				
 				
-				query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+				query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
 								+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 				       
 				String quantity;
@@ -801,6 +851,7 @@ public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String 
 					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
 					
 				}
+				hibernateSession.getTransaction().commit();
 			}
 			/*Object result = session.createQuery("select productId from ProductDetails  where productName='"+productName+"'").uniqueResult();
 
@@ -834,10 +885,7 @@ public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String 
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
@@ -845,7 +893,7 @@ public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String 
 
 public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customerId, String fundName) throws MoneyBuddyException {
 
-	Session session  = null;
+	Session hibernateSession  = null;
 	
 	try
 	{
@@ -853,19 +901,19 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		
 		System.out.println("getInvestmentDetailsData : customerId : "+customerId);
 		System.out.println("getInvestmentDetailsData : fundName : "+fundName);
-		session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
-		session.beginTransaction();
+		hibernateSession.beginTransaction();
 
 		List<InvestmentDetailsDataModel> investmentDetailsDataModel = new LinkedList<InvestmentDetailsDataModel>();
 		
-		Object result = session.createQuery("select fundId from PrimaryFundDetails  where fundName='"+fundName+"'").uniqueResult();
+		Object result = hibernateSession.createQuery("select fundId from PrimaryFundDetails  where fundName='"+fundName+"'").uniqueResult();
 
 		String productId = null;
 		if (result != null)
 			productId = result.toString();
 		System.out.println("getInvestmentDetailsData : productId : "+productId);
-		Query query = session.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+		Query query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
 				+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 		       
 		String quantity;
@@ -884,7 +932,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		}
 
 
-		//session.getTransaction().commit();
+		hibernateSession.getTransaction().commit();
 
 		System.out.println("getInvestmentDetailsData : investmentDetailsDataModel.size() : "+investmentDetailsDataModel.size());
 		
@@ -908,10 +956,7 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 		throw new MoneyBuddyException(e.getMessage(),e);
 	}
 	finally {
-		/*if(factory!=null)
-		factory.close();*/
-		//HibernateUtil.getSessionAnnotationFactory().close();
-		session.close();
+		hibernateSession.close();
 
 	}
 
@@ -929,6 +974,8 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
     	
 			query.setParameter("fundId", fundId);
 			String productName = query.uniqueResult().toString();
+			hibernateSession.getTransaction().commit();
+			
 			logger.debug("QueryProducts class : getProductName method : end");
 			
 			return productName;
@@ -950,9 +997,6 @@ public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customer
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
 			hibernateSession.close();
 
 		}

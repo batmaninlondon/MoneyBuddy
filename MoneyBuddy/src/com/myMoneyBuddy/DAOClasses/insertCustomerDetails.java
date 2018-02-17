@@ -32,40 +32,32 @@ public class insertCustomerDetails {
     {
 
     	logger.debug("insertCustomerDetails class : insertCustomer method : start");
-    	
-    	//SessionFactory sessionFactory = null;
-		Session session = null;
-		//Transaction tx = null;
+
+		Session hibernateSession = null;
 		
     	try {
-    		//Get Session
-    		//sessionFactory = HibernateUtil.getSessionAnnotationFactory();
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-    		//start transaction
-    		//tx = session.beginTransaction();
-    		session.beginTransaction();
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		hibernateSession.beginTransaction();
         	
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
     		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N","N");
-    		//session.beginTransaction();
-    		session.save(tempCustomer);
-    		session.getTransaction().commit();
-    		//tx.commit();
-    		session.close();
+
+    		hibernateSession.save(tempCustomer);
+    		hibernateSession.getTransaction().commit();
+
+    		hibernateSession.close();
     		
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-    		//start transaction
-    		//tx = session.beginTransaction();
-    		session.beginTransaction();
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+    		hibernateSession.beginTransaction();
     		
     		Subscriber tempSubscriber = new Subscriber(emailId,"CUSTOMER",frmtdDate);
-    		//session.beginTransaction();
-    		session.save(tempSubscriber);
-    		session.getTransaction().commit();
-    		//tx.commit();
+
+    		hibernateSession.save(tempSubscriber);
+    		hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
 
@@ -76,18 +68,18 @@ public class insertCustomerDetails {
     		System.out.println("insertCustomerDetails class : insertCustomer method : customerId : "+customerId);
 
     		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
-    		session.beginTransaction();
-    		session.save(tempUserPasswords);
+    		hibernateSession.beginTransaction();
+    		hibernateSession.save(tempUserPasswords);
 
-    		session.getTransaction().commit();
+    		hibernateSession.getTransaction().commit();
 
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerPasswordsHistory table for customerId : "+customerId);
 
     		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(Integer.toString(customerId),null,frmtdDate);
 
-    		session.beginTransaction();
-    		session.save(tempUserTimeDetails);
-    		session.getTransaction().commit();
+    		hibernateSession.beginTransaction();
+    		hibernateSession.save(tempUserTimeDetails);
+    		hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerLoginActivity table for customerId : "+customerId);
     		
@@ -105,10 +97,7 @@ public class insertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     		
     	}
 
@@ -117,13 +106,13 @@ public class insertCustomerDetails {
     public void updateVerificationStatus (String password) throws MoneyBuddyException {
 
 		logger.debug("insertCustomerDetails class : updateVerificationStatus method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			Query query = session.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
+			Query query = hibernateSession.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
 
 			query.setParameter("verificationStatus", "Y");
 
@@ -131,7 +120,7 @@ public class insertCustomerDetails {
 
 			int result = query.executeUpdate();
 
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : updateVerificationStatus method : updated data of Customers table to set verificationStatus Y");
     		
@@ -148,10 +137,7 @@ public class insertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

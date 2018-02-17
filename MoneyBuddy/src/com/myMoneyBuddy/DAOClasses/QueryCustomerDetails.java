@@ -26,12 +26,13 @@ public class QueryCustomerDetails {
 	public CustomerDetails getCustomerDetails(String customerId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomerDetails class : getCustomerDetails method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			CustomerDetails customerDetail = (CustomerDetails) session.get(CustomerDetails.class, customerId);
-			
+			hibernateSession.beginTransaction();
+			CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class, customerId);
+			hibernateSession.getTransaction().commit();
 			return customerDetail;
 		}
 		catch ( HibernateException e ) {
@@ -45,10 +46,7 @@ public class QueryCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 	}
 

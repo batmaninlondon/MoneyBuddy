@@ -28,13 +28,13 @@ public class UpdateCurrentLoginTimestamp {
 
 		logger.debug("UpdateCurrentLoginTimestamp class : UpdateCurrentLoginTimestamp method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			Query query = session.createQuery("update CustomerLoginActivity set currentLoginTimestamp = :currentLoginTimestamp" + " where customerId = :customerId");
+			Query query = hibernateSession.createQuery("update CustomerLoginActivity set currentLoginTimestamp = :currentLoginTimestamp" + " where customerId = :customerId");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			String frmtdDate = dateFormat.format(date);
@@ -44,7 +44,7 @@ public class UpdateCurrentLoginTimestamp {
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("UpdateCurrentLoginTimestamp class : UpdateCurrentLoginTimestamp method : updated data of CustomerLoginActivity table to set currentLoginTimestamp for customerId : "+customerId);
 			logger.debug("UpdateCurrentLoginTimestamp class : UpdateCurrentLoginTimestamp method : end");
@@ -61,10 +61,7 @@ public class UpdateCurrentLoginTimestamp {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

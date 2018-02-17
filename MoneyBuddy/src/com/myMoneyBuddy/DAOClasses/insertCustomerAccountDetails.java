@@ -28,7 +28,7 @@ public class insertCustomerAccountDetails {
 
     	logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : start");
     	
-    	Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
     	try {
@@ -39,9 +39,9 @@ public class insertCustomerAccountDetails {
 
     		CustomerAccountDetails tempCustomerAccountDetail = new CustomerAccountDetails(transactionId,customerId,bankName,accountNumber,
     				accountPassword,cvvNumber,frmtdDate,frmtdDate);
-    		session.beginTransaction();
-    		session.save(tempCustomerAccountDetail);
-    		session.getTransaction().commit();
+    		hibernateSession.beginTransaction();
+    		hibernateSession.save(tempCustomerAccountDetail);
+    		hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : inserted data to CustomerAccountDetails table for customerId : "+customerId);
     		logger.debug("insertCustomerAccountDetails class : insertCustomerAccountDetail method : end");
@@ -58,10 +58,7 @@ public class insertCustomerAccountDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
 
     	}
 

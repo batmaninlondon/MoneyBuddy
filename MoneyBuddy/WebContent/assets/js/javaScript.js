@@ -90,6 +90,7 @@ function buyFundHandler(fundId) {
         success : function(result){
         	
         	if (result == "success") {
+
         		window.location='selectedFundDetails';
         	}
         	else {
@@ -1495,8 +1496,14 @@ function populateBankDetails()
         success : function(result){
         	if (result.startsWith("success")) {
         		var paymentUrl = result.substring(8);
-        		alert('paymentUrl   : '+paymentUrl);
-        		window.open(paymentUrl, "_self");
+        		//alert('paymentUrl   : '+paymentUrl);
+        		
+        		//var html  = "<html><head></head><body><p>HIii</p></body></html>";
+        		//alert('html is : '+html);
+        		var wnd = window.open("", "_self");
+        		wnd.document.write(paymentUrl);
+        		 wnd.document.close();
+        		 
         	}
         	else {
         		window.location='errorPage';

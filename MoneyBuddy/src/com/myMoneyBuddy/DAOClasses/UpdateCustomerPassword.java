@@ -27,33 +27,33 @@ public class UpdateCustomerPassword {
 
 		logger.debug("UpdateCustomerPassword class : UpdatePassword method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
 			DesEncrypter desEncrypter = new DesEncrypter(emailId);
 			newPassword = desEncrypter.encrypt(newPassword);
-			session.beginTransaction();
-			Query query = session.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
 
 			query.setParameter("newPassword", newPassword);
 
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateCustomerPassword class : UpdatePassword method : updated data of CustomerPasswordsHistory table to set password for customerId : "+customerId);
 			
-			session.beginTransaction();
-			query = session.createQuery("update Customers set password = :newPassword" + " where customerId = :customerId");
+			hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("update Customers set password = :newPassword" + " where customerId = :customerId");
 
 			query.setParameter("newPassword", newPassword);
 
 			query.setParameter("customerId", customerId);
 
 			result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 
 			System.out.println("newPassword : "+newPassword);
@@ -73,10 +73,7 @@ public class UpdateCustomerPassword {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 

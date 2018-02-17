@@ -22,22 +22,22 @@ public class UpdateUserVerification {
 	
 	public void userVerification (String hashedPassword) throws MoneyBuddyException {
 
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
 			logger.debug("UpdateUserVerification class : UserVerification method : start");
 			
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			Query query = session.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :hashedPassword");
+			Query query = hibernateSession.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :hashedPassword");
 
 			query.setParameter("verificationStatus", "Y");
 			query.setParameter("hashedPassword", hashedPassword);
 
 			int result = query.executeUpdate();
 
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateUserVerification class : UserVerification method : updated data of Customers table to set verificationStatus to Y ");
 			logger.debug("UpdateUserVerification class : UserVerification method : end");
@@ -54,10 +54,7 @@ public class UpdateUserVerification {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

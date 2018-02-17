@@ -26,17 +26,17 @@ public class QueryAdditionalCustomerDetails {
 	public AdditionalCustomerDetails getAddCusDetails(String customerId) throws MoneyBuddyException {
 			
 		logger.debug("QueryAdditionalCustomerDetails class : getAddCusDetails method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
 		AdditionalCustomerDetails addCusDetails = new AdditionalCustomerDetails();
 	
 	
 		try
 		{
-			session.beginTransaction();
-			addCusDetails = (AdditionalCustomerDetails) session.createQuery("from AdditionalCustomerDetails where customerId = '"+customerId+"'").uniqueResult();
+			hibernateSession.beginTransaction();
+			addCusDetails = (AdditionalCustomerDetails) hibernateSession.createQuery("from AdditionalCustomerDetails where customerId = '"+customerId+"'").uniqueResult();
 	
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryAdditionalCustomerDetails class : getCugetAddCusDetailsstomer method : end");
 			return addCusDetails;
@@ -52,10 +52,7 @@ public class QueryAdditionalCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 	}
 

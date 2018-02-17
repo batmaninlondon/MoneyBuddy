@@ -28,27 +28,27 @@ public class UpdateLoginTimestamp {
 
 		logger.debug("UpdateLastLoginTimestamp class : UpdateLastLoginTimestamp method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			CustomerLoginActivity userTimestampDetails = (CustomerLoginActivity)session.get(CustomerLoginActivity.class,customerId);
+			CustomerLoginActivity userTimestampDetails = (CustomerLoginActivity)hibernateSession.get(CustomerLoginActivity.class,customerId);
 			String  currentTime = userTimestampDetails.getCurrentLoginTimestamp();
 
-			Query query = session.createQuery("update CustomerLoginActivity set lastLoginTimestamp = :lastLoginTimestamp" + " where customerId = :customerId");
+			Query query = hibernateSession.createQuery("update CustomerLoginActivity set lastLoginTimestamp = :lastLoginTimestamp" + " where customerId = :customerId");
 
 			query.setParameter("lastLoginTimestamp", currentTime);
 
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			query = session.createQuery("update CustomerLoginActivity set currentLoginTimestamp = :currentLoginTimestamp" + " where customerId = :customerId");
+			query = hibernateSession.createQuery("update CustomerLoginActivity set currentLoginTimestamp = :currentLoginTimestamp" + " where customerId = :customerId");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			String frmtdDate = dateFormat.format(date);
@@ -58,7 +58,7 @@ public class UpdateLoginTimestamp {
 			query.setParameter("customerId", customerId);
 
 			result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : updated data of CustomerLoginActivity table to set lastLoginTimestamp for customerId : "+customerId);
 			logger.debug("UpdateLoginTimestamp class : UpdateLoginTimestamp method : end");
@@ -75,10 +75,7 @@ public class UpdateLoginTimestamp {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

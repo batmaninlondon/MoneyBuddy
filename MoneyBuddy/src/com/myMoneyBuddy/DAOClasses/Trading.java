@@ -4,13 +4,9 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,31 +16,17 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.xml.bind.JAXBElement;
-
 import org.hibernate.HibernateException;
-import org.hibernate.MappingException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.json.JSONObject;
 import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
 
-//import org.tempuri.StarMFPaymentGatewayService;
-
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
-import com.myMoneyBuddy.EntityClasses.CustomerPortfolio;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-//import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
-import com.myMoneyBuddy.EntityClasses.ProductDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
-//import com.myMoneyBuddy.EntityClasses.PriceHistory;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
@@ -53,12 +35,11 @@ import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.derby.iapi.services.info.ProductGenusNames;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFactory;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
@@ -75,29 +56,29 @@ public class Trading {
 			String customerId, String CLIENT_APPNAME1, String CLIENT_EMAIL, String CLIENT_PAN, String CLIENT_CM_MOBILE) throws MoneyBuddyException {
 
 		
-			Session session = null;
+			Session hibernateSession = null;
 
 		try {
 			
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
-			session.beginTransaction();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession.beginTransaction();
 			
-			Query query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
+			Query query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
 			query.setParameter("fieldValue", CLIENT_TAXSTATUS);
 			
 			String taxStatus = query.uniqueResult().toString();
 			
-			query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
+			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
 			query.setParameter("fieldValue", CLIENT_STATE);
 			
 			String state = query.uniqueResult().toString();
 			
-			query = session.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
+			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
 			query.setParameter("fieldValue", CLIENT_OCCUPATIONCODE);
 			
 			String occupation = query.uniqueResult().toString();
-
+			hibernateSession.getTransaction().commit();
 			
 			String PASSWORD_STARMF;
 			
@@ -178,7 +159,7 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -357,18 +338,24 @@ public class Trading {
 			
 			Double totalPaymentAmount = 0.0;
 
+			String path = ServletActionContext.getServletContext().getRealPath("");
+			System.out.println("Path : "+path);
+			System.out.println("Real Path : "+ ServletActionContext.getRequest().getSession().getServletContext().getRealPath("") );
+			
+			String paymentUrlFile = ServletActionContext.getServletContext().getRealPath("")+"payment.html";
+			
 			for ( String currentProductId : productDetailsMap.keySet())  {
 				System.out.println("currentProductId : "+currentProductId);
 
 				hibernateSession.beginTransaction();
-				String fundName = null;
+				String schemeCode = null;
 				Object result;
-				result = (hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId").setParameter("fundId",currentProductId).uniqueResult());
+				result = (hibernateSession.createQuery("select schemeCode from SecondaryFundDetails where fundId = :fundId").setParameter("fundId",currentProductId).uniqueResult());
 
 				if (result != null) 
-					fundName = result.toString();
+					schemeCode = result.toString();
 
-				System.out.println(" fundName :  "+fundName +" for fund Id : "+currentProductId);
+				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+currentProductId);
 
 				hibernateSession.getTransaction().commit();
 
@@ -459,7 +446,7 @@ public class Trading {
 					}
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
 					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
-							configProperties.getProperty("MEMBER_ID"),customerId,fundName,buySellType,clientProperties.getProperty("BUY_SELL_TYPE"),
+							configProperties.getProperty("MEMBER_ID"),customerId,schemeCode,buySellType,clientProperties.getProperty("BUY_SELL_TYPE"),
 							clientProperties.getProperty("DP_TXN"),Double.toString(productDetailsMap.get(currentProductId)),clientProperties.getProperty("QTY"),
 							clientProperties.getProperty("ALL_REDEEM"),clientProperties.getProperty("FOLIO_NUMBER"),clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
@@ -478,7 +465,7 @@ public class Trading {
 					System.out.println(" startDate  : "+startDate );
 					System.out.println(" numOfInstallments  : "+Integer.toString(years*12) );
 					
-					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, fundName, configProperties.getProperty("MEMBER_ID"),
+					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, schemeCode, configProperties.getProperty("MEMBER_ID"),
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
 							Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
@@ -492,6 +479,7 @@ public class Trading {
 				}
 
 				System.out.println("entryParam : "+entryParam);
+				
 
 				resultsEntryParam = entryParam.split("\\|");
 
@@ -579,6 +567,7 @@ public class Trading {
 					System.out.println("oredrNums : "+it.next().toString());
 				}
 				
+				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
 				RequestParam requestParam = new RequestParam();
 				requestParam.setAccNo(objFact.createRequestParamAccNo(accountNum));
 				requestParam.setBankID(objFact.createRequestParamBankID(bankId));
@@ -591,6 +580,7 @@ public class Trading {
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
 				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(Double.toString(totalPaymentAmount)));
 
+				System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());
 				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
 
 				String[] resultsPaymentGateway = paymentGateway.toString().split("\\|");
@@ -601,36 +591,86 @@ public class Trading {
 
 				paymentUrl = paymentGateway.getResponseString().getValue();
 				
-				hibernateSession.beginTransaction();
-
-				query = hibernateSession.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
-
-				query.setParameter("subscriberType", "INVESTOR");
-
-				query.setParameter("customerId", customerId);
-
-				int result = query.executeUpdate();
-
-				hibernateSession.getTransaction().commit();
+				String responseStatus = paymentGateway.getStatus().getValue();
+				System.out.println("responseStatus : "+responseStatus);
 				
-				hibernateSession.beginTransaction();
-				Object emailIdObj = hibernateSession.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
-				String emailId = null;
-				if (emailIdObj != null)
-					emailId = emailIdObj.toString();
-								
-				hibernateSession.getTransaction().commit();
-				
-				hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
+				if ("101".equals(responseStatus))  {
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
+					query.setParameter("transactionId", transactionId);
+					int updateResult = query.executeUpdate();
+					
+				}
+				else {
+					//System.out.println("paymentUrl : "+paymentUrl);
+					
+					//String paymentUrlFile = "C://HTMLFile/payment.html";
+					File newHtmlFile = new File(paymentUrlFile);
+					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
 
-				query.setParameter("subscriberType", "INVESTOR");
 
-				query.setParameter("emailId", emailId);
-
-				result = query.executeUpdate();
-
-				hibernateSession.getTransaction().commit();
+					/*ServletResponse response = ServletActionContext.getResponse();
+					response.setContentType("text/html");
+					PrintWriter out = response.getWriter(); 
+					out.println(paymentUrl);	
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					Document doc = Jsoup.parse(paymentUrl);
+					
+					System.out.println("Path : "+ServletActionContext.getServletContext().getRealPath(""));*/
+					
+					/*URL url = new URL(paymentUrl);
+				    String nullFragment = null;
+				    URI uri = new URI(url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), nullFragment);
+				    //System.out.println("URI " + uri.toString() + " is OK");
+				      
+					URI myUri = new URI(paymentUrl);
+					Desktop.getDesktop().browse(uri);*/
+					
+					/*final File f = new File(ServletActionContext.getServletContext().getRealPath("")+"filename.html");
+			        FileUtils.writeStringToFile(f, doc.outerHtml(), "UTF-8");*/
+					
+					hibernateSession.beginTransaction();
+	
+					query = hibernateSession.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
+	
+					query.setParameter("subscriberType", "INVESTOR");
+	
+					query.setParameter("customerId", customerId);
+	
+					int result = query.executeUpdate();
+	
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					Object emailIdObj = hibernateSession.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
+					String emailId = null;
+					if (emailIdObj != null)
+						emailId = emailIdObj.toString();
+									
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
+	
+					query.setParameter("subscriberType", "INVESTOR");
+	
+					query.setParameter("emailId", emailId);
+	
+					result = query.executeUpdate();
+	
+					hibernateSession.getTransaction().commit();
+				}
 
 			}
 			else {
@@ -639,9 +679,7 @@ public class Trading {
 			}
 
 			//String paymentUrlFile = "http://localhost:8080/MoneyBuddy/thankYou.jsp";
-			String paymentUrlFile = "D://HTMLFile/payment.html";
-			File newHtmlFile = new File(paymentUrlFile);
-			FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
+			
 			
 			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - start 
 			
@@ -711,7 +749,7 @@ public class Trading {
 			
 			logger.debug("Trading class : executeTrade method : end");
 
-			return paymentUrlFile;
+			return paymentUrl;
 		} catch (NumberFormatException | HibernateException e) {
 			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
 			e.printStackTrace();
@@ -730,7 +768,7 @@ public class Trading {
 
 	public void checkPaymentStatus(String customerId) throws MoneyBuddyException {
 
-		Session session = null;
+		Session hibernateSession = null;
 		Query query;
 		List<Object[]> transactionDetails;
 		List<String> customerIds;
@@ -752,27 +790,27 @@ public class Trading {
 
 			logger.debug("Trading class : checkPaymentStatus method : start");
 
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
-			session.beginTransaction();
-			query = session.createQuery("select distinct(customerId) from Customers");
+			hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("select distinct(customerId) from Customers");
 
 			customerIds = query.list();
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			for (String customerid : customerIds)  {
 				System.out.println("customerid : "+customerid);
 
 
 			}
-				//session.beginTransaction();
-				query = session.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='5'");
+			hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='5'");
 
 				transactionDetails = query.list();
 
-				//session.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
 				for (Object[]  transactionDetail : transactionDetails)  {
 
@@ -794,9 +832,9 @@ public class Trading {
 
 					if (lessThanToday)  {
 
-						//session.beginTransaction();
-						session.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
-						session.getTransaction().commit();
+						hibernateSession.beginTransaction();
+						hibernateSession.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+						hibernateSession.getTransaction().commit();
 
 					}
 
@@ -833,82 +871,82 @@ public class Trading {
 						List<String> paymentDetailsList;
 						if (resultsPaymentStatusResponse[0].equals("100"))  {
 
-							session.beginTransaction();
+							hibernateSession.beginTransaction();
 
-							query = session.createQuery("select paymentRefNum from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
+							query = hibernateSession.createQuery("select paymentRefNum from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
 							paymentDetailsList = query.list();
 
-							//session.getTransaction().commit();
+							hibernateSession.getTransaction().commit();
 
-							//session.beginTransaction();
+							hibernateSession.beginTransaction();
 
 							if (paymentDetailsList.isEmpty())  {
 								tempPaymentDetail = new PaymentDetails( transactionDetail[1].toString(), transactionDetail[3].toString(),
 										resultsPaymentStatusResponse[1], transactionDetail[2].toString(),frmtdDateForDB);
-								session.save(tempPaymentDetail);
+								hibernateSession.save(tempPaymentDetail);
 							}
 							else 
 							{
 								for (String paymentDetail : paymentDetailsList)  {
 									refNumber = paymentDetail;
 								}
-								session.createQuery("update PaymentDetails set paymentGatewayComment='"+resultsPaymentStatusResponse[1]+"' , updateDate='"+frmtdDateForDB+"' where PAYMENT_REF_NUM='"+refNumber+"'").executeUpdate();;
+								hibernateSession.createQuery("update PaymentDetails set paymentGatewayComment='"+resultsPaymentStatusResponse[1]+"' , updateDate='"+frmtdDateForDB+"' where PAYMENT_REF_NUM='"+refNumber+"'").executeUpdate();;
 							}
 
-							session.getTransaction().commit();
+							hibernateSession.getTransaction().commit();
 
 							if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
 								System.out.println("Payment Successful");
-								session.beginTransaction();
-								session.createQuery("update TransactionDetails set transactionStatus='7' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
-								session.getTransaction().commit();
+								hibernateSession.beginTransaction();
+								hibernateSession.createQuery("update TransactionDetails set transactionStatus='7' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+								hibernateSession.getTransaction().commit();
 
 								Double quantity = Double.parseDouble(transactionDetail[5].toString());
 
-								session.beginTransaction();
+								hibernateSession.beginTransaction();
 
-								Object result = session.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
+								Object result = hibernateSession.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
 								Double pendingOrder = 0.0;
 								Double totalQuantity = 0.0;
 								if (result != null) 
 									pendingOrder = Double.parseDouble(result.toString());
 
-								//session.getTransaction().commit();
+								hibernateSession.getTransaction().commit();
 								
-								//session.beginTransaction();
-								result = session.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
+								hibernateSession.beginTransaction();
+								result = hibernateSession.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
 
 								if (result != null)
 									totalQuantity  = Double.parseDouble(result.toString());
 
 								pendingOrder -= quantity;
 								totalQuantity += quantity;
-								//session.getTransaction().commit();
+								hibernateSession.getTransaction().commit();
 
 
-								//session.beginTransaction();
-								session.createQuery("update ebdb.CUSTOMER_PORTFOLIO set PENDING_ORDERS='"+pendingOrder+"', TOTAL_QUANTITY='"+totalQuantity+"' where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").executeUpdate();
-								session.getTransaction().commit();
+								hibernateSession.beginTransaction();
+								hibernateSession.createQuery("update ebdb.CUSTOMER_PORTFOLIO set PENDING_ORDERS='"+pendingOrder+"', TOTAL_QUANTITY='"+totalQuantity+"' where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").executeUpdate();
+								hibernateSession.getTransaction().commit();
 
-								session.beginTransaction();
-								result = session.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+								hibernateSession.beginTransaction();
+								result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
 								String fundName = null;
 
 								if (result != null) 
 									fundName = result.toString();
-								//session.getTransaction().commit();
+								hibernateSession.getTransaction().commit();
 
 								successfulPayment.put(fundName, transactionDetail[6].toString());
 								
 							}
 							else {
-								//session.beginTransaction();
-								Object result = session.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+								hibernateSession.beginTransaction();
+								Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
 								String fundName = null;
 
 								if (result != null) 
 									fundName = result.toString();
-								//session.getTransaction().commit();
+								hibernateSession.getTransaction().commit();
 								
 								pendingPayment.put(fundName, transactionDetail[6].toString());
 								
@@ -921,14 +959,14 @@ public class Trading {
 
 				if (!successfulPayment.isEmpty())
 				{
-					//session.beginTransaction();
-					Object result = session.createQuery("select emailId from Customers where customerId='"+customerId+"'").uniqueResult();
+					hibernateSession.beginTransaction();
+					Object result = hibernateSession.createQuery("select emailId from Customers where customerId='"+customerId+"'").uniqueResult();
 					String emailId = null;
 
 					if (result != null) 
 						emailId = result.toString();
 
-					//session.getTransaction().commit();
+					hibernateSession.getTransaction().commit();
 
 					String subject="[MoneyBuddy] Thank you for the payment.";
 					SendMail sendMail = new SendMail();
@@ -971,7 +1009,7 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

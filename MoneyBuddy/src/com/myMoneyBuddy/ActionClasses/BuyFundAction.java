@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,6 +37,10 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 
     	logger.debug("BuyFundAction class : execute method : start");
     	Session hibernateSession = null;
+    	
+    	String path =   ServletActionContext.getServletContext().getRealPath("WebContent");  
+		System.out.println("Path : "+path);
+		System.out.println("Real Path : "+ ServletActionContext.getRequest().getSession().getServletContext().getRealPath("WebContent") );
     	
     	try {
     		

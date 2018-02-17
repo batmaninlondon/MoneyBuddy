@@ -416,9 +416,63 @@
                 </div>
                	<!--  Portfolio Summary Chart End -->
                 
-                <!--  Portfolio Summary Table Start -->
+                
+               <!--  Portfolio Summary Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
+                		</div> 
+			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
+								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
+								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
+							        <thead>
+							            <tr class="g-bg-color--primary" >
+							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
+							            </tr>
+							        </thead>
+							    </table>
+							</div> 
+	              		</div>
+                	</div>   
+                <!-- Portfolio Summary Table End -->
+                
+                 
+               <!--  Pending Order Table Start -->
+                
+                <div class="row" style="padding: 0px; margin: 20px;">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Pending Orders</h3>
+                		</div> 
+			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
+								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
+								<table id="pendingOrders" class="table-bordered" cellspacing="0" width="100%">
+							        <thead>
+							            <tr class="g-bg-color--primary" >
+							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
+							            </tr>
+							        </thead>
+							    </table>
+							</div> 
+	              		</div>
+                	</div>   
+                <!-- Pending Order Table End -->               
+                
+                <!--  Portfolio Summary Table Start -->
+                
+               <%--  <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
                     		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
@@ -465,7 +519,7 @@
 							    </table>
 							</div> 
 	              		</div>
-                	</div>   
+                	</div>    --%>
                 <!-- Portfolio Summary Table End -->
                 
                 
@@ -535,7 +589,7 @@
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Next Sip Date</span></th>
 								</tr>
 							</thead>
-							<tbody class="table-body " >
+<%-- 							<tbody class="table-body " >
 								<s:iterator value="#session.sipDataModel" var="sipDataModelElement">
 									<tr class="class="g-text-right--xs ">
 										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.fundName"/></span></td>
@@ -544,7 +598,7 @@
 										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.nextSipDate"/></span></td>
 									</tr>
 								</s:iterator>
-							</tbody>
+							</tbody> --%>
 				   		</table>
 						</div> 
 	              	</div>
@@ -563,7 +617,7 @@
 						<table id="transctionhistory" class="display" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
@@ -571,7 +625,7 @@
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
 									</tr>
 								</thead>
-								<tbody table-body>
+								<%-- <tbody table-body>
 										<s:iterator value="#session.allFundsInvestmentDetailsDataModel" var="allFundsElement">
 											<tr class="class="g-text-right--xs ">
 													<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundId"/></span></td>
@@ -582,7 +636,7 @@
     												<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.buySell"/></span></td>
 											</tr>
 										</s:iterator>
-								</tbody>
+								</tbody> --%>
 				   			</table>
 						</div> 
 	              	</div>
@@ -730,57 +784,146 @@
 		    TUTORIAL_SAVVY.initChart()
 		} );
 		
+		var portfolioData;	
+		var pendingOrderData;
+		var sipData;
+		var investmentDetailData;
+		var allFundsInvestmentDetailsData;
+		var portfolioDataArray = [];
+		var pendingOrderDataArray = [];
+		var sipDataArray = [];
+		var transctionhistoryDataArray = [];
+		
 		var TUTORIAL_SAVVY ={
-		  /*Makes the AJAX calll (synchronous) to load a Student Data*/
 				
-				 
-				  /* Initalization Student render chart */
+				  		/* Initalization render chart */
 				  		initChart : function(){
-						var rawData 		= TUTORIAL_SAVVY.loadData();
-						barChartData 		= TUTORIAL_SAVVY.createBarChartData(rawData);
+				  			/*Makes the AJAX calll (synchronous) to load a All Data*/
+				  		TUTORIAL_SAVVY.loadData();
+				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
+				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
+				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
+				  		TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData);
+				  		
+						barChartData 		= TUTORIAL_SAVVY.createBarChartData(portfolioDataArray);
 					    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
-					    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(rawData);
+					    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(portfolioDataArray);
 					    DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
-					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata(rawData);
-					    
-					   
-					    $('#portfoliosummary1').DataTable( {
-					        "paging":   true,
-					        "ordering": false,
-					        "info":     false,
-					        "searching": true,
-					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-					    } );
-					    $('#transctionhistory').DataTable( {
-					        "paging":   true,
-					        "ordering": false,
-					        "info":     false,
-					        "searching": true,
-					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-					    } );
-					    $('#siptable').DataTable( {
-					        "paging":   true,
-					        "ordering": false,
-					        "info":     false,
-					        "searching": true,
-					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-					    } );
+					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata();
+					    pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData();
+					    sipTable   			= TUTORIAL_SAVVY.loadSipdata();
+					    transctionhistoryTable = TUTORIAL_SAVVY.loadTransctionhistoryData();
+
 				  },
-		  
-				  loadPortfoliodata : function(portfolioTableData)
+				  
+				  
+				  createPortfolioDataArray : function(portfolioData)
 				  {
-					 var table =  $('#portfoliosummary').DataTable( {
-					    	data: portfolioTableData,
+					  $.each(portfolioData,function(index,dataElement){
+						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
+						});
+					  
+				  },
+				  
+				  createPendingOrderDataArray : function(pendingOrderData)
+				  {
+					  $.each(pendingOrderData,function(index,dataElement){
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStartDate]);
+						});  
+				  },
+				  
+				  createSipDataArray : function(sipData)
+				  {
+					  $.each(sipData,function(index,dataElement){
+						  sipDataArray.push([dataElement.fundName,dataElement.investedAmount,dataElement.sipStartDate,dataElement.nextSipDate]);
+						});
+					  
+				  },
+				  
+				  createTransctionhistoryDataArray : function(transctionhistoryData)
+				  {
+					  $.each(transctionhistoryData,function(index,dataElement){
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.transactionDate,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						});
+					  
+				  },
+				  
+				  loadSipdata : function()
+				  {
+					 var table =  $('#siptable').DataTable( {
+					    	data: sipDataArray,
 					    	"paging":   true,
 					        "ordering": false,
 					        "info":     false,
 					        "searching": true,
 					        "responsive": true,
 					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
-					  		"columnDefs": [ { "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" }  ],
+							dom: 'lBfrtip',
+					        
+					        
+							"language": {
+							            "lengthMenu": "Display _MENU_ records per page",
+							            "zeroRecords": "Nothing found - sorry",
+							            "info": "Showing page _PAGE_ of _PAGES_",
+							            "infoEmpty": "No records available",
+							            "infoFiltered": "(filtered from _MAX_ total records)"
+				        				},
+				       		createdRow: function (row, data, index) {
+				       						$(row).addClass("g-font-size-12--xs g-text-right--xs");
+				        			        var totalRecords= data.length;
+				        			        $('td', row).eq(totalRecords).addClass('g-text-center--xs');
+				        			        $('td', row).eq(0).addClass('g-text-left--xs');
+				        			    },
+				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
+					    } ); 
+
+				  },
+				  
+				  
+				  loadTransctionhistoryData : function()
+				  {
+					 var table =  $('#transctionhistory').DataTable( {
+						 
+						 
+					    	data: transctionhistoryDataArray,
+					    	"paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					  		dom: 'lBfrtip',
+					        
+					        
+							"language": {
+							            "lengthMenu": "Display _MENU_ records per page",
+							            "zeroRecords": "Nothing found - sorry",
+							            "info": "Showing page _PAGE_ of _PAGES_",
+							            "infoEmpty": "No records available",
+							            "infoFiltered": "(filtered from _MAX_ total records)"
+				        				},
+				       		createdRow: function (row, data, index) {
+				       						$(row).addClass("g-font-size-12--xs g-text-right--xs");
+				        			        var totalRecords= data.length;
+				        			        $('td', row).eq(totalRecords).addClass('g-text-center--xs');
+				        			        $('td', row).eq(0).addClass('g-text-left--xs');
+				        			    },
+				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
+					    } ); 
+
+				  },
+				  
+				  loadPortfoliodata : function()
+				  {
+					 var table =  $('#portfoliosummary').DataTable( {
+					    	data: portfolioDataArray,
+					    	"paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					  		"columnDefs": [ {"targets": 0,"visible": false}, { "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" }  ],
 					  		dom: 'lBfrtip',
 					  		//buttons: [ 'print', 'excelHtml5', 'csvHtml5', 'pdfHtml5'],
 					  		/* "buttons": [
@@ -856,35 +999,70 @@
 				  
 					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
 					        var data = table.row( $(this).parents('tr') ).data();
+					        var fundId = data[0];
+					        buyFundHandler(fundId);
+					    } ); 
+					  
+				
+				  },
+				  
+				  loadPendingOrdersData : function()
+				  {
+					 var table =  $('#pendingOrders').DataTable( {
+					    	data: pendingOrderDataArray,
+					    	"paging":   true,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": true,
+					        "responsive": true,
+					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					  		"columnDefs": [ { "targets": -1, "data": null, "defaultContent": "<button>Pay Now!</button>" }  ],
+					  		dom: 'lBfrtip',
+					        
+							"language": {
+							            "lengthMenu": "Display _MENU_ records per page",
+							            "zeroRecords": "Nothing found - sorry",
+							            "info": "Showing page _PAGE_ of _PAGES_",
+							            "infoEmpty": "No records available",
+							            "infoFiltered": "(filtered from _MAX_ total records)"
+				        				},
+				       		createdRow: function (row, data, index) {
+				       						$(row).addClass("g-font-size-12--xs g-text-right--xs");
+				        			        var totalRecords= data.length;
+				        			        $('td', row).eq(totalRecords).addClass('g-text-center--xs');
+				        			        $('td', row).eq(0).addClass('g-text-left--xs');
+				        			    },
+				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
+					    } ); 
+					 
+				  
+/* 					 $('#pendingOrders tbody').on( 'click', 'button', function () {
+					        var data = table.row( $(this).parents('tr') ).data();
 					        alert( data[0] +"'s Fund ID is: "+ data[ 1 ] );
 					        buyFundHandler('32');
-					    } ); 
+					    } );  */
 					  
 				
 				  },
 		  
 		  loadData : function(){
-				var portfolioDataModelListArray =[];
+			  
 				$.ajax({
 						async: false,
 						url: "portfolioAction",
 						dataType:"json",
 						success: function(jsonResponse){
-							console.log(jsonResponse);
-							$.each(jsonResponse.portfolioDataModel,function(index,dataElement){
-								portfolioDataModelListArray.push([dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
-							});
-								$.each(jsonResponse.newPortfolioDataModel,function(index,dataElement){
-							});
-								$.each(jsonResponse.investmentDetailsDataModel,function(index,dataElement){
-							});
-							$.each(jsonResponse.doughnutChartData,function(index,dataElement){
-								alert('key is : '+dataElement.key);
-							});
-						}
+							
+							portfolioData  = jsonResponse.portfolioDataModel;
+							pendingOrderData = jsonResponse.pendingOrderDataModel;
+							sipData = jsonResponse.sipDataModel;
+							investmentDetailData = jsonResponse.investmentDetailsDataModel;
+							allFundsInvestmentDetailsData = jsonResponse.allFundsInvestmentDetailsDataModel;
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
 				});
-				console.log(portfolioDataModelListArray);
-		   return portfolioDataModelListArray;
 		  },
 		  
 		  
@@ -893,7 +1071,6 @@
 		  createBarChartData : function(jsonData)
 		  {
 
-			 // console.log(jsonData);
 			  var funds =[];
 			  var investedValue =[];
 			  var currentValue =[];

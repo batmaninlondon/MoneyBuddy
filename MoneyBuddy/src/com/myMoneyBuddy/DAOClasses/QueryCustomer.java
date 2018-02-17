@@ -26,8 +26,8 @@ public class QueryCustomer {
 	public Customers getCustomer(String emailId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomer class : getCustomer method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
-		session.clear();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		hibernateSession.clear();
 		
 		Customers customer = new Customers();
 	
@@ -35,11 +35,11 @@ public class QueryCustomer {
 		try
 		{
 			System.out.println("Email id is : "+emailId);
-			session.beginTransaction();
-			customer = (Customers) session.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
+			hibernateSession.beginTransaction();
+			customer = (Customers) hibernateSession.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
 	
 			System.out.println("customer.getEmailId() : "+customer.getEmailId());
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomer method : end");
 			return customer;
@@ -55,10 +55,7 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 	}
 
@@ -68,17 +65,17 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class : getPassword method : start");
 		
-		Session session =  HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
 	
 
 		try
 		{
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			QueryCustomer queryUser = new QueryCustomer();
 			int customerId = queryUser.getCustomerId(emailId);
-			CustomerPasswordsHistory customer = (CustomerPasswordsHistory)session.get(CustomerPasswordsHistory.class,Integer.toString(customerId));
+			CustomerPasswordsHistory customer = (CustomerPasswordsHistory)hibernateSession.get(CustomerPasswordsHistory.class,Integer.toString(customerId));
 			String password = customer.getPassword();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getPassword method : end");
 			return password;
@@ -94,10 +91,7 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 	}
 	
@@ -129,9 +123,6 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
 			hibernateSession.close();
 		}
 	}
@@ -140,16 +131,16 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		
 		logger.debug("QueryCustomer class : getHashedPassword method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			QueryCustomer queryCustomer = new QueryCustomer();
 			int customerId = queryCustomer.getCustomerId(emailId);
-			Customers user = (Customers)session.get(Customers.class,Integer.toString(customerId));
+			Customers user = (Customers)hibernateSession.get(Customers.class,Integer.toString(customerId));
 			String hashedPassword = user.getPassword();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getHashedPassword method : end");
 			return hashedPassword;
@@ -165,10 +156,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -176,27 +164,19 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 	public int getCustomerId(String emailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class : getCustomerId method : start");
-    	//SessionFactory sessionFactory = null;
-		Session session = null;
-		//Transaction tx = null;
-		//Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		//hibernateSession.flush();
+		Session hibernateSession = null;
 
 		Object result;
 		int customerId =0 ;
 
 		try
 		{
-    		//sessionFactory = HibernateUtil.getSessionAnnotationFactory();
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-			//hibernateSession.beginTransaction();
-			//tx = session.beginTransaction();
-    		session.beginTransaction();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession.beginTransaction();
 			System.out.println("HI there 1 + emailID : "+emailId);
-			result = session.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
-			session.getTransaction().commit();
-			
-			//tx.commit();
+			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
+			hibernateSession.getTransaction().commit();
+
 			if (result != null) {
 				System.out.println("HI there 1"+result.toString());
 				customerId = Integer.parseInt(result.toString());
@@ -216,11 +196,8 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.clear();
-			session.close();
+			hibernateSession.clear();
+			hibernateSession.close();
 		}
 
 	}
@@ -229,14 +206,14 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		
 		logger.debug("QueryCustomer class : getCustomerName method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		String customerName =  null;
 
 		try
 		{
-			session.beginTransaction();
-			Query query = session.createQuery("from Customers where emailId = :emailId");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("from Customers where emailId = :emailId");
 			query.setParameter("emailId",emailId);
 			List<Customers> customersList = query.list();
 
@@ -244,7 +221,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 				customerName = customer.getCustomerName();
 			}
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomerName method : end");
 			return customerName;
@@ -260,10 +237,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -272,7 +246,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		
 		logger.debug("QueryCustomer class : getCustomerMobileNumber method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		Object result;
 		String customerMobileNumber =  null;
@@ -280,13 +254,13 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 
 		try
 		{
-			session.beginTransaction();
-			result = session.createQuery("select mobileNumber from Customers where emailId = '"+emailId+"'").uniqueResult();
+			hibernateSession.beginTransaction();
+			result = hibernateSession.createQuery("select mobileNumber from Customers where emailId = '"+emailId+"'").uniqueResult();
 
 			if ( result != null )
 				customerMobileNumber = result.toString();
 			
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getCustomerMobileNumber method : end");
 			return customerMobileNumber;
@@ -302,10 +276,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -314,17 +285,17 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		
 		logger.debug("QueryCustomer class : getVerificationStatus method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			QueryCustomer queryCustomer = new QueryCustomer();
 			int customerId = queryCustomer.getCustomerId(emailId);
-			Customers customer = (Customers)session.get(Customers.class,Integer.toString(customerId));
+			Customers customer = (Customers)hibernateSession.get(Customers.class,Integer.toString(customerId));
 			String verificationStatus = customer.getVerificationStatus();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : getVerificationStatus method : end");
 			return verificationStatus;
@@ -340,10 +311,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -352,22 +320,22 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		
 		logger.debug("QueryCustomer class : existsUser method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			QueryCustomer queryUser = new QueryCustomer();
 			int customerId = queryUser.getCustomerId(emailId);
 			System.out.println("QueryCustomer class : existsUser method : customerId : "+customerId);
-			Customers customer = (Customers)session.get(Customers.class,Integer.toString(customerId));
+			Customers customer = (Customers)hibernateSession.get(Customers.class,Integer.toString(customerId));
 			//System.out.println("QueryCustomer class : existsUser method : customer : "+customer.getCustomerId());
 			if (customer == null ) {
 				System.out.println("QueryCustomer class : existsUser method : customer is null ");
 				return false;
 			}
 			System.out.println("QueryCustomer class : existsUser method : customer is not null");
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class : existsUser method : end");
 			return true;
@@ -383,10 +351,7 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -395,17 +360,17 @@ public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyExceptio
 		
 		logger.debug("QueryCustomer class : existsMobileNumber method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			
-			Query query = session.createQuery("select mobileNumber from Customers");
+			Query query = hibernateSession.createQuery("select mobileNumber from Customers");
 			
 			List<String> mobileNumberList = query.list();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			for (String mobileNum : mobileNumberList)  {
 
 				if (mobileNum.equals(mobileNumber) ) {
@@ -431,10 +396,7 @@ public boolean existsMobileNumber(String mobileNumber) throws MoneyBuddyExceptio
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

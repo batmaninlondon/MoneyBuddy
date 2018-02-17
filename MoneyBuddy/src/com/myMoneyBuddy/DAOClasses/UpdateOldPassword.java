@@ -24,17 +24,17 @@ public class UpdateOldPassword {
 
 		logger.debug("UpdateOldPassword class : updateOldPassword method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
-			session.beginTransaction();
-			Query query = session.createQuery("update CustomerPasswordsHistory set old_password = password" + " where customerId = :customerId");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update CustomerPasswordsHistory set old_password = password" + " where customerId = :customerId");
 
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateOldPassword class : updateOldPassword method : updated data of CustomerPasswordsHistory table to set old_password for customerId : "+customerId);
 			logger.debug("UpdateOldPassword class : updateOldPassword method : end");
@@ -51,10 +51,7 @@ public class UpdateOldPassword {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 

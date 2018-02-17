@@ -41,17 +41,17 @@ public class GenerateKycForm {
     	logger.debug("GenerateKycForm class : generateKycFormPdf method : start");
     	PdfReader reader = null;
     	PdfStamper stamper = null;
-    	Session session = null;
+    	Session hibernateSession = null;
     	
     	try {
 
     		
-    		session = HibernateUtil.getSessionAnnotationFactory().openSession();
-    		session.beginTransaction();
-    		Customers customer = (Customers) session.get(Customers.class, customerId);
-    		CustomerDetails customerDetail = (CustomerDetails) session.get(CustomerDetails.class, customerId);
-    		AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) session.get(AdditionalCustomerDetails.class, customerId);
-
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		hibernateSession.beginTransaction();
+    		Customers customer = (Customers) hibernateSession.get(Customers.class, customerId);
+    		CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class, customerId);
+    		AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) hibernateSession.get(AdditionalCustomerDetails.class, customerId);
+    		hibernateSession.getTransaction().commit();
 
     		
     		reader = new PdfReader("D://PdfFiles/KYC.pdf");
@@ -204,10 +204,7 @@ public class GenerateKycForm {
 
     		if(reader !=null)
     			reader.close();
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     		
     	}
 

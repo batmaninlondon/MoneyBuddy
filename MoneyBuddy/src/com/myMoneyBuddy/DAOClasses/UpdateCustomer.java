@@ -27,7 +27,7 @@ public class UpdateCustomer {
 
 		logger.debug("UpdateCustomer class : updatePancard method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		System.out.println("customerId : in updatePancard : "+customerId);
 		System.out.println("panCard : in updatePancard : "+panCard);
@@ -35,8 +35,8 @@ public class UpdateCustomer {
 
 		try {
 
-			session.beginTransaction();
-			Query query = session.createQuery("update Customers set panCard = :panCard , kycStatus = :kycStatus where customerId = :customerId");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update Customers set panCard = :panCard , kycStatus = :kycStatus where customerId = :customerId");
 
 			query.setParameter("panCard", panCard);
 
@@ -44,7 +44,7 @@ public class UpdateCustomer {
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateCustomer class : updatePancard method : updated data of Customers table to set panCard and kycStatus for customerId : "+customerId);
 
@@ -62,10 +62,7 @@ public class UpdateCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
@@ -108,9 +105,6 @@ public class UpdateCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
 			hibernateSession.close();
 
 		}

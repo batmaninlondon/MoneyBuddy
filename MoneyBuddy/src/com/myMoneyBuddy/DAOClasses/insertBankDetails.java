@@ -33,7 +33,7 @@ public class insertBankDetails {
 
     	logger.debug("insertBankDetails class : insertBankDetail method : start");
     	
-    	Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
     	
     	try {
@@ -42,14 +42,14 @@ public class insertBankDetails {
 			Date date = new Date();
 			String frmtdDateForDB = dateFormat.format(date);
 			
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 			
 			BankDetails tempBankDetails = new BankDetails(customerId, bankName, accountType,
 					accountNumber, ifscCode, frmtdDateForDB);
 
-			session.save(tempBankDetails);
+			hibernateSession.save(tempBankDetails);
 
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertBankDetails class : insertBankDetail method : end");
 
@@ -65,10 +65,7 @@ public class insertBankDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		/*if(factory!=null)
-			factory.close();*/
-    		//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+    		hibernateSession.close();
     		
     	}
 
@@ -77,13 +74,13 @@ public class insertBankDetails {
     public void updateVerificationStatus (String password) throws MoneyBuddyException {
 
 		logger.debug("insertCustomerDetails class : updateVerificationStatus method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
-			Query query = session.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
+			Query query = hibernateSession.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
 
 			query.setParameter("verificationStatus", "Y");
 
@@ -91,7 +88,7 @@ public class insertBankDetails {
 
 			int result = query.executeUpdate();
 
-			session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
     		
     		logger.debug("insertCustomerDetails class : updateVerificationStatus method : updated data of Customers table to set verificationStatus Y");
     		
@@ -108,10 +105,7 @@ public class insertBankDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

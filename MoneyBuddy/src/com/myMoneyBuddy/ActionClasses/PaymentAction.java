@@ -33,51 +33,14 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	Logger logger = Logger.getLogger(PaymentAction.class);
 	private SessionMap<String, Object> sessionMap;
-	
-	//private String clientHolding;
-	//private String taxStatus;
-	//private String occupationName;
-	//private String genderType;
-	//private String dateOfBirth;
+
 	private String accountType;
-	//private String residentialAddress;
 	private String accountNumber;
-	//private String residentialCity;
 	private String neftCode;
 	private String bankName;
-	//private String residentialState;
-	//private String residentialPin;
-	//private String residentialCountry;
-	//private String groupName;
 	
 	private InputStream stream;
-	
-	//private List<String> groupNamesList = new ArrayList<String>(); 
-    
-/*    public void validate() {
-    	
-    	System.out.println("Payment Action : bankName : "+getBankName());
-    	System.out.println("Payment Action : accountNumber : "+getAccountNumber());
-    	System.out.println("Payment Action : accountPassword : "+getAccountPassword());
-    	System.out.println("Payment Action : cvvNumber : "+getCvvNumber());
-    	System.out.println("Payment Action : groupName : "+getGroupName());
-    	
-    	logger.debug("PaymentAction class : validate method : start");
-    	
-    	if(StringUtils.isEmpty(getAccountNumber()) )
-            addFieldError("accountNumber","Account Number can't be blank!");
-        else if ( StringUtils.isEmpty(getAccountPassword()))
-            addFieldError("accountPassword","Account Password can't be blank");
-        else if ( StringUtils.isEmpty(getCvvNumber()))
-            addFieldError("cvvNumber","CVV Number can't be blank");
-        else if ( customerPortfolio.existsGroupName(getGroupName())) {
-        	System.out.println("Payment Action : Group Name already exists. Please choose a different group Name : "+getGroupName());
-            addFieldError("groupName","Group Name already exists. Please choose a different group Name");
-        }
-    	
-    	logger.debug("PaymentAction class : validate method : end");
-    }*/
-    
+	   
     public String execute()  {
 
     	try {
@@ -85,37 +48,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     		System.out.println("Payment Action class : execute method : transactionType : "+sessionMap.get("transactionType").toString());
 
     		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
-	    	/*String subject ;
-	    	sendMail sendmail = new sendMail();
-	    	StringBuilder bodyText = new StringBuilder();
-	    	String MAIL_SITE_LINK = "www.quantwealth.in/login";*/
-    	
-    	
-	    	//System.out.println("Inside payment execute mehtod - start ");
-    	
-	    	/*if ( customerPortfolio.existsGroupName(getGroupName())) {
-	        	System.out.println("Payment Action : Group Name already exists. Please choose a different group Name : "+getGroupName());
-	        	String str = "groupNameAlreadyExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
-	    		return SUCCESS;
-	            
-	        }*/
-
-			/*String CLIENT_HOLDING = ; // Considering Single account
-			String CLIENT_TAXSTATUS = getTaxStatus(); // Considering Individual
-			String CLIENT_OCCUPATIONCODE = getOccupationName(); // will take from Client
-			String CLIENT_DOB = getDateOfBirth(); // will take from Client
-			String CLIENT_GENDER = getGenderType(); // will take from Client
-			String CLIENT_GUARDIAN = ""; // considering, it is not on behalf of minor
-			String CLIENT_ACCTYPE_1 = getAccountType(); // will take from Client
-			String CLIENT_ACCNO_1 = getAccountNumber(); // will take from Client
-			String CLIENT_NEFT_IFSCCODE_1 = getNeftCode(); // will take from Client
-			String CLIENT_ADD_1 = getResidentialAddress();  // will take from Client
-			String CLIENT_CITY = getResidentialCity(); // will take from Client
-			String CLIENT_STATE = getResidentialState(); // will take from Client
-			String CLIENT_PINCODE = getResidentialPin(); // will take from Client
-			String CLIENT_COUNTRY = getResidentialCountry(); // will take from Client
-*/			
 	    	
 	    	System.out.println("Hi There 1 .");
 	    	String customerId;
@@ -164,10 +96,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	CustomerDetails customerDetails = queryCustomerDetails.getCustomerDetails(customerId);
 	    	
 	    	QueryAdditionalCustomerDetails queryAddCusDetails = new QueryAdditionalCustomerDetails();
-	    	
-	    	//AdditionalCustomerDetails addCusDetails = queryAddCusDetails.getAddCusDetails(customerId);
-	    	
-	    	
+
 	    	Trading trading = new Trading();
 		
 	    	String bseClientCreatedStatus = "N";
@@ -206,9 +135,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			System.out.println("transactionType : "+sessionMap.get("transactionType").toString());
 			if (sessionMap.get("transactionType").toString() == "UPFRONT")  {
 				amount = sessionMap.get("upfrontInvestment").toString();
-				
-		    	/*productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>) sessionMap.get("productRatioList"),
-		    			Double.parseDouble(sessionMap.get("upfrontInvestment").toString()));*/
 		    	
 		    	List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartList");
 		    	
@@ -254,48 +180,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			
 			String str ;
 			if ( !paymentUrl.equals("NotSet")) {
-			
-				sessionMap.put("paymentUrl", paymentUrl);
-		
-		    	System.out.println("paymentUrl from session : "+sessionMap.get("paymentUrl").toString());
-		    	
-		    	logger.debug("PaymentAction class : execute method : stored paymentUrl : "+paymentUrl+" in session id : "+sessionMap.getClass().getName());
-/*				
-				groupNamesList = (ArrayList)customerPortfolio.getGroupNameList(sessionMap.get("customerId").toString());
-				sessionMap.put("groupNamesList", groupNamesList);*/
-		    	logger.debug("PaymentAction class : execute method : updated groupNamesList in session id : "+sessionMap.getClass().getName());
-		    	
-		    	//if ( (Long.parseLong(getAccountNumber()) % 2) == 0)  {
-		    		
-		    		/*System.out.println(" account number is even, considering payment successful !! ");
-		    		
-			    	subject = "Payment recieved for your recent transaction";
-		        	bodyText.append("<div>")
-		        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
-		        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
-		        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
-		        	.append("  <h3>Thanks,</h3><br/><br/>")
-		        	.append("  <h3>MoneyBuddy Team</h3>")
-		        	.append("</div>");
-		        	sendmail.MailSending(sessionMap.get("emailId").toString(), bodyText,subject);*/
 		        	
 		        	str = "success|"+paymentUrl;
-		        	
-		        	SendMail sendmail = new SendMail();
-					StringBuilder bodyText = new StringBuilder();
-					String MAIL_SITE_LINK = "www.quantwealth.in/login";
-					
-					String subject = "Payment recieved for your recent transaction";
-		        	bodyText.append("<div>")
-		        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
-		        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
-		        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
-		        	.append("  <h3>Thanks,</h3><br/><br/>")
-		        	.append("  <h3>MoneyBuddy Team</h3>")
-		        	.append("</div>");
-		        	sendmail.MailSending(CLIENT_EMAIL, bodyText,subject);
-
-	    		
 			}
 			else{
 				str = "allOrderFailed";

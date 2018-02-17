@@ -20,17 +20,17 @@ public class QueryKycStatus {
 	
 	public String getKycStatusForPanCard(String panCard) throws MoneyBuddyException{
 		
-		Session session = null;
+		Session hibernateSession = null;
 		try
 		{
 			logger.debug("QueryKycStatus class : getKycStatusForPanCard method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
-			session.beginTransaction();
-			KycStatus kyc = (KycStatus)session.get(KycStatus.class,panCard);
+			hibernateSession.beginTransaction();
+			KycStatus kyc = (KycStatus)hibernateSession.get(KycStatus.class,panCard);
 			String status = kyc.getStatus();
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryKycStatus class : getKycStatusForPanCard method : end");
 			return status;
@@ -46,30 +46,27 @@ public class QueryKycStatus {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
 
 	public boolean existsPanCard(String panCard) throws MoneyBuddyException {
 
-		Session session = null;
+		Session hibernateSession = null;
 		try
 		{
 			logger.debug("QueryKycStatus class : existsPanCard method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
-			session.beginTransaction();
-			KycStatus kyc = (KycStatus)session.get(KycStatus.class,panCard);
+			hibernateSession.beginTransaction();
+			KycStatus kyc = (KycStatus)hibernateSession.get(KycStatus.class,panCard);
 			if (kyc == null ) {
 				logger.error("QueryKycStatus class : existsPanCard method : No entry found in the database table for panCard : "+panCard);
 				return false;
 			}
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryKycStatus class : existsPanCard method : end");
 			return true;
@@ -85,10 +82,7 @@ public class QueryKycStatus {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}

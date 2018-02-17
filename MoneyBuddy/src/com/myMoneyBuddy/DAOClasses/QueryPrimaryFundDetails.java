@@ -31,19 +31,19 @@ public class QueryPrimaryFundDetails {
 	
 	public List<FundDetailsDataModel> getFundDetailsData() throws MoneyBuddyException {
 		
-		Session session  = null;
+		Session hibernateSession  = null;
 	       
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class : getFundDetailsData method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			List<FundDetailsDataModel> fundDetailsDataModel = new LinkedList<FundDetailsDataModel>();
 
-			Query query = session.createQuery("from PrimaryFundDetails");
+			Query query = hibernateSession.createQuery("from PrimaryFundDetails");
 
 			
 			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
@@ -58,7 +58,7 @@ public class QueryPrimaryFundDetails {
 						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory(),fundDetailsListElement.getPdfFilePath()));
 			}
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("QueryPrimaryFundDetails class : getFundDetailsData method : end");
 			
@@ -81,10 +81,7 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
@@ -92,19 +89,19 @@ public class QueryPrimaryFundDetails {
 	
 	public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
 		
-		Session session  = null;
+		Session hibernateSession  = null;
 	       
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : start");
 			
-			session = HibernateUtil.getSessionAnnotationFactory().openSession();
+			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-			session.beginTransaction();
+			hibernateSession.beginTransaction();
 
 			FundDetailsDataModel selectedFundDetailsDataModel = new FundDetailsDataModel();
 
-			Query query = session.createQuery("from PrimaryFundDetails where fundId = :fundId");
+			Query query = hibernateSession.createQuery("from PrimaryFundDetails where fundId = :fundId");
 			query.setParameter("fundId", fundId);
 			
 			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
@@ -118,7 +115,7 @@ public class QueryPrimaryFundDetails {
 						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory(),primaryFundDetailsList.get(0).getPdfFilePath());
 			}
 
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("QueryPrimaryFundDetails class : getSelectedFundDetailsData method : end");
 			
@@ -141,10 +138,7 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 

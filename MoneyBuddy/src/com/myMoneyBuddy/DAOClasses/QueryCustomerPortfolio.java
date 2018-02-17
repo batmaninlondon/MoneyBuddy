@@ -26,12 +26,12 @@ public class QueryCustomerPortfolio {
 		
 		logger.debug("QueryCustomerPortfolio class : existsGroupName method : start");
 		
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			session.beginTransaction();
-			Query query = session.createQuery("from CustomerPortfolio where investmentTypeName = :groupName");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("from CustomerPortfolio where investmentTypeName = :groupName");
 			query.setParameter("groupName",groupName);
 			List<CustomerPortfolio> customerPortfolioList = query.list();
 
@@ -39,7 +39,7 @@ public class QueryCustomerPortfolio {
 			{
 				return true;
 			}
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomerPortfolio class : existsGroupName method : end");
 			return false;
@@ -55,10 +55,7 @@ public class QueryCustomerPortfolio {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 		}
 
 	}
@@ -66,12 +63,12 @@ public class QueryCustomerPortfolio {
 	public List<String> getGroupNameList(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomerPortfolio class : getGroupNameList method : start");
-		Session session = HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
-			session.beginTransaction();
-			Query query = session.createQuery("select c.investmentTypeName from CustomerPortfolio c  where customerId = :customerId group by c.investmentTypeName");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select c.investmentTypeName from CustomerPortfolio c  where customerId = :customerId group by c.investmentTypeName");
 			query.setParameter("customerId",customerId);
 
 			List<String> groupNamesList = query.list();
@@ -80,7 +77,7 @@ public class QueryCustomerPortfolio {
 				System.out.println(" Group Name in the list is : "+groupName);
 			}*/
 			
-			//session.getTransaction().commit();
+			hibernateSession.getTransaction().commit();
 
 			logger.debug("QueryCustomerPortfolio class : getGroupNameList method : end");
 			return groupNamesList;
@@ -96,10 +93,7 @@ public class QueryCustomerPortfolio {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			/*if(factory!=null)
-			factory.close();*/
-			//HibernateUtil.getSessionAnnotationFactory().close();
-			session.close();
+			hibernateSession.close();
 
 		}
 
