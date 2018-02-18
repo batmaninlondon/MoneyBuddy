@@ -779,6 +779,11 @@
   text-align: left;
 }
 
+
+.g-text-justify--xs {
+  text-align: justify;
+}
+
 .g-text-right--xs {
   text-align: right;
 }

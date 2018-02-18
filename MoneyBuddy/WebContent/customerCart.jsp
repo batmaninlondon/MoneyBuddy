@@ -26,15 +26,9 @@
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
         
-      <!--   <link href="css/material-bootstrap-wizard.css" rel="stylesheet" /> -->
-
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-       <!--  <link href="css/material-kit.css" rel="stylesheet"/> -->
-        
-        
-        
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -42,50 +36,13 @@
         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
         
         
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-     <script src="assets/js/sly.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/index.js"></script>
-  
-  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-  
-  
-  
-  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-		
-		<script>
-		
-		$(document).ready(function() {
-		    $('#cartData').DataTable( {
-		        "paging":   false,
-		        "ordering": false,
-		        "info":     false,
-		        "searching": false,
-		        "responsive": true,
-		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-		        
-		        
-		    } );
-		} );
-		
-		</script>
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
-   <!--  <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> -->
+<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
    <div class="container ">
    		<a href="nhome.jsp" class="s-header-v2__logo-link">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo.png" alt="Dublin Logo">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>
 	</div>
 	<div class="row">
@@ -109,23 +66,23 @@
 							<tr>
 								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
 								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-3 g-bg-color--gray-light">Creation Date</th>
 								<th class="center col-md-3 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
 							<s:iterator value="#session.customerCartList" var="customerCartListElement">
 								<tr>
-								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
-								    <td class="center g-font-size-14--xs">
-								    
-								    <s:property value="#customerCartListElement.amount"/>
-								    </td>
-								    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.cartCreationDate"/></td>
-								    <td>
+								    <s:if test="productName.equals('Total')">
+								    	<td class="center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.productName"/></b></td>
+								    	<td class="center g-font-size-14--xs g-bg-color--gray-light g-text-right--xs"><b><s:property value="#customerCartListElement.amount"/></b></td>
+								    	<td class="g-bg-color--gray-light"></td>
+								    </s:if>
+									<s:else>
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
-								    	<button type="button" class="  btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button>
-								    </td>
+								    	<td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+								    	<td class="center g-font-size-14--xs g-text-right--xs"><s:property value="#customerCartListElement.amount"/></td>
+							    		<td class="center"><button type="button" class=" btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button></td>
+								    </s:else>
 								</tr>
 							</s:iterator> 
 						</tbody>
@@ -203,5 +160,31 @@
 
 </body>
 	
-
+	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+ 	<script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/sly.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/index.js"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+		    $('#cartData').DataTable( {
+		        "paging":   false,
+		        "ordering": false,
+		        "info":     false,
+		        "searching": false,
+		        "responsive": true,
+		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+		    } );
+		} );
+	</script>
 </html>

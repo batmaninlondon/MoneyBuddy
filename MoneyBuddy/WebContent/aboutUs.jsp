@@ -10,12 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
-   
+
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
 </head>
-
 <body>
 	<div id="load" class="load"></div>
 	<div id="content">
@@ -32,7 +31,6 @@
                                 <span class="s-header-v2__toggle-icon-bar"></span>
                             </button>
                         </div>
-
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
@@ -43,7 +41,6 @@
                             </div>
                             <!-- End Logo -->
                         </div>
-                        
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
@@ -81,7 +78,6 @@
             <div class="container g-padding-y-45--xs">
             </div>
         </div>
-
  <section id="about-us" >
         <div class="container">
 			<div class="g-margin-t-15--xs wow fadeInDown">
@@ -210,12 +206,80 @@
 		</div><!--/.container-->
     </section><!--/about-us-->
 	
-</div>
-</body>
-		
-		<!-- Back To Top -->
+	
+	
+        <!--========== FOOTER ==========-->
+        <footer class="g-bg-color--dark">
+            <!-- Links -->
+            <div class="g-hor-divider__dashed--white-opacity-lightest">
+                <div class="container g-padding-y-80--xs">
+                    <div class="row">
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="myIndex">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.linkedin.com/in/money-buddy-94a73814a/">Linkedin</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms.jsp">Terms &amp; Conditions</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy.jsp">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
+                            <p class="g-color--white-opacity">
+                            No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
+                        </div>
+                    </div>
+                    <div class="row  g-font-size-12--xs">
+                    <br/>
+                    	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+                    </div>
+                </div>
+            </div>
+            <!-- End Links -->
+
+            <!-- Copyright -->
+            <div class="container g-padding-y-50--xs">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="index.html">
+                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
+                        </a>
+                    </div>
+                     <div class="col-sm-6 g-text-right--xs">
+                    &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                </div>
+                </div>
+            </div>
+            <!-- End Copyright -->
+        </footer>
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
+   
+</div>
+
+	
+
+
+</body>
+		<!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
 		<script>
          document.onreadystatechange = function () {
@@ -234,8 +298,6 @@
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
  		<script src="assets/js/jquery.js"></script>
     	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-		
-
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
+    	<script src="assets/js/main.js"></script>
+    	<script src="assets/js/wow.min.js"></script>
 </html>

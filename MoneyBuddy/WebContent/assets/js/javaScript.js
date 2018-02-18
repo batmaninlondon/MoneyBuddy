@@ -1,16 +1,3 @@
-//$(document).ready(function(){
-//	
-//var dg_H = $(window).height();
-//var dg_W = $(window).width();
-//$('#wrap').css({'height':dg_H,'width':dg_W});
-//function anim() {
-//    $("#wrap img.bgfade").first().appendTo('#wrap').fadeOut(3000);
-//    $("#wrap img").first().fadeIn(3000);
-//    setTimeout(anim, 6000);
-//}
-//anim();
-//});
-
 function getURLParameter(name) {
 	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 	}
@@ -20,6 +7,13 @@ function showUpfrontInvestment(newValue)
 document.getElementById("upfrontInvestment").innerHTML=newValue;
 update();
 }
+
+function addCommas(x) {
+	var parts = x.toString().split(".");
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return parts.join(".");
+	}
+
 
 function changeUploadStatus(el)  
 {
