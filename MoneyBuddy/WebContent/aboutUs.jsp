@@ -78,7 +78,7 @@
             <div class="container g-padding-y-45--xs">
             </div>
         </div>
- <section id="about-us" >
+ <section id="about-us" class="g-margin-b-30--xs">
         <div class="container">
 			<div class="g-margin-t-15--xs wow fadeInDown">
 				<h2 ><b>Hello, We're MoneyBuddy</b></h2>

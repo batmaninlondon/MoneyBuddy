@@ -308,10 +308,6 @@
 	  	<br/>
 	  	<br/>
         
-        <!--========== END PAGE CONTENT ==========-->
-
-        <!--========== FOOTER ==========-->
-        
         <!--========== FOOTER ==========-->
         <footer class="g-bg-color--dark">
             <!-- Links -->
