@@ -7,7 +7,14 @@ package com.myMoneyBuddy.ActionClasses;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Pattern;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.mailerClasses.SendMail;
@@ -18,11 +25,57 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	
 	Logger logger = Logger.getLogger(ForgotPasswordAction.class);
 	private Map<String, Object> sessionMap;
     private String emailId;
+    
+    static final String FROM = "info@quantwealth.in";
+    static final String FROMNAME = "MoneyBuddy";
+	
+    // Replace recipient@example.com with a "To" address. If your account 
+    // is still in the sandbox, this address must be verified.
+    static final String TO = "emailwadhwani@gmail.com";
+    
+    // Replace smtp_username with your Amazon SES SMTP user name.
+    static final String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
+    
+    // Replace smtp_password with your Amazon SES SMTP password.
+    static final String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
+    
+    // The name of the Configuration Set to use for this message.
+    // If you comment out or remove this variable, you will also need to
+    // comment out or remove the header below.
+    static final String CONFIGSET = "ConfigSet";
+    
+    // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
+    // See http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html#region-endpoints
+    // for more information.
+    static final String HOST = "email-smtp.us-east-1.amazonaws.com";
+    
+    // The port you will connect to on the Amazon SES SMTP endpoint. 
+    static final int PORT = 587;
+    
+    static final String SUBJECT = "Money Buddy is here!!";
+    
+    static final String BODY = String.join(
+    	    System.getProperty("line.separator"),
+    	    "<h1>Coming Soon</h1>",
+    	    "<p>We are excited to annouce that we are launching our platform soon", 
+    	    "  <a href='http://www.quantwealth.in'>MnoeyBuddy.in</a>."
+    	);
+
+    
 
     public final String MAIL_ResetPassword_SITE_LINK = "www.quantwealth.in/resetPassword";
 
@@ -71,7 +124,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	logger.debug("ForgotPasswordAction class : execute method : stored emailId : "+getEmailId()+" in session id : "+sessionMap.getClass().getName());
 	    	
 	    	String subject="Reset your MoneyBuddy password.";
-	    	SendMail sendMail = new SendMail();
+	    	//SendMail sendMail = new SendMail();
 	    	String hashedPassword = customer.getPassword(getEmailId());
 	    	String link = MAIL_ResetPassword_SITE_LINK+"?emailId="+emailId+"&hashedPassword="+hashedPassword;
 	    	StringBuilder bodyText = new StringBuilder();
@@ -84,7 +137,77 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	.append("  <h3>Thanks,</h3><br/><br/>")
 	    	.append("  <h3>MoneyBuddy Team</h3>")
 	    	.append("</div>");
-	    	sendMail.MailSending(getEmailId(), bodyText,subject);
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+
+
+	        // Create a Properties object to contain connection configuration information.
+	    	Properties props = System.getProperties();
+	    	props.put("mail.transport.protocol", "smtp");
+	    	props.put("mail.smtp.port", PORT); 
+	    	props.put("mail.smtp.starttls.enable", "true");
+	    	props.put("mail.smtp.auth", "true");
+
+	        // Create a Session object to represent a mail session with the specified properties. 
+	    	Session session = Session.getDefaultInstance(props);
+
+	        // Create a message with the specified information. 
+	        MimeMessage msg = new MimeMessage(session);
+	        msg.setFrom(new InternetAddress(FROM,FROMNAME));
+	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
+	        msg.setSubject(subject);
+	        msg.setContent(bodyText.toString(),"text/html");
+	        
+	        // Add a configuration set header. Comment or delete the 
+	        // next line if you are not using a configuration set
+	        //msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
+	            
+	        // Create a transport.
+	        Transport transport = session.getTransport();
+	                    
+	        // Send the message.
+	        try
+	        {
+	            System.out.println("Sending...");
+	            
+	            // Connect to Amazon SES using the SMTP username and password you specified above.
+	            transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
+	        	
+	            // Send the email.
+	            transport.sendMessage(msg, msg.getAllRecipients());
+	            System.out.println("Email sent!");
+	        }
+	        catch (Exception ex) {
+	            System.out.println("The email was not sent.");
+	            System.out.println("Error message: " + ex.getMessage());
+	        }
+	        finally
+	        {
+	            // Close and terminate the connection.
+	            transport.close();
+	        }
+	    
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	//sendMail.MailSending(getEmailId(), bodyText,subject);
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");
