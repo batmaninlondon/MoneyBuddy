@@ -140,6 +140,10 @@
   background-color: #2980b9;
 }
 
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 </style>
         
     </head>
@@ -235,7 +239,7 @@
                                 <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you to grow your money so that you can focus on what matters most to you</h2>
                             </div>
                             <div class="g-text-center--xs">
-                       			<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                            	<button  onclick="javascript:getMfData()" class="text-uppercase s-btn button2 s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT1</button>
                        			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
                		  		</div>
                         </div>
