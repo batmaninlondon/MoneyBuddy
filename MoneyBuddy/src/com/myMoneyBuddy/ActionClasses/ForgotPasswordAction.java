@@ -45,7 +45,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	
     // Replace recipient@example.com with a "To" address. If your account 
     // is still in the sandbox, this address must be verified.
-    static final String TO = "emailwadhwani@gmail.com";
+   
     
     // Replace smtp_username with your Amazon SES SMTP user name.
     static final String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
@@ -158,7 +158,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	        // Create a message with the specified information. 
 	        MimeMessage msg = new MimeMessage(session);
 	        msg.setFrom(new InternetAddress(FROM,FROMNAME));
-	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
+	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(getEmailId()));
 	        msg.setSubject(subject);
 	        msg.setContent(bodyText.toString(),"text/html");
 	        

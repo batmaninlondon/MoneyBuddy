@@ -280,19 +280,20 @@ function paymentStatus()
 
 function forgottenPassword()
 {
-	var emailId = document.getElementById("email-id").value;
+	document.getElementById('load').style.visibility="visible";
+	var emailId = document.getElementById("emailid").value;
 
 	if ( emailId == '')  {
 		
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = "Email Id can not be blank!";
+		document.getElementById("emailid").className += " formInvalid";
+		document.getElementById("emailid").placeholder = "Email Id can not be blank!";
 		
 		return;
 	}
 	else if (!validateEmail(emailId)) {
-		document.getElementById("email-id").className += " formInvalid";
-		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " - Not a valid Email Id ";
-		document.getElementById("email-id").value = null;
+		document.getElementById("emailid").className += " formInvalid";
+		document.getElementById("emailid").placeholder = document.getElementById("emailid").value + " - Not a valid Email Id ";
+		document.getElementById("emailid").value = null;
 		return;
 	}
 
@@ -307,14 +308,14 @@ function forgottenPassword()
         		window.location='thankYouForPasswordReset';
         	}
         	else if (result == "verificationNotDone")  {
-        		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + "Verification pending for this Email Id ";
-        		document.getElementById("email-id").value = null;
+        		document.getElementById("emailid").className += " formInvalid";
+        		document.getElementById("emailid").placeholder = document.getElementById("emailid").value + "Verification pending for this Email Id ";
+        		document.getElementById("emailid").value = null;
         	}
         	else if (result == "emailIdDoesNotExists")  {
-        		document.getElementById("email-id").className += " formInvalid";
-        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " is not registered with MoneyBuddy";
-        		document.getElementById("email-id").value = null;
+        		document.getElementById("emailid").className += " formInvalid";
+        		document.getElementById("emailid").placeholder = document.getElementById("emailid").value + " is not registered with MoneyBuddy";
+        		document.getElementById("emailid").value = null;
         	}
         	else {
         		window.location='errorPage';
@@ -1089,6 +1090,7 @@ function sendcontactMail() {
 
 function login() {
 	
+	document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
 	if ( emailId == '')  {
@@ -1187,6 +1189,7 @@ function generatePackage() {
 
 function register() {
 
+	document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("email-id1").value;
 	var password = document.getElementById("password1").value;
 	var mobileNumber = document.getElementById("mobile-number").value;
@@ -1257,6 +1260,7 @@ function register() {
 
     $.ajax({
       	
+   
         url : "registerAction",
         type: 'post',
         

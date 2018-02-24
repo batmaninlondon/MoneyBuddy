@@ -120,7 +120,7 @@
                     <div class="col-xs-4 g-full-width--xs">
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-headphone-alt"></i>
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Call at</h4>
+                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Call / whats app </h4>
                             <p style="color: white;"><b>+91 9971648736</b></p>
                         </div>
                     </div>

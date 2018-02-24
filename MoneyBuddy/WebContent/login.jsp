@@ -36,9 +36,16 @@
 	    <link rel="stylesheet" href="css/style4.css">
 </head>
 
-<body >
+<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
 <div id="load" class="load"></div>
 <div id="content">
+	
+	<div class="container ">
+   		<a href="myIndex" class="s-header-v2__logo-link">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
+		</a>
+	</div>
 	<%
 	
 	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
@@ -49,77 +56,54 @@
 	    	System.out.println("In login jsp : OnetimeInvestment set to FALSE .");
 	    }
 	%>
-   <!--========== HEADER ==========-->
-        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
-            <!-- Navbar -->
-            <nav class="s-header-v2__navbar">
-                <div class="container g-display-table--lg">
-                    <!-- Navbar Row -->
-                    <div class="s-header-v2__navbar-row">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="s-header-v2__navbar-col">
-                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                                <span class="s-header-v2__toggle-icon-bar"></span>
-                            </button>
-                        </div>
-
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
-                            <!-- Logo -->
-                            <div class="s-header-v2__logo">
-                                <a href="myIndex" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
-                                </a>
-                            </div>
-                            <!-- End Logo -->
-                        </div>
-                        
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-				                                        <a href="login" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login/Register<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-				                                    </li>
-										<%	} else 
-										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
-                                </ul>
-                            </div>
-                            <!-- End Nav Menu -->
-                        </div>
-                    </div>
-                    <!-- End Navbar Row -->
-                </div>
-            </nav>
-            <!-- End Navbar -->
-        </header>
-        <!--========== END HEADER ==========-->
-
 	<!--========== PROMO BLOCK ==========-->
-          <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
-         <br/><br/><br/><br/>
-         <div class="form">
+          <div class="g-fullheight--xs g-bg-position--center swiper-slide " >
+         <div class="form  ">
       
       <ul class="tab-group">
-        <li class="tab active"><a href="#login">Log In</a></li>
-        <li class="tab "><a href="#signup">Sign Up</a></li>
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab "><a href="#login">Log In</a></li>
+        
       </ul>
       
       <div class="tab-content">
         
         
+        
+        
+        <div id="signup">   
+          
+          <form action="/" method="post">
+          
+          <div class="field-wrap">
+            <label>
+              Your Email<span class="req">*</span>
+            </label>
+            <input id="email-id1" type="email"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Create Password<span class="req">*</span>
+            </label>
+            <input id="password1"  type="password"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Mobile Number<span class="req">*</span>
+            </label>
+            <input id="mobile-number"  type="password"required autocomplete="off"/>
+          </div>
+          
+          <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
+			<button type="button"  class="button button-block" onClick="register();">Continue</button>        
+			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
+			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
+                              
+          </form>
+
+        </div>
         <div id="login">   
           <h1>Welcome Back!</h1>
           
@@ -138,71 +122,53 @@
               Password<span class="req">*</span>
             </label>
             <input  id="password" type="password" required autocomplete="off"/>
-            <!-- <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="width:600px;"> -->
           </div>
           
-          <p class="forgot"><a href="forgottenPassword">Forgot Password???</a></p>
+          <p class="forgot"><a data-toggle="modal" data-target="#myModal">Forgot Password?</a></p>
+          <div class="container">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+          <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
+        </div>
+        
+			<div class="input-group g-margin-l-20--xs  g-margin-r-60--xs g-margin-b-20--xs">
+    			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    			<input id="emailid" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" >
+  			</div>
+	
+        <div class="modal-footer">
+        	<div class="row">
+				<div class="col-md-3 g-color--primary">
+					<i class="  glyphicon glyphicon-chevron-left"></i><a  data-dismiss="modal">Back to Login</a>
+				</div>
+				<div class="col-md-5">
+				</div>
+				<div class="col-md-4">
+					<button type="button" id="submit-button-5" class="  g-bg-color--primary g-color--white"  onClick="forgottenPassword();">Send Reset Link</button>
+				</div>
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
           
-          <!-- <button id="submit-button-51"  class="button button-block" onClick="login();" >Log In</button> -->
-          <button type="button" id="submit-button-5" class="button button-block"  onClick="login();" ">SIGN IN</button>
-         <!--  <button type="button" id="submit-button-5" class="btn btn-primary readmore"  onClick="login();" style="width: 200px;">SIGN IN</button> -->
           
-          
+          <button type="button" id="submit-button-5" class="button button-block"  onClick="login();">SIGN IN</button>
           
           
           
           </form>
 
-        </div>
-        
-        <div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-          <!-- <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div> -->
-
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input id="email-id1" type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input id="password1"  type="password"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Phone Number<span class="req">*</span>
-            </label>
-            <input id="mobile-number"  type="password"required autocomplete="off"/>
-          </div>
-          
-          <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-			<button type="button"  class="button button-block" onClick="register();">Get Started</button>        
-          </form>
-
-        </div>
-        
+        </div>	
       </div><!-- tab-content -->
       
 </div>

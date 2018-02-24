@@ -898,7 +898,7 @@
   Fullheight
 ------------------------------------*/
 .g-fullheight--xs {
-  height: 100vh;
+  height: 80vh;
 }
 
 /* Small screen / phone */
@@ -7295,6 +7295,10 @@
   color: #f5f8f9 !important;
 }
 
+.g-color--black {
+  color: #000000!important;
+}
+
 /* Hover Colors */
 .g-color--text[href]:hover {
   color: #13b1cd !important;
@@ -7307,6 +7311,10 @@
 /* Background Colors */
 .g-bg-color--primary {
   background-color: #13b1cd !important;
+}
+
+.g-bg-color--black {
+  background-color: #000000!important;
 }
 
 .g-bg-color--blueviolet {
