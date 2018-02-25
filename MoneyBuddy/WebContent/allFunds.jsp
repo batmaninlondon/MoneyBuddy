@@ -46,7 +46,6 @@
     <script src="assets/js/jquery.isotope.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/index.js"></script>
   
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   

@@ -149,7 +149,7 @@
             <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
             <!-- End Arrows -->
             
-            <a href="javascript:getMfData()" " class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+            <a href="javascript:getMfData()"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
                 <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
                 <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
             </a>
@@ -193,9 +193,9 @@
 										        </thead>
 										         <tbody>
 										            <tr class="g-bg-color--white" >
-										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -235,9 +235,9 @@
 										        </thead>
 										         <tbody>
 										            <tr class="g-bg-color--white" >
-										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -276,9 +276,9 @@
 										        </thead>
 										         <tbody>
 										            <tr class="g-bg-color--white" >
-										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -317,9 +317,9 @@
 										        </thead>
 										         <tbody>
 										            <tr class="g-bg-color--white" >
-										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></th>
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
