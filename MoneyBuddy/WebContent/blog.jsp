@@ -192,7 +192,7 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="myIndex">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -215,7 +215,7 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
-                    <div class="row  g-font-size-12--xs">
+                    <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
@@ -232,7 +232,7 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
                             <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
                         </a>
                     </div>
-                     <div class="col-sm-6 g-text-right--xs">
+                     <div class="col-sm-6 g-text-right--xs g-color--white">
                     &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>

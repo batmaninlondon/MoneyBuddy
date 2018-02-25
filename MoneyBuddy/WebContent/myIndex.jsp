@@ -9,7 +9,7 @@
         <title>MoneyBuddy - Home</title>
         <meta name="keywords" content="HTML5 Theme" />
         <meta name="description" content="MoneyBuddy - Effortless Investing">
-        <meta name="author" content="keenthemes.com">
+        <meta name="author" content=moneybuddy.in>
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -17,135 +17,16 @@
 
         <!-- Vendor Styles -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/animate.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
-         <link href="assets/css/table.css" rel="stylesheet">
 
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-        <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->
-        <link href="assets/bootstrap/css/main.css" rel="stylesheet">
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <style>
-      div .typed {
-        	display: inline-block;
-        	margin: 0;
-        }
-        div .typed-cursor {
-        	font-size: 60px;
-        	display: inline-block;
-        	margin: 0 10px;
-        	color: #00a8ff;
-        	-webkit-animation-name: flash;
-        	animation-name: flash;
-        	-webkit-animation-duration: 1s;
-        	animation-duration: 1s;
-        	-webkit-animation-iteration-count: infinite;
-        	animation-iteration-count: infinite;
-        }
-        .white {
-        	color: white;
-        }
-        </style> 
-        
-        
-<style>
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-.snip1418 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  text-align: left;
-  color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 20em;
-  perspective: 20em;
-}
-.snip1418 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.snip1418 .add-to-cart {
-  position: absolute;
-  height:50px;
-  top: 0;
-  right: 0;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0;
- // background-color: #409ad5;
-   background-color: black;
-  -webkit-transform: rotateX(-90deg);
-  transform: rotateX(-90deg);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.snip1418 figcaption {
-//  padding: 20px;
-}
-.snip1418 h3,
-.snip1418 p {
-  margin: 0;
-}
-.snip1418 h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.snip1418 p {
-  font-size: 0.7em;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-.snip1418 a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.snip1418:hover .add-to-cart,
-.snip1418.hover .add-to-cart {
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.snip1418:hover .add-to-cart i,
-.snip1418.hover .add-to-cart i {
-  background-color: #2980b9;
-}
-
-.button2:hover {
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-</style>
-        
     </head>
     <!-- End Head -->
 
@@ -628,9 +509,9 @@
 
         <section id="services" class="g-bg-color--dark">
 	   		<div class="container ">
-	            <div class="center wow fadeInDown g-margin-t-50--xs ">
-	            	<h2 class="">Our Partners..</h2>
-	                <p class="lead">We use funds from leading providers to build your portfolio</p>
+	            <div class="center wow fadeInDown g-margin-t-50--xs g-margin-b-50--xs ">
+	            	<h2 class="g-color--white g-text-center--xs">Our Partners..</h2>
+	                <p class="g-color--white g-text-center--xs">We use funds from leading providers to build your portfolio</p>
 	            	<marquee behavior="scroll" direction="left" >
 	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 						<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
@@ -763,7 +644,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="myIndex">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -786,7 +667,7 @@
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
-                    <div class="row  g-font-size-12--xs">
+                    <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
@@ -803,7 +684,7 @@
                             <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
                         </a>
                     </div>
-                     <div class="col-sm-6 g-text-right--xs">
+                     <div class="col-sm-6 g-text-right--xs g-color--white">
                     &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
@@ -817,38 +698,28 @@
 
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
+                                                                               
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
-        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
-        <script type="text/javascript" src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-        <script type="text/javascript" src="vendor/swiper/swiper.jquery.min.js"></script>
-        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
-        <script type="text/javascript" src="vendor/counterup.min.js"></script>
-        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsXUGTFS09pLVdsYEE9YrO2y4IAncAO2U"></script>
-        <script type="text/javascript" src="vendor/jquery.wow.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-      	
-
+        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
+    
         <!-- General Components and Settings -->
-        <script type="text/javascript" src="js/global.min.js"></script>
+       <!--  <script type="text/javascript" src="js/global.min.js"></script> -->
         <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
-        <script type="text/javascript" src="js/components/magnific-popup.min.js"></script>
+        <script type="text/javascript" src="vendor/swiper/swiper.jquery.min.js"></script>
         <script type="text/javascript" src="js/components/swiper.min.js"></script>
+        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="vendor/counterup.min.js"></script>
         <script type="text/javascript" src="js/components/counter.min.js"></script>
-        <script type="text/javascript" src="js/components/portfolio-3-col.min.js"></script>
-        <script type="text/javascript" src="js/components/parallax.min.js"></script>
-        <script type="text/javascript" src="js/components/google-map.min.js"></script>
-        <script type="text/javascript" src="js/components/wow.min.js"></script>
         <script type="text/javascript" src="assets/js/javaScript.js"></script>
         
         <!--========== END JAVASCRIPTS ==========-->
-         <script>
+       
+	</div>
+    </body>
+      <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -863,7 +734,5 @@
 			}
          
          </script>
-	</div>
-    </body>
     <!-- End Body -->
 </html>
