@@ -660,14 +660,14 @@ public List<PendingOrderDataModel> getPendingOrderData(String customerId) throws
 			
             Query buyRecordsQuery, sellRecordsQuery;
 			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.fundName , t.transactionAmount, t.transactionDate "
-										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='3' and t.productId = p.fundId");
+										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='4' and t.productId = p.fundId");
 			
 			query.setParameter("customerId",customerId);
 	           
 			 for(Iterator it=query.iterate(); it.hasNext();){		      
 				 Object[] row = (Object[]) it.next();
 				 
-				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),row[4].toString()));
+				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"Payment Awiated",row[4].toString()));
 			 }
 
 			 hibernateSession.getTransaction().commit();

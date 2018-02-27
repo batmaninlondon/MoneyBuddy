@@ -73,7 +73,7 @@
         
         <div id="signup">   
           
-          <form action="/" method="post">
+          <div >
           
           <div class="field-wrap">
             <label>
@@ -101,13 +101,13 @@
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
                               
-          </form>
+          </div>
 
         </div>
         <div id="login">   
           <h1>Welcome Back!</h1>
           
-          <form action="/" method="post">
+          <div>
           
             <div class="field-wrap">
             <label>
@@ -166,7 +166,7 @@
           
           
           
-          </form>
+          </div>
 
         </div>	
       </div><!-- tab-content -->

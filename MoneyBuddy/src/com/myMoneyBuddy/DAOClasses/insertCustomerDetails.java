@@ -43,7 +43,7 @@ public class insertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N","N");
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N","N","NOT_GENERATED");
 
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();

@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="center-block g-width-500--sm g-width-550--md">
+                <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md" >
                     <div class="g-margin-b-20--xs">
                         <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name">
                     </div>
@@ -148,9 +148,13 @@
                         <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
                     </div>
                     <div class="g-text-center--xs">
-                        <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" onClick="sendcontactMail();" >Submit</button>
+                        <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" onclick="sendcontactMail();" >Submit</button>
                     </div>
-                </form>
+                </div>
+                
+                <p id="contact-us-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
+                
+                
             </div>
             <img class="s-mockup-v2" src="img/mockups/pencil-01.png" alt="Mockup Image">
         </div>

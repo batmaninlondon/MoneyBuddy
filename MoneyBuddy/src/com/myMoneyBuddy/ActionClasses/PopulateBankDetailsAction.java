@@ -108,8 +108,8 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 	        	.append("  <h3>Thanks,</h3><br/><br/>")
 	        	.append("  <h3>MoneyBuddy Team</h3>")
 	        	.append("</div>");
-	        	sendmail.MailSending(emailId, bodyText,subject);
 	        	
+	        	//sendmail.MailSending(emailId, bodyText,subject);
  
 		    	
 		    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+emailId+" to reset password for session id : "+sessionMap.getClass().getName());

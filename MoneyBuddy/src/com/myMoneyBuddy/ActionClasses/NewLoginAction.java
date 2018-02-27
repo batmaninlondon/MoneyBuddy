@@ -67,7 +67,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     	try {
     		
     		
-    		Customers customer = queryCustomer.getCustomer(getEmailId());
+    		Customers customer = queryCustomer.getCustomerFromEmailId(getEmailId());
 	    	logger.debug("NewLoginAction class : execute method : start");
 	    	//System.out.println("Start - NewLoginAction execute method ");
 	    	if (customer == null) {

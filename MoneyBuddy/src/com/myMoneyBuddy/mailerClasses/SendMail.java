@@ -47,17 +47,68 @@ public class SendMail {
 	Logger logger = Logger.getLogger(SendMail.class);
 	
 	private int port =587;
-    private String host ="smtp.gmail.com";
-    private String username ="mf.moneybuddy@gmail.com";
+    private String gmailHost ="smtp.gmail.com";
+    private String username ="info@quantwealth.in";
+    private String mailerName="MoneyBuddy";
     private String password="banaras23";
     private boolean debug=true;
+    private String HOST = "email-smtp.us-east-1.amazonaws.com";
+    private String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
+    private String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
 
     
 
-    public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
-
+    //public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
+    public void MailSending( StringBuilder bodyText, String subject) throws MoneyBuddyException {
     	logger.debug("sendMail class : MailSending method : start");
     	
+    	try
+        {
+    	Properties props = System.getProperties();
+    	props.put("mail.transport.protocol", "smtp");
+    	props.put("mail.smtp.port", getPort()); 
+    	props.put("mail.smtp.starttls.enable", "true");
+    	props.put("mail.smtp.auth", "true");
+
+        // Create a Session object to represent a mail session with the specified properties. 
+    	Session session = Session.getDefaultInstance(props);
+
+        // Create a message with the specified information. 
+        MimeMessage msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(getUsername(),getMailerName()));
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress("emailwadhwani@gmail.com"));
+        msg.setSubject(subject);
+        msg.setContent(bodyText.toString(),"text/html");
+        
+        // Add a configuration set header. Comment or delete the 
+        // next line if you are not using a configuration set
+        //msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
+            
+        // Create a transport.
+        Transport transport = session.getTransport();
+                    
+        // Send the message.
+        
+            System.out.println("Sending...");
+            
+            // Connect to Amazon SES using the SMTP username and password you specified above.
+            transport.connect(getHOST(), getSMTP_USERNAME(), getSMTP_PASSWORD());
+        	
+            // Send the email.
+            transport.sendMessage(msg, msg.getAllRecipients());
+            System.out.println("Email sent!");
+        }
+        
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+/*    	
     	Properties props = new Properties();
     	props.put("mail.smtp.auth", "true");
     	props.put("mail.smtp.starttls.enable", "true");
@@ -100,7 +151,7 @@ public class SendMail {
     		
     		logger.debug("sendMail class : MailSending method : end");
 
-    	} 
+    	} */
     	catch (MessagingException e) {
     		logger.error("sendMail class : MailSending method : Caught Exception");
     		e.printStackTrace();
@@ -170,7 +221,7 @@ public class SendMail {
        	Properties props = new Properties();
        	props.put("mail.smtp.auth", "true");
        	props.put("mail.smtp.starttls.enable", "true");
-       	props.put("mail.smtp.host", getHost());
+       	props.put("mail.smtp.host", getGmailHost());
        	props.put("mail.smtp.port", getPort());
 
        	// Get the Session object.
@@ -256,7 +307,7 @@ public class SendMail {
     	Properties props = new Properties();
     	props.put("mail.smtp.auth", "true");
     	props.put("mail.smtp.starttls.enable", "true");
-    	props.put("mail.smtp.host", getHost());
+    	props.put("mail.smtp.host", getGmailHost());
     	props.put("mail.smtp.port", getPort());
 
     	// Get the Session object.
@@ -344,13 +395,6 @@ public class SendMail {
 		this.port = port;
 	}
 
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
 
 	public String getUsername() {
 		return username;
@@ -358,6 +402,46 @@ public class SendMail {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getMailerName() {
+		return mailerName;
+	}
+
+	public void setMailerName(String mailerName) {
+		this.mailerName = mailerName;
+	}
+
+	public String getHOST() {
+		return HOST;
+	}
+
+	public void setHOST(String hOST) {
+		HOST = hOST;
+	}
+
+	public String getSMTP_USERNAME() {
+		return SMTP_USERNAME;
+	}
+
+	public void setSMTP_USERNAME(String sMTP_USERNAME) {
+		SMTP_USERNAME = sMTP_USERNAME;
+	}
+
+	public String getSMTP_PASSWORD() {
+		return SMTP_PASSWORD;
+	}
+
+	public void setSMTP_PASSWORD(String sMTP_PASSWORD) {
+		SMTP_PASSWORD = sMTP_PASSWORD;
+	}
+
+	public String getGmailHost() {
+		return gmailHost;
+	}
+
+	public void setGmailHost(String gmailHost) {
+		this.gmailHost = gmailHost;
 	}
 
 	public String getPassword() {

@@ -50,8 +50,8 @@ public class TestAction {
          
          try {
 
-        	 trading.executeTrade("000012","1000", productDetailsMapForBUy,"NEW","15","2017-12-12","2018-12-12","UPFRONT", "BUY", 5,"123456123456","ICI","ICIC0000073",
-        			 "DIRECT","Y","Customer bought some mutual funds",null,null);
+        	 trading.executeTrade("000012", productDetailsMapForBUy,"NEW","15","2017-12-12","2018-12-12","UPFRONT", "BUY", 5,"123456123456","ICI","ICIC0000073",
+        			 "DIRECT","Y","Customer bought some mutual funds",null,"NotSet",null);
          String fromDate = "2016-10-05";
          String toDate = "2016-10-07";
          

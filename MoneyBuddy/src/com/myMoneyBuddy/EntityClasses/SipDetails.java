@@ -35,6 +35,9 @@ public class SipDetails {
     
     @Column (name="SIP_END_DATE")
     private String sipEndDate;
+    
+    @Column (name="SIP_DURATION")
+    private String sipDuration;
 
     @Column(name="SIP_COMPLETION_STATUS")
     private String sipCompletionStatus;
@@ -47,14 +50,15 @@ public class SipDetails {
         
     }
 
-	public SipDetails(String customerId, String transactionDetailId, String sipDate, String sipStartDate,  String sipEndDate, String sipCompletionStatus,
-			String sipFormSubmission) {
+	public SipDetails(String customerId, String transactionDetailId, String sipDate, String sipStartDate,  String sipEndDate, String sipDuration, 
+				String sipCompletionStatus, String sipFormSubmission) {
 		super();
 		this.customerId = customerId;
 		this.transactionDetailId = transactionDetailId;
 		this.sipStartDate = sipStartDate;
 		this.sipDate = sipDate;
 		this.sipEndDate = sipEndDate;
+		this.sipDuration = sipDuration;
 		this.sipCompletionStatus = sipCompletionStatus;
 		this.sipFormSubmission = sipFormSubmission;
 	}
@@ -100,6 +104,14 @@ public class SipDetails {
 		this.sipEndDate = sipEndDate;
 	}
 
+	public String getSipDuration() {
+		return sipDuration;
+	}
+
+	public void setSipDuration(String sipDuration) {
+		this.sipDuration = sipDuration;
+	}
+
 	public String getSipCompletionStatus() {
 		return sipCompletionStatus;
 	}
@@ -140,6 +152,9 @@ public class SipDetails {
         if ((this.sipEndDate == null) ? (other.sipEndDate != null) : !this.sipEndDate.equals(other.sipEndDate)) {
             return false;
         }
+        if ((this.sipDuration == null) ? (other.sipDuration != null) : !this.sipDuration.equals(other.sipDuration)) {
+            return false;
+        }
         if ((this.sipCompletionStatus == null) ? (other.sipCompletionStatus != null) : !this.sipCompletionStatus.equals(other.sipCompletionStatus)) {
             return false;
         }
@@ -158,6 +173,7 @@ public class SipDetails {
         hash = 79 * hash + (this.sipDate != null ? this.sipDate.hashCode() : 0);
         hash = 79 * hash + (this.sipStartDate != null ? this.sipStartDate.hashCode() : 0);
         hash = 79 * hash + (this.sipEndDate != null ? this.sipEndDate.hashCode() : 0);
+        hash = 79 * hash + (this.sipDuration != null ? this.sipDuration.hashCode() : 0);
         hash = 79 * hash + (this.sipCompletionStatus != null ? this.sipCompletionStatus.hashCode() : 0);
         hash = 79 * hash + (this.sipFormSubmission != null ? this.sipFormSubmission.hashCode() : 0);
         

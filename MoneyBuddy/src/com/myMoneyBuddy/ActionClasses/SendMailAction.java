@@ -7,32 +7,12 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.EntityClasses.Subscriber;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.mailerClasses.SendMail;
-import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IStarMFWebService;
-import org.tempuri.MFOrderEntry;
 
 /**
  *
@@ -78,18 +58,22 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 			    	.append("</div>");
 	    	
 	    	
-    	sendMail.MailSending(getSenderEmailId(),bodyText,subject);
+    	//sendMail.MailSending(getSenderEmailId(),bodyText,subject);
+    	sendMail.MailSending(bodyText,subject);
+    	
     	System.out.println(" SendMailAction execute method : mail sent to the user ");
 		
-    	subject="[MoneyBuddy] message from "+getSenderName()+" email id : "+getSenderEmailId();
+/*    	subject="[MoneyBuddy] message from "+getSenderName()+" email id : "+getSenderEmailId();
     	
     	bodyText.append("<div>")
     	.append("   <br/><br/>")
     	.append("  "+getSenderMessage()+"<br/>")
 	 	.append("</div>");
     	
-    	sendMail.MailSending("mf.moneybuddy@gmail.com",bodyText,subject);
-    	System.out.println(" SendMailAction execute method : mail sent to moneyBuddy team");
+    	//sendMail.MailSending("mf.moneybuddy@gmail.com",bodyText,subject);
+    	sendMail.MailSending(bodyText,subject);
+    	
+    	System.out.println(" SendMailAction execute method : mail sent to moneyBuddy team");*/
     	
     	logger.debug("SendMailAction execute method : end");
     	
@@ -159,7 +143,13 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 		this.senderMessage = senderMessage;
 	}
 
+	public InputStream getStream() {
+		return stream;
+	}
 
+	public void setStream(InputStream stream) {
+		this.stream = stream;
+	}
 
 
 }

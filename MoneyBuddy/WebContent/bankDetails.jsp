@@ -86,6 +86,7 @@
 	System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
 	%>
    <!--  <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> -->
+
    <div class="container ">
    		<a href="myIndex" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
@@ -224,7 +225,7 @@
 				     <div class="row">
 						<div class="col-md-6 col-xs-4">
 							<div class="checkbox">
-				  				<label><input type="checkbox" value="" onClick="activatePayNowButton();">I accept terms & condition</label>
+				  				<label><input id="iAccept" type="checkbox" onchange="activatePayNowButton();" />I accept terms & condition</label>
 							</div>
 						</div>
 					</div>
@@ -242,7 +243,7 @@
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  id="pay-now-button" class="disabled btn g-color--white g-margin-t-15--xs " onClick="populateBankDetails();" style="background-color:black; ">Pay Now</button>
+	                	<button type="button"  id="pay-now-button" class="disabled btn g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<%= request.getParameter("tranDetailId") %>');" style="background-color:black; ">Pay Now</button>
 	            </div>
 	       	</div>
 	     </div>

@@ -403,9 +403,10 @@ function checkKysStatus()
         data: { 'customerName' : customerName , 'dateOfBirth' : dateOfBirth , 'gender' : gender , 'occupation' : occupation , 'taxStatus' : taxStatus, 'addressLineOne' : addressLineOne , 'addressLineTwo' : addressLineTwo , 'addressLineThree' : addressLineThree , 'residentialCity' : residentialCity , 'residentialState' : residentialState , 'residentialPin' : residentialPin , 'residentialCountry' : residentialCountry},
 
         success : function(result){
-
+        	var tranDetailId = "NotSet";
+        	
         	if (result == "kycDone") {
-        		window.location='bankDetails';
+        		window.location='bankDetails.jsp?tranDetailId='+tranDetailId;
         	} 
         	else if (result == "kycNotDone")  {
         		window.location='additionalCustomerDetails';
@@ -459,7 +460,7 @@ function prepareKyc()
 
 }
 
-function checkDetails()
+/*function checkDetails()
 {
 	var clientHolding = document.getElementById("client-holding").value;
 	var taxStatus = document.getElementById("tax-status").value;
@@ -627,7 +628,7 @@ function checkDetails()
         	}
         },
     });
-}
+}*/
 
 function setInitialUpfrontInvestment() 
 {
@@ -641,7 +642,15 @@ function setInitialUpfrontInvestment()
 
 function activatePayNowButton()
 {
-	$("#pay-now-button").removeClass('disabled');
+	var iAccept = document.getElementById("iAccept").checked;
+	
+	if (iAccept)  {
+		
+		$("#pay-now-button").removeClass('disabled');
+	}
+	else {
+		$("#pay-now-button").addClass('disabled');
+	}
 	
 }
 
@@ -880,12 +889,13 @@ function deleteCartEntry(cartId)
 function openCustomerDetailsPage()  
 {
 	var redirectingPage = document.getElementById('redirectingPage').value;
-
+	var tranDetailId = "NotSet";
+	
 	if (redirectingPage == "panCardVerifiction") {
 		window.location='panCardVerification';
 	} 
 	else if (redirectingPage == "bankDetails"){
-		window.location='bankDetails';
+		window.location='bankDetails.jsp?tranDetailId='+tranDetailId;
 	}
 	else if (redirectingPage == "addCustomerDetails"){
 		window.location='additionalCustomerDetails';
@@ -1069,25 +1079,33 @@ function sendcontactMail() {
 		document.getElementById("sender-message").placeholder = "Message can not be blank";
 		return;
 	}
-	
-	$.ajax({
 
-        url : "sendMailAction",
-        type: 'post',
-        
-        data: {'senderName' : senderName, 'senderEmailId' : senderEmailId, 'senderMobileNum' : senderMobileNum, 'senderMessage' : senderMessage},
-        
-        success : function(result){
-        	if (result == "success") {
+		$.ajax({
 
-        		window.location='startSip';
-        	}
-        	else {
-        		window.location='errorPage';
-        	}
+	        url : "sendMailAction",
+	        type: 'post',
+	        
+	        data: {'senderName' : senderName, 'senderEmailId' : senderEmailId, 'senderMobileNum' : senderMobileNum, 'senderMessage' : senderMessage},
+	        
+	        success : function(result){
+	        	
+	        	//alert('result : '+result);
+	        	if (result == "success") {
+	        		//alert('success.... ');
 
-        },
-    });	
+	        		document.getElementById("contact-us-text").innerHTML = "Thank You , we will get back to you soon.";
+	        		$("#contact-us-form").addClass('hidden');
+	        	}
+	        	else {
+	        		window.location='errorPage';
+	        	}
+
+	        },
+
+	        
+	        
+	    });	
+
 }
 
 function login() {
@@ -1435,8 +1453,11 @@ function comparePasswords(password1,password2) {
     return false;
 }
  
-function populateBankDetails() 
+function populateBankDetails(tranDetailId) 
 {
+	
+	var tranDetailId = tranDetailId;
+	alert('tranDetailId : '+tranDetailId);
 	var bankName = document.getElementById("bank-name").value;
 	var accountType = document.getElementById("account-type").value;
 	var accountNumber = document.getElementById("account-number").value;
@@ -1491,7 +1512,7 @@ function populateBankDetails()
 		url : "paymentAction",
         type: 'post',
         
-        data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'neftCode' : ifscCode },
+        data: {'bankName' : bankName , 'accountNumber' : accountNumber , 'accountType' : accountType , 'neftCode' : ifscCode, 'tranDetailId' :tranDetailId },
         
         success : function(result){
         	if (result.startsWith("success")) {

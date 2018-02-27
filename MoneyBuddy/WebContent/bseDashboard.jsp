@@ -452,6 +452,7 @@
 							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
 							            </tr>
@@ -824,7 +825,7 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
 						});  
 				  },
 				  
@@ -1037,6 +1038,13 @@
 					        alert( data[0] +"'s Fund ID is: "+ data[ 1 ] );
 					        buyFundHandler('32');
 					    } );  */
+					    
+					 $('#pendingOrders tbody').on( 'click', 'button', function () {
+					        var data = table.row( $(this).parents('tr') ).data();
+					        var transactionDetailId = data[0];
+					        alert('transactionDetailId : '+transactionDetailId);
+					        window.location='bankDetails.jsp?tranDetailId='+transactionDetailId;
+					    } ); 
 					  
 				
 				  },

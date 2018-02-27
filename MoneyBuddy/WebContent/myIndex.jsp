@@ -566,7 +566,7 @@
                     <div class="col-md-8 js__form-eqaul-height-v1">
                         <div class="g-padding-x-40--xs g-padding-y-50--xs">
                             <h2 class="g-font-size-24--xs g-color--primary ">Have a question? Write to us</h2>
-                            <form>
+                            <div>
                                 <div class="row g-margin-b-30--xs ">
                                     <div class="col-sm-6  g-margin-b-0--md">
                                         <input type="text" class="form-control s-form-v4__input g-padding-l-0--xs" placeholder="* Full Name">
@@ -582,7 +582,7 @@
                                 <div class="g-text-center--xs">
                                     <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-70--xs ">Submit</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <!-- End Form -->

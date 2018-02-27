@@ -23,9 +23,9 @@ public class QueryCustomer {
 
 	Logger logger = Logger.getLogger(QueryCustomer.class);
 		
-	public Customers getCustomer(String emailId) throws MoneyBuddyException {
+	public Customers getCustomerFromEmailId(String emailId) throws MoneyBuddyException {
 			
-		logger.debug("QueryCustomer class : getCustomer method : start");
+		logger.debug("QueryCustomer class : getCustomerFromEmailId method : start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		hibernateSession.clear();
 		
@@ -41,16 +41,16 @@ public class QueryCustomer {
 			System.out.println("customer.getEmailId() : "+customer.getEmailId());
 			hibernateSession.getTransaction().commit();
 			
-			logger.debug("QueryCustomer class : getCustomer method : end");
+			logger.debug("QueryCustomer class : getCustomerFromEmailId method : end");
 			return customer;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class : getCustomer method : Caught Exception");
+			logger.debug("QueryCustomer class : getCustomerFromEmailId method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class : getCustomer method : Caught Exception");
+			logger.debug("QueryCustomer class : getCustomerFromEmailId method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -59,7 +59,39 @@ public class QueryCustomer {
 		}
 	}
 
-
+	public Customers getCustomerFromCustomerId(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class : getCustomerFromCustomerId method : start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		hibernateSession.clear();
+		
+		Customers customer = new Customers();
+	
+	
+		try
+		{
+			System.out.println("customerId is : "+customerId);
+			hibernateSession.beginTransaction();
+			customer = (Customers) hibernateSession.get(Customers.class, customerId);
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class : getCustomerFromCustomerId method : end");
+			return customer;
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryCustomer class : getCustomerFromCustomerId method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryCustomer class : getCustomerFromCustomerId method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
+		}
+	}
 
 	public String getPassword(String emailId) throws MoneyBuddyException {
 		
@@ -95,7 +127,8 @@ public class QueryCustomer {
 		}
 	}
 	
-public String getBseClientCreationStatus(String customerId) throws MoneyBuddyException {
+	
+	public String getBseClientCreationStatus(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class : getBseClientCreationStatus method : start");
 		
@@ -119,6 +152,38 @@ public String getBseClientCreationStatus(String customerId) throws MoneyBuddyExc
 		}
 		catch (Exception e ) {
 			logger.debug("QueryCustomer class : getBseClientCreationStatus method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
+		}
+	}
+	
+	public String getIsipMandateId(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class : getIsipMandateId method : start");
+		
+		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String isipMandateId = customer.getIsipMandateId();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class : getIsipMandateId method : end");
+			return isipMandateId;
+		}
+		catch ( HibernateException e ) {
+			logger.debug("QueryCustomer class : getIsipMandateId method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("QueryCustomer class : getIsipMandateId method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

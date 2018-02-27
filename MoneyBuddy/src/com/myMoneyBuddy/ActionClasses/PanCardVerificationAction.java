@@ -12,8 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
@@ -21,10 +23,18 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
+import com.ndml.kra.pan.webservice.service.GetPasscode;
+import com.ndml.kra.pan.webservice.service.GetPasscodeResponse;
+import com.ndml.kra.pan.webservice.service.ObjectFactory;
+import com.ndml.kra.pan.webservice.service.PANServiceImpl;
+import com.ndml.kra.pan.webservice.service.PANServiceImplService;
+import com.ndml.kra.pan.webservice.service.PanInquiryDetails;
+import com.ndml.kra.pan.webservice.service.PanInquiryDetailsResponse;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
+import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -62,6 +72,61 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 
     	// Savita Wadhwani - We need to update this piece of code with real API - start
     	
+		Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
+
+		configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+		
+		String password = configProperties.getProperty("KYC_PASSWORD");
+		String userId = configProperties.getProperty("KYC_USER_ID");
+		String miId = configProperties.getProperty("KYC_MI_ID");
+		String mobileNo = configProperties.getProperty("KYC_MOBILE_NO");
+		String encryptionKey = configProperties.getProperty("KYC_ENCRYPTION_KEY");
+		
+    	PANServiceImplService wbPanService = new PANServiceImplService();
+    	PANServiceImpl panServiceImpl = wbPanService.getPANServiceImplPort();
+
+    	String encryptedPassword = panServiceImpl.getPasscode(password,encryptionKey);
+
+		System.out.println("encryptedPassword : "  +encryptedPassword);
+		
+		String panCard = "AAXPW9277C";
+		String requestNum = "1234512346";
+		
+		String requestXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+							+ "<APP_REQ_ROOT>"
+								+ "<APP_PAN_INQ>"
+									+ "<APP_PAN_NO>"+panCard+"</APP_PAN_NO>"
+									+ "<APP_MOBILE_NO>"+mobileNo+"</APP_MOBILE_NO>"
+									+ "<APP_REQ_NO>"+requestNum+"</APP_REQ_NO>"
+								+ "</APP_PAN_INQ>"
+							+ "</APP_REQ_ROOT>";
+		
+		/*PanInquiryDetails details = new PanInquiryDetails();
+		details.setArg0(requestXml);
+		
+		System.out.println("requestXml : "+details.getArg0() );
+		details.setArg1(userId);
+		details.setArg2(encryptedPassword);
+		details.setArg3(miId);
+		
+		ObjectFactory factory = ObjectFactory.class.newInstance();
+		factory.createPanInquiryDetails(details);
+		
+		PanInquiryDetailsResponse response = factory.createPanInquiryDetailsResponse();
+		
+
+		//System.out.println("Res is : "+res);
+		System.out.println("Response is : "+response.getClass().getName().toString());*/
+		
+		
+		String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, miId);
+		
+		System.out.println("RES is "+res);
+		
+		
+		
+		
 		String num1 = getPanCard().substring(5,9);
 		String str;
 		System.out.println(" num1 is : "+num1);

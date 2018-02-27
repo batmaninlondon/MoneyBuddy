@@ -118,7 +118,9 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 		    	.append("  MoneyBuddy Team")
 		    	.append("</div>");
 
-    	sendMail.MailSending(getEmailId(),bodyText,subject);
+    	//sendMail.MailSending(getEmailId(),bodyText,subject);
+    	sendMail.MailSending(bodyText,subject);
+    	
     	System.out.println(" send email function completed from register user.");
     	
     	logger.debug("RegisterAction class : execute method : mail sent to "+getEmailId()+" to complete user registration");

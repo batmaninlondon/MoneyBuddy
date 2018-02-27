@@ -108,7 +108,7 @@ public class PrepareCartAction extends ActionSupport implements SessionAware  {
 	        	.append("  <h3>Thanks,</h3><br/><br/>")
 	        	.append("  <h3>MoneyBuddy Team</h3>")
 	        	.append("</div>");
-	        	sendmail.MailSending(emailId, bodyText,subject);
+	        	//sendmail.MailSending(emailId, bodyText,subject);
 	        	
  
 		    	

@@ -360,12 +360,12 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                    <form class="input-group">
+                    <div class="input-group">
                         <input type="email" class="form-control s-form-v5__input g-radius--left-50" name="email" placeholder="Enter your email">
                         <span class="input-group-btn">
                             <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--dark-brd s-btn--dark-brd g-radius--right-50"><i class="ti-arrow-right"></i></button>
                         </span>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

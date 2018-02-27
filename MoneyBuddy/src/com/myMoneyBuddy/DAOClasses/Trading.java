@@ -179,18 +179,23 @@ public class Trading {
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 
-			String[] mandateIdDetailsArray = {customerId,amount,mandateType,accountNum,accountType,ifscCode,"",sipStartDate,sipEndDate};
+
+
+			String frmtdStartDateForMandateId = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
+			String frmtdEndDateForMandateId = sipEndDate.substring(3,5)+"/"+sipEndDate.substring(0,2)+"/"+sipEndDate.substring(6,10);
+			
+			String[] mandateIdDetailsArray = {customerId,amount,mandateType,accountNum,accountType,ifscCode,"",frmtdStartDateForMandateId,frmtdEndDateForMandateId};
 
 			String mandateIdDetails = String.join("|",mandateIdDetailsArray);
-
+			
 			System.out.println("customerId : "+customerId);
 			System.out.println("amount : "+amount);
 			System.out.println("mandateType : "+mandateType);
 			System.out.println("accountNum : "+accountNum);
 			System.out.println("accountType : "+accountType);
 			System.out.println("ifscCode : "+ifscCode);
-			System.out.println("sipStartDate : "+sipStartDate);
-			System.out.println("sipEndDate : "+sipEndDate);
+			System.out.println("sipStartDate : "+frmtdStartDateForMandateId);
+			System.out.println("sipEndDate : "+frmtdEndDateForMandateId);
 			System.out.println("mandateIdDetails : "+mandateIdDetails);
 			
 			System.out.println(" USER_ID : "+configProperties.getProperty("USER_ID"));
@@ -231,10 +236,10 @@ public class Trading {
 	}
 
 
-	public String executeTrade(String customerId, String amount, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, 
+	public String executeTrade(String customerId, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, 
 			String sipStartDate, String sipEndDate,
 			String transactionType, String buySell, int years, String accountNum, String bankId, String ifsc, String bankMode, 
-			String firstOrderFlag, String paymentGatewayComment, String mandateId, SessionMap<String, Object> sessionMap) throws MoneyBuddyException {
+			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  SessionMap<String, Object> sessionMap) throws MoneyBuddyException {
 
 
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
@@ -259,50 +264,11 @@ public class Trading {
 			
 			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-			//hibernateSession.beginTransaction();
-
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = new Date();
-			String frmtdDateForDB = dateFormat.format(date);
-
-			System.out.println("frmtdDateForDB : "+frmtdDateForDB);
-			
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date dateForDbf = new Date();
-
-
-			dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			date = new Date();
-			String frmtdDate = dateFormat.format(date);
-
-
 			for ( Double currentAmount : productDetailsMap.values())  {
 				System.out.println("currentAmount : "+currentAmount);
 				totalAmount = totalAmount + currentAmount;
 			}
 
-			/*tempTransaction = new Transactions(customerId, Double.toString(totalAmount),
-					transactionType, "Pending",frmtdDateForDB,frmtdDateForDB);
-
-			hibernateSession.save(tempTransaction);
-			hibernateSession.getTransaction().commit();*/
-			
-			
-			
-			//logger.debug("Trading class : executeTrade method : inserted data to Transactions table for customerId : "+customerId);
-
-			//String transactionId = tempTransaction.getTransactionId();
-			
-			hibernateSession.beginTransaction();
-			
-			query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
-			
-			String transactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
-			
-			
-			hibernateSession.getTransaction().commit();
-			
-			
 			Properties clientProperties = new Properties();
 			String clientPropFilePath = "../../../config/client.properties";
 
@@ -324,12 +290,9 @@ public class Trading {
 			String PASSWORD_STARMF;
 			Response passwordStarMFPaymentGateway;
 			String[] resultsStarMFPaymentGateway;
-
-			//String paymentDetails;
 			String entryParam;
 			String[] resultsEntryParam = null;
 			String[] paymentDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
-			//paymentDetails = String.join("|",paymentDetailsArray);
 
 			boolean allOrderFailed = true ;
 			String paymentUrl;
@@ -344,9 +307,38 @@ public class Trading {
 			
 			String paymentUrlFile = ServletActionContext.getServletContext().getRealPath("")+"payment.html";
 			
+			if ("NotSet".equals(tranDetailId))  {
+				
+				System.out.println("Inside else case : tranDetailId is "+tranDetailId);
+			
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();
+				String frmtdDateForDB = dateFormat.format(date);
+	
+				System.out.println("frmtdDateForDB : "+frmtdDateForDB);
+				
+				dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date dateForDbf = new Date();
+	
+	
+				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				date = new Date();
+				String frmtdDate = dateFormat.format(date);
+				
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+				
+				String transactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+				
+				
+				hibernateSession.getTransaction().commit();
+
+			
 			for ( String currentProductId : productDetailsMap.keySet())  {
 				System.out.println("currentProductId : "+currentProductId);
 
+				
 				hibernateSession.beginTransaction();
 				String schemeCode = null;
 				Object result;
@@ -405,7 +397,7 @@ public class Trading {
 					String frmtdEndDateForSip = sipEndDate.substring(6,10)+"-"+sipEndDate.substring(0,2)+"-"+sipEndDate.substring(3,5);
 					
 					tempSipDetail = new SipDetails(customerId, transactionDetailId,
-							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,"N","N");
+							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,Integer.toString(years),"N","N");
 	
 					hibernateSession.save(tempSipDetail);
 					hibernateSession.getTransaction().commit();
@@ -602,43 +594,9 @@ public class Trading {
 					
 				}
 				else {
-					//System.out.println("paymentUrl : "+paymentUrl);
 					
-					//String paymentUrlFile = "C://HTMLFile/payment.html";
 					File newHtmlFile = new File(paymentUrlFile);
 					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
-
-
-					/*ServletResponse response = ServletActionContext.getResponse();
-					response.setContentType("text/html");
-					PrintWriter out = response.getWriter(); 
-					out.println(paymentUrl);	
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					Document doc = Jsoup.parse(paymentUrl);
-					
-					System.out.println("Path : "+ServletActionContext.getServletContext().getRealPath(""));*/
-					
-					/*URL url = new URL(paymentUrl);
-				    String nullFragment = null;
-				    URI uri = new URI(url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), nullFragment);
-				    //System.out.println("URI " + uri.toString() + " is OK");
-				      
-					URI myUri = new URI(paymentUrl);
-					Desktop.getDesktop().browse(uri);*/
-					
-					/*final File f = new File(ServletActionContext.getServletContext().getRealPath("")+"filename.html");
-			        FileUtils.writeStringToFile(f, doc.outerHtml(), "UTF-8");*/
 					
 					hibernateSession.beginTransaction();
 	
@@ -744,7 +702,123 @@ public class Trading {
 		    	
 		    	logger.debug("Trading class : executeTrade method : stored orderDataModel : in session id : "+sessionMap.getClass().getName());
 			
-			
+			}
+			else {
+				
+				System.out.println("Inside else case : tranDetailId is "+tranDetailId);
+				
+				
+				QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+				TransactionDetails transactionDetails =  queryTransactionDetails.getTransactionDetails(tranDetailId);
+				
+				orderNums.getString().add(transactionDetails.getBseOrderId());
+				
+				PasswordRequest passwordRequest = new PasswordRequest();
+				ObjectFactory objFact = ObjectFactory.class.newInstance();
+
+				passwordRequest.setMemberId(objFact.createPasswordRequestMemberId(configProperties.getProperty("MEMBER_ID")));
+				passwordRequest.setPassKey(objFact.createPasswordRequestPassKey(configProperties.getProperty("PASS_KEY")));
+				passwordRequest.setPassword(objFact.createPasswordRequestPassword(configProperties.getProperty("PASSWORD")));
+				passwordRequest.setUserId(objFact.createPasswordRequestUserId(configProperties.getProperty("USER_ID")));	
+				
+				passwordStarMFPaymentGateway = iStarMFPaymentGatewayService.getPassword(passwordRequest);
+
+				resultsStarMFPaymentGateway = passwordStarMFPaymentGateway.toString().split("\\|");
+
+				for (int i = 0 ; i <resultsStarMFPaymentGateway.length ; i++ )   {
+					System.out.println("resultsStarMF : "+i+" : " +resultsStarMFPaymentGateway[i]);
+				}
+				
+				System.out.println("UserId Passed : "+ passwordRequest.getUserId().getValue());
+				System.out.println("MemberId Passed : "+ passwordRequest.getMemberId().getValue());
+				System.out.println("PassKey Passed : "+ passwordRequest.getPassKey().getValue());
+				System.out.println("Password Passed : "+ passwordRequest.getPassword().getValue());
+
+				String status = passwordStarMFPaymentGateway.getStatus().getValue();
+
+				System.out.println("status : "+status);
+				
+				PASSWORD_STARMF = passwordStarMFPaymentGateway.getResponseString().getValue();
+				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
+
+				Iterator it = orderNums.getString().iterator();
+				
+				while(it.hasNext())  {
+					System.out.println("oredrNums : "+it.next().toString());
+				}
+				
+				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
+				RequestParam requestParam = new RequestParam();
+				requestParam.setAccNo(objFact.createRequestParamAccNo(accountNum));
+				requestParam.setBankID(objFact.createRequestParamBankID(bankId));
+				requestParam.setClientCode(objFact.createRequestParamClientCode(customerId));
+				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));
+				requestParam.setIFSC(objFact.createRequestParamIFSC(ifsc));
+				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(LOGOUT_URL));
+				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
+				requestParam.setMode(objFact.createRequestParamMode(bankMode));
+				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
+				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(Double.toString(totalPaymentAmount)));
+
+				System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());
+				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
+
+				String[] resultsPaymentGateway = paymentGateway.toString().split("\\|");
+
+				for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
+					System.out.println("resultsPaymentGateway : "+i+" : " +resultsPaymentGateway[i]);
+				}
+
+				paymentUrl = paymentGateway.getResponseString().getValue();
+				
+				String responseStatus = paymentGateway.getStatus().getValue();
+				System.out.println("responseStatus : "+responseStatus);
+				
+				if ("101".equals(responseStatus))  {
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
+					query.setParameter("transactionId", tranDetailId);
+					int updateResult = query.executeUpdate();
+					
+				}
+				else {
+					File newHtmlFile = new File(paymentUrlFile);
+					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
+					
+					hibernateSession.beginTransaction();
+	
+					query = hibernateSession.createQuery("update Customers set subscriberType = :subscriberType where customerId = :customerId");
+	
+					query.setParameter("subscriberType", "INVESTOR");
+	
+					query.setParameter("customerId", customerId);
+	
+					int result = query.executeUpdate();
+	
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					Object emailIdObj = hibernateSession.createQuery("select emailId from Customers where customerId = '"+customerId+"'").uniqueResult();
+					String emailId = null;
+					if (emailIdObj != null)
+						emailId = emailIdObj.toString();
+									
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("update Subscriber set subscriberType = :subscriberType where emailId = :emailId");
+	
+					query.setParameter("subscriberType", "INVESTOR");
+	
+					query.setParameter("emailId", emailId);
+	
+					result = query.executeUpdate();
+	
+					hibernateSession.getTransaction().commit();
+				}
+
+	
+			}
 			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - end
 			
 			logger.debug("Trading class : executeTrade method : end");
@@ -992,7 +1066,7 @@ public class Trading {
 					.append("  MoneyBuddy Team")
 					.append("</div>");
 
-					sendMail.MailSending(emailId,bodyText,subject);
+					//sendMail.MailSending(emailId,bodyText,subject);
 
 				}
 				

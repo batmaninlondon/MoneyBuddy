@@ -40,40 +40,40 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> sessionMap;
     private String emailId;
     
-    static final String FROM = "info@quantwealth.in";
-    static final String FROMNAME = "MoneyBuddy";
+    /*static final String FROM = "info@quantwealth.in";
+    static final String FROMNAME = "MoneyBuddy";*/
 	
     // Replace recipient@example.com with a "To" address. If your account 
     // is still in the sandbox, this address must be verified.
-   
+    //static final String TO = "emailwadhwani@gmail.com";
     
     // Replace smtp_username with your Amazon SES SMTP user name.
-    static final String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
+    //static final String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
     
     // Replace smtp_password with your Amazon SES SMTP password.
-    static final String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
+    //static final String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
     
     // The name of the Configuration Set to use for this message.
     // If you comment out or remove this variable, you will also need to
     // comment out or remove the header below.
-    static final String CONFIGSET = "ConfigSet";
+    //static final String CONFIGSET = "ConfigSet";
     
     // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
     // See http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html#region-endpoints
     // for more information.
-    static final String HOST = "email-smtp.us-east-1.amazonaws.com";
+    //static final String HOST = "email-smtp.us-east-1.amazonaws.com";
     
     // The port you will connect to on the Amazon SES SMTP endpoint. 
-    static final int PORT = 587;
+    //static final int PORT = 587;
     
-    static final String SUBJECT = "Money Buddy is here!!";
+    //static final String SUBJECT = "Money Buddy is here!!";
     
-    static final String BODY = String.join(
+/*    static final String BODY = String.join(
     	    System.getProperty("line.separator"),
     	    "<h1>Coming Soon</h1>",
     	    "<p>We are excited to annouce that we are launching our platform soon", 
     	    "  <a href='http://www.quantwealth.in'>MnoeyBuddy.in</a>."
-    	);
+    	);*/
 
     
 
@@ -124,7 +124,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	logger.debug("ForgotPasswordAction class : execute method : stored emailId : "+getEmailId()+" in session id : "+sessionMap.getClass().getName());
 	    	
 	    	String subject="Reset your MoneyBuddy password.";
-	    	//SendMail sendMail = new SendMail();
+	    	SendMail sendMail = new SendMail();
 	    	String hashedPassword = customer.getPassword(getEmailId());
 	    	String link = MAIL_ResetPassword_SITE_LINK+"?emailId="+emailId+"&hashedPassword="+hashedPassword;
 	    	StringBuilder bodyText = new StringBuilder();
@@ -142,7 +142,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	
 	    	
 	    	
-	    	
+/*	    	
 
 
 	        // Create a Properties object to contain connection configuration information.
@@ -158,7 +158,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	        // Create a message with the specified information. 
 	        MimeMessage msg = new MimeMessage(session);
 	        msg.setFrom(new InternetAddress(FROM,FROMNAME));
-	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(getEmailId()));
+	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
 	        msg.setSubject(subject);
 	        msg.setContent(bodyText.toString(),"text/html");
 	        
@@ -193,7 +193,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    
 	    	
 	    	
-	    	
+	    	*/
 	    	
 	    	
 	    	
@@ -208,6 +208,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	
 	    	
 	    	//sendMail.MailSending(getEmailId(), bodyText,subject);
+	    	sendMail.MailSending(bodyText,subject);
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");

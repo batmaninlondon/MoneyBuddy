@@ -209,7 +209,7 @@
         </header>
         
 <div class="row g-margin-t-90--xs g-text-right--xs ">    	
-	<form id="msform" style="text-align: center;">
+	<div id="msform" style="text-align: center;">
 		<!-- progressbar -->
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
@@ -476,7 +476,7 @@
 		<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;"/>
 		<input type="submit" name="submit" class="submit action-button" value="Submit"  style="width:20% ;float: right;"/>
 	</fieldset>
-</form>
+</div>
 </div>	  
 </body>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
