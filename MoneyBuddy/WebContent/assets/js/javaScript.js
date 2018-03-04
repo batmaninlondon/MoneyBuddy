@@ -280,30 +280,30 @@ function paymentStatus()
 }
 
 
-function forgottenPassword()
+function forgottenPassword(googleResponse)
 {
-	document.getElementById('load').style.visibility="visible";
+	//alert(googleResponse);
+	//document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("emailid").value;
 
 	if ( emailId == '')  {
-		
+		alert("email ID is blank");
 		document.getElementById("emailid").className += " formInvalid";
 		document.getElementById("emailid").placeholder = "Email Id can not be blank!";
-		
 		return;
 	}
 	else if (!validateEmail(emailId)) {
+		alert("email ID is invalid");
 		document.getElementById("emailid").className += " formInvalid";
 		document.getElementById("emailid").placeholder = document.getElementById("emailid").value + " - Not a valid Email Id ";
 		document.getElementById("emailid").value = null;
 		return;
 	}
-
+	alert('hello');
     $.ajax({
         url : "forgottenPasswordAction",
         type: 'post',
-        
-        data: { 'emailId' : emailId },
+        data: { 'emailId' : emailId,   'googleResponse' : googleResponse},
 
         success : function(result){
         	if (result == "success") {
@@ -318,6 +318,10 @@ function forgottenPassword()
         		document.getElementById("emailid").className += " formInvalid";
         		document.getElementById("emailid").placeholder = document.getElementById("emailid").value + " is not registered with MoneyBuddy";
         		document.getElementById("emailid").value = null;
+        	}
+        	
+        	else if (result == "Lookslikeyouarearobot")  {
+        		document.getElementById("forgotPwdMessage").innerHtml = " Looks like you are a robot";
         	}
         	else {
         		window.location='errorPage';
@@ -997,13 +1001,13 @@ function signUp(){
 	
 }
 
-function saveSubscriber( token) {
+function saveSubscriber( googleResponse) {
 	
 	alert("saveSubscriberAction callessd JS");
 
 	//var emailId = document.getElementById("subscriber-email-id").value;
 
-	var emailId = token;
+	var emailId = googleResponse;
 	
 	
 	if ( emailId == '')  {
@@ -1112,8 +1116,10 @@ function sendcontactMail() {
 
 }
 
-function login() {
+function login(googleResponse) {
 	
+	alert("login");
+	alert(googleResponse);
 	document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;
@@ -1145,7 +1151,7 @@ function login() {
         url : "newLoginAction",
         type: 'post',
         
-        data: {'emailId' : emailId , 'password' : password },
+        data: {'emailId' : emailId , 'password' : password, 'googleResponse':googleResponse },
         
         success : function(result){
         	if (result == "success") {
@@ -1171,6 +1177,9 @@ function login() {
         		document.getElementById("password").className += " formInvalid";
         		document.getElementById("password").placeholder = "Incorrect Password";
         		document.getElementById("password").value = null;
+        	}
+        	else if (result == "Lookslikeyouarearobot")  {
+        		document.getElementById("loginMessage").innerHtml = " Looks like you are a robot";
         	}
         	else if (result == "fundSelected")  {
         		window.location='investmentStyle';
@@ -1211,7 +1220,7 @@ function generatePackage() {
 }
 
 
-function register() {
+function register(googleResponse) {
 
 	document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("email-id1").value;
@@ -1283,12 +1292,9 @@ function register() {
 	}
 
     $.ajax({
-      	
-   
         url : "registerAction",
         type: 'post',
-        
-        data: {'emailId' : emailId, 'password' : password,'mobileNumber' : mobileNumber},
+        data: {'emailId' : emailId, 'password' : password,'mobileNumber' : mobileNumber, 'googleResponse':googleResponse},
         
         success : function(result){
         	if (result == "success") {
@@ -1311,6 +1317,9 @@ function register() {
         		document.getElementById("password1").placeholder = "Password";
         		document.getElementById("email-id1").className = "form-control";
         		document.getElementById("email-id1").placeholder = "Email ID";
+        	}
+        	else if (result == "Lookslikeyouarearobot")  {
+        		document.getElementById("registerMessage").innerHtml = " Looks like you are a robot";
         	}
         	else {
         		window.location='errorPage';

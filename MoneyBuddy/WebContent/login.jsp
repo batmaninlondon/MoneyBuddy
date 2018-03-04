@@ -32,8 +32,12 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	    
-	    
+	      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	    <link rel="stylesheet" href="css/style4.css">
+	    <style>
+	    	
+				.grecaptcha-badge{visibility:hidden;}
+	    </style>
 </head>
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
@@ -67,21 +71,13 @@
       </ul>
       
       <div class="tab-content">
-        
-        
-        
-        
         <div id="signup">   
-          
           <div >
-          
           <div class="field-wrap">
-            <label>
-              Your Email<span class="req">*</span>
-            </label>
+          	<p id="registerMessage"></p>
+            <label> Your Email<span class="req">*</span>  </label>
             <input id="email-id1" type="email"required autocomplete="off"/>
           </div>
-          
           <div class="field-wrap">
             <label>
               Create Password<span class="req">*</span>
@@ -97,7 +93,8 @@
           </div>
           
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-			<button type="button"  class="button button-block" onClick="register();">Continue</button>        
+          <button type="button" class="g-recaptcha button button-block" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='register'  data-badge="bottomleft"  >Continue</button>
+			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
                               
@@ -106,7 +103,7 @@
         </div>
         <div id="login">   
           <h1>Welcome Back!</h1>
-          
+          <p id="loginMessage"></p>
           <div>
           
             <div class="field-wrap">
@@ -133,6 +130,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p id="forgotPwdMessage"></p>
           <h4 class="modal-title">Reset Password</h4>
         </div>
         <div class="modal-body">
@@ -152,7 +150,7 @@
 				<div class="col-md-5">
 				</div>
 				<div class="col-md-4">
-					<button type="button" id="submit-button-5" class="  g-bg-color--primary g-color--white"  onClick="forgottenPassword();">Send Reset Link</button>
+					<button id="2" type="button" class="g-recaptcha g-bg-color--primary g-color--white" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='forgottenPassword'  data-badge="bottomleft"  >Send Reset Link</button>
 				</div>
 			</div>
         </div>
@@ -160,11 +158,9 @@
     </div>
   </div>
 </div>
-          
-          
-          <button type="button" id="submit-button-5" class="button button-block"  onClick="login();">SIGN IN</button>
-          
-          
+          <div>
+        	  <button id="3" type="button" class="g-recaptcha button button-block" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='login'  data-badge="bottomleft"  >SIGN IN</button>
+           </div>
           
           </div>
 

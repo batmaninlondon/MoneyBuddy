@@ -10,6 +10,7 @@ import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.insertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.MbUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.ByteArrayInputStream;
@@ -33,6 +34,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     //private String confirmPassword;
     private String emailId;
     private String mobileNumber;
+    private String googleResponse;
     //public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/userVerification";
     public final String MAIL_ForgotPassword_SITE_LINK = "www.quantwealth.in/userVerification";
     QueryCustomer customer = new QueryCustomer();
@@ -79,6 +81,14 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	logger.debug("RegisterAction class : execute method : start");
     	
     	System.out.println("RegisterAction class : execute method : email Id : "+getEmailId());
+    	
+    	MbUtil mbUtil = new MbUtil();
+    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+    	{
+    		String str = "Lookslikeyouarearobot";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    	    return ERROR;
+    	}
     	
     	if (customer.existsCustomer(getEmailId())) {
     		System.out.println("RegisterAction class : execute method : UserAlreadyExists");
@@ -183,7 +193,15 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
         this.mobileNumber = mobileNumber;
     }
 
-    public String getPassword() {
+    public String getGoogleResponse() {
+		return googleResponse;
+	}
+
+	public void setGoogleResponse(String googleResponse) {
+		this.googleResponse = googleResponse;
+	}
+
+	public String getPassword() {
         return password;
     }
 

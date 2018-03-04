@@ -117,7 +117,7 @@
 									<h5>Kamal Wadhwani</h5>
 									<h6>Co-Founder and CEO</h6>
 									<ul class="tag clearfix">
-										<li class="btn"><a href="#">INvestment</a></li>
+										<li class="btn"><a href="#">Investment</a></li>
 										<li class="btn"><a href="#">Tax</a></li>
 										<li class="btn"><a href="#">Growth</a></li>
 									</ul>

@@ -21,6 +21,7 @@ import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.MbUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,6 +36,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     private String emailId;
     private String password;
     //private String login;
+    private String googleResponse;
 
     QueryCustomer queryCustomer = new QueryCustomer();
 
@@ -65,10 +67,15 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     public String execute() {
     	String str = null;
     	try {
-    		
-    		
     		Customers customer = queryCustomer.getCustomerFromEmailId(getEmailId());
 	    	logger.debug("NewLoginAction class : execute method : start");
+	    	MbUtil mbUtil = new MbUtil();
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	{
+	    		String strMsg = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(strMsg.getBytes());
+	    	    return ERROR;
+	    	}
 	    	//System.out.println("Start - NewLoginAction execute method ");
 	    	if (customer == null) {
 	    		System.out.println("Emaid id not valid ");
@@ -259,7 +266,15 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
         return emailId;
     }
 
-    public void setEmailId(String emailId) {
+    public String getGoogleResponse() {
+		return googleResponse;
+	}
+
+	public void setGoogleResponse(String googleResponse) {
+		this.googleResponse = googleResponse;
+	}
+
+	public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
    

@@ -540,16 +540,16 @@
         </div><!--/.container-->
     </section><!--/#services-->
     
-    <!-- Subscribe -->
+   <%--  <!-- Subscribe -->
     
     
     
   <h1>Test reCaptcha with Struts 2</h1>
   
-  <form id='demo-form' action="?" method="POST">
+  <div id='demo-form' >
       <button class="g-recaptcha" data-sitekey="6Lc2P0oUAAAAAD3ucaAxyybznlN_LO6OBCh5mO0h" data-callback='saveSubscriber'>Submit</button>
       <br/>
-    </form>
+    </div>
     
         <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
             <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
@@ -576,7 +576,7 @@
             </div>
         </div>
         <!-- End Subscribe -->
-    
+     --%>
 
 	<div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
             <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">
@@ -599,7 +599,7 @@
                                     <textarea class="form-control s-form-v4__input g-padding-l-0--xs" rows="4" placeholder="* What is your query?"></textarea>
                                 </div>
                                 <div class="g-text-center--xs">
-                                    <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-70--xs ">Submit</button>
+                                   <!--  <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-70--xs ">Submit</button> -->
                                 </div>
                             </div>
                         </div>
