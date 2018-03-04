@@ -997,28 +997,32 @@ function signUp(){
 	
 }
 
-function saveSubscriber() {
+function saveSubscriber( token) {
+	
+	alert("saveSubscriberAction callessd JS");
 
-	var emailId = document.getElementById("subscriber-email-id").value;
+	//var emailId = document.getElementById("subscriber-email-id").value;
 
+	var emailId = token;
+	
+	
 	if ( emailId == '')  {
 		
 		document.getElementById("subscriber-email-id").className += " formInvalid";
 		document.getElementById("subscriber-email-id").placeholder = "Email Id can not be blank!";
 		return;
 	}
-	else if (!validateEmail(emailId)) {
-		document.getElementById("subscriber-email-id").className += " formInvalid";
-		document.getElementById("subscriber-email-id").placeholder = document.getElementById("subscriber-email-id").value + " - Not a valid Email Id ";
-		document.getElementById("subscriber-email-id").value = null;
-		return;
-	}
+//	else if (!validateEmail(emailId)) {
+//		document.getElementById("subscriber-email-id").className += " formInvalid";
+//		document.getElementById("subscriber-email-id").placeholder = document.getElementById("subscriber-email-id").value + " - Not a valid Email Id ";
+//		document.getElementById("subscriber-email-id").value = null;
+//		return;
+//	}
 	
 	$.ajax({
 
         url : "saveSubscriberAction",
         type: 'post',
-        
         data: {'emailId' : emailId},
         
         success : function(result){
