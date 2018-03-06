@@ -77,11 +77,19 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 
 		configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 		
-		String password = configProperties.getProperty("KYC_PASSWORD");
+		/*String password = configProperties.getProperty("KYC_PASSWORD");
 		String userId = configProperties.getProperty("KYC_USER_ID");
 		String miId = configProperties.getProperty("KYC_MI_ID");
 		String mobileNo = configProperties.getProperty("KYC_MOBILE_NO");
-		String encryptionKey = configProperties.getProperty("KYC_ENCRYPTION_KEY");
+		String encryptionKey = configProperties.getProperty("KYC_ENCRYPTION_KEY");*/
+		
+		
+		String password = "NDML@1234";
+		String userId = "TEST";
+		String miId = "Z0589";
+		String mobileNo = "7875898574";
+		String encryptionKey = "83";
+		
 		
     	PANServiceImplService wbPanService = new PANServiceImplService();
     	PANServiceImpl panServiceImpl = wbPanService.getPANServiceImplPort();
@@ -93,32 +101,13 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		String panCard = "AAXPW9277C";
 		String requestNum = "1234512346";
 		
-		String requestXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-							+ "<APP_REQ_ROOT>"
+		String requestXml = "<APP_REQ_ROOT>"
 								+ "<APP_PAN_INQ>"
 									+ "<APP_PAN_NO>"+panCard+"</APP_PAN_NO>"
 									+ "<APP_MOBILE_NO>"+mobileNo+"</APP_MOBILE_NO>"
 									+ "<APP_REQ_NO>"+requestNum+"</APP_REQ_NO>"
 								+ "</APP_PAN_INQ>"
-							+ "</APP_REQ_ROOT>";
-		
-		/*PanInquiryDetails details = new PanInquiryDetails();
-		details.setArg0(requestXml);
-		
-		System.out.println("requestXml : "+details.getArg0() );
-		details.setArg1(userId);
-		details.setArg2(encryptedPassword);
-		details.setArg3(miId);
-		
-		ObjectFactory factory = ObjectFactory.class.newInstance();
-		factory.createPanInquiryDetails(details);
-		
-		PanInquiryDetailsResponse response = factory.createPanInquiryDetailsResponse();
-		
-
-		//System.out.println("Res is : "+res);
-		System.out.println("Response is : "+response.getClass().getName().toString());*/
-		
+							+ "</APP_REQ_ROOT>";		
 		
 		String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, miId);
 		

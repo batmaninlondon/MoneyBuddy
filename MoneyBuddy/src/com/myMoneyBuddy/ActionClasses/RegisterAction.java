@@ -129,7 +129,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 		    	.append("</div>");
 
     	//sendMail.MailSending(getEmailId(),bodyText,subject);
-    	sendMail.MailSending(bodyText,subject);
+    	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" send email function completed from register user.");
     	

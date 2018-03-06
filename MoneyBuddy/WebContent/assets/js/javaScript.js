@@ -282,7 +282,7 @@ function paymentStatus()
 
 function forgottenPassword(googleResponse)
 {
-	//alert(googleResponse);
+
 	//document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("emailid").value;
 
@@ -299,7 +299,6 @@ function forgottenPassword(googleResponse)
 		document.getElementById("emailid").value = null;
 		return;
 	}
-	alert('hello');
     $.ajax({
         url : "forgottenPasswordAction",
         type: 'post',
@@ -1116,10 +1115,66 @@ function sendcontactMail() {
 
 }
 
-function login(googleResponse) {
+function pendingNavs()  {
 	
-	alert("login");
-	alert(googleResponse);
+	
+	$.ajax({
+
+        url : "newLoginAction",
+        type: 'post',
+        
+        data: {'emailId' : emailId , 'password' : password, 'googleResponse':googleResponse },
+        
+        success : function(result){
+        	if (result == "success") {
+        		window.location='myIndex';
+        	}
+        	else if (result == "verificationNotDone")  {
+        		document.getElementById("email-id").className += " formInvalid";
+        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + "Verification pending for this Email Id ";
+        		document.getElementById("email-id").value = null;
+        		document.getElementById("password").className = "form-control";
+        		document.getElementById("password").placeholder = "Password";
+        	}
+        	else if (result == "emailIdDoesNotExists")  {
+        		document.getElementById("email-id").className += " formInvalid";
+        		document.getElementById("email-id").placeholder = document.getElementById("email-id").value + " is not registered with MoneyBuddy";
+        		document.getElementById("email-id").value = null;
+        		document.getElementById("password").className = "form-control";
+        		document.getElementById("password").placeholder = "Password";
+        	}
+        	else if (result == "incorrectPassword")  {
+        		document.getElementById("email-id").className = "form-control";
+        		document.getElementById("email-id").placeholder = "Email";
+        		document.getElementById("password").className += " formInvalid";
+        		document.getElementById("password").placeholder = "Incorrect Password";
+        		document.getElementById("password").value = null;
+        	}
+        	else if (result == "Lookslikeyouarearobot")  {
+        		document.getElementById("loginMessage").innerHtml = " Looks like you are a robot";
+        	}
+        	else if (result == "fundSelected")  {
+        		window.location='investmentStyle';
+        	}
+        	else if (result == "fundOnetimeSelected")  {
+        		window.location='amountConfirmation';
+        	}
+        	else if (result == "fundSIPSelected")  {
+        		window.location='amountConfirmation';
+        	}
+        	else {
+        		window.location='errorPage';
+        	}
+
+        },
+    });	
+
+}
+
+
+
+function login(googleResponse) {
+
 	document.getElementById('load').style.visibility="visible";
 	var emailId = document.getElementById("email-id").value;
 	var password = document.getElementById("password").value;

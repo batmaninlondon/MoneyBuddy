@@ -209,7 +209,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	*/
 	    	
 	    	//sendMail.MailSending(getEmailId(), bodyText,subject);
-	    	//sendMail.MailSending(bodyText,subject);
+	    	sendMail.MailSending(bodyText,subject);
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");

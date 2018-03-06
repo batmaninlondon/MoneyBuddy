@@ -32,7 +32,35 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	    
-	      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	      <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+	      
+	      <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+    <script>
+      var recaptcha1;
+      var recaptcha2;
+      var myCallBack = function() {
+        //Render the recaptcha1 on the element with ID "recaptcha1"
+        recaptcha1 = grecaptcha.render('recaptcha1', {
+          'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+          'size' : 'invisible',
+          'callback' : register
+        });
+        
+        //Render the recaptcha2 on the element with ID "recaptcha2"
+        recaptcha2 = grecaptcha.render('recaptcha2', {
+        	'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+            'size' : 'invisible',
+            'callback' : forgottenPassword
+        });
+        
+        recaptcha3 = grecaptcha.render('recaptcha3', {
+            'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+            'size' : 'invisible',
+            'callback' : login
+          });
+      };
+    </script>
+    
 	    <link rel="stylesheet" href="css/style4.css">
 	    <style>
 	    	
@@ -93,7 +121,7 @@
           </div>
           
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-          <button type="button" class="g-recaptcha button button-block" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='register'  data-badge="bottomleft"  >Continue</button>
+          <button id="recaptcha1" type="button" class="g-recaptcha button button-block" >Continue</button>
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
@@ -150,7 +178,7 @@
 				<div class="col-md-5">
 				</div>
 				<div class="col-md-4">
-					<button id="2" type="button" class="g-recaptcha g-bg-color--primary g-color--white" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='forgottenPassword'  data-badge="bottomleft"  >Send Reset Link</button>
+					<button id="recaptcha2" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button>
 				</div>
 			</div>
         </div>
@@ -159,7 +187,7 @@
   </div>
 </div>
           <div>
-        	  <button id="3" type="button" class="g-recaptcha button button-block" data-sitekey="6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID" data-callback='login'  data-badge="bottomleft"  >SIGN IN</button>
+        	  <button id="recaptcha3" type="button" class="g-recaptcha button button-block"  >SIGN IN</button>
            </div>
           
           </div>
