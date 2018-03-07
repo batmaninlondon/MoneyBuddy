@@ -8,8 +8,8 @@ package com.myMoneyBuddy.ActionClasses;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.MbUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
@@ -27,6 +27,7 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 	private String senderEmailId;
 	private String senderMobileNum;
 	private String senderMessage;
+	private String googleResponse;
 
     private InputStream stream;
 
@@ -37,6 +38,14 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
     		
     	logger.debug("SendMailAction class : execute method : start");
     	System.out.println(" SendMailAction execute method Called !!");
+    	
+    	MbUtil mbUtil = new MbUtil();
+    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+    	{
+    		String str = "Lookslikeyouarearobot";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    	    return ERROR;
+    	}
     	
     	System.out.println(" SendMailAction execute method : Name : "+getSenderName());
     	System.out.println(" SendMailAction execute method : emailId : "+getSenderEmailId());
@@ -59,7 +68,7 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 	    	
 	    	
     	//sendMail.MailSending(getSenderEmailId(),bodyText,subject);
-    	sendMail.MailSending(bodyText,subject);
+    	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" SendMailAction execute method : mail sent to the user ");
 		
@@ -141,6 +150,14 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 
 	public void setSenderMessage(String senderMessage) {
 		this.senderMessage = senderMessage;
+	}
+
+	public String getGoogleResponse() {
+		return googleResponse;
+	}
+
+	public void setGoogleResponse(String googleResponse) {
+		this.googleResponse = googleResponse;
 	}
 
 	public InputStream getStream() {

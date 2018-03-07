@@ -21,10 +21,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.MbUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -209,7 +209,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	*/
 	    	
 	    	//sendMail.MailSending(getEmailId(), bodyText,subject);
-	    	sendMail.MailSending(bodyText,subject);
+	    	sendMail.MailSending(bodyText,subject,"ForgotPassword");
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");

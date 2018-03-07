@@ -26,6 +26,22 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        
+        <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+    <script>
+      var recaptchaSubscriber;
+      
+      var myCallBack = function() {
+        //Render the recaptcha1 on the element with ID "recaptcha1"
+        recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
+          'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+          'size' : 'invisible',
+          'callback' : sendContactUsMail
+        });
+        
+      };
+    </script>
+    
     </head>
     <!-- End Head -->
 
@@ -148,7 +164,7 @@
                         <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
                     </div>
                     <div class="g-text-center--xs">
-                       <!--  <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" onclick="" >Submit</button> -->
+                        <button id="recaptcha-contact-us" type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button>
                     </div>
                 </div>
                 

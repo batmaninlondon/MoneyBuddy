@@ -20,7 +20,8 @@ import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.EntityClasses.Subscriber;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.MbUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;
@@ -52,6 +53,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 	private Map<String, Object> sessionMap;
 	
 	private String emailId;
+	private String googleResponse;
 	//private String mobileNumber;
    
     QueryKycStatus kyc = new QueryKycStatus();
@@ -59,110 +61,109 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
     private InputStream stream;
 
     public String execute() {
-    	
-    	boolean isCaptchaValid = isCaptchaValid("6Lc2P0oUAAAAABCrec0MOCG_2OTLBTc644V8o9Ge",emailId);
-    	if (isCaptchaValid) 
-    		{
-    		System.out.println("valid response");
-    		}
-    	else
-    	{
-    		System.out.println("invalid response");
-    	}
+
     	
     	Session hibernateSession = null;
     	
-////    	try {
-////    		
-////    	logger.debug("SaveSubscriberAction class : execute method : start");
-////    	System.out.println(" SaveSubscriberAction execute method Called !!");
-////    	
-////    	System.out.println(" SaveSubscriberAction execute method : First Name : "+getEmailId());
-////    	//System.out.println(" SaveSubscriberAction execute method : Last Name : "+getMobileNumber());
-////    	
-////    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession(); 
-////	    
-////    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-////		Date date = new Date();
-////		String frmtdDate = dateFormat.format(date);
-////		
-////		hibernateSession.beginTransaction();
-////		Object result = hibernateSession.createQuery("select count(*) from Subscriber where emailId = '"+getEmailId()+"' ").uniqueResult();
-////		
-////		hibernateSession.getTransaction().commit();
-////		
-////		SendMail sendMail = new SendMail();
-////		String subject="[MoneyBuddy] ThankYou for your subscription";
-////
-////    	StringBuilder bodyText = new StringBuilder();
-////    	
-////    	System.out.println(" result : "+result.toString());
-////    	
-////		if ( "0".equals(result.toString()) )  {
-////			Subscriber tempSubscriber = new Subscriber(getEmailId(),"SUBSCRIBER",frmtdDate);
-////			hibernateSession.beginTransaction();
-////			hibernateSession.save(tempSubscriber);
-////			hibernateSession.getTransaction().commit();
-////			bodyText.append("<div>")
-////	    	.append("  Dear User<br/><br/>")
-////	    	.append("  Thank you for subscribing with MoneyBuddy. <br/>")
-////	    	.append("  <br/><br/>")
-////	    	.append("  Thanks,<br/>")
-////	    	.append("  MoneyBuddy Team")
-////	    	.append("</div>");
-////			
-////			System.out.println("str set to subscribedSuccessfully ");
-////			String str = "subscribedSuccessfully";
-////	    	stream = new ByteArrayInputStream(str.getBytes());
-////			
-////		}
-////		else {
-////		
-////	    	bodyText.append("<div>")
-////			    	.append("  Dear User<br/><br/>")
-////			    	.append("  you are alreadt subscribed with MoneyBuddy. <br/>")
-////			    	.append("  <br/><br/>")
-////			    	.append("  Thanks,<br/>")
-////			    	.append("  MoneyBuddy Team")
-////			    	.append("</div>");
-////	    	
-////	    	System.out.println("str set to alreadySubscribed ");
-////	    	String str = "alreadySubscribed";
-////	    	stream = new ByteArrayInputStream(str.getBytes());
-////		}
-////
-////    	//sendMail.MailSending(getEmailId(),bodyText,subject);
-////    	sendMail.MailSending(bodyText,subject);
-////    	
-////    	System.out.println(" send email function completed from subscriber.");
-////		
-////    	logger.debug("KycCheckAction class : execute method : end");
-////    	
-////    	System.out.println(" Returned Success !!");
-////
-////    	/*String str = "success";
-////    	stream = new ByteArrayInputStream(str.getBytes());*/
-//
-//    	return SUCCESS;
-//    	} 
-//    	/*catch ( MoneyBuddyException e )  {
-//    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-//    		e.printStackTrace();
-//    		String str = "error";
-//    	    stream = new ByteArrayInputStream(str.getBytes());
-//    		return ERROR;
-//    	}*/
-//    	catch ( Exception e )  {
-//    		logger.error("KycCheckAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
-//    		e.printStackTrace();
-//    		String str = "error";
-//    	    stream = new ByteArrayInputStream(str.getBytes());
-//    		return ERROR;
-//    	}
-//    	finally {
-//    		hibernateSession.close();
-//    	}
+    	try {
+    		
+    	logger.debug("SaveSubscriberAction class : execute method : start");
+    	System.out.println(" SaveSubscriberAction execute method Called !!");
+    	
+    	MbUtil mbUtil = new MbUtil();
+    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+    	{
+    		String str = "Lookslikeyouarearobot";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    	    return ERROR;
+    	}
+    	
+    	System.out.println(" SaveSubscriberAction execute method : First Name : "+getEmailId());
+    	//System.out.println(" SaveSubscriberAction execute method : Last Name : "+getMobileNumber());
+    	
+    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession(); 
+	    
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String frmtdDate = dateFormat.format(date);
+		
+		hibernateSession.beginTransaction();
+		Object result = hibernateSession.createQuery("select count(*) from Subscriber where emailId = '"+getEmailId()+"' ").uniqueResult();
+		
+		hibernateSession.getTransaction().commit();
+		
+		SendMail sendMail = new SendMail();
+		String subject="[MoneyBuddy] ThankYou for your subscription";
+
+    	StringBuilder bodyText = new StringBuilder();
+    	
+    	System.out.println(" result : "+result.toString());
+    	
+		if ( "0".equals(result.toString()) )  {
+			Subscriber tempSubscriber = new Subscriber(getEmailId(),"SUBSCRIBER",frmtdDate);
+			hibernateSession.beginTransaction();
+			hibernateSession.save(tempSubscriber);
+			hibernateSession.getTransaction().commit();
+			bodyText.append("<div>")
+	    	.append("  Dear User<br/><br/>")
+	    	.append("  Thank you for subscribing with MoneyBuddy. <br/>")
+	    	.append("  <br/><br/>")
+	    	.append("  Thanks,<br/>")
+	    	.append("  MoneyBuddy Team")
+	    	.append("</div>");
+			
+			System.out.println("str set to subscribedSuccessfully ");
+			String str = "subscribedSuccessfully";
+	    	stream = new ByteArrayInputStream(str.getBytes());
+			
+		}
+		else {
+		
+	    	bodyText.append("<div>")
+		    	.append("  Dear User<br/><br/>")
+			    	.append("  you are alreadt subscribed with MoneyBuddy. <br/>")
+			    	.append("  <br/><br/>")
+			    	.append("  Thanks,<br/>")
+			    	.append("  MoneyBuddy Team")
+			    	.append("</div>");
+	    	
+	    	System.out.println("str set to alreadySubscribed ");
+	    	String str = "alreadySubscribed";
+	    	stream = new ByteArrayInputStream(str.getBytes());
+		}
+
+    	//sendMail.MailSending(getEmailId(),bodyText,subject);
+    	//sendMail.MailSending(bodyText,subject);
+    	
+    	System.out.println(" send email function completed from subscriber.");
+		
+    	logger.debug("KycCheckAction class : execute method : end");
+    	
+    	System.out.println(" Returned Success !!");
+
+    	/*String str = "success";
+    	stream = new ByteArrayInputStream(str.getBytes());*/
+
     	return SUCCESS;
+    	} 
+    	/*catch ( MoneyBuddyException e )  {
+    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+    		e.printStackTrace();
+    		String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    		return ERROR;
+    	}*/
+    	catch ( Exception e )  {
+    		logger.error("KycCheckAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
+    		e.printStackTrace();
+    		String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());
+    		return ERROR;
+    	}
+    	finally {
+    		hibernateSession.close();
+    	}
+    	
     }
     
     @Override
@@ -192,6 +193,14 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 		this.emailId = emailId;
 	}
 
+	public String getGoogleResponse() {
+		return googleResponse;
+	}
+
+	public void setGoogleResponse(String googleResponse) {
+		this.googleResponse = googleResponse;
+	}
+
 /*	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -203,28 +212,5 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 
 */
 	
-	public  boolean isCaptchaValid(String secretKey, String response) {
-	    try {
-	        String url = "https://www.google.com/recaptcha/api/siteverify?"
-	                + "secret=" + secretKey
-	                + "&response=" + response;
-	        System.out.println(url);
-	        InputStream res = new URL(url).openStream();
-	        BufferedReader rd = new BufferedReader(new InputStreamReader(res, Charset.forName("UTF-8")));
 
-	        StringBuilder sb = new StringBuilder();
-	        int cp;
-	        while ((cp = rd.read()) != -1) {
-	            sb.append((char) cp);
-	        }
-	        String jsonText = sb.toString();
-	        res.close();
-
-	        JSONObject json = new JSONObject(jsonText);
-	        System.out.println(json);
-	        return json.getBoolean("success");
-	    } catch (Exception e) {
-	        return false;
-	    }
-	}
 }

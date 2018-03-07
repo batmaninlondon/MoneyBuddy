@@ -29,7 +29,23 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <%-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> --%>
+        
+	<script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+    <script>
+      var recaptchaSubscriber;
+      
+      var myCallBack = function() {
+        //Render the recaptcha1 on the element with ID "recaptcha1"
+        recaptchaSubscriber = grecaptcha.render('recaptcha-subscriber', {
+          'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+          'size' : 'invisible',
+          'callback' : saveSubscriber
+        });
+        
+      };
+    </script>
+    
    
         
     </head>
@@ -540,16 +556,7 @@
         </div><!--/.container-->
     </section><!--/#services-->
     
-   <%--  <!-- Subscribe -->
-    
-    
-    
-  <h1>Test reCaptcha with Struts 2</h1>
-  
-  <div id='demo-form' >
-      <button class="g-recaptcha" data-sitekey="6Lc2P0oUAAAAAD3ucaAxyybznlN_LO6OBCh5mO0h" data-callback='saveSubscriber'>Submit</button>
-      <br/>
-    </div>
+    <!-- Subscribe -->
     
         <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
             <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
@@ -562,11 +569,7 @@
                         <div class="input-group">
                             <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email">
                             <span class="input-group-btn">
-                            <!-- <form id='demo-form' action="?" method="POST">
-      							<button class="g-recaptcha" data-sitekey="6Lc2P0oUAAAAAD3ucaAxyybznlN_LO6OBCh5mO0h" data-callback='onSubmit'>Submit</button>
-     								 <br/>
-   								 </form> -->
-                                <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" onClick="saveSubscriber();"><i class="ti-arrow-right"></i></button>
+                                <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button>
                             </span>
                         </div>
                         <br/><br/>
@@ -576,7 +579,7 @@
             </div>
         </div>
         <!-- End Subscribe -->
-     --%>
+    
 
 	<div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
             <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">

@@ -7,40 +7,15 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceStarMF;
-import com.ndml.kra.pan.webservice.service.GetPasscode;
-import com.ndml.kra.pan.webservice.service.GetPasscodeResponse;
-import com.ndml.kra.pan.webservice.service.ObjectFactory;
 import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
-import com.ndml.kra.pan.webservice.service.PanInquiryDetails;
-import com.ndml.kra.pan.webservice.service.PanInquiryDetailsResponse;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
-import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IStarMFWebService;
-import org.tempuri.MFOrderEntry;
 
 /**
  *

@@ -15,7 +15,7 @@ import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.BufferedInputStream;

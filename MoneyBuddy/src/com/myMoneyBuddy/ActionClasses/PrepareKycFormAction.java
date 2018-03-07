@@ -20,7 +20,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.opensymphony.xwork2.ActionSupport;

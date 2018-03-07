@@ -26,7 +26,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;

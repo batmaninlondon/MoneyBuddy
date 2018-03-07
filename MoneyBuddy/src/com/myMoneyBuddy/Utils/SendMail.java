@@ -3,7 +3,7 @@
  * @author Savita Wadhwani
  */
 
-package com.myMoneyBuddy.mailerClasses;
+package com.myMoneyBuddy.Utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,13 +59,16 @@ public class SendMail {
     
 
     //public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
-    public void MailSending( StringBuilder bodyText, String subject) throws MoneyBuddyException {
+    public void MailSending( StringBuilder bodyText, String subject, String callingFunctionality) throws MoneyBuddyException {
     	logger.debug("sendMail class : MailSending method : start");
     	
     	try
         {
+    		logger.debug("sendMail class : MailSending method : called for following functionality : "+callingFunctionality);
+    		
     	Properties props = System.getProperties();
     	props.put("mail.transport.protocol", "smtp");
+    	
     	props.put("mail.smtp.port", getPort()); 
     	props.put("mail.smtp.starttls.enable", "true");
     	props.put("mail.smtp.auth", "true");
@@ -76,7 +79,7 @@ public class SendMail {
         // Create a message with the specified information. 
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(getUsername(),getMailerName()));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress("emailwadhwani@gmail.com"));
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress("savita.wadhwani@gmail.com"));
         msg.setSubject(subject);
         msg.setContent(bodyText.toString(),"text/html");
         
@@ -165,7 +168,7 @@ public class SendMail {
 		}
     }
 
-    public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{
+    public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{/*
     	
            PdfReader reader;
 		try {
@@ -181,8 +184,8 @@ public class SendMail {
            map = (HashMap) form.getFields();
            //Iterator iterator = map.keySet().iterator();
            System.out.println("iterator size : "+map.size());
-           /*while(iterator.hasNext())
-               System.out.println("Field is >>>"+iterator.next());*/
+           while(iterator.hasNext())
+               System.out.println("Field is >>>"+iterator.next());
            
            form.setField("Your Company Name", "MoneyBuddy");
            form.setField("Your Name", "MoneyBuddy");
@@ -298,9 +301,9 @@ public class SendMail {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 
-    }
+    */}
     
-    public void sendKycFormMail(String pdfFile, String emailId) throws MoneyBuddyException{
+    public void sendKycFormMail(String pdfFile, String emailId) throws MoneyBuddyException{/*
 
 		try {
 	
@@ -376,15 +379,17 @@ public class SendMail {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 
- }
+ */}
     
     
-    public int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {
+    public int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {/*
         stamper.insertPage(pagecount, pagesize);
         PdfContentByte canvas = stamper.getOverContent(pagecount);
         column.setCanvas(canvas);
         column.setSimpleColumn(rect);
         return column.go();
+    */
+    	return 0;
     }
     
 	public int getPort() {

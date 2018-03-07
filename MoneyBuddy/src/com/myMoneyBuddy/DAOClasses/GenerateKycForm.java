@@ -15,7 +15,7 @@ import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.SendMail;
+import com.myMoneyBuddy.Utils.SendMail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -184,7 +184,7 @@ public class GenerateKycForm {
            
 
        		SendMail sendMail = new SendMail();
-       		sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId());
+       		//sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId());
        	
            System.out.println("End!!");
            

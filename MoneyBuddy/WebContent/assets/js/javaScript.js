@@ -1004,9 +1004,9 @@ function saveSubscriber( googleResponse) {
 	
 	alert("saveSubscriberAction callessd JS");
 
-	//var emailId = document.getElementById("subscriber-email-id").value;
+	var emailId = document.getElementById("subscriber-email-id").value;
 
-	var emailId = googleResponse;
+	//var emailId = googleResponse;
 	
 	
 	if ( emailId == '')  {
@@ -1026,10 +1026,14 @@ function saveSubscriber( googleResponse) {
 
         url : "saveSubscriberAction",
         type: 'post',
-        data: {'emailId' : emailId},
+        data: {'emailId' : emailId , 'googleResponse' : googleResponse },
         
         success : function(result){
-        	if (result == "subscribedSuccessfully") {
+        	if (result == "Lookslikeyouarearobot") {
+        		document.getElementById("subscription-text").innerHTML = "Lookslikeyouarearobot";
+
+        	}
+        	else if (result == "subscribedSuccessfully") {
         		document.getElementById("subscription-text").innerHTML = "Thank You for subscribing with MoneyBuddy";
 
         	}
@@ -1045,7 +1049,7 @@ function saveSubscriber( googleResponse) {
 }
 
 
-function sendcontactMail() {
+function sendContactUsMail(googleResponse) {
 	
 	var senderName = document.getElementById("sender-name").value;
 	var senderEmailId = document.getElementById("sender-emailId").value;
@@ -1092,7 +1096,7 @@ function sendcontactMail() {
 	        url : "sendMailAction",
 	        type: 'post',
 	        
-	        data: {'senderName' : senderName, 'senderEmailId' : senderEmailId, 'senderMobileNum' : senderMobileNum, 'senderMessage' : senderMessage},
+	        data: {'senderName' : senderName, 'senderEmailId' : senderEmailId, 'senderMobileNum' : senderMobileNum, 'senderMessage' : senderMessage, 'googleResponse' : googleResponse },
 	        
 	        success : function(result){
 	        	
@@ -1102,6 +1106,9 @@ function sendcontactMail() {
 
 	        		document.getElementById("contact-us-text").innerHTML = "Thank You , we will get back to you soon.";
 	        		$("#contact-us-form").addClass('hidden');
+	        	}
+	        	else if (result == "Lookslikeyouarearobot")  {
+	        		document.getElementById("contact-us-text").innerHtml = " Looks like you are a robot";
 	        	}
 	        	else {
 	        		window.location='errorPage';

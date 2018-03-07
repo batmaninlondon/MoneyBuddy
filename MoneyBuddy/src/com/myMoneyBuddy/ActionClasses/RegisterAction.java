@@ -6,11 +6,11 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-import com.myMoneyBuddy.mailerClasses.SendMail;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.insertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.MbUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.ByteArrayInputStream;

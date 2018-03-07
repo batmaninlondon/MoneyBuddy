@@ -30,7 +30,7 @@ public class SendAttachment {
     
 
     //public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
-    
+/*    
     public static void main(String args[]) {
 
     	//Logger logger = Logger.getLogger(sendMail.class);
@@ -121,7 +121,7 @@ public class SendAttachment {
 			e.printStackTrace();
 			//throw new MoneyBuddyException(e.getMessage(),e);
 		}
-    }
+    }*/
 
     
 
