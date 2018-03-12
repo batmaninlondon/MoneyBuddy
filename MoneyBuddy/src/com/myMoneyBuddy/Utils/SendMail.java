@@ -5,40 +5,23 @@
 
 package com.myMoneyBuddy.Utils;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Properties;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 
@@ -46,23 +29,23 @@ public class SendMail {
 
 	Logger logger = Logger.getLogger(SendMail.class);
 	
-	private int port =587;
-    private String gmailHost ="smtp.gmail.com";
-    private String username ="info@quantwealth.in";
-    private String mailerName="MoneyBuddy";
-    private String password="banaras23";
-    private boolean debug=true;
-    private String HOST = "email-smtp.us-east-1.amazonaws.com";
-    private String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
-    private String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
+	//private int port =587;
+    //private String gmailHost ="smtp.gmail.com";
+    //private String username ="info@quantwealth.in";
+    //private String mailerName="MoneyBuddy";
+    //private String password="banaras23";
+    //private boolean debug=true;
+    //private String HOST = "email-smtp.us-east-1.amazonaws.com";
+    //private String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
+    //private String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
 
     
 
-    //public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
-    public void MailSending( StringBuilder bodyText, String subject, String callingFunctionality) throws MoneyBuddyException {
+    public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
+    //public void MailSending( StringBuilder bodyText, String subject, String callingFunctionality) throws MoneyBuddyException {
     	logger.debug("sendMail class : MailSending method : start");
     	
-    	try
+/*    	try
         {
     		logger.debug("sendMail class : MailSending method : called for following functionality : "+callingFunctionality);
     		
@@ -100,7 +83,7 @@ public class SendMail {
             // Send the email.
             transport.sendMessage(msg, msg.getAllRecipients());
             System.out.println("Email sent!");
-        }
+        }*/
         
     	
     	
@@ -108,31 +91,35 @@ public class SendMail {
     	
     	
     	
+
+    	try {    	
     	
+    	Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
+
+		configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+		
     	
-    	
-/*    	
     	Properties props = new Properties();
     	props.put("mail.smtp.auth", "true");
     	props.put("mail.smtp.starttls.enable", "true");
-    	props.put("mail.smtp.host", getHost());
-    	props.put("mail.smtp.port", getPort());
+    	props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+    	props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
 
     	// Get the Session object.
 
     	Session session = Session.getInstance(props,
     			new javax.mail.Authenticator() {
     		protected PasswordAuthentication getPasswordAuthentication() {
-    			return new PasswordAuthentication(getUsername(), getPassword());
+    			return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
     		}
     	});
 
-    	try {
     		// Create a default MimeMessage object.
     		Message message = new MimeMessage(session);
 
     		// Set From: header field of the header.
-    		message.setFrom(new InternetAddress(getUsername()));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
 
     		// Set To: header field of the header.
 
@@ -146,15 +133,18 @@ public class SendMail {
 
     		// Send message
     		
-    		System.out.println("sendMail class : username : "+username);
-    		System.out.println("sendMail class : password : "+password);
     		System.out.println("sendMail class : emailId : "+emailId);
     		
     		Transport.send(message);
     		
     		logger.debug("sendMail class : MailSending method : end");
 
-    	} */
+    	} 
+    	catch (IOException e) {
+    		logger.error("sendMail class : MailSending method : Caught Exception");
+    		e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+    	}
     	catch (MessagingException e) {
     		logger.error("sendMail class : MailSending method : Caught Exception");
     		e.printStackTrace();
@@ -392,7 +382,7 @@ public class SendMail {
     	return 0;
     }
     
-	public int getPort() {
+/*	public int getPort() {
 		return port;
 	}
 
@@ -423,9 +413,9 @@ public class SendMail {
 
 	public void setHOST(String hOST) {
 		HOST = hOST;
-	}
+	}*/
 
-	public String getSMTP_USERNAME() {
+/*	public String getSMTP_USERNAME() {
 		return SMTP_USERNAME;
 	}
 
@@ -439,8 +429,8 @@ public class SendMail {
 
 	public void setSMTP_PASSWORD(String sMTP_PASSWORD) {
 		SMTP_PASSWORD = sMTP_PASSWORD;
-	}
-
+	}*/
+/*
 	public String getGmailHost() {
 		return gmailHost;
 	}
@@ -455,7 +445,7 @@ public class SendMail {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	}*/
     
 }
 

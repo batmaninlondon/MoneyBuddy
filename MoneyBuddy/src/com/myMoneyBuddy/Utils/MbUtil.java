@@ -1,20 +1,35 @@
 package com.myMoneyBuddy.Utils;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
-
+import java.util.Properties;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+
 public class MbUtil {
-	 public boolean isCaptchaValid(String googleResponse2) 
+	
+	Logger logger = Logger.getLogger(MbUtil.class);
+	
+	 public boolean isCaptchaValid(String googleResponse) throws MoneyBuddyException
 	    {
+		 	logger.debug("MbUtil class : isCaptchaValid method : start");
 		    try {
+		    	
+		    	Properties configProperties = new Properties();
+				String configPropFilePath = "../../../config/config.properties";
+
+				configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+				
+				
 		        String url = "https://www.google.com/recaptcha/api/siteverify?"
-		                + "secret=" + "6LfzbkoUAAAAAM4RRocJaTgXIHtcLkEROYS2MVgy"
-		                + "&response=" + googleResponse2;
+		                + "secret=" + configProperties.getProperty("RECAPTHA_SECRET_KEY")
+		                + "&response=" + googleResponse;
 		        System.out.println(url);
 		        InputStream res = new URL(url).openStream();
 		        BufferedReader rd = new BufferedReader(new InputStreamReader(res, Charset.forName("UTF-8")));
@@ -29,10 +44,21 @@ public class MbUtil {
 
 		        JSONObject json = new JSONObject(jsonText);
 		        System.out.println(json);
+		        
+		        logger.debug("MbUtil class : isCaptchaValid method : start");
+		        
 		        return json.getBoolean("success");
-		    } catch (Exception e) {
-		        return false;
-		    }
+		        
+		    }catch (IOException e) {
+	    		logger.error("MbUtil class : isCaptchaValid method : Caught Exception");
+	    		e.printStackTrace();
+				throw new MoneyBuddyException(e.getMessage(),e);
+	    	}
+	        catch (Exception e ) {
+	        	logger.error("MbUtil class : isCaptchaValid method : Caught Exception");
+				e.printStackTrace();
+				throw new MoneyBuddyException(e.getMessage(),e);
+			}
 		
 		}
 

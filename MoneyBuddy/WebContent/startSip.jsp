@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.Properties" %>
+<%@ page language="java" import="java.io.FileInputStream" %>
+<%@ page language="java" import="java.io.File" %>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -29,12 +35,29 @@
         
         <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
     <script>
-      var recaptchaSubscriber;
+    
+    <%
+    
+    ServletContext sc=request.getServletContext();
+    String path=sc.getRealPath("/properties/jspConfig.properties");
+    FileInputStream fis = new FileInputStream(new File(path));
+    
+    Properties configProperties = new Properties();
+
+	configProperties.load(fis);
+	
+	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
+	
+	System.out.println("siteKey : "+siteKey);
+    
+    %>
+    
+      var recaptchaContactUs;
       
       var myCallBack = function() {
         //Render the recaptcha1 on the element with ID "recaptcha1"
         recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
-          'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+          'sitekey' : '<%=siteKey%>', //Replace this with your Site key
           'size' : 'invisible',
           'callback' : sendContactUsMail
         });

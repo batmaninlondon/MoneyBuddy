@@ -9,11 +9,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.log4j.Logger;

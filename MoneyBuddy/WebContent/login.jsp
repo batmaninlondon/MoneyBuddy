@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.Properties" %>
+<%@ page language="java" import="java.io.FileInputStream" %>
+<%@ page language="java" import="java.io.File" %>
+
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -36,6 +42,23 @@
 	      
 	      <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
     <script>
+    
+    <%
+    
+    ServletContext sc=request.getServletContext();
+    String path=sc.getRealPath("/properties/jspConfig.properties");
+    FileInputStream fis = new FileInputStream(new File(path));
+    
+    Properties configProperties = new Properties();
+
+	configProperties.load(fis);
+	
+	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
+	
+	System.out.println("siteKey : "+siteKey);
+    
+    %>
+    
       var recaptchaRegister;
       var recaptchaForgotPswd;
       var recaptchaLogin;
@@ -43,20 +66,20 @@
       var myCallBack = function() {
         //Render the recaptcha1 on the element with ID "recaptcha1"
         recaptchaRegister = grecaptcha.render('recaptcha-register', {
-          'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+          'sitekey' : '<%=siteKey%>', //Replace this with your Site key
           'size' : 'invisible',
           'callback' : register
         });
         
         //Render the recaptcha2 on the element with ID "recaptcha2"
         recaptchaForgotPswd = grecaptcha.render('recaptcha-forgot-pswd', {
-        	'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+        	'sitekey' : '<%=siteKey%>', //Replace this with your Site key
             'size' : 'invisible',
             'callback' : forgottenPassword
         });
         
         recaptchaLogin = grecaptcha.render('recaptcha-login', {
-            'sitekey' : '6LfzbkoUAAAAAMCRHI8BqlBdRlALLUpvYK7EeVID', //Replace this with your Site key
+            'sitekey' : '<%=siteKey%>', //Replace this with your Site key
             'size' : 'invisible',
             'callback' : login
           });
@@ -151,7 +174,7 @@
             <input  id="password" type="password" required autocomplete="off"/>
           </div>
           
-          <p class="forgot"><a data-toggle="modal" data-target="#myModal">Forgot Password?</a></p>
+          <p class="forgot"><button type="button" class="g-recaptcha g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
           <div class="container">
 
   <!-- Modal -->
