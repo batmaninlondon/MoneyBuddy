@@ -133,7 +133,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	if(uccSpilts[0].equals("100") ) {
 		    		
-		    		if(uccSpilts[1].contains("RECORD INSERTED SUCCESSFULLY") ) {
+		    		if(uccSpilts[1].contains("SUCCESSFULLY") ) {
 			    		
 			    		UpdateCustomer updateCustomer = new UpdateCustomer();
 			    		updateCustomer.updateBseClientCreationStatus(customerId, "Y");
@@ -212,9 +212,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				
 				String mandateId = customer.getIsipMandateId();
-				
-				if ( !"NOT_GENERATED".equals(mandateId))  {
-					String mandateIdResponse = trading.generateMandateId(customerId, amount, "X", getAccountNumber(), getAccountType(), getNeftCode(), 
+
+				if ( "NOT_GENERATED".equals(mandateId))  {
+					String mandateIdResponse = trading.generateMandateId(customerId, amount, "I", getAccountNumber(), getAccountType(), getNeftCode(), 
 							sipStartDate, sipEndDate);
 					
 					String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 

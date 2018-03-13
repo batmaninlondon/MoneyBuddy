@@ -56,22 +56,34 @@ public class QueryTransactionDetails {
 		}
 	}
 	
-/*	public HashMap<String,String> getPendingNavsOrders() throws MoneyBuddyException {
+	public HashMap<String,String> getPendingNavsOrders() throws MoneyBuddyException {
 		
 		logger.debug("QueryTransactionDetails class : getPendingNavsOrders method : start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		HashMap<String,String> pendingNavOrders = new HashMap<String,String>();
 	
-	
 		try
 		{
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select bseOrderId,TRANSACTION_FOLIO_NUM FROM ebdb.TRANSACTION_DETAILS  where TRANSACTION_STATUS='7';");
+			Query query = hibernateSession.createQuery("select bseOrderId,transactionFolioNum from TransactionDetails where transactionStatus = '7'");
 			List<Object[]> transactionDetailsList = query.list();
-			
+			String bseOrderId = "";
+			String folioNum = "";
 			for ( int i = 0; i < transactionDetailsList.size() ;i++ ) {
-				pendingNavOrders.put(transactionDetailsList.get(i)[0].toString(), transactionDetailsList.get(i)[1].toString());
+				
+				if (null == transactionDetailsList.get(i)[0])
+					bseOrderId = "";
+				else
+					bseOrderId = transactionDetailsList.get(i)[0].toString();
+				
+				if (null == transactionDetailsList.get(i)[1])
+					folioNum = "";
+				else
+					folioNum = transactionDetailsList.get(i)[1].toString();
+				
+					
+				pendingNavOrders.put(bseOrderId, folioNum);
 			}
 			
 			Iterator it = pendingNavOrders.entrySet().iterator();
@@ -100,7 +112,7 @@ public class QueryTransactionDetails {
 		finally {
 			hibernateSession.close();
 		}
-	}*/
+	}
 
 
 }

@@ -3,6 +3,8 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@ page language="java"
 	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
+	
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -106,7 +108,9 @@
 			<div class="col-md-6">
 				<h2 style="font-family:Aparajita;font-size:35px;"><b>Upload NAV</b></h2>
 			</div>
-			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<p>Dummy Value is : <s:property value="dummyValue"/></p>
+			</div>
 		</div>	
 	
 		

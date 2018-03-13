@@ -47,8 +47,6 @@
 	configProperties.load(fis);
 	
 	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
-	
-	System.out.println("siteKey : "+siteKey);
     
     %>
     

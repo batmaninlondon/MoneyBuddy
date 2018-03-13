@@ -106,7 +106,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	
     	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
     	String hashedPassword = desEncrypter.encrypt(getPassword());
-    	String subject="[MoneyBuddy] Please verify your email address.";
+    	String subject="Welcome to MoneyBuddy";
 
     	/*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
     	/*Date date = new Date();
@@ -119,16 +119,17 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 
     	StringBuilder bodyText = new StringBuilder();
     	bodyText.append("<div>")
-		    	.append("  Dear User<br/><br/>")
-		    	.append("  Thank you for registration. Your mail ("+getEmailId()+") is under verification<br/>")
-		    	.append("  Please click <a href=\""+link+"\">here</a> or open below link in browser<br/>")
-		    	.append("  <a href=\""+link+"\">"+link+"</a>")
-		    	.append("  <br/><br/>")
-		    	.append("  Thanks,<br/>")
-		    	.append("  MoneyBuddy Team")
+		    	.append("  Congratulations on taking the first step towards investing your money in a simple and stress free way.<br/><br/>")
+		    	.append("  We’re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.<br/><br/>")
+		    	.append("  Click on the below link to verify your email and activate your account<br/>")
+		    	.append("  <a href=\""+link+"\"></a><br/>")
+		    	.append("  Questions?<br/>")
+		    	.append("  Reply to this email OR Whatsapp/Call/SMS us at 9971648736")
+		    	.append("  Wishing you a prosperous and healthy life<br/>")
+		    	.append("  -Team MoneyBuddy")
 		    	.append("</div>");
 
-    	//sendMail.MailSending(getEmailId(),bodyText,subject);
+    	sendMail.MailSending(getEmailId(),bodyText,subject);
     	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" send email function completed from register user.");

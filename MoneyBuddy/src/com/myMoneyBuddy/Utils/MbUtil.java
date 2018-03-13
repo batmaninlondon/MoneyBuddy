@@ -30,7 +30,7 @@ public class MbUtil {
 		        String url = "https://www.google.com/recaptcha/api/siteverify?"
 		                + "secret=" + configProperties.getProperty("RECAPTHA_SECRET_KEY")
 		                + "&response=" + googleResponse;
-		        System.out.println(url);
+		        //System.out.println(url);
 		        InputStream res = new URL(url).openStream();
 		        BufferedReader rd = new BufferedReader(new InputStreamReader(res, Charset.forName("UTF-8")));
 
@@ -43,7 +43,7 @@ public class MbUtil {
 		        res.close();
 
 		        JSONObject json = new JSONObject(jsonText);
-		        System.out.println(json);
+		        //System.out.println(json);
 		        
 		        logger.debug("MbUtil class : isCaptchaValid method : start");
 		        

@@ -92,13 +92,12 @@
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
 	
-	
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn g-color--white g-margin-t-15--xs " onClick="openCustomerDetailsPage();" style="background-color:black; ">Continue</button>
+	                	<button type="button"  class="btn g-color--white g-margin-t-15--xs <s:if test="#session.customerCartList.size() == 1 ">disabled</s:if>" onClick="openCustomerDetailsPage();" style="background-color:black; ">Continue</button>
 	            </div>
 	       	</div>
 	     </div>

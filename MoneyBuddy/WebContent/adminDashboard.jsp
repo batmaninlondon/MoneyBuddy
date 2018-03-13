@@ -108,7 +108,8 @@
 		</div>
 		<div class="col-md-3">
 		
-			<a href="uploadCustomerNav"><b>UploadCustomerNav</b></a>
+			<button type="button"  class="btn g-color--white g-margin-t-15--xs " onClick="fetchPendingNavData();">UploadCustomerNav</button>
+			<!-- <a href="uploadCustomerNav"><b>UploadCustomerNav</b></a> -->
 		
 		</div>
 	</div>	
@@ -129,7 +130,7 @@
 				<tbody class="table-body" >
 
 					 <s:iterator value="#session.dbfStatusDataModel" var="dbfStatusDataModelElement">
-					 <s:property value="#session.dbfStatusDataModel.size"/>
+					<%--  <s:property value="#session.dbfStatusDataModel.size"/> --%>
 						<tr >
 						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfStatusDataModelElement.dbfDataDate"/></td>
 						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfStatusDataModelElement.rta"/></td>

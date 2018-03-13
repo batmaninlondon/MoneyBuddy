@@ -132,7 +132,7 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 	    	stream = new ByteArrayInputStream(str.getBytes());
 		}
 
-    	//sendMail.MailSending(getEmailId(),bodyText,subject);
+    	sendMail.MailSending(getEmailId(),bodyText,subject);
     	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" send email function completed from subscriber.");

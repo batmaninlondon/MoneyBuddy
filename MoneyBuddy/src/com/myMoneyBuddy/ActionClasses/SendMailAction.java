@@ -47,10 +47,10 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
     	    return ERROR;
     	}
     	
-    	System.out.println(" SendMailAction execute method : Name : "+getSenderName());
+    	/*System.out.println(" SendMailAction execute method : Name : "+getSenderName());
     	System.out.println(" SendMailAction execute method : emailId : "+getSenderEmailId());
     	System.out.println(" SendMailAction execute method : mobileNumber : "+getSenderMobileNum());
-    	System.out.println(" SendMailAction execute method : message : "+getSenderMessage());
+    	System.out.println(" SendMailAction execute method : message : "+getSenderMessage());*/
 
 		
 		SendMail sendMail = new SendMail();
@@ -67,7 +67,7 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
 			    	.append("</div>");
 	    	
 	    	
-    	//sendMail.MailSending(getSenderEmailId(),bodyText,subject);
+    	sendMail.MailSending(getSenderEmailId(),bodyText,subject);
     	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" SendMailAction execute method : mail sent to the user ");

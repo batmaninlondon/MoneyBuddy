@@ -5,18 +5,19 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
-public class PendingNavsAction extends ActionSupport implements SessionAware  {
+public class PendingNavsAction extends ActionSupport implements SessionAware,Action  {
 
 	
 	
@@ -25,30 +26,40 @@ public class PendingNavsAction extends ActionSupport implements SessionAware  {
 
 	private InputStream stream;
 	
-	private List<FundDetailsDataModel> fundDetailsDataModel;
+	private HashMap<String,String>  pendingNavOrders ;
+	
+	private String dummyValue;
+	
 	
     public String execute() {
 
     	logger.debug("PendingNavsAction class : execute method : start");
+
+    	
+    	dummyValue = "Hello";
     	
     	try {
-			System.out.println("Calling FetchFundDetailsAction class - start ");
-			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+			System.out.println("Calling PendingNavsAction class - start ");
+			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 
-			fundDetailsDataModel = queryPrimaryFundDetails.getFundDetailsData();
-			setFundDetailsDataModel(fundDetailsDataModel);
+			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
+
+			Iterator it = pendingNavOrders.entrySet().iterator();
+			 
+			while ( it.hasNext() )  {
+				Map.Entry pair = (Map.Entry)it.next();
+				System.out.println("PendingNavsAction class : execute method : key : "+pair.getKey()+" and value : "+pair.getValue());
+				
+			}
 			
-			sessionMap.put("fundDetailsDataModel", fundDetailsDataModel);
-			logger.debug("FetchFundDetailsAction class : execute method : stored fundDetailsDataModel in session id : "+sessionMap.getClass().getName());
-			
-			logger.debug("FetchFundDetailsAction class : execute method : end");
+			logger.debug("PendingNavsAction class : execute method : end");
 			
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-			logger.debug("FetchFundDetailsAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.debug("PendingNavsAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";
@@ -79,14 +90,26 @@ public class PendingNavsAction extends ActionSupport implements SessionAware  {
 	}
 
 
-	public List<FundDetailsDataModel> getFundDetailsDataModel() {
-		return fundDetailsDataModel;
+	public HashMap<String, String> getPendingNavOrders() {
+		return pendingNavOrders;
 	}
 
 
-	public void setFundDetailsDataModel(List<FundDetailsDataModel> fundDetailsDataModel) {
-		this.fundDetailsDataModel = fundDetailsDataModel;
+	public void setPendingNavOrders(HashMap<String, String> pendingNavOrders) {
+		this.pendingNavOrders = pendingNavOrders;
 	}
+
+
+	public String getDummyValue() {
+		return dummyValue;
+	}
+
+
+	public void setDummyValue(String dummyValue) {
+		this.dummyValue = dummyValue;
+	}
+
+
 
 
 }

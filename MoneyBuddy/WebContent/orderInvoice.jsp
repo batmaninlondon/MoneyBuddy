@@ -110,7 +110,6 @@
 							<tr>
 								<th class="center col-md-4 g-bg-color--gray-light">Id</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Units</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Amount</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Date</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Status</th>
@@ -121,7 +120,6 @@
 								<tr>
 								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionId"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.fundName"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.units"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.amount"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionDate"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionStatus"/></td>
