@@ -112,13 +112,16 @@ public class insertCustomerDetails {
 
 			hibernateSession.beginTransaction();
 
-			Query query = hibernateSession.createQuery("update Customers set verificationStatus = :verificationStatus" + " where password = :password");
+			Query query = hibernateSession.createQuery("update Customers set verificationStatus = :verificationStatus where password = :password");
 
 			query.setParameter("verificationStatus", "Y");
 
 			query.setParameter("password", password);
 
 			int result = query.executeUpdate();
+			
+			System.out.println("Value of password is : "+password);
+			System.out.println(result+" rows updated !! ");
 
 			hibernateSession.getTransaction().commit();
     		

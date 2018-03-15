@@ -8,6 +8,8 @@ package com.myMoneyBuddy.ActionClasses;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
+
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,43 +48,20 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    return ERROR;
     	}
-    	
-    	/*System.out.println(" SendMailAction execute method : Name : "+getSenderName());
-    	System.out.println(" SendMailAction execute method : emailId : "+getSenderEmailId());
-    	System.out.println(" SendMailAction execute method : mobileNumber : "+getSenderMobileNum());
-    	System.out.println(" SendMailAction execute method : message : "+getSenderMessage());*/
 
+    	SendMail sendMail = new SendMail();
+
+    	Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
+
+		configProperties.load(RegisterAction.class.getResourceAsStream(configPropFilePath));
 		
-		SendMail sendMail = new SendMail();
-		String subject="[MoneyBuddy] ThankYou for your message";
+		String mailLink = configProperties.getProperty("MAIL_CONTACT_US_LINK");
+		System.out.println("mailLink is : "+mailLink);
+    	
+    	String subject = configProperties.getProperty("MAIL_CONTACT_US_SUBJECT");
 
-    	StringBuilder bodyText = new StringBuilder();
-
-    	bodyText.append("<div>")
-			    	.append("  Dear "+getSenderName()+"<br/><br/>")
-			    	.append("  We will get back to you  <br/>")
-			    	.append("  <br/><br/>")
-			    	.append("  Thanks,<br/>")
-			    	.append("  MoneyBuddy Team")
-			    	.append("</div>");
-	    	
-	    	
-    	sendMail.MailSending(getSenderEmailId(),bodyText,subject);
-    	//sendMail.MailSending(bodyText,subject);
-    	
-    	System.out.println(" SendMailAction execute method : mail sent to the user ");
-		
-/*    	subject="[MoneyBuddy] message from "+getSenderName()+" email id : "+getSenderEmailId();
-    	
-    	bodyText.append("<div>")
-    	.append("   <br/><br/>")
-    	.append("  "+getSenderMessage()+"<br/>")
-	 	.append("</div>");
-    	
-    	//sendMail.MailSending("mf.moneybuddy@gmail.com",bodyText,subject);
-    	sendMail.MailSending(bodyText,subject);
-    	
-    	System.out.println(" SendMailAction execute method : mail sent to moneyBuddy team");*/
+    	sendMail.MailSending(getSenderEmailId(),subject,"ContactUsMail","ContactUsMail.txt",mailLink,"");
     	
     	logger.debug("SendMailAction execute method : end");
     	

@@ -5,7 +5,10 @@
 
 package com.myMoneyBuddy.Utils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
 import javax.mail.Message;
@@ -22,78 +25,45 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfStamper;
+import com.myMoneyBuddy.ActionClasses.RegisterAction;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 
 public class SendMail {
 
-	Logger logger = Logger.getLogger(SendMail.class);
-	
-	//private int port =587;
-    //private String gmailHost ="smtp.gmail.com";
-    //private String username ="info@quantwealth.in";
-    //private String mailerName="MoneyBuddy";
-    //private String password="banaras23";
-    //private boolean debug=true;
-    //private String HOST = "email-smtp.us-east-1.amazonaws.com";
-    //private String SMTP_USERNAME = "AKIAIWUUSWP7Q6ZULO5Q";
-    //private String SMTP_PASSWORD = "AsZxWpOv37ISx5HD/SSD6NkKgcf5qD165ORDlzXSiCvr";
+	Logger logger = Logger.getLogger(SendMail.class);   
 
-    
-
-    public void MailSending(String emailId, StringBuilder bodyText, String subject) throws MoneyBuddyException {
-    //public void MailSending( StringBuilder bodyText, String subject, String callingFunctionality) throws MoneyBuddyException {
+    public void MailSending(String emailId, String subject, String mailType,String fileName,
+    		String mailLink,String displayLinkName) throws MoneyBuddyException {
+    	
     	logger.debug("sendMail class : MailSending method : start");
+    	logger.debug(mailType+" has been sent to "+emailId);
     	
-/*    	try
-        {
-    		logger.debug("sendMail class : MailSending method : called for following functionality : "+callingFunctionality);
-    		
-    	Properties props = System.getProperties();
-    	props.put("mail.transport.protocol", "smtp");
-    	
-    	props.put("mail.smtp.port", getPort()); 
-    	props.put("mail.smtp.starttls.enable", "true");
-    	props.put("mail.smtp.auth", "true");
-
-        // Create a Session object to represent a mail session with the specified properties. 
-    	Session session = Session.getDefaultInstance(props);
-
-        // Create a message with the specified information. 
-        MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(getUsername(),getMailerName()));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress("savita.wadhwani@gmail.com"));
-        msg.setSubject(subject);
-        msg.setContent(bodyText.toString(),"text/html");
-        
-        // Add a configuration set header. Comment or delete the 
-        // next line if you are not using a configuration set
-        //msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
-            
-        // Create a transport.
-        Transport transport = session.getTransport();
-                    
-        // Send the message.
-        
-            System.out.println("Sending...");
-            
-            // Connect to Amazon SES using the SMTP username and password you specified above.
-            transport.connect(getHOST(), getSMTP_USERNAME(), getSMTP_PASSWORD());
-        	
-            // Send the email.
-            transport.sendMessage(msg, msg.getAllRecipients());
-            System.out.println("Email sent!");
-        }*/
-        
-    	
-    	
-    	
-    	
-    	
-    	
+    	System.out.println(mailType+" has been sent to "+emailId);
 
     	try {    	
     	
+    		String mailContentFilePath = "../../../mailContents/"+fileName;
+    		InputStream is = RegisterAction.class.getResourceAsStream(mailContentFilePath);
+        	
+        	
+        	StringBuilder bodyText = new StringBuilder();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            
+            String strLine;
+
+            //Read File Line By Line
+            while ((strLine = br.readLine()) != null)   {
+            	
+            	if (strLine.contains("LinkForEmail")) {
+            		
+            		System.out.println("contains LinkForEmail ");
+            		strLine = strLine.replace("LinkForEmail", "<a href=\""+mailLink+"\">"+displayLinkName+"</a>");
+
+            	}
+            	bodyText.append(strLine);
+            }
     	Properties configProperties = new Properties();
 		String configPropFilePath = "../../../config/config.properties";
 

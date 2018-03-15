@@ -85,7 +85,7 @@ public class DesEncrypter {
             byte[] utf8 = str.getBytes("UTF8");
             byte[] enc  = ecipher.doFinal(utf8);
 
-            logger.debug("DesEncrypter class : encrypt method : end");
+            logger.debug("DesEncrypter class : encrypt method : end"); 
             
             return new sun.misc.BASE64Encoder().encode(enc);
 

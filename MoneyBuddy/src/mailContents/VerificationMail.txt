@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<br/>
+		<h3>Congratulations on taking the first step towards investing your money in a simple and stress free way.</h3>
+		<h3>We’re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</h3>
+		<h3>Click on LinkForEmail to verify your email and activate your account</h3>
+		<br/><br/>
+		<h2>Questions?</h2>
+		<br/><br/>
+		<h3>Reply to this email OR Whatsapp/Call/SMS us at 9971648736</h3>
+		<h3>Wishing you a prosperous and healthy life</h3>
+		<br/><br/>
+		<h3>-Team MoneyBuddy</h3>
+	</div>
+</body>
+</html>

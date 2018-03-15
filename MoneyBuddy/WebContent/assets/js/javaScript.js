@@ -1251,7 +1251,7 @@ function generatePackage() {
 
 function register(googleResponse) {
 
-	document.getElementById('load').style.visibility="visible";
+	
 	var emailId = document.getElementById("email-id1").value;
 	var password = document.getElementById("password1").value;
 	var mobileNumber = document.getElementById("mobile-number").value;
@@ -1264,6 +1264,7 @@ function register(googleResponse) {
 		document.getElementById("password1").placeholder = "Password";
 		document.getElementById("mobile-number").className = "form-control";
 		document.getElementById("mobile-number").placeholder = "Contact Number";
+		
 		return;
 	}
 	else if ( !validateEmail(emailId) )  {
@@ -1320,6 +1321,8 @@ function register(googleResponse) {
 		return;
 	}
 
+	document.getElementById('load').style.visibility="visible";
+	
     $.ajax({
         url : "registerAction",
         type: 'post',

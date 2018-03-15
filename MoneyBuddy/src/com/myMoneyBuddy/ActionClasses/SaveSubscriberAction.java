@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -91,11 +92,6 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 		Object result = hibernateSession.createQuery("select count(*) from Subscriber where emailId = '"+getEmailId()+"' ").uniqueResult();
 		
 		hibernateSession.getTransaction().commit();
-		
-		SendMail sendMail = new SendMail();
-		String subject="[MoneyBuddy] ThankYou for your subscription";
-
-    	StringBuilder bodyText = new StringBuilder();
     	
     	System.out.println(" result : "+result.toString());
     	
@@ -104,13 +100,20 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 			hibernateSession.beginTransaction();
 			hibernateSession.save(tempSubscriber);
 			hibernateSession.getTransaction().commit();
-			bodyText.append("<div>")
-	    	.append("  Dear User<br/><br/>")
-	    	.append("  Thank you for subscribing with MoneyBuddy. <br/>")
-	    	.append("  <br/><br/>")
-	    	.append("  Thanks,<br/>")
-	    	.append("  MoneyBuddy Team")
-	    	.append("</div>");
+			
+			SendMail sendMail = new SendMail();
+
+	    	Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(RegisterAction.class.getResourceAsStream(configPropFilePath));
+			
+			String mailLink = configProperties.getProperty("MAIL_SUBSCRIPTION_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_SUBSCRIPTION_SUBJECT");
+
+	    	sendMail.MailSending(getEmailId(),subject,"SubscriptionMail","SubscriptionMail.txt",null,"");
 			
 			System.out.println("str set to subscribedSuccessfully ");
 			String str = "subscribedSuccessfully";
@@ -118,22 +121,12 @@ public class SaveSubscriberAction extends ActionSupport  implements SessionAware
 			
 		}
 		else {
-		
-	    	bodyText.append("<div>")
-		    	.append("  Dear User<br/><br/>")
-			    	.append("  you are alreadt subscribed with MoneyBuddy. <br/>")
-			    	.append("  <br/><br/>")
-			    	.append("  Thanks,<br/>")
-			    	.append("  MoneyBuddy Team")
-			    	.append("</div>");
 	    	
 	    	System.out.println("str set to alreadySubscribed ");
 	    	String str = "alreadySubscribed";
 	    	stream = new ByteArrayInputStream(str.getBytes());
 		}
 
-    	sendMail.MailSending(getEmailId(),bodyText,subject);
-    	//sendMail.MailSending(bodyText,subject);
     	
     	System.out.println(" send email function completed from subscriber.");
 		

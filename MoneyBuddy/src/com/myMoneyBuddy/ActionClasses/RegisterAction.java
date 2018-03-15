@@ -7,15 +7,21 @@ package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.insertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Properties;
 
 /*import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,50 +37,14 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	private SessionMap<String, Object> sessionMap;
 
     private String password;
-    //private String confirmPassword;
     private String emailId;
     private String mobileNumber;
     private String googleResponse;
-    //public final String MAIL_ForgotPassword_SITE_LINK = "http://localhost:8080/userVerification";
-    public final String MAIL_ForgotPassword_SITE_LINK = "www.quantwealth.in/userVerification";
     QueryCustomer customer = new QueryCustomer();
     insertCustomerDetails newCustomer = new insertCustomerDetails();
     
-   /* String regexEmail = "^(.+)@(.+)$";
-    String regexMobile = "\\d+";
-    Pattern patternEmail = Pattern.compile(regexEmail);
-    Pattern patternMobile = Pattern.compile(regexMobile);*/
-
     private InputStream stream;
-    
-/*    public void validate() {
-    	logger.debug("RegisterAction class : validate method : start");
-    	
-        if ( StringUtils.isEmpty(getFirstName()) )
-            addFieldError("firstName","first name can't be blank");
-        else if (StringUtils.isEmpty(getLastName()))
-            addFieldError("lastName"," last name can't be blank.");
-        else if ( StringUtils.isEmpty(getPassword())) 
-            addFieldError("password","Password can't be blank");
-        else if ( StringUtils.isEmpty(getConfirmPassword()))
-            addFieldError("confirmPassword","Confirm Password can't be blank");
-        else if (!getPassword().equals(getConfirmPassword()))
-            addFieldError("confirmPassword","Confirm password doesn't match with the above password");
-        else  if (StringUtils.isEmpty(getEmailId()) )
-            addFieldError("emailId","Email can't be blank");
-        else if (!patternEmail.matcher(emailId).matches())
-            addFieldError("emailId","Please enter a valid emil address");
-        else if (customer.existsCustomer(getEmailId()))
-            addFieldError("emailId"," User already exists. Please choose a different email Id");
-        else if( StringUtils.isEmpty(getMobileNumber()))
-            addFieldError("mobileNumber","Mobile No. can't be blank");
-        else if (getMobileNumber().length()!=10)
-            addFieldError("mobileNumber","Please enter a valid mobile number");
-        else if (!patternMobile.matcher(mobileNumber).matches())
-            addFieldError("mobileNumber","Please enter a valid mobile number");
 
-        logger.debug("RegisterAction class : validate method : end");
-    }*/
     public String execute() {
     	try {
     	
@@ -106,32 +76,26 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	
     	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
     	String hashedPassword = desEncrypter.encrypt(getPassword());
-    	String subject="Welcome to MoneyBuddy";
-
-    	/*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
-    	/*Date date = new Date();
-    	String frmtdDate = dateFormat.format(date);*/
 
     	newCustomer.insertCustomer(getEmailId(),getMobileNumber(),hashedPassword);
     	SendMail sendMail = new SendMail();
 
-    	String link = MAIL_ForgotPassword_SITE_LINK+"?hashedPassword="+hashedPassword;
+    	Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
 
-    	StringBuilder bodyText = new StringBuilder();
-    	bodyText.append("<div>")
-		    	.append("  Congratulations on taking the first step towards investing your money in a simple and stress free way.<br/><br/>")
-		    	.append("  We’re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.<br/><br/>")
-		    	.append("  Click on the below link to verify your email and activate your account<br/>")
-		    	.append("  <a href=\""+link+"\"></a><br/>")
-		    	.append("  Questions?<br/>")
-		    	.append("  Reply to this email OR Whatsapp/Call/SMS us at 9971648736")
-		    	.append("  Wishing you a prosperous and healthy life<br/>")
-		    	.append("  -Team MoneyBuddy")
-		    	.append("</div>");
-
-    	sendMail.MailSending(getEmailId(),bodyText,subject);
-    	//sendMail.MailSending(bodyText,subject);
+		configProperties.load(RegisterAction.class.getResourceAsStream(configPropFilePath));
+		
+		String mailLink = configProperties.getProperty("MAIL_VERIFICATION_LINK");
+		System.out.println("mailLink is : "+mailLink);
+		
+    	String link = mailLink+"?hashedPassword="+hashedPassword;
     	
+    	System.out.println("link is : "+link);
+    	
+    	String subject = configProperties.getProperty("MAIL_VERIFICATION_SUBJECT");
+
+    	sendMail.MailSending(getEmailId(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email");
+
     	System.out.println(" send email function completed from register user.");
     	
     	logger.debug("RegisterAction class : execute method : mail sent to "+getEmailId()+" to complete user registration");
@@ -170,14 +134,6 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 		return sessionMap;
 	}
 	
-/*    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }*/
-
     public String getEmailId() {
         return emailId;
     }

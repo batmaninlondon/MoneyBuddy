@@ -135,79 +135,20 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	}
 	    	sessionMap.put("emailId", getEmailId());
 	    	logger.debug("ForgotPasswordAction class : execute method : stored emailId : "+getEmailId()+" in session id : "+sessionMap.getClass().getName());
-	    	
-	    	String subject="Reset your MoneyBuddy password.";
+
 	    	SendMail sendMail = new SendMail();
-	    	String hashedPassword = customer.getPassword(getEmailId());
-	    	String link = MAIL_ResetPassword_SITE_LINK+"?emailId="+emailId+"&hashedPassword="+hashedPassword;
-	    	StringBuilder bodyText = new StringBuilder();
-	    	bodyText.append("<div>")
-	    	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
-	    	.append("  <p>Here's the link you requested to reset your MoneyBuddy password.</p><br/><br/><br/>")
-	    	.append(" <h3> Please click <a href=\""+link+"\">here</a> or open below link in browser</h3><br/><br/>")
-	    	.append("  <a href=\""+link+"\">"+link+"</a>")
-	    	.append("  <br/><br/><br/><p>If you didn't request a password reset, please ignore this message and your password will stay the same.</p><br/><br/> <br/>")
-	    	.append("  <h3>Thanks,</h3><br/><br/>")
-	    	.append("  <h3>MoneyBuddy Team</h3>")
-	    	.append("</div>");
-	    	
-	    	
-	    	
-	    	
-	    	
-/*	    	
 
+	    	Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
 
-	        // Create a Properties object to contain connection configuration information.
-	    	Properties props = System.getProperties();
-	    	props.put("mail.transport.protocol", "smtp");
-	    	props.put("mail.smtp.port", PORT); 
-	    	props.put("mail.smtp.starttls.enable", "true");
-	    	props.put("mail.smtp.auth", "true");
-
-	        // Create a Session object to represent a mail session with the specified properties. 
-	    	Session session = Session.getDefaultInstance(props);
-
-	        // Create a message with the specified information. 
-	        MimeMessage msg = new MimeMessage(session);
-	        msg.setFrom(new InternetAddress(FROM,FROMNAME));
-	        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
-	        msg.setSubject(subject);
-	        msg.setContent(bodyText.toString(),"text/html");
-	        
-	        // Add a configuration set header. Comment or delete the 
-	        // next line if you are not using a configuration set
-	        //msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
-	            
-	        // Create a transport.
-	        Transport transport = session.getTransport();
-	                    
-	        // Send the message.
-	        try
-	        {
-	            System.out.println("Sending...");
-	            
-	            // Connect to Amazon SES using the SMTP username and password you specified above.
-	            transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
-	        	
-	            // Send the email.
-	            transport.sendMessage(msg, msg.getAllRecipients());
-	            System.out.println("Email sent!");
-	        }
-	        catch (Exception ex) {
-	            System.out.println("The email was not sent.");
-	            System.out.println("Error message: " + ex.getMessage());
-	        }
-	        finally
-	        {
-	            // Close and terminate the connection.
-	            transport.close();
-	        }
-
-	    	*/
+			configProperties.load(RegisterAction.class.getResourceAsStream(configPropFilePath));
+			
+			String mailLink = configProperties.getProperty("MAIL_FORGOT_PASSWORD_LINK");
+			System.out.println("mailLink is : "+mailLink);
 	    	
-	    	sendMail.MailSending(getEmailId(), bodyText,subject);
-	    	//sendMail.MailSending(bodyText,subject,"ForgotPassword");
+	    	String subject = configProperties.getProperty("MAIL_FORGOT_PASSWORD_SUBJECT");
+
+	    	sendMail.MailSending(getEmailId(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset Password");
 	    	
 	    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+getEmailId()+" to reset password for session id : "+sessionMap.getClass().getName());
 	    	logger.debug("ForgotPasswordAction class : execute method : end");
