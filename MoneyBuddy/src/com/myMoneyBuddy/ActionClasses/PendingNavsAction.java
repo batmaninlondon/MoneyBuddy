@@ -54,16 +54,17 @@ public class PendingNavsAction extends ActionSupport implements SessionAware,Act
 			
 			logger.debug("PendingNavsAction class : execute method : end");
 			
-			String str = "success";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+			/*String str = "success";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			System.out.println("Returning success !! ");
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
 			logger.debug("PendingNavsAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
-			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+			System.out.println("Returning error !! ");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
 			return ERROR;
 		} 
 

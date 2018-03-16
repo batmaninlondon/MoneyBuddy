@@ -112,54 +112,58 @@
 				<p>Dummy Value is : <s:property value="dummyValue"/></p>
 			</div>
 		</div>	
-	
 		
-		<div class="row" style="margin-top:20px;">
-			<div class="col-md-1"></div>
+		<div class="row" >
+			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="col-md-1"></div>
-				<div class="col-md-5"><label for="bse-order-id" style="font-family:Aparajita;font-size:25px;" class="pull-right" >BSE OrderId </label></div>
-				<div  class="col-md-6" >
-					  
-					  <input class="form-control" id="bse-order-id" type="text" placeholder="Enter BSE Order Id" style="margin-top:-10px;">
+				<table id="cartData" class="table table-bordered stripe ">
+						<thead class="table-head g-font-size-14--xs">
+							<tr>
+								<th class="center col-md-2 g-bg-color--gray-light">BSE Order Id</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Folio Num</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Units</th>
+								<th class="center col-md-3 g-bg-color--gray-light">NAV</th>	
+								<th class="center col-md-3 g-bg-color--gray-light"></th>
+							</tr>
+						</thead>
+						<tbody class="table-body g-font-size-14--xs">
+							<%-- <s:set var="pendingNavOrders" <s:property value="pendingNavOrders"/> /> --%>
+								<s:iterator value="pendingNavOrders" var="pendingNavOrdersElement">
+									<tr>
+									    <td class="center g-font-size-14--xs">
+									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.key"/>" readonly>
+									    </td>
+									    
+									    <td class="center g-font-size-14--xs">
+									    	<s:if test="#pendingNavOrdersElement.value == ''  || #pendingNavOrdersElement.value == null ">
+									    		<input class="form-control" id="folio-num" type="text" placeholder="Enter Folio Num" >
+									    	</s:if>
+									    	<s:else>
+									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.value"/>" readonly>
+									    	</s:else>
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" >
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" >
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<button type="button" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav(this);">Upload NAV</button>
+									    </td>
+									</tr>
+								</s:iterator>
+							 
+						</tbody>
+					</table>
 				</div>
-			</div>
-			<div class="col-md-3">
-			</div>
+				<div class="col-md-2"></div>
 		</div>
-		
-		<div class="row" style="margin-top:20px;">
-			<div class="col-md-1"></div>
-			<div class="col-md-8">
-				<div class="col-md-1"></div>
-				<div class="col-md-5"><label for="nav-value" style="font-family:Aparajita;font-size:25px;" class="pull-right" >NAV </label></div>
-				<div class="col-md-6" >
-					  
-					  <input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" style="margin-top:-10px;">
-				</div>
-			</div>
-			<div class="col-md-3">
-			</div>
-		</div>
-	
-		<div class="row" style="margin-top:20px;">
-			<div class="col-md-1"></div>
-			<div class="col-md-8">
-				<div class="col-md-1"></div>
-				<div class="col-md-5"><label for="units-purchased" style="font-family:Aparajita;font-size:25px;" class="pull-right" >Units </label></div>
-				<div class="col-md-6" >
-					  
-					  <input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" style="margin-top:-10px;">
-				</div>
-			</div>
-			<div class="col-md-3">
-			</div>
-		</div>
-	
+
 		<div class="row" style="margin-top:20px;">
 			<div class="col-md-6"></div>
 			<div class="col-md-6">
-				<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav();">Upload NAV</button>
+				
 			</div>
 	
 		</div>

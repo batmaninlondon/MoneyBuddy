@@ -1131,8 +1131,16 @@ function fetchPendingNavData()  {
         type: 'post',
         
         data: { },
+ 
+        success : function()  {
+        	window.location='uploadCustomerNav';
+        },
+        error : function()  {
+        	window.location='errorPage';
+        }
         
-        success : function(result){
+/*        success : function(result){
+        	alert('result : '+result);
         	if (result == "success") {
         		window.location='uploadCustomerNav';
         	}
@@ -1140,7 +1148,7 @@ function fetchPendingNavData()  {
         		window.location='errorPage';
         	}
 
-        },
+        },*/
     });	
 
 }
@@ -1580,49 +1588,23 @@ function populateBankDetails(tranDetailId)
 
 }
 
-function uploadCutsomerNav() 
+function uploadCutsomerNav(el) 
 {
 	
-	var bseOrderId = document.getElementById("bse-order-id").value;
-	var navValue = document.getElementById("nav-value").value;
-	var unitsPurchased = document.getElementById("units-purchased").value;
+	var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
+	var folioNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
+	var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
+	var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
 	
-	if ( bseOrderId == '')  {
-		
-		document.getElementById("bse-order-id").className += " formInvalid";
-		document.getElementById("bse-order-id").placeholder = "Bse Order Id can not be blank!";
-		document.getElementById("nav-value").className = "form-control";
-		document.getElementById("units-purchased").className = "form-control";
-
-		return;
-	}
-	else if ( navValue == '')  {
-		
-		document.getElementById("nav-value").className += " formInvalid";
-		document.getElementById("nav-value").placeholder = "NAV Value can not be blank!";
-		document.getElementById("bse-order-id").className = "form-control";
-		document.getElementById("units-purchased").className = "form-control";
-		
-		return;
-	}
-
-	else if ( unitsPurchased == '')  {
-		
-		document.getElementById("units-purchased").className += " formInvalid";
-		document.getElementById("units-purchased").placeholder = "NAV Value can not be blank!";
-		document.getElementById("bse-order-id").className = "form-control";
-		document.getElementById("nav-value").className = "form-control";
-		
-		return;
-	}
 	
+	alert("bseOrderId : "+bseOrderId+" : folioNum : "+folioNum+" : navValue : "+navValue+" : unitsPurchased : "+unitsPurchased);
 	
 	$.ajax({
 	  	
         url : "uploadCustomerNavAction",
         type: 'post',
         
-        data: {'bseOrderId' : bseOrderId , 'navValue' : navValue ,'unitsPurchased' : unitsPurchased  },
+        data: {'bseOrderId' : bseOrderId , 'folioNum' : folioNum , 'navValue' : navValue ,'unitsPurchased' : unitsPurchased  },
         
         success : function(result){
         	if (result == "success") {

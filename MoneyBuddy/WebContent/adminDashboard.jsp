@@ -108,8 +108,7 @@
 		</div>
 		<div class="col-md-3">
 		
-			<button type="button"  class="btn g-color--white g-margin-t-15--xs " onClick="fetchPendingNavData();">UploadCustomerNav</button>
-			<!-- <a href="uploadCustomerNav"><b>UploadCustomerNav</b></a> -->
+			<a href="<s:url action="pendingNavsAction"/>"><button type="button"  class="btn g-color--white g-margin-t-15--xs ">UploadCustomerNav</button></a>
 		
 		</div>
 	</div>	
