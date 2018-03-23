@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.EntityClasses;
@@ -12,14 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author Savita Wadhwani
- */
 @Entity
 @Table (name="TRANSACTION_DETAILS")
 public class TransactionDetails {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +32,7 @@ public class TransactionDetails {
     
     @Column(name="CUSTOMER_ID")
     private String customerId;
-
-   
+  
     @Column(name="TRANSACTION_TYPE")
     private String transactionType;
     
@@ -50,7 +44,6 @@ public class TransactionDetails {
     
     @Column(name="TRANSACTION_AMOUNT")
     private String transactionAmount;
-
 
     @Column(name="TRANSACTION_STATUS")
     private String transactionStatus;
@@ -89,9 +82,7 @@ public class TransactionDetails {
 
     }
 
-    
-	
-public TransactionDetails(String transactionId, String bseOrderId, String uniqueReferenceNumber, String customerId, String transactionType,
+    public TransactionDetails(String transactionId, String bseOrderId, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String transactionAmount, String transactionStatus,
 			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
 			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum) {
@@ -117,30 +108,6 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
 		this.transactionFolioNum = transactionFolioNum;
 	}
 
-
-
-/*	public TransactionDetails(String transactionId, String bseOrderId,
-			String customerId, String transactionType, String transactionAmount,
-			String transactionStatus, String bseRemarks, String bseSuccessFlag,
-			String reverseFeed, String productId, String quantity, String unitPrice, 
-			String transactionDate, String updateDate) {
-		super();
-		this.transactionId = transactionId;
-		this.bseOrderId = bseOrderId;
-		this.customerId = customerId;
-		this.transactionType = transactionType;
-		this.transactionAmount = transactionAmount;
-		this.transactionStatus = transactionStatus;
-		this.bseRemarks = bseRemarks;
-		this.bseSuccessFlag = bseSuccessFlag;
-		this.reverseFeed = reverseFeed;
-		this.productId = productId;
-		this.quantity = quantity;
-		this.unitPrice = unitPrice;
-		this.transactionDate = transactionDate;
-		this.updateDate = updateDate;
-	}*/
-
 	public String getTransactionDetailId() {
 		return transactionDetailId;
 	}
@@ -164,19 +131,14 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
 	public void setBseOrderId(String bseOrderId) {
 		this.bseOrderId = bseOrderId;
 	}
-
 	
 	public String getUniqueReferenceNumber() {
 		return uniqueReferenceNumber;
 	}
 
-
-
 	public void setUniqueReferenceNumber(String uniqueReferenceNumber) {
 		this.uniqueReferenceNumber = uniqueReferenceNumber;
 	}
-
-
 
 	public String getCustomerId() {
 		return customerId;
@@ -221,8 +183,6 @@ public TransactionDetails(String transactionId, String bseOrderId, String unique
 	public void setTransactionStatus(String transactionStatus) {
 		this.transactionStatus = transactionStatus;
 	}
-	
-	
 
 	public String getBseRemarks() {
 		return bseRemarks;

@@ -1,9 +1,6 @@
 package com.myMoneyBuddy.ExceptionClasses;
 
-import javax.xml.soap.Detail;
-
 public class MoneyBuddyException extends Exception{
-
 
 	protected int errorId;
 	protected String systemId;

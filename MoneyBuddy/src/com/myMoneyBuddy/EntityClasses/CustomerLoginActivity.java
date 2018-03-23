@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author ADMIN
  */
 
 package com.myMoneyBuddy.EntityClasses;
@@ -9,11 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-/**
- *
- * @author ADMIN
- */
 
 @Entity
 @Table(name="CUSTOMER_LOGIN_ACTIVITY")

@@ -4,22 +4,12 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class QuerySipDetails {
 
@@ -27,7 +17,7 @@ public class QuerySipDetails {
 
 	public SipDetails getSipDetails(String transactionDetailId) throws MoneyBuddyException {
 		
-		logger.debug("QuerySipDetails class : getSipDetails method : start");
+		logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		hibernateSession.clear();
 		
@@ -41,16 +31,18 @@ public class QuerySipDetails {
 			sipDetails = (SipDetails) hibernateSession.get(SipDetails.class, transactionDetailId);
 			hibernateSession.getTransaction().commit();
 			
-			logger.debug("QuerySipDetails class : getSipDetails method : end");
+			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - return SipDetails record");
+			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - end");
+			
 			return sipDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QuerySipDetails class : getSipDetails method : Caught Exception");
+			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QuerySipDetails class : getSipDetails method : Caught Exception");
+			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

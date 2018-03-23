@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.ActionClasses;
@@ -15,16 +15,13 @@ import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-/**
- *
- * @author Savita Wadhwani
- */
 public class PanCardVerificationAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(PanCardVerificationAction.class);
-	private Map<String, Object> sessionMap;
+	private SessionMap<String,Object> sessionMap;
 	
     private String panCard;
 
@@ -37,7 +34,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
         	System.out.println(" PanCardVerificationAction execute method Called !!");
         	System.out.println(" PanCardVerificationAction execute method : panCard : "+getPanCard());
     		
-    		UpdateCustomer updatecustomerPancard = new UpdateCustomer();
+    		UpdateCustomer updatecustomer = new UpdateCustomer();
     		
     		String customerId = sessionMap.get("customerId").toString();
     		
@@ -50,7 +47,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		Properties configProperties = new Properties();
 		String configPropFilePath = "../../../config/config.properties";
 
-		configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+		configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
 		
 		/*String password = configProperties.getProperty("KYC_PASSWORD");
 		String userId = configProperties.getProperty("KYC_USER_ID");
@@ -72,19 +69,19 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     	String encryptedPassword = panServiceImpl.getPasscode(password,encryptionKey);
 
 		System.out.println("encryptedPassword : "  +encryptedPassword);
-		
-		String panCard = "AAXPW9277C";
+
 		String requestNum = "1234512346";
 		
 		String requestXml = "<APP_REQ_ROOT>"
 								+ "<APP_PAN_INQ>"
-									+ "<APP_PAN_NO>"+panCard+"</APP_PAN_NO>"
+									+ "<APP_PAN_NO>"+getPanCard()+"</APP_PAN_NO>"
 									+ "<APP_MOBILE_NO>"+mobileNo+"</APP_MOBILE_NO>"
 									+ "<APP_REQ_NO>"+requestNum+"</APP_REQ_NO>"
 								+ "</APP_PAN_INQ>"
 							+ "</APP_REQ_ROOT>";		
 		
-		String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, miId);
+		//String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, miId);
+		String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, encryptionKey);
 		
 		System.out.println("RES is "+res);
 		
@@ -109,10 +106,10 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 			
 		}
 		
-		updatecustomerPancard.updatePancard(customerId, getPanCard(), kycStatus);
+		updatecustomer.updatePancardAndKycStatus(customerId, getPanCard(), kycStatus);
 		
-		sessionMap.put("panCard", panCard);
-    	logger.debug("PanCardVerificationAction class : execute method : stored panCard : "+panCard+" in session id : "+sessionMap.getClass().getName());
+		sessionMap.put("panCard", getPanCard());
+    	logger.debug("PanCardVerificationAction class : execute method : stored panCard : "+getPanCard()+" in session id : "+sessionMap.getClass().getName());
     	
     	sessionMap.put("kycStatus", kycStatus);
     	logger.debug("PanCardVerificationAction class : execute method : stored kycStatus : "+kycStatus+" in session id : "+sessionMap.getClass().getName());
@@ -126,14 +123,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     	stream = new ByteArrayInputStream(str.getBytes());
 
     	return SUCCESS;
-    	} 
-    	/*catch ( MoneyBuddyException e )  {
-    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-    		e.printStackTrace();
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return ERROR;
-    	}*/
+    	}
     	catch ( Exception e )  {
     		logger.error("PanCardVerificationAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
     		e.printStackTrace();
@@ -144,14 +134,9 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     }
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
     
 	public String getPanCard() {
         return panCard;

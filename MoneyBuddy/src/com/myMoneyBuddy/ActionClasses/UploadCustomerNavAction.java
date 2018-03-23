@@ -8,40 +8,34 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
 import com.myMoneyBuddy.EntityClasses.FolioDetails;
-import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-
-public class UploadCustomerNavAction extends ActionSupport implements SessionAware {
+public class UploadCustomerNavAction extends ActionSupport {
 	
-	Logger logger = Logger.getLogger(UploadCustomerNavAction.class);
-	private Map<String, Object> sessionMap;
-	
+	Logger logger = Logger.getLogger(UploadCustomerNavAction.class);	
     private String bseOrderId;
     private String folioNum;
     private String navValue;
     private String unitsPurchased;
- 
-    
     private InputStream stream;
 
     public String execute() {
     	
-    	Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();;
 		
     	try {
     		
-    		logger.debug("UploadCustomerNavAction class : execute method : start");
+    		logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - start ");
 
     		System.out.println("UploadCustomerNavAction class : execute method : called ");
-    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    		
     		hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
 					+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
@@ -93,45 +87,30 @@ public class UploadCustomerNavAction extends ActionSupport implements SessionAwa
 				
 				
 			}
-
-
-			
-			
- 
-	    	logger.debug("UploadCustomerNavAction class : execute method : end");
 	    	
 	    	System.out.println(" Action complete !!");
 	    	String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());
+		    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned success");
+	    	logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - end");
+	    	
 	    	return SUCCESS;
 	    	
     	}
     	catch (Exception e) {	
-    		System.out.println(" Cought Exception !!");
-    		logger.debug("NewLoginAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
-			e.printStackTrace();
-			
-			String str = "error";
+    		logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - Caught Exception");
+    		e.printStackTrace();
+    		
+    		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-			return ERROR;
+    	    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned error");
+    	    
+    		return ERROR;
 		}
     	finally {
     		hibernateSession.close();
     	}
     }
-    
-    @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-    
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
-
-
 
 	public String getBseOrderId() {
 		return bseOrderId;

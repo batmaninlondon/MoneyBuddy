@@ -7,12 +7,10 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -24,7 +22,7 @@ public class QueryTransactionDetails {
 
 	public TransactionDetails getTransactionDetails(String transactionDetailId) throws MoneyBuddyException {
 		
-		logger.debug("QueryTransactionDetails class : getTransactionDetails method : start");
+		logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		hibernateSession.clear();
 		
@@ -38,16 +36,18 @@ public class QueryTransactionDetails {
 			transactionDetails = (TransactionDetails) hibernateSession.get(TransactionDetails.class, transactionDetailId);
 			hibernateSession.getTransaction().commit();
 			
-			logger.debug("QueryTransactionDetails class : getTransactionDetails method : end");
+			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - return TransactionDetails record");
+			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - end");
+			
 			return transactionDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryTransactionDetails class : getTransactionDetails method : Caught Exception");
+			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryTransactionDetails class : getTransactionDetails method : Caught Exception");
+			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -58,13 +58,14 @@ public class QueryTransactionDetails {
 	
 	public HashMap<String,String> getPendingNavsOrders() throws MoneyBuddyException {
 		
-		logger.debug("QueryTransactionDetails class : getPendingNavsOrders method : start");
+		 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		HashMap<String,String> pendingNavOrders = new HashMap<String,String>();
 	
 		try
 		{
+			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - start");
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("select bseOrderId,transactionFolioNum from TransactionDetails where transactionStatus = '7'");
 			List<Object[]> transactionDetailsList = query.list();
@@ -96,16 +97,18 @@ public class QueryTransactionDetails {
 			hibernateSession.getTransaction().commit();
 			
 			
-			logger.debug("QueryTransactionDetails class : getPendingNavsOrders method : end");
+			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - return pendingNavOrders containg bseOrderId and folioNum records for transactionStatus 7 ");
+			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - end");
+			
 			return pendingNavOrders;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryTransactionDetails class : getPendingNavsOrders method : Caught Exception");
+			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryTransactionDetails class : getPendingNavsOrders method : Caught Exception");
+			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

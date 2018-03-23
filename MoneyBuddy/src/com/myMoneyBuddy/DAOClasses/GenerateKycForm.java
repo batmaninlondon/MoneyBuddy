@@ -5,31 +5,23 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-
+import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class GenerateKycForm {
 
@@ -55,7 +47,6 @@ public class GenerateKycForm {
 
     		
     		reader = new PdfReader("D://PdfFiles/KYC.pdf");
-            //Rectangle pagesize = reader.getPageSize(1);
     		
     		String directoryName = "D://PdfFiles/"+customerId;
             File directory = new File(String.valueOf(directoryName));
@@ -75,17 +66,7 @@ public class GenerateKycForm {
             System.out.println("iterator size : "+map.size());
             while(iterator.hasNext())
                 System.out.println("Field is >>>"+iterator.next());
-            
-           /* session.beginTransaction();
-			customer = (Customers) session.createQuery("from Customers where customerId = '"+customerId+"'").uniqueResult();
-	
-			//session.getTransaction().commit();
-			
-			//session.beginTransaction();
-			additionalDetails = (AdditionalCustomerDetails) session.createQuery("from AdditionalCustomerDetails where customerId = '"+customerId+"'").uniqueResult();
-	*/
-			//session.getTransaction().commit();
-            
+
             String customerName = customer.getCustomerName();
             form.setField("Name", customerName.toUpperCase());
             form.setField("FathersSpouse Name", additionalDetails.getFatherName().toUpperCase());  
@@ -182,9 +163,18 @@ public class GenerateKycForm {
            stamper.close();
            reader.close();
            
+           Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
 
+			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));
+			
+           String mailLink = configProperties.getProperty("MAIL_KYC_FORM_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_KYC_FORM_SUBJECT");
+	    	
        		SendMail sendMail = new SendMail();
-       		//sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId());
+       		sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId(),subject,"KycNotDone.txt",mailLink,"");
        	
            System.out.println("End!!");
            

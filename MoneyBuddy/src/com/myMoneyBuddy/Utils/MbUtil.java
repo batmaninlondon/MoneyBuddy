@@ -18,19 +18,18 @@ public class MbUtil {
 	
 	 public boolean isCaptchaValid(String googleResponse) throws MoneyBuddyException
 	    {
-		 	logger.debug("MbUtil class : isCaptchaValid method : start");
+		 	logger.debug("MbUtil class - isCaptchaValid method - start");
 		    try {
 		    	
 		    	Properties configProperties = new Properties();
 				String configPropFilePath = "../../../config/config.properties";
 
-				configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+				configProperties.load(MbUtil.class.getResourceAsStream(configPropFilePath));
 				
 				
 		        String url = "https://www.google.com/recaptcha/api/siteverify?"
 		                + "secret=" + configProperties.getProperty("RECAPTHA_SECRET_KEY")
 		                + "&response=" + googleResponse;
-		        //System.out.println(url);
 		        InputStream res = new URL(url).openStream();
 		        BufferedReader rd = new BufferedReader(new InputStreamReader(res, Charset.forName("UTF-8")));
 
@@ -43,19 +42,18 @@ public class MbUtil {
 		        res.close();
 
 		        JSONObject json = new JSONObject(jsonText);
-		        //System.out.println(json);
 		        
-		        logger.debug("MbUtil class : isCaptchaValid method : start");
+		        logger.debug("MbUtil class - isCaptchaValid method - end");
 		        
 		        return json.getBoolean("success");
 		        
 		    }catch (IOException e) {
-	    		logger.error("MbUtil class : isCaptchaValid method : Caught Exception");
+	    		logger.error("MbUtil class - isCaptchaValid method - Caught IOException");
 	    		e.printStackTrace();
 				throw new MoneyBuddyException(e.getMessage(),e);
 	    	}
 	        catch (Exception e ) {
-	        	logger.error("MbUtil class : isCaptchaValid method : Caught Exception");
+	        	logger.error("MbUtil class - isCaptchaValid method - Caught Exception");
 				e.printStackTrace();
 				throw new MoneyBuddyException(e.getMessage(),e);
 			}

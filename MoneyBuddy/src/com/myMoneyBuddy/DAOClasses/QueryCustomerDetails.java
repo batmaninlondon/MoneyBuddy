@@ -5,19 +5,11 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class QueryCustomerDetails {
 
@@ -25,7 +17,7 @@ public class QueryCustomerDetails {
 		
 	public CustomerDetails getCustomerDetails(String customerId) throws MoneyBuddyException {
 			
-		logger.debug("QueryCustomerDetails class : getCustomerDetails method : start");
+		logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
@@ -33,15 +25,19 @@ public class QueryCustomerDetails {
 			hibernateSession.beginTransaction();
 			CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class, customerId);
 			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - return customerDetail record");
+			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - end");
+			
 			return customerDetail;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomerDetails class : getCustomerDetails method : Caught Exception");
+			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomerDetails class : getCustomerDetails method : Caught Exception");
+			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

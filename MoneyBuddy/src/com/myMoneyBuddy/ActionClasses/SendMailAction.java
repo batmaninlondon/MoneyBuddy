@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.ActionClasses;
@@ -14,17 +14,12 @@ import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-/**
- *
- * @author Savita Wadhwani
- */
-public class SendMailAction extends ActionSupport  implements SessionAware{
+public class SendMailAction extends ActionSupport {
 
 	Logger logger = Logger.getLogger(SendMailAction.class);
-	private Map<String, Object> sessionMap;
-	
 	private String senderName;
 	private String senderEmailId;
 	private String senderMobileNum;
@@ -34,71 +29,58 @@ public class SendMailAction extends ActionSupport  implements SessionAware{
     private InputStream stream;
 
     public String execute() {
-
-    	
+	
     	try {
     		
-    	logger.debug("SendMailAction class : execute method : start");
-    	System.out.println(" SendMailAction execute method Called !!");
-    	
-    	MbUtil mbUtil = new MbUtil();
-    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
-    	{
-    		String str = "Lookslikeyouarearobot";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    return ERROR;
-    	}
-
-    	SendMail sendMail = new SendMail();
-
-    	Properties configProperties = new Properties();
-		String configPropFilePath = "../../../config/config.properties";
-
-		configProperties.load(RegisterAction.class.getResourceAsStream(configPropFilePath));
-		
-		String mailLink = configProperties.getProperty("MAIL_CONTACT_US_LINK");
-		System.out.println("mailLink is : "+mailLink);
-    	
-    	String subject = configProperties.getProperty("MAIL_CONTACT_US_SUBJECT");
-
-    	sendMail.MailSending(getSenderEmailId(),subject,"ContactUsMail","ContactUsMail.txt",mailLink,"");
-    	
-    	logger.debug("SendMailAction execute method : end");
-    	
-    	System.out.println(" Returned Success !!");
-
-    	String str = "success";
-    	stream = new ByteArrayInputStream(str.getBytes());
-
-    	return SUCCESS;
+    		logger.debug("SendMailAction class - execute method - start");
+	    	System.out.println(" SendMailAction execute method Called !!");
+	    	
+	    	MbUtil mbUtil = new MbUtil();
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	{
+	    		String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    	    logger.debug("SendMailAction class - execute method - returned Lookslikeyouarearobot");
+	    	    logger.debug("SendMailAction class - execute method - end ");
+	    	    
+	    	    return SUCCESS;
+	    	}
+	
+	    	SendMail sendMail = new SendMail();
+	
+	    	Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+	
+			configProperties.load(SendMailAction.class.getResourceAsStream(configPropFilePath));
+			
+			String mailLink = configProperties.getProperty("MAIL_CONTACT_US_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_CONTACT_US_SUBJECT");
+	
+	    	sendMail.MailSending(getSenderEmailId(),subject,"ContactUsMail","ContactUsMail.txt",mailLink,"");
+	    	
+	    	System.out.println(" Returned Success !!");
+	
+	    	String str = "success";
+	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	logger.debug("SendMailAction class - execute method - returned success");
+	    	logger.debug("SendMailAction class - execute method - end");
+	
+	    	return SUCCESS;
     	} 
-    	/*catch ( MoneyBuddyException e )  {
-    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-    		e.printStackTrace();
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return ERROR;
-    	}*/
     	catch ( Exception e )  {
-    		logger.error("SendMailAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
-    		e.printStackTrace();
-    		String str = "error";
+    		logger.debug("SendMailAction class - execute method - Caught Exception");
+			e.printStackTrace();
+			
+			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    		return ERROR;
+    	    logger.debug("SendMailAction class - execute method - returned error");
+			return ERROR;
     	}
     	
     }
     
-    @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
-
 	public String getSenderName() {
 		return senderName;
 	}

@@ -100,7 +100,4 @@ public class PortfolioDataModel implements Serializable{
 		this.transactionStartDate = transactionStartDate;
 	}
 	
-	
-
-	
 }

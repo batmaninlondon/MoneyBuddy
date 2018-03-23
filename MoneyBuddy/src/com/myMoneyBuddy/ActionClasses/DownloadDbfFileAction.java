@@ -5,50 +5,32 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.opensymphony.xwork2.ActionSupport;
-
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-import java.util.regex.Pattern;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 public class DownloadDbfFileAction extends ActionSupport implements SessionAware  {
 
-	
-	
 	Logger logger = Logger.getLogger(DownloadDbfFileAction.class);
-	private Map<String, Object> sessionMap;
-	
+	private SessionMap<String,Object> sessionMap;
 	private String date;
 	private InputStream stream;
 	
     public String execute() {
-    	
-		System.out.println("DownloadDbfFileAction class : execute method : date : "+date);
-		
-	
     	logger.debug("DownloadDbfFileAction class : execute method : start");
     	
     	try {
-    		
+    		System.out.println("DownloadDbfFileAction class : execute method : date : "+date);
+    		    		
     		Properties properties = new Properties();
 			String propFilePath = "../../../config/config.properties";
 
@@ -97,14 +79,9 @@ public class DownloadDbfFileAction extends ActionSupport implements SessionAware
 	}
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
 
 	public String getDate() {
 		return date;
@@ -121,8 +98,5 @@ public class DownloadDbfFileAction extends ActionSupport implements SessionAware
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
-
-
-
 
 }

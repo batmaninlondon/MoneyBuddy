@@ -1,6 +1,6 @@
 /**
  *
- * @author ADMIN
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.mailerClasses;
@@ -13,7 +13,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -22,10 +21,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
-
 import org.apache.log4j.Logger;
-
-import com.myMoneyBuddy.DAOClasses.insertCustomerAccountDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class DesEncrypter {
@@ -44,7 +40,7 @@ public class DesEncrypter {
 
     public DesEncrypter(String passPhrase) throws MoneyBuddyException {
 
-    	logger.debug("DesEncrypter class : DesEncrypter method : start");
+    	logger.debug("DesEncrypter class - DesEncrypter method - start");
     	
         try{
 
@@ -59,17 +55,17 @@ public class DesEncrypter {
             ecipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
             dcipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
 
-            logger.debug("DesEncrypter class : DesEncrypter method : end");
+            logger.debug("DesEncrypter class - DesEncrypter method - end ");
             
         } 
         catch (InvalidAlgorithmParameterException|InvalidKeySpecException|NoSuchPaddingException|NoSuchAlgorithmException|InvalidKeyException e)
         {
-        	logger.error("DesEncrypter class : DesEncrypter method : Caught Exception");
+        	logger.error("DesEncrypter class - DesEncrypter method - caught some Exception");
         	e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
         } 
         catch (Exception e ) {
-        	logger.error("DesEncrypter class : DesEncrypter method : Caught Exception");
+        	logger.error("DesEncrypter class - DesEncrypter method - caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -78,26 +74,26 @@ public class DesEncrypter {
 
     public String encrypt(String str) throws MoneyBuddyException {
 
-    	logger.debug("DesEncrypter class : encrypt method : start");
+    	logger.debug("DesEncrypter class - encrypt method - start");
     	
         try{
 
             byte[] utf8 = str.getBytes("UTF8");
             byte[] enc  = ecipher.doFinal(utf8);
 
-            logger.debug("DesEncrypter class : encrypt method : end"); 
+            logger.debug("DesEncrypter class - encrypt method - end"); 
             
             return new sun.misc.BASE64Encoder().encode(enc);
 
         } 
         catch (BadPaddingException|IllegalBlockSizeException|UnsupportedEncodingException e)
         {
-        	logger.error("DesEncrypter class : encrypt method : Caught Exception");
+        	logger.error("DesEncrypter class - encrypt method - Caught some Exception");
         	e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
         } 
         catch (Exception e ) {
-        	logger.error("DesEncrypter class : encrypt method : Caught Exception");
+        	logger.error("DesEncrypter class - encrypt method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -106,33 +102,33 @@ public class DesEncrypter {
 
     public String decrypt(String str) throws MoneyBuddyException {
 
-    	logger.debug("DesEncrypter class : decrypt method : start");
+    	logger.debug("DesEncrypter class - decrypt method - start");
     	
         try{
 
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
             byte[] utf8 = dcipher.doFinal(dec);
 
-            logger.debug("DesEncrypter class : decrypt method : end");
+            logger.debug("DesEncrypter class - decrypt method - end");
             
             return new String(utf8,"UTF8");
 
         } 
         catch (BadPaddingException|IllegalBlockSizeException|UnsupportedEncodingException e)
         {
-        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+        	logger.error("DesEncrypter class - decrypt method - Caught some Exception");
         	e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
         } 
 
         catch (IOException e)
         {
-        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+        	logger.error("DesEncrypter class - decrypt method - Caught IOException");
         	e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
         }
         catch (Exception e ) {
-        	logger.error("DesEncrypter class : decrypt method : Caught Exception");
+        	logger.error("DesEncrypter class - decrypt method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

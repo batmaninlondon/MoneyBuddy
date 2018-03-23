@@ -47,11 +47,9 @@ public class ExcelToDb {
         }
         catch (Exception e){
         	e.printStackTrace(); 
-        }
-        
-        
-        
+        }    
     }
+    
     public static Vector read(String fileName)    {
         Vector cellVectorHolder = new Vector();
         try{

@@ -4,9 +4,6 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +17,13 @@ import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 public class PortfolioAction extends ActionSupport implements SessionAware{
 	
 	Logger logger = Logger.getLogger(PortfolioAction.class);
-	private Map<String, Object> session;
+	private SessionMap<String,Object> sessionMap;
 
 	private List<PortfolioDataModel> portfolioDataModel;
 	private List<PendingOrderDataModel> pendingOrderDataModel;
@@ -35,8 +33,6 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	
 	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
 	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
-/*	
-	private InputStream stream;*/
 
 	public String execute() {
 
@@ -44,15 +40,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		logger.debug("PortfolioAction class : execute method : start");
 
 		QueryProducts queryProducts = new QueryProducts();
-		/*dashboardDataModel = queryProducts.getDashboardData(sessionMap.get("customerId").toString(),investmentTypeName);*/
 		
 		System.out.println("portfolio action class called - start ");
 
-		//session.remove("portfolioDataModel");
-		portfolioDataModel = queryProducts.getPortfolioData(session.get("customerId").toString());
+		portfolioDataModel = queryProducts.getPortfolioData(sessionMap.get("customerId").toString());
 		setPortfolioDataModel(portfolioDataModel);
 		
-		pendingOrderDataModel = queryProducts.getPendingOrderData(session.get("customerId").toString());
+		pendingOrderDataModel = queryProducts.getPendingOrderData(sessionMap.get("customerId").toString());
 		setPendingOrderDataModel(pendingOrderDataModel);
 		
 		HashMap<String,String> dataSet = new HashMap<String,String>();
@@ -62,10 +56,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		int i =0;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
 			if ("Total".equals(portfolioDataModelElement.getFundName())) {
-				session.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
-				logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+session.getClass().getName());
-				session.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
-				logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+session.getClass().getName());
+				sessionMap.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
+				logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+sessionMap.getClass().getName());
+				sessionMap.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
+				logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+sessionMap.getClass().getName());
 			}
 			else {
 				dataSet.put(colors[i],portfolioDataModelElement.getCurrentAmount());
@@ -74,40 +68,40 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			}
 		}
 
-		session.put("portfolioDataModel", portfolioDataModel);
-		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+session.getClass().getName());
+		sessionMap.put("portfolioDataModel", portfolioDataModel);
+		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
 		
-		sipDataModel = queryProducts.getSipData(session.get("customerId").toString());
+		sipDataModel = queryProducts.getSipData(sessionMap.get("customerId").toString());
 		setSipDataModel(sipDataModel);
 
-		session.put("sipDataModel", sipDataModel);
-		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+session.getClass().getName());
+		sessionMap.put("sipDataModel", sipDataModel);
+		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+sessionMap.getClass().getName());
 
 		String fundId = null;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
 			fundId = portfolioDataModelElement.getFundId();
 			System.out.println("fundId : "+fundId);
 			
-			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),fundId);
+			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),fundId);
 			investmentDetailsDataModelList.put(fundId,investmentDetailsDataModel);
 			
 		}
 		// Savita Wadhwani - Added this for chart testing - start
 		
-		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(session.get("customerId").toString(),"RELLFCP-GR");
+		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),"RELLFCP-GR");
 		setInvestmentDetailsDataModel(investmentDetailsDataModel);
 		
 		System.out.println("Size of investmentDetailsDataModel : "+investmentDetailsDataModel.size());
 		
 		// Savita Wadhwani - Added this for chart testing - end
 		
-		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(session.get("customerId").toString());
+		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(sessionMap.get("customerId").toString());
 		setAllFundsInvestmentDetailsDataModel(allFundsInvestmentDetailsDataModel);
 		
 		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
 		
-		session.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
-		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+session.getClass().getName());
+		sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
+		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+sessionMap.getClass().getName());
 		
 		for (String key : investmentDetailsDataModelList.keySet())  {
 			System.out.println("key : "+key);
@@ -119,54 +113,23 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				
 			}
 		}
-		session.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
-		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+session.getClass().getName());
-		
-		
-		
-		/*Double TotalInvestedAmount = 0.0;
-		Double TotalCurrentAmount = 0.0;
-		for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
-			
-			
-			TotalInvestedAmount = TotalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
-			TotalCurrentAmount = TotalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
-		}
-		
-		Double TotalrateOfGrowth = ((TotalCurrentAmount - TotalInvestedAmount)/TotalInvestedAmount)*100;
-	
-		
-		session.put("TotalInvestedAmount", String.format("%.2f", TotalInvestedAmount));
-		logger.debug("PortfolioAction class : execute method : stored TotalInvestedAmount in session id : "+session.getClass().getName());
-
-		session.put("TotalCurrentAmount", String.format("%.2f", TotalCurrentAmount));
-		logger.debug("PortfolioAction class : execute method : stored TotalCurrentAmount in session id : "+session.getClass().getName());
-		
-		session.put("TotalrateOfGrowth", String.format("%.2f", TotalrateOfGrowth));
-		logger.debug("PortfolioAction class : execute method : stored TotalrateOfGrowth in session id : "+session.getClass().getName());
-		
-		System.out.println("Vivek printing session information "+session.get("portfolioDataModel"));
-		System.out.println("portfolio action class called - end ");*/
+		sessionMap.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
+		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+sessionMap.getClass().getName());
 		
 		logger.debug("PortfolioAction class : execute method : end");
-
-/*		String str = "success";
-    	stream = new ByteArrayInputStream(str.getBytes());*/
     	
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
-			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+session.get("customerId").toString());
+			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
-/*			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+session.get("customerId").toString());
+    		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
-/*			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			
 			return ERROR;
 		} 
 	}
@@ -192,23 +155,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	}
 
 	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
+    }
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-/*
-	public InputStream getStream() {
-		return stream;
-	}
-
-	public void setStream(InputStream stream) {
-		this.stream = stream;
-	}
-
-*/
 	public HashMap<String, List<InvestmentDetailsDataModel>> getInvestmentDetailsDataModelList() {
 		return investmentDetailsDataModelList;
 	}

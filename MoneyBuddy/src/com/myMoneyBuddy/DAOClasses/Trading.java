@@ -52,41 +52,20 @@ public class Trading {
 
 	Logger logger = Logger.getLogger(Trading.class);
 
-	public String createClient(String CLIENT_HOLDING, String CLIENT_TAXSTATUS, String CLIENT_OCCUPATIONCODE, String CLIENT_DOB,
-			String CLIENT_GENDER, String CLIENT_GUARDIAN, String CLIENT_ACCTYPE_1, String CLIENT_ACCNO_1, String CLIENT_NEFT_IFSCCODE_1,
-			String CLIENT_ADD_1, String CLIENT_CITY, String CLIENT_STATE, String CLIENT_PINCODE, String CLIENT_COUNTRY,
-			String customerId, String CLIENT_APPNAME1, String CLIENT_EMAIL, String CLIENT_PAN, String CLIENT_CM_MOBILE) throws MoneyBuddyException {
+	public String createClient(String clientHolding, String clientTaxStatus, String clientOccupationCode, String clientDob,
+			String clientGender, String clientGuardian, String clientAccType1, String clientAccNo1, String clientNeftIfscCode1,
+			String clientAdd, String clientCity, String clientState, String clientPinCode, String clientCountry,
+			String customerId, String clientAppName1, String clientEmail, String clientPan, String clientMobile) throws MoneyBuddyException {
 
-		
 			Session hibernateSession = null;
 
 		try {
-			
+
+			logger.debug("Trading class : createClient method : start");
 			
 			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
-			query.setParameter("fieldValue", CLIENT_TAXSTATUS);
-			
-			String taxStatus = query.uniqueResult().toString();
-			
-			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
-			query.setParameter("fieldValue", CLIENT_STATE);
-			
-			String state = query.uniqueResult().toString();
-			
-			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
-			query.setParameter("fieldValue", CLIENT_OCCUPATIONCODE);
-			
-			String occupation = query.uniqueResult().toString();
-			hibernateSession.getTransaction().commit();
-			
-			String PASSWORD_STARMF;
-			
-			String dob = CLIENT_DOB.substring(8,10)+"/"+CLIENT_DOB.substring(5,7)+"/"+CLIENT_DOB.substring(0,4);
-			System.out.println("dob : "+dob);
-
 			Properties clientProperties = new Properties();
 			String clientPropFilePath = "../../../config/client.properties";
 
@@ -96,16 +75,53 @@ public class Trading {
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
-
+			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			
+			String taxStatus,state,occupation,dob,clientDetails,getPasswordResp,passwordStartMf,ucc;
 
-			String[] clientDetailsArray = {customerId,CLIENT_HOLDING,taxStatus,occupation,CLIENT_APPNAME1,clientProperties.getProperty("CLIENT_APPNAME2"),
-					clientProperties.getProperty("CLIENT_APPNAME3"),dob,CLIENT_GENDER,clientProperties.getProperty("CLIENT_GUARDIAN"),CLIENT_PAN,
+			
+			// Savita Wadhwani - Self Comment - Start 
+			// Check if we can get rid of re-writing same query again and agian 
+			
+			Query query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", clientTaxStatus);
+			
+			taxStatus = query.uniqueResult().toString();
+			
+			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", clientState);
+			
+			state = query.uniqueResult().toString();
+			
+			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", clientOccupationCode);
+			
+			occupation = query.uniqueResult().toString();
+			hibernateSession.getTransaction().commit();
+			
+			
+			// Savita Wadhwani - Self Comment - End
+			
+
+			
+			// Savita Wadhwani - Self Comment - Start
+			// Check if can convert dob from one format to another with some ready made function 
+			
+			dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
+			System.out.println("dob : "+dob);
+			
+			// Savita Wadhwani - Self Comment - End
+			
+
+			
+			String[] clientDetailsArray = {customerId,clientHolding,taxStatus,occupation,clientAppName1,clientProperties.getProperty("CLIENT_APPNAME2"),
+					clientProperties.getProperty("CLIENT_APPNAME3"),dob,clientGender,clientProperties.getProperty("CLIENT_GUARDIAN"),clientPan,
 					clientProperties.getProperty("CLIENT_NOMINEE"),clientProperties.getProperty("CLIENT_NOMINEE_RELATION"),clientProperties.getProperty("CLIENT_GUARDIANPAN"),
 					clientProperties.getProperty("CLIENT_TYPE"),clientProperties.getProperty("CLIENT_DEFAULTDP"),clientProperties.getProperty("CLIENT_CDSLDPID"),
 					clientProperties.getProperty("CLIENT_CDSLCLTID"),clientProperties.getProperty("CLIENT_NSDLDPID"),clientProperties.getProperty("CLIENT_NSDLCLTID"),
-					CLIENT_ACCTYPE_1,CLIENT_ACCNO_1,clientProperties.getProperty("CLIENT_MICRNO_1"),CLIENT_NEFT_IFSCCODE_1,clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_1"),
+					clientAccType1,clientAccNo1,clientProperties.getProperty("CLIENT_MICRNO_1"),clientNeftIfscCode1,clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_1"),
 					clientProperties.getProperty("CLIENT_ACCTYPE_2"),clientProperties.getProperty("CLIENT_ACCNO_2"),clientProperties.getProperty("CLIENT_MICRNO_2"),
 					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_2"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_2"),clientProperties.getProperty("CLIENT_ACCTYPE_3"),
 					clientProperties.getProperty("CLIENT_ACCNO_3"),clientProperties.getProperty("CLIENT_MICRNO_3"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_3"),
@@ -113,50 +129,43 @@ public class Trading {
 					clientProperties.getProperty("CLIENT_MICRNO_4"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_4"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_4"),
 					clientProperties.getProperty("CLIENT_ACCTYPE_5"),clientProperties.getProperty("CLIENT_ACCNO_5"),clientProperties.getProperty("CLIENT_MICRNO_5"),
 					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_5"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_5"),clientProperties.getProperty("CLIENT_CHEQUENAME_5"),
-					CLIENT_ADD_1,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),CLIENT_CITY,state,CLIENT_PINCODE,CLIENT_COUNTRY,
+					clientAdd,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),clientCity,state,clientPinCode,clientCountry,
 					clientProperties.getProperty("CLIENT_RESIPHONE"),clientProperties.getProperty("CLIENT_RESIFAX"),clientProperties.getProperty("CLIENT_OFFICEPHONE"),
-					clientProperties.getProperty("CLIENT_OFFICEFAX"),CLIENT_EMAIL,clientProperties.getProperty("CLIENT_COMMMODE"),clientProperties.getProperty("CLIENT_DIVPAYMODE"), 
+					clientProperties.getProperty("CLIENT_OFFICEFAX"),clientEmail,clientProperties.getProperty("CLIENT_COMMMODE"),clientProperties.getProperty("CLIENT_DIVPAYMODE"), 
 					clientProperties.getProperty("CLIENT_PAN_2"),clientProperties.getProperty("CLIENT_PAN_3"),clientProperties.getProperty("CLIENT_MAPIN_NO"),
 					clientProperties.getProperty("CLIENT_CM_FORADD_1"),clientProperties.getProperty("CLIENT_CM_FORADD_2"),clientProperties.getProperty("CLIENT_CM_FORADD_3"),
 					clientProperties.getProperty("CLIENT_CM_FORCITY"),clientProperties.getProperty("CLIENT_CM_FORPINCODE"),clientProperties.getProperty("CLIENT_CM_FORSTATE"),
 					clientProperties.getProperty("CLIENT_CM_FORCOUNTRY"),clientProperties.getProperty("CLIENT_CM_FORRESIPHONE"),clientProperties.getProperty("CLIENT_CM_FORRESIFAX"),
-					clientProperties.getProperty("CLIENT_CM_FOROFFPHONE"),clientProperties.getProperty("CLIENT_CM_FOROFFFAX"),CLIENT_CM_MOBILE};
+					clientProperties.getProperty("CLIENT_CM_FOROFFPHONE"),clientProperties.getProperty("CLIENT_CM_FOROFFFAX"),clientMobile};
 
-			String clientDetails = String.join("|",clientDetailsArray);
+			clientDetails = String.join("|",clientDetailsArray);
 
 			System.out.println("clientDetails : "+clientDetails);
-			
-			System.out.println(" USER_ID : "+configProperties.getProperty("USER_ID"));
-			System.out.println(" MEMBER_ID : "+configProperties.getProperty("MEMBER_ID"));
-			System.out.println(" PASSWORD : "+configProperties.getProperty("PASSWORD"));
-			System.out.println(" PASS_KEY : "+configProperties.getProperty("PASS_KEY"));
 
-			String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+			getPasswordResp = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
-			String[] resultsStarMF = passwordStarMF.split("\\|");
+			String[] resultsStarMF = getPasswordResp.split("\\|");
 
 			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
 				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
 			}
 
+			passwordStartMf = resultsStarMF[1];
 
-			System.out.println("passwordStarMF : "+passwordStarMF);
+			ucc = iStarMFWebService.mfapi("02",configProperties.getProperty("USER_ID"),passwordStartMf,clientDetails);
 
-			PASSWORD_STARMF = resultsStarMF[1];
+			System.out.println("iStarMFWebService - mfapi response ucc : "+ucc);
 
-			String ucc = iStarMFWebService.mfapi("02",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,clientDetails);
-
-			System.out.println("ucc : "+ucc);
-
-
+			logger.debug("Trading class : createClient method : end");
+			
 			return ucc;
 
 		}catch (IOException e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.debug("Trading class : createClient method : Caught IOException for customerId : "+customerId);
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.debug("Trading class : createClient method : Caught Exception for customerId : "+customerId);
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
@@ -189,22 +198,6 @@ public class Trading {
 			String[] mandateIdDetailsArray = {customerId,amount,mandateType,accountNum,accountType,ifscCode,"",frmtdStartDateForMandateId,frmtdEndDateForMandateId};
 
 			String mandateIdDetails = String.join("|",mandateIdDetailsArray);
-			
-			System.out.println("customerId : "+customerId);
-			System.out.println("amount : "+amount);
-			System.out.println("mandateType : "+mandateType);
-			System.out.println("accountNum : "+accountNum);
-			System.out.println("accountType : "+accountType);
-			System.out.println("ifscCode : "+ifscCode);
-			System.out.println("sipStartDate : "+frmtdStartDateForMandateId);
-			System.out.println("sipEndDate : "+frmtdEndDateForMandateId);
-			System.out.println("mandateIdDetails : "+mandateIdDetails);
-			
-			System.out.println(" USER_ID : "+configProperties.getProperty("USER_ID"));
-			System.out.println(" MEMBER_ID : "+configProperties.getProperty("MEMBER_ID"));
-			System.out.println(" PASSWORD : "+configProperties.getProperty("PASSWORD"));
-			System.out.println(" PASS_KEY : "+configProperties.getProperty("PASS_KEY"));
-
 
 			String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
@@ -238,13 +231,12 @@ public class Trading {
 
 	}
 
-
 	public String executeTrade(String customerId, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, 
 			String sipStartDate, String sipEndDate,
 			String transactionType, String buySell, int years, String accountNum, String bankId, String ifsc, String bankMode, 
-			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  SessionMap<String, Object> sessionMap) throws MoneyBuddyException {
+			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  Map<String, Object> sessionMap) throws MoneyBuddyException {
 
-
+		logger.debug("Trading class : executeTrade method : start");
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
 		System.out.println("Trading class : executeTade method : years : "+years);
 
@@ -254,15 +246,13 @@ public class Trading {
 		String buySellType; 
 		String transactionDetailId;
 		Query query;
-		//Transactions tempTransaction;
 		TransactionDetails tempTransactionDetail;
 		SipDetails tempSipDetail;
-		//ArrayList<String> transactionDetailIdList = new ArrayList<String>();
 		List<OrderDataModel> orderDataModel;
 
 		try {
 
-			logger.debug("Trading class : executeTrade method : start");
+			
 			orderDataModel = new LinkedList<OrderDataModel>();
 			
 			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -275,19 +265,18 @@ public class Trading {
 			Properties clientProperties = new Properties();
 			String clientPropFilePath = "../../../config/client.properties";
 
-			clientProperties.load(PaymentAction.class.getResourceAsStream(clientPropFilePath));
+			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
 			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
-			configProperties.load(PaymentAction.class.getResourceAsStream(configPropFilePath));
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
 			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
 			String passwordMFOrder;
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
-			String LOGOUT_URL = "http://localhost:8080/MoneyBuddy/orderInvoice";
 			WebServiceStarMFPaymentGateway webServiceStarMFPaymentGateway = new WebServiceStarMFPaymentGateway();		
 			IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
 			String PASSWORD_STARMF;
@@ -295,7 +284,6 @@ public class Trading {
 			String[] resultsStarMFPaymentGateway;
 			String entryParam;
 			String[] resultsEntryParam = null;
-			String[] paymentDetailsArray = {configProperties.getProperty("MEMBER_ID"),customerId,LOGOUT_URL};
 
 			boolean allOrderFailed = true ;
 			String paymentUrl;
@@ -373,8 +361,6 @@ public class Trading {
 				
 				hibernateSession.beginTransaction();
 
-				//session.getTransaction().commit();
-
 				Double currentTransactionAmount = productDetailsMap.get(currentProductId);
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
@@ -383,7 +369,6 @@ public class Trading {
 						transactionCode,buySell, Double.toString(currentTransactionAmount),
 						"1", null,null,"N",currentProductId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum); 		
 
-				//session.beginTransaction();
 				hibernateSession.save(tempTransactionDetail);
 
 				logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
@@ -439,8 +424,6 @@ public class Trading {
 					frmtdDateForDBF = dateFormat.format(dateForDbf);
 				}
 
-				//session.getTransaction().commit();
-
 				passwordMFOrder = mfOrderEntry.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
 				resultsMFOrder = passwordMFOrder.split("\\|");
@@ -461,8 +444,6 @@ public class Trading {
 					else {
 						buySellType = "R";
 					}
-					
-					
 					
 					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
 					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
@@ -494,13 +475,7 @@ public class Trading {
 							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
 							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
 							clientProperties.getProperty("PARAM_3"));
-
-
-
 				}
-
-				System.out.println("entryParam : "+entryParam);
-				
 
 				resultsEntryParam = entryParam.split("\\|");
 
@@ -540,8 +515,6 @@ public class Trading {
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				hibernateSession.getTransaction().commit();
 
-				//session.beginTransaction();
-
 				logger.debug("Trading class : executeTrade method : inserted data to CustomerPortfolio table for customerId : "+customerId);
 
 			}
@@ -549,7 +522,6 @@ public class Trading {
 
 			if (!allOrderFailed) {
 
-				
 				PasswordRequest passwordRequest = new PasswordRequest();
 				ObjectFactory objFact = ObjectFactory.class.newInstance();
 
@@ -565,11 +537,6 @@ public class Trading {
 				for (int i = 0 ; i <resultsStarMFPaymentGateway.length ; i++ )   {
 					System.out.println("resultsStarMF : "+i+" : " +resultsStarMFPaymentGateway[i]);
 				}
-				
-				System.out.println("UserId Passed : "+ passwordRequest.getUserId().getValue());
-				System.out.println("MemberId Passed : "+ passwordRequest.getMemberId().getValue());
-				System.out.println("PassKey Passed : "+ passwordRequest.getPassKey().getValue());
-				System.out.println("Password Passed : "+ passwordRequest.getPassword().getValue());
 
 				String status = passwordStarMFPaymentGateway.getStatus().getValue();
 
@@ -577,9 +544,6 @@ public class Trading {
 				
 				PASSWORD_STARMF = passwordStarMFPaymentGateway.getResponseString().getValue();
 				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
-				
-				
-				//orderNums.getString().add(resultsEntryParam[2].toString());
 
 				Iterator it = orderNums.getString().iterator();
 				
@@ -594,7 +558,7 @@ public class Trading {
 				requestParam.setClientCode(objFact.createRequestParamClientCode(customerId));
 				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));
 				requestParam.setIFSC(objFact.createRequestParamIFSC(ifsc));
-				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(LOGOUT_URL));
+				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(configProperties.getProperty("LOGOUT_URL")));
 				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
 				requestParam.setMode(objFact.createRequestParamMode(bankMode));
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
@@ -664,13 +628,6 @@ public class Trading {
 				System.out.println("paymentUrl: "+paymentUrl);
 			}
 
-			//String paymentUrlFile = "http://localhost:8080/MoneyBuddy/thankYou.jsp";
-			
-			
-			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - start 
-			
-			
-				
 				Iterator it = orderNums.getString().iterator();
 				
 				while(it.hasNext())  {
@@ -756,11 +713,6 @@ public class Trading {
 				for (int i = 0 ; i <resultsStarMFPaymentGateway.length ; i++ )   {
 					System.out.println("resultsStarMF : "+i+" : " +resultsStarMFPaymentGateway[i]);
 				}
-				
-				System.out.println("UserId Passed : "+ passwordRequest.getUserId().getValue());
-				System.out.println("MemberId Passed : "+ passwordRequest.getMemberId().getValue());
-				System.out.println("PassKey Passed : "+ passwordRequest.getPassKey().getValue());
-				System.out.println("Password Passed : "+ passwordRequest.getPassword().getValue());
 
 				String status = passwordStarMFPaymentGateway.getStatus().getValue();
 
@@ -782,7 +734,7 @@ public class Trading {
 				requestParam.setClientCode(objFact.createRequestParamClientCode(customerId));
 				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));
 				requestParam.setIFSC(objFact.createRequestParamIFSC(ifsc));
-				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(LOGOUT_URL));
+				requestParam.setLogOutURL(objFact.createRequestParamLogOutURL(configProperties.getProperty("LOGOUT_URL")));
 				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
 				requestParam.setMode(objFact.createRequestParamMode(bankMode));
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
@@ -847,7 +799,6 @@ public class Trading {
 
 	
 			}
-			// Savita Wadhwani - Somehow we need to check whether payment was successful or not - end
 			
 			logger.debug("Trading class : executeTrade method : end");
 

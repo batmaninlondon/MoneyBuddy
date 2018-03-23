@@ -211,7 +211,4 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
-
-
-
 }

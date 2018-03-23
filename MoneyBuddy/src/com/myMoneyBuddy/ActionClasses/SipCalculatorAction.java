@@ -5,40 +5,32 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.regex.Pattern;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 public class SipCalculatorAction extends ActionSupport implements SessionAware  {
 
 	Logger logger = Logger.getLogger(SipCalculatorAction.class);
-	private Map<String, Object> sessionMap;
-
+	private SessionMap<String,Object> sessionMap;
     private String sipAmount;
-    private String fundId;
-    
-    HashMap<Integer,Double> predictedValueList = new HashMap<Integer,Double>();
-    
+    private String fundId;     
     private InputStream stream;
 
     public String execute() {
 
-    	logger.debug("SipCalculatorAction class : execute method : start");
+    	logger.debug("SipCalculatorAction class - execute method - start ");
     	
     	try {
+    		HashMap<Integer,Double> predictedValueList = new HashMap<Integer,Double>();
     		
 			sipAmount = Double.toString(Math.round( Double.parseDouble(getSipAmount()) * 100.0 ) / 100.0); 
 
@@ -49,43 +41,42 @@ public class SipCalculatorAction extends ActionSupport implements SessionAware  
 			sessionMap.put("predictedValueForOneYear", Double.toString(predictedValueList.get(1)));
 			sessionMap.put("predictedValueForThreeYear", Double.toString(predictedValueList.get(3)));
 			sessionMap.put("predictedValueForFiveYear", Double.toString(predictedValueList.get(5)));
-			logger.debug("SipCalculatorAction class : execute method : stored sipAmount : "+getSipAmount()+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("SipCalculatorAction class : execute method : stored predictedValueForOneYear : "+predictedValueList.get(1)+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("SipCalculatorAction class : execute method : stored predictedValueForThreeYear : "+predictedValueList.get(3)+" in session id : "+sessionMap.getClass().getName());
-			logger.debug("SipCalculatorAction class : execute method : stored predictedValueForFiveYear : "+predictedValueList.get(5)+" in session id : "+sessionMap.getClass().getName());
-
+			logger.debug("SipCalculatorAction class - execute method - stored sipAmount in sessionMap");
+			logger.debug("SipCalculatorAction class - execute method - stored predictedValueForOneYear in sessionMap");
+			logger.debug("SipCalculatorAction class - execute method - stored predictedValueForThreeYear in sessionMap");
+			logger.debug("SipCalculatorAction class - execute method - stored predictedValueForFiveYear in sessionMap");
+			
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
-
-			logger.debug("SipCalculatorAction class : execute method : end");
+    	    logger.debug("SipCalculatorAction class - execute method - returned success");
+	    	logger.debug("SipCalculatorAction class - execute method - end");
+	    	
 			return SUCCESS;
 		} catch (MoneyBuddyException e) {	
-			logger.debug("SipCalculatorAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+			logger.debug("SipCalculatorAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
+    	    logger.debug("SipCalculatorAction class - execute method - returned error");
 			return ERROR;
 		} 
     	catch (Exception e) {	
-			logger.debug("SipCalculatorAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+    		logger.debug("SipCalculatorAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
+    	    logger.debug("SipCalculatorAction class - execute method - returned error");
 			return ERROR;
 		} 
 
     }
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
 
     public String getSipAmount() {
 		return sipAmount;

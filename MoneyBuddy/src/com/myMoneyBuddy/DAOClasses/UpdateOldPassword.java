@@ -5,16 +5,12 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class UpdateOldPassword {
 
@@ -22,7 +18,7 @@ public class UpdateOldPassword {
 	
 	public void updateOldPassword (String customerId) throws MoneyBuddyException {
 
-		logger.debug("UpdateOldPassword class : updateOldPassword method : start");
+		logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
@@ -36,17 +32,17 @@ public class UpdateOldPassword {
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateOldPassword class : updateOldPassword method : updated data of CustomerPasswordsHistory table to set old_password for customerId : "+customerId);
-			logger.debug("UpdateOldPassword class : updateOldPassword method : end");
+			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - updated data of CustomerPasswordsHistory table to set old_password ");
+			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - end");
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateOldPassword class : updateOldPassword method : Caught Exception");
+			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateOldPassword class : updateOldPassword method : Caught Exception");
+			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

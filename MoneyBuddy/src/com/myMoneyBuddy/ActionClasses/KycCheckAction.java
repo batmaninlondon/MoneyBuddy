@@ -1,44 +1,29 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package com.myMoneyBuddy.ActionClasses;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceStarMF;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IStarMFWebService;
-import org.tempuri.MFOrderEntry;
-
 /**
  *
  * @author Savita Wadhwani
  */
+package com.myMoneyBuddy.ActionClasses;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(KycCheckAction.class);
-	private Map<String, Object> sessionMap;
+	private SessionMap<String,Object> sessionMap;
 	
 	private String customerName;
 	private String gender;
@@ -52,218 +37,94 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     private String residentialState;
     private String residentialPin;
     private String residentialCountry;
-   
-    QueryKycStatus kyc = new QueryKycStatus();
 
     private InputStream stream;
 	
-/*    public void validate() {
-    	
-    	logger.debug("KycCheckAction class : validate method : start");
-        try {
-        	
-        if(StringUtils.isEmpty(getPanCard()) )
-            addFieldError("panCard","PAN Card number can't be blank!");
-
-        else if (!kyc.existsPanCard(getPanCard()))
-            addFieldError("panCard"," PAN Card does not exists.");
-        } catch ( MoneyBuddyException e )  {
-        	logger.debug("KycCheckAction class : validate method : end");
-        	e.printStackTrace();
-        }
-        logger.debug("KycCheckAction class : validate method : end");
-
-    }*/
     public String execute() {
     	
-    	Session hibernateSession = null;
-    	
+    	String customerId = null;
     	try {
+    		customerId = sessionMap.get("customerId").toString();
     		
-    	logger.debug("KycCheckAction class : execute method : start");
-    	System.out.println(" KycCheckAction execute method Called !!");
-    	
-    	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
-    	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
-    	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
-    	System.out.println(" PrepareKycFormAction execute method :dateOfBirth : "+getDateOfBirth());
-    	System.out.println(" PrepareKycFormAction execute method :addressLineOne : "+getAddressLineOne());
-    	System.out.println(" PrepareKycFormAction execute method :addressLineTwo : "+getAddressLineTwo());
-    	System.out.println(" PrepareKycFormAction execute method :residentialCity : "+getResidentialCity());
-    	System.out.println(" PrepareKycFormAction execute method :residentialState : "+getResidentialState());
-    	System.out.println(" PrepareKycFormAction execute method :residentialPin : "+getResidentialPin());
-    	System.out.println(" PrepareKycFormAction execute method :residentialCountry : "+getResidentialCountry());
-    	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
-    	
-    	// Savita Wadhwani - Start - Added this block to validate input panCard through ajax call
-    	
-    	/*if (!kyc.existsPanCard(getPanCard())) {
-    		System.out.println(" Returned invalid !!");
+    		logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - start ");
     		
-    		String str = "invalid";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return "invalid";
-    		return SUCCESS;
-    	}
-    	
-    	// Savita Wadhwani - End - Added this block to validate input panCard through ajax call
-    	
-    	if (kyc.getKycStatusForPanCard(getPanCard()).equalsIgnoreCase("N"))  {
-    		logger.debug("KycCheckAction class : execute method : KYC is not done for "+getPanCard());
-    		System.out.println(" Returned KYC not done !!");
-    		String str = "kycNotDone";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return SUCCESS;
-    	}*/
+	    	System.out.println(" KycCheckAction execute method Called !!");
+	    	
+	    	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
+	    	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
+	    	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
+	    	System.out.println(" PrepareKycFormAction execute method :dateOfBirth : "+getDateOfBirth());
+	    	System.out.println(" PrepareKycFormAction execute method :addressLineOne : "+getAddressLineOne());
+	    	System.out.println(" PrepareKycFormAction execute method :addressLineTwo : "+getAddressLineTwo());
+	    	System.out.println(" PrepareKycFormAction execute method :residentialCity : "+getResidentialCity());
+	    	System.out.println(" PrepareKycFormAction execute method :residentialState : "+getResidentialState());
+	    	System.out.println(" PrepareKycFormAction execute method :residentialPin : "+getResidentialPin());
+	    	System.out.println(" PrepareKycFormAction execute method :residentialCountry : "+getResidentialCountry());
+	    	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
+	    	
+	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+		    String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
+			Date date = dateFormat.parse(dob);
+			
+			String frmtdDateForDB = dateFormat.format(date);
+	
+			sessionMap.put("customerName", getCustomerName());
+			logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - stored customerName in sessionMap");
+			
+			
+	    	UpdateCustomer UpdateCustomer = new UpdateCustomer();
+	    	int updateResult =  UpdateCustomer.updateNameAndCustDetUploadedStatus(customerId, getCustomerName(), "Y");
+	
+	    	if (updateResult == 1) 
+				sessionMap.put("CustDetUploaded", "Y");
+			else 
+				sessionMap.put("CustDetUploaded", "N");
 
-    	
-    	/*DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    	Date frmtDateOfBirth = format.parse(getDateOfBirth());*/ 
-    	
-    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession(); 
-    	
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-	    String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
-		Date date = dateFormat.parse(dob);
-		
-		String frmtdDateForDB = dateFormat.format(date);
-	    
-    	/*Customers customer = new Customers();
-    	customer.setCustomerId(sessionMap.get("customerId").toString());
-    	customer.setCustomerName(getCustomerName());
-    	customer.setDateOfBirth(frmtdDateForDB);
-    	customer.setAddressLineOne(getAddressLineOne());
-    	customer.setAddressLineTwo(getAddressLineTwo());
-    	customer.setAddressLineThree(getAddressLineThree());
-    	customer.setResidentialCity(getResidentialCity());
-    	customer.setResidentialState(getResidentialState());
-    	customer.setResidentialCountry(getResidentialCountry());
-    	customer.setResidentialPin(getResidentialPin());
-    	customer.setTaxStatus(getTaxStatus());
-    	customer.setGender(getGender());
-    	customer.setOccupation(getOccupation());
-    	customer.setPanCard(getPanCard());
-    	
-    	session.beginTransaction();
-    	
-    	session.update(customer);
-    	
-    	session.getTransaction().commit();*/
-    	
-		/*Query query = session.createQuery("update Customers set firstName = :firstName , lastName = :lastName , gender = :gender ,panCard = :panCard ,occupation = :occupation ,grossAnnualIncome = :grossAnnualIncome ,politicallyExposed = :politicallyExposed  where customerId = :customerId");
-		
-		query.setParameter("firstName", getFirstName());
-		query.setParameter("lastName", getLastName());
-		query.setParameter("gender", getGender()); 
-		query.setParameter("panCard", getPanCard());
-		query.setParameter("occupation", getOccupation());
-		query.setParameter("grossAnnualIncome", getGrossAnnualIncome()); 
-		query.setParameter("politicallyExposed", getPoliticallyExposed());
-		query.setParameter("customerId", sessionMap.get("customerId").toString());*/
-		
-		/*int updateResult = query.executeUpdate();
-		System.out.println(updateResult + " rows updated in Customers table ");*/
-
-		sessionMap.put("customerName", getCustomerName());
-    	logger.debug("KycCheckAction class : execute method : updated customerName : "+customerName+" in session id : "+sessionMap.getClass().getName());
-		
-		
-    	hibernateSession.beginTransaction();
-		Query query = hibernateSession.createQuery("update Customers set customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
-		query.setParameter("customerName", getCustomerName());
-		query.setParameter("cusDetailsUploaded", "Y");
-		query.setParameter("customerId", sessionMap.get("customerId").toString());
-		
-		int updateResult = query.executeUpdate();
-		hibernateSession.getTransaction().commit();
-		
-		System.out.println(updateResult + " rows updated in Customers table ");
-		
-		hibernateSession.beginTransaction();
-		
-		query = hibernateSession.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
-				+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
-				+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
-				+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
-				+ " where customerId = :customerId");
-
-		query.setParameter("dateOfBirth", frmtdDateForDB);
-		query.setParameter("addressLineOne", getAddressLineOne());
-		query.setParameter("addressLineTwo", getAddressLineTwo());
-		query.setParameter("addressLineThree", getAddressLineThree());
-		query.setParameter("residentialCity", getResidentialCity());
-		query.setParameter("residentialState", getResidentialState());
-		query.setParameter("residentialCountry", getResidentialCountry());
-		query.setParameter("residentialPin", getResidentialPin());
-		query.setParameter("taxStatus", getTaxStatus());
-		query.setParameter("gender", getGender());
-		query.setParameter("occupation", getOccupation());
-
-
-		query.setParameter("customerId", sessionMap.get("customerId").toString());
-		
-		updateResult = query.executeUpdate();
-
-		hibernateSession.getTransaction().commit();
-		
-		System.out.println(updateResult + " rows updated in Customers table ");
-		
-		if (updateResult == 1) {
-			sessionMap.put("CustDetUploaded", "Y");
-			logger.debug("PrepareKycFormAction class : execute method : stored CustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
-		}
-		else {
-			sessionMap.put("CustDetUploaded", "N");
-			logger.debug("PrepareKycFormAction class : execute method : stored CustDetUploaded : N in session id : "+sessionMap.getClass().getName());
-		}
-
-    	logger.debug("KycCheckAction class : execute method : end");
-    	
-    	System.out.println(" Returned Success !!");
-
-    	if (sessionMap.get("kycStatus").toString().equalsIgnoreCase("DONE"))  {
-    		System.out.println(" Returned KYC  done !!");
-    		String str = "kycDone";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return SUCCESS;
-    	}
-    	else {
-			System.out.println(" Returned KYC not done !!");
-			String str = "kycNotDone";
-		    stream = new ByteArrayInputStream(str.getBytes());
-			return SUCCESS;
-    	}
+			logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - stored CustDetUploaded in sessionMap");
+	    	
+			UpdateCustomerDetails updateCustomerDetails = new UpdateCustomerDetails();
+			updateCustomerDetails.updateCustomerDetails(customerId, frmtdDateForDB, getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), 
+					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(), getOccupation());
+	    	
+	    	System.out.println(" Returned Success !!");
+	
+	    	if (sessionMap.get("kycStatus").toString().equalsIgnoreCase("DONE"))  {
+	    		System.out.println(" Returned KYC  done !!");
+	    		String str = "kycDone";
+	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycDone");
+		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
+		    	
+	    		return SUCCESS;
+	    	}
+	    	else {
+				System.out.println(" Returned KYC not done !!");
+				String str = "kycNotDone";
+			    stream = new ByteArrayInputStream(str.getBytes());
+			    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycNotDone");
+		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
+		    	
+				return SUCCESS;
+	    	}
 
     	} 
-    	/*catch ( MoneyBuddyException e )  {
-    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-    		e.printStackTrace();
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return ERROR;
-    	}*/
     	catch ( Exception e )  {
-    		logger.error("KycCheckAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
+    		logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
+    		
     		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
+    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned error");
+    	    
     		return ERROR;
-    	}
-    	finally {
-    		hibernateSession.close();
     	}
     }
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
 
 	public InputStream getStream() {
 		return stream;
@@ -369,5 +230,4 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		this.residentialCountry = residentialCountry;
 	}
 	
-
 }

@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.EntityClasses;
@@ -12,14 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author Savita Wadhwani
- */
 @Entity
 @Table (name="SECONDARY_FUND_DETAILS")
 public class SecondaryFundDetails {
-
 
     @Id
     @Column (name="FUND_ID")
@@ -34,11 +29,9 @@ public class SecondaryFundDetails {
     @Column(name="SCHEME_CODE")
     private String schemeCode;
     
-
     public SecondaryFundDetails() {
 
     }
-  
 
 	public SecondaryFundDetails(String fundId, String amcCode, String rta, String schemeCode) {
 		super();

@@ -11,31 +11,27 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.Subscriber;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
 
-public class insertCustomerDetails {
+public class InsertCustomerDetails {
 
-	Logger logger = Logger.getLogger(insertCustomerDetails.class);
+	Logger logger = Logger.getLogger(InsertCustomerDetails.class);
 
-    public void insertCustomer (String emailId,String mobileNumber,
-    		String password) throws MoneyBuddyException
+    public void insertCustomer (String emailId,String mobileNumber, String password) throws MoneyBuddyException
     {
-
-    	logger.debug("insertCustomerDetails class : insertCustomer method : start");
-
 		Session hibernateSession = null;
-		
+		String customerId = null;
     	try {
+    		
+    		QueryCustomer queryCustomer = new QueryCustomer();
+    		customerId = Integer.toString(queryCustomer.getCustomerId(emailId));
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - start");
+    		
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		hibernateSession.beginTransaction();
         	
@@ -48,6 +44,8 @@ public class insertCustomerDetails {
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();
 
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in Customers table");
+    		
     		hibernateSession.close();
     		
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -59,40 +57,37 @@ public class insertCustomerDetails {
     		hibernateSession.save(tempSubscriber);
     		hibernateSession.getTransaction().commit();
     		
-    		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to Customers table for emailId : "+emailId);
-
-    		QueryCustomer queryCustomer = new QueryCustomer();
-    		int customerId = queryCustomer.getCustomerId(emailId);
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in Subscriber table");
     		
     		System.out.println("insertCustomerDetails class : insertCustomer method : emailId : "+emailId);
     		System.out.println("insertCustomerDetails class : insertCustomer method : customerId : "+customerId);
 
-    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(Integer.toString(customerId),password,null);
+    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(customerId,password,null);
     		hibernateSession.beginTransaction();
     		hibernateSession.save(tempUserPasswords);
 
     		hibernateSession.getTransaction().commit();
+    		
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in CustomerPasswordsHistory table");
 
-    		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerPasswordsHistory table for customerId : "+customerId);
-
-    		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(Integer.toString(customerId),null,frmtdDate);
+    		CustomerLoginActivity tempUserTimeDetails = new CustomerLoginActivity(customerId,null,frmtdDate);
 
     		hibernateSession.beginTransaction();
     		hibernateSession.save(tempUserTimeDetails);
     		hibernateSession.getTransaction().commit();
     		
-    		logger.debug("insertCustomerDetails class : insertCustomer method : inserted data to CustomerLoginActivity table for customerId : "+customerId);
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in CustomerLoginActivity table");
     		
-    		logger.debug("insertCustomerDetails class : insertCustomer method : end");
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - end");
 
     	}
     	catch ( HibernateException e ) {
-			logger.debug("insertCustomerDetails class : insertCustomer method : Caught Exception");
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("insertCustomerDetails class : insertCustomer method : Caught Exception");
+			logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -105,7 +100,7 @@ public class insertCustomerDetails {
     
     public void updateVerificationStatus (String password) throws MoneyBuddyException {
 
-		logger.debug("insertCustomerDetails class : updateVerificationStatus method : start");
+    	logger.debug("InsertCustomerDetails class - updateVerificationStatus method - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
@@ -125,17 +120,17 @@ public class insertCustomerDetails {
 
 			hibernateSession.getTransaction().commit();
     		
-    		logger.debug("insertCustomerDetails class : updateVerificationStatus method : updated data of Customers table to set verificationStatus Y");
+			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - updated data of Customers table to set verificationStatus Y");
     		
-    		logger.debug("insertCustomerDetails class : updateVerificationStatus method : end");
+			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - end");
 		}
 		catch ( HibernateException e ) {
-			logger.debug("insertCustomerDetails class : updateVerificationStatus method : Caught Exception");
+			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("insertCustomerDetails class : updateVerificationStatus method : Caught Exception");
+			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

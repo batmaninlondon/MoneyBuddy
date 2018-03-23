@@ -11,16 +11,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.log4j.Logger;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.ColumnText;
@@ -128,8 +135,8 @@ public class SendMail {
 		}
     }
 
-    public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{/*
-    	
+    //public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{
+    	/*
            PdfReader reader;
 		try {
 			reader = new PdfReader("D://DelMe/"+pdfName+".pdf");
@@ -261,24 +268,30 @@ public class SendMail {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 
-    */}
+    *///}
     
-    public void sendKycFormMail(String pdfFile, String emailId) throws MoneyBuddyException{/*
-
+    public void sendKycFormMail(String pdfFile, String emailId, String subject, String fileName,
+    				String mailLink,String displayLinkName) throws MoneyBuddyException{
+    	
 		try {
 	
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+			
     	Properties props = new Properties();
     	props.put("mail.smtp.auth", "true");
     	props.put("mail.smtp.starttls.enable", "true");
-    	props.put("mail.smtp.host", getGmailHost());
-    	props.put("mail.smtp.port", getPort());
+    	props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+    	props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
 
     	// Get the Session object.
 
     	Session session = Session.getInstance(props,
     			new javax.mail.Authenticator() {
     		protected PasswordAuthentication getPasswordAuthentication() {
-    			return new PasswordAuthentication(getUsername(), getPassword());
+    			return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
     		}
     	});
 
@@ -287,7 +300,7 @@ public class SendMail {
     		Message message = new MimeMessage(session);
 
     		// Set From: header field of the header.
-    		message.setFrom(new InternetAddress(getUsername()));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
 
     		// Set To: header field of the header.
 
@@ -295,30 +308,46 @@ public class SendMail {
     				InternetAddress.parse(emailId));
 
     		// Set Subject: header field
-    		String subject ="Investment Details";
+
     		message.setSubject(subject);
+    		
+    		String mailContentFilePath = "../../../mailContents/"+fileName;
+    		InputStream is = RegisterAction.class.getResourceAsStream(mailContentFilePath);
+        	
+    		
+        	StringBuilder bodyText = new StringBuilder();
 
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            
+            String strLine;
 
-    		BodyPart messageBodyPart1 = new MimeBodyPart();     
-         messageBodyPart1.setText("Please find kyc application form pdf"); 
-         System.out.println("Hi There 3 ");
+            //Read File Line By Line
+            while ((strLine = br.readLine()) != null)   {
+            	
+            	if (strLine.contains("LinkForEmail")) {
+            		
+            		System.out.println("contains LinkForEmail ");
+            		strLine = strLine.replace("LinkForEmail", "<a href=\""+mailLink+"\">"+displayLinkName+"</a>");
 
-         //4) create new MimeBodyPart object and set DataHandler object to this object        
+            	}
+            	bodyText.append(strLine);
+            }
+
+         BodyPart messageBodyPart1 = new MimeBodyPart(); 	    
+         messageBodyPart1.setText(bodyText.toString());
+
+         //create new MimeBodyPart object and set DataHandler object to this object        
          MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
-         String filename = pdfFile;//change accordingly
-         System.out.println("Hi There 4 ");
-         DataSource source = new FileDataSource(filename);    
+         String sourceFileName = pdfFile;//change accordingly
+         
+         DataSource source = new FileDataSource(sourceFileName);    
          messageBodyPart2.setDataHandler(new DataHandler(source));    
-         messageBodyPart2.setFileName("KYC_Application_Form.pdf");    
-         System.out.println("Hi There 5 ");
+         messageBodyPart2.setFileName("KYC_Application_Form.pdf");
 
-         //5) create Multipart object and add MimeBodyPart objects to this object        
+         //create Multipart object and add MimeBodyPart objects to this object        
          Multipart multipart = new MimeMultipart();    
          multipart.addBodyPart(messageBodyPart1);     
          multipart.addBodyPart(messageBodyPart2); 
-         
-         System.out.println("Hi There 6 ");
- 		//message.setContent(bodyText.toString(), "text/html; charset=utf-8");
 
          message.setContent(multipart );  
          
@@ -339,18 +368,18 @@ public class SendMail {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 
- */}
+	}
     
     
-    public int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {/*
+/*    public int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {
         stamper.insertPage(pagecount, pagesize);
         PdfContentByte canvas = stamper.getOverContent(pagecount);
         column.setCanvas(canvas);
         column.setSimpleColumn(rect);
         return column.go();
-    */
+    
     	return 0;
-    }
+    }*/
     
 /*	public int getPort() {
 		return port;

@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -28,84 +27,68 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
     private String hashedPassword;
     private String newPassword;
     private String confirmPassword;
-
-    HttpServletRequest request;
-
-    QueryCustomer user = new QueryCustomer();
-
-    private SessionMap<String, Object> sessionMap;
+    private SessionMap<String,Object> sessionMap;
     private InputStream stream;
-    
-    /*@Override
-    public void validate()  {
-    	logger.debug("ResetPasswordAction class : validate method : start");
-
-    	if(StringUtils.isEmpty(getNewPassword())  )
-    		addFieldError("newPassword","Password can't be blank!");
-
-    	else if(StringUtils.isEmpty(getConfirmPassword())  )
-    		addFieldError("confirmPassword","Password can't be blank!");
-    	else if(!getNewPassword().equals(getConfirmPassword())  )
-    		addFieldError("confirmPassword","The Password do not match.");
-
-    	logger.debug("ResetPasswordAction class : validate method : end");
-    }*/
 
     @Override
     public String execute() {
         
-    	try {
+    	String customerId = null;
     	
-    	logger.debug("ResetPasswordAction class : execute method : start");
+    	try {
 
-    	//Set the current password as the old password
-    	QueryCustomer customer = new QueryCustomer();
-    	int customerId = customer.getCustomerId(getEmailId());
-    	UpdateOldPassword updateOldPassword = new UpdateOldPassword();
-    	updateOldPassword.updateOldPassword(Integer.toString(customerId));
+	    	QueryCustomer customer = new QueryCustomer();
+    		customerId = Integer.toString(customer.getCustomerId(getEmailId()));
+    		
+    		logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - start ");
+	
+	    	//Set the current password as the old password
+	    	
+	    	UpdateOldPassword updateOldPassword = new UpdateOldPassword();
+	    	updateOldPassword.updateOldPassword(customerId);
+	
+	    	//Update the password for the user
+	    	UpdateCustomerPassword updateUserPassword = new UpdateCustomerPassword();
+	    	updateUserPassword.updatePassword(customerId, getEmailId(), getNewPassword());
 
-    	//Update the password for the user
-    	UpdateCustomerPassword updateUserPassword = new UpdateCustomerPassword();
-    	updateUserPassword.updatePassword(Integer.toString(customerId), getEmailId(), getNewPassword());
-
-    	logger.debug("ResetPasswordAction class : execute method : end");
-    	String str = "success";
-	    stream = new ByteArrayInputStream(str.getBytes());
-	    if(sessionMap!=null){  
-            sessionMap.invalidate();  
-        } 
-
-    	return SUCCESS;
+		    if(sessionMap!=null){  
+	            sessionMap.invalidate();  
+	        } 
+	
+	    	String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());
+		    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned success");
+		    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - end ");
+		    
+	    	return SUCCESS;
+	    	
     	}catch (MoneyBuddyException e) {	
-    		logger.debug("ResetPasswordAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-			e.printStackTrace();
-			
-			String str = "error";
+    		logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		e.printStackTrace();
+    		
+    		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-			return ERROR;
+    	    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+    	    
+    		return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("ResetPasswordAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
-			e.printStackTrace();
-			
-			String str = "error";
+    		logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		e.printStackTrace();
+    		
+    		String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-			return ERROR;
+    	    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+    	    
+    		return ERROR;
 		}
     }
  
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = (SessionMap)sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-    public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
-        
-	public HttpServletRequest getServletRequest() {
-		return this.request;
-	}
+
     public String getHashedPassword() {
         return hashedPassword;
     }

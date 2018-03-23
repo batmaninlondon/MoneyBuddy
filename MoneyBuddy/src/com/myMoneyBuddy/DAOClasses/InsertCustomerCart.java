@@ -5,25 +5,14 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.CustomerLoginActivity;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.Subscriber;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class InsertCustomerCart {
 
@@ -33,7 +22,7 @@ public class InsertCustomerCart {
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
 
-    	logger.debug("insertCustomerCart class : addCustomerCart method : start");
+    	logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - start");
     	
     	Session hibernateSession = null;
     	CustomerCart tempCustomerCart = null;
@@ -75,6 +64,7 @@ public class InsertCustomerCart {
     			query.executeUpdate();
     			
     			hibernateSession.getTransaction().commit();
+    			logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - record updated in CustomerCart table for productId - "+productId);
     			
     		}
     		else {
@@ -86,25 +76,25 @@ public class InsertCustomerCart {
 	   	        hibernateSession.refresh(tempCustomerCart);
 	   	        
 	   	        hibernateSession.getTransaction().commit();
+	   	        logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - new record inserted in CustomerCart table");
    	        
     		}
     		
-   	        
-    		logger.debug("insertCustomerCart class : addCustomerCart method : end");
+    		logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - end");
 
     	}
     	catch ( MoneyBuddyException e ) {
-			logger.debug("insertCustomerCart class : addCustomerCart method : Caught Exception");
+    		logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught MoneyBuddyException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	catch ( HibernateException e ) {
-			logger.debug("insertCustomerCart class : addCustomerCart method : Caught Exception");
+    		logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("insertCustomerCart class : addCustomerCart method : Caught Exception");
+			logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

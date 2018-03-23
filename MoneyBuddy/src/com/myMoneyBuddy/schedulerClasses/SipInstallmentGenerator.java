@@ -1,20 +1,13 @@
 package com.myMoneyBuddy.schedulerClasses;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
-
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 

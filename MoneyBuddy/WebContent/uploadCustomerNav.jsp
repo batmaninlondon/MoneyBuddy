@@ -109,7 +109,6 @@
 				<h2 style="font-family:Aparajita;font-size:35px;"><b>Upload NAV</b></h2>
 			</div>
 			<div class="col-md-3">
-				<p>Dummy Value is : <s:property value="dummyValue"/></p>
 			</div>
 		</div>	
 		

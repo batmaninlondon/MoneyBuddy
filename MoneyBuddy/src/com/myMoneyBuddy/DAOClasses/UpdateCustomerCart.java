@@ -5,19 +5,12 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-
 
 public class UpdateCustomerCart {
 	
@@ -25,7 +18,7 @@ public class UpdateCustomerCart {
 
 	public void deleteCustomerCartEntry (String customerId, String cartId) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomerCart class : deleteCustomerCartEntry method : start");
+		logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
@@ -43,18 +36,18 @@ public class UpdateCustomerCart {
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateCustomerCart class : deleteCustomerCartEntry method : deleted a row from CustomerCart table for customerId : "+customerId+" and cartId : "+cartId);
+			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - deleted a row from CustomerCart table for cartId : "+cartId);
 
-			logger.debug("UpdateCustomerCart class : deleteCustomerCartEntry method : end");
+			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomerCart class : deleteCustomerCartEntry method : Caught Exception");
+			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomerCart class : deleteCustomerCartEntry method : Caught Exception");
+			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

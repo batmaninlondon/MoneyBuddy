@@ -1,6 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.EntityClasses;
@@ -12,14 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author Savita Wadhwani
- */
 @Entity
 @Table (name="RTA_SPECIFIC_CODES")
 public class RtaSpecificCodes {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

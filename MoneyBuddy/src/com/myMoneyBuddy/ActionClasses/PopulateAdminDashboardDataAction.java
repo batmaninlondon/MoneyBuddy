@@ -5,50 +5,27 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.myMoneyBuddy.ModelClasses.DbfStatusDataModel;
-import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
-
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.regex.Pattern;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class PopulateAdminDashboardDataAction extends ActionSupport implements SessionAware  {
 
-	
-	
 	Logger logger = Logger.getLogger(PopulateAdminDashboardDataAction.class);
-	private Map<String, Object> sessionMap;
-	
-	
+	private SessionMap<String,Object> sessionMap;
+
 	private InputStream stream;
 	
     public String execute() {
@@ -62,18 +39,11 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
     	HashMap<String,String> dbfDataList = new HashMap<String,String>();
     	
     	try {
-    		
-/*    		Properties properties = new Properties();
-			String propFilePath = "../../../config/config.properties";
-
-			properties.load(Trading.class.getResourceAsStream(propFilePath));*/
-
  
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
     		hibernateSession.beginTransaction();
-				
-				
+							
 				Query query =  hibernateSession.createQuery(" from DbfFileStatusDetails where uploadedStatus = :uploadedStatus ");
 				query.setParameter("uploadedStatus", "N");
 				List<DbfFileStatusDetails> dbfFileStatusDetailsList = query.list();
@@ -115,16 +85,10 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
     
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
     
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
-
-
 	public InputStream getStream() {
 		return stream;
 	}

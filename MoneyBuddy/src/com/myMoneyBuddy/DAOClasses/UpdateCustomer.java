@@ -5,27 +5,20 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
-import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.DesEncrypter;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-
 
 public class UpdateCustomer {
 	
 	Logger logger = Logger.getLogger(UpdateCustomer.class);
 
-	public void updatePancard (String customerId, String panCard, String kycStatus) throws MoneyBuddyException {
+	public void updatePancardAndKycStatus (String customerId, String panCard, String kycStatus) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomer class : updatePancard method : start");
+		logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
@@ -46,18 +39,18 @@ public class UpdateCustomer {
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateCustomer class : updatePancard method : updated data of Customers table to set panCard and kycStatus for customerId : "+customerId);
+			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - updated data of Customers table to set panCard and kycStatus");
 
-			logger.debug("UpdateCustomer class : updatePancard method : end");
+			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class : updatePancard method : Caught Exception");
+			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class : updatePancard method : Caught Exception");
+			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -68,10 +61,96 @@ public class UpdateCustomer {
 
 	}
 	
+	public void updateAddCusDetUploadedStatus (String customerId, String status) throws MoneyBuddyException {
+
+		logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		System.out.println("customerId : in updateAddCusDetUploadedStatus : "+customerId);
+		System.out.println("status : in updateAddCusDetUploadedStatus : "+status);
+
+		try {
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update Customers set addCusDetailsUploaded = :addCusDetailsUploaded where customerId = :customerId");
+			
+			query.setParameter("addCusDetailsUploaded", status);
+			query.setParameter("customerId", customerId);
+
+			int result = query.executeUpdate();
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - updated data of Customers table to set addCusDetailsUploaded status ");
+
+			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - end");
+
+		}
+		catch ( HibernateException e ) {
+			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
+
+		}
+
+	}
+	
+	public int updateNameAndCustDetUploadedStatus (String customerId, String customerName, String cusDetailsUploaded) throws MoneyBuddyException {
+
+		logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		System.out.println("customerId : in updateNameAndCustDetUploadedStatus : "+customerId);
+		System.out.println("customerName : in updateNameAndCustDetUploadedStatus : "+customerName);
+		System.out.println("cusDetailsUploaded : in updateNameAndCustDetUploadedStatus : "+cusDetailsUploaded);
+
+		try {
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update Customers set customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
+			query.setParameter("customerName", customerName);
+			query.setParameter("cusDetailsUploaded", cusDetailsUploaded);
+			query.setParameter("customerId", customerId);
+
+			int result = query.executeUpdate();
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - updated data of Customers table to set customerName and cusDetailsUploaded ");
+
+			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - end");
+			
+			return result;
+
+		}
+		catch ( HibernateException e ) {
+			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			hibernateSession.close();
+
+		}
+
+	}
 	
 	public void updateBseClientCreationStatus (String customerId, String bseClientCreationStatus) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomer class : updateBseClientCreationStatus method : start");
+		logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
@@ -89,18 +168,18 @@ public class UpdateCustomer {
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateCustomer class : updateBseClientCreationStatus method : updated data of Customers table to set bseClientCreated for customerId : "+customerId);
+			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - updated data of Customers table to set bseClientCreated ");
 
-			logger.debug("UpdateCustomer class : updateBseClientCreationStatus method : end");
+			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class : updateBseClientCreationStatus method : Caught Exception");
+			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class : updateBseClientCreationStatus method : Caught Exception");
+			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

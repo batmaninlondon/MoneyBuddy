@@ -38,7 +38,7 @@
 
 </head>
 
-<body class="homepage bg-warning" onload="setData();">
+<body class="homepage bg-warning" onload="setAdminDashboardData();">
    <header id="header">
 <!--         <div class="top-bar">
             <div class="container">

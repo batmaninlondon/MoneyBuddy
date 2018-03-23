@@ -100,8 +100,4 @@ public class InvestmentDetailsDataModel implements Serializable{
 		this.buySell = buySell;
 	}
 
-
-
-
-	
 }

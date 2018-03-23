@@ -6,7 +6,6 @@ public class OrderDataModel implements Serializable{
 
 	private String transactionId;
 	private String fundName;
-	//private String units;
 	private String amount;
 	private String transactionDate;
 	private String transactionStatus;
@@ -19,7 +18,6 @@ public class OrderDataModel implements Serializable{
 		super();
 		this.transactionId = transactionId;
 		this.fundName = fundName;
-		//this.units = units;
 		this.amount = amount;
 		this.transactionDate = transactionDate;
 		this.transactionStatus = transactionStatus;
@@ -40,14 +38,6 @@ public class OrderDataModel implements Serializable{
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
 	}
-
-/*	public String getUnits() {
-		return units;
-	}
-
-	public void setUnits(String units) {
-		this.units = units;
-	}*/
 
 	public String getAmount() {
 		return amount;

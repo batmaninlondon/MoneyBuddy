@@ -1,21 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author ADMIN
  */
 
 package com.myMoneyBuddy.EntityClasses;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author ADMIN
- */
 @Entity
 @Table (name ="ADDITIONAL_CUSTOMER_DETAILS")
 public class AdditionalCustomerDetails {

@@ -1,149 +1,89 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Savita Wadhwani
  */
 
 package com.myMoneyBuddy.ActionClasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-
 import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
-import com.myMoneyBuddy.DAOClasses.QueryKycStatus;
-import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.Utils.SendMail;
-import com.myMoneyBuddy.webServices.WebServiceMFOrder;
-import com.myMoneyBuddy.webServices.WebServiceStarMF;
+import com.myMoneyBuddy.DAOClasses.InsertAdditionalCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.tempuri.IStarMFWebService;
-import org.tempuri.MFOrderEntry;
 
-/**
- *
- * @author Savita Wadhwani
- */
 public class PrepareKycFormAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(PrepareKycFormAction.class);
-	private Map<String, Object> sessionMap;
-	
+	private SessionMap<String,Object> sessionMap;	
 	private String fatherName ;
 	private String maritalStatus;
     private String nationality;
     private String status;
     private String grossAnnualIncome;
     private String politicallyExposed;
-    
-    QueryKycStatus kyc = new QueryKycStatus();
-
     private InputStream stream;
 	
     public String execute() {
-    	Session hibernateSession = null;
     	
+    	String str = null;
+    	String customerId = null;
     	try {
-    		
-    	logger.debug("PrepareKycFormAction class : execute method : start");
-    	System.out.println(" PrepareKycFormAction execute method Called !!");
     	
-	    System.out.println(" PrepareKycFormAction execute method :fatherName : "+getFatherName());
-    	System.out.println(" PrepareKycFormAction execute method :maritalStatus : "+getMaritalStatus());
-    	System.out.println(" PrepareKycFormAction execute method :nationality : "+getNationality());
-    	System.out.println(" PrepareKycFormAction execute method :status : "+getStatus());
-    	System.out.println(" PrepareKycFormAction execute method :status : "+getGrossAnnualIncome());
-    	System.out.println(" PrepareKycFormAction execute method :status : "+getPoliticallyExposed());
-    	
-    	String customerId = sessionMap.get("customerId").toString();
-    	
-    	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-	    
-	    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-	    //String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
-		//Date date = dateFormat.parse(dob);
-		
-		//String frmtdDateForDB = dateFormat.format(date);
-		
-	    AdditionalCustomerDetails tempAdditionalCustomer = new AdditionalCustomerDetails(customerId, getFatherName(), getMaritalStatus(),
-				getNationality(), getStatus(), getGrossAnnualIncome(),getPoliticallyExposed());
-	    hibernateSession.beginTransaction();
-	    hibernateSession.saveOrUpdate(tempAdditionalCustomer);
-	    hibernateSession.getTransaction().commit();
-		
-		sessionMap.put("addCustDetUploaded", "Y");
-		logger.debug("PrepareKycFormAction class : execute method : stored addCustDetUploaded : Y in session id : "+sessionMap.getClass().getName());
-		
-		Query query = hibernateSession.createQuery("update Customers set addCusDetailsUploaded = :addCusDetailsUploaded where customerId = :customerId");
-
-		query.setParameter("addCusDetailsUploaded", "Y");
-		query.setParameter("customerId", sessionMap.get("customerId").toString());
-		
-		int updateResult = query.executeUpdate();
-		
-		hibernateSession.getTransaction().commit();
-		
-		System.out.println(updateResult + " rows updated in Customers table ");
-		
-		String str = null;
+        	customerId = sessionMap.get("customerId").toString();
+        	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - start ");
+        	
+	    	System.out.println(" PrepareKycFormAction execute method Called !!");
+	    	
+		    System.out.println(" PrepareKycFormAction execute method :fatherName : "+getFatherName());
+	    	System.out.println(" PrepareKycFormAction execute method :maritalStatus : "+getMaritalStatus());
+	    	System.out.println(" PrepareKycFormAction execute method :nationality : "+getNationality());
+	    	System.out.println(" PrepareKycFormAction execute method :status : "+getStatus());
+	    	System.out.println(" PrepareKycFormAction execute method :status : "+getGrossAnnualIncome());
+	    	System.out.println(" PrepareKycFormAction execute method :status : "+getPoliticallyExposed());
+			
+			InsertAdditionalCustomerDetails InsertAddCustDetails = new InsertAdditionalCustomerDetails();
+	    	InsertAddCustDetails.insertAddCusDetails(customerId, getFatherName(), getMaritalStatus(), getNationality(), getStatus(), 
+	    				getGrossAnnualIncome(), getPoliticallyExposed());
+			
+			sessionMap.put("addCustDetUploaded", "Y");
+			logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");
+			
+			UpdateCustomer updateCustomer = new UpdateCustomer();
+			updateCustomer.updateAddCusDetUploadedStatus(customerId, "Y");
 		
 	    	GenerateKycForm generateKycForm = new GenerateKycForm();
 	    	generateKycForm.generateKycFormAndSendMail(customerId);	
+
+	    	System.out.println(" Returned Success !!");
+	    	
 	    	str = "success";
-
-
-    	logger.debug("PrepareKycFormAction class : execute method : end");
-    	
-    	System.out.println(" Returned Success !!");
-    	
-    	
-    	stream = new ByteArrayInputStream(str.getBytes());
-
-    	return SUCCESS;
+	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned success");
+	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - end");
+	    	
+	    	return SUCCESS;
     	} 
-    	/*catch ( MoneyBuddyException e )  {
-    		logger.error("KycCheckAction class : execute method : caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
-    		e.printStackTrace();
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return ERROR;
-    	}*/
     	catch ( Exception e )  {
-    		logger.error("KycCheckAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
+    		logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
-    		String str = "error";
+    		
+    		str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
+    	    logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned error");
+    	    
     		return ERROR;
-    	}
-    	finally {
-    		hibernateSession.close();
     	}
     }
     
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
     
 	public InputStream getStream() {
 		return stream;

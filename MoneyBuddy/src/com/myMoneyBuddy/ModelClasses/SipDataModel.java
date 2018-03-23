@@ -63,6 +63,4 @@ public class SipDataModel implements Serializable{
 		this.nextSipDate = nextSipDate;
 	}
 
-
-	
 }

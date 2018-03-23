@@ -657,7 +657,7 @@ function activatePayNowButton()
 	
 }
 
-function setData() 
+function setAdminDashboardData() 
 {
 	
 	$.ajax({

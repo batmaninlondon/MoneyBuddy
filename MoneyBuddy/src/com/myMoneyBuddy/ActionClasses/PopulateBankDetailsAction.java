@@ -6,54 +6,25 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerPortfolio;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.GAT.PredictedValueCalculation;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
-
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.regex.Pattern;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class PopulateBankDetailsAction extends ActionSupport implements SessionAware  {
-
-	
 	
 	Logger logger = Logger.getLogger(PopulateBankDetailsAction.class);
-	private Map<String, Object> sessionMap;
-
+	private SessionMap<String,Object> sessionMap;
 	private InputStream stream;
-	
-	
 	private String bankName;
 	private String accountType;
 	private String accountNumber;
@@ -73,7 +44,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     	System.out.println("ifscCode : "+getIfscCode());
     	try {
  
-    		QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
+    		//QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
     		
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
@@ -84,36 +55,36 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 			hibernateSession.beginTransaction();
-				
-				BankDetails tempBankDetails = new BankDetails(customerId, getBankName(),getAccountType(),
-						getAccountNumber(),getIfscCode(),frmtdDateForDB);
+			
+			BankDetails tempBankDetails = new BankDetails(customerId, getBankName(),getAccountType(),
+					getAccountNumber(),getIfscCode(),frmtdDateForDB);
 
-				hibernateSession.save(tempBankDetails);
+			hibernateSession.save(tempBankDetails);
 
-				logger.debug("PopulateBankDetailsAction class : execute method : stored BankDetails in session id : "+sessionMap.getClass().getName());
-				hibernateSession.getTransaction().commit();
-				
-				QueryCustomer customer = new QueryCustomer();
-				String emailId = sessionMap.get("emailId").toString();
-				
-				SendMail sendmail = new SendMail();
-				StringBuilder bodyText = new StringBuilder();
-				String MAIL_SITE_LINK = "www.quantwealth.in/login";
-				
-				String subject = "Payment recieved for your recent transaction";
-	        	bodyText.append("<div>")
-	        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
-	        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
-	        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
-	        	.append("  <h3>Thanks,</h3><br/><br/>")
-	        	.append("  <h3>MoneyBuddy Team</h3>")
-	        	.append("</div>");
-	        	
-	        	//sendmail.MailSending(emailId, bodyText,subject);
+			logger.debug("PopulateBankDetailsAction class : execute method : stored BankDetails in session id : "+sessionMap.getClass().getName());
+			hibernateSession.getTransaction().commit();
+			
+			QueryCustomer customer = new QueryCustomer();
+			String emailId = sessionMap.get("emailId").toString();
+			
+			SendMail sendmail = new SendMail();
+			StringBuilder bodyText = new StringBuilder();
+			String MAIL_SITE_LINK = "www.quantwealth.in/login";
+			
+			String subject = "Payment recieved for your recent transaction";
+        	bodyText.append("<div>")
+        	.append(" <br/><br/> <h1>Dear User</h1><br/><br/>")
+        	.append("  <p>Payment for your recent transaction has been received</p><br/><br/><br/>")
+        	.append(" <h3> Please click <a href=\""+MAIL_SITE_LINK+"\">here</a> to login and check the staus of all your transactions.</h3><br/><br/>")
+        	.append("  <h3>Thanks,</h3><br/><br/>")
+        	.append("  <h3>MoneyBuddy Team</h3>")
+        	.append("</div>");
+        	
+        	//sendmail.MailSending(emailId, bodyText,subject);
  
 		    	
 		    	logger.debug("ForgotPasswordAction class : execute method : mail sent to "+emailId+" to reset password for session id : "+sessionMap.getClass().getName());
-		    	
+	    	
 				
 			logger.debug("PopulateBankDetailsAction class : execute method : end");
 			
@@ -183,15 +154,9 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 
 
 	@Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap<String, Object>) map;
     }
-    
-
-    public Map<String, Object> getSession() {
-		return sessionMap;
-	}
-
 
 	public InputStream getStream() {
 		return stream;
