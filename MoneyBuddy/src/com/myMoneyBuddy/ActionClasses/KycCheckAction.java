@@ -12,7 +12,6 @@ import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;

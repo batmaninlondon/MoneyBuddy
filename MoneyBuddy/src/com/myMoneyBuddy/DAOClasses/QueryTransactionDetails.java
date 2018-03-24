@@ -52,7 +52,8 @@ public class QueryTransactionDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 	
@@ -113,7 +114,8 @@ public class QueryTransactionDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 

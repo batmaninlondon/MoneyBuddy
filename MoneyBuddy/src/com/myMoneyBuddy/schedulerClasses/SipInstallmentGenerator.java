@@ -17,10 +17,9 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		try {
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
 			hibernateSession.beginTransaction();
 			
@@ -82,7 +81,8 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 		} 
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 

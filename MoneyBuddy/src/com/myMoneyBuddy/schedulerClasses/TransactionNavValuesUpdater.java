@@ -145,10 +145,10 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 			System.out.println("price : "+price);
 			System.out.println("units : "+units);
 
-			Session hibernateSession = null;
+			Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			Query query = null;
 			try {
-				hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+				
 				hibernateSession.beginTransaction();
 				query = hibernateSession.createQuery("update TransactionDetails set quantity = :quantity , unitPrice = :unitPrice , transactionStatus = :transactionStatus where transactionDetailId = :transactionDetailId");
 				query.setParameter("quantity", units);
@@ -164,7 +164,8 @@ public class TransactionNavValuesUpdater implements org.quartz.Job{
 
 			} 
 			finally {
-				hibernateSession.close();
+				if(hibernateSession !=null )
+						hibernateSession.close();
 			}
 
 		}

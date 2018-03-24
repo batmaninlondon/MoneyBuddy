@@ -30,7 +30,7 @@ public class SaveSubscriberAction extends ActionSupport {
 
     public String execute() {
  	
-    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	
     	try {
     		
@@ -114,9 +114,9 @@ public class SaveSubscriberAction extends ActionSupport {
 			return ERROR;
     	}
     	finally {
-    		if ( hibernateSession != null )
-    			hibernateSession.close();
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
     	
     }
 

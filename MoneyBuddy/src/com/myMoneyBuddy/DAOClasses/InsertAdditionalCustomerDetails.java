@@ -57,9 +57,9 @@ public class InsertAdditionalCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		hibernateSession.close();
-    		
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
     }
  

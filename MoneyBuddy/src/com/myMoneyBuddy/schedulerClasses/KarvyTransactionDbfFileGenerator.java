@@ -1022,9 +1022,10 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 				e.printStackTrace();
 				//throw new MoneyBuddyException(e.getMessage(),e);
 			}
-			finally {
-				hibernateSession.close();
-			}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
 
 		} 

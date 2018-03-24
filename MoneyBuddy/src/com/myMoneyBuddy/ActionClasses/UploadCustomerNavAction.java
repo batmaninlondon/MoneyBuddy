@@ -28,7 +28,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 
     public String execute() {
     	
-    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
     	try {
     		
@@ -108,8 +108,9 @@ public class UploadCustomerNavAction extends ActionSupport {
     		return ERROR;
 		}
     	finally {
-    		hibernateSession.close();
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
     }
 
 	public String getBseOrderId() {

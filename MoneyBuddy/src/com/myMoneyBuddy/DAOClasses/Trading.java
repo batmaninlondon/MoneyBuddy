@@ -57,13 +57,12 @@ public class Trading {
 			String clientAdd, String clientCity, String clientState, String clientPinCode, String clientCountry,
 			String customerId, String clientAppName1, String clientEmail, String clientPan, String clientMobile) throws MoneyBuddyException {
 
-			Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
 			logger.debug("Trading class : createClient method : start");
 			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			hibernateSession.beginTransaction();
 			
 			Properties clientProperties = new Properties();
@@ -170,7 +169,8 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -240,7 +240,7 @@ public class Trading {
 		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
 		System.out.println("Trading class : executeTade method : years : "+years);
 
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		Double totalAmount = 0.0;
 		String buySellType; 
@@ -251,11 +251,8 @@ public class Trading {
 		List<OrderDataModel> orderDataModel;
 
 		try {
-
 			
 			orderDataModel = new LinkedList<OrderDataModel>();
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 			for ( Double currentAmount : productDetailsMap.values())  {
 				System.out.println("currentAmount : "+currentAmount);
@@ -813,15 +810,15 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 
 	public void checkPaymentStatus(String customerId) throws MoneyBuddyException {
 
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		Query query;
 		List<Object[]> transactionDetails;
 		List<String> customerIds;
@@ -842,8 +839,6 @@ public class Trading {
 		try {
 
 			logger.debug("Trading class : checkPaymentStatus method : start");
-
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 
 			hibernateSession.beginTransaction();
@@ -1062,7 +1057,8 @@ public class Trading {
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}

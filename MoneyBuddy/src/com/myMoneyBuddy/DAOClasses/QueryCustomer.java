@@ -22,7 +22,6 @@ public class QueryCustomer {
 			
 		logger.debug("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		hibernateSession.clear();
 
 		try
 		{
@@ -50,7 +49,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 
@@ -84,13 +84,14 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 
 	public String getPassword(String emailId) throws MoneyBuddyException {
 
-		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		String customerId = null;
 
 		try
@@ -107,7 +108,7 @@ public class QueryCustomer {
 			
 			logger.debug("QueryCustomer class - getPassword method - customerId - "+customerId+" - retrun password");
 			logger.debug("QueryCustomer class - getPassword method - customerId - "+customerId+" - end");
-			
+
 			return password;
 		}
 		catch ( HibernateException e ) {
@@ -121,7 +122,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 	
@@ -130,9 +132,8 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - start");
 		
-		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
-
 		try
 		{
 			hibernateSession.beginTransaction();
@@ -156,7 +157,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 	
@@ -164,7 +166,7 @@ public class QueryCustomer {
 		
 		logger.debug("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - start");
 		
-		Session hibernateSession =  HibernateUtil.getSessionAnnotationFactory().openSession();
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try
 		{
@@ -189,7 +191,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 
@@ -225,7 +228,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -233,14 +237,14 @@ public class QueryCustomer {
 	public int getCustomerId(String emailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - start");
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		Object result;
 		int customerId =0 ;
 
 		try
 		{
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+			
 			hibernateSession.beginTransaction();
 			System.out.println("HI there 1 + emailID : "+emailId);
 			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
@@ -267,8 +271,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.clear();
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -309,7 +313,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -350,7 +355,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -387,7 +393,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -431,7 +438,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
@@ -480,7 +488,8 @@ public class QueryCustomer {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}

@@ -24,15 +24,13 @@ public class InsertCustomerDetails {
 
     public void insertCustomer (String emailId,String mobileNumber, String password) throws MoneyBuddyException
     {
-		Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		String customerId = null;
     	try {
     		
     		QueryCustomer queryCustomer = new QueryCustomer();
     		customerId = Integer.toString(queryCustomer.getCustomerId(emailId));
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - start");
-    		
-    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		hibernateSession.beginTransaction();
         	
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -92,16 +90,16 @@ public class InsertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		hibernateSession.close();
-    		
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
     }
     
     public void updateVerificationStatus (String password) throws MoneyBuddyException {
 
     	logger.debug("InsertCustomerDetails class - updateVerificationStatus method - start");
-		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
 
@@ -135,7 +133,8 @@ public class InsertCustomerDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}

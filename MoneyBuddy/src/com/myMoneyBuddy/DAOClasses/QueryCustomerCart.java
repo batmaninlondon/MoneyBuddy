@@ -20,11 +20,9 @@ public class QueryCustomerCart {
 	public List<CustomerCart> getCustomerCart(String customerId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - start");
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		try
 		{
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			hibernateSession.flush();
 			System.out.println("customerId is : "+customerId);
 			hibernateSession.beginTransaction();
@@ -59,7 +57,8 @@ public class QueryCustomerCart {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 

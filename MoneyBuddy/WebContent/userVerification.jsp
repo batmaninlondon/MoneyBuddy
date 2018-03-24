@@ -1,6 +1,6 @@
+<%@page import="com.myMoneyBuddy.DAOClasses.InsertCustomerDetails"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="com.myMoneyBuddy.DAOClasses.insertCustomerDetails" %>
 <%@ page import="java.net.URL" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +17,7 @@
 	    //if (request.getAttribute("hash")!=null) {
 	    String hashedPassword = (String)request.getParameter("hashedPassword");
 	    System.out.println("hello from  jsp : value of hashedPassword : "+hashedPassword);
-	    insertCustomerDetails customer = new insertCustomerDetails();
+	    InsertCustomerDetails customer = new InsertCustomerDetails();
 	    customer.updateVerificationStatus(hashedPassword);
 	    //}
 	    String redirectURL = "login";

@@ -33,12 +33,10 @@ public class GenerateKycForm {
     	logger.debug("GenerateKycForm class : generateKycFormPdf method : start");
     	PdfReader reader = null;
     	PdfStamper stamper = null;
-    	Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	
     	try {
-
     		
-    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		hibernateSession.beginTransaction();
     		Customers customer = (Customers) hibernateSession.get(Customers.class, customerId);
     		CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class, customerId);
@@ -194,8 +192,9 @@ public class GenerateKycForm {
 
     		if(reader !=null)
     			reader.close();
-    		hibernateSession.close();
-    		
+			if(hibernateSession !=null )
+					hibernateSession.close();
+    			
     	}
 
     }

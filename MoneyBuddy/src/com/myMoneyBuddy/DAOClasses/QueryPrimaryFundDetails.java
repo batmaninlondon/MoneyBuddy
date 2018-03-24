@@ -52,19 +52,18 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 	
 	public List<FundDetailsDataModel> getFundDetailsData() throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	       
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class - getFundDetailsData method - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -109,21 +108,19 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 	
 	public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	       
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -167,21 +164,19 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 	
 	public boolean checkBufferDays(String sipStartDate, List<String> fundIds) throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	       
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class - checkBufferDays method - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -227,21 +222,19 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 	
 	public double getInterestRateOfOneFund(String fundId) throws MoneyBuddyException{
 
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		try
 		{
 			logger.debug("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - start");
-
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 			double interestRate = 0.0;
 			hibernateSession.beginTransaction();
@@ -275,8 +268,8 @@ public class QueryPrimaryFundDetails {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.clear();
-			hibernateSession.close();
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}

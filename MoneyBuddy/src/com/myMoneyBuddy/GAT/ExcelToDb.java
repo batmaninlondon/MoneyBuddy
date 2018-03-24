@@ -117,10 +117,10 @@ public class ExcelToDb {
             System.out.println("price : "+price);
             System.out.println("units : "+units);
             
-            Session hibernateSession = null;
+            Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
             Query query = null;
             try {
-            	hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+            	
             	hibernateSession.beginTransaction();
 				query = hibernateSession.createQuery("update TransactionDetails set quantity = :quantity , unitPrice = :unitPrice , transactionStatus = :transactionStatus where transactionDetailId = :transactionDetailId");
 				query.setParameter("quantity", units);
@@ -135,9 +135,10 @@ public class ExcelToDb {
     			e.printStackTrace();
 
     		} 
-        	finally {
-        		hibernateSession.close();
-        	}
+            finally {
+    			if(hibernateSession !=null )
+    					hibernateSession.close();
+    		}
 
         }
 

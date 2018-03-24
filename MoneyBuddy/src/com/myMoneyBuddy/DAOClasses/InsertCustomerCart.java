@@ -24,11 +24,10 @@ public class InsertCustomerCart {
 
     	logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - start");
     	
-    	Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	CustomerCart tempCustomerCart = null;
     	Query query ;
     	try {
-    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		
     		hibernateSession.beginTransaction();
     		
@@ -99,9 +98,9 @@ public class InsertCustomerCart {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
     	finally {
-    		hibernateSession.close();
-    		
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
     }
  

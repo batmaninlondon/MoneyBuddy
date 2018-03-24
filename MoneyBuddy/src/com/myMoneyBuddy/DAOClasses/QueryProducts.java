@@ -76,7 +76,7 @@ public class QueryProducts {
 
 	public List<PortfolioDataModel> getPortfolioData(String customerId) throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		double soldUnit = 0.0;
 		double investedAmount = 0.0;
 		double availableUnits = 0.0;
@@ -90,8 +90,6 @@ public class QueryProducts {
 		try
 		{
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -268,22 +266,20 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 
 	public List<PendingOrderDataModel> getPendingOrderData(String customerId) throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		double investedAmount = 0.0;
 	       
 		try
 		{
 			logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - end");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -325,21 +321,19 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 	
 	public List<SipDataModel> getSipData(String customerId) throws MoneyBuddyException {
 		
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	       
 		try
 		{
 			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -420,22 +414,21 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 
 	public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsData(String customerId) throws MoneyBuddyException {
 
-		Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		try
 		{
 			logger.debug("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - start ");
 			
 			System.out.println("getInvestmentDetailsData : customerId : "+customerId);
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 			hibernateSession.beginTransaction();
 
@@ -499,15 +492,15 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}
 
 	public List<InvestmentDetailsDataModel> getInvestmentDetailsData(String customerId, String fundName) throws MoneyBuddyException {
 
-	Session hibernateSession  = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
 	try
 	{
@@ -515,7 +508,6 @@ public class QueryProducts {
 		
 		System.out.println("getInvestmentDetailsData : customerId : "+customerId);
 		System.out.println("getInvestmentDetailsData : fundName : "+fundName);
-		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	
 		hibernateSession.beginTransaction();
 
@@ -572,18 +564,17 @@ public class QueryProducts {
 		throw new MoneyBuddyException(e.getMessage(),e);
 	}
 	finally {
-		hibernateSession.close();
-
+		if(hibernateSession !=null )
+				hibernateSession.close();
 	}
 
 }
 
 	public String getProductName( String fundId) throws MoneyBuddyException  {
-		Session hibernateSession = null;
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
 		try {
 			logger.debug("QueryProducts class - getProductName method - fundId - "+fundId+" - start");
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 			
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
@@ -615,8 +606,8 @@ public class QueryProducts {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 	}
 

@@ -52,8 +52,8 @@ public class UpdateCustomerCart {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		finally {
-			hibernateSession.close();
-
+			if(hibernateSession !=null )
+					hibernateSession.close();
 		}
 
 	}

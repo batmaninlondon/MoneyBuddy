@@ -32,15 +32,13 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 
     	logger.debug("PopulateAdminDashboardDataAction class : execute method : start");
     	
-    	Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	
     	List<DbfStatusDataModel> dbfStatusDataModel = new LinkedList<DbfStatusDataModel>();
     	
     	HashMap<String,String> dbfDataList = new HashMap<String,String>();
     	
     	try {
- 
-    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
     		hibernateSession.beginTransaction();
 							
@@ -78,8 +76,9 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 			return ERROR;
 		} 
     	finally {
-    		hibernateSession.close();
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
     }
     

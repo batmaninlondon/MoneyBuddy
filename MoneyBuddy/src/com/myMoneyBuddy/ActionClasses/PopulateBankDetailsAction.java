@@ -35,7 +35,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     public String execute() {
 
     	logger.debug("PopulateBankDetailsAction class : execute method : start");
-    	Session hibernateSession = null;
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	
     	System.out.println("bankName : "+getBankName());
     	System.out.println("accountType : "+getAccountType());
@@ -51,8 +51,6 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 			String frmtdDateForDB = dateFormat.format(date);
 			
 			String customerId = sessionMap.get("customerId").toString();
-			
-			hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 			hibernateSession.beginTransaction();
 			
@@ -101,8 +99,9 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 			return ERROR;
 		} 
     	finally {
-    		hibernateSession.close();
-    	}
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 
     }
     
