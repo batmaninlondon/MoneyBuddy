@@ -32,12 +32,12 @@ public class QueryCustomerDetails {
 			return customerDetail;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomerDetails class - getCustomerDetails method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

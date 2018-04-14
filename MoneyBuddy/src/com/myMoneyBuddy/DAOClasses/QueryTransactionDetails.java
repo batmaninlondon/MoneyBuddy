@@ -42,12 +42,12 @@ public class QueryTransactionDetails {
 			return transactionDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
+			logger.error("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
+			logger.error("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -104,12 +104,12 @@ public class QueryTransactionDetails {
 			return pendingNavOrders;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - Caught HibernateException");
+			logger.error("QueryTransactionDetails class - getPendingNavsOrders method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - Caught Exception");
+			logger.error("QueryTransactionDetails class - getPendingNavsOrders method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

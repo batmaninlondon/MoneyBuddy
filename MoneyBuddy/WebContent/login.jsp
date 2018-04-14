@@ -3,7 +3,7 @@
 <%@ page language="java" import="java.util.Properties" %>
 <%@ page language="java" import="java.io.FileInputStream" %>
 <%@ page language="java" import="java.io.File" %>
-
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -62,26 +62,28 @@
       var recaptchaLogin;
       
       var myCallBack = function() {
-        //Render the recaptcha1 on the element with ID "recaptcha1"
+        //Render the recaptchaRegister on the element with ID "recaptcha-register"
         recaptchaRegister = grecaptcha.render('recaptcha-register', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
           'size' : 'invisible',
-          'callback' : register
+          'callback' : submitRegister
         });
         
-        //Render the recaptcha2 on the element with ID "recaptcha2"
+        //Render the recaptchaForgotPswd on the element with ID "recaptcha-forgot-pswd"
         recaptchaForgotPswd = grecaptcha.render('recaptcha-forgot-pswd', {
         	'sitekey' : '<%=siteKey%>', //Replace this with your Site key
             'size' : 'invisible',
-            'callback' : forgottenPassword
+            'callback' : submitForgotPassword
         });
         
+      //Render the recaptchaLogin on the element with ID "recaptcha-login"
         recaptchaLogin = grecaptcha.render('recaptcha-login', {
             'sitekey' : '<%=siteKey%>', //Replace this with your Site key
             'size' : 'invisible',
-            'callback' : login
+            'callback' : submitLogin
           });
       };
+     
     </script>
     
 	    <link rel="stylesheet" href="css/style4.css">
@@ -123,45 +125,63 @@
       
       <div class="tab-content">
         <div id="signup">   
-          <div >
-          <div class="field-wrap">
+          <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" autocomplete="off" >
+          
+          <div id="registration-email-id"  class="field-wrap">
           	<p id="registerMessage"></p>
             <label> Your Email<span class="req">*</span>  </label>
-            <input id="email-id1" type="email"required autocomplete="off"/>
+           	<s:fielderror fieldName="emailIdRegister" class="g-color--red" />
+  			<s:textfield name="emailIdRegister" autocomplete="off" />
+            <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
           </div>
-          <div class="field-wrap">
+          <div id="registration-password" class="field-wrap">
             <label>
               Create Password<span class="req">*</span>
             </label>
-            <input id="password1"  type="password"required autocomplete="off"/>
+            <s:fielderror fieldName="passwordRegister" class="g-color--red" />
+  			<s:password name="passwordRegister" autocomplete="off" />
+            <!-- <input id="password1"  type="password"required autocomplete="off"/> -->
           </div>
           
-          <div class="field-wrap">
+          <div id="registration-mobile-number" class="field-wrap">
             <label>
               Mobile Number<span class="req">*</span>
             </label>
-            <input id="mobile-number"  type="password"required autocomplete="off"/>
+            <s:fielderror fieldName="mobileNumberRegister" class="g-color--red" />
+  			<s:textfield name="mobileNumberRegister" autocomplete="off" />
+            <!-- <input id="mobile-number"  type="password"required autocomplete="off"/> -->
           </div>
-          
+          <s:hidden id="google-response-register" name="googleResponseRegister"></s:hidden>
+          <!-- <p id="registration-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-35--xs"></p> -->
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-          <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button>
+          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Continue"  />
+          <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
-                              
-          </div>
+          	<div class="row" >
+				<div class="col-md-3"></div>
+				<div class="col-md-5 ">
+						<s:actionmessage class="small-text"/> 
+				</div>
+				<div class="col-md-4"></div>
+			</div>                 
+          </s:form>
 
         </div>
-        <div id="login">   
+        <div id="login"> 
+          <s:form  action="newLoginAction" class="g-recaptcha" method="post" name="formLogin" namespace="/" >
           <h1>Welcome Back!</h1>
           <p id="loginMessage"></p>
           <div>
           
             <div class="field-wrap">
-            <label>
+            <label id="email-id-label">
               Email Address<span class="req">*</span>
             </label>
-            <input id="email-id"  type="email" required autocomplete="off"/>
+            <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
+  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" />
+            <!-- <input id="email-id"  type="email" required autocomplete="off"/> -->
            <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
           </div>
           
@@ -169,14 +189,28 @@
             <label>
               Password<span class="req">*</span>
             </label>
-            <input  id="password" type="password" required autocomplete="off"/>
+            <s:fielderror fieldName="passwordLogin" class="g-color--red" />
+  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" />
+            <!-- <input  id="password" type="password" required autocomplete="off"/> -->
           </div>
           
           <p class="forgot"><button type="button" class="g-recaptcha g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
           <div class="container">
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  
+  </div>
+  
+  	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
+          <div>
+          	
+        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="SIGN IN"  />
+        	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
+           </div>
+          </s:form>
+          </div>
+          
+          <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -187,13 +221,25 @@
         <div class="modal-body">
           <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
         </div>
-        
+        <s:form  action="forgottenPasswordAction" class="g-recaptcha" method="post" name="formForgotPassword">
+
+			<div class="row" >
+				<div class="col-md-3"></div>
+				<div class="col-md-5 ">
+						<s:actionmessage class="small-text"/> 
+				</div>
+				<div class="col-md-4"></div>
+			</div>
 			<div class="input-group g-margin-l-20--xs  g-margin-r-60--xs g-margin-b-20--xs">
     			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    			<input id="emailid" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" >
+    			<s:fielderror fieldName="emailIdForgotPassword" class="g-color--red" />
+	  			<s:textfield class="form-control" placeholder="Enter Email Id" name="emailIdForgotPassword" /> 
+	  			<s:hidden id="google-response-forgot-pswd" name="googleResponseFrgtPswd"></s:hidden>	
+    			<!-- <input id="emailid" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" > -->
   			</div>
 	
-        <div class="modal-footer">
+       <!--  <div class="modal-footer"> -->
+        	
         	<div class="row">
 				<div class="col-md-3 g-color--primary">
 					<i class="  glyphicon glyphicon-chevron-left"></i><a  data-dismiss="modal">Back to Login</a>
@@ -201,19 +247,18 @@
 				<div class="col-md-5">
 				</div>
 				<div class="col-md-4">
-					<button id="recaptcha-forgot-pswd" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button>
+					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-bg-color--primary g-color--white" value="Send Reset Link"  />
+					<!-- <button id="recaptcha-forgot-pswd" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button> -->
 				</div>
 			</div>
+
+			</s:form>
+		
         </div>
       </div>
     </div>
-  </div>
 </div>
-          <div>
-        	  <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button>
-           </div>
-          
-          </div>
+
 
         </div>	
       </div><!-- tab-content -->
@@ -227,7 +272,7 @@
 	
 
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
     	<script src="assets/js/jquery.prettyPhoto.js"></script>

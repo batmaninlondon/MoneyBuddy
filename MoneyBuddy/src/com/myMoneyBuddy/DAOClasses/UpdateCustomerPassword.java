@@ -6,8 +6,9 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.mailerClasses.DesEncrypter;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -25,7 +26,7 @@ public class UpdateCustomerPassword {
 
 		try {
 
-			DesEncrypter desEncrypter = new DesEncrypter(emailId);
+			DesEncrypter desEncrypter = new DesEncrypter();
 			newPassword = desEncrypter.encrypt(newPassword);
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
@@ -57,12 +58,12 @@ public class UpdateCustomerPassword {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomerPassword class - updatePassword method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomerPassword class - updatePassword method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomerPassword class - updatePassword method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomerPassword class - updatePassword method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

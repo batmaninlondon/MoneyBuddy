@@ -14,7 +14,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -33,26 +33,6 @@
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -280,6 +260,6 @@
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 </body>
 </html>

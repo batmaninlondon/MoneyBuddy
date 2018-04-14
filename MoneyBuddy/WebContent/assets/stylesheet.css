@@ -310,6 +310,11 @@
 	color:white;
 	font-size: 25px;
 }
+.very-small-text-red{
+	font-family: Aparajita;
+	color:red;
+	font-size: 20px;
+}
 .medium-text{
 	/* margin-top:80px; */
 	font-family: Aparajita;

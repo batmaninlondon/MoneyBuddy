@@ -37,12 +37,12 @@ public class QuerySipDetails {
 			return sipDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
+			logger.error("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
+			logger.error("QuerySipDetails class - getSipDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

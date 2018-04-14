@@ -45,12 +45,12 @@ public class UpdateCurrentLoginTimestamp {
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCurrentLoginTimestamp class - updateCurrentLoginTimestamp method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCurrentLoginTimestamp class - updateCurrentLoginTimestamp method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCurrentLoginTimestamp class - updateCurrentLoginTimestamp method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCurrentLoginTimestamp class - updateCurrentLoginTimestamp method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

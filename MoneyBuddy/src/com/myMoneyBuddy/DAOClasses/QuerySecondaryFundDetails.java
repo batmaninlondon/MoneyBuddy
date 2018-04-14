@@ -40,12 +40,12 @@ public class QuerySecondaryFundDetails {
 			return secondaryFundDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QuerySecondaryFundDetails class - getSecondaryFundDetails method - fundId - "+fundId+" - Caught HibernateException");
+			logger.error("QuerySecondaryFundDetails class - getSecondaryFundDetails method - fundId - "+fundId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QuerySecondaryFundDetails class - getSecondaryFundDetails method - fundId - "+fundId+" - Caught Exception");
+			logger.error("QuerySecondaryFundDetails class - getSecondaryFundDetails method - fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

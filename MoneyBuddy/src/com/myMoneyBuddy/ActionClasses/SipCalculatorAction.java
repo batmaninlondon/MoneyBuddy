@@ -53,21 +53,21 @@ public class SipCalculatorAction extends ActionSupport implements SessionAware  
 	    	
 			return SUCCESS;
 		} catch (MoneyBuddyException e) {	
-			logger.debug("SipCalculatorAction class - execute method - Caught Exception");
+			logger.error("SipCalculatorAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("SipCalculatorAction class - execute method - returned error");
+    	    logger.error("SipCalculatorAction class - execute method - returned error");
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("SipCalculatorAction class - execute method - Caught Exception");
+    		logger.error("SipCalculatorAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("SipCalculatorAction class - execute method - returned error");
+    	    logger.error("SipCalculatorAction class - execute method - returned error");
 			return ERROR;
 		} 
 

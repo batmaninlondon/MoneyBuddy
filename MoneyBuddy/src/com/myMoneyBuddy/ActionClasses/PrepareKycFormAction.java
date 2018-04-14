@@ -69,12 +69,12 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 	    	return SUCCESS;
     	} 
     	catch ( Exception e )  {
-    		logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
     		str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned error");
+    	    logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
     	}

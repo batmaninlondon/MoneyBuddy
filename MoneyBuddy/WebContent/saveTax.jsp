@@ -1,3 +1,4 @@
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -73,7 +74,7 @@
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
                                         <a href="saveTax" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save Tax<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
@@ -83,7 +84,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -109,7 +110,7 @@
 	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 1,50,000/-</b></span> 
 	                        from your taxable income to effectively reduce your tax liability.</p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
-	                        	<a class="btn btn-home" href="javascript:getMfData()" " role="button">Get Started</a>
+	                        	<a class="btn btn-home" href="<s:url action="fetchFundDetailsAction"/>" " role="button">Get Started</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -330,6 +331,6 @@
         <script type="text/javascript" src="js/components/wow.min.js"></script>
         <script src="js/owl.carousel.js"></script>
         <script src="js/main.js"></script>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
 </html>

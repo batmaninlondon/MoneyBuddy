@@ -91,13 +91,13 @@ public class PredictedValueCalculation {
 			
 			return predictedValueList;
 		} catch (NumberFormatException e) {
-			logger.debug("PredictedValueCalculation class - predictedSipAmount method - Caught NumberFormatException");
+			logger.error("PredictedValueCalculation class - predictedSipAmount method - Caught NumberFormatException");
 			e.printStackTrace();
 
     	    throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("PredictedValueCalculation class - predictedSipAmount method - Caught Exception");
+			logger.error("PredictedValueCalculation class - predictedSipAmount method - Caught Exception");
 			e.printStackTrace();
 
     	    throw new MoneyBuddyException(e.getMessage(),e);

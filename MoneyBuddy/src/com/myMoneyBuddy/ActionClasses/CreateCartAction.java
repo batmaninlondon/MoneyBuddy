@@ -27,7 +27,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(CreateCartAction.class);
 	private SessionMap<String,Object> sessionMap;
-	private InputStream stream;
+	//private InputStream stream;
 
     public String execute() {
     	
@@ -69,8 +69,8 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	sessionMap.put("customerCartList", customerCartList);
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    	
 	
-	    	String str = "success";
-	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+	    	stream = new ByteArrayInputStream(str.getBytes());*/
 	
     	    logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - end");
@@ -78,12 +78,12 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	return SUCCESS;
     	} 
     	catch ( Exception e )  {
-    		logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("CreateCartAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - returned error");
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("CreateCartAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
     	}
@@ -94,12 +94,12 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
         sessionMap = (SessionMap<String, Object>) map;
     }
     
-	public InputStream getStream() {
+/*	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 }

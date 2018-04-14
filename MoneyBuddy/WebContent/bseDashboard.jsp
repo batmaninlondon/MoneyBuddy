@@ -23,12 +23,6 @@
 
         <!-- Vendor Styles -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-       <!--  <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-    	<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    	<link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    	<link href="assets/bootstrap/css/main.css" rel="stylesheet"> -->
 		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
@@ -53,7 +47,7 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	    <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-	    
+	
     </head>
     
          <style>
@@ -215,7 +209,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
@@ -252,13 +246,13 @@
 					<br/><br/><br/><br/>
                     <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
                 </div> 
-                <div class="row" style="padding: 0px; margin: 0px;">
+                <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
                     <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
                         <div class="g-text-center--xs" >
                              <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
                              <div >
                                 <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
+                                <figure id="tot-val" class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
                             </div>
                            
                         </div>
@@ -269,7 +263,7 @@
                              <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
                              <div >
                                 <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
+                                <figure id="tot-grwth" class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
                                  <div class="tooltipOuter">
                                 <div class="tooltipInner"></div>
                                 </div>
@@ -293,7 +287,7 @@
                                 <li class="g-color--white">
                                     <a class="g-color--white" href="https://www.behance.net/keenthemes">
                                         <i class="g-padding-r-5--xs ti-arrow-circle-up"></i>
-                                        <span class="font-weight-bold"><a href="javascript:getMfData()"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="font-weight-bold"><a href="<s:url action="fetchFundDetailsAction"/>"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </li>
                                 <li class="g-color--white">
@@ -316,29 +310,10 @@
                 </div>
                   
             </div>
-              
-            
-            
+       
         </div>
         
-        
-		
-		<!-- <div class="g-bg-color--dark" style="padding-bottom: 0.8rem" >
-            <div class="g-container--md g-text-center--xs  ">
-            <br/>
-               
-            </div>
-        </div> -->
-        
-        
-        <!-- <div class="g-bg-color--primary-ltr">
-	 		<div class="container ">
-	 		<div class="g-text-center--xs g-margin-b-10--xs">
-                    <h3 class="g-font-size-32--xs g-font-size-50--md  g-letter-spacing--1 g-color--white text-left font-weight-bold " style="font-family:brandonText; font-weight:900; letter-spacing:-0.05em">Dashboard</h3>
-                </div> 
-                </div> 
-			</div> -->
-		
+	
        <!-- Counter -->
        	<div class="js__parallax-window" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> 
         <!-- <div style="background-color: #eeeeee"> -->
@@ -346,41 +321,6 @@
                <div class="g-text-center--xs g-margin-b-10--xs">
                 </div> 
                 
-              <!--   Total Value and Total Growth Start-->
-                
-                <%-- <div class="row" style="padding: 0px; margin: 20px;">
-                	<div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:20vh;">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-16--xs  ti-bar-chart g-margin-b-10--xs  g-text-left--xs g-margin-t-20--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
-                             <div >
-                                <span class="g-font-size-40--md g-font-size-20--xs g-font-family--playfair " style="line-height: 1;">&#8377; </span>
-                                 <figure class="g-display-inline-block--xs g-font-size-50--md g-font-size-30--xs g-font-family--brandonText  js__counter g-margin-t-10--xs" style="line-height: 1;"><s:property value="#session.totalCurrentAmount" /></figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:20vh;">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-16--xs ti-pulse g-margin-b-10--xs g-text-left--xs g-margin-t-20--xs font-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
-                             <div >
-                                <span class="g-font-size-40--xs g-font-family--playfair" style="line-height: 1;">&#8377; </span>
-                                <figure class="g-display-inline-block--xs g-font-size-50--md g-font-size-30--xs g-font-family--brandonText  js__counter g-margin-t-10--xs" style="line-height: 1;"><s:property value="#session.totalRateOfGrowth" /></figure>
-                                 <div class="tooltipOuter">
-                                <div class="tooltipInner"></div>
-                                </div>
-                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;!&nbsp;</span>
-                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--primary">&nbsp;&nbsp; </span>
-                            </div>
-                        </div>
-                    </div>
-                  <div class="col-md-1 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
-                </div> --%>
-                
-                <!--   Total Value and Total Growth End-->
                 
                 <!--  Portfolio Summary Chart Start-->
                 
@@ -462,109 +402,7 @@
 	              		</div>
                 	</div>   
                 <!-- Pending Order Table End -->               
-                
-                <!--  Portfolio Summary Table Start -->
-                
-               <%--  <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
-                		</div> 
-			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
-								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
-								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
-							        <thead>
-							            <tr class="g-bg-color--primary" >
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
-							            </tr>
-							        </thead>
-    								<tbody class="table-body ">
-										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
-											<tr class="g-text-right--xs ">
-												<s:if test="fundName.equals('Total')">
-													<td class="g-bg-color--gray-light ">
-												    	<span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.fundName"/></span>
-												    </td>
-												     <td class="g-bg-color--gray-light "><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></span></td>
-												  </s:if>
-												  <s:else>
-												    <td>
-												    	<s:set var="selectedFundId" value="#portfolioDataModelElement.fundId" />
-												    	<span class="g-font-size-14--xs g-font-size-5--xs "> <button type="button" class="  btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><s:property value="#portfolioDataModelElement.fundName"/></button></span>
-												    </td>
-												  
-												    <td><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/> %</span></td>
-												  </s:else>
-											</tr>
-										</s:iterator> 
-									</tbody> 
-							    </table>
-							</div> 
-	              		</div>
-                	</div>    --%>
-                <!-- Portfolio Summary Table End -->
-                
-                
-                 <!--  Portfolio Summary Table Start -->
-                
-<%--                 <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
-                		</div> 
-							<div class="g-text-center--xs g-padding-y-20--xs table-responsive">
-								<table id="portfoliosummary1" class="display" cellspacing="0" width="100%">
-								 <thead class="text-center ">
-										<tr class="g-bg-color--primary" >
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
-										</tr>
-									</thead>
-									<tbody class="table-body ">
-										<s:iterator value="#session.portfolioDataModel" var="portfolioDataModelElement">
-											<tr class="g-text-right--xs ">
-												<s:if test="fundName.equals('Total')">
-													<td class="g-bg-color--gray-light ">
-												    	<span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.fundName"/></span>
-												    </td>
-												     <td class="g-bg-color--gray-light "><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
-												    <td class="g-bg-color--gray-light " ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/></span></td>
-												  </s:if>
-												  <s:else>
-												    <td>
-												    	<s:set var="selectedFundId" value="#portfolioDataModelElement.fundId" />
-												    	<span class="g-font-size-14--xs g-font-size-5--xs "> <button type="button" class="  btn-link" onClick="buyFundHandler(<s:property value="selectedFundId" />);" ><s:property value="#portfolioDataModelElement.fundName"/></button></span>
-												    </td>
-												  
-												    <td><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.units"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.investedAmount"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.currentAmount"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#portfolioDataModelElement.rateOfGrowth"/> %</span></td>
-												  </s:else>
-											</tr>
-										</s:iterator> 
-									</tbody> 
-								</table>
-							</div> 
-	              		</div>
-                	</div>   --%> 
-                <!-- Portfolio Summary Table End -->
+
                 
                 <!-- Sip Summary Table Start -->
                 <div class="row" style="padding: 0px; margin: 20px;">
@@ -582,21 +420,14 @@
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Next Sip Date</span></th>
 								</tr>
 							</thead>
-<%-- 							<tbody class="table-body " >
-								<s:iterator value="#session.sipDataModel" var="sipDataModelElement">
-									<tr class="class="g-text-right--xs ">
-										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.fundName"/></span></td>
-										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.investedAmount"/></span></td>
-										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.sipStartDate"/></span></td>
-										<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#sipDataModelElement.nextSipDate"/></span></td>
-									</tr>
-								</s:iterator>
-							</tbody> --%>
 				   		</table>
 						</div> 
 	              	</div>
 	             </div>
 	              
+        		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+  					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+				</s:form>
 	              <!-- Added Table for SIP - end  -->
 	              
 	              <!-- Transaction Hidtory Start -->
@@ -618,46 +449,17 @@
 										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
 									</tr>
 								</thead>
-								<%-- <tbody table-body>
-										<s:iterator value="#session.allFundsInvestmentDetailsDataModel" var="allFundsElement">
-											<tr class="class="g-text-right--xs ">
-													<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundId"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.fundName"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.transactionDate"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.units"/></span></td>
-												    <td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.navPurchased"/></span></td>
-    												<td ><span class="g-font-size-14--xs g-font-size-5--xs"><s:property value="#allFundsElement.buySell"/></span></td>
-											</tr>
-										</s:iterator>
-								</tbody> --%>
 				   			</table>
 						</div> 
 	              	</div>
 	             </div>
                 <!-- Transaction History End -->
                 
-                <!-- Investment Breakdown Chart Start-->
-                <!-- <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style="height:70vh;">
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  ">Investment Breakdown Chart </h3>
-                		</div> 
-			     		<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-						<canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
-						</div> 
-	              	</div>
-	             </div> -->
-                <!-- Investment Breakdown Chart End -->
-                    
-                
-             
-                
-                 
             </div>
         <!-- End Counter -->
      
 
-	
+
 
         <!--========== FOOTER ==========-->
           <footer class="g-bg-color--dark">
@@ -781,6 +583,8 @@
 		    TUTORIAL_SAVVY.initChart()
 		} );
 		
+		var totalCurrAmt;
+		var totalGrwthAmt;
 		var portfolioData;	
 		var pendingOrderData;
 		var sipData;
@@ -797,6 +601,16 @@
 				  		initChart : function(){
 				  			/*Makes the AJAX calll (synchronous) to load a All Data*/
 				  		TUTORIAL_SAVVY.loadData();
+				  			
+				  		//document.getElementById('tot-val').value = totalCurrAmt;
+				  		$("#tot-val").html(totalCurrAmt);
+				  		$("#tot-grwth").html(totalGrwthAmt);
+				  		//alert('value : '+document.getElementById('tot-val').value);
+				  		//document.getElementById('tot-grwth').value = totalGrwthAmt;
+				  		
+				  		//$("#tot-values").load("bseDashboard.jsp #tot-values");
+				  		
+				  		
 				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
 				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
 				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
@@ -1042,8 +856,9 @@
 					 $('#pendingOrders tbody').on( 'click', 'button', function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var transactionDetailId = data[0];
-					        alert('transactionDetailId : '+transactionDetailId);
-					        window.location='bankDetails.jsp?tranDetailId='+transactionDetailId;
+					        //alert('transactionDetailId : '+transactionDetailId);
+					        window.location='checkBankDetailsAction?tranDetailId='+transactionDetailId; 
+					        /* window.location='bankDetails.jsp?tranDetailId='+transactionDetailId; */
 					    } ); 
 					  
 				
@@ -1057,6 +872,8 @@
 						dataType:"json",
 						success: function(jsonResponse){
 							
+							totalCurrAmt = jsonResponse.totalCurrentAmount;
+							totalGrwthAmt = jsonResponse.totalRateOfGrowth;
 							portfolioData  = jsonResponse.portfolioDataModel;
 							pendingOrderData = jsonResponse.pendingOrderDataModel;
 							sipData = jsonResponse.sipDataModel;
@@ -1067,6 +884,7 @@
 				        	window.location='errorPage';
 				        }
 				});
+				
 		  },
 		  
 		  

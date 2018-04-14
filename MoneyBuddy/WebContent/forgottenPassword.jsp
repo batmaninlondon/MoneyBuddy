@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.Properties" %>
+<%@ page language="java" import="java.io.FileInputStream" %>
+<%@ page language="java" import="java.io.File" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
@@ -31,31 +34,41 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+	<script>
+	    <%
+    
+    ServletContext sc=request.getServletContext();
+    String path=sc.getRealPath("/properties/jspConfig.properties");
+    FileInputStream fis = new FileInputStream(new File(path));
+    
+    Properties configProperties = new Properties();
 
+	configProperties.load(fis);
+	
+	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
+    
+    %>
+    
+      var recaptchaForgotPswd;
+      
+      var myCallBack = function() {
+        //Render the recaptchaForgotPswd on the element with ID "recaptcha-forgot-pswd"
+        recaptchaForgotPswd = grecaptcha.render('recaptcha-forgot-pswd', {
+          'sitekey' : '<%=siteKey%>', //Replace this with your Site key
+          'size' : 'invisible',
+          'callback' : submitForgotPassword
+        });
+        
+
+      
+      };
+      
+    </script>
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
+<body class="homepage bg-warning" >
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -96,6 +109,7 @@
     </header>
     <section id="forgottenPassword">
     
+    
     <div class="row" >
 		<div class="col-md-12 center">
 			<h2 style="font-family:Aparajita;font-size:35px;"><b>Forgotten Password</b></h2>
@@ -104,28 +118,44 @@
 
 	<br/><br/><br/>
 	
-	
+	<div >
+	<s:form  action="forgottenPasswordAction" class="g-recaptcha" method="post" name="formForgotPswd" >
+	<!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ></button> -->
 	<div class="row" style="margin-top:-100px;">
 		<div class="col-md-3"></div>
 		<div class="col-md-5 ">
 			<div class=" input-group input-group-lg ">
     			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    			<input id="email-id" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" style="width:600px;">
+    			<s:fielderror fieldName="emailIdForgotPassword" class="g-color--red" />
+			  	<s:textfield class="form-control" id="email-id" placeholder="Enter Email Id" name="emailIdForgotPassword" style="width:600px;"/> 
+				<!-- <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" style="width:600px;"> -->
 	
   			</div>
 		</div>
 		<div class="col-md-4"></div>
+		<br/><br/>
 	</div>
-	<div class="row">
-	
-		<div class="col-md-5"></div>
-		<div class="col-md-7">
-			<div id="button-5" class="row">
-				<button type="button" id="submit-button-forgotten-password" class="btn btn-primary readmore" onClick="forgottenPassword();" style="margin-top:50px; width:200px;">SUBMIT</button>
-			</div>
+	<div class="row" >
+		<div class="col-md-3"></div>
+		<div class="col-md-5 ">
+				<s:actionmessage class="small-text"/> 
 		</div>
+		<div class="col-md-4"></div>
 	</div>
+	<br/><br/>
+
 	<br/>
+	<s:hidden id="google-response" name="getGoogleResponseFrgtPswd"></s:hidden>
+	<div class="row" style="margin-top:25px;">
+		<div class="col-md-5"></div>
+		<div class="col-md-2">
+			 <s:submit id="recaptcha-forgot-pswd" class="center btn btn-primary readmore submit-button-1" value="SUBMIT" />
+		</div>
+		<div class="col-md-5"></div>
+	</div>
+	
+	</s:form>
+	</div>
 
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
@@ -150,6 +180,6 @@
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

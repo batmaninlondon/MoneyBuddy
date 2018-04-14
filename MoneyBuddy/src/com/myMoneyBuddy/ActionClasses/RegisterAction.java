@@ -5,10 +5,10 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.mailerClasses.DesEncrypter;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
@@ -24,11 +24,11 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(RegisterAction.class);
 	private SessionMap<String,Object> sessionMap;
-    private String password;
-    private String emailId;
-    private String mobileNumber;
-    private String googleResponse;    
-    private InputStream stream;
+    private String passwordRegister;
+    private String emailIdRegister;
+    private String mobileNumberRegister;
+    private String googleResponseRegister;    
+    //private InputStream stream;
 
     public String execute() {
     	
@@ -36,43 +36,46 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
     	
     		logger.debug("RegisterAction class - execute method - start ");
     	
-	    	System.out.println("RegisterAction class : execute method : email Id : "+getEmailId());
+	    	System.out.println("RegisterAction class : execute method : email Id : "+getEmailIdRegister());
 
 	        QueryCustomer customer = new QueryCustomer();
 	        InsertCustomerDetails newCustomer = new InsertCustomerDetails();
 	        
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponseRegister()))
 	    	{
-	    		String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		addActionMessage("Looks like, you are a robot.");
 	    	    logger.debug("RegisterAction class - execute method - returned Lookslikeyouarearobot");
 	    	    
 	    	    return SUCCESS;
 	    	}
 	    	
-	    	if (customer.existsCustomer(getEmailId())) {
+	    	if (customer.existsCustomer(getEmailIdRegister())) {
 	    		System.out.println("RegisterAction class : execute method : UserAlreadyExists");
-	    		String str = "UserAlreadyExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "UserAlreadyExists";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		addActionMessage("This emailId is already resgistered with MoneyBuddy.");
 	    	    logger.debug("RegisterAction class - execute method - returned UserAlreadyExists");
 	    	    
 	        	return SUCCESS;
 	    	}
 	    	
-	    	if (customer.existsMobileNumber(getMobileNumber())) {
+	    	if (customer.existsMobileNumber(getMobileNumberRegister())) {
 	    		System.out.println("RegisterAction class : execute method : MobileNumberAlreadyExists");
-	    		String str = "MobileNumberAlreadyExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "MobileNumberAlreadyExists";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		addActionMessage("This mobile number is already resgistered with MoneyBuddy.");
 	    	    logger.debug("RegisterAction class - execute method - returned MobileNumberAlreadyExists");
 	    	    
 	        	return SUCCESS;
 	    	}
 	    	
-	    	DesEncrypter desEncrypter = new DesEncrypter(getEmailId());
-	    	String hashedPassword = desEncrypter.encrypt(getPassword());
+	    	DesEncrypter desEncrypter = new DesEncrypter();
+	    	String hashedPassword = desEncrypter.encrypt(getPasswordRegister());
 	
-	    	newCustomer.insertCustomer(getEmailId(),getMobileNumber(),hashedPassword);
+	    	newCustomer.insertCustomer(getEmailIdRegister(),getMobileNumberRegister(),hashedPassword);
 	    	SendMail sendMail = new SendMail();
 	
 	    	Properties configProperties = new Properties();
@@ -89,37 +92,38 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_VERIFICATION_SUBJECT");
 	
-	    	sendMail.MailSending(getEmailId(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email");
+	    	sendMail.MailSending(getEmailIdRegister(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email");
 	
 	    	System.out.println(" send email function completed from register user.");
 	    	
-	    	logger.debug("RegisterAction class - execute method - mail sent to "+getEmailId()+" to complete user registration");
+	    	logger.debug("RegisterAction class - execute method - mail sent to "+getEmailIdRegister()+" to complete user registration");
 	    	
 	    	System.out.println("RegisterAction class : execute method : returning success ");
 	    	
-	    	String str = "success";
-		    stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());*/
+	    	addActionMessage("Thank you for registering with MoneyBuddy, please verify your email.");
 		    logger.debug("RegisterAction class - execute method - returned Lookslikeyouarearobot");
 		    logger.debug("RegisterAction class - execute method - end");
 		    
 	    	return SUCCESS;
 	    	
     	} catch (MoneyBuddyException e) {	
-    		logger.debug("RegisterAction class - execute method - Caught Exception");
+    		logger.error("RegisterAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("RegisterAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("RegisterAction class - execute method - returned error");
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("RegisterAction class - execute method - Caught Exception");
+    		logger.error("RegisterAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("RegisterAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("RegisterAction class - execute method - returned error");
 			return ERROR;
 		}
     }
@@ -129,44 +133,48 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
         sessionMap = (SessionMap<String, Object>) map;
     }
 	
-    public String getEmailId() {
-        return emailId;
-    }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
 
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public String getGoogleResponse() {
-		return googleResponse;
+    public String getPasswordRegister() {
+		return passwordRegister;
 	}
 
-	public void setGoogleResponse(String googleResponse) {
-		this.googleResponse = googleResponse;
+	public void setPasswordRegister(String passwordRegister) {
+		this.passwordRegister = passwordRegister;
 	}
 
-	public String getPassword() {
-        return password;
-    }
+	public String getEmailIdRegister() {
+		return emailIdRegister;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setEmailIdRegister(String emailIdRegister) {
+		this.emailIdRegister = emailIdRegister;
+	}
 
-	public InputStream getStream() {
+	public String getMobileNumberRegister() {
+		return mobileNumberRegister;
+	}
+
+	public void setMobileNumberRegister(String mobileNumberRegister) {
+		this.mobileNumberRegister = mobileNumberRegister;
+	}
+
+	public String getGoogleResponseRegister() {
+		return googleResponseRegister;
+	}
+
+	public void setGoogleResponseRegister(String googleResponseRegister) {
+		this.googleResponseRegister = googleResponseRegister;
+	}
+
+
+
+	/*public InputStream getStream() {
 		return stream;
 	}
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 
 }

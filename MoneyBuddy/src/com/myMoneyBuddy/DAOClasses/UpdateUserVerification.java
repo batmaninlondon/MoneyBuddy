@@ -40,12 +40,12 @@ public class UpdateUserVerification {
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateUserVerification class - userVerification method - Caught HibernateException");
+			logger.error("UpdateUserVerification class - userVerification method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateUserVerification class - userVerification method - Caught Exception");
+			logger.error("UpdateUserVerification class - userVerification method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

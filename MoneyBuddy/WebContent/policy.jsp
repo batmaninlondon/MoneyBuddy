@@ -1,3 +1,4 @@
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -65,7 +66,7 @@
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                    	<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--primary-bg  g-margin-t-20--lg btn btn-home">TRY IT OUT</a>
+                                    	<a  href="<s:url action="fetchFundDetailsAction"/>" class="text-uppercase s-btn s-btn--md s-btn--primary-bg  g-margin-t-20--lg btn btn-home">TRY IT OUT</a>
                                     </li> 
                                 </ul>
                             </div>
@@ -323,7 +324,7 @@
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
         <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 
         <!-- General Components and Settings -->
         <script type="text/javascript" src="js/global.min.js"></script>

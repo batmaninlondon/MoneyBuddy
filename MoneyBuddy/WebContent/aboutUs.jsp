@@ -1,3 +1,5 @@
+
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -47,7 +49,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
                                         <a href="aboutUs" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About US<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
@@ -59,7 +61,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -295,7 +297,7 @@
 			  }
 			}
          </script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
  		<script src="assets/js/jquery.js"></script>
     	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
     	<script src="assets/js/main.js"></script>

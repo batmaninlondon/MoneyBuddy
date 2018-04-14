@@ -28,7 +28,7 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
     private String newPassword;
     private String confirmPassword;
     private SessionMap<String,Object> sessionMap;
-    private InputStream stream;
+    //private InputStream stream;
 
     @Override
     public String execute() {
@@ -55,30 +55,30 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
 	            sessionMap.invalidate();  
 	        } 
 	
-	    	String str = "success";
-		    stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned success");
 		    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - end ");
 		    
 	    	return SUCCESS;
 	    	
     	}catch (MoneyBuddyException e) {	
-    		logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("ResetPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
 		}
@@ -120,13 +120,13 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
-
+/*
 	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 }

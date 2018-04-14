@@ -47,12 +47,12 @@ public class QueryCustomerCart {
 			return customerCartList;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

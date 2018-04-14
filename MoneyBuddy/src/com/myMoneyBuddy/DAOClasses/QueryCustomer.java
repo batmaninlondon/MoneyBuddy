@@ -39,12 +39,12 @@ public class QueryCustomer {
 			return customer;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -74,12 +74,12 @@ public class QueryCustomer {
 			return customer;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getCustomerFromCustomerId method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getCustomerFromCustomerId method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getCustomerFromCustomerId method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomer class - getCustomerFromCustomerId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -112,12 +112,12 @@ public class QueryCustomer {
 			return password;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getPassword method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getPassword method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getPassword method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomer class - getPassword method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -147,12 +147,12 @@ public class QueryCustomer {
 			return bseClientCreationStatus;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -181,12 +181,12 @@ public class QueryCustomer {
 			return isipMandateId;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -218,12 +218,12 @@ public class QueryCustomer {
 			return hashedPassword;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getHashedPassword method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getHashedPassword method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getHashedPassword method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryCustomer class - getHashedPassword method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -261,12 +261,12 @@ public class QueryCustomer {
 			return customerId;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -303,12 +303,12 @@ public class QueryCustomer {
 			return customerName;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getCustomerName method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getCustomerName method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getCustomerName method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - getCustomerName method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -345,12 +345,12 @@ public class QueryCustomer {
 			return customerMobileNumber;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getCustomerMobileNumber method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getCustomerMobileNumber method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getCustomerMobileNumber method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - getCustomerMobileNumber method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -383,12 +383,12 @@ public class QueryCustomer {
 			return verificationStatus;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - getVerificationStatus method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - getVerificationStatus method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - getVerificationStatus method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - getVerificationStatus method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -412,6 +412,7 @@ public class QueryCustomer {
 			int customerId = queryUser.getCustomerId(emailId);
 			System.out.println("QueryCustomer class : existsUser method : customerId : "+customerId);
 			Customers customer = (Customers)hibernateSession.get(Customers.class,Integer.toString(customerId));
+			hibernateSession.getTransaction().commit();
 			if (customer == null ) {
 				System.out.println("QueryCustomer class : existsUser method : customer is null ");
 				
@@ -420,7 +421,7 @@ public class QueryCustomer {
 				return false;
 			}
 			System.out.println("QueryCustomer class : existsUser method : customer is not null");
-			hibernateSession.getTransaction().commit();
+			
 			
 			logger.debug("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - customer exists returns true");
 			logger.debug("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - end");
@@ -428,12 +429,12 @@ public class QueryCustomer {
 			return true;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - Caught HibernateException");
+			logger.error("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - Caught Exception");
+			logger.error("QueryCustomer class - existsCustomer method - emailId - "+emailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -478,12 +479,12 @@ public class QueryCustomer {
 			return false;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryCustomer class - existsMobileNumber method - mobileNumber - "+mobileNumber+" - Caught HibernateException");
+			logger.error("QueryCustomer class - existsMobileNumber method - mobileNumber - "+mobileNumber+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryCustomer class - existsMobileNumber method - mobileNumber - "+mobileNumber+" - Caught Exception");
+			logger.error("QueryCustomer class - existsMobileNumber method - mobileNumber - "+mobileNumber+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

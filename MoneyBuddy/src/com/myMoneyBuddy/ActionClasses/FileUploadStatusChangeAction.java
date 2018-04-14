@@ -57,12 +57,12 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-    		logger.debug("FileUploadStatusChangeAction class - execute method - Caught Exception");
+    		logger.error("FileUploadStatusChangeAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("FileUploadStatusChangeAction class - execute method - returned error");
+    	    logger.error("FileUploadStatusChangeAction class - execute method - returned error");
     	    
 			return ERROR;
 		} 

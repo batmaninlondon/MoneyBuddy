@@ -1,3 +1,4 @@
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -66,7 +67,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
@@ -79,7 +80,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -462,7 +463,7 @@
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
         <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 
         <!-- General Components and Settings -->
         <script type="text/javascript" src="js/global.min.js"></script>

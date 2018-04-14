@@ -60,12 +60,12 @@ public class UpdateLoginTimestamp {
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateLoginTimestamp class - updateLoginTimestamp method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateLoginTimestamp class - updateLoginTimestamp method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateLoginTimestamp class - updateLoginTimestamp method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateLoginTimestamp class - updateLoginTimestamp method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

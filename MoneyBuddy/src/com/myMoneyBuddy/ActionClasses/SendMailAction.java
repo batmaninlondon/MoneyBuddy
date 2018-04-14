@@ -26,7 +26,7 @@ public class SendMailAction extends ActionSupport {
 	private String senderMessage;
 	private String googleResponse;
 
-    private InputStream stream;
+    //private InputStream stream;
 
     public String execute() {
 	
@@ -38,8 +38,9 @@ public class SendMailAction extends ActionSupport {
 	    	MbUtil mbUtil = new MbUtil();
 	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
 	    	{
-	    		String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		addActionMessage("Looks like, you are a robot.");
 	    	    logger.debug("SendMailAction class - execute method - returned Lookslikeyouarearobot");
 	    	    logger.debug("SendMailAction class - execute method - end ");
 	    	    
@@ -62,20 +63,23 @@ public class SendMailAction extends ActionSupport {
 	    	
 	    	System.out.println(" Returned Success !!");
 	
-	    	String str = "success";
-	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+	    	stream = new ByteArrayInputStream(str.getBytes());*/
+	    	
+	    	addActionMessage("Thank you for writing to MoneyBuddy, we will get back to you soon.");
+	    	
 	    	logger.debug("SendMailAction class - execute method - returned success");
 	    	logger.debug("SendMailAction class - execute method - end");
 	
 	    	return SUCCESS;
     	} 
     	catch ( Exception e )  {
-    		logger.debug("SendMailAction class - execute method - Caught Exception");
+    		logger.error("SendMailAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("SendMailAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("SendMailAction class - execute method - returned error");
 			return ERROR;
     	}
     	
@@ -121,13 +125,13 @@ public class SendMailAction extends ActionSupport {
 		this.googleResponse = googleResponse;
 	}
 
-	public InputStream getStream() {
+	/*public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 
 }

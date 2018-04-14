@@ -39,7 +39,7 @@ public class PaymentStatusAction extends ActionSupport implements SessionAware  
 			return SUCCESS;
 		}  
     	catch (Exception e) {	
-			logger.debug("PaymentStatusAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.error("PaymentStatusAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";

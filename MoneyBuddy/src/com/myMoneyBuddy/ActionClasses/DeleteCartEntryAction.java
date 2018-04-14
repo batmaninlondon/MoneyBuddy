@@ -20,7 +20,7 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 
 	Logger logger = Logger.getLogger(DeleteCartEntryAction.class);
 	private SessionMap<String,Object> sessionMap;
-	private InputStream stream;
+	//private InputStream stream;
 	private String cartId;
 
     public String execute() {
@@ -40,6 +40,13 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	
 	    	int i = 0;
 	    	Double totalAmount = 0.0;
+	    	
+	    	System.out.println("customerCartList size : "+customerCartList.size());
+	    	
+	    	for (int j = 0; j < customerCartList.size(); j++)  {
+	    		System.out.println("customerCartList.get(j).getProductName() : "+customerCartList.get(j).getProductName());
+	    	}
+	    	System.out.println();
 	    	while (customerCartList.get(i) != null)  {
 	    		
 	    		if ("Total".equals(customerCartList.get(i).getProductName()))  {
@@ -55,11 +62,14 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	
 	    	i = 0;
 	    	
+	    	System.out.println(" cartId : "+getCartId());
 	    	while (customerCartList.get(i) != null)  {
-	
-	    		if (cartId.equals(customerCartList.get(i).getCartId()))  {
+	    		System.out.println("customerCartList product name : "+customerCartList.get(i).getProductName());
+	    		if (getCartId().equals(customerCartList.get(i).getCartId()))  {
+	    			System.out.println("customerCartList cartId removing : "+customerCartList.get(i).getProductName());
 	    			totalAmount -= Double.parseDouble(customerCartList.get(i).getAmount());
 	    			customerCartList.remove(i);
+	    			
 	    			break;
 	    		}  		
 	    		i++;
@@ -72,8 +82,8 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	
 	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" -updated customerCartList in sessionMap");
 
-	    	String str = "success";
-	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+	    	stream = new ByteArrayInputStream(str.getBytes());*/
 	
 	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - end");
@@ -81,12 +91,12 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	return SUCCESS;
     	}
     	catch ( Exception e )  {
-    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned error");
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
     	}
@@ -97,13 +107,13 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
         sessionMap = (SessionMap<String, Object>) map;
     }
     
-	public InputStream getStream() {
+/*	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 	public String getCartId() {
 		return cartId;

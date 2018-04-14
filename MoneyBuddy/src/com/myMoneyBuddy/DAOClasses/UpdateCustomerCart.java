@@ -42,12 +42,12 @@ public class UpdateCustomerCart {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

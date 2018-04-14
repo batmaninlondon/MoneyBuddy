@@ -91,7 +91,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-			logger.debug("PopulateBankDetailsAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.error("PopulateBankDetailsAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";

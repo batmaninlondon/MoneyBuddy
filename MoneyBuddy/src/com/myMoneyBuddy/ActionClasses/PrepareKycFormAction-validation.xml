@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="fatherName">
+        <field-validator type="requiredstring">
+            <message>Father's name can not be blank.</message>
+        </field-validator>
+    </field>
+    
+</validators>

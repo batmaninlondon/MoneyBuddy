@@ -18,24 +18,10 @@
    
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-    
-    <!-- Commented CSS for testing -->
-    <!--  <link href="assets/bootstrap/css/responsive.css" rel="stylesheet"> -->
-    <%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --%>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
-    <!-- <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet"> -->
-   	<!--  <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet"> -->
-   	
-   	<!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
-   	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-    
+
 </head>
 
-<body  onLoad="showPredictedSipValues(<s:property value="#session.selectedFundDetailsDataModel.minSipAmount"/>)">
+<body >
 	<div id="load" class="load"></div>
 	<div id="content">
 	<!--========== HEADER ==========-->
@@ -70,7 +56,7 @@
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="javascript:getMfData()" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funds<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                        <a href="<s:url action="fetchFundDetailsAction"/>" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funds<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
@@ -81,7 +67,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -203,7 +189,7 @@
                 				<table id="portfoliosummary" class="display" >
 										        <tbody>
 										            <tr class="g-margin-b-45--xs">
-										                <td colspan="2" class="" ><span class=" g-font-size-16--xs g-font-size-5--xs g-color--primary"><b>Annualised Returnns</b></span><br/><br/></td>
+										                <td colspan="2" class="" ><span class=" g-font-size-16--xs g-font-size-5--xs g-color--primary"><b>Past Returnns</b></span><br/><br/></td>
 										            </tr>
 										            
 										            <%-- <tr >
@@ -216,19 +202,19 @@
 										            </tr> --%>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 1 YR 	 </span></td>
-														<td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#fundDetails.returnsOneYear"/></span></td>
+														<td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs">&nbsp;<s:property value="#fundDetails.returnsOneYear"/>&nbsp;&nbsp;% Per Year</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 3 YR </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs">&#8377;<s:property value="#fundDetails.returnsThreeYears" /></span></td>
+										                 <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs">&nbsp;<s:property value="#fundDetails.returnsThreeYears" />&nbsp;&nbsp;% Per Year</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs"> 5 YR</span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &#8377;<s:property value="#fundDetails.returnsFiveYears" /></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &nbsp;<s:property value="#fundDetails.returnsFiveYears" />&nbsp;&nbsp;% Per Year</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs"> Since Inception</span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &#8377;<s:property value="#fundDetails.returnsSinceInception" /></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &nbsp;<s:property value="#fundDetails.returnsSinceInception" />&nbsp;&nbsp;% Per Year</span></td>
 										            </tr>
 										        </tbody>
 										    </table>

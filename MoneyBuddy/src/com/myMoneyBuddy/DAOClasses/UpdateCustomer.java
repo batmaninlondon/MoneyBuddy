@@ -45,12 +45,12 @@ public class UpdateCustomer {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -87,12 +87,12 @@ public class UpdateCustomer {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomer class - updateAddCusDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -132,12 +132,12 @@ public class UpdateCustomer {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -174,12 +174,12 @@ public class UpdateCustomer {
 
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomer class - updateBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

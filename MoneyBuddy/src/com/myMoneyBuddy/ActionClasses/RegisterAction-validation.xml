@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="emailIdRegister">
+        <field-validator type="requiredstring">
+            <message>Email Id can not be blank.</message>
+        </field-validator>
+        
+        <field-validator type="email">
+            <message>Not a valid Email Id.</message>
+        </field-validator>
+    </field>  
+    <field name="passwordRegister">
+        <field-validator type="requiredstring">
+            <message>Password can't be blank.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+             <param name="minLength">8</param>
+             <message>Password must contain at least ${minLength} characters</message>
+        </field-validator>
+    </field>
+    <field name="mobileNumberRegister">
+        <field-validator type="requiredstring">
+            <message>Mobile Number can't be blank.</message>
+        </field-validator>
+        
+        <field-validator type="regex">  
+          <param name="regexExpression">[0-9]{10,10}</param>  
+          <message>Not a valid Mobile Number.</message>  
+        </field-validator>
+    </field>
+    
+   
+</validators>

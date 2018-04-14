@@ -26,7 +26,7 @@ public class SaveSubscriberAction extends ActionSupport {
 	Logger logger = Logger.getLogger(SaveSubscriberAction.class);	
 	private String emailId;
 	private String googleResponse;
-    private InputStream stream;
+   // private InputStream stream;
 
     public String execute() {
  	
@@ -40,10 +40,11 @@ public class SaveSubscriberAction extends ActionSupport {
 	    	MbUtil mbUtil = new MbUtil();
 	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
 	    	{
-	    		String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    	    logger.debug("SaveSubscriberAction class - execute method - returned Lookslikeyouarearobot");
 	    	    logger.debug("SaveSubscriberAction class - execute method - end ");
+	    	    addActionMessage("Looks like you are a robot.");
 	    	    
 	    	    return SUCCESS;
 	    	}
@@ -82,18 +83,21 @@ public class SaveSubscriberAction extends ActionSupport {
 		    	sendMail.MailSending(getEmailId(),subject,"SubscriptionMail","SubscriptionMail.txt",mailLink,"");
 				
 				System.out.println("str set to subscribedSuccessfully ");
-				String str = "subscribedSuccessfully";
+				//String str = "subscribedSuccessfully";
+				addActionMessage("Thank You for subscribing with MoneyBuddy.");
 				logger.debug("SaveSubscriberAction class - execute method - emailId - "+getEmailId()+" is subscribed with MoneyBuddy");
 		    	logger.debug("SaveSubscriberAction class - execute method - returned subscribedSuccessfully");
-		    	stream = new ByteArrayInputStream(str.getBytes());
+		    	//stream = new ByteArrayInputStream(str.getBytes());
 				
 			}
 			else {
 		    	
 		    	System.out.println("str set to alreadySubscribed ");
 		    	
-		    	String str = "alreadySubscribed";
-		    	stream = new ByteArrayInputStream(str.getBytes());
+		    	/*String str = "alreadySubscribed";
+		    	stream = new ByteArrayInputStream(str.getBytes());*/
+		    	
+		    	addActionMessage("You have already subscribed with MoneyBuddy.");
 		    	logger.debug("SaveSubscriberAction class - execute method - emailId - "+getEmailId()+" is already subscribed with MoneyBuddy");
 		    	logger.debug("SaveSubscriberAction class - execute method - returned alreadySubscribed");
 			}
@@ -105,12 +109,12 @@ public class SaveSubscriberAction extends ActionSupport {
 	    	return SUCCESS;
     	} 
     	catch ( Exception e )  {
-    		logger.debug("SaveSubscriberAction class - execute method - Caught Exception");
+    		logger.error("SaveSubscriberAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("SaveSubscriberAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("SaveSubscriberAction class - execute method - returned error");
 			return ERROR;
     	}
     	finally {
@@ -119,14 +123,14 @@ public class SaveSubscriberAction extends ActionSupport {
 		}
     	
     }
-
+/*
 	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 	
 	public String getEmailId() {

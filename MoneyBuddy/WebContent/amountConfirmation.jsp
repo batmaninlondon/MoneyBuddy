@@ -62,22 +62,6 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
-		<script>
-		
-		$(document).ready(function() {
-		    $('#cartData').DataTable( {
-		        "paging":   true,
-		        "ordering": false,
-		        "info":     true,
-		        "searching": false,
-		        "responsive": true,
-		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-		        
-		        
-		    } );
-		} );
-		
-		</script>
     </head>
 
 <body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minLumsumAmount"/>');">
@@ -131,8 +115,8 @@
 			    	<div class="container">
 			    	<br/>
   						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="newUpdate('UPFRONT');">Invest Lumsum</a></li>
-   							<li><a data-toggle="tab" href="#sip" onClick="newUpdate('SIP');">Start SIP</a></li>
+    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="setTransactionType('UPFRONT');">Invest Lumsum</a></li>
+   							<li><a data-toggle="tab" href="#sip" onClick="setTransactionType('SIP');">Start SIP</a></li>
  						</ul>
   					</div>
   				</div>
@@ -140,6 +124,16 @@
   		</div>
   		<div class="col-md-1 col-xs-1" ></div>
   	</div>
+  	
+  	<s:form  action="newEstimateAction" method="post" name="formEstimate">
+  		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
+		<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
+		<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
+		<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
+		<s:hidden id="risk-category-value" name="riskCategory"></s:hidden>
+		<s:hidden id="plan-name-value" name="planName"></s:hidden>
+		<s:hidden id="transaction-type-value" name="transactionType"></s:hidden>
+  	</s:form>
   	
   	<div class="row "  >
 		<div class="col-md-1 col-xs-1" > </div>
@@ -150,25 +144,28 @@
 	    			<!-- <input type="hidden" id="transactionType" value="UPFRONT" /> -->
 	        		<div class="name g-margin-t-40--xs">
 						<div class="row g-margin-t-50--xs g-margin-b-50--xs">
-								<div id="investment-options" class="col-md-4 col-xs-12">
-									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
-								</div>
-								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-								<input id="upfront-investment-range" type="range" min="<s:property value="#session.minLumsumAmount"/>" max="150000" step="500"
-												 value="<s:property value="#session.minLumsumAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
-								</div>
-								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
-								<div class="col-md-5"></div>
+							<div id="investment-options" class="col-md-4 col-xs-12">
+								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
 							</div>
-	  					<div class="row">
-							<div class="g-bg-color--gray-lighter " style="height:60px;">
-	    						<div class="profile" >
-	        						<div class="name g-text-right--xs g-margin-r-10--xs" >
-	        							<button type="button" class="btn  g-color--white g-margin-t-15--xs" onClick="createCart();"  style="background-color:black;" >Add to Cart</button>
-	            					</div>
-	       						</div>
-	     					</div>
+							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minLumsumAmount"/>" max="150000" step="500"
+											 value="<s:property value="#session.minLumsumAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+							</div>
+							<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
+							<div class="col-md-5"></div>
 						</div>
+						<s:form action="createCartAction" method="post" >
+		  					<div class="row">
+								<div class="g-bg-color--gray-lighter " style="height:60px;">
+		    						<div class="profile" >
+		        						<div class="name g-text-right--xs g-margin-r-10--xs" >
+		        							<%-- <s:submit class="tn  g-color--white g-margin-t-15--xs" style="background-color:black;" value="Add to Cart" /> --%>
+		        							<button type="button" class="btn  g-color--white g-margin-t-15--xs" onClick="newUpdate();"  style="background-color:black;" >Add to Cart</button>
+		            					</div>
+		       						</div>
+		     					</div>
+							</div>
+						</s:form>
 						
 					</div>
 	       		</div>
@@ -204,7 +201,7 @@
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Select SIP installment Date</p>
 								</div>
 								<div id="duration-value"  class="col-md-3   col-xs-6 g-margin-l-20--xs">
-									<select class="form-control" id="sip-date" name="sipDate" onChange="showDate()">
+									<select class="form-control" id="sip-date" name="sipDate" >
 								        <option value="1">1</option>
 								        <option value="5" selected>5</option>
 								        <option value="10">10</option>
@@ -215,7 +212,7 @@
 								</div>
 								<div class="col-md-4"></div>
 							</div>
-							<div class="row ">
+							<%-- <div class="row ">
 								<%
 								System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
 						    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
@@ -261,12 +258,12 @@
 									
 								}
 								%>
-							</div>
+							</div> --%>
 							<div class="row">
 								<div class=" g-bg-color--gray-lighter " style="height:60px;">
 	    							<div class="profile" >
 	        							<div class="name g-text-right--xs g-margin-r-10--xs " >
-	        								<button type="button" class="btn g-color--white g-margin-t-15--xs" onClick="openCustomerDetailsPage();"  style="background-color:black;" >Continue</button>
+    										<button type="button" class="btn g-color--white g-margin-t-15--xs" onClick="newUpdate();"  style="background-color:black;" >Continue</button>
 	            						</div>
 	       							</div>
 	     						</div>

@@ -28,6 +28,7 @@ public class InsertBankDetails {
 
     	try {
 
+    		System.out.println("Bank Details : accountNumber : "+accountNumber+" : ifscCode : "+ifscCode);
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			String frmtdDateForDB = dateFormat.format(date);
@@ -47,12 +48,12 @@ public class InsertBankDetails {
 
     	}
     	catch ( HibernateException e ) {
-    		logger.debug("InsertBankDetails class - insertBankDetail method - customerId - "+customerId+" - Caught HibernateException");
+    		logger.error("InsertBankDetails class - insertBankDetail method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("InsertBankDetails class - insertBankDetail method - customerId - "+customerId+" - Caught Exception");
+			logger.error("InsertBankDetails class - insertBankDetail method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

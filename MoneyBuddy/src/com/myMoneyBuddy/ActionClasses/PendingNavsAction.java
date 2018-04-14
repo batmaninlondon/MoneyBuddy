@@ -43,10 +43,10 @@ public class PendingNavsAction extends ActionSupport implements Action  {
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-			logger.debug("PendingNavsAction class - execute method - Caught Exception");
+			logger.error("PendingNavsAction class - execute method - Caught Exception");
 			e.printStackTrace();
 
-    	    logger.debug("PendingNavsAction class - execute method - returned error");
+    	    logger.error("PendingNavsAction class - execute method - returned error");
 			return ERROR;
 		} 
 

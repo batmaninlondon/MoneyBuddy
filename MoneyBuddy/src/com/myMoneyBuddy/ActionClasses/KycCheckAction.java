@@ -4,20 +4,19 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 public class KycCheckAction extends ActionSupport  implements SessionAware{
 
@@ -36,8 +35,17 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     private String residentialState;
     private String residentialPin;
     private String residentialCountry;
-
-    private InputStream stream;
+    
+    private String respMsg;
+    private String tranDetailId;
+    private String selectedBankName;
+    private String selectedAccType;
+    private String selectedAccNum;
+    private String selectedIfscCode;
+    private String displayAccType ;
+    private String displayBankName;
+    
+   // private InputStream stream;
 	
     public String execute() {
     	
@@ -48,6 +56,8 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     		logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - start ");
     		
 	    	System.out.println(" KycCheckAction execute method Called !!");
+	    	
+	    	setTranDetailId("NotSet");
 	    	
 	    	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
 	    	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
@@ -90,34 +100,105 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	
 	    	if (sessionMap.get("kycStatus").toString().equalsIgnoreCase("DONE"))  {
 	    		System.out.println(" Returned KYC  done !!");
-	    		String str = "kycDone";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		setRespMsg("bankDetailsNotExists");
+	    		
+	    		QueryBankDetails queryBankDetails = new QueryBankDetails();
+	    		
+	    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
+	    		
+	    		if (bankDetailsExists)  {
+	    			
+	    			BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
+	    			
+	    			String bankName = bankDetails.getBankName();
+	    			
+	    			switch (bankName)  {
+	    				case "ICI" :
+	    					displayBankName = "ICICI Bank";
+	    					break;
+	    				case "SBI" :
+	    					displayBankName = "SBI Bank";
+	    					break;
+	    				case "HDF" :
+	    					displayBankName = "HDFC Bank";
+	    					break;
+	    				default :
+	    					displayBankName = "KOTAK Bank";
+	    					break;
+	    			
+	    			}
+	    			
+	    			String accType = bankDetails.getAccountType();
+	    			
+	    			switch (accType)  {
+	    				case "CB" :
+	    					displayAccType = "Current Account";
+	    					break;
+	    				case "SB" :
+	    					displayAccType = "Saving Account";
+	    					break;
+	    				case "NE" :
+	    					displayAccType = "NRI - Repatriable (NRE)";
+	    					break;
+	    				default :
+	    					displayAccType = "NRI - Repatriable (NRO)";
+	    					break;
+	    			
+	    			}
+	    			
+	    			DesEncrypter desEncrypter = new DesEncrypter();
+	    			System.out.println("Acc num m: "+bankDetails.getAccountNumber());
+	    			String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
+	    							
+	    			setSelectedBankName(bankDetails.getBankName());
+	    			setDisplayBankName(displayBankName);
+	    			setSelectedAccType(bankDetails.getAccountType());
+	    			setDisplayAccType(displayAccType);
+	    			setSelectedAccNum(accNum);
+	    			setSelectedIfscCode(bankDetails.getIfscCode());
+	    			
+	    			setRespMsg("bankDetailsExists");
+	    			//return "bankDetailsExists";
+	    			
+	    		}
+	    	    //stream = new ByteArrayInputStream(str.getBytes());
 	    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycDone");
 		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
+		    	
 		    	
 	    		return SUCCESS;
 	    	}
 	    	else {
 				System.out.println(" Returned KYC not done !!");
-				String str = "kycNotDone";
-			    stream = new ByteArrayInputStream(str.getBytes());
+				//String str = "kycNotDone";
+			    //stream = new ByteArrayInputStream(str.getBytes());
 			    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycNotDone");
 		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
-		    	
-				return SUCCESS;
+
+				return "kycNotDone";
 	    	}
 
     	} 
     	catch ( Exception e )  {
-    		logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("KycCheckAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned error");
-    	    
+    		//String str = "error";
+    	    //stream = new ByteArrayInputStream(str.getBytes());
+    	    logger.error("KycCheckAction class - execute method - customerId - "+customerId+" - returned error");
+
     		return ERROR;
     	}
+    }
+    
+    
+    public boolean isUserAlreadyInDatabase(String name)  {
+    	 if (name.startsWith("s"))  {
+    		 System.out.println("name starts with s");
+    		 return true;
+    	 }
+    	 
+    	 return false;
     }
     
     @Override
@@ -125,14 +206,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
         sessionMap = (SessionMap<String, Object>) map;
     }
 
-	public InputStream getStream() {
+/*	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
-
+*/
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -228,5 +309,69 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	public void setResidentialCountry(String residentialCountry) {
 		this.residentialCountry = residentialCountry;
 	}
-	
+
+	public String getRespMsg() {
+		return respMsg;
+	}
+
+	public void setRespMsg(String respMsg) {
+		this.respMsg = respMsg;
+	}
+
+	public String getSelectedBankName() {
+		return selectedBankName;
+	}
+
+	public void setSelectedBankName(String selectedBankName) {
+		this.selectedBankName = selectedBankName;
+	}
+
+	public String getSelectedAccType() {
+		return selectedAccType;
+	}
+
+	public void setSelectedAccType(String selectedAccType) {
+		this.selectedAccType = selectedAccType;
+	}
+
+	public String getSelectedAccNum() {
+		return selectedAccNum;
+	}
+
+	public void setSelectedAccNum(String selectedAccNum) {
+		this.selectedAccNum = selectedAccNum;
+	}
+
+	public String getSelectedIfscCode() {
+		return selectedIfscCode;
+	}
+
+	public void setSelectedIfscCode(String selectedIfscCode) {
+		this.selectedIfscCode = selectedIfscCode;
+	}
+
+	public String getDisplayAccType() {
+		return displayAccType;
+	}
+
+	public void setDisplayAccType(String displayAccType) {
+		this.displayAccType = displayAccType;
+	}
+
+	public String getDisplayBankName() {
+		return displayBankName;
+	}
+
+	public void setDisplayBankName(String displayBankName) {
+		this.displayBankName = displayBankName;
+	}
+
+	public String getTranDetailId() {
+		return tranDetailId;
+	}
+
+	public void setTranDetailId(String tranDetailId) {
+		this.tranDetailId = tranDetailId;
+	}
+
 }

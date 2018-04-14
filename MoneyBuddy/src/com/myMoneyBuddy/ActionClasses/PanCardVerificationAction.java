@@ -25,7 +25,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 	
     private String panCard;
 
-    private InputStream stream;
+    //private InputStream stream;
 
     public String execute() {
     	    	
@@ -89,7 +89,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		
 		
 		String num1 = getPanCard().substring(5,9);
-		String str;
+		//String str;
 		System.out.println(" num1 is : "+num1);
 		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
 		String kycStatus = null;
@@ -97,12 +97,12 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 			
 			kycStatus= "DONE";
 			sessionMap.put("kycStatus", "DONE");
-			str = "kycDone";
+			//str = "kycDone";
 		}
 		else {
 			kycStatus = "NOTDONE";
 			sessionMap.put("kycStatus", "NOTDONE");
-			str = "kycNotDone";
+			//str = "kycNotDone";
 			
 		}
 		
@@ -120,15 +120,15 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     	
     	System.out.println(" Returned Success !!");
 
-    	stream = new ByteArrayInputStream(str.getBytes());
+    	//stream = new ByteArrayInputStream(str.getBytes());
 
     	return SUCCESS;
     	}
     	catch ( Exception e )  {
     		logger.error("PanCardVerificationAction class : execute method : caught Exception for session id : "+sessionMap.getClass().getName());
     		e.printStackTrace();
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
     		return ERROR;
     	}
     }
@@ -145,13 +145,13 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
     public void setPanCard(String panCard) {
         this.panCard = panCard;
     }
-
+/*
 	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 }

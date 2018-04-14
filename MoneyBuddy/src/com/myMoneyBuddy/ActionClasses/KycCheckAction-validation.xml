@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="customerName">
+        <field-validator type="requiredstring">
+            <message>Customer Name can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="addressLineOne">
+        <field-validator type="requiredstring">
+            <message>Address Line One can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="addressLineTwo">
+        <field-validator type="requiredstring">
+            <message>Address Line Two can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="addressLineThree">
+        <field-validator type="requiredstring">
+            <message>Address Line Three can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="residentialPin">
+        <field-validator type="requiredstring">
+            <message>Residential Pin can not be blank.</message>
+        </field-validator>
+    </field>
+    
+</validators>

@@ -17,7 +17,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -36,26 +36,6 @@
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -103,24 +83,24 @@
 	
 	
 <%
-    //URL url = new URL(request.getRequestURL());
-    //if (request.getAttribute("hash")!=null) {
     String hashedPassword = (String)session.getAttribute("hashedPassword");
-    System.out.println("value of hashedPassword : "+hashedPassword);
-
     String emailId = (String)session.getAttribute("emailId");
-    System.out.println("value of hash emailId: "+emailId);
 
 %>
-
-	<input type="hidden" id="email-id" name="emailId" value="<%=emailId%>">
-	<input type="hidden" id="hashed-password" name="hashedPassword" value="<%=hashedPassword%>">
+	
+	<s:form  action="resetPasswordAction" method="post" >
+	<s:set var="cusEmailId" ><%=emailId%></s:set>
+	<s:set var="cusPswd" ><%=hashedPassword%></s:set>
+	<s:hidden id="email-id" name="emailId" value="#cusEmailId" />
+	<s:hidden id="hashed-password" name="hashedPassword" value="#cusPswd" />
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
 			<div class="input-group input-group-lg">
     			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-    			<input id="new-password" type="password" class="form-control" name="newPassword" placeholder="Password" style="width:600px;">
+    			<s:fielderror fieldName="newPassword" class="g-color--red" />
+			  	<s:password class="form-control" id="new-password" placeholder="Password" name="newPassword" style="width:600px;"/>
+    			<!-- <input id="new-password" type="password" class="form-control" name="newPassword" placeholder="Password" style="width:600px;"> -->
 	
   			</div>
 		</div>
@@ -131,7 +111,9 @@
 		<div class="col-md-9">
 			<div class="input-group input-group-lg">
     			<span class="input-group-addon" ><i class="glyphicon glyphicon-lock"></i></span>
-    			<input id="confirm-password" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" style="width:600px;">
+    			<s:fielderror fieldName="confirmPassword" class="g-color--red" />
+			  	<s:password class="form-control" id="confirm-password" placeholder="Confirm Password" name="confirmPassword" style="width:600px;"/>
+    			<!-- <input id="confirm-password" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" style="width:600px;"> -->
   			</div>
 		</div>
 	</div>
@@ -140,11 +122,13 @@
 		<div class="col-md-5"></div>
 		<div class="col-md-7">
 			<div id="button-5" class="row">
-				<button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="resetPassword();" style="margin-top:50px; width:200px;">RESET PASSWORD</button>
+				<s:submit id="submit-button-5" class="center btn btn-primary readmore submit-button-1" value="RESET PASSWORD" style="margin-top:50px; width:200px;" />
+				<!-- <button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="resetPassword();" style="margin-top:50px; width:200px;">RESET PASSWORD</button> -->
 			</div>
 		</div>
 	</div>
-
+	</s:form>
+	
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
@@ -168,6 +152,6 @@
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

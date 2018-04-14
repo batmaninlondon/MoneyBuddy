@@ -20,7 +20,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -35,6 +35,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    
+    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
 
 	<style type="text/css">
 		.ui-datepicker {
@@ -55,28 +57,8 @@
 	</script>
 </head>
 
-<body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
+<body class="homepage bg-warning">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -125,14 +107,21 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>	
+	<div >
+	<s:form action="kycCheckAction" method="post" >
+		
 	<div class="row">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
-			<div class="col-md-4"><label for="customer-name" class="small-text pull-right">Name </label></div>
+			<div class="col-md-4">
+			
+			<label for="customer-name" class="small-text pull-right">Name </label>
+			</div> 
 
-			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="customer-name" type="text" placeholder="Enter Name as per PAN CARD" style="margin-top:-10px;">
+			<div class="col-md-6">
+				<s:fielderror fieldName="customerName" class="g-color--red" />
+			  	<s:textfield class="form-control" id="customer-name" placeholder="Enter Name as per PAN CARD" name="customerName" style="margin-top:-10px;"/> 
+				  <!-- <input class="form-control" id="customer-name" name="customerName" type="text" placeholder="Enter Name as per PAN CARD" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -147,7 +136,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="date-of-birth"  class="small-text pull-right">Date of Birth</label></div>
 			<div  class="col-md-6" >
-                <input class="form-control datepicker" name = "date" id="date-of-birth"  placeholder="Enter Date of Birth" style="margin-top:-10px;">
+                <input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="Enter Date of Birth" style="margin-top:-10px;">
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -162,12 +151,15 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gender" style="margin-top:-10px;">
+				 <s:select class="form-control"  id="gender" style="margin-top:-10px;" 
+					list="#{'M':'Male', 'F':'Female'}" 
+					name="gender" 
+					value="M" /> 
+			  	<%-- <select class="form-control" id="gender" name="gender" style="margin-top:-10px;">
 			        <option value="M" selected>Male</option>
 			        <option value="F">Female</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -184,8 +176,14 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="occupation" style="margin-top:-10px;">
+			  	<s:select class="form-control"  id="occupation" style="margin-top:-10px;"
+					list="#{'PriSecJob':'Private Sector job', 'PubSecJob':'Public Sector job', 'GovSer':'Government Service',
+					'Business':'Business', 'Professional':'Professional', 'Agriculturist':'Agriculturist',
+					'Retired':'Retired', 'Student':'Student', 'ForexDeal':'Forex Dealer',
+					'HouseWife':'Housewife', 'Others':'Others' }" 
+					name="occupation" 
+					value="PriSecJob" /> 
+			  	<%-- <select class="form-control" id="occupation" name="occupation" style="margin-top:-10px;">
 			        <option value="PriSecJob" selected>Private Sector job</option>
 			        <option value="PubSecJob">Public Sector job</option>
 			        <option value="GovSer">Government Service</option>
@@ -198,7 +196,7 @@
 			        <option value="HouseWife">Housewife</option>
 			        <option value="Others">Others</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -214,8 +212,19 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="tax-status" style="margin-top:-10px;">
+				<s:select class="form-control"  id="tax-status" style="margin-top:-10px;"
+					list="#{'Individual':'Individual', 'OnBeOfMinor':'On Behalf Of Minor', 'Huf':'HUF', 'Company':'Company',
+					'AopBoi':'AOP/BOI', 'Partnership':'Partnership', 'BodyCorporate':'Body Corporate', 'Trust':'Trust',
+					'Society':'Society', 'NriNre':'NRI - Repatriable(NRE)', 'OverCorpoBody':'Oversea Corporate Body', 'ForeInstiInvest':'Foreign Institutional Investor',
+					'OverCorpoBodyOthers':'Oversea Corporate Body - Others', 'ProviFundEpf':'Provident Fund - EPF', 'SuperAnnuFund':'Super Annuation Fund', 'GratuityFund':'Gratuity Fund',
+					'BankFinanInsti':'Bank/Finanacial Institution', 'SolePropri':'Sole Proprietorship', 'PensionFund':'Pension Fund', 'NriNro':'NRI - Repatriable(NRO)',
+					'NriMinorNre':'NRI - Minor (NRE)', 'NriHufNro':'NRI-HUF(NRO)', 'NriThruNroAc':'NRI Through NRO A/c', 'GloDevelopNet':'Global Development Network',
+					'NriHufNre':'NRI-HUF(NRE)', 'LimLiaParter':'Limited Liability Partnership', 'PubLimCompany':'Public Limited Company', 'PriLimCompany':'Private Limited Company',
+					'UnlisCompany':'Unlisted Company', 'OciRepatri':'OCI - Repatriation', 'OciNonRepatri':'OCI - Non Repatriation', 'Pio':'Person of Indian Origin [PIO]',
+					'Ngo':'Non-Government Organisation [NGO]', 'Others':'Others' }" 
+					name="taxStatus" 
+					value="Individual" /> 
+			  	<%-- <select class="form-control" id="tax-status" name="taxStatus" style="margin-top:-10px;">
 			        <option value="Individual" selected>Individual</option>
 			        <option value="OnBeOfMinor">On Behalf Of Minor</option>
 			        <option value="Huf">HUF</option>
@@ -251,7 +260,7 @@
 			        <option value="Ngo">Non-Government Organisation [NGO]</option>
 			        <option value="Others">Others</option>
 			        
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -274,21 +283,24 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="address-line-one"  class="small-text pull-right">Line 1</label></div>
 			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="address-line-one" type="text" placeholder="Enter Address Line 1" style="margin-top:-10px;">
+				<s:fielderror fieldName="addressLineOne" class="g-color--red" />
+			  	<s:textfield class="form-control" id="address-line-one" placeholder="Enter Address Line 1" name="addressLineOne" style="margin-top:-10px;"/> 
+				<!-- <input class="form-control" id="address-line-one" name="addressLineOne" type="text" placeholder="Enter Address Line 1" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 		<div class="col-md-4">
 		</div>
 	</div>
+	
 	<div class="row" style="margin-top:20px;">
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="address-line-two"  class="small-text pull-right">Line 2</label></div>
 			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="address-line-two" type="text" placeholder="Enter Address Line 2" style="margin-top:-10px;">
+			  	<s:fielderror fieldName="addressLineTwo" class="g-color--red" />
+			  	<s:textfield class="form-control" id="address-line-two" placeholder="Enter Address Line 2" name="addressLineTwo" style="margin-top:-10px;"/> 
+				 <!-- <input class="form-control" id="address-line-two" name="addressLineTwo" type="text" placeholder="Enter Address Line 2" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -300,8 +312,9 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="address-line-three"  class="small-text pull-right">Line 3</label></div>
 			<div  class="col-md-6" >
-				  
-				  <input class="form-control" id="address-line-three" type="text" placeholder="Enter Address Line 3" style="margin-top:-10px;">
+			  	<s:fielderror fieldName="addressLineThree" class="g-color--red" />
+			  	<s:textfield class="form-control" id="address-line-three" placeholder="Enter Address Line 3" name="addressLineThree" style="margin-top:-10px;"/> 
+				<!-- <input class="form-control" id="address-line-three" name="addressLineThree" type="text" placeholder="Enter Address Line 3" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -314,79 +327,35 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="residential-city" class="small-text pull-right">City</label></div>
 			<div class="col-md-6" >
-				  
-			  	<select class="form-control" id="residential-city" style="margin-top:-10px;">
-	  		      	<option value="Agra">Agra</option>
-					<option value="Ahmedabad">Ahmedabad</option>
-					<option value="Ajmer">Ajmer</option>
-					<option value="Allahabad">Allahabad</option>
-					<option value="Amritsar">Amritsar</option>
-					<option value="Anand">Anand</option>
-					<option value="Asansol">Asansol</option>
-					<option value="Aurangabad">Aurangabad</option>
-					<option value="Bangalore">Bangalore</option>
-					<option value="Baroda">Baroda</option>
-					<option value="Bharuch">Bharuch</option>
-					<option value="Bhavnagar">Bhavnagar</option>
-					<option value="Bhopal">Bhopal</option>
-					<option value="Bhubaneswar">Bhubaneswar</option>
-					<option value="Calicut">Calicut</option>
-					<option value="Chandigarh">Chandigarh</option>
-					<option value="Chennai">Chennai</option>
-					<option value="Coimbatore">Coimbatore</option>
-					<option value="Dehradun">Dehradun</option>
-					<option value="Dharwad">Dharwad</option>
-					<option value="Dubai">Dubai</option>
-					<option value="Durgapur">Durgapur</option>
-					<option value="Erode">Erode</option>
-					<option value="Guntur">Guntur</option>
-					<option value="Guwahati">Guwahati</option>
-					<option value="Hubli">Hubli</option>
-					<option value="Hyderabad">Hyderabad</option>
-					<option value="Indore">Indore</option>
-					<option value="Jaipur">Jaipur</option>
-					<option value="Jalandhar">Jalandhar</option>
-					<option value="Jalgaon">Jalgaon</option>
-					<option value="Jamnagar">Jamnagar</option>
-					<option value="Jamshedpur">Jamshedpur</option>
-					<option value="Jodpur">Jodpur</option>
-					<option value="Kanpur">Kanpur</option>
-					<option value="Karaikudi">Karaikudi</option>
-					<option value="Kochi">Kochi</option>
-					<option value="Kolkata">Kolkata</option>
-					<option value="Kota">Kota</option>
-					<option value="Kottayam">Kottayam</option>
-					<option value="Lucknow">Lucknow</option>
-					<option value="Ludhiana">Ludhiana</option>
-					<option value="Mangalore">Mangalore</option>
-					<option value="Meerut">Meerut</option>
-					<option value="Moradabad">Moradabad</option>
-					<option value="Mumbai">Mumbai</option>
-					<option value="Mysore">Mysore</option>
-					<option value="Nagpur">Nagpur</option>
-					<option value="Nasik">Nasik</option>
-					<option value="NewDelhi">New Delhi</option>
-					<option value="Panjim">Panjim</option>
-					<option value="Patna">Patna</option>
-					<option value="Pondicherry">Pondicherry</option>
-					<option value="Pune">Pune</option>
-					<option value="Raipur">Raipur</option>
-					<option value="Rajahmundry">Rajahmundry</option>
-					<option value="Rajkot">Rajkot</option>
-					<option value="Ranchi">Ranchi</option>
-					<option value="Salem">Salem</option>
-					<option value="Siliguri">Siliguri</option>
-					<option value="Surat">Surat</option>
-					<option value="Tirunelveli">Tirunelveli</option>
-					<option value="Tirupur">Tirupur</option>
-					<option value="Trichy">Trichy</option>
-					<option value="Trivandrum">Trivandrum</option>
-					<option value="Udaipur">Udaipur</option>
-					<option value="Varanasi">Varanasi</option>
-					<option value="Vashi">Vashi</option>
-					<option value="Vijayawada">Vijayawada</option>
-					<option value="Others">Others</option>
-			  </select>       
+				<%-- <s:select class="form-control"  id="tax-status" style="margin-top:-10px;"
+					list="#{'Individual':'Individual', 'OnBeOfMinor':'On Behalf Of Minor', 'Huf':'HUF', 'Company':'Company',
+					'AopBoi':'AOP/BOI', 'Partnership':'Partnership', 'BodyCorporate':'Body Corporate', 'Trust':'Trust',
+					'Society':'Society', 'NriNre':'NRI - Repatriable(NRE)', 'OverCorpoBody':'Oversea Corporate Body', 'ForeInstiInvest':'Foreign Institutional Investor',
+					'OverCorpoBodyOthers':'Oversea Corporate Body - Others', 'ProviFundEpf':'Provident Fund - EPF', 'SuperAnnuFund':'Super Annuation Fund', 'GratuityFund':'Gratuity Fund',
+					'BankFinanInsti':'Bank/Finanacial Institution', 'SolePropri':'Sole Proprietorship', 'PensionFund':'Pension Fund', 'NriNro':'NRI - Repatriable(NRO)',
+					'NriMinorNre':'NRI - Minor (NRE)', 'NriHufNro':'NRI-HUF(NRO)', 'NriThruNroAc':'NRI Through NRO A/c', 'GloDevelopNet':'Global Development Network',
+					'NriHufNre':'NRI-HUF(NRE)', 'LimLiaParter':'Limited Liability Partnership', 'PubLimCompany':'Public Limited Company', 'PriLimCompany':'Private Limited Company',
+					'UnlisCompany':'Unlisted Company', 'OciRepatri':'OCI - Repatriation', 'OciNonRepatri':'OCI - Non Repatriation', 'Pio':'Person of Indian Origin [PIO]',
+					'Ngo':'Non-Government Organisation [NGO]', 'Others':'Others' }" 
+					name="taxStatus" 
+					value="Individual" />  --%>
+				<s:select class="form-control"  id="residential-city" style="margin-top:-10px;"
+					list="#{'Agra':'Agra', 'Ahmedabad':'Ahmedabad', 'Ajmer':'Ajmer', 'Allahabad':'Allahabad', 
+					'Amritsar':'Amritsar', 'Anand':'Anand', 'Asansol':'Asansol', 'Aurangabad':'Aurangabad', 'Bangalore':'Bangalore', 
+					'Baroda':'Baroda', 'Bharuch':'Bharuch', 'Bhavnagar':'Bhavnagar', 'Bhopal':'Bhopal', 'Bhubaneswar':'Bhubaneswar', 
+					'Calicut':'Calicut', 'Chandigarh':'Chandigarh', 'Chennai':'Chennai', 'Coimbatore':'Coimbatore', 'Dehradun':'Dehradun', 
+					'Dharwad':'Dharwad', 'Dubai':'Dubai<', 'Durgapur':'Durgapur', 'Erode':'Erode', 'Guntur':'Guntur', 
+					'Guwahati':'Guwahati', 'Hubli':'Hubli', 'Hyderabad':'Hyderabad', 'Indore':'Indore', 'Jaipur':'Jaipur', 
+					'Jalandhar':'Jalandhar', 'Jalgaon':'Jalgaon', 'Jamnagar':'Jamnagar', 'Jamshedpur':'Jamshedpur', 'Jodpur':'Jodpur', 
+					'Kanpur':'Kanpur', 'Karaikudi':'Karaikudi', 'Kochi':'Kochi', 'Kolkata':'Kolkata', 'Kota':'Kota', 'Kottayam':'Kottayam', 
+					'Lucknow':'Lucknow', 'Ludhiana':'Ludhiana', 'Mangalore':'Mangalore', 'Meerut':'Meerut', 'Moradabad':'Moradabad', 
+					'Mumbai':'Mumbai', 'Mysore':'Mysore<', 'Nagpur':'Nagpur', 'Nasik':'Nasik', 'NewDelhi':'New Delhi<', 'Panjim':'Panjim', 
+					'Patna':'Patna', 'Pondicherry':'Pondicherry', 'Pune':'Pune', 'Raipur':'Raipur', 'Rajahmundry':'Rajahmundry', 
+					'Rajkot':'Rajkot', 'Ranchi':'Ranchi', 'Salem':'Salem', 'Siliguri':'Siliguri', 'Surat':'Surat', 'Tirunelveli':'Tirunelveli', 
+					'Tirupur':'Tirupur', 'Trichy':'Trichy', 'Trivandrum':'Trivandrum', 'Udaipur':'Udaipur', 'Varanasi':'Varanasi', 
+					'Vashi':'Vashi', 'Vijayawada':'Vijayawada', 'Others':'Others' }" 
+					name="residentialCity" 
+					value="Agra" />     
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -402,45 +371,18 @@
 			<div class="col-md-4"><label for="residential-state" class="small-text pull-right">State</label></div>
 			<div  class="col-md-6" >
 				  
-			  	<select class="form-control" id="residential-state" style="margin-top:-10px;">
-			        <option value="AndamanAndNicobar">Andaman & Nicobar</option>
-			        <option value="ArunachalPradesh">Arunachal Pradesh</option>
-			        <option value="AndhraPradesh">Andhra Pradesh</option>
-			        <option value="Assam">Assam</option>
-			        <option value="Bihar">Bihar</option>
-			        <option value="Chandigarh">Chandigarh</option>
-			        <option value="Chhattisgarh">Chhattisgarh</option>
-			        <option value="GOA">GOA</option>
-			        <option value="Gujarat" selected>Gujarat</option>
-			        <option value="Haryana">Haryana</option>
-			        <option value="HimachalPradesh">Himachal Pradesh</option>
-			        <option value="JammuAndKashmir">Jammu & Kashmir</option>
-			        <option value="Jharkhand">Jharkhand</option>
-			        <option value="Karnataka">Karnataka</option>
-			        <option value="Kerala">Kerala</option>
-			        <option value="MadhyaPradesh">Madhya Pradesh</option>
-			        <option value="Maharashtra">Maharashtra</option>
-			        <option value="Manipur">Manipur</option>
-			        <option value="Meghalaya">Meghalaya</option>
-			        <option value="Mizoram">Mizoram</option>
-			        <option value="Nagaland">Nagaland</option>
-			        <option value="NewDelhi">New Delhi</option>
-			        <option value="Orissa">Orissa</option>
-			        <option value="Pondicherry">Pondicherry</option>
-			        <option value="Punjab">Punjab</option>
-			        <option value="Rajasthan">Rajasthan</option>
-			        <option value="Sikkim">Sikkim</option>
-			        <option value="Telengana">Telengana</option>
-			        <option value="TamilNadu">Tamil Nadu</option>
-			        <option value="Tripura">Tripura</option>
-			        <option value="UttarPradesh">Uttar Pradesh</option>
-			        <option value="Uttaranchal">Uttaranchal</option>
-			        <option value="WestBengal">West Bengal</option>
-			        <option value="DadraAndNagarHaveli">Dadra and Nagar Haveli</option>
-			        <option value="DamanAndDiu">Daman and Diu</option>
-			        <option value="Lakshadweep">Lakshadweep</option>
-			        <option value="Others">Others</option>
-		      	</select>
+			  	<s:select class="form-control"  id="residential-state" style="margin-top:-10px;"
+					list="#{'AndamanAndNicobar':'Andaman & Nicobar', 'ArunachalPradesh':'Arunachal Pradesh', 'AndhraPradesh':'Andhra Pradesh', 
+			        'Assam':'Assam', 'Bihar':'Bihar', 'Chandigarh':'Chandigarh', 'Chhattisgarh':'Chhattisgarh', 'GOA':'GOA', 'Gujarat':'Gujarat', 
+			        'Haryana':'Haryana', 'HimachalPradesh':'Himachal Pradesh', 'JammuAndKashmir':'Jammu & Kashmir', 'Jharkhand':'Jharkhand', 
+			        'Karnataka':'Karnataka', 'Kerala':'Kerala', 'MadhyaPradesh':'Madhya Pradesh', 'Maharashtra':'Maharashtra', 'Manipur':'Manipur', 
+			        'Meghalaya':'Meghalaya', 'Mizoram':'Mizoram', 'Nagaland':'Nagaland', 'NewDelhi':'New Delhi', 'Orissa':'Orissa', 
+			        'Pondicherry':'Pondicherry', 'Punjab':'Punjab', 'Rajasthan':'Rajasthan', 'Sikkim':'Sikkim', 'Telengana':'Telengana', 
+			        'TamilNadu':'Tamil Nadu', 'Tripura':'Tripura', 'UttarPradesh':'Uttar Pradesh', 'Uttaranchal':'Uttaranchal', 
+			        'WestBengal':'West Bengal', 'DadraAndNagarHaveli':'Dadra and Nagar Haveli', 'DamanAndDiu':'Daman and Diu', 
+			        'Lakshadweep':'Lakshadweep', 'Others':'Others' }" 
+					name="residentialState" 
+					value="AndamanAndNicobar" />
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -453,8 +395,9 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="residential-country" class="small-text pull-right">Country</label></div>
 			<div class="col-md-6" >
-				  
-				  <input class="form-control" id="residential-country" type="text" placeholder="Enter Country" style="margin-top:-10px;">
+			  	<s:fielderror fieldName="residentialCountry" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-country" placeholder="Enter Country" name="residentialCountry" value="India" style="margin-top:-10px;"/> 
+				<!-- <input class="form-control" id="residential-country" name="residentialCountry" type="text" placeholder="Enter Country" style="margin-top:-10px;" value="India"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -469,8 +412,9 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="residential-pin" class="small-text pull-right">Pin</label></div>
 			<div class="col-md-6" >
-				  
-				  <input class="form-control" id="residential-pin" type="text" placeholder="Enter Pin" style="margin-top:-10px;">
+			  	<s:fielderror fieldName="residentialPin" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-pin" placeholder="Enter Pin" name="residentialPin" style="margin-top:-10px;"/> 
+				<!-- <input class="form-control" id="residential-pin" name="residentialPin" type="text" placeholder="Enter Pin" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -478,17 +422,17 @@
 		</div>
 
 	</div>
-	
-
-
-
-	<div id="button-1" class="row" style="margin-top:25px;">
+	<div class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="checkKysStatus();">SUBMIT</button>
+			 <s:submit class="center btn btn-primary readmore submit-button-1" value="SUBMIT" />
 		</div>
 		<div class="col-md-5"></div>
 	</div>
+	
+	</s:form>
+</div>
+
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
@@ -507,11 +451,6 @@
             </div>
         </div>
     </footer>
-
-
-
-<%-- 		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script> --%>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

@@ -22,10 +22,11 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	
 	Logger logger = Logger.getLogger(ForgotPasswordAction.class);
 	private SessionMap<String,Object> sessionMap;
-    private String emailId;
-    private String googleResponse;
+    private String emailIdForgotPassword;
+    private String googleResponseFrgtPswd;
+    //private String response;
    
-    private InputStream stream;
+    //private InputStream stream;
 
     @Override
     public String execute() {
@@ -34,42 +35,49 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
     	QueryCustomer customer = new QueryCustomer();   
     	try 
     	{
-    		customerId = customer.getCustomerFromEmailId(getEmailId()).getCustomerId();
+    		
     		
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - start");
 	    	System.out.println("ForgotPasswordAction class : execute method called ");
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	System.out.println("googleResponse : "+getGoogleResponseFrgtPswd());
+	    	
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponseFrgtPswd()))
 	    	{
-	    		String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    	    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned Lookslikeyouarearobot");
+	    	    addActionMessage("Looks like you are a robot.");
 	    	    
 	    	    return SUCCESS;
 	    	}
 	    	
-	    	if (!customer.existsCustomer(getEmailId())) {
+	    	if (!customer.existsCustomer(getEmailIdForgotPassword())) {
 	    		System.out.println("Email Id does not exist in the database ");
 	    		
-	    		String str = "emailIdDoesNotExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "emailIdDoesNotExists";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    	    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned emailIdDoesNotExists");
+	    	    addActionMessage("EmailId is not registered with MoneyBuddy.");
 	    	    
 	    		return SUCCESS;
 	    	}
-	    	if (customer.getVerificationStatus(getEmailId()).equalsIgnoreCase("N"))  {
+	    	if (customer.getVerificationStatus(getEmailIdForgotPassword()).equalsIgnoreCase("N"))  {
 	    		
 	    		System.out.println("Verification not done for this email id ");
 	    		
-	    		String str = "verificationNotDone";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "verificationNotDone";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    	    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned verificationNotDone");
+	    	    addActionMessage("Verification pending for this Email Id.");
 	    	    
 	    		return SUCCESS;
 	    	}
-	    			
-	    	sessionMap.put("emailId", getEmailId());
-	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - stored emailId : "+getEmailId()+" in sessionMap");
+	    		
+	    	customerId = customer.getCustomerFromEmailId(getEmailIdForgotPassword()).getCustomerId();
+	    	
+	    	sessionMap.put("emailId", getEmailIdForgotPassword());
+	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - stored emailId : "+getEmailIdForgotPassword()+" in sessionMap");
 
 	    	SendMail sendMail = new SendMail();
 
@@ -83,68 +91,70 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_FORGOT_PASSWORD_SUBJECT");
 
-	    	sendMail.MailSending(getEmailId(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset Password");
+	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset Password");
 	    	
-	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - mail sent to "+getEmailId()+" to reset password");
+	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - mail sent to "+getEmailIdForgotPassword()+" to reset password");
 	    	
-	    	String str = "success";
-		    stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    
 		    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - end");
 	    	
+	    	addActionMessage("Email has been sent to reset your password.");
 	    	return SUCCESS;
 		} catch (MoneyBuddyException e) {	
-			logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+			logger.error("ForgotPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned error");
     	    
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("ForgotPasswordAction class - execute method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("ForgotPasswordAction class - execute method - customerId - "+customerId+" - returned error");
     	    
 			return ERROR;
 		}
-    }
-    
+    } 
    
-
 	@Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
 	
-    public String getEmailId() {
-        return emailId;
-    }
 
-    public String getGoogleResponse() {
-		return googleResponse;
+    public String getEmailIdForgotPassword() {
+		return emailIdForgotPassword;
 	}
 
-	public void setGoogleResponse(String googleResponse) {
-		this.googleResponse = googleResponse;
+	public void setEmailIdForgotPassword(String emailIdForgotPassword) {
+		this.emailIdForgotPassword = emailIdForgotPassword;
 	}
 
-	public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
+	public String getGoogleResponseFrgtPswd() {
+		return googleResponseFrgtPswd;
+	}
 
-	public InputStream getStream() {
+	public void setGoogleResponseFrgtPswd(String googleResponseFrgtPswd) {
+		this.googleResponseFrgtPswd = googleResponseFrgtPswd;
+	}
+
+
+
+/*	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 }

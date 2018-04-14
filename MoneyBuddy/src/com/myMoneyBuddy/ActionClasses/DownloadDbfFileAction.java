@@ -54,7 +54,7 @@ public class DownloadDbfFileAction extends ActionSupport implements SessionAware
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-			logger.debug("EstimateAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.error("EstimateAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";

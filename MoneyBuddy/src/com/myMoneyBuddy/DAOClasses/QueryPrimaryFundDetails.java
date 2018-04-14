@@ -42,12 +42,12 @@ public class QueryPrimaryFundDetails {
 			return primaryFundDetail;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryPrimaryFundDetails class - getPrimaryFundDetail method - fundId - "+fundId+" - Caught HibernateException");
+			logger.error("QueryPrimaryFundDetails class - getPrimaryFundDetail method - fundId - "+fundId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryPrimaryFundDetails class - getPrimaryFundDetail method - fundId - "+fundId+" - Caught Exception");
+			logger.error("QueryPrimaryFundDetails class - getPrimaryFundDetail method - fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -93,17 +93,17 @@ public class QueryPrimaryFundDetails {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryPrimaryFundDetails class - getFundDetailsData method - Caught NumberFormatException ");
+			logger.error("QueryPrimaryFundDetails class - getFundDetailsData method - Caught NumberFormatException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryPrimaryFundDetails class - getFundDetailsData method - Caught HibernateException ");
+			logger.error("QueryPrimaryFundDetails class - getFundDetailsData method - Caught HibernateException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryPrimaryFundDetails class - getFundDetailsData method - Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class - getFundDetailsData method - Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -126,18 +126,22 @@ public class QueryPrimaryFundDetails {
 
 			FundDetailsDataModel selectedFundDetailsDataModel = new FundDetailsDataModel();
 
+			System.out.println("fund id is : "+fundId);
 			Query query = hibernateSession.createQuery("from PrimaryFundDetails where fundId = :fundId");
 			query.setParameter("fundId", fundId);
 			
 			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
 			
 			if (primaryFundDetailsList != null)  {
-				
+				System.out.println("primaryFundDetailsList is not null !!!! ");
 				selectedFundDetailsDataModel= new FundDetailsDataModel(primaryFundDetailsList.get(0).getFundId(),primaryFundDetailsList.get(0).getFundName(),primaryFundDetailsList.get(0).getSector(),
 						primaryFundDetailsList.get(0).getSubSector(),primaryFundDetailsList.get(0).getFundStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
 						primaryFundDetailsList.get(0).getReturnsOneYear(),primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getReturnsFiveYears(),
 						primaryFundDetailsList.get(0).getReturnsSinceInception(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinLumsumAmount(),
 						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory(),primaryFundDetailsList.get(0).getPdfFilePath());
+			}
+			else {
+				System.out.println("primaryFundDetailsList is null !!!! ");
 			}
 
 			hibernateSession.getTransaction().commit();
@@ -149,17 +153,17 @@ public class QueryPrimaryFundDetails {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught NumberFormatException ");
+			logger.error("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught NumberFormatException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught HibernateException ");
+			logger.error("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught HibernateException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class - getSelectedFundDetailsData method - fundId - "+fundId+" - Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -207,17 +211,17 @@ public class QueryPrimaryFundDetails {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryPrimaryFundDetails class - checkBufferDays method - Caught NumberFormatException ");
+			logger.error("QueryPrimaryFundDetails class - checkBufferDays method - Caught NumberFormatException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryPrimaryFundDetails class - checkBufferDays method - Caught HibernateException ");
+			logger.error("QueryPrimaryFundDetails class - checkBufferDays method - Caught HibernateException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryPrimaryFundDetails class - checkBufferDays method - Caught Exception ");
+			logger.error("QueryPrimaryFundDetails class - checkBufferDays method - Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -253,17 +257,17 @@ public class QueryPrimaryFundDetails {
 			return interestRate;
 		}
 		catch ( NumberFormatException e)  {
-			logger.debug("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught NumberFormatException");
+			logger.error("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught NumberFormatException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught HibernateException");
+			logger.error("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught Exception");
+			logger.error("QueryPrimaryFundDetails class - getInterestRateOfOneFund method - fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

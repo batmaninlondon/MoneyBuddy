@@ -3,7 +3,7 @@
 <%@ page language="java" import="java.util.Properties" %>
 <%@ page language="java" import="java.io.FileInputStream" %>
 <%@ page language="java" import="java.io.File" %>
-
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -53,14 +53,15 @@
       var recaptchaContactUs;
       
       var myCallBack = function() {
-        //Render the recaptcha1 on the element with ID "recaptcha1"
+        //Render the recaptchaContactUs on the element with ID "recaptcha-contact-us"
         recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
           'size' : 'invisible',
-          'callback' : sendContactUsMail
+          'callback' : submitContactUsMail
         });
         
-      };
+      };       
+        
     </script>
     
     </head>
@@ -102,7 +103,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
@@ -114,7 +115,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -169,25 +170,47 @@
                         </div>
                     </div>
                 </div>
+                
+                <s:form  action="sendMailAction" class="g-recaptcha" method="post" name="formContactUsMail" namespace="/" >
+                
                 <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md" >
+					<div class="g-margin-b-20--xs">
+						<s:actionmessage class="small-text"/> 
+                        
+                    </div>
                     <div class="g-margin-b-20--xs">
-                        <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name">
+                        <s:fielderror fieldName="senderName" class="g-color--red" />
+			  			<s:textfield class="form-control s-form-v3__input" name="senderName" placeholder="* Name" /> 
+						<!-- <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name"> -->
                     </div>
                     <div class="row g-row-col-5 g-margin-b-50--xs">
                         <div class="col-sm-6 g-margin-b-30--xs g-margin-b-0--md">
-                            <input type="email" class="form-control s-form-v3__input" id="sender-emailId" placeholder="* Email">
+                        	<s:fielderror fieldName="senderEmailId" class="g-color--red" />
+			  				<s:textfield class="form-control s-form-v3__input" name="senderEmailId" placeholder="* Email" />
+                            <!-- <input type="email" class="form-control s-form-v3__input" id="sender-emailId" placeholder="* Email"> -->
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone">
+                        	<s:fielderror fieldName="senderMobileNum" class="g-color--red" />
+			  				<s:textfield class="form-control s-form-v3__inpu" name="senderMobileNum" placeholder="* Phone"  />
+                            <!-- <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone"> -->
                         </div>
                     </div>
                     <div class="g-margin-b-10--xs">
-                        <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
+                    	<s:fielderror fieldName="senderMessage" class="g-color--red" />
+			  			<s:textfield class="form-control s-form-v3__inpu" name="senderMessage" placeholder="* Your message" />
+                        <!-- <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea> -->
                     </div>
+                    <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>
+                    
                     <div class="g-text-center--xs">
-                        <button id="recaptcha-contact-us" type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button>
+                    	<s:submit id="recaptcha-contact-us" class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />
+                        <!-- <button id="recaptcha-contact-us" type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button> -->
                     </div>
+                    
+                   
                 </div>
+                
+                </s:form>
                 
                 <p id="contact-us-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
                 

@@ -25,6 +25,8 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	Logger logger = Logger.getLogger(PortfolioAction.class);
 	private SessionMap<String,Object> sessionMap;
 
+	private String totalRateOfGrowth;
+	private String totalCurrentAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
 	private List<PendingOrderDataModel> pendingOrderDataModel;
 	private List<SipDataModel> sipDataModel;
@@ -56,10 +58,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		int i =0;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
 			if ("Total".equals(portfolioDataModelElement.getFundName())) {
-				sessionMap.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
-				logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+sessionMap.getClass().getName());
-				sessionMap.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
-				logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+sessionMap.getClass().getName());
+				setTotalCurrentAmount(portfolioDataModelElement.getCurrentAmount());
+				System.out.println("TOTAL AMOUNT SET TO : "+getTotalCurrentAmount() );
+				
+				//sessionMap.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
+				//logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+sessionMap.getClass().getName());
+				
+				setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
+				System.out.println("TOTAL GROWTH RATE SET TO : "+ getTotalRateOfGrowth() );
+				//sessionMap.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
+				//logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+sessionMap.getClass().getName());
 			}
 			else {
 				dataSet.put(colors[i],portfolioDataModelElement.getCurrentAmount());
@@ -68,7 +76,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			}
 		}
 
-		sessionMap.put("portfolioDataModel", portfolioDataModel);
+		//sessionMap.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
 		
 		sipDataModel = queryProducts.getSipData(sessionMap.get("customerId").toString());
@@ -121,13 +129,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
-			logger.debug("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
+			logger.error("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
 			
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("PortfolioAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
+    		logger.error("PortfolioAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
 			e.printStackTrace();
 			
 			return ERROR;
@@ -197,6 +205,26 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setPendingOrderDataModel(List<PendingOrderDataModel> pendingOrderDataModel) {
 		this.pendingOrderDataModel = pendingOrderDataModel;
+	}
+
+
+	public String getTotalRateOfGrowth() {
+		return totalRateOfGrowth;
+	}
+
+
+	public void setTotalRateOfGrowth(String totalRateOfGrowth) {
+		this.totalRateOfGrowth = totalRateOfGrowth;
+	}
+
+
+	public String getTotalCurrentAmount() {
+		return totalCurrentAmount;
+	}
+
+
+	public void setTotalCurrentAmount(String totalCurrentAmount) {
+		this.totalCurrentAmount = totalCurrentAmount;
 	}
 
 

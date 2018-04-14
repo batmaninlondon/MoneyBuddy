@@ -20,7 +20,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -126,13 +126,18 @@
 		<div class="col-md-3"></div>
 	</div>
 	
+	<div>
+	<s:form action="prepareKycFormAction" method="post" >
+	
 	<div class="row" >
 		<div class="col-md-8">
 			<div class="col-md-1"></div>
 			<div class="col-md-4"><label for="father-name"  class="small-text pull-right">Father's Name</label></div>
 			<div  class="col-md-6" >
+				<s:fielderror fieldName="fatherName" class="g-color--red" />
+			  	<s:textfield class="form-control" id="father-name" placeholder="Enter Father's Name" name="fatherName" style="margin-top:-10px;"/> 
 				  
-				  <input class="form-control" id="father-name" type="text" placeholder="Enter Father's Name" style="margin-top:-10px;">
+				  <!-- <input class="form-control" id="father-name" type="text" placeholder="Enter Father's Name" style="margin-top:-10px;"> -->
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -149,12 +154,15 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="marital-status" style="margin-top:-10px;">
+				<s:select class="form-control"  id="marital-status" style="margin-top:-10px;" 
+					list="#{'Married':'Married', 'Single':'Single'}" 
+					name="maritalStatus" 
+					value="Married" />  
+			  	<%-- <select class="form-control" id="marital-status" style="margin-top:-10px;">
 			        <option value="Single">Single</option>
 			        <option value="Married" selected>Married</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -171,12 +179,15 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="nationality" style="margin-top:-10px;">
+				<s:select class="form-control"  id="nationality" style="margin-top:-10px;" 
+					list="#{'Indian':'Indian', 'Other':'Other'}" 
+					name="nationality" 
+					value="Indian" />
+			  	<%-- <select class="form-control" id="nationality" style="margin-top:-10px;">
 			        <option value="Indian" selected>Indian</option>
 			        <option value="Other">Other</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -193,12 +204,15 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="status" style="margin-top:-10px;">
+				<s:select class="form-control"  id="status" style="margin-top:-10px;" 
+					list="#{'LivInInd':'Living in India', 'NonResInd':'Non Resident Indian (NRI)', 'ForNat':'Foreign National'}" 
+					name="status" 
+					value="LivInInd" />	  
+			  	<%-- <select class="form-control" id="status" style="margin-top:-10px;">
 			        <option value="LivInInd" selected>Living in India</option>
 			        <option value="NonResInd">Non Resident Indian (NRI)</option>
 					<option value="ForNat">Foreign National</option>
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -214,15 +228,19 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
+				<s:select class="form-control"  id="gross-annual-income" style="margin-top:-10px;" 
+					list="#{'LesThaOneLak':'less than 1 lakh', 'OneToFivLak':'1 to 5 lakhs', 'FivToTenLak':'5 to 10 lakhs',
+					'TenToTweFivLak':'10 to 25 lakhs','MorThaTweFivLak':'More Than 25 lakhs' }" 
+					name="grossAnnualIncome" 
+					value="LesThaOneLak" />	  
+			  	<%-- <select class="form-control" id="gross-annual-income" style="margin-top:-10px;">
 			        <option value="LesThaOneLak">less than 1 lakh</option>
 			        <option value="OneToFivLak">1 to 5 lakhs</option>
 			        <option value="FivToTenLak">5 to 10 lakhs</option>
 			        <option value="TenToTweFivLak" selected>10 to 25 lakhs</option>
 			        <option value="MorThaTweFivLak">More Than 25 lakhs</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -239,13 +257,17 @@
 	      	</div>
 
 			<div  class="col-md-6" >
-				  
-			  	<select class="form-control" id="politically-exposed" style="margin-top:-10px;">
+				<s:select class="form-control"  id="politically-exposed" style="margin-top:-10px;" 
+					list="#{'No':'No', 'PoliticExposed':'Politically Exposed Person', 
+					'RelToPoliticExposed':'Related to a Politically Exposed Person' }" 
+					name="politicallyExposed" 
+					value="No" />
+			  	<%-- <select class="form-control" id="politically-exposed" style="margin-top:-10px;">
 			        <option value="No" selected>No</option> 
 			        <option value="PoliticExposed">Politically Exposed Person</option>
 			        <option value="RelToPoliticExposed">Related to a Politically Exposed Person</option>
 	
-		      	</select>
+		      	</select> --%>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -254,14 +276,22 @@
 		</div>
 
 	</div>
-	
-	<div id="button-1" class="row" style="margin-top:25px;">
+	<div class="row" style="margin-top:25px;">
+		<div class="col-md-5"></div>
+		<div class="col-md-2">
+			<s:submit class="center btn btn-primary readmore submit-button-1" value="Continue" />
+		</div>
+		<div class="col-md-5"></div>
+	</div>
+	</s:form>
+	</div>
+<!-- 	<div id="button-1" class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
 			<button type="button" id="submit-button-1" class="btn btn-primary readmore submit-button-1" onClick="prepareKyc();">Continue</button>
 		</div>
 		<div class="col-md-5"></div>
-	</div>
+	</div> -->
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
@@ -281,6 +311,6 @@
         </div>
     </footer>
 
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

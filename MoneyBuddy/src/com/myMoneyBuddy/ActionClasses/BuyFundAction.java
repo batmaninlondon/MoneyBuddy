@@ -86,12 +86,12 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     	}
 
     	catch (Exception e) {	
-			logger.debug("BuyFundAction class - execute method - Caught Exception");
+			logger.error("BuyFundAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("BuyFundAction class - execute method - returned error");
+    	    logger.error("BuyFundAction class - execute method - returned error");
 			return ERROR;
 		}
 

@@ -57,17 +57,17 @@ public class QueryProducts {
 			return hashMap;
 		}
 		catch (NumberFormatException e ) {
-			logger.debug("QueryProducts class - getProductAmountList method - Caught NumberFormatException ");
+			logger.error("QueryProducts class - getProductAmountList method - Caught NumberFormatException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getProductAmountList method - Caught HibernateException ");
+			logger.error("QueryProducts class - getProductAmountList method - Caught HibernateException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getProductAmountList method - Caught Exception ");
+			logger.error("QueryProducts class - getProductAmountList method - Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -251,17 +251,17 @@ public class QueryProducts {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught NumberFormatException");
+			logger.error("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught NumberFormatException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -306,17 +306,17 @@ public class QueryProducts {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught NumberFormatException");
+			logger.error("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught NumberFormatException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -399,17 +399,17 @@ public class QueryProducts {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught NumberFormatException");
+			logger.error("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught NumberFormatException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -477,17 +477,17 @@ public class QueryProducts {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught NumberFormatException");
+			logger.error("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught NumberFormatException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryProducts class - getAllFundsInvestmentDetailsData method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -549,17 +549,17 @@ public class QueryProducts {
 	}
 	catch (NumberFormatException e)
 	{
-		logger.debug("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught NumberFormatException");
+		logger.error("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught NumberFormatException");
 		e.printStackTrace();
 		throw new MoneyBuddyException(e.getMessage(),e);
 	}
 	catch ( HibernateException e ) {
-		logger.debug("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught HibernateException");
+		logger.error("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught HibernateException");
 		e.printStackTrace();
 		throw new MoneyBuddyException(e.getMessage(),e);
 	}
 	catch (Exception e ) {
-		logger.debug("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught Exception");
+		logger.error("QueryProducts class - getInvestmentDetailsData method - customerId - "+customerId+" - Caught Exception");
 		e.printStackTrace();
 		throw new MoneyBuddyException(e.getMessage(),e);
 	}
@@ -591,17 +591,17 @@ public class QueryProducts {
 		}
 		catch (NumberFormatException e)
 		{
-			logger.debug("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught NumberFormatException ");
+			logger.error("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught NumberFormatException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught HibernateException ");
+			logger.error("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught HibernateException ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught Exception ");
+			logger.error("QueryProducts class - getProductName method - fundId - "+fundId+" - Caught Exception ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

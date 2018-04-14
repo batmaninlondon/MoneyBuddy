@@ -38,7 +38,7 @@ public class InsertAdditionalCustomerDetails {
 			
 			AdditionalCustomerDetails tempAdditionalCustomer = new AdditionalCustomerDetails(customerId, fatherName, maritalStatus,
 						nationality, status, grossAnnualIncome,politicallyExposed);
-		    hibernateSession.beginTransaction();
+
 		    hibernateSession.saveOrUpdate(tempAdditionalCustomer);
 		    hibernateSession.getTransaction().commit();
 		    
@@ -47,12 +47,12 @@ public class InsertAdditionalCustomerDetails {
     		logger.debug("InsertAdditionalCustomerDetails class - insertAddCusDetails method - customerId - "+customerId+" - end");
     	}
     	catch ( HibernateException e ) {
-			logger.debug("InsertAdditionalCustomerDetails class - insertAddCusDetails method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("InsertAdditionalCustomerDetails class - insertAddCusDetails method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("InsertAdditionalCustomerDetails class - insertAddCusDetails method - customerId - "+customerId+" - Caught Exception");
+			logger.error("InsertAdditionalCustomerDetails class - insertAddCusDetails method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

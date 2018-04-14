@@ -34,8 +34,7 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        
-        
+
     </head>
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
@@ -81,13 +80,18 @@
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
 								    	<td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
 								    	<td class="center g-font-size-14--xs g-text-right--xs"><s:property value="#customerCartListElement.amount"/></td>
-							    		<td class="center"><button type="button" class=" btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button></td>
+							    		<td class="center">
+							    			<button type="button" class=" btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button>
+							    		</td>
 								    </s:else>
 								</tr>
 							</s:iterator> 
 						</tbody>
 					</table>
 			</div>
+				<s:form  action="deleteCartEntryAction" method="post" name="formDeleteCart">
+			  		<s:hidden id="cart-id-value" name="cartId"></s:hidden>
+  				</s:form>
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
@@ -97,66 +101,21 @@
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn g-color--white g-margin-t-15--xs <s:if test="#session.customerCartList.size() == 1 ">disabled</s:if>" onClick="openCustomerDetailsPage();" style="background-color:black; ">Continue</button>
+	        		<s:form action="redirectAction" method="post">
+	        			<s:if test="#session.customerCartList.size() == 1 ">
+	        				<s:submit class="btn g-color--white g-margin-t-15--xs disabled" value="Continue" style="background-color:black; "/>
+	        			</s:if>
+	        			<s:else>
+	        				<s:submit class="btn g-color--white g-margin-t-15--xs " value="Continue" style="background-color:black; "/>
+	        			</s:else>
+	        		</s:form>
+	                	<%-- <button type="button"  class="btn g-color--white g-margin-t-15--xs <s:if test="#session.customerCartList.size() == 1 ">disabled</s:if>" onClick="openCustomerDetailsPage();" style="background-color:black; ">Continue</button> --%>
 	            </div>
 	       	</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
 	</div>
 	
-	<div class="row ">
-
-
-								<%
-								System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
-						    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
-						    	System.out.println("addCustDetUploaded in session in jsp : "+session.getAttribute("addCustDetUploaded"));
-								if ("NC".equals(session.getAttribute("kycStatus"))) {
-									
-								
-								%>
-							
-									<input type="hidden" id="redirectingPage" value="panCardVerifiction" />
-								<%
-								} else if ("DONE".equals(session.getAttribute("kycStatus"))) {
-									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
-										System.out.println("bankDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="bankDetails" />
-								<%
-									}
-									else {
-										System.out.println("customerDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="customerDetails" />
-								<%
-									}
-								} else  {
-									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
-										if("Y".equals(session.getAttribute("addCustDetUploaded"))) {
-											System.out.println("DownloadKycForm page ");
-								%>
-											<input type="hidden" id="redirectingPage" value="downloadKycForm" />
-								<%
-										}
-										else {
-											System.out.println("addCustomerDetails page ");
-								%>
-											<input type="hidden" id="redirectingPage" value="addCustomerDetails" />
-								<%		
-										}
-									}
-									else {
-										System.out.println("customerDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="customerDetails" />
-								<%
-									}
-									
-								}
-								%>
-				</div>
-
 </body>
 	
 	<script type="text/javascript" src="assets/js/javaScript.js"></script>

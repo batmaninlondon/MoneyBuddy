@@ -179,12 +179,12 @@ public class GenerateKycForm {
     	}
     	catch ( HibernateException e ) {
     		
-			logger.debug("insertCustomerDetails class : insertCustomer method : Caught Exception");
+			logger.error("insertCustomerDetails class : insertCustomer method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("insertCustomerDetails class : insertCustomer method : Caught Exception");
+			logger.error("insertCustomerDetails class : insertCustomer method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

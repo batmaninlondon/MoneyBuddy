@@ -36,7 +36,7 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
        
-                <script type="text/javascript" src="assets/js/javaScript.js"></script>
+                <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script src="assets/js/jquery.js"></script>
@@ -145,7 +145,14 @@
 }
 
 </style>
-
+ 
+	<script>
+	function buyFundHandler(fundId)  
+    {
+			document.getElementById("fund-id-value").value = fundId;
+			document.formBuyFundAction.submit();
+    }
+	</script>
         
     </head>
     <!-- End Head -->
@@ -184,7 +191,7 @@
                                     <li class="s-header-v2__nav-item"><a href="myIndex" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="javascript:getMfData()" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funds<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                        <a href="<s:url action="fetchFundDetailsAction"/>" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funds<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
@@ -195,7 +202,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -302,6 +309,11 @@
 						</div>
 			</s:iterator> 
 		</div>	
+		
+		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+	  		<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+		</s:form>
+  				
 	  	</div>
 	  	</div>   
 	  	<br/>

@@ -4,12 +4,10 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.myMoneyBuddy.DAOClasses.QueryAdditionalCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
@@ -24,6 +22,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -35,19 +34,24 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	private SessionMap<String,Object> sessionMap;
 	private String accountType;
 	private String accountNumber;
-	private String neftCode;
+	private String reAccountNumber;
+	private String ifscCode;
 	private String bankName;
 	private String tranDetailId;
-	private InputStream stream;
+	//private InputStream stream;
+	private String paymentUrl;
 	   
     public String execute()  {
 
     	String CLIENT_HOLDING = "SI"; // Considering Single account
-    	String str = null;
+    	//String str = null;
     	String customerId = null;
     	
     	try {
-    		   
+    		
+    		System.out.println("tranDetailId : "+getTranDetailId()+" and accountNumber : "+getAccountNumber()+" reAccountNumber : "+getReAccountNumber()); 
+    		System.out.println("accountType : "+getAccountType()+" and ifscCode : "+getIfscCode()+" and bankName : "+getBankName());
+    		
     		customerId = sessionMap.get("customerId").toString();
     		
     		String transactionType = null;
@@ -69,9 +73,14 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy = new HashMap<String, Double>();
 
-	    	InsertBankDetails bankDetails = new InsertBankDetails();
-	    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), getAccountNumber(), getNeftCode());
-
+	    	QueryBankDetails queryBankDetails = new QueryBankDetails();
+	    	boolean insertBankDetails = queryBankDetails.sameBankDetailsExists(customerId, getBankName(), getAccountType(), 
+	    										getAccountNumber(), getIfscCode());
+	    	if ( insertBankDetails)  {
+		    	InsertBankDetails bankDetails = new InsertBankDetails();
+		    	DesEncrypter desEncrypter = new DesEncrypter();
+		    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), desEncrypter.encrypt(getAccountNumber()), getIfscCode());
+	    	}
 	    	Trading trading = new Trading();
 	    	
 	    	String bseClientCreatedStatus = customer.getBseClientCreated();
@@ -82,7 +91,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    		CustomerDetails customerDetails = queryCustomerDetails.getCustomerDetails(customerId);
 	    		
 		    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
-		    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getNeftCode(),
+		    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
 		    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
 		    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
 					customerId, customer.getCustomerName(), customer.getEmailId(), customer.getPanCard(), customer.getMobileNumber());
@@ -126,7 +135,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				
 		    	paymentUrl = trading.executeTrade(customerId, productDetailsMapForBuy,
-						"NEW",null,null,null,transactionType,"BUY",0,getAccountNumber(),getBankName(),getNeftCode(),getBankMode(getBankName()),"Y",
+						"NEW",null,null,null,transactionType,"BUY",0,getAccountNumber(),getBankName(),getIfscCode(),getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",null,getTranDetailId(), sessionMap);
 		    	
 			}
@@ -168,7 +177,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				String mandateId = customer.getIsipMandateId();
 
 				if ( "NOT_GENERATED".equals(mandateId))  {
-					String mandateIdResponse = trading.generateMandateId(customerId, amount, "I", getAccountNumber(), getAccountType(), getNeftCode(), 
+					String mandateIdResponse = trading.generateMandateId(customerId, amount, "I", getAccountNumber(), getAccountType(), getIfscCode(), 
 							sipStartDate, sipEndDate);
 					
 					String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 
@@ -188,43 +197,50 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	paymentUrl = trading.executeTrade(customerId, productDetailsMapForBuy,
 						"NEW",sipDate,sipStartDate,sipEndDate,
 						transactionType,"BUY",Integer.parseInt(sipDuration),
-						getAccountNumber(),getBankName(),getNeftCode(),getBankMode(getBankName()),"Y",
+						getAccountNumber(),getBankName(),getIfscCode(),getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
 			}
 
 			if ( !paymentUrl.equals("NotSet")) {
-		        	
-		        	str = "success|"+paymentUrl;
+				
+				/*OpenHtmlToUrl openHtmlToUrl = new OpenHtmlToUrl();
+				openHtmlToUrl.openPage(paymentUrl);*/
+				
+				setPaymentUrl(paymentUrl);
+				
+				return SUCCESS;
+				
 			}
-			else{
-				str = "allOrderFailed";
-
+			else {
+				addActionMessage("allOrderFailed with BSE");
+				return "allOrderFailed";
 			}
 			
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return SUCCESS;
+    	    //stream = new ByteArrayInputStream(str.getBytes());
+    		
 
 		}
 		else {
-			str = "clientCreationFailure";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    		return SUCCESS;
+			/*str = "clientCreationFailure";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+			addActionMessage("clientCreationFailed with BSE");
+    		return "clientCreationFailure";
 		}
 
 		} catch (MoneyBuddyException e) {	
-    		logger.debug("PaymentAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
+    		logger.error("PaymentAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
-			str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+			/*str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("PaymentAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+    		logger.error("PaymentAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
-			str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+			/*str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
 			return ERROR;
 		}
 
@@ -259,14 +275,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		this.accountNumber = accountNumber;
 	}
 
-	public String getNeftCode() {
-		return neftCode;
+	public String getIfscCode() {
+		return ifscCode;
 	}
 
-	public void setNeftCode(String neftCode) {
-		this.neftCode = neftCode;
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
 	}
-
 
 	public String getTranDetailId() {
 		return tranDetailId;
@@ -276,14 +291,30 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		this.tranDetailId = tranDetailId;
 	}
 
-	public InputStream getStream() {
+	public String getPaymentUrl() {
+		return paymentUrl;
+	}
+
+	public void setPaymentUrl(String paymentUrl) {
+		this.paymentUrl = paymentUrl;
+	}
+
+	/*public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 	
+	public String getReAccountNumber() {
+		return reAccountNumber;
+	}
+
+	public void setReAccountNumber(String reAccountNumber) {
+		this.reAccountNumber = reAccountNumber;
+	}
+
 	public String getBankMode(String bankName)  {
 		
 		String bankMode;

@@ -28,9 +28,10 @@ public class InsertCustomerDetails {
 		String customerId = null;
     	try {
     		
-    		QueryCustomer queryCustomer = new QueryCustomer();
-    		customerId = Integer.toString(queryCustomer.getCustomerId(emailId));
+    		
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - start");
+    		
+    		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     		hibernateSession.beginTransaction();
         	
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -42,12 +43,17 @@ public class InsertCustomerDetails {
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();
 
-    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in Customers table");
+    		
     		
     		hibernateSession.close();
     		
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
+    		QueryCustomer queryCustomer = new QueryCustomer();
+    		customerId = Integer.toString(queryCustomer.getCustomerId(emailId));
+    		
+    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in Customers table");
+    		
     		hibernateSession.beginTransaction();
     		
     		Subscriber tempSubscriber = new Subscriber(emailId,"CUSTOMER",frmtdDate);
@@ -80,12 +86,12 @@ public class InsertCustomerDetails {
 
     	}
     	catch ( HibernateException e ) {
-    		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught HibernateException");
+    		logger.error("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught Exception");
+			logger.error("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -123,12 +129,12 @@ public class InsertCustomerDetails {
 			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - end");
 		}
 		catch ( HibernateException e ) {
-			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - Caught HibernateException");
+			logger.error("InsertCustomerDetails class - updateVerificationStatus method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - Caught Exception");
+			logger.error("InsertCustomerDetails class - updateVerificationStatus method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

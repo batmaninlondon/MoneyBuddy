@@ -24,7 +24,7 @@ public class UploadCustomerNavAction extends ActionSupport {
     private String folioNum;
     private String navValue;
     private String unitsPurchased;
-    private InputStream stream;
+    //private InputStream stream;
 
     public String execute() {
     	
@@ -36,6 +36,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 
     		System.out.println("UploadCustomerNavAction class : execute method : called ");
     		
+    		System.out.println("transactionFolioNum : "+getFolioNum()+" : unitPrice : "+getNavValue()+" : quantity : "+getUnitsPurchased()+" : bseOrderId : "+getBseOrderId());
     		hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
 					+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
@@ -45,6 +46,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 			query.setParameter("quantity", getUnitsPurchased());
 			query.setParameter("bseOrderId", getBseOrderId());
 			query.setParameter("transactionStatus", "8");
+			
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
 			hibernateSession.getTransaction().commit();
@@ -89,8 +91,8 @@ public class UploadCustomerNavAction extends ActionSupport {
 			}
 	    	
 	    	System.out.println(" Action complete !!");
-	    	String str = "success";
-		    stream = new ByteArrayInputStream(str.getBytes());
+	    	/*String str = "success";
+		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned success");
 	    	logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - end");
 	    	
@@ -98,12 +100,12 @@ public class UploadCustomerNavAction extends ActionSupport {
 	    	
     	}
     	catch (Exception e) {	
-    		logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - Caught Exception");
+    		logger.error("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - Caught Exception");
     		e.printStackTrace();
     		
-    		String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned error");
+    		/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned error");
     	    
     		return ERROR;
 		}
@@ -144,7 +146,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 	public void setUnitsPurchased(String unitsPurchased) {
 		this.unitsPurchased = unitsPurchased;
 	}
-
+/*
 
 	public InputStream getStream() {
 		return stream;
@@ -152,7 +154,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 	
 
 }

@@ -68,7 +68,7 @@ public class PopulateAdminDashboardDataAction extends ActionSupport implements S
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-			logger.debug("PopulateAdminDashboardDataAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
+			logger.error("PopulateAdminDashboardDataAction class : execute method : Caught Exception for session id : "+sessionMap.getClass().getName());
 			e.printStackTrace();
 			
 			String str = "error";

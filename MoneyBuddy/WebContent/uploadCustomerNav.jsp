@@ -21,7 +21,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -40,26 +40,6 @@
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -127,31 +107,49 @@
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
 							<%-- <s:set var="pendingNavOrders" <s:property value="pendingNavOrders"/> /> --%>
+							<s:form  action="uploadCustomerNavAction" method="post" name="formUploadNav" namespace="/" >
 								<s:iterator value="pendingNavOrders" var="pendingNavOrdersElement">
 									<tr>
 									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
+			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
 									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.key"/>" readonly>
 									    </td>
 									    
 									    <td class="center g-font-size-14--xs">
 									    	<s:if test="#pendingNavOrdersElement.value == ''  || #pendingNavOrdersElement.value == null ">
-									    		<input class="form-control" id="folio-num" type="text" placeholder="Enter Folio Num" >
+									    		<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+											  	<%-- <s:textfield class="form-control" id="folio-num" placeholder="Enter Folio Num"  /> --%>
+											  	<input class="form-control" id="folio-num" type="text" placeholder="Enter Folio Num" >
 									    	</s:if>
 									    	<s:else>
+									    		<s:set var="folNum" value="#pendingNavOrdersElement.value" />
+									    		<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+											  	<%-- <s:textfield class="form-control" id="folio-num" placeholder="Enter Folio Num" value="#FolNum" /> --%>
 									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.value"/>" readonly>
 									    	</s:else>
 									    </td>
 									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+										  	<%-- <s:textfield class="form-control" id="units-purchased" placeholder="Enter Units" /> --%>
 									    	<input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" >
 									    </td>
 									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+										  	<%-- <s:textfield class="form-control" id="nav-value" placeholder="Enter NAV" /> --%>
 									    	<input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" >
 									    </td>
 									    <td class="center g-font-size-14--xs">
-									    	<button type="button" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav(this);">Upload NAV</button>
+									    	<s:submit class="btn btn-primary readmore submit-button-1" value="Upload NAV"  onCLick="return uploadCutsomerNav(this)" />
+									    	<!-- <button type="button" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav(this);">Upload NAV</button> -->
 									    </td>
 									</tr>
 								</s:iterator>
+								<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
+								<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
+								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
+								<s:hidden id="action-nav-value" name="navValue"></s:hidden>
+								</s:form>
 							 
 						</tbody>
 					</table>
@@ -201,6 +199,6 @@
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

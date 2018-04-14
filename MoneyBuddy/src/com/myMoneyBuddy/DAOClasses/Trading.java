@@ -60,9 +60,8 @@ public class Trading {
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
-
-			logger.debug("Trading class : createClient method : start");
 			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - start");
 			hibernateSession.beginTransaction();
 			
 			Properties clientProperties = new Properties();
@@ -70,10 +69,14 @@ public class Trading {
 
 			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
 			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded clientProperties file.");
+			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
@@ -100,20 +103,8 @@ public class Trading {
 			occupation = query.uniqueResult().toString();
 			hibernateSession.getTransaction().commit();
 			
-			
-			// Savita Wadhwani - Self Comment - End
-			
-
-			
-			// Savita Wadhwani - Self Comment - Start
-			// Check if can convert dob from one format to another with some ready made function 
-			
 			dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
 			System.out.println("dob : "+dob);
-			
-			// Savita Wadhwani - Self Comment - End
-			
-
 			
 			String[] clientDetailsArray = {customerId,clientHolding,taxStatus,occupation,clientAppName1,clientProperties.getProperty("CLIENT_APPNAME2"),
 					clientProperties.getProperty("CLIENT_APPNAME3"),dob,clientGender,clientProperties.getProperty("CLIENT_GUARDIAN"),clientPan,
@@ -139,6 +130,8 @@ public class Trading {
 
 			clientDetails = String.join("|",clientDetailsArray);
 
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array created ");
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array - "+clientDetails);
 			System.out.println("clientDetails : "+clientDetails);
 
 			getPasswordResp = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
@@ -149,22 +142,26 @@ public class Trading {
 				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
 			}
 
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - fetched encrypted password from iStarMFWebService API ");
+			
 			passwordStartMf = resultsStarMF[1];
 
 			ucc = iStarMFWebService.mfapi("02",configProperties.getProperty("USER_ID"),passwordStartMf,clientDetails);
 
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - client created through iStarMFWebService API on BSE");
+			
 			System.out.println("iStarMFWebService - mfapi response ucc : "+ucc);
 
-			logger.debug("Trading class : createClient method : end");
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - end");
 			
 			return ucc;
 
 		}catch (IOException e) {
-			logger.debug("Trading class : createClient method : Caught IOException for customerId : "+customerId);
+			logger.error("Trading class - createClient method - customerId - "+customerId+" - Caught IOException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.debug("Trading class : createClient method : Caught Exception for customerId : "+customerId);
+			logger.error("Trading class - createClient method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
@@ -180,17 +177,19 @@ public class Trading {
 
 		try {
 			
+			logger.debug("Trading class - generateMandateId method - customerId - "+customerId+" - start");
+			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 			
+			logger.debug("Trading class - generateMandateId method - customerId - "+customerId+" - Loaded configProperties file.");
+			
 			String PASSWORD_STARMF;
 
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
-
-
 
 			String frmtdStartDateForMandateId = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
 			String frmtdEndDateForMandateId = sipEndDate.substring(3,5)+"/"+sipEndDate.substring(0,2)+"/"+sipEndDate.substring(6,10);
@@ -207,7 +206,7 @@ public class Trading {
 				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
 			}
 
-
+			logger.debug("Trading class - generateMandateId method - customerId - "+customerId+" - fetched encrypted password from iStarMFWebService API ");
 			System.out.println("passwordStarMF : "+passwordStarMF);
 
 			PASSWORD_STARMF = resultsStarMF[1];
@@ -215,16 +214,18 @@ public class Trading {
 			String mandateIdResponse = iStarMFWebService.mfapi("06",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,mandateIdDetails);
 
 			System.out.println("mandateIdResponse : "+mandateIdResponse);
+			logger.debug("Trading class - generateMandateId method - customerId - "+customerId+" - generated mandateId - "+mandateIdResponse);
 
-
+			logger.debug("Trading class - generateMandateId method - customerId - "+customerId+" - end");
+			
 			return mandateIdResponse;
 
 		}catch (IOException e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.error("Trading class - generateMandateId method - customerId - "+customerId+" - Caught IOException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.error("Trading class - generateMandateId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
@@ -236,9 +237,6 @@ public class Trading {
 			String transactionType, String buySell, int years, String accountNum, String bankId, String ifsc, String bankMode, 
 			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  Map<String, Object> sessionMap) throws MoneyBuddyException {
 
-		logger.debug("Trading class : executeTrade method : start");
-		System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
-		System.out.println("Trading class : executeTade method : years : "+years);
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
@@ -252,6 +250,11 @@ public class Trading {
 
 		try {
 			
+			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - start");
+			
+			System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
+			System.out.println("Trading class : executeTade method : years : "+years);
+			
 			orderDataModel = new LinkedList<OrderDataModel>();
 
 			for ( Double currentAmount : productDetailsMap.values())  {
@@ -264,11 +267,15 @@ public class Trading {
 
 			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
 			
+			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Loaded clientProperties file.");
+			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 
+			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Loaded configProperties file.");
+			
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
 			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
 			String passwordMFOrder;
@@ -297,7 +304,8 @@ public class Trading {
 			
 			if ("NotSet".equals(tranDetailId))  {
 				
-				System.out.println("Inside else case : tranDetailId is "+tranDetailId);
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for fresh order start");
+				System.out.println("Inside if case : tranDetailId is "+tranDetailId);
 			
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = new Date();
@@ -368,7 +376,7 @@ public class Trading {
 
 				hibernateSession.save(tempTransactionDetail);
 
-				logger.debug("Trading class : executeTrade method : inserted data to TransactionDetails table for customerId : "+customerId);
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - inserted new row in TransactionDetails table with transactionId - "+transactionId);
 
 				hibernateSession.getTransaction().commit();
 				
@@ -382,6 +390,8 @@ public class Trading {
 				
 				hibernateSession.getTransaction().commit();
 
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - deleted row from CustomerCart table for productId - "+currentProductId);
+				
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 				
 				//transactionDetailIdList.add(transactionDetailId);
@@ -403,12 +413,16 @@ public class Trading {
 	
 					hibernateSession.save(tempSipDetail);
 					hibernateSession.getTransaction().commit();
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - inserted new row in SipDetails table");
 				}
 				
-				dateFormat = new SimpleDateFormat("HH:mm:ss");
+				// Commented dbf specific code - start 
+				
+				/*dateFormat = new SimpleDateFormat("HH:mm:ss");
 				Date CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
 				
-				Date closingTime = dateFormat.parse("14:30:00");
+				String closingTimeStr = configProperties.getProperty("CLOSING_TIME");
+				Date closingTime = dateFormat.parse(closingTimeStr);
 
 				String frmtdDateForDBF;
 				if (CurrentTime.after(closingTime))
@@ -419,8 +433,10 @@ public class Trading {
 				else
 				{
 					frmtdDateForDBF = dateFormat.format(dateForDbf);
-				}
+				}*/
 
+				// Commented dbf specific code - end
+				
 				passwordMFOrder = mfOrderEntry.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
 				resultsMFOrder = passwordMFOrder.split("\\|");
@@ -428,6 +444,8 @@ public class Trading {
 
 				PASSWORD_MFORDER = resultsMFOrder[1];
 
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from mfOrderEntry API ");
+				
 				amcCode = secondaryFundDetails.getAmcCode();
 				
 				if (folioNum== null)
@@ -451,6 +469,9 @@ public class Trading {
 							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
 							clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
 							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
+				
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - "+buySell+" -order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
+					
 				}
 				else {
 
@@ -472,6 +493,9 @@ public class Trading {
 							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
 							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
 							clientProperties.getProperty("PARAM_3"));
+					
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - new Sip start order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
+					
 				}
 
 				resultsEntryParam = entryParam.split("\\|");
@@ -480,28 +504,31 @@ public class Trading {
 					System.out.println("resultsEntryParam : "+i+" : " +resultsEntryParam[i]);
 				}
 				
+				String bseOrderId;
 				hibernateSession.beginTransaction();
 				query = hibernateSession.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
-				if (transactionType == "UPFRONT")
-					query.setParameter("bseOrderId", resultsEntryParam[2]);
+				if (transactionType == "UPFRONT") 
+					bseOrderId = resultsEntryParam[2].toString();
 				else 
-					query.setParameter("bseOrderId", resultsEntryParam[5]);
+					bseOrderId = resultsEntryParam[5].toString();
+				query.setParameter("bseOrderId", bseOrderId);
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - bseOrderId - "+bseOrderId+" recived from BSE for transactionDetailId - "+transactionDetailId);
+			
 
-				if ( resultsEntryParam[7].equals("1") ) 
+				if ( resultsEntryParam[7].equals("1") ) {
 					query.setParameter("transactionStatus", "2");
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - order failed with BSE for transactionDetailId - "+transactionDetailId);
+				}
 				else  
 				{
-					if (transactionType == "UPFRONT") {
-						orderNums.getString().add(resultsEntryParam[2].toString());
-						System.out.println(resultsEntryParam[2].toString()+" added in orderNums");
-					}
-					else {
-						orderNums.getString().add(resultsEntryParam[5].toString());
-						System.out.println(resultsEntryParam[5].toString()+" added in orderNums");
-					}
+					orderNums.getString().add(bseOrderId);
+					System.out.println(bseOrderId+" added in orderNums");
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - amount - "+Double.toString(productDetailsMap.get(currentProductId))+" for bseOrderId - "+bseOrderId+"added in orderNums hashMap for payment ");
+
 					totalPaymentAmount += productDetailsMap.get(currentProductId);
 					query.setParameter("transactionStatus", "3");
 					allOrderFailed = false;
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - order successfully placed to BSE for transactionDetailId - "+transactionDetailId);
 				}
 
 				query.setParameter("uniqueReferenceNumber", resultsEntryParam[1]);
@@ -511,8 +538,6 @@ public class Trading {
 				int updateResult = query.executeUpdate();
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				hibernateSession.getTransaction().commit();
-
-				logger.debug("Trading class : executeTrade method : inserted data to CustomerPortfolio table for customerId : "+customerId);
 
 			}
 
@@ -541,6 +566,8 @@ public class Trading {
 				
 				PASSWORD_STARMF = passwordStarMFPaymentGateway.getResponseString().getValue();
 				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
+				
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from passwordStarMFPaymentGateway API ");
 
 				Iterator it = orderNums.getString().iterator();
 				
@@ -564,6 +591,8 @@ public class Trading {
 				System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());
 				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
 
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"initiated");
+				
 				String[] resultsPaymentGateway = paymentGateway.toString().split("\\|");
 
 				for (int i = 0 ; i <resultsPaymentGateway.length ; i++ )   {
@@ -580,7 +609,9 @@ public class Trading {
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
 					query.setParameter("transactionId", transactionId);
 					int updateResult = query.executeUpdate();
+					System.out.println("Payment gateway failure reason : "+paymentUrl);
 					
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"failed with paymentGateway");
 				}
 				else {
 					
@@ -617,6 +648,10 @@ public class Trading {
 					result = query.executeUpdate();
 	
 					hibernateSession.getTransaction().commit();
+					
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - subscriberType changed to INVESTOR");
+				
+					
 				}
 
 			}
@@ -682,11 +717,13 @@ public class Trading {
 			
 				sessionMap.put("orderDataModel", orderDataModel);
 		    	
-		    	logger.debug("Trading class : executeTrade method : stored orderDataModel : in session id : "+sessionMap.getClass().getName());
-			
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - stored orderDataModel in sessionMap");
+		    	
+		    	logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for fresh order end");
+		    	
 			}
 			else {
-				
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for re-try payment for existing failed order - start");
 				System.out.println("Inside else case : tranDetailId is "+tranDetailId);
 				
 				
@@ -718,6 +755,8 @@ public class Trading {
 				PASSWORD_STARMF = passwordStarMFPaymentGateway.getResponseString().getValue();
 				System.out.println("Response String (Encrypted Password) : "+PASSWORD_STARMF);
 
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from passwordStarMFPaymentGateway API ");
+				
 				Iterator it = orderNums.getString().iterator();
 				
 				while(it.hasNext())  {
@@ -751,11 +790,14 @@ public class Trading {
 				String responseStatus = paymentGateway.getStatus().getValue();
 				System.out.println("responseStatus : "+responseStatus);
 				
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"initiated");
+				
 				if ("101".equals(responseStatus))  {
 					hibernateSession.beginTransaction();
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
 					query.setParameter("transactionId", tranDetailId);
 					int updateResult = query.executeUpdate();
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"failed with paymentGateway");
 					
 				}
 				else {
@@ -792,20 +834,23 @@ public class Trading {
 					result = query.executeUpdate();
 	
 					hibernateSession.getTransaction().commit();
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - subscriberType changed to INVESTOR");
 				}
 
-	
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for re-try payment for existing failed order - end");
 			}
 			
-			logger.debug("Trading class : executeTrade method : end");
+			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - user will be re-directed to payment page");
+			
+			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - end");
 
 			return paymentUrl;
 		} catch (NumberFormatException | HibernateException e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.error("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Caught some Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.debug("Trading class : executeTrade method : Caught exception for customerId : "+customerId);
+			logger.error("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
@@ -818,15 +863,13 @@ public class Trading {
 
 	public void checkPaymentStatus(String customerId) throws MoneyBuddyException {
 
-		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		/*Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		Query query;
 		List<Object[]> transactionDetails;
 		List<String> customerIds;
 		PaymentDetails tempPaymentDetail;
 		HashMap<String,String> successfulPayment = new HashMap<String, String>();
 		HashMap<String,String> pendingPayment = new HashMap<String, String>();
-
-		System.out.println("Trading class : checkPaymentStatus method - start ");
 
 		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
 		IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
@@ -837,9 +880,10 @@ public class Trading {
 		String paymentStatusDetails;
 
 		try {
+			
+			logger.debug("Trading class - checkPaymentStatus method - customerId - "+customerId+" - start");
 
-			logger.debug("Trading class : checkPaymentStatus method : start");
-
+			System.out.println("Trading class : checkPaymentStatus method - start ");
 
 			hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("select distinct(customerId) from Customers");
@@ -977,7 +1021,7 @@ public class Trading {
 								hibernateSession.getTransaction().commit();
 
 								hibernateSession.beginTransaction();
-								result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+								Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
 								String fundName = null;
 
 								if (result != null) 
@@ -1048,18 +1092,18 @@ public class Trading {
 			logger.debug("Trading class : checkPaymentStatus method : end");
 
 		} catch (NumberFormatException | HibernateException e) {
-			logger.debug("Trading class : checkPaymentStatus method : Caught exception  ");
+			logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.debug("Trading class : checkPaymentStatus method : Caught exception  ");
+			logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}
 		finally {
 			if(hibernateSession !=null )
 					hibernateSession.close();
-		}
+		}*/
 
 	}
 

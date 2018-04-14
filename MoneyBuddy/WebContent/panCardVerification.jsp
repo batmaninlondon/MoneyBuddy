@@ -37,7 +37,7 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script src="assets/js/jquery.js"></script>
@@ -85,21 +85,26 @@
 						
 	            </div>
 	       	</div>
+	       	
+	       	<s:form action="panCardVerificationAction" method="post" >
 	       	<div class="row">
 				<label for="pancard-number" style="font-family:Aparajita;font-size:25px;color:black;" >&nbsp;&nbsp;&nbsp;PAN </label>
 			</div>
 			<div  class="row" >
-				<div class="col-md-3 col-xs-3">  
-				  <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;">
+				<div class="col-md-3 col-xs-3">
+					<s:fielderror fieldName="panCard" class="g-color--red" />
+			  		<s:textfield class="form-control" id="pancard-number" placeholder="Enter Pancard Number" name="panCard" style="margin-top:-10px;" /> 
+					<!-- <input class="form-control" id="pancard-number" type="text" placeholder="Enter Pancard Number" style="margin-top:-10px;"> -->
 			  	</div>
 			</div>
 			<div  class="row" >
 				<p id="panCardStats"></p>
 			</div>
 			<div  class="row" >
-				
-				&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onClick="verifyPancard();" style="padding:5px 15px 5px 15px;">Verify</button>
+				&nbsp;&nbsp;&nbsp;<s:submit class="btn btn-primary" value="Verify" style="padding:5px 15px 5px 15px;"/>
+				<!-- &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onClick="verifyPancard();" style="padding:5px 15px 5px 15px;">Verify</button> -->
 			</div>
+			</s:form>
 	     </div>
 	     <div class="col-md-1 col-xs-1" style="height:500px"></div>
 	</div>

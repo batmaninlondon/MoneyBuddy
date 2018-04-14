@@ -42,7 +42,7 @@
         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
         
         
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script src="assets/js/jquery.js"></script>
@@ -103,7 +103,7 @@
 	<div class="row g-height-auto--lg" >
 		<div class="col-md-1 col-xs-1" ></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--white " >
-		<p>MIn SIP amount <s:property value="#session.minSipAmount"/></p>
+		<%-- <p>MIn SIP amount <s:property value="#session.minSipAmount"/></p> --%>
 			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
@@ -131,72 +131,6 @@
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
-	
-	
-	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
-	    	<div class="profile">
-	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
-	                	<button type="button"  class="btn " onClick="openCustomerDetailsPage();" style="background-color:black; ">Pay Now</button>
-	            </div>
-	       	</div>
-	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
-	</div>
-	
-	<div class="row ">
-
-
-								<%
-								System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
-						    	System.out.println("custDetUploaded in session in jsp : "+session.getAttribute("custDetUploaded"));
-						    	System.out.println("addCustDetUploaded in session in jsp : "+session.getAttribute("addCustDetUploaded"));
-								if ("NC".equals(session.getAttribute("kycStatus"))) {
-									
-								
-								%>
-							
-									<input type="hidden" id="redirectingPage" value="panCardVerifiction" />
-								<%
-								} else if ("DONE".equals(session.getAttribute("kycStatus"))) {
-									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
-										System.out.println("bankDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="bankDetails" />
-								<%
-									}
-									else {
-										System.out.println("customerDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="customerDetails" />
-								<%
-									}
-								} else  {
-									if ("Y".equals(session.getAttribute("custDetUploaded")))  {
-										if("Y".equals(session.getAttribute("addCustDetUploaded"))) {
-											System.out.println("DownloadKycForm page ");
-								%>
-											<input type="hidden" id="redirectingPage" value="downloadKycForm" />
-								<%
-										}
-										else {
-											System.out.println("addCustomerDetails page ");
-								%>
-											<input type="hidden" id="redirectingPage" value="addCustomerDetails" />
-								<%		
-										}
-									}
-									else {
-										System.out.println("customerDetails page ");
-								%>
-										<input type="hidden" id="redirectingPage" value="customerDetails" />
-								<%
-									}
-									
-								}
-								%>
-				</div>
 
 </body>
 	

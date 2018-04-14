@@ -37,12 +37,12 @@ public class UpdateOldPassword {
 			
 		}
 		catch ( HibernateException e ) {
-			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateOldPassword class - updateOldPassword method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

@@ -5,6 +5,7 @@
 <%@ page language="java" import="java.io.File" %>
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -54,19 +55,28 @@
     
     %>
       var recaptchaSubscriber;
+      var recaptchaContactUs;
       
       var myCallBack = function() {
-        //Render the recaptcha1 on the element with ID "recaptcha1"
+
+        //Render the recaptchaSubscriber on the element with ID "recaptcha-subscriber"
         recaptchaSubscriber = grecaptcha.render('recaptcha-subscriber', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
           'size' : 'invisible',
-          'callback' : saveSubscriber
+          'callback' : submitSubscriber
         });
-        
+      
       };
+  
     </script>
     
-   
+   	<script>
+	function buyFundHandler(fundId)  
+    {
+			document.getElementById("fund-id-value").value = fundId;
+			document.formBuyFundAction.submit();
+    }
+	</script>
         
     </head>
     <!-- End Head -->
@@ -108,7 +118,7 @@
                                         <a href="nhome.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="javascript:getMfData()" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
@@ -118,7 +128,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="javascript:setDashboardData()" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard.jsp" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -147,7 +157,7 @@
                              <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
                         </div>
 						<div class="g-text-center--xs">
-                       		<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       		<a  href="<s:url action="fetchFundDetailsAction"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
                        		<br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
                		   </div>
                     </div>
@@ -161,7 +171,7 @@
                                 <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you to grow your money so that you can focus on what matters most to you</h2>
                             </div>
                             <div class="g-text-center--xs">
-                            	<button  onclick="javascript:getMfData()" class="text-uppercase s-btn button2 s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT1</button>
+                            	<button  onclick="<s:url action="fetchFundDetailsAction"/>" class="text-uppercase s-btn button2 s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT1</button>
                        			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
                		  		</div>
                         </div>
@@ -176,7 +186,7 @@
                                 <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >The best thing money can buy is .....money</h2>
                             </div>
                             <div class="g-text-center--xs">
-                       			<a  href="javascript:getMfData()" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       			<a  href="<s:url action="fetchFundDetailsAction"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
                        			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
                		  		</div>
                         </div>
@@ -190,7 +200,7 @@
             <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
             <!-- End Arrows -->
             
-            <a href="javascript:getMfData()"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+            <a href="<s:url action="fetchFundDetailsAction"/>"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
                 <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
                 <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
             </a>
@@ -288,6 +298,10 @@
 								</figure>
 								
 							</div>
+							<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+	  							<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+							</s:form>
+							
 						</div>
 						<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
 							<div  class="  g-line-height--normal  ">
@@ -587,10 +601,19 @@
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
                         <div class="input-group">
-                            <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email">
-                            <span class="input-group-btn">
-                                <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button>
-                            </span>
+                        	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
+	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
+	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
+			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
+			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->
+	                            <span class="input-group-btn">
+	                            	<s:submit id="recaptcha-subscriber" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" value="Submit"></s:submit>
+	                                <!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button> -->
+	                            </span>
+	                            
+	                            <s:actionmessage class="g-font-size-32--xs g-font-size-36--md g-color--white"/> 
+	                            
+                            </s:form>
                         </div>
                         <br/><br/>
                         <p id="subscription-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
@@ -605,26 +628,31 @@
             <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">
                 <div class="row">
                     <!-- Form -->
-                    <div class="col-md-8 js__form-eqaul-height-v1">
+                    <div class="col-md-8 js__form-eqaul-height-v1 ">
                         <div class="g-padding-x-40--xs g-padding-y-50--xs">
                             <h2 class="g-font-size-24--xs g-color--primary ">Have a question? Write to us</h2>
-                            <div>
-                                <div class="row g-margin-b-30--xs ">
-                                    <div class="col-sm-6  g-margin-b-0--md">
-                                        <input type="text" class="form-control s-form-v4__input g-padding-l-0--xs" placeholder="* Full Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control s-form-v4__input g-padding-l-0--xs" placeholder="* Phone Number">
-                                    </div>
-                                </div>
-                                
-                                <div class="g-margin-b-50--xs">
-                                    <textarea class="form-control s-form-v4__input g-padding-l-0--xs" rows="4" placeholder="* What is your query?"></textarea>
-                                </div>
-                                <div class="g-text-center--xs">
-                                   <!--  <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-70--xs ">Submit</button> -->
-                                </div>
-                            </div>
+	                        <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md g-bg-color--primary" >
+			                    <div class="g-margin-b-20--xs g-color--primary">
+			                        <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name">
+			                    </div>
+			                    <div class="row g-row-col-5 g-margin-b-50--xs g-color--primary">
+			                        <div class="g-color--primary col-sm-6 g-margin-b-30--xs g-margin-b-0--md">
+			                            <input type="email" class="g-color--primary form-control s-form-v3__input" id="sender-emailId" placeholder="* Email">
+			                        </div>
+			                        <div class="col-sm-6">
+			                            <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone">
+			                        </div>
+			                    </div>
+			                    <div class="g-margin-b-10--xs">
+			                        <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
+			                    </div>
+			                    <div class="g-text-center--xs">
+			                        <button id="recaptcha-contact-us" type="submit" class="g-recaptcha g-bg-color--primary g-color--white text-uppercase s-btn s-btn--md g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button>
+			                    </div>
+	                		</div>
+	                		<div class ="center-block g-width-500--sm g-width-550--md g-bg-color--primary">
+	                			<p id="contact-us-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
+                        	</div>
                         </div>
                     </div>
                     <!-- End Form -->
@@ -777,12 +805,12 @@
          
          </script>
          
-     <script>
+<%--      <script>
        function onSubmit(token) {
          alert(token);
          saveSubscriber(token);
        }
-     </script> 
+     </script>  --%>
          
         
     <!-- End Body -->

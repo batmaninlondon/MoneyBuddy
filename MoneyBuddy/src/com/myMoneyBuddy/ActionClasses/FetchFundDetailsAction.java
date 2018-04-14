@@ -46,12 +46,12 @@ public class FetchFundDetailsAction extends ActionSupport implements SessionAwar
 			return SUCCESS;
 		} 
     	catch (Exception e) {	
-    		logger.debug("FetchFundDetailsAction class - execute method - Caught Exception");
+    		logger.error("FetchFundDetailsAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
 			String str = "error";
     	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("FetchFundDetailsAction class - execute method - returned error");
+    	    logger.error("FetchFundDetailsAction class - execute method - returned error");
     	    
 			return ERROR;
 		} 

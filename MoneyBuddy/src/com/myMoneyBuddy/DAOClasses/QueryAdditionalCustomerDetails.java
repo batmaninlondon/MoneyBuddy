@@ -36,12 +36,12 @@ public class QueryAdditionalCustomerDetails {
 			return addCusDetails;
 		}
 		catch ( HibernateException e ) {
-			logger.debug("QueryAdditionalCustomerDetails class - getAddCusDetails method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("QueryAdditionalCustomerDetails class - getAddCusDetails method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.debug("QueryAdditionalCustomerDetails class - getAddCusDetails method - customerId - "+customerId+" - Caught Exception");
+			logger.error("QueryAdditionalCustomerDetails class - getAddCusDetails method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

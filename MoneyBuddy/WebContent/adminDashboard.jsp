@@ -19,7 +19,7 @@
     <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">
     <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-	<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
@@ -38,28 +38,8 @@
 
 </head>
 
-<body class="homepage bg-warning" onload="setAdminDashboardData();">
+<body class="homepage bg-warning">
    <header id="header">
-<!--         <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-4">
-                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +91 9971648736</p></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                       </div>
-                    </div>
-                </div>
-            </div>/.container
-        </div>/.top-bar -->
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -106,16 +86,22 @@
 		<div class="col-md-6">
 			<h2 style="font-family:Aparajita;font-size:35px;"><b>Admin Dashboard</b></h2>
 		</div>
-		<div class="col-md-3">
-		
-			<a href="<s:url action="pendingNavsAction"/>"><button type="button"  class="btn g-color--white g-margin-t-15--xs ">UploadCustomerNav</button></a>
-		
-		</div>
+		<div class="col-md-3"></div>
 	</div>	
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<a href="<s:url action="pendingNavsAction"/>">
+				<button type="button"  class="btn g-color--white g-margin-t-15--xs ">UploadCustomerNav</button>
+			</a>
+		</div>
+		<div class="col-md-3"></div>
+	
+	</div>
 
-		<div  id="invested-fund-list" class="row" style="margin-top:20px;padding-left:70px;padding-right:70px;">
+<%-- 		<div  id="invested-fund-list" class="row" style="margin-top:20px;padding-left:70px;padding-right:70px;">
 			<div class="col-md-1"></div>
-			<div id = "investment-fund-list-data" class ="col-md-10">
+			<div  class ="col-md-10">
 			<table class="table table-bordered" >
 				<thead class="table-head">
 					<tr>
@@ -129,12 +115,12 @@
 				<tbody class="table-body" >
 
 					 <s:iterator value="#session.dbfStatusDataModel" var="dbfStatusDataModelElement">
-					<%--  <s:property value="#session.dbfStatusDataModel.size"/> --%>
+					 <s:property value="#session.dbfStatusDataModel.size"/>
 						<tr >
 						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfStatusDataModelElement.dbfDataDate"/></td>
 						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfStatusDataModelElement.rta"/></td>
 						    <td class="center date" style="padding:0px;vertical-align: middle;"><s:property value="#dbfStatusDataModelElement.dbfFileType"/></td>
-						    <%-- <td class="center"><s:property value="#productListElement.value"/></td> --%>
+						    <td class="center"><s:property value="#productListElement.value"/></td>
 						    <td class="center" style="padding:0px;">
 						    	<button type="button" id="submit-button-1" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="downloadDbfFile(this);">Download DBF File</button>
 						    </td>
@@ -142,7 +128,7 @@
 						    	<button type="button" id="submit-button-2" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="changeUploadStatus(this);">Update Uploaded Status</button>
 						    </td>
 						</tr>
-						<%-- <tr >
+						<tr >
 						    <td class="center" style="padding:0px;vertical-align: middle;">2 Sep 17</td>
 						    <td class="center"><s:property value="#productListElement.value"/></td>
 						    <td class="center" style="padding:0px;">
@@ -151,13 +137,13 @@
 						    <td class="center" style="padding:0px;">
 						    	<button type="button" id="submit-button-2" class="btn btn-info btn-lg submit-button-1 sharp raised " onClick="">Update Uploaded Status</button>
 						    </td>
-						</tr> --%>
+						</tr>
 					</s:iterator>
 				</tbody>
    			</table>
    			</div>
 			<div class="col-md-1"></div>
-		</div>
+		</div> --%>
    </section>
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
@@ -181,6 +167,6 @@
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 </body>
 </html>

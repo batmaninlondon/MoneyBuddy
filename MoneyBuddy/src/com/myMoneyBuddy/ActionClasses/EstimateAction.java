@@ -41,7 +41,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     String regexDecimal = "(\\d+(?:\\.\\d+)?)";
     Pattern patternDecimal = Pattern.compile(regexDecimal);
     
-    private InputStream stream;
+    //private InputStream stream;
 
     public String execute() {
 
@@ -172,6 +172,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
  
 	   	    }
 	   	    it = productList.entrySet().iterator();
+	   	    
 		   	 while (it.hasNext()) {
 		   		Map.Entry pair = (Map.Entry)it.next();
 		   		System.out.println(" Entry in productList : "+pair.getKey() + " = " + pair.getValue()); 
@@ -180,29 +181,38 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
    	 	
 	   	 	logger.debug("EstimateAction class - execute method - stored productList in sessionMap");
 	   	 	
-			String str = "success";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+			/*String str = "success";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
     	    
     	    logger.debug("EstimateAction class - execute method - returned success");
 			logger.debug("EstimateAction class - execute method - end");
-			return SUCCESS;
+			
+			System.out.println("EstimateAction : execute method : transactionType : "+getTransactionType());
+			
+			if ("SIP".equals(getTransactionType()))  {
+				return "SIP";
+			}
+			else {
+				return "UPFRONT";
+			}
+    	
 		} catch (MoneyBuddyException e) {	
-			logger.debug("EstimateAction class - execute method - Caught MoneyBuddyException");
+			logger.error("EstimateAction class - execute method - Caught MoneyBuddyException");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("EstimateAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("EstimateAction class - execute method - returned error");
     	    
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.debug("EstimateAction class - execute method - Caught Exception");
+    		logger.error("EstimateAction class - execute method - Caught Exception");
 			e.printStackTrace();
 			
-			String str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
-    	    logger.debug("EstimateAction class - execute method - returned error");
+			/*String str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
+    	    logger.error("EstimateAction class - execute method - returned error");
     	    
 			return ERROR;
 		} 
@@ -277,14 +287,14 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
-
+/*
 	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 
 	public static String theMonth(int month){
