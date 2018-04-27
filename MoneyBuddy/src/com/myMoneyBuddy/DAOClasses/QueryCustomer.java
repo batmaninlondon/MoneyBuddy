@@ -162,6 +162,41 @@ public class QueryCustomer {
 		}
 	}
 	
+	
+	public String getKycStatus(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getKycStatus method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String kycStatus = customer.getKycStatus();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class - getKycStatus method - customerId - "+customerId+" - return kycStatus ");
+			logger.debug("QueryCustomer class - getKycStatus method - customerId - "+customerId+" - end");
+			
+			return kycStatus;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getKycStatus method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getKycStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
 	public String getIsipMandateId(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - start");

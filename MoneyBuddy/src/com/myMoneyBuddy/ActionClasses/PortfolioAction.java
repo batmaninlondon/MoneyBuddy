@@ -82,9 +82,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		sipDataModel = queryProducts.getSipData(sessionMap.get("customerId").toString());
 		setSipDataModel(sipDataModel);
 
-		sessionMap.put("sipDataModel", sipDataModel);
+		/*sessionMap.put("sipDataModel", sipDataModel);
 		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+sessionMap.getClass().getName());
-
+*/
 		String fundId = null;
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
 			fundId = portfolioDataModelElement.getFundId();
@@ -108,9 +108,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
 		
-		sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
+		/*sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
 		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+sessionMap.getClass().getName());
-		
+		*/
 		for (String key : investmentDetailsDataModelList.keySet())  {
 			System.out.println("key : "+key);
 			for (InvestmentDetailsDataModel dataMadel : investmentDetailsDataModelList.get(key))  {
@@ -121,9 +121,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				
 			}
 		}
-		sessionMap.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
+		/*sessionMap.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
 		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+sessionMap.getClass().getName());
-		
+		*/
 		logger.debug("PortfolioAction class : execute method : end");
     	
 		return SUCCESS;

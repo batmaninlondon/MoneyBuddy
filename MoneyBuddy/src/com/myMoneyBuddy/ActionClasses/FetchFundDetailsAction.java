@@ -32,10 +32,10 @@ public class FetchFundDetailsAction extends ActionSupport implements SessionAwar
 			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 
 			fundDetailsDataModel = queryPrimaryFundDetails.getFundDetailsData();
-			setFundDetailsDataModel(fundDetailsDataModel);
+			//setFundDetailsDataModel(fundDetailsDataModel);
 			
-			sessionMap.put("fundDetailsDataModel", fundDetailsDataModel);
-			logger.debug("FetchFundDetailsAction class - execute method - stored fundDetailsDataModel in sessionMap");
+			//sessionMap.put("fundDetailsDataModel", fundDetailsDataModel);
+			//logger.debug("FetchFundDetailsAction class - execute method - stored fundDetailsDataModel in sessionMap");
 
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());

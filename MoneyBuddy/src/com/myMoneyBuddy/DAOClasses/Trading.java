@@ -4,7 +4,6 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,17 +14,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.IStarMFWebService;
 import org.tempuri.MFOrderEntry;
-
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.myMoneyBuddy.ActionClasses.PaymentAction;
-import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
@@ -34,15 +30,14 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
+import com.myMoneyBuddy.schedulerClasses.PaymentStatusCheck;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.time.DateUtils;
+import in.bsestarmf._2016._01.StarMFWebService;
+
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.SessionMap;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFactory;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.RequestParam;
@@ -79,7 +74,7 @@ public class Trading {
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 			
 			String taxStatus,state,occupation,dob,clientDetails,getPasswordResp,passwordStartMf,ucc;
 
@@ -188,8 +183,11 @@ public class Trading {
 			
 			String PASSWORD_STARMF;
 
+			/*StarMFWebService starMFWebService= new StarMFWebService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = starMFWebService.getWSHttpBindingIStarMFWebService();*/
+			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-			IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 
 			String frmtdStartDateForMandateId = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
 			String frmtdEndDateForMandateId = sipEndDate.substring(3,5)+"/"+sipEndDate.substring(0,2)+"/"+sipEndDate.substring(6,10);
@@ -296,11 +294,11 @@ public class Trading {
 			
 			Double totalPaymentAmount = 0.0;
 
-			String path = ServletActionContext.getServletContext().getRealPath("");
-			System.out.println("Path : "+path);
-			System.out.println("Real Path : "+ ServletActionContext.getRequest().getSession().getServletContext().getRealPath("") );
+			//String path = ServletActionContext.getServletContext().getRealPath("");
+			//System.out.println("Path : "+path);
+			//System.out.println("Real Path : "+ ServletActionContext.getRequest().getSession().getServletContext().getRealPath("") );
 			
-			String paymentUrlFile = ServletActionContext.getServletContext().getRealPath("")+"payment.html";
+			//String paymentUrlFile = ServletActionContext.getServletContext().getRealPath("")+"payment.html";
 			
 			if ("NotSet".equals(tranDetailId))  {
 				
@@ -615,8 +613,8 @@ public class Trading {
 				}
 				else {
 					
-					File newHtmlFile = new File(paymentUrlFile);
-					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
+					//File newHtmlFile = new File(paymentUrlFile);
+					//FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
 					
 					hibernateSession.beginTransaction();
 	
@@ -801,8 +799,8 @@ public class Trading {
 					
 				}
 				else {
-					File newHtmlFile = new File(paymentUrlFile);
-					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);
+					/*File newHtmlFile = new File(paymentUrlFile);
+					FileUtils.writeStringToFile(newHtmlFile, paymentUrl);*/
 					
 					hibernateSession.beginTransaction();
 	
@@ -861,250 +859,225 @@ public class Trading {
 
 	}
 
-	public void checkPaymentStatus(String customerId) throws MoneyBuddyException {
+	public void checkPaymentStatus() throws MoneyBuddyException {
+		
+	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	Query query;
+	List<Object[]> transactionDetails;
+	List<String> customerIds;
+	PaymentDetails tempPaymentDetail;
+	HashMap<String,String> successfulPayment = new HashMap<String, String>();
+	HashMap<String,String> pendingPayment = new HashMap<String, String>();
 
-		/*Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		Query query;
-		List<Object[]> transactionDetails;
-		List<String> customerIds;
-		PaymentDetails tempPaymentDetail;
-		HashMap<String,String> successfulPayment = new HashMap<String, String>();
-		HashMap<String,String> pendingPayment = new HashMap<String, String>();
+	
+	WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+	in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+	String PASSWORD_STARMF;
+	String passwordStarMF;
+	String[] resultsStarMF;
 
-		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
-		IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
-		String PASSWORD_STARMF;
-		String passwordStarMF;
-		String[] resultsStarMF;
+	String paymentStatusDetails;
 
-		String paymentStatusDetails;
+	try {
+		
+		logger.debug("Trading class - checkPaymentStatus method - start");
 
-		try {
-			
-			logger.debug("Trading class - checkPaymentStatus method - customerId - "+customerId+" - start");
+		System.out.println("Trading class : checkPaymentStatus method - start ");
 
-			System.out.println("Trading class : checkPaymentStatus method - start ");
+		/*hibernateSession.beginTransaction();
+		query = hibernateSession.createQuery("select distinct(customerId) from Customers");
 
-			hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select distinct(customerId) from Customers");
+		customerIds = query.list();
 
-			customerIds = query.list();
+		hibernateSession.getTransaction().commit();
+
+		for (String customerid : customerIds)  {
+			System.out.println("customerid : "+customerid);
+
+
+		}*/
+		hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount,customerId from TransactionDetails where transactionStatus='5'");
+
+			transactionDetails = query.list();
 
 			hibernateSession.getTransaction().commit();
+			
+			if (!transactionDetails.isEmpty())  {
 
-			for (String customerid : customerIds)  {
-				System.out.println("customerid : "+customerid);
+			for (Object[]  transactionDetail : transactionDetails)  {
+
+				System.out.println("BSE Order Id : "+transactionDetail[3]);
+
+				long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date startDate;
+
+				startDate = dateFormat.parse(transactionDetail[2].toString());
+
+				Date date = new Date();
+				String frmtdDate = dateFormat.format(date);
+				Date todayDate = dateFormat.parse(frmtdDate);
+
+				boolean lessThanToday = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
+				System.out.println("lessThanToday is : "+lessThanToday+" for transactionDetailId : "+transactionDetail[1]);
+
+				if (lessThanToday)  {
+
+					hibernateSession.beginTransaction();
+					hibernateSession.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+					hibernateSession.getTransaction().commit();
+
+				}
+
+				else {
+					Properties configProperties = new Properties();
+					String configPropFilePath = "../../../config/config.properties";
+
+					configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 
 
-			}
-			hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount from TransactionDetails where customerId='"+customerId+"' and transactionStatus='5'");
 
-				transactionDetails = query.list();
+					String[] paymentStatusDetailsArray = {transactionDetail[7].toString(),transactionDetail[3].toString(),"BSEMF"};
+					paymentStatusDetails = String.join("|",paymentStatusDetailsArray);
 
-				hibernateSession.getTransaction().commit();
 
-				for (Object[]  transactionDetail : transactionDetails)  {
+					passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
-					System.out.println("Order number : "+transactionDetail[3]);
+					resultsStarMF = passwordStarMF.split("\\|");
 
-					long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+					PASSWORD_STARMF = resultsStarMF[1];
 
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Date startDate;
+					String paymentStatusResponse = iStarMFWebService.mfapi("11",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,paymentStatusDetails);
 
-					startDate = dateFormat.parse(transactionDetail[2].toString());
+					System.out.println("paymentStatusResponse : "+paymentStatusResponse);
 
-					Date date = new Date();
-					String frmtdDate = dateFormat.format(date);
-					Date todayDate = dateFormat.parse(frmtdDate);
+					String[] resultsPaymentStatusResponse = paymentStatusResponse.split("\\|");
 
-					boolean lessThanToday = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
-					System.out.println("lessThanToday is : "+lessThanToday+" for transactionDetailId : "+transactionDetail[1]);
+					dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					date = new Date();
+					String frmtdDateForDB = dateFormat.format(date);
 
-					if (lessThanToday)  {
+					String refNumber = null;
+					List<String> paymentDetailsList;
+					if (resultsPaymentStatusResponse[0].equals("100"))  {
 
 						hibernateSession.beginTransaction();
-						hibernateSession.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+
+						query = hibernateSession.createQuery("select paymentDetailsId from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
+						paymentDetailsList = query.list();
+
 						hibernateSession.getTransaction().commit();
 
-					}
+						hibernateSession.beginTransaction();
 
-					else {
-						Properties properties = new Properties();
-						String propFilePath = "../../../config/client.properties";
+						if (paymentDetailsList.isEmpty())  {
+							tempPaymentDetail = new PaymentDetails( transactionDetail[1].toString(), transactionDetail[3].toString(),
+									resultsPaymentStatusResponse[1], transactionDetail[2].toString(),frmtdDateForDB);
+							hibernateSession.save(tempPaymentDetail);
+						}
+						else 
+						{
+							for (String paymentDetail : paymentDetailsList)  {
+								refNumber = paymentDetail;
+							}
+							hibernateSession.createQuery("update PaymentDetails set paymentGatewayComment='"+resultsPaymentStatusResponse[1]+"' , updateDate='"+frmtdDateForDB+"' where paymentDetailsId='"+refNumber+"'").executeUpdate();;
+						}
 
-						properties.load(PaymentAction.class.getResourceAsStream(propFilePath));
+						hibernateSession.getTransaction().commit();
 
-
-
-						String[] paymentStatusDetailsArray = {customerId,transactionDetail[3].toString(),"BSEMF"};
-						paymentStatusDetails = String.join("|",paymentStatusDetailsArray);
-
-
-
-						passwordStarMF = iStarMFWebService.getPassword(properties.getProperty("USER_ID"),properties.getProperty("MEMBER_ID"),properties.getProperty("PASSWORD"),properties.getProperty("PASS_KEY"));
-
-						resultsStarMF = passwordStarMF.split("\\|");
-
-						PASSWORD_STARMF = resultsStarMF[1];
-
-						String paymentStatusResponse = iStarMFWebService.mfapi("11",properties.getProperty("USER_ID"),PASSWORD_STARMF,paymentStatusDetails);
-
-						System.out.println("paymentStatusResponse : "+paymentStatusResponse);
-
-						String[] resultsPaymentStatusResponse = paymentStatusResponse.split("\\|");
-
-						dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						date = new Date();
-						String frmtdDateForDB = dateFormat.format(date);
-
-						String refNumber = null;
-						List<String> paymentDetailsList;
-						if (resultsPaymentStatusResponse[0].equals("100"))  {
-
+						if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
+							System.out.println("Payment Successful");
 							hibernateSession.beginTransaction();
-
-							query = hibernateSession.createQuery("select paymentRefNum from PaymentDetails where transactionDetailId='"+transactionDetail[1].toString()+"' and bseOrderID='"+transactionDetail[3].toString()+"'");
-							paymentDetailsList = query.list();
-
+							hibernateSession.createQuery("update TransactionDetails set transactionStatus='7' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
 							hibernateSession.getTransaction().commit();
 
+							Double quantity = Double.parseDouble(transactionDetail[5].toString());
+
 							hibernateSession.beginTransaction();
+							Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+							String fundName = null;
 
-							if (paymentDetailsList.isEmpty())  {
-								tempPaymentDetail = new PaymentDetails( transactionDetail[1].toString(), transactionDetail[3].toString(),
-										resultsPaymentStatusResponse[1], transactionDetail[2].toString(),frmtdDateForDB);
-								hibernateSession.save(tempPaymentDetail);
-							}
-							else 
-							{
-								for (String paymentDetail : paymentDetailsList)  {
-									refNumber = paymentDetail;
-								}
-								hibernateSession.createQuery("update PaymentDetails set paymentGatewayComment='"+resultsPaymentStatusResponse[1]+"' , updateDate='"+frmtdDateForDB+"' where PAYMENT_REF_NUM='"+refNumber+"'").executeUpdate();;
-							}
-
+							if (result != null) 
+								fundName = result.toString();
 							hibernateSession.getTransaction().commit();
 
-							if (resultsPaymentStatusResponse[1].startsWith("APPROVED"))  {
-								System.out.println("Payment Successful");
-								hibernateSession.beginTransaction();
-								hibernateSession.createQuery("update TransactionDetails set transactionStatus='7' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
-								hibernateSession.getTransaction().commit();
+							successfulPayment.put(fundName, transactionDetail[6].toString());
+							
+						}
+						else {
+							hibernateSession.beginTransaction();
+							Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
+							String fundName = null;
 
-								Double quantity = Double.parseDouble(transactionDetail[5].toString());
-
-								hibernateSession.beginTransaction();
-
-								Object result = hibernateSession.createQuery("select pendingOrders from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
-								Double pendingOrder = 0.0;
-								Double totalQuantity = 0.0;
-								if (result != null) 
-									pendingOrder = Double.parseDouble(result.toString());
-
-								hibernateSession.getTransaction().commit();
-								
-								hibernateSession.beginTransaction();
-								result = hibernateSession.createQuery("select totalQuantity from ebdb.CUSTOMER_PORTFOLIO where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").uniqueResult();
-
-								if (result != null)
-									totalQuantity  = Double.parseDouble(result.toString());
-
-								pendingOrder -= quantity;
-								totalQuantity += quantity;
-								hibernateSession.getTransaction().commit();
-
-
-								hibernateSession.beginTransaction();
-								hibernateSession.createQuery("update ebdb.CUSTOMER_PORTFOLIO set PENDING_ORDERS='"+pendingOrder+"', TOTAL_QUANTITY='"+totalQuantity+"' where PRODUCT_ID='"+transactionDetail[4].toString()+"' and TRANSACTION_DETAIL_ID='"+transactionDetail[1].toString()+"'").executeUpdate();
-								hibernateSession.getTransaction().commit();
-
-								hibernateSession.beginTransaction();
-								Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
-								String fundName = null;
-
-								if (result != null) 
-									fundName = result.toString();
-								hibernateSession.getTransaction().commit();
-
-								successfulPayment.put(fundName, transactionDetail[6].toString());
-								
-							}
-							else {
-								hibernateSession.beginTransaction();
-								Object result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
-								String fundName = null;
-
-								if (result != null) 
-									fundName = result.toString();
-								hibernateSession.getTransaction().commit();
-								
-								pendingPayment.put(fundName, transactionDetail[6].toString());
-								
-							}
-
+							if (result != null) 
+								fundName = result.toString();
+							hibernateSession.getTransaction().commit();
+							
+							pendingPayment.put(fundName, transactionDetail[6].toString());
+							
 						}
 
 					}
+
 				}
+			}
 
-				if (!successfulPayment.isEmpty())
-				{
-					hibernateSession.beginTransaction();
-					Object result = hibernateSession.createQuery("select emailId from Customers where customerId='"+customerId+"'").uniqueResult();
-					String emailId = null;
+/*					if (!successfulPayment.isEmpty())
+			{
+				hibernateSession.beginTransaction();
+				Object result = hibernateSession.createQuery("select emailId from Customers where customerId='"+customerId+"'").uniqueResult();
+				String emailId = null;
 
-					if (result != null) 
-						emailId = result.toString();
+				if (result != null) 
+					emailId = result.toString();
 
-					hibernateSession.getTransaction().commit();
+				hibernateSession.getTransaction().commit();
 
-					String subject="[MoneyBuddy] Thank you for the payment.";
-					SendMail sendMail = new SendMail();
-					StringBuilder bodyText = new StringBuilder();
-					bodyText.append("<div>")
-					.append("  Dear User<br/><br/>")
-					.append("  Thank you for the payment of following records.")
+				String subject="[MoneyBuddy] Thank you for the payment.";
+				SendMail sendMail = new SendMail();
+				StringBuilder bodyText = new StringBuilder();
+				bodyText.append("<div>")
+				.append("  Dear User<br/><br/>")
+				.append("  Thank you for the payment of following records.")
+				.append("  <br/>");
+				
+				Set set = successfulPayment.entrySet();
+				
+				Iterator iterator = set.iterator();
+				
+				while(iterator.hasNext()) {
+					Map.Entry mentry = (Map.Entry)iterator.next();
+					bodyText.append("Fund Name : "+ mentry.getKey())
+					.append("Amount : "+mentry.getValue())
 					.append("  <br/>");
-					
-					Set set = successfulPayment.entrySet();
-					
-					Iterator iterator = set.iterator();
-					
-					while(iterator.hasNext()) {
-						Map.Entry mentry = (Map.Entry)iterator.next();
-						bodyText.append("Fund Name : "+ mentry.getKey())
-						.append("Amount : "+mentry.getValue())
-						.append("  <br/>");
-					}
-					
-					bodyText.append("  <br/><br/>")
-					.append("  Thanks,<br/>")
-					.append("  MoneyBuddy Team")
-					.append("</div>");
-
-					//sendMail.MailSending(emailId,bodyText,subject);
-
 				}
 				
-				
-			logger.debug("Trading class : checkPaymentStatus method : end");
+				bodyText.append("  <br/><br/>")
+				.append("  Thanks,<br/>")
+				.append("  MoneyBuddy Team")
+				.append("</div>");
 
-		} catch (NumberFormatException | HibernateException e) {
-			logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
-			e.printStackTrace();
-			throw new MoneyBuddyException(e.getMessage(), e);
-		} catch (Exception e) {
-			logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
-			e.printStackTrace();
-			throw new MoneyBuddyException(e.getMessage(), e);
-		}
-		finally {
-			if(hibernateSession !=null )
-					hibernateSession.close();
-		}*/
+				//sendMail.MailSending(emailId,bodyText,subject);
 
+			}*/
+			
+			}
+		logger.debug("Trading class : checkPaymentStatus method : end");
+
+	} catch (NumberFormatException | HibernateException e) {
+		logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
+		e.printStackTrace();
+		throw new MoneyBuddyException(e.getMessage(), e);
+	} catch (Exception e) {
+		logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
+		e.printStackTrace();
+		throw new MoneyBuddyException(e.getMessage(), e);
 	}
+	finally {
+		if(hibernateSession !=null )
+				hibernateSession.close();
+	}}
 
 }

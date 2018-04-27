@@ -86,6 +86,23 @@
      
     </script>
     
+    <script>
+    
+    	function abc(activeTab)  {
+    		
+    		if (new String("login").valueOf() == activeTab.valueOf())  {
+    			document.getElementById("login-tab").addClass('active'); 
+    			document.getElementById("sign-up-tab").removeClass('active'); 
+    		}
+    		else {
+    			document.getElementById("sign-up-tab").addClass('active'); 
+    			document.getElementById("login-tab").removeClass('active'); 
+    		} 
+		
+    	}
+    </script>
+    
+    
 	    <link rel="stylesheet" href="css/style4.css">
 	    <style>
 	    	
@@ -118,8 +135,8 @@
          <div class="form  ">
       
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab "><a href="#login">Log In</a></li>
+        <li id="sign-up-tab" class="tab active"><a href="#signup" onclick="abc('signUp');">Sign Up</a></li>
+        <li id="login-tab" class="tab" ><a href="#login" onclick="abc('login');">Log In</a></li>
         
       </ul>
       

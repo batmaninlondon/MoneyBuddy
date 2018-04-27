@@ -36,6 +36,26 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 
+<script>
+
+	function uploadCutsomerNav(el) 
+	{		
+		var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
+		var folioNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
+		var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
+		var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
+		
+		document.getElementById("action-bse-order-id").value = bseOrderId;
+		document.getElementById("action-folio-number").value = folioNum;
+		document.getElementById("action-units-purchased").value = unitsPurchased;
+		document.getElementById("action-nav-value").value = navValue;
+		
+		document.formUploadNav.submit();
+		
+	}
+
+</script>
+
 </head>
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
@@ -92,6 +112,17 @@
 			</div>
 		</div>	
 		
+		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<s:actionmessage class="small-text g-color--red"/> 
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+		
+		
+		
 		<div class="row" >
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -130,9 +161,10 @@
 									    	</s:else>
 									    </td>
 									    <td class="center g-font-size-14--xs">
-									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+									    	<s:fielderror fieldName="unitsPurchased" class="g-color--red" />
 										  	<%-- <s:textfield class="form-control" id="units-purchased" placeholder="Enter Units" /> --%>
 									    	<input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" >
+									    	<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
 									    </td>
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
@@ -140,14 +172,14 @@
 									    	<input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" >
 									    </td>
 									    <td class="center g-font-size-14--xs">
-									    	<s:submit class="btn btn-primary readmore submit-button-1" value="Upload NAV"  onCLick="return uploadCutsomerNav(this)" />
+									    	<s:submit class="btn btn-primary readmore submit-button-1" value="Upload NAV"  onCLick="uploadCutsomerNav(this)" />
 									    	<!-- <button type="button" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav(this);">Upload NAV</button> -->
 									    </td>
 									</tr>
 								</s:iterator>
 								<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
 								<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
-								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
+								
 								<s:hidden id="action-nav-value" name="navValue"></s:hidden>
 								</s:form>
 							 

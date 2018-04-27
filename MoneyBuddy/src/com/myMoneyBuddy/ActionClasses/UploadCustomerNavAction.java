@@ -4,16 +4,15 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
+
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -24,8 +23,10 @@ public class UploadCustomerNavAction extends ActionSupport {
     private String folioNum;
     private String navValue;
     private String unitsPurchased;
+    private HashMap<String,String>  pendingNavOrders ;
+    
     //private InputStream stream;
-
+   
     public String execute() {
     	
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -37,8 +38,47 @@ public class UploadCustomerNavAction extends ActionSupport {
     		System.out.println("UploadCustomerNavAction class : execute method : called ");
     		
     		System.out.println("transactionFolioNum : "+getFolioNum()+" : unitPrice : "+getNavValue()+" : quantity : "+getUnitsPurchased()+" : bseOrderId : "+getBseOrderId());
+    		
+    		if (!NumberUtils.isNumber(getUnitsPurchased()))  {
+    			
+    			addActionMessage("Entered Units is not a number !! ");
+    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
+    			return INPUT;
+    		}
+
+    		if (!NumberUtils.isNumber(getNavValue()))  {
+    			
+    			addActionMessage("Entered Nav value is not a number !! ");
+    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
+    			return INPUT;
+    		}
+    		
     		hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
+    		
+    		Query query = hibernateSession.createQuery("select transactionAmount from TransactionDetails where bseOrderId = :bseOrderId ");
+    		query.setParameter("bseOrderId", getBseOrderId());
+    		
+    		Double amount = Double.valueOf(query.uniqueResult().toString());
+    		
+    		hibernateSession.getTransaction().commit();
+    		
+    		Double calculatedAmount = Double.valueOf(getNavValue()) * Double.valueOf(getUnitsPurchased());
+
+    		System.out.println(" NAV value : "+getNavValue()+" : units : "+getUnitsPurchased());
+    		
+    		System.out.println("calculated amount : "+calculatedAmount+" : amount : "+amount);
+    		
+    		if ( Double.compare(amount, calculatedAmount) != 0 )  {
+    			addActionMessage("Entered values are not correct !! ");
+    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
+    			return INPUT;
+    		}
+    		
+    		hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
 					+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
 
 			query.setParameter("transactionFolioNum", getFolioNum());
@@ -146,6 +186,15 @@ public class UploadCustomerNavAction extends ActionSupport {
 	public void setUnitsPurchased(String unitsPurchased) {
 		this.unitsPurchased = unitsPurchased;
 	}
+
+	public HashMap<String, String> getPendingNavOrders() {
+		return pendingNavOrders;
+	}
+
+	public void setPendingNavOrders(HashMap<String, String> pendingNavOrders) {
+		this.pendingNavOrders = pendingNavOrders;
+	}
+	
 /*
 
 	public InputStream getStream() {

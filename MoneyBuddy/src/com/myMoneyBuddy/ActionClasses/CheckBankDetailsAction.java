@@ -86,8 +86,35 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    				case "HDF" :
 	    					displayBankName = "HDFC Bank";
 	    					break;
-	    				default :
+	    				case "162" :
 	    					displayBankName = "KOTAK Bank";
+	    					break;
+	    				case "UTI" :
+	    					displayBankName = "Axis Bank";
+	    					break;
+	    				case "PNB" :
+	    					displayBankName = "Punjab National Bank";
+	    					break;
+	    				case "SIB" :
+	    					displayBankName = "South Indian Bank";
+	    					break;
+	    				case "SCB" :
+	    					displayBankName = "Standard Chartered Bank";
+	    					break;
+	    				case "UBI" :
+	    					displayBankName = "Union Bank Of India";
+	    					break;
+	    				case "UNI" :
+	    					displayBankName = "United Bank Of India";
+	    					break;
+	    				case "YBK" :
+	    					displayBankName = "Yes Bank Ltd";
+	    					break;
+	    				case "RBL" :
+	    					displayBankName = "Ratnakar Bank";
+	    					break;
+	    				case "DCB" :
+	    					displayBankName = "DCB";
 	    					break;
 	    			
 	    			}

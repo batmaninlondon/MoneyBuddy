@@ -73,20 +73,6 @@ public class FileUploadStatusChangeAction extends ActionSupport implements Sessi
 
     }
     
-
-	public static boolean copyFileUsingFileUtils(String srcFilePath, String destFilePath){
-		boolean isFileCopied = false;
-		
-		try {
-			FileUtils.copyFile(new File(srcFilePath), new File(destFilePath),true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return isFileCopied;
-	}
-    
     @Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;

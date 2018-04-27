@@ -234,7 +234,7 @@
     <div id="load" class="load"></div>
 		<div id="content">
 			<div id="myDiv2" class="row  g-padding-y-40--sm g-container--md  ">
-				<s:iterator value="#session.fundDetailsDataModel" var="fundDetailsDataModelElement">
+				<s:iterator value="fundDetailsDataModel" var="fundDetailsDataModelElement">
 						<div id="myDiv3" class="col-md-4  g-bg-color--white">
 							<div  class="  g-line-height--normal  ">
 							<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />

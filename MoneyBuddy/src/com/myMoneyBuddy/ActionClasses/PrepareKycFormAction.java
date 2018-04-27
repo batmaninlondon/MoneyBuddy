@@ -50,8 +50,8 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 	    	InsertAddCustDetails.insertAddCusDetails(customerId, getFatherName(), getMaritalStatus(), getNationality(), getStatus(), 
 	    				getGrossAnnualIncome(), getPoliticallyExposed());
 			
-			sessionMap.put("addCustDetUploaded", "Y");
-			logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");
+			/*sessionMap.put("addCustDetUploaded", "Y");
+			logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");*/
 			
 			UpdateCustomer updateCustomer = new UpdateCustomer();
 			updateCustomer.updateAddCusDetUploadedStatus(customerId, "Y");

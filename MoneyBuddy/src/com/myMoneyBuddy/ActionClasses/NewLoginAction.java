@@ -85,8 +85,8 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return INPUT;
 	    	}
 	    	
-	    	String custDetUploaded = customer.getCusDetailsUploaded();
-	    	String addCustDetUploaded = customer.getAddCusDetailsUploaded();
+	    	//String custDetUploaded = customer.getCusDetailsUploaded();
+	    	//String addCustDetUploaded = customer.getAddCusDetailsUploaded();
 	    	
 	    	System.out.println("customerId : "+customerId);
 	    	
@@ -99,31 +99,31 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("customerMobileNumber", customer.getMobileNumber());
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerMobileNumber in sessionMap");
 	    	
-	    	sessionMap.put("panCard", customer.getPanCard());
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored panCard in sessionMap");
+	    	/*sessionMap.put("panCard", customer.getPanCard());
+	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored panCard in sessionMap");*/
 	    	
-	    	sessionMap.put("kycStatus", customer.getKycStatus());
+	    	/*sessionMap.put("kycStatus", customer.getKycStatus());
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored kycStatus in sessionMap");
-	    	
-	    	if (custDetUploaded == null || "N".equals(custDetUploaded))  
+	    	*/
+	    	/*if (custDetUploaded == null || "N".equals(custDetUploaded))  
 	    		custDetUploaded = "N";
 	    	else 
 	    		custDetUploaded = "Y";
 	    	
 	    	sessionMap.put("custDetUploaded", custDetUploaded);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored custDetUploaded in sessionMap");
-	    	
-	    	if (addCustDetUploaded == null || "N".equals(addCustDetUploaded))  
+	    	*/
+	    	/*if (addCustDetUploaded == null || "N".equals(addCustDetUploaded))  
 	    		addCustDetUploaded = "N";
 	    	else 
 	    		addCustDetUploaded = "Y";
 	    		
 	    	sessionMap.put("addCustDetUploaded", addCustDetUploaded);
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");
+	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");*/
 	    	
-	    	System.out.println("kycStaus in session : "+sessionMap.get("kycStatus"));
-	    	System.out.println("custDetUploaded in session : "+sessionMap.get("custDetUploaded"));
-	    	System.out.println("addCustDetUploaded in session : "+sessionMap.get("addCustDetUploaded"));
+	    	//System.out.println("kycStaus in session : "+sessionMap.get("kycStatus"));
+	    	/*System.out.println("custDetUploaded in session : "+sessionMap.get("custDetUploaded"));*/
+	    	/*System.out.println("addCustDetUploaded in session : "+sessionMap.get("addCustDetUploaded"));*/
 
 	    	UpdateLoginTimestamp lastLogin = new UpdateLoginTimestamp();
 	    	lastLogin.updateLoginTimestamp(customerId);

@@ -130,8 +130,6 @@
 		<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
 		<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
 		<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
-		<s:hidden id="risk-category-value" name="riskCategory"></s:hidden>
-		<s:hidden id="plan-name-value" name="planName"></s:hidden>
 		<s:hidden id="transaction-type-value" name="transactionType"></s:hidden>
   	</s:form>
   	
@@ -159,6 +157,7 @@
 								<div class="g-bg-color--gray-lighter " style="height:60px;">
 		    						<div class="profile" >
 		        						<div class="name g-text-right--xs g-margin-r-10--xs" >
+		        							<s:hidden id="tot-investment-id-value" name="totalInvestment"></s:hidden>
 		        							<%-- <s:submit class="tn  g-color--white g-margin-t-15--xs" style="background-color:black;" value="Add to Cart" /> --%>
 		        							<button type="button" class="btn  g-color--white g-margin-t-15--xs" onClick="newUpdate();"  style="background-color:black;" >Add to Cart</button>
 		            					</div>

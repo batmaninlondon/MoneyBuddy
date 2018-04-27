@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -82,15 +83,15 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - stored customerName in sessionMap");
 			
 			
-	    	UpdateCustomer UpdateCustomer = new UpdateCustomer();
-	    	int updateResult =  UpdateCustomer.updateNameAndCustDetUploadedStatus(customerId, getCustomerName(), "Y");
+	    	//UpdateCustomer UpdateCustomer = new UpdateCustomer();
+	    	/*int updateResult =  UpdateCustomer.updateNameAndCustDetUploadedStatus(customerId, getCustomerName(), "Y");
 	
 	    	if (updateResult == 1) 
 				sessionMap.put("CustDetUploaded", "Y");
 			else 
 				sessionMap.put("CustDetUploaded", "N");
 
-			logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - stored CustDetUploaded in sessionMap");
+			logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - stored CustDetUploaded in sessionMap");*/
 	    	
 			UpdateCustomerDetails updateCustomerDetails = new UpdateCustomerDetails();
 			updateCustomerDetails.updateCustomerDetails(customerId, frmtdDateForDB, getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), 
@@ -98,7 +99,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	
 	    	System.out.println(" Returned Success !!");
 	
-	    	if (sessionMap.get("kycStatus").toString().equalsIgnoreCase("DONE"))  {
+	    	QueryCustomer queryCustomer = new QueryCustomer();
+	    	
+	    	if (("DONE").equalsIgnoreCase(queryCustomer.getKycStatus(customerId)))  {
 	    		System.out.println(" Returned KYC  done !!");
 	    		setRespMsg("bankDetailsNotExists");
 	    		
@@ -122,11 +125,38 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    				case "HDF" :
 	    					displayBankName = "HDFC Bank";
 	    					break;
-	    				default :
+	    				case "162" :
 	    					displayBankName = "KOTAK Bank";
 	    					break;
-	    			
-	    			}
+	    				case "UTI" :
+	    					displayBankName = "Axis Bank";
+	    					break;
+	    				case "PNB" :
+	    					displayBankName = "Punjab National Bank";
+	    					break;
+	    				case "SIB" :
+	    					displayBankName = "South Indian Bank";
+	    					break;
+	    				case "SCB" :
+	    					displayBankName = "Standard Chartered Bank";
+	    					break;
+	    				case "UBI" :
+	    					displayBankName = "Union Bank Of India";
+	    					break;
+	    				case "UNI" :
+	    					displayBankName = "United Bank Of India";
+	    					break;
+	    				case "YBK" :
+	    					displayBankName = "Yes Bank Ltd";
+	    					break;
+	    				case "RBL" :
+	    					displayBankName = "Ratnakar Bank";
+	    					break;
+	    				case "DCB" :
+	    					displayBankName = "DCB";
+	    					break;
+    			
+    			}
 	    			
 	    			String accType = bankDetails.getAccountType();
 	    			

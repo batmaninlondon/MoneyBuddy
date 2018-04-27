@@ -903,8 +903,8 @@
 					  {	
 					   // console.log(obj[0]);
 					    funds.push(obj[0]);
-					    investedValue.push(obj[2]);
-					    currentValue.push(obj[3]);
+					    investedValue.push(obj[3]);
+					    currentValue.push(obj[4]);
 					   }
 				}
 			 
@@ -970,7 +970,7 @@
 					var obj = jsonData[i];
 					if(obj[0]!="Total")
 					{
-						funds.push(obj[0]);
+						funds.push(obj[1]);
 						currentValue.push(obj[3]);
 						var bgClrIndex = 0;
 						if (i > 6) {

@@ -22,6 +22,7 @@ import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.CommonUtil;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
@@ -119,8 +120,11 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			
 			String amount;
 			System.out.println("transactionType : "+transactionType);
+			
+			CommonUtil commonUtil = new CommonUtil();
+			
 			if ("UPFRONT".equals(transactionType))  {
-				
+							
 				if ("NotSet".equals(getTranDetailId()))    {
 					List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartList");
 					for (int i =0 ; i< customerCartList.size() ;i++) {
@@ -135,8 +139,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				
 		    	paymentUrl = trading.executeTrade(customerId, productDetailsMapForBuy,
-						"NEW",null,null,null,transactionType,"BUY",0,getAccountNumber(),getBankName(),getIfscCode(),getBankMode(getBankName()),"Y",
+						"NEW",null,null,null,transactionType,"BUY",0,getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",null,getTranDetailId(), sessionMap);
+		    	
+		    	System.out.println("paymentUrl : "+paymentUrl);
 		    	
 			}
 			else {
@@ -197,17 +203,19 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	paymentUrl = trading.executeTrade(customerId, productDetailsMapForBuy,
 						"NEW",sipDate,sipStartDate,sipEndDate,
 						transactionType,"BUY",Integer.parseInt(sipDuration),
-						getAccountNumber(),getBankName(),getIfscCode(),getBankMode(getBankName()),"Y",
+						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
+		    	
 			}
 
+			
 			if ( !paymentUrl.equals("NotSet")) {
-				
-				/*OpenHtmlToUrl openHtmlToUrl = new OpenHtmlToUrl();
-				openHtmlToUrl.openPage(paymentUrl);*/
-				
+			
+				if (!paymentUrl.contains("<html>"))  {
+					addActionMessage(paymentUrl);
+					return "failedWithPaymentGateway";
+				}
 				setPaymentUrl(paymentUrl);
-				
 				return SUCCESS;
 				
 			}
@@ -313,23 +321,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	public void setReAccountNumber(String reAccountNumber) {
 		this.reAccountNumber = reAccountNumber;
-	}
-
-	public String getBankMode(String bankName)  {
-		
-		String bankMode;
-		
-		switch (bankName)  {
-			case "ICI" : 
-			case "SBI" : 
-			case "162" :
-				bankMode="DIRECT";break;
-			case "HDF" :
-				bankMode="NODAL";break;
-			default : 
-				bankMode="INVALID";
-		}
-		return bankMode;
 	}
 
 	

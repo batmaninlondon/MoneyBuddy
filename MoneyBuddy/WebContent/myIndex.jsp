@@ -115,7 +115,7 @@
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                      <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="nhome.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                        <a href="myIndex.jsp" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>

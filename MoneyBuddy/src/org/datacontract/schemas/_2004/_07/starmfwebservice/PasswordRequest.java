@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="MemberId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="PassKey" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="RequestType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="UserId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
     "memberId",
     "passKey",
     "password",
+    "requestType",
     "userId"
 })
 public class PasswordRequest {
@@ -45,6 +47,8 @@ public class PasswordRequest {
     protected JAXBElement<String> passKey;
     @XmlElementRef(name = "Password", namespace = "http://schemas.datacontract.org/2004/07/StarMFWebService", type = JAXBElement.class, required = false)
     protected JAXBElement<String> password;
+    @XmlElementRef(name = "RequestType", namespace = "http://schemas.datacontract.org/2004/07/StarMFWebService", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> requestType;
     @XmlElementRef(name = "UserId", namespace = "http://schemas.datacontract.org/2004/07/StarMFWebService", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userId;
 
@@ -118,6 +122,30 @@ public class PasswordRequest {
      */
     public void setPassword(JAXBElement<String> value) {
         this.password = value;
+    }
+
+    /**
+     * Gets the value of the requestType property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getRequestType() {
+        return requestType;
+    }
+
+    /**
+     * Sets the value of the requestType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setRequestType(JAXBElement<String> value) {
+        this.requestType = value;
     }
 
     /**

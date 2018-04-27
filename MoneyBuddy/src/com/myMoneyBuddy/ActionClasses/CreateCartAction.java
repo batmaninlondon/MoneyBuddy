@@ -27,6 +27,9 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(CreateCartAction.class);
 	private SessionMap<String,Object> sessionMap;
+	
+	private String totalInvestment;
+	
 	//private InputStream stream;
 
     public String execute() {
@@ -38,11 +41,12 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     		
     		logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - start ");
 	    	System.out.println(" CreateCartAction execute method Called !!");
+	    	System.out.println("CreateCartAction execute method : totalInvestment : "+getTotalInvestment());
 	    	
 	    	sessionMap.put("transactionType", "UPFRONT");
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored transactionType as UPFRONT in sessionMap");
 	    	
-	    	String totalInvestment = sessionMap.get("totalInvestment").toString();
+	    	//String totalInvestment = sessionMap.get("totalInvestment").toString();
 	    	HashMap<String,Double> productRatioList = (HashMap<String,Double>)sessionMap.get("productRatioList");
 	
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -56,7 +60,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	   	    while (it.hasNext()) {
 	   	    	
 	   	        Map.Entry pair = (Map.Entry)it.next();
-	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(totalInvestment) ) /100);
+	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(getTotalInvestment()) ) /100);
 	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),frmtdDate,"Pending");
 	   	        
 	   	    }
@@ -93,6 +97,14 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
+
+	public String getTotalInvestment() {
+		return totalInvestment;
+	}
+
+	public void setTotalInvestment(String totalInvestment) {
+		this.totalInvestment = totalInvestment;
+	}
     
 /*	public InputStream getStream() {
 		return stream;

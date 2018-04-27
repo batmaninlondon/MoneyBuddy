@@ -33,8 +33,8 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     		QueryCustomer queryCustomer = new QueryCustomer();
     		Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
     		System.out.println("kycStaus : "+customer.getKycStatus());
-	    	System.out.println("custDetUploaded : "+customer.getCusDetailsUploaded());
-	    	System.out.println("addCustDetUploaded : "+customer.getAddCusDetailsUploaded());
+	    	/*System.out.println("custDetUploaded : "+customer.getCusDetailsUploaded());
+	    	System.out.println("addCustDetUploaded : "+customer.getAddCusDetailsUploaded());*/
 			if ("NC".equals(customer.getKycStatus())) {
 				logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned panCardVerifiction");
 		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");

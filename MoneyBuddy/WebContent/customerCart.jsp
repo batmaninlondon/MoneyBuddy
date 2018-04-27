@@ -39,7 +39,7 @@
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
    <div class="container ">
-   		<a href="nhome.jsp" class="s-header-v2__logo-link">
+   		<a href="myIndex.jsp" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>

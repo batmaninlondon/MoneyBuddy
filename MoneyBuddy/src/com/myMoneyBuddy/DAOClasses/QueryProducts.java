@@ -11,6 +11,8 @@ import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
 import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.Utils.CommonUtil;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -361,6 +363,7 @@ public class QueryProducts {
 				
 				sipDate = sipDetailsListElement.getSipDate();
 				
+				CommonUtil commonUtil = new CommonUtil();
 				if (Integer.parseInt(sipDate) < currentDate)  {
 					if (currentMonth == 11)  {
 						nextSipMonth = "01";
@@ -368,13 +371,13 @@ public class QueryProducts {
 						nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
 					}
 					else {
-						nextSipMonth = theMonth(cal.get(Calendar.MONTH)+1);
+						nextSipMonth = commonUtil.theMonth(cal.get(Calendar.MONTH)+1);
 						nextSipYear = Integer.toString(currentYear);
 						nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
 					}
 				}
 				else {
-					nextSipMonth = theMonth(cal.get(Calendar.MONTH));
+					nextSipMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
 					nextSipYear = Integer.toString(currentYear);
 					nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
 					
@@ -669,9 +672,5 @@ public class QueryProducts {
 	    }
 	}
 	
-	public static String theMonth(int month){
-	    String[] monthNames = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-	    return monthNames[month];
-	}
 
 }

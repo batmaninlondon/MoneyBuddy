@@ -31,7 +31,7 @@ public class PaymentStatusAction extends ActionSupport implements SessionAware  
     	try {
     		
     		Trading trading = new Trading();
-    		trading.checkPaymentStatus(sessionMap.get("customerId").toString());
+    		//trading.checkPaymentStatus(sessionMap.get("customerId").toString());
 			String str = "success";
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    

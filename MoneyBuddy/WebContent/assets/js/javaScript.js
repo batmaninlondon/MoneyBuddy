@@ -12,40 +12,40 @@
 			document.getElementById("sip-duration").innerHTML=minSipDur;
 			document.getElementById("sipPerMonth").innerHTML=minSipAmt;
 			document.getElementById("upfrontInvestment").innerHTML=minLumsumAmount;
+			document.getElementById("tot-investment-id-value").innerHTML=minLumsumAmount;
 			document.getElementById("transaction-type-value").value = 'UPFRONT';
 		}
 		function showNewUpfrontInvestment(newValue)
 		{
 			document.getElementById("upfrontInvestment").innerHTML=newValue;
+			document.getElementById("tot-investment-id-value").innerHTML=newValue;
 		}
 		
 
 		function setTransactionType(transactionType)  {
 			
-			document.getElementById("transaction-type").value = transactionType;
+			//alert('setTransactionType called : transactionType : '+transactionType);
+			document.getElementById("transaction-type-value").value = transactionType;
+			
 			
 		}
 				
 		function newUpdate(){
 			
 			var transactionType = document.getElementById("transaction-type-value").value;
-			
+			//alert('newUpdate called : transactionType : '+transactionType);
 			//alert('transactionType : '+transactionType);
 			if (transactionType == "SIP") {
 				document.getElementById("sip-amount-value").value = document.getElementById("sipPerMonth").innerHTML;
 				document.getElementById("upfront-investment-value").value = "0";
 				document.getElementById("sip-duration-value").value = document.getElementById('sip-duration').innerHTML; // in years
 				document.getElementById("sip-date-value").value = document.getElementById('sip-date').value;
-				document.getElementById("plan-name-value").value = "SIP";
 			} else{
 				document.getElementById("sip-amount-value").value = "0";
 				document.getElementById("upfront-investment-value").value = document.getElementById("upfrontInvestment").innerHTML;
 				document.getElementById("sip-duration-value").value = "0"; // in years
 				document.getElementById("sip-date-value").value = "0";
-				document.getElementById("plan-name-value").value = "SAVE_TAX";
 			}
-
-			document.getElementById("risk-category-value").value = "3";
 			
 			document.formEstimate.submit();
 			
@@ -53,7 +53,7 @@
 		
 		function populateBankDetails(tranDetailId)  
 	    {
-				alert('tranDetailId : '+tranDetailId);
+				//alert('tranDetailId : '+tranDetailId);
 				document.getElementById("tran-detail-id-value").value = tranDetailId;
 				document.formPayment.submit();
 	    }
@@ -151,21 +151,6 @@
                     	document.formContactUsMail.submit();
                       };
                       
-                  	function uploadCutsomerNav(el) 
-                	{
-                		
-                		var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
-                		var folioNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
-                		var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
-                		var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();	
-                		
-                		document.getElementById("action-bse-order-id").value = bseOrderId;
-                		document.getElementById("action-folio-number").value = folioNum;
-                		document.getElementById("action-units-purchased").value = unitsPurchased;
-                		document.getElementById("action-nav-value").value = navValue;
-                		
-                		document.formUploadNav.submit();
-                		
-                	}
+
                     
-                    
+

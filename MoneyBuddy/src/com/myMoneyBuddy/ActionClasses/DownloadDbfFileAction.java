@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.Utils.CommonUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -42,7 +43,9 @@ public class DownloadDbfFileAction extends ActionSupport implements SessionAware
 
        		System.out.println("DownloadDbfFileAction class : Downloading DBF File");
 
-       		copyFileUsingFileUtils(srcDirName+fileName,destDirName+fileName);
+       		CommonUtil commonUtil= new CommonUtil();
+       		
+       		commonUtil.copyFileUsingFileUtils(srcDirName+fileName,destDirName+fileName);
 
 
        		 System.out.println("DownloadDbfFileAction class : Downloaded DBF File");
@@ -63,21 +66,7 @@ public class DownloadDbfFileAction extends ActionSupport implements SessionAware
 		} 
 
     }
-    
 
-	public static boolean copyFileUsingFileUtils(String srcFilePath, String destFilePath){
-		boolean isFileCopied = false;
-		
-		try {
-			FileUtils.copyFile(new File(srcFilePath), new File(destFilePath),true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return isFileCopied;
-	}
-    
     @Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;

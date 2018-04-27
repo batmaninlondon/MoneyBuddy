@@ -8,9 +8,11 @@ package com.myMoneyBuddy.ActionClasses;
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.CommonUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,10 +34,11 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     private String sipAmount;
     private String sipDuration; // in years
     private String sipDate;
-    private String riskCategory;
-    private String planName;
-    private String totalInvestment;
+    //private String riskCategory;
+    //private String planName;
+    //private String totalInvestment;
     private String transactionType;
+    private String totalInvestment;
     
     HashMap<Integer,Double> predictedValueList = new HashMap<Integer,Double>();
     String regexDecimal = "(\\d+(?:\\.\\d+)?)";
@@ -58,8 +61,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			System.out.println("After calculation : upfrontInvestment : "+getUpfrontInvestment()+ " and sipAmount : "+getSipAmount());
 
 	    	QueryProducts queryProduct = new QueryProducts();
-	    	System.out.println("EstimateAction class : execute method : riskCategory : "+getRiskCategory());
-	    	System.out.println("EstimateAction class : execute method : planName : "+getPlanName());
+	    	//System.out.println("EstimateAction class : execute method : riskCategory : "+getRiskCategory());
+	    	//System.out.println("EstimateAction class : execute method : planName : "+getPlanName());
 	    	
 	    	HashMap<String,Double> productRatioList =  (HashMap<String,Double>)sessionMap.get("productRatioList");
 	    	
@@ -80,6 +83,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			logger.debug("EstimateAction class - execute method - stored sipDuration : "+getSipDuration()+" in sessionMap");
 			logger.debug("EstimateAction class - execute method - stored sipDate : "+getSipDate()+" in sessionMap");
 			
+			//Double totalInvestment= 0.0;
 			if ("UPFRONT".equals(getTransactionType())) {
 				System.out.println("EstimateAction class : execute method : Inside UPFRONT loop .... ");
 				totalInvestment = Double.toString(Double.parseDouble(getUpfrontInvestment())) ;
@@ -87,7 +91,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			}
 			else {
 				System.out.println("EstimateAction class : execute method : Inside SIP loop .... ");
-				totalInvestment = Double.toString( Double.parseDouble(getSipAmount()));
+				totalInvestment = Double.toString(Double.parseDouble(getSipAmount()));
 
 				Calendar cal = Calendar.getInstance();
 				
@@ -100,13 +104,15 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				String sipStartMonth;
 				String sipEndMonth;
 				
+				CommonUtil commonUtil= new CommonUtil();
+				
 				if ( Integer.parseInt(sipDate) <=   (cal.get(Calendar.DATE)) ) {
-					sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
-					sipEndMonth = theMonth(cal.get(Calendar.MONTH));
+					sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(0) : commonUtil.theMonth(cal.get(Calendar.MONTH)+1));
+					sipEndMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
 				}
 				else {
-					sipStartMonth = theMonth(cal.get(Calendar.MONTH));
-					sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(11) : theMonth(cal.get(Calendar.MONTH)-1));
+					sipStartMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+					sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(11) : commonUtil.theMonth(cal.get(Calendar.MONTH)-1));
 				}
 				System.out.println(" sipEndMonth : "+sipEndMonth);
 				System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
@@ -117,7 +123,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				String sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
 				String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
 				
-				List<String> fundIds = (List<String>) productRatioList.keySet();
+				List<String> fundIds = new ArrayList<String> (productRatioList.keySet());
 				QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 				
 				boolean changeSipDate = queryPrimaryFundDetails.checkBufferDays(sipStartDate,fundIds);
@@ -126,8 +132,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				if (changeSipDate) {
 					
 					System.out.println("BEFORE CHANGE : sipStartMonth : "+sipStartMonth+" and sipEndMonth : "+sipEndMonth);
-					sipStartMonth = (("12".equals(sipStartMonth)) ? theMonth(0) : theMonth(Integer.parseInt(sipStartMonth)));
-					sipEndMonth = (("12".equals(sipEndMonth)) ? theMonth(0) : theMonth(Integer.parseInt(sipEndMonth)));
+					sipStartMonth = (("12".equals(sipStartMonth)) ? commonUtil.theMonth(0) : commonUtil.theMonth(Integer.parseInt(sipStartMonth)));
+					sipEndMonth = (("12".equals(sipEndMonth)) ? commonUtil.theMonth(0) : commonUtil.theMonth(Integer.parseInt(sipEndMonth)));
 					System.out.println("AFTER CHANGE : sipStartMonth : "+sipStartMonth+" and sipEndMonth : "+sipEndMonth);
 					sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
 					sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
@@ -149,13 +155,13 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			
 			
 			
-			sessionMap.put("riskCategory", getRiskCategory());
-			sessionMap.put("planName", getPlanName());
-			sessionMap.put("totalInvestment", totalInvestment);
+			//sessionMap.put("riskCategory", getRiskCategory());
+			//sessionMap.put("planName", getPlanName());
+			//sessionMap.put("totalInvestment", totalInvestment);
 
-			logger.debug("EstimateAction class - execute method - stored riskCategory : "+getRiskCategory()+" in sessionMap");
-			logger.debug("EstimateAction class - execute method - stored planName : "+getPlanName()+" in sessionMap");
-			logger.debug("EstimateAction class - execute method - stored totalInvestment : "+totalInvestment+" in sessionMap");
+			//logger.debug("EstimateAction class - execute method - stored riskCategory : "+getRiskCategory()+" in sessionMap");
+			//logger.debug("EstimateAction class - execute method - stored planName : "+getPlanName()+" in sessionMap");
+			//logger.debug("EstimateAction class - execute method - stored totalInvestment : "+totalInvestment+" in sessionMap");
 
 			System.out.println("EstimateAction class : execute method : upfrontInvestment : "+sessionMap.get("upfrontInvestment").toString());
 			System.out.println("EstimateAction class : execute method : sip : "+sessionMap.get("sipAmount").toString()); 
@@ -193,6 +199,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				return "SIP";
 			}
 			else {
+				System.out.println("EstimateAction execute method : totalInvestment : "+getTotalInvestment());
 				return "UPFRONT";
 			}
     	
@@ -224,19 +231,19 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
         sessionMap = (SessionMap<String, Object>) map;
     }
     
-	public String getTotalInvestment() {
+	/*public String getTotalInvestment() {
 		return totalInvestment;
 	}
 	public void setTotalInvestment(String totalInvestment) {
 		this.totalInvestment = totalInvestment;
-	}
-	public String getRiskCategory() {
+	}*/
+	/*public String getRiskCategory() {
         return riskCategory;
     }
 
     public void setRiskCategory(String riskCategory) {
         this.riskCategory = riskCategory;
-    }
+    }*/
 
     public String getSipAmount() {
 		return sipAmount;
@@ -272,13 +279,13 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 		this.sipDate = sipDate;
 	}
 
-	public String getPlanName() {
+	/*public String getPlanName() {
         return planName;
     }
 
     public void setPlanName(String planName) {
         this.planName = planName;
-    }
+    }*/
 
 	public String getTransactionType() {
 		return transactionType;
@@ -287,6 +294,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
+	
+	
 /*
 	public InputStream getStream() {
 		return stream;
@@ -297,9 +306,12 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	}*/
 
 
-	public static String theMonth(int month){
-	    String[] monthNames = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-	    return monthNames[month];
+	public String getTotalInvestment() {
+		return totalInvestment;
+	}
+
+	public void setTotalInvestment(String totalInvestment) {
+		this.totalInvestment = totalInvestment;
 	}
 
 }

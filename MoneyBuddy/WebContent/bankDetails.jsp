@@ -85,7 +85,7 @@
 <body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;">
 	<%
 	System.out.println("transactionType : "+session.getAttribute("transactionType"));
-	System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));
+	/* System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus")); */
 	%>
    <!--  <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> -->
 
@@ -193,6 +193,15 @@
 									        <option value="SBI">SBI Bank</option>
 									        <option value="HDF">HDFC Bank</option>
 									        <option value="162">KOTAK Bank</option>
+									        <option value="UTI">Axis Bank</option>
+									        <option value="PNB">Punjab National Bank</option>
+									        <option value="SIB">South Indian Bank</option>
+									        <option value="SCB">Standard Chartered Bank</option>
+									        <option value="UBI">Union Bank Of India</option>
+									        <option value="UNI">United Bank Of India</option>
+									        <option value="YBK">Yes Bank Ltd</option>
+									        <option value="RBL">Ratnakar Bank</option>
+									        <option value="DCB">DCB</option>
 							      		</select>
 									</div>
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
@@ -266,21 +275,21 @@
 											<s:set var="transactionType" value="#session.transactionType" />
 											<s:if test="#transactionType.equals('UPFRONT')">
 												<% System.out.println("Inside Upfront"); %>
-												<%-- <s:iterator value="#session.customerCartList" var="customerCartListElement">
+												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
 													</tr>
-												</s:iterator> --%>
+												</s:iterator>
 											</s:if>
 											<s:else>
 												<% System.out.println("Inside Sip"); %>
-												<%-- <s:iterator value="#session.productList" var="productListElement">
+												<s:iterator value="#session.productList" var="productListElement">
 													<tr>
 													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.key"/></td>
 													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.value"/></td>
 													</tr>
-												</s:iterator> --%>
+												</s:iterator>
 											</s:else>
 											 
 										</tbody>

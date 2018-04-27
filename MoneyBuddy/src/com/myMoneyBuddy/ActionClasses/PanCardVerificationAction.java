@@ -96,24 +96,24 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		if ( (Integer.parseInt(num1) % 2) != 0) {
 			
 			kycStatus= "DONE";
-			sessionMap.put("kycStatus", "DONE");
+			//sessionMap.put("kycStatus", "DONE");
 			//str = "kycDone";
 		}
 		else {
 			kycStatus = "NOTDONE";
-			sessionMap.put("kycStatus", "NOTDONE");
+			//sessionMap.put("kycStatus", "NOTDONE");
 			//str = "kycNotDone";
 			
 		}
 		
 		updatecustomer.updatePancardAndKycStatus(customerId, getPanCard(), kycStatus);
 		
-		sessionMap.put("panCard", getPanCard());
-    	logger.debug("PanCardVerificationAction class : execute method : stored panCard : "+getPanCard()+" in session id : "+sessionMap.getClass().getName());
+		/*sessionMap.put("panCard", getPanCard());
+    	logger.debug("PanCardVerificationAction class : execute method : stored panCard : "+getPanCard()+" in session id : "+sessionMap.getClass().getName());*/
     	
-    	sessionMap.put("kycStatus", kycStatus);
+    	/*sessionMap.put("kycStatus", kycStatus);
     	logger.debug("PanCardVerificationAction class : execute method : stored kycStatus : "+kycStatus+" in session id : "+sessionMap.getClass().getName());
-    	
+    	*/
 		// Savita Wadhwani - We need to update this piece of code with real API - end
 
     	logger.debug("PanCardVerificationAction class : execute method : end");
