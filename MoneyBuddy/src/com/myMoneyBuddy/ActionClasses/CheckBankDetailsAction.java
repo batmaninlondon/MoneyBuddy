@@ -4,12 +4,19 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
+import com.myMoneyBuddy.DAOClasses.QueryOrderStatus;
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionContext;
@@ -59,6 +66,43 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    	    
 	    	//System.out.println("tranDetailId from request set to : "+tranDetailId);
 	    	setTranDetailId(getTranDetailId());
+	    	
+	    	
+	    	if (!"NotSet".equals(getTranDetailId())) {
+	    		
+	    		QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+				TransactionDetails transactionDetails =  queryTransactionDetails.getTransactionDetails(getTranDetailId());
+				
+				if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
+				
+					sessionMap.put("transactionType", "UPFRONT");
+					logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored transactionType set as UPFRONT in sessionMap");
+					
+					QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+					
+					String fundName = queryPrimaryFundDetails.getFundName(transactionDetails.getProductId());
+					
+					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
+					
+					String userStatus = queryOrderStatus.getStatusDetail(transactionDetails.getTransactionStatus());
+					
+		    		List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
+			    	
+		    		customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),fundName,transactionDetails.getTransactionAmount(),null,userStatus));
+			    	
+			    	sessionMap.put("customerCartList", customerCartList);
+			    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    
+				}
+				else {
+					
+					sessionMap.put("transactionType", "SIP");
+					logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored transactionType set as SIP in sessionMap");
+					
+					
+				}
+		    	
+	    	}
+	    	
 	    	
 	    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - tranDetailId set to - "+getTranDetailId());
 	    	

@@ -39,7 +39,7 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		System.out.println("transactionFolioNum : "+getFolioNum()+" : unitPrice : "+getNavValue()+" : quantity : "+getUnitsPurchased()+" : bseOrderId : "+getBseOrderId());
     		
-    		if (!NumberUtils.isNumber(getUnitsPurchased()))  {
+    		/*if (!NumberUtils.isNumber(getUnitsPurchased()))  {
     			
     			addActionMessage("Entered Units is not a number !! ");
     			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
@@ -53,7 +53,7 @@ public class UploadCustomerNavAction extends ActionSupport {
     			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
     			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
     			return INPUT;
-    		}
+    		}*/
     		
     		hibernateSession.beginTransaction();
     		
@@ -70,12 +70,12 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		System.out.println("calculated amount : "+calculatedAmount+" : amount : "+amount);
     		
-    		if ( Double.compare(amount, calculatedAmount) != 0 )  {
+    		/*if ( Double.compare(amount, calculatedAmount) != 0 )  {
     			addActionMessage("Entered values are not correct !! ");
     			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
     			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
     			return INPUT;
-    		}
+    		}*/
     		
     		hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "

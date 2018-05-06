@@ -278,4 +278,45 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
+	public String getFundName(String fundId) throws MoneyBuddyException{
+
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		try
+		{
+			String fundName = null;
+			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - start");
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId ");
+			query.setParameter("fundId",fundId);
+			
+			if (query.list().size() != 0) {
+				fundName = query.uniqueResult().toString();
+			}
+
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - return fundName - "+fundName);
+			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - end");
+			
+			return fundName;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
 }

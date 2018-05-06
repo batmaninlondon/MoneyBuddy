@@ -268,8 +268,8 @@
                                 <div class="tooltipInner"></div>
                                 </div>
                             
-                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;!&nbsp;</span>
-                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp;10% </span>
+                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;&nbsp;</span>
+                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp; </span>
                             </div>
                            
                         </div>

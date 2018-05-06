@@ -93,6 +93,9 @@ public class QueryProducts {
 		{
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - start");
 		
+			Date todayDate = Calendar.getInstance().getTime();
+			SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
 			hibernateSession.beginTransaction();
 
 			List<PortfolioDataModel> portfolioDataModel = new LinkedList<PortfolioDataModel>();
@@ -133,7 +136,7 @@ public class QueryProducts {
 			       
 			     DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
 			     Date date = (Date)formatter.parse(transactionStartDate);
-			     SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+			     
 			     transactionStartDate = newFormat.format(date);
 			     System.out.println("transactionStartDate : "+transactionStartDate);
 			     
@@ -169,6 +172,8 @@ public class QueryProducts {
 			       
 			     buyRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+row[0]+"' and customerId='"+customerId+"' and buySell='BUY' and unitPrice is not null ");
 			       
+			     
+			     
 			     for (Iterator buyIt=buyRecordsQuery.iterate(); buyIt.hasNext();)  {
 			    	   
 			    	 Object[] buyRecordRow = (Object[]) buyIt.next();
@@ -209,11 +214,22 @@ public class QueryProducts {
 			    	 System.out.println("transactionDate : "+transactionDate);
 					       	
 			    	 dates.add(strToDate(transactionDate));
+			    	 
+			    	 System.out.println("AMOUNT ADDED FOR XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
+			    	 System.out.println("transactionDate : "+transactionDate);
+			    	 System.out.println("DATE ADDED FOR XIRR : "+strToDate(transactionDate));
 			    	 amounts.add(Double.parseDouble(buyRecordRow[1].toString()));
 				           
+			    	 
+			         
+			         
 			    	 totalDates.add(strToDate(transactionDate));
 			    	 totalAmounts.add(Double.parseDouble(buyRecordRow[1].toString()));
-				           
+			    	 
+			    	 System.out.println("AMOUNT ADDED FOR TOTAL XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
+			    	 System.out.println("DATE ADDED FOR TOTAL XIRR : "+strToDate(transactionDate));
+				     
+				     
 			    	 System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));
 			       
 			     }
@@ -221,30 +237,43 @@ public class QueryProducts {
 			     currentAmount = availableUnits* Double.parseDouble(currentNavValue);
 			     rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
 		       
+			     amounts.add(currentAmount*-1);
+			     dates.add(strToDate(newFormat.format(todayDate)));
+		         
 			     xirr = Newtons_method(0.1, amounts, dates);
+			     xirr = xirr*100;
+			     
 			     System.out.println("Total availableUnits : "+ String.format("%.4f", availableUnits));
 			     System.out.println("Total invested Amount : "+ String.format("%.4f", investedAmount));
 			     System.out.println("Current Amount : "+ String.format("%.4f", currentAmount));
-			     System.out.println("XIRR : "+ String.format("%.4f", xirr));
+			     System.out.println("XIRR : "+ String.format("%.2f", xirr));
 			      
 			       
 			     portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),row[1].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",xirr),transactionStartDate));
 			}
-			 
-			totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
-			 
-			Double TotalInvestedAmount = 0.0;
-			Double TotalCurrentAmount = 0.0;
+			
+			
+			
+			Double totalInvestedAmount = 0.0;
+			Double totalCurrentAmount = 0.0;
 			for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
 					
 					
-				TotalInvestedAmount = TotalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
-				TotalCurrentAmount = TotalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
+				totalInvestedAmount = totalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
+				totalCurrentAmount = totalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
 			}
 				
-			Double TotalrateOfGrowth = ((TotalCurrentAmount - TotalInvestedAmount)/TotalInvestedAmount)*100;
+			Double TotalrateOfGrowth = ((totalCurrentAmount - totalInvestedAmount)/totalInvestedAmount)*100;
 
-			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",TotalInvestedAmount),String.format("%.2f",TotalCurrentAmount),String.format("%.2f",totalXirr),""));
+			totalAmounts.add(totalCurrentAmount*-1);
+			totalDates.add(strToDate(newFormat.format(todayDate)));
+		     
+			totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
+			totalXirr = totalXirr*100;
+			
+			System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
+			
+			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",totalXirr),""));
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return portfolioDataModel of "+portfolioDataModel.size()+ " record");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");
@@ -289,7 +318,7 @@ public class QueryProducts {
 			
             Query buyRecordsQuery, sellRecordsQuery;
 			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.fundName , t.transactionAmount, t.transactionDate "
-										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='4' and t.productId = p.fundId");
+										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='5' and t.productId = p.fundId");
 			
 			query.setParameter("customerId",customerId);
 	           
@@ -661,7 +690,7 @@ public class QueryProducts {
 	    }
 	
 	    return x0;
-	}
+	}	
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	public Date strToDate(String str){

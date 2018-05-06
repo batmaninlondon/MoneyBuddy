@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class CustomerDetails {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    //@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="CUSTOMER_ID")
     private String customerId;
 
@@ -58,10 +58,11 @@ public class CustomerDetails {
         
     }
 
-	public CustomerDetails(String gender, String occupation, String dateOfBirth, String addressLineOne,
+	public CustomerDetails(String customerId, String gender, String occupation, String dateOfBirth, String addressLineOne,
 			String addressLineTwo, String addressLineThree, String residentialCity, String residentialState,
 			String residentialPin, String residentialCountry, String taxStatus) {
 		super();
+		this.customerId = customerId;
 		this.gender = gender;
 		this.occupation = occupation;
 		this.dateOfBirth = dateOfBirth;

@@ -98,14 +98,21 @@
 	
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
+		
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
+			
 	    	<div class="profile">
-	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
+	        	<div class="name g-text-right--xs g-margin-r-9--xs" >
 	        		<s:form action="redirectAction" method="post">
 	        			<s:if test="#session.customerCartList.size() == 1 ">
-	        				<s:submit class="btn g-color--white g-margin-t-15--xs disabled" value="Continue" style="background-color:black; "/>
+	        				<a href="<s:url action="fetchFundDetailsAction"/>" class="btn g-color--white "  style="background-color:black;" >Back</a>
+	        				<button type="button"  class="btn g-color--white g-margin-t-15--xs disabled"  style="background-color:black; ">Continue</button>
+	        				<%-- <s:submit class="btn g-color--white g-margin-t-15--xs disabled" value="Continue" style="background-color:black; "/> --%>
+	        			
 	        			</s:if>
 	        			<s:else>
+	        			<a href="<s:url action="fetchFundDetailsAction"/>" class="btn g-color--white "  style="background-color:black;" >Add more to Cart</a>
+	        			<!-- <button type="button"  class="btn g-color--white "  style="background-color:black;" onClick="allFunds.jsp" >Back</button> -->
 	        				<s:submit class="btn g-color--white g-margin-t-15--xs " value="Continue" style="background-color:black; "/>
 	        			</s:else>
 	        		</s:form>

@@ -5,6 +5,8 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
+import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import org.apache.log4j.Logger;
@@ -28,7 +30,16 @@ public class UpdateCustomerDetails {
 
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
+			
+			
+			CustomerDetails tempCustomerDetails  = new CustomerDetails(customerId, gender, occupation, dateOfBirth, addressLineOne,
+					addressLineTwo, addressLineThree, residentialCity, residentialState,
+					residentialPin, residentialCountry, taxStatus); 		
+
+			hibernateSession.saveOrUpdate(tempCustomerDetails);
+			
+			
+			/*Query query = hibernateSession.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
 					+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
 					+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
 					+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
@@ -49,7 +60,7 @@ public class UpdateCustomerDetails {
 
 			query.setParameter("customerId", customerId);
 			
-			int result = query.executeUpdate();
+			int result = query.executeUpdate();*/
 			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateCustomerDetails class - updateCustomerDetails method - customerId - "+customerId+" - updated CustomerDetails record ");

@@ -569,9 +569,9 @@ public class Trading {
 
 				Iterator it = orderNums.getString().iterator();
 				
-				while(it.hasNext())  {
+				/*while(it.hasNext())  {
 					System.out.println("oredrNums : "+it.next().toString());
-				}
+				}*/
 				
 				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
 				RequestParam requestParam = new RequestParam();
@@ -660,9 +660,9 @@ public class Trading {
 
 				Iterator it = orderNums.getString().iterator();
 				
-				while(it.hasNext())  {
+				/*while(it.hasNext())  {
 					System.out.println("oredrNums : "+it.next().toString());
-				}
+				}*/
 				
 				String bseOrderId = null;
 				int result;
@@ -671,8 +671,9 @@ public class Trading {
 				
 				while(it.hasNext())  {
 					
+					
 					bseOrderId = it.next().toString();
-					System.out.println("bseOrderId : "+bseOrderId);
+					System.out.println("bseOrderId added in orderNums : "+bseOrderId);
 					hibernateSession.beginTransaction();
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus = :transactionStatus where bseOrderId = :bseOrderId and customerId = :customerId");
 
@@ -698,6 +699,10 @@ public class Trading {
 					query.setParameter("customerId", customerId);
 					transactionDetailQueryResult = query.list();
 					
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					
 					query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
 					query.setParameter("fundId", transactionDetailQueryResult.get(0)[0]);
 					fundName = query.uniqueResult().toString();
@@ -705,14 +710,22 @@ public class Trading {
 					hibernateSession.getTransaction().commit();
 					
 					System.out.println(" Adding a new row in orderDataModelList for fundName : "+fundName+" and fund id : "+transactionDetailQueryResult.get(0)[0]);
+					
+					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
+					
+					String userStatus = queryOrderStatus.getStatusDetail(transactionDetailQueryResult.get(0)[3].toString());
 					orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[4].toString(), fundName, 
 											transactionDetailQueryResult.get(0)[1].toString(), transactionDetailQueryResult.get(0)[2].toString(),
-											transactionDetailQueryResult.get(0)[3].toString()));
+											userStatus ));
 					
 					
 				}
 				
-			
+				for ( int i =0;i<orderDataModel.size();i++)  {
+					
+					System.out.println("orderDataModel.get("+i+").getFundName()"+orderDataModel.get(i).getFundName());
+					
+				}
 				sessionMap.put("orderDataModel", orderDataModel);
 		    	
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - stored orderDataModel in sessionMap");
@@ -721,13 +734,14 @@ public class Trading {
 		    	
 			}
 			else {
-				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for re-try payment for existing failed order - start");
+				logger.debug("Trading class - executeTrade method - customerId - "+customerId+"  - flow for re-try payment for existing failed order - start");
 				System.out.println("Inside else case : tranDetailId is "+tranDetailId);
 				
 				
 				QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 				TransactionDetails transactionDetails =  queryTransactionDetails.getTransactionDetails(tranDetailId);
 				
+				transactionType = transactionDetails.getTransactionType();
 				orderNums.getString().add(transactionDetails.getBseOrderId());
 				
 				PasswordRequest passwordRequest = new PasswordRequest();
@@ -757,9 +771,9 @@ public class Trading {
 				
 				Iterator it = orderNums.getString().iterator();
 				
-				while(it.hasNext())  {
+				/*while(it.hasNext())  {
 					System.out.println("oredrNums : "+it.next().toString());
-				}
+				}*/
 				
 				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
 				RequestParam requestParam = new RequestParam();
@@ -772,7 +786,7 @@ public class Trading {
 				requestParam.setMemberCode(objFact.createRequestParamMemberCode(configProperties.getProperty("MEMBER_ID")));
 				requestParam.setMode(objFact.createRequestParamMode(bankMode));
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
-				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(Double.toString(totalPaymentAmount)));
+				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(transactionDetails.getTransactionAmount()));
 
 				System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());
 				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
@@ -788,11 +802,22 @@ public class Trading {
 				String responseStatus = paymentGateway.getStatus().getValue();
 				System.out.println("responseStatus : "+responseStatus);
 				
+				QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
+				
+				String userStatus = queryOrderStatus.getStatusDetail(transactionDetails.getTransactionStatus());
+				
+				QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+				
+				String fundName = queryPrimaryFundDetails.getFundName(transactionDetails.getProductId());
+				
+				orderDataModel.add(new OrderDataModel(tranDetailId, fundName, 
+									transactionDetails.getTransactionAmount(), transactionDetails.getTransactionDate(),userStatus ));
+				
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"initiated");
 				
 				if ("101".equals(responseStatus))  {
 					hibernateSession.beginTransaction();
-					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
+					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='6' where transactionId = :transactionId");
 					query.setParameter("transactionId", tranDetailId);
 					int updateResult = query.executeUpdate();
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"failed with paymentGateway");

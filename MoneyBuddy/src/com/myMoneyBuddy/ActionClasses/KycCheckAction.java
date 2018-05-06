@@ -97,7 +97,11 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			updateCustomerDetails.updateCustomerDetails(customerId, frmtdDateForDB, getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), 
 					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(), getOccupation());
 	    	
-	    	System.out.println(" Returned Success !!");
+			UpdateCustomer updateCustomer = new UpdateCustomer();
+	    	updateCustomer.updateNameAndCustDetUploadedStatus(customerId, getCustomerName(), "Y");
+	    	 
+	   
+	    	//System.out.println(" Returned Success !!");
 	
 	    	QueryCustomer queryCustomer = new QueryCustomer();
 	    	

@@ -45,6 +45,7 @@
 		var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
 		var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
 		
+		alert('unitsPurchased : '+unitsPurchased);
 		document.getElementById("action-bse-order-id").value = bseOrderId;
 		document.getElementById("action-folio-number").value = folioNum;
 		document.getElementById("action-units-purchased").value = unitsPurchased;
@@ -161,10 +162,10 @@
 									    	</s:else>
 									    </td>
 									    <td class="center g-font-size-14--xs">
-									    	<s:fielderror fieldName="unitsPurchased" class="g-color--red" />
+									    	<%-- <s:fielderror fieldName="unitsPurchased" class="g-color--red" /> --%>
 										  	<%-- <s:textfield class="form-control" id="units-purchased" placeholder="Enter Units" /> --%>
 									    	<input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" >
-									    	<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
+									    	
 									    </td>
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
@@ -179,7 +180,7 @@
 								</s:iterator>
 								<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
 								<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
-								
+								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
 								<s:hidden id="action-nav-value" name="navValue"></s:hidden>
 								</s:form>
 							 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java"
+	import="com.myMoneyBuddy.DAOClasses.Trading"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -108,10 +110,10 @@
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-4 g-bg-color--gray-light">Id</th>
+								<th class="center col-md-1 g-bg-color--gray-light">Id</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Date</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Date</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Status</th>
 							</tr>
 						</thead>
@@ -131,6 +133,20 @@
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
+
+	<% 
+	if(null != session.getAttribute("orderDataModel")) {
+		System.out.println("orderDataModel is not null ");
+		session.removeAttribute("orderDataModel");
+	}
+	else {
+		System.out.println("orderDataModel is  null ");
+	}
+	System.out.println("calling trading ");
+	Trading trading = new Trading();
+	trading.checkPaymentStatus();
+	
+	%> 
 
 </body>
 	
