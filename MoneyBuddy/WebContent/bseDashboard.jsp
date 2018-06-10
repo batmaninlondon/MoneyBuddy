@@ -22,6 +22,8 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
 
         <!-- Vendor Styles -->
+        
+         
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
@@ -47,6 +49,8 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	    <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+	   
+	   
 	
     </head>
     
@@ -249,10 +253,10 @@
                 <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
                     <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
                         <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Total Value </h4>
+                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Invested Amount </h4>
                              <div >
-                                <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
-                                <figure id="tot-val" class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
+                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
+                                <figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter"></figure>
                             </div>
                            
                         </div>
@@ -260,10 +264,66 @@
                     
                     <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
                         <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Total Growth </h4>
+                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Profit </h4>
                              <div >
-                                <span class="g-font-size-60--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
-                                <figure id="tot-grwth" class="g-display-inline-block--xs g-font-size-70--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
+                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
+                                <figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                  <%--   <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Profit </h4>
+                             <div >
+                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
+                                <figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
+                                 <!-- <div class="tooltipOuter">
+                                <div class="tooltipInner"></div>
+                                </div> -->
+                            
+                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;&nbsp;</span>
+                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp; </span>
+                            </div>
+                           
+                        </div>
+                    </div> --%>
+                    
+                    
+                    
+                </div>
+                
+                <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
+                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Current Value </h4>
+                             <div >
+                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
+                                <figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Growth Rate </h4>
+                             <div >
+                                <figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            	<span class="g-font-size-40--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                   <%--  <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs" >
+                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Growth Rate</h4>
+                             <div >
+                                
+                                <figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
+                                 
                                  <div class="tooltipOuter">
                                 <div class="tooltipInner"></div>
                                 </div>
@@ -273,12 +333,14 @@
                             </div>
                            
                         </div>
-                    </div>
+                    </div> --%>
                     
                     
                     
                 </div>
-                 <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--white text-left font-weight-bold g-hor-divider__solid--white  "></h3>
+                
+                
+                <%--  <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--white text-left font-weight-bold g-hor-divider__solid--white  "></h3>
                  <div class="row" >
                      <div class="col-md-1 col-xs-0" >&nbsp;</div>
                       <div class="col-md-4 col-xs-12 g-full-width--xs g-margin-b-30--xs g-margin-b-0--lg g-color--white">
@@ -307,7 +369,7 @@
                         &nbsp;
                         </div>
                     
-                </div>
+                </div> --%>
                   
             </div>
        
@@ -324,7 +386,7 @@
                 
                 <!--  Portfolio Summary Chart Start-->
                 
-                <div  id="contents" class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
+                <!-- <div  id="contents" class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
 	              	<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
 	              		<div class="g-text-center--xs g-margin-b-10--xs">
 	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary Chart</h3>
@@ -343,30 +405,31 @@
 							<canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
 						</div> 
 	              	</div>
-	             </div>
+	             </div> -->
 	                
-                </div>
+               
                	<!--  Portfolio Summary Chart End -->
-                
+                 </div>
                 
                <!--  Portfolio Summary Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary</h3>
+                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Details</h3>
                 		</div> 
 			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
 								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
 							        <thead>
 							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Id</span></th>
+							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs ">Unit</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Current Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs ">Total units held</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Current Value</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs ">Profit</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate<br/>(% per year)</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
 							            </tr>
 							        </thead>
@@ -379,7 +442,7 @@
                  
                <!--  Pending Order Table Start -->
                 
-                <div class="row" style="padding: 0px; margin: 20px;">
+                <div class="row" style="padding: 0px; margin: 20px;" id="pendingOrderTableRow">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
                     		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Pending Orders</h3>
@@ -391,7 +454,7 @@
 							            <tr class="g-bg-color--primary" >
 							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
@@ -408,16 +471,17 @@
                 <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Running SIP</h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Active SIP's</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
 						<table id="siptable" class="display" cellspacing="0" width="100%">
 							<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 								<tr class="g-bg-color--primary">
+									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Start Date</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Next Sip Date</span></th>
+									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Category</span></th>
+									<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">SIP Amount</span></th>
+									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Debit Date</span></th>
 								</tr>
 							</thead>
 				   		</table>
@@ -435,18 +499,19 @@
                 <div class="row" style="padding: 0px; margin: 20px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Transction History </h3>
+                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Transaction History </h3>
                 		</div> 
 			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
 						<table id="transctionhistory" class="display" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">NAV</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
+										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
+										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center sort-date" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
+										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Amount</span></th>
+										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
+										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">NAV</span></th>
+										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
 									</tr>
 								</thead>
 				   			</table>
@@ -559,6 +624,8 @@
 		
 		
 		<!-- data table -->
+		
+		 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
@@ -574,7 +641,8 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
-		
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/numeric-comma.js"></script>
 		
 		
 	 <script>
@@ -585,10 +653,12 @@
 		
 		var totalCurrAmt;
 		var totalGrwthAmt;
+		var totalInvAmt;
+		var totalProAmt;
 		var portfolioData;	
 		var pendingOrderData;
 		var sipData;
-		var investmentDetailData;
+		/* var investmentDetailData; */
 		var allFundsInvestmentDetailsData;
 		var portfolioDataArray = [];
 		var pendingOrderDataArray = [];
@@ -599,27 +669,21 @@
 				
 				  		/* Initalization render chart */
 				  		initChart : function(){
-				  			/*Makes the AJAX calll (synchronous) to load a All Data*/
-				  		TUTORIAL_SAVVY.loadData();
 				  			
-				  		//document.getElementById('tot-val').value = totalCurrAmt;
-				  		$("#tot-val").html(totalCurrAmt);
-				  		$("#tot-grwth").html(totalGrwthAmt);
-				  		//alert('value : '+document.getElementById('tot-val').value);
-				  		//document.getElementById('tot-grwth').value = totalGrwthAmt;
-				  		
-				  		//$("#tot-values").load("bseDashboard.jsp #tot-values");
-				  		
-				  		
+				  		TUTORIAL_SAVVY.loadData();
+				  		$("#tot-inv-amt").html(TUTORIAL_SAVVY.addCommas(totalInvAmt));
+				  		$("#tot-prof-amt").html(TUTORIAL_SAVVY.addCommas(totalProAmt));
+				  		$("#tot-cur-amt").html(TUTORIAL_SAVVY.addCommas(totalCurrAmt));
+				  		$("#tot-grwth-amt").html(totalGrwthAmt);
 				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
 				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
 				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
 				  		TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData);
 				  		
-						barChartData 		= TUTORIAL_SAVVY.createBarChartData(portfolioDataArray);
-					    BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
-					    DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(portfolioDataArray);
-					    DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
+						//barChartData 		= TUTORIAL_SAVVY.createBarChartData(portfolioDataArray);
+					    //BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
+					    //DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(portfolioDataArray);
+					    //DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
 					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata();
 					    pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData();
 					    sipTable   			= TUTORIAL_SAVVY.loadSipdata();
@@ -627,11 +691,18 @@
 
 				  },
 				  
+				  addCommas : function ( num ) {
+	  	        		var parts = num.toString().split(".");
+	  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  	        		return parts.join(".");
+	  	        		
+	                 },
+				  
 				  
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth]);
 						});
 					  
 				  },
@@ -646,7 +717,7 @@
 				  createSipDataArray : function(sipData)
 				  {
 					  $.each(sipData,function(index,dataElement){
-						  sipDataArray.push([dataElement.fundName,dataElement.investedAmount,dataElement.sipStartDate,dataElement.nextSipDate]);
+						  sipDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.fundCategory,dataElement.investedAmount,dataElement.nextSipDate]);
 						});
 					  
 				  },
@@ -654,7 +725,7 @@
 				  createTransctionhistoryDataArray : function(transctionhistoryData)
 				  {
 					  $.each(transctionhistoryData,function(index,dataElement){
-						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.transactionDate,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
 						});
 					  
 				  },
@@ -663,13 +734,45 @@
 				  {
 					 var table =  $('#siptable').DataTable( {
 					    	data: sipDataArray,
-					    	"paging":   true,
+					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
-					        "searching": true,
+					        "searching": false,
 					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
+					        "columnDefs": [ 
+					        	{"className": "dt-center", "targets": "_all"},
+					  			{
+					  	            "searchable": false,
+					  	            "orderable": false,
+					  	            "targets": 0
+					  	        },
+					  	      	{
+					  	        	 "mRender": function ( data, type, row ) {
+					  	        		var parts = data.toString().split(".");
+					  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  	        		return parts.join(".");
+					  	        		
+					                 },
+					                 "targets": 'add-comma'
+					  	        }],
+					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+					  	        $("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
+					  	        return nRow;
+					  	    },
 							dom: 'lBfrtip',
+							"buttons": [
+					        	
+					        	{
+					        	extend: 'pdfHtml5',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download your SIP details in PDF format',
+					        	titleAttr: 'PDF',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	},
+					        	},
+					        	],
 					        
 					        
 							"language": {
@@ -693,18 +796,61 @@
 				  
 				  loadTransctionhistoryData : function()
 				  {
-					 var table =  $('#transctionhistory').DataTable( {
+					  $.fn.dataTable.moment( 'D MMM YYYY' );
+					  
+					  $('#transctionhistory').DataTable( {
 						 
 						 
 					    	data: transctionhistoryDataArray,
 					    	"paging":   true,
-					        "ordering": false,
+					        "ordering": true,
 					        "info":     false,
-					        "searching": true,
+					        "searching": false,
 					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+					        "lengthMenu": [ [ 10, 25, 50, -1], [10, 25, 50, "All"] ],
+					        "columnDefs": [ 
+					        	{"className": "dt-center", "targets": "_all"},
+					  			{
+					  	            "orderable": false,
+					  	            "targets": 'no-sort'
+					  	        },
+					  	      	{
+					  	        	 "mRender": function ( data, type, row ) {
+					  	        		var parts = data.toString().split(".");
+					  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  	        		return parts.join(".");
+					  	        		
+					                 },
+					                 "targets": 'add-comma'
+					  	        }
+					  	        ],
+					  	      order: [[ 2, 'asc' ]],
+					  	      
+					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+					  	        $("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
+					  	        return nRow;
+					  	    },
 					  		dom: 'lBfrtip',
-					        
+							"buttons": [
+								{
+					        	extend: 'excelHtml5',
+					        	text: '<i class="fa fa-file-excel-o"></i> Download Transaction details in Excel format',
+					        	titleAttr: 'Export to Excel',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	}
+					        	},
+					        	{
+					        	extend: 'pdfHtml5',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download Transaction details in PDF format',
+					        	titleAttr: 'PDF',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	},
+					        	},
+					        	],
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
@@ -727,14 +873,51 @@
 				  loadPortfoliodata : function()
 				  {
 					 var table =  $('#portfoliosummary').DataTable( {
+						 
 					    	data: portfolioDataArray,
-					    	"paging":   true,
+					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
-					        "searching": true,
+					        "searching": false,
 					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
-					  		"columnDefs": [ {"targets": 0,"visible": false}, { "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" }  ],
+					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
+					  		"columnDefs": [ 
+					  			{"className": "dt-center", "targets": "_all"},
+					  			{ "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" },
+					  			{
+					  	            "searchable": false,
+					  	            "orderable": false,
+					  	            "targets": 0
+					  	        },
+					  	        {
+					  	        	 "mRender": function ( data, type, row ) {
+					  	        		var parts = data.toString().split(".");
+					  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  	        		return parts.join(".");
+					  	        		
+					                 },
+					                 "targets": 'add-comma'
+					  	        }
+					  	        ],
+					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+					  	    	  
+					  	    	if ( aData[1] == "Total" ) {
+					  	    		
+					  	    	  	$('td:nth-child(2)', nRow).addClass('g-font-weight--700');
+					  	    	  	$('td:nth-child(3)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(5)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(6)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(7)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(8)', nRow).html(null);
+					  	    	  	return nRow;
+				  	    	  	}
+					  	    	else {
+					  	        	$("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
+					  	        	return nRow;
+					  	      	}
+				  	    	},
+				  	    	
+				  	    	
 					  		dom: 'lBfrtip',
 					  		//buttons: [ 'print', 'excelHtml5', 'csvHtml5', 'pdfHtml5'],
 					  		/* "buttons": [
@@ -753,7 +936,7 @@
 					        
 					        
 					        "buttons": [
-					        	{
+					        	/* {
 					        	extend: 'excelHtml5',
 					        	text: '<i class="fa fa-file-excel-o"></i> Excel',
 					        	titleAttr: 'Export to Excel',
@@ -770,17 +953,17 @@
 					        	exportOptions: {
 					        	columns: ':not(:last-child)',
 					        	}
-					        	},
+					        	}, */
 					        	{
 					        	extend: 'pdfHtml5',
-					        	text: '<i class="fa fa-file-pdf-o"></i> PDF',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio in PDF',
 					        	titleAttr: 'PDF',
 					        	title: 'Money Buddy - Account Statement',
 					        	exportOptions: {
 					        	columns: ':not(:last-child)',
 					        	},
 					        	},
-					        	{
+					        	/* {
 					        	extend: 'print',
 					        	exportOptions: {
 					        	columns: ':visible'
@@ -788,7 +971,7 @@
 					        	customize: function(win) {
 					        	$(win.document.body).find( 'table' ).find('td:last-child, th:last-child').remove();
 					        	}
-					        	},
+					        	}, */
 					        	],
 					        
 							"language": {
@@ -807,6 +990,7 @@
 				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
 					    } ); 
 					 
+					 
 				  
 					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
 					        var data = table.row( $(this).parents('tr') ).data();
@@ -821,18 +1005,43 @@
 				  {
 					 var table =  $('#pendingOrders').DataTable( {
 					    	data: pendingOrderDataArray,
-					    	"paging":   true,
+					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
-					        "searching": true,
+					        "searching": false,
 					        "responsive": true,
-					        "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
-					  		"columnDefs": [ { "targets": -1, "data": null, "defaultContent": "<button>Pay Now!</button>" }  ],
+					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
+					  		"columnDefs": [
+					  			{"className": "dt-center", "targets": "_all"},
+					  			{ "targets": -1, "data": null, "defaultContent": "<button>Pay Now!</button>" },
+					  			{
+					  	        	 "mRender": function ( data, type, row ) {
+					  	        		var parts = data.toString().split(".");
+					  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					  	        		return parts.join(".");
+					  	        		
+					                 },
+					                 "targets": 'add-comma'
+					  	        }
+					  			],
 					  		dom: 'lBfrtip',
-					        
+							
+					  		"buttons": [
+					        	
+					        	{
+					        	extend: 'pdfHtml5',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download your Pending Orders in PDF format',
+					        	titleAttr: 'PDF',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	},
+					        	},
+					        	],
+					        	
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": TUTORIAL_SAVVY.fnPendingOrdersRedraw(),
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -863,6 +1072,13 @@
 					  
 				
 				  },
+				  
+				  fnPendingOrdersRedraw: function () { 
+					  
+					  $('#pendingOrderTableRow').addClass("hidden");
+			     },
+				  
+				  
 		  
 		  loadData : function(){
 			  
@@ -874,10 +1090,12 @@
 							
 							totalCurrAmt = jsonResponse.totalCurrentAmount;
 							totalGrwthAmt = jsonResponse.totalRateOfGrowth;
+							totalInvAmt = jsonResponse.totalInvestedAmount;
+							totalProAmt = jsonResponse.totalProfitAmount;
 							portfolioData  = jsonResponse.portfolioDataModel;
 							pendingOrderData = jsonResponse.pendingOrderDataModel;
 							sipData = jsonResponse.sipDataModel;
-							investmentDetailData = jsonResponse.investmentDetailsDataModel;
+							/* investmentDetailData = jsonResponse.investmentDetailsDataModel; */
 							allFundsInvestmentDetailsData = jsonResponse.allFundsInvestmentDetailsDataModel;
 						},
 						error : function()  {

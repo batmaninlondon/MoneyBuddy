@@ -80,11 +80,7 @@ public class QueryProducts {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		double soldUnit = 0.0;
-		double investedAmount = 0.0;
-		double availableUnits = 0.0;
-		double currentAmount = 0.0;
-		double rateOfGrowth = 0.0;
-		double xirr = 0.0;
+		
 		double totalXirr = 0.0;
 		List<Double> totalAmounts = new ArrayList<Double>();
 	    List<Date> totalDates = new ArrayList<Date>();
@@ -106,6 +102,12 @@ public class QueryProducts {
 			query.setParameter("customerId",customerId);
 	           
 			for(Iterator it=query.iterate(); it.hasNext();){
+				
+				double investedAmount = 0.0;
+				double availableUnits = 0.0;
+				double currentAmount = 0.0;
+				double xirr = 0.0;
+				
 				 List<Double> amounts = new ArrayList<Double>();
 			     List<Date> dates = new ArrayList<Date>();
   
@@ -118,6 +120,13 @@ public class QueryProducts {
 			       
 			     Object result;
 			       
+			     result = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = '"+row[0]+"' ").uniqueResult();
+			     
+			     String fundName = null;
+			     
+			     if (result != null )
+			    	 fundName = result.toString();
+			     
 			     result = hibernateSession.createQuery("select navValue from NavHistory where schemeCode = '"+row[1]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[1]+"') ").uniqueResult();
 			     String currentNavValue = null; 
 			       
@@ -202,7 +211,7 @@ public class QueryProducts {
 			    		 availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
 
 			    		 System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
-			    		 investedAmount += (Double.parseDouble(buyRecordRow[2].toString()))* (Double.parseDouble(buyRecordRow[3].toString()));
+			    		 investedAmount += (Double.parseDouble(buyRecordRow[1].toString()));
 			    		 System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 			    	 }
 					       
@@ -235,7 +244,7 @@ public class QueryProducts {
 			     }
 			       
 			     currentAmount = availableUnits* Double.parseDouble(currentNavValue);
-			     rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
+			     //rateOfGrowth = ((currentAmount - investedAmount)/investedAmount)*100;
 		       
 			     amounts.add(currentAmount*-1);
 			     dates.add(strToDate(newFormat.format(todayDate)));
@@ -249,7 +258,7 @@ public class QueryProducts {
 			     System.out.println("XIRR : "+ String.format("%.2f", xirr));
 			      
 			       
-			     portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),row[1].toString(),String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",xirr),transactionStartDate));
+			     portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),fundName,String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",(currentAmount-investedAmount)),String.format("%.2f",xirr),transactionStartDate));
 			}
 			
 			
@@ -273,7 +282,7 @@ public class QueryProducts {
 			
 			System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
 			
-			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",totalXirr),""));
+			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),String.format("%.2f",totalXirr),""));
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return portfolioDataModel of "+portfolioDataModel.size()+ " record");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");
@@ -325,7 +334,7 @@ public class QueryProducts {
 			 for(Iterator it=query.iterate(); it.hasNext();){		      
 				 Object[] row = (Object[]) it.next();
 				 
-				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"Payment Awiated",row[4].toString()));
+				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"Payment Awiated",row[4].toString().substring(0,10)));
 			 }
 
 			 hibernateSession.getTransaction().commit();
@@ -414,14 +423,14 @@ public class QueryProducts {
 				
 
 				hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("select f.fundName,t.transactionAmount from TransactionDetails t, PrimaryFundDetails f where t.transactionDetailId= :transactionDetailId and t.productId = f.fundId ");
+				query = hibernateSession.createQuery("select f.fundId,f.fundName,f.sector,t.transactionAmount from TransactionDetails t, PrimaryFundDetails f where t.transactionDetailId= :transactionDetailId and t.productId = f.fundId ");
 				query.setParameter("transactionDetailId", sipDetailsListElement.getTransactionDetailId());
 							
 				rows = query.list();
 				hibernateSession.getTransaction().commit();
 				
-				sipDataModel.add(new SipDataModel(sipDetailsListElement.getSipStartDate(),rows.get(0)[0].toString(),
-									rows.get(0)[1].toString(),nextSipDate));
+				sipDataModel.add(new SipDataModel(sipDetailsListElement.getSipStartDate(),rows.get(0)[0].toString(),rows.get(0)[1].toString(),rows.get(0)[2].toString(),
+									rows.get(0)[3].toString(),sipDate));
 			}
 			
 			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - return sipDataModel containing "+sipDataModel.size()+" records");
@@ -480,7 +489,7 @@ public class QueryProducts {
 				String fundName = query.setParameter("fundId",productId).uniqueResult().toString();
 				
 				
-				query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+				query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId,transactionAmount"
 								+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 				       
 				String quantity;
@@ -494,7 +503,16 @@ public class QueryProducts {
 						quantity = transactionDetailsRow[1].toString();
 					}
 
-					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
+					
+					//String pattern = "HH:mm:ss";
+					
+					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(transactionDetailsRow[0].toString().substring(0,10));  
+					
+					
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+					String date = simpleDateFormat.format(date1);
+					
+					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,date,transactionDetailsRow[6].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
 					
 				}
 				hibernateSession.getTransaction().commit();
@@ -551,7 +569,7 @@ public class QueryProducts {
 		if (result != null)
 			productId = result.toString();
 		System.out.println("getInvestmentDetailsData : productId : "+productId);
-		Query query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId"
+		Query query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId,transactionAmount"
 				+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
 		       
 		String quantity;
@@ -565,7 +583,13 @@ public class QueryProducts {
 				quantity = transactionDetailsRow[1].toString();
 			}
 
-			investmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,transactionDetailsRow[0].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(transactionDetailsRow[0].toString().substring(0,10));  
+			
+			
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+			String date = simpleDateFormat.format(date1);
+			
+			investmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),fundName,date,transactionDetailsRow[6].toString(),quantity,transactionDetailsRow[2].toString(),transactionDetailsRow[3].toString(),transactionDetailsRow[4].toString()));
 			
 		}
 

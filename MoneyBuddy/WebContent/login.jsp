@@ -222,6 +222,7 @@
           <div>
           	
         	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="SIGN IN"  />
+        	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
         	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
            </div>
           </s:form>

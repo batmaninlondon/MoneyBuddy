@@ -7,6 +7,7 @@ public class InvestmentDetailsDataModel implements Serializable{
 	private String transactionId;
 	private String fundName;
 	private String transactionDate;
+	private String transactionAmount;
 	private String units;
 	private String navPurchased;
 	private String transactionType;
@@ -18,12 +19,13 @@ public class InvestmentDetailsDataModel implements Serializable{
 	}
 
 
-	public InvestmentDetailsDataModel( String transactionId, String fundName, String transactionDate, String units, String navPurchased, 
+	public InvestmentDetailsDataModel( String transactionId, String fundName, String transactionDate, String transactionAmount, String units, String navPurchased, 
 				String transactionType, String buySell ) {
 		super();
 		this.transactionId = transactionId;
 		this.fundName = fundName;
 		this.transactionDate = transactionDate;
+		this.transactionAmount = transactionAmount;
 		this.units = units;
 		this.navPurchased = navPurchased;
 		this.transactionType = transactionType;
@@ -58,6 +60,16 @@ public class InvestmentDetailsDataModel implements Serializable{
 
 	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
+	}
+
+
+	public String getTransactionAmount() {
+		return transactionAmount;
+	}
+
+
+	public void setTransactionAmount(String transactionAmount) {
+		this.transactionAmount = transactionAmount;
 	}
 
 

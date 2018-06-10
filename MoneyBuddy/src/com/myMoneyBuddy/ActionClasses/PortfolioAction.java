@@ -25,15 +25,18 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	Logger logger = Logger.getLogger(PortfolioAction.class);
 	private SessionMap<String,Object> sessionMap;
 
+	
 	private String totalRateOfGrowth;
 	private String totalCurrentAmount;
+	private String totalInvestedAmount;
+	private String totalProfitAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
 	private List<PendingOrderDataModel> pendingOrderDataModel;
 	private List<SipDataModel> sipDataModel;
 
-	private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
+	//private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
 	
-	private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
+	//private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
 	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
 
 	public String execute() {
@@ -50,28 +53,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		pendingOrderDataModel = queryProducts.getPendingOrderData(sessionMap.get("customerId").toString());
 		setPendingOrderDataModel(pendingOrderDataModel);
-		
-		HashMap<String,String> dataSet = new HashMap<String,String>();
-		
-		
-		String[] colors = { "Red", "Blue", "Yellow", "Green", "Purple", "Orange" };
-		int i =0;
+
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
 			if ("Total".equals(portfolioDataModelElement.getFundName())) {
 				setTotalCurrentAmount(portfolioDataModelElement.getCurrentAmount());
-				System.out.println("TOTAL AMOUNT SET TO : "+getTotalCurrentAmount() );
-				
-				//sessionMap.put("totalCurrentAmount", portfolioDataModelElement.getCurrentAmount());
-				//logger.debug("PortfolioAction class : execute method : stored totalCurrentAmount in session id : "+sessionMap.getClass().getName());
-				
 				setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
-				System.out.println("TOTAL GROWTH RATE SET TO : "+ getTotalRateOfGrowth() );
-				//sessionMap.put("totalRateOfGrowth", portfolioDataModelElement.getRateOfGrowth());
-				//logger.debug("PortfolioAction class : execute method : stored totalRateOfGrowth in session id : "+sessionMap.getClass().getName());
-			}
-			else {
-				dataSet.put(colors[i],portfolioDataModelElement.getCurrentAmount());
-				i = (i == 5) ? i=0 : i++;
+				setTotalInvestedAmount(portfolioDataModelElement.getInvestedAmount());
+				setTotalProfitAmount(portfolioDataModelElement.getProfit());
 				
 			}
 		}
@@ -85,24 +73,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		/*sessionMap.put("sipDataModel", sipDataModel);
 		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+sessionMap.getClass().getName());
 */
-		String fundId = null;
-		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
+		//String fundId = null;
+		/*for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel) {
 			fundId = portfolioDataModelElement.getFundId();
 			System.out.println("fundId : "+fundId);
 			
 			investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),fundId);
 			investmentDetailsDataModelList.put(fundId,investmentDetailsDataModel);
 			
-		}
-		// Savita Wadhwani - Added this for chart testing - start
-		
-		investmentDetailsDataModel = queryProducts.getInvestmentDetailsData(sessionMap.get("customerId").toString(),"RELLFCP-GR");
-		setInvestmentDetailsDataModel(investmentDetailsDataModel);
-		
-		System.out.println("Size of investmentDetailsDataModel : "+investmentDetailsDataModel.size());
-		
-		// Savita Wadhwani - Added this for chart testing - end
-		
+		}*/
+				
 		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(sessionMap.get("customerId").toString());
 		setAllFundsInvestmentDetailsDataModel(allFundsInvestmentDetailsDataModel);
 		
@@ -111,7 +91,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		/*sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
 		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+sessionMap.getClass().getName());
 		*/
-		for (String key : investmentDetailsDataModelList.keySet())  {
+		/*for (String key : investmentDetailsDataModelList.keySet())  {
 			System.out.println("key : "+key);
 			for (InvestmentDetailsDataModel dataMadel : investmentDetailsDataModelList.get(key))  {
 				System.out.println("dataMadel.getTransactionDate() : "+dataMadel.getTransactionDate());
@@ -120,7 +100,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				System.out.println("dataMadel.getTransactionType() : "+dataMadel.getTransactionType());
 				
 			}
-		}
+		}*/
 		/*sessionMap.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
 		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+sessionMap.getClass().getName());
 		*/
@@ -167,7 +147,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
         sessionMap = (SessionMap<String, Object>) map;
     }
 
-	public HashMap<String, List<InvestmentDetailsDataModel>> getInvestmentDetailsDataModelList() {
+/*	public HashMap<String, List<InvestmentDetailsDataModel>> getInvestmentDetailsDataModelList() {
 		return investmentDetailsDataModelList;
 	}
 
@@ -175,17 +155,17 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public void setInvestmentDetailsDataModelList(
 			HashMap<String, List<InvestmentDetailsDataModel>> investmentDetailsDataModelList) {
 		this.investmentDetailsDataModelList = investmentDetailsDataModelList;
-	}
+	}*/
 
 
-	public List<InvestmentDetailsDataModel> getInvestmentDetailsDataModel() {
+/*	public List<InvestmentDetailsDataModel> getInvestmentDetailsDataModel() {
 		return investmentDetailsDataModel;
 	}
 
 
 	public void setInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> investmentDetailsDataModel) {
 		this.investmentDetailsDataModel = investmentDetailsDataModel;
-	}
+	}*/
 
 
 	public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsDataModel() {
@@ -215,6 +195,26 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setTotalRateOfGrowth(String totalRateOfGrowth) {
 		this.totalRateOfGrowth = totalRateOfGrowth;
+	}
+
+
+	public String getTotalInvestedAmount() {
+		return totalInvestedAmount;
+	}
+
+
+	public void setTotalInvestedAmount(String totalInvestedAmount) {
+		this.totalInvestedAmount = totalInvestedAmount;
+	}
+
+
+	public String getTotalProfitAmount() {
+		return totalProfitAmount;
+	}
+
+
+	public void setTotalProfitAmount(String totalProfitAmount) {
+		this.totalProfitAmount = totalProfitAmount;
 	}
 
 
