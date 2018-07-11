@@ -25,44 +25,22 @@ public class NavHistory {
     @Column(name="NAV_DATE")
     private String navDate;
     
-    @Column(name="SCHEME_CODE")
-    private String schemeCode;
-    
-    @Column(name="SCHEME_NAME")
-    private String schemeName;
-    
-    @Column(name="RTA_SCHEME_CODE")
-    private String rtaSchemeCode;
-    
-    @Column(name="DIVIDEND_REINVEST_FLAG")
-    private String dividendReinvestFlag;
-    
-    @Column(name="ISIN")
-    private String isin;
-    
     @Column(name="NAV_VALUE")
     private String navValue;
     
-    @Column(name="RTA_CODE")
-    private String rtaCode;
+    @Column(name="FUND_ID")
+    private String fundId;
     
 
     public NavHistory() {
 
     }
 
-    public NavHistory(String navHistoryId, String navDate, String schemeCode, String schemeName, String rtaSchemeCode,
-			String dividendReinvestFlag, String isin, String navValue, String rtaCode) {
+	public NavHistory(String navDate, String navValue, String fundId) {
 		super();
-		
 		this.navDate = navDate;
-		this.schemeCode = schemeCode;
-		this.schemeName = schemeName;
-		this.rtaSchemeCode = rtaSchemeCode;
-		this.dividendReinvestFlag = dividendReinvestFlag;
-		this.isin = isin;
 		this.navValue = navValue;
-		this.rtaCode = rtaCode;
+		this.fundId = fundId;
 	}
 
 	public String getNavHistoryId() {
@@ -81,46 +59,6 @@ public class NavHistory {
 		this.navDate = navDate;
 	}
 
-	public String getSchemeCode() {
-		return schemeCode;
-	}
-
-	public void setSchemeCode(String schemeCode) {
-		this.schemeCode = schemeCode;
-	}
-
-	public String getSchemeName() {
-		return schemeName;
-	}
-
-	public void setSchemeName(String schemeName) {
-		this.schemeName = schemeName;
-	}
-
-	public String getRtaSchemeCode() {
-		return rtaSchemeCode;
-	}
-
-	public void setRtaSchemeCode(String rtaSchemeCode) {
-		this.rtaSchemeCode = rtaSchemeCode;
-	}
-
-	public String getDividendReinvestFlag() {
-		return dividendReinvestFlag;
-	}
-
-	public void setDividendReinvestFlag(String dividendReinvestFlag) {
-		this.dividendReinvestFlag = dividendReinvestFlag;
-	}
-
-	public String getIsin() {
-		return isin;
-	}
-
-	public void setIsin(String isin) {
-		this.isin = isin;
-	}
-
 	public String getNavValue() {
 		return navValue;
 	}
@@ -129,12 +67,12 @@ public class NavHistory {
 		this.navValue = navValue;
 	}
 
-	public String getRtaCode() {
-		return rtaCode;
+	public String getFundId() {
+		return fundId;
 	}
 
-	public void setRtaCode(String rtaCode) {
-		this.rtaCode = rtaCode;
+	public void setFundId(String fundId) {
+		this.fundId = fundId;
 	}
 
 	@Override
@@ -152,25 +90,10 @@ public class NavHistory {
         if ((this.navDate == null) ? (other.navDate != null) : !this.navDate.equals(other.navDate)) {
             return false;
         }
-        if ((this.schemeCode == null) ? (other.schemeCode != null) : !this.schemeCode.equals(other.schemeCode)) {
-            return false;
-        }
-        if ((this.schemeName == null) ? (other.schemeName != null) : !this.schemeName.equals(other.schemeName)) {
-            return false;
-        }
-        if ((this.rtaSchemeCode == null) ? (other.rtaSchemeCode != null) : !this.rtaSchemeCode.equals(other.rtaSchemeCode)) {
-            return false;
-        }
-        if ((this.dividendReinvestFlag == null) ? (other.dividendReinvestFlag != null) : !this.dividendReinvestFlag.equals(other.dividendReinvestFlag)) {
-            return false;
-        }
-        if ((this.isin == null) ? (other.isin != null) : !this.isin.equals(other.isin)) {
-            return false;
-        }
         if ((this.navValue == null) ? (other.navValue != null) : !this.navValue.equals(other.navValue)) {
             return false;
         }
-        if ((this.rtaCode == null) ? (other.rtaCode != null) : !this.rtaCode.equals(other.rtaCode)) {
+        if ((this.fundId == null) ? (other.fundId != null) : !this.fundId.equals(other.fundId)) {
             return false;
         }
         return true;
@@ -182,13 +105,8 @@ public class NavHistory {
         int hash = 3;
         hash = 83 * hash + (this.navHistoryId != null ? this.navHistoryId.hashCode() : 0);
         hash = 83 * hash + (this.navDate != null ? this.navDate.hashCode() : 0);
-        hash = 83 * hash + (this.schemeCode != null ? this.schemeCode.hashCode() : 0);
-        hash = 83 * hash + (this.schemeName != null ? this.schemeName.hashCode() : 0);
-        hash = 83 * hash + (this.rtaSchemeCode != null ? this.rtaSchemeCode.hashCode() : 0);
-        hash = 83 * hash + (this.dividendReinvestFlag != null ? this.dividendReinvestFlag.hashCode() : 0);
-        hash = 83 * hash + (this.isin != null ? this.isin.hashCode() : 0);
         hash = 83 * hash + (this.navValue != null ? this.navValue.hashCode() : 0);
-        hash = 83 * hash + (this.rtaCode != null ? this.rtaCode.hashCode() : 0);
+        hash = 83 * hash + (this.fundId != null ? this.fundId.hashCode() : 0);
         
         return hash;
     }

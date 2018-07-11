@@ -38,7 +38,7 @@ public class InsertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC",null,"N","N","CUSTOMER","N","N","N","NOT_GENERATED");
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC","N","N","CUSTOMER","N","N","N","NOT_GENERATED","CLIENT");
 
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();
@@ -135,6 +135,48 @@ public class InsertCustomerDetails {
 		}
 		catch (Exception e ) {
 			logger.error("InsertCustomerDetails class - updateVerificationStatus method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+    
+    public void updateMandateId (String mandateId,String customerId) throws MoneyBuddyException {
+
+    	logger.debug("InsertCustomerDetails class - updateMandateId method - start");
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try {
+
+			hibernateSession.beginTransaction();
+
+			Query query = hibernateSession.createQuery("update Customers set isipMandateId = :isipMandateId where customerId = :customerId");
+
+			query.setParameter("isipMandateId", mandateId);
+
+			query.setParameter("customerId", customerId);
+
+			int result = query.executeUpdate();
+			
+			System.out.println(result+" rows updated !! ");
+
+			hibernateSession.getTransaction().commit();
+    		
+			logger.debug("InsertCustomerDetails class - updateMandateId method - updated data of Customers table to set verificationStatus Y");
+    		
+			logger.debug("InsertCustomerDetails class - updateMandateId method - end");
+		}
+		catch ( HibernateException e ) {
+			logger.error("InsertCustomerDetails class - updateMandateId method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("InsertCustomerDetails class - updateMandateId method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

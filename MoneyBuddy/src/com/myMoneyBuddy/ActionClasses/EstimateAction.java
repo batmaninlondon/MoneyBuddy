@@ -126,7 +126,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				List<String> fundIds = new ArrayList<String> (productRatioList.keySet());
 				QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 				
-				boolean changeSipDate = queryPrimaryFundDetails.checkBufferDays(sipStartDate,fundIds);
+				/*boolean changeSipDate = queryPrimaryFundDetails.checkBufferDays(sipStartDate,fundIds);
 
 				System.out.println("changeSipDate : "+changeSipDate);
 				if (changeSipDate) {
@@ -137,7 +137,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 					System.out.println("AFTER CHANGE : sipStartMonth : "+sipStartMonth+" and sipEndMonth : "+sipEndMonth);
 					sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
 					sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
-				}
+				}*/
 				
 				sessionMap.put("sipStartDate", sipStartDate);
 				sessionMap.put("sipEndDate", sipEndDate);

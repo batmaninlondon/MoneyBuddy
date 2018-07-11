@@ -63,14 +63,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	System.out.println(" KycCheckAction execute method : First Name : "+getCustomerName());
 	    	System.out.println(" KycCheckAction execute method : Gender : "+getGender());
 	    	System.out.println(" KycCheckAction execute method : Occupation : "+getOccupation());
-	    	System.out.println(" PrepareKycFormAction execute method :dateOfBirth : "+getDateOfBirth());
-	    	System.out.println(" PrepareKycFormAction execute method :addressLineOne : "+getAddressLineOne());
-	    	System.out.println(" PrepareKycFormAction execute method :addressLineTwo : "+getAddressLineTwo());
-	    	System.out.println(" PrepareKycFormAction execute method :residentialCity : "+getResidentialCity());
-	    	System.out.println(" PrepareKycFormAction execute method :residentialState : "+getResidentialState());
-	    	System.out.println(" PrepareKycFormAction execute method :residentialPin : "+getResidentialPin());
-	    	System.out.println(" PrepareKycFormAction execute method :residentialCountry : "+getResidentialCountry());
-	    	System.out.println(" PrepareKycFormAction execute method :taxStatus : "+getTaxStatus());
+	    	System.out.println(" KycCheckAction execute method :dateOfBirth : "+getDateOfBirth());
+	    	System.out.println(" KycCheckAction execute method :addressLineOne : "+getAddressLineOne());
+	    	System.out.println(" KycCheckAction execute method :addressLineTwo : "+getAddressLineTwo());
+	    	System.out.println(" KycCheckAction execute method :residentialCity : "+getResidentialCity());
+	    	System.out.println(" KycCheckAction execute method :residentialState : "+getResidentialState());
+	    	System.out.println(" KycCheckAction execute method :residentialPin : "+getResidentialPin());
+	    	System.out.println(" KycCheckAction execute method :residentialCountry : "+getResidentialCountry());
+	    	System.out.println(" KycCheckAction execute method :taxStatus : "+getTaxStatus());
 	    	
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	

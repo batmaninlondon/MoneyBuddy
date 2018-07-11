@@ -81,7 +81,7 @@
         </action>
     </package>
     
-    <package name="CreateCartAction" namespace="/" extends="struts-default">
+    <package name="createCartAction" namespace="/" extends="struts-default">
         <action name="createCartAction" class="com.myMoneyBuddy.ActionClasses.CreateCartAction">
             <result name="success">/customerCart.jsp</result>
             <result name="error">/errorPage.jsp</result>
@@ -93,13 +93,21 @@
         </action>
     </package>
     
+    <package name="downloadKycFormAction" namespace="/" extends="struts-default">
+        <action name="downloadKycFormAction" class="com.myMoneyBuddy.ActionClasses.DownloadKycFormAction">
+            <result name="success">/downloadKycForm.jsp</result>
+            <result name="error">/errorPage.jsp</result>
+        </action>
+    </package>
+    
     <package name="redirectAction" namespace="/" extends="struts-default">
         <action name="redirectAction" class="com.myMoneyBuddy.ActionClasses.RedirectAction">
-        	<param name="tranDetailId">NotSet</param>
+        	<param name="tranDetailId">KycNotDone</param>
+            <result name="bankDetailsForKND">/bankDetails.jsp</result>
             <result name="panCardVerifiction">/panCardVerification.jsp</result>
             <result name="bankDetails" type="chain">checkBankDetailsAction</result>
             <result name="customerDetails">/customerDetails.jsp</result>
-            <result name="downloadKycForm">/downloadKycForm.jsp</result>
+            <result name="downloadKycForm" type="chain">downloadKycFormAction</result>
             <result name="addCustomerDetails">/additionalCustomerDetails.jsp</result>
             <result name="error">/errorPage.jsp</result>
         </action>
@@ -140,6 +148,19 @@
   			<result name="input" type="dispatcher">/newErrorPage.jsp</result> -->
         </action>
     </package>
+    
+    <package name="displayDashboardAction" namespace="/" extends="struts-default">
+        <action name="displayDashboardAction" class="com.myMoneyBuddy.ActionClasses.DisplayDashboardAction">
+            <!-- <result name="success" type="chain">portfolioAction</result> -->
+            <result name="success">/customerDashboardForAdmin.jsp</result>
+            <result name="error">/errorPage</result>
+            <!-- <result type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">stream</param>
+  			</result>
+  			<result name="input" type="dispatcher">/newErrorPage.jsp</result> -->
+        </action>
+    </package>
  
      <!-- <package name="portfolioAction" namespace="/" extends="struts-default">
         <action name="portfolioAction" class="com.myMoneyBuddy.ActionClasses.PortfolioAction">
@@ -155,7 +176,8 @@
     
     <package name="prepareKycFormAction" namespace="/" extends="struts-default">
         <action name="prepareKycFormAction" class="com.myMoneyBuddy.ActionClasses.PrepareKycFormAction">
-            <result name="success">/downloadKycForm.jsp</result>
+            <param name="tranDetailId">KycNotDone</param>
+            <result name="success">/bankDetails.jsp</result>
             <result name="input">/additionalCustomerDetails.jsp</result>
             <result name="error">/errorPage.jsp</result>
             <!-- <result type="stream">
@@ -428,6 +450,7 @@
             <result name="failedWithPaymentGateway">/bankDetails.jsp</result>
             <result name="allOrderFailed">/bankDetails.jsp</result>
         	<result name="clientCreationFailure">/bankDetails.jsp</result>
+        	<result name="kycNotDone" type="chain">downloadKycFormAction</result>
             <result name="error">/errorPage.jsp</result>
             <!-- <result type="stream">
     			<param name="contentType">text/html</param>
@@ -470,6 +493,7 @@
     <package name="newLoginAction" namespace="" extends="struts-default">
         <action name="newLoginAction" class="com.myMoneyBuddy.ActionClasses.NewLoginAction">
             <result name="success">/myIndex.jsp</result>
+            <result name="adminLogin">/adminDashboard.jsp</result>
             <result name="fundSelected">/amountConfirmation.jsp</result>
             <result name="input">/login.jsp</result>
             <result name="error">/errorPage.jsp</result>

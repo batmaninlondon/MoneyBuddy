@@ -275,6 +275,7 @@ public class SendMail {
     	
 		try {
 	
+			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
@@ -333,11 +334,14 @@ public class SendMail {
             	bodyText.append(strLine);
             }
 
+            
          BodyPart messageBodyPart1 = new MimeBodyPart(); 	    
-         messageBodyPart1.setText(bodyText.toString());
+         messageBodyPart1.setContent(bodyText.toString(),"text/html; charset=utf-8");
 
          //create new MimeBodyPart object and set DataHandler object to this object        
-         MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
+         MimeBodyPart messageBodyPart2 = new MimeBodyPart(); 
+         
+         System.out.println("pdfFile : "+pdfFile);
          String sourceFileName = pdfFile;//change accordingly
          
          DataSource source = new FileDataSource(sourceFileName);    

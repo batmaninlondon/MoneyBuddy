@@ -26,11 +26,13 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     private String status;
     private String grossAnnualIncome;
     private String politicallyExposed;
-    private InputStream stream;
+    private String tranDetailId;
+    
+    //private InputStream stream;
 	
     public String execute() {
     	
-    	String str = null;
+    	//String str = null;
     	String customerId = null;
     	try {
     	
@@ -57,23 +59,24 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 			updateCustomer.updateAddCusDetUploadedStatus(customerId, "Y");
 		
 	    	GenerateKycForm generateKycForm = new GenerateKycForm();
-	    	generateKycForm.generateKycFormAndSendMail(customerId);	
+	    	generateKycForm.generateKycForm(customerId);	
 
 	    	System.out.println(" Returned Success !!");
 	    	
-	    	str = "success";
-	    	stream = new ByteArrayInputStream(str.getBytes());
+	    	/*str = "success";
+	    	stream = new ByteArrayInputStream(str.getBytes());*/
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - end");
 	    	
+	    	setTranDetailId("KycNotDone");
 	    	return SUCCESS;
     	} 
     	catch ( Exception e )  {
     		logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
     		
-    		str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());
+    		/*str = "error";
+    	    stream = new ByteArrayInputStream(str.getBytes());*/
     	    logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
@@ -84,14 +87,14 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
-    
+/*    
 	public InputStream getStream() {
 		return stream;
 	}
 
 	public void setStream(InputStream stream) {
 		this.stream = stream;
-	}
+	}*/
 
 	public String getFatherName() {
 		return fatherName;
@@ -139,6 +142,14 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 
 	public void setPoliticallyExposed(String politicallyExposed) {
 		this.politicallyExposed = politicallyExposed;
+	}
+
+	public String getTranDetailId() {
+		return tranDetailId;
+	}
+
+	public void setTranDetailId(String tranDetailId) {
+		this.tranDetailId = tranDetailId;
 	}
 
 

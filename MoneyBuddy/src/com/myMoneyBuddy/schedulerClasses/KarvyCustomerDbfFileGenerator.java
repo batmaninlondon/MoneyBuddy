@@ -149,7 +149,7 @@ public class KarvyCustomerDbfFileGenerator implements org.quartz.Job{
 				    rowData[4] = properties.getProperty("BROKER_CODE");
 				    rowData[5] = properties.getProperty("ARN_CODE");
 				    rowData[6] = "";
-				    rowData[7] = customer.getFolioNumber();
+				    rowData[7] = "FOLIO_NUMBER";
 				    
 				    rowData[8] = customer.getCustomerName();
 				    rowData[9] = "1";

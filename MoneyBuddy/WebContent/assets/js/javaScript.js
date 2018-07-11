@@ -53,7 +53,6 @@
 		
 		function populateBankDetails(tranDetailId)  
 	    {
-				//alert('tranDetailId : '+tranDetailId);
 				document.getElementById("tran-detail-id-value").value = tranDetailId;
 				document.formPayment.submit();
 	    }

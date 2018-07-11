@@ -85,6 +85,10 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return INPUT;
 	    	}
 	    	
+	    	
+	    	if ("ADMIN".equals(customer.getUserType()))  {
+	    		return "adminLogin";
+	    	}
 	    	//String custDetUploaded = customer.getCusDetailsUploaded();
 	    	//String addCustDetUploaded = customer.getAddCusDetailsUploaded();
 	    	

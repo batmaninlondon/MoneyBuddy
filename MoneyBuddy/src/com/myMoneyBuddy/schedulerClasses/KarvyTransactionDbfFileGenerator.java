@@ -838,7 +838,7 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[3] = properties.getProperty("USER_ID"); 
 						rowData[4] = transactionDetail.getTransactionDetailId(); 
 						rowData[5] = null; 
-						rowData[6] = customer.getFolioNumber(); 
+						rowData[6] = "FOLIO_NUMBER"; 
 						rowData[7] = null; 
 						rowData[8] = (("BUY".equals(transactionDetail.getBuySell())) ? "P" : "R"); 
 						rowData[9] = fundName; 

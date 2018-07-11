@@ -8,6 +8,7 @@ package com.myMoneyBuddy.DAOClasses;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import com.myMoneyBuddy.ActionClasses.RegisterAction;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -16,6 +17,9 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
@@ -27,7 +31,7 @@ public class GenerateKycForm {
 
 	Logger logger = Logger.getLogger(GenerateKycForm.class);
 	
-    public void generateKycFormAndSendMail (String customerId) throws MoneyBuddyException
+    public void generateKycForm (String customerId) throws MoneyBuddyException
     {
 
     	logger.debug("GenerateKycForm class : generateKycFormPdf method : start");
@@ -43,31 +47,68 @@ public class GenerateKycForm {
     		AdditionalCustomerDetails additionalDetails = (AdditionalCustomerDetails) hibernateSession.get(AdditionalCustomerDetails.class, customerId);
     		hibernateSession.getTransaction().commit();
 
+    		/*String pdfFilePath = "../../../editablePdfs/"+"KYC_Application_Form_Original.pdf";
+    		InputStream is = RegisterAction.class.getResourceAsStream(pdfFilePath);
+    		reader = new PdfReader(is);*/
     		
-    		reader = new PdfReader("D://PdfFiles/KYC.pdf");
+	    	
+			ClassLoader cl = getClass().getClassLoader();
+			
+			String directoryName = cl.getResource("./../../assets/KycForms").getPath().substring(1);
+
+    		System.out.println(" directoryName is : "+directoryName);
     		
-    		String directoryName = "D://PdfFiles/"+customerId;
+    		reader = new PdfReader(directoryName+"/KYC_Application_Form_Original.pdf");
+    		
+    		
+    		
+    		//reader = new PdfReader("../../../editablePdfs/KYC_Application_Form.pdf");
+    		
+    		/*String pdfFilePath = "../../../editablePdfs/";
+    		InputStream is = RegisterAction.class.getResourceAsStream(mailContentFilePath);*/
+    		
+    		//String directoryName = "../../../editablePdfs/"+customerId;
+    		//String directoryName = new File(GenerateKycForm.class.getProtectionDomain(). getCodeSource().getLocation().getPath()).getCanonicalPath();
+    		
+    		/*Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));*/
+	    	
+	    	//String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
+
+
             File directory = new File(String.valueOf(directoryName));
             
             if(!directory.exists()){
 
                 directory.mkdir();
+                
             }
             
+            System.out.println("directory : "+directory.getAbsolutePath());
+            
             stamper = new PdfStamper(reader,
-         	          new FileOutputStream(directoryName+"/KYC_Application_Form.pdf")); // output PDF
+         	          new FileOutputStream(directoryName+"/KYC_Application_Form_"+customerId+".pdf")); // output PDF
             AcroFields form = stamper.getAcroFields();
             
             HashMap map = new HashMap();
             map = (HashMap) form.getFields();
             Iterator iterator = map.keySet().iterator();
             System.out.println("iterator size : "+map.size());
-            while(iterator.hasNext())
-                System.out.println("Field is >>>"+iterator.next());
+            /*while(iterator.hasNext())
+                System.out.println("Field is >>>"+iterator.next());*/
 
             String customerName = customer.getCustomerName();
             form.setField("Name", customerName.toUpperCase());
             form.setField("FathersSpouse Name", additionalDetails.getFatherName().toUpperCase());  
+            String[] states = form.getAppearanceStates("Female");
+            
+            System.out.println(Arrays.toString(states));
+            
+            //form.setField("Female","On");
+            
+            //form.setField("Single", "On");
             
             if ( "F".equals(customerDetail.getGender()))
             	form.setField("Female","On");
@@ -161,19 +202,6 @@ public class GenerateKycForm {
            stamper.close();
            reader.close();
            
-           Properties configProperties = new Properties();
-			String configPropFilePath = "../../../config/config.properties";
-
-			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));
-			
-           String mailLink = configProperties.getProperty("MAIL_KYC_FORM_LINK");
-			System.out.println("mailLink is : "+mailLink);
-	    	
-	    	String subject = configProperties.getProperty("MAIL_KYC_FORM_SUBJECT");
-	    	
-       		SendMail sendMail = new SendMail();
-       		sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form.pdf", customer.getEmailId(),subject,"KycNotDone.txt",mailLink,"");
-       	
            System.out.println("End!!");
            
     	}
@@ -196,6 +224,42 @@ public class GenerateKycForm {
 					hibernateSession.close();
     			
     	}
+
+    }
+
+    public void sendKycFormMail (String customerId) throws MoneyBuddyException
+    {
+
+    	logger.debug("GenerateKycForm class : sendKycFormMail method : start");
+    	
+    	try {
+           
+    		QueryCustomer queryCustomer = new QueryCustomer();
+    		
+    		String emailId = queryCustomer.getCustomerEmailId(customerId);
+    		
+    		Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));
+			
+           String mailLink = configProperties.getProperty("MAIL_KYC_FORM_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_KYC_FORM_SUBJECT");
+	    	
+	    	String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
+       		SendMail sendMail = new SendMail();
+       		sendMail.sendKycFormMail(directoryName+"/KYC_Application_Form_"+customerId+".pdf", emailId,subject,"KycNotDone.txt",mailLink,"");
+       	
+           System.out.println("End!!");
+           
+    	}
+		catch (Exception e ) {
+			logger.error("insertCustomerDetails class : insertCustomer method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
 
     }
     

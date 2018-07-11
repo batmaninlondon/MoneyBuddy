@@ -6,6 +6,8 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
+
+import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +21,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 	private SessionMap<String,Object> sessionMap;
 
 	private String transactionType;
+	private String tranDetailId;
 	
     public String execute() {
     	
@@ -56,10 +59,25 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 			} else  {
 				if ("Y".equals(customer.getCusDetailsUploaded()))  {
 					if("Y".equals(customer.getAddCusDetailsUploaded())) {
-						System.out.println("DownloadKycForm page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "downloadKycForm";
+						
+						QueryBankDetails queryBankDetails = new QueryBankDetails();
+			    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
+			    		if (bankDetailsExists)  {
+			    			
+							System.out.println("DownloadKycForm page ");
+							logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
+					    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+							return "downloadKycForm";
+							
+			    		}
+			    		else {
+			    			System.out.println("bankDetails for KycNotDone page ");
+							logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails for kycNotDone");
+					    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+					    	
+					    	setTranDetailId("KycNotDone");
+							return "bankDetailsForKND";
+			    		}
 					}
 					else {
 						System.out.println("addCustomerDetails page ");
@@ -100,6 +118,14 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+	}
+
+	public String getTranDetailId() {
+		return tranDetailId;
+	}
+
+	public void setTranDetailId(String tranDetailId) {
+		this.tranDetailId = tranDetailId;
 	}
 
 }

@@ -82,6 +82,11 @@
 	    	<result>/customerDetails.jsp</result>
 		</action>
 	</package>
+	<package name="customerDashboardForAdmin" namespace="/" extends="struts-default">
+	    <action name="customerDashboardForAdmin">
+	    	<result>/customerDashboardForAdmin.jsp</result>
+		</action>
+	</package>	
 	<package name="customerCart" namespace="/" extends="struts-default">
 	    <action name="customerCart">
 	    	<result>/customerCart.jsp</result>

@@ -56,6 +56,10 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    	System.out.println(" CheckBankDetailsAction execute method Called !!");
 	    	System.out.println("tranDetailId : "+getTranDetailId());
 	    	
+	    	
+	    	if ("KycNotDone".equals(getTranDetailId()))   {
+	    		setTranDetailId("NotSet");
+	    	}
 	    	//tranDetailId = ServletActionContext.getRequest().getParameter("tranDetailId");
 	    	
 	    	

@@ -127,7 +127,7 @@ public class QueryProducts {
 			     if (result != null )
 			    	 fundName = result.toString();
 			     
-			     result = hibernateSession.createQuery("select navValue from NavHistory where schemeCode = '"+row[1]+"' and navDate = (select max(navDate) from NavHistory  where schemeCode = '"+row[1]+"') ").uniqueResult();
+			     result = hibernateSession.createQuery("select navValue from NavHistory where fundId = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory  where fundId = '"+row[0]+"') ").uniqueResult();
 			     String currentNavValue = null; 
 			       
 			     if (result != null )
@@ -143,9 +143,9 @@ public class QueryProducts {
 			       
 			     System.out.println("transactionStartDate : " + transactionStartDate);
 			       
-			     DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+			     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 			     Date date = (Date)formatter.parse(transactionStartDate);
-			     
+			     			     
 			     transactionStartDate = newFormat.format(date);
 			     System.out.println("transactionStartDate : "+transactionStartDate);
 			     

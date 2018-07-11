@@ -90,10 +90,28 @@
 	</div>	
 	<div class="row">
 		<div class="col-md-3"></div>
-		<div class="col-md-6">
+		<div class="col-md-3">
 			<a href="<s:url action="pendingNavsAction"/>">
 				<button type="button"  class="btn g-color--white g-margin-t-15--xs ">UploadCustomerNav</button>
 			</a>
+		</div>
+		<div class="col-md-3">
+			<s:form  action="displayDashboardAction"  method="post" namespace="/">
+				<div id="email-id"  >
+		          	
+		            <label> Customer Email<span class="req">*</span>  </label>
+		           	<%-- <s:fielderror fieldName="emailIdDashboard" class="g-color--red" /> --%>
+		  			<s:textfield name="emailIdDashboard" />
+		  			<%-- <s:textfield class="form-control" id="pancard-number" placeholder="Enter Pancard Number" name="emailIdDashboard"  /> --%>
+		            <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
+	          	</div>
+	          	<!-- <button type="button" class="g-bg-color--primary g-color--white"  >ViewCustomersDashboard</button> -->
+	          	<s:submit class="btn btn-primary" value="ViewCustomersDashboard" style="padding:5px 15px 5px 15px;"/>
+	          	<%-- <a href="<s:url action="displayDashboardAction"/>">
+					
+					<button type="button"  class="btn g-color--white g-margin-t-15--xs ">ViewCustomersDashboard</button>
+				</a> --%>
+			</s:form>
 		</div>
 		<div class="col-md-3"></div>
 	

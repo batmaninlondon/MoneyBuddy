@@ -79,6 +79,7 @@
 	
 	<section id="one">
 	
+	
 	<div class="row" style="margin-top:-40px;">
 		<div class="col-md-3"></div>
 		<div class="col-md-6 center">
@@ -98,7 +99,7 @@
 		<div  class="row" style="padding-left:70px;padding-right:70px;">
 			<div class="col-md-5"></div>
 			<div class ="col-md-5">
-				<button type="button" class="btn btn-primary readmore submit-button-1" onClick="window.open('${pageContext.request.contextPath}/assets/KycForms/1/KYC_Application_Form.pdf')">Download KYC Form</button>
+				<button type="button" class="btn btn-primary readmore submit-button-1" onClick="window.open('${pageContext.request.contextPath}/assets/KycForms/<s:property value="kycForm"/>')">Download KYC Form</button>
 
    			</div>
 			<div class="col-md-2"></div>

@@ -42,9 +42,6 @@ public class Customers {
     @Column(name="KYC_STATUS")
     private String kycStatus;
     
-    @Column(name="FOLIO_NUMBER")
-    private String folioNumber;
-    
     @Column(name="KARVY_FILE_GENERATED")
     private String karvyFileGenerated;
     
@@ -65,15 +62,18 @@ public class Customers {
     
     @Column(name="ISIP_MANDATE_ID")
     private String isipMandateId;
+    
+    @Column(name="USER_TYPE")
+    private String userType;
 
     public Customers() {
         
     }
 
 	public Customers(String emailId, String customerName, String mobileNumber, String password, String verificationStatus, 
-			String panCard, String kycStatus, String folioNumber, String karvyFileGenerated, 
+			String panCard, String kycStatus, String karvyFileGenerated, 
 			String camsFileGenerated, String subscriberType, String cusDetailsUploaded, String addCusDetailsUploaded, String bseClientCreated,
-			String isipMandateId) {
+			String isipMandateId, String userType) {
 		super();
 		this.emailId = emailId;
 		this.customerName = customerName;
@@ -82,7 +82,6 @@ public class Customers {
 		this.verificationStatus = verificationStatus;
 		this.panCard = panCard;
 		this.kycStatus = kycStatus;
-		this.folioNumber = folioNumber;
 		this.karvyFileGenerated = karvyFileGenerated;
 		this.camsFileGenerated = camsFileGenerated;
 		this.subscriberType = subscriberType;
@@ -90,6 +89,7 @@ public class Customers {
 		this.addCusDetailsUploaded = addCusDetailsUploaded;
 		this.bseClientCreated = bseClientCreated;
 		this.isipMandateId = isipMandateId;
+		this.userType = userType;
 	}
 
 
@@ -158,14 +158,6 @@ public class Customers {
 		this.kycStatus = kycStatus;
 	}
 
-	public String getFolioNumber() {
-		return folioNumber;
-	}
-
-	public void setFolioNumber(String folioNumber) {
-		this.folioNumber = folioNumber;
-	}
-
 	public String getKarvyFileGenerated() {
 		return karvyFileGenerated;
 	}
@@ -222,6 +214,14 @@ public class Customers {
 		this.isipMandateId = isipMandateId;
 	}
 
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -255,9 +255,6 @@ public class Customers {
         if ((this.kycStatus == null) ? (other.kycStatus != null) : !this.kycStatus.equals(other.kycStatus)) {
             return false;
         }
-        if ((this.folioNumber == null) ? (other.folioNumber != null) : !this.folioNumber.equals(other.folioNumber)) {
-            return false;
-        }
         if ((this.karvyFileGenerated == null) ? (other.karvyFileGenerated != null) : !this.karvyFileGenerated.equals(other.karvyFileGenerated)) {
             return false;
         }
@@ -279,6 +276,9 @@ public class Customers {
         if ((this.isipMandateId == null) ? (other.isipMandateId != null) : !this.isipMandateId.equals(other.isipMandateId)) {
             return false;
         }
+        if ((this.userType == null) ? (other.userType != null) : !this.userType.equals(other.userType)) {
+            return false;
+        }
         return true;
     }
 
@@ -293,7 +293,6 @@ public class Customers {
         hash = 79 * hash + (this.verificationStatus != null ? this.verificationStatus.hashCode() : 0);
         hash = 79 * hash + (this.panCard != null ? this.panCard.hashCode() : 0);
         hash = 79 * hash + (this.kycStatus != null ? this.kycStatus.hashCode() : 0);
-        hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
         hash = 79 * hash + (this.karvyFileGenerated != null ? this.karvyFileGenerated.hashCode() : 0);
         hash = 79 * hash + (this.camsFileGenerated != null ? this.camsFileGenerated.hashCode() : 0);
         hash = 79 * hash + (this.subscriberType != null ? this.subscriberType.hashCode() : 0);
@@ -301,6 +300,7 @@ public class Customers {
         hash = 79 * hash + (this.addCusDetailsUploaded != null ? this.addCusDetailsUploaded.hashCode() : 0);
         hash = 79 * hash + (this.bseClientCreated != null ? this.bseClientCreated.hashCode() : 0);
         hash = 79 * hash + (this.isipMandateId != null ? this.isipMandateId.hashCode() : 0);
+        hash = 79 * hash + (this.userType != null ? this.userType.hashCode() : 0);
         return hash;
     }
 

@@ -49,18 +49,18 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 
 		configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
 		
-		/*String password = configProperties.getProperty("KYC_PASSWORD");
+		String password = configProperties.getProperty("KYC_PASSWORD");
 		String userId = configProperties.getProperty("KYC_USER_ID");
 		String miId = configProperties.getProperty("KYC_MI_ID");
 		String mobileNo = configProperties.getProperty("KYC_MOBILE_NO");
-		String encryptionKey = configProperties.getProperty("KYC_ENCRYPTION_KEY");*/
+		String encryptionKey = configProperties.getProperty("KYC_ENCRYPTION_KEY");
 		
 		
-		String password = "NDML@1234";
+		/*String password = "NDML@1234";
 		String userId = "TEST";
 		String miId = "Z0589";
 		String mobileNo = "7875898574";
-		String encryptionKey = "83";
+		String encryptionKey = "83";*/
 		
 		
     	PANServiceImplService wbPanService = new PANServiceImplService();

@@ -70,13 +70,42 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		System.out.println("calculated amount : "+calculatedAmount+" : amount : "+amount);
     		
-    		/*if ( Double.compare(amount, calculatedAmount) != 0 )  {
-    			addActionMessage("Entered values are not correct !! ");
-    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
-    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
-    			return INPUT;
-    		}*/
-    		
+    		hibernateSession.beginTransaction();
+
+			query = hibernateSession.createQuery("select t.productId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode "
+									+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
+									+ "where t.customerId = c.customerId and t.productId = s.fundId and t.bseOrderId= :bseOrderId");
+			
+
+			query.setParameter("bseOrderId", getBseOrderId());
+			
+			List<Object[]> queryResult = query.list(); 
+			
+			String fundId = queryResult.get(0)[0].toString();
+			String panCard = queryResult.get(0)[1].toString();
+			String customerId = queryResult.get(0)[2].toString();
+			String folioNum = null;
+			if (queryResult.get(0)[3] != null )  {
+				folioNum = queryResult.get(0)[3].toString();	
+			}
+			
+			String amcCode = queryResult.get(0)[4].toString();
+			
+			System.out.println(" panCard : "+panCard+" : customerId : "+customerId+" : folioNum : "+folioNum+" : amcCode : "+amcCode);
+			
+			hibernateSession.getTransaction().commit();
+			
+			if ("".equals(folioNum) || folioNum == null)  {
+				
+				hibernateSession.beginTransaction();
+
+				FolioDetails tempFolioDetails = new FolioDetails( getFolioNum(), customerId, panCard,fundId,amcCode,"MoneyBuddy");
+				hibernateSession.save(tempFolioDetails);
+				
+				hibernateSession.getTransaction().commit();
+	
+			}
+
     		hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
 					+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
@@ -89,47 +118,8 @@ public class UploadCustomerNavAction extends ActionSupport {
 			
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
-			hibernateSession.getTransaction().commit();
-			
-			hibernateSession.beginTransaction();
-			
-			String count ;
-			query = hibernateSession.createQuery("select count(*) from FolioDetails where folioNum = :folioNum ");
-			query.setParameter("folioNum", getFolioNum());
-			
-			count = query.uniqueResult().toString();
-			hibernateSession.getTransaction().commit();
-			
-			
-			if ("0".equals(count))  {
-				
-				hibernateSession.beginTransaction();
-
-				query = hibernateSession.createQuery("select s.amcCode,c.panCard, t.customerId "
-										+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
-										+ "where t.customerId = c.customerId and t.productId = s.fundId and t.bseOrderId= :bseOrderId");
-				query.setParameter("bseOrderId", getBseOrderId());
-				
-				List<Object[]> queryResult = query.list(); 
-				
-				String amcCode = queryResult.get(0)[0].toString();
-				String panCard = queryResult.get(0)[1].toString();
-				String customerId = queryResult.get(0)[2].toString();
-				
-				System.out.println("amcCode : "+amcCode+" : panCard : "+panCard+" : customerId : "+customerId);
-				
-				hibernateSession.getTransaction().commit();
-				
-				hibernateSession.beginTransaction();
-
-				FolioDetails tempFolioDetails = new FolioDetails( getFolioNum(), customerId, amcCode, panCard);
-				hibernateSession.save(tempFolioDetails);
-				
-				hibernateSession.getTransaction().commit();
-				
-				
-			}
-	    	
+			hibernateSession.getTransaction().commit();	
+ 	
 	    	System.out.println(" Action complete !!");
 	    	/*String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());*/

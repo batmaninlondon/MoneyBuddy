@@ -6,6 +6,7 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import javax.xml.bind.JAXBElement;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -35,6 +39,8 @@ import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
 
+import in.bsestarmf._2016._01.GetPasswordForChildOrderResponse;
+import in.bsestarmf._2016._01.GetPasswordResponse;
 import in.bsestarmf._2016._01.StarMFWebService;
 
 import org.apache.log4j.Logger;
@@ -42,6 +48,10 @@ import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFact
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.RequestParam;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.Response;
+import org.datacontract.schemas._2004._07.starmfwebservice.ArrayOfChildOrderDetails;
+import org.datacontract.schemas._2004._07.starmfwebservice.ChildOrderDetails;
+import org.datacontract.schemas._2004._07.starmfwebservice.ChildOrderRequest;
+import org.datacontract.schemas._2004._07.starmfwebservice.ChildOrderResponse;
 
 public class Trading {
 
@@ -167,8 +177,8 @@ public class Trading {
 
 	}
 	
-	public String generateMandateId(String customerId, String amount, String mandateType, String accountNum, String accountType, 
-						String ifscCode, String sipStartDate, String sipEndDate) throws MoneyBuddyException {
+	public String generateMandateId(String customerId, String mandateType, String accountNum, String accountType, 
+						String ifscCode) throws MoneyBuddyException {
 
 		try {
 			
@@ -189,10 +199,26 @@ public class Trading {
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
 
-			String frmtdStartDateForMandateId = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
-			String frmtdEndDateForMandateId = sipEndDate.substring(3,5)+"/"+sipEndDate.substring(0,2)+"/"+sipEndDate.substring(6,10);
+			Date date = new Date();
+			String mandateIdStartDate= new SimpleDateFormat("dd/MM/yyyy").format(date);
 			
-			String[] mandateIdDetailsArray = {customerId,amount,mandateType,accountNum,accountType,ifscCode,"",frmtdStartDateForMandateId,frmtdEndDateForMandateId};
+			Calendar today = Calendar.getInstance();
+			
+			Calendar hundredYearsFromToday = today;
+			
+			hundredYearsFromToday.add(Calendar.YEAR, 100); // to get previous year add -1
+			date = hundredYearsFromToday.getTime();
+			String mandateIdEndDate= new SimpleDateFormat("dd/MM/yyyy").format(date);
+			
+			System.out.println("MANDATE ID START DATE : "+mandateIdStartDate);
+			System.out.println("MANDATE ID END DATE : "+mandateIdEndDate);
+			
+			
+			
+			//String frmtdStartDateForMandateId = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
+			//String frmtdEndDateForMandateId = sipEndDate.substring(3,5)+"/"+sipEndDate.substring(0,2)+"/"+sipEndDate.substring(6,10);
+			
+			String[] mandateIdDetailsArray = {customerId,"120000",mandateType,accountNum,accountType,ifscCode,"",mandateIdStartDate,mandateIdEndDate};
 
 			String mandateIdDetails = String.join("|",mandateIdDetailsArray);
 
@@ -230,7 +256,7 @@ public class Trading {
 
 	}
 
-	public String executeTrade(String customerId, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, 
+	public String executeTrade(String customerId, String panCard, Map<String, Double> productDetailsMap, String transactionCode, String sipDate, 
 			String sipStartDate, String sipEndDate,
 			String transactionType, String buySell, int years, String accountNum, String bankId, String ifsc, String bankMode, 
 			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  Map<String, Object> sessionMap) throws MoneyBuddyException {
@@ -328,12 +354,13 @@ public class Trading {
 				
 				hibernateSession.getTransaction().commit();
 
+				
+				
+			for ( String currentProductId : productDetailsMap.keySet())  {
 				String schemeCode = null;
 				String amcCode = null;
 				String folioNum = null;
 				
-			for ( String currentProductId : productDetailsMap.keySet())  {
-				folioNum = null;
 				System.out.println("currentProductId : "+currentProductId);
 
 				QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
@@ -349,16 +376,33 @@ public class Trading {
 				hibernateSession.beginTransaction();
 				
 				Object result = null;
-				query = hibernateSession.createQuery("select folioNum from FolioDetails where amcCode = :amcCode and customerId = :customerId ");
+				query = hibernateSession.createQuery("select folioNum from FolioDetails where amcCode = :amcCode and customerId = :customerId and panCard = :panCard and generatedBy = :generatedBy ");
 				query.setParameter("amcCode", amcCode);
 				query.setParameter("customerId", customerId);
+				query.setParameter("panCard", panCard);
+				query.setParameter("generatedBy", "MoneyBuddy");
 				
 				result = query.uniqueResult();
 				hibernateSession.getTransaction().commit();
 				
-				
 				if (result != null)  {
 					folioNum= result.toString();
+				}
+				else {
+					hibernateSession.beginTransaction();
+					query = hibernateSession.createQuery("select folioNum from FolioDetails where amcCode = :amcCode and customerId = :customerId and panCard = :panCard and generatedBy = :generatedBy ");
+					query.setParameter("amcCode", amcCode);
+					query.setParameter("customerId", customerId);
+					query.setParameter("panCard", panCard);
+					query.setParameter("generatedBy", "Others");
+					
+					result = query.uniqueResult();
+					hibernateSession.getTransaction().commit();
+					
+					if (result != null)  {
+						folioNum= result.toString();
+					}
+					
 				}
 				System.out.println("folioNum :  "+folioNum);
 				
@@ -444,8 +488,7 @@ public class Trading {
 
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from mfOrderEntry API ");
 				
-				amcCode = secondaryFundDetails.getAmcCode();
-				
+								
 				if (folioNum== null)
 					folioNum ="";
 				
@@ -486,7 +529,7 @@ public class Trading {
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
 							Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
-							folioNum,firstOrderFlag,clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
+							folioNum,"Y",clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
 							clientProperties.getProperty("EUIN"),
 							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
 							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
@@ -507,8 +550,87 @@ public class Trading {
 				query = hibernateSession.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus , bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " where transactionDetailId = :transactionDetailId");
 				if (transactionType == "UPFRONT") 
 					bseOrderId = resultsEntryParam[2].toString();
-				else 
+				else {
+					String regNum = resultsEntryParam[5].toString();
+					
+					WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+					in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+					
+					ChildOrderRequest childOrderRequest = new ChildOrderRequest();
+					
+					org.datacontract.schemas._2004._07.starmfwebservice.ObjectFactory objFact = org.datacontract.schemas._2004._07.starmfwebservice.ObjectFactory.class.newInstance();
+					
+					SimpleDateFormat childReqDateFormat = new SimpleDateFormat("dd MMM yyyy");
+					date = new Date();
+					String frmtdChildReqDate = childReqDateFormat.format(date);
+					
+					System.out.println("regNum is : "+regNum);
+					System.out.println("customerId is : "+customerId);
+					
+					/*String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),
+							configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+					
+					String[] resultsStarMF = passwordStarMF.split("\\|");
+
+					for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+						System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+					}
+
+					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - fetched encrypted password from iStarMFWebService API ");
+					System.out.println("passwordStarMF : "+passwordStarMF);
+
+					PASSWORD_STARMF = resultsStarMF[1];*/
+					
+					org.datacontract.schemas._2004._07.starmfwebservice.PasswordRequest passwordRequest = new org.datacontract.schemas._2004._07.starmfwebservice.PasswordRequest();
+					
+					passwordRequest.setMemberId(objFact.createPasswordRequestMemberId(configProperties.getProperty("MEMBER_ID")));
+					passwordRequest.setUserId(objFact.createPasswordRequestUserId(configProperties.getProperty("USER_ID")));
+					passwordRequest.setPassword(objFact.createPasswordRequestPassword(configProperties.getProperty("PASSWORD")));
+					passwordRequest.setPassKey(objFact.createPasswordRequestPassKey(configProperties.getProperty("PASS_KEY")));
+					
+					org.datacontract.schemas._2004._07.starmfwebservice.Response getPasswordForChildOrderResponse = iStarMFWebService.getPasswordForChildOrder(passwordRequest);
+					
+					String password = getPasswordForChildOrderResponse.getResponseString().getValue().toString();
+					
+					System.out.println("password  :  "+password);
+					
+					childOrderRequest.setClientCode(objFact.createChildOrderRequestClientCode(customerId));
+					childOrderRequest.setMemberCode(objFact.createChildOrderRequestMemberCode(configProperties.getProperty("MEMBER_ID")));
+					childOrderRequest.setSystematicPlanType(objFact.createChildOrderRequestSystematicPlanType("ISIP"));
+					childOrderRequest.setRegnNo(objFact.createChildOrderRequestRegnNo(regNum));
+					childOrderRequest.setEncryptedPassword(objFact.createChildOrderRequestEncryptedPassword(password));
+					childOrderRequest.setDate(objFact.createChildOrderRequestDate(frmtdChildReqDate));
+					
+					System.out.println("CHILD ORDER REQUEST CLIENT CODE Is : "+childOrderRequest.getClientCode().getValue());
+					System.out.println("CHILD ORDER REQUEST MEMBER CODE Is : "+childOrderRequest.getMemberCode().getValue());
+					System.out.println("CHILD ORDER REQUEST REQ DATE Is : "+childOrderRequest.getDate().getValue());
+					System.out.println("CHILD ORDER REQUEST PASSWORD Is : "+childOrderRequest.getEncryptedPassword().getValue());
+					System.out.println("CHILD ORDER REQUEST systematic plan type Is : "+childOrderRequest.getSystematicPlanType().getValue());
+					System.out.println("CHILD ORDER REQUEST REGISTRATION NUM Is : "+childOrderRequest.getRegnNo().getValue());
+					
+					ChildOrderResponse childOrderResponse =  iStarMFWebService.childOrderDetails(childOrderRequest);
+					
+					System.out.println("BSE ORDER ID FOR ISIP is : "+childOrderResponse.getChildOrderDetails().isNil() );
+					
+					System.out.println("BSE ORDER ID FOR ISIP Message is : "+childOrderResponse.getMessage().getValue().toString()  );
+					
+					System.out.println("BSE ORDER ID FOR ISIP Status is : "+childOrderResponse.getStatus().getValue().toString() );
+					
+					List<ChildOrderDetails> abc = childOrderResponse.getChildOrderDetails().getValue().getChildOrderDetails() ;
+					
+					System.out.println("abc to strin gis : "+abc.get(0).getOrderNumber());
+
+					/*for (int i = 0 ; i < abc.size() ; i++ )   {
+						
+						System.out.println("abc  : "+i+" : "+ abc.get(i) );
+					}*/
+					
+					
+					
 					bseOrderId = resultsEntryParam[5].toString();
+					
+				}
 				query.setParameter("bseOrderId", bseOrderId);
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - bseOrderId - "+bseOrderId+" recived from BSE for transactionDetailId - "+transactionDetailId);
 			
@@ -607,6 +729,8 @@ public class Trading {
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='4' where transactionId = :transactionId");
 					query.setParameter("transactionId", transactionId);
 					int updateResult = query.executeUpdate();
+					hibernateSession.getTransaction().commit();
+					
 					System.out.println("Payment gateway failure reason : "+paymentUrl);
 					
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"failed with paymentGateway");
@@ -820,6 +944,8 @@ public class Trading {
 					query = hibernateSession.createQuery("update TransactionDetails set transactionStatus ='6' where transactionId = :transactionId");
 					query.setParameter("transactionId", tranDetailId);
 					int updateResult = query.executeUpdate();
+					hibernateSession.getTransaction().commit();
+					
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"failed with paymentGateway");
 					
 				}

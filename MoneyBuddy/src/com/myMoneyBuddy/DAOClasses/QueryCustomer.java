@@ -126,8 +126,7 @@ public class QueryCustomer {
 					hibernateSession.close();
 		}
 	}
-	
-	
+		
 	public String getBseClientCreationStatus(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - start");
@@ -153,6 +152,40 @@ public class QueryCustomer {
 		}
 		catch (Exception e ) {
 			logger.error("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+
+	public String getCustomerEmailId(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String emailId = customer.getEmailId();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - return emailId ");
+			logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - end");
+			
+			return emailId;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -281,12 +314,12 @@ public class QueryCustomer {
 		{
 			
 			hibernateSession.beginTransaction();
-			System.out.println("HI there 1 + emailID : "+emailId);
+			System.out.println("HI there  + emailID : "+emailId);
 			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
 			hibernateSession.getTransaction().commit();
 
 			if (result != null) {
-				System.out.println("HI there 1"+result.toString());
+				System.out.println("HI there "+result.toString());
 				customerId = Integer.parseInt(result.toString());
 			}
 				

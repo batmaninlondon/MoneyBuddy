@@ -489,7 +489,7 @@
 		 });
 
 		 $(".submit").click(function(){
-		 	alert("add here");
+		 	//alert("add here");
 		 	checkKysStatus();
 		 	return false;
 		 })

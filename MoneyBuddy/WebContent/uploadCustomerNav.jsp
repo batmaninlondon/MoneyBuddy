@@ -45,7 +45,7 @@
 		var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
 		var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
 		
-		alert('unitsPurchased : '+unitsPurchased);
+		//alert('unitsPurchased : '+unitsPurchased);
 		document.getElementById("action-bse-order-id").value = bseOrderId;
 		document.getElementById("action-folio-number").value = folioNum;
 		document.getElementById("action-units-purchased").value = unitsPurchased;

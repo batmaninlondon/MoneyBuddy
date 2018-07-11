@@ -156,8 +156,12 @@
 									</div>
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs ">
 										<s:set var="selAccNum" value="selectedAccNum" />
+										<s:set var ="astrics" value="'********'" />
+										<s:set var="selAccNumDisplay" value="#astrics+selectedAccNum.substring(8,12)" />
+
 										<s:fielderror fieldName="accountNumber" class="g-color--red" />
-			  							<s:textfield id="account-number" name="accountNumber" value="%{selAccNum}" class="field left" readonly="true" /> 
+										<s:textfield id="account-number" name="accountNumber" value="%{selAccNum}" class="field left hidden" readonly="true" />
+			  							<s:textfield id="account-number-dis" name="accountNumberDis" value="%{selAccNumDisplay}" class="field left" readonly="true" /> 
 										<%-- <input type="text" id="account-number"  name="accountNumber" value="<s:property value="#selAccNum"/>" class="field left" readonly> --%>
 									</div>
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs ">
@@ -179,7 +183,24 @@
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
 									</div>
 			  					</div>
-
+			  					<s:set var="transactionType" value="#session.transactionType" />
+								<s:if test="#transactionType.equals('UPFRONT')">
+			  					</s:if>
+			  					<s:else>
+			  					<div class="row">
+			  						<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
+			  							First Order Today
+		  							</div>
+						        	<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
+										<s:select class="form-control"  id="firstOrderFlag"
+											list="#{'Y':'Yes', 'N':'No'}" 
+											name="firstOrderFlag" 
+											value="Y" />
+						        	</div>
+									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
+									</div>
+			  					</div>
+			  					</s:else>
 							</s:if>
 							<s:else>
 							
@@ -258,6 +279,24 @@
 									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
 									</div>
 			  					</div>
+			  					<s:set var="transactionType" value="#session.transactionType" />
+			  					<s:if test="#transactionType.equals('UPFRONT')">
+			  					</s:if>
+			  					<s:else>
+			  					<div class="row">
+			  						<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
+			  							First Order Today
+		  							</div>
+						        	<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
+										<s:select class="form-control"  id="firstOrderFlag"
+											list="#{'Y':'Yes', 'N':'No'}" 
+											name="firstOrderFlag" 
+											value="Y" />
+						        	</div>
+									<div id="investment-options" class="col-md-2 g-margin-b-5--xs">
+									</div>
+			  					</div>
+			  					</s:else>
 							
 							</s:else>
 							
@@ -272,7 +311,7 @@
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-14--xs">
-											<s:set var="transactionType" value="#session.transactionType" />
+											<%-- <s:set var="transactionType" value="#session.transactionType" /> --%>
 											<s:if test="#transactionType.equals('UPFRONT')">
 												<% System.out.println("Inside Upfront"); %>
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
