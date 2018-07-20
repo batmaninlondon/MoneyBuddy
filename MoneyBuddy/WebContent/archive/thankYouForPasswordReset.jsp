@@ -71,7 +71,7 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
-                        <li id="header-nav-li"><a href="startSip">Start SIP</a></li>
+                        <li id="header-nav-li"><a href="contactUs">Start SIP</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="blog">Blog</a></li> 

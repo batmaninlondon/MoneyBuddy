@@ -11,8 +11,12 @@ import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -309,6 +313,64 @@ public class QueryPrimaryFundDetails {
 		}
 		catch (Exception e ) {
 			logger.error("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+
+	public HashMap<String,String> getAvailableStpFundsList(String fundId) throws MoneyBuddyException{
+
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		try
+		{
+			HashMap<String,String> availableStpFundsList = new HashMap<String,String>();
+			logger.debug("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - start");
+
+			System.out.println("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - start");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select p.fundId,p.fundName from PrimaryFundDetails p, SecondaryFundDetails s where s.fundId = p.fundId and s.amcCode = (select amcCode from SecondaryFundDetails where fundId = :fundId ) ");
+			query.setParameter("fundId",fundId);
+			
+			List<Object[]> availableFundList = query.list();
+			String availableFundId = "";
+			String availableFundName = "";
+			for ( int i = 0; i < availableFundList.size() ;i++ ) {
+
+				availableFundId = availableFundList.get(i)[0].toString();
+				availableFundName = availableFundList.get(i)[1].toString();
+				
+					
+				availableStpFundsList.put(availableFundId, availableFundName);
+			}
+
+			Iterator it = availableStpFundsList.entrySet().iterator();
+			 
+			while ( it.hasNext() )  {
+				Map.Entry pair = (Map.Entry)it.next();
+				System.out.println("key : "+pair.getKey()+" and value : "+pair.getValue());
+				
+			}
+
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - end");
+			
+			return availableStpFundsList;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

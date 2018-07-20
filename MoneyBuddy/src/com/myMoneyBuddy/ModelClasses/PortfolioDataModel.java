@@ -12,6 +12,7 @@ public class PortfolioDataModel implements Serializable{
 	private String profit;
 	private String rateOfGrowth;
 	private String transactionStartDate;
+	private String fundSector;
 	
 	
 	public PortfolioDataModel() {
@@ -20,7 +21,7 @@ public class PortfolioDataModel implements Serializable{
 
 
 	public PortfolioDataModel(String fundId, String fundName, String units, String investedAmount, String currentAmount,
-			String profit, String rateOfGrowth, String transactionStartDate) {
+			String profit, String rateOfGrowth, String transactionStartDate, String fundSector) {
 		super();
 		this.fundId = fundId;
 		this.fundName = fundName;
@@ -30,6 +31,7 @@ public class PortfolioDataModel implements Serializable{
 		this.profit = profit;
 		this.rateOfGrowth = rateOfGrowth;
 		this.transactionStartDate = transactionStartDate;
+		this.fundSector = fundSector;
 	}
 
 
@@ -110,6 +112,16 @@ public class PortfolioDataModel implements Serializable{
 
 	public void setTransactionStartDate(String transactionStartDate) {
 		this.transactionStartDate = transactionStartDate;
+	}
+
+
+	public String getFundSector() {
+		return fundSector;
+	}
+
+
+	public void setFundSector(String fundSector) {
+		this.fundSector = fundSector;
 	}
 	
 }

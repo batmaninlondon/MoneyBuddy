@@ -1,0 +1,102 @@
+/**
+ *
+ * @author Savita Wadhwani
+ */
+
+package com.myMoneyBuddy.ActionClasses;
+
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
+import com.opensymphony.xwork2.ActionSupport;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
+public class FetchAvailableStpFundsAction extends ActionSupport  {
+
+	Logger logger = Logger.getLogger(FetchAvailableStpFundsAction.class);
+	private String stpFundId;
+	private String stpAmount;
+	private String fundName;
+	private HashMap<String,String> availableFundsList;
+	
+    public String execute() {
+  	
+    	try {
+    		logger.debug("FetchAvailableStpFundsAction class - execute method - start");
+			System.out.println("Calling FetchAvailableStpFundsAction class - start ");
+			System.out.println("FetchAvailableStpFundsAction class - stpAmount : "+getStpAmount());
+			
+			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+			
+			fundName = queryPrimaryFundDetails.getFundName(getStpFundId());
+			
+			availableFundsList = queryPrimaryFundDetails.getAvailableStpFundsList(getStpFundId());
+			
+			
+			int rangeAmount = (( Double.valueOf(getStpAmount()).intValue())/100);
+			
+			setStpAmount(Integer.toString(rangeAmount*100));
+			
+			System.out.println("FetchAvailableStpFundsAction class - stpAmount after change : "+getStpAmount());
+			
+    	    logger.debug("FetchAvailableStpFundsAction class - execute method - returned success");
+    	    logger.debug("FetchAvailableStpFundsAction class - execute method - end");
+    	    
+			return SUCCESS;
+		} 
+    	catch (Exception e) {	
+    		logger.error("FetchAvailableStpFundsAction class - execute method - Caught Exception");
+			e.printStackTrace();
+
+    	    logger.error("FetchAvailableStpFundsAction class - execute method - returned error");
+    	    
+			return ERROR;
+		} 
+
+    }
+
+
+	public String getStpFundId() {
+		return stpFundId;
+	}
+
+
+	public void setStpFundId(String stpFundId) {
+		this.stpFundId = stpFundId;
+	}
+
+
+	public String getStpAmount() {
+		return stpAmount;
+	}
+
+
+	public void setStpAmount(String stpAmount) {
+		this.stpAmount = stpAmount;
+	}
+
+
+	public String getFundName() {
+		return fundName;
+	}
+
+	public void setFundName(String fundName) {
+		this.fundName = fundName;
+	}
+
+	public HashMap<String, String> getAvailableFundsList() {
+		return availableFundsList;
+	}
+
+	public void setAvailableFundsList(HashMap<String, String> availableFundsList) {
+		this.availableFundsList = availableFundsList;
+	}
+
+
+}

@@ -127,6 +127,13 @@ public class QueryProducts {
 			     if (result != null )
 			    	 fundName = result.toString();
 			     
+			     result = hibernateSession.createQuery("select sector from PrimaryFundDetails where fundId = '"+row[0]+"' ").uniqueResult();
+			     
+			     String sector = null;
+			     
+			     if (result != null )
+			    	 sector = result.toString();
+			     
 			     result = hibernateSession.createQuery("select navValue from NavHistory where fundId = '"+row[0]+"' and navDate = (select max(navDate) from NavHistory  where fundId = '"+row[0]+"') ").uniqueResult();
 			     String currentNavValue = null; 
 			       
@@ -258,7 +265,7 @@ public class QueryProducts {
 			     System.out.println("XIRR : "+ String.format("%.2f", xirr));
 			      
 			       
-			     portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),fundName,String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",(currentAmount-investedAmount)),String.format("%.2f",xirr),transactionStartDate));
+			     portfolioDataModel.add(new PortfolioDataModel(row[0].toString(),fundName,String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),String.format("%.2f",(currentAmount-investedAmount)),String.format("%.2f",xirr),transactionStartDate,sector));
 			}
 			
 			
@@ -282,7 +289,7 @@ public class QueryProducts {
 			
 			System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
 			
-			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),String.format("%.2f",totalXirr),""));
+			portfolioDataModel.add(new PortfolioDataModel("","Total","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),String.format("%.2f",totalXirr),"",""));
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return portfolioDataModel of "+portfolioDataModel.size()+ " record");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");

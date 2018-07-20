@@ -108,7 +108,7 @@
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="startSip" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
+                                        <a href="contactUs" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
@@ -191,13 +191,13 @@
                         </div>
                         <div class="col-sm-6">
                         	<s:fielderror fieldName="senderMobileNum" class="g-color--red" />
-			  				<s:textfield class="form-control s-form-v3__inpu" name="senderMobileNum" placeholder="* Phone"  />
+			  				<s:textfield class="form-control s-form-v3__input" name="senderMobileNum" placeholder="* Phone"  />
                             <!-- <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone"> -->
                         </div>
                     </div>
                     <div class="g-margin-b-10--xs">
                     	<s:fielderror fieldName="senderMessage" class="g-color--red" />
-			  			<s:textfield class="form-control s-form-v3__inpu" name="senderMessage" placeholder="* Your message" />
+			  			<s:textfield class="form-control s-form-v3__input" name="senderMessage" placeholder="* Your message" />
                         <!-- <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea> -->
                     </div>
                     <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>

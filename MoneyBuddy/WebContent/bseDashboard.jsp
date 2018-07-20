@@ -217,7 +217,7 @@
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
@@ -431,6 +431,8 @@
 											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs ">Profit</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate<br/>(% per year)</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Redeem</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">STP</span></th>
 							            </tr>
 							        </thead>
 							    </table>
@@ -491,6 +493,11 @@
 	              
         		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+				</s:form>
+				
+				<s:form  action="fetchAvailableStpFundsAction" method="post" name="formFetchAvailableStpFundsAction">
+  					<s:hidden id="fund-id-stp-value" name="stpFundId"></s:hidden>
+  					<s:hidden id="cur-amount-stp-value" name="stpAmount"></s:hidden>
 				</s:form>
 	              <!-- Added Table for SIP - end  -->
 	              
@@ -702,7 +709,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.fundSector]);
 						});
 					  
 				  },
@@ -883,7 +890,9 @@
 					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
 					  		"columnDefs": [ 
 					  			{"className": "dt-center", "targets": "_all"},
-					  			{ "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" },
+					  			{ "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" },
+					  			{ "targets": -2, "data": null, "defaultContent": "<button id='redeemButton'>Redeem</button>" },
+					  			{ "targets": -3, "data": null, "defaultContent": "<button id='topUpButton'>Top up!</button>" },
 					  			{
 					  	            "searchable": false,
 					  	            "orderable": false,
@@ -900,7 +909,8 @@
 					  	        }
 					  	        ],
 					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-					  	    	  
+								
+
 					  	    	if ( aData[1] == "Total" ) {
 					  	    		
 					  	    	  	$('td:nth-child(2)', nRow).addClass('g-font-weight--700');
@@ -909,9 +919,16 @@
 					  	    		$('td:nth-child(6)', nRow).addClass('g-font-weight--700');
 					  	    		$('td:nth-child(7)', nRow).addClass('g-font-weight--700');
 					  	    		$('td:nth-child(8)', nRow).html(null);
-					  	    	  	return nRow;
+					  	    		$('td:nth-child(9)', nRow).html(null);
+					  	    		$('td:nth-child(10)', nRow).html(null);
+					  	    	  	return nRow;	
 				  	    	  	}
 					  	    	else {
+					  	    		if ( aData[7] != "Debt" ) {
+						  	    		
+		  	    	  		    		$('td:nth-child(10)', nRow).html(null);
+						  	    	  
+					  	    	  	}
 					  	        	$("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
 					  	        	return nRow;
 					  	      	}
@@ -992,12 +1009,19 @@
 					 
 					 
 				  
-					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
+					 $('#portfoliosummary tbody').on('click','#topUpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
 					        buyFundHandler(fundId);
 					    } ); 
 					  
+					 $('#portfoliosummary tbody').on('click','#stpButton',function () {
+					        var data = table.row( $(this).parents('tr') ).data();
+					        var fundId = data[0];
+					        var amount = data[4];
+					        alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]);
+					        stpFundHandler(fundId,amount);
+					    } ); 
 				
 				  },
 				  

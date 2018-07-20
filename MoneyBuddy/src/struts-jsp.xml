@@ -37,14 +37,29 @@
 	    	<result>/orderInvoice.jsp</result>
 		</action>
 	</package>
+	<package name="orderInvoiceSipFofN" namespace="/" extends="struts-default">
+	    <action name="orderInvoiceSipFofN">
+	    	<result>/orderInvoiceSipFofN.jsp</result>
+		</action>
+	</package>
+	<package name="orderInvoiceSipFofY" namespace="/" extends="struts-default">
+	    <action name="orderInvoiceSipFofY">
+	    	<result>/orderInvoiceSipFofY.jsp</result>
+		</action>
+	</package>
 	<package name="panCardVerification" namespace="/" extends="struts-default">
 	    <action name="panCardVerification">
 	    	<result>/panCardVerification.jsp</result>
 		</action>
 	</package>
-	<package name="startSip" namespace="/" extends="struts-default">
-	    <action name="startSip">
-	    	<result>/startSip.jsp</result>
+	<package name="contactUs" namespace="/" extends="struts-default">
+	    <action name="contactUs">
+	    	<result>/contactUs.jsp</result>
+		</action>
+	</package>
+	<package name="stpConfirmation" namespace="/" extends="struts-default">
+	    <action name="stpConfirmation">
+	    	<result>/stpConfirmation.jsp</result>
 		</action>
 	</package>
 	<package name="allFunds" namespace="/" extends="struts-default">

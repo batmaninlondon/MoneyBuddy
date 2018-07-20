@@ -65,6 +65,12 @@
           'size' : 'invisible',
           'callback' : submitSubscriber
         });
+        
+        recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
+            'sitekey' : '<%=siteKey%>', //Replace this with your Site key
+            'size' : 'invisible',
+            'callback' : submitContactUsMail
+          });
       
       };
   
@@ -122,7 +128,7 @@
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="startSip" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
@@ -631,28 +637,33 @@
                     <div class="col-md-8 js__form-eqaul-height-v1 ">
                         <div class="g-padding-x-40--xs g-padding-y-50--xs">
                             <h2 class="g-font-size-24--xs g-color--primary ">Have a question? Write to us</h2>
+	                        <s:form  action="sendMailAction" class="g-recaptcha" method="post" name="formContactUsMail" namespace="/" >
 	                        <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md g-bg-color--primary" >
 			                    <div class="g-margin-b-20--xs g-color--primary">
-			                        <input type="text" class="form-control s-form-v3__input" id="sender-name" placeholder="* Name">
+			                        <s:fielderror fieldName="senderName" class="g-color--red" />
+						  			<s:textfield class="form-control s-form-v3__input" name="senderName" placeholder="* Name" /> 
 			                    </div>
 			                    <div class="row g-row-col-5 g-margin-b-50--xs g-color--primary">
 			                        <div class="g-color--primary col-sm-6 g-margin-b-30--xs g-margin-b-0--md">
-			                            <input type="email" class="g-color--primary form-control s-form-v3__input" id="sender-emailId" placeholder="* Email">
+			                        	<s:fielderror fieldName="senderEmailId" class="g-color--red" />
+						  				<s:textfield class="g-color--primary form-control s-form-v3__input" name="senderEmailId" placeholder="* Email" />
 			                        </div>
 			                        <div class="col-sm-6">
-			                            <input type="text" class="form-control s-form-v3__input" id="sender-mobile-number" placeholder="* Phone">
+			                        	<s:fielderror fieldName="senderMobileNum" class="g-color--red" />
+						  				<s:textfield class="g-color--primary form-control s-form-v3__input" name="senderMobileNum" placeholder="* Phone"  />
 			                        </div>
 			                    </div>
 			                    <div class="g-margin-b-10--xs">
-			                        <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea>
+			                    	<s:fielderror fieldName="senderMessage" class="g-color--red" />
+						  			<s:textfield class="form-control s-form-v3__input" name="senderMessage" placeholder="* Your message" />
 			                    </div>
+			                    <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>
+                    
 			                    <div class="g-text-center--xs">
-			                        <button id="recaptcha-contact-us" type="submit" class="g-recaptcha g-bg-color--primary g-color--white text-uppercase s-btn s-btn--md g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button>
-			                    </div>
+			                    	<s:submit id="recaptcha-contact-us" class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />
+		                        </div>
 	                		</div>
-	                		<div class ="center-block g-width-500--sm g-width-550--md g-bg-color--primary">
-	                			<p id="contact-us-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
-                        	</div>
+	                		</s:form>
                         </div>
                     </div>
                     <!-- End Form -->

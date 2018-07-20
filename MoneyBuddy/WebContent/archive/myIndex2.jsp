@@ -71,7 +71,7 @@
                         <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
                         <!-- <li id="header-nav-li"><a href="help"><b>FAQs</b></a></li> -->
                         <li id="header-nav-li"><a href="<s:url action="fetchFundDetailsAction"/>"><b>Funds</b></a></li> 
-                        <li id="header-nav-li"><a href="startSip"><b>Contact Us</b></a></li>
+                        <li id="header-nav-li"><a href="contactUs"><b>Contact Us</b></a></li>
 				         	<%  if(session.getAttribute("customerId") == null)
 							 	{   %> 
 										 	 <li id="header-nav-li"><a href="login" ><b>Sign in</b></a></li>

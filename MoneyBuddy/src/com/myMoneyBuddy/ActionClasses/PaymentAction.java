@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
@@ -47,6 +49,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	private String tranDetailId;
 	//private InputStream stream;
 	private String paymentUrl;
+	private String returnDate;
+	private String sipAmount;
 	   
     public String execute()  {
 
@@ -167,37 +171,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				
 				if ("NotSet".equals(getTranDetailId()))    {
 					amount = sessionMap.get("sipAmount").toString();
+					sipAmount = amount;
 					sipDate = sessionMap.get("sipDate").toString();
 					sipStartDate = sessionMap.get("sipStartDate").toString();
-					
-					if ("Y".equals(getFirstOrderFlag()))  {
-						Date startDate = new SimpleDateFormat("dd/MM/yyyy").parse(sipStartDate);  
-						
-						Calendar c = Calendar.getInstance();
-				        c.setTime(startDate);
-				        c.add(Calendar.DATE, 16);
-				        
-				        Date newStartDate = c.getTime();
-				        
-				        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-				        
-				        System.out.println("newStartDate : "+dateFormat.format(newStartDate));
-					}
-					else {
-						Date startDate = new SimpleDateFormat("MM/dd/yyyy").parse(sipStartDate);  
-						
-						Calendar c = Calendar.getInstance();
-				        c.setTime(startDate);
-				        c.add(Calendar.DATE, 31);
-				        
-				        Date newStartDate = c.getTime();
-				        
-				        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-				        
-				        System.out.println("newStartDate : "+dateFormat.format(newStartDate));
-					}
-
 					sipEndDate = sessionMap.get("sipEndDate").toString();
+					
+					
+				    
 					sipDuration = sessionMap.get("sipDuration").toString();
 					
 					productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>)sessionMap.get("productRatioList"),
@@ -205,6 +185,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				else {
 					amount = transactionDetails.getTransactionAmount();
+					sipAmount = amount;
 					QuerySipDetails querySipDetails = new QuerySipDetails();
 					SipDetails sipDetails = querySipDetails.getSipDetails(getTranDetailId());
 					sipDate = sipDetails.getSipDate();
@@ -222,6 +203,47 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					productDetailsMapForBuy.put(transactionDetails.getProductId(), Double.parseDouble(transactionDetails.getTransactionAmount()));
 				}
 				
+				Properties configProperties = new Properties();
+				String configPropFilePath = "../../../config/config.properties";
+
+				configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
+				
+				String sipBufferDays = null;
+				
+				Date currentDate = new Date();
+				Calendar c = Calendar.getInstance();
+		        c.setTime(currentDate);
+		        
+				if ("Y".equals(getFirstOrderFlag()))  {
+					sipBufferDays = configProperties.getProperty("SIP_BUFFER_DAYS_YES");
+				}
+				else {
+					sipBufferDays = configProperties.getProperty("SIP_BUFFER_DAYS_NO");
+					
+				}
+			     
+				c.add(Calendar.DATE, Integer.parseInt(sipBufferDays));
+				
+			    Date minSipStartDate = c.getTime();
+					
+			    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			    
+			    minSipStartDate = sdf.parse(sdf.format(minSipStartDate));
+			    
+			    Date curSipStartDate = sdf.parse(sipStartDate);
+			    Date curSipEndDate = sdf.parse(sipEndDate);
+			    
+			    if (minSipStartDate.after(curSipStartDate)) {
+			    	c.setTime(curSipStartDate);
+			    	c.add(Calendar.MONTH,+1);
+			    	curSipStartDate = c.getTime();
+			    	
+			    	c.setTime(curSipEndDate);
+			    	c.add(Calendar.MONTH,+1);
+			    	curSipEndDate = c.getTime();
+			    	
+			    }
+			    
 				String mandateId = customer.getIsipMandateId();
 				
 				if ( "NOT_GENERATED".equals(mandateId))  {
@@ -242,15 +264,35 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	System.out.println("mandateId : "+mandateId);
 		    	
-				
-		    	
-		    	
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
-						"NEW",sipDate,sipStartDate,sipEndDate,
+						"NEW",sipDate,sdf.format(curSipStartDate),sdf.format(curSipEndDate),
 						transactionType,"BUY",Integer.parseInt(sipDuration),
-						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
+						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),getFirstOrderFlag(),
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
 		    	
+		    	if ("SIP".equals(transactionType))   {
+			    	SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
+			    	
+			    	returnDate = returnDateFormat.format(curSipStartDate);
+			    	String formatting = "";
+			    	if ("01".equals(returnDate.substring(0,2)))  
+			    		formatting = "st";
+			    	else if ("02".equals(returnDate.substring(0,2)))
+			    		formatting = "nd";
+			    	else if ("03".equals(returnDate.substring(0,2)))
+			    		formatting = "rd";
+			    	else 
+			    		formatting = "th";
+			    	
+			    	System.out.println("returnDate befor editing : "+returnDate);
+			    	returnDate = returnDate.substring(0,2)+formatting+returnDate.substring(2,returnDate.length()-3)+"'"+returnDate.substring(returnDate.length()-2);
+			    	System.out.println("returnDate after editing :  "+returnDate);
+			    	
+			    	if ("Y".equals(getFirstOrderFlag()))
+			    		return "sipOrderFofY";
+			    	else
+			    		return "sipOrderFofN";
+		    	}	
 			}
 
 			
@@ -375,6 +417,23 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	public void setReAccountNumber(String reAccountNumber) {
 		this.reAccountNumber = reAccountNumber;
 	}
+
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public String getSipAmount() {
+		return sipAmount;
+	}
+
+	public void setSipAmount(String sipAmount) {
+		this.sipAmount = sipAmount;
+	}
+
 
 	
 }

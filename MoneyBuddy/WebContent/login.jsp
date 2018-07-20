@@ -142,30 +142,31 @@
       
       <div class="tab-content">
         <div id="signup">   
-          <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" autocomplete="off" >
-          
+          <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" >
           <div id="registration-email-id"  class="field-wrap">
           	<p id="registerMessage"></p>
-            <label> Your Email<span class="req">*</span>  </label>
+            <%-- <label> 
+            	Email Address<span class="req">*</span>  
+            </label> --%>
            	<s:fielderror fieldName="emailIdRegister" class="g-color--red" />
-  			<s:textfield name="emailIdRegister" autocomplete="off" />
+  			<s:textfield name="emailIdRegister"  autocomplete="false" placeholder="Email Address"/>
             <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
           </div>
-          <div id="registration-password" class="field-wrap">
-            <label>
+          <div id="registration-password" class="field-wrap ">
+            <%-- <label>
               Create Password<span class="req">*</span>
-            </label>
+            </label> --%>
             <s:fielderror fieldName="passwordRegister" class="g-color--red" />
-  			<s:password name="passwordRegister" autocomplete="off" />
+  			<s:password name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
             <!-- <input id="password1"  type="password"required autocomplete="off"/> -->
           </div>
           
           <div id="registration-mobile-number" class="field-wrap">
-            <label>
+            <%-- <label>
               Mobile Number<span class="req">*</span>
-            </label>
+            </label> --%>
             <s:fielderror fieldName="mobileNumberRegister" class="g-color--red" />
-  			<s:textfield name="mobileNumberRegister" autocomplete="off" />
+  			<s:textfield name="mobileNumberRegister" autocomplete="off" placeholder="Mobile Number"/>
             <!-- <input id="mobile-number"  type="password"required autocomplete="off"/> -->
           </div>
           <s:hidden id="google-response-register" name="googleResponseRegister"></s:hidden>
@@ -192,7 +193,7 @@
           <p id="loginMessage"></p>
           <div>
           
-            <div class="field-wrap">
+          <div class="field-wrap">
             <label id="email-id-label">
               Email Address<span class="req">*</span>
             </label>

@@ -1,3 +1,22 @@
+		$("input").each(function() {
+			//alert('Hi');
+		  var $this = $(this);
+		  // add empty class on initial run
+		  if ($(this).val().trim() == "") {
+		      $(this).addClass("input-empty");
+		    } else {
+		      $(this).removeClass("input-empty");
+		    }
+		  // add empty class on input change
+		  $this.on("change", function() {
+		    if ($(this).val().trim() == "") {
+		      $(this).addClass("input-empty");
+		    } else {
+		      $(this).removeClass("input-empty");
+		    }
+		  });
+		});
+		
 		function showDuration(newValue)
 		{
 			document.getElementById("sip-duration").innerHTML=newValue;
@@ -6,6 +25,10 @@
 		function showSipAmountPerMonth(newValue)
 		{
 			document.getElementById("sipPerMonth").innerHTML=newValue;
+		}
+		function showStpAmountPerMonth(newValue)
+		{
+			document.getElementById("stpPerMonth").innerHTML=newValue;
 		}
 		function filldata(minSipAmt,minSipDur,minLumsumAmount)
 		{
@@ -77,6 +100,14 @@
 				document.getElementById("fund-id-value").value = fundId;
 				document.formBuyFundAction.submit();
 	    }
+		
+		function stpFundHandler(fundId,amount)  
+	    {
+				document.getElementById("fund-id-stp-value").value = fundId;
+				document.getElementById("cur-amount-stp-value").value = amount;
+				document.formFetchAvailableStpFundsAction.submit();
+	    }
+		
         function deleteCartEntry(cartId)  
         {
 			document.getElementById("cart-id-value").value = cartId;
