@@ -174,7 +174,7 @@ public class QueryCustomer {
 			String emailId = customer.getEmailId();
 			hibernateSession.getTransaction().commit();
 			
-			logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - return emailId ");
+			logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - return emailId - "+emailId);
 			logger.debug("QueryCustomer class - getCustomerEmailId method - customerId - "+customerId+" - end");
 			
 			return emailId;
@@ -195,6 +195,39 @@ public class QueryCustomer {
 		}
 	}
 	
+	public String getAofFormStatus(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getAofFormStatus method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String aofFormStatus = customer.getAofFormStatus();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class - getAofFormStatus method - customerId - "+customerId+" - return aofFormStatus - "+aofFormStatus);
+			logger.debug("QueryCustomer class - getAofFormStatus method - customerId - "+customerId+" - end");
+			
+			return aofFormStatus;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getAofFormStatus method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getAofFormStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
 	
 	public String getKycStatus(String customerId) throws MoneyBuddyException {
 		
@@ -255,6 +288,40 @@ public class QueryCustomer {
 		}
 		catch (Exception e ) {
 			logger.error("QueryCustomer class - getIsipMandateId method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
+	public String getCustomerNameFromId(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getCustomerNameFromId method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String customerName = customer.getCustomerName();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class - getCustomerNameFromId method - customerId - "+customerId+" - return customerName ");
+			logger.debug("QueryCustomer class - getCustomerNameFromId method - customerId - "+customerId+" - end");
+			
+			return customerName;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getCustomerNameFromId method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getCustomerNameFromId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

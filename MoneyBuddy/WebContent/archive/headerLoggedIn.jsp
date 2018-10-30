@@ -6,7 +6,7 @@
 		</div>
 		<div class="col-md-8">
 			<div class="row">
-				<a href="myIndex" class="button">Home</a>
+				<a href="welcome" class="button">Home</a>
 				<a href="whyInvest" class="button">Why invest</a>
 				<a href="aboutUs" class="button">About us</a>
 				<a href="saveTax" class="button">Save Tax</a>

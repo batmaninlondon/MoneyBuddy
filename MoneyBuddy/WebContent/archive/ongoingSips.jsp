@@ -68,12 +68,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active" id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active" id="header-nav-li"><a href="welcome">Home</a></li>
                         <li id="header-nav-li"><a href="contactUs">Start SIP</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
@@ -167,7 +167,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="welcome">Home</a></li>
                         <li><a href="aboutUs">About Us</a></li>
                         <li><a href="help">Contact Us</a></li>
                         <li><a href="register">Sign Up</a></li>

@@ -21,6 +21,7 @@ import com.myMoneyBuddy.DAOClasses.QuerySipDetails;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.myMoneyBuddy.DAOClasses.GenerateAofForm;
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
@@ -78,10 +79,41 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), desEncrypter.encrypt(getAccountNumber()), getIfscCode());
 	    	}
 	    	
-	    	if ("KycNotDone".equals(getTranDetailId()))  {
-    			return "kycNotDone";
+	    	QueryCustomer queryCustomer = new QueryCustomer();
+	    	
+	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+	    	
+	    	System.out.println(" customer.getAofFormStatus() is : .................................................."+customer.getAofFormStatus()+"!!!!!!!!!!");
+	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
+	    		System.out.println(" Inside the loop of NOT_ACTIVATED aof form status !!!!!! ");
+	    		GenerateAofForm generateAofForm = new GenerateAofForm();
+	    		generateAofForm.generateAofForm(customerId);
+	    	}
+	    	
+	    	if ("AofNotDone".equals(getTranDetailId()))  {
+	    		return "aofNotDone";
+	    	}
+	    	else if ("KycAndAofNotDone".equals(getTranDetailId()))  {
+	    		return "aofAndKycNotDone";
+	    	}
+	    	else if ("KycNotDone".equals(getTranDetailId()))  {
+	    		
+	    		if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
+	    			return "aofAndKycNotDone";
+	    		}
+	    		else {
+	    			return "kycNotDone";
+	    		}
     		}
-    		else if ("NotSet".equals(getTranDetailId()))  {
+	    	
+	    	if ("FORM_RECEIVED".equals(customer.getAofFormStatus())) {
+	    		return "aofOrKycFormReceived";
+	    	}
+	    	else if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
+	    		return "aofNotDone";
+	    	}
+	    	
+	    	if ("NotSet".equals(getTranDetailId()))  {
     			transactionType = sessionMap.get("transactionType").toString();
     		}
     		else {
@@ -91,9 +123,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     		}
     		System.out.println("Payment Action class : execute method : transactionType : "+transactionType);
 
-		    QueryCustomer queryCustomer = new QueryCustomer();
-	    	
-	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+		    
 
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy = new HashMap<String, Double>();
@@ -162,7 +192,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	System.out.println("paymentUrl : "+paymentUrl);
 		    	
 			}
-			else {
+			else if ("SIP".equals(transactionType)) {
 				
 				String sipDate = null;
 				String sipStartDate = null;
@@ -270,29 +300,28 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),getFirstOrderFlag(),
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
 		    	
-		    	if ("SIP".equals(transactionType))   {
-			    	SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
-			    	
-			    	returnDate = returnDateFormat.format(curSipStartDate);
-			    	String formatting = "";
-			    	if ("01".equals(returnDate.substring(0,2)))  
-			    		formatting = "st";
-			    	else if ("02".equals(returnDate.substring(0,2)))
-			    		formatting = "nd";
-			    	else if ("03".equals(returnDate.substring(0,2)))
-			    		formatting = "rd";
-			    	else 
-			    		formatting = "th";
-			    	
-			    	System.out.println("returnDate befor editing : "+returnDate);
-			    	returnDate = returnDate.substring(0,2)+formatting+returnDate.substring(2,returnDate.length()-3)+"'"+returnDate.substring(returnDate.length()-2);
-			    	System.out.println("returnDate after editing :  "+returnDate);
-			    	
-			    	if ("Y".equals(getFirstOrderFlag()))
-			    		return "sipOrderFofY";
-			    	else
-			    		return "sipOrderFofN";
-		    	}	
+		    	SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
+		    	
+		    	returnDate = returnDateFormat.format(curSipStartDate);
+		    	String formatting = "";
+		    	if ("01".equals(returnDate.substring(0,2)))  
+		    		formatting = "st";
+		    	else if ("02".equals(returnDate.substring(0,2)))
+		    		formatting = "nd";
+		    	else if ("03".equals(returnDate.substring(0,2)))
+		    		formatting = "rd";
+		    	else 
+		    		formatting = "th";
+		    	
+		    	System.out.println("returnDate befor editing : "+returnDate);
+		    	returnDate = returnDate.substring(0,2)+formatting+returnDate.substring(2,returnDate.length()-3)+"'"+returnDate.substring(returnDate.length()-2);
+		    	System.out.println("returnDate after editing :  "+returnDate);
+		    	
+		    	if ("N".equals(getFirstOrderFlag()))
+		    		return "sipOrderFofN";
+		    	/*else
+		    		return "sipOrderFofN";*/
+		    		
 			}
 
 			

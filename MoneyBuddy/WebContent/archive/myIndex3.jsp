@@ -82,7 +82,7 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active"  id="header-nav-li"><a href="myIndex">Home</a></li>
+                        <li class="active"  id="header-nav-li"><a href="welcome">Home</a></li>
                         <li id="header-nav-li"><a href="whyInvest">Why Invest</a></li>
                         <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
                         <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>

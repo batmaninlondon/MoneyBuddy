@@ -7,6 +7,7 @@ public class SipDataModel implements Serializable{
 	private String sipStartDate;
 	private String fundId;
 	private String fundName;
+	private String folioNumber;
 	private String fundCategory;
 	private String investedAmount;
 	private String nextSipDate;
@@ -17,11 +18,12 @@ public class SipDataModel implements Serializable{
 	}
 
 
-	public SipDataModel(String sipStartDate, String fundId, String fundName, String fundCategory, String investedAmount, String nextSipDate) {
+	public SipDataModel(String sipStartDate, String fundId, String fundName, String folioNumber,String fundCategory, String investedAmount, String nextSipDate) {
 		super();
 		this.sipStartDate = sipStartDate;
 		this.fundId = fundId;
 		this.fundName = fundName;
+		this.folioNumber = folioNumber;
 		this.fundCategory = fundCategory;
 		this.investedAmount = investedAmount;
 		this.nextSipDate = nextSipDate;
@@ -55,6 +57,16 @@ public class SipDataModel implements Serializable{
 
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
+	}
+
+
+	public String getFolioNumber() {
+		return folioNumber;
+	}
+
+
+	public void setFolioNumber(String folioNumber) {
+		this.folioNumber = folioNumber;
 	}
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<br/>
+		<h3>Please find attached the Account Opening Form</h3>
+		<br/><br/>
+		<h2>Questions?</h2>
+		<br/><br/>
+		<h3>Reply to this email OR Whatsapp/Call/SMS us at 9971648736</h3>
+		<h3>Wishing you a prosperous and healthy life</h3>
+		<br/><br/>
+		<h3>-Team MoneyBuddy</h3>
+	</div>
+</body>
+</html>

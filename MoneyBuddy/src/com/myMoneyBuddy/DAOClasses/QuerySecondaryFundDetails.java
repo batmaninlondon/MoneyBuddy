@@ -8,6 +8,7 @@ import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -59,6 +60,54 @@ public class QuerySecondaryFundDetails {
 		}
 	
 		
+	}
+	
+	public HashMap<String,String> allSchemeCodesAndFundIds()  throws MoneyBuddyException {
+		
+		logger.debug("QuerySecondaryFundDetails class - allSchemeCodesAndFundIds method - start");
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+    	HashMap<String,String> schemeCodesAndFundIds = new HashMap<String,String>();
+    	
+		try {
+
+			hibernateSession.beginTransaction();
+
+			Query query = hibernateSession.createQuery("select isin,fundId from SecondaryFundDetails ");
+			List<Object[]> secondaryFundDetailsList = query.list();
+			String isin = "";
+			String fundId = "";
+			for ( int i = 0; i < secondaryFundDetailsList.size() ;i++ ) {
+
+				isin = secondaryFundDetailsList.get(i)[0].toString();
+				fundId = secondaryFundDetailsList.get(i)[1].toString();
+	
+				schemeCodesAndFundIds.put(isin, fundId);
+			}
+
+			hibernateSession.getTransaction().commit();
+    		
+			logger.debug("QuerySecondaryFundDetails class - allSchemeCodesAndFundIds method - returning schemeCodesAndFundIds HashMap ");
+    		
+			logger.debug("QuerySecondaryFundDetails class - allSchemeCodesAndFundIds method - end");
+			
+			return schemeCodesAndFundIds;
+			
+		}
+		catch ( HibernateException e ) {
+			logger.error("QuerySecondaryFundDetails class - allSchemeCodesAndFundIds method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QuerySecondaryFundDetails class - allSchemeCodesAndFundIds method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 	}
 	
 	public List<String> allSchemeCodes()  throws MoneyBuddyException {

@@ -29,56 +29,60 @@ public class SecondaryFundDetails {
     @Column(name="SCHEME_CODE")
     private String schemeCode;
     
+    @Column(name="ISIN")
+    private String isin;
+    
     public SecondaryFundDetails() {
 
     }
 
-	public SecondaryFundDetails(String fundId, String amcCode, String rta, String schemeCode) {
+	public SecondaryFundDetails(String fundId, String amcCode, String rta, String schemeCode,String isin) {
 		super();
 		this.fundId = fundId;
 		this.amcCode = amcCode;
 		this.rta = rta;
 		this.schemeCode = schemeCode;
+		this.isin = isin;
 	}
-
 
 	public String getFundId() {
 		return fundId;
 	}
 
-
 	public void setFundId(String fundId) {
 		this.fundId = fundId;
 	}
-
 
 	public String getAmcCode() {
 		return amcCode;
 	}
 
-
 	public void setAmcCode(String amcCode) {
 		this.amcCode = amcCode;
 	}
-
 
 	public String getRta() {
 		return rta;
 	}
 
-
 	public void setRta(String rta) {
 		this.rta = rta;
 	}
-
 
 	public String getSchemeCode() {
 		return schemeCode;
 	}
 
-
 	public void setSchemeCode(String schemeCode) {
 		this.schemeCode = schemeCode;
+	}
+
+	public String getIsin() {
+		return isin;
+	}
+
+	public void setIsin(String isin) {
+		this.isin = isin;
 	}
 
 	@Override
@@ -103,6 +107,9 @@ public class SecondaryFundDetails {
         if ((this.schemeCode == null) ? (other.schemeCode != null) : !this.schemeCode.equals(other.schemeCode)) {
             return false;
         }
+        if ((this.isin == null) ? (other.isin != null) : !this.isin.equals(other.isin)) {
+            return false;
+        }
         return true;
     }
 
@@ -113,6 +120,7 @@ public class SecondaryFundDetails {
         hash = 83 * hash + (this.amcCode != null ? this.amcCode.hashCode() : 0);
         hash = 83 * hash + (this.rta != null ? this.rta.hashCode() : 0);
         hash = 83 * hash + (this.schemeCode != null ? this.schemeCode.hashCode() : 0);
+        hash = 83 * hash + (this.isin != null ? this.isin.hashCode() : 0);
         return hash;
     }
     

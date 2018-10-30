@@ -374,6 +374,211 @@ public class SendMail {
 
 	}
     
+    public void sendAofAndKycFormMail(String aofPdfFile, String kycPdfFile, String emailId, String subject, 
+    										String textFileName ) throws MoneyBuddyException{
+
+    	
+		try {
+		
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+		
+			configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+			
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+			props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
+			
+			// Get the Session object.
+			
+			Session session = Session.getInstance(props,
+					new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
+				}
+			});
+		
+		
+			// Create a default MimeMessage object.
+			Message message = new MimeMessage(session);
+		
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+		
+			// Set To: header field of the header.
+		
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(emailId));
+		
+			// Set Subject: header field
+		
+			message.setSubject(subject);
+			
+			String mailContentFilePath = "../../../mailContents/"+textFileName;
+			InputStream is = RegisterAction.class.getResourceAsStream(mailContentFilePath);
+			
+			
+			StringBuilder bodyText = new StringBuilder();
+		
+		    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		    
+		    String strLine;
+				    
+			 BodyPart messageBodyPart1 = new MimeBodyPart(); 	    
+			 messageBodyPart1.setContent(bodyText.toString(),"text/html; charset=utf-8");
+			
+			 //create new MimeBodyPart object and set DataHandler object to this object        
+			 MimeBodyPart messageBodyPart2 = new MimeBodyPart(); 
+			 
+			 System.out.println("aofPdfFile : "+aofPdfFile+" : kycPdfFile : "+kycPdfFile);
+			 
+			 String sourceFileName = aofPdfFile;//change accordingly
+			 
+			 DataSource source = new FileDataSource(sourceFileName);    
+			 messageBodyPart2.setDataHandler(new DataHandler(source));    
+			 messageBodyPart2.setFileName("AccountOpeningForm.pdf");
+			 
+			 sourceFileName = kycPdfFile;//change accordingly
+			 
+			 source = new FileDataSource(sourceFileName);    
+			 messageBodyPart2.setDataHandler(new DataHandler(source));    
+			 messageBodyPart2.setFileName("KYC_Application_Form.pdf");
+			
+			 //create Multipart object and add MimeBodyPart objects to this object        
+			 Multipart multipart = new MimeMultipart();    
+			 multipart.addBodyPart(messageBodyPart1);     
+			 multipart.addBodyPart(messageBodyPart2); 
+			
+			 message.setContent(multipart );  
+		 
+			// Send message
+			Transport.send(message);
+		
+		
+		} 
+		catch (MessagingException e) {
+			logger.error("sendMail class : sendAofAndKycFormMail method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+	
+		catch (Exception e ) {
+			logger.error("sendMail class : sendAofAndKycFormMail method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+	
+    }
+ 
+    
+    public void sendAofFormMail(String pdfFile, String emailId, String subject, String fileName,
+			String mailLink,String displayLinkName) throws MoneyBuddyException{
+
+    	
+		try {
+		
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+		
+			configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+			
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+			props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
+			
+			// Get the Session object.
+			
+			Session session = Session.getInstance(props,
+					new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
+				}
+			});
+		
+		
+			// Create a default MimeMessage object.
+			Message message = new MimeMessage(session);
+		
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+		
+			// Set To: header field of the header.
+		
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(emailId));
+		
+			// Set Subject: header field
+		
+			message.setSubject(subject);
+			
+			String mailContentFilePath = "../../../mailContents/"+fileName;
+			InputStream is = RegisterAction.class.getResourceAsStream(mailContentFilePath);
+			
+			
+			StringBuilder bodyText = new StringBuilder();
+		
+		    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		    
+		    String strLine;
+		
+		    //Read File Line By Line
+		    while ((strLine = br.readLine()) != null)   {
+		    	
+		    	if (strLine.contains("LinkForEmail")) {
+		    		
+		    		System.out.println("contains LinkForEmail ");
+		    		strLine = strLine.replace("LinkForEmail", "<a href=\""+mailLink+"\">"+displayLinkName+"</a>");
+		
+		    	}
+		    	bodyText.append(strLine);
+		    }
+		
+		    
+			 BodyPart messageBodyPart1 = new MimeBodyPart(); 	    
+			 messageBodyPart1.setContent(bodyText.toString(),"text/html; charset=utf-8");
+			
+			 //create new MimeBodyPart object and set DataHandler object to this object        
+			 MimeBodyPart messageBodyPart2 = new MimeBodyPart(); 
+			 
+			 System.out.println("pdfFile : "+pdfFile);
+			 String sourceFileName = pdfFile;//change accordingly
+			 
+			 DataSource source = new FileDataSource(sourceFileName);    
+			 messageBodyPart2.setDataHandler(new DataHandler(source));    
+			 messageBodyPart2.setFileName("AccountOpeningForm.pdf");
+			
+			 //create Multipart object and add MimeBodyPart objects to this object        
+			 Multipart multipart = new MimeMultipart();    
+			 multipart.addBodyPart(messageBodyPart1);     
+			 multipart.addBodyPart(messageBodyPart2); 
+			
+			 message.setContent(multipart );  
+		 
+			// Send message
+			Transport.send(message);
+		
+		
+		} 
+		catch (MessagingException e) {
+			logger.error("sendMail class : sendAofFormMail method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+	
+		catch (Exception e ) {
+			logger.error("sendMail class : sendAofFormMail method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+	
+    }
+ 
     
 /*    public int triggerNewPage(PdfStamper stamper, Rectangle pagesize, ColumnText column, Rectangle rect, int pagecount) throws DocumentException {
         stamper.insertPage(pagecount, pagesize);

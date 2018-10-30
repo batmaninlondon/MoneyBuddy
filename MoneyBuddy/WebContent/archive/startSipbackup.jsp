@@ -48,12 +48,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
+                        <li id="header-nav-li"><a href="welcome"><b>Home</b></a></li>
                         <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
                         <li  id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
                         <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 

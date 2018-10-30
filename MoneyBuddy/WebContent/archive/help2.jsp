@@ -63,12 +63,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="myIndex">Home</a></li>
+                        <li><a href="welcome">Home</a></li>
                         <li><a href="whyInvest">Why Invest</a></li>
                         <li><a href="aboutUs">About Us</a></li>
                         <li><a href="saveTax">Save Tax</a></li>

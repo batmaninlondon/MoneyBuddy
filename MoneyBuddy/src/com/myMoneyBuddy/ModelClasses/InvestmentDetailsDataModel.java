@@ -6,12 +6,12 @@ public class InvestmentDetailsDataModel implements Serializable{
 
 	private String transactionId;
 	private String fundName;
+	private String folioNumber;
 	private String transactionDate;
 	private String transactionAmount;
 	private String units;
 	private String navPurchased;
 	private String transactionType;
-	private String buySell;
 	
 	
 	public InvestmentDetailsDataModel() {
@@ -19,17 +19,17 @@ public class InvestmentDetailsDataModel implements Serializable{
 	}
 
 
-	public InvestmentDetailsDataModel( String transactionId, String fundName, String transactionDate, String transactionAmount, String units, String navPurchased, 
-				String transactionType, String buySell ) {
+	public InvestmentDetailsDataModel( String transactionId, String fundName, String folioNumber, String transactionDate, String transactionAmount, String units, String navPurchased, 
+				String transactionType) {
 		super();
 		this.transactionId = transactionId;
 		this.fundName = fundName;
+		this.folioNumber = folioNumber;
 		this.transactionDate = transactionDate;
 		this.transactionAmount = transactionAmount;
 		this.units = units;
 		this.navPurchased = navPurchased;
 		this.transactionType = transactionType;
-		this.buySell = buySell;
 	}
 
 
@@ -50,6 +50,16 @@ public class InvestmentDetailsDataModel implements Serializable{
 
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
+	}
+
+
+	public String getFolioNumber() {
+		return folioNumber;
+	}
+
+
+	public void setFolioNumber(String folioNumber) {
+		this.folioNumber = folioNumber;
 	}
 
 
@@ -100,16 +110,6 @@ public class InvestmentDetailsDataModel implements Serializable{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
-	}
-
-
-	public String getBuySell() {
-		return buySell;
-	}
-
-
-	public void setBuySell(String buySell) {
-		this.buySell = buySell;
 	}
 
 }

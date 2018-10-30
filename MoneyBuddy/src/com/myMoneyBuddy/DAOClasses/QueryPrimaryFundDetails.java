@@ -118,6 +118,63 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
+	public List<FundDetailsDataModel> getPopularFundDetailsData() throws MoneyBuddyException {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	       
+		try
+		{
+			logger.debug("QueryPrimaryFundDetails class - getPopularFundDetailsData method - start");
+		
+			hibernateSession.beginTransaction();
+
+			List<FundDetailsDataModel> fundDetailsDataModel = new LinkedList<FundDetailsDataModel>();
+
+			Query query = hibernateSession.createQuery("from PrimaryFundDetails where mostPopularFund = 'Y' ");
+
+			
+			List<PrimaryFundDetails> primaryFundDetailsList = query.list();
+
+			for (PrimaryFundDetails fundDetailsListElement : primaryFundDetailsList)  {
+				
+			
+				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
+						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
+						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
+						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
+						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory(),fundDetailsListElement.getPdfFilePath()));
+			}
+
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("QueryPrimaryFundDetails class - getPopularFundDetailsData method - return fundDetailsDataModel of - "+fundDetailsDataModel.size()+" records");
+			logger.debug("QueryPrimaryFundDetails class - getPopularFundDetailsData method - end");
+			
+			return fundDetailsDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryPrimaryFundDetails class - getPopularFundDetailsData method - Caught NumberFormatException ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class - getPopularFundDetailsData method - Caught HibernateException ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class - getPopularFundDetailsData method - Caught Exception ");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
 	public FundDetailsDataModel getSelectedFundDetailsData(String fundId) throws MoneyBuddyException {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();

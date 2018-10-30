@@ -5,7 +5,7 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="myIndex">Home</a></li>
+                        <li class="active"><a href="welcome">Home</a></li>
                         <li><a href="whyInvest">Why Invest</a></li>
                         <li><a href="aboutUs">About us</a></li>
                         <li><a href="blog">Blog</a></li>

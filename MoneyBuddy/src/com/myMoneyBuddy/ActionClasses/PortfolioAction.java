@@ -4,11 +4,17 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
 import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
@@ -25,7 +31,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	Logger logger = Logger.getLogger(PortfolioAction.class);
 	private SessionMap<String,Object> sessionMap;
 
-	
+	private String customerName;
+	private String profitDir;
+	private String profitValue;
+	private String curDate;
 	private String totalRateOfGrowth;
 	private String totalCurrentAmount;
 	private String totalInvestedAmount;
@@ -44,6 +53,14 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		try {
 		logger.debug("PortfolioAction class : execute method : start");
 
+		QueryCustomer queryCustomer = new QueryCustomer();
+		
+		setCustomerName(queryCustomer.getCustomerNameFromId(sessionMap.get("customerId").toString()));
+		
+		Date date = Calendar.getInstance().getTime();  
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");  
+		setCurDate(dateFormat.format(date));  
+		
 		QueryProducts queryProducts = new QueryProducts();
 		
 		System.out.println("portfolio action class called - start ");
@@ -63,6 +80,8 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				
 			}
 		}
+		
+		
 
 		//sessionMap.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
@@ -104,6 +123,19 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		/*sessionMap.put("investmentDetailsDataModelList", investmentDetailsDataModelList);
 		logger.debug("PortfolioAction class : execute method : stored investmentDetailsDataModelList in session id : "+sessionMap.getClass().getName());
 		*/
+		
+		if (Double.valueOf(totalProfitAmount) < 0)  {
+			setProfitDir("down");
+			setProfitValue("NA");
+		}
+		else {
+				setProfitDir("up");
+				setProfitValue(totalProfitAmount);
+			
+		}
+		
+		System.out.println("profitDir : "+profitDir+" : profitValue : "+profitValue);
+		
 		logger.debug("PortfolioAction class : execute method : end");
     	
 		return SUCCESS;
@@ -225,6 +257,46 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setTotalCurrentAmount(String totalCurrentAmount) {
 		this.totalCurrentAmount = totalCurrentAmount;
+	}
+
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+
+	public String getProfitDir() {
+		return profitDir;
+	}
+
+
+	public void setProfitDir(String profitDir) {
+		this.profitDir = profitDir;
+	}
+
+
+	public String getProfitValue() {
+		return profitValue;
+	}
+
+
+	public void setProfitValue(String profitValue) {
+		this.profitValue = profitValue;
+	}
+
+
+	public String getCurDate() {
+		return curDate;
+	}
+
+
+	public void setCurDate(String curDate) {
+		this.curDate = curDate;
 	}
 
 

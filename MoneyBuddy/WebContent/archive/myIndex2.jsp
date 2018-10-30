@@ -60,12 +60,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="myIndex"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class ="active" id="header-nav-li"><a href="myIndex"><b>Home</b></a></li>
+                        <li class ="active" id="header-nav-li"><a href="welcome"><b>Home</b></a></li>
                         <li id="header-nav-li"><a href="saveTax"><b>Save Tax</b></a></li>
                         <li id="header-nav-li"><a href="aboutUs"><b>About Us</b></a></li>
                         <li id="header-nav-li"><a href="blog"><b>Blog</b></a></li> 
@@ -106,11 +106,11 @@
                                 <div class="carousel-content">
                                     <h1 class="animation animated-item-1">Make your dreams reality</h1>
                                     <h2 class="animation animated-item-2"> The best thing money can buy is .....money</h2>
-                                    <!-- Changes to generate productList at the click of "try it out" button in myIndex page - start -->
+                                    <!-- Changes to generate productList at the click of "try it out" button in welcome page - start -->
                                     <!-- <a class="btn-slide animation animated-item-3" href="investmentStyle">Try it out</a> -->
                                     <button type="button" id="submit-button-5" class="btn btn-primary readmore" onClick="generatePackage();" style="margin-top:20px;padding:5px 15px 5px 15px;">Try it out</button>
                                     <!-- <button type="button" id="submit-button-5" class="btn btn-info btn-lg submit-button-5 sharp raised " onClick="testDummyEkyc();">Click for kyc</button> -->
-                                    <!-- Changes to generate productList at the click of "try it out" button in myIndex page - end -->
+                                    <!-- Changes to generate productList at the click of "try it out" button in welcome page - end -->
                                     <br/><p id="slogan-4" class="small-text box" style="margin-top:10px;"> with investing your capital is at risk</p>
                                 </div>
                             </div>

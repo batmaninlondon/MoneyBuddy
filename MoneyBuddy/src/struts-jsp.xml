@@ -19,12 +19,12 @@
 	</package>
 	<package name="ongoingSips" namespace="/" extends="struts-default">
 	    <action name="ongoingSips">
-	    	<result>/ongoingSips.jsp</result>
+	    	<result>/WEB-INF/content/ongoingSips.jsp</result>
 		</action>
 	</package>
 	<package name="selectedFundDetails" namespace="/" extends="struts-default">
 	    <action name="selectedFundDetails">
-	    	<result>/selectedFundDetails.jsp</result>
+	    	<result>/WEB-INF/content/selectedFundDetails.jsp</result>
 		</action>
 	</package>
 	<package name="amountConfirmation" namespace="/" extends="struts-default">
@@ -34,22 +34,22 @@
 	</package>
 	<package name="orderInvoice" namespace="/" extends="struts-default">
 	    <action name="orderInvoice">
-	    	<result>/orderInvoice.jsp</result>
+	    	<result>/WEB-INF/content/orderInvoice.jsp</result>
 		</action>
 	</package>
 	<package name="orderInvoiceSipFofN" namespace="/" extends="struts-default">
 	    <action name="orderInvoiceSipFofN">
-	    	<result>/orderInvoiceSipFofN.jsp</result>
+	    	<result>/WEB-INF/content/orderInvoiceSipFofN.jsp</result>
 		</action>
 	</package>
 	<package name="orderInvoiceSipFofY" namespace="/" extends="struts-default">
 	    <action name="orderInvoiceSipFofY">
-	    	<result>/orderInvoiceSipFofY.jsp</result>
+	    	<result>/WEB-INF/content/orderInvoiceSipFofY.jsp</result>
 		</action>
 	</package>
 	<package name="panCardVerification" namespace="/" extends="struts-default">
 	    <action name="panCardVerification">
-	    	<result>/panCardVerification.jsp</result>
+	    	<result>/WEB-INF/content/panCardVerification.jsp</result>
 		</action>
 	</package>
 	<package name="contactUs" namespace="/" extends="struts-default">
@@ -59,22 +59,32 @@
 	</package>
 	<package name="stpConfirmation" namespace="/" extends="struts-default">
 	    <action name="stpConfirmation">
-	    	<result>/stpConfirmation.jsp</result>
+	    	<result>/WEB-INF/content/stpConfirmation.jsp</result>
 		</action>
 	</package>
 	<package name="allFunds" namespace="/" extends="struts-default">
 	    <action name="allFunds">
-	    	<result>/allFunds.jsp</result>
+	    	<result>/WEB-INF/content/allFunds.jsp</result>
 		</action>
 	</package>
 	<package name="additionalCustomerDetails" namespace="/" extends="struts-default">
 	    <action name="additionalCustomerDetails">
-	    	<result>/additionalCustomerDetails.jsp</result>
+	    	<result>/WEB-INF/content/additionalCustomerDetails.jsp</result>
 		</action>
 	</package>
 	<package name="downloadKycForm" namespace="/" extends="struts-default">
 	    <action name="downloadKycForm">
-	    	<result>/downloadKycForm.jsp</result>
+	    	<result>/WEB-INF/content/downloadKycForm.jsp</result>
+		</action>
+	</package>
+	<package name="downloadAofForm" namespace="/" extends="struts-default">
+	    <action name="downloadAofForm">
+	    	<result>/WEB-INF/content/downloadAofForm.jsp</result>
+		</action>
+	</package>
+	<package name="downloadAofAndKycForm" namespace="/" extends="struts-default">
+	    <action name="downloadAofAndKycForm">
+	    	<result>/WEB-INF/content/downloadAofAndKycForm.jsp</result>
 		</action>
 	</package>
 	<package name="blog" namespace="/" extends="struts-default">
@@ -84,42 +94,42 @@
 	</package>
 	<package name="uploadCustomerNav" namespace="/" extends="struts-default">
 	    <action name="uploadCustomerNav">
-	    	<result>/uploadCustomerNav.jsp</result>
+	    	<result>/WEB-INF/content/uploadCustomerNav.jsp</result>
 		</action>
 	</package>
 	<package name="adminDashboard" namespace="/" extends="struts-default">
 	    <action name="adminDashboard">
-	    	<result>/adminDashboard.jsp</result>
+	    	<result>/WEB-INF/content/adminDashboard.jsp</result>
 		</action>
 	</package>
 	<package name="customerDetails" namespace="/" extends="struts-default">
 	    <action name="customerDetails">
-	    	<result>/customerDetails.jsp</result>
+	    	<result>/WEB-INF/content/customerDetails.jsp</result>
 		</action>
 	</package>
 	<package name="customerDashboardForAdmin" namespace="/" extends="struts-default">
 	    <action name="customerDashboardForAdmin">
-	    	<result>/customerDashboardForAdmin.jsp</result>
+	    	<result>/WEB-INF/content/customerDashboardForAdmin.jsp</result>
 		</action>
 	</package>	
 	<package name="customerCart" namespace="/" extends="struts-default">
 	    <action name="customerCart">
-	    	<result>/customerCart.jsp</result>
+	    	<result>/WEB-INF/content/customerCart.jsp</result>
 		</action>
 	</package>
 	<package name="bankDetails" namespace="/" extends="struts-default">
 	    <action name="bankDetails">
-	    	<result>/bankDetails.jsp</result>
+	    	<result>/WEB-INF/content/bankDetails.jsp</result>
 		</action>
 	</package>
 	<package name="newUpfrontInvestment" namespace="/" extends="struts-default">
 	    <action name="newUpfrontInvestment">
-	    	<result>/newUpfrontInvestment.jsp</result>
+	    	<result>/WEB-INF/content/newUpfrontInvestment.jsp</result>
 		</action>
 	</package>
 	<package name="cutomerPortfolio" namespace="/" extends="struts-default">
 	    <action name="cutomerPortfolio">
-	    	<result>/cutomerPortfolio.jsp</result>
+	    	<result>/WEB-INF/content/cutomerPortfolio.jsp</result>
 		</action>
 	</package>
 	<package name="myProfile" namespace="/" extends="struts-default">
@@ -129,33 +139,33 @@
 	</package>
 	<package name="bseDashboard" namespace="/" extends="struts-default">
 	    <action name="bseDashboard">
-	    	<result>/bseDashboard.jsp</result>
+	    	<result>/WEB-INF/content/bseDashboard.jsp</result>
 		</action>
 	</package>
 	<package name="clientDetails" namespace="/" extends="struts-default">
 	    <action name="clientDetails">
-	    	<result>/clientDetails.jsp</result>
+	    	<result>/WEB-INF/content/clientDetails.jsp</result>
 		</action>
 	</package>
 	<package name="dashboard" namespace="/" extends="struts-default">
 	    <action name="dashboard">
-	    	<result>/dashboard.jsp</result>
+	    	<result>/WEB-INF/content/dashboard.jsp</result>
 		</action>
 	</package>
 	<package name="downloadForm" namespace="/" extends="struts-default">
 	    <action name="downloadForm">
-	    	<result>/downloadForm.jsp</result>
+	    	<result>/WEB-INF/content/downloadForm.jsp</result>
 		</action>
 	</package>
 	
 	<package name="errorPage" namespace="/" extends="struts-default">
 	    <action name="errorPage">
-	    	<result>/errorPage.jsp</result>
+	    	<result>/WEB-INF/content/errorPage.jsp</result>
 		</action>
 	</package>
 	<package name="forgottenPassword" namespace="/" extends="struts-default">
 	    <action name="forgottenPassword">
-	    	<result>/forgottenPassword.jsp</result>
+	    	<result>/WEB-INF/content/forgottenPassword.jsp</result>
 		</action>
 	</package>
 	<package name="headerLoggedIn" namespace="/" extends="struts-default">
@@ -176,12 +186,12 @@
 	
 	<package name="investmentStyle" namespace="/" extends="struts-default">
 	    <action name="investmentStyle">
-	    	<result>/investmentStyle.jsp</result>
+	    	<result>/WEB-INF/content/investmentStyle.jsp</result>
 		</action>
 	</package>
 	<package name="kycNotDone" namespace="/" extends="struts-default">
 	    <action name="kycNotDone">
-	    	<result>/kycNotDone.jsp</result>
+	    	<result>/WEB-INF/content/kycNotDone.jsp</result>
 		</action>
 	</package>
 	<package name="login" namespace="/" extends="struts-default">
@@ -189,35 +199,59 @@
 	    	<result>/login.jsp</result>
 		</action>
 	</package>
-	<package name="logOff" namespace="/" extends="struts-default">
-	    <action name="logOff">
-	    	<result>/logOff.jsp</result>
-		</action>
-	</package>
-	<package name="myIndex" namespace="/" extends="struts-default">
-	    <action name="myIndex">
-	    	<result>/myIndex.jsp</result>
+	<package name="aofOrKycFormReceived" namespace="/" extends="struts-default">
+	    <action name="aofOrKycFormReceived">
+	    	<result>/aofOrKycFormReceived.jsp</result>
 		</action>
 	</package>
 	
+	<package name="logOff" namespace="/" extends="struts-default">
+	    <action name="logOff">
+	    	<result>/WEB-INF/content/logOff.jsp</result>
+		</action>
+	</package>
+	<package name="welcome" namespace="/" extends="struts-default">
+	    <action name="welcome">
+	    	<result>/welcome.jsp</result>
+		</action>
+	</package>
+	
+	<package name="policy" namespace="/" extends="struts-default">
+	    <action name="policy">
+	    	<result>/policy.jsp</result>
+		</action>
+	</package>
+	
+	<package name="terms" namespace="/" extends="struts-default">
+	    <action name="terms">
+	    	<result>/terms.jsp</result>
+		</action>
+	</package>
+	
+	<!-- <package name="myIndex" namespace="/" extends="struts-default">
+	    <action name="myIndex">
+	    	<result>/WEB-INF/content/myIndex.jsp</result>
+		</action>
+	</package> -->
+	
 	<package name="newErrorPage" namespace="/" extends="struts-default">
 	    <action name="newErrorPage">
-	    	<result>/newErrorPage.jsp</result>
+	    	<result>/WEB-INF/content/newErrorPage.jsp</result>
 		</action>
 	</package>
 	<package name="paymentFailure" namespace="/" extends="struts-default">
 	    <action name="paymentFailure">
-	    	<result>/paymentFailure.jsp</result>
+	    	<result>/WEB-INF/content/paymentFailure.jsp</result>
 		</action>
 	</package>
 	<package name="register" namespace="/" extends="struts-default">
 	    <action name="register">
-	    	<result>/register.jsp</result>
+	    	<result>/WEB-INF/content/register.jsp</result>
 		</action>
 	</package>
 	<package name="resetPassword" namespace="/" extends="struts-default">
 	    <action name="resetPassword">
-	    	<result>/resetPassword.jsp</result>
+	    	<result>/WEB-INF/content/resetPassword.jsp</result>
 		</action>
 	</package>
 	<package name="saveTax" namespace="/" extends="struts-default">
@@ -228,48 +262,48 @@
 	
 	<package name="thankYou" namespace="/" extends="struts-default">
 	    <action name="thankYou">
-	    	<result>/thankYou.jsp</result>
+	    	<result>/WEB-INF/content/thankYou.jsp</result>
 		</action>
 	</package>
 	
 	<package name="thankYouForRegistration" namespace="/" extends="struts-default">
 	    <action name="thankYouForRegistration">
-	    	<result>/thankYouForRegistration.jsp</result>
+	    	<result>/WEB-INF/content/thankYouForRegistration.jsp</result>
 		</action>
 	</package>
 	<package name="thankYouForSubscribing" namespace="/" extends="struts-default">
 	    <action name="thankYouForSubscribing">
-	    	<result>/thankYouForSubscribing.jsp</result>
+	    	<result>/WEB-INF/content/thankYouForSubscribing.jsp</result>
 		</action>
 	</package>
 	<package name="thankYouForPasswordReset" namespace="/" extends="struts-default">
 	    <action name="thankYouForPasswordReset">
-	    	<result>/thankYouForPasswordReset.jsp</result>
+	    	<result>/WEB-INF/content/thankYouForPasswordReset.jsp</result>
 		</action>
 	</package>
 	<package name="upfrontInvestment" namespace="/" extends="struts-default">
 	    <action name="upfrontInvestment">
-	    	<result>/upfrontInvestment.jsp</result>
+	    	<result>/WEB-INF/content/upfrontInvestment.jsp</result>
 		</action>
 	</package>
 	<package name="sipInvestment" namespace="/" extends="struts-default">
 	    <action name="sipInvestment">
-	    	<result>/sipInvestment.jsp</result>
+	    	<result>/WEB-INF/content/sipInvestment.jsp</result>
 		</action>
 	</package>
 	<package name="newSipInvestment" namespace="/" extends="struts-default">
 	    <action name="newSipInvestment">
-	    	<result>/newSipInvestment.jsp</result>
+	    	<result>/WEB-INF/content/newSipInvestment.jsp</result>
 		</action>
 	</package>
 	<package name="userVerification" namespace="/" extends="struts-default">
 	    <action name="userVerification">
-	    	<result>/userVerification.jsp</result>
+	    	<result>/WEB-INF/content/userVerification.jsp</result>
 		</action>
 	</package>
 	<package name="whyInvest" namespace="/" extends="struts-default">
 	    <action name="whyInvest">
-	    	<result>/whyInvest.jsp</result>
+	    	<result>/WEB-INF/content/whyInvest.jsp</result>
 		</action>
 	</package>
 	

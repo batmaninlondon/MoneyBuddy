@@ -83,7 +83,7 @@
 	<!-- <input type="hidden" id="transactionType" value="UPFRONT" /> -->
 	
 	<div class="container ">
-   		<a href="myIndex" class="s-header-v2__logo-link">
+   		<a href="welcome" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>

@@ -65,6 +65,9 @@ public class Customers {
     
     @Column(name="USER_TYPE")
     private String userType;
+    
+    @Column(name="AOF_FORM_STATUS")
+    private String aofFormStatus;
 
     public Customers() {
         
@@ -73,7 +76,7 @@ public class Customers {
 	public Customers(String emailId, String customerName, String mobileNumber, String password, String verificationStatus, 
 			String panCard, String kycStatus, String karvyFileGenerated, 
 			String camsFileGenerated, String subscriberType, String cusDetailsUploaded, String addCusDetailsUploaded, String bseClientCreated,
-			String isipMandateId, String userType) {
+			String isipMandateId, String userType, String aofFormStatus) {
 		super();
 		this.emailId = emailId;
 		this.customerName = customerName;
@@ -90,6 +93,7 @@ public class Customers {
 		this.bseClientCreated = bseClientCreated;
 		this.isipMandateId = isipMandateId;
 		this.userType = userType;
+		this.aofFormStatus = aofFormStatus;
 	}
 
 
@@ -222,6 +226,14 @@ public class Customers {
 		this.userType = userType;
 	}
 
+	public String getAofFormStatus() {
+		return aofFormStatus;
+	}
+
+	public void setAofFormStatus(String aofFormStatus) {
+		this.aofFormStatus = aofFormStatus;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -279,6 +291,9 @@ public class Customers {
         if ((this.userType == null) ? (other.userType != null) : !this.userType.equals(other.userType)) {
             return false;
         }
+        if ((this.aofFormStatus == null) ? (other.aofFormStatus != null) : !this.aofFormStatus.equals(other.aofFormStatus)) {
+            return false;
+        }
         return true;
     }
 
@@ -301,6 +316,7 @@ public class Customers {
         hash = 79 * hash + (this.bseClientCreated != null ? this.bseClientCreated.hashCode() : 0);
         hash = 79 * hash + (this.isipMandateId != null ? this.isipMandateId.hashCode() : 0);
         hash = 79 * hash + (this.userType != null ? this.userType.hashCode() : 0);
+        hash = 79 * hash + (this.aofFormStatus != null ? this.aofFormStatus.hashCode() : 0);
         return hash;
     }
 

@@ -21,6 +21,7 @@ public class MbUtil {
 		 	logger.debug("MbUtil class - isCaptchaValid method - start");
 		    try {
 		    	
+		    	System.out.println("googleResponse: inside login : "+googleResponse);
 		    	Properties configProperties = new Properties();
 				String configPropFilePath = "../../../config/config.properties";
 

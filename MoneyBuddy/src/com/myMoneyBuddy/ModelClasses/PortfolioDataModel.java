@@ -6,6 +6,7 @@ public class PortfolioDataModel implements Serializable{
 
 	private String fundId;
 	private String fundName;
+	private String folioNumber;
 	private String units;
 	private String investedAmount;
 	private String currentAmount;
@@ -20,11 +21,12 @@ public class PortfolioDataModel implements Serializable{
 	}
 
 
-	public PortfolioDataModel(String fundId, String fundName, String units, String investedAmount, String currentAmount,
+	public PortfolioDataModel(String fundId, String fundName, String folioNumber, String units, String investedAmount, String currentAmount,
 			String profit, String rateOfGrowth, String transactionStartDate, String fundSector) {
 		super();
 		this.fundId = fundId;
 		this.fundName = fundName;
+		this.folioNumber = folioNumber;
 		this.units = units;
 		this.investedAmount = investedAmount;
 		this.currentAmount = currentAmount;
@@ -52,6 +54,16 @@ public class PortfolioDataModel implements Serializable{
 
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
+	}
+
+
+	public String getFolioNumber() {
+		return folioNumber;
+	}
+
+
+	public void setFolioNumber(String folioNumber) {
+		this.folioNumber = folioNumber;
 	}
 
 

@@ -62,6 +62,8 @@
       var recaptchaLogin;
       
       var myCallBack = function() {
+    	  
+    	  alert('Hi There !!!!!!! site key is : '+<%=siteKey%>);
         //Render the recaptchaRegister on the element with ID "recaptcha-register"
         recaptchaRegister = grecaptcha.render('recaptcha-register', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
@@ -115,7 +117,7 @@
 <div id="content">
 	
 	<div class="container ">
-   		<a href="myIndex" class="s-header-v2__logo-link">
+   		<a href="welcome" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>
@@ -175,7 +177,7 @@
           <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Continue"  />
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
-			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms.jsp">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy.jsp">Privacy Policy</a></span>
+			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
           	<div class="row" >
 				<div class="col-md-3"></div>

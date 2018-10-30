@@ -27,6 +27,9 @@ public class TransactionDetails {
     @Column(name="BSE_ORDER_ID")
     private String bseOrderId;
     
+    @Column(name="BSE_REGISTRATION_NUMBER")
+    private String bseRegistrationNumber;
+    
     @Column(name="UNIQUE_REFERENCE_NUMBER")
     private String uniqueReferenceNumber;
     
@@ -85,13 +88,14 @@ public class TransactionDetails {
 
     }
 
-    public TransactionDetails(String transactionId, String bseOrderId, String uniqueReferenceNumber, String customerId, String transactionType,
+    public TransactionDetails(String transactionId, String bseOrderId, String bseRegistrationNumber, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionStatus,
 			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
 			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
+		this.bseRegistrationNumber = bseRegistrationNumber;
 		this.uniqueReferenceNumber = uniqueReferenceNumber;
 		this.customerId = customerId;
 		this.transactionType = transactionType;
@@ -136,6 +140,14 @@ public class TransactionDetails {
 		this.bseOrderId = bseOrderId;
 	}
 	
+	public String getBseRegistrationNumber() {
+		return bseRegistrationNumber;
+	}
+
+	public void setBseRegistrationNumber(String bseRegistrationNumber) {
+		this.bseRegistrationNumber = bseRegistrationNumber;
+	}
+
 	public String getUniqueReferenceNumber() {
 		return uniqueReferenceNumber;
 	}
@@ -297,6 +309,9 @@ public class TransactionDetails {
         if ((this.bseOrderId == null) ? (other.bseOrderId != null) : !this.bseOrderId.equals(other.bseOrderId)) {
             return false;
         }
+        if ((this.bseRegistrationNumber == null) ? (other.bseRegistrationNumber != null) : !this.bseRegistrationNumber.equals(other.bseRegistrationNumber)) {
+            return false;
+        }
         if ((this.uniqueReferenceNumber == null) ? (other.uniqueReferenceNumber != null) : !this.uniqueReferenceNumber.equals(other.uniqueReferenceNumber)) {
             return false;
         }       
@@ -360,6 +375,7 @@ public class TransactionDetails {
         hash = 83 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
         hash = 83 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
         hash = 83 * hash + (this.bseOrderId != null ? this.bseOrderId.hashCode() : 0);
+        hash = 83 * hash + (this.bseRegistrationNumber != null ? this.bseRegistrationNumber.hashCode() : 0);
         hash = 83 * hash + (this.uniqueReferenceNumber != null ? this.uniqueReferenceNumber.hashCode() : 0);
         hash = 83 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 83 * hash + (this.transactionAmount != null ? this.transactionAmount.hashCode() : 0);

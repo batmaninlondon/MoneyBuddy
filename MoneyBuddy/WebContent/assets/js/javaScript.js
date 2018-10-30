@@ -80,7 +80,46 @@
 				document.formPayment.submit();
 	    }
 		
+		function redeem(fundId,fundName,folioNumber,totalAmount,totalQuantity)  
+	    {
+				document.getElementById("redeem-fund-id").value = fundId;
+				document.getElementById("redeem-fund-name").value = fundName;
+				document.getElementById("redeem-folio-num").value = folioNumber;
+				document.getElementById("redeem-total-amount").value = totalAmount;
+				document.getElementById("redeem-total-quantity").value = totalQuantity;
+				
+				
+				document.formRedeem.submit();
+	    }
+			
+		function showAmtQuanOptions(selectedValue)  
+		{
 
+			if (selectedValue == "2") {
+				$("#amount-or-quantity").removeClass('hidden');
+				$("#redeem-amount-option").removeClass('hidden');
+				$("#redeem-quantity-option").addClass('hidden');
+			}
+			else {
+				$("#amount-or-quantity").addClass('hidden');
+				$("#redeem-amount-option").addClass('hidden');
+				$("#redeem-quantity-option").addClass('hidden');
+			}
+		}
+		
+		function showAmtOrQuanOptions(selectedValue)  
+		{
+
+			if (selectedValue == "1")  {
+				$("#redeem-amount-option").removeClass('hidden');
+				$("#redeem-quantity-option").addClass('hidden');
+			}
+			else {
+				$("#redeem-quantity-option").removeClass('hidden');
+				$("#redeem-amount-option").addClass('hidden');
+			}
+		}
+		
 		function activatePayNowButton()
 		{
 			var iAccept = document.getElementById("iAccept").checked;
@@ -106,6 +145,16 @@
 				document.getElementById("fund-id-stp-value").value = fundId;
 				document.getElementById("cur-amount-stp-value").value = amount;
 				document.formFetchAvailableStpFundsAction.submit();
+	    }
+		
+		function redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity)  
+	    {
+				document.getElementById("fund-id-redeem-value").value = fundId;
+				document.getElementById("folio-num-redeem-value").value = folioNum;
+				document.getElementById("total-amount-redeem-value").value = totalAmount;
+				document.getElementById("total-quantity-redeem-value").value = totalQuantity;
+				
+				document.formRedeemFundAction.submit();
 	    }
 		
         function deleteCartEntry(cartId)  

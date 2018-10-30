@@ -75,6 +75,9 @@ public class PrimaryFundDetails {
     
     @Column(name="TAX_SAVING_FUND")
     private String taxSavingFund;
+    
+    @Column(name="MOST_POPULAR_FUND")
+    private String mostPopularFund;
 
     public PrimaryFundDetails() {
 
@@ -82,7 +85,7 @@ public class PrimaryFundDetails {
     
 	public PrimaryFundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
 			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory,
-			String interestRate, String sipBufferDays, String pdfFilePath, String taxSavingFund ) {
+			String interestRate, String sipBufferDays, String pdfFilePath, String taxSavingFund, String mostPopularFund ) {
 		super();
 		this.fundName = fundName;
 		this.sector = sector;
@@ -99,6 +102,7 @@ public class PrimaryFundDetails {
 		this.sipBufferDays = sipBufferDays;
 		this.pdfFilePath = pdfFilePath;
 		this.taxSavingFund = taxSavingFund;
+		this.mostPopularFund = mostPopularFund;
 	}
 
 	public String getFundId() {
@@ -298,6 +302,14 @@ public class PrimaryFundDetails {
 		this.taxSavingFund = taxSavingFund;
 	}
 
+	public String getMostPopularFund() {
+		return mostPopularFund;
+	}
+
+	public void setMostPopularFund(String mostPopularFund) {
+		this.mostPopularFund = mostPopularFund;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -365,6 +377,9 @@ public class PrimaryFundDetails {
         if ((this.taxSavingFund == null) ? (other.taxSavingFund != null) : !this.taxSavingFund.equals(other.taxSavingFund)) {
             return false;
         }
+        if ((this.mostPopularFund == null) ? (other.mostPopularFund != null) : !this.mostPopularFund.equals(other.mostPopularFund)) {
+            return false;
+        }
         return true;
     }
 
@@ -389,7 +404,8 @@ public class PrimaryFundDetails {
         hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
         hash = 83 * hash + (this.sipBufferDays != null ? this.sipBufferDays.hashCode() : 0);
         hash = 83 * hash + (this.pdfFilePath != null ? this.pdfFilePath.hashCode() : 0);
-        hash = 83 * hash + (this.taxSavingFund != null ? this.taxSavingFund.hashCode() : 0);        
+        hash = 83 * hash + (this.taxSavingFund != null ? this.taxSavingFund.hashCode() : 0);
+        hash = 83 * hash + (this.mostPopularFund != null ? this.mostPopularFund.hashCode() : 0);
         return hash;
     }
     
