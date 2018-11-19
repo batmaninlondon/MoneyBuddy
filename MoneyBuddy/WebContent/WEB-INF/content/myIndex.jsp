@@ -138,7 +138,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link" style="color:red">Cart</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
@@ -685,10 +685,10 @@
                         	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
 	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
 	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
-			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
-			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->
-	                            <span class="input-group-btn">
-	                            	<s:submit id="recaptcha-subscriber" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" value="Submit"></s:submit>
+			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
+			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
+	                            <span class="input-group-btn " >
+	                            	<s:submit id="recaptcha-subscriber" class="g-margin-l-100--xs g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--left-50 g-radius--right-50" value="Submit"></s:submit>
 	                                <!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button> -->
 	                            </span>
 	                            

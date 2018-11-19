@@ -119,5 +119,44 @@ public class QueryTransactionDetails {
 		}
 	}
 
+	public boolean haveInvestments(String customerId)  throws MoneyBuddyException  {
+		
+		logger.debug("QueryTransactionDetails class - haveInvestments method - customerId - "+customerId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
+		try
+		{
+			System.out.println("customerId is : "+customerId);
+			hibernateSession.beginTransaction();
+			
+			Query query = hibernateSession.createQuery("select count(*) from TransactionDetails   where customerId = :customerId ");
+			query.setParameter("customerId", customerId);
+			
+			String count = query.uniqueResult().toString();
+			
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryTransactionDetails class - haveInvestments method - customerId - "+customerId+" - end");
+			
+			if (Integer.parseInt(count) == 0 )  
+				return false;
+			else 
+				return true;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryTransactionDetails class - haveInvestments method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryTransactionDetails class - haveInvestments method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
 }

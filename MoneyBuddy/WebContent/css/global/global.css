@@ -1400,6 +1400,14 @@
   Container
 ------------------------------------*/
 /* Small container */
+.g-container--lg {
+  padding-right: .9375rem;
+  padding-left: .9375rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Small container */
 .g-container--sm {
   padding-right: .9375rem;
   padding-left: .9375rem;

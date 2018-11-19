@@ -1,17 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ page language="java" import="java.util.Properties" %>
 <%@ page language="java" import="java.io.FileInputStream" %>
 <%@ page language="java" import="java.io.File" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html >
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html lang="en">
 <head>
+
+
+
         <!-- Basic -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <!-- <title>Megakit - HTML5 Theme</title> -->
         <meta name="keywords" content="HTML5 Theme" />
         <meta name="description" content="Megakit - HTML5 Theme">
         <meta name="author" content="keenthemes.com">
@@ -88,33 +92,26 @@
      
     </script>
     
-    <script>
-    
-    	function abc(activeTab)  {
-    		
-    		if (new String("login").valueOf() == activeTab.valueOf())  {
-    			document.getElementById("login-tab").addClass('active'); 
-    			document.getElementById("sign-up-tab").removeClass('active'); 
-    		}
-    		else {
-    			document.getElementById("sign-up-tab").addClass('active'); 
-    			document.getElementById("login-tab").removeClass('active'); 
-    		} 
-		
-    	}
-    </script>
-    
-    
-	    <link rel="stylesheet" href="css/style4.css">
+
 	    <style>
 	    	
 				.grecaptcha-badge{visibility:hidden;}
 	    </style>
+	    
+	    
+	    
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style4.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
-
-<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
-<div id="load" class="load"></div>
-<div id="content">
+<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;" >
+	<div id="load" class="load"></div>
+	<div id="content">
 	
 	<div class="container ">
    		<a href="welcome" class="s-header-v2__logo-link">
@@ -133,18 +130,63 @@
 	    }
 	%>
 	<!--========== PROMO BLOCK ==========-->
-          <div class="g-fullheight--xs g-bg-position--center swiper-slide " >
-         <div class="form  ">
-      
-      <ul class="tab-group">
-        <li id="sign-up-tab" class="tab active"><a href="#signup" onclick="abc('signUp');">Sign Up</a></li>
-        <li id="login-tab" class="tab" ><a href="#login" onclick="abc('login');">Log In</a></li>
-        
-      </ul>
-      
-      <div class="tab-content">
-        <div id="signup">   
-          <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" >
+		<div class="g-fullheight--xs g-bg-position--center swiper-slide " >
+        	<div class="form  ">
+   	
+  <ul class="nav nav-pills nav-tabs card-header-pills">
+    <li class="nav-item active">
+      <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#loginTabContent">LogIn</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#signup">SignUp</a>
+    </li>       
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="loginTabContent" class="container tab-pane active"><br>
+                <s:form  action="newLoginAction" class="g-recaptcha" method="post" name="formLogin" namespace="/" >
+          <h1>Welcome Back!</h1>
+          <p id="loginMessage"></p>
+         <!--  <div> -->
+          
+          <div class="field-wrap">
+            <label id="email-id-label">
+              Email Address<span class="req">*</span>
+            </label>
+            <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
+  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" />
+            <!-- <input id="email-id"  type="email" required autocomplete="off"/> -->
+           <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <s:fielderror fieldName="passwordLogin" class="g-color--red" />
+  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" />
+            <!-- <input  id="password" type="password" required autocomplete="off"/> -->
+          </div>
+          
+          <p class="forgot"><button type="button" class="g-recaptcha g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
+          <div class="container">
+
+  <!-- Modal -->
+  
+  </div>
+  
+  	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
+          <div>
+          	
+        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="SIGN IN"  />
+        	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
+        	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
+           </div>
+          </s:form>
+    </div>
+    <div id="signup" class="container tab-pane fade"><br>
+               <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" >
           <div id="registration-email-id"  class="field-wrap">
           	<p id="registerMessage"></p>
             <%-- <label> 
@@ -187,61 +229,21 @@
 				<div class="col-md-4"></div>
 			</div>                 
           </s:form>
-
-        </div>
-        <div id="login"> 
-          <s:form  action="newLoginAction" class="g-recaptcha" method="post" name="formLogin" namespace="/" >
-          <h1>Welcome Back!</h1>
-          <p id="loginMessage"></p>
-          <div>
-          
-          <div class="field-wrap">
-            <label id="email-id-label">
-              Email Address<span class="req">*</span>
-            </label>
-            <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
-  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" />
-            <!-- <input id="email-id"  type="email" required autocomplete="off"/> -->
-           <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <s:fielderror fieldName="passwordLogin" class="g-color--red" />
-  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" />
-            <!-- <input  id="password" type="password" required autocomplete="off"/> -->
-          </div>
-          
-          <p class="forgot"><button type="button" class="g-recaptcha g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
-          <div class="container">
-
-  <!-- Modal -->
-  
-  </div>
-  
-  	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
-          <div>
-          	
-        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="SIGN IN"  />
-        	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
-        	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
-           </div>
-          </s:form>
-          </div>
-          
-          <div class="modal fade" id="myModal" role="dialog">
+    </div>
+    
+              <div class="modal fade" id="myModal" >
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <p id="forgotPwdMessage"></p>
+          
+          
           <h4 class="modal-title">Reset Password</h4>
+          <p id="forgotPwdMessage"></p>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
-        </div>
+       
         <s:form  action="forgottenPasswordAction" class="g-recaptcha" method="post" name="formForgotPassword">
 
 			<div class="row" >
@@ -251,46 +253,49 @@
 				</div>
 				<div class="col-md-4"></div>
 			</div>
-			<div class="input-group g-margin-l-20--xs  g-margin-r-60--xs g-margin-b-20--xs">
-    			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    			<s:fielderror fieldName="emailIdForgotPassword" class="g-color--red" />
-	  			<s:textfield class="form-control" placeholder="Enter Email Id" name="emailIdForgotPassword" /> 
-	  			<s:hidden id="google-response-forgot-pswd" name="googleResponseFrgtPswd"></s:hidden>	
+			<div class="row input-group form-group">
+				<div class="col-md-1"></div>
+    			<div class="col-md-10">
+	    			<s:fielderror fieldName="emailIdForgotPassword" class="g-color--red" />
+		  			<s:textfield class="form-control" placeholder="Enter Email Id" name="emailIdForgotPassword" /> 
+		  			<s:hidden id="google-response-forgot-pswd" name="googleResponseFrgtPswd"></s:hidden>
+	  			</div>
+	  			<div class="col-md-1">
+	  			</div>	
     			<!-- <input id="emailid" type="text" class="form-control" name="emailId" placeholder="Enter Email Id" > -->
   			</div>
 	
-       <!--  <div class="modal-footer"> -->
-        	
-        	<div class="row">
-				<div class="col-md-3 g-color--primary">
+			
+        	<div class="row ">
+				<div class="col-md-5 g-color--primary">
 					<i class="  glyphicon glyphicon-chevron-left"></i><a  data-dismiss="modal">Back to Login</a>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-3">
 				</div>
 				<div class="col-md-4">
-					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-bg-color--primary g-color--white" value="Send Reset Link"  />
+					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-font-size-14--xs g-bg-color--primary g-color--white" value="Send Reset Link"  />
 					<!-- <button id="recaptcha-forgot-pswd" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button> -->
 				</div>
 			</div>
-
+			
 			</s:form>
 		
+		 </div>
+		 
         </div>
       </div>
     </div>
+    
+    <!-- <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div> -->
+  </div>
+  </div>
+  </div>
 </div>
 
 
-        </div>	
-      </div><!-- tab-content -->
-      
-</div>
-	</div>		
-          </div>
-        <!--========== END PROMO BLOCK ==========-->
-	
-<!--========== END PROMO BLOCK ==========-->
-	
 
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
@@ -306,6 +311,7 @@
         <!-- Vendor -->
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
@@ -320,6 +326,7 @@
         <script type="text/javascript" src="js/components/faq.min.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
          <script  src="js/index.js"></script>
+         
          <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
@@ -335,20 +342,6 @@
 			}
          
          </script>
+         
 </body>
 </html>
-
-
-
-
-
-
-
-    
-
-
-	 
-	
-	
-  
-

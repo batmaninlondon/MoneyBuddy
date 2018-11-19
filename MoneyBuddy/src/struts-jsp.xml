@@ -142,6 +142,11 @@
 	    	<result>/WEB-INF/content/bseDashboard.jsp</result>
 		</action>
 	</package>
+	<package name="customerDashboard" namespace="/" extends="struts-default">
+	    <action name="customerDashboard">
+	    	<result>/WEB-INF/content/customerDashboard.jsp</result>
+		</action>
+	</package>
 	<package name="clientDetails" namespace="/" extends="struts-default">
 	    <action name="clientDetails">
 	    	<result>/WEB-INF/content/clientDetails.jsp</result>

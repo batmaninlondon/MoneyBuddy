@@ -556,6 +556,7 @@
     <package name="newLoginAction" namespace="" extends="struts-default">
         <action name="newLoginAction" class="com.myMoneyBuddy.ActionClasses.NewLoginAction">
             <result name="success">/welcome.jsp</result>
+            <result name="haveInvestment">/WEB-INF/content/bseDashboard.jsp</result>
             <result name="adminLogin">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="fundSelected">/amountConfirmation.jsp</result>
             <result name="input">/login.jsp</result>

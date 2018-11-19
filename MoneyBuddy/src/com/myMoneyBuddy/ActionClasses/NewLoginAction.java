@@ -6,6 +6,7 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -40,17 +41,17 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
+	    	/*if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
 	    	{
 	    		System.out.println("Looks like you are a robot. ");
-	    		/*String strMsg = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(strMsg.getBytes());*/
+	    		String strMsg = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(strMsg.getBytes());
 	    		addActionMessage("Looks like you are a robot.");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned Lookslikeyouarearobot");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 	    	    
 	    	    return INPUT;
-	    	}
+	    	}*/
 	    	if (customer == null) {
 	    		System.out.println("Emaid id not valid ");
 	    		/*str = "emailIdDoesNotExists";
@@ -168,6 +169,11 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return "fundSelected";
 	    	}
 	    	
+	    	QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+	    	
+	    	if (queryTransactionDetails.haveInvestments(customerId))  {
+	    		return "haveInvestment";
+	    	}
 	    	/*str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned success");

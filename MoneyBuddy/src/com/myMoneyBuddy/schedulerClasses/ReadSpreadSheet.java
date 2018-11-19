@@ -1,10 +1,6 @@
-package com.myMoneyBuddy.Utils;
+package com.myMoneyBuddy.schedulerClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,15 +15,33 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
-public class ReadSpreadSheet {
-    public static void main( String [] args ) {
+public class ReadSpreadSheet implements org.quartz.Job {
+	
+	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
+		
+		try {
+    		
+    		String navFileName="C://xlsx/DailyNav.xls";
+        
+    		Vector navDataHolder=read(navFileName);
+    		saveToDatabase(navDataHolder);
+
+        }
+		
+        catch (Exception e){
+        	e.printStackTrace(); 
+        } 
+
+	}
+/*    public static void main( String [] args ) {
         
     	try {
     		
@@ -40,7 +54,7 @@ public class ReadSpreadSheet {
         catch (Exception e){
         	e.printStackTrace(); 
         }    
-    }
+    }*/
     
     public static Vector read(String fileName)    {
         Vector cellVectorHolder = new Vector();
@@ -122,13 +136,11 @@ public class ReadSpreadSheet {
 	            	
 	            	if (schemeCodesAndFundIds.containsKey(isin))  {
 	            		
-	            		 String sDate1=navDate;  
-	            		  Date date1=(Date) new SimpleDateFormat("dd-MMM-yyyy").parse(sDate1);   
-	            		  System.out.println(sDate1+"\t"+date1);  
+	            		 Date dNow = new Date();
 	            		  
 	            		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	        			
-	        			String frmtdDate = dateFormat.format(date1);
+	        			String frmtdDate = dateFormat.format(dNow);
 	        			
 	            		
 	            		  

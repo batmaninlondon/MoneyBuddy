@@ -64,9 +64,42 @@ a:hover {
   background: #13b1cd;
   color: #ffffff;
 }
-
+/* 
 .tab-content > div:last-child {
   display: none;
+} */
+
+.nav-pills {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+.nav-pills:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.nav-pills li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+.nav-pills li a:hover {
+  background: #13b1cd;
+  color: #ffffff;
+}
+.nav-pills .active a {
+  background: #13b1cd;
+  color: #ffffff;
 }
 
 h1 {
@@ -88,7 +121,7 @@ label {
   pointer-events: none;
   font-size: 22px;
 }
-label .req {
+/* label .req {
   margin: 2px;
   color: #13b1cd;
 }
@@ -105,7 +138,7 @@ label.active .req {
 
 label.highlight {
   color: #ffffff;
-}
+} */
 
 input, textarea {
   font-size: 22px;

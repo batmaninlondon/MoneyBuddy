@@ -32,7 +32,22 @@ public class MoneyBuddyScheduler {
 		
 			scheduler.start();
 			
-			JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
+			JobDetail readSpreadSheetJob = JobBuilder.newJob(ReadSpreadSheet.class)
+					.withIdentity("ReadSpreadSheetJob", "Group").build();
+			
+			// This Trigger will work at 9 pm (21 hours) everyday
+			
+			Trigger readSpreadSheetTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("ReadSpreadSheetTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 21 * * ?")) 
+					.build();
+			
+	
+			scheduler.scheduleJob(readSpreadSheetJob, readSpreadSheetTrigger);
+			
+			
+			/*JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
 					.withIdentity("PaymentStatusCheckJob", "Group").build();
 			
 			// This Trigger will work at 3 pm (15 hours) everyday
@@ -44,7 +59,7 @@ public class MoneyBuddyScheduler {
 					.build();
 			
 	
-			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);
+			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);*/
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();
