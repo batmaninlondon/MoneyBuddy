@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +41,12 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private String totalInvestedAmount;
 	private String totalProfitAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
-	private List<PendingOrderDataModel> pendingOrderDataModel;
+	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();;
 	private List<SipDataModel> sipDataModel;
+	private String totalUpfrontInvestments;
+	private String totalSips;
+	private String totalTransactions;
+	private String totalPendingOrders;
 
 	//private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
 	
@@ -50,12 +55,15 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public String execute() {
 
+		String customerId = sessionMap.get("customerId").toString();
 		try {
 		logger.debug("PortfolioAction class : execute method : start");
 
+		
+		
 		QueryCustomer queryCustomer = new QueryCustomer();
 		
-		setCustomerName(queryCustomer.getCustomerNameFromId(sessionMap.get("customerId").toString()));
+		setCustomerName(queryCustomer.getCustomerNameFromId(customerId));
 		
 		Date date = Calendar.getInstance().getTime();  
 		DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");  
@@ -65,10 +73,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		System.out.println("portfolio action class called - start ");
 
-		portfolioDataModel = queryProducts.getPortfolioData(sessionMap.get("customerId").toString());
+		portfolioDataModel = queryProducts.getPortfolioData(customerId);
 		setPortfolioDataModel(portfolioDataModel);
 		
-		pendingOrderDataModel = queryProducts.getPendingOrderData(sessionMap.get("customerId").toString());
+		setTotalPendingOrders(queryProducts.getTotalPendingTransactions(customerId));
+		
+		if (!getTotalPendingOrders().equals("0"))
+			pendingOrderDataModel = queryProducts.getPendingOrderData(customerId);
 		setPendingOrderDataModel(pendingOrderDataModel);
 
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
@@ -86,7 +97,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		//sessionMap.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
 		
-		sipDataModel = queryProducts.getSipData(sessionMap.get("customerId").toString());
+		sipDataModel = queryProducts.getSipData(customerId);
 		setSipDataModel(sipDataModel);
 
 		/*sessionMap.put("sipDataModel", sipDataModel);
@@ -102,7 +113,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			
 		}*/
 				
-		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(sessionMap.get("customerId").toString());
+		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(customerId);
 		setAllFundsInvestmentDetailsDataModel(allFundsInvestmentDetailsDataModel);
 		
 		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
@@ -141,13 +152,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
-			logger.error("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+sessionMap.get("customerId").toString());
+			logger.error("PortfolioAction class : execute method : Caught MoneyBuddyException for customerId : "+customerId);
 			e.printStackTrace();
 			
 			return ERROR;
 		} 
     	catch (Exception e) {	
-    		logger.error("PortfolioAction class : execute method : Caught Exception for customerId : "+sessionMap.get("customerId").toString());
+    		logger.error("PortfolioAction class : execute method : Caught Exception for customerId : "+customerId);
 			e.printStackTrace();
 			
 			return ERROR;
@@ -297,6 +308,46 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setCurDate(String curDate) {
 		this.curDate = curDate;
+	}
+
+
+	public String getTotalUpfrontInvestments() {
+		return totalUpfrontInvestments;
+	}
+
+
+	public void setTotalUpfrontInvestments(String totalUpfrontInvestments) {
+		this.totalUpfrontInvestments = totalUpfrontInvestments;
+	}
+
+
+	public String getTotalSips() {
+		return totalSips;
+	}
+
+
+	public void setTotalSips(String totalSips) {
+		this.totalSips = totalSips;
+	}
+
+
+	public String getTotalTransactions() {
+		return totalTransactions;
+	}
+
+
+	public void setTotalTransactions(String totalTransactions) {
+		this.totalTransactions = totalTransactions;
+	}
+
+
+	public String getTotalPendingOrders() {
+		return totalPendingOrders;
+	}
+
+
+	public void setTotalPendingOrders(String totalPendingOrders) {
+		this.totalPendingOrders = totalPendingOrders;
 	}
 
 

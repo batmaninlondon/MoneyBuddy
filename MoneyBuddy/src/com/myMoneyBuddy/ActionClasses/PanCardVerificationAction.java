@@ -5,15 +5,27 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
-import com.myMoneyBuddy.DAOClasses.Trading;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
+import javax.xml.namespace.QName;
+import javax.xml.ws.BindingProvider;
+
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.ndml.kra.pan.webservice.service.GetPasscode;
+import com.ndml.kra.pan.webservice.service.GetPasscodeResponse;
+import com.ndml.kra.pan.webservice.service.ObjectFactory;
 import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.mail.iap.Protocol;
+/*import com.sun.net.ssl.HttpsURLConnection;*/
+
+import in.bsestarmf._2016._01.GetPasswordResponse;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -62,10 +74,42 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		String mobileNo = "7875898574";
 		String encryptionKey = "83";*/
 		
+		/*String certificatesTrustStorePath = "C://Program Files/Java/jdk1.8.0_161/jre/lib/security/cacerts";
+		System.setProperty("javax.net.ssl.trustStore", certificatesTrustStorePath);
+		System.setProperty("javax.net.ssl.trustStorePassword", "changeit");*/
 		
+		System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
+		
+		//java.net.URL wsdlURL = new URL("https://kra.ndml.in/sms-ws/PANServiceImplService/PANServiceImplService");
+		
+		//ObjectFactory objectFac = new ObjectFactory();
     	PANServiceImplService wbPanService = new PANServiceImplService();
     	PANServiceImpl panServiceImpl = wbPanService.getPANServiceImplPort();
 
+    	
+    	//System.out.println(" service name is : "+wbPanService.getServiceName());
+    	BindingProvider bindingProvider = (BindingProvider) panServiceImpl;
+    	bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "https://kra.ndml.in/sms-ws/PANServiceImplService");
+
+    	
+    	/*GetPasscode abc = objectFac.createGetPasscode();
+    	abc.setArg0(password);
+    	abc.setArg1(encryptionKey);
+    	
+    	objectFac.createGetPasscode(abc);
+    	
+    	
+    	GetPasscodeResponse abcRes = objectFac.createGetPasscodeResponse();
+   
+    	
+    	System.out.println("arg 0 is : "+abc.getArg0());
+    	System.out.println("arg 1 is : "+abc.getArg1());
+    	*/
+    	
+    	/*System.out.println(" Hello abcRes : "+abcRes.getReturn().toString());*/
+
+    	/*String encryptedPassword = panServiceImpl.getPasscode(abc.getArg0(),abc.getArg1());*/
+    	
     	String encryptedPassword = panServiceImpl.getPasscode(password,encryptionKey);
 
 		System.out.println("encryptedPassword : "  +encryptedPassword);
@@ -82,6 +126,48 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		
 		//String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, miId);
 		String res = panServiceImpl.panInquiryDetails(requestXml, userId, encryptedPassword, encryptionKey);
+		
+		
+		
+		
+		
+/*		
+		 SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+		 URL url = new URL("https://kra.ndml.in/sms-ws/PANServiceImplService");
+		  URL url = new URL(null, "https://kra.ndml.in/sms-ws/PANServiceImplService", new sun.net.www.protocol.https.Handler());
+		  HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
+		  conn.setSSLSocketFactory(sslsocketfactory);
+		  System.setProperty("javax.net.ssl.trustStoreType", "jks");
+		  System.setProperty("javax.net.ssl.keyStore", "C:\\Users\\Work-PC\\Desktop\\cake print\\kra.cer"); 	  
+		  Certificate provided by ndml. Provide Path to that
+		   * Then create a keystore from the Pfx provided
+		   
+		  System.setProperty("javax.net.ssl.trustStore","C:\\Program Files\\Java\\jre1.8.0_161\\bin\\keystore.jks");
+		  
+		  PANServiceImplProxy proxyClientService =new PANServiceImplService();
+		  PANServiceImpl proxyClient = proxyClientService.getPANServiceImplPort();
+			// Get the encrypted password using getPassCode function
+			// Parameters are: your mi password and passkey
+			// Passkey can be any 3 characters
+			String encryptedPassword=proxyClient.getPasscode(password, encryptionKey);
+			System.out.println("### ENCRYPTED PASSWORD IS: " + encryptedPassword + " ###");
+			String requestXMl="<APP_REQ_ROOT><APP_PAN_INQ>	<APP_PAN_NO>"+panCard+"</APP_PAN_NO>	<APP_MOBILE_NO>"+mobileNo+"</APP_MOBILE_NO>	<APP_REQ_NO>1234567890</APP_REQ_NO>	</APP_PAN_INQ></APP_REQ_ROOT>";
+			System.out.println("### REQUEST XML IS: " + requestXMl + " ###");
+			
+					// 	Inquire the pan using panInquiryDetails function
+					// Parameters are: xml request, mi user id, encrypted password recieved from getPasscode function and 
+					// passkey that was use earlier.
+			String inquiryResponse=proxyClient.panInquiryDetails(requestXMl, userId, encryptedPassword, encryptionKey);
+			System.out.println("RESPONSE IS: " + inquiryResponse + "");*/
+			
+			
+			
+		
+		
+		
+		
+		
+		
 		
 		System.out.println("RES is "+res);
 		

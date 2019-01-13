@@ -35,6 +35,130 @@ public class QueryProducts {
 
 	public final double tol = 0.001;  
 
+	public String getTotalUpfrontTransactions(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryProducts class - getTotalUpfrontTransactions method - customerId - "+customerId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		Object result;
+		String totalUpfrontInvestments ;
+
+		try
+		{
+			
+			hibernateSession.beginTransaction();
+			
+			totalUpfrontInvestments = hibernateSession.createQuery("select count(distinct(productId)) from TransactionDetails   where transactionType='UPFRONT' and customerId='"+customerId+"' ").uniqueResult().toString();
+			
+			hibernateSession.getTransaction().commit();
+
+
+				
+			logger.debug("QueryProducts class - getTotalUpfrontTransactions method - customerId - "+customerId+" - return totalUpfrontInvestments - "+totalUpfrontInvestments);
+			logger.debug("QueryProducts class - getTotalUpfrontTransactions method - customerId - "+customerId+" - end");
+			
+			return totalUpfrontInvestments;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class - getTotalUpfrontTransactions method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class - getTotalUpfrontTransactions method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+	public String getTotalSipTransactions(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryProducts class - getTotalSipTransactions method - customerId - "+customerId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		Object result;
+		String totalSips ;
+
+		try
+		{
+			
+			hibernateSession.beginTransaction();
+			
+			totalSips = hibernateSession.createQuery("select count(distinct(productId)) from TransactionDetails   where transactionType='SIP' and customerId='"+customerId+"' ").uniqueResult().toString();
+			
+			hibernateSession.getTransaction().commit();
+
+
+				
+			logger.debug("QueryProducts class - getTotalSipTransactions method - customerId - "+customerId+" - return totalSips - "+totalSips);
+			logger.debug("QueryProducts class - getTotalSipTransactions method - customerId - "+customerId+" - end");
+			
+			return totalSips;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class - getTotalSipTransactions method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class - getTotalSipTransactions method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+	public String getTotalPendingTransactions(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryProducts class - getTotalPendingTransactions method - customerId - "+customerId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		Object result;
+		String totalPendingTransactions ;
+
+		try
+		{
+			
+			hibernateSession.beginTransaction();
+			
+			totalPendingTransactions = hibernateSession.createQuery("select count(*) from TransactionDetails   where transactionStatus='5' and customerId='"+customerId+"' ").uniqueResult().toString();
+			
+			hibernateSession.getTransaction().commit();
+
+
+				
+			logger.debug("QueryProducts class - getTotalPendingTransactions method - customerId - "+customerId+" - return totalPendingTransactions - "+totalPendingTransactions);
+			logger.debug("QueryProducts class - getTotalPendingTransactions method - customerId - "+customerId+" - end");
+			
+			return totalPendingTransactions;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class - getTotalPendingTransactions method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class - getTotalPendingTransactions method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+	
 	public HashMap<String,Double> getProductAmountList(HashMap<String,Double> productRatioList,Double amount) throws MoneyBuddyException
 	{
 

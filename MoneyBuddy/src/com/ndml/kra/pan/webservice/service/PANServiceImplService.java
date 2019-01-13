@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "PANServiceImplService", targetNamespace = "http://service.webservice.pan.kra.ndml.com/", wsdlLocation = "http://121.242.223.211/sms-ws/PANServiceImplService/PANServiceImplService.wsdl")
+@WebServiceClient(name = "PANServiceImplService", targetNamespace = "http://service.webservice.pan.kra.ndml.com/", wsdlLocation = "https://kra.ndml.in/sms-ws/PANServiceImplService/PANServiceImplService.wsdl")
 public class PANServiceImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class PANServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://121.242.223.211/sms-ws/PANServiceImplService/PANServiceImplService.wsdl");
+            url = new URL("https://kra.ndml.in/sms-ws/PANServiceImplService/PANServiceImplService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

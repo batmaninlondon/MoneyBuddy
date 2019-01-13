@@ -100,7 +100,7 @@
 	    
 	    
 	    
-  <title>Bootstrap Example</title>
+  <title>Login/SignUp</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -131,9 +131,26 @@
 	%>
 	<!--========== PROMO BLOCK ==========-->
 		<div class="g-fullheight--xs g-bg-position--center swiper-slide " >
+		
+		<div class="row" >
+				<div class="col-md-3"></div>
+				<div class="col-md-5 g-color--white text-center g-font-size-24--xs g-font-family--playfair g-margin-l-60--md">
+					
+						<s:iterator value="actionMessages">
+            				<span class="actionMessage">
+                				<s:property />
+            				</span>
+        				</s:iterator>
+       				
+				</div>
+				<div class="col-md-4"></div>
+			</div>  
+			
+			
+			
         	<div class="form  ">
    	
-  <ul class="nav nav-pills nav-tabs card-header-pills">
+  <ul class="nav nav-tabs card-header-pills">
     <li class="nav-item active">
       <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#loginTabContent">LogIn</a>
     </li>
@@ -221,13 +238,7 @@
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
-          	<div class="row" >
-				<div class="col-md-3"></div>
-				<div class="col-md-5 ">
-						<s:actionmessage class="small-text"/> 
-				</div>
-				<div class="col-md-4"></div>
-			</div>                 
+          	               
           </s:form>
     </div>
     

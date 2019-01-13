@@ -50,8 +50,6 @@
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 	    <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
 	   
-	   
-	
     </head>
     
          <style>
@@ -314,10 +312,10 @@
 						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#portfolioSummaryPane">Portfolio Summary</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane">Active SIP's</a>
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane" >Active SIP's</a>
 						      </li>
 						      <li class="nav-item" >
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane">Transaction History</a>
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
 						      </li>
 						      <li class="nav-item" id="hideMe" >
 						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>

@@ -57,7 +57,7 @@ public class SendMail {
         	StringBuilder bodyText = new StringBuilder();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            
+
             String strLine;
 
             //Read File Line By Line
