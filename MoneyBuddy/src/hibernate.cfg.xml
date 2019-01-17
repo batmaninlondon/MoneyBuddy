@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-     <!-- <property name="hibernate.connection.url">jdbc:mysql://aanfrcjh7hflzl.ces0bsvgrqsy.ap-south-1.rds.amazonaws.com:3306/ebdb</property> -->
-     <property name="hibernate.connection.url">jdbc:mysql://aa5znxbgqxuz1l.ces0bsvgrqsy.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
-     <!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ebdb</property> -->
-    <property name="hibernate.connection.username">moneybuddy</property>
-    <property name="hibernate.connection.password">Moneybuddy123</property>
-     <property name="hibernate.show_sql">true</property>
-     <!-- Mapping with model class containing annotations -->
-	 <mapping class="com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.BankDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerAccountDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerLoginActivity"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPortfolio"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.Customers"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.KycStatus"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.NavHistory"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.PaymentDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.PriceHistory"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.ProductDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.RtaSpecificCodes"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.SipDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.TransactionDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.Subscriber"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.PrimaryFundDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.SecondaryFundDetails"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerCart"/>
-	 <mapping class="com.myMoneyBuddy.EntityClasses.CustomerDetails"/>
-  </session-factory>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://aa1q24164iwturl.cod5krwosqto.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ebdb</property> -->
+		<property name="hibernate.connection.username">moneybuddy</property>
+		<property name="hibernate.connection.password">MonBudDB33</property>
+		<property name="hibernate.show_sql">true</property>
+	
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+		
+		<!-- C3p0 -->
+		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.max_size">25</property>
+		<property name="hibernate.c3p0.timeout">120</property>
+		<property name="hibernate.c3p0.max_statement">50</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1;</property>
+		<property name="hibernate.c3p0.idle_test_period">300</property>
+
+		<!-- Mapping with model class containing annotations -->
+		<mapping class="com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.BankDetails" />
+		<!-- <mapping class="com.myMoneyBuddy.EntityClasses.CustomerAccountDetails"/> -->
+		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerLoginActivity" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory" />
+		<!-- <mapping class="com.myMoneyBuddy.EntityClasses.CustomerPortfolio"/> -->
+		<mapping class="com.myMoneyBuddy.EntityClasses.Customers" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.DbfFileStatusDetails" />
+		<!-- <mapping class="com.myMoneyBuddy.EntityClasses.KycStatus"/> -->
+		<mapping class="com.myMoneyBuddy.EntityClasses.NavHistory" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.PaymentDetails" />
+		<!-- <mapping class="com.myMoneyBuddy.EntityClasses.PriceHistory"/> -->
+		<!-- <mapping class="com.myMoneyBuddy.EntityClasses.ProductDetails"/> -->
+		<mapping class="com.myMoneyBuddy.EntityClasses.RtaSpecificCodes" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.SipDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.TransactionDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.Subscriber" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.PrimaryFundDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.SecondaryFundDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerCart" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.FolioDetails" />
+	</session-factory>
 </hibernate-configuration>
