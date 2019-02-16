@@ -686,18 +686,10 @@
                         	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
 	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
 	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
-			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
-			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
-	                            <span class="input-group-btn " >
+			  						<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
 	                            	<s:submit id="recaptcha-subscriber" class="g-margin-l-100--xs g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--left-50 g-radius--right-50" value="Submit"></s:submit>
-	                                <!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button> -->
-	                            </span>
-	                            
-	                            <s:actionmessage class="g-font-size-32--xs g-font-size-36--md g-color--white"/> 
-	                            
                             </s:form>
                         </div>
-                        <br/><br/>
                         <p id="subscription-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
                     </div>
                 </div>

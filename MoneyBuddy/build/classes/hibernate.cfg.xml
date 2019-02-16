@@ -4,7 +4,7 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://aa1q24164iwturl.cod5krwosqto.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
+		<property name="hibernate.connection.url">jdbc:mysql://aac9ppbotiomy3.cod5krwosqto.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
 		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ebdb</property> -->
 		<property name="hibernate.connection.username">moneybuddy</property>
 		<property name="hibernate.connection.password">MonBudDB33</property>
@@ -45,5 +45,6 @@
 		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerCart" />
 		<mapping class="com.myMoneyBuddy.EntityClasses.CustomerDetails" />
 		<mapping class="com.myMoneyBuddy.EntityClasses.FolioDetails" />
+		<mapping class="com.myMoneyBuddy.EntityClasses.OrderStatus" />
 	</session-factory>
 </hibernate-configuration>

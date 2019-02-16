@@ -11,7 +11,6 @@
 <body >
 		
 		<%-- <jsp:forward page="/fundDetails.action" /> --%>
-		
 		<s:action name="fetchPopularFundDetailsAction" namespace="/" executeResult="true" />
 </body>
    

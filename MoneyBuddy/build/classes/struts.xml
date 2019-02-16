@@ -507,9 +507,18 @@
             <result name="sipOrderFofN">/WEB-INF/content/orderInvoiceSipFofN.jsp</result>
             <!-- <result name="sipOrderFofY">/orderInvoiceSipFofY.jsp</result> -->
             <result name="input">/WEB-INF/content/bankDetails.jsp</result> 
-            <result name="failedWithPaymentGateway">/WEB-INF/content/bankDetails.jsp</result>
-            <result name="allOrderFailed">/WEB-INF/content/bankDetails.jsp</result>
-        	<result name="clientCreationFailure">/WEB-INF/content/bankDetails.jsp</result>
+            <result name="failedWithPaymentGateway" type="chain">
+            	<param name="actionName">checkBankDetailsAction</param>
+            	<param name="actionMsg">${actionMsg}</param>
+            </result>
+            <result name="allOrderFailed" type="chain">
+            	<param name="actionName">checkBankDetailsAction</param>
+            	<param name="actionMsg">${actionMsg}</param>
+            </result>
+        	<result name="clientCreationFailure" type="chain">
+            	<param name="actionName">checkBankDetailsAction</param>
+            	<param name="actionMsg">${actionMsg}</param>
+            </result>
         	<result name="aofOrKycFormReceived">/WEB-INF/content/aofOrKycFormReceived.jsp</result>
         	<result name="kycNotDone" type="chain">downloadKycFormAction</result>
         	<result name="aofNotDone" type="chain">downloadAofFormAction</result>
