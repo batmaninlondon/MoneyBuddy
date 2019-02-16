@@ -20,11 +20,11 @@ var TUTORIAL_SAVVY ={
 			  
 			
             $.each(jsonResponse.portfolioDataModel,function(index,dataElement){
-            	//alert('fund name : '+dataElement.fundName);
-           	 portfolioDataModelListArray.push([dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
+            	//alert('fund name : '+dataElement.schemeName);
+           	 portfolioDataModelListArray.push([dataElement.schemeName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
             });
             $.each(jsonResponse.newPortfolioDataModel,function(index,dataElement){
-            	//alert('new fundName : '+dataElement.fundName);
+            	//alert('new schemeName : '+dataElement.schemeName);
             });
             $.each(jsonResponse.investmentDetailsDataModel,function(index,dataElement){
             	//alert('transaction Date : '+dataElement.transactionDate);
@@ -46,7 +46,7 @@ var TUTORIAL_SAVVY ={
   
    return {
     
-    labels : ["FundName", "Units", "InvestedAmount","CurrentAmount", "RateOfGrowth"],
+    labels : ["schemeName", "Units", "InvestedAmount","CurrentAmount", "RateOfGrowth"],
     
     datasets : [
      {

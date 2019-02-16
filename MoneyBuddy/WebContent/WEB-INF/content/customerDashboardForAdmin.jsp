@@ -491,6 +491,7 @@
 	              
         		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+  					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
 	              <!-- Added Table for SIP - end  -->
 	              
@@ -702,7 +703,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth]);
 						});
 					  
 				  },
@@ -710,14 +711,14 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
 						});  
 				  },
 				  
 				  createSipDataArray : function(sipData)
 				  {
 					  $.each(sipData,function(index,dataElement){
-						  sipDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.fundCategory,dataElement.investedAmount,dataElement.nextSipDate]);
+						  sipDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.schemeType,dataElement.investedAmount,dataElement.nextSipDate]);
 						});
 					  
 				  },
@@ -725,7 +726,7 @@
 				  createTransctionhistoryDataArray : function(transctionhistoryData)
 				  {
 					  $.each(transctionhistoryData,function(index,dataElement){
-						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
 						});
 					  
 				  },
@@ -995,7 +996,8 @@
 					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
-					        buyFundHandler(fundId);
+					        var folioNum = data[2];
+					        buyFundHandler(fundId,folioNum);
 					    } ); 
 					  
 				

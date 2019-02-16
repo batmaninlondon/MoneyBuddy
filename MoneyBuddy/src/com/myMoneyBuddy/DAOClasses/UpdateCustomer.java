@@ -38,6 +38,17 @@ public class UpdateCustomer {
 
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
+			
+			if ("DONE".equals(kycStatus))  {
+			
+				hibernateSession.beginTransaction();
+				query = hibernateSession.createQuery("update Customers set aofFormStatus = 'ACTIVATED' where customerId = :customerId");
+
+				query.setParameter("customerId", customerId);
+	
+				result = query.executeUpdate();
+				hibernateSession.getTransaction().commit();
+			}
 
 			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - updated data of Customers table to set panCard and kycStatus");
 

@@ -90,7 +90,7 @@
 		</a>
 	</div>
 	
-	<s:set var="fundNameA" value="fundName" />
+	<s:set var="schemeNameA" value="schemeName" />
 	
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
@@ -99,7 +99,7 @@
 	    		<s:iterator value="#session.productList" var="productListElement">
 	        	</s:iterator> 
 	        	<div class="name">
-	                	<h3 class="title g-color--white"><s:property value="redeemFundName"/></h3>
+	                	<h3 class="title g-color--white"><s:property value="redeemSchemeName"/></h3>
 						<h6 style="color:white;"><s:property value="#session.customerMobileNumber" /></h6>
 	            </div>
 	       	</div>
@@ -115,7 +115,7 @@
 			    	<div class="container">
 			    	<br/>
   						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#stp" onClick="setTransactionType('UPFRONT');">Start STP</a></li>
+    						<li class="active"><a data-toggle="tab" href="#stp" onClick="setTransactionType('UPFRONT');">Start Redemption</a></li>
  						</ul>
   					</div>
   				</div>
@@ -146,7 +146,7 @@
 							</div>
 							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 							
-								<p><s:property value="redeemFundName"/></p>
+								<p><s:property value="redeemSchemeName"/></p>
 							</div>
 							<div class="col-md-5"></div>
 						</div> --%>
@@ -197,14 +197,14 @@
 							    	<div class="profile">
 							        	<div class="name g-text-right--xs g-margin-r-10--xs" >
 						        			<button type="button"  id="redeem-button" class=" btn g-color--white g-margin-t-15--xs " 
-						        					onClick="redeem('<s:property value="redeemFundId"/>','<s:property value="redeemFundName"/>','<s:property value="folioNum"/>','<s:property value="totalAmount"/>','<s:property value="totalQuantity"/>');" style="background-color:black; ">Continuuue</button>
+						        					onClick="redeem('<s:property value="redeemFundId"/>','<s:property value="redeemSchemeName"/>','<s:property value="folioNum"/>','<s:property value="totalAmount"/>','<s:property value="totalQuantity"/>');" style="background-color:black; ">Continuuue</button>
 							            </div>
 							       	</div>
 							     </div>
 							     <div class="col-md-1 col-xs-1"></div>
 							</div>
 							<s:hidden id="redeem-fund-id" name="fundId"></s:hidden>
-							<s:hidden id="redeem-fund-name" name="fundName"></s:hidden>
+							<s:hidden id="redeem-scheme-name" name="schemeName"></s:hidden>
 							<s:hidden id="redeem-folio-num" name="folioNumber"></s:hidden>
 							<s:hidden id="redeem-total-amount" name="totalAmount"></s:hidden>
 							<s:hidden id="redeem-total-quantity" name="totalQuantity"></s:hidden>

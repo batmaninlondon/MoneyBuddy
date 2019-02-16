@@ -22,7 +22,7 @@ public class FetchAvailableStpFundsAction extends ActionSupport  {
 	Logger logger = Logger.getLogger(FetchAvailableStpFundsAction.class);
 	private String stpFundId;
 	private String stpAmount;
-	private String fundName;
+	private String schemeName;
 	private HashMap<String,String> availableFundsList;
 	
     public String execute() {
@@ -34,7 +34,7 @@ public class FetchAvailableStpFundsAction extends ActionSupport  {
 			
 			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 			
-			fundName = queryPrimaryFundDetails.getFundName(getStpFundId());
+			schemeName = queryPrimaryFundDetails.getSchemeName(getStpFundId());
 			
 			availableFundsList = queryPrimaryFundDetails.getAvailableStpFundsList(getStpFundId());
 			
@@ -81,14 +81,15 @@ public class FetchAvailableStpFundsAction extends ActionSupport  {
 		this.stpAmount = stpAmount;
 	}
 
-
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
+
 
 	public HashMap<String, String> getAvailableFundsList() {
 		return availableFundsList;

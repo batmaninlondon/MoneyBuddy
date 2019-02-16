@@ -235,10 +235,10 @@
 									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
 				  					<figcaption>
 				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.fundName"/></p>
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.schemeName"/></p>
 				    						<br/>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.sector"/>. <s:property value="#popularFundDetailsDataModelElement.subSector"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.fundStartDate"/></p> 
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.schemeType"/>. <s:property value="#popularFundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.startDate"/></p> 
 				    					</article>
 				    					<article class="g-margin-l-20--xs "> 
 									        <s:if test="#popularFundDetailsDataModelElement.rating.equals('5'.toString())">
@@ -469,6 +469,7 @@
                 <!-- End Wrapper -->
 				<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
 		  		<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+		  		<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 			</s:form>
                 <!-- Pagination -->
                 <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--dark g-text-center--xs js__swiper-pagination"></div>

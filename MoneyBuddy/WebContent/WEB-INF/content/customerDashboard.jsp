@@ -342,10 +342,10 @@
 							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Fund Name</th>
 							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Folio Num</th>
 											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Invested Amount</th>
-											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Total units held</th>
+											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Units held</th>
 											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Current Value</th>
 											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Profit</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Growth Rate (% per year)</th>
+											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Returns (% per year)</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Invest More</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th>
@@ -387,6 +387,7 @@
 	              
         		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+  					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
 				
 				<s:form  action="fetchAvailableStpFundsAction" method="post" name="formFetchAvailableStpFundsAction">
@@ -680,7 +681,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.fundSector]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType]);
 						});
 					  
 				  },
@@ -688,14 +689,14 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
 						});  
 				  },
 				  
 				  createSipDataArray : function(sipData)
 				  {
 					  $.each(sipData,function(index,dataElement){
-						  sipDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.folioNumber,dataElement.fundCategory,dataElement.investedAmount,dataElement.nextSipDate]);
+						  sipDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.schemeType,dataElement.investedAmount,dataElement.nextSipDate]);
 						});
 					  
 				  },
@@ -703,7 +704,7 @@
 				  createTransctionhistoryDataArray : function(transctionhistoryData)
 				  {
 					  $.each(transctionhistoryData,function(index,dataElement){
-						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.folioNumber,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.folioNumber,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
 						});
 					  
 				  },
@@ -949,14 +950,15 @@
 					        	}, */
 					        	{
 					        	extend: 'pdfHtml5',
-					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio as PDF',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio in PDF',
 					        	titleAttr: 'PDF',
+					        	/* orientation: 'auto', */
+					        	/* pageSize: 'LETTER', */
 					        	title: 'Money Buddy Financial Services Private Limited',
-					        	messageTop: 'Investment statement summary of '+customerName+' with us as on '+curDate,
-					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\n Your investments are '
-					        			+profitDir+' by: Rs. '+totalProAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
+					        	messageTop: 'Investment statement of '+customerName+'\n\nGiven below is a quick summary of your investments with us',
+					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
 					        	exportOptions: {
-					        		columns: [  1, 3, 4, 5, 6, 7 ],
+					        		columns: [ 1, 3, 4, 5, 7 ],
 					        	},
 					        	customize: function(doc){
 				        			doc.styles.title.alignment = 'center';
@@ -964,7 +966,39 @@
 				        			doc.styles.title.fontSize = '20';
 				        			doc.styles.message.alignment = 'center';
 				        			doc.styles.message.fontSize = '14';
-				        			doc.styles.message.decoration='underline';
+				        			doc.styles.tableHeader.fillColor = '#8DB3E2';
+				        			/* var cols = [];
+			                        cols[0] = {text: 'Athlete', alignment: 'right', margin:[15, 10, 10, 10] };
+			                        
+				        			doc['content']['1'].style = 'athleteTable'; */
+				        			/* doc['styles'] = {
+				                            tableHeader: {
+				                                bold: !0,
+				                                fontSize: 15,
+				                                color: 'black',
+				                                alignment: 'center',
+				                                border: '1px solid',
+				                                fillColor: '#8DB3E2'
+				                            },
+				                            athleteTable: {
+				                                //alignment: 'center'
+				                            },
+				                            column1: {
+				                                alignment: 'center'
+				                            },
+				                            column2: {
+				                                alignment: 'center'
+				                            },
+				                            title: {
+				                                fontSize: 18,
+				                                bold: true,
+				                                margin: [0, 0, 0, 10],
+				                                alignment: 'center'
+				                            }
+				                        }; */
+				        			/* doc.styles.table.body.border = '1px'; */
+				        			/* doc.styles.message.decoration='underline'; */
+				        			
 					        	},
 					        	},
 					        	/* {
@@ -999,7 +1033,8 @@
 					 $('#portfoliosummary tbody').on('click','#topUpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
-					        buyFundHandler(fundId);
+					        var folioNum = data[2];
+					        buyFundHandler(fundId,folioNum);
 					    } ); 
 					  
 					 $('#portfoliosummary tbody').on('click','#stpButton',function () {
@@ -1016,7 +1051,7 @@
 					        var folioNum = data[2];
 					        var totalAmount = data[5];
 					        var totalQuantity = data[3];
-					        alert('fundId : '+fundId+' : folioNum : '+folioNum+' : totalAmount : '+totalAmount+' : totalQuantity : '+totalQuantity);
+					        //alert('fundId : '+fundId+' : folioNum : '+folioNum+' : totalAmount : '+totalAmount+' : totalQuantity : '+totalQuantity);
 					        redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity);
 					    } );
 
@@ -1095,8 +1130,8 @@
 				  },
 				  
 				  fnPendingOrdersRedraw: function () { 
-					  $('#hideMe').addClass("hidden");
-					  $('#pendingOrderTableRow').addClass("hidden");
+					  /*  $('#hideMe').addClass("hidden");
+					  $('#pendingOrderTableRow').addClass("hidden"); */ 
 					  
 			     },
 				  

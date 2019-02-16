@@ -789,13 +789,13 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						occuCode = result.toString();
 						hibernateSession.getTransaction().commit();
 						
-						String  fundName;
+						String  schemeName;
 						
 						hibernateSession.beginTransaction();
-						query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId");
+						query = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId = :fundId");
 						query.setParameter("fundId", transactionDetail.getProductId());		
 						result = query.uniqueResult();
-						fundName = result.toString();
+						schemeName = result.toString();
 						
 						hibernateSession.getTransaction().commit();
 						
@@ -842,7 +842,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[6] = "FOLIO_NUMBER";
 						rowData[7] = null; 
 						rowData[8] = (("BUY".equals(transactionDetail.getBuySell())) ? "P" : "R"); 
-						rowData[9] = fundName; 
+						rowData[9] = schemeName; 
 	
 						rowData[10] = customer.getCustomerName(); 
 						rowData[11] = null; 

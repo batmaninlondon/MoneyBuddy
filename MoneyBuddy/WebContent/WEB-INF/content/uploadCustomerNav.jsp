@@ -125,16 +125,19 @@
 		
 		
 		<div class="row" >
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
 				<table id="cartData" class="table table-bordered stripe ">
-						<thead class="table-head g-font-size-14--xs">
+						<thead class="table-head " style="font-size:17px;">
 							<tr>
-								<th class="center col-md-2 g-bg-color--gray-light">BSE Order Id</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Folio Num</th>
+								<th class="center col-md-1 g-bg-color--gray-light">BseOrderId</th>
+								<th class="center col-md-1 g-bg-color--gray-light">RTA</th>
+								<th class="center col-md-1 g-bg-color--gray-light">SchemeType</th>
+								<th class="center col-md-2 g-bg-color--gray-light">TransactionDate</th>
+								<th class="center col-md-2 g-bg-color--gray-light">FolioNum</th>
 								<th class="center col-md-2 g-bg-color--gray-light">Units</th>
-								<th class="center col-md-3 g-bg-color--gray-light">NAV</th>	
-								<th class="center col-md-3 g-bg-color--gray-light"></th>
+								<th class="center col-md-2 g-bg-color--gray-light">NAV</th>	
+								<th class="center col-md-1 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
@@ -145,20 +148,35 @@
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
 			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
-									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.key"/>" readonly>
+									    	<b><s:property value="#pendingNavOrdersElement.bseOrderId"/></b>
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
+			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
+									    	<s:property value="#pendingNavOrdersElement.rta"/>
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
+			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
+									    	<s:property value="#pendingNavOrdersElement.schemeType"/>
+									    </td>
+									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
+			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
+									    	<s:property value="#pendingNavOrdersElement.transactionDate"/>
 									    </td>
 									    
 									    <td class="center g-font-size-14--xs">
-									    	<s:if test="#pendingNavOrdersElement.value == ''  || #pendingNavOrdersElement.value == null ">
+									    	<s:if test="#pendingNavOrdersElement.transactionFolioNum == ''  || #pendingNavOrdersElement.transactionFolioNum == null ">
 									    		<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
 											  	<%-- <s:textfield class="form-control" id="folio-num" placeholder="Enter Folio Num"  /> --%>
 											  	<input class="form-control" id="folio-num" type="text" placeholder="Enter Folio Num" >
 									    	</s:if>
 									    	<s:else>
-									    		<s:set var="folNum" value="#pendingNavOrdersElement.value" />
+									    		<s:set var="folNum" value="#pendingNavOrdersElement.transactionFolioNum" />
 									    		<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
 											  	<%-- <s:textfield class="form-control" id="folio-num" placeholder="Enter Folio Num" value="#FolNum" /> --%>
-									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.value"/>" readonly>
+									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.transactionFolioNum"/>" readonly>
 									    	</s:else>
 									    </td>
 									    <td class="center g-font-size-14--xs">
@@ -187,7 +205,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-1"></div>
 		</div>
 
 		<div class="row" style="margin-top:20px;">

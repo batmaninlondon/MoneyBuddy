@@ -64,7 +64,7 @@
 		
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minLumsumAmount"/>');">
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minPurchaseAmount"/>');">
 <%-- <%session.setAttribute("transactionType", "SIP");%>; --%>
 	<%
 	
@@ -89,7 +89,7 @@
 		</a>
 	</div>
 	
-	<s:set var="fundNameA" value="fundName" />
+	<s:set var="schemeNameA" value="schemeName" />
 	
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
@@ -98,7 +98,7 @@
 	    		<s:iterator value="#session.productList" var="productListElement">
 	        	</s:iterator> 
 	        	<div class="name">
-	                	<h3 class="title g-color--white"><s:property value="#fundNameA"/></h3>
+	                	<h3 class="title g-color--white"><s:property value="#schemeNameA"/></h3>
 						<h6 style="color:white;"><s:property value="#session.customerMobileNumber" /></h6>
 	            </div>
 	       	</div>
@@ -145,7 +145,7 @@
 							</div>
 							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 							
-							<s:textfield id="fund-name-a" name="fundNameA" value="%{fundNameA}" class="field left" readonly="true" style="width:400px" />
+							<s:textfield id="scheme-name-a" name="schemeNameA" value="%{schemeNameA}" class="field left" readonly="true" style="width:400px" />
 							</div>
 							<div class="col-md-5"></div>
 						</div>

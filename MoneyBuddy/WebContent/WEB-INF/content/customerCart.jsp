@@ -65,6 +65,7 @@
 							<tr>
 								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
 								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Folio No.</th>
 								<th class="center col-md-3 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
@@ -75,11 +76,17 @@
 								    	<td class="center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.productName"/></b></td>
 								    	<td class="center g-font-size-14--xs g-bg-color--gray-light g-text-right--xs"><b><s:property value="#customerCartListElement.amount"/></b></td>
 								    	<td class="g-bg-color--gray-light"></td>
+								    	<td class="g-bg-color--gray-light"></td>
 								    </s:if>
 									<s:else>
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
+								    	<s:set var="folios" value="#customerCartListElement.folioNumber" />
 								    	<td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
 								    	<td class="center g-font-size-14--xs g-text-right--xs"><s:property value="#customerCartListElement.amount"/></td>
+								    	<td class="center g-font-size-14--xs g-text-right--xs">
+								    		<s:property value="#customerCartListElement.folioNumber"/>
+
+							    		</td>
 							    		<td class="center">
 							    			<button type="button" class=" btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button>
 							    		</td>

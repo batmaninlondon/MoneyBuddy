@@ -232,7 +232,7 @@
         <div class="row g-text-left--xs" >
         	<div class="col-md-2 col-xs-6 g-margin-l-70--xs g-margin-l-70--xs">Date of Birth</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="Enter Date of Birth">
+        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="Enter Date of Birth in DD/MM/YYYY format">
         	</div>
         	<div class="col-md-6 col-xs-6 "></div>
         </div>

@@ -39,7 +39,7 @@ public class QueryCustomerCart {
 				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - end");

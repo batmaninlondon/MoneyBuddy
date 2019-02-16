@@ -242,10 +242,10 @@
 									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
 				  					<figcaption>
 				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#fundDetailsDataModelElement.fundName"/></p>
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
 				    						<br/>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.sector"/>. <s:property value="#fundDetailsDataModelElement.subSector"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.fundStartDate"/></p> 
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.schemeType"/>. <s:property value="#fundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.startDate"/></p> 
 				    					</article>
 				    					<article class="g-margin-l-20--xs "> 
 									        <s:if test="#fundDetailsDataModelElement.rating.equals('5'.toString())">
@@ -312,6 +312,7 @@
 		
 		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
 	  		<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+	  		<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 		</s:form>
   				
 	  	</div>

@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class FundDetailsDataModel implements Serializable{
 
 	private String fundId;
-	private String fundName;
-	private String sector;
-	private String subSector;
-	private String fundStartDate;
+	private String schemeName;
+	private String schemeType;
+	private String category;
+	private String startDate;
 	private String rating;
 	private String risk;
 	private String returnsOneYear;
@@ -16,10 +16,13 @@ public class FundDetailsDataModel implements Serializable{
 	private String returnsFiveYears;
 	private String returnsSinceInception;
 	private String minSipAmount;
-	private String minLumsumAmount;
+	private String minPurchaseAmount;
 	private String minSipDuration;
-	private String fundCategory;
 	private String pdfFilePath;
+	private String sipFlag;
+	private String stpFlag;
+	private String swpFlag;
+	private String switchFlag;
 	
 	
 	public FundDetailsDataModel() {
@@ -27,16 +30,16 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
-	public FundDetailsDataModel(String fundId, String fundName, String sector, String subSector, String fundStartDate,
+	public FundDetailsDataModel(String fundId, String schemeName, String schemeType, String category, String startDate,
 			String rating, String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears, 
-			String returnsSinceInception, String minSipAmount, String minLumsumAmount,
-			String minSipDuration, String fundCategory, String pdfFilePath) {
+			String returnsSinceInception, String minSipAmount, String minPurchaseAmount,
+			String minSipDuration, String pdfFilePath, String sipFlag, String stpFlag, String swpFlag, String switchFlag ) {
 		super();
 		this.fundId = fundId;
-		this.fundName = fundName;
-		this.sector = sector;
-		this.subSector = subSector;
-		this.fundStartDate = fundStartDate;
+		this.schemeName = schemeName;
+		this.schemeType = schemeType;
+		this.category = category;
+		this.startDate = startDate;
 		this.rating = rating;
 		this.risk = risk;
 		this.returnsOneYear = returnsOneYear;
@@ -44,10 +47,13 @@ public class FundDetailsDataModel implements Serializable{
 		this.returnsFiveYears = returnsFiveYears;
 		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
-		this.minLumsumAmount = minLumsumAmount;
+		this.minPurchaseAmount = minPurchaseAmount;
 		this.minSipDuration = minSipDuration;
-		this.fundCategory = fundCategory;
 		this.pdfFilePath = pdfFilePath;
+		this.sipFlag = sipFlag;
+		this.stpFlag = stpFlag;
+		this.swpFlag = swpFlag;
+		this.switchFlag = switchFlag;
 	}
 
 
@@ -60,44 +66,45 @@ public class FundDetailsDataModel implements Serializable{
 		this.fundId = fundId;
 	}
 
-
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 
-	public String getSector() {
-		return sector;
+	public String getSchemeType() {
+		return schemeType;
 	}
 
 
-	public void setSector(String sector) {
-		this.sector = sector;
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
 	}
 
 
-	public String getSubSector() {
-		return subSector;
+
+	public String getCategory() {
+		return category;
 	}
 
 
-	public void setSubSector(String subSector) {
-		this.subSector = subSector;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 
-	public String getFundStartDate() {
-		return fundStartDate;
+
+	public String getStartDate() {
+		return startDate;
 	}
 
 
-	public void setFundStartDate(String fundStartDate) {
-		this.fundStartDate = fundStartDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
 
@@ -171,13 +178,13 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
-	public String getMinLumsumAmount() {
-		return minLumsumAmount;
+	public String getMinPurchaseAmount() {
+		return minPurchaseAmount;
 	}
 
 
-	public void setMinLumsumAmount(String minLumsumAmount) {
-		this.minLumsumAmount = minLumsumAmount;
+	public void setMinPurchaseAmount(String minPurchaseAmount) {
+		this.minPurchaseAmount = minPurchaseAmount;
 	}
 
 
@@ -191,16 +198,6 @@ public class FundDetailsDataModel implements Serializable{
 	}
 
 
-	public String getFundCategory() {
-		return fundCategory;
-	}
-
-
-	public void setFundCategory(String fundCategory) {
-		this.fundCategory = fundCategory;
-	}
-
-
 	public String getPdfFilePath() {
 		return pdfFilePath;
 	}
@@ -208,6 +205,46 @@ public class FundDetailsDataModel implements Serializable{
 
 	public void setPdfFilePath(String pdfFilePath) {
 		this.pdfFilePath = pdfFilePath;
+	}
+
+
+	public String getSipFlag() {
+		return sipFlag;
+	}
+
+
+	public void setSipFlag(String sipFlag) {
+		this.sipFlag = sipFlag;
+	}
+
+
+	public String getStpFlag() {
+		return stpFlag;
+	}
+
+
+	public void setStpFlag(String stpFlag) {
+		this.stpFlag = stpFlag;
+	}
+
+
+	public String getSwpFlag() {
+		return swpFlag;
+	}
+
+
+	public void setSwpFlag(String swpFlag) {
+		this.swpFlag = swpFlag;
+	}
+
+
+	public String getSwitchFlag() {
+		return switchFlag;
+	}
+
+
+	public void setSwitchFlag(String switchFlag) {
+		this.switchFlag = switchFlag;
 	}
 
 

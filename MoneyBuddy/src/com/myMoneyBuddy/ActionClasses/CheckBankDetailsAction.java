@@ -31,6 +31,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	Logger logger = Logger.getLogger(CheckBankDetailsAction.class);
 	private SessionMap<String,Object> sessionMap;
     
+	private String actionMsg;
     private String respMsg;
     private String tranDetailId;
     private String selectedBankName;
@@ -44,6 +45,11 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
     	
     	String customerId = null;
     	try {
+    		
+    		System.out.println(" Action msg added is : "+getActionMsg());
+    		if (null != getActionMsg())
+	    		if (getActionMsg().startsWith("ActionMsg") )
+	    			addActionMessage(getActionMsg().substring(10));
     		customerId = sessionMap.get("customerId").toString();
     		
     		if (customerId == null || "".equals(customerId))  {
@@ -84,7 +90,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 					QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 					
-					String fundName = queryPrimaryFundDetails.getFundName(transactionDetails.getProductId());
+					String schemeName = queryPrimaryFundDetails.getSchemeName(transactionDetails.getProductId());
 					
 					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
 					
@@ -92,9 +98,8 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 		    		List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
-		    		customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),fundName,transactionDetails.getTransactionAmount(),null,userStatus));
-			    	
-			    	sessionMap.put("customerCartList", customerCartList);
+    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),transactionDetails.getTransactionFolioNum(),null,userStatus));
+	    			sessionMap.put("customerCartList", customerCartList);
 			    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    
 				}
 				else {
@@ -289,6 +294,14 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 
 	public void setTranDetailId(String tranDetailId) {
 		this.tranDetailId = tranDetailId;
+	}
+
+	public String getActionMsg() {
+		return actionMsg;
+	}
+
+	public void setActionMsg(String actionMsg) {
+		this.actionMsg = actionMsg;
 	}
 
 }

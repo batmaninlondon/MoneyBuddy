@@ -30,12 +30,12 @@
 		{
 			document.getElementById("stpPerMonth").innerHTML=newValue;
 		}
-		function filldata(minSipAmt,minSipDur,minLumsumAmount)
+		function filldata(minSipAmt,minSipDur,minPurchaseAmount)
 		{
 			document.getElementById("sip-duration").innerHTML=minSipDur;
 			document.getElementById("sipPerMonth").innerHTML=minSipAmt;
-			document.getElementById("upfrontInvestment").innerHTML=minLumsumAmount;
-			document.getElementById("tot-investment-id-value").innerHTML=minLumsumAmount;
+			document.getElementById("upfrontInvestment").innerHTML=minPurchaseAmount;
+			document.getElementById("tot-investment-id-value").innerHTML=minPurchaseAmount;
 			document.getElementById("transaction-type-value").value = 'UPFRONT';
 		}
 		function showNewUpfrontInvestment(newValue)
@@ -56,16 +56,23 @@
 		function newUpdate(){
 			
 			var transactionType = document.getElementById("transaction-type-value").value;
+			var e = document.getElementById("selectUpfrontFolioNum");
+			var strFolio = e.options[e.selectedIndex].value;
+			var eSip = document.getElementById("selectSipFolioNum");
+			var strSipFolio = eSip.options[eSip.selectedIndex].value;
+			
 			//alert('newUpdate called : transactionType : '+transactionType);
 			//alert('transactionType : '+transactionType);
 			if (transactionType == "SIP") {
 				document.getElementById("sip-amount-value").value = document.getElementById("sipPerMonth").innerHTML;
 				document.getElementById("upfront-investment-value").value = "0";
+				document.getElementById("select-folio-num-value").value = strSipFolio;
 				document.getElementById("sip-duration-value").value = document.getElementById('sip-duration').innerHTML; // in years
 				document.getElementById("sip-date-value").value = document.getElementById('sip-date').value;
 			} else{
 				document.getElementById("sip-amount-value").value = "0";
 				document.getElementById("upfront-investment-value").value = document.getElementById("upfrontInvestment").innerHTML;
+				document.getElementById("select-folio-num-value").value = strFolio;
 				document.getElementById("sip-duration-value").value = "0"; // in years
 				document.getElementById("sip-date-value").value = "0";
 			}
@@ -80,10 +87,10 @@
 				document.formPayment.submit();
 	    }
 		
-		function redeem(fundId,fundName,folioNumber,totalAmount,totalQuantity)  
+		function redeem(fundId,schemeName,folioNumber,totalAmount,totalQuantity)  
 	    {
 				document.getElementById("redeem-fund-id").value = fundId;
-				document.getElementById("redeem-fund-name").value = fundName;
+				document.getElementById("redeem-scheme-name").value = schemeName;
 				document.getElementById("redeem-folio-num").value = folioNumber;
 				document.getElementById("redeem-total-amount").value = totalAmount;
 				document.getElementById("redeem-total-quantity").value = totalQuantity;
@@ -134,9 +141,10 @@
 			
 		}
 		
-		function buyFundHandler(fundId)  
+		function buyFundHandler(fundId,folioNum)  
 	    {
 				document.getElementById("fund-id-value").value = fundId;
+				document.getElementById("folio-num-value").value = folioNum;
 				document.formBuyFundAction.submit();
 	    }
 		

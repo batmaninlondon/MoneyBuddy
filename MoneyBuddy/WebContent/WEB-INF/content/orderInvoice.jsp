@@ -68,9 +68,9 @@
 		
 		$(document).ready(function() {
 		    $('#cartData').DataTable( {
-		        "paging":   true,
+		        "paging":   false,
 		        "ordering": false,
-		        "info":     true,
+		        "info":     false,
 		        "searching": false,
 		        "responsive": true,
 		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
@@ -110,21 +110,26 @@
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-1 g-bg-color--gray-light">Id</th>
+								<th class="center col-md-1 g-bg-color--gray-light">Sl No.</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
 								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Date</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Status</th>
 							</tr>
 						</thead>
+						<% int i = 1; %> 
 						<tbody class="table-body g-font-size-14--xs">
 							<s:iterator value="#session.orderDataModel" var="orderDataModelElement">
 								<tr>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionId"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.fundName"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.amount"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionDate"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.transactionStatus"/></td>
+									<s:if test="schemeName.equals('Total')">
+										<td class="center g-font-size-14--xs g-bg-color--gray-light"></td>
+									    <td class="center g-font-size-14--xs g-bg-color--gray-light"><s:property value="#orderDataModelElement.schemeName"/></td>
+									    <td class="center g-font-size-14--xs g-bg-color--gray-light"><s:property value="#orderDataModelElement.amount"/></td>
+									  
+								    </s:if>
+									<s:else>
+									    	<td class="center g-font-size-14--xs"><%= i %> <% i++; %></td>
+									    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.schemeName"/></td>
+									    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.amount"/></td>
+								    </s:else>
 								</tr>
 							</s:iterator> 
 						</tbody>

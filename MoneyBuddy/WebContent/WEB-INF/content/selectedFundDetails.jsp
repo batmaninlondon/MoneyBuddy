@@ -108,16 +108,18 @@
 			 		<div class="row  ">
 					 		<div class="col-md-8 col-xs-12 ">
 					 			<input type="hidden" id="fundId" value="<s:property value="#fundDetails.fundId"/>" />
-					 		 	<h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-50--lg  g-margin-t-20--xs"><s:property value="#fundDetails.fundName"/></h1>
+					 		 	<h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-50--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
 				            </div>
 		            		<div class="col-md-1 col-xs-6  g-hor-centered-row__col g-margin-t-25--xs g-margin-b-0--lg ">
-		                     	<a  href="javascript:callOneTimeInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs">One time Investment</a>
+		                     	<a  href="javascript:callOneTimeInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs" style="width:140px;">Invest Lumpsum</a>
 		                    </div>
 		                    <div class="col-md-1  g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
 		                    </div>
-		             		<div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-25--xs g-margin-b-0--lg ">
-		                   		<a  href="javascript:callSIPInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs">Regular Investment</a>
-		                    </div>
+		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
+			             		<div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-25--xs g-margin-b-0--lg ">
+			                   		<a  href="javascript:callSIPInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs" style="width:140px;">Start SIP</a>
+			                    </div>
+		                    </s:if>
 		                    <div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
 		                    </div>
 		            </div> 
@@ -168,16 +170,16 @@
 														<td class="" ><span class=" g-font-size-14--xs"><b>Risk :</b> <s:property value="#fundDetails.risk"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>Category :</b> <s:property value="#fundDetails.sector"/></span></td>
-														<td class="" ><span class=" g-font-size-14--xs"><b>Sector :</b> <s:property value="#fundDetails.subSector"/></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>Scheme Type :</b> <s:property value="#fundDetails.schemeType"/></span></td>
+														<td class="" ><span class=" g-font-size-14--xs"><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AAUM :</b> &#8377; 4039.34 Cr <small>as on 31 Jan 2018 </small></span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception :</b> <s:property value="#fundDetails.fundStartDate"/></span></td>
+										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception :</b> <s:property value="#fundDetails.startDate"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Mins SIP Investment:</b> &#8377;<s:property value="#fundDetails.minSipAmount"/></span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="#fundDetails.minLumsumAmount"/></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="#fundDetails.minPurchaseAmount"/></span></td>
 										            </tr>
 										        </tbody>
 								</table>

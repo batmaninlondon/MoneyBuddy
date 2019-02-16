@@ -4,12 +4,14 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.HashMap;
 import java.util.Map;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -166,6 +168,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 			    	
 			    	return "fundSIPSelected";
 	    		}*/
+	    		
+	    		if (sessionMap.get("FolioNumList") == null)  {
+	    			FundDetailsDataModel fundDetailsDataModel =  (FundDetailsDataModel)sessionMap.get("selectedFundDetailsDataModel");
+	    			
+	    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+	    			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, fundDetailsDataModel.getFundId());
+	    			sessionMap.put("FolioNumList", folioNumList);
+	    		}
 	    		return "fundSelected";
 	    	}
 	    	

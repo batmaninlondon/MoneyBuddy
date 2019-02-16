@@ -74,7 +74,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
-		    String dob = getDateOfBirth().substring(6,10)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
+		    String dob = getDateOfBirth().substring(6)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
 			Date date = dateFormat.parse(dob);
 			
 			String frmtdDateForDB = dateFormat.format(date);

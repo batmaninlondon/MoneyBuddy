@@ -21,7 +21,7 @@ public class RedeemFundAction extends ActionSupport  {
 
 	Logger logger = Logger.getLogger(RedeemFundAction.class);
 	private String redeemFundId;
-	private String redeemFundName;
+	private String redeemSchemeName;
 	private String folioNum;
 	private String totalAmount;
 	private String totalQuantity;
@@ -35,7 +35,7 @@ public class RedeemFundAction extends ActionSupport  {
 			System.out.println("RedeemFundAction class - redeemFundId : "+getRedeemFundId());
 
 			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
-			redeemFundName = queryPrimaryFundDetails.getFundName(getRedeemFundId());
+			redeemSchemeName = queryPrimaryFundDetails.getSchemeName(getRedeemFundId());
 		
     	    logger.debug("RedeemFundAction class - execute method - returned success");
     	    logger.debug("RedeemFundAction class - execute method - end");
@@ -62,17 +62,14 @@ public class RedeemFundAction extends ActionSupport  {
 		this.redeemFundId = redeemFundId;
 	}
 
-
-	public String getRedeemFundName() {
-		return redeemFundName;
+	public String getRedeemSchemeName() {
+		return redeemSchemeName;
 	}
 
 
-	public void setRedeemFundName(String redeemFundName) {
-		this.redeemFundName = redeemFundName;
+	public void setRedeemSchemeName(String redeemSchemeName) {
+		this.redeemSchemeName = redeemSchemeName;
 	}
-
-
 
 
 	public String getFolioNum() {

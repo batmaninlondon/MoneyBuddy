@@ -6,13 +6,18 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -23,6 +28,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	private SessionMap<String,Object> sessionMap;
 	private InputStream stream;
 	private String fundId;
+	private String folioNum;
 	private FundDetailsDataModel selectedFundDetailsDataModel;
 	
     public String execute() {
@@ -37,12 +43,34 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     		PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(getFundId());
     		HashMap<String,Double> productRatioList =  new HashMap<String,Double>();
     		    		
-	    	System.out.println("MIN LUMSUM AMOUNT ........ "+primaryFundDetails.getMinLumsumAmount());
-	    	sessionMap.put("minLumsumAmount", primaryFundDetails.getMinLumsumAmount());
-	    	logger.debug("BuyFundAction class - execute method - fetched minLumsumAmount from primaryFundDetails and stored it in session");
+	    	System.out.println("MIN LUMSUM PURCHASE AMOUNT ........ "+primaryFundDetails.getMinPurchaseAmount());
+	    	sessionMap.put("minPurchaseAmount", primaryFundDetails.getMinPurchaseAmount());
+	    	logger.debug("BuyFundAction class - execute method - fetched minPurchaseAmount from primaryFundDetails and stored it in session");
 	    	
+			
 	    	System.out.println("MIN SIP AMOUNT ........ "+primaryFundDetails.getMinSipAmount());
 	    	sessionMap.put("minSipAmount", primaryFundDetails.getMinSipAmount());
+	    	System.out.println("folio num :"+getFolioNum());
+
+	    	if (null != getFolioNum() && !("".equals(getFolioNum())))  {
+	    		System.out.println("FOLIO NUMBER IS NOT NULL ........................");
+	    		sessionMap.put("FolioNumList", getFolioNum());
+	    	}
+	    	else {
+	    		System.out.println("FOLIO NUMBER IS NULL ........................");
+	    	
+		    	if (sessionMap.get("customerId") != null)  {
+	    			    			
+	    			System.out.println("CURRENT PRODUCT ID IS : "+getFundId());
+	    			
+	    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+	    			String folioNumList = queryTransactionDetails.getFolioNumsList(sessionMap.get("customerId").toString(), getFundId());
+	    			System.out.println("CURRENT FOLIO NUM LIST IS : "+folioNumList);
+	    			sessionMap.put("FolioNumList", folioNumList);
+	    		}
+	    	}
+
+	    	
 	    	logger.debug("BuyFundAction class - execute method - fetched minSipAmount from primaryFundDetails and stored it in session");
 	    	
 	    	String minSipDuration = primaryFundDetails.getMinSipDuration(); 	
@@ -73,6 +101,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 			setSelectedFundDetailsDataModel(selectedFundDetailsDataModel);
 			
 			sessionMap.put("selectedFundDetailsDataModel", selectedFundDetailsDataModel);
+			/*sessionMap.put("sipFlag", primaryFundDetails.getSipFlag());*/
 			logger.debug("BuyFundAction class - execute method - stored selectedFundDetailsDataModel in sessionMap ");
 
 			String str = "success";
@@ -103,6 +132,14 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 
 	public void setFundId(String fundId) {
 		this.fundId = fundId;
+	}
+
+	public String getFolioNum() {
+		return folioNum;
+	}
+
+	public void setFolioNum(String folioNum) {
+		this.folioNum = folioNum;
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    		
 	    	}
 	    	System.out.println("Total amount : "+totalAmount);
-	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null));
+	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null));
 	    	
 	    	sessionMap.put("customerCartList",customerCartList);
 	    	

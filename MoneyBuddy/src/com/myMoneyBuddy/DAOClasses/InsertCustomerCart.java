@@ -18,7 +18,7 @@ public class InsertCustomerCart {
 
 	Logger logger = Logger.getLogger(InsertCustomerCart.class);
 	
-    public void addCustomerCart (String customerId, String productId, String productName, String amount,
+    public void addCustomerCart (String customerId, String productId, String productName, String amount, String folioNum,
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
 
@@ -37,14 +37,29 @@ public class InsertCustomerCart {
     		
     		hibernateSession.getTransaction().commit();
     		
+    		hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("select distinct(folioNumber) from CustomerCart where customerId = :customerId and productId = :productId ");
+			query.setParameter("customerId", customerId);
+			query.setParameter("productId", productId);
+			
+			List<String> folioList = query.list();
+			
+			
+			hibernateSession.getTransaction().commit();
+			
+    		System.out.println("folioNum is : "+folioNum);
+    		
     		System.out.println("amount :"+amount);
-    		if ( cartProductIdList.contains(productId) )  {
+    		if ( cartProductIdList.contains(productId) && folioList.contains(folioNum))  {
+    			
+    			
     			
     			System.out.println(productId+" exist in customerCart");
     			hibernateSession.beginTransaction();
-    			query = hibernateSession.createQuery("select amount from CustomerCart where customerId = :customerId and productId = :productId ");
+    			query = hibernateSession.createQuery("select amount from CustomerCart where customerId = :customerId and productId = :productId  and folioNumber = :folioNumber");
     			query.setParameter("customerId", customerId);
     			query.setParameter("productId", productId);
+    			query.setParameter("folioNumber", folioNum);
     			
     			Object result = query.uniqueResult();
     			
@@ -56,8 +71,12 @@ public class InsertCustomerCart {
     			hibernateSession.getTransaction().commit();
     			hibernateSession.beginTransaction();
     			
-    			query = hibernateSession.createQuery("update CustomerCart set amount = :amount where customerId = :customerId and productId = :productId ");
+    			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNum+"  has to be updated for customerId : "+customerId+" and productId : "+productId);
+    			
+    			query = hibernateSession.createQuery("update CustomerCart set amount = :amount "
+    					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber ");
     			query.setParameter("amount", Double.toString(updatedAmount));
+    			query.setParameter("folioNumber", folioNum);
     			query.setParameter("customerId", customerId);
     			query.setParameter("productId", productId);
     			query.executeUpdate();
@@ -70,7 +89,7 @@ public class InsertCustomerCart {
     			System.out.println(productId+" does not exist in customerCart");
     			
 	    		hibernateSession.beginTransaction();
-	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,cartCreationDate,status);
+	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,folioNum,cartCreationDate,status);
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PortfolioDataModel implements Serializable{
 
 	private String fundId;
-	private String fundName;
+	private String schemeName;
 	private String folioNumber;
 	private String units;
 	private String investedAmount;
@@ -13,7 +13,7 @@ public class PortfolioDataModel implements Serializable{
 	private String profit;
 	private String rateOfGrowth;
 	private String transactionStartDate;
-	private String fundSector;
+	private String schemeType;
 	
 	
 	public PortfolioDataModel() {
@@ -21,11 +21,11 @@ public class PortfolioDataModel implements Serializable{
 	}
 
 
-	public PortfolioDataModel(String fundId, String fundName, String folioNumber, String units, String investedAmount, String currentAmount,
-			String profit, String rateOfGrowth, String transactionStartDate, String fundSector) {
+	public PortfolioDataModel(String fundId, String schemeName, String folioNumber, String units, String investedAmount, String currentAmount,
+			String profit, String rateOfGrowth, String transactionStartDate, String schemeType) {
 		super();
 		this.fundId = fundId;
-		this.fundName = fundName;
+		this.schemeName = schemeName;
 		this.folioNumber = folioNumber;
 		this.units = units;
 		this.investedAmount = investedAmount;
@@ -33,7 +33,7 @@ public class PortfolioDataModel implements Serializable{
 		this.profit = profit;
 		this.rateOfGrowth = rateOfGrowth;
 		this.transactionStartDate = transactionStartDate;
-		this.fundSector = fundSector;
+		this.schemeType = schemeType;
 	}
 
 
@@ -47,13 +47,13 @@ public class PortfolioDataModel implements Serializable{
 	}
 
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 
@@ -127,13 +127,15 @@ public class PortfolioDataModel implements Serializable{
 	}
 
 
-	public String getFundSector() {
-		return fundSector;
+	public String getSchemeType() {
+		return schemeType;
 	}
 
 
-	public void setFundSector(String fundSector) {
-		this.fundSector = fundSector;
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
 	}
+
+
 	
 }

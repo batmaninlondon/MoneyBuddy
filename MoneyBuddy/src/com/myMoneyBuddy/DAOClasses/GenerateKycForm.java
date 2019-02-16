@@ -96,8 +96,8 @@ public class GenerateKycForm {
             map = (HashMap) form.getFields();
             Iterator iterator = map.keySet().iterator();
             System.out.println("iterator size : "+map.size());
-            /*while(iterator.hasNext())
-                System.out.println("Field is >>>"+iterator.next());*/
+            while(iterator.hasNext())
+                System.out.println("Field is >>>"+iterator.next());
 
             String customerName = customer.getCustomerName();
             form.setField("Name", customerName.toUpperCase());
@@ -110,15 +110,23 @@ public class GenerateKycForm {
             
             //form.setField("Single", "On");
             
-            if ( "F".equals(customerDetail.getGender()))
-            	form.setField("Female","On");
-            else 
-            	form.setField("Male","On");
+            if ( "F".equals(customerDetail.getGender())) {
+            	form.setField("F ema","On");
+            	form.setField("Ma","Off");
+            }
+            else {
+            	form.setField("Ma","On");
+            	form.setField("F ema","Off");
+            }
             
-            if ( "Married".equals(additionalDetails.getMaritalStatus()))
+            if ( "Married".equals(additionalDetails.getMaritalStatus())) {
             	form.setField("Married","On");
-            else 
+            	form.setField("Single","Off");
+            }
+            else {
             	form.setField("Single","On");
+            	form.setField("Married","Off");
+            }
             
             // assuming dob will come in dd/mm/yyyy format
             
@@ -131,18 +139,33 @@ public class GenerateKycForm {
             form.setField("Month",dob.substring(5,7));
             form.setField("Year",dob.substring(0,4));
             
-            if ( "Indian".equals(additionalDetails.getNationality()))
+            if ( "Indian".equals(additionalDetails.getNationality())) {
             	form.setField("Indian","On");
-            else 
+            	form.setField("Foreigner","Off");
+            }
+            else {
             	form.setField("Foreigner","On");
+            	form.setField("Indian","Off");
+            }
             
-            if ( "LivInInd".equals(additionalDetails.getStatus()))
+            if ( "LivInInd".equals(additionalDetails.getStatus())) {
             	form.setField("Resident Indian","On");
-            else if ("NonResInd".equals(additionalDetails.getStatus()))
+            	form.setField("NRI","Off");
+            	form.setField("Foreign National","Off");
+            }
+            else if ("NonResInd".equals(additionalDetails.getStatus())) {
             	form.setField("NRI","On");
-            else 
+            	form.setField("Resident Indian","Off");
+            	form.setField("Foreign National","Off");
+            }
+            else {
             	form.setField("Foreign National","On");
+            	form.setField("NRI","Off");
+            	form.setField("Resident Indian","Off");
+            }
             
+            System.out.println(" Customer PAN card num in Upper case : "+customer.getPanCard().toUpperCase());
+            System.out.println(" Customer Res State num in Upper case : "+customerDetail.getResidentialState().toUpperCase());
             form.setField("PAN", customer.getPanCard().toUpperCase());
             
             form.setField("Address 1.0", "Updated");

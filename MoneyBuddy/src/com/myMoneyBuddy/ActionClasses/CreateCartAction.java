@@ -33,14 +33,20 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     public String execute() {
     	
     	String customerId = null;
+    	String folioNum = null;
     	try {
     		
     		customerId = sessionMap.get("customerId").toString();
-    		
+			folioNum = sessionMap.get("selectFolioNum").toString();
+			
+			sessionMap.remove("FolioNumList");
+			System.out.println("FolioNumList has been removed from the session "+sessionMap.get("FolioNumList"));
+			sessionMap.remove("selectFolioNum");
+    		System.out.println("selectFolioNum has been removed from the session "+sessionMap.get("selectFolioNum"));
     		logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - start ");
 	    	System.out.println(" CreateCartAction execute method Called !!");
 	    	System.out.println("CreateCartAction execute method : totalInvestment : "+getTotalInvestment());
-	    	
+
 	    	sessionMap.put("transactionType", "UPFRONT");
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored transactionType as UPFRONT in sessionMap");
 	    	
@@ -55,11 +61,15 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 			Double amount = 0.0;
 			InsertCustomerCart insertCustomerCart = new InsertCustomerCart();
 			QueryProducts queryProduct = new QueryProducts();
+			
+			// This has been done for the current scenario, in whcih user is selecing one fund at a time, and not the group of funds together
+
 	   	    while (it.hasNext()) {
 	   	    	
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(getTotalInvestment()) ) /100);
-	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),frmtdDate,"Pending");
+	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),
+	   	        		folioNum,frmtdDate,"Pending");
 	   	        
 	   	    }
 	

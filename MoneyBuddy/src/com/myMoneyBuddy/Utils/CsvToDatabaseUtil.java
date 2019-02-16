@@ -57,8 +57,6 @@ public class CsvToDatabaseUtil {
 			
             bReader.close();
     		
-			logger.debug("CsvToDatabaseUtil class - navEnteries method - updated data of Customers table to set verificationStatus Y");
-    		
 			logger.debug("CsvToDatabaseUtil class - navEnteries method - end");
 		}
 		catch ( IOException e ) {

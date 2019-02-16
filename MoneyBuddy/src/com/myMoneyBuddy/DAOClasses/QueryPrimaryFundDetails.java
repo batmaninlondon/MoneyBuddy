@@ -81,11 +81,12 @@ public class QueryPrimaryFundDetails {
 			for (PrimaryFundDetails fundDetailsListElement : primaryFundDetailsList)  {
 				
 			
-				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
-						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
+				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getSchemeName(),fundDetailsListElement.getSchemeType(),
+						fundDetailsListElement.getCategory(),fundDetailsListElement.getStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
-						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
-						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory(),fundDetailsListElement.getPdfFilePath()));
+						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinPurchaseAmount(),
+						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
+						fundDetailsListElement.getStpFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
 			}
 
 			hibernateSession.getTransaction().commit();
@@ -138,11 +139,12 @@ public class QueryPrimaryFundDetails {
 			for (PrimaryFundDetails fundDetailsListElement : primaryFundDetailsList)  {
 				
 			
-				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getFundName(),fundDetailsListElement.getSector(),
-						fundDetailsListElement.getSubSector(),fundDetailsListElement.getFundStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
+				fundDetailsDataModel.add(new FundDetailsDataModel(fundDetailsListElement.getFundId(),fundDetailsListElement.getSchemeName(),fundDetailsListElement.getSchemeType(),
+						fundDetailsListElement.getCategory(),fundDetailsListElement.getStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
-						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinLumsumAmount(),
-						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getFundCategory(),fundDetailsListElement.getPdfFilePath()));
+						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinPurchaseAmount(),
+						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
+						fundDetailsListElement.getStpFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
 			}
 
 			hibernateSession.getTransaction().commit();
@@ -195,11 +197,12 @@ public class QueryPrimaryFundDetails {
 			
 			if (primaryFundDetailsList != null)  {
 				System.out.println("primaryFundDetailsList is not null !!!! ");
-				selectedFundDetailsDataModel= new FundDetailsDataModel(primaryFundDetailsList.get(0).getFundId(),primaryFundDetailsList.get(0).getFundName(),primaryFundDetailsList.get(0).getSector(),
-						primaryFundDetailsList.get(0).getSubSector(),primaryFundDetailsList.get(0).getFundStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
+				selectedFundDetailsDataModel= new FundDetailsDataModel(primaryFundDetailsList.get(0).getFundId(),primaryFundDetailsList.get(0).getSchemeName(),primaryFundDetailsList.get(0).getSchemeType(),
+						primaryFundDetailsList.get(0).getCategory(),primaryFundDetailsList.get(0).getStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
 						primaryFundDetailsList.get(0).getReturnsOneYear(),primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getReturnsFiveYears(),
-						primaryFundDetailsList.get(0).getReturnsSinceInception(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinLumsumAmount(),
-						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getFundCategory(),primaryFundDetailsList.get(0).getPdfFilePath());
+						primaryFundDetailsList.get(0).getReturnsSinceInception(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinPurchaseAmount(),
+						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getPdfFilePath(),primaryFundDetailsList.get(0).getSipFlag(),
+						primaryFundDetailsList.get(0).getStpFlag(),primaryFundDetailsList.get(0).getSwpFlag(),primaryFundDetailsList.get(0).getSwitchFlag());
 			}
 			else {
 				System.out.println("primaryFundDetailsList is null !!!! ");
@@ -235,7 +238,7 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
-	public boolean checkBufferDays(String sipStartDate, List<String> fundIds) throws MoneyBuddyException {
+	/*public boolean checkBufferDays(String sipStartDate, List<String> fundIds) throws MoneyBuddyException {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 	       
@@ -291,8 +294,8 @@ public class QueryPrimaryFundDetails {
 					hibernateSession.close();
 		}
 
-	}
-	
+	}*/
+	/*
 	public double getInterestRateOfOneFund(String fundId) throws MoneyBuddyException{
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -338,38 +341,38 @@ public class QueryPrimaryFundDetails {
 		}
 
 	}
-	
-	public String getFundName(String fundId) throws MoneyBuddyException{
+	*/
+	public String getSchemeName(String fundId) throws MoneyBuddyException{
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		try
 		{
-			String fundName = null;
-			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - start");
+			String schemeName = null;
+			logger.debug("QueryPrimaryFundDetails class - getSchemeName method - fundId - "+fundId+" - start");
 
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select fundName from PrimaryFundDetails where fundId = :fundId ");
+			Query query = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId = :fundId ");
 			query.setParameter("fundId",fundId);
 			
 			if (query.list().size() != 0) {
-				fundName = query.uniqueResult().toString();
+				schemeName = query.uniqueResult().toString();
 			}
 
 			hibernateSession.getTransaction().commit();
 			
-			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - return fundName - "+fundName);
-			logger.debug("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - end");
+			logger.debug("QueryPrimaryFundDetails class - getSchemeName method - fundId - "+fundId+" - return schemeName - "+schemeName);
+			logger.debug("QueryPrimaryFundDetails class - getSchemeName method - fundId - "+fundId+" - end");
 			
-			return fundName;
+			return schemeName;
 		}
 		catch ( HibernateException e ) {
-			logger.error("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - Caught HibernateException");
+			logger.error("QueryPrimaryFundDetails class - getSchemeName method - fundId - "+fundId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("QueryPrimaryFundDetails class - getFundName method - fundId - "+fundId+" - Caught Exception");
+			logger.error("QueryPrimaryFundDetails class - getSchemeName method - fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -392,19 +395,19 @@ public class QueryPrimaryFundDetails {
 
 			System.out.println("QueryPrimaryFundDetails class - getAvailableStpFundIds method - fundId - "+fundId+" - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select p.fundId,p.fundName from PrimaryFundDetails p, SecondaryFundDetails s where s.fundId = p.fundId and s.amcCode = (select amcCode from SecondaryFundDetails where fundId = :fundId ) ");
+			Query query = hibernateSession.createQuery("select p.fundId,p.schemeName from PrimaryFundDetails p, SecondaryFundDetails s where s.fundId = p.fundId and s.amcCode = (select amcCode from SecondaryFundDetails where fundId = :fundId ) ");
 			query.setParameter("fundId",fundId);
 			
 			List<Object[]> availableFundList = query.list();
 			String availableFundId = "";
-			String availableFundName = "";
+			String availableSchemeName = "";
 			for ( int i = 0; i < availableFundList.size() ;i++ ) {
 
 				availableFundId = availableFundList.get(i)[0].toString();
-				availableFundName = availableFundList.get(i)[1].toString();
+				availableSchemeName = availableFundList.get(i)[1].toString();
 				
 					
-				availableStpFundsList.put(availableFundId, availableFundName);
+				availableStpFundsList.put(availableFundId, availableSchemeName);
 			}
 
 			Iterator it = availableStpFundsList.entrySet().iterator();

@@ -16,7 +16,7 @@ var TUTORIAL_SAVVY ={
 				success: function(jsonResponse){
 					console.log(jsonResponse);
 					$.each(jsonResponse.portfolioDataModel,function(index,dataElement){
-						portfolioDataModelListArray.push([dataElement.fundName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
+						portfolioDataModelListArray.push([dataElement.schemeName,dataElement.units,dataElement.investedAmount,dataElement.currentAmount,dataElement.rateOfGrowth]);
 					});
 						$.each(jsonResponse.newPortfolioDataModel,function(index,dataElement){
 					});

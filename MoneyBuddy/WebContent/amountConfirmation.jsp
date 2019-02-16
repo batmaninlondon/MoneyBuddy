@@ -64,7 +64,7 @@
 		
     </head>
 
-<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minLumsumAmount"/>');">
+<body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minPurchaseAmount"/>');">
 <%-- <%session.setAttribute("transactionType", "SIP");%>; --%>
 	<%
 	
@@ -99,7 +99,7 @@
 	    		<s:iterator value="#session.productList" var="productListElement">
 	        	</s:iterator> 
 	        	<div class="name">
-	                	<h3 class="title g-color--white"><s:property value="#fundDetails.fundName"/></h3>
+	                	<h3 class="title g-color--white"><s:property value="#fundDetails.schemeName"/></h3>
 						<h6 style="color:white;"><s:property value="#session.customerMobileNumber" /></h6>
 	            </div>
 	       	</div>
@@ -115,8 +115,10 @@
 			    	<div class="container">
 			    	<br/>
   						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="setTransactionType('UPFRONT');">Invest Lumsum</a></li>
-   							<li><a data-toggle="tab" href="#sip" onClick="setTransactionType('SIP');">Start SIP</a></li>
+    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="setTransactionType('UPFRONT');">Invest Lumpsum</a></li>
+   							<s:if test="#session.selectedFundDetailsDataModel.sipFlag.equals('Y'.toString())">
+   								<li><a data-toggle="tab" href="#sip" onClick="setTransactionType('SIP');">Start SIP</a></li>
+ 							</s:if>
  						</ul>
   					</div>
   				</div>
@@ -126,6 +128,7 @@
   	</div>
   	
   	<s:form  action="newEstimateAction" method="post" name="formEstimate">
+  		<s:hidden id="select-folio-num-value" name="selectFolioNum"></s:hidden>
   		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
 		<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
 		<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
@@ -146,11 +149,43 @@
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
 							</div>
 							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minLumsumAmount"/>" max="150000" step="500"
-											 value="<s:property value="#session.minLumsumAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500"
+											 value="<s:property value="#session.minPurchaseAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
 							</div>
 							<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
 							<div class="col-md-5"></div>
+						</div>
+						
+						<div class="row g-margin-t-50--xs g-margin-b-50--xs">
+						<div class="col-md-1"></div>
+						<div id="investment-options" class="col-md-4 ">
+							<%
+										System.out.println("FolioNumList is : "+session.getAttribute("FolioNumList"));
+								    	String arr1= (String) session.getAttribute("FolioNumList"); 
+								    	System.out.println("arr1 : "+arr1);
+								    	
+								    	if ( arr1 == null)  {
+								    		arr1 = "NEW";
+								    	}
+								    		String[] a = arr1.split(":");
+								    	
+								    		System.out.println("a length : "+a.length);
+								    	
+								    	%>
+								    	<select id="selectUpfrontFolioNum" name="selectUpfrontFolioNum" style="width:150px;" > 
+										    
+										    <% 
+										    
+										    if (a.length != 0)
+										    {
+										    	for(int i=0;i<a.length;i++){ 
+										        String fol= (String)a[i]; %> 
+										        <option value="<%=fol%>" > <%=fol%> 
+										        </option>
+										    <%}}%> 
+										</select>
+										</div>
+										<div class="col-md-7"></div>
 						</div>
 						<s:form action="createCartAction" method="post" >
 		  					<div class="row">
@@ -178,7 +213,7 @@
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >How much do you want to invest monthly?</p>
 								</div>
 								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-								<input id="sip-amount-range" type="range" min="<s:property value="#session.minSipAmount"/>" max="150000" step="500"
+								<input id="sip-amount-range" type="range" min="<s:property value="#session.minSipAmount"/>" max="150000" step="100"
 												 value="<s:property value="#session.minSipAmount"/>" onchange="showSipAmountPerMonth(this.value)"/>
 								</div>
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="sipPerMonth" class="g-color--black"></span></p>
@@ -206,11 +241,29 @@
 								        <option value="10">10</option>
 								        <option value="15">15</option>
 								        <option value="20">20</option>
-								        <option value="25">25</option>
 					      			</select>
 								</div>
 								<div class="col-md-4"></div>
 							</div>
+													<div class="row g-margin-t-50--xs g-margin-b-50--xs">
+						<div class="col-md-1"></div>
+						<div id="investment-options" class="col-md-4 ">
+
+								    	<select id="selectSipFolioNum" name="selectSipFolioNum" style="width:150px;" > 
+										    
+										    <% 
+										    
+										    if (a.length != 0)
+										    {
+										    	for(int i=0;i<a.length;i++){ 
+										        String fol= (String)a[i]; %> 
+										        <option value="<%=fol%>" > <%=fol%> 
+										        </option>
+										    <%}}%> 
+										</select>
+										</div>
+										<div class="col-md-7"></div>
+						</div>
 							<%-- <div class="row ">
 								<%
 								System.out.println("kycStaus in session in jsp: "+session.getAttribute("kycStatus"));

@@ -30,6 +30,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	Logger logger = Logger.getLogger(EstimateAction.class);
 	private SessionMap<String,Object> sessionMap;
 	
+	private String selectFolioNum;
 	private String upfrontInvestment;
     private String sipAmount;
     private String sipDuration; // in years
@@ -72,7 +73,8 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	    	sessionMap.put("transactionType", getTransactionType());
 			logger.debug("EstimateAction class - execute method - stored transactionType : "+getTransactionType()+" in sessionMap");
 			
-	   	 
+			System.out.println(" Value of selectFolioNum has been put into sessionMap : "+getSelectFolioNum());
+			sessionMap.put("selectFolioNum", getSelectFolioNum());
 			sessionMap.put("upfrontInvestment", getUpfrontInvestment());
 			sessionMap.put("sipAmount", getSipAmount());
 			sessionMap.put("sipDuration", getSipDuration());
@@ -184,6 +186,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 		   		System.out.println(" Entry in productList : "+pair.getKey() + " = " + pair.getValue()); 
 		   	 }
 	   	 	sessionMap.put("productList", productList);
+	   	 	sessionMap.put("sipFolioNum", selectFolioNum);
    	 	
 	   	 	logger.debug("EstimateAction class - execute method - stored productList in sessionMap");
 	   	 	
@@ -312,6 +315,14 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
 	public void setTotalInvestment(String totalInvestment) {
 		this.totalInvestment = totalInvestment;
+	}
+
+	public String getSelectFolioNum() {
+		return selectFolioNum;
+	}
+
+	public void setSelectFolioNum(String selectFolioNum) {
+		this.selectFolioNum = selectFolioNum;
 	}
 
 }

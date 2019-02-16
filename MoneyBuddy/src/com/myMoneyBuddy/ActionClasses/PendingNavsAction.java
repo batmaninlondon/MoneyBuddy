@@ -6,11 +6,13 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
@@ -18,7 +20,8 @@ public class PendingNavsAction extends ActionSupport implements Action  {
 
 	Logger logger = Logger.getLogger(PendingNavsAction.class);
 	private InputStream stream;
-	private HashMap<String,String>  pendingNavOrders ;
+	//private HashMap<String,String>  pendingNavOrders ;
+	private List<PendingNavOrders> pendingNavOrders;
 
     public String execute() {
 
@@ -29,13 +32,13 @@ public class PendingNavsAction extends ActionSupport implements Action  {
 			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
 
-			Iterator it = pendingNavOrders.entrySet().iterator();
+			/*Iterator it = pendingNavOrders.entrySet().iterator();
 			 
 			while ( it.hasNext() )  {
 				Map.Entry pair = (Map.Entry)it.next();
 				System.out.println("PendingNavsAction class : execute method : key : "+pair.getKey()+" and value : "+pair.getValue());
 				
-			}
+			}*/
 			
 			System.out.println("Returning success !! ");
 			logger.debug("PendingNavsAction class - execute method - end ");
@@ -60,14 +63,15 @@ public class PendingNavsAction extends ActionSupport implements Action  {
 		this.stream = stream;
 	}
 
-
-	public HashMap<String, String> getPendingNavOrders() {
+	public List<PendingNavOrders> getPendingNavOrders() {
 		return pendingNavOrders;
 	}
 
-
-	public void setPendingNavOrders(HashMap<String, String> pendingNavOrders) {
+	public void setPendingNavOrders(List<PendingNavOrders> pendingNavOrders) {
 		this.pendingNavOrders = pendingNavOrders;
 	}
+
+
+
 
 }

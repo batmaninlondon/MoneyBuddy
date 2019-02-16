@@ -1,5 +1,6 @@
 package com.myMoneyBuddy.schedulerClasses;
 
+
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -8,6 +9,8 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+
+import com.myMoneyBuddy.schedulerClasses.ReadSpreadSheet;
 
 public class MoneyBuddyScheduler {
 
@@ -40,14 +43,14 @@ public class MoneyBuddyScheduler {
 			Trigger readSpreadSheetTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 0 21 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 55 11 * * ?")) 
 					.build();
 			
 	
 			scheduler.scheduleJob(readSpreadSheetJob, readSpreadSheetTrigger);
 			
 			
-			/*JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
+			JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
 					.withIdentity("PaymentStatusCheckJob", "Group").build();
 			
 			// This Trigger will work at 3 pm (15 hours) everyday
@@ -55,11 +58,11 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0/1 0/15 * * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 56 11 * * ?")) 
 					.build();
 			
 	
-			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);*/
+			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();
@@ -71,3 +74,4 @@ public class MoneyBuddyScheduler {
 
 	}
 }
+

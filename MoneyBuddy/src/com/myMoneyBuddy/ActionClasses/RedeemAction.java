@@ -30,7 +30,7 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
 	private SessionMap<String,Object> sessionMap;
 	
 	private String fundId;
-	private String fundName;
+	private String schemeName;
 	private String folioNumber;
 	private String totalAmount;
 	private String totalQuantity;
@@ -55,7 +55,7 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
 	    	System.out.println(" RedeemAction execute method Called !!");
 	    	
 	    	System.out.println(" RedeemAction execute method fundId : "+getFundId());
-	    	System.out.println(" RedeemAction execute method fundName : "+getFundName());
+	    	System.out.println(" RedeemAction execute method schemeName : "+getSchemeName());
 	    	System.out.println(" RedeemAction execute method folioNumber : "+getFolioNumber());
 	    	System.out.println(" RedeemAction execute method totalAmount : "+getTotalAmount());
 	    	System.out.println(" RedeemAction execute method totalQuantity : "+getTotalQuantity());
@@ -132,12 +132,12 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
 		this.fundId = fundId;
 	}
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 	public String getFolioNumber() {

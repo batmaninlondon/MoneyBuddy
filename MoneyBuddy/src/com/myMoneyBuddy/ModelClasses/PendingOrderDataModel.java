@@ -6,7 +6,7 @@ public class PendingOrderDataModel implements Serializable{
 
 	private String fundId;
 	private String transactionId;
-	private String fundName;
+	private String schemeName;
 	private String investedAmount;
 	private String transactionStatus;
 	private String transactionStartDate;
@@ -16,12 +16,12 @@ public class PendingOrderDataModel implements Serializable{
 
 	}
 
-	public PendingOrderDataModel(String fundId, String transactionId, String fundName, String investedAmount,
+	public PendingOrderDataModel(String fundId, String transactionId, String schemeName, String investedAmount,
 			String transactionStatus, String transactionStartDate) {
 		super();
 		this.fundId = fundId;
 		this.transactionId = transactionId;
-		this.fundName = fundName;
+		this.schemeName = schemeName;
 		this.investedAmount = investedAmount;
 		this.transactionStatus = transactionStatus;
 		this.transactionStartDate = transactionStartDate;
@@ -48,13 +48,13 @@ public class PendingOrderDataModel implements Serializable{
 	}
 
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 

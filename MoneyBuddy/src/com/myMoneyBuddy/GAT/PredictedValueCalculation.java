@@ -27,7 +27,9 @@ public class PredictedValueCalculation {
 			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 			double interestRate;
 
-			interestRate = queryPrimaryFundDetails.getInterestRateOfOneFund(fundId);
+			/*interestRate = queryPrimaryFundDetails.getInterestRateOfOneFund(fundId);*/
+			interestRate = 10.0;
+			
 			System.out.println("interestRate before deviding 100 : "+interestRate);
 			interestRate = interestRate /100;
 			

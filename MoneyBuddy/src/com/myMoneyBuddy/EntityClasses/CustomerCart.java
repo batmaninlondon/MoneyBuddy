@@ -32,6 +32,9 @@ public class CustomerCart {
     
     @Column (name="AMOUNT")
     private String amount;
+    
+    @Column (name="FOLIO_NUMBER")
+    private String folioNumber;
 
     @Column(name="CART_CREATION_DATE")
     private String cartCreationDate;
@@ -44,12 +47,13 @@ public class CustomerCart {
     }
 
 	public CustomerCart( String customerId, String productId, String productName, String amount,
-			String cartCreationDate, String status) {
+			String folioNumber, String cartCreationDate, String status) {
 		super();
 		this.customerId = customerId;
 		this.productId = productId;
 		this.productName = productName;
 		this.amount = amount;
+		this.folioNumber = folioNumber;
 		this.cartCreationDate = cartCreationDate;
 		this.status = status;
 	}
@@ -95,6 +99,14 @@ public class CustomerCart {
 		this.amount = amount;
 	}
 
+	public String getFolioNumber() {
+		return folioNumber;
+	}
+
+	public void setFolioNumber(String folioNumber) {
+		this.folioNumber = folioNumber;
+	}
+
 	public String getCartCreationDate() {
 		return cartCreationDate;
 	}
@@ -135,6 +147,9 @@ public class CustomerCart {
         if ((this.amount == null) ? (other.amount != null) : !this.amount.equals(other.amount)) {
             return false;
         }
+        if ((this.folioNumber == null) ? (other.folioNumber != null) : !this.folioNumber.equals(other.folioNumber)) {
+            return false;
+        }
         if ((this.cartCreationDate == null) ? (other.cartCreationDate != null) : !this.cartCreationDate.equals(other.cartCreationDate)) {
             return false;
         }
@@ -152,6 +167,7 @@ public class CustomerCart {
         hash = 79 * hash + (this.productId != null ? this.productId.hashCode() : 0);
         hash = 79 * hash + (this.productName != null ? this.productName.hashCode() : 0);
         hash = 79 * hash + (this.amount != null ? this.amount.hashCode() : 0);
+        hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
         hash = 79 * hash + (this.cartCreationDate != null ? this.cartCreationDate.hashCode() : 0);
         hash = 79 * hash + (this.status != null ? this.status.hashCode() : 0);
         return hash;

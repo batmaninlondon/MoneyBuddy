@@ -83,7 +83,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		setPendingOrderDataModel(pendingOrderDataModel);
 
 		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
-			if ("Total".equals(portfolioDataModelElement.getFundName())) {
+			if ("Total".equals(portfolioDataModelElement.getSchemeName())) {
 				setTotalCurrentAmount(portfolioDataModelElement.getCurrentAmount());
 				setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
 				setTotalInvestedAmount(portfolioDataModelElement.getInvestedAmount());

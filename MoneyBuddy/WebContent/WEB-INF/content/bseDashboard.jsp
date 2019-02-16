@@ -725,7 +725,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.fundSector]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType]);
 						});
 					  
 				  },
@@ -733,14 +733,14 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
 						});  
 				  },
 				  
 				  createSipDataArray : function(sipData)
 				  {
 					  $.each(sipData,function(index,dataElement){
-						  sipDataArray.push([dataElement.fundId,dataElement.fundName,dataElement.folioNumber,dataElement.fundCategory,dataElement.investedAmount,dataElement.nextSipDate]);
+						  sipDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.schemeType,dataElement.investedAmount,dataElement.nextSipDate]);
 						});
 					  
 				  },
@@ -748,7 +748,7 @@
 				  createTransctionhistoryDataArray : function(transctionhistoryData)
 				  {
 					  $.each(transctionhistoryData,function(index,dataElement){
-						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.fundName,dataElement.folioNumber,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.folioNumber,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
 						});
 					  
 				  },
@@ -997,7 +997,7 @@
 					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio in PDF',
 					        	titleAttr: 'PDF',
 					        	title: 'Money Buddy Financial Services Private Limited',
-					        	messageTop: 'Investment statement summary of '+customerName+' with us as on '+curDate,
+					        	messageTop: '<u>Investment statement of '+customerName+'</u>\nGiven below is a quick summary of your investments with us',
 					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\n Your investments are '
 					        			+profitDir+' by: Rs. '+totalProAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
 					        	exportOptions: {
@@ -1009,7 +1009,9 @@
 				        			doc.styles.title.fontSize = '20';
 				        			doc.styles.message.alignment = 'center';
 				        			doc.styles.message.fontSize = '14';
-				        			doc.styles.message.decoration='underline';
+				        			doc.styles.tableHeader.fillColor = '#8DB3E2';
+				        			/* doc.styles.message.decoration='underline'; */
+				        			
 					        	},
 					        	},
 					        	/* {
@@ -1044,7 +1046,8 @@
 					 $('#portfoliosummary tbody').on('click','#topUpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
-					        buyFundHandler(fundId);
+					        var folioNum = data[2];
+					        buyFundHandler(fundId,folioNum);
 					    } ); 
 					  
 					 $('#portfoliosummary tbody').on('click','#stpButton',function () {

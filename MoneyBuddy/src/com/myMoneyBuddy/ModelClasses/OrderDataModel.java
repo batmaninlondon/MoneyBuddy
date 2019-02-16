@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class OrderDataModel implements Serializable{
 
 	private String transactionId;
-	private String fundName;
+	private String schemeName;
 	private String amount;
 	private String transactionDate;
 	private String transactionStatus;
@@ -14,10 +14,10 @@ public class OrderDataModel implements Serializable{
 
 	}
 
-	public OrderDataModel(String transactionId, String fundName, String amount, String transactionDate, String transactionStatus) {
+	public OrderDataModel(String transactionId, String schemeName, String amount, String transactionDate, String transactionStatus) {
 		super();
 		this.transactionId = transactionId;
-		this.fundName = fundName;
+		this.schemeName = schemeName;
 		this.amount = amount;
 		this.transactionDate = transactionDate;
 		this.transactionStatus = transactionStatus;
@@ -31,12 +31,12 @@ public class OrderDataModel implements Serializable{
 		this.transactionId = transactionId;
 	}
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 	public String getAmount() {

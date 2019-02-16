@@ -117,7 +117,7 @@
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
 								<tr>
-								    <td class="center g-font-size-14--xs"><s:property value="fundName"/></td>
+								    <td class="center g-font-size-14--xs"><s:property value="schemeName"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="redeemAmount"/></td>
 								    <td class="center g-font-size-14--xs"><s:property value="redeemQuantity"/></td>
 								</tr>

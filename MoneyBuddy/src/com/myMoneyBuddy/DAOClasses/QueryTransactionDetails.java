@@ -6,9 +6,12 @@ package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.OrderDataModel;
+import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -20,6 +23,62 @@ public class QueryTransactionDetails {
 
 	Logger logger = Logger.getLogger(QueryTransactionDetails.class);
 
+	public String getFolioNumsList(String customerId, String productId) throws MoneyBuddyException {
+		
+		logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		String folioNums = "";
+
+		try
+		{
+			System.out.println("customerId is : "+customerId+" and productId is : "+productId);
+			hibernateSession.beginTransaction();
+    		
+    		Query query = hibernateSession.createQuery("select distinct(folioNum) from FolioDetails "
+    				+ " where customerId = :customerId and  amcCode = (select amcCode from  SecondaryFundDetails where fundId = :fundId) ");
+    		query.setParameter("customerId", customerId);
+    		query.setParameter("fundId", productId);
+    		List<String> folioNumList = query.list();
+    		
+    		System.out.println("folioNumList size : ........... "+folioNumList.size());
+    		
+    		if ( folioNumList.size() == 0 ) {
+    			folioNums = "NEW";
+    		}
+    		else {
+    			folioNums = "NEW:";
+    			for ( int i =0; i< folioNumList.size()-1; i++ )  {
+    				if (folioNumList.get(i) != null)
+    					folioNums += folioNumList.get(i)+":";
+    			}
+    			folioNums += folioNumList.get(folioNumList.size()-1);
+    		}
+    		
+    		hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - return FolioNums List");
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - end");
+			
+			return folioNums;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
+	
 	public TransactionDetails getTransactionDetails(String transactionDetailId) throws MoneyBuddyException {
 		
 		logger.debug("QueryTransactionDetails class - getTransactionDetails method - transactionDetailId - "+transactionDetailId+" - start");
@@ -57,20 +116,26 @@ public class QueryTransactionDetails {
 		}
 	}
 	
-	public HashMap<String,String> getPendingNavsOrders() throws MoneyBuddyException {
+	public List<PendingNavOrders> getPendingNavsOrders() throws MoneyBuddyException {
 		
 		 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-		HashMap<String,String> pendingNavOrders = new HashMap<String,String>();
+		List<PendingNavOrders> pendingNavOrders = new LinkedList<PendingNavOrders>();
 	
 		try
 		{
 			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select bseOrderId,transactionFolioNum from TransactionDetails where transactionStatus = '7'");
+			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.updateDate,t.transactionFolioNum"
+					+ " from TransactionDetails t, SecondaryFundDetails s, PrimaryFundDetails p "
+					+ "where t.transactionStatus='7' and t.productId=p.fundId and t.productId=s.fundId");
+			
 			List<Object[]> transactionDetailsList = query.list();
 			String bseOrderId = "";
+			String rta = "";
+			String schemeType = "";
+			String updateDate = "";
 			String folioNum = "";
 			for ( int i = 0; i < transactionDetailsList.size() ;i++ ) {
 				
@@ -78,23 +143,34 @@ public class QueryTransactionDetails {
 					bseOrderId = "";
 				else
 					bseOrderId = transactionDetailsList.get(i)[0].toString();
-				
 				if (null == transactionDetailsList.get(i)[1])
+					rta = "";
+				else
+					rta = transactionDetailsList.get(i)[1].toString();
+				if (null == transactionDetailsList.get(i)[2])
+					schemeType = "";
+				else
+					schemeType = transactionDetailsList.get(i)[2].toString();
+				if (null == transactionDetailsList.get(i)[3])
+					updateDate = "";
+				else
+					updateDate = transactionDetailsList.get(i)[3].toString();
+				if (null == transactionDetailsList.get(i)[4])
 					folioNum = "";
 				else
-					folioNum = transactionDetailsList.get(i)[1].toString();
+					folioNum = transactionDetailsList.get(i)[4].toString();
 				
 					
-				pendingNavOrders.put(bseOrderId, folioNum);
+				pendingNavOrders.add( new PendingNavOrders(bseOrderId,rta,schemeType,updateDate, folioNum));
 			}
 			
-			Iterator it = pendingNavOrders.entrySet().iterator();
+			/*Iterator it = pendingNavOrders.entrySet().iterator();
 			 
 			while ( it.hasNext() )  {
 				Map.Entry pair = (Map.Entry)it.next();
 				System.out.println("key : "+pair.getKey()+" and value : "+pair.getValue());
 				
-			}
+			}*/
 			hibernateSession.getTransaction().commit();
 			
 			

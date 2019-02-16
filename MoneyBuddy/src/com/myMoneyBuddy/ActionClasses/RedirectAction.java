@@ -73,12 +73,11 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 						}
 		    		}
 		    		else {
-		    			System.out.println("bankDetails for AofNotDone page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails for AofNotDone");
+		    			System.out.println("bankDetails page ");
+						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
 				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 				    	
-				    	setTranDetailId("AofNotDone");
-						return "bankDetailsForKND";
+						return "bankDetails";
 		    		}
 				}
 				else {

@@ -66,9 +66,9 @@
 		
 		$(document).ready(function() {
 		    $('#cartData').DataTable( {
-		        "paging":   true,
+		        "paging":   false,
 		        "ordering": false,
-		        "info":     true,
+		        "info":     false,
 		        "searching": false,
 		        "responsive": true,
 		        "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
@@ -210,7 +210,7 @@
 									</div>
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
 						      			<select class="form-control" id="bank-name" name="bankName" >
-									        <option value="ICI">ICICI Bank</option>
+									        <option value="ICI" selected="selected">ICICI Bank</option>
 									        <option value="SBI">SBI Bank</option>
 									        <option value="HDF">HDFC Bank</option>
 									        <option value="162">KOTAK Bank</option>
@@ -235,7 +235,7 @@
 									<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
 										<select class="form-control" id="account-type" name="accountType">
 									        <option value="CB">Current Account</option>
-									        <option value="SB">Saving Account</option>
+									        <option value="SB" selected="selected">Saving Account</option>
 									        <option value="NE">NRI - Repatriable (NRE)</option>
 									        <option value="NO">NRI - Repatriable (NRO)</option>
 							      		</select>
@@ -308,6 +308,7 @@
 											<tr>
 												<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
 												<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
+												<th class="center col-md-3 g-bg-color--gray-light">FolioNum</th>
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-14--xs">
@@ -318,6 +319,7 @@
 													<tr>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.folioNumber"/></td>
 													</tr>
 												</s:iterator>
 											</s:if>
@@ -327,13 +329,21 @@
 													<tr>
 													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.key"/></td>
 													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.value"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#session.sipFolioNum"/></td>
 													</tr>
 												</s:iterator>
 											</s:else>
 											 
 										</tbody>
 									</table>
+									
+									
 							</div>
+							
+							<div class="g-text-right--xs g-margin-r-30--xs">
+								<label >I accept terms & condition  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></label><br>
+							</div>
+							
 							</div>
 							
 							
@@ -345,13 +355,7 @@
 						<div class="col-md-6 col-xs-6"></div>
 					</div>
 	
-				     <div class="row">
-						<div class="col-md-6 col-xs-4">
-							<div class="checkbox">
-				  				<label><input id="iAccept" type="checkbox" onchange="activatePayNowButton();" />I accept terms & condition</label>
-							</div>
-						</div>
-					</div>
+				     
 		
 					</div>
 	       	</div>
@@ -361,12 +365,22 @@
 	</div>
 	
 
+	<!-- <div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:30px;">
+			<div class="checkbox g-text-right--xs g-margin-r-100--xs">
+  				<h5><label><input id="iAccept" type="checkbox" onchange="activatePayNowButton();" />I accept terms & condition</label></h5>
+			</div>
+		</div>
+		<div class="col-md-1 col-xs-1"></div>
+	</div> -->
 	<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:60px;">
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-10--xs" >
 	        		<%-- <s:set var="tranDetailIdvalue" value="tranDetailId" /> --%>
+	        		
         			<button type="button"  id="pay-now-button" class="disabled btn g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<s:property value="tranDetailId"/>');" style="background-color:black; ">Continue</button>
 	            </div>
 	       	</div>

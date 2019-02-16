@@ -52,8 +52,19 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	private String paymentUrl;
 	private String returnDate;
 	private String sipAmount;
+	private String actionMsg;
+	
+	
 	   
-    public String execute()  {
+    public String getActionMsg() {
+		return actionMsg;
+	}
+
+	public void setActionMsg(String actionMsg) {
+		this.actionMsg = actionMsg;
+	}
+
+	public String execute()  {
 
     	String CLIENT_HOLDING = "SI"; // Considering Single account
     	//String str = null;
@@ -84,7 +95,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
 	    	
 	    	System.out.println(" customer.getAofFormStatus() is : .................................................."+customer.getAofFormStatus()+"!!!!!!!!!!");
-	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
+	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
 	    		System.out.println(" Inside the loop of NOT_ACTIVATED aof form status !!!!!! ");
 	    		GenerateAofForm generateAofForm = new GenerateAofForm();
 	    		generateAofForm.generateAofForm(customerId);
@@ -106,10 +117,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    		}
     		}
 	    	
-	    	if ("FORM_RECEIVED".equals(customer.getAofFormStatus())) {
+	    	if ("FORM_RECEIVED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus())) {
 	    		return "aofOrKycFormReceived";
 	    	}
-	    	else if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
+	    	else if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
 	    		return "aofNotDone";
 	    	}
 	    	
@@ -127,6 +138,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	    	QueryProducts queryProducts = new QueryProducts();
 	    	Map<String, Double> productDetailsMapForBuy = new HashMap<String, Double>();
+	    	//Map<String, String> folioNumMapForBuy = new HashMap<String, String>();
 
 	    	
 	    	Trading trading = new Trading();
@@ -177,12 +189,14 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					for (int i =0 ; i< customerCartList.size() ;i++) {
 			    		System.out.println("Value of i is : "+i+" customerCartList.get(i).getProductName : "+customerCartList.get(i).getProductName());
 			    		if ( !"Total".equals(customerCartList.get(i).getProductName()))  {
-			    			productDetailsMapForBuy.put(customerCartList.get(i).getProductId(), Double.parseDouble(customerCartList.get(i).getAmount()));
+			    			productDetailsMapForBuy.put(customerCartList.get(i).getProductId()+":"+customerCartList.get(i).getFolioNumber(), Double.parseDouble(customerCartList.get(i).getAmount()));
+			    			//folioNumMapForBuy.put(customerCartList.get(i).getProductId(), customerCartList.get(i).getFolioNumber());
 			    		}
 			    	}
 				}
 				else {
-					productDetailsMapForBuy.put(transactionDetails.getProductId(), Double.parseDouble(transactionDetails.getTransactionAmount()));
+					productDetailsMapForBuy.put(transactionDetails.getProductId()+":"+transactionDetails.getTransactionFolioNum(), Double.parseDouble(transactionDetails.getTransactionAmount()));
+					//folioNumMapForBuy.put(transactionDetails.getProductId(), transactionDetails.getTransactionFolioNum());
 				}
 				
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
@@ -211,7 +225,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					sipDuration = sessionMap.get("sipDuration").toString();
 					
 					productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>)sessionMap.get("productRatioList"),
-			    			Double.parseDouble(amount));
+			    			Double.parseDouble(amount),sessionMap.get("sipFolioNum").toString());
+					
+					
 				}
 				else {
 					amount = transactionDetails.getTransactionAmount();
@@ -230,7 +246,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					
 					sipDuration= sipDetails.getSipDuration();
 					
-					productDetailsMapForBuy.put(transactionDetails.getProductId(), Double.parseDouble(transactionDetails.getTransactionAmount()));
+					productDetailsMapForBuy.put(transactionDetails.getProductId()+":"+transactionDetails.getTransactionFolioNum(), Double.parseDouble(transactionDetails.getTransactionAmount()));
 				}
 				
 				Properties configProperties = new Properties();
@@ -328,7 +344,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			if ( !paymentUrl.equals("NotSet")) {
 			
 				if (!paymentUrl.contains("<html>"))  {
-					addActionMessage(paymentUrl);
+					setActionMsg("ActionMsg-"+paymentUrl);
 					return "failedWithPaymentGateway";
 				}
 				setPaymentUrl(paymentUrl);
@@ -336,7 +352,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				
 			}
 			else {
-				addActionMessage("allOrderFailed with BSE");
+				//addActionMessage("allOrderFailed with BSE");
+				setActionMsg("ActionMsg-allOrderFailed with BSE");
 				return "allOrderFailed";
 			}
 			
@@ -347,7 +364,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		else {
 			/*str = "clientCreationFailure";
     	    stream = new ByteArrayInputStream(str.getBytes());*/
-			addActionMessage("clientCreationFailed with BSE");
+			setActionMsg("ActionMsg-clientCreationFailed with BSE");
     		return "clientCreationFailure";
 		}
 

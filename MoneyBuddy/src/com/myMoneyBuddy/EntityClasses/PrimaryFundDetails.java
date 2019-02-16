@@ -22,17 +22,17 @@ public class PrimaryFundDetails {
     @Column (name="FUND_ID")
     private String fundId;
 
-    @Column(name="FUND_NAME")
-    private String fundName;
+    @Column(name="SCHEME_NAME")
+    private String schemeName;
 
-    @Column(name="SECTOR")
-    private String sector;
+    @Column(name="SCHEME_TYPE")
+    private String schemeType;
     
-    @Column(name="SUB_SECTOR")
-    private String subSector;
+    @Column(name="CATEGORY")
+    private String category;
     
-    @Column(name="FUND_START_DATE")
-    private String fundStartDate;
+    @Column(name="START_DATE")
+    private String startDate;
     
     @Column(name="RATING")
     private String rating;
@@ -55,54 +55,54 @@ public class PrimaryFundDetails {
     @Column(name="MIN_SIP_AMOUNT")
     private String minSipAmount;
     
-    @Column(name="MIN_LUMSUM_AMOUNT")
-    private String minLumsumAmount;
+    @Column(name="MIN_PURCHASE_AMOUNT")
+    private String minPurchaseAmount;
     
     @Column(name="MIN_SIP_DURATION")
     private String minSipDuration;
     
-    @Column(name="FUND_CATEGORY")
-    private String fundCategory;
-    
-    @Column(name="INTEREST_RATE")
-    private String interestRate;
-    
-    @Column(name="SIP_BUFFER_DAYS")
-    private String sipBufferDays;
-    
     @Column(name="PDF_FILE_PATH")
     private String pdfFilePath;
-    
-    @Column(name="TAX_SAVING_FUND")
-    private String taxSavingFund;
     
     @Column(name="MOST_POPULAR_FUND")
     private String mostPopularFund;
 
+    @Column(name="SIP_FLAG")
+    private String sipFlag;
+    
+    @Column(name="STP_FLAG")
+    private String stpFlag;
+    
+    @Column(name="SWP_FLAG")
+    private String swpFlag;
+    
+    @Column(name="SWITCH_FLAG")
+    private String switchFlag;
+    
     public PrimaryFundDetails() {
 
     }
     
-	public PrimaryFundDetails(String fundName, String sector, String subSector, String fundStartDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minLumsumAmount, String minSipDuration, String fundCategory,
-			String interestRate, String sipBufferDays, String pdfFilePath, String taxSavingFund, String mostPopularFund ) {
+	public PrimaryFundDetails(String schemeName, String schemeType, String category, String startDate, String rating,
+			String risk, String returnsThreeYears, String minSipAmount, String minPurchaseAmount, String minSipDuration, 
+			String pdfFilePath, String mostPopularFund,String sipFlag, String stpFlag, String swpFlag, String switchFlag ) {
 		super();
-		this.fundName = fundName;
-		this.sector = sector;
-		this.subSector = subSector;
-		this.fundStartDate = fundStartDate;
+		this.schemeName = schemeName;
+		this.schemeType = schemeType;
+		this.category = category;
+		this.startDate = startDate;
 		this.rating = rating;
 		this.risk = risk;
 		this.returnsThreeYears = returnsThreeYears;
 		this.minSipAmount = minSipAmount;
-		this.minLumsumAmount = minLumsumAmount;
+		this.minPurchaseAmount = minPurchaseAmount;
 		this.minSipDuration = minSipDuration;
-		this.fundCategory = fundCategory;
-		this.interestRate = interestRate;
-		this.sipBufferDays = sipBufferDays;
 		this.pdfFilePath = pdfFilePath;
-		this.taxSavingFund = taxSavingFund;
 		this.mostPopularFund = mostPopularFund;
+		this.sipFlag = sipFlag;
+		this.stpFlag = stpFlag;
+		this.swpFlag = swpFlag;
+		this.switchFlag = switchFlag;
 	}
 
 	public String getFundId() {
@@ -113,51 +113,43 @@ public class PrimaryFundDetails {
 		this.fundId = fundId;
 	}
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
-	}
-
-
-
-	public String getSector() {
-		return sector;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 
 
-	public void setSector(String sector) {
-		this.sector = sector;
+	public String getSchemeType() {
+		return schemeType;
 	}
 
 
 
-	public String getSubSector() {
-		return subSector;
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
 	}
 
 
+	public String getCategory() {
+		return category;
+	}
 
-	public void setSubSector(String subSector) {
-		this.subSector = subSector;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 
-
-	public String getFundStartDate() {
-		return fundStartDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-
-
-	public void setFundStartDate(String fundStartDate) {
-		this.fundStartDate = fundStartDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-
-
 
 	public String getRating() {
 		return rating;
@@ -230,19 +222,13 @@ public class PrimaryFundDetails {
 	}
 
 
-
-	public String getMinLumsumAmount() {
-		return minLumsumAmount;
+	public String getMinPurchaseAmount() {
+		return minPurchaseAmount;
 	}
 
-
-
-	public void setMinLumsumAmount(String minLumsumAmount) {
-		this.minLumsumAmount = minLumsumAmount;
+	public void setMinPurchaseAmount(String minPurchaseAmount) {
+		this.minPurchaseAmount = minPurchaseAmount;
 	}
-
-
-
 
 	public String getMinSipDuration() {
 		return minSipDuration;
@@ -254,38 +240,6 @@ public class PrimaryFundDetails {
 		this.minSipDuration = minSipDuration;
 	}
 
-
-
-	public String getFundCategory() {
-		return fundCategory;
-	}
-
-
-
-	public void setFundCategory(String fundCategory) {
-		this.fundCategory = fundCategory;
-	}
-
-
-
-	public String getInterestRate() {
-		return interestRate;
-	}
-
-
-
-	public void setInterestRate(String interestRate) {
-		this.interestRate = interestRate;
-	}
-
-	public String getSipBufferDays() {
-		return sipBufferDays;
-	}
-
-	public void setSipBufferDays(String sipBufferDays) {
-		this.sipBufferDays = sipBufferDays;
-	}
-
 	public String getPdfFilePath() {
 		return pdfFilePath;
 	}
@@ -294,20 +248,44 @@ public class PrimaryFundDetails {
 		this.pdfFilePath = pdfFilePath;
 	}
 
-	public String getTaxSavingFund() {
-		return taxSavingFund;
-	}
-
-	public void setTaxSavingFund(String taxSavingFund) {
-		this.taxSavingFund = taxSavingFund;
-	}
-
 	public String getMostPopularFund() {
 		return mostPopularFund;
 	}
 
 	public void setMostPopularFund(String mostPopularFund) {
 		this.mostPopularFund = mostPopularFund;
+	}
+
+	public String getSipFlag() {
+		return sipFlag;
+	}
+
+	public void setSipFlag(String sipFlag) {
+		this.sipFlag = sipFlag;
+	}
+
+	public String getStpFlag() {
+		return stpFlag;
+	}
+
+	public void setStpFlag(String stpFlag) {
+		this.stpFlag = stpFlag;
+	}
+
+	public String getSwpFlag() {
+		return swpFlag;
+	}
+
+	public void setSwpFlag(String swpFlag) {
+		this.swpFlag = swpFlag;
+	}
+
+	public String getSwitchFlag() {
+		return switchFlag;
+	}
+
+	public void setSwitchFlag(String switchFlag) {
+		this.switchFlag = switchFlag;
 	}
 
 	@Override
@@ -323,16 +301,16 @@ public class PrimaryFundDetails {
         if ((this.fundId == null) ? (other.fundId != null) : !this.fundId.equals(other.fundId)) {
             return false;
         }
-        if ((this.fundName == null) ? (other.fundName != null) : !this.fundName.equals(other.fundName)) {
+        if ((this.schemeName == null) ? (other.schemeName != null) : !this.schemeName.equals(other.schemeName)) {
             return false;
         }
-        if ((this.sector == null) ? (other.sector != null) : !this.sector.equals(other.sector)) {
+        if ((this.schemeType == null) ? (other.schemeType != null) : !this.schemeType.equals(other.schemeType)) {
             return false;
         }
-        if ((this.subSector == null) ? (other.subSector != null) : !this.subSector.equals(other.subSector)) {
+        if ((this.category == null) ? (other.category != null) : !this.category.equals(other.category)) {
             return false;
         }
-        if ((this.fundStartDate == null) ? (other.fundStartDate != null) : !this.fundStartDate.equals(other.fundStartDate)) {
+        if ((this.startDate == null) ? (other.startDate != null) : !this.startDate.equals(other.startDate)) {
             return false;
         }
         if ((this.rating == null) ? (other.rating != null) : !this.rating.equals(other.rating)) {
@@ -356,28 +334,28 @@ public class PrimaryFundDetails {
         if ((this.minSipAmount == null) ? (other.minSipAmount != null) : !this.minSipAmount.equals(other.minSipAmount)) {
             return false;
         }
-        if ((this.minLumsumAmount == null) ? (other.minLumsumAmount != null) : !this.minLumsumAmount.equals(other.minLumsumAmount)) {
+        if ((this.minPurchaseAmount == null) ? (other.minPurchaseAmount != null) : !this.minPurchaseAmount.equals(other.minPurchaseAmount)) {
             return false;
         }
         if ((this.minSipDuration == null) ? (other.minSipDuration != null) : !this.minSipDuration.equals(other.minSipDuration)) {
             return false;
         }
-        if ((this.fundCategory == null) ? (other.fundCategory != null) : !this.fundCategory.equals(other.fundCategory)) {
-            return false;
-        }
-        if ((this.interestRate == null) ? (other.interestRate != null) : !this.interestRate.equals(other.interestRate)) {
-            return false;
-        }
-        if ((this.sipBufferDays == null) ? (other.sipBufferDays != null) : !this.sipBufferDays.equals(other.sipBufferDays)) {
-            return false;
-        }
         if ((this.pdfFilePath == null) ? (other.pdfFilePath != null) : !this.pdfFilePath.equals(other.pdfFilePath)) {
             return false;
         }
-        if ((this.taxSavingFund == null) ? (other.taxSavingFund != null) : !this.taxSavingFund.equals(other.taxSavingFund)) {
+        if ((this.mostPopularFund == null) ? (other.mostPopularFund != null) : !this.mostPopularFund.equals(other.mostPopularFund)) {
             return false;
         }
-        if ((this.mostPopularFund == null) ? (other.mostPopularFund != null) : !this.mostPopularFund.equals(other.mostPopularFund)) {
+        if ((this.sipFlag == null) ? (other.sipFlag != null) : !this.sipFlag.equals(other.sipFlag)) {
+            return false;
+        }
+        if ((this.stpFlag == null) ? (other.stpFlag != null) : !this.stpFlag.equals(other.stpFlag)) {
+            return false;
+        }
+        if ((this.swpFlag == null) ? (other.swpFlag != null) : !this.swpFlag.equals(other.swpFlag)) {
+            return false;
+        }
+        if ((this.switchFlag == null) ? (other.switchFlag != null) : !this.switchFlag.equals(other.switchFlag)) {
             return false;
         }
         return true;
@@ -387,10 +365,10 @@ public class PrimaryFundDetails {
     public int hashCode() {
         int hash = 3;
         hash = 83 * hash + (this.fundId != null ? this.fundId.hashCode() : 0);
-        hash = 83 * hash + (this.fundName != null ? this.fundName.hashCode() : 0);
-        hash = 83 * hash + (this.sector != null ? this.sector.hashCode() : 0);
-        hash = 83 * hash + (this.subSector != null ? this.subSector.hashCode() : 0);
-        hash = 83 * hash + (this.fundStartDate != null ? this.fundStartDate.hashCode() : 0);
+        hash = 83 * hash + (this.schemeName != null ? this.schemeName.hashCode() : 0);
+        hash = 83 * hash + (this.schemeType != null ? this.schemeType.hashCode() : 0);
+        hash = 83 * hash + (this.category != null ? this.category.hashCode() : 0);
+        hash = 83 * hash + (this.startDate != null ? this.startDate.hashCode() : 0);
         hash = 83 * hash + (this.rating != null ? this.rating.hashCode() : 0);
         hash = 83 * hash + (this.risk != null ? this.risk.hashCode() : 0);
         hash = 83 * hash + (this.returnsOneYear != null ? this.returnsOneYear.hashCode() : 0);
@@ -398,14 +376,14 @@ public class PrimaryFundDetails {
         hash = 83 * hash + (this.returnsFiveYears != null ? this.returnsFiveYears.hashCode() : 0);
         hash = 83 * hash + (this.returnsSinceInception != null ? this.returnsSinceInception.hashCode() : 0);
         hash = 83 * hash + (this.minSipAmount != null ? this.minSipAmount.hashCode() : 0);
-        hash = 83 * hash + (this.minLumsumAmount != null ? this.minLumsumAmount.hashCode() : 0);
+        hash = 83 * hash + (this.minPurchaseAmount != null ? this.minPurchaseAmount.hashCode() : 0);
         hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
-        hash = 83 * hash + (this.fundCategory != null ? this.fundCategory.hashCode() : 0);
-        hash = 83 * hash + (this.interestRate != null ? this.interestRate.hashCode() : 0);
-        hash = 83 * hash + (this.sipBufferDays != null ? this.sipBufferDays.hashCode() : 0);
         hash = 83 * hash + (this.pdfFilePath != null ? this.pdfFilePath.hashCode() : 0);
-        hash = 83 * hash + (this.taxSavingFund != null ? this.taxSavingFund.hashCode() : 0);
         hash = 83 * hash + (this.mostPopularFund != null ? this.mostPopularFund.hashCode() : 0);
+        hash = 83 * hash + (this.sipFlag != null ? this.sipFlag.hashCode() : 0);
+        hash = 83 * hash + (this.stpFlag != null ? this.stpFlag.hashCode() : 0);
+        hash = 83 * hash + (this.swpFlag != null ? this.swpFlag.hashCode() : 0);
+        hash = 83 * hash + (this.switchFlag != null ? this.switchFlag.hashCode() : 0);
         return hash;
     }
     

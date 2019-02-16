@@ -6,9 +6,9 @@ public class SipDataModel implements Serializable{
 
 	private String sipStartDate;
 	private String fundId;
-	private String fundName;
+	private String schemeName;
 	private String folioNumber;
-	private String fundCategory;
+	private String schemeType;
 	private String investedAmount;
 	private String nextSipDate;
 	
@@ -18,13 +18,13 @@ public class SipDataModel implements Serializable{
 	}
 
 
-	public SipDataModel(String sipStartDate, String fundId, String fundName, String folioNumber,String fundCategory, String investedAmount, String nextSipDate) {
+	public SipDataModel(String sipStartDate, String fundId, String schemeName, String folioNumber,String schemeType, String investedAmount, String nextSipDate) {
 		super();
 		this.sipStartDate = sipStartDate;
 		this.fundId = fundId;
-		this.fundName = fundName;
+		this.schemeName = schemeName;
 		this.folioNumber = folioNumber;
-		this.fundCategory = fundCategory;
+		this.schemeType = schemeType;
 		this.investedAmount = investedAmount;
 		this.nextSipDate = nextSipDate;
 	}
@@ -50,13 +50,13 @@ public class SipDataModel implements Serializable{
 	}
 
 
-	public String getFundName() {
-		return fundName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
 
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 
@@ -70,13 +70,13 @@ public class SipDataModel implements Serializable{
 	}
 
 
-	public String getFundCategory() {
-		return fundCategory;
+	public String getSchemeType() {
+		return schemeType;
 	}
 
 
-	public void setFundCategory(String fundCategory) {
-		this.fundCategory = fundCategory;
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
 	}
 
 
