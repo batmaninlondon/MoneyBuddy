@@ -266,5 +266,5 @@ If you're unsure which ISA types is suitable for you, please seek financial advi
          </script>
 		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
  		<script src="assets/js/jquery.js"></script>
-    	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+    	<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 </html>

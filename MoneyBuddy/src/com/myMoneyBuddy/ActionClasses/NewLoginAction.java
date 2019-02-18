@@ -169,12 +169,17 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 			    	return "fundSIPSelected";
 	    		}*/
 	    		
-	    		if (sessionMap.get("FolioNumList") == null)  {
+	    		
+	    		if (sessionMap.get("FolioNumList") == null || "undefined".equals(sessionMap.get("FolioNumList")))  {
+	    			System.out.println("sessionMap.get FolioNumList is NULL");
 	    			FundDetailsDataModel fundDetailsDataModel =  (FundDetailsDataModel)sessionMap.get("selectedFundDetailsDataModel");
 	    			
 	    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 	    			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, fundDetailsDataModel.getFundId());
 	    			sessionMap.put("FolioNumList", folioNumList);
+	    		}
+	    		else {
+	    			System.out.println("sessionMap.get FolioNumList :"+sessionMap.get("FolioNumList").toString()+":");
 	    		}
 	    		return "fundSelected";
 	    	}

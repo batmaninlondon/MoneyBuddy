@@ -52,7 +52,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	sessionMap.put("minSipAmount", primaryFundDetails.getMinSipAmount());
 	    	System.out.println("folio num :"+getFolioNum());
 
-	    	if (null != getFolioNum() && !("".equals(getFolioNum())))  {
+	    	if (null != getFolioNum() && !("".equals(getFolioNum())) || "undefined".equals(sessionMap.get("FolioNumList")))  {
 	    		System.out.println("FOLIO NUMBER IS NOT NULL ........................");
 	    		sessionMap.put("FolioNumList", getFolioNum());
 	    	}

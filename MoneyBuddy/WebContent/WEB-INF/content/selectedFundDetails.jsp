@@ -341,7 +341,7 @@
 		
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
  		<script src="assets/js/jquery.js"></script>
-    	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+    	<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
     	
         <script>
          document.onreadystatechange = function () {

@@ -27,6 +27,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
 
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
         <!-- Vendor Styles -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
@@ -846,7 +847,17 @@
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <!-- Vendor -->
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script src="assets/js/jquery.js"></script>
+	    <script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
+	    <script src="assets/js/index.js"></script>
+	    <!-- Vendor -->
                                                                                
         <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>

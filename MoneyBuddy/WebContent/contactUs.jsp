@@ -13,25 +13,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Megakit - HTML5 Theme</title>
-        <meta name="keywords" content="HTML5 Theme" />
+        <!-- <meta name="keywords" content="HTML5 Theme" />
         <meta name="description" content="Megakit - HTML5 Theme">
-        <meta name="author" content="keenthemes.com">
+        <meta name="author" content="keenthemes.com"> -->
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
 
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
         <!-- Vendor Styles -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+       <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
 
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
         
         <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
     <script>
@@ -305,18 +307,20 @@
 			}
          </script>
          <!-- Vendor -->
-        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
-        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script> --%>
         <script type="text/javascript" src="assets/js/javaScript.js"></script>
 
+		<script src="assets/js/jquery.js"></script>
+    	<script src="assets/js/bootstrap.min.js"></script>
         <!-- General Components and Settings -->
-        <script type="text/javascript" src="js/global.min.js"></script>
-        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
+        <%-- <script type="text/javascript" src="js/global.min.js"></script> --%>
+        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+        <%-- <script type="text/javascript" src="js/components/scrollbar.min.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
     <!-- End Body -->
 </html>

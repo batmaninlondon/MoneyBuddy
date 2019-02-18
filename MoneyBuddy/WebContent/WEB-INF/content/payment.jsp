@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">     
-<script type="text/javascript" src="vendor/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.js"></script>
 <script type="text/javascript" src="assets/js/javaScript.js"></script>
 
 <script>

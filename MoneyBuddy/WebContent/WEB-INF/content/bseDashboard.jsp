@@ -24,7 +24,7 @@
         <!-- Vendor Styles -->
         
          
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
 		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
@@ -42,13 +42,13 @@
         
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-	    <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
+	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 	   
 	   
 	

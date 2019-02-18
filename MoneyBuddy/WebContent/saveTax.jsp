@@ -22,7 +22,7 @@
        
 
         <!-- Theme Styles -->
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="css/global/global.css" rel="stylesheet" type="text/css"/> -->
         
        
         <!-- Vendor Styles -->
@@ -307,6 +307,8 @@
 			  }
 			}
          </script>
+         
+         
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>

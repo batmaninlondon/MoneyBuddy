@@ -11,16 +11,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Megakit - HTML5 Theme</title>
-        <meta name="keywords" content="HTML5 Theme" />
-        <meta name="description" content="Megakit - HTML5 Theme">
-        <meta name="author" content="keenthemes.com">
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
 
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+	
         <!-- Vendor Styles -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
         <!-- <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
@@ -30,12 +30,12 @@
         <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 		    
 	    
 <style>
@@ -297,9 +297,12 @@
 </div>	  
 </body>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
-    	<script src="assets/js/jquery.prettyPhoto.js"></script>
+		<%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
+    	<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script src="assets/js/jquery.js"></script>
+	    <script src="assets/js/bootstrap.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
     	<script src="assets/js/jquery.isotope.min.js"></script>
    	 	<script src="assets/js/main.js"></script>
     	<script src="assets/js/wow.min.js"></script>
@@ -307,22 +310,22 @@
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
         <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
-        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script> --%>
 
         <!-- General Components and Settings -->
-        <script type="text/javascript" src="js/global.min.js"></script>
+        <%-- <script type="text/javascript" src="js/global.min.js"></script>
         <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
         <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
-        <script type="text/javascript" src="js/components/faq.min.js"></script>
+        <script type="text/javascript" src="js/components/faq.min.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
-         <script  src="js/index.js"></script>	
+         <%-- <script  src="js/index.js"></script>	 --%>
          
          
 		<!-- jQuery easing plugin -->

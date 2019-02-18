@@ -9,24 +9,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Megakit - HTML5 Theme</title>
-        <meta name="keywords" content="HTML5 Theme" />
-        <meta name="description" content="Megakit - HTML5 Theme">
-        <meta name="author" content="keenthemes.com">
-    	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+		
         <!-- Vendor Styles -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
         
-        <link href="css/material-bootstrap-wizard.css" rel="stylesheet" />
+       <!--  <link href="css/material-bootstrap-wizard.css" rel="stylesheet" /> -->
 
         <!-- Theme Styles -->
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -34,8 +31,8 @@
         <link href="css/material-kit.css" rel="stylesheet"/>
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
         
         <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
