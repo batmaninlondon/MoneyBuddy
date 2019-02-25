@@ -24,17 +24,17 @@
         <!-- Vendor Styles -->
         
          
-        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
+		<link href="assets/css/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
 		
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
   		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>	
 
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/> 
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
        <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
        
          -->
@@ -48,7 +48,7 @@
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    
 	   
     </head>
     
@@ -211,19 +211,33 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-													<li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                       					 <a href="bseDashboard" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-                                    				</li>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -511,8 +525,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -567,13 +581,36 @@
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <!-- Vendor -->
-    
-		  
-		
-		<script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
        <%--  <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script> --%>
+        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
+
+        <!-- General Components and Settings -->
+      	<script type="text/javascript" src="assets/js/global.min.js"></script>
+        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
+        
+        
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    	<script src="assets/js/jquery.isotope.min.js"></script>
+    	<script src="assets/js/main.js"></script>
+   	 	<script src="assets/js/wow.min.js"></script>
+   	 	
+   	 	<!-- Vendor -->
+    
+		  
+		<%-- <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
@@ -591,7 +628,7 @@
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
     	<script src="assets/js/jquery.isotope.min.js"></script>
     	<script src="assets/js/main.js"></script>
-   	 	<script src="assets/js/wow.min.js"></script>
+   	 	<script src="assets/js/wow.min.js"></script> --%>
    	 
    	 
 		    <!--========== Chart.js scripts ==========-->

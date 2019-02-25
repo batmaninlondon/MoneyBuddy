@@ -59,7 +59,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		try {
 		logger.debug("PortfolioAction class : execute method : start");
 
-		
+		System.out.println(" calling portfolioAction class for : customerId : "+customerId);
 		
 		QueryCustomer queryCustomer = new QueryCustomer();
 		

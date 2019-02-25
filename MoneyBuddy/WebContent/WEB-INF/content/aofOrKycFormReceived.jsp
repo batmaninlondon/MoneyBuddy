@@ -9,22 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
- 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/prettyPhoto.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/main.css" rel="stylesheet">
-    <link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
+ 	<link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/animate.min.css" rel="stylesheet">
+    <link href="assets/prettyPhoto.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/main.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
- 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
-    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+	
     <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -49,27 +43,41 @@
                     <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class="active" id="header-nav-li"><a href="welcome">Home</a></li>
-                        <li id="header-nav-li"><a href="contactUs">Start SIP</a></li>
-                        <li id="header-nav-li"><a href="saveTax">Save Tax</a></li>
-                        <li id="header-nav-li"><a href="aboutUs">About Us</a></li>
-                        <li id="header-nav-li"><a href="blog">Blog</a></li> 
-                        <li id="header-nav-li"><a href="help">Contact Us</a></li>  
-                       
-				         	<%  if(session.getAttribute("customerId") == null)
-							 	{   %> 
-										 	 <li id="header-nav-li"><a href="login" >Sign in</a></li>
-										<li id="header-nav-li"><a href="register" >Sign up</a></li> 
-							<%	} else 
-							 	{	%>
-							 			 <li id="header-nav-li"><a href="bseDashboard" >Dashboard</a></li> 
-							 			 <li id="header-nav-li"><a href="logOff" >Log Out</a></li> 
-							<%	}	%>  
-				                            
-                    </ul>
-                </div>
+                <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+										<%	} else 
+										 	{	%>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+                                </ul>
+                            </div>
             </div><!--/.container-->
         </nav><!--/nav-->
 		
@@ -91,21 +99,27 @@
                     &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="welcome">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
-                        <li><a href="help">Contact Us</a></li>
-                        <li><a href="register">Sign Up</a></li>
-                    </ul>
+                    <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                            </ul>
                 </div>
             </div>
         </div>
     </footer>
 
 
-
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+	 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+	    <script type="text/javascript"  src="assets/js/bootstrap/bootstrap.min.js"></script>
+	    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+	    <script type="text/javascript" src="assets/js/main.js"></script>
+	    <script type="text/javascript" src="assets/js/wow.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 </body>
 </html>

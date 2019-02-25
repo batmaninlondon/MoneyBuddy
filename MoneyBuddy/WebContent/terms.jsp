@@ -12,10 +12,9 @@
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         
-        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
-		<link href="css/style.css" rel="stylesheet" type="text/css"/>
-		<link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
+		<link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <!-- Vendor Styles -->
         <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
@@ -23,8 +22,8 @@
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
 
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -65,9 +64,37 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
-                                   <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                    	<a  href="<s:url action="fetchFundDetailsAction"/>" class="text-uppercase s-btn s-btn--md s-btn--primary-bg  g-margin-t-20--lg btn btn-home">TRY IT OUT</a>
-                                    </li> 
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+										<%	} else 
+										 	{	%>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -93,126 +120,389 @@
 	                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs"><b>Terms and Conditions</b></h3>
 	                    		<div class="g-color--text g-font-family--playfair g-letter-spacing--1" style=" text-align: justify; height : 500px; overflow : auto;" >
 	                    			<p>
-	                    			If you continue to browse and use this website you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern Nextbillion Technology Private Limited relationship with you in relation to this website.
+	                    			This document is an electronic record in terms of the Information Technology Act, 2000 and rules made thereunder as applicable and the amended provisions pertaining to electronic records in various statutes as amended by the Information Technology Act, 2000. This electronic record is generated by a computer system and does not require any physical or digital signatures.
 									</p>
 									<p>
-										<b>General Terms and Conditions for use of the Website</b>
+									This document is published in accordance with the provisions of Rule 3 (1) of the Information Technology (Intermediaries Guidelines) Rules, 2011 that require publishing the rules and regulations, privacy policy and terms of use for access or usage of online platforms of MoneyBuddy Financial Services Private Limited including but not limited to <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> webportal
 									</p>
 									<p>
-										By visiting this Website you agree to be bound by the terms and conditions of this Privacy Policy. If you do not agree please do not use or access our Website.
+									Applicable to all the customers of MoneyBuddy Financial Services Private Limited  including but not limited to users of our webportal <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> 
 									</p>
 									<p>
-										By mere use of the Website, you expressly consent to our use and disclosure of your personal information in accordance with this Privacy Policy. This Privacy Policy is incorporated into and subject to the Terms of Use.
+									MoneyBuddy Financial Services Private Limited, here in referred to as MoneyBuddy, is a company engaged in distribution of financial products and services. You are requested to carefully go through the below mentioned Terms and Conditions (&quot;Terms & Conditions&quot;) before availing any of our services. If you continue to browse and use the online platforms of MoneyBuddy, you irrevocably and  unconditionally accept all the obligations stipulated in the Terms & Conditions and agree to abide by and be bound by them. Please note accessing our services through any medium including but not limited to our our website <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> , mobile app or offline channels, is also subject to these Terms & Conditions. Additionally, please note that these Terms & Conditions supersede all previous oral and written terms and conditions (if any) communicated to you.
 	                    			</p>
 									<p>
-	                    				<b>1. Collection of Personally Identifiable Information and other Information</b>
+	                    				<b>DEFINITION of Key Terms used in this agreement</b>
 	                    			</p>
 									<p>
-	                    				When you use our Website, we collect and store your personal information which is provided by you from time to time. Our primary goal in doing so is to provide you a safe, efficient, smooth and customized experience. This allows us to provide services and features that most likely meet your needs, and to customize our Website to make your experience safer and easier. More importantly, while doing so we collect personal information from you that we consider necessary for achieving this purpose.
+	                    			<b>&quot;AMC&quot;</b> shall mean and include all the Asset Management Companies in India.
 	                    			</p>
 									<p>
-	                    				In general, you can browse the Website without telling us who you are or revealing any personal information about yourself. Once you give us your personal information, you are not anonymous to us. Where possible, we indicate which fields are required and which fields are optional. You always have the option to not provide information by choosing not to use a particular service or feature on the Website. We may automatically track certain information about you based upon your behaviour on our Website. We use this information to do internal research on our users&#39; demographics, interests, and behaviour to better understand, protect and serve our users. This information is compiled and analysed on an aggregated basis. This information may include the URL that you just came from (whether this URL is on our Website or not), which URL you next go to (whether this URL is on our Website or not), your computer browser information, and your IP address.
+	                    			<b>&quot;BSE&quot;</b> shall mean Bombay Stock Exchange
 	                    			</p>
 									<p>
-									We use data collection devices such as &#34;cookies&#34; on certain pages of the Website to help analyse our web page flow, measure promotional effectiveness, and promote trust and safety. &#34;Cookies&#34; are small files placed on your hard drive that assist us in providing our services. We offer certain features that are only available through the use of a &#34;cookie&#34;.
+									<b>&quot;MoneyBuddy&quot;</b> or <b>&quot;we&quot;</b> or <b>&quot;our&quot;</b> shall mean and refer to MoneyBuddy Financial Services Pvt Ld & all its affiliates, officers, employees, agents, partners and licensors.
 	                    			</p>
 									<p>
-	                    			We also use cookies to allow you to enter your password less frequently during a session. Cookies can also help us provide information that is targeted to your interests. Most cookies are &#34;session cookies,&#34; meaning that they are automatically deleted from your hard drive at the end of a session. You are always free to decline our cookies if your browser permits, although in that case you may not be able to use certain features on the Website and you may be required to re-enter your password more frequently during a session.
+	                    			<b>&quot;User&quot;, &quot;You/you&quot;, &quot;Your/your&quot;</b> means any person whether Registered with us or not, who views or uses the Website or any other online platform of MoneyBuddy;
 	                    			</p>
 									<p>
-									Additionally, you may encounter &#34;cookies&#34; or other similar devices on certain pages of the Website that are placed by third parties. We do not control the use of cookies by third parties.
+									<b>&quot;Services&quot;</b> means the service to carry out purchase, SIP, STP, switch and redemption of mutual fund units through online platforms of MoneyBuddy. This also include the service to modify user details such as email ID/ Phone number in user&apos;s mutual funds .
 	                    			</p>
 									<p>
-										If you choose to invest through the Website, we collect information about your investment behaviour.
+									<b>&quot;Force Majeure Event&quot;</b> means any event due to any cause beyond the reasonable control of MoneyBuddy, including without limitations, unavailability of any communication systems, breach, or virus in the processes or payment or delivery mechanism, sabotage, fire, flood, explosion, acts of god, civil commotion, strikes or industrial action of any kind, riots, insurrection, war, acts of government, computer hacking, unauthorised access to computer data and storage devices, computer crashes, malfunctioning in the computer terminal or the systems getting affected by any malicious, destructive or corrupting code or program, mechanical or technical errors/failures or power shut down, faults or failures in telecommunication etc.
 									</p>
 									<p>
-										If you transact with us, we collect some additional information, such as a billing address, a credit / debit card number and a credit / debit card expiration date and/ or other payment instrument details and tracking information from cheques or money orders.
+									<b>&quot;Website&quot;</b> means and includes all the online platforms of MoneyBuddy whether accessed through a computer or mobile.
 									</p>
 									<p>
-										If you choose to post messages on our message boards, chat rooms or other message areas or leave feedback, we will collect that information you provide to us. We retain this information as necessary to resolve disputes, provide customer support and troubleshoot problems as permitted by law.
+									<b>&quot;SIP&quot;</b> shall mean Systematic Investment Plans.
 									</p>
 									<p>
-										If you send us personal correspondence, such as emails or letters, or if other users or third parties send us correspondence about your activities or postings on the Website, we may collect such information into a file specific to you.
+									<b>&quot;STP&quot;</b> shall mean Systematic Transfer Plans.
 									</p>
 									<p>
-										We collect personally identifiable information (email address, name, phone number, credit card / debit card / other payment instrument details, etc.) from you when you set up a free account with us. While you can browse some sections of our Website without being a registered member, certain activities (such as placing an order) do require registration. We do use your contact information to send you offers based on your previous orders and your interests.
+									<b>&quot;NAV&quot;</b> shall mean Net Asset Value.
 									</p>
 									<p>
-										<b>2. Use of Demographic / Profile Data / Your Information</b>	
+									<b>&quot;RTA&quot;</b> shall mean Registrar and Transfer Agent.
 									</p>
 									<p>
-										We use personal information to provide the services you request. To the extent we use your personal information to market to you, we will provide you the ability to opt-out of such uses. We use your personal information to resolve disputes; troubleshoot problems; help promote a safe service; collect money; measure consumer interest in our products and services, inform you about online and offline offers, products, services, and updates; customize your experience; detect and protect us against error, fraud and other criminal activity; enforce our terms and conditions; and as otherwise described to you at the time of collection.
+									<b>&quot;Investment Account&quot;</b> shall mean the account opened with MoneyBuddy for availing services provided by MoneyBuddy as explained above.
 									</p>
 									<p>
-										In our efforts to continually improve our product and service offerings, we collect and analyse demographic and profile data about our users&#34; activity on our Website.
+									<b>&quot;Registered User&quot; or &quot;Registered Customer&quot;</b> shall mean and include the users or customers who have opened an investment Account with MoneyBuddy for availing our services.
 									</p>
 									<p>
-										We identify and use your IP address to help diagnose problems with our server, and to administer our Website. Your IP address is also used to help identify you and to gather broad demographic information.
+									<b>&quot;Electronic payment gateway&quot;</b> shall mean and include the payment gateways used for processing funds for mutual funds investments via internet banking, One Time Mandate (OTM), Bill Payee facility or any other mode for online processing of funds.
+									</p>
+									<ol>
+										<li>
+										<p><b>Using the Services of MoneyBuddy</b></p>
+										<p>
+										I/We hereby agree to avail the service of MoneyBuddy through its online technology platform for the purchase and redemptions of units of mutual funds listed on its Websites/ Mobile Apps. I/We agree that those services are subject to the Terms & Conditions mentioned herein (the &quot;Services&quot;). I/We agree that MoneyBuddy and / or the mutual fund may, at its sole discretion, vary the Terms & Conditions, or withdraw any of the facilities provided herein from time to time. I/We, hereby, irrevocably and unconditionally, grant my/our no objection to MoneyBuddy and the respective mutual funds to collate transaction details relating to the investments in mutual fund units done by me/us on it&apos;s online technology platform, and transmit such transaction data to the concerned Asset Management Company (&quot;AMC&quot;) / mutual fund / BSE for further processing of my/our transactions.We also understand that apart from their online platform, MoneyBuddy is also in the business of distributing mutual funds through physical paperworks or through any other means it deems suitable.
+										</p>
+										</li>
+										<li>
+										<p><b>Registration of users on MoneyBuddy&apos;s online platform</b></p>
+										<p>
+										Access to MoneyBuddy&apos;s online technology platform for purchase, switch, and redemption transactions of mutual fund units will only be limited to the registered customers of MoneyBuddy. I/We agree and acknowledge that the Services provided may be limited to select Mutual Funds only, as per the agreement MoneyBuddy has entered into those Mutual Fund companies as well as per the discretion of MoneyBuddy. 
+										</p>
+										<p>
+										Registered Customers will be able to only purchase, redeem, and switch mutual fund units through this service. I/We agree and understand that other things such as change of address, mobile number, e&#8209;mail ID, and / or bank details might require a written request be sent to the AMC / CAMS / POS for signature verification and other formalities. I/We agree that any and / or all information that may be provided by me/us to MoneyBuddy from time to time, including but not limited to contact information, address and tax&#8209;related information, or any other information required under existing or future KYC, or other norms & laws, may be shared by MoneyBuddy with the mutual funds/AMCs, or their respective authorized service providers, auditors, legal and tax consultants in compliance with the extant legal provisions from time to time.
+										</p>
+										<p>
+										There may be an exit load applicable to certain mutual fund schemes. This is mentioned in the respective offer documents, including the Scheme Information Document (SID) / Key Information Memorandum (KIM) and addendums issued thereto from time to time (collectively referred to as &quot;scheme related documents&quot;). I/We shall read all the scheme related documents before investing.
+										</p>
+										<p>
+										Investments from persons from the United States of America (&quot;U.S.&quot;) and Canada may not be permitted in certain mutual funds. MoneyBuddy/ AMCs/their respective trustee companies shall not be liable for rejection of an application by mutual funds, where the investor is a U.S. person and/or a Canadian person or such other prohibited investor as may be specified in respective scheme related document from time to time.
+										</p>
+										<p>
+										Purchase requests made through MoneyBuddy&apos;s online technology platform shall be processed by the respective mutual funds/BSE/AMCs only after funds sufficient to cover the purchase price, and other costs and charges have been received by the respective mutual funds/AMCs. Payments towards the purchase price and other costs and charges shall be made by Registered Customers directly in the name of the respective mutual fund scheme(s) through the payment gateway made available by MoneyBuddy/ BSE on the online technology platform. If, for any reason, the mutual fund is unable to allow a transaction for purchase or redemption of the full quantity of units as transacted by a Registered Customer through MoneyBuddy, the respective mutual fund/AMCs shall be entitled to process a lesser quantity of units being purchased or redeemed (as the case may be). In such case, neither MoneyBuddy nor the AMCs, or their respective trustees shall be responsible for the non&#8209;execution of transactions for the entire quantity or the remaining quantity of units.
+										</p>
+										<p>
+										Transaction rights for Systematic Investment Plans (&quot;SIPs&quot;) and Systematic Transfer Plans (&quot;STPs&quot;) will be pursuant to the Registered Customer executing the instructions, in the manner and form as prescribed by MoneyBuddy/ BSE and / or mutual funds on the online technology platform from time to time. The instructions will be applicable to all SIP and STP transactions, whether presently existing, or to be opened in future. I/We agree that, upon granting such instructions for SIP and STP transactions, I/We will be bound by the terms of the relevant SIP scheme of the mutual fund to which I/we subscribe.
+										</p>
+										<p>
+										I/We agree and acknowledge that any transaction done or purported to be done by me/us before the cut&#8209;off time on a business day, would be processed on the same day. Any transactions done on the online technology platform of MoneyBuddy after the prescribed cut&#8209;off time will be deemed to be received on the next working day and will be processed accordingly. I/We agree and achnowledge that the MoneyBuddy reserves the right to specify a different cut-off time then the one specificed by said Mutual Fund / BSE.
+										</p>
+										<p>
+										I/We acknowledge that the units of the scheme shall be allotted, redeemed or switched, as the case may be, by the respective mutual funds / AMCs at the applicable Net Asset Value (&quot;NAV&quot;) of the concerned mutual fund scheme, in consistence with the terms of the scheme. However, MoneyBuddy shall not be liable for any loss that may arise to me/us as a result of incorrect NAV applied on units allotted to me/us by the mutual fund. I/We acknowledge that any transactions done on a holiday would be processed on the next business day and the NAV would be applicable as per the respective scheme related documents.
+										</p>
+										<p>
+										I/We acknowledge that transactions once placed cannot be cancelled. However depending upon the type of investments, I have the flexibility to withdraw my money after the transaction has been processed as per the applicable loads/charges.
+										</p>
+										<p>
+										I/We acknowledge that any application for redemption, purchase, or exchange, or any other instruction must be correct, complete, clear, and unambiguous in all respects, and should conform to the prescribed procedure/documentation and regulatory requirements, failing which, MoneyBuddy / the AMC reserve the right to reject the same, and in such a case, MoneyBuddy / the AMC / the trustee shall not be responsible for any consequence arising therefrom.
+										</p>
+										<p>
+										I/We have read and understood the contents of the scheme related documents and the details of the scheme, and I/we have not received or been induced by any rebate or gifts, directly or indirectly, in making investments. I/We hereby declare that the amount invested/to be invested by me/us in the scheme(s) of the mutual fund is derived through legitimate sources and is not held or designed for the purpose of contravention of any act, rules, regulations, or any statute or legislation, or any other applicable laws or any notifications, or directions issued by any governmental or statutory authority from time to time.
+										</p>
+										<p>
+										The ARN holder has disclosed to me/us all the commissions (in the form of trail commission or any other mode), payable to him for the different competing schemes of various mutual funds from amongst which the scheme is being recommended.
+										</p>
+										</li>
+										<li>
+										<p><b>Accessing MoneyBuddy online platforms</b></p>
+										<p>
+										I/We acknowledge that by accessing and using the Services offered by MoneyBuddy, I/We agree to follow the Terms & Conditions for the use of its online platforms and as may be specified on MoneyBuddy&apos;s online platforms from time to time. Notwithstanding such acceptance of those Terms and Conditions, I/we agree to the following:
+										</p>
+										<ol type="a">
+											<li>
+											I/We agree that all information, content, materials, products (including, but not limited to text, content, photographs, graphics, video and audio content) on MoneyBuddy&apos;s online platforms, is protected by copyright in favour of MoneyBuddy under applicable copyright laws, and is also protected otherwise under general intellectual property law.
+											</li>
+											<li>
+											I/We agree that all information submitted by me/us to MoneyBuddy, whether through any online platform or otherwise, shall be deemed to be the property of MoneyBuddy and it shall be free to use any ideas, concepts, know&#8209; how or techniques provided by me/us in  MoneyBuddy&apos;s Websites, in any manner whatsoever.
+											</li>
+											<li>
+											I/We agree not to copy, reproduce, sell, redistribute, publish, enter into a database, display, perform, modify, transmit, license, create derivatives from, transfer, or in any way, exploit any part of any information, content, materials, services available from or through any online platform of MoneyBuddy, except that which I/we may download for my/our own personal, non&#8209; commercial use.
+											</li>
+											<li>
+											I/We agree that I/we will not access online platforms of MoneyBuddy for any purpose that is unlawful, or prohibited by these Terms & Conditions. I/We also agree that I/we will not access MoneyBuddy&apos;s online platforms in any manner that could damage, disable or impair the platform, or interfere with any other person&apos;s use or enjoyment of MoneyBuddy&apos;s platform.
+											</li>
+											<li>
+											I/We agree that the software and hardware underlying online platforms of MoneyBuddy, as well as other internet related software which are required for accessing the MoneyBuddy platforms, are the legal property of the respective Vendors. The permission given by MoneyBuddy to access MoneyBuddy&apos;s platform will not convey any proprietary or ownership rights in the above software/hardware. I/We agree that I/we shall not attempt to modify, translate, disassemble, decompile, or reverse engineer the software/hardware underlying MoneyBuddy&apos;s online platforms, or create any derivative product based on the software /hardware.
+											</li>
+											<li>
+											I/We agree that not all the products and services offered by MoneyBuddy are available in all geographic areas, and I/we may not be eligible for all the products or services offered on MoneyBuddy&apos;s online platform. MoneyBuddy reserves the right to determine the availability and eligibility for any product or service and might decline acess to any person as per the sole discretion of MoneyBuddy.
+											</li>
+											<li>
+											I/We agree that MoneyBuddy/AMC is not responsible for the availability of content or other services on third party sites linked from any of the MoneyBuddy&apos;s online platforms. I/We are aware that access of hyperlinks to other internet sites are at my/ our own risk and the content, accuracy, opinions expressed, and other links provided by these sites are not verified, monitored, or endorsed by MoneyBuddy in any way. MoneyBuddy does not make any warranties and expressly disclaims all warranties, express or implied, including without limitation, those of merchantability and fitness for a particular purpose, title or non&#8209; infringement with respect to any information or services or products that are available or advertised or sold through these third party websites.
+											</li>
+											<li>
+											I/We agree that MoneyBuddy has the absolute discretion to amend or supplement any of MoneyBuddy&apos;s Terms & Conditions at any time, without prior notice for such changes. I/We agree that the information and assistance provided on MoneyBuddy&apos;s online platforms are true to the knowledge of MoneyBuddy, and should not be construed as investment advice, and that MoneyBuddy shall have no liability for any discrepancy in any such information or assistance.											
+											</li>
+											<li>
+											I/We agree that an Account may be created offline, without accessing any of MoneyBuddy&apos;s online platforms. In the event I/we create a MoneyBuddy Investment Account offline, I/we understand and acknowledge that these Terms & Conditions, and the Terms & Conditions of the use of MoneyBuddy&apos;s online platforms will continue to be applicable to me/us for the use of Services.
+											</li>
+										</ol>
+										</li>
+										<li>
+										<p><b>No objection to MoneyBuddy</b></p>
+										<p>
+										I/We grant my/our no objection to MoneyBuddy to do or perform upon my/our placing of transaction requests on the online technology platform of MoneyBuddy and at my/our risk and cost, all or any of the following acts, deeds, matters and things:
+										</p>
+										<ol type="a">
+											<li>
+											To forward my transaction data and requests to the BSE/respective mutual funds/AMCs with respect to my instructions and orders of sale, purchase, transfer, splitting, and consolidation of mutual funds units.
+											</li>
+											<li>
+											To transmit to the BSE, mutual fund and/or the corresponding AMC, information relating to my/our nomination / changes in investment plan / any other changes made through MoneyBuddy.
+											</li>
+											<li>
+											To obtain and forward to the BSE/AMC/its Authorized Registrar my/our information as available in the KYC records, including my signature. I/We agree that such records may be used by the AMC/Authorised Registrar for authorizing the transactions that may be submitted by me/us in physical/offline mode.
+											</li>
+											<li>
+											To override my registration to DNC/ NDNC and to contact me/us regarding matters pertaining to the operation of my account including, but not limited to, servicing of my requests, communication of special offers, new product launches, and product recommendations.
+											</li>
+										</ol>
+										</li>
+										<li>
+											<p><b>Multiple Investors in a Single MoneyBuddy Investment Account</b></p>
+											<p>
+											I/We acknowledge that MoneyBuddy provides the facility, to add multiple investors in a single MoneyBuddy account for separate transactions in different mutual fund schemes, subject to applicable KYC norms for such additional investors. I/We agree that if I am/we are the account holder, I/we must specify the name of investor(s) for every transaction performed in the Account. When I/we are adding such &quot;additional investor(s)&quot; to my/our Account, I/we acknowledge that, the additional investor(s) has also seen and accepted all the Terms and Conditions accepted by the primary account holder. If I am/we are being added to an account as an &quot;additional investor&quot;, I/we acknowledge that I/we have seen and accepted all the Terms and Conditions accepted by the account holder.
+											</p>
+											<p>
+											I/We further acknowledge that if a transaction is performed from a user Account having multiple investors, such transaction will be deemed to be made jointly with the additional investor(s) and will be legally binding on the all the investors in that account including but not limited to the investor under whose name the said transaction is being performed.
+											</p>
+										</li>
+										<li>
+											<p><b>Communication of instructions</b></p>
+											<p>
+											In the event an Account has multiple investors mentioned in such Account, I/we acknowledge that all instructions (including instructions for modification of this clause) shall be given only by the first holder of such an Account, on behalf of both/all of us. All instructions given by the first holder above shall be binding on both/all as if given by each of us personally. I/We agree that the instructions may be for the purchase of units in the sole name of the first holder, or in the name of the first holder jointly with another person to the exclusion of the second or the third holder. I/We hereby authorize MoneyBuddy/BSE/AMCs to process and transmit such instructions given from time to time in relation to my/our transactions to the respective mutual funds/AMCs.
+											</p>
+											<p>
+											The transactions for purchase, switch or redemption of units may be done through the online method as defined by MoneyBuddy. I/We agree that MoneyBuddy/BSE/AMC reserves the right to remove or add any method of making instructions for any transactions such as purchase, switch or redemption of the units, change of address, change of email/ phone number at any time as per their discretion.
+											</p>
+											<p>
+											I/We agree and acknowledge that units purchased by giving instructions through any of the above modes will be deemed to be accepted for redemptions through the same mode only.
+											</p>
+											<p>
+											MoneyBuddy may refuse to transmit transaction data for clients unless they are given in a manner and form acceptable to MoneyBuddy and in accordance with its right to verify such transactions. However, MoneyBuddy shall have no responsibility to determine the authenticity of any transactions done or purported to be done by me/us. I/We shall not hold MoneyBuddy liable on account of MoneyBuddy acting in good faith on any of/our transactions done or purported to be done by me/us.
+											</p>
+											<p>
+											The mutual funds/AMCs may, at its discretion, not give effect to my/our transactions where the mutual fund/AMCs/BSE/MoneyBuddy have reason to believe (which decision of mutual fund / AMCs /MoneyBuddy/BSE I/We shall not question or dispute) that the transactions are not genuine or are otherwise improper, ambiguous or unclear or raise a doubt.
+											</p>
+											<p>
+											MoneyBuddy/BSE/AMC/mutual fund/trustee of the AMC shall not be liable for any losses including, but not limited to, the loss of any opportunity costs incurred by me/us, if any, transactions are not carried out for any reasons whatsoever.
+											</p>
+											<p>
+											I/We agree to indemnify MoneyBuddy, BSE, AMC, trustees to the AMC, its respective officers, directors, employees, and agents against any improper/ fraudulent transactions, improper/fraudulent fund transfer transactions done or purported to be done by me/us on the online technology platform / payment gateway provided by MoneyBuddy/ BSE. MoneyBuddy/BSE/AMC shall not be obliged to accept from me/us any oral instructions for carrying out any transactions in mutual fund units. Further MoneyBuddy, BSE, AMC, trustees to the AMC, its respective officers, employees, and agents shall be indemnified for and held free and harmless from and against any and all costs, claims, losses or liabilities of any nature (direct or indirect) resulting from the act of purchase, redemption, or switch of mutual fund units, together with any and all attendant costs and expenses including reasonable legal fees and expenses, that MoneyBuddy, BSE, AMC, trustees to the AMC, its respective officers, employees, and agents may incur or be subject to, in relation to the transactions conducted by me/us on the online platforms of MoneyBuddy. I/We also acknowledge that the security and the control provided by MoneyBuddy are designed to verify the source of communication, and not to detect errors in transmission of content including discrepancies between names on the account numbers, and that MoneyBuddy, or any intermediary, may transmit data or take requisite action by referring to the account number only, even if the name on the account is also provided. Nothing contained herein shall require MoneyBuddy to violate any applicable laws, rules or the procedures/ instructions. MoneyBuddy shall have no duty to verify the content of any transactions, instructions and communication, whether or not authorized, sent in its name and accepted by MoneyBuddy. MoneyBuddy will collate and transmit the transaction data and other details as it is received and stored on its servers, and will not validate the same for holdings, correctness of transaction and any other information.
+											</p>
+										</li>
+										<li>
+											<p><b>Holding pattern and customer details</b></p>
+											<p>
+											I/We acknowledge and agree that the holding pattern of the Registered Customer, as reflected in the MoneyBuddy system, is deemed to be the MoneyBuddy Account holding pattern of the account holder/investor(s).
+											</p>
+											<p>
+											I/We also agree there will be no changes allowed in the holding pattern of the investors associated with the Account once the Account is activated.
+											</p>
+											<p>
+											I/We agree that once an investment is made using the holding pattern, I/We will not be allowed to change the holding pattern for the subscriptions.
+											</p>
+											<p>
+											The other requisite data (which is not part of the form) required to be reported to AMC / authorized registrar of the AMC will be extracted from the Account details maintained for the First holder. The mode of holding in all customer joint accounts is treated as &quot;Anyone or Survivor&quot;.
+											</p>
+										</li>
+										<li>
+											<p><b>Account Statement & Charges and fees</b></p>
+											<p>
+											I/We agree and acknowledge that it shall be the obligation of the AMC to regularly send to the Registered Customer (only to the first holder in cause of multiple / joint holdings) such communications as required under SEBI regulations. MoneyBuddy will not be liable for sending any legally required communication but will strive it&apos;s best to provide required information to users in a simple and easy to understand way.
+											</p>
+											<p>
+											While currently, the Services offered by MoneyBuddy are free of transaction charges, I/we acknowledge that it reserves the right to charge fees in the future for its Services, or for any other services they may offer in the future. Any such changes will be communicated via email 14 days ahead of implementation, and will also be displayed on it&apos;s online platforms. Under such circumstances, I/we understand that I/we will be allowed to transfer our assets out of my/our Account without incurring any costs payable to MoneyBuddy.
+											</p>
+											<p>
+											I/We agree and understand that any such charges/fees that MoneyBuddy may choose to levy will be in addition to those levied by the BSE/AMCs, if any. All fees, charges, and reimbursement of expenditure shall be paid or made in full by me / us without any counterclaim, set off, or withholding. All liabilities and obligations of the Registered Customer hereunder to MoneyBuddy/BSE/mutual fund/AMCs/trustees of the AMC shall be joint and/or several, as the case may be.
+											</p>
+										</li>
+										<li>
+											<p><b>Third party risk</b></p>
+											<p>
+											MoneyBuddy shall not be liable for any loss or damage caused by reason of failures or delay of the mutual fund to deliver any units purchased, even though payments have been made for the same, or failure or delay in making payment in respect of any units sold, though they may have been delivered. I/We shall hold MoneyBuddy/BSE harmless and free from any claim in respect thereof.
+											</p>
+											<p>
+											MoneyBuddy/BSE shall also not be liable for any delay, failure, or refusal of the mutual fund in registering or transferring units to my/our names or for any interest, dividend, or other loss caused to me/us arising therefrom.
+											</p>
+											<p>
+											In such instances of third party claims, the AMC/mutual fund/trustees to the mutual fund shall be liable for failure/delay only where such claims/losses arise due to a reason entirely attributable to an error or gross negligence of the AMC. In no event shall the AMC/mutual fund/trustees to the mutual fund be liable for losses/claims arising due to force majeure reasons beyond the reasonable control of the AMC/mutual fund.
+											</p>
+										</li>
+										<li>
+											<p><b>Liability of MoneyBuddy</b></p>
+											<p>
+											MoneyBuddy shall not be liable to me/us for any act, omission, or delay by the BSE/ AMCs/mutual fund, or for any claims which I/we may suffer or incur as a result of, or in course of discharge of duties by MoneyBuddy, or its employees, officers, directors, nominee, or agent.
+											</p>
+											<p>
+											Without prejudice to the above, MoneyBuddy shall not be held liable for any loss or damage or failure to comply or delay in complying with its obligations under these Terms and Conditions which is caused directly or indirectly by any event or circumstances beyond MoneyBuddy&apos;s reasonable control. These include system failure, network errors, delay, or loss of data due to the above, and in circumstances of acts of God, floods, epidemics, quarantines, riots, civil commotion, and/or war. I/We further agree that MoneyBuddy shall not be held liable for any losses, damages, expenses, costs, liabilities, and claims of whatsoever nature caused by fraudulent or unauthorized use or access of my/our information, and/or signatures. MoneyBuddy will be under no duty to verify compliance with any restrictions on my/our investment powers.
+											</p>
+											<p>
+											MoneyBuddy will not be liable for any loss, damage, cost, charges, or expenses directly or indirectly caused by reasons of any defects or imperfections or mechanical or other failure with relation to computer, cable, telex, telephone, or postal system.
+											</p>
+											<p>
+											While MoneyBuddy will make every effort to have its computer systems available at all times, it makes no guarantees with respect to the availability of such systems. Additionally, MoneyBuddy will make every effort to resolve availability issues such as network problems, virus attacks, etc., in an expeditious manner. Notwithstanding these, MoneyBuddy will as such not be liable for any loss, damage, cost, charges or expenses directly or indirectly caused by reasons of lack of such availability.
+											</p>
+										</li>
+										<li>
+											<p><b>Electronic payment gateway</b></p>
+											<p>
+											I/we understand that funds transfer for purchase of units of mutual funds will be done by using an Electronic Payment Gateway facility for net banking offered through a third party net  banking service provider registered with the Reserve Bank of India. I/we agree not to use or permit the use of the payment gateway or any related services for any illegal or improper purposes.
+											</p>
+											<p>
+											I/We hereby acknowledge that I/we am/are utilizing the Electronic Payment Gateway at my/our risk. I/We agree and understand that these risks would include but not be limited to the following risks, and MoneyBuddy/BSE/AMC/trustees of the AMC, disclaim all liability and responsibility for any claims, losses, damages, and costs of whatsoever nature arising due to such risks:
+											</p>
+											<ol type="a">
+												<li>
+													<p><b>Misuse of Password:</b></p>
+													<p>
+													I/We acknowledge that if any third party obtains access to my password of my MoneyBuddy Investment Account, such third party would be able to transact on MoneyBuddy&apos;s online platform. I/We shall ensure that the Terms & Conditions applicable to the use of the Net Banking password as contained in the Electronic Payment Gateway for Net Banking are complied with at all times.
+													</p>
+												</li>
+												<li>
+													<p><b>Internet Frauds:</b></p>
+													<p>
+													I/We understand that the internet per se is susceptible to a number of frauds, misuse, hacking, and other actions, which could affect payment instructions given using Electronic Payment Gateway or the transactions done using MoneyBuddy&apos;s online technology platform. Whilst MoneyBuddy shall aim to provide best security to prevent the same, there cannot be any guarantee against such internet frauds, hacking and other actions. I/We shall separately evolve/evaluate all risks arising out of same.
+													</p>
+												</li>
+												<li>
+													<p><b>Mistakes and Errors:</b></p>
+													<p>
+													The filling in of applicable data for transfer would require proper, accurate, and complete details. In the event of my/our account receiving an incorrect credit by reason of a mistake committed by any third party, the concerned mutual fund/AMC or the bank shall be entitled to reverse the incorrect credit at any time whatsoever without my/our consent. I/We shall be liable and responsible to MoneyBuddy/BSE/ concerned mutual fund/concerned AMC and accede to accept instructions without questions for any unfair or unjust gain obtained by me/us as a result of the same.
+													</p>
+												</li>
+												<li>
+													<p><b>Technology Risks:</b></p>
+													<p>
+													The technology for enabling the transfer of funds and the other services offered by the Electronic Payment and MoneyBuddy could be affected by virus or other malicious, destructive, or corrupting code, program, or macro. I/We understand that the online platform of MoneyBuddy or the bank may require maintenance, and during such time, it may not be possible to process my/our request. This could result in delays in the processing of transactions/payment instructions or failure in the processing of transactions/payment instructions and other such failures and inability.
+													</p>
+													<p>
+													I/We understand that MoneyBuddy disclaim all and any liability, whether direct or indirect, whether arising out of loss of profit or otherwise arising out of any failure or inability by MoneyBuddy/BSE/bank/mutual funds/AMCS to process any transaction/payment instructions for whatsoever reason. I/We understand and accept that MoneyBuddy/BSE/AMC/trustee company of the AMC/authorised registrars of the AMC shall not be responsible for any of the aforesaid risks.
+													</p>
+												</li>
+												<li>
+													<p><b>Limits:</b></p>
+													<p>
+													I/We are aware that MoneyBuddy/BSE may, from time to time, impose maximum and minimum limits on funds that may be transferred by virtue of the payment transfer service given. I/We realize and accept and agree that the same is to reduce my/our risks. I/We shall be bound by such limits imposed and shall strictly comply with them.
+													</p>
+												</li>
+												<li>
+													<p><b>Indemnity:</b></p>
+													<p>
+													I/We agree and undertake to indemnify MoneyBuddy/BSE/mutual funds /AMCs /trustees to the AMCs/authorized registrar of the AMC from and against all losses and damages that may be caused as a consequence of breach of any of the Electronic Payment Gateways for net banking, and the Terms & Conditions mentioned herein above.
+													</p>
+												</li>
+												<li>
+													<p><b>Withdrawal of Facility:</b></p>
+													<p>
+													MoneyBuddy shall be entitled to withdraw this service at any time without assigning any reason whatsoever.
+													</p>
+												</li>
+												<li>
+													<p><b>Binding nature of the above Terms & Conditions:</b></p>
+													<p>
+													I/We agree that by use of this facility, I/we shall be deemed to have agreed to all the above Terms & Conditions and such Terms & Conditions shall be bound on me/us in the same manner as if I/we have agreed to the same in writing.
+													</p>
+												</li>
+											</ol>
+										</li>
+										<li>
+											<p><b>Role and responsiblities of MoneyBuddy</b></p>
+											<p>
+											I/We expressly agree and acknowledge that any information contained in MoneyBuddy&apos;s online platform, emails, brochures or any other materials, or communicated by MoneyBuddy in any form, shall not be construed by me/us as investment advice and that all decisions to purchase or sell units made by me/us shall be on the basis of my/our own personal judgment arrived at after due consideration.
+											</p>
+											<p>
+											I/We understand and agree that MoneyBuddy does not in any manner:
+											</p>
+											<ol type="a">
+												<li>Guarantee payments on any units; or</li>
+												<li>Guarantee liquidity of any units; or</li>
+												<li>Make any offer to buy back any units; or</li>
+												<li>Guarantee the redemption or repayment of any units on maturity; or</li>
+												<li>Guarantee the payments of interest or dividend; or</li>
+												<li>Promise, indicate, or guarantee any returns; or</li>
+												<li>Guarantee any goods delivery.</li>
+											</ol>
+											<p>
+											I/We further understand and agree that MoneyBuddy/BSE does not in any manner:
+											</p>
+											<ol type="a">
+												<li>
+												Subscribe to units of mutual funds on my/our behalf or in my/our name or collect payments from me/us for the units so purchased by me/us for remitting it further to the AMCs; or
+												</li>
+												<li>
+												Redeem/sell the units held by me/us on my/our behalf or in my/our name; or
+												</li>
+												<li>
+												Unilaterally instruct the mutual fund and/or the corresponding AMCs with regards to nomination/changes in investment plan/any other changes; or
+												</li>
+												<li>
+												Sign any document on my/our behalf or in my/our name for purchase, sale, or redemption of units; or
+												</li>
+												<li>
+												Collect, receive, and/or give receipts and discharges for any sum including dividend, interest, or income arising from the units, and does not sign and/or endorse dividend and interest warrants on my/our behalf or in my/our name;or
+												</li>
+												<li>
+												Correspond with, or gives notice to the mutual fund/AMCs on my/our behalf, or in my/our name, except for transmission of transactions done or purported to be done by me/us on the online technology platform.
+												</li>
+											</ol>
+											<p>
+											I/We understand and acknowledge that MoneyBuddy does not offer any investment advice, and nothing contained herein or on the online platforms of MoneyBuddy or communicated by MoneyBuddy in any form, shall be construed as investment advice.
+											</p>
+											<p>
+											I/We understand that any sum invested through MoneyBuddy&apos;s Investment Account is not a deposit with MoneyBuddy and is not bank insured. The same is not endorsed or guaranteed, and does not constitute obligations of MoneyBuddy or any of the subsidiaries associates or affiliates companies whose role in only as described in these Terms & Conditions. Investments in mutual fund are subject to investment risk, including the possible loss of principal amount invested. The value of my/our units will fluctuate. If I/we redeem my units/shares, I/we may receive more or less than
+											</p>
+											<p>
+											I/we paid depending upon NAV of the units in the fund or trust at the time of redemption. Past results are not a guarantee to future performance. Past performance may or may not be sustained in the future.
+											</p>
+										</li>
+										<li>
+											<p><b>Correspondence</b></p>
+											<p>
+											Any notice or other correspondence addressed by MoneyBuddy to me/us may be addressed to the first holder at the address given by me/us, or as may be intimated from time to time. If according to me/us, there is any discrepancy in the particular or details of my transaction or Account statement, then I/we shall be obliged to intimate the same to MoneyBuddy, and to the concerned mutual fund/AMC/authorised registrar of the AMC in writing within 7 (seven) working days of the first holder receiving notice thereof, failing which such transaction, statement or account (as the case may be) shall be deemed to be correct and accepted by me/us, and I/we shall not be entitled to question the correctness or accuracy thereof.
+											</p>
+										</li>
+										<li>
+											<p><b>Customer Information</b></p>
+											<p>
+											I/We agree to provide any and all information that may be required by MoneyBuddy/BSE/AMC/authorised service providers of the AMC from time to time in compliance with existing legal norms and regulations, including but not limited to contact information, address and tax&#8209;related information, and any information required under existing or future KYC norms and laws. I/We agree that MoneyBuddy/BSE/AMC/authorized service providers of the AMC may take steps to verify the veracity of such information provided by me/us, and I/we agree to cooperate with MoneyBuddy/BSE/AMC/authorized service providers of the AMC in providing all information requested by MoneyBuddy. I/We acknowledge that failure to provide such information in a timely manner may result in my/our ineligibility to avail of some, or all of the services of MoneyBuddy, and that MoneyBuddy/BSE/AMC/Trustees of AMC shall in no way be held liable for any losses of whatsoever nature resulting from such failure to provide information on my/our part. I/We agree that any information provided by me/us may be required to be shared with relevant regulatory / statutory authorities and I/we authorise MoneyBuddy to provide all information to such regulatory / statutory authorities as and when required.
+											</p>
+										</li>
+										<li>
+											<p><b>Termination</b></p>
+											<p>
+											MoneyBuddy may terminate its Services by giving 30 days&apos; prior notice in writing to the Registered Customer, provided that the Registered Customer shall not be relieved of obligations hereunder notwithstanding such termination incurred prior to the date on which such termination shall  become effective.
+											</p>
+										</li>
+									</ol>
+									<p><b>Questions?</b></p>
+									<p>
+									Please contact us immediately for any queries wrt our T&Cs.
 									</p>
 									<p>
-										We will occasionally ask you to complete optional online surveys. These surveys may ask you for contact information and demographic information (like zip code, age, or income level). We use this data to tailor your experience at our Website, providing you with content that we think you might be interested in and to display content according to your preferences.
+									<b><u>Please Note:</u></b> Our Terms and Conditions are subject to change without further notice. Users are requested to refer to the latest version available on our website for up to date information.
 									</p>
-									<p>
-										<b>Cookies</b>
-									</p>
-									<p>	
-										A âcookieâ is a small piece of information stored by a web server on a web browser so it can be later read back from that browser. Cookies are useful for enabling the browser to remember information specific to a given user. We place both permanent and temporary cookies in your computerâs hard drive. The cookies do not contain any of your personally identifiable information.
-									</p>
-									<p>	
-										<b>3. Sharing of personal information</b>
-									</p>
-									<p>
-										We may share personal information with our other corporate entities and affiliates. These entities and affiliates may market to you as a result of such sharing unless you explicitly opt-out.
-									</p>
-									<p>	
-										We may disclose personal information to third parties. This disclosure may be required for us to provide you access to our Services, to comply with our legal obligations, to enforce our User Agreement, to facilitate our marketing and advertising activities, or to prevent, detect, mitigate, and investigate fraudulent or illegal activities related to our Services. We do not disclose your personal information to third parties for their marketing and advertising purposes without your explicit consent.
-									</p>
-									<p>
-										We may disclose personal information if required to do so by law or in the good faith belief that such disclosure is reasonably necessary to respond to subpoenas, court orders, or other legal process. We may disclose personal information to law enforcement offices, third party rights owners, or others in the good faith belief that such disclosure is reasonably necessary to: enforce our Terms or Privacy Policy; respond to claims that an advertisement, posting or other content violates the rights of a third party; or protect the rights, property or personal safety of our users or the general public.
-									</p>
-									<p>
-										We and our affiliates will share / sell some or all of your personal information with another business entity should we (or our assets) plan to merge with, or be acquired by that business entity, or re-organization, amalgamation, restructuring of business. Should such a transaction occur that other business entity (or the new combined entity) will be required to follow this privacy policy with respect to your personal information.
-									</p>
-									<p>
-										<b>4. Links to Other Sites</b>
-									</p>
-									<p>
-										Our Website links to other websites that may collect personally identifiable information about you. moneybuddy.in is not responsible for the privacy practices or the content of those linked websites.
-	                    			</p>
-	                    			<p>
-										<b>5. Security Precautions</b>
-									</p>
-	                    			<p>
-	                    				Our Website has stringent security measures in place to protect the loss, misuse, and alteration of the information under our control. Whenever you change or access your account information, we offer the use of a secure server. Once your information is in our possession we adhere to strict security guidelines, protecting it against unauthorized access.
-									</p>
-	                    			<p>
-	                    				<b>6. Your Consent</b>
-									</p>
-									<p>
-										By using the Website and/ or by providing your information, you consent to the collection and use of the information you disclose on the Website in accordance with this Privacy Policy, including but not limited to Your consent for sharing your information as per this privacy policy.
-									</p>
-									<p>
-										If we decide to change our privacy policy, we will post those changes on this page so that you are always aware of what information we collect, how we use it, and under what circumstances we disclose it.
-									</p>
-									<p>
-										<b>7. Grievance Officer</b>
-									</p>
-									<p>
-										In accordance with Information Technology Act 2000 and rules made there under, the name and contact details of the Grievance Officer are provided below:
-									</p>
-									<p>
-										Email: support@moneybuddy.in
-									</p>
-									<p>
-										<b>8. Questions?</b>
-									</p>
-									<p>
-										Please contact us regarding any questions regarding this statement as support@moneybuddy.in
-									
-									</p>
-	                    			
-	                    			
-	                    			
+
 	                    		</div>
 	                    		
 	                    		
@@ -241,7 +531,7 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
@@ -317,7 +607,7 @@
          <script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<script src="assets/js/jquery.js"></script>
-	    <script src="assets/js/bootstrap.min.js"></script>
+	    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
     
        	<%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>

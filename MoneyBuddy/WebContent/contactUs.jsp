@@ -20,16 +20,16 @@
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
 
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
         <!-- Vendor Styles -->
        <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
 
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -105,19 +105,33 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="contactUs" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-                                    </li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -134,10 +148,10 @@
         
 
 		<div class="g-bg-color--dark">
-            <div class="g-container--md g-text-center--xs g-padding-y-20--xs">
-            <br/><br/><br/><br/><br/>
+            <div class="g-container--md g-text-center--xs ">
+            <br/><br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">Contact Us</h1>
+                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Contact Us</h1>
                 </div>
             </div>
         </div>
@@ -168,7 +182,7 @@
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-files"></i>
                             <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">FAQs</h4>
-                            <p class="g-color--white-opacity"> <a href="help"><b><span style="color: white;"> Click Here</span></b></a></p>
+                            <p class="g-color--white-opacity"> <a href="FAQs"><b><span style="color: white;"> Click Here</span></b></a></p>
                         </div>
                     </div>
                 </div>
@@ -234,8 +248,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -316,7 +330,7 @@
         <script type="text/javascript" src="assets/js/javaScript.js"></script>
 
 		<script src="assets/js/jquery.js"></script>
-    	<script src="assets/js/bootstrap.min.js"></script>
+    	<script src="assets/js/bootstrap/bootstrap.min.js"></script>
         <!-- General Components and Settings -->
         <%-- <script type="text/javascript" src="js/global.min.js"></script> --%>
         <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>

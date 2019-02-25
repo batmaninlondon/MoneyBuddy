@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">     
-<script type="text/javascript" src="assets/js/jquery.js"></script>
-<script type="text/javascript" src="assets/js/javaScript.js"></script>
+
 
 <script>
 
@@ -43,5 +42,8 @@
 		openPaymentUrl();
 
 		</script>
+		
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 </body>
 </html>

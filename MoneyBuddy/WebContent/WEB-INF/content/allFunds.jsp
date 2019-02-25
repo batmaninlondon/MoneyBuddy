@@ -9,10 +9,10 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <title>MoneyBuddy-Top Performing Mutual Funds</title>
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
-		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+		<link href="assets/css/bootstrap/animate.min.css" rel="stylesheet">
 	
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -25,11 +25,11 @@
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet"> -->
+        <link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet"> -->
 
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->
 
         <!-- Favicon -->
@@ -39,13 +39,7 @@
                 <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
- 	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-     <script src="assets/js/sly.min.js"></script>
-    <script src="assets/js/jquery.prettyPhoto.js"></script>
-    <script src="assets/js/jquery.isotope.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/wow.min.js"></script>
+ 	
   
  <%--  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> --%>
   
@@ -191,19 +185,33 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="<s:url action="fetchFundDetailsAction"/>" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funds<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-                                    </li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -224,8 +232,9 @@
             <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
             <br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">Mutual Fund</h1>
-                     <input class="form-control" id="myInput" type="text" placeholder="Enter fund name to search..">
+                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Top Performing Mutual Funds</h1>
+                     <p class="g-font-size-15--xs g-font-size-30--sm g-font-size-30--md">Fully online investing</p>
+                     <input class="form-control" id="myInput" type="text" placeholder="Search by entering fund name or category">
 				  <br>
 				</div>
             </div>
@@ -250,7 +259,7 @@
 				    					</article>
 				    					<article class="g-margin-l-20--xs "> 
 									        <s:if test="#fundDetailsDataModelElement.rating.equals('5'.toString())">
-										        <span class="fa fa-star g-color--primary"></span>
+										        <i class="fa fa-star g-color--primary"></i>
 												<span class="fa fa-star g-color--primary"></span>
 												<span class="fa fa-star g-color--primary"></span>
 												<span class="fa fa-star g-color--primary"></span>
@@ -264,7 +273,7 @@
 												<span class="fa fa-star"></span>
 											</s:if>
 											<s:if test="#fundDetailsDataModelElement.rating.equals('3'.toString())">
-										        <span class="fa fa-star g-color--primary"></span>
+										        <i class="fa fa-star g-color--primary"></i>
 												<span class="fa fa-star g-color--primary"></span>
 												<span class="fa fa-star g-color--primary"></span>
 												<span class="fa fa-star "></span>
@@ -331,8 +340,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -386,7 +395,14 @@
 
 
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+	    <script src="assets/js/jquery.js"></script>
+	    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+	    <script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
+	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<!-- Vendor -->
        <%--  <script type="text/javascript" src="vendor/jquery.min.js"></script>

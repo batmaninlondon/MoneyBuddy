@@ -11,20 +11,12 @@
         <title>Megakit - HTML5 Theme</title>
         
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
- 		<link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
+ 		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
-        <script src="assets/js/jquery.js"></script>
-    	<script src="assets/js/bootstrap.min.js"></script>
-     	<script src="assets/js/sly.min.js"></script>
-	    <script src="assets/js/jquery.prettyPhoto.js"></script>
-	    <script src="assets/js/jquery.isotope.min.js"></script>
-	    <script src="assets/js/main.js"></script>
-	    <script src="assets/js/wow.min.js"></script>
-	    <script src="assets/js/index.js"></script>
+        
     
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -337,6 +329,16 @@
   		</div>
   		<div class="col-md-1 col-xs-1" ></div>
   	</div>
+  
+  		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+        <script src="assets/js/jquery.js"></script>
+    	<script src="assets/js/bootstrap/bootstrap.min.js"></script>
+     	<script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
+	    <script src="assets/js/index.js"></script>
   
 </body>
 </html>

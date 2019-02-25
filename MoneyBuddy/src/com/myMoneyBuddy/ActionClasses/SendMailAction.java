@@ -36,16 +36,16 @@ public class SendMailAction extends ActionSupport {
 	    	System.out.println(" SendMailAction execute method Called !!");
 	    	
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	/*if(!mbUtil.isCaptchaValid(getGoogleResponse()))
 	    	{
-	    		/*String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		addActionMessage("Looks like, you are a robot.");
 	    	    logger.debug("SendMailAction class - execute method - returned Lookslikeyouarearobot");
 	    	    logger.debug("SendMailAction class - execute method - end ");
 	    	    
 	    	    return SUCCESS;
-	    	}
+	    	}*/
 	
 	    	SendMail sendMail = new SendMail();
 	

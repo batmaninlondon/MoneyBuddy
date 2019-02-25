@@ -17,8 +17,8 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
 
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
 	
         <!-- Vendor Styles -->
         <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -27,8 +27,8 @@
         <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
         
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -112,13 +112,13 @@
 	        	<div class="name g-text-right--xs g-margin-r-9--xs" >
 	        		<s:form action="redirectAction" method="post">
 	        			<s:if test="#session.customerCartList.size() == 1 ">
-	        				<a href="<s:url action="fetchFundDetailsAction"/>" class="btn g-color--white "  style="background-color:black;" >Back</a>
+	        				<a href="<s:url action="MFexplorer"/>" class="btn g-color--white "  style="background-color:black;" >Back</a>
 	        				<button type="button"  class="btn g-color--white g-margin-t-15--xs disabled"  style="background-color:black; ">Continue</button>
 	        				<%-- <s:submit class="btn g-color--white g-margin-t-15--xs disabled" value="Continue" style="background-color:black; "/> --%>
 	        			
 	        			</s:if>
 	        			<s:else>
-	        			<a href="<s:url action="fetchFundDetailsAction"/>" class="btn g-color--white "  style="background-color:black;" >Add more to Cart</a>
+	        			<a href="<s:url action="MFexplorer"/>" class="btn g-color--white "  style="background-color:black;" >Add more to Cart</a>
 	        			<!-- <button type="button"  class="btn g-color--white "  style="background-color:black;" onClick="allFunds.jsp" >Back</button> -->
 	        				<s:submit class="btn g-color--white g-margin-t-15--xs " value="Continue" style="background-color:black; "/>
 	        			</s:else>
@@ -136,7 +136,7 @@
     <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
  	<script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
     <script src="assets/js/sly.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>

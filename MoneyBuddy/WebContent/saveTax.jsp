@@ -8,17 +8,17 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 	    <title>Save Tax | Money Buddy</title>
 	    <!-- core CSS -->
-	    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
+	    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-	 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
-	    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+	 	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
+	    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/animate.min.css">
 	   
-	    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-	    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+	    <link type="text/css" rel="stylesheet" href="assets/css/global/global.css"/>
+	    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 	    
     
         <!-- CSS -->
-        <link rel="stylesheet" href="css/style2.css">
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
        
 
         <!-- Theme Styles -->
@@ -26,15 +26,15 @@
         
        
         <!-- Vendor Styles -->
-        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/themify.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
 
         <!-- Theme Styles -->
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
 
     </head>
 
@@ -71,20 +71,34 @@
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        <a href="saveTax" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save Tax<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-                                    </li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
+										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
-										 			 <li class="s-header-v2__nav-item"><a href="bseDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
                                 </ul>
@@ -110,7 +124,7 @@
 	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 1,50,000/-</b></span> 
 	                        from your taxable income to effectively reduce your tax liability.</p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
-	                        	<a class="btn btn-home" href="<s:url action="fetchFundDetailsAction"/>" " role="button">Get Started</a>
+	                        	<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -230,8 +244,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -307,32 +321,31 @@
 			  }
 			}
          </script>
-         
-         
-        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
-        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
-        <script type="text/javascript" src="vendor/swiper/swiper.jquery.min.js"></script>
-        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
-        <script type="text/javascript" src="vendor/counterup.min.js"></script>
-        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.equal-height.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.wow.min.js"></script>
+        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
+        <script type="text/javascript" src="assets/js/counterup.min.js"></script>
+        <script type="text/javascript" src="assets/js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.parallax.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.equal-height.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.wow.min.js"></script>
 
         <!-- General Components and Settings -->
-        <script type="text/javascript" src="js/global.min.js"></script>
-        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
-        <script type="text/javascript" src="js/components/swiper.min.js"></script>
-        <script type="text/javascript" src="js/components/counter.min.js"></script>
-        <script type="text/javascript" src="js/components/parallax.min.js"></script>
-        <script type="text/javascript" src="js/components/tab.min.js"></script>
-        <script type="text/javascript" src="js/components/equal-height.min.js"></script>
-        <script type="text/javascript" src="js/components/wow.min.js"></script>
-        <script src="js/owl.carousel.js"></script>
-        <script src="js/main.js"></script>
+        <script type="text/javascript" src="assets/js/global.min.js"></script>
+        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
+        <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+        <script type="text/javascript" src="assets/js/counter.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/parallax.min.js"></script>
+        <script type="text/javascript" src="assets/js/tab.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/equal-height.min.js"></script>
+        <script type="text/javascript" src="assets/js/wow.min.js"></script>
+        <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
 </html>

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>User Verification Page</title>
-<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
 </head>
 <body>
@@ -25,7 +25,7 @@
 	%>
 
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap/bootstrap.min.js"></script>
 	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->	
 </body>
 </html>

@@ -1,240 +1,867 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>test</title>
-    core CSS
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.Properties" %>
+<%@ page language="java" import="java.io.FileInputStream" %>
+<%@ page language="java" import="java.io.File" %>
 
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    
-   	<style>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
-		p.special-font {
-		    font-size:140%;
-		    font-family:'Bodoni MT';
-		}
-		p.dark-font {
-		    font-size:140%;
-		    font-family:'Bodoni MT';
-		    font-weight: bold;
-		}
-	</style>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <!-- Begin Head -->
+    <head>
+        <!-- Basic -->
+
+    	<!-- <META HTTP-EQUIV="Refresh" CONTENT="0;URL=/MoneyBuddy/MFexplorer.action"> -->
+    	<!-- /MoneyBuddy/MFexplorer.action -->
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>MoneyBuddy - Home</title>
+        <meta name="keywords" content="HTML5 Theme" />
+        <meta name="description" content="MoneyBuddy - Effortless Investing">
+        <meta name="author" content=moneybuddy.in>
+
+        <!-- Web Fonts -->
+
+        
+    </head>
+    <!-- End Head -->
+
+    <!-- Body -->
+    <body >
+    <div id="load" class="load"></div>
 	<div id="content">
-    ========== HEADER ==========
-        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
-            Navbar
-            <nav class="s-header-v2__navbar">
-                <div class="container g-display-table--lg">
-                    Navbar Row
-                    <div class="s-header-v2__navbar-row">
-                        Brand and toggle get grouped for better mobile display
-                        <div class="s-header-v2__navbar-col">
+<!--========== HEADER ==========-->
+               <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+           <!--  <nav class="s-header-v2__navbar"> -->
+                <div class="container">
+                    <!-- Navbar Row -->
+                   <!--  <div class="s-header-v2__navbar-row"> -->
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                       <%--  <div class="s-header-v2__navbar-col">
                             <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
                                 <span class="s-header-v2__toggle-icon-bar"></span>
                             </button>
-                        </div>
-                        <div class="s-header-v2__navbar-col-width--180">
-                            Logo
-                            <div class="">
-                                <a href="welcome" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                        </div> --%>
+
+                        <div >
+                            <!-- Logo -->
+                            <div >
+                                <a href="welcome" >
+                                    <img src="img/logo-white.png" alt="Dublin Logo">
+                                    <img  src="img/logo.png" alt="Dublin Logo">
                                 </a>
                             </div>
-                            End Logo
+                            <!-- End Logo -->
                         </div>
-
+                        
+                        <!-- <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right"> -->
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+<%--                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+										 			<li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+										<%	} else 
+										 	{	%>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
+				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
+				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+													      </ul>
+				                                    
+				                                    </li>
+										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+                                </ul>
+                            </div> --%>
+                            <!-- End Nav Menu -->
+                       <!--  </div> -->
                     </div>
-                    End Navbar Row
-                </div>
-            </nav>
-            End Navbar
+                    <!-- End Navbar Row -->
+               <!--  </div> -->
+        <!--     </nav> -->
+            <!-- End Navbar -->
         </header>
-        ========== END HEADER ==========
+        <!--========== END HEADER ==========-->
+    	
+    	
+    	
+    	
+        <!--========== SWIPER SLIDER ==========-->
+<%--         <div class="s-swiper js__swiper-one-item">
+            <!-- Swiper Wrapper -->
+            <div class="swiper-wrapper">
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/970x970/04.jpg');">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Give your money<br>A chance to grow</h1>
+                             <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
+                        </div>
+						<div class="g-text-center--xs">
+                       		<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       		<br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		   </div>
+                    </div>
+                </div>
+                
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url(images/slider/bg56.jpg);">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <div class="g-margin-b-30--xs">
+                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Your money with our support<br></h1>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you to grow your money so that you can focus on what matters most to you</h2>
+                            </div>
+                            <div class="g-text-center--xs">
+                            	<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		  		</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/1920x1080/01.jpg');">
+                    <div class="container g-text-center--xs g-ver-center--xs">
+                        <div class="g-margin-b-30--xs">
+                            <div class="g-margin-b-30--xs">
+                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Make your dreams reality</h1>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >The best thing money can buy is .....money</h2>
+                            </div>
+                            <div class="g-text-center--xs">
+                       			<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+               		  		</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Swiper Wrapper -->
+
+            <!-- Arrows -->
+            <a href="javascript:void(0);" class="s-swiper__arrow-v1--right s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-right js__swiper-btn--next"></a>
+            <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
+            <!-- End Arrows -->
+            
+            <a href="whyInvest"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+                <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
+                <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
+            </a>
+        </div> --%>
+        <!--========== END SWIPER SLIDER ==========-->
+
+<%-- 		<div class="container-fluid g-padding-y-10--xs g-padding-y-20--sm">
+            <div class="g-text-center--xs g-margin-b-10--xs">
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-5--xs">Some of Our Most Popular Funds</p>
+            </div>
+
+            <!-- Swiper -->
+            <div class="s-swiper js__swiper-news">
+                <!-- Wrapper -->
+                <div class="swiper-wrapper g-margin-b-3s0--xs">
+                	<s:iterator value="popularFundDetailsDataModel" var="popularFundDetailsDataModelElement">
+                	<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<s:set var="selectedFundId" value="#popularFundDetailsDataModelElement.fundId" />
+								<figure class="snip1418   swiper-slide" onClick="buyFundHandler(<s:property value="selectedFundId" />);" style="height:250px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.fundName"/></p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.sector"/>. <s:property value="#popularFundDetailsDataModelElement.subSector"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.fundStartDate"/></p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+									        <s:if test="#popularFundDetailsDataModelElement.rating.equals('5'.toString())">
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+											</s:if>
+											<s:if test="#popularFundDetailsDataModelElement.rating.equals('4'.toString())">
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star"></span>
+											</s:if>
+											<s:if test="#popularFundDetailsDataModelElement.rating.equals('3'.toString())">
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+											</s:if>
+											<s:if test="#popularFundDetailsDataModelElement.rating.equals('2'.toString())">
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+											</s:if>
+											<s:if test="#popularFundDetailsDataModelElement.rating.equals('1'.toString())">
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+											</s:if>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+                	</s:iterator> 
+                <div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide"  onClick="buyFundHandler('1');" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name - 1</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+							<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+	  							<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+							</s:form>
+							
+						</div>
+						<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+						<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+							<div  class="  g-line-height--normal  ">
+								<figure class="snip1418   swiper-slide" style="height:300px;">
+									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+				  					<figcaption>
+				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;">Fund Name</p>
+				    						<br/>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">Equity.Wealth</p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;">13 March 2010</p> 
+				    					</article>
+				    					<article class="g-margin-l-20--xs "> 
+										        <span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star g-color--primary"></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star "></span>
+												<span class="fa fa-star"></span>
+									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
+									        <table id="portfoliosummary" class="table-bordered" cellspacing="0" width="80%">
+										        <thead>
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+														<td class="text-center" ><span class="g-font-size-14--xs">10%</span></td>
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+				  				 </figcaption>
+		  						 <a href="#"></a>
+								</figure>
+								
+							</div>
+						</div>
+                
+                </div>
+                <!-- End Wrapper -->
+				<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+		  		<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+			</s:form>
+                <!-- Pagination -->
+                <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--dark g-text-center--xs js__swiper-pagination"></div>
+            </div>
+            <!-- End Swiper -->
+        </div> --%>
+
+
+		
+		<!-- Mutual Funds -->
         
-        <div class="g-bg-color--dark">
-            <div class="container g-padding-y-45--xs">
+        <!-- End News -->
+
+       
+<!-- Process -->
+        
+        <!-- <div class="g-bg-color--dark">
+        <div class="g-bg-color--primary-ltr">
+            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-text-center--xs g-margin-b-100--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Process</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">How it Works</h2>
+                </div>
+                <ul class="list-inline row g-margin-b-100--xs">
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">01</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Assess</h3>
+                                <p class="g-color--white-opacity">The first step is to assess your special characteristics by understanding your financial situation, your economic goals and your short to medium term commitments.</p>
+                            </div>
+                        </div>
+                    </li>
+                    End Process
+
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">02</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Measure</h3>
+                                <p class="g-color--white-opacity">This is where we use intelligence questionnaire based algorithm to assess your risk appetite</p>
+                            </div>
+                        </div>
+                    </li>
+                    End Process
+
+                    Process
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--sm">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">03</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Design</h3>
+                                <p class="g-color--white-opacity">We use Artificial Intelligence and machine learning to design your investment portfolio by picking the funds matching your goals and risks appetite </p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1">
+                        <div class="center-block g-text-center--xs">
+                            <div class="g-margin-b-30--xs">
+                                <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">04</span>
+                            </div>
+                            <div class="g-padding-x-20--xs">
+                                <h3 class="g-font-size-18--xs g-color--white">Monitor</h3>
+                                <p class="g-color--white-opacity">Pro-active monitoring to ensure your investment remains in-line with your goals and risk appetite.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="g-text-center--xs">
+                    <a href="#js__scroll-to-appointment" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- End Process -->
+        <!-- Parallax -->
+<!--         <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed;">
+            <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-margin-b-80--xs">
+                    <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--primary">The Most Efficient and Easiest Way to Save Tax</h2>
+                </div>
+                <a  href="saveTax" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">Learn More</a>
+            </div>
+        </div> -->
+        <!-- End Parallax -->
+
+        <!-- Culture -->
+<!--         <div class="g-promo-section">
+            <div class="container g-padding-y-80--xs g-padding-y-60--sm">
+                <div class="row">
+                    <div class="col-md-4 g-margin-t-15--xs g-margin-b-60--xs g-margin-b-0--lg">
+                        <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".1s">
+                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">Why</h2>
+                        </div>
+                        <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s">
+                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">MoneyBuddy</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <p class="g-font-size-16--xs">We aim high at being focused on building relationships with our clients and community. </p>
+                        <p class="g-font-size-16--xs">With more than 40 years of experience in financial investments, consulting and technology, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
+                    	<div class="row ">
+                        <ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Wealth Management</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Tax Saving</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Portfolio Tracking</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Financial Planning</li>
+                        </ul>
+                  		<ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>No Fee</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Any time, any where</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Proven Track Record</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Mobile, web and more</li>
+                        </ul> 
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 g-promo-section__img-right--lg g-bg-position--center g-height-100-percent--md js__fullwidth-img">
+                <img class="img-responsive" src="img/970x970/03.jpg" alt="Image">
+            </div>
+        </div> -->
+        <!-- End Culture -->
+
+        
+        <!-- Portfolio Filter -->
+        
+        <!-- Counter -->
+<%--         <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;">
+            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="row">
+                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">30</figure>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">40</figure>
+                                <span class="g-font-size-40--xs g-color--white">+</span>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Yrs experience</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                        <div class="g-text-center--xs">
+                            <div class="g-margin-b-10--xs">
+                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">4</figure>
+                                <span class="g-font-size-40--xs g-color--white">x</span>
+                            </div>
+                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --%>
+        <!-- End Counter -->
+
+<%--         <section id="services" class="g-bg-color--dark">
+	   		<div class="container ">
+	            <div class="center wow fadeInDown g-margin-t-50--xs g-margin-b-50--xs ">
+	            	<h2 class="g-color--white g-text-center--xs">Our Partners..</h2>
+	                <p class="g-color--white g-text-center--xs">We use funds from leading providers to build your portfolio</p>
+	            	<marquee behavior="scroll" direction="left" >
+	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+						<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 					<img src="images/partners/icici.jpg" height="42" alt="ICICI"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	 				  	<!-- <img src="images/partners/dhfl_fd.png" height="35" alt="DHFL"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/reliance.png"  height="42" alt="Reliance"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   -->
+	 				  	<img src="images/partners/BSE.jpg"  height="42" alt="BSE"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				 	<!-- <img src="images/partners/axis.jpg"  height="42" alt="Axix">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->  
+	 				  	<img src="images/partners/dhfl_fd.jpg"  height="42" alt="dhfl_fd">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/dsp.jpg"  height="42" alt="Dsp"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/franklin.jpg"  height="42" alt="Franklin"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/grun_fd.jpg"  height="42" alt="Grun_fd">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/housing_fd.jpg"  height="42" alt="Housing">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/icici.jpg"  height="42" alt="ICICI">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/mahindra_fd.jpg"  height="42" alt="Mahindra">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+	 				  	<img src="images/partners/hdfc.jpg"  height="42" alt="HDFS">
+					</marquee>
+	            </div>
+        </div><!--/.container-->
+    </section> --%><!--/#services-->
+    
+    <!-- Subscribe -->
+    
+<%--         <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
+            <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+                <div class="g-margin-b-80--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Join Over 1000+ People</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                        <div class="input-group">
+                        	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
+	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
+	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
+			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
+			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
+	                            <span class="input-group-btn " >
+	                            	<s:submit id="recaptcha-subscriber" class="g-margin-l-100--xs g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--left-50 g-radius--right-50" value="Submit"></s:submit>
+	                                <!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button> -->
+	                            </span>
+	                            
+	                            <s:actionmessage class="g-font-size-32--xs g-font-size-36--md g-color--white"/> 
+	                            
+                            </s:form>
+                        </div>
+                        <br/><br/>
+                        <p id="subscription-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"></p>
+                    </div>
+                </div>
+            </div>
+        </div> --%>
+        <!-- End Subscribe -->
+    
+
+<!-- 	<div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">
+                <div class="row"> -->
+                    <!-- Form -->
+<%--                     <div class="col-md-8 js__form-eqaul-height-v1 ">
+                        <div class="g-padding-x-40--xs g-padding-y-50--xs">
+                            <h2 class="g-font-size-24--xs g-color--primary ">Have a question? Write to us</h2>
+	                        <s:form  action="sendMailAction" class="g-recaptcha" method="post" name="formContactUsMail" namespace="/" >
+	                        <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md g-bg-color--primary" >
+			                    <div class="g-margin-b-20--xs g-color--primary">
+			                        <s:fielderror fieldName="senderName" class="g-color--red" />
+						  			<s:textfield class="form-control s-form-v3__input" name="senderName" placeholder="* Name" /> 
+			                    </div>
+			                    <div class="row g-row-col-5 g-margin-b-50--xs g-color--primary">
+			                        <div class="g-color--primary col-sm-6 g-margin-b-30--xs g-margin-b-0--md">
+			                        	<s:fielderror fieldName="senderEmailId" class="g-color--red" />
+						  				<s:textfield class="g-color--primary form-control s-form-v3__input" name="senderEmailId" placeholder="* Email" />
+			                        </div>
+			                        <div class="col-sm-6">
+			                        	<s:fielderror fieldName="senderMobileNum" class="g-color--red" />
+						  				<s:textfield class="g-color--primary form-control s-form-v3__input" name="senderMobileNum" placeholder="* Phone"  />
+			                        </div>
+			                    </div>
+			                    <div class="g-margin-b-10--xs">
+			                    	<s:fielderror fieldName="senderMessage" class="g-color--red" />
+						  			<s:textfield class="form-control s-form-v3__input" name="senderMessage" placeholder="* Your message" />
+			                    </div>
+			                    <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>
+                    
+			                    <div class="g-text-center--xs">
+			                    	<s:submit id="recaptcha-contact-us" class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />
+		                        </div>
+	                		</div>
+	                		</s:form>
+                        </div>
+                    </div> --%>
+                    <!-- End Form -->
+
+                    <!-- Contacts -->
+<!--                     <div class="col-md-4 g-bg-color--primary-ltr js__form-eqaul-height-v1">
+                        <div class="g-overflow--hidden g-padding-x-40--xs g-padding-y-50--xs">
+                            <h2 class="g-font-size-24--xs g-color--white g-margin-b-50--xs">Contact Us</h2>
+                            <ul class="list-unstyled g-margin-b-70--xs">
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-location-pin"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        A 1204, Partk Royale, <br> Rahantani, Pune 411017, India
+                                    </div>
+                                </li>
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-headphone-alt"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        + (91) 997 164 8736
+                                    </div>
+                                </li>
+                                <li class="clearfix g-color--white g-margin-b-40--xs">
+                                    <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                                        <i class="g-font-size-20--xs g-color--white-opacity-light ti-email"></i>
+                                    </div>
+                                    <div class="g-media__body">
+                                        info.moneybuddy@gmail.com
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="list-inline g-ul-li-lr-15--xs">
+                                <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="g-font-size-20--xs g-color--white-opacity ti-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/MoneyBuddyIndia"><i class="g-font-size-20--xs g-color--white-opacity ti-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/money-buddy-94a73814a/"><i class="g-font-size-20--xs g-color--white-opacity fa fa-linkedin"></i></a></li>
+                                <li><a href="https://www.YouTube.com/MoneyBuddy"><i class="g-font-size-20--xs g-color--white-opacity fa fa-youtube"></i></a></li>
+                            </ul>
+                            <i class="g-font-size-150--xs g-color--white-opacity-lightest ti-comments" style="position: absolute; bottom: -1.25rem; right: -1.25rem;"></i>
+                        </div>
+                    </div> -->
+                    <!-- End Contacts -->
+             <!--    </div>
             </div>
         </div>
-         <section id="verification-mail-content" class="g-margin-b-30--xs">
-        <div class="container" >
-		<br/>
-		<p class="special-font">Welcome to MoneyBuddy! </p>
-		<p class="special-font"><i>Congratulations on taking the first step towards investing your money in a simple and stress free way.</i></p>
-		<p class="special-font"><i>We&#8217;re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</i></p>
-		<p class="special-font"><i>Click on LinkForEmail to verify your email and activate your account.</i></p>
-		</br>
-		<p class="special-font">That&#8217;s it, all you need to get started with MoneyBuddy.</p>
-		<p class="dark-font"><u>If you have any Question/Doubts</u></p>
-		
-		<p class="special-font">Reply to this <u>Email</u> or Whatsapp/Call/SMS us at <u>+91-9971648736</u></p>
-		<br/>
-		<p class="special-font"><i>-Wishing you a prosperous and healthy life</i></p>
-		
-		<p class="special-font"><i>The MoneyBuddy Team</i></p>
-		</div>
-		</section>
+      -->
+        <!--========== END PAGE CONTENT ==========-->
+
+        <!--========== FOOTER ==========-->
+<!--         <footer class="g-bg-color--dark">
+            Links
+            <div class="g-hor-divider__dashed--white-opacity-lightest">
+                <div class="container g-padding-y-80--xs">
+                    <div class="row">
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.linkedin.com/in/money-buddy-94a73814a/">Linkedin</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
+                            <p class="g-color--white-opacity">
+                            No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
+                        </div>
+                    </div>
+                    <div class="row  g-font-size-12--xs g-color--white">
+                    <br/>
+                    	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+                    </div>
+                </div>
+            </div>
+            End Links
+
+            Copyright
+            <div class="container g-padding-y-50--xs">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="index.html">
+                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
+                        </a>
+                    </div>
+                     <div class="col-sm-6 g-text-right--xs g-color--white">
+                    &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                </div>
+                </div>
+            </div>
+            End Copyright
+        </footer> -->
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
+       <!--  <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a> -->
+
+       <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+     	<%-- <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+       <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
+       <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+       <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
+       <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+       <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
+       <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+       <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
+       <script type="text/javascript" src="assets/js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+       <script type="text/javascript" src="assets/js/counterup.min.js"></script>
+       <script type="text/javascript" src="assets/js/counter.min.js"></script>
+       <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
+       
+        <!-- Vendor -->
+                                                                               
+        <%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script> --%>
+    
+        <!-- General Components and Settings -->
+       <!--  <script type="text/javascript" src="js/global.min.js"></script> -->
+        <%-- <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="vendor/swiper/swiper.jquery.min.js"></script>
+        <script type="text/javascript" src="js/components/swiper.min.js"></script>
+        <script type="text/javascript" src="vendor/waypoint.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="vendor/counterup.min.js"></script>
+        <script type="text/javascript" src="js/components/counter.min.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
+        
+        <!--========== END JAVASCRIPTS ==========-->
+       
 	</div>
-
-</body>
-</html> -->
-
-
-
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Welcome Message</title>
-</head>
-<body>
-<center>
-<table width="600" background="#FFFFFF" style="text-align:left;" cellpadding="0" cellspacing="0">
-<tr>
-	<td height="18" width="31" style="border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="18" width="131">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="18" width="466" style="border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-</tr>
-<tr>
-	<td height="2" width="31" style="border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="2" width="131">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="2" width="466" style="border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-</tr>
-<!--GREEN STRIPE-->
-<tr>
-	<td background="images/greenback.gif" width="31" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF;" height="80">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	
-	<!--WHITE TEXT AREA-->
-	<td width="200" bgcolor="#FFFFFF" style="border-top:1px solid #FFF; text-align:center;" height="80" valign="middle">
-	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#13b1cd;">Money|</span>
-	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#4B4A4A;">Buddy</span>
-	
-	</td>
-	
-	<!--GREEN TEXT AREA-->
-	<td background="images/greenback.gif" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:35px;" height="80">
-	<span style="color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;align:center;">Let your money work for you</span>
-	</td>
-</tr>
-
-<!--DOUBLE BORDERS BOTTOM-->
-<tr>
-	<td height="3" width="31" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="3" width="131">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-	<td height="3" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-	<!--CONTENT STARTS HERE-->
-	<br />
-	<br />
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-	<td width="15"><div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-</td>
-	<td width="325" style="padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:13px;" valign="top">
-	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Welcome to MoneyBuddy!</span>
-	<br />
-	<p>Congratulations on taking the first step towards investing your money in a simple and stress free way.</p>
-	<br />
-	<p>We&#8217;re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</p>
-	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
-
-	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#2)</div>
-	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
- -->
- 	<br/>
-	<p>Click on <b style="font-size:17px;">LinkForEmail</b> to verify your email and activate your account.</p>
-	<br/>
-	<p>That&#8217;s it, all you need to get started with MoneyBuddy.</p>
-	<br/>
-
-   <p style="border-top:1px solid #e4e4e4;"></p>
-   	<br/>
-   	<p style="font-size:15px;"><b >Wishing you a prosperous and healthy life!</b></p>
-	
-    <p style="font-size:15px;"><b>-The MoneyBuddy Team</b></p><br/>
-
-	</td>
-	<td style="border-left:1px solid #e4e4e4; padding-left:15px;" valign="top">
-	
-	<!--RIGHT COLUMN FIRST BOX-->
-	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<tr>
-	<td>
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Why MoneyBuddy?</div>
-	<img src="images/addressbook.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>To help ensure that you receive all email messages consistently in your inbox with images displayed, please add this address to your address book or contacts list: <strong>[YOUR REPLY ADDRESS]</strong>.</p>
-	<br />
-	</td>
-	</tr>
-	</table>
-	
-	<!--RIGHT COLUMN SECOND BOX-->
-	<br />
-	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<tr>
-	<td>
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
-	<img src="images/penpaper.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
-	<br />
-	</td>
-	</tr>
-	</table>
-	
-	<!--RIGHT COLUMN THIRD BOX-->
-	<br />
-	<table cellpadding="0" width="100%" cellspacing="0" style="font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<tr>
-	<td>
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have A Topic Idea?</div>
-	<img src="images/lightbulb.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>I'd love to hear it! Just reply any time and let me know what topics you'd like to know more about.</p>
-
-	<br />
-	</td>
-	</tr>
-	</table>
-	
-	</td>
-	</tr>
-	</table>
-	</td>
-</tr>
-</table>
-<br />
-
-</center>
-</body>
+    </body>
+      <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         
+         </script>
+         
+<%--      <script>
+       function onSubmit(token) {
+         alert(token);
+         saveSubscriber(token);
+       }
+     </script>  --%>
+         
+        
+    <!-- End Body -->
 </html>

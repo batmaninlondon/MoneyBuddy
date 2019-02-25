@@ -24,17 +24,17 @@
         <!-- Vendor Styles -->
         
          
-        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-		<link href="assets/bootstrap/css/responsive.css" rel="stylesheet">
-		<link href="assets/js/vendor/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
+		<link href="assets/css/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
 		
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
   		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>	
 
         <!-- Theme Styles -->
-        <link href="css/style.css" rel="stylesheet" type="text/css"/> 
-        <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
        <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
        
          -->
@@ -43,7 +43,7 @@
 
         <!-- Favicon -->
         
-	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    
 	   
 	   
 	
@@ -208,7 +208,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
                                     <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
@@ -344,7 +344,7 @@
                                 <li class="g-color--white">
                                     <a class="g-color--white" href="https://www.behance.net/keenthemes">
                                         <i class="g-padding-r-5--xs ti-arrow-circle-up"></i>
-                                        <span class="font-weight-bold"><a href="<s:url action="fetchFundDetailsAction"/>"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="font-weight-bold"><a href="<s:url action="MFexplorer"/>"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </li>
                                 <li class="g-color--white">
@@ -532,8 +532,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -591,7 +591,7 @@
         <!-- Vendor -->
     
 		  
-		
+		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<script type="text/javascript" src="vendor/jquery.min.js"></script>
        <%--  <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script> --%>

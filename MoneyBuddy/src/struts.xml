@@ -27,6 +27,7 @@
 		
 	<!-- <constant name="struts.action.extension" value="html"/> -->
 	<constant name="struts.ui.theme" value="simple" />
+	<!-- <constant name="struts.action.extension" value="" /> -->
 	<include file="struts-jsp.xml"></include>
 	
     <package name="registerAction" namespace="/" extends="struts-default">
@@ -57,7 +58,7 @@
     </package>
     
     <package name="fetchFundDetailsAction" namespace="/" extends="struts-default">
-        <action name="fetchFundDetailsAction" class="com.myMoneyBuddy.ActionClasses.FetchFundDetailsAction">
+        <action name="MFexplorer" class="com.myMoneyBuddy.ActionClasses.FetchFundDetailsAction">
             <result name="success">/WEB-INF/content/allFunds.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
             <!-- <result type="stream">
@@ -565,7 +566,7 @@
     <package name="newLoginAction" namespace="" extends="struts-default">
         <action name="newLoginAction" class="com.myMoneyBuddy.ActionClasses.NewLoginAction">
             <result name="success">/welcome.jsp</result>
-            <result name="haveInvestment">/WEB-INF/content/bseDashboard.jsp</result>
+            <result name="haveInvestment">/WEB-INF/content/customerDashboard.jsp</result>
             <result name="adminLogin">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="fundSelected">/amountConfirmation.jsp</result>
             <result name="input">/login.jsp</result>

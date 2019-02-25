@@ -202,7 +202,7 @@ public class QueryTransactionDetails {
 
 		try
 		{
-			System.out.println("customerId is : "+customerId);
+			System.out.println("customerId is :"+customerId+":");
 			hibernateSession.beginTransaction();
 			
 			Query query = hibernateSession.createQuery("select count(*) from TransactionDetails   where customerId = :customerId ");
@@ -211,6 +211,9 @@ public class QueryTransactionDetails {
 			String count = query.uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
+			
+			
+			System.out.println("count is :"+count+":");
 			
 			logger.debug("QueryTransactionDetails class - haveInvestments method - customerId - "+customerId+" - end");
 			
