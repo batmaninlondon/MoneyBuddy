@@ -15,7 +15,7 @@
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/datepicker.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
- 	<link href="assets/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+ 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/bootstrap/css/main.css" rel="stylesheet">

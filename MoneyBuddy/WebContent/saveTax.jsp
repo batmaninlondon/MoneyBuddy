@@ -10,8 +10,8 @@
 	    <!-- core CSS -->
 	    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-	 	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
-	    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/animate.min.css">
+	 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+	    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/animate.min.css">
 	   
 	    <link type="text/css" rel="stylesheet" href="assets/css/global/global.css"/>
 	    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
@@ -73,34 +73,25 @@
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
+										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
+	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
+									      	</ul>
+	                                    
+	                                    </li>
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -119,10 +110,11 @@
 	            <div class="row">
 	                <div class="col-md-7">
 	                    <div class="block">
-	                        <p class="wow fadeInDown g-color--primary" data-wow-delay="0.3s" data-wow-duration=".2s" ><b>ENJOY TAX-EFFICIENT SAVINGS</b></p>
-	                        <p class="wow fadeInDown g-font-size-20--xs" data-wow-delay="0.5s" data-wow-duration=".5s">Investments in ELSS qualify for tax deduction under section 80C of the income tax. You can invest into ELSS and deduct upto
-	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 1,50,000/-</b></span> 
-	                        from your taxable income to effectively reduce your tax liability.</p>
+	                        <p class="wow fadeInDown g-color--primary" data-wow-delay="0.3s" data-wow-duration=".2s" ><b>ENJOY TAX-EFFICIENT SAVINGS</b></p></br>
+	                        <p class="wow fadeInDown g-font-size-20--xs" data-wow-delay="0.5s" data-wow-duration=".5s">Did you Know? ELSS funds are the best way to create wealth and save income tax; Invest upto  
+	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 150,000</b></span> 
+	                         in our top performing ELSS funds and save tax upto 
+	                        <span class="g-color--primary g-font-size-24--xs"> <b>Rs. 46,350</b></span> </p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
 	                        	<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
 	                        </div>
@@ -182,15 +174,15 @@
                         <div class="g-hor-border-1__solid--primary g-padding-x-40--xs g-padding-x-50--sm g-padding-y-100--xs g-padding-y-120--sm js__filters-tabs">
                             <div data-filter=".-is-active" class="s-tab__filter-v1 g-font-family--playfair cbp-filter-item-active cbp-filter-item">
                                 <span class="text-uppercase g-display-block--xs g-font-size-24--xs g-color--primary">01</span>
-                               Tax Benefit
+                               Save tax upto Rs. 46,350
                             </div>
                             <div data-filter=".service" class="s-tab__filter-v1 g-font-family--playfair cbp-filter-item">
                                 <span class="text-uppercase g-display-block--xs g-font-size-24--xs g-color--primary">02</span>
-                                Lock in period
+                                Lock in period of 3 yrs vs 15 yrs for PPF
                             </div>
                             <div data-filter=".pages" class="s-tab__filter-v1 g-font-family--playfair cbp-filter-item">
                                 <span class="text-uppercase g-display-block--xs g-font-size-24--xs g-color--primary">03</span>
-                               Long term value growth
+                               Avg 3 yr returns of 15% vs 8.5% for PPF
                             </div>
                         </div>
                     </div>
@@ -203,24 +195,24 @@
                         <div class="cbp js__grid-tabs">
                             <div class="s-tab__grid-v1-item cbp-item -is-active">
                                 <div class="g-margin-b-20--xs">
-                                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Tax Benefit</p>
-                                    <h2 class="g-font-size-32--xs g-font-family--playfair">How your can reduce your tax obligations</h2>
+                                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Save tax upto Rs. 46,350</p>
+                                    <h2 class="g-font-size-32--xs g-font-family--playfair">How to claim income tax benefits with ELSS</h2>
                                 </div>
-                                <p>One of the primary reasons to invest in ELSS is to save tax. Investments in ELSS qualify for tax deduction under section 80C of the income tax act of 1961. But any dividend or long term capital gain earned by the investor is exempted from income tax. </p>
-                                <p>Simply, your returns from ELSS become tax free. Government of India also provides tax rebate for equity linked saving schemes (ELSS) u/s 80C of Income Tax Act 1961. You can invest into ELSS and deduct upto Rs. 1,50,000/- from your taxable income to effectively reduce your tax liability.</p>
+                                <p>With MoneyBuddy, You can invest in ELSS funds online and submit receipt to your office next day itself, this will help reduce your TDS burden and your cash in hand will increase.</p><br/>
+                                <p>If you've missed your office deadline, you should still invest in ELSS funds before 31st Mar'19.. You can submit the investment proof while filiing income tax in June'19 and claim the refund for excess tax paid.</p>
                             </div>
                             <div class="s-tab__grid-v1-item cbp-item service">  
                                 <div class="g-margin-b-20--xs">
                                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-                                    <span style="text-align: left;">Lock in period</span></p>
-                                    <h2 class="g-font-size-32--xs g-font-family--playfair">Simulate inculcate saving habit</h2>
+                                    <span style="text-align: left;">Lock in period of 3 yrs vs 15 yrs for PPF</span></p>
+                                    <h2 class="g-font-size-32--xs g-font-family--playfair">Lock in period of 3 yrs vs 15 yrs for PPF</h2>
                                 </div>
                                 <p>Pertaining to the performance of the mutual funds, good mutual fund portfolios are constructed for long term investments, however, they are not bound with the lock in periods. But in case of ELSS, the funds are locked in for at least 3 years.</p>
                                 <p>Which means, in ELSS fund you are obligated to stay invested for 3 years or more to exempt from taxes applicable on returns. This forcefully embeds a good habit to stay invested for a longer period.</p>
                             </div>
                             <div class="s-tab__grid-v1-item cbp-item pages">
                                 <div class="g-margin-b-20--xs">
-                                    <p class="text-left g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Long term value growth</p>
+                                    <p class="text-left g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Avg 3 yr returns of 15% vs 8.5% for PPF</p>
                                     <h2 class="g-font-size-32--xs g-font-family--playfair">Equity invested funds</h2>
                                 </div>
                                 <p>Although, the lock in period for ELSS is 3 years, you can allow the continuous growth of your fund for longer or redeem after 3 years. Inherently, equity investments are subject to market risk. </p>
@@ -245,7 +237,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">

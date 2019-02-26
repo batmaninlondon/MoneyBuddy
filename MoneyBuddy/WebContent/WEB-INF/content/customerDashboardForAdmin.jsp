@@ -27,7 +27,7 @@
         <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
 		<link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
 		<link href="assets/css/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
   		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>	
@@ -533,7 +533,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">

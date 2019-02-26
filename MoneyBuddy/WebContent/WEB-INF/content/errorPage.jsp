@@ -11,19 +11,21 @@
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
- 	<link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap/animate.min.css" rel="stylesheet">
+ 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
 	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 	
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 
 
 	<style>
@@ -54,61 +56,69 @@
 
 <body id="errorPage">
 
-   <header id="header">
 
-        <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+    <div id="container">
+    
+    <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="container g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="welcome" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
+										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
+	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
+									      	</ul>
+	                                    
+	                                    </li>
                                 </ul>
                             </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
-    
-    <div id="container">
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
     </div>
     
     <!-- <div class="error-bg"></div>
@@ -136,7 +146,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                 </div>
             </div>

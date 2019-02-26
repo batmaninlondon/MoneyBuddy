@@ -15,7 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
 		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
-		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
+		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		
         <!-- Vendor Styles -->
         <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

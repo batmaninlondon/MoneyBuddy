@@ -25,10 +25,12 @@
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
 
         <!-- Vendor Styles -->
-        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        
         <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <!-- <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/> -->
         <link href="assets/css/swiper.min.css" rel="stylesheet" type="text/css"/>
@@ -36,6 +38,7 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
 
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -129,34 +132,25 @@
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
+										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
+	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
+									      	</ul>
+	                                    
+	                                    </li>
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -180,11 +174,13 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Give your money<br>A chance to grow</h1>
-                             <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of poor returns from banks? Let our experts match you with a portfolio that could give your money the chance to perform better.</h2>
+                             <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of Poor returns on your investments? Let us match you to a portfolio with better growth potential</h2>
                         </div>
 						<div class="g-text-center--xs">
-                       		<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
-                       		<br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+                       		<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
+	                        	<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
+	                        </div>
+                       		<%-- <br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p> --%>
                		   </div>
                     </div>
                 </div>
@@ -194,11 +190,13 @@
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
                                 <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Your money with our support<br></h1>
-                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you to grow your money so that you can focus on what matters most to you</h2>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you in growing your wealth, so that you can focus on enjoying your life</h2>
                             </div>
                             <div class="g-text-center--xs">
-                            	<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
-                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+                            	<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
+	                        		<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
+	                        	</div>
+                       			<%-- <br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p> --%>
                		  		</div>
                         </div>
                     </div>
@@ -208,12 +206,14 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
-                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Make your dreams reality</h1>
-                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >The best thing money can buy is .....money</h2>
+                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Make your dreams a reality</h1>
+                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Disciplined Investing Made easy with our fully online SIP platform</h2>
                             </div>
                             <div class="g-text-center--xs">
-                       			<a  href="<s:url action="MFexplorer"/>" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
-                       			<br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p>
+                       			<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
+	                        		<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
+	                        	</div>
+                       			<%-- <br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p> --%>
                		  		</div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
             <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
             <!-- End Arrows -->
             
-            <a href="whyInvest"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+            <a href="#whyMoneyBuddySection"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
                 <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
                 <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
             </a>
@@ -235,7 +235,7 @@
 
 		<div class="container-fluid g-padding-y-10--xs g-padding-y-20--sm">
             <div class="g-text-center--xs g-margin-b-10--xs">
-                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-5--xs">Some of Our Most Popular Funds</p>
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-5--xs">Our Most Popular Funds</p>
             </div>
 
             <!-- Swiper -->
@@ -250,10 +250,10 @@
 									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
 				  					<figcaption>
 				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.fundName"/></p>
+				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.schemeName"/></p>
 				    						<br/>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.sector"/>. <s:property value="#popularFundDetailsDataModelElement.subSector"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.fundStartDate"/></p> 
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.schemeType"/>. <s:property value="#popularFundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.startDate"/></p> 
 				    					</article>
 				    					<article class="g-margin-l-20--xs "> 
 									        <s:if test="#popularFundDetailsDataModelElement.rating.equals('5'.toString())">
@@ -302,9 +302,21 @@
 										        </thead>
 										         <tbody>
 										            <tr class="g-bg-color--white" >
-										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
-														<td class="text-center" ><span class="g-font-size-14--xs"><s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>%</span></th>
+										                <td class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">
+										                	<s:property value="#popularFundDetailsDataModelElement.returnsOneYear"/>
+										                	<s:if test="#popularFundDetailsDataModelElement.returnsOneYear.equals('NA'.toString())"></s:if>
+										                		<s:else>%</s:else>
+									                	</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">
+															<s:property value="#popularFundDetailsDataModelElement.returnsThreeYears"/>
+															<s:if test="#popularFundDetailsDataModelElement.returnsThreeYears.equals('NA'.toString())"></s:if>
+										                		<s:else>%</s:else>
+														</span></th>
+														<td class="text-center" ><span class="g-font-size-14--xs">
+															<s:property value="#popularFundDetailsDataModelElement.returnsFiveYears"/>
+															<s:if test="#popularFundDetailsDataModelElement.returnsFiveYears.equals('NA'.toString())"></s:if>
+										                		<s:else>%</s:else>
+														</span></th>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -580,7 +592,7 @@
         <!-- End Parallax -->
 
         <!-- Culture -->
-        <div class="g-promo-section">
+        <div class="g-promo-section" id="whyMoneyBuddySection">
             <div class="container g-padding-y-80--xs g-padding-y-60--sm">
                 <div class="row">
                     <div class="col-md-4 g-margin-t-15--xs g-margin-b-60--xs g-margin-b-0--lg">
@@ -624,33 +636,33 @@
         <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;">
             <div class="container g-padding-y-80--xs g-padding-y-125--sm">
                 <div class="row">
-                    <div class="col-md-4 col-xs-6 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
+                    <div class="col-md-4 col-xs-4 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">30</figure>
+                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Top Performing Funds</figure>
                             </div>
-                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4>
+                           <!--  <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                    <div class="col-md-4 col-xs-4 g-full-width--xs">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">40</figure>
-                                <span class="g-font-size-40--xs g-color--white">+</span>
+                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Full Liquidity</figure>
+                                <%-- <span class="g-font-size-40--xs g-color--white">+</span> --%>
                             </div>
-                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Yrs experience</h4>
+                            <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Yrs experience</h4> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-6 g-full-width--xs">
+                    <div class="col-md-4 col-xs-4 g-full-width--xs">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">4</figure>
-                                <span class="g-font-size-40--xs g-color--white">x</span>
+                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Ethical investing</figure>
+                                <%-- <span class="g-font-size-40--xs g-color--white">x</span> --%>
                             </div>
-                            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4>
+                            <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
+                            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4> -->
                         </div>
                     </div>
                 </div>
@@ -691,8 +703,8 @@
         <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
             <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
                 <div class="g-margin-b-80--xs">
-                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
-                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Join Over 1000+ People</h2>
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Looking to learn more about investing and mutual funds?</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Subscribe to our newsletter</h2>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
@@ -815,7 +827,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="FAQs">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">

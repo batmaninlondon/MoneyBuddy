@@ -179,7 +179,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		System.out.println(" num1 is : "+num1);
 		System.out.println(" (Integer.parseInt(num1) % 2) is : "+(Integer.parseInt(num1) % 2));
 		String kycStatus = null;
-		if ( (Integer.parseInt(num1) % 2) != 0) {
+		/*if ( (Integer.parseInt(num1) % 2) != 0) {
 			
 			kycStatus= "DONE";
 			//sessionMap.put("kycStatus", "DONE");
@@ -190,7 +190,8 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 			//sessionMap.put("kycStatus", "NOTDONE");
 			//str = "kycNotDone";
 			
-		}
+		}*/
+		kycStatus= "DONE";
 		
 		updatecustomer.updatePancardAndKycStatus(customerId, getPanCard(), kycStatus);
 		

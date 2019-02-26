@@ -33,7 +33,7 @@ public class FetchPopularFundDetailsAction extends ActionSupport   {
 
 			for ( int i =0 ; i<popularFundDetailsDataModel.size() ; i++)  {
 				
-				System.out.println("popularFundDetailsDataModel : "+i+" : "+popularFundDetailsDataModel.get(i).getFundId());
+				System.out.println("popularFundDetailsDataModel : i: "+i+" : fundId : "+popularFundDetailsDataModel.get(i).getFundId()+" : Return1yr : "+popularFundDetailsDataModel.get(i).getReturnsOneYear());
 				
 			}
     	    

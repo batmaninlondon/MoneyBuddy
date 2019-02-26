@@ -79,13 +79,16 @@ public class PrimaryFundDetails {
     @Column(name="SWITCH_FLAG")
     private String switchFlag;
     
+    @Column(name="AUM")
+    private String aum;
+    
     public PrimaryFundDetails() {
 
     }
     
 	public PrimaryFundDetails(String schemeName, String schemeType, String category, String startDate, String rating,
 			String risk, String returnsThreeYears, String minSipAmount, String minPurchaseAmount, String minSipDuration, 
-			String pdfFilePath, String mostPopularFund,String sipFlag, String stpFlag, String swpFlag, String switchFlag ) {
+			String pdfFilePath, String mostPopularFund,String sipFlag, String stpFlag, String swpFlag, String switchFlag,String aum ) {
 		super();
 		this.schemeName = schemeName;
 		this.schemeType = schemeType;
@@ -103,6 +106,7 @@ public class PrimaryFundDetails {
 		this.stpFlag = stpFlag;
 		this.swpFlag = swpFlag;
 		this.switchFlag = switchFlag;
+		this.aum = aum;
 	}
 
 	public String getFundId() {
@@ -288,6 +292,14 @@ public class PrimaryFundDetails {
 		this.switchFlag = switchFlag;
 	}
 
+	public String getAum() {
+		return aum;
+	}
+
+	public void setAum(String aum) {
+		this.aum = aum;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -358,6 +370,9 @@ public class PrimaryFundDetails {
         if ((this.switchFlag == null) ? (other.switchFlag != null) : !this.switchFlag.equals(other.switchFlag)) {
             return false;
         }
+        if ((this.aum == null) ? (other.aum != null) : !this.aum.equals(other.aum)) {
+            return false;
+        }
         return true;
     }
 
@@ -384,6 +399,7 @@ public class PrimaryFundDetails {
         hash = 83 * hash + (this.stpFlag != null ? this.stpFlag.hashCode() : 0);
         hash = 83 * hash + (this.swpFlag != null ? this.swpFlag.hashCode() : 0);
         hash = 83 * hash + (this.switchFlag != null ? this.switchFlag.hashCode() : 0);
+        hash = 83 * hash + (this.aum != null ? this.aum.hashCode() : 0);
         return hash;
     }
     

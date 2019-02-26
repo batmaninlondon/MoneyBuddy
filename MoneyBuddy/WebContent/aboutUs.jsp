@@ -11,16 +11,17 @@
     <!-- core CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/font-awesome.min.css" >
+ 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="load" class="load"></div>
 	<div id="content">
     <!--========== HEADER ==========-->
+            <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -33,6 +34,7 @@
                                 <span class="s-header-v2__toggle-icon-bar"></span>
                             </button>
                         </div>
+
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
@@ -43,6 +45,7 @@
                             </div>
                             <!-- End Logo -->
                         </div>
+                        
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
@@ -50,34 +53,25 @@
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
-				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
-				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-													      </ul>
-				                                    
-				                                    </li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
+										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
+	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
+									      	</ul>
+	                                    
+	                                    </li>
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -94,32 +88,42 @@
             <div class="container g-padding-y-45--xs">
             </div>
         </div>
- <section id="about-us" class="g-margin-b-30--xs">
+        
+ 			<section id="about-us" class="g-margin-b-30--xs">
         <div class="container">
 			<div class="g-margin-t-15--xs wow fadeInDown">
-				<h2 ><b>Hello, We're MoneyBuddy</b></h2>
+				<h2 ><b>Who we are</b></h2>
 				<p >
-					MoneyBuddy is an idea to uncomplicate financial planning and make it easier for people to benefit from different types of investments and insurance products. The idea was born after personally experiencing how complicated and stressful the financial planning has become for a common person.
+					We are a bootstrap startup, helping people improve their financial status through better planning and investing.
 				</p>
 				<p >
-					We're a group of like-minded investment experts, technologists and entrepreneurs with a shared ambition to shake things up and make investing easy and affordable for everyone. We're challenging people to think differently and do more with their savings.
-                	Our promise is simple: No complicated jargon, no daunting fees, just <span class="g-color--primary"><b>straightforward, effortless investing.</b></span></p>
+					We offer our customers the convenience of fully secure and online investing, tracking and redemption facility. Yet we pride ourselves on not being a tech first company instead capitalising our efforts on growing our investors wealth through disciplined investing and superior fund selection by leveraging behavioral finance and our deep understanding of markets.
+				</p>
+				<p>
+					We are registered with Association of Mutual Funds in India (AMFI), regulatory body responsible for granting license to financial distributors like us. Additionally, we work with Bombay Stock Exchange (BSE) to ensure safe and secure transactions for our customers.
+				</p>
 			</div>
 			
 			<div class=" wow fadeInDown">
 				<h2><b>Our Vision</b></h2>
 				<p > 
-					Ensure every person is able to plan and save for his retirement, new house, children's marriage and other essential financial needs.
-					While we truly understand the audacity of our vision we strongly believe how it can lead to a happier world. This website is a first step to realise our vision and we are super excited to see people fall in love with our services.
+					To ensure everyone has access to the right financial advice and tools required to ensure financial well being of their loved ones.
+				</p>
+			</div>
+			
+			<div class=" wow fadeInDown">
+				<h2><b>Our Mission</b></h2>
+				<p > 
+					To make a genuine positive impact, however small, in the life of each and every user.
 				</p>
 			</div>
 			
 			<!-- our-team -->
 			<div class="team" class="left">
 				<div class="left wow fadeInDown">
-					<h2><b>Meet the team</b></h2>
+					<h2><b>Our Team</b></h2>
 					<p >
-						We are based in Pune and are bootstrapping to achieve our goal. Our team consists of following people and we are looking to add more people who believe in our vision.
+						We are run by a small team of three individuals with complimentary skills and common mission. Together, we aim to build an ethical company with zero tolerance for any mis-selling of investment products. Instead the company should thrive by keeping it&apos;s costs low and by providing quality service at a reasonable price.
 					</p>
 				</div>
 				<div class="row clearfix">
@@ -145,7 +149,7 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>Kamal is an IIT allumuns with over 10 years of experience investment experiences. He has managed over $10 millions in last five years...</p>
+							<p>Kamal is an IIT allumuns with over 10 years of investment experiences. He has managed over $10 millions in last five years.</p>
 						</div>
 					</div><!--/.col-lg-4 -->
 					
@@ -158,7 +162,7 @@
 								</div>
 								<div class="media-body">
 									<h5>Sail Wadhwani</h5>
-									<h6>Co - Founder and CTO</h6>
+									<h6>Co-Founder and CTO</h6>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Investment</a></li>
 										<li class="btn"><a href="#">Technology</a></li>
@@ -171,7 +175,7 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>A born entrepreneurs. With over tweleve years of international consulting experience ... Sail has worked with spend most of his time working with C suites to .... </p>
+							<p>A born entrepreneurs. With over twelve years of international consulting experience. Sail has spend most of his time working with C suites. </p>
 						</div>
 					</div><!--/.col-lg-4 -->					
 				</div> <!--/.row -->
@@ -200,7 +204,7 @@
 
 								<div class="media-body">
 									<h5>Savita Wadhwani</h5>
-									<h6>Director of Technology</h6>
+									<h6>Co-Founder and CTO</h6>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Web</a></li>
 										<li class="btn"><a href="#">Technology</a></li>
@@ -213,7 +217,7 @@
 									</ul>
 								</div>
 							</div><!--/.media -->
-							<p>Savvy has over ten years of experience in software development. She believed that technology can .....</p>
+							<p>Savvy has over ten years of experience in software development. She believed that the only constant in technology is change.</p>
 						</div>
 					</div>
 					
@@ -234,8 +238,8 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="help">Help</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
@@ -313,7 +317,7 @@
          </script>
 		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
  		<script src="assets/js/jquery.js"></script>
-    	<script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+    	<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
     	<script src="assets/js/main.js"></script>
     	<script src="assets/js/wow.min.js"></script>
 </html>
