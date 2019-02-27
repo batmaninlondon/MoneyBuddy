@@ -459,7 +459,7 @@
          <script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<script src="assets/js/jquery.js"></script>
-	    <script src="assets/js/bootstrap.min.js"></script>
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script src="assets/js/sly.min.js"></script>
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
 	    <script src="assets/js/jquery.isotope.min.js"></script>

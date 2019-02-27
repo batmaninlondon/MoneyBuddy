@@ -882,13 +882,13 @@
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
      	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
        <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
-       <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+       <script src="assets/bootstrap/js/bootstrap.min.js"></script>
        <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
        <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
        <script type="text/javascript" src="assets/js/swiper.min.js"></script>
        <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
-       <script type="text/javascript" src="assets/js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+       <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
        <script type="text/javascript" src="assets/js/counterup.min.js"></script>
        <script type="text/javascript" src="assets/js/counter.min.js"></script>
        <script type="text/javascript" src="assets/js/javaScript.js"></script>

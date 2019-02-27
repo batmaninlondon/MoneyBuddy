@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -9,18 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
-	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
 	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
 	
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+        
+        
+ 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+    <script type="text/javascript"  src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/main.js"></script> -->
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
     <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -56,37 +67,22 @@
 
 <body id="errorPage">
 
+   <header id="header">
 
-    <div id="container">
-    
-    <header class="navbar-fixed-top s-header-v2 js__header-sticky">
-            <!-- Navbar -->
-            <nav class="s-header-v2__navbar">
-                <div class="container g-display-table--lg">
-                    <!-- Navbar Row -->
-                    <div class="s-header-v2__navbar-row">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="s-header-v2__navbar-col">
-                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                                <span class="s-header-v2__toggle-icon-bar"></span>
-                            </button>
-                        </div>
-
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
-                            <!-- Logo -->
-                            <div class="s-header-v2__logo">
-                                <a href="welcome" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
-                                </a>
-                            </div>
-                            <!-- End Logo -->
-                        </div>
-                        
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav">
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="welcome"><img src="img/logo.png" alt="logo"></a>
+                </div>
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
@@ -110,15 +106,13 @@
 	                                    
 	                                    </li>
                                 </ul>
-                            </div>
-                            <!-- End Nav Menu -->
-                        </div>
-                    </div>
-                    <!-- End Navbar Row -->
                 </div>
-            </nav>
-            <!-- End Navbar -->
-        </header>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+		
+    </header>
+    
+    <div id="container">
     </div>
     
     <!-- <div class="error-bg"></div>
@@ -154,15 +148,9 @@
     </footer>
 
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
-	 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
-	    <script type="text/javascript"  src="assets/js/bootstrap/bootstrap.min.js"></script>
-	    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
-	    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-	    <script type="text/javascript" src="assets/js/main.js"></script>
-	    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 </body>
 </html>

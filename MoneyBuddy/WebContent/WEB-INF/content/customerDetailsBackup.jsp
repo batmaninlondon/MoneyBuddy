@@ -24,7 +24,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	<script type="text/javascript"  src="assets/js/jquery.js"></script>
-    <script type="text/javascript"  src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>

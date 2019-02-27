@@ -12,7 +12,7 @@
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
-		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		<link type="text/css" rel="stylesheet" href="assets/css/cubeportfolio/cubeportfolio.min.css" />
 		
@@ -686,7 +686,7 @@
          <script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<script src="assets/js/jquery.js"></script>
-	    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script src="assets/js/sly.min.js"></script>
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
 	    <script src="assets/js/jquery.isotope.min.js"></script>
@@ -703,7 +703,7 @@
         <%-- <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script> --%>
        <%--  <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script> --%>
         <%-- <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script> --%>
-        <script type="text/javascript" src="assets/js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
         <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 
         <!-- General Components and Settings -->

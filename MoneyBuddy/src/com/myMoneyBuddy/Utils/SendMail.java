@@ -76,6 +76,7 @@ public class SendMail {
 
 		configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
 		
+		//System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
     	
     	Properties props = new Properties();
     	props.put("mail.smtp.auth", "true");
@@ -83,6 +84,7 @@ public class SendMail {
     	props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
     	props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
 
+    	System.out.println(" GMAIL PORT IS :  "+configProperties.getProperty("GMAIL_PORT"));
     	// Get the Session object.
 
     	Session session = Session.getInstance(props,
@@ -96,7 +98,8 @@ public class SendMail {
     		Message message = new MimeMessage(session);
 
     		// Set From: header field of the header.
-    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress("admin@moneybuddy.co.in"));
 
     		// Set To: header field of the header.
 
@@ -385,12 +388,13 @@ public class SendMail {
 			String configPropFilePath = "../../../config/config.properties";
 		
 			configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
-			
+			System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
 			props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
+			System.out.println(" GMAIL PORT IS  : "+ configProperties.getProperty("GMAIL_PORT"));
 			
 			// Get the Session object.
 			
@@ -654,6 +658,8 @@ public class SendMail {
 	public void setPassword(String password) {
 		this.password = password;
 	}*/
+    
+    
     
 }
 

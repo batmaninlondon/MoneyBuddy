@@ -26,7 +26,7 @@
         
        
         <!-- Vendor Styles -->
-        <link type="text/css" rel="stylesheet" href="assets/css/themify.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/themify/themify.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
@@ -320,7 +320,7 @@
         <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
         <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
         <script type="text/javascript" src="assets/js/counterup.min.js"></script>
-        <script type="text/javascript" src="assets/js/cubeportfolio/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.parallax.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.equal-height.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.wow.min.js"></script>

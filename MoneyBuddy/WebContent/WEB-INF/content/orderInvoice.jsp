@@ -15,7 +15,7 @@
 	        <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         
-        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 	
         <!-- Vendor Styles -->
@@ -137,7 +137,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
 	 	<script src="assets/js/jquery.js"></script>
-	    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	     <script src="assets/js/sly.min.js"></script>
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
 	    <script src="assets/js/jquery.isotope.min.js"></script>
