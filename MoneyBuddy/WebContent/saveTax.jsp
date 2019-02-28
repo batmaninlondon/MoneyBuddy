@@ -10,7 +10,7 @@
 	    <!-- core CSS -->
 	    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-	 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+	 	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
 	    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/animate.min.css">
 	   
 	    <link type="text/css" rel="stylesheet" href="assets/css/global/global.css"/>
@@ -30,6 +30,7 @@
         <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
         <!-- Theme Styles -->
         <!-- Favicon -->
@@ -195,8 +196,8 @@
                         <div class="cbp js__grid-tabs">
                             <div class="s-tab__grid-v1-item cbp-item -is-active">
                                 <div class="g-margin-b-20--xs">
-                                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Save tax upto Rs. 46,350</p>
-                                    <h2 class="g-font-size-32--xs g-font-family--playfair">How to claim income tax benefits with ELSS</h2>
+                                    <!-- <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Save tax upto Rs. 46,350</p> -->
+                                    <h2 class="g-font-size-32--xs g-font-family--playfair">Save tax upto Rs. 46,350</h2>
                                 </div>
                                 <p>With MoneyBuddy, You can invest in ELSS funds online and submit receipt to your office next day itself, this will help reduce your TDS burden and your cash in hand will increase.</p><br/>
                                 <p>If you've missed your office deadline, you should still invest in ELSS funds before 31st Mar'19.. You can submit the investment proof while filiing income tax in June'19 and claim the refund for excess tax paid.</p>
@@ -204,7 +205,7 @@
                             <div class="s-tab__grid-v1-item cbp-item service">  
                                 <div class="g-margin-b-20--xs">
                                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-                                    <span style="text-align: left;">Lock in period of 3 yrs vs 15 yrs for PPF</span></p>
+                                    <%-- <span style="text-align: left;">Lock in period of 3 yrs vs 15 yrs for PPF</span></p> --%>
                                     <h2 class="g-font-size-32--xs g-font-family--playfair">Lock in period of 3 yrs vs 15 yrs for PPF</h2>
                                 </div>
                                 <p>Pertaining to the performance of the mutual funds, good mutual fund portfolios are constructed for long term investments, however, they are not bound with the lock in periods. But in case of ELSS, the funds are locked in for at least 3 years.</p>
@@ -212,8 +213,8 @@
                             </div>
                             <div class="s-tab__grid-v1-item cbp-item pages">
                                 <div class="g-margin-b-20--xs">
-                                    <p class="text-left g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Avg 3 yr returns of 15% vs 8.5% for PPF</p>
-                                    <h2 class="g-font-size-32--xs g-font-family--playfair">Equity invested funds</h2>
+                                    <!-- <p class="text-left g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Avg 3 yr returns of 15% vs 8.5% for PPF</p> -->
+                                    <h2 class="g-font-size-32--xs g-font-family--playfair">Avg 3 yr returns of 15% vs 8.5% for PPF</h2>
                                 </div>
                                 <p>Although, the lock in period for ELSS is 3 years, you can allow the continuous growth of your fund for longer or redeem after 3 years. Inherently, equity investments are subject to market risk. </p>
                                 <p>But since these funds invest your money in equity, you possess chances of higher returns with tax exemption.</p>
@@ -236,7 +237,7 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
@@ -319,6 +320,7 @@
         <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
         <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/counter.min.js"></script>
         <script type="text/javascript" src="assets/js/counterup.min.js"></script>
         <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.parallax.min.js"></script>
@@ -330,7 +332,7 @@
         <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
         <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
         <script type="text/javascript" src="assets/js/swiper.min.js"></script>
-        <script type="text/javascript" src="assets/js/counter.min.js"></script>
+        
         <script type="text/javascript" src="assets/js/components/parallax.min.js"></script>
         <script type="text/javascript" src="assets/js/tab.min.js"></script>
         <script type="text/javascript" src="assets/js/components/equal-height.min.js"></script>

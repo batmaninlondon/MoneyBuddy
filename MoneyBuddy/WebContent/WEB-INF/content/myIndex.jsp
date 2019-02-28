@@ -47,9 +47,99 @@
         <%-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> --%>
         
 	<script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1418 .add-to-cart {
+  position: absolute;
+  height:50px;
+  top: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+ // background-color: #409ad5;
+   background-color: black;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.snip1418 figcaption {
+//  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+
+</style>
 
     <script>
-    
+	function buyFundHandler(fundId)  
+    {
+			alert('Hiiiii');
+			document.getElementById("fund-id-value").value = fundId;
+			document.formBuyFundAction.submit();
+    }
+	
     <%
     
     ServletContext sc=request.getServletContext();
@@ -86,11 +176,7 @@
     </script>
     
    	<script>
-	function buyFundHandler(fundId)  
-    {
-			document.getElementById("fund-id-value").value = fundId;
-			document.formBuyFundAction.submit();
-    }
+
 	</script>
         
     </head>
@@ -494,8 +580,12 @@
                 
                 </div>
                 <!-- End Wrapper -->
-				<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+				<%-- <s:form  action="buyFundAction" method="post" name="formBuyFundAction">
 		  		<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+			</s:form> --%>
+			<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+	  			<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+	  			<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 			</s:form>
                 <!-- Pagination -->
                 <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--dark g-text-center--xs js__swiper-pagination"></div>
@@ -826,7 +916,7 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
@@ -853,7 +943,7 @@
                     <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
                     </div>
                 </div>
             </div>
@@ -890,7 +980,7 @@
        <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
        <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
        <script type="text/javascript" src="assets/js/counterup.min.js"></script>
-       <script type="text/javascript" src="assets/js/counter.min.js"></script>
+       <script type="text/javascript" src="assets/js/components/counter.min.js"></script>
        <script type="text/javascript" src="assets/js/javaScript.js"></script>
        
         <!-- Vendor -->

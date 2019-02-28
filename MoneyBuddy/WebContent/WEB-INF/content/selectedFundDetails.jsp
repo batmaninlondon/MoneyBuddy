@@ -179,11 +179,11 @@
 														<td class="" ><span class=" g-font-size-14--xs"><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AAUM :</b> &#8377; 4039.34 Cr <small>as on 31 Jan 2018 </small></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AUM :</b> &#8377; 4039.34 Cr </span></td>
 										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception :</b> <s:property value="#fundDetails.startDate"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Mins SIP Investment:</b> &#8377;<s:property value="#fundDetails.minSipAmount"/></span></td>
+										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="#fundDetails.minSipAmount"/><small> /month</small></span></td>
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="#fundDetails.minPurchaseAmount"/></span></td>
 										            </tr>
 										        </tbody>
@@ -196,7 +196,7 @@
                 				<table id="portfoliosummary" class="display" >
 										        <tbody>
 										            <tr class="g-margin-b-45--xs">
-										                <td colspan="2" class="" ><span class=" g-font-size-16--xs g-font-size-5--xs g-color--primary"><b>Past Returnns</b></span><br/><br/></td>
+										                <td colspan="2" class="" ><span class=" g-font-size-16--xs g-font-size-5--xs g-color--primary"><b>Past Returns</b></span><br/><br/></td>
 										            </tr>
 										            
 										            <%-- <tr >
@@ -282,7 +282,7 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="allFunds">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
