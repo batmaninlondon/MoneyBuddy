@@ -30,7 +30,7 @@
         <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        
 
         <!-- Theme Styles -->
         <!-- Favicon -->
@@ -292,10 +292,10 @@
    </div>
     </body>
        <!-- Js -->
-        <script src="js/vendor/jquery-2.1.1.min.js"></script>
-        <script src="js/jquery.lwtCountdown-1.0.js"></script>
-        <script src="js/jquery.nav.js"></script>
-        <script src="js/wow.min.js"></script>
+        <script src="assets/js/vendor/jquery-2.1.1.min.js"></script>
+        <script src="assets/js/jquery.lwtCountdown-1.0.js"></script>
+        <script src="assets/js/jquery.nav.js"></script>
+        <script src="assets/js/wow.min.js"></script>
     	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
@@ -314,6 +314,7 @@
 			  }
 			}
          </script>
+         
         <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
@@ -333,12 +334,13 @@
         <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
         <script type="text/javascript" src="assets/js/swiper.min.js"></script>
         
+        
         <script type="text/javascript" src="assets/js/components/parallax.min.js"></script>
         <script type="text/javascript" src="assets/js/tab.min.js"></script>
         <script type="text/javascript" src="assets/js/components/equal-height.min.js"></script>
         <script type="text/javascript" src="assets/js/wow.min.js"></script>
         <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
-        <script type="text/javascript" src="assets/js/main.js"></script>
+        <script type="text/javascript" src="assets/js/main2.js"></script>
         <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
