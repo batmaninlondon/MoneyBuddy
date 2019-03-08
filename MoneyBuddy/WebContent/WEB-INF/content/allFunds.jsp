@@ -3,46 +3,33 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en" class="no-js">
-    <!-- Begin Head -->
+    <!-- Begin Head -->    
     <head>
         <!-- Basic -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy-Top Performing Mutual Funds</title>
-		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+
+      	<!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-	
-        <!-- Web Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-
-        <!-- Vendor Styles -->
-        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/animate.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet"> -->
-
-        <!-- Theme Styles -->
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-        <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->
+
 
         <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
        
                 <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
-        <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
  	
   
- <%--  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> --%>
-  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   
  <script>
 		$(document).ready(function(){
@@ -54,7 +41,6 @@
 		  });
 		});
 </script>
-
 
 <style>
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
@@ -80,7 +66,6 @@
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-
 .snip1418 .add-to-cart {
   position: absolute;
   height:50px;
@@ -102,7 +87,6 @@
   -ms-transform-origin: 100% 0;
   transform-origin: 100% 0;
 }
-
 .snip1418 figcaption {
 //  padding: 20px;
 }
@@ -138,19 +122,25 @@
 .snip1418.hover .add-to-cart i {
   background-color: #2980b9;
 }
-
 </style>
  
-	<script>
+	
+        
+        
+        <script>
 	function buyFundHandler(fundId)  
     {
 			document.getElementById("fund-id-value").value = fundId;
 			document.formBuyFundAction.submit();
     }
 	</script>
-        
     </head>
-    <!-- End Head -->
+    
+    
+    
+    
+    
+    
 
     <!-- Body -->
     <body >
@@ -455,3 +445,8 @@
     </body>
     <!-- End Body -->
 </html>
+
+
+
+
+

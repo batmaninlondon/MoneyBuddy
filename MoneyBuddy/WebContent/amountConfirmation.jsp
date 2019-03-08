@@ -61,6 +61,84 @@
 		<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> --%>
 		
+    
+    <style>
+input[type="range"] { 
+    margin: auto;
+    -webkit-appearance: none;
+    position: relative;
+    overflow: hidden;
+    height: 20px;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 0; /* iOS */
+}
+
+::-webkit-slider-runnable-track {
+    background: #ddd;
+}
+
+/*
+ * 1. Set to 0 width and remove border for a slider without a thumb
+ */
+::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; /* 1 */
+    height: 20px;
+    background: #fff;
+    box-shadow: -100vw 0 0 100vw #13b1cd;
+    border: 1px solid #999; /* 1 */
+}
+
+::-moz-range-track {
+    height: 400px;
+    background: #ddd;
+}
+
+::-moz-range-thumb {
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    border: 3px solid #999;
+    border-radius: 0 !important;
+    box-shadow: -100vw 0 0 100vw #13b1cd;
+    box-sizing: border-box;
+}
+
+::-ms-fill-lower { 
+    background: #13b1cd;
+}
+
+::-ms-thumb { 
+    background: #fff;
+    border: 2px solid #999;
+    height: 20px;
+    width: 20px;
+    box-sizing: border-box;
+}
+
+::-ms-ticks-after { 
+    display: none; 
+}
+
+::-ms-ticks-before { 
+    display: none; 
+}
+
+::-ms-track { 
+    background: #ddd;
+    color: transparent;
+    height: 20px;
+    border: none;
+}
+
+::-ms-tooltip { 
+    display: none;
+}
+    </style>
+    
+    
+    
     </head>
 
 <body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minPurchaseAmount"/>');">
@@ -147,12 +225,21 @@
 							<div id="investment-options" class="col-md-4 col-xs-12">
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
 							</div>
-							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							 <%-- <div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500"
 											 value="<s:property value="#session.minPurchaseAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
+							</div>  --%>
+							
+							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							  <input type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500" class="slider" id="myRange">
 							</div>
-							<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
-							<div class="col-md-5"></div>
+							
+							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							  Rs.<span id="tot-investment-id-value" name="totalInvestment1"></span>
+							</div>
+							 <s:hidden id="upfrontInvestment" name="totalInvestment"></s:hidden>
+							
+							<%-- <p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs.jjj <span id="upfrontInvestment" class="g-color--black"></span></p> --%>
 						</div>
 						
 						<div class="row g-margin-t-50--xs g-margin-b-50--xs">
@@ -191,7 +278,7 @@
 								<div class="g-bg-color--gray-lighter " style="height:60px;">
 		    						<div class="profile" >
 		        						<div class="name g-text-right--xs g-margin-r-10--xs" >
-		        							<s:hidden id="tot-investment-id-value" name="totalInvestment"></s:hidden>
+		        							
 		        							<%-- <s:submit class="tn  g-color--white g-margin-t-15--xs" style="background-color:black;" value="Add to Cart" /> --%>
 		        							<button type="button" class="btn  g-color--white g-margin-t-15--xs" onClick="newUpdate();"  style="background-color:black;" >Add to Cart</button>
 		            					</div>
@@ -339,6 +426,20 @@
 	    <script src="assets/js/main.js"></script>
 	    <script src="assets/js/wow.min.js"></script>
 	    <script src="assets/js/index.js"></script>
+  		
+  		<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("upfrontInvestment");
+var output1 = document.getElementById("tot-investment-id-value");
+output.innerHTML = slider.value;
+output1.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  output1.innerHTML = this.value;
   
+}
+</script>
+  		
 </body>
 </html>
