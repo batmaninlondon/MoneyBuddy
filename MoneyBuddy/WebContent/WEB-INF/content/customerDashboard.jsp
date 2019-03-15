@@ -13,10 +13,10 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>MoneyBuddy | Dashboard</title>
-        <meta name="keywords" content="HTML5 Theme" />
+        <title>MoneyBuddy - Top Performing Mutual Funds</title>
+        <!-- <meta name="keywords" content="HTML5 Theme" />
         <meta name="description" content="Megakit - HTML5 Theme">
-        <meta name="author" content="keenthemes.com">
+        <meta name="author" content="keenthemes.com"> -->
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -531,7 +531,7 @@
                         <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms.jsp">Terms &amp; Conditions</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy.jsp">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -632,11 +632,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
-		
-		
-		
-		
-		<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script> --%>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -676,7 +672,6 @@
 				
 				  		/* Initalization render chart */
 				  		initChart : function(){
-				  			
 				  		TUTORIAL_SAVVY.loadData();
 				  		$("#tot-inv-amt").html(TUTORIAL_SAVVY.addCommas(totalInvAmt));
 				  		$("#tot-prof-amt").html(TUTORIAL_SAVVY.addCommas(totalProAmt));
@@ -1070,7 +1065,7 @@
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
 					        var amount = data[4];
-					        alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]);
+					        /* alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]); */
 					        stpFundHandler(fundId,amount);
 					    } );
 					 
@@ -1167,7 +1162,6 @@
 				  
 		  
 		  loadData : function(){
-			  
 				$.ajax({
 						async: false,
 						url: "portfolioAction",
@@ -1332,12 +1326,12 @@
 		document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
-			       document.getElementById('contents').style.visibility="hidden";
+			       /* document.getElementById('contents').style.visibility="hidden"; */
 			  } else if (state == 'complete') {
 			      setTimeout(function(){
 			         document.getElementById('interactive');
 			         document.getElementById('load').style.visibility="hidden";
-			         document.getElementById('contents').style.visibility="visible";
+			         /* document.getElementById('contents').style.visibility="visible"; */
 			      },1000);
 			  }
 			}

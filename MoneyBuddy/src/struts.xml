@@ -118,7 +118,8 @@
     
     <package name="createCartAction" namespace="/" extends="struts-default">
         <action name="createCartAction" class="com.myMoneyBuddy.ActionClasses.CreateCartAction">
-            <result name="success">/WEB-INF/content/customerCart.jsp</result>
+            <result name="UPFRONT">/WEB-INF/content/customerCart.jsp</result>
+            <result name="SIP">/WEB-INF/content/customerSipCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
             <!-- <result type="stream">
     			<param name="contentType">text/html</param>
@@ -415,7 +416,7 @@
    	<package name="newEstimateAction" namespace="/" extends="struts-default">
         <action name="newEstimateAction" class="com.myMoneyBuddy.ActionClasses.EstimateAction">
             <result name="UPFRONT" type="chain">createCartAction</result>
-            <result name="SIP" type="chain">redirectAction</result>
+            <result name="SIP" type="chain">createCartAction</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
             <!-- <result type="stream">
     			<param name="contentType">text/html</param>
@@ -427,7 +428,8 @@
     
     <package name="deleteCartEntryAction" namespace="/" extends="struts-default">
         <action name="deleteCartEntryAction" class="com.myMoneyBuddy.ActionClasses.DeleteCartEntryAction">
-            <result name="success">/WEB-INF/content/customerCart.jsp</result>
+            <result name="UPFRONT">/WEB-INF/content/customerCart.jsp</result>
+            <result name="SIP">/WEB-INF/content/customerSipCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
             <!-- <result type="stream">
     			<param name="contentType">text/html</param>

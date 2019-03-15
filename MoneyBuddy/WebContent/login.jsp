@@ -15,7 +15,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <!-- <title>Megakit - HTML5 Theme</title> -->
+        <title>MoneyBuddy - Login</title>
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -43,6 +43,7 @@
 	     -->
 	      <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 	      
+	     <%--  <script src="https://www.google.com/recaptcha/api.js" async defer></script> --%>
 	      <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
     <script>
     
@@ -57,6 +58,8 @@
 	configProperties.load(fis);
 	
 	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
+	
+	System.out.println("siteKey is : "+siteKey);
     
     %>
     
@@ -65,8 +68,7 @@
       var recaptchaLogin;
       
       var myCallBack = function() {
-    	  
-    	  alert('Hi There !!!!!!! site key is : '+<%=siteKey%>);
+
         //Render the recaptchaRegister on the element with ID "recaptcha-register"
         recaptchaRegister = grecaptcha.render('recaptcha-register', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
@@ -92,10 +94,10 @@
     </script>
     
 
-	    <style>
+	    <%-- <style>
 	    	
 				.grecaptcha-badge{visibility:hidden;}
-	    </style>
+	    </style> --%>
 	    
 	    
 	    
@@ -161,7 +163,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="loginTabContent" class="container tab-pane active"><br>
-                <s:form  action="newLoginAction" class="g-recaptcha" method="post" name="formLogin" namespace="/" >
+                <s:form  action="newLoginAction" method="post" name="formLogin" namespace="/" >
           <h1>Welcome Back!</h1>
           <p id="loginMessage"></p>
          <!--  <div> -->
@@ -185,7 +187,7 @@
             <!-- <input  id="password" type="password" required autocomplete="off"/> -->
           </div>
           
-          <p class="forgot"><button type="button" class="g-recaptcha g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
+          <p class="forgot"><button type="button" class=" g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
           <div class="container">
 
   <!-- Modal -->
@@ -202,7 +204,7 @@
           </s:form>
     </div>
     <div id="signup" class="container tab-pane fade"><br>
-               <s:form  action="registerAction" class="g-recaptcha" method="post" name="formRegister" namespace="/" >
+               <s:form  action="registerAction" method="post" name="formRegister" namespace="/" >
           <div id="registration-email-id"  class="field-wrap">
           	<p id="registerMessage"></p>
             <%-- <label> 
@@ -235,7 +237,7 @@
           <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Continue"  />
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
-			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="policy">Privacy Policy</a></span>
+			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="privacyPolicy">Privacy Policy</a></span>
 			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
           	               
           </s:form>
@@ -254,7 +256,7 @@
         <div class="modal-body">
           <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
        
-        <s:form  action="forgottenPasswordAction" class="g-recaptcha" method="post" name="formForgotPassword">
+        <s:form  action="forgottenPasswordAction" method="post" name="formForgotPassword">
 
 			<div class="row" >
 				<div class="col-md-3"></div>

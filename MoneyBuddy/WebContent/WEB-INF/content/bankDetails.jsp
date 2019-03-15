@@ -8,7 +8,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <title>MoneyBuddy - Top Performing Mutual Funds</title>
         
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -296,7 +296,7 @@
 											<%-- <s:set var="transactionType" value="#session.transactionType" /> --%>
 											<s:if test="#transactionType.equals('UPFRONT')">
 												<% System.out.println("Inside Upfront"); %>
-												<s:iterator value="#session.customerCartList" var="customerCartListElement">
+												<s:iterator value="#session.customerCartUpfrontList" var="customerCartListElement">
 													<tr>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
 													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
@@ -306,11 +306,11 @@
 											</s:if>
 											<s:else>
 												<% System.out.println("Inside Sip"); %>
-												<s:iterator value="#session.productList" var="productListElement">
+												<s:iterator value="#session.customerCartSipList" var="customerCartListElement">
 													<tr>
-													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.key"/></td>
-													    <td class="center g-font-size-14--xs"><s:property value="#productListElement.value"/></td>
-													    <td class="center g-font-size-14--xs"><s:property value="#session.sipFolioNum"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.amount"/></td>
+													    <td class="center g-font-size-14--xs"><s:property value="#customerCartListElement.folioNumber"/></td>
 													</tr>
 												</s:iterator>
 											</s:else>
@@ -322,7 +322,7 @@
 							</div>
 							
 							<div class="g-text-right--xs g-margin-r-30--xs">
-								<label >I accept terms & condition  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></label><br>
+								<a href="terms" >I agree to MoneyBuddy's Terms & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></a><br>
 							</div>
 							
 							</div>

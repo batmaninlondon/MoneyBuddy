@@ -26,17 +26,24 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
     public String execute() {
     	
     	String customerId = null;
+    	String transactionType = null;
     	
     	try {
     		customerId = sessionMap.get("customerId").toString();
+    		transactionType = sessionMap.get("transactionType").toString();
     		
-    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - start ");
+    		
+    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" and transactionType - "+transactionType+" - start ");
 	    	System.out.println(" DeleteCartEntryAction execute method Called !!");
 
 	    	UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
 	    	updateCustomerCart.deleteCustomerCartEntry(customerId, getCartId());
 	    	
-	    	List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartList");
+	    	List<CustomerCart> customerCartList ;
+	    	if ("UPFRONT".equals(transactionType))
+	    		customerCartList = (List<CustomerCart>) sessionMap.get("customerCartUpfrontList");
+	    	else 
+	    		customerCartList = (List<CustomerCart>) sessionMap.get("customerCartSipList");
 	    	
 	    	int i = 0;
 	    	Double totalAmount = 0.0;
@@ -76,19 +83,34 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    		
 	    	}
 	    	System.out.println("Total amount : "+totalAmount);
-	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null));
+	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null));
 	    	
-	    	sessionMap.put("customerCartList",customerCartList);
 	    	
-	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" -updated customerCartList in sessionMap");
+	    	if ("UPFRONT".equals(transactionType)) {
+	    		sessionMap.put("customerCartUpfrontList",customerCartList);
+	    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" -updated customerCartUpfrontList in sessionMap");
+	    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned UPFRONT");
+		    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - end");
+		    	return "UPFRONT";
+	    	}
+	    	else {
+	    		sessionMap.put("customerCartSipList",customerCartList);
+	    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" -updated customerCartSipList in sessionMap");
+	    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned SIP");
+		    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - end");
+		    	return "SIP";
+	    	}
+	    	
+	    	
+	    	
+	    	
 
 	    	/*String str = "success";
 	    	stream = new ByteArrayInputStream(str.getBytes());*/
 	
-	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - returned success");
-	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - end");
 	    	
-	    	return SUCCESS;
+	    	
+	    	
     	}
     	catch ( Exception e )  {
     		logger.error("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - Caught Exception");

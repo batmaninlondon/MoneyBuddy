@@ -4,7 +4,6 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,8 +14,10 @@ import java.util.Properties;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QuerySipDetails;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.Trading;
@@ -50,7 +51,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	private String tranDetailId;
 	//private InputStream stream;
 	private String paymentUrl;
-	private String returnDate;
+	//private String returnDate;
 	private String sipAmount;
 	private String actionMsg;
 	
@@ -95,13 +96,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
 	    	
 	    	System.out.println(" customer.getAofFormStatus() is : .................................................."+customer.getAofFormStatus()+"!!!!!!!!!!");
-	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
+	    	/*if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
 	    		System.out.println(" Inside the loop of NOT_ACTIVATED aof form status !!!!!! ");
 	    		GenerateAofForm generateAofForm = new GenerateAofForm();
 	    		generateAofForm.generateAofForm(customerId);
-	    	}
+	    	}*/
 	    	
-	    	if ("AofNotDone".equals(getTranDetailId()))  {
+	    	/*if ("AofNotDone".equals(getTranDetailId()))  {
 	    		return "aofNotDone";
 	    	}
 	    	else if ("KycAndAofNotDone".equals(getTranDetailId()))  {
@@ -122,6 +123,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	}
 	    	else if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
 	    		return "aofNotDone";
+	    	}*/
+	    	
+	    	if ("KycNotDone".equals(getTranDetailId()))  {
+	    		return "kycNotDone";
 	    	}
 	    	
 	    	if ("NotSet".equals(getTranDetailId()))  {
@@ -174,7 +179,37 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	}
 	    	
 	    	
+	    	
 		if("Y".equals(bseClientCreatedStatus)) {
+			
+			if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) ) {
+				boolean anyCamsFund;
+				if ("NotSet".equals(getTranDetailId()))    {
+					
+					QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
+					if ("UPFRONT".equals(transactionType))  {
+						anyCamsFund = queryCustomerCart.existsCamsFund(customerId, "UPFRONT");
+					}
+					else {
+						anyCamsFund = queryCustomerCart.existsCamsFund(customerId, "SIP");
+					}	
+				}
+				else {
+					QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
+					if ("CAMS".equals(querySecondaryFundDetails.getRta(transactionDetails.getProductId()))) {
+						anyCamsFund = true;
+					}else {
+						anyCamsFund = false;
+					}
+					
+				}
+				
+				if (anyCamsFund )  {
+					return "aofNotDone";
+				}
+			}
+			
+			
 			String paymentUrl = null;
 			
 			String amount;
@@ -185,7 +220,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			if ("UPFRONT".equals(transactionType))  {
 							
 				if ("NotSet".equals(getTranDetailId()))    {
-					List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartList");
+					List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartUpfrontList");
 					for (int i =0 ; i< customerCartList.size() ;i++) {
 			    		System.out.println("Value of i is : "+i+" customerCartList.get(i).getProductName : "+customerCartList.get(i).getProductName());
 			    		if ( !"Total".equals(customerCartList.get(i).getProductName()))  {
@@ -200,7 +235,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
-						"NEW",null,null,null,transactionType,"BUY",0,getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
+						"NEW",transactionType,"BUY",getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
 						"Customer bought some mutual funds",null,getTranDetailId(), sessionMap);
 		    	
 		    	System.out.println("paymentUrl : "+paymentUrl);
@@ -208,24 +243,101 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			}
 			else if ("SIP".equals(transactionType)) {
 				
-				String sipDate = null;
+				/*String sipDate = null;
 				String sipStartDate = null;
-				String sipEndDate = null;
-				String sipDuration= null;
+				String sipEndDate = null;*/
+				//String sipDuration= null;
 				
+				Date currentDate = new Date();
+				Calendar c = Calendar.getInstance();
+		        c.setTime(currentDate);
+		        Properties configProperties = new Properties();
+				String configPropFilePath = "../../../config/config.properties";
+
+				configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
+				
+				String sipBufferDays = null;
+				
+				if ("Y".equals(getFirstOrderFlag()))  {
+					sipBufferDays = configProperties.getProperty("SIP_BUFFER_DAYS_YES");
+				}
+				else {
+					sipBufferDays = configProperties.getProperty("SIP_BUFFER_DAYS_NO");
+					
+				}
+				c.add(Calendar.DATE, Integer.parseInt(sipBufferDays));
+				
+			    Date minSipStartDate = c.getTime();
+					
+			    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			    
+			    minSipStartDate = sdf.parse(sdf.format(minSipStartDate));
+			    
+			    Calendar cal = Calendar.getInstance();
+			    
 				if ("NotSet".equals(getTranDetailId()))    {
-					amount = sessionMap.get("sipAmount").toString();
-					sipAmount = amount;
-					sipDate = sessionMap.get("sipDate").toString();
+					/*amount = sessionMap.get("sipAmount").toString();
+					sipAmount = amount;*/
+					/*sipDate = sessionMap.get("sipDate").toString();
 					sipStartDate = sessionMap.get("sipStartDate").toString();
-					sipEndDate = sessionMap.get("sipEndDate").toString();
+					sipEndDate = sessionMap.get("sipEndDate").toString();*/
 					
 					
 				    
-					sipDuration = sessionMap.get("sipDuration").toString();
+					/*sipDuration = sessionMap.get("sipDuration").toString();*/
 					
-					productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>)sessionMap.get("productRatioList"),
-			    			Double.parseDouble(amount),sessionMap.get("sipFolioNum").toString());
+					List<CustomerCart> customerCartList = (List<CustomerCart>) sessionMap.get("customerCartSipList");
+					
+				    
+			        for (int i =0 ; i< customerCartList.size() ;i++) {
+			    		System.out.println("Value of i is : "+i+" customerCartList.get(i).getProductName : "+customerCartList.get(i).getProductName());
+			    		if ( !"Total".equals(customerCartList.get(i).getProductName()))  {
+
+			    			String sipStartMonth;
+							String sipEndMonth;
+							
+							//CommonUtil commonUtil= new CommonUtil();
+							
+							if ( Integer.parseInt(customerCartList.get(i).getSipDate()) <=   (cal.get(Calendar.DATE)) ) {
+								sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(0) : commonUtil.theMonth(cal.get(Calendar.MONTH)+1));
+								sipEndMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+							}
+							else {
+								sipStartMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+								sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(11) : commonUtil.theMonth(cal.get(Calendar.MONTH)-1));
+							}
+							System.out.println(" sipEndMonth : "+sipEndMonth);
+							System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
+							String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(customerCartList.get(i).getSipDuration()));
+							String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+							System.out.println(" sipEndYear : "+sipEndYear);
+							
+							String sipStartDate = sipStartMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipStartYear;
+							String sipEndDate = sipEndMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipEndYear;
+							
+						    Date curSipStartDate = sdf.parse(sipStartDate);
+						    Date curSipEndDate = sdf.parse(sipEndDate);
+						    
+						    if (minSipStartDate.after(curSipStartDate)) {
+						    	c.setTime(curSipStartDate);
+						    	c.add(Calendar.MONTH,+1);
+						    	curSipStartDate = c.getTime();
+						    	
+						    	c.setTime(curSipEndDate);
+						    	c.add(Calendar.MONTH,+1);
+						    	curSipEndDate = c.getTime();
+						    	
+						    }
+			    			productDetailsMapForBuy.put(customerCartList.get(i).getProductId()+":"+customerCartList.get(i).getFolioNumber()+
+			    					":"+customerCartList.get(i).getSipDuration()+":"+customerCartList.get(i).getSipDate()+
+			    					":"+sdf.format(curSipStartDate)+":"+sdf.format(curSipEndDate),
+			    					Double.parseDouble(customerCartList.get(i).getAmount()));
+			    			//folioNumMapForBuy.put(customerCartList.get(i).getProductId(), customerCartList.get(i).getFolioNumber());
+			    		}
+			    	}
+					
+					/*productDetailsMapForBuy = queryProducts.getProductAmountList((HashMap<String,Double>)sessionMap.get("productRatioList"),
+			    			Double.parseDouble(amount),sessionMap.get("sipFolioNum").toString());*/
 					
 					
 				}
@@ -234,9 +346,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					sipAmount = amount;
 					QuerySipDetails querySipDetails = new QuerySipDetails();
 					SipDetails sipDetails = querySipDetails.getSipDetails(getTranDetailId());
-					sipDate = sipDetails.getSipDate();
-					sipStartDate = sipDetails.getSipStartDate();
-					sipEndDate = sipDetails.getSipEndDate();
+					String sipDate = sipDetails.getSipDate();
+					String sipStartDate = sipDetails.getSipStartDate();
+					String sipEndDate = sipDetails.getSipEndDate();
 					
 					System.out.println("Before change : sipStartDate : "+sipStartDate+" and sipEndDate : "+sipEndDate);
 					sipStartDate = sipStartDate.substring(5,7)+"/"+sipStartDate.substring(8,10)+"/"+sipStartDate.substring(0,4);
@@ -244,12 +356,28 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					System.out.println("After change : sipStartDate : "+sipStartDate+" and sipEndDate : "+sipEndDate);
 					
 					
-					sipDuration= sipDetails.getSipDuration();
+					//sipDuration= sipDetails.getSipDuration();
 					
-					productDetailsMapForBuy.put(transactionDetails.getProductId()+":"+transactionDetails.getTransactionFolioNum(), Double.parseDouble(transactionDetails.getTransactionAmount()));
+					Date curSipStartDate = sdf.parse(sipStartDate);
+				    Date curSipEndDate = sdf.parse(sipEndDate);
+				    
+				    if (minSipStartDate.after(curSipStartDate)) {
+				    	c.setTime(curSipStartDate);
+				    	c.add(Calendar.MONTH,+1);
+				    	curSipStartDate = c.getTime();
+				    	
+				    	c.setTime(curSipEndDate);
+				    	c.add(Calendar.MONTH,+1);
+				    	curSipEndDate = c.getTime();
+				    	
+				    }
+					
+					productDetailsMapForBuy.put(transactionDetails.getProductId()+":"+transactionDetails.getTransactionFolioNum()+
+								":"+sipDetails.getSipDuration()+":"+sipDate+":"+sdf.format(curSipStartDate)+":"+sdf.format(curSipEndDate), 
+							Double.parseDouble(transactionDetails.getTransactionAmount()));
 				}
 				
-				Properties configProperties = new Properties();
+				/*Properties configProperties = new Properties();
 				String configPropFilePath = "../../../config/config.properties";
 
 				configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
@@ -288,7 +416,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 			    	c.add(Calendar.MONTH,+1);
 			    	curSipEndDate = c.getTime();
 			    	
-			    }
+			    }*/
 			    
 				String mandateId = customer.getIsipMandateId();
 				
@@ -311,14 +439,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	System.out.println("mandateId : "+mandateId);
 		    	
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
-						"NEW",sipDate,sdf.format(curSipStartDate),sdf.format(curSipEndDate),
-						transactionType,"BUY",Integer.parseInt(sipDuration),
+						"NEW",transactionType,"BUY",
 						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),getFirstOrderFlag(),
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
 		    	
-		    	SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
+		    	/*SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
 		    	
-		    	returnDate = returnDateFormat.format(curSipStartDate);
+		    	returnDate = returnDateFormat.format("12/01/2019");
 		    	String formatting = "";
 		    	if ("01".equals(returnDate.substring(0,2)))  
 		    		formatting = "st";
@@ -331,7 +458,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	System.out.println("returnDate befor editing : "+returnDate);
 		    	returnDate = returnDate.substring(0,2)+formatting+returnDate.substring(2,returnDate.length()-3)+"'"+returnDate.substring(returnDate.length()-2);
-		    	System.out.println("returnDate after editing :  "+returnDate);
+		    	System.out.println("returnDate after editing :  "+returnDate);*/
 		    	
 		    	if ("N".equals(getFirstOrderFlag()))
 		    		return "sipOrderFofN";
@@ -463,14 +590,14 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	public void setReAccountNumber(String reAccountNumber) {
 		this.reAccountNumber = reAccountNumber;
 	}
-
+/*
 	public String getReturnDate() {
 		return returnDate;
 	}
 
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
-	}
+	}*/
 
 	public String getSipAmount() {
 		return sipAmount;

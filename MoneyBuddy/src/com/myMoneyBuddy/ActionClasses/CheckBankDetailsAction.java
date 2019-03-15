@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryOrderStatus;
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
@@ -96,9 +97,15 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 					String userStatus = queryOrderStatus.getStatusDetail(transactionDetails.getTransactionStatus());
 					
-		    		List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
+					QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
+	    			
+	    			String rta = querySecondaryFundDetails.getRta(transactionDetails.getProductId());
+	    			
+	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
-    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),transactionDetails.getTransactionFolioNum(),null,userStatus));
+    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),transactionDetails.getTransactionType(),
+    						null,null,transactionDetails.getTransactionFolioNum(),null,userStatus,rta));
+    				
 	    			sessionMap.put("customerCartList", customerCartList);
 			    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    
 				}

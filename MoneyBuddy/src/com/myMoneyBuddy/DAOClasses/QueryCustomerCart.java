@@ -5,6 +5,7 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.util.List;
@@ -17,7 +18,7 @@ public class QueryCustomerCart {
 
 	Logger logger = Logger.getLogger(QueryCustomerCart.class);
 		
-	public List<CustomerCart> getCustomerCart(String customerId) throws MoneyBuddyException {
+	public List<CustomerCart> getCustomerCartUpfront(String customerId) throws MoneyBuddyException {
 			
 		logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -27,7 +28,7 @@ public class QueryCustomerCart {
 			System.out.println("customerId is : "+customerId);
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId ");
+			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and transactionType = 'UPFRONT' ");
 			query.setParameter("customerId", customerId);
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
@@ -39,7 +40,52 @@ public class QueryCustomerCart {
 				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null));
+			
+			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
+			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - end");
+			
+			return customerCartList;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
+	public List<CustomerCart> getCustomerCartSip(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		try
+		{
+			hibernateSession.flush();
+			System.out.println("customerId is : "+customerId);
+			hibernateSession.beginTransaction();
+			
+			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and transactionType = 'SIP' ");
+			query.setParameter("customerId", customerId);
+			hibernateSession.getTransaction().commit();
+			List<CustomerCart> customerCartList = query.list();
+			
+			Double totalAmount = 0.0;
+			
+			for (int i = 0; i < customerCartList.size(); i++) {
+				CustomerCart customerCartListElement = customerCartList.get(i);
+				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
+			}
+			
+			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - end");
@@ -62,4 +108,51 @@ public class QueryCustomerCart {
 		}
 	}
 
+	public boolean existsCamsFund(String customerId, String transactionType) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try
+		{
+			
+			hibernateSession.beginTransaction();
+    		
+    		Query query = hibernateSession.createQuery("select count(*) from CustomerCart where customerId = :customerId "
+    				+ "and rta='CAMS' and transactionType = :transactionType");
+    		query.setParameter("customerId", customerId);
+    		query.setParameter("transactionType", transactionType);
+    		String count = query.uniqueResult().toString();
+    		
+    		hibernateSession.getTransaction().commit();
+    		
+    		if ("0".equals(count))  {
+    			logger.debug("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - CAMS fund exists returns true");
+    			logger.debug("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - end");
+    			return false;
+    		}
+    		else  {
+    			logger.debug("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - CAMS fund exists returns true");
+    			logger.debug("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - end");
+    			return true;
+    		}
+
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - existsCamsFund method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
 }

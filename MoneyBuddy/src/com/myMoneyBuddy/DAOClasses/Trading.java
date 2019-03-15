@@ -36,6 +36,7 @@ import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
+import com.myMoneyBuddy.Utils.CommonUtil;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
@@ -245,8 +246,7 @@ public class Trading {
 	}
 
 	public String executeTrade(String customerId, String panCard, Map<String, Double> productDetailsMap, 
-			String transactionCode, String sipDate, String sipStartDate, String sipEndDate,
-			String transactionType, String buySell, int years, String accountNum, String bankId, String ifsc, String bankMode, 
+			String transactionCode, String transactionType, String buySell, String accountNum, String bankId, String ifsc, String bankMode, 
 			String firstOrderFlag, String paymentGatewayComment, String mandateId, String tranDetailId,  Map<String, Object> sessionMap) throws MoneyBuddyException {
 
 
@@ -267,7 +267,7 @@ public class Trading {
 			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - start");
 			
 			System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
-			System.out.println("Trading class : executeTade method : years : "+years);
+			//System.out.println("Trading class : executeTade method : years : "+years);
 			
 			orderDataModel = new LinkedList<OrderDataModel>();
 
@@ -346,7 +346,7 @@ public class Trading {
 
 				
 				
-			for ( String currentProductIdAndFolioNum : productDetailsMap.keySet())  {
+			for ( String currentProductDetails : productDetailsMap.keySet())  {
 				String schemeCode = null;
 				String amcCode = null;
 				//String folioNum = null;
@@ -354,11 +354,53 @@ public class Trading {
 				String category = null;
 				buySellType = "FRESH";
 				
-				String[] proIdAndFunId = currentProductIdAndFolioNum.split(":");
+				String[] proIdAndFunId = currentProductDetails.split(":");
 				String selFundId = proIdAndFunId[0];
 				String selFolioNum = proIdAndFunId[1];
+				String selSipDuration = null;
+				String selSipDate = null;
+				String selSipStartDate = null;
+				String selSipEndDate = null;
 				
-				System.out.println("selFundId : "+selFundId+" and selFolioNum : "+selFolioNum);
+				if ("SIP".equals(transactionType ))  {
+					selSipDuration = proIdAndFunId[2];
+					selSipDate = proIdAndFunId[3];
+					selSipStartDate = proIdAndFunId[4];
+					selSipEndDate = proIdAndFunId[5];
+				}
+				
+				
+				/*Calendar cal = Calendar.getInstance();
+				
+				
+				if (selSipDate.length() == 1) {
+					selSipDate = "0"+selSipDate;
+				}
+				
+				String sipStartMonth;
+				String sipEndMonth;
+				
+				CommonUtil commonUtil= new CommonUtil();
+				
+				if ( Integer.parseInt(selSipDate) <=   (cal.get(Calendar.DATE)) ) {
+					sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(0) : commonUtil.theMonth(cal.get(Calendar.MONTH)+1));
+					sipEndMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+				}
+				else {
+					sipStartMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+					sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(11) : commonUtil.theMonth(cal.get(Calendar.MONTH)-1));
+				}
+				System.out.println(" sipEndMonth : "+sipEndMonth);
+				System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
+				String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(selSipDuration));
+				String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+				System.out.println(" sipEndYear : "+sipEndYear);
+				*/
+				//String sipStartDate = sipStartMonth+"/"+selSipDate+"/"+sipStartYear;
+				//String sipEndDate = sipEndMonth+"/"+selSipDate+"/"+sipEndYear;
+				
+				
+				System.out.println("selFundId : "+selFundId+" and selFolioNum : "+selFolioNum+" and selSipStartDate : "+selSipStartDate+" and selSipEndDate : "+selSipEndDate);
 
 				QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
 				SecondaryFundDetails secondaryFundDetails = querySecondaryFundDetails.getSecondaryFundDetails(selFundId);
@@ -419,7 +461,7 @@ public class Trading {
 				
 				
 
-				Double currentTransactionAmount = productDetailsMap.get(currentProductIdAndFolioNum);
+				Double currentTransactionAmount = productDetailsMap.get(currentProductDetails);
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
 
@@ -465,15 +507,15 @@ public class Trading {
 					
 					System.out.println("customerId for SipDetails is : "+customerId);
 					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
-					System.out.println("sipDate for SipDetails is : "+sipDate);
-					System.out.println("sipStartDate for SipDetails is : "+sipStartDate);
-					System.out.println("sipEndDate for SipDetails is : "+sipEndDate);
+					System.out.println("sipDate for selSipDate is : "+selSipDate);
+					System.out.println("sipStartDate for SipDetails is : "+selSipStartDate);
+					System.out.println("sipEndDate for SipDetails is : "+selSipEndDate);
 					
-					String frmtdStartDateForSip = sipStartDate.substring(6,10)+"-"+sipStartDate.substring(0,2)+"-"+sipStartDate.substring(3,5);
-					String frmtdEndDateForSip = sipEndDate.substring(6,10)+"-"+sipEndDate.substring(0,2)+"-"+sipEndDate.substring(3,5);
+					String frmtdStartDateForSip = selSipStartDate.substring(6,10)+"-"+selSipStartDate.substring(0,2)+"-"+selSipStartDate.substring(3,5);
+					String frmtdEndDateForSip = selSipEndDate.substring(6,10)+"-"+selSipEndDate.substring(0,2)+"-"+selSipEndDate.substring(3,5);
 					
 					tempSipDetail = new SipDetails(customerId, transactionDetailId,
-							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,Integer.toString(years),"N","N");
+							selSipDate, frmtdStartDateForSip, frmtdEndDateForSip,selSipDuration,"N","N");
 	
 					hibernateSession.save(tempSipDetail);
 					hibernateSession.getTransaction().commit();
@@ -530,14 +572,14 @@ public class Trading {
 					}
 				}
 				else {
-					if ( productDetailsMap.get(currentProductIdAndFolioNum) >= 200000.00 ) {
+					if ( productDetailsMap.get(currentProductDetails) >= 200000.00 ) {
 						schemeCode = schemeCode+"-L1" ;	
 					}
 				}
 				
 				System.out.println(" SCHEME CODE : "+schemeCode);
 				
-				if (transactionType == "UPFRONT")  {
+				if ("UPFRONT".equals(transactionType))  {
 
 					if (buySell == "BUY")  {
 						buySellValue = "P";
@@ -549,10 +591,10 @@ public class Trading {
 					
 					
 					
-					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductIdAndFolioNum)));
+					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductDetails)));
 					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
 							configProperties.getProperty("MEMBER_ID"),customerId,schemeCode,buySellValue,buySellType,
-							clientProperties.getProperty("DP_TXN"),Double.toString(productDetailsMap.get(currentProductIdAndFolioNum)),clientProperties.getProperty("QTY"),
+							clientProperties.getProperty("DP_TXN"),Double.toString(productDetailsMap.get(currentProductDetails)),clientProperties.getProperty("QTY"),
 							clientProperties.getProperty("ALL_REDEEM"),selFolioNum,clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
 							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
@@ -564,19 +606,19 @@ public class Trading {
 				}
 				else {
 
-					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductIdAndFolioNum)));
+					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductDetails)));
 					System.out.println(" start Date  : "+frmtdDate );
-					System.out.println(" sip start Date  : "+sipStartDate );
+					System.out.println(" sip start Date  : "+selSipStartDate );
 
-					String startDate = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
+					String startDate = selSipStartDate.substring(3,5)+"/"+selSipStartDate.substring(0,2)+"/"+selSipStartDate.substring(6,10);
 				
 					System.out.println(" startDate  : "+startDate );
-					System.out.println(" numOfInstallments  : "+Integer.toString(years*12) );
+					System.out.println(" numOfInstallments  : "+Integer.toString(Integer.parseInt(selSipDuration)*12) );
 					
 					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, schemeCode, configProperties.getProperty("MEMBER_ID"),
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
-							Double.toString(productDetailsMap.get(currentProductIdAndFolioNum)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
+							Double.toString(productDetailsMap.get(currentProductDetails)),Integer.toString(Integer.parseInt(selSipDuration)*12),clientProperties.getProperty("REMARKS"),
 							selFolioNum,"Y",clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
 							clientProperties.getProperty("EUIN"),
 							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
@@ -706,10 +748,10 @@ public class Trading {
 					if (bseOrderId != null)  {
 						orderNums.getString().add(bseOrderId);
 						System.out.println(bseOrderId+" added in orderNums");
-						logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - amount - "+Double.toString(productDetailsMap.get(currentProductIdAndFolioNum))+" for bseOrderId - "+bseOrderId+"added in orderNums hashMap for payment ");
+						logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - amount - "+Double.toString(productDetailsMap.get(currentProductDetails))+" for bseOrderId - "+bseOrderId+"added in orderNums hashMap for payment ");
 					}
 					
-					totalPaymentAmount += productDetailsMap.get(currentProductIdAndFolioNum);
+					totalPaymentAmount += productDetailsMap.get(currentProductDetails);
 					query.setParameter("transactionStatus", "3");
 					allOrderFailed = false;
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - order successfully placed to BSE for transactionDetailId - "+transactionDetailId);

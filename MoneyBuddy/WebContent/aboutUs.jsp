@@ -131,7 +131,7 @@
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
 								<div class="pull-left">
-									<a href="#"><img class="media-object" src="images/Kamal.JPG" alt="" ></a>
+									<a href="#"><img class="media-object" src="images/Kamal.jpg" alt=""></a>
 								</div>
 								<div class="media-body">
 									<h5>Kamal Wadhwani</h5>
@@ -144,7 +144,7 @@
 									
 									<ul class="social_icons">
 										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter"></i></a></li> 
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li> 	
 										<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 									</ul>
 								</div>
@@ -158,7 +158,7 @@
 						<div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="media">
 								<div class="pull-left">
-									<a href="#"><img class="media-object" src="images/Sail.JPG" ></a>
+									<a href="#"><img class="media-object" src="images/Sail.jpg" ></a>
 								</div>
 								<div class="media-body">
 									<h5>Sail Wadhwani</h5>
@@ -199,7 +199,7 @@
 						<div class="single-profile-bottom wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
 							<div class="media">
 								<div class="pull-left">
-									<a href="#"><img class="media-object" src="images/man3.jpg" alt=""></a>
+									<a href="#"><img class="media-object" src="images/Savvy.jpg" alt=""></a>
 								</div>
 
 								<div class="media-body">
@@ -253,7 +253,7 @@
                         <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">

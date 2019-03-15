@@ -10,7 +10,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <title>MoneyBuddy - Top Performing Mutual Funds</title>
         
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -96,19 +96,19 @@
 					<table id="sipInvestmentData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-1 g-bg-color--gray-light">Sl. no.</th>
-								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
+								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-3 g-bg-color--gray-light">FolioNum</th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
-							<%! int i = 1; %> 
+							<%-- <%! int i = 1; %>  --%>
 
-							<s:iterator value="#session.productList" var="productListElement">
+							<s:iterator value="#session.customerCartSipList" var="customerCartSipListElement">
 								<tr>
-									<td class="center g-font-size-14--xs"><%= i++ %> </td>
-								    <td class="center g-font-size-14--xs"><s:property value="#productListElement.key"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#productListElement.value"/></td>
+									<td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.productName"/></td>
+								    <td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.amount"/></td>
+								    <td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.folioNumber"/></td>
 								</tr>
 							</s:iterator>
 						</tbody>
@@ -125,9 +125,9 @@
 	        		<h5 class="title g-color--white"> 
                 		 We have received your first SIP instalment of Rs. <u id="sip-amt"><s:property value="sipAmount"/></u>
                		</h5>
-                	<h5 class="title g-color--white"> 
+                	<%-- <h5 class="title g-color--white"> 
                 		Going forward, your SIP will be auto-debited on <u><s:property value="returnDate.substring(0,4)"/></u> of every month, starting from <u><s:property value="returnDate"/></u>
-               		</h5>
+               		</h5> --%>
 	            </div>
 	       	</div>
 	     </div>

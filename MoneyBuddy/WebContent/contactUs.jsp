@@ -12,7 +12,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <title>MoneyBuddy - Contact Us</title>
         <!-- <meta name="keywords" content="HTML5 Theme" />
         <meta name="description" content="Megakit - HTML5 Theme">
         <meta name="author" content="keenthemes.com"> -->
@@ -210,7 +210,7 @@
                     <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>
                     
                     <div class="g-text-center--xs">
-                    	<s:submit  class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />
+                    	<s:submit id="recaptcha-contact-us"  class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />
                         <!-- <button id="recaptcha-contact-us" type="submit" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" >Submit</button> -->
                     </div>
                     
@@ -254,7 +254,7 @@
                         <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">

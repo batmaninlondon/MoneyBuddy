@@ -25,7 +25,8 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 
 	Logger logger = Logger.getLogger(CreateCartAction.class);
 	private SessionMap<String,Object> sessionMap;
-	
+	private String sipDuration; // in years
+    private String sipDate;
 	private String totalInvestment;
 	
 	//private InputStream stream;
@@ -34,10 +35,21 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     	
     	String customerId = null;
     	String folioNum = null;
+    	String transactionType = null;
+    	String sipDuration = null;
+    	String sipDate = null;
+    	
     	try {
     		
     		customerId = sessionMap.get("customerId").toString();
 			folioNum = sessionMap.get("selectFolioNum").toString();
+			transactionType = sessionMap.get("transactionType").toString(); 
+			
+			if ("SIP".equals(transactionType)) {
+				sipDuration = getSipDuration();
+				sipDate = getSipDate();
+			}
+			
 			
 			sessionMap.remove("FolioNumList");
 			System.out.println("FolioNumList has been removed from the session "+sessionMap.get("FolioNumList"));
@@ -47,8 +59,8 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	System.out.println(" CreateCartAction execute method Called !!");
 	    	System.out.println("CreateCartAction execute method : totalInvestment : "+getTotalInvestment());
 
-	    	sessionMap.put("transactionType", "UPFRONT");
-	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored transactionType as UPFRONT in sessionMap");
+	    	/*sessionMap.put("transactionType", "UPFRONT");
+	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored transactionType as UPFRONT in sessionMap");*/
 	    	
 	    	//String totalInvestment = sessionMap.get("totalInvestment").toString();
 	    	HashMap<String,Double> productRatioList = (HashMap<String,Double>)sessionMap.get("productRatioList");
@@ -69,17 +81,24 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(getTotalInvestment()) ) /100);
 	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),
-	   	        		folioNum,frmtdDate,"Pending");
+	   	        		transactionType,sipDuration,sipDate,folioNum,frmtdDate,"Pending");
 	   	        
 	   	    }
 	
 	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
-	    	List<CustomerCart> customerCartList = queryCustomerCart.getCustomerCart(customerId);
+	    	List<CustomerCart> customerCartUpfrontList = queryCustomerCart.getCustomerCartUpfront(customerId);
 	    	
-	    	System.out.println(" size of customerCartList is : "+customerCartList.size());
+	    	System.out.println(" size of customerCartUpfrontList is : "+customerCartUpfrontList.size());
 	    	
-	    	sessionMap.put("customerCartList", customerCartList);
-	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    	
+	    	sessionMap.put("customerCartUpfrontList", customerCartUpfrontList);
+	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored customerCartUpfrontList in sessionMap"); 
+	    	
+	    	List<CustomerCart> customerCartSipList = queryCustomerCart.getCustomerCartSip(customerId);
+	    	
+	    	System.out.println(" size of customerCartSipList is : "+customerCartSipList.size());
+	    	
+	    	sessionMap.put("customerCartSipList", customerCartSipList);
+	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - stored customerCartSipList in sessionMap"); 
 	
 	    	/*String str = "success";
 	    	stream = new ByteArrayInputStream(str.getBytes());*/
@@ -87,7 +106,12 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     	    logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - end");
 	    	
-	    	return SUCCESS;
+	    	if ("SIP".equals(transactionType)) {
+	    		return "SIP";
+	    	}
+	    	else {
+	    		return "UPFRONT";
+	    	}
     	} 
     	catch ( Exception e )  {
     		logger.error("CreateCartAction class - execute method - customerId - "+customerId+" - Caught Exception");
@@ -112,6 +136,22 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 
 	public void setTotalInvestment(String totalInvestment) {
 		this.totalInvestment = totalInvestment;
+	}
+
+	public String getSipDuration() {
+		return sipDuration;
+	}
+
+	public void setSipDuration(String sipDuration) {
+		this.sipDuration = sipDuration;
+	}
+
+	public String getSipDate() {
+		return sipDate;
+	}
+
+	public void setSipDate(String sipDate) {
+		this.sipDate = sipDate;
 	}
     
 /*	public InputStream getStream() {

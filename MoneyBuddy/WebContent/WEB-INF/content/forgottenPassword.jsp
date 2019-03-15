@@ -21,6 +21,8 @@
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
 	
 	<script>
 	    <%
@@ -141,7 +143,7 @@
 	<div class="row" style="margin-top:25px;">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			 <s:submit id="recaptcha-forgot-pswd" class="center btn btn-primary readmore submit-button-1" value="SUBMIT" />
+			 <s:submit id="recaptcha-forgot-pswd" class="g-recaptcha center btn btn-primary readmore submit-button-1" value="SUBMIT" />
 		</div>
 		<div class="col-md-5"></div>
 	</div>

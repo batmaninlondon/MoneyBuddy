@@ -222,8 +222,8 @@
 	</package>
 	
 	<package name="policy" namespace="/" extends="struts-default">
-	    <action name="policy">
-	    	<result>/policy.jsp</result>
+	    <action name="privacyPolicy">
+	    	<result>/privacyPolicy.jsp</result>
 		</action>
 	</package>
 	

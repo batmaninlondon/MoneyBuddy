@@ -64,17 +64,21 @@
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
 								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-3 g-bg-color--gray-light">Folio No.</th>
-								<th class="center col-md-3 g-bg-color--gray-light"></th>
+								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Folio No.</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Sip Duration</th>
+								<th class="center col-md-1 g-bg-color--gray-light">Sip Date</th>
+								<th class="center col-md-2 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
-							<s:iterator value="#session.customerCartUpfrontList" var="customerCartListElement">
+							<s:iterator value="#session.customerCartSipList" var="customerCartListElement">
 								<tr>
 								    <s:if test="productName.equals('Total')">
 								    	<td class="center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.productName"/></b></td>
 								    	<td class="center g-font-size-14--xs g-bg-color--gray-light g-text-right--xs"><b><s:property value="#customerCartListElement.amount"/></b></td>
+								    	<td class="g-bg-color--gray-light"></td>
+								    	<td class="g-bg-color--gray-light"></td>
 								    	<td class="g-bg-color--gray-light"></td>
 								    	<td class="g-bg-color--gray-light"></td>
 								    </s:if>
@@ -87,6 +91,8 @@
 								    		<s:property value="#customerCartListElement.folioNumber"/>
 
 							    		</td>
+							    		<td class="center g-font-size-14--xs g-text-right--xs"><s:property value="#customerCartListElement.sipDuration"/></td>
+							    		<td class="center g-font-size-14--xs g-text-right--xs"><s:property value="#customerCartListElement.sipDate"/></td>
 							    		<td class="center">
 							    			<button type="button" class=" btn-link" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Delete from cart</button>
 							    		</td>
@@ -111,7 +117,7 @@
 	    	<div class="profile">
 	        	<div class="name g-text-right--xs g-margin-r-9--xs" >
 	        		<s:form action="redirectAction" method="post">
-	        			<s:if test="#session.customerCartUpfrontList.size() == 1 ">
+	        			<s:if test="#session.customerCartSipList.size() == 1 ">
 	        				<a href="<s:url action="MFexplorer"/>" class="btn g-color--white "  style="background-color:black;" >Back</a>
 	        				<button type="button"  class="btn g-color--white g-margin-t-15--xs disabled"  style="background-color:black; ">Continue</button>
 	        				<%-- <s:submit class="btn g-color--white g-margin-t-15--xs disabled" value="Continue" style="background-color:black; "/> --%>

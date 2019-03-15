@@ -42,15 +42,15 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	        InsertCustomerDetails newCustomer = new InsertCustomerDetails();
 	        
 	    	MbUtil mbUtil = new MbUtil();
-	    	/*if(!mbUtil.isCaptchaValid(getGoogleResponseRegister()))
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponseRegister()))
 	    	{
-	    		String str = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(str.getBytes());
+	    		/*String str = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    		addActionMessage("Looks like, you are a robot.");
 	    	    logger.debug("RegisterAction class - execute method - returned Lookslikeyouarearobot");
 	    	    
 	    	    return SUCCESS;
-	    	}*/
+	    	}
 	    	
 	    	if (customer.existsCustomer(getEmailIdRegister())) {
 	    		System.out.println("RegisterAction class : execute method : UserAlreadyExists");

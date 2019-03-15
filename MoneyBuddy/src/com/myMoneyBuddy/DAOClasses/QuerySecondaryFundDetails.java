@@ -192,4 +192,46 @@ public class QuerySecondaryFundDetails {
 					hibernateSession.close();
 		}
 	}
+	
+	public String getRta(String fundId)  throws MoneyBuddyException {
+		
+		logger.debug("QuerySecondaryFundDetails class - getRta method - start");
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try {
+			String rta = null;
+			
+			hibernateSession.beginTransaction();
+    		
+    		Query query = hibernateSession.createQuery("select rta from SecondaryFundDetails where fundId = :fundId ");
+    		query.setParameter("fundId", fundId);
+    		
+    		rta = query.uniqueResult().toString();
+    		
+    		System.out.println(" rta for fundId : "+fundId+" is : "+rta);
+    		
+    		hibernateSession.getTransaction().commit();
+    		
+    		logger.debug("QuerySecondaryFundDetails class - getRta method - returning rta : "+rta+" for fundId : "+fundId);
+    		
+			logger.debug("QuerySecondaryFundDetails class - getRta method - end");
+			
+			return rta;
+			
+		}
+		catch ( HibernateException e ) {
+			logger.error("QuerySecondaryFundDetails class - getRta method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QuerySecondaryFundDetails class - getRta method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
 }

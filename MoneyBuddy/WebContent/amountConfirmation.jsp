@@ -8,35 +8,27 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Megakit - HTML5 Theme</title>
+        <title>MoneyBuddy - Top Performing Mutual Funds</title>
         
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
- 		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-        
-        
-    
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <!-- <link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" /> -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         <!-- Web Fonts -->
-        
-       <!--  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
         <!-- Vendor Styles -->
-        
- 	
-        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
-     <!--    <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
+        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
+        <link href="assets/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
         
         <!-- <link href="css/material-bootstrap-wizard.css" rel="stylesheet" />
  -->
         <!-- Theme Styles -->
-        
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <!-- <link href="css/material-kit.css" rel="stylesheet"/> -->
         
         
@@ -60,9 +52,7 @@
   	<%-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script> --%>
 		<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> --%>
-		
-    
-    <style>
+	<style>
 input[type="range"] { 
     margin: auto;
     -webkit-appearance: none;
@@ -135,10 +125,7 @@ input[type="range"] {
 ::-ms-tooltip { 
     display: none;
 }
-    </style>
-    
-    
-    
+    </style>	
     </head>
 
 <body style="background: url(img/1920x1080/10.jpg) 50% 0 no-repeat fixed;" onload="filldata('<s:property value="#session.minSipAmount"/>','<s:property value="#session.minSipDuration"/>','<s:property value="#session.minPurchaseAmount"/>');">
@@ -225,21 +212,21 @@ input[type="range"] {
 							<div id="investment-options" class="col-md-4 col-xs-12">
 								<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Enter the amount you want to invest</p>
 							</div>
-							 <%-- <div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500"
-											 value="<s:property value="#session.minPurchaseAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
-							</div>  --%>
-							
-							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							<%-- <div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 							  <input type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500" class="slider" id="myRange">
 							</div>
 							
 							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
-							  Rs.<span id="tot-investment-id-value" name="totalInvestment1"></span>
+							  Rs.<span id="upfrontInvestment" name="totalInvestment1"></span>
+							</div> --%>
+							 <%-- <s:hidden id="upfrontInvestment" name="totalInvestment"></s:hidden> --%>
+							 
+							<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+							<input id="upfront-investment-range" type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500"
+											 value="<s:property value="#session.minPurchaseAmount"/>" onchange="showNewUpfrontInvestment(this.value)"/>
 							</div>
-							 <s:hidden id="upfrontInvestment" name="totalInvestment"></s:hidden>
-							
-							<%-- <p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs.jjj <span id="upfrontInvestment" class="g-color--black"></span></p> --%>
+							<p class="title g-margin-l-100--md g-margin-l-20--xs  " >Rs. <span id="upfrontInvestment" class="g-color--black"></span></p>
+							<div class="col-md-5"></div>
 						</div>
 						
 						<div class="row g-margin-t-50--xs g-margin-b-50--xs">
@@ -278,7 +265,7 @@ input[type="range"] {
 								<div class="g-bg-color--gray-lighter " style="height:60px;">
 		    						<div class="profile" >
 		        						<div class="name g-text-right--xs g-margin-r-10--xs" >
-		        							
+		        							<s:hidden id="tot-investment-id-value" name="totalInvestment"></s:hidden>
 		        							<%-- <s:submit class="tn  g-color--white g-margin-t-15--xs" style="background-color:black;" value="Add to Cart" /> --%>
 		        							<button type="button" class="btn  g-color--white g-margin-t-15--xs" onClick="newUpdate();"  style="background-color:black;" >Add to Cart</button>
 		            					</div>
@@ -298,6 +285,13 @@ input[type="range"] {
 								<div id="investment-options" class="col-md-5 col-xs-12">
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >How much do you want to invest monthly?</p>
 								</div>
+								<%-- <div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+								  <input type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500" class="slider" id="myRange">
+								</div>
+								
+								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+								  Rs.<span id="sipPerMonth" name="totalInvestment1"></span>
+								</div> --%>
 								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 								<input id="sip-amount-range" type="range" min="<s:property value="#session.minSipAmount"/>" max="150000" step="100"
 												 value="<s:property value="#session.minSipAmount"/>" onchange="showSipAmountPerMonth(this.value)"/>
@@ -309,6 +303,13 @@ input[type="range"] {
 								<div id="investment-options" class="col-md-5 col-xs-12">
 									<p class="title g-margin-l-100--md g-margin-l-20--xs  " >How long do you expect to invest for?</p>
 								</div>
+								<%-- <div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+								  <input type="range" min="<s:property value="#session.minPurchaseAmount"/>" max="150000" step="500" class="slider" id="myRange">
+								</div>
+								
+								<div class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
+								  Rs.<span id="sipDuration" name="totalInvestment1"></span>
+								</div> --%>
 								<div id="duration-value"  class="col-md-3  g-margin-t-10--xs col-xs-6 g-margin-l-20--xs">
 								<input id="sip-duration-range" type="range" min="<s:property value="#session.minSipDuration"/>" max="50" step="1"
 												 value="<s:property value="#session.minSipDuration"/>" onchange="showDuration(this.value)"/>
@@ -419,27 +420,33 @@ input[type="range"] {
   
   		<script type="text/javascript" src="assets/js/javaScript.js"></script>
         <script src="assets/js/jquery.js"></script>
-    	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    	<script src="assets/js/bootstrap.min.js"></script>
      	<script src="assets/js/sly.min.js"></script>
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
 	    <script src="assets/js/jquery.isotope.min.js"></script>
 	    <script src="assets/js/main.js"></script>
 	    <script src="assets/js/wow.min.js"></script>
 	    <script src="assets/js/index.js"></script>
-  		
-  		<script>
-var slider = document.getElementById("myRange");
-var output = document.getElementById("upfrontInvestment");
-var output1 = document.getElementById("tot-investment-id-value");
-output.innerHTML = slider.value;
-output1.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  output1.innerHTML = this.value;
+	    
+	    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   
-}
-</script>
-  		
+  
+  
+  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<%--     		<script>
+				var slider = document.getElementById("myRange");
+				var output = document.getElementById("upfrontInvestment");
+				var output1 = document.getElementById("tot-investment-id-value");
+				output.innerHTML = slider.value;
+				output1.innerHTML = slider.value;
+				
+				slider.oninput = function() {
+				  output.innerHTML = this.value;
+				  output1.innerHTML = this.value;
+				  
+				}
+			</script> --%>
 </body>
 </html>

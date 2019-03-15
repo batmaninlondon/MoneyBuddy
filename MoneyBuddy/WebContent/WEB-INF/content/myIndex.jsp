@@ -133,12 +133,12 @@
 </style>
 
     <script>
-	function buyFundHandler(fundId)  
+	/* function buyFundHandler(fundId)  
     {
 			alert('Hiiiii');
 			document.getElementById("fund-id-value").value = fundId;
 			document.formBuyFundAction.submit();
-    }
+    } */
 	
     <%
     
@@ -695,7 +695,7 @@
                     </div>
                     <div class="col-md-4 col-md-offset-1">
                         <p class="g-font-size-16--xs">We aim high at being focused on building relationships with our clients and community. </p>
-                        <p class="g-font-size-16--xs">With more than 40 years of experience in financial investments, consulting and technology, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
+                        <p class="g-font-size-16--xs">With more than 40 years of total experience in financial investments, consulting and technology, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
                     	<div class="row ">
                         <ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Wealth Management</li>
@@ -931,7 +931,7 @@
                         <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="policy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -977,6 +977,8 @@
        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
        <script type="text/javascript" src="assets/js/swiper.jquery.min.js"></script>
        <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+       <script type="text/javascript" src="assets/js/jquery.parallax.min.js"></script>
+       <script type="text/javascript" src="assets/js/components/parallax.min.js"></script>
        <script type="text/javascript" src="assets/js/waypoint.min.js"></script>
        <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
        <script type="text/javascript" src="assets/js/counterup.min.js"></script>

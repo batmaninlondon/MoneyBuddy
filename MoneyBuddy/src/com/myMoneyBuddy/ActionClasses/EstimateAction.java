@@ -103,7 +103,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				}
 				System.out.println(" sipDate : "+sipDate);
 				
-				String sipStartMonth;
+				/*String sipStartMonth;
 				String sipEndMonth;
 				
 				CommonUtil commonUtil= new CommonUtil();
@@ -123,7 +123,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 				System.out.println(" sipEndYear : "+sipEndYear);
 				
 				String sipStartDate = sipStartMonth+"/"+sipDate+"/"+sipStartYear;
-				String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
+				String sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;*/
 				
 				List<String> fundIds = new ArrayList<String> (productRatioList.keySet());
 				QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
@@ -141,11 +141,11 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 					sipEndDate = sipEndMonth+"/"+sipDate+"/"+sipEndYear;
 				}*/
 				
-				sessionMap.put("sipStartDate", sipStartDate);
+				/*sessionMap.put("sipStartDate", sipStartDate);
 				sessionMap.put("sipEndDate", sipEndDate);
 				
 				System.out.println(" sipStartDate : "+sipStartDate);
-				System.out.println(" sipEndDate : "+sipEndDate);
+				System.out.println(" sipEndDate : "+sipEndDate);*/
 				}
 			
 			System.out.println("upfrontInvestment in sessionMap is : "+getUpfrontInvestment());
