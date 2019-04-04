@@ -43,22 +43,22 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
+	    	/*if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
 	    	{
-	    		System.out.println("Looks like you are a robot. ");
-	    		/*String strMsg = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(strMsg.getBytes());*/
+	    		System.out.println("Looks like you are a robot...... ");
+	    		String strMsg = "Lookslikeyouarearobot";
+	    	    stream = new ByteArrayInputStream(strMsg.getBytes());
 	    		addActionMessage("Looks like you are a robot.");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned Lookslikeyouarearobot");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 	    	    
 	    	    return INPUT;
-	    	}
+	    	}*/
 	    	if (customer == null) {
 	    		System.out.println("Emaid id not valid ");
 	    		/*str = "emailIdDoesNotExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage(getEmailIdLogin()+"is not registered with MoneyBuddy.");
+	    		addActionMessage("This email ID is not registered, please sign up to use MoneyBuddy");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned emailIdDoesNotExists");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 	    	    
@@ -71,7 +71,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		System.out.println("incorrectPassword ");
 	    		/*str = "incorrectPassword";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage("EmailId and Password does not match.");
+	    		addActionMessage("Invalid Password, Please enter correct password");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned incorrectPassword");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 		    	

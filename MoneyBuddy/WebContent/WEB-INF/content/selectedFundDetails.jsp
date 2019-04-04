@@ -16,7 +16,10 @@
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
    
+    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    
     <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 
 </head>
@@ -111,27 +114,31 @@
         	<div class=" g-bg-color--primary-white  " >
 		 		<div class="container ">
 			 		<div class="row  ">
-					 		<div class="col-md-8 col-xs-12 ">
+					 		<div class="col-md-12 col-xs-12 g-text-center--sm ">
 					 			<input type="hidden" id="fundId" value="<s:property value="#fundDetails.fundId"/>" />
-					 		 	<h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-50--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
+					 		 	<h1 class="g-font-size-35--xs g-font-size-35--sm g-font-size-35--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
 				            </div>
-		            		<div class="col-md-1 col-xs-6  g-hor-centered-row__col g-margin-t-25--xs g-margin-b-0--lg ">
-		                     	<a  href="javascript:callOneTimeInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs" style="width:140px;">Invest Lumpsum</a>
+		            		<%-- <div class="col-md-1 col-xs-6  g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+		                     	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
 		                    </div>
 		                    <div class="col-md-1  g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
 		                    </div>
 		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
-			             		<div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-25--xs g-margin-b-0--lg ">
-			                   		<a  href="javascript:callSIPInvestment()" class="text-uppercase s-btn s-btn--md g-bg-color--primary  g-color--white g-radius--30 g-padding-x-10--xs" style="width:140px;">Start SIP</a>
+			             		<div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs" style="width:150px;">Start SIP</a>
 			                    </div>
 		                    </s:if>
 		                    <div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
-		                    </div>
+		                    </div> --%>
 		            </div> 
+		            <br><br>
 		            <div class="row ">
-					 		<div class="col-md-8 col-xs-12 g-margin-t-25--xs g-margin-b-25--xs">
+					 		<div class="col-md-8 col-xs-12  g-margin-b-25--xs">
 					 		 	<table id="portfoliosummary" class="display" >
 										        <tbody>
+										         <tr  >
+										                <td colspan="2" ><span class=" g-color--primary "><b>Fund Details</b></span></td>
+										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" >
 										                	<span class=" g-font-size-14--xs g-font-size-5--xs">
@@ -180,7 +187,7 @@
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AUM :</b> &#8377; 4039.34 Cr </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception :</b> <s:property value="#fundDetails.startDate"/></span></td>
+										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception Date:</b> <s:property value="#fundDetails.startDate"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="#fundDetails.minSipAmount"/><small> /month</small></span></td>
@@ -195,8 +202,8 @@
 		            		<div class="col-md-4 col-xs-6  g-full-width--xs ">
                 				<table id="portfoliosummary" class="display" >
 										        <tbody>
-										            <tr class="g-margin-b-45--xs">
-										                <td colspan="2" class="" ><span class=" g-font-size-16--xs g-font-size-5--xs g-color--primary"><b>Past Returns</b></span><br/><br/></td>
+										            <tr  >
+										                <td colspan="2" ><span class=" g-color--primary "><b>Past Returns (% per year)</b></span></td>
 										            </tr>
 										            
 										            <%-- <tr >
@@ -208,25 +215,45 @@
 										                 <td class="" ></td>
 										            </tr> --%>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 1 YR 	 </span></td>
-														<td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs">&nbsp;<s:property value="#fundDetails.returnsOneYear"/>&nbsp;&nbsp;% Per Year</span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 1 Year 	 </span></td>
+										                <td></td>
+														<td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsOneYear"/>&nbsp;&nbsp;%</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 3 YR </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs">&nbsp;<s:property value="#fundDetails.returnsThreeYears" />&nbsp;&nbsp;% Per Year</span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 3 Year </span></td>
+										                <td></td>
+										                 <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsThreeYears" />&nbsp;&nbsp;%</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs"> 5 YR</span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &nbsp;<s:property value="#fundDetails.returnsFiveYears" />&nbsp;&nbsp;% Per Year</span></td>
+										                <td class="" ><span class=" g-font-size-14--xs"> 5 Year</span></td>
+										                <td></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> <s:property value="#fundDetails.returnsFiveYears" />&nbsp;&nbsp;%</span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" ><span class=" g-font-size-14--xs"> Since Inception</span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> &nbsp;<s:property value="#fundDetails.returnsSinceInception" />&nbsp;&nbsp;% Per Year</span></td>
+										                <td></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsSinceInception" />&nbsp;&nbsp;%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
                				</div>
 		            </div> 
+		            
+		            <div class="row ">
+		            	<div class="col-md-4 ">
+		                    </div>
+		                    <div class="col-md-2 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+		                     	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
+		                    </div>
+		                    
+		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
+			             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs" style="width:150px;">Start SIP</a>
+			                    </div>
+		                    </s:if>
+		                    <div class="col-md-4 ">
+		                    </div>
+		            </div>
 				</div>
 		    </div> 
 		    
@@ -235,7 +262,7 @@
             	<div class="container ">
 	               <div class="">
 	               <div class="g-text-center--xs ">
-	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Fund Details</b></h3>
+	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Additional Fund Details</b></h3>
 	                	</div>
 	                	  <iframe src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%; height:800px;" ></iframe>
 	               </div> 

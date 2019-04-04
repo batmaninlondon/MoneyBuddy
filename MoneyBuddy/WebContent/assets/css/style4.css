@@ -186,13 +186,13 @@ textarea {
 }
 
 .button {
-  border: 0;
+  border: 20px;
   outline: none;
   border-radius: 0;
   padding: 1px 0;
   font-size: 2rem;
   font-weight: 300;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: .1em;
   background: #13b1cd;
   color: #ffffff;
@@ -201,7 +201,9 @@ textarea {
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #13b1cd;
+  background: #4ee0e4;
+  color: #555;
+   cursor:pointer;
 }
 
 .button-block {

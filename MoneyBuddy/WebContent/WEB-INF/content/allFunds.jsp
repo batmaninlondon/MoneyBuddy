@@ -239,16 +239,16 @@
 						<div id="myDiv3" class="col-md-4  g-bg-color--white">
 							<div  class="  g-line-height--normal  ">
 							<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
-								<figure class="snip1418   swiper-slide" onClick="buyFundHandler(<s:property value="selectedFundId" />);" style="height:250px;">
+								<figure class="snip1418   swiper-slide " style="width:100%;height:292px;"  onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
 									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
-				  					<figcaption>
-				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
-				    						<br/>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.schemeType"/>. <s:property value="#fundDetailsDataModelElement.category"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#fundDetailsDataModelElement.startDate"/></p> 
+				  					<figcaption >
+				    					<article class=" panel panel-heading g-bg-color--primary" style="height:140px;" >
+				    						<p class="g-color--white  g-font-size-16--xs " style="font-weight: bold; "><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
+				    						 <p class="g-color--white  g-font-size-12--xs" ><b>Scheme Type:</b> <s:property value="#fundDetailsDataModelElement.schemeType"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" ><b>Category:</b> <s:property value="#fundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-font-size-12--xs" ><b>Inception Date:</b> <s:property value="#fundDetailsDataModelElement.startDate"/></p>
 				    					</article>
-				    					<article class="g-margin-l-20--xs "> 
+				    					<article class="g-margin-l-20--xs g-margin-t-20--xs" style="height:110px;"> 
 									        <s:if test="#fundDetailsDataModelElement.rating.equals('5'.toString())">
 										        <i class="fa fa-star g-color--primary"></i>
 												<span class="fa fa-star g-color--primary"></span>
@@ -314,6 +314,7 @@
 										        </tbody>
 										    </table>
 									       	</article>
+									       	
 				  				 </figcaption>
 		  						 <a href="#"></a>
 								</figure>

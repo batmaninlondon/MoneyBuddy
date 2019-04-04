@@ -29,8 +29,7 @@ public class QueryCustomer {
 			System.out.println("Email id is : "+emailId);
 			hibernateSession.beginTransaction();
 			customer = (Customers) hibernateSession.createQuery("from Customers where emailId = '"+emailId+"'").uniqueResult();
-	
-			System.out.println("customer.getEmailId() : "+customer.getEmailId());
+
 			hibernateSession.getTransaction().commit();
 			
 			logger.debug("QueryCustomer class - getCustomerFromEmailId method - emailId - "+emailId+" - return Customers record");

@@ -178,12 +178,20 @@ input[type="range"] {
 				<div class="name">
 			    	<div class="container">
 			    	<br/>
-  						<ul class="nav nav-tabs">
-    						<li class="active"><a data-toggle="tab" href="#onetime" onClick="setTransactionType('UPFRONT');">Invest Lumpsum</a></li>
+  						<ul class="nav nav-tabs card-header-pills">
+    						<li class="nav-item active"><a class="nav-link  active font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#onetime" onClick="setTransactionType('UPFRONT');">Invest Lumpsum</a></li>
    							<s:if test="#session.selectedFundDetailsDataModel.sipFlag.equals('Y'.toString())">
-   								<li><a data-toggle="tab" href="#sip" onClick="setTransactionType('SIP');">Start SIP</a></li>
+   								<li class="nav-item"><a class="nav-link font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#sip" onClick="setTransactionType('SIP');">Start SIP</a></li>
  							</s:if>
  						</ul>
+ 						<!-- <ul class="nav nav-tabs card-header-pills">
+    <li class="nav-item active">
+      <a class="nav-link  active g-bg-color--primary g-color--white font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#loginTabContent">Log In</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link g-bg-color--primary g-color--white font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#signup">Sign Up</a>
+    </li>      
+  </ul> -->
   					</div>
   				</div>
   			</div>

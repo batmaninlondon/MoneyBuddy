@@ -142,7 +142,7 @@
             <div class="g-container--md g-text-center--xs ">
             <br/><br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Contact Uss</h1>
+                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Contact Us</h1>
                 </div>
             </div>
         </div>

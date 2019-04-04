@@ -153,10 +153,10 @@
    	
   <ul class="nav nav-tabs card-header-pills">
     <li class="nav-item active">
-      <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#loginTabContent">LogIn</a>
+      <a class="nav-link  active g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#loginTabContent">Log In</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#signup">SignUp</a>
+      <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#signup">Sign Up</a>
     </li>      
   </ul>
 
@@ -173,7 +173,7 @@
               Email Address<span class="req">*</span>
             </label>
             <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
-  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" />
+  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" />
             <!-- <input id="email-id"  type="email" required autocomplete="off"/> -->
            <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
           </div>
@@ -183,7 +183,7 @@
               Password<span class="req">*</span>
             </label>
             <s:fielderror fieldName="passwordLogin" class="g-color--red" />
-  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" />
+  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" placeholder="Password"/>
             <!-- <input  id="password" type="password" required autocomplete="off"/> -->
           </div>
           
@@ -197,7 +197,8 @@
   	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
           <div>
           	
-        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="SIGN IN"  />
+        	<%-- <s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="Sign In"  /> --%>
+        	<s:submit  class="button button-block" value="Sign In"  />
         	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
         	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
            </div>
@@ -214,14 +215,6 @@
   			<s:textfield name="emailIdRegister"  autocomplete="false" placeholder="Email Address"/>
             <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
           </div>
-          <div id="registration-password" class="field-wrap ">
-            <%-- <label>
-              Create Password<span class="req">*</span>
-            </label> --%>
-            <s:fielderror fieldName="passwordRegister" class="g-color--red" />
-  			<s:password name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
-            <!-- <input id="password1"  type="password"required autocomplete="off"/> -->
-          </div>
           
           <div id="registration-mobile-number" class="field-wrap">
             <%-- <label>
@@ -231,14 +224,22 @@
   			<s:textfield name="mobileNumberRegister" autocomplete="off" placeholder="Mobile Number"/>
             <!-- <input id="mobile-number"  type="password"required autocomplete="off"/> -->
           </div>
+           <div id="registration-password" class="field-wrap ">
+            <%-- <label>
+              Create Password<span class="req">*</span>
+            </label> --%>
+            <s:fielderror fieldName="passwordRegister" class="g-color--red" />
+  			<s:password name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
+            <!-- <input id="password1"  type="password"required autocomplete="off"/> -->
+          </div>
           <s:hidden id="google-response-register" name="googleResponseRegister"></s:hidden>
           <!-- <p id="registration-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-35--xs"></p> -->
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Continue"  />
+          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Create My Free Account"  />
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="privacyPolicy">Privacy Policy</a></span>
-			<p class=" g-font-size-8--xs g-color--white-opacity-light"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
+			<p class=" g-font-size-8--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
           	               
           </s:form>
     </div>
@@ -285,7 +286,7 @@
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-4">
-					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-font-size-14--xs g-bg-color--primary g-color--white" value="Send Reset Link"  />
+					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-font-size-14--xs button button-block" value="Send Reset Link"  />
 					<!-- <button id="recaptcha-forgot-pswd" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button> -->
 				</div>
 			</div>

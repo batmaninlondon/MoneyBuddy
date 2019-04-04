@@ -264,7 +264,8 @@
                         </div>
 						<div class="g-text-center--xs">
                        		<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
-	                        	<a class="btn btn-home" href="<s:url action="MFexplorer"/>" " role="button">Get Started</a>
+                       			<!-- <button type="button" class="btn btn-round btn-home">Get Started</button> -->
+	                        	<a class="btn btn-home " href="<s:url action="MFexplorer"/>" >Get Started</a>
 	                        </div>
                        		<%-- <br/><br/><p id="slogan-4" class="small box g-text-right--xs  g-color--gray-light" > <span class="glyphicon">&#xe086;</span> with investing your capital is at risk</p> --%>
                		   </div>
