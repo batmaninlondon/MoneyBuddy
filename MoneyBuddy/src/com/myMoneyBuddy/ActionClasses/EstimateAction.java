@@ -34,6 +34,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	private String upfrontInvestment;
     private String sipAmount;
     private String sipDuration; // in years
+    private String sipPlan;
     private String sipDate;
     //private String riskCategory;
     //private String planName;
@@ -53,8 +54,10 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
     		
     		logger.debug("EstimateAction class - execute method - start");
     		
-    		System.out.println("EstimateAction class - execute method - start");
-    		System.out.println("EstimateAction class - execute method - transactionType : "+getTransactionType());
+    		System.out.println("EstimateAction class - execute method - start - sipPlan value :"+getSipPlan()+":");
+    		System.out.println("EstimateAction class - execute method - sipDate : "+getSipDate());
+    		System.out.println("EstimateAction class - execute method - sipDuration : "+getSipDuration());
+    		System.out.println("EstimateAction class - execute method - transactionType : "+getTransactionType()+" - folio number is :"+getSelectFolioNum()+":");
     		
 			System.out.println("Before calculation : upfrontInvestment : "+getUpfrontInvestment()+ " and sipAmount : "+getSipAmount());
 			upfrontInvestment = Double.toString(Math.round( Double.parseDouble(getUpfrontInvestment()) * 100.0 ) / 100.0);
@@ -323,6 +326,14 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
 	public void setSelectFolioNum(String selectFolioNum) {
 		this.selectFolioNum = selectFolioNum;
+	}
+
+	public String getSipPlan() {
+		return sipPlan;
+	}
+
+	public void setSipPlan(String sipPlan) {
+		this.sipPlan = sipPlan;
 	}
 
 }

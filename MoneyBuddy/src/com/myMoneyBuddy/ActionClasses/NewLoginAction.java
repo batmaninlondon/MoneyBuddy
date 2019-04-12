@@ -100,6 +100,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("customerId", customerId);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerId in sessionMap");
 	    	
+	    	
 	    	sessionMap.put("customerName", customer.getCustomerName());
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerName in sessionMap");
 	    	

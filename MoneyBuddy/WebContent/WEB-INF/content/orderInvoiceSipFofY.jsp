@@ -81,8 +81,8 @@
 		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:100px;">
 	    	<div class="profile">
 	        	<div class="name">
-	                	<h3 class="title g-color--white">Thank you for starting your SIP</h3>
-						<h6 style="color:white;">Your SIP details </h6>
+	                	<h3 class="title g-color--white">Thank you for investing with MoneyBuddy</h3>
+						<h6 style="color:white;">Your SIP investment details </h6>
 	            </div>
 	       	</div>
 	     </div>
@@ -96,19 +96,30 @@
 					<table id="sipInvestmentData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-3 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-3 g-bg-color--gray-light">Amount</th>
-								<th class="center col-md-3 g-bg-color--gray-light">FolioNum</th>
+								<th class="text-center col-md-3 g-bg-color--gray-light">Fund Name</th>
+								<th class="text-center col-md-3 g-bg-color--gray-light">Amount</th>
+								<th class="text-center col-md-3 g-bg-color--gray-light">FolioNum</th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
-							<%-- <%! int i = 1; %>  --%>
-
 							<s:iterator value="#session.customerCartSipList" var="customerCartSipListElement">
 								<tr>
-									<td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.productName"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.amount"/></td>
-								    <td class="center g-font-size-14--xs"><s:property value="#customerCartSipListElement.folioNumber"/></td>
+									<s:if test="productName.equals('Total')">
+									    <td class="center g-font-size-14--xs text-center">
+									    	<b><s:property value="#customerCartSipListElement.productName"/></b>
+									    </td>
+									    <td class="center g-font-size-14--xs text-center">
+									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.amount]})}"/>&nbsp;/month</b>
+								    	</td>
+								    	<td></td>
+							    	</s:if>
+							    	<s:else>
+							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.productName"/></td>
+									    <td class="center g-font-size-14--xs text-center">
+									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.amount]})}"/>&nbsp;/month
+								    	</td>
+								    	<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.folioNumber"/></td>
+							    	</s:else>
 								</tr>
 							</s:iterator>
 						</tbody>
@@ -160,7 +171,7 @@
 	    <script src="assets/js/wow.min.js"></script>
 	    <script src="assets/js/index.js"></script>
 	  
-	  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	  	<script type="text/javascript" src="assets/js/jquery-latest.js"></script>
 	  
 	  
 	  

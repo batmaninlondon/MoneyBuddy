@@ -25,6 +25,7 @@ import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.GenerateAofForm;
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -42,12 +43,12 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	Logger logger = Logger.getLogger(PaymentAction.class);
 	private SessionMap<String,Object> sessionMap;
-	private String accountType;
+	/*private String accountType;
 	private String accountNumber;
 	private String reAccountNumber;
-	private String ifscCode;
+	private String ifscCode;*/
 	private String firstOrderFlag;
-	private String bankName;
+	/*private String bankName;*/
 	private String tranDetailId;
 	//private InputStream stream;
 	private String paymentUrl;
@@ -73,8 +74,10 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     	
     	try {
     		
-    		System.out.println("tranDetailId : "+getTranDetailId()+" and accountNumber : "+getAccountNumber()+" reAccountNumber : "+getReAccountNumber()); 
-    		System.out.println("accountType : "+getAccountType()+" and ifscCode : "+getIfscCode()+" and bankName : "+getBankName());
+    		System.out.println(" HI THERE FROM PAYMENT ACTION !!!! ");
+    		System.out.println("tranDetailId : "+getTranDetailId());
+    		/*System.out.println("tranDetailId : "+getTranDetailId()+" and accountNumber : "+getAccountNumber()+" reAccountNumber : "+getReAccountNumber()); 
+    		System.out.println("accountType : "+getAccountType()+" and ifscCode : "+getIfscCode()+" and bankName : "+getBankName());*/
     		System.out.println("firstOrderFlag : "+getFirstOrderFlag());
     		
     		customerId = sessionMap.get("customerId").toString();
@@ -83,14 +86,15 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     		TransactionDetails transactionDetails = null;
     		
     		QueryBankDetails queryBankDetails = new QueryBankDetails();
-	    	boolean insertBankDetails = queryBankDetails.sameBankDetailsExists(customerId, getBankName(), getAccountType(), 
+    		BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
+	    	/*boolean insertBankDetails = queryBankDetails.sameBankDetailsExists(customerId, getBankName(), getAccountType(), 
 	    										getAccountNumber(), getIfscCode());
 	    	if ( insertBankDetails)  {
 		    	InsertBankDetails bankDetails = new InsertBankDetails();
 		    	DesEncrypter desEncrypter = new DesEncrypter();
 		    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), desEncrypter.encrypt(getAccountNumber()), getIfscCode());
 	    	}
-	    	
+	    	*/
 	    	QueryCustomer queryCustomer = new QueryCustomer();
 	    	
 	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
@@ -128,7 +132,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	if ("KycNotDone".equals(getTranDetailId()))  {
 	    		return "kycNotDone";
 	    	}
-	    	
+	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) )  {
+	    		return "aofNotDone";
+	    	}
 	    	if ("NotSet".equals(getTranDetailId()))  {
     			transactionType = sessionMap.get("transactionType").toString();
     		}
@@ -156,7 +162,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    		CustomerDetails customerDetails = queryCustomerDetails.getCustomerDetails(customerId);
 	    		
 		    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
-		    			customerDetails.getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
+		    			customerDetails.getGender(), "", bankDetails.getAccountType(), bankDetails.getAccountNumber(), bankDetails.getIfscCode(),
 		    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
 		    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
 					customerId, customer.getCustomerName(), customer.getEmailId(), customer.getPanCard(), customer.getMobileNumber());
@@ -235,7 +241,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				}
 				
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
-						"NEW",transactionType,"BUY",getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),"Y",
+						"NEW",transactionType,"BUY",bankDetails.getAccountNumber(),bankDetails.getBankName(),bankDetails.getIfscCode(),commonUtil.getBankMode(bankDetails.getBankName()),"Y",
 						"Customer bought some mutual funds",null,getTranDetailId(), sessionMap);
 		    	
 		    	System.out.println("paymentUrl : "+paymentUrl);
@@ -422,7 +428,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				
 				if ( "NOT_GENERATED".equals(mandateId))  {
 										
-					String mandateIdResponse = trading.generateMandateId(customerId, "I", getAccountNumber(), getAccountType(), getIfscCode());
+					String mandateIdResponse = trading.generateMandateId(customerId, "I", bankDetails.getAccountNumber(), bankDetails.getAccountType(), bankDetails.getIfscCode());
 					
 					String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 
 			    	
@@ -440,7 +446,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),productDetailsMapForBuy,
 						"NEW",transactionType,"BUY",
-						getAccountNumber(),getBankName(),getIfscCode(),commonUtil.getBankMode(getBankName()),getFirstOrderFlag(),
+						bankDetails.getAccountNumber(),bankDetails.getBankName(),bankDetails.getIfscCode(),commonUtil.getBankMode(bankDetails.getBankName()),getFirstOrderFlag(),
 						"Customer bought some mutual funds",mandateId,getTranDetailId(),sessionMap);
 		    	
 		    	/*SimpleDateFormat returnDateFormat = new SimpleDateFormat("dd MMMM yy");
@@ -519,7 +525,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
         sessionMap = (SessionMap<String, Object>) map;
     }
 	
-	public String getBankName() {
+/*	public String getBankName() {
 		return bankName;
 	}
 
@@ -549,7 +555,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
-	}
+	}*/
 
 	public String getTranDetailId() {
 		return tranDetailId;
@@ -583,13 +589,13 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		this.stream = stream;
 	}*/
 	
-	public String getReAccountNumber() {
+/*	public String getReAccountNumber() {
 		return reAccountNumber;
 	}
 
 	public void setReAccountNumber(String reAccountNumber) {
 		this.reAccountNumber = reAccountNumber;
-	}
+	}*/
 /*
 	public String getReturnDate() {
 		return returnDate;

@@ -22,9 +22,40 @@
             <message>Address Line Three can not be blank.</message>
         </field-validator>
     </field>
+    <field name="residentialCity">
+        <field-validator type="requiredstring">
+            <message>City can not be blank.</message>
+        </field-validator>
+    </field>
     <field name="residentialPin">
         <field-validator type="requiredstring">
             <message>Residential Pin can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="accountNumber">
+        <field-validator type="requiredstring">
+            <message>Account Number can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="reAccountNumber">
+        <field-validator type="requiredstring">
+            <message>Account Number can not be blank.</message>
+        </field-validator>
+    </field>
+    <field name="accountNumber">
+  		<field-validator type="fieldexpression">
+	    	<param name="expression"><![CDATA[accountNumber == reAccountNumber]]></param>
+	    	<message>Account NUmber must match.</message>
+  		</field-validator>
+  	</field>
+    <field name="ifscCode">
+        <field-validator type="requiredstring">
+            <message>Ifsc Code can not be blank.</message>
+        </field-validator>
+        
+        <field-validator type="regex">  
+          <param name="regexExpression">[a-zA-Z][a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9][0-9][0-9]</param>  
+          <message>Not a valid Ifsc Code.</message>  
         </field-validator>
     </field>
     

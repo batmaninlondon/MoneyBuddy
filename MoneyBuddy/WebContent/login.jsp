@@ -235,7 +235,7 @@
           <s:hidden id="google-response-register" name="googleResponseRegister"></s:hidden>
           <!-- <p id="registration-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-35--xs"></p> -->
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Create My Free Account"  />
+          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Create Account"  />
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="privacyPolicy">Privacy Policy</a></span>

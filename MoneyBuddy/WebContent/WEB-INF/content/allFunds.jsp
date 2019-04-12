@@ -41,18 +41,11 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
  	
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
   
   
  <script>
-		$(document).ready(function(){
-		  $("#myInput").on("keyup", function() {
-		    var value = $(this).val().toLowerCase();
-		    $("#myDiv1 div").filter(function() {
-		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		    });
-		  });
-		});
+		
 </script>
 
 
@@ -140,15 +133,7 @@
 }
 
 </style>
- 
-	<%-- <script>
-	function buyFundHandler(fundId)  
-    {
-			document.getElementById("fund-id-value").value = fundId;
-			document.formBuyFundAction.submit();
-    }
-	</script> --%>
-        
+
     </head>
     <!-- End Head -->
 
@@ -225,7 +210,7 @@
                 <div class="g-margin-b-10--xs">
                     <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Top Performing Mutual Funds</h1>
                      <p class="g-font-size-15--xs g-font-size-30--sm g-font-size-30--md">Fully online investing</p>
-                     <input class="form-control" id="myInput" type="text" placeholder="Search by entering fund name or category">
+                     <input class="form-control" id="myInput" type="text" oninput="showSearch(this.value)" placeholder="Search by entering fund name or category">
 				  <br>
 				</div>
             </div>
@@ -440,7 +425,14 @@
         
  <script>
          document.onreadystatechange = function () {
-			  var state = document.readyState
+        	/*  $(myInput).keyup(function() {
+		 		    var value = $(this).val().toLowerCase();
+		 		    $("#myDiv1 div").filter(function() {
+		 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		 		    });
+		 		  }); */
+        	 
+        	 var state = document.readyState
 			  if (state == 'interactive') {
 			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
@@ -450,7 +442,13 @@
 			         document.getElementById('contents').style.visibility="visible";
 			      },1000);
 			  }
+			  
+			 
 			}
+         
+        /*  $(document).ready(function(){
+ 			
+ 		}); */
          
          </script>
     </body>

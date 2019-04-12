@@ -823,7 +823,7 @@
         <!-- End Subscribe -->
     
 
-	<div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
+	<%-- <div id="js__scroll-to-appointment" class="g-bg-color--sky-light g-padding-y-80--xs g-padding-y-125--sm">
             <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3">
                 <div class="row">
                     <!-- Form -->
@@ -889,7 +889,7 @@
                                     <div class="g-media__body">
                                         info.moneybuddy@gmail.com
                                     </div>
-                                </li>
+                                </li>c
                             </ul>
                             <ul class="list-inline g-ul-li-lr-15--xs">
                                 <li><a href="https://www.facebook.com/MoneyBuddyIndia"><i class="g-font-size-20--xs g-color--white-opacity ti-facebook"></i></a></li>
@@ -903,7 +903,7 @@
                     <!-- End Contacts -->
                 </div>
             </div>
-        </div>
+        </div> --%>
      
         <!--========== END PAGE CONTENT ==========-->
 

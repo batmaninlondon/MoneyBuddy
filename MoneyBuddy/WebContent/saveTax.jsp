@@ -296,7 +296,7 @@
         <script src="assets/js/jquery.lwtCountdown-1.0.js"></script>
         <script src="assets/js/jquery.nav.js"></script>
         <script src="assets/js/wow.min.js"></script>
-    	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+    	<script src="assets/js/jquery.validate.js"></script>
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->

@@ -186,12 +186,12 @@
 														<td class="" ><span class=" g-font-size-14--xs"><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AUM :</b> &#8377; 4039.34 Cr </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception Date:</b> <s:property value="#fundDetails.startDate"/></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AUM :</b> &#8377; 4,039.34 Cr </span></td>
+										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception Date:</b> <s:property value="#fundDetails.startDate" /></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="#fundDetails.minSipAmount"/><small> /month</small></span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="#fundDetails.minPurchaseAmount"/></span></td>
+										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minSipAmount]})}"/><small> /month</small></span></td>
+										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minPurchaseAmount]})}"/></span></td>
 										            </tr>
 										        </tbody>
 								</table>

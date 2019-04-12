@@ -159,7 +159,7 @@
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-email"></i>
                             <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Email</h4>
-                        	<p style="color: white;"><b><a href="mailto:info@moneybuddy.in?Subject=Tell%20me%20more" target="_top" style="color: white;">info@moneybuddy.in</a></b></p>
+                        	<p style="color: white;"><b><a href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
                         </div>
                     </div>
                     <div class="col-xs-4 g-full-width--xs">

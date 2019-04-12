@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
@@ -29,6 +30,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	private String occupation;
 	private String dateOfBirth;
     private String taxStatus;
+    private String nomineeName;
+    private String nomineeRelationship;
+    
     private String addressLineOne;
 	private String addressLineTwo;
 	private String addressLineThree;
@@ -37,14 +41,20 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     private String residentialPin;
     private String residentialCountry;
     
+    private String bankName;
+    private String accountType;
+	private String accountNumber;
+	private String reAccountNumber;
+	private String ifscCode;
+    
     private String respMsg;
     private String tranDetailId;
-    private String selectedBankName;
-    private String selectedAccType;
+   // private String selectedBankName;
+   /* private String selectedAccType;
     private String selectedAccNum;
     private String selectedIfscCode;
     private String displayAccType ;
-    private String displayBankName;
+    private String displayBankName;*/
     
    // private InputStream stream;
 	
@@ -71,6 +81,8 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	System.out.println(" KycCheckAction execute method :residentialPin : "+getResidentialPin());
 	    	System.out.println(" KycCheckAction execute method :residentialCountry : "+getResidentialCountry());
 	    	System.out.println(" KycCheckAction execute method :taxStatus : "+getTaxStatus());
+	    	System.out.println(" KycCheckAction execute method :nomineeName : "+getNomineeName());
+	    	System.out.println(" KycCheckAction execute method :nomineeRelationship : "+getNomineeRelationship());
 	    	
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -95,12 +107,17 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	
 			UpdateCustomerDetails updateCustomerDetails = new UpdateCustomerDetails();
 			updateCustomerDetails.updateCustomerDetails(customerId, frmtdDateForDB, getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), 
-					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(), getOccupation());
+					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(),
+					getOccupation(),getNomineeName(), getNomineeRelationship());
 	    	
 			UpdateCustomer updateCustomer = new UpdateCustomer();
 	    	updateCustomer.updateNameAndCustDetUploadedStatus(customerId, getCustomerName(), "Y");
 	    	 
 	   
+	    	InsertBankDetails bankDetails = new InsertBankDetails();
+	    	DesEncrypter desEncrypter = new DesEncrypter();
+	    	bankDetails.insertBankDetail(customerId, getBankName(), getAccountType(), desEncrypter.encrypt(getAccountNumber()), getIfscCode());
+	    	
 	    	//System.out.println(" Returned Success !!");
 	
 	    	QueryCustomer queryCustomer = new QueryCustomer();
@@ -109,7 +126,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    		System.out.println(" Returned KYC  done !!");
 	    		setRespMsg("bankDetailsNotExists");
 	    		
-	    		QueryBankDetails queryBankDetails = new QueryBankDetails();
+	    		/*QueryBankDetails queryBankDetails = new QueryBankDetails();
 	    		
 	    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
 	    		
@@ -194,7 +211,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    			setRespMsg("bankDetailsExists");
 	    			//return "bankDetailsExists";
 	    			
-	    		}
+	    		}*/
 	    	    //stream = new ByteArrayInputStream(str.getBytes());
 	    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycDone");
 		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
@@ -226,14 +243,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     }
     
     
-    public boolean isUserAlreadyInDatabase(String name)  {
+   /* public boolean isUserAlreadyInDatabase(String name)  {
     	 if (name.startsWith("s"))  {
     		 System.out.println("name starts with s");
     		 return true;
     	 }
     	 
     	 return false;
-    }
+    }*/
     
     @Override
     public void setSession(Map<String, Object> map) {
@@ -287,6 +304,26 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	public void setTaxStatus(String taxStatus) {
 		this.taxStatus = taxStatus;
 	}
+
+	public String getNomineeName() {
+		return nomineeName;
+	}
+
+
+	public void setNomineeName(String nomineeName) {
+		this.nomineeName = nomineeName;
+	}
+
+
+	public String getNomineeRelationship() {
+		return nomineeRelationship;
+	}
+
+
+	public void setNomineeRelationship(String nomineeRelationship) {
+		this.nomineeRelationship = nomineeRelationship;
+	}
+
 
 	public String getAddressLineOne() {
 		return addressLineOne;
@@ -351,16 +388,19 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	public void setRespMsg(String respMsg) {
 		this.respMsg = respMsg;
 	}
+	
+	
+	
 
-	public String getSelectedBankName() {
+/*	public String getSelectedBankName() {
 		return selectedBankName;
 	}
 
 	public void setSelectedBankName(String selectedBankName) {
 		this.selectedBankName = selectedBankName;
-	}
+	}*/
 
-	public String getSelectedAccType() {
+/*	public String getSelectedAccType() {
 		return selectedAccType;
 	}
 
@@ -398,7 +438,57 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 	public void setDisplayBankName(String displayBankName) {
 		this.displayBankName = displayBankName;
+	}*/
+
+	public String getBankName() {
+		return bankName;
 	}
+
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+
+	public String getReAccountNumber() {
+		return reAccountNumber;
+	}
+
+
+	public void setReAccountNumber(String reAccountNumber) {
+		this.reAccountNumber = reAccountNumber;
+	}
+
+
+	public String getIfscCode() {
+		return ifscCode;
+	}
+
+
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
+
 
 	public String getTranDetailId() {
 		return tranDetailId;

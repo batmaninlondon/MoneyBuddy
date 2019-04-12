@@ -22,6 +22,7 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	private SessionMap<String,Object> sessionMap;
 	//private InputStream stream;
 	private String cartId;
+	private String allNewFolio;
 
     public String execute() {
     	
@@ -83,8 +84,14 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    		
 	    	}
 	    	System.out.println("Total amount : "+totalAmount);
-	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null));
+	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null));
 	    	
+	    	setAllNewFolio("TRUE");
+	    	for (int j = 0; j < (customerCartList.size()-1); j++) {
+	    	    if ( !customerCartList.get(j).getFolioNumber().equals("NEW") )  {
+	    	    	setAllNewFolio("FALSE");
+	    	    }
+	    	}
 	    	
 	    	if ("UPFRONT".equals(transactionType)) {
 	    		sessionMap.put("customerCartUpfrontList",customerCartList);
@@ -143,6 +150,14 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
+	}
+
+	public String getAllNewFolio() {
+		return allNewFolio;
+	}
+
+	public void setAllNewFolio(String allNewFolio) {
+		this.allNewFolio = allNewFolio;
 	}
 
 }

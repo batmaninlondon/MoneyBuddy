@@ -212,61 +212,82 @@
 		<!-- progressbar -->
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
-			<li>Professional Details</li>
 			<li>Address Details</li>
+			<li>Payment Details</li>
 		</ul>
 	<!-- fieldsets -->
 	<fieldset  style="background-color: #cecece !important; ">
 		<div style="background-color: white; height:55vh;">
 		<br/>
 		<div class="row g-text-left--xs " >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs ">Name</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Name</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="customerName" class="g-color--red" />
-		  		<s:textfield class="form-control" id="customer-name" placeholder="Enter Name as per PAN CARD" name="customerName"/> 
+		  		<s:textfield class="form-control" id="customer-name" placeholder="Your Full Name: As per Pan Card" name="customerName"/> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs g-margin-l-70--xs">Date of Birth</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="Enter Date of Birth in DD/MM/YYYY format">
+        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="DD/MM/YYYY Format">
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Gender</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">Gender</div>
         	<div class="col-md-6 col-xs-6 ">
 				<s:select class="form-control"  id="gender"
 					list="#{'M':'Male', 'F':'Female'}" 
 					name="gender" 
 					value="M" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
-        </div>
-        	<input type="button" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
-	</fieldset>
-	<fieldset  style="background-color: #cecece !important;">
-		<div style="background-color: white; height:55vh;">
-		<br/>
-		<div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Occupation</div>
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">Working as</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:select class="form-control"  id="occupation" 
 					list="#{'PriSecJob':'Private Sector job', 'PubSecJob':'Public Sector job', 'GovSer':'Government Service',
-					'Business':'Business', 'Professional':'Professional', 'Agriculturist':'Agriculturist',
-					'Retired':'Retired', 'Student':'Student', 'ForexDeal':'Forex Dealer',
+					'Business':'Business', 'Professional':'Professional', 
+					'Retired':'Retired', 'Student':'Student', 
 					'HouseWife':'Housewife', 'Others':'Others' }" 
 					name="occupation" 
 					value="PriSecJob" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
-        <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-text-left--xs  g-margin-l-70--xs">Tax Status</div>
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">You are</div>
         	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="tax-status" 
+				<s:select class="form-control"  id="tax-status"
+					list="#{'Individual':'Resident Individual', 'NriNre':'NRI with NRE a/c', 'NriNro':'NRI with NRO a/c'}" 
+					name="taxStatus" 
+					value="Individual" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <%-- <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 g-text-left--xs  g-margin-l-90--xs">You are </div>
+        	<!-- <div class="col-md-8 col-xs-8 "> -->
+				<form  class="col-md-8 col-xs-8 ">
+				  	<label class="radio-inline ">
+					  	<input type="radio" id="y1" name="taxStatus" value="Individual" checked="checked" >Resident Individual
+				  	</label>
+				  	<label class="radio-inline ">
+					  <input type="radio" id="y2" name="taxStatus" value="NriNre" > NRI with NRE a/c
+					</label>
+					<!-- <label class="radio-inline ">
+					  <input type="radio" id="y2" name="taxStatus" value="NriNro" > NRI with NRO a/c
+					</label> -->
+			  	</form>
+				  	<s:select class="form-control"  id="tax-status" 
 					list="#{'Individual':'Individual', 'OnBeOfMinor':'On Behalf Of Minor', 'Huf':'HUF', 'Company':'Company',
 					'AopBoi':'AOP/BOI', 'Partnership':'Partnership', 'BodyCorporate':'Body Corporate', 'Trust':'Trust',
 					'Society':'Society', 'NriNre':'NRI - Repatriable(NRE)', 'OverCorpoBody':'Oversea Corporate Body', 'ForeInstiInvest':'Foreign Institutional Investor',
@@ -278,45 +299,67 @@
 					'Ngo':'Non-Government Organisation [NGO]', 'Others':'Others' }" 
 					name="taxStatus" 
 					value="Individual" />
+        	<!-- </div> -->
+        	<div class="col-md-1 col-xs-1 "></div>
+        </div> --%>
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Name</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="nomineeName" class="g-color--red" />
+		  		<s:textfield class="form-control" id="nominee-name" placeholder="Nominee Name" name="nomineeName"/> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
-		
-         </div>
-			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
-			<input type="button" name="next" class="next action-button" value="Next" style="width:20% ;float: right;"/>
+        <div class="row g-text-left--xs " >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Relationship</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="nomineeRelationship" class="g-color--red" />
+		  		<s:textfield class="form-control" id="nominee-relationship" placeholder="Nominee Relationship" name="nomineeRelationship"/> 
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        </div>
+        	<input type="button" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
 	</fieldset>
 	<fieldset  style="background-color: #cecece !important;">
 		<div style="background-color: white; height:55vh;">
 		<br/>
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-2 col-xs-6 ">Line 1</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Address Line 1</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="addressLineOne" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-one" placeholder="Enter Address Line 1" name="addressLineOne" /> 
+			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" /> 
 			</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
         <div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-2 col-xs-6 ">Line 2</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Address Line 2</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="addressLineTwo" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-two" placeholder="Enter Address Line 2" name="addressLineTwo" /> 
+			  	<s:textfield class="form-control" id="address-line-two" placeholder="Address Line 2" name="addressLineTwo" /> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-2 col-xs-6 ">Line 3</div>
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Address Line 3</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="addressLineThree" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-three" placeholder="Enter Address Line 3" name="addressLineThree" /> 
+			  	<s:textfield class="form-control" id="address-line-three" placeholder="Address Line 3" name="addressLineThree" /> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>	
         <div class="row g-text-left--xs g-margin-l-70--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">City</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:select class="form-control"  id="residential-city" 
+        		<s:fielderror fieldName="residentialCity" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-city" placeholder="City" name="residentialCity" />
+			  	<%-- <s:select class="form-control"  id="residential-city" 
 					list="#{'Agra':'Agra', 'Ahmedabad':'Ahmedabad', 'Ajmer':'Ajmer', 'Allahabad':'Allahabad', 
 					'Amritsar':'Amritsar', 'Anand':'Anand', 'Asansol':'Asansol', 'Aurangabad':'Aurangabad', 'Bangalore':'Bangalore', 
 					'Baroda':'Baroda', 'Bharuch':'Bharuch', 'Bhavnagar':'Bhavnagar', 'Bhopal':'Bhopal', 'Bhubaneswar':'Bhubaneswar', 
@@ -332,11 +375,12 @@
 					'Tirupur':'Tirupur', 'Trichy':'Trichy', 'Trivandrum':'Trivandrum', 'Udaipur':'Udaipur', 'Varanasi':'Varanasi', 
 					'Vashi':'Vashi', 'Vijayawada':'Vijayawada', 'Others':'Others' }" 
 					name="residentialCity" 
-					value="Agra" />
+					value="Agra" /> --%>
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
+		<div class="row g-text-left--xs g-margin-l-70--xs " >
+        	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">State</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:select class="form-control"  id="residential-state"
@@ -352,24 +396,93 @@
 					name="residentialState" 
 					value="AndamanAndNicobar" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
+		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Country</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="residentialCountry" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-country" placeholder="Enter Country" name="residentialCountry" value="India" /> 
+			  	<s:textfield class="form-control" id="residential-country" placeholder="Country" name="residentialCountry" value="India" /> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-3 "></div>
         </div>	
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 previous">Pin</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="residentialPin" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-pin" placeholder="Enter Pin" name="residentialPin" /> 
+			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" /> 
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
-        </div></div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-40--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-11 col-xs-11"><b><u>* Address proof not required</u></b></div>
+        </div>
+		
+         </div>
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
+			<input type="button" name="next" class="next action-button" value="Next" style="width:20% ;float: right;"/>
+	</fieldset>
+	<fieldset  style="background-color: #cecece !important;">
+		<div style="background-color: white; height:55vh;">
+		<br/>
+		<div class="row g-text-left--xs g-margin-l-70--xs " >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Bank Name</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:select class="form-control"  id="bank-name"
+					list="#{'ICI':'ICICI Bank', 'SBI':'SBI Bank', 'HDF':'HDFC Bank', 
+			        '162':'KOTAK Bank', 'UTI':'Axis Bank', 'PNB':'Punjab National Bank', 'SIB':'South Indian Bank', 
+			        'SCB':'Standard Chartered Bank', 'UBI':'Union Bank Of India', 'UNI':'United Bank Of India', 
+			        'YBK':'Yes Bank Ltd', 'RBL':'Ratnakar Bank', 'DCB':'DCB'}" 
+					name="bankName" 
+					value="ICI" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>	
+		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs " >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Account Type</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:select class="form-control"  id="account-type"
+					list="#{'SB':'Saving', 'CB':'Current', 'NE':'NRE', 
+			        'NO':'NRO'}" 
+					name="accountType" 
+					value="SB" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>	
+		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Account Number</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="accountNumber" class="g-color--red" />
+			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" /> 
+			</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+		<div class="row g-text-left--xs g-margin-l-70--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">Re-enter Account Number</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="reAccountNumber" class="g-color--red" />
+			  	<s:password class="form-control" id="re-account-number" placeholder="Account Number" name="reAccountNumber" /> 
+			</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-70--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 ">IFSC Code</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="ifscCode" class="g-color--red" />
+			  	<s:textfield class="form-control" id="ifsc-code" placeholder="IFSC Code" name="ifscCode" /> 
+			</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+		
+		</div>
 		<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;"/>
 		<s:submit class="next action-button" value="SUBMIT" style="width:20% ;float: right;"/>
 	</fieldset>
@@ -410,7 +523,7 @@
          
          
 		<!-- jQuery easing plugin -->
-		<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
+		<script src="assets/js/jquery.easing.min.js" type="text/javascript"></script>
 		    	
 		 <script>
 		 

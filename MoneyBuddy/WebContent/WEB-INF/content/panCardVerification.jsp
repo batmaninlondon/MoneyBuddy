@@ -107,7 +107,7 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/index.js"></script>
   
-  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript" src="assets/js/jquery-latest.js"></script>
 </body>
 	
 

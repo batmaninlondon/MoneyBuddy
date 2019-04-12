@@ -222,7 +222,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/index.js"></script>
-  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript" src="assets/js/jquery-latest.js"></script>
   	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>

@@ -162,7 +162,7 @@
 								</div>
 								<div class="media-body">
 									<h5>Sail Wadhwani</h5>
-									<h6>Co-Founder and CTO</h6>
+									<h6>Co-Founder</h6>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Investment</a></li>
 										<li class="btn"><a href="#">Technology</a></li>
@@ -204,7 +204,7 @@
 
 								<div class="media-body">
 									<h5>Savita Wadhwani</h5>
-									<h6>Co-Founder and CTO</h6>
+									<h6>Co-Founder</h6>
 									<ul class="tag clearfix">
 										<li class="btn"><a href="#">Web</a></li>
 										<li class="btn"><a href="#">Technology</a></li>

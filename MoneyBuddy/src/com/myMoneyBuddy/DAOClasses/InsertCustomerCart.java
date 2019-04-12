@@ -19,7 +19,7 @@ public class InsertCustomerCart {
 	Logger logger = Logger.getLogger(InsertCustomerCart.class);
 	
     public void addCustomerCart (String customerId, String productId, String productName, String amount,
-    		String transactionType, String sipDuration, String sipDate, String folioNum,
+    		String transactionType, String sipDuration, String sipPlan, String sipDate, String folioNum,
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
 
@@ -42,9 +42,10 @@ public class InsertCustomerCart {
     		}
     		else {
     			query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and productId = :productId "
-        				+ " and folioNumber = :folioNumber and transactionType = :transactionType and sipDuration = :sipDuration and sipDate = :sipDate ");
+        				+ " and folioNumber = :folioNumber and transactionType = :transactionType and sipDuration = :sipDuration and sipPlan = :sipPlan and sipDate = :sipDate ");
         		
         		query.setParameter("sipDuration", sipDuration);
+        		query.setParameter("sipPlan", sipPlan);
         		query.setParameter("sipDate", sipDate);
     		}
     		
@@ -102,9 +103,10 @@ public class InsertCustomerCart {
     			else {
     				query = hibernateSession.createQuery("update CustomerCart set amount = :updatedAmount "
         					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber "
-        					+ " and transactionType=:transactionType and sipDuration=:sipDuration and sipDate=:sipDate ");
+        					+ " and transactionType=:transactionType and sipDuration=:sipDuration and sipPlan=:sipPlan and sipDate=:sipDate ");
 
         			query.setParameter("sipDuration", sipDuration);
+        			query.setParameter("sipPlan", sipPlan);
         			query.setParameter("sipDate", sipDate);
         			
     			}
@@ -128,7 +130,7 @@ public class InsertCustomerCart {
     			String rta = querySecondaryFundDetails.getRta(productId);
         		
 	    		hibernateSession.beginTransaction();
-	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,transactionType,sipDuration,sipDate,folioNum,cartCreationDate,status,rta);
+	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,cartCreationDate,status,rta);
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);

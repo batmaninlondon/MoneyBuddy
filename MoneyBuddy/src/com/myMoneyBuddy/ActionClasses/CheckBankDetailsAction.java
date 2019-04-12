@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
+import com.myMoneyBuddy.DAOClasses.QueryBankName;
 import com.myMoneyBuddy.DAOClasses.QueryOrderStatus;
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
@@ -35,11 +36,11 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	private String actionMsg;
     private String respMsg;
     private String tranDetailId;
-    private String selectedBankName;
+   /* private String selectedBankName;
     private String selectedAccType;
     private String selectedAccNum;
     private String selectedIfscCode;
-    private String displayAccType ;
+    private String displayAccType ;*/
     private String displayBankName;
 	
     public String execute() {
@@ -48,6 +49,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
     	try {
     		
     		System.out.println(" Action msg added is : "+getActionMsg());
+    		System.out.println("tranDetailId: "+getTranDetailId());
     		if (null != getActionMsg())
 	    		if (getActionMsg().startsWith("ActionMsg") )
 	    			addActionMessage(getActionMsg().substring(10));
@@ -104,7 +106,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
     				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),transactionDetails.getTransactionType(),
-    						null,null,transactionDetails.getTransactionFolioNum(),null,userStatus,rta));
+    						null,null,null,transactionDetails.getTransactionFolioNum(),null,userStatus,rta));
     				
 	    			sessionMap.put("customerCartList", customerCartList);
 			    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    
@@ -124,9 +126,21 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    	
 	    	System.out.println(" tranDetailId set to : "+getTranDetailId());
    		
-	    	setRespMsg("bankDetailsNotExists");
+	    	setRespMsg("bankDetailsExists");
 	    	
-	    		QueryBankDetails queryBankDetails = new QueryBankDetails();
+	    	QueryBankDetails queryBankDetails = new QueryBankDetails();
+	    	BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
+	    	String bankName = bankDetails.getBankName();
+	    	QueryBankName queryBankName = new QueryBankName();
+	    	DesEncrypter desEncrypter = new DesEncrypter();
+			String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
+			
+			setDisplayBankName(queryBankName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
+			
+			System.out.println("DISPLAY BANK NAME IS : "+getDisplayBankName());
+	    	
+	    	
+	    		/*QueryBankDetails queryBankDetails = new QueryBankDetails();
 	    		
 	    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
 	    		
@@ -209,7 +223,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    			setSelectedIfscCode(bankDetails.getIfscCode());
 	    			
 	    			setRespMsg("bankDetailsExists");
-	    		}
+	    		}*/
 	    		
 	    	   
 		    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - end");
@@ -247,7 +261,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 		this.respMsg = respMsg;
 	}
 
-	public String getSelectedBankName() {
+	/*public String getSelectedBankName() {
 		return selectedBankName;
 	}
 
@@ -285,7 +299,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 
 	public void setDisplayAccType(String displayAccType) {
 		this.displayAccType = displayAccType;
-	}
+	}*/
 
 	public String getDisplayBankName() {
 		return displayBankName;

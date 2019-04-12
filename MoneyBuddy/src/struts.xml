@@ -160,14 +160,11 @@
     <package name="redirectAction" namespace="/" extends="struts-default">
         <action name="redirectAction" class="com.myMoneyBuddy.ActionClasses.RedirectAction">
         	<param name="tranDetailId">KycNotDone</param>
-            <result name="bankDetailsForKND">/WEB-INF/content/bankDetails.jsp</result>
             <result name="panCardVerifiction">/WEB-INF/content/panCardVerification.jsp</result>
             <result name="bankDetails" type="chain">checkBankDetailsAction</result>
             <result name="customerDetails">/WEB-INF/content/customerDetails.jsp</result>
             <result name="aofOrKycFormReceived">/WEB-INF/content/aofOrKycFormReceived.jsp</result>
             <result name="downloadKycForm" type="chain">downloadKycFormAction</result>
-            <result name="downloadAofForm" type="chain">downloadAofFormAction</result>
-            <result name="downloadAofAndKycForm" type="chain">downloadAofAndKycFormAction</result>
             <result name="addCustomerDetails">/WEB-INF/content/additionalCustomerDetails.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
@@ -510,18 +507,21 @@
             <result name="sipOrderFofN">/WEB-INF/content/orderInvoiceSipFofN.jsp</result>
             <!-- <result name="sipOrderFofY">/orderInvoiceSipFofY.jsp</result> -->
             <result name="input">/WEB-INF/content/bankDetails.jsp</result> 
-            <result name="failedWithPaymentGateway" type="chain">
+            <result name="failedWithPaymentGateway">/WEB-INF/content/bankDetails.jsp</result>
+            <result name="allOrderFailed">/WEB-INF/content/bankDetails.jsp</result>
+            <result name="clientCreationFailure">/WEB-INF/content/bankDetails.jsp</result>
+            <!-- <result name="failedWithPaymentGateway" type="chain">
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>
-            </result>
-            <result name="allOrderFailed" type="chain">
+            </result> -->
+            <!-- <result name="allOrderFailed" type="chain">
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>
             </result>
         	<result name="clientCreationFailure" type="chain">
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>
-            </result>
+            </result> -->
         	<result name="aofOrKycFormReceived">/WEB-INF/content/aofOrKycFormReceived.jsp</result>
         	<result name="kycNotDone" type="chain">downloadKycFormAction</result>
         	<result name="aofNotDone" type="chain">downloadAofFormAction</result>

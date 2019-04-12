@@ -53,6 +53,12 @@ public class CustomerDetails {
     
     @Column(name="TAX_STATUS")
     private String taxStatus;
+    
+    @Column(name="NOMINEE_NAME")
+    private String nomineeName;
+    
+    @Column(name="NOMINEE_RELATIONSHIP")
+    private String nomineeRelationship;
 
     public CustomerDetails() {
         
@@ -60,7 +66,7 @@ public class CustomerDetails {
 
 	public CustomerDetails(String customerId, String gender, String occupation, String dateOfBirth, String addressLineOne,
 			String addressLineTwo, String addressLineThree, String residentialCity, String residentialState,
-			String residentialPin, String residentialCountry, String taxStatus) {
+			String residentialPin, String residentialCountry, String taxStatus,String nomineeName, String nomineeRelationship) {
 		super();
 		this.customerId = customerId;
 		this.gender = gender;
@@ -74,6 +80,8 @@ public class CustomerDetails {
 		this.residentialPin = residentialPin;
 		this.residentialCountry = residentialCountry;
 		this.taxStatus = taxStatus;
+		this.nomineeName = nomineeName;
+		this.nomineeRelationship = nomineeRelationship;
 	}
 
 	public String getCustomerId() {
@@ -172,6 +180,22 @@ public class CustomerDetails {
 		this.taxStatus = taxStatus;
 	}
 
+	public String getNomineeName() {
+		return nomineeName;
+	}
+
+	public void setNomineeName(String nomineeName) {
+		this.nomineeName = nomineeName;
+	}
+
+	public String getNomineeRelationship() {
+		return nomineeRelationship;
+	}
+
+	public void setNomineeRelationship(String nomineeRelationship) {
+		this.nomineeRelationship = nomineeRelationship;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -217,6 +241,12 @@ public class CustomerDetails {
         if ((this.taxStatus == null) ? (other.taxStatus != null) : !this.taxStatus.equals(other.taxStatus)) {
             return false;
         }
+        if ((this.nomineeName == null) ? (other.nomineeName != null) : !this.nomineeName.equals(other.nomineeName)) {
+            return false;
+        }
+        if ((this.nomineeRelationship == null) ? (other.nomineeRelationship != null) : !this.nomineeRelationship.equals(other.nomineeRelationship)) {
+            return false;
+        }
         return true;
     }
 
@@ -235,6 +265,8 @@ public class CustomerDetails {
         hash = 79 * hash + (this.residentialPin != null ? this.residentialPin.hashCode() : 0);
         hash = 79 * hash + (this.residentialCountry != null ? this.residentialCountry.hashCode() : 0);
         hash = 79 * hash + (this.taxStatus != null ? this.taxStatus.hashCode() : 0);
+        hash = 79 * hash + (this.nomineeName != null ? this.nomineeName.hashCode() : 0);
+        hash = 79 * hash + (this.nomineeRelationship != null ? this.nomineeRelationship.hashCode() : 0);
         return hash;
     }
 

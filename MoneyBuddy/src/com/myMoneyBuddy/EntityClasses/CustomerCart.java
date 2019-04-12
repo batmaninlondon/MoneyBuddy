@@ -39,6 +39,9 @@ public class CustomerCart {
     @Column (name="SIP_DURATION")
     private String sipDuration;
     
+    @Column (name="SIP_PLAN")
+    private String sipPlan;
+    
     @Column (name="SIP_DATE")
     private String sipDate;
     
@@ -59,7 +62,7 @@ public class CustomerCart {
     }
 
 	public CustomerCart( String customerId, String productId, String productName, String amount,
-			String transactionType, String sipDuration, String sipDate,
+			String transactionType, String sipDuration, String sipPlan, String sipDate,
 			String folioNumber, String cartCreationDate, String status, String rta) {
 		super();
 		this.customerId = customerId;
@@ -68,6 +71,7 @@ public class CustomerCart {
 		this.amount = amount;
 		this.transactionType = transactionType;
 		this.sipDuration = sipDuration;
+		this.sipPlan = sipPlan;
 		this.sipDate = sipDate;
 		this.folioNumber = folioNumber;
 		this.cartCreationDate = cartCreationDate;
@@ -130,6 +134,14 @@ public class CustomerCart {
 
 	public void setSipDuration(String sipDuration) {
 		this.sipDuration = sipDuration;
+	}
+
+	public String getSipPlan() {
+		return sipPlan;
+	}
+
+	public void setSipPlan(String sipPlan) {
+		this.sipPlan = sipPlan;
 	}
 
 	public String getSipDate() {
@@ -202,6 +214,9 @@ public class CustomerCart {
         if ((this.sipDuration == null) ? (other.sipDuration != null) : !this.sipDuration.equals(other.sipDuration)) {
             return false;
         }
+        if ((this.sipPlan == null) ? (other.sipPlan != null) : !this.sipPlan.equals(other.sipPlan)) {
+            return false;
+        }
         if ((this.sipDate == null) ? (other.sipDate != null) : !this.sipDate.equals(other.sipDate)) {
             return false;
         }
@@ -230,6 +245,7 @@ public class CustomerCart {
         hash = 79 * hash + (this.amount != null ? this.amount.hashCode() : 0);
         hash = 79 * hash + (this.transactionType != null ? this.transactionType.hashCode() : 0);
         hash = 79 * hash + (this.sipDuration != null ? this.sipDuration.hashCode() : 0);
+        hash = 79 * hash + (this.sipPlan != null ? this.sipPlan.hashCode() : 0);
         hash = 79 * hash + (this.sipDate != null ? this.sipDate.hashCode() : 0);
         hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
         hash = 79 * hash + (this.cartCreationDate != null ? this.cartCreationDate.hashCode() : 0);

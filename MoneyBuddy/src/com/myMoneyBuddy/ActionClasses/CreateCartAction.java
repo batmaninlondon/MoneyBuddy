@@ -26,8 +26,10 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	Logger logger = Logger.getLogger(CreateCartAction.class);
 	private SessionMap<String,Object> sessionMap;
 	private String sipDuration; // in years
+	private String sipPlan;
     private String sipDate;
 	private String totalInvestment;
+	private String allNewFolio;
 	
 	//private InputStream stream;
 
@@ -41,12 +43,15 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     	
     	try {
     		
+    		System.out.println("CreateCartAction class - execute method - start - sipPlan value :"+getSipPlan()+":");
+    		
     		customerId = sessionMap.get("customerId").toString();
 			folioNum = sessionMap.get("selectFolioNum").toString();
 			transactionType = sessionMap.get("transactionType").toString(); 
 			
 			if ("SIP".equals(transactionType)) {
 				sipDuration = getSipDuration();
+				sipPlan = getSipPlan();
 				sipDate = getSipDate();
 			}
 			
@@ -81,7 +86,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(getTotalInvestment()) ) /100);
 	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),
-	   	        		transactionType,sipDuration,sipDate,folioNum,frmtdDate,"Pending");
+	   	        		transactionType,sipDuration,sipPlan,sipDate,folioNum,frmtdDate,"Pending");
 	   	        
 	   	    }
 	
@@ -95,6 +100,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	
 	    	List<CustomerCart> customerCartSipList = queryCustomerCart.getCustomerCartSip(customerId);
 	    	
+	    	System.out.println(" size of customerCartUpfrontList is : "+customerCartUpfrontList.size());
 	    	System.out.println(" size of customerCartSipList is : "+customerCartSipList.size());
 	    	
 	    	sessionMap.put("customerCartSipList", customerCartSipList);
@@ -106,10 +112,24 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
     	    logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("CreateCartAction class - execute method - customerId - "+customerId+" - end");
 	    	
+	    	
+	    	setAllNewFolio("TRUE");
 	    	if ("SIP".equals(transactionType)) {
+	    		
+		    	for (int i = 0; i < (customerCartSipList.size()-1); i++) {
+		    	    if ( !customerCartSipList.get(i).getFolioNumber().equals("NEW") )  {
+		    	    	setAllNewFolio("FALSE");
+		    	    }
+		    	}
 	    		return "SIP";
 	    	}
 	    	else {
+	    		
+		    	for (int i = 0; i < (customerCartUpfrontList.size()-1); i++) {
+		    	    if ( !customerCartUpfrontList.get(i).getFolioNumber().equals("NEW") )  {
+		    	    	setAllNewFolio("FALSE");
+		    	    }
+		    	}
 	    		return "UPFRONT";
 	    	}
     	} 
@@ -152,6 +172,22 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 
 	public void setSipDate(String sipDate) {
 		this.sipDate = sipDate;
+	}
+
+	public String getAllNewFolio() {
+		return allNewFolio;
+	}
+
+	public void setAllNewFolio(String allNewFolio) {
+		this.allNewFolio = allNewFolio;
+	}
+
+	public String getSipPlan() {
+		return sipPlan;
+	}
+
+	public void setSipPlan(String sipPlan) {
+		this.sipPlan = sipPlan;
 	}
     
 /*	public InputStream getStream() {

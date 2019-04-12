@@ -37,6 +37,7 @@ import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
 import com.myMoneyBuddy.Utils.CommonUtil;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
@@ -487,8 +488,9 @@ public class Trading {
 				
 				hibernateSession.beginTransaction();
 				
-				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and productId = :productId and folioNumber = :folioNumber ");
+				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and transactionType = :transactionType and productId = :productId and folioNumber = :folioNumber ");
 				query.setParameter("customerId", customerId);
+				query.setParameter("transactionType", transactionType);
 				query.setParameter("productId", selFundId);
 				query.setParameter("folioNumber", selFolioNum);
 				
@@ -629,6 +631,7 @@ public class Trading {
 					
 				}
 
+				System.out.println(" transactionType :!!!!!!!!!!!!!!!!............................... "+transactionType);
 				resultsEntryParam = entryParam.split("\\|");
 
 				for (int i = 0 ; i <resultsEntryParam.length ; i++ )   {
@@ -642,7 +645,10 @@ public class Trading {
 																	+ "uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus ,"
 																	+ " bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " "
 																			+ " where transactionDetailId = :transactionDetailId");
-				if (transactionType == "UPFRONT") {
+				
+				System.out.println(" transactionType :!!!!!!!!!!!!!!!!.................................. "+transactionType);
+				
+				if ("UPFRONT".equals(transactionType) ) {
 					bseOrderId = resultsEntryParam[2].toString();
 					
 				}
@@ -805,8 +811,9 @@ public class Trading {
 				}*/
 				
 				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
+				DesEncrypter desEncrypter = new DesEncrypter();
 				RequestParam requestParam = new RequestParam();
-				requestParam.setAccNo(objFact.createRequestParamAccNo(accountNum));
+				requestParam.setAccNo(objFact.createRequestParamAccNo( desEncrypter.decrypt(accountNum)));
 				requestParam.setBankID(objFact.createRequestParamBankID(bankId));
 				requestParam.setClientCode(objFact.createRequestParamClientCode(customerId));
 				requestParam.setEncryptedPassword(objFact.createRequestParamEncryptedPassword(PASSWORD_STARMF));

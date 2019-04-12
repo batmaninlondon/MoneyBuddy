@@ -24,7 +24,7 @@
 		}
 		function showSipAmountPerMonth(newValue)
 		{
-			document.getElementById("sipPerMonth").innerHTML=newValue;
+			document.getElementById("sipPerMonth").value=newValue;
 		}
 		function showStpAmountPerMonth(newValue)
 		{
@@ -32,7 +32,7 @@
 		}
 		function filldata(minSipAmt,minSipDur,minPurchaseAmount)
 		{
-			document.getElementById("sip-duration").innerHTML=minSipDur;
+			/*document.getElementById("sip-duration").innerHTML=minSipDur;*/
 			document.getElementById("sipPerMonth").innerHTML=minSipAmt;
 			document.getElementById("upfrontInvestment").innerHTML=minPurchaseAmount;
 			document.getElementById("tot-investment-id-value").innerHTML=minPurchaseAmount;
@@ -40,10 +40,18 @@
 		}
 		function showNewUpfrontInvestment(newValue)
 		{
-			document.getElementById("upfrontInvestment").innerHTML=newValue;
+			document.getElementById("upfrontInvestment").value=newValue;
 			document.getElementById("tot-investment-id-value").innerHTML=newValue;
 		}
 		
+		function showSearch(val)
+		{
+	 		    var value = val.toLowerCase();
+	 		    $("#myDiv1 div").filter(function() {
+	 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	 		    });
+
+		}
 
 		function setTransactionType(transactionType)  {
 			
@@ -52,26 +60,87 @@
 			
 			
 		}
+		
+		function enableTextBox()  {
+			var result = document.querySelector('input[name="sipDuration"]:checked').value;
+		    if(result=="custom"){
+
+		    	document.getElementById("sip-duration-in-years").disabled = false;
+		    }
+		    else{
+		    	document.getElementById("sip-duration-in-years").disabled = true;
+		    }	
+		}
+		
+		function changeSliderValue(val)   {
+			
+			if (val == "" || val == null )   {
+				document.getElementById("upfront-investment-range").value = "0";
+			}
+			else if ( val > 150000 ) {
+				document.getElementById("upfront-investment-range").value = "150000";
+			}
+			else {
+				document.getElementById("upfront-investment-range").value = val;
+			}
+		}
+		
+		function changeSliderSipValue(val)   {
+			
+			if (val == "" || val == null )   {
+				document.getElementById("sip-amount-range").value = "0";
+			}
+			else if ( val > 150000 ) {
+				document.getElementById("sip-amount-range").value = "150000";
+			}
+			else {
+				document.getElementById("sip-amount-range").value = val;
+			}
+		}
 				
 		function newUpdate(){
 			
 			var transactionType = document.getElementById("transaction-type-value").value;
 			var e = document.getElementById("selectUpfrontFolioNum");
-			var strFolio = e.options[e.selectedIndex].value;
+			var strFolio;
+			if (e == null ) 
+				strFolio = "NEW";
+			else 
+				strFolio = e.options[e.selectedIndex].value;
+						
 			var eSip = document.getElementById("selectSipFolioNum");
-			var strSipFolio = eSip.options[eSip.selectedIndex].value;
+			var strSipFolio;
+			if (eSip == null)
+				strSipFolio = "NEW";
+			else
+				strSipFolio = eSip.options[eSip.selectedIndex].value;
 			
-			//alert('newUpdate called : transactionType : '+transactionType);
-			//alert('transactionType : '+transactionType);
+			
+			
+		    
 			if (transactionType == "SIP") {
-				document.getElementById("sip-amount-value").value = document.getElementById("sipPerMonth").innerHTML;
+				var sipDuration;
+				var result = document.querySelector('input[name="sipDuration"]:checked').value;
+			    if(result=="custom"){
+			    	sipDuration = document.getElementById('sip-duration-in-years').value;
+					
+					if (sipDuration == "" || sipDuration == null || sipDuration == "0")  {
+						sipDuration="5";
+					}
+			    }
+			    else{
+			    	sipDuration = "99";
+			    	document.getElementById("sip-plan-value").value = "UntilStopped";
+			    }	
+			    
+				document.getElementById("sip-amount-value").value = document.getElementById("sipPerMonth").value;
 				document.getElementById("upfront-investment-value").value = "0";
 				document.getElementById("select-folio-num-value").value = strSipFolio;
-				document.getElementById("sip-duration-value").value = document.getElementById('sip-duration').innerHTML; // in years
-				document.getElementById("sip-date-value").value = document.getElementById('sip-date').value;
+				document.getElementById("sip-duration-value").value = sipDuration;
+				document.getElementById("sip-date-value").value = $("input[type='radio'][name='sipDate']:checked").val();
 			} else{
 				document.getElementById("sip-amount-value").value = "0";
-				document.getElementById("upfront-investment-value").value = document.getElementById("upfrontInvestment").innerHTML;
+				document.getElementById("upfront-investment-value").value = document.getElementById("upfrontInvestment").value;
 				document.getElementById("select-folio-num-value").value = strFolio;
 				document.getElementById("sip-duration-value").value = "0"; // in years
 				document.getElementById("sip-date-value").value = "0";

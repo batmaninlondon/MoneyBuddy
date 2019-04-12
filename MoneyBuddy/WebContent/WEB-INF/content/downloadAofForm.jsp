@@ -30,6 +30,7 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
         <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->
 
         <!-- Favicon -->
@@ -41,7 +42,7 @@
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
  	
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
   
   
  <script>
@@ -153,176 +154,105 @@
     <!-- End Head -->
 
     <!-- Body -->
-    <body >
-<!--========== HEADER ==========-->
-        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
-            <!-- Navbar -->
-            <nav class="s-header-v2__navbar">
-                <div class="container g-display-table--lg">
-                    <!-- Navbar Row -->
-                    <div class="s-header-v2__navbar-row">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="s-header-v2__navbar-col">
-                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                                <span class="s-header-v2__toggle-icon-bar"></span>
-                            </button>
-                        </div>
+   <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
+   <div class="container ">
+   		<a href="welcome.jsp" class="s-header-v2__logo-link">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
+		</a>
+	</div>
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:70px;">
+	    	<div class="profile">
+	        	<div class="name pagination">
+	                	<s:set var="disBankName" value="displayBankName" />
+	                	<h3 class="title g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b>
+	                		
+	                	
+						<!-- <h3></h3> -->
+						<%-- <h6 style="color:white;"><s:property value="#session.customerMobileNumber" /></h6> --%>
+	            </div>
+	       	</div>
+	     </div>
+	     <div class="col-md-1 col-xs-1"></div>
+	</div>
+	
+	<%-- <s:form  action="paymentAction" method="post" name="formPayment"> --%>
+	
+	
+	<div class="row g-height-auto--lg" >
+		<div class="col-md-1 col-xs-1" ></div>
+		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+			<div class="row text-center g-margin-t-15--xs">
+				<h4 class="title g-margin-l-120--md g-margin-l-20--xs text-center"><u>As required by Govt. regulations, we ask all our users to re-verify their account opening form</u></h4>
+			</div>
+			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+					
+			</div>
+			
+				<h5 class="text-center"> Kindly download your pre-filled account opening form</h5>
+				
+				<br/>
+				
+				<h5 class="text-center"> Please email the signed form to admin@MoneyBuddy.co.in</h5>
+				
+			<br/>
+	     </div>
+	     <div class="col-md-1 col-xs-1" ></div>
+	</div>
+	
 
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
-                            <!-- Logo -->
-                            <div class="s-header-v2__logo">
-                                <a href="welcome" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
-                                </a>
-                            </div>
-                            <!-- End Logo -->
-                        </div>
-                        
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
-										<%	} else 
-										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
-										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
-	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
-									      	</ul>
-	                                    
-	                                    </li>
-                                </ul>
-                            </div>
-                            <!-- End Nav Menu -->
-                        </div>
-                    </div>
-                    <!-- End Navbar Row -->
-                </div>
-            </nav>
-            <!-- End Navbar -->
-        </header>
-        <!--========== END HEADER ==========-->
-
-        <!--========== PAGE CONTENT ==========-->
-       
-       <div class="g-bg-color--dark">
-            <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
-            <br/><br/><br/>
-                <div class="g-margin-b-10--xs " >
-                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">We have sent a mail to you</h1>
-                     <p class="g-font-size-15--xs g-font-size-30--sm g-font-size-30--md">Please sign and send the form back to us</p>
-				  <br><br><br><br><br><br><br><br>
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		
+		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+			<!-- <div class="col-md-6 col-xs-6"></div>
+			<div class="col-md-6 col-xs-6">
+				<div class="g-text-right--xs g-margin-r-30--xs ">
+					<a href="terms" style="color:black;">I agree to MoneyBuddy's Terms & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></a><br>
 				</div>
-            </div>
-        </div>
+						
+			</div> -->
 
-        
-        <!--========== FOOTER ==========-->
-        <footer class="g-bg-color--dark">
-            <!-- Links -->
-            <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
-                    <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.linkedin.com/in/money-buddy-94a73814a/">Linkedin</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms.jsp">Terms &amp; Conditions</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
-                            No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
-                        </div>
-                    </div>
-                    <div class="row  g-font-size-12--xs g-color--white">
-                    <br/>
-                    	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
-                    </div>
-                </div>
-            </div>
-            <!-- End Links -->
+	     </div>
+	     <div class="col-md-1 col-xs-1"></div>
+	</div>
 
-            <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <a href="index.html">
-                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
-                        </a>
-                    </div>
-                     <div class="col-sm-6 g-text-right--xs g-color--white">
-                    &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
-                </div>
-                </div>
-            </div>
-            <!-- End Copyright -->
-        </footer>
-        <!--========== END FOOTER ==========-->
-
-        <!-- Back To Top -->
-        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
-
-
-       <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-	    <script src="assets/js/jquery.js"></script>
+	
+	<div class="row g-margin-t-o-20--xs">
+		<div class="col-md-5"></div>
+		<div class="col-md-2">
+			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " >Download AoF</button>
+		</div>
+		<div class="col-md-5">
+		</div>
+	</div>
+	
+	<%-- <s:hidden id="tran-detail-id-value" name="tranDetailId"></s:hidden>
+	</s:form> --%>
+	
+	
+		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+	 	<script src="assets/js/jquery.js"></script>
 	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	    <script src="assets/js/sly.min.js"></script>
+	     <script src="assets/js/sly.min.js"></script>
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
 	    <script src="assets/js/jquery.isotope.min.js"></script>
 	    <script src="assets/js/main.js"></script>
 	    <script src="assets/js/wow.min.js"></script>
-	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
-		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
-
-        <!--========== END JAVASCRIPTS ==========-->
-        
- <script>
-         document.onreadystatechange = function () {
-			  var state = document.readyState
-			  if (state == 'interactive') {
-			       document.getElementById('contents').style.visibility="hidden";
-			  } else if (state == 'complete') {
-			      setTimeout(function(){
-			         document.getElementById('interactive');
-			         document.getElementById('load').style.visibility="hidden";
-			         document.getElementById('contents').style.visibility="visible";
-			      },1000);
-			  }
-			}
-         
-         </script>
-    </body>
+	    <script src="assets/js/index.js"></script>
+	  
+	  	<script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+	  
+	  
+	  
+	  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
+</body>
     <!-- End Body -->
 </html>

@@ -74,8 +74,8 @@
 		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:100px;">
 	    	<div class="profile">
 	        	<div class="name">
-	                	<h3 class="title g-color--white">thank you </h3>
-						<h6 style="color:white;">you order invoice details</h6>
+	                	<h3 class="title g-color--white">Thank you for investing with MoneyBuddy</h3>
+						<h6 style="color:white;">Your SIP investment details </h6>
 	            </div>
 	       	</div>
 	     </div>
@@ -89,26 +89,27 @@
 					<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head g-font-size-14--xs">
 							<tr>
-								<th class="center col-md-1 g-bg-color--gray-light">Sl No.</th>
 								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
 								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
 							</tr>
 						</thead>
-						<% int i = 1; %> 
 						<tbody class="table-body g-font-size-14--xs">
-							<s:iterator value="#session.orderDataModel" var="orderDataModelElement">
+							<s:iterator value="#session.customerCartUpfrontList" var="customerCartUpfrontListElement">
 								<tr>
-									<s:if test="schemeName.equals('Total')">
-										<td class="center g-font-size-14--xs g-bg-color--gray-light"></td>
-									    <td class="center g-font-size-14--xs g-bg-color--gray-light"><s:property value="#orderDataModelElement.schemeName"/></td>
-									    <td class="center g-font-size-14--xs g-bg-color--gray-light"><s:property value="#orderDataModelElement.amount"/></td>
-									  
-								    </s:if>
-									<s:else>
-									    	<td class="center g-font-size-14--xs"><%= i %> <% i++; %></td>
-									    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.schemeName"/></td>
-									    <td class="center g-font-size-14--xs"><s:property value="#orderDataModelElement.amount"/></td>
-								    </s:else>
+									<s:if test="productName.equals('Total')">
+									    <td class="center g-font-size-14--xs text-center">
+									    	<b><s:property value="#customerCartUpfrontListElement.productName"/></b>
+									    </td>
+									    <td class="center g-font-size-14--xs text-center">
+									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartUpfrontListElement.amount]})}"/>&nbsp;/month</b>
+								    	</td>
+							    	</s:if>
+							    	<s:else>
+							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartUpfrontListElement.productName"/></td>
+									    <td class="center g-font-size-14--xs text-center">
+									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartUpfrontListElement.amount]})}"/>&nbsp;/month
+								    	</td>
+							    	</s:else>
 								</tr>
 							</s:iterator> 
 						</tbody>
@@ -117,22 +118,6 @@
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
-
-	<% 
-	if(null != session.getAttribute("orderDataModel")) {
-		System.out.println("orderDataModel is not null ");
-		session.removeAttribute("orderDataModel");
-	}
-	else {
-		System.out.println("orderDataModel is  null ");
-	}
-	/* System.out.println("calling trading ");
-	Trading trading = new Trading();
-	trading.checkPaymentStatus(); */
-	
-	%> 
-
-
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
@@ -145,7 +130,7 @@
 	    <script src="assets/js/wow.min.js"></script>
 	    <script src="assets/js/index.js"></script>
 	  
-	  	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	  	<script type="text/javascript" src="assets/js/jquery-latest.js"></script>
 	  
 	  
 	  

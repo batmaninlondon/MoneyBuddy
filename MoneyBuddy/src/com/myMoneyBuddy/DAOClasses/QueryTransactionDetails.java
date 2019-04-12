@@ -47,12 +47,13 @@ public class QueryTransactionDetails {
     			folioNums = "NEW";
     		}
     		else {
-    			folioNums = "NEW:";
+    			
     			for ( int i =0; i< folioNumList.size()-1; i++ )  {
     				if (folioNumList.get(i) != null)
     					folioNums += folioNumList.get(i)+":";
     			}
     			folioNums += folioNumList.get(folioNumList.size()-1);
+    			folioNums += ":NEW";
     		}
     		
     		hibernateSession.getTransaction().commit();

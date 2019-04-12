@@ -36,11 +36,6 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     		QueryCustomer queryCustomer = new QueryCustomer();
     		Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
     		System.out.println("kycStaus : "+customer.getKycStatus());
-	    	/*System.out.println("custDetUploaded : "+customer.getCusDetailsUploaded());
-	    	System.out.println("addCustDetUploaded : "+customer.getAddCusDetailsUploaded());*/
-    		
-    		QueryBankDetails queryBankDetails = new QueryBankDetails();
-    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
     		
     		
 			if ("NC".equals(customer.getKycStatus())) {
@@ -51,34 +46,11 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 			else if ("DONE".equals(customer.getKycStatus())) {
 				if ("Y".equals(customer.getCusDetailsUploaded()))  {
 					
-		    		/*if (bankDetailsExists) {
-		    			
-		    			if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))   {
-							System.out.println("downloadAofForm page ");
-							logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadAofForm");
-					    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-							return "downloadAofForm";
-						}
-						else if ("FORM_RECEIVED".equals(customer.getAofFormStatus()))   {
-							System.out.println("aofOrKycFormReceived page ");
-							logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned aofOrKycFormReceived");
-					    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-							return "aofOrKycFormReceived";
-						}
-						else {
-							System.out.println("bankDetails page ");
-							logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
-					    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-							return "bankDetails";
-						}
-		    		}
-		    		else {*/
 		    			System.out.println("bankDetails page ");
 						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
 				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 				    	
 						return "bankDetails";
-		    		/*}*/
 				}
 				else {
 					System.out.println("customerDetails page ");
@@ -87,78 +59,22 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 					return "customerDetails";
 				}
 			} else if ("FORM_RECEIVED".equals(customer.getKycStatus()))   {
-				
-				if (bankDetailsExists) {
-					/*if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))   {
-						System.out.println("downloadAofForm page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadAofForm");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "downloadAofForm";
-					}
-					else if ("FORM_RECEIVED".equals(customer.getAofFormStatus()))   {
-						System.out.println("aofOrKycFormReceived page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned aofOrKycFormReceived");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "aofOrKycFormReceived";
-					}
-					else {*/
-						System.out.println("aofOrKycFormReceived page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned aofOrKycFormReceived");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "aofOrKycFormReceived";
-					/*}*/
-				}
-				else {
-					/*System.out.println("bankDetails for AofNotDone page ");*/
-					logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails for AofNotDone");
-			    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-			    	
-			    	setTranDetailId("KycNotDone");
-					return "bankDetailsForKND";
-				}
+		
+				System.out.println("aofOrKycFormReceived page ");
+				logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned aofOrKycFormReceived");
+		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+				return "aofOrKycFormReceived";
 				
 			}
 			else  {
 				if ("Y".equals(customer.getCusDetailsUploaded()))  {
 					if("Y".equals(customer.getAddCusDetailsUploaded())) {
+	
+						System.out.println("DownloadKycForm page ");
+						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
+				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+						return "downloadKycForm";
 						
-			    		if (bankDetailsExists)  {
-			    			
-			    			/*if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))   {
-								System.out.println("downloadAofForm page ");
-								logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadAofForm");
-						    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-								return "downloadAofAndKycForm";
-							}
-							else   {*/
-								System.out.println("DownloadKycForm page ");
-								logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
-						    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-								return "downloadKycForm";
-							/*}*/
-			    			
-			    		}
-			    		else {
-			    			
-			    			/*if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))   {
-			    				System.out.println("bankDetails for KycAndAofNotDone page ");
-								logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails for KycAndAofNotDone");
-						    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						    	
-						    	setTranDetailId("KycAndAofNotDone");
-								return "bankDetailsForKND";
-								
-							}
-							else   {*/
-								System.out.println("bankDetails for KycNotDone page ");
-								logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails for kycNotDone");
-						    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						    	
-						    	setTranDetailId("KycNotDone");
-								return "bankDetailsForKND";
-							/*}*/
-			    			
-			    		}
 					}
 					else {
 						System.out.println("addCustomerDetails page ");
