@@ -771,10 +771,11 @@ public class Trading {
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				hibernateSession.getTransaction().commit();
 				
-				if ("N".equals(firstOrderFlag)) {
-					return null;
-				}
-
+			}
+			
+			
+			if ("SIP".equals(transactionType) && "N".equals(firstOrderFlag))  {
+				return null;
 			}
 			
 			if (!allOrderFailed) {
