@@ -394,20 +394,27 @@ input[type="range"] {
 								  Rs.<span id="sipDuration" name="totalInvestment1"></span>
 								</div> --%>
 								<div class="col-md-9  col-sm-9 col-9">
+									
 									<div id="sip-duration-range" >
-									  	<form class="col-md-6" onClick="enableTextBox();">
-										  	<label class="radio-inline g-margin-l-35--md">
-											  	<input type="radio" id="d1" name="sipDuration" value="untilStopped" checked="checked" >until Stopped
-										  	</label>
-										  	<label class="radio-inline ">
-											  <input type="radio" id="d2" name="sipDuration" value="custom" > Custom
-											</label>
-									  	</form>
-									  	<!-- <div class="form-group col-md-3"> -->
-									    	<input class="g-margin-l-o-100--sm g-text-left--xs" disabled type="number" id="sip-duration-in-years" name="sipDurationText" min="0" max="99999" step="1" value="5" 
-									    			onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-							    			&nbsp;&nbsp;years
-									    <!-- </div> -->
+									  	<div class="row">
+										  	<form class="col-md-5" onClick="enableTextBox();">
+											  	<label class="radio-inline g-margin-l-50--md">
+												  	<input type="radio" id="d1" name="sipDuration" value="untilStopped" checked="checked" >until Stopped&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											  	</label>
+											  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											  	<label class="radio-inline ">
+												  <input type="radio" id="d2" name="sipDuration" value="custom" > Custom
+												</label>
+										  	</form>
+										  	<div class="col-md-3">
+										    	 <%-- <input type="number" id="sip-duration-in-years" class="g-margin-l-o-100--sm g-color--black" value="99"
+												min="1"  max="99999" name="sipDurationText" 
+												onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" > --%>
+												<input class="g-margin-t-o-10--md" disabled autofocus type="number" id="sip-duration-in-years" name="sipDurationText" min="0" max="99999" step="1" value="99" 
+										    			onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+								    			&nbsp;&nbsp;years
+										    </div>
+										</div>
 									</div>
 								</div>
 								

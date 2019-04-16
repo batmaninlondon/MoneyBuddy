@@ -351,7 +351,7 @@
                         </a>
                     </div>
                      <div class="col-sm-6 g-text-right--xs">
-                    &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2019 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

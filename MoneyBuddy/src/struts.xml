@@ -506,10 +506,10 @@
             <result name="success">/WEB-INF/content/payment.jsp</result>
             <result name="sipOrderFofN">/WEB-INF/content/orderInvoiceSipFofN.jsp</result>
             <!-- <result name="sipOrderFofY">/orderInvoiceSipFofY.jsp</result> -->
-            <result name="input">/WEB-INF/content/bankDetails.jsp</result> 
-            <result name="failedWithPaymentGateway">/WEB-INF/content/bankDetails.jsp</result>
-            <result name="allOrderFailed">/WEB-INF/content/bankDetails.jsp</result>
-            <result name="clientCreationFailure">/WEB-INF/content/bankDetails.jsp</result>
+            <result name="input">/WEB-INF/content/bankDetails.jsp</result>
+            <result name="failedWithPaymentGateway">/WEB-INF/content/errorPage.jsp</result>
+            <result name="allOrderFailed">/WEB-INF/content/errorPage.jsp</result>
+            <result name="clientCreationFailure">/WEB-INF/content/errorPage.jsp</result>
             <!-- <result name="failedWithPaymentGateway" type="chain">
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>

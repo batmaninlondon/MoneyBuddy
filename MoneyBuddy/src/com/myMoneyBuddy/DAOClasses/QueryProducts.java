@@ -333,16 +333,16 @@ public class QueryProducts {
 				    	   
 				    	 Object[] buyRecordRow = (Object[]) buyIt.next();
 					       
-				    	 System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]+" : transactionDate : "+buyRecordRow[4]);
+				    	// System.out.println("Product transactionDetail for BUY - id : "+buyRecordRow[0]+" amount: "+buyRecordRow[1]+" unit: "+buyRecordRow[2]+" unitPrice: "+buyRecordRow[3]+" : transactionDate : "+buyRecordRow[4]);
 	
 					       
 				    	 if (soldUnit != 0 )   {
 						    	   
 				    		 if (Double.parseDouble(buyRecordRow[2].toString()) > soldUnit)  {
 				    			 availableUnits += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit);
-				    			 System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
+				    			 //System.out.println(" availableUnits : "+String.format("%.4f", availableUnits));
 				    			 investedAmount += (Double.parseDouble(buyRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buyRecordRow[3].toString()));
-				    			 System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
+				    			 //System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 				    		   
 				    			 soldUnit = 0;
 						    		   
@@ -356,9 +356,9 @@ public class QueryProducts {
 				    	 else {
 				    		 availableUnits +=  Double.valueOf(buyRecordRow[2].toString());
 	
-				    		 System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
+				    		 //System.out.println(" availableUnits : "+String.format("%.2f", availableUnits));
 				    		 investedAmount += (Double.parseDouble(buyRecordRow[1].toString()));
-				    		 System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
+				    		 //System.out.println(" investedAmount : "+String.format("%.2f",investedAmount));
 				    	 }
 						       
 				    	 oldstring = buyRecordRow[4].toString().substring(0, 10);
@@ -366,13 +366,13 @@ public class QueryProducts {
 				    	 date = (Date)formatter.parse(oldstring);
 						       	
 				    	 String transactionDate = newFormat.format(date);
-				    	 System.out.println("transactionDate : "+transactionDate);
+				    	 //System.out.println("transactionDate : "+transactionDate);
 						       	
 				    	 dates.add(strToDate(transactionDate));
 				    	 
-				    	 System.out.println("AMOUNT ADDED FOR XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
+				    	 /*System.out.println("AMOUNT ADDED FOR XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
 				    	 System.out.println("transactionDate : "+transactionDate);
-				    	 System.out.println("DATE ADDED FOR XIRR : "+strToDate(transactionDate));
+				    	 System.out.println("DATE ADDED FOR XIRR : "+strToDate(transactionDate));*/
 				    	 amounts.add(Double.parseDouble(buyRecordRow[1].toString()));
 					           
 				    	 
@@ -381,11 +381,11 @@ public class QueryProducts {
 				    	 totalDates.add(strToDate(transactionDate));
 				    	 totalAmounts.add(Double.parseDouble(buyRecordRow[1].toString()));
 				    	 
-				    	 System.out.println("AMOUNT ADDED FOR TOTAL XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
+				    	/* System.out.println("AMOUNT ADDED FOR TOTAL XIRR : "+Double.parseDouble(buyRecordRow[1].toString()));
 				    	 System.out.println("DATE ADDED FOR TOTAL XIRR : "+strToDate(transactionDate));
 					     
 					     
-				    	 System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));
+				    	 System.out.println("Added : date : "+strToDate(transactionDate)+" : amount : "+(Double.parseDouble(buyRecordRow[1].toString())));*/
 				       
 				     }
 				       
@@ -488,11 +488,11 @@ public class QueryProducts {
 
 			 hibernateSession.getTransaction().commit();
 			 
-			 for ( int i =0;i<pendingOrderDataModel.size();i++)  {
+			/* for ( int i =0;i<pendingOrderDataModel.size();i++)  {
 					
 					System.out.println("pendingOrderDataModel.get("+i+").getTransactionId()"+pendingOrderDataModel.get(i).getTransactionId());
 					
-				}
+				}*/
 
 			 logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - return pendingOrderDataModel containing "+pendingOrderDataModel.size()+" records");
 			 logger.debug("QueryProducts class - getPendingOrderData method - customerId - "+customerId+" - end");

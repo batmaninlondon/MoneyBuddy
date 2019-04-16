@@ -64,10 +64,11 @@
 		function enableTextBox()  {
 			var result = document.querySelector('input[name="sipDuration"]:checked').value;
 		    if(result=="custom"){
-
+		    	document.getElementById("sip-duration-in-years").value = "0";
 		    	document.getElementById("sip-duration-in-years").disabled = false;
 		    }
 		    else{
+		    	document.getElementById("sip-duration-in-years").value = "99";
 		    	document.getElementById("sip-duration-in-years").disabled = true;
 		    }	
 		}

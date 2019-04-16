@@ -15,6 +15,6 @@
         <field-validator type="requiredstring">
             <message>Password can't be blank.</message>
         </field-validator>
-    </field>   
+    </field>  
    
 </validators>

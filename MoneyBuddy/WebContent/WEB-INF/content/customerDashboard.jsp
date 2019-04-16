@@ -278,15 +278,15 @@
 										         <tbody>
 										            <tr class="g-bg-color--white" >
 										                <td class="text-center" >
-										                	<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >Rs. </span>
+										                	<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
                                 							<figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter"></figure>
                             							</td>
 														<td class="text-center" >
-															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >Rs. </span>
+															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
                                 							<figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
                             							</td>
 														<td class="text-center" >
-															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >Rs. </span>
+															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
                                 							<figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
                             							</td>
 														<td class="text-center" >
@@ -558,7 +558,7 @@
                         </a>
                     </div>
                      <div class="col-sm-6 g-text-right--xs g-color--white">
-                    &copy; 2018 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2019 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

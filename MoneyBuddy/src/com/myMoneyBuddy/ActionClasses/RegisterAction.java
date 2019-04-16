@@ -56,7 +56,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    		System.out.println("RegisterAction class : execute method : UserAlreadyExists");
 	    		/*String str = "UserAlreadyExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage("This emailId is already resgistered with MoneyBuddy.");
+	    		addActionMessage("This emailId is already registered with MoneyBuddy.");
 	    	    logger.debug("RegisterAction class - execute method - returned UserAlreadyExists");
 	    	    
 	        	return SUCCESS;
@@ -66,7 +66,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    		System.out.println("RegisterAction class : execute method : MobileNumberAlreadyExists");
 	    		/*String str = "MobileNumberAlreadyExists";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage("This mobile number is already resgistered with MoneyBuddy.");
+	    		addActionMessage("This mobile number is already registered with MoneyBuddy.");
 	    	    logger.debug("RegisterAction class - execute method - returned MobileNumberAlreadyExists");
 	    	    
 	        	return SUCCESS;

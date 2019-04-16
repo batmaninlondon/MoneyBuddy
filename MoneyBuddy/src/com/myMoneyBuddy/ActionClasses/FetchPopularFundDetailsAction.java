@@ -31,11 +31,11 @@ public class FetchPopularFundDetailsAction extends ActionSupport   {
 
 			popularFundDetailsDataModel = queryPrimaryFundDetails.getPopularFundDetailsData();
 
-			for ( int i =0 ; i<popularFundDetailsDataModel.size() ; i++)  {
+			/*for ( int i =0 ; i<popularFundDetailsDataModel.size() ; i++)  {
 				
 				System.out.println("popularFundDetailsDataModel : i: "+i+" : fundId : "+popularFundDetailsDataModel.get(i).getFundId()+" : Return1yr : "+popularFundDetailsDataModel.get(i).getReturnsOneYear());
 				
-			}
+			}*/
     	    
     	    logger.debug("FetchPopularFundDetailsAction class - execute method - returned success");
     	    logger.debug("FetchPopularFundDetailsAction class - execute method - end");
