@@ -345,11 +345,11 @@ public class SendMail {
          MimeBodyPart messageBodyPart2 = new MimeBodyPart(); 
          
          System.out.println("pdfFile : "+pdfFile);
-         String sourceFileName = pdfFile;//change accordingly
+         //String sourceFileName = pdfFile;//change accordingly
          
-         DataSource source = new FileDataSource(sourceFileName);    
+         DataSource source = new FileDataSource(pdfFile);    
          messageBodyPart2.setDataHandler(new DataHandler(source));    
-         messageBodyPart2.setFileName("KYC_Application_Form.pdf");
+         messageBodyPart2.setFileName("AccountOpeningForm.pdf");
 
          //create Multipart object and add MimeBodyPart objects to this object        
          Multipart multipart = new MimeMultipart();    

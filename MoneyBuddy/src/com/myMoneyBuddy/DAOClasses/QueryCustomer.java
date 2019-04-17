@@ -329,6 +329,57 @@ public class QueryCustomer {
 					hibernateSession.close();
 		}
 	}
+	
+	
+	public String getAoFFormName(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getAoFFormName method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		String aoFFormName;
+		try
+		{
+			hibernateSession.beginTransaction();
+			String kycStatus = hibernateSession.createQuery("select kycStatus from Customers where customerId = '"+customerId+"'").uniqueResult().toString();
+			hibernateSession.getTransaction().commit();
+			
+			hibernateSession.beginTransaction();
+			String taxStatus = hibernateSession.createQuery("select taxStatus from CustomerDetails where customerId = '"+customerId+"'").uniqueResult().toString();
+			hibernateSession.getTransaction().commit();
+			
+			if ("Individual".equalsIgnoreCase(taxStatus))  {
+				if ("DONE".equalsIgnoreCase(kycStatus))  
+					aoFFormName = "Account_Opening_Form_1";
+				else 
+					aoFFormName = "Account_Opening_Form_2"; 
+			}
+			else {
+				if ("DONE".equalsIgnoreCase(kycStatus))  
+					aoFFormName = "Account_Opening_Form_3";
+				else 
+					aoFFormName = "Account_Opening_Form_4"; 
+			}
+			logger.debug("QueryCustomer class - getAoFFormName method - customerId - "+customerId+" - return customerName ");
+			logger.debug("QueryCustomer class - getAoFFormName method - customerId - "+customerId+" - end");
+			
+			return aoFFormName;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getAoFFormName method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getAoFFormName method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
 
 	public String getHashedPassword(String emailId) throws MoneyBuddyException {
 

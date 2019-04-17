@@ -35,63 +35,40 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 	    	
     		QueryCustomer queryCustomer = new QueryCustomer();
     		Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
-    		System.out.println("kycStaus : "+customer.getKycStatus());
+    		// System.out.println("kycStaus : "+customer.getKycStatus());
     		
-    		
-			if ("NC".equals(customer.getKycStatus())) {
-				logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned panCardVerifiction");
+    		if ("ACTTIVATED".equals(customer.getAofFormStatus()))  {
+    			logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
 		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-				return "panCardVerifiction";
-			}
-			else if ("DONE".equals(customer.getKycStatus())) {
-				if ("Y".equals(customer.getCusDetailsUploaded()))  {
-					
-		    			System.out.println("bankDetails page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-				    	
-						return "bankDetails";
-				}
-				else {
-					System.out.println("customerDetails page ");
-					logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned customerDetails");
-			    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-					return "customerDetails";
-				}
-			} else if ("FORM_RECEIVED".equals(customer.getKycStatus()))   {
-		
-				System.out.println("aofOrKycFormReceived page ");
-				logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned aofOrKycFormReceived");
-		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-				return "aofOrKycFormReceived";
-				
-			}
-			else  {
-				if ("Y".equals(customer.getCusDetailsUploaded()))  {
-					if("Y".equals(customer.getAddCusDetailsUploaded())) {
-	
-						System.out.println("DownloadKycForm page ");
+		    	
+				return "bankDetails";
+    		}
+    		else {
+    			if ("N".equals(customer.getCusDetailsUploaded()))  {
+    				logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned panCardVerifiction");
+    		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+    				return "customerDetails";
+    			}
+    			else {
+    				if ("DONE".equals(customer.getKycStatus()))  {
 						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
 				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "downloadKycForm";
-						
-					}
-					else {
-						System.out.println("addCustomerDetails page ");
-						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned addCustomerDetails");
-				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-						return "addCustomerDetails";
-					}
-				}
-				else {
-					System.out.println("customerDetails page ");
-					logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned customerDetails");
-			    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
-					return "customerDetails";
-				}
-			}
-    		
-			
+						return "aofNotDone";
+    				}
+    				else {
+    					if ("Y".equals(customer.getAddCusDetailsUploaded()))  {
+    						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
+    				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+    						return "aofNotDone";
+    					}
+    					else {
+    						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned addCustomerDetails");
+    				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
+    						return "addCustomerDetails";
+    					}
+    				}
+    			}
+    		}
 			
     	} 
     	catch ( Exception e )  {

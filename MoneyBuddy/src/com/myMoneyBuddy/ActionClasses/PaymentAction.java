@@ -260,7 +260,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		        Properties configProperties = new Properties();
 				String configPropFilePath = "../../../config/config.properties";
 
-				configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
+				configProperties.load(PaymentAction.class.getResourceAsStream(configPropFilePath));
 				
 				String sipBufferDays = null;
 				
@@ -386,7 +386,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				/*Properties configProperties = new Properties();
 				String configPropFilePath = "../../../config/config.properties";
 
-				configProperties.load(PanCardVerificationAction.class.getResourceAsStream(configPropFilePath));
+				configProperties.load(PaymentAction.class.getResourceAsStream(configPropFilePath));
 				
 				String sipBufferDays = null;
 				

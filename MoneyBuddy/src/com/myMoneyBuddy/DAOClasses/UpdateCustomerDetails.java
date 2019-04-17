@@ -30,9 +30,7 @@ public class UpdateCustomerDetails {
 		try {
 
 			hibernateSession.beginTransaction();
-			
-			
-			
+
 			CustomerDetails tempCustomerDetails  = new CustomerDetails(customerId, gender, occupation, dateOfBirth, addressLineOne,
 					addressLineTwo, addressLineThree, residentialCity, residentialState,
 					residentialPin, residentialCountry, taxStatus, nomineeName, nomineeRelationship); 		

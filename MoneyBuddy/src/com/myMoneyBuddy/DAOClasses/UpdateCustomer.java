@@ -16,41 +16,29 @@ public class UpdateCustomer {
 	
 	Logger logger = Logger.getLogger(UpdateCustomer.class);
 
-	public void updatePancardAndKycStatus (String customerId, String panCard, String kycStatus) throws MoneyBuddyException {
+	public void updateCustomerData (String customerId, String panCard, String kycStatus, String customerName, String cusDetailsUploaded)
+							throws MoneyBuddyException {
 
 		logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		
-		System.out.println("customerId : in updatePancard : "+customerId);
-		System.out.println("panCard : in updatePancard : "+panCard);
-		System.out.println("kycStatus : in updatePancard : "+kycStatus);
 
 		try {
 
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("update Customers set panCard = :panCard , kycStatus = :kycStatus where customerId = :customerId");
+			Query query = hibernateSession.createQuery("update Customers set panCard = :panCard , kycStatus = :kycStatus, "
+								+ "customerName = :customerName, cusDetailsUploaded = :cusDetailsUploaded where customerId = :customerId");
 
 			query.setParameter("panCard", panCard);
-
 			query.setParameter("kycStatus", kycStatus);
+			query.setParameter("customerName", customerName);
+			query.setParameter("cusDetailsUploaded", cusDetailsUploaded);
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
-			
-			if ("DONE".equals(kycStatus))  {
-			
-				hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("update Customers set aofFormStatus = 'ACTIVATED' where customerId = :customerId");
 
-				query.setParameter("customerId", customerId);
-	
-				result = query.executeUpdate();
-				hibernateSession.getTransaction().commit();
-			}
-
-			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - updated data of Customers table to set panCard and kycStatus");
+			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - updated data of Customers table");
 
 			logger.debug("UpdateCustomer class - updatePancardAndKycStatus method - customerId - "+customerId+" - end");
 
@@ -114,7 +102,7 @@ public class UpdateCustomer {
 
 	}
 	
-	public int updateNameAndCustDetUploadedStatus (String customerId, String customerName, String cusDetailsUploaded) throws MoneyBuddyException {
+	/*public int updateNameAndCustDetUploadedStatus (String customerId, String customerName, String cusDetailsUploaded) throws MoneyBuddyException {
 
 		logger.debug("UpdateCustomer class - updateNameAndCustDetUploadedStatus method - customerId - "+customerId+" - start");
 		
@@ -157,7 +145,7 @@ public class UpdateCustomer {
 					hibernateSession.close();
 		}
 
-	}
+	}*/
 	
 	public void updateBseClientCreationStatus (String customerId, String bseClientCreationStatus) throws MoneyBuddyException {
 

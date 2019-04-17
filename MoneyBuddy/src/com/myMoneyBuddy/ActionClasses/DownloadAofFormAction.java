@@ -62,8 +62,10 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
 	    	//String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
+			
+			
 	    	
-	    	setAofForm("AccountOpeningForm_"+customerId+".pdf");
+	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
 	    	
        		SendMail sendMail = new SendMail();
        		sendMail.sendAofFormMail(directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");

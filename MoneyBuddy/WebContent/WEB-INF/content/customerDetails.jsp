@@ -228,6 +228,15 @@
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
+        <div class="row g-text-left--xs " >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">PAN</div>
+        	<div class="col-md-6 col-xs-6 ">
+        		<s:fielderror fieldName="panCard" class="g-color--red" />
+		  		<s:textfield class="form-control" id="pancard-number" placeholder="Pancard Number" name="panCard" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
         <div class="row g-text-left--xs" >
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>

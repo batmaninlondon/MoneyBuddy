@@ -27,12 +27,9 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     private String grossAnnualIncome;
     private String politicallyExposed;
     private String tranDetailId;
-    
-    //private InputStream stream;
 	
     public String execute() {
     	
-    	//String str = null;
     	String customerId = null;
     	try {
     	
@@ -40,43 +37,28 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
         	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - start ");
         	
 	    	System.out.println(" PrepareKycFormAction execute method Called !!");
-	    	
-		    System.out.println(" PrepareKycFormAction execute method :fatherName : "+getFatherName());
-	    	System.out.println(" PrepareKycFormAction execute method :maritalStatus : "+getMaritalStatus());
-	    	System.out.println(" PrepareKycFormAction execute method :nationality : "+getNationality());
-	    	System.out.println(" PrepareKycFormAction execute method :status : "+getStatus());
-	    	System.out.println(" PrepareKycFormAction execute method :status : "+getGrossAnnualIncome());
-	    	System.out.println(" PrepareKycFormAction execute method :status : "+getPoliticallyExposed());
 			
 			InsertAdditionalCustomerDetails InsertAddCustDetails = new InsertAdditionalCustomerDetails();
 	    	InsertAddCustDetails.insertAddCusDetails(customerId, getFatherName(), getMaritalStatus(), getNationality(), getStatus(), 
 	    				getGrossAnnualIncome(), getPoliticallyExposed());
-			
-			/*sessionMap.put("addCustDetUploaded", "Y");
-			logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");*/
-			
+						
 			UpdateCustomer updateCustomer = new UpdateCustomer();
 			updateCustomer.updateAddCusDetUploadedStatus(customerId, "Y");
 		
-	    	GenerateKycForm generateKycForm = new GenerateKycForm();
-	    	generateKycForm.generateKycForm(customerId);	
+	    	/*GenerateKycForm generateKycForm = new GenerateKycForm();
+	    	generateKycForm.generateKycForm(customerId);	*/
 
 	    	System.out.println(" Returned Success !!");
 	    	
-	    	/*str = "success";
-	    	stream = new ByteArrayInputStream(str.getBytes());*/
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - end");
 	    	
 	    	setTranDetailId("KycNotDone");
-	    	return SUCCESS;
+	    	return "aofNotDone";
     	} 
     	catch ( Exception e )  {
     		logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
-    		
-    		/*str = "error";
-    	    stream = new ByteArrayInputStream(str.getBytes());*/
     	    logger.error("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
@@ -87,14 +69,6 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
-/*    
-	public InputStream getStream() {
-		return stream;
-	}
-
-	public void setStream(InputStream stream) {
-		this.stream = stream;
-	}*/
 
 	public String getFatherName() {
 		return fatherName;

@@ -193,7 +193,7 @@ public class PanCardVerificationAction extends ActionSupport  implements Session
 		}*/
 		kycStatus= "DONE";
 		
-		updatecustomer.updatePancardAndKycStatus(customerId, getPanCard(), kycStatus);
+		//updatecustomer.updatePancardAndKycStatus(customerId, getPanCard(), kycStatus);
 		
 		/*sessionMap.put("panCard", getPanCard());
     	logger.debug("PanCardVerificationAction class : execute method : stored panCard : "+getPanCard()+" in session id : "+sessionMap.getClass().getName());*/
