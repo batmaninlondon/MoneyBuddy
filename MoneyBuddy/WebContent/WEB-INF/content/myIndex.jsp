@@ -130,6 +130,7 @@
   background-color: #2980b9;
 }
 
+
 </style>
 
     <script>
@@ -174,10 +175,7 @@
       };
   
     </script>
-    
-   	<script>
 
-	</script>
         
     </head>
     <!-- End Head -->
@@ -313,7 +311,7 @@
             <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
             <!-- End Arrows -->
             
-            <a href="#whyMoneyBuddySection"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
+            <a href="#whyMoneyBuddySection"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs" >
                 <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
                 <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
             </a>
@@ -672,10 +670,12 @@
         </div> -->
         <!-- End Process -->
         <!-- Parallax -->
-        <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed;">
+        <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed ;">
             <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
                 <div class="g-margin-b-80--xs">
-                    <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--primary">The Most Efficient and Easiest Way to Save Tax</h2>
+                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--primary " style="text-transform:none;">
+                    	The most efficient and easiest way to Save Tax
+                   	</h1>
                 </div>
                 <a  href="saveTax" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">Learn More</a>
             </div>
@@ -683,15 +683,15 @@
         <!-- End Parallax -->
 
         <!-- Culture -->
-        <div class="g-promo-section" id="whyMoneyBuddySection">
+        <div class="g-promo-section" id="whyMoneyBuddySection" >
             <div class="container g-padding-y-80--xs g-padding-y-60--sm">
                 <div class="row">
-                    <div class="col-md-4 g-margin-t-15--xs g-margin-b-60--xs g-margin-b-0--lg">
+                    <div class="col-md-4 g-margin-t-15--xs ">
                         <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".1s">
-                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">Why</h2>
+                            <h1 class="text-center g-font-size-30--xs g-font-size-40--sm g-font-size-50--md  g-color--primary g-font-weight--700">Why</h1>
                         </div>
                         <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s">
-                            <h2 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md g-letter-spacing--2 g-color--primary g-font-weight--700">MoneyBuddy</h2>
+                            <h1 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md  g-color--primary g-font-weight--700">MoneyBuddy</h1>
                         </div>
                     </div>
                     <div class="col-md-4 col-md-offset-1">
@@ -730,7 +730,7 @@
                     <div class="col-md-4 col-xs-4 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Top Performing Funds</figure>
+                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Top Performing Funds</b></h1>
                             </div>
                            <!--  <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
                             <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4> -->
@@ -739,7 +739,7 @@
                     <div class="col-md-4 col-xs-4 g-full-width--xs">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Full Liquidity</figure>
+                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Full Liquidity</b></h1>
                                 <%-- <span class="g-font-size-40--xs g-color--white">+</span> --%>
                             </div>
                             <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
@@ -749,7 +749,7 @@
                     <div class="col-md-4 col-xs-4 g-full-width--xs">
                         <div class="g-text-center--xs">
                             <div class="g-margin-b-10--xs">
-                                <figure class="g-display-inline-block--xs g-font-size-40--xs g-color--white ">Ethical investing</figure>
+                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Ethical investing</b></h1>
                                 <%-- <span class="g-font-size-40--xs g-color--white">x</span> --%>
                             </div>
                             <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
@@ -764,7 +764,7 @@
         <section id="services" class="g-bg-color--dark">
 	   		<div class="container ">
 	            <div class="center wow fadeInDown g-margin-t-50--xs g-margin-b-50--xs ">
-	            	<h2 class="g-color--white g-text-center--xs">Our Partners..</h2>
+	            	<h2 class="g-color--white g-text-center--xs">Our Partners</h2>
 	                <p class="g-color--white g-text-center--xs">We use funds from leading providers to build your portfolio</p>
 	            	<marquee behavior="scroll" direction="left" >
 	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
@@ -792,7 +792,7 @@
     <!-- Subscribe -->
     
         <div class="js__parallax-window" style="background: url(img/1920x1080/07.jpg) 50% 0 no-repeat fixed;" id="subscriber">
-            <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="g-container--sm g-text-center--xs g-padding-y-30--xs g-padding-y-40--sm">
                 <div class="g-margin-b-80--xs">
                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Looking to learn more about investing and mutual funds?</p>
                     <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Subscribe to our newsletter</h2>
@@ -803,12 +803,12 @@
                         	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
 	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
 	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
-			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Enter your email" name="emailId" /> 
+			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" autofocus="true" id="subscriber-email-id" placeholder="Email Address" name="emailId" /> 
 			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
-	                            <span class="input-group-btn " >
-	                            	<s:submit id="recaptcha-subscriber" class="g-margin-l-100--xs g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--left-50 g-radius--right-50" value="Submit"></s:submit>
+	                            <%-- <span class="input-group-btn " > --%>
+                            	<s:submit id="recaptcha-subscriber" class="btn btn-home g-color--white g-recaptcha  " value="Submit"></s:submit>
 	                                <!-- <button id="recaptcha-subscriber" type="submit" class="g-recaptcha s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50" ><i class="ti-arrow-right"></i></button> -->
-	                            </span>
+	                            <%-- </span> --%>
 	                            
 	                            <s:actionmessage class="g-font-size-32--xs g-font-size-36--md g-color--white"/> 
 	                            
@@ -911,7 +911,7 @@
         <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
+                <div class="container g-padding-y-40--xs">
                     <div class="row">
                         <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
@@ -951,7 +951,7 @@
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
+            <div class="container g-padding-y-10--xs">
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="index.html">

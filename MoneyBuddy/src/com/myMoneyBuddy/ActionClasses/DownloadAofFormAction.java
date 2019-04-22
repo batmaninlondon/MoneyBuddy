@@ -15,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
 import org.apache.commons.io.FileUtils;
@@ -57,13 +59,19 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 	    	
 	    	String subject = configProperties.getProperty("MAIL_AOF_FORM_SUBJECT");
 	    	
+	    	/*Path path = Paths.get(DownloadAofFormAction.class.getResource("/").toURI()).getParent().getParent().getParent();
+	    	
+	    	String pathName = path + "/MoneyBuddy/resources/AofForms/";
+	    	
+	    	System.out.println("PATH NAME IS : "+pathName);*/
+	    	
 	    	ClassLoader cl = getClass().getClassLoader();
 			
 			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
 	    	//String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
 			
-			
+			System.out.println("directoryName : "+directoryName);
 	    	
 	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
 	    	

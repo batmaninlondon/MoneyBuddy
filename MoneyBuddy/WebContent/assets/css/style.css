@@ -399,7 +399,6 @@ fieldset[disabled] .s-btn {
   font-weight: 300;
   background: transparent;
   border-color: #fff;
-  border-right: none;
   box-shadow: none;
   letter-spacing: .1rem;
   padding: .625rem 2.5rem;
@@ -1060,6 +1059,7 @@ fieldset[disabled] .s-btn {
   -webkit-transform: translate3d(-50%, 0, 0);
   transform: translate3d(-50%, 0, 0);
   text-align: center;
+
 }
 
 /*----------------------------------
