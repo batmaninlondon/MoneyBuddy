@@ -13,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.regex.Pattern;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -84,7 +86,10 @@ public class DesEncrypter {
 
             logger.debug("DesEncrypter class - encrypt method - end"); 
             
-            return new sun.misc.BASE64Encoder().encode(enc);
+            String encryptStr = new sun.misc.BASE64Encoder().encode(enc);
+            String newStr = encryptStr.replaceAll(Pattern.quote("+"), "123456789");
+            		
+            return newStr;
 
         } 
         catch (BadPaddingException|IllegalBlockSizeException|UnsupportedEncodingException e)
@@ -106,7 +111,7 @@ public class DesEncrypter {
     	logger.debug("DesEncrypter class - decrypt method - start");
     	
         try{
-
+        	str = str.replaceAll("123456789", Pattern.quote("+"));	
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
             byte[] utf8 = dcipher.doFinal(dec);
 

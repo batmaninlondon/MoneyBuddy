@@ -166,7 +166,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="loginTabContent" class="container tab-pane active"><br>
-                <s:form  action="newLoginAction" method="post" name="formLogin" namespace="/" >
+                <s:form  action="newLoginAction" method="post" name="formLogin" namespace="/" autocomplete="off"  >
           <h1>Welcome Back!</h1>
           <p id="loginMessage"></p>
          <!--  <div> -->
@@ -176,7 +176,27 @@
               Email Address<span class="req">*</span>
             </label>
             <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
-  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" />
+            <%
+            String userNa = (String) request.getSession().getAttribute("name");
+            System.out.println(" userNa: "+userNa);
+            
+			if (userNa != null){
+				pageContext.setAttribute("userName", userNa);
+				
+			%>
+			<s:set var="uName" ><%=userNa %></s:set>
+  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" 
+  					 value="%{#uName}" />
+            
+            <%
+			}
+			else 
+			{
+            %>
+            <s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" />
+            <%
+            }
+            %>
             <!-- <input id="email-id"  type="email" required autocomplete="off"/> -->
            <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
           </div>
@@ -186,7 +206,7 @@
               Password<span class="req">*</span>
             </label>
             <s:fielderror fieldName="passwordLogin" class="g-color--red" />
-  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" placeholder="Password"/>
+  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" placeholder="Password" />
             <!-- <input  id="password" type="password" required autocomplete="off"/> -->
           </div>
           

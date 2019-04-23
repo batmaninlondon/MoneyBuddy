@@ -73,8 +73,9 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    	}
 	    	
 	    	DesEncrypter desEncrypter = new DesEncrypter();
-	    	String hashedPassword = desEncrypter.encrypt(getPasswordRegister());
+	    	String hashedPassword = desEncrypter.encrypt(getPasswordRegister()+getEmailIdRegister());
 	
+	    	System.out.println("hashedPassword : "+hashedPassword);
 	    	newCustomer.insertCustomer(getEmailIdRegister(),getMobileNumberRegister(),hashedPassword);
 	    	SendMail sendMail = new SendMail();
 	

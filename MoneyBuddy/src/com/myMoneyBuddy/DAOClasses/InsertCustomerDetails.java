@@ -28,7 +28,7 @@ public class InsertCustomerDetails {
 		String customerId = null;
     	try {
     		
-    		
+    		System.out.println("password is :...................:"+password);
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - start");
     		
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -102,9 +102,9 @@ public class InsertCustomerDetails {
 
     }
     
-    public void updateVerificationStatus (String password) throws MoneyBuddyException {
+    public String updateVerificationStatusAndGetEmail (String password) throws MoneyBuddyException {
 
-    	logger.debug("InsertCustomerDetails class - updateVerificationStatus method - start");
+    	logger.debug("InsertCustomerDetails class - updateVerificationStatusAndGetEmail method - start");
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
@@ -123,18 +123,26 @@ public class InsertCustomerDetails {
 			System.out.println(result+" rows updated !! ");
 
 			hibernateSession.getTransaction().commit();
+			
+			hibernateSession.beginTransaction();
+			String emailId = hibernateSession.createQuery("select emailId from Customers where password = '"+password+"'").uniqueResult().toString();
+			hibernateSession.getTransaction().commit();
     		
-			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - updated data of Customers table to set verificationStatus Y");
+			System.out.println("Value of emailId is : "+emailId);
+			
+			logger.debug("InsertCustomerDetails class - updateVerificationStatusAndGetEmail method - updated data of Customers table to set verificationStatus Y");
     		
-			logger.debug("InsertCustomerDetails class - updateVerificationStatus method - end");
+			logger.debug("InsertCustomerDetails class - updateVerificationStatusAndGetEmail method - end");
+			
+			return emailId;
 		}
 		catch ( HibernateException e ) {
-			logger.error("InsertCustomerDetails class - updateVerificationStatus method - Caught HibernateException");
+			logger.error("InsertCustomerDetails class - updateVerificationStatusAndGetEmail method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("InsertCustomerDetails class - updateVerificationStatus method - Caught Exception");
+			logger.error("InsertCustomerDetails class - updateVerificationStatusAndGetEmail method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

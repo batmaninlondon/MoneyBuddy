@@ -18,8 +18,9 @@
 	    String hashedPassword = (String)request.getParameter("hashedPassword");
 	    System.out.println("hello from  jsp : value of hashedPassword : "+hashedPassword);
 	    InsertCustomerDetails customer = new InsertCustomerDetails();
-	    customer.updateVerificationStatus(hashedPassword);
+	    String emailId = customer.updateVerificationStatusAndGetEmail(hashedPassword);
 	    //}
+	    request.getSession().setAttribute("name", emailId);
 	    String redirectURL = "login";
 	    response.sendRedirect(redirectURL);
 	%>

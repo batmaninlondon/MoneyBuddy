@@ -189,6 +189,49 @@ public class UpdateCustomer {
 
 	}
 
+	
+	public void updateAofFormStatus (String customerId, String aofFormStatus) throws MoneyBuddyException {
+
+		logger.debug("UpdateCustomer class - updateAofFormStatus method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		System.out.println("customerId : in updateAofFormStatus : "+customerId);
+		System.out.println("aofFormStatus : in updateAofFormStatus : "+aofFormStatus);
+
+		try {
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("update Customers set aofFormStatus = :aofFormStatus where customerId = :customerId");
+
+			query.setParameter("aofFormStatus", aofFormStatus);
+			query.setParameter("customerId", customerId);
+
+			int result = query.executeUpdate();
+			hibernateSession.getTransaction().commit();
+
+			logger.debug("UpdateCustomer class - updateAofFormStatus method - customerId - "+customerId+" - updated data of Customers table to set aofFormStatus ");
+
+			logger.debug("UpdateCustomer class - updateAofFormStatus method - customerId - "+customerId+" - end");
+
+		}
+		catch ( HibernateException e ) {
+			logger.error("UpdateCustomer class - updateAofFormStatus method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("UpdateCustomer class - updateAofFormStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+
 
 }
 

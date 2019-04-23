@@ -12,16 +12,6 @@
             <message>Address Line One can not be blank.</message>
         </field-validator>
     </field>
-    <field name="addressLineTwo">
-        <field-validator type="requiredstring">
-            <message>Address Line Two can not be blank.</message>
-        </field-validator>
-    </field>
-    <field name="addressLineThree">
-        <field-validator type="requiredstring">
-            <message>Address Line Three can not be blank.</message>
-        </field-validator>
-    </field>
     <field name="residentialCity">
         <field-validator type="requiredstring">
             <message>City can not be blank.</message>

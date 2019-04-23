@@ -348,7 +348,7 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Address Line 2</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="addressLineTwo" class="g-color--red" />
+        		<%-- <s:fielderror fieldName="addressLineTwo" class="g-color--red" /> --%>
 			  	<s:textfield class="form-control" id="address-line-two" placeholder="Address Line 2" name="addressLineTwo" /> 
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
@@ -357,7 +357,7 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Address Line 3</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="addressLineThree" class="g-color--red" />
+        		<%-- <s:fielderror fieldName="addressLineThree" class="g-color--red" /> --%>
 			  	<s:textfield class="form-control" id="address-line-three" placeholder="Address Line 3" name="addressLineThree" /> 
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>

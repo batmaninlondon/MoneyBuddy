@@ -8,6 +8,7 @@ package com.myMoneyBuddy.ActionClasses;
 import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.Utils.CommonUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
@@ -77,6 +78,9 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 	    	
        		SendMail sendMail = new SendMail();
        		sendMail.sendAofFormMail(directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");
+       		
+       		UpdateCustomer updateCustomer = new UpdateCustomer();
+       		updateCustomer.updateAofFormStatus(customerId, "FORM_SENT");
        		
        		logger.debug("DownloadAofFormAction class - execute method - mail sent with kyc form for customerId - "+customerId);
        	

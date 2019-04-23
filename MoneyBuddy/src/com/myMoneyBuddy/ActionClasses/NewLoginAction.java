@@ -65,7 +65,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return INPUT;
 	    	}
 	    	if(!(new DesEncrypter()).decrypt(queryCustomer.getPassword(getEmailIdLogin())).equals(getPasswordLogin())) {
-	    		String pswd = new DesEncrypter().decrypt(queryCustomer.getPassword(getEmailIdLogin()));
+	    		String pswd = new DesEncrypter().decrypt(queryCustomer.getPassword(getEmailIdLogin())+getEmailIdLogin());
 	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);
 	    		
 	    		System.out.println("incorrectPassword ");
@@ -141,7 +141,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored emailId in sessionMap");
 	    	
 	    	DesEncrypter desEncrypter = new DesEncrypter();
-	    	String hashedPassword = desEncrypter.encrypt(getPasswordLogin());
+	    	String hashedPassword = desEncrypter.encrypt(getPasswordLogin()+getEmailIdLogin());
 
 	    	sessionMap.put("hashedPassword", hashedPassword);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored hashedPassword in sessionMap");
@@ -183,6 +183,10 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    			System.out.println("sessionMap.get FolioNumList :"+sessionMap.get("FolioNumList").toString()+":");
 	    		}
 	    		return "fundSelected";
+	    	}
+	    	
+	    	if ("FORM_SENT".equals(customer.getAofFormStatus()))  {
+	    		return "aofFormSent";
 	    	}
 	    	
 	    	QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();

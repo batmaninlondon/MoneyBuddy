@@ -27,7 +27,7 @@ public class UpdateCustomerPassword {
 		try {
 
 			DesEncrypter desEncrypter = new DesEncrypter();
-			newPassword = desEncrypter.encrypt(newPassword);
+			newPassword = desEncrypter.encrypt(newPassword+emailId);
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("update CustomerPasswordsHistory set password = :newPassword" + " where customerId = :customerId");
 
