@@ -30,6 +30,10 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     	try {
     		
     		customerId = sessionMap.get("customerId").toString();
+
+    		if ("".equals(getTranDetailId()) || null == getTranDetailId())   {
+    			setTranDetailId("NotSet");
+    		}
     		
     		logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - start ");
 	    	
@@ -37,7 +41,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     		Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
     		// System.out.println("kycStaus : "+customer.getKycStatus());
     		
-    		if ("ACTTIVATED".equals(customer.getAofFormStatus()))  {
+    		if ("ACTIVATED".equals(customer.getAofFormStatus()))  {
     			logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
 		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 		    	

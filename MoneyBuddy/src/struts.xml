@@ -106,7 +106,6 @@
     
     <package name="redirectAction" namespace="/" extends="struts-default">
         <action name="redirectAction" class="com.myMoneyBuddy.ActionClasses.RedirectAction">
-        	<param name="tranDetailId">KycNotDone</param>
             <result name="bankDetails">/WEB-INF/content/bankDetails.jsp</result>
             <result name="customerDetails">/WEB-INF/content/customerDetails.jsp</result>
             <result name="aofNotDone" type="chain">downloadAofFormAction</result>
@@ -139,7 +138,6 @@
    
     <package name="prepareKycFormAction" namespace="/" extends="struts-default">
         <action name="prepareKycFormAction" class="com.myMoneyBuddy.ActionClasses.PrepareKycFormAction">
-            <param name="tranDetailId">KycNotDone</param>
             <result name="aofNotDone" type="chain">downloadAofFormAction</result>
             <result name="input">/WEB-INF/content/additionalCustomerDetails.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
@@ -200,7 +198,6 @@
 
     <package name="kycCheckAction" namespace="/" extends="struts-default">
         <action name="kycCheckAction" class="com.myMoneyBuddy.ActionClasses.KycCheckAction">
-            <param name="tranDetailId">NotSet</param>
             <result name="aofNotDone" type="chain">downloadAofFormAction</result>
             <result name="input">/WEB-INF/content/customerDetails.jsp</result>
             <result name="kycNotDone">/WEB-INF/content/additionalCustomerDetails.jsp</result>
@@ -210,7 +207,6 @@
     
     <package name="checkBankDetailsAction" namespace="/" extends="struts-default">
         <action name="checkBankDetailsAction" class="com.myMoneyBuddy.ActionClasses.CheckBankDetailsAction">
-            <param name="tranDetailId">${tranDetailId}</param>
             <result name="success">/WEB-INF/content/bankDetails.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>   
         </action>
@@ -281,10 +277,10 @@
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>
             </result> -->
-        	<result name="aofOrKycFormReceived">/WEB-INF/content/aofOrKycFormReceived.jsp</result>
-        	<result name="kycNotDone" type="chain">downloadKycFormAction</result>
+        	<!-- <result name="aofOrKycFormReceived">/WEB-INF/content/aofOrKycFormReceived.jsp</result> -->
+        	<!-- <result name="kycNotDone" type="chain">downloadKycFormAction</result> -->
         	<result name="aofNotDone" type="chain">downloadAofFormAction</result>
-        	<result name="aofAndKycNotDone" type="chain">downloadAofAndKycFormAction</result>
+        	<!-- <result name="aofAndKycNotDone" type="chain">downloadAofAndKycFormAction</result> -->
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>

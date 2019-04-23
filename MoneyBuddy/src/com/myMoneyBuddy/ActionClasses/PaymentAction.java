@@ -73,11 +73,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     	String customerId = null;
     	
     	try {
-    		
+
     		System.out.println(" HI THERE FROM PAYMENT ACTION !!!! ");
-    		System.out.println("tranDetailId : "+getTranDetailId());
-    		/*System.out.println("tranDetailId : "+getTranDetailId()+" and accountNumber : "+getAccountNumber()+" reAccountNumber : "+getReAccountNumber()); 
-    		System.out.println("accountType : "+getAccountType()+" and ifscCode : "+getIfscCode()+" and bankName : "+getBankName());*/
     		System.out.println("firstOrderFlag : "+getFirstOrderFlag());
     		
     		customerId = sessionMap.get("customerId").toString();
@@ -106,32 +103,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    		generateAofForm.generateAofForm(customerId);
 	    	}*/
 	    	
-	    	/*if ("AofNotDone".equals(getTranDetailId()))  {
-	    		return "aofNotDone";
-	    	}
-	    	else if ("KycAndAofNotDone".equals(getTranDetailId()))  {
-	    		return "aofAndKycNotDone";
-	    	}
-	    	else if ("KycNotDone".equals(getTranDetailId()))  {
-	    		
-	    		if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()))  {
-	    			return "aofAndKycNotDone";
-	    		}
-	    		else {
-	    			return "kycNotDone";
-	    		}
-    		}
-	    	
-	    	if ("FORM_RECEIVED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus())) {
-	    		return "aofOrKycFormReceived";
-	    	}
-	    	else if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) && "NOT_DONE".equals(customer.getKycStatus()))  {
-	    		return "aofNotDone";
-	    	}*/
-	    	
-	    	if ("KycNotDone".equals(getTranDetailId()))  {
-	    		return "kycNotDone";
-	    	}
+
 	    	if ("NOT_ACTIVATED".equals(customer.getAofFormStatus()) )  {
 	    		return "aofNotDone";
 	    	}

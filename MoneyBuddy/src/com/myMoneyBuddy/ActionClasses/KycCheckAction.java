@@ -53,7 +53,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	private String reAccountNumber;
 	private String ifscCode;
     
-    private String tranDetailId;
+    //private String tranDetailId;
     
    // private InputStream stream;
 	
@@ -67,7 +67,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     		
 	    	System.out.println(" KycCheckAction execute method Called !!");
 	    	
-	    	setTranDetailId("NotSet");
+	    	//setTranDetailId("NotSet");
 	    	
 	    	System.out.println(" KycCheckAction execute method : Pan acrd : "+getPanCard());
 	    	
@@ -346,12 +346,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	}
 
 
-	public String getTranDetailId() {
+/*	public String getTranDetailId() {
 		return tranDetailId;
 	}
 
 	public void setTranDetailId(String tranDetailId) {
 		this.tranDetailId = tranDetailId;
-	}
+	}*/
 
 }

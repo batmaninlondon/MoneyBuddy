@@ -26,7 +26,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
     private String status;
     private String grossAnnualIncome;
     private String politicallyExposed;
-    private String tranDetailId;
+    //private String tranDetailId;
 	
     public String execute() {
     	
@@ -53,7 +53,7 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("PrepareKycFormAction class - execute method - customerId - "+customerId+" - end");
 	    	
-	    	setTranDetailId("KycNotDone");
+	    	//setTranDetailId("KycNotDone");
 	    	return "aofNotDone";
     	} 
     	catch ( Exception e )  {
@@ -118,13 +118,13 @@ public class PrepareKycFormAction extends ActionSupport  implements SessionAware
 		this.politicallyExposed = politicallyExposed;
 	}
 
-	public String getTranDetailId() {
+/*	public String getTranDetailId() {
 		return tranDetailId;
 	}
 
 	public void setTranDetailId(String tranDetailId) {
 		this.tranDetailId = tranDetailId;
 	}
-
+*/
 
 }

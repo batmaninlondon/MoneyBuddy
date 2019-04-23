@@ -1146,7 +1146,7 @@
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var transactionDetailId = data[0];
 					        //alert('transactionDetailId : '+transactionDetailId);
-					        window.location='checkBankDetailsAction?tranDetailId='+transactionDetailId; 
+					        window.location='redirectAction?tranDetailId='+transactionDetailId; 
 					        /* window.location='bankDetails.jsp?tranDetailId='+transactionDetailId; */
 					    } ); 
 					  
