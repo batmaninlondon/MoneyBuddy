@@ -9,6 +9,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerCart;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.opensymphony.xwork2.ActionSupport;
@@ -22,25 +24,34 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	private SessionMap<String,Object> sessionMap;
 	//private InputStream stream;
 	private String cartId;
-	private String allNewFolio;
+	//private String allNewFolio;
 
     public String execute() {
     	
     	String customerId = null;
-    	String transactionType = null;
+    	//String transactionType = null;
     	
     	try {
     		customerId = sessionMap.get("customerId").toString();
-    		transactionType = sessionMap.get("transactionType").toString();
+    		//transactionType = sessionMap.get("transactionType").toString();
     		
     		
-    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" and transactionType - "+transactionType+" - start ");
+    		logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - start ");
 	    	System.out.println(" DeleteCartEntryAction execute method Called !!");
 
 	    	UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
 	    	updateCustomerCart.deleteCustomerCartEntry(customerId, getCartId());
 	    	
-	    	List<CustomerCart> customerCartList ;
+	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
+    		
+    		List<CustomerCart> customerCartList = queryCustomerCart.getCustomerCart(customerId);
+
+	    	sessionMap.put("customerCartList", customerCartList);
+	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
+	
+	    	return SUCCESS;
+	    	
+	    	/*List<CustomerCart> customerCartList ;
 	    	if ("UPFRONT".equals(transactionType))
 	    		customerCartList = (List<CustomerCart>) sessionMap.get("customerCartUpfrontList");
 	    	else 
@@ -84,11 +95,11 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    		
 	    	}
 	    	System.out.println("Total amount : "+totalAmount);
-	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null));
+	    	customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null,null));
 	    	
 	    	setAllNewFolio("TRUE");
 	    	for (int j = 0; j < (customerCartList.size()-1); j++) {
-	    	    if ( !customerCartList.get(j).getFolioNumber().equals("NEW") )  {
+	    	    if ( !customerCartList.get(j).getFolioNumber().equals("New") )  {
 	    	    	setAllNewFolio("FALSE");
 	    	    }
 	    	}
@@ -109,7 +120,7 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	}
 	    	
 	    	
-	    	
+	    	*/
 	    	
 
 	    	/*String str = "success";
@@ -151,13 +162,13 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
-
+/*
 	public String getAllNewFolio() {
 		return allNewFolio;
 	}
 
 	public void setAllNewFolio(String allNewFolio) {
 		this.allNewFolio = allNewFolio;
-	}
+	}*/
 
 }

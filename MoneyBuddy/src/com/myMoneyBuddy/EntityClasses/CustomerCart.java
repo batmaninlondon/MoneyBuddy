@@ -47,6 +47,9 @@ public class CustomerCart {
     
     @Column (name="FOLIO_NUMBER")
     private String folioNumber;
+    
+    @Column (name="FOLIO_NUM_LIST")
+    private String folioNumList;
 
     @Column(name="CART_CREATION_DATE")
     private String cartCreationDate;
@@ -56,6 +59,9 @@ public class CustomerCart {
     
     @Column(name="RTA")
     private String rta;
+    
+    @Column(name="PDF_FILE_PATH")
+    private String pdfFilePath;
 
     public CustomerCart() {
         
@@ -63,7 +69,7 @@ public class CustomerCart {
 
 	public CustomerCart( String customerId, String productId, String productName, String amount,
 			String transactionType, String sipDuration, String sipPlan, String sipDate,
-			String folioNumber, String cartCreationDate, String status, String rta) {
+			String folioNumber, String folioNumList, String cartCreationDate, String status, String rta, String pdfFilePath) {
 		super();
 		this.customerId = customerId;
 		this.productId = productId;
@@ -74,9 +80,11 @@ public class CustomerCart {
 		this.sipPlan = sipPlan;
 		this.sipDate = sipDate;
 		this.folioNumber = folioNumber;
+		this.folioNumList = folioNumList;
 		this.cartCreationDate = cartCreationDate;
 		this.status = status;
 		this.rta = rta;
+		this.pdfFilePath = pdfFilePath;
 	}
 
 
@@ -160,6 +168,14 @@ public class CustomerCart {
 		this.folioNumber = folioNumber;
 	}
 
+	public String getFolioNumList() {
+		return folioNumList;
+	}
+
+	public void setFolioNumList(String folioNumList) {
+		this.folioNumList = folioNumList;
+	}
+
 	public String getCartCreationDate() {
 		return cartCreationDate;
 	}
@@ -184,76 +200,154 @@ public class CustomerCart {
 		this.rta = rta;
 	}
 
+	public String getPdfFilePath() {
+		return pdfFilePath;
+	}
+
+	public void setPdfFilePath(String pdfFilePath) {
+		this.pdfFilePath = pdfFilePath;
+	}
+
 	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CustomerCart other = (CustomerCart) obj;
-        if ((this.cartId == null) ? (other.cartId != null) : !this.cartId.equals(other.cartId)) {
-            return false;
-        }
-        if ((this.customerId == null) ? (other.customerId != null) : !this.customerId.equals(other.customerId)) {
-            return false;
-        }
-        if ((this.productId == null) ? (other.productId != null) : !this.productId.equals(other.productId)) {
-            return false;
-        }
-        if ((this.productName == null) ? (other.productName != null) : !this.productName.equals(other.productName)) {
-            return false;
-        }
-        if ((this.amount == null) ? (other.amount != null) : !this.amount.equals(other.amount)) {
-            return false;
-        }
-        if ((this.transactionType == null) ? (other.transactionType != null) : !this.transactionType.equals(other.transactionType)) {
-            return false;
-        }
-        if ((this.sipDuration == null) ? (other.sipDuration != null) : !this.sipDuration.equals(other.sipDuration)) {
-            return false;
-        }
-        if ((this.sipPlan == null) ? (other.sipPlan != null) : !this.sipPlan.equals(other.sipPlan)) {
-            return false;
-        }
-        if ((this.sipDate == null) ? (other.sipDate != null) : !this.sipDate.equals(other.sipDate)) {
-            return false;
-        }
-        if ((this.folioNumber == null) ? (other.folioNumber != null) : !this.folioNumber.equals(other.folioNumber)) {
-            return false;
-        }
-        if ((this.cartCreationDate == null) ? (other.cartCreationDate != null) : !this.cartCreationDate.equals(other.cartCreationDate)) {
-            return false;
-        }
-        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
-            return false;
-        }
-        if ((this.rta == null) ? (other.rta != null) : !this.rta.equals(other.rta)) {
-            return false;
-        }
-        return true;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((cartCreationDate == null) ? 0 : cartCreationDate.hashCode());
+		result = prime * result + ((cartId == null) ? 0 : cartId.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((folioNumList == null) ? 0 : folioNumList.hashCode());
+		result = prime * result + ((folioNumber == null) ? 0 : folioNumber.hashCode());
+		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((rta == null) ? 0 : rta.hashCode());
+		result = prime * result + ((sipDate == null) ? 0 : sipDate.hashCode());
+		result = prime * result + ((sipDuration == null) ? 0 : sipDuration.hashCode());
+		result = prime * result + ((sipPlan == null) ? 0 : sipPlan.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((transactionType == null) ? 0 : transactionType.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + (this.cartId != null ? this.cartId.hashCode() : 0);
-        hash = 79 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
-        hash = 79 * hash + (this.productId != null ? this.productId.hashCode() : 0);
-        hash = 79 * hash + (this.productName != null ? this.productName.hashCode() : 0);
-        hash = 79 * hash + (this.amount != null ? this.amount.hashCode() : 0);
-        hash = 79 * hash + (this.transactionType != null ? this.transactionType.hashCode() : 0);
-        hash = 79 * hash + (this.sipDuration != null ? this.sipDuration.hashCode() : 0);
-        hash = 79 * hash + (this.sipPlan != null ? this.sipPlan.hashCode() : 0);
-        hash = 79 * hash + (this.sipDate != null ? this.sipDate.hashCode() : 0);
-        hash = 79 * hash + (this.folioNumber != null ? this.folioNumber.hashCode() : 0);
-        hash = 79 * hash + (this.cartCreationDate != null ? this.cartCreationDate.hashCode() : 0);
-        hash = 79 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 79 * hash + (this.rta != null ? this.rta.hashCode() : 0);
-        return hash;
-    }
-
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		CustomerCart other = (CustomerCart) obj;
+		if (amount == null) {
+			if (other.amount != null) {
+				return false;
+			}
+		} else if (!amount.equals(other.amount)) {
+			return false;
+		}
+		if (cartCreationDate == null) {
+			if (other.cartCreationDate != null) {
+				return false;
+			}
+		} else if (!cartCreationDate.equals(other.cartCreationDate)) {
+			return false;
+		}
+		if (cartId == null) {
+			if (other.cartId != null) {
+				return false;
+			}
+		} else if (!cartId.equals(other.cartId)) {
+			return false;
+		}
+		if (customerId == null) {
+			if (other.customerId != null) {
+				return false;
+			}
+		} else if (!customerId.equals(other.customerId)) {
+			return false;
+		}
+		if (folioNumList == null) {
+			if (other.folioNumList != null) {
+				return false;
+			}
+		} else if (!folioNumList.equals(other.folioNumList)) {
+			return false;
+		}
+		if (folioNumber == null) {
+			if (other.folioNumber != null) {
+				return false;
+			}
+		} else if (!folioNumber.equals(other.folioNumber)) {
+			return false;
+		}
+		if (pdfFilePath == null) {
+			if (other.pdfFilePath != null) {
+				return false;
+			}
+		} else if (!pdfFilePath.equals(other.pdfFilePath)) {
+			return false;
+		}
+		if (productId == null) {
+			if (other.productId != null) {
+				return false;
+			}
+		} else if (!productId.equals(other.productId)) {
+			return false;
+		}
+		if (productName == null) {
+			if (other.productName != null) {
+				return false;
+			}
+		} else if (!productName.equals(other.productName)) {
+			return false;
+		}
+		if (rta == null) {
+			if (other.rta != null) {
+				return false;
+			}
+		} else if (!rta.equals(other.rta)) {
+			return false;
+		}
+		if (sipDate == null) {
+			if (other.sipDate != null) {
+				return false;
+			}
+		} else if (!sipDate.equals(other.sipDate)) {
+			return false;
+		}
+		if (sipDuration == null) {
+			if (other.sipDuration != null) {
+				return false;
+			}
+		} else if (!sipDuration.equals(other.sipDuration)) {
+			return false;
+		}
+		if (sipPlan == null) {
+			if (other.sipPlan != null) {
+				return false;
+			}
+		} else if (!sipPlan.equals(other.sipPlan)) {
+			return false;
+		}
+		if (status == null) {
+			if (other.status != null) {
+				return false;
+			}
+		} else if (!status.equals(other.status)) {
+			return false;
+		}
+		if (transactionType == null) {
+			if (other.transactionType != null) {
+				return false;
+			}
+		} else if (!transactionType.equals(other.transactionType)) {
+			return false;
+		}
+		return true;
+	}
 
 }

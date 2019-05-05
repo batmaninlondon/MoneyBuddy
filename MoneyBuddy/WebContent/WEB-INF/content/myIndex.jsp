@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->

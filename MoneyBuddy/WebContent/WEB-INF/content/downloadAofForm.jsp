@@ -223,7 +223,10 @@
 	<div class="row g-margin-t-o-20--xs">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " >Download AoF</button>
+			
+			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " 
+			onClick="window.open('${pageContext.request.contextPath}/assets/AofForms/<s:property value="aofForm"/>')">
+			Download AoF</button>
 		</div>
 		<div class="col-md-5">
 		</div>

@@ -78,7 +78,7 @@
     
    	<package name="customerCartAction" namespace="/" extends="struts-default">
         <action name="customerCartAction" class="com.myMoneyBuddy.ActionClasses.CustomerCartAction">
-            <result name="success">/WEB-INF/content/customerCart.jsp</result>
+            <result name="success">/amountConfirmation.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -220,10 +220,25 @@
         </action>
     </package>
     
+    <package name="addToCartAction" namespace="/" extends="struts-default">
+        <action name="addToCartAction" class="com.myMoneyBuddy.ActionClasses.AddToCartAction">
+            <result name="success">/amountConfirmation.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="editCartAction" namespace="/" extends="struts-default">
+        <action name="editCartAction" class="com.myMoneyBuddy.ActionClasses.EditCartAction">
+            <!-- <result name="success">/amountConfirmation.jsp</result> -->
+            <result name="success" type="chain">MFexplorer</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
     <package name="deleteCartEntryAction" namespace="/" extends="struts-default">
         <action name="deleteCartEntryAction" class="com.myMoneyBuddy.ActionClasses.DeleteCartEntryAction">
-            <result name="UPFRONT">/WEB-INF/content/customerCart.jsp</result>
-            <result name="SIP">/WEB-INF/content/customerSipCart.jsp</result>
+            <result name="success">/amountConfirmation.jsp</result>
+            <!-- <result name="SIP">/WEB-INF/content/customerSipCart.jsp</result> -->
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -288,10 +303,11 @@
     <package name="newLoginAction" namespace="" extends="struts-default">
         <action name="newLoginAction" class="com.myMoneyBuddy.ActionClasses.NewLoginAction">
             <result name="success">/welcome.jsp</result>
-            <result name="aofFormSent">aofOrKycFormReceived.jsp</result>
+            <result name="aofFormSent" type="chain">downloadAofFormAction</result>
+            <result name="customerCartExists" type="chain">customerCartAction</result>
             <result name="haveInvestment">/WEB-INF/content/customerDashboard.jsp</result>
             <result name="adminLogin">/WEB-INF/content/adminDashboard.jsp</result>
-            <result name="fundSelected">/amountConfirmation.jsp</result>
+            <result name="fundSelected" type="chain">addToCartAction</result>
             <result name="input">/login.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>		
         </action>

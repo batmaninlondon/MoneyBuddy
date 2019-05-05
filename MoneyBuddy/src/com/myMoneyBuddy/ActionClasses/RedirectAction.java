@@ -20,12 +20,12 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 	Logger logger = Logger.getLogger(RedirectAction.class);
 	private SessionMap<String,Object> sessionMap;
 
-	private String transactionType;
+	/*private String transactionType;*/
 	private String tranDetailId;
 	
     public String execute() {
     	
-    	System.out.println("RedirectAction : execute method : transactionType : "+getTransactionType());
+    	System.out.println("RedirectAction : execute method -start ");
     	String customerId = null;
     	try {
     		
@@ -89,14 +89,14 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
-
+/*
 	public String getTransactionType() {
 		return transactionType;
 	}
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
-	}
+	}*/
 
 	public String getTranDetailId() {
 		return tranDetailId;

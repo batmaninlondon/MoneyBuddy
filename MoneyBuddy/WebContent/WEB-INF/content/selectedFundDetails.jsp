@@ -239,11 +239,23 @@
                				</div>
 		            </div> 
 		            
-		            <div class="row ">
+		            <s:form  action="addToCartAction" method="post" name="formAddToCart" namespace="/">
+                   		<s:hidden id="transaction-type" name="transactionType"></s:hidden>
+                	 </s:form>
+                      <div class="row ">
 		            	<div class="col-md-4 ">
 		                    </div>
 		                    <div class="col-md-2 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
-		                     	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
+		                     	<%-- <s:form  action="newEstimateAction" method="post" name="formEstimate">
+							  		<s:hidden id="select-folio-num-value" name="selectFolioNum"></s:hidden>
+							  		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
+									<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
+									<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
+									<s:hidden id="sip-plan-value" name="sipPlan"></s:hidden>
+									<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
+									<s:hidden id="transaction-type-value" name="transactionType" value="UPFRONT"></s:hidden>
+							  	</s:form> --%>
+							  	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
 		                    </div>
 		                    
 		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
@@ -296,7 +308,7 @@
 	           	   <br/><br/><br/>
 	            </div>
 		    </div>
-		<input type="hidden" id="transactionType" value="UPFRONT" />	
+		<!-- <input type="hidden" id="transactionType" value="UPFRONT" />	 -->
 </div>
 
         <!--========== FOOTER ==========-->

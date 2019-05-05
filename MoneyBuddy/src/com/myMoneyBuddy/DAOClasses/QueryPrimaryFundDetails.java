@@ -383,6 +383,47 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
+	public String getPdfFilePath(String fundId) throws MoneyBuddyException{
+
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		try
+		{
+			String pdfFilePath = null;
+			logger.debug("QueryPrimaryFundDetails class - getPdfFilePath method - fundId - "+fundId+" - start");
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select pdfFilePath from PrimaryFundDetails where fundId = :fundId ");
+			query.setParameter("fundId",fundId);
+			
+			if (query.list().size() != 0) {
+				pdfFilePath = query.uniqueResult().toString();
+			}
+
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryPrimaryFundDetails class - getPdfFilePath method - fundId - "+fundId+" - return pdfFilePath - "+pdfFilePath);
+			logger.debug("QueryPrimaryFundDetails class - getPdfFilePath method - fundId - "+fundId+" - end");
+			
+			return pdfFilePath;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class - getPdfFilePath method - fundId - "+fundId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class - getPdfFilePath method - fundId - "+fundId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
 
 	public HashMap<String,String> getAvailableStpFundsList(String fundId) throws MoneyBuddyException{
 

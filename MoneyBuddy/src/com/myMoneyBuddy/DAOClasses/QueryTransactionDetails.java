@@ -44,7 +44,7 @@ public class QueryTransactionDetails {
     		System.out.println("folioNumList size : ........... "+folioNumList.size());
     		
     		if ( folioNumList.size() == 0 ) {
-    			folioNums = "NEW";
+    			folioNums = "New";
     		}
     		else {
     			
@@ -53,7 +53,7 @@ public class QueryTransactionDetails {
     					folioNums += folioNumList.get(i)+":";
     			}
     			folioNums += folioNumList.get(folioNumList.size()-1);
-    			folioNums += ":NEW";
+    			folioNums += ":New";
     		}
     		
     		hibernateSession.getTransaction().commit();

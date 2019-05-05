@@ -7,6 +7,7 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.HashMap;
 import java.util.Map;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -26,12 +27,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     private String emailIdLogin;
     private String passwordLogin;
     private String googleResponseLogin;
+    private String transactionType;
     //private InputStream stream;
 
     public String execute() {
 
     	String customerId = null;
     	try {
+    		System.out.println("transactionType in NewLoginAction is : "+getTransactionType());
     		System.out.println("googleResponse : "+getGoogleResponseLogin());
     		logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - start");
     		QueryCustomer queryCustomer = new QueryCustomer(); 
@@ -94,8 +97,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	}
 	    	//String custDetUploaded = customer.getCusDetailsUploaded();
 	    	//String addCustDetUploaded = customer.getAddCusDetailsUploaded();
-	    	
-	    	System.out.println("customerId : "+customerId);
+	    
 	    	
 	    	sessionMap.put("customerId", customerId);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerId in sessionMap");
@@ -146,9 +148,13 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	sessionMap.put("hashedPassword", hashedPassword);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored hashedPassword in sessionMap");
 	    	
+	    	if ("FORM_SENT".equals(customer.getAofFormStatus()))  {
+	    		return "aofFormSent";
+	    	}
+	    	
 	    	//System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
 	    	
-	    	System.out.println("Value of session variale OnetimeInvestment : "+ sessionMap.get("OnetimeInvestment"));
+	    	//System.out.println("Value of session variale OnetimeInvestment : "+ sessionMap.get("OnetimeInvestment"));
 	    	if ("TRUE".equals(sessionMap.get("fundSelected"))) {
 
 /*	    		if ("TRUE".equals(sessionMap.get("OnetimeInvestment"))) {
@@ -171,7 +177,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		}*/
 	    		
 	    		
-	    		if (sessionMap.get("FolioNumList") == null || "undefined".equals(sessionMap.get("FolioNumList")))  {
+	    		/*if (sessionMap.get("FolioNumList") == null || "undefined".equals(sessionMap.get("FolioNumList")))  {
 	    			System.out.println("sessionMap.get FolioNumList is NULL");
 	    			FundDetailsDataModel fundDetailsDataModel =  (FundDetailsDataModel)sessionMap.get("selectedFundDetailsDataModel");
 	    			
@@ -181,12 +187,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		}
 	    		else {
 	    			System.out.println("sessionMap.get FolioNumList :"+sessionMap.get("FolioNumList").toString()+":");
-	    		}
+	    		}*/
 	    		return "fundSelected";
 	    	}
 	    	
-	    	if ("FORM_SENT".equals(customer.getAofFormStatus()))  {
-	    		return "aofFormSent";
+	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
+	    	
+	    	if (queryCustomerCart.cartExists(customerId)) {
+	    		return "customerCartExists";
 	    	}
 	    	
 	    	QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
@@ -246,6 +254,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 
 	public void setGoogleResponseLogin(String googleResponseLogin) {
 		this.googleResponseLogin = googleResponseLogin;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 
 /*	public InputStream getStream() {

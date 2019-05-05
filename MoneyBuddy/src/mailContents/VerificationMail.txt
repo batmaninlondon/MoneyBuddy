@@ -69,9 +69,8 @@
 		<p class="special-font">Welcome to MoneyBuddy! </p>
 		<p class="special-font"><i>Congratulations on taking the first step towards investing your money in a simple and stress free way.</i></p>
 		<p class="special-font"><i>We&#8217;re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</i></p>
-		<p class="special-font"><i>Click on LinkForEmail to verify your email and activate your account.</i></p>
+		<p class="special-font"><i>Click on LinkForEmail to verify your email and create your account.</i></p>
 		</br>
-		<p class="special-font">That&#8217;s it, all you need to get started with MoneyBuddy.</p>
 		<p class="dark-font"><u>If you have any Question/Doubts</u></p>
 		
 		<p class="special-font">Reply to this <u>Email</u> or Whatsapp/Call/SMS us at <u>+91-9971648736</u></p>
@@ -175,16 +174,17 @@
 	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
  -->
  	<br/>
-	<p>Click on <b style="font-size:17px;">LinkForEmail</b> to verify your email and activate your account.</p>
+	<p>Click on <b style="font-size:17px;">LinkForEmail</b> to verify your email and create your account.</p>
 	<!-- <br/> -->
-	<p>That&#8217;s it, all you need to get started with MoneyBuddy.</p>
 	<br/>
 
    <!-- <p style="border-top:1px solid #e4e4e4;"></p>
    	<br/> -->
-   	<p style="font-size:15px;"><b >Cheers!</b></p>
+   	<p style="border-top:1px solid #e4e4e4;"></p>
+   	<br/>
+   	<p style="font-size:15px;"><b >Wishing you a prosperous and healthy life!</b></p>
 	
-    <p style="font-size:15px;"><b>Team MoneyBuddy</b></p><br/>
+    <p style="font-size:15px;"><b>-The MoneyBuddy Team</b></p><br/>
 
 	</td>
 	<td style="border-left:1px solid #e4e4e4; padding-left:15px;" valign="top">
@@ -196,8 +196,8 @@
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Why MoneyBuddy?</div>
 	
 	<ol>
-		<li>Well researched funds</li>
 		<li>Customised Portfolios</li>
+		<li>Direct funds for higher returns</li>
 		<li>Fully Online Investing</li>
 	</ol>
 	<br /><br />
@@ -220,16 +220,7 @@
 	
 	<!--RIGHT COLUMN THIRD BOX-->
 	<br />
-	<table cellpadding="0" width="100%" cellspacing="0" style="font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<tr>
-	<td>
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have A Topic Idea?</div>
-	<p>I'd love to hear it! Just reply any time and let me know what topics you'd like to know more about.</p>
 
-	<br />
-	</td>
-	</tr>
-	</table>
 	
 	</td>
 	</tr>

@@ -1,22 +1,146 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome Message</title>
 </head>
 <body>
-	<div>
-		<br/>
-		<h3>Congratulations on subscribing to the MoneyBuddy newsletter. We’re working hard to improve the financial well being of people by helping them save and invest better.</h3>
-		<h3>This newsletter is our attempt to circulate articles which are expected to help our readers organize their personal finance and take better control of their money.</h3>
-		<h3><b>PS:</b> Stuck with old investments eg: LIC, ULIP, MF  that you bought in the past and now unable to track properly? Our experts will be happy to assist you in sorting those out</h3>
-		<br/><br/>
-		<h2>Questions?</h2>
-		<br/><br/>
-		<h3>Reply to this email OR Whatsapp/Call/SMS us at 9971648736</h3>
-		<h3>Wishing you a prosperous and healthy life</h3>
-		<br/><br/>
-		<h3>-Team MoneyBuddy</h3>
-	</div>
+<center>
+<table width="600" background="#FFFFFF" style="text-align:left;" cellpadding="0" cellspacing="0">
+<tr>
+	<td height="18" width="31" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="18" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="18" width="466" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+	<td height="2" width="31" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="2" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="2" width="466" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<!--GREEN STRIPE-->
+<tr>
+	<td background="images/greenback.gif" width="31" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF;" height="80">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	
+	<!--WHITE TEXT AREA-->
+	<td width="200" bgcolor="#FFFFFF" style="border-top:1px solid #FFF; text-align:center;" height="80" valign="middle">
+	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#13b1cd;">Money|</span>
+	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#4B4A4A;">Buddy</span>
+	
+	</td>
+	
+	<!--GREEN TEXT AREA-->
+	<td background="images/greenback.gif" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:35px;" height="80">
+	<span style="color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;align:center;">Let your money work for you</span>
+	</td>
+</tr>
+
+<!--DOUBLE BORDERS BOTTOM-->
+<tr>
+	<td height="3" width="31" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="3" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="3" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+	<!--CONTENT STARTS HERE-->
+	<br />
+	<br />
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="15"><div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+</td>
+	<td width="325" style="padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:13px;" valign="top">
+	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Welcome to MoneyBuddy!</span>
+	<br />
+	<p>You have successfully subscribed to &#34;MoneyBuddy Newsletter&#34;.</p>
+	<br />
+	<p>You will receive occasional emails with useful tips and articles on how to grow your savings in a stress-free and efficient way.</p>
+	<p>In the meantime, You should visit the following link to learn more about how we can help you create wealth through a customized portfolio and direct mutual funds.</p>
+	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
+
+	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#2)</div>
+	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
+ -->
+ 	<br/>
+	<p><b style="font-size:17px;">LinkForEmail</b></p>
+	<!-- <br/> -->
+	
+	<br/>
+
+   <!-- <p style="border-top:1px solid #e4e4e4;"></p>
+   	<br/> -->
+   	<p style="border-top:1px solid #e4e4e4;"></p>
+   	<br/>
+   	<p style="font-size:15px;"><b >Wishing you a prosperous and healthy life!</b></p>
+	
+    <p style="font-size:15px;"><b>-The MoneyBuddy Team</b></p><br/>
+
+	</td>
+
+	</td>
+	<td style="border-left:1px solid #e4e4e4; padding-left:15px;" valign="top">
+	
+	<!--RIGHT COLUMN FIRST BOX-->
+	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
+	<tr>
+	<td>
+	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Why MoneyBuddy?</div>
+	
+	<ol>
+		<li>Customised Portfolios</li>
+		<li>Direct funds for higher returns</li>
+		<li>Fully Online Investing</li>
+	</ol>
+	<br /><br />
+	</td>
+	</tr>
+	</table>
+	
+	<!--RIGHT COLUMN SECOND BOX-->
+	<br />
+	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
+	<tr>
+	<td>
+	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
+	
+	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
+	<br /><br />
+	</td>
+	</tr>
+	</table>
+	
+	<!--RIGHT COLUMN THIRD BOX-->
+	<br />
+
+	
+	</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<br />
+
+</center>
 </body>
 </html>

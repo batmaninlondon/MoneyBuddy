@@ -105,13 +105,14 @@
 											<tr>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-14--xs">
-											<s:set var="transactionType" value="#session.transactionType" />
-											<s:if test="#transactionType.equals('UPFRONT')">
-												<% System.out.println("Inside Upfront"); %>
-												<s:iterator value="#session.customerCartUpfrontList" var="customerCartListElement">
+												<%
+													boolean anySipInvestment = false;
+												%>
+												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
 													    <s:if test="productName.equals('Total')">
 														    <td class="center g-font-size-14--xs text-center">
@@ -120,37 +121,27 @@
 														    <td class="center g-font-size-14--xs text-center">
 														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b>
 													    	</td>
+													    	<td class="center g-font-size-14--xs text-center"></td>
 												    	</s:if>
 												    	<s:else>
-												    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartListElement.productName"/></td>
+												    		<td class="center g-font-size-14--xs text-center">
+												    			<s:property value="#customerCartListElement.productName"/>
+											    			</td>
 														    <td class="center g-font-size-14--xs text-center">
 														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>
 													    	</td>
+													    	<td class="center g-font-size-14--xs text-center">
+													    		<s:property value="#customerCartListElement.transactionType"/>
+												    		</td>
+												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
+												    		<%
+												    		String transType = (String) pageContext.getAttribute("transactionType"); 
+												    		if ("SIP".equals(transType))
+												    			anySipInvestment = true;
+												    		%>
 												    	</s:else>
 													</tr>
 												</s:iterator>
-											</s:if>
-											<s:else>
-												<% System.out.println("Inside Sip"); %>
-												<s:iterator value="#session.customerCartSipList" var="customerCartListElement">
-													<tr>
-														<s:if test="productName.equals('Total')">
-														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#customerCartListElement.productName"/></b>
-														    </td>
-														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>&nbsp;/month</b>
-													    	</td>
-												    	</s:if>
-												    	<s:else>
-												    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartListElement.productName"/></td>
-														    <td class="center g-font-size-14--xs text-center">
-														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>&nbsp;/month
-													    	</td>
-												    	</s:else>
-													</tr>
-												</s:iterator>
-											</s:else>
 											 
 										</tbody>
 									</table>
@@ -170,10 +161,10 @@
 		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
 			<div class="col-md-1 col-xs-1"></div>
 			<div class="col-md-8 col-xs-8">
-				<s:set var="transactionType" value="#session.transactionType" />
- 					<s:if test="#transactionType.equals('UPFRONT')">
- 					</s:if>
- 					<s:else>
+									
+ 					<%
+ 					if (anySipInvestment)  {
+ 					%>
  					<div class="row">
  						<div id="investment-options" class="col-md-3 g-margin-b-5--xs">
  							<b>First SIP payment</b>
@@ -193,7 +184,9 @@
 					<div id="investment-options" class="col-md-2 g-margin-b-50--xs">
 					</div>
  					</div>
- 					</s:else>
+ 					<%
+ 					}
+ 					%>
 					</div>
 					
 					

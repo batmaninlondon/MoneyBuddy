@@ -108,7 +108,7 @@
 								    	<td class="text-center g-font-size-14--xs "><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></td>
 								    	<s:if test="'FALSE'.equals(#allFolio) ">
 									    	<td class="text-center g-font-size-14--xs ">
-									    		<s:if test="folioNumber.equals('NEW')">
+									    		<s:if test="folioNumber.equals('New')">
 									    			new folio
 								    			</s:if>
 								    			<s:else>

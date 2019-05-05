@@ -33,8 +33,6 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	
     public String execute() {
 
-    	
-    	
     	try {
     		
     		logger.debug("BuyFundAction class - execute method - start ");
@@ -46,8 +44,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	System.out.println("MIN LUMSUM PURCHASE AMOUNT ........ "+primaryFundDetails.getMinPurchaseAmount());
 	    	sessionMap.put("minPurchaseAmount", primaryFundDetails.getMinPurchaseAmount());
 	    	logger.debug("BuyFundAction class - execute method - fetched minPurchaseAmount from primaryFundDetails and stored it in session");
-	    	
-			
+
 	    	System.out.println("MIN SIP AMOUNT ........ "+primaryFundDetails.getMinSipAmount());
 	    	sessionMap.put("minSipAmount", primaryFundDetails.getMinSipAmount());
 	    	System.out.println("folio num :"+getFolioNum());

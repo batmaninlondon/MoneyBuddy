@@ -122,16 +122,7 @@
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>
 	</div>
-	<%
 	
-	    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
-	    	session.setAttribute("OnetimeInvestment", "TRUE");
-	    	System.out.println("In login jsp : OnetimeInvestment set to TRUE .");
-	    } else if ("FALSE".equals(request.getParameter("OnetimeInvestment"))) {
-	    	session.setAttribute("OnetimeInvestment", "FALSE");
-	    	System.out.println("In login jsp : OnetimeInvestment set to FALSE .");
-	    }
-	%>
 
 	<!--========== PROMO BLOCK ==========-->
 		<div class="g-fullheight--xs g-bg-position--center swiper-slide " >
@@ -167,6 +158,22 @@
   <div class="tab-content">
     <div id="loginTabContent" class="container tab-pane active"><br>
                 <s:form  action="newLoginAction" method="post" name="formLogin" namespace="/" autocomplete="off"  >
+                <%
+	
+				    if ("TRUE".equals(request.getParameter("OnetimeInvestment"))) {
+		    	%>
+		    		<s:hidden  name="transactionType" value="UPFRONT"></s:hidden>
+				    	<%
+				    	/* session.setAttribute("OnetimeInvestment", "TRUE");
+				    	System.out.println("In login jsp : OnetimeInvestment set to TRUE ."); */
+				    } else if ("FALSE".equals(request.getParameter("OnetimeInvestment"))) {
+				    	%>
+				    	<s:hidden  name="transactionType" value="SIP"></s:hidden>
+				    	<%
+				    	/* session.setAttribute("OnetimeInvestment", "FALSE");
+				    	System.out.println("In login jsp : OnetimeInvestment set to FALSE ."); */
+				    }
+				%>
           <h1>Welcome Back!</h1>
           <p id="loginMessage"></p>
          <!--  <div> -->

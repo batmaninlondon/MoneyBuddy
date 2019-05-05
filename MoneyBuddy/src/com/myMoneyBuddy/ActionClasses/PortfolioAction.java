@@ -70,8 +70,6 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		setCurDate(dateFormat.format(date));  
 		
 		QueryProducts queryProducts = new QueryProducts();
-		
-		System.out.println("portfolio action class called - start ");
 
 		portfolioDataModel = queryProducts.getPortfolioData(customerId);
 		setPortfolioDataModel(portfolioDataModel);

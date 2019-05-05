@@ -229,9 +229,6 @@ public class QueryProducts {
 			for(Iterator itFunds=query.iterate(); itFunds.hasNext();){
 				
 				Object[] rowFunds = (Object[]) itFunds.next();
-
-			     System.out.println("Product ID: " + rowFunds[0]);
-			     System.out.println("Scheme Code: " + rowFunds[1]);
 			     
 				query = hibernateSession.createQuery("select distinct(transactionFolioNum) from TransactionDetails   where customerId= :customerId and transactionStatus='8' and productId= :productId ");
 				

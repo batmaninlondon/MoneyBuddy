@@ -73,6 +73,14 @@
 		    }	
 		}
 		
+		function editCart(val)   {
+
+        	document.getElementById("return-type").value = val;
+        	
+        	document.formEditCart.submit();
+        	
+		}
+		
 		function changeSliderValue(val)   {
 			
 			if (val == "" || val == null )   {
@@ -105,14 +113,14 @@
 			var e = document.getElementById("selectUpfrontFolioNum");
 			var strFolio;
 			if (e == null ) 
-				strFolio = "NEW";
+				strFolio = "New";
 			else 
 				strFolio = e.options[e.selectedIndex].value;
 						
 			var eSip = document.getElementById("selectSipFolioNum");
 			var strSipFolio;
 			if (eSip == null)
-				strSipFolio = "NEW";
+				strSipFolio = "New";
 			else
 				strSipFolio = eSip.options[eSip.selectedIndex].value;
 			
@@ -271,17 +279,18 @@
                   	document.getElementById("google-response-subscriber").value = googleResponse;
                   	
                   	document.formSubscriber.submit();
-                    };
+                };
                     
                     function callOneTimeInvestment()  
                     {
                     	var cusId = document.getElementById('cusId').value;
                     	var OnetimeInvestment = "TRUE";
+                    	document.getElementById("transaction-type").value = "UPFRONT";
                     	if (cusId == "customerIdNull") {
                     		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
                     	} 
                     	else {
-                    		window.location='amountConfirmation.jsp?OnetimeInvestment='+OnetimeInvestment;
+                    		document.formAddToCart.submit();
                     	}
                     	
                     }
@@ -291,11 +300,12 @@
                           
                     	var cusId = document.getElementById('cusId').value;
                     	var OnetimeInvestment = "FALSE";
+                    	document.getElementById("transaction-type").value = "SIP";
                     	if (cusId == "customerIdNull") {
                     		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
                     	} 
                     	else {
-                    		window.location='amountConfirmation.jsp?OnetimeInvestment='+OnetimeInvestment;
+                    		document.formAddToCart.submit();
                     	}
                     	
                     }

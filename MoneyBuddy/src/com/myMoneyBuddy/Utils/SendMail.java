@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.Utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -550,7 +551,11 @@ public class SendMail {
 			 //create new MimeBodyPart object and set DataHandler object to this object        
 			 MimeBodyPart messageBodyPart2 = new MimeBodyPart(); 
 			 
-			 System.out.println("pdfFile : "+pdfFile);
+			 /*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+	    	 
+	    	File file = new File(classLoader.getResource("Account_Opening_Form_1.pdf").getFile());*/
+		    	
+			 //System.out.println("pdfFile : "+file.getPath().toString());
 			 String sourceFileName = pdfFile;//change accordingly
 			 
 			 DataSource source = new FileDataSource(sourceFileName);    

@@ -7,7 +7,11 @@ package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -18,7 +22,71 @@ public class InsertCustomerCart {
 
 	Logger logger = Logger.getLogger(InsertCustomerCart.class);
 	
-    public void addCustomerCart (String customerId, String productId, String productName, String amount,
+	
+	public void insertRow (FundDetailsDataModel selectedFundDetailsDataModel, String customerId, String transactionType) throws MoneyBuddyException
+    {
+
+    	logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - start");
+    	
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+    	CustomerCart tempCustomerCart = null;
+    	try {
+
+    			
+    			QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
+    			
+    			String rta = querySecondaryFundDetails.getRta(selectedFundDetailsDataModel.getFundId());
+    			
+    			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    			Date date = new Date();
+    			String frmtdDate = dateFormat.format(date);
+    			
+    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
+    			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, selectedFundDetailsDataModel.getFundId());
+    			
+	    		hibernateSession.beginTransaction();
+	    		if ("UPFRONT".equals(transactionType))  {
+	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),transactionType,null,null,null,"NEW",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getPdfFilePath());
+	    		}
+	    		else {
+	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
+	    					selectedFundDetailsDataModel.getMinSipAmount(),transactionType,"99",null,
+	    					"1","NEW",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getPdfFilePath());
+	    		}
+	   	        hibernateSession.save(tempCustomerCart);
+	   	        hibernateSession.flush();
+	   	        hibernateSession.refresh(tempCustomerCart);
+	   	        
+	   	        hibernateSession.getTransaction().commit();
+	   	        logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - new record inserted in CustomerCart table");
+   	        
+
+    		
+    		logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - end");
+
+    	}
+    	catch ( HibernateException e ) {
+    		logger.error("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+    	finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+    }
+	
+	
+	public void addCustomerCart (String customerId, String productId, String productName, String amount,
     		String transactionType, String sipDuration, String sipPlan, String sipDate, String folioNum,
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
@@ -128,9 +196,13 @@ public class InsertCustomerCart {
     			QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
     			
     			String rta = querySecondaryFundDetails.getRta(productId);
+    			
+    			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+    			
+    			String pdfFilePath = queryPrimaryFundDetails.getPdfFilePath(productId);
         		
 	    		hibernateSession.beginTransaction();
-	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,cartCreationDate,status,rta);
+	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);
@@ -166,4 +238,7 @@ public class InsertCustomerCart {
     }
  
 }
+
+
+
 

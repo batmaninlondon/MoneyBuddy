@@ -28,19 +28,12 @@ public class CustomerCartAction extends ActionSupport  implements SessionAware{
     		
     		logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - start ");
 	    	System.out.println(" CustomerCartAction execute method Called !!");
-	    	
-	    	sessionMap.put("transactionType", "UPFRONT");
-	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - stored transactionType as UPFRONT in sessionMap");
 
 	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
-	    	List<CustomerCart> customerCartUpfrontList = queryCustomerCart.getCustomerCartUpfront(customerId);
+	    	List<CustomerCart> customerCartList = queryCustomerCart.getCustomerCart(customerId);
 	    	
-	    	System.out.println(" size of customerCartUpfrontList is : "+customerCartUpfrontList.size());
-	    	
-	    	sessionMap.put("customerCartUpfrontList", customerCartUpfrontList);
-	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - stored customerCartUpfrontList in sessionMap");    	
-	
-    	    logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - returned success");
+	    	sessionMap.put("customerCartList", customerCartList);
+	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");   
 	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - end");
 	    	
 	    	return SUCCESS;

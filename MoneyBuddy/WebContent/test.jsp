@@ -1,156 +1,151 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html >
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Investment Details Page | Money Buddy</title>
-    <!-- core CSS -->
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
- 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    <link href="assets/prettyPhoto.css" rel="stylesheet">
-    <link href="assets/css/bootstrap/main.css" rel="stylesheet">
-    <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
-	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
-	
-	<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-        
-        
- 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
-    <script type="text/javascript"  src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-    <!-- <script type="text/javascript" src="assets/js/main.js"></script> -->
-    <script type="text/javascript" src="assets/js/wow.min.js"></script>
-    <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-
-
-	<style>
-	    body, html {
-		    height: 90%;
-		    margin: 0;
-		}
-	
-		#errorPage #container{
-			/* The image used */
-		    background-image: url('images/errorPage/error2.jpg');
-		
-		    /* Full height */
-		    height: 100%; 
-		
-		    /* Center and scale the image nicely */
-		    background-position: center;
-		    background-repeat: no-repeat;
-		    background-size: cover;
-    
-	        /* height:  1000px;
-	        width:  1000px;
-	        background-image: url('images/errorPage/error1.jpg') */
-	    }
-	
-	</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome Message</title>
 </head>
+<body>
+<center>
+<table width="600" background="#FFFFFF" style="text-align:left;" cellpadding="0" cellspacing="0">
+<tr>
+	<td height="18" width="31" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="18" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="18" width="466" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+	<td height="2" width="31" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="2" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="2" width="466" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<!--GREEN STRIPE-->
+<tr>
+	<td background="images/greenback.gif" width="31" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF;" height="80">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	
+	<!--WHITE TEXT AREA-->
+	<td width="200" bgcolor="#FFFFFF" style="border-top:1px solid #FFF; text-align:center;" height="80" valign="middle">
+	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#13b1cd;">Money|</span>
+	<span style="font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#4B4A4A;">Buddy</span>
+	
+	</td>
+	
+	<!--GREEN TEXT AREA-->
+	<td background="images/greenback.gif" bgcolor="#13b1cd" style="border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:35px;" height="80">
+	<span style="color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;align:center;">Let your money work for you</span>
+	</td>
+</tr>
 
-<body id="errorPage">
+<!--DOUBLE BORDERS BOTTOM-->
+<tr>
+	<td height="3" width="31" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="3" width="131">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+	<td height="3" style="border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+	<!--CONTENT STARTS HERE-->
+	<br />
+	<br />
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="15"><div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+</td>
+	<td width="325" style="padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:13px;" valign="top">
+	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi,</span>
+	<br />
+	<p>Thanks for reaching out!</p>
+	<br />
+	<p>We wanted to confirm that we have noted down your query and are working on the same. You can expect a response within 2 working days.</p>
+	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
 
-   <header id="header">
+	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#2)</div>
+	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
+ -->
+ 	<br/>
+	<p style="font-size:14px;">Thank you for contacting us.</p>
+	<br/>
+	<p style="font-size:14px;">We will get back to you soon.</p>
+	<br/>
+	<p style="border-top:1px solid #e4e4e4;"></p>
+   	<br/>
+   	<p style="font-size:15px;"><b >Wishing you a prosperous and healthy life!</b></p>
+	
+    <p style="font-size:15px;"><b>-The MoneyBuddy Team</b></p><br/>
 
-        <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="welcome"><img src="img/logo.png" alt="logo"></a>
-                </div>
-				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
-										<%	} else 
-										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
-										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
-	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
-									      	</ul>
-	                                    
-	                                    </li>
-                                </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-		
-    </header>
-    
-    <div id="container">
-    </div>
-    
-    <!-- <div class="error-bg"></div>
-    <section id="errorPage"> -->
-    
-    
-    
-    <!-- <img src="images/errorPage/error1.jpg" alt=""> -->
-    
-    <!-- <div class="row" style="margin-top:50px;">
-		<div class="center">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>CAUGHT ERROR</b></h2>
-		</div>
-	</div> -->	
-
-   <!-- </section> -->
-      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a target="_blank" href="http://quantwealth.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
-                            </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-
-		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
+	</td>
+	<td style="border-left:1px solid #e4e4e4; padding-left:15px;" valign="top">
+	
+	<!--RIGHT COLUMN FIRST BOX-->
+	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
+	<tr>
+	<td>
+	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Why MoneyBuddy?</div>
+	<ol>
+		<li>Customised Portfolios</li>
+		<li>Direct funds for higher returns</li>
+		<li>Fully Online Investing</li>
+	</ol>
+	<br /><br />
+	</td>
+	</tr>
+	</table>
+	
+	<!--RIGHT COLUMN SECOND BOX-->
+	<br />
+	<table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #e4e4e4; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
+	<tr>
+	<td>
+	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
+	<img src="images/penpaper.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
+	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
+	<br />
+	</td>
+	</tr>
+	</table>
+	
+	<!--RIGHT COLUMN THIRD BOX-->
+	<br />
+	
+	
+	</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<br />
+<!-- <table cellpadding="0" style="border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;" cellspacing="0" width="600">
+<tr>
+	<td height="2" style="border-bottom:1px solid #e4e4e4;">
+	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
+	</td>
+</tr>
+	<td style="font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
+	<br />
+	{!contact_address}<br />
+	<a href="{!remove_web}">Unsubscribe </a>
+	</td>
+</tr>
+</table> -->
+</center>
 </body>
 </html>

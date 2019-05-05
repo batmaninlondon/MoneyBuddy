@@ -1,96 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>test</title>
-    core CSS
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-    
-   	<style>
-
-		p.special-font {
-		    font-size:140%;
-		    font-family:'Bodoni MT';
-		}
-		p.dark-font {
-		    font-size:140%;
-		    font-family:'Bodoni MT';
-		    font-weight: bold;
-		}
-	</style>
-</head>
-<body>
-	<div id="content">
-    ========== HEADER ==========
-        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
-            Navbar
-            <nav class="s-header-v2__navbar">
-                <div class="container g-display-table--lg">
-                    Navbar Row
-                    <div class="s-header-v2__navbar-row">
-                        Brand and toggle get grouped for better mobile display
-                        <div class="s-header-v2__navbar-col">
-                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                                <span class="s-header-v2__toggle-icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="s-header-v2__navbar-col-width--180">
-                            Logo
-                            <div class="">
-                                <a href="welcome" class="s-header-v2__logo-link">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
-                                </a>
-                            </div>
-                            End Logo
-                        </div>
-
-                    </div>
-                    End Navbar Row
-                </div>
-            </nav>
-            End Navbar
-        </header>
-        ========== END HEADER ==========
-        
-        <div class="g-bg-color--dark">
-            <div class="container g-padding-y-45--xs">
-            </div>
-        </div>
-         <section id="verification-mail-content" class="g-margin-b-30--xs">
-        <div class="container" >
-		<br/>
-		<p class="special-font">Welcome to MoneyBuddy! </p>
-		<p class="special-font"><i>Congratulations on taking the first step towards investing your money in a simple and stress free way.</i></p>
-		<p class="special-font"><i>We&#8217;re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</i></p>
-		<p class="special-font"><i>Click on LinkForEmail to verify your email and activate your account.</i></p>
-		</br>
-		<p class="special-font">That&#8217;s it, all you need to get started with MoneyBuddy.</p>
-		<p class="dark-font"><u>If you have any Question/Doubts</u></p>
-		
-		<p class="special-font">Reply to this <u>Email</u> or Whatsapp/Call/SMS us at <u>+91-9971648736</u></p>
-		<br/>
-		<p class="special-font"><i>-Wishing you a prosperous and healthy life</i></p>
-		
-		<p class="special-font"><i>The MoneyBuddy Team</i></p>
-		</div>
-		</section>
-	</div>
-
-</body>
-</html> -->
-
-
-
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -163,11 +70,11 @@
 	<td width="15"><div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
 </td>
 	<td width="325" style="padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:13px;" valign="top">
-	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hello from MoneyBuddy!</span>
+	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi,</span>
 	<br />
-	<p>Congratulations on taking your steps towards investing your money in a simple and stress free way.</p>
+	<p>Thanks for reaching out!</p>
 	<br />
-	<p>We&#8217;re glad to see you join community of investors, benefiting from our powerful platform to save time and earn higher returns.</p>
+	<p>We wanted to confirm that we have noted down your query and are working on the same. You can expect a response within 2 working days.</p>
 	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
 
 	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#2)</div>
@@ -192,9 +99,12 @@
 	<tr>
 	<td>
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Why MoneyBuddy?</div>
-	<img src="images/addressbook.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>To help ensure that you receive all email messages consistently in your inbox with images displayed, please add this address to your address book or contacts list: <strong>[YOUR REPLY ADDRESS]</strong>.</p>
-	<br />
+	<ol>
+		<li>Customised Portfolios</li>
+		<li>Direct funds for higher returns</li>
+		<li>Fully Online Investing</li>
+	</ol>
+	<br /><br />
 	</td>
 	</tr>
 	</table>
@@ -214,17 +124,7 @@
 	
 	<!--RIGHT COLUMN THIRD BOX-->
 	<br />
-	<table cellpadding="0" width="100%" cellspacing="0" style="font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<tr>
-	<td>
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have A Topic Idea?</div>
-	<img src="images/lightbulb.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>I'd love to hear it! Just reply any time and let me know what topics you'd like to know more about.</p>
-
-	<br />
-	</td>
-	</tr>
-	</table>
+	
 	
 	</td>
 	</tr>

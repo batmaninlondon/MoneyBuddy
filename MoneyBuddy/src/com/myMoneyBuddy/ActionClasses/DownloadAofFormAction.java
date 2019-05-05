@@ -16,10 +16,14 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.servlet.ServletContext;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -70,12 +74,39 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 			
 			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
+			System.out.println("directoryName : "+directoryName);
+			System.out.println("directoryName : "+cl.getResource("./../../assets/AofForms").getPath().toString());
+			
+			//String directoryName = "../../../resources/AofForms/";
+			
+			/*URL url = this.getClass().getResource("/Account_Opening_Form_1.pdf");
+			String absoluteDiskPath = url.getPath();*/
+			
+			//System.out.println("absoluteDiskPath : "+absoluteDiskPath);
+			
+			/*ServletContext context = getContext();
+			String fullPath = context.getRealPath("/WEB-INF/Account_Opening_Form_1.pdf");*/
+			//InputStream resourceContent = context.getResourceAsStream("/WEB-INF/Account_Opening_Form_1.pdf");
+			
+			
+			/*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+	    	 
+	    	File file = new File(classLoader.getResource("AofForms/Account_Opening_Form_1.pdf").getFile());
+		    	
+			 System.out.println("pdfFile : "+file.getPath().toString());
+			 
+			 String path = new File(classLoader.getResource("Account_Opening_Form_1.pdf").getPath()).toString();
+			 
+			 System.out.println(" Path is : "+path);*/
+	         
+			
 	    	//String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
 			
-			System.out.println("directoryName : "+directoryName);
+			
 	    	
 	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
-	    	
+	    	System.out.println(" Aof Form name is : "+getAofForm());
+			//setAofForm("Account_Opening_Form_1.pdf");
        		SendMail sendMail = new SendMail();
        		sendMail.sendAofFormMail(directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");
        		

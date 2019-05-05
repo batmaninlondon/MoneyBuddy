@@ -117,7 +117,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	if ("SIP".equals(transactionType)) {
 	    		
 		    	for (int i = 0; i < (customerCartSipList.size()-1); i++) {
-		    	    if ( !customerCartSipList.get(i).getFolioNumber().equals("NEW") )  {
+		    	    if ( !customerCartSipList.get(i).getFolioNumber().equals("NEw") )  {
 		    	    	setAllNewFolio("FALSE");
 		    	    }
 		    	}
@@ -126,7 +126,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	    	else {
 	    		
 		    	for (int i = 0; i < (customerCartUpfrontList.size()-1); i++) {
-		    	    if ( !customerCartUpfrontList.get(i).getFolioNumber().equals("NEW") )  {
+		    	    if ( !customerCartUpfrontList.get(i).getFolioNumber().equals("New") )  {
 		    	    	setAllNewFolio("FALSE");
 		    	    }
 		    	}
