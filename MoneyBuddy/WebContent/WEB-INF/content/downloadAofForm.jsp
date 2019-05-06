@@ -225,7 +225,7 @@
 		<div class="col-md-2">
 			
 			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " 
-			onClick="window.open('${pageContext.request.contextPath}/WEB-INF/AofForms/<s:property value="aofForm"/>')">
+			onClick="window.open('${pageContext.request.contextPath}/assets/AofForms/<s:property value="aofForm"/>')">
 			Download AoF</button>
 		</div>
 		<div class="col-md-5">

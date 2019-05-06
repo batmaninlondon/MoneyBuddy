@@ -74,7 +74,7 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 			
 			//String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
-			String directoryName = cl.getResource("./../AofForms").getPath().substring(1);
+			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
 			System.out.println("directoryNameeeee : "+directoryName);
 			/*System.out.println("directoryName : "+cl.getResource("./../AofForms").getPath().toString());*/
@@ -132,7 +132,7 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 	    	System.out.println(" Aof Form name is : "+getAofForm());
 			//setAofForm("Account_Opening_Form_1.pdf");
        		SendMail sendMail = new SendMail();
-       		sendMail.sendAofFormMail(directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");
+       		sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");
        		
        		UpdateCustomer updateCustomer = new UpdateCustomer();
        		updateCustomer.updateAofFormStatus(customerId, "FORM_SENT");
