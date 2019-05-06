@@ -72,10 +72,34 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 	    	
 	    	ClassLoader cl = getClass().getClassLoader();
 			
-			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
+			//String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
-			System.out.println("directoryName : "+directoryName);
-			System.out.println("directoryName : "+cl.getResource("./../../assets/AofForms").getPath().toString());
+			String directoryName = cl.getResource("./../AofForms").getPath().substring(1);
+			
+			System.out.println("directoryNameeeee : "+directoryName);
+			/*System.out.println("directoryName : "+cl.getResource("./../AofForms").getPath().toString());*/
+			
+			logger.debug("DownloadAofFormAction class - execute method - directoryName - "+directoryName);
+			
+			
+			
+			/*File folder = new File(directoryName);
+			File[] listOfFiles = folder.listFiles();
+			
+			System.out.println("folder: "+folder );
+
+			for (int i = 0; i < listOfFiles.length; i++) {
+			  if (listOfFiles[i].isFile()) {
+			    System.out.println("File " + listOfFiles[i].getName());
+			    System.out.println("Path of File " + listOfFiles[i].getAbsolutePath());
+			  } else if (listOfFiles[i].isDirectory()) {
+			    System.out.println("Directory " + listOfFiles[i].getName());
+			    System.out.println("Path of Directory " + listOfFiles[i].getAbsolutePath());
+			  }
+			}*/
+			
+			
+			
 			
 			//String directoryName = "../../../resources/AofForms/";
 			
