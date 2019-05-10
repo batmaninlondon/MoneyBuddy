@@ -68,18 +68,17 @@
 	
 	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi customerName,</span>
 	<br />
-	<p>Congratulations, your recent MoneyBuddy transaction has been executed successfully.</p>
+	<p>Congratulations, your SIP has been successfully registered and we are super happy to see you become a disciplined investor.</p>
 	<!-- <br /> -->
-	<p>click here to access your latest portfolio:</p>
-	<center><b style="font-size:17px;color:#13b1cd;">LinkForEmail</b></center>
-	<p>PS: If you had invested in multiple funds together, some of your investments might still be under process thus not visible in your portfolio. Request you to kindly wait for a max of 2 working days to see your complete portfolio</p>
-	
+	<p>As a final step, you will need to register BSE as a payee in your internet banking to set up auto-debit of your future SIP installments. We will reach out to you soon to guide you on this process.</p>
 	<br/>
+	
+	
 	<p style="border-top:1px solid #e4e4e4;"></p>
 	
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
 	<img src="images/penpaper.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>Reply to this <b style="color:#13b1cd;"><u>Email</u></b> or Whatsapp/Call/SMS us at <b style="color:#13b1cd;"><u>+91-9971648736</u></b></p>
+	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
 	
 	<!-- <p style="border-top:1px solid #e4e4e4;"></p> -->
    	<br/>

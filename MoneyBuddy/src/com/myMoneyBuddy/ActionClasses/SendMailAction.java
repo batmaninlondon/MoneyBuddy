@@ -60,7 +60,7 @@ public class SendMailAction extends ActionSupport {
 	    	
 	    	String subject = configProperties.getProperty("MAIL_CONTACT_US_SUBJECT");
 	
-	    	sendMail.MailSending(getSenderEmailId(),subject,"ContactUsMail","ContactUsMail.txt",mailLink,"");
+	    	sendMail.MailSending(getSenderEmailId(),subject,"ContactUsMail","ContactUsMail.txt",mailLink,"",getSenderName());
 	    	
 	    	System.out.println(" Returned Success !!");
 	

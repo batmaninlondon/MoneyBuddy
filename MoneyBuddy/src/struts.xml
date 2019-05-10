@@ -212,6 +212,13 @@
         </action>
     </package>
     
+    <package name="sendThankYouMailAction" namespace="/" extends="struts-default">
+        <action name="sendThankYouMailAction" class="com.myMoneyBuddy.ActionClasses.SendThankYouMailAction">
+            <result name="success">/WEB-INF/content/orderInvoice.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>   
+        </action>
+    </package>
+    
    	<package name="newEstimateAction" namespace="/" extends="struts-default">
         <action name="newEstimateAction" class="com.myMoneyBuddy.ActionClasses.EstimateAction">
             <result name="UPFRONT" type="chain">createCartAction</result>
@@ -274,7 +281,7 @@
         <action name="paymentAction" class="com.myMoneyBuddy.ActionClasses.PaymentAction">
             <param name="tranDetailId">${tranDetailId}</param>
             <result name="success">/WEB-INF/content/payment.jsp</result>
-            <result name="sipOrderFofN">/WEB-INF/content/orderInvoiceSipFofN.jsp</result>
+            <result name="sipOrderFofN">/logout.jsp</result>
             <!-- <result name="sipOrderFofY">/orderInvoiceSipFofY.jsp</result> -->
             <result name="input">/WEB-INF/content/bankDetails.jsp</result>
             <result name="failedWithPaymentGateway">/WEB-INF/content/errorPage.jsp</result>

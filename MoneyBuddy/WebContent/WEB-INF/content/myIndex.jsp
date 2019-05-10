@@ -6,7 +6,6 @@
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
@@ -72,7 +71,6 @@
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-
 .snip1418 .add-to-cart {
   position: absolute;
   height:50px;
@@ -94,7 +92,6 @@
   -ms-transform-origin: 100% 0;
   transform-origin: 100% 0;
 }
-
 .snip1418 figcaption {
 //  padding: 20px;
 }
@@ -130,8 +127,6 @@
 .snip1418.hover .add-to-cart i {
   background-color: #2980b9;
 }
-
-
 </style>
 
     <script>
@@ -149,7 +144,6 @@
     FileInputStream fis = new FileInputStream(new File(path));
     
     Properties configProperties = new Properties();
-
 	configProperties.load(fis);
 	
 	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
@@ -159,7 +153,6 @@
       var recaptchaContactUs;
       
       var myCallBack = function() {
-
         //Render the recaptchaSubscriber on the element with ID "recaptcha-subscriber"
         recaptchaSubscriber = grecaptcha.render('recaptcha-subscriber', {
           'sitekey' : '<%=siteKey%>', //Replace this with your Site key
@@ -623,7 +616,6 @@
                         </div>
                     </li>
                     End Process
-
                     Process
                     <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
                         <div class="center-block g-text-center--xs">
@@ -637,7 +629,6 @@
                         </div>
                     </li>
                     End Process
-
                     Process
                     <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--sm">
                         <div class="center-block g-text-center--xs">
@@ -650,7 +641,6 @@
                             </div>
                         </div>
                     </li>
-
                     <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1">
                         <div class="center-block g-text-center--xs">
                             <div class="g-margin-b-30--xs">
@@ -663,7 +653,6 @@
                         </div>
                     </li>
                 </ul>
-
                 <div class="g-text-center--xs">
                     <a href="#js__scroll-to-appointment" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">TRY IT OUT</a>
                 </div>
@@ -804,7 +793,7 @@
                         	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
 	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
 	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
-			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" autofocus="true" id="subscriber-email-id" placeholder="Email Address" name="emailId" /> 
+			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Email Address" name="emailId" /> 
 			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
 	                            <%-- <span class="input-group-btn " > --%>
                             	<s:submit id="recaptcha-subscriber" class="btn btn-home g-color--white g-recaptcha  " value="Submit"></s:submit>
@@ -861,7 +850,6 @@
                         </div>
                     </div>
                     <!-- End Form -->
-
                     <!-- Contacts -->
                     <div class="col-md-4 g-bg-color--primary-ltr js__form-eqaul-height-v1">
                         <div class="g-overflow--hidden g-padding-x-40--xs g-padding-y-50--xs">

@@ -70,21 +70,13 @@
 	<td width="15"><div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
 </td>
 	<td width="325" style="padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:13px;" valign="top">
-	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi,</span>
+	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi customerName,</span>
 	<br />
 	<p>Thanks for reaching out!</p>
-	<br />
+	
 	<p>We wanted to confirm that we have noted down your query and are working on the same. You can expect a response within 2 working days.</p>
-	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
-
-	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#2)</div>
-	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
- -->
  	<br/>
-	<p style="font-size:14px;">Thank you for contacting us.</p>
-	<br/>
-	<p style="font-size:14px;">We will get back to you soon.</p>
-	<br/>
+
 	<p style="border-top:1px solid #e4e4e4;"></p>
    	<br/>
    	<p style="font-size:15px;"><b >Wishing you a prosperous and healthy life!</b></p>
@@ -116,7 +108,7 @@
 	<td>
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
 	<img src="images/penpaper.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
+	<p>Reply to this <b style="color:#13b1cd;"><u>Email</u></b> or Whatsapp/Call/SMS us at <b style="color:#13b1cd;"><u>+91-9971648736</u></b></p>
 	<br />
 	</td>
 	</tr>
@@ -133,19 +125,7 @@
 </tr>
 </table>
 <br />
-<!-- <table cellpadding="0" style="border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;" cellspacing="0" width="600">
-<tr>
-	<td height="2" style="border-bottom:1px solid #e4e4e4;">
-	<div style="line-height: 0px; font-size: 1px; position: absolute;">&nbsp;</div>
-	</td>
-</tr>
-	<td style="font-family:Trebuchet MS, Verdana, Arial; font-size:12px;">
-	<br />
-	{!contact_address}<br />
-	<a href="{!remove_web}">Unsubscribe </a>
-	</td>
-</tr>
-</table> -->
+
 </center>
 </body>
 </html>

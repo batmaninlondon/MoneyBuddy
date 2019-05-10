@@ -73,7 +73,7 @@
 	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Welcome to MoneyBuddy!</span>
 	<br />
 	<p>You have successfully subscribed to &#34;MoneyBuddy Newsletter&#34;.</p>
-	<br />
+	
 	<p>You will receive occasional emails with useful tips and articles on how to grow your savings in a stress-free and efficient way.</p>
 	<p>In the meantime, You should visit the following link to learn more about how we can help you create wealth through a customized portfolio and direct mutual funds.</p>
 	<!-- <div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#1)</div>
@@ -82,7 +82,7 @@
 	<div style="padding-left:20px; padding-bottom:10px;"><img src="images/spade.gif" alt=""/>&nbsp;&nbsp;&nbsp;Benefit of receiving email (#3)</div>
  -->
  	<br/>
-	<p><b style="font-size:17px;">LinkForEmail</b></p>
+	<center><p><b style="font-size:17px;color:#13b1cd;">LinkForEmail</b></p></center>
 	<!-- <br/> -->
 	
 	<br/>
@@ -123,7 +123,7 @@
 	<td>
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
 	
-	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
+	<p>Reply to this <b style="color:#13b1cd;"><u>Email</u></b> or Whatsapp/Call/SMS us at <b style="color:#13b1cd;"><u>+91-9971648736</u></b></p>
 	<br /><br />
 	</td>
 	</tr>

@@ -70,7 +70,7 @@
 	<br />
 	<p>Congratulations, your recent MoneyBuddy transaction has been executed successfully.</p>
 	<!-- <br /> -->
-	<p>click here to access your latest portfolio:</p>
+	<p>click here to Log in and access your latest portfolio:</p>
 	<center><b style="font-size:17px;color:#13b1cd;">LinkForEmail</b></center>
 	<p>PS: If you had invested in multiple funds together, some of your investments might still be under process thus not visible in your portfolio. Request you to kindly wait for a max of 2 working days to see your complete portfolio</p>
 	

@@ -87,33 +87,43 @@
 		<%-- <p>MIn SIP amount <s:property value="#session.minSipAmount"/></p> --%>
 			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
 					<table id="cartData" class="table table-bordered stripe ">
-						<thead class="table-head g-font-size-14--xs">
-							<tr>
-								<th class="center col-md-4 g-bg-color--gray-light">Fund Name</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Amount</th>
-							</tr>
-						</thead>
-						<tbody class="table-body g-font-size-14--xs">
-							<s:iterator value="#session.customerCartUpfrontList" var="customerCartUpfrontListElement">
-								<tr>
-									<s:if test="productName.equals('Total')">
-									    <td class="center g-font-size-14--xs text-center">
-									    	<b><s:property value="#customerCartUpfrontListElement.productName"/></b>
-									    </td>
-									    <td class="center g-font-size-14--xs text-center">
-									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartUpfrontListElement.amount]})}"/>&nbsp;/month</b>
-								    	</td>
-							    	</s:if>
-							    	<s:else>
-							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartUpfrontListElement.productName"/></td>
-									    <td class="center g-font-size-14--xs text-center">
-									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartUpfrontListElement.amount]})}"/>&nbsp;/month
-								    	</td>
-							    	</s:else>
-								</tr>
-							</s:iterator> 
-						</tbody>
-					</table>
+										<thead class="table-head g-font-size-14--xs">
+											<tr>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
+											</tr>
+										</thead>
+										<tbody class="table-body g-font-size-14--xs">
+												<s:iterator value="#session.customerCartList" var="customerCartListElement">
+													<tr>
+													    <s:if test="productName.equals('Total')">
+														    <td class="center g-font-size-14--xs text-center">
+														    	<b><s:property value="#customerCartListElement.productName"/></b>
+													    	</td>
+														    <td class="center g-font-size-14--xs text-center">
+														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b>
+													    	</td>
+													    	<td class="center g-font-size-14--xs text-center"></td>
+												    	</s:if>
+												    	<s:else>
+												    		<td class="center g-font-size-14--xs text-center">
+												    			<s:property value="#customerCartListElement.productName"/>
+											    			</td>
+														    <td class="center g-font-size-14--xs text-center">
+														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>
+													    	</td>
+													    	<td class="center g-font-size-14--xs text-center">
+													    		<s:property value="#customerCartListElement.transactionType"/>
+												    		</td>
+												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
+												    		
+												    	</s:else>
+													</tr>
+												</s:iterator>
+											 
+										</tbody>
+									</table>
 			</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>

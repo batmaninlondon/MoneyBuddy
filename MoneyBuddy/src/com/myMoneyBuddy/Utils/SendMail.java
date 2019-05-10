@@ -42,13 +42,14 @@ public class SendMail {
 	Logger logger = Logger.getLogger(SendMail.class);   
 
     public void MailSending(String emailId, String subject, String mailType,String fileName,
-    		String mailLink,String displayLinkName) throws MoneyBuddyException {
+    		String mailLink,String displayLinkName, String customerName) throws MoneyBuddyException {
     	
     	logger.debug("sendMail class : MailSending method : start");
     	logger.debug(mailType+" has been sent to "+emailId);
     	
     	System.out.println(mailType+" has been sent to "+emailId);
-
+    	
+    	String bccEmailId = "kamalwadhwani@gmail.com";
     	try {    	
     	
     		String mailContentFilePath = "../../../mailContents/"+fileName;
@@ -70,6 +71,12 @@ public class SendMail {
             		strLine = strLine.replace("LinkForEmail", "<a href=\""+mailLink+"\">"+displayLinkName+"</a>");
 
             	}
+            	if (strLine.contains("customerName")) {
+		    		
+		    		System.out.println("contains customerName ");
+		    		strLine = strLine.replace("customerName", customerName);
+		
+		    	}
             	bodyText.append(strLine);
             }
     	Properties configProperties = new Properties();
@@ -106,6 +113,8 @@ public class SendMail {
 
     		message.setRecipients(Message.RecipientType.TO,
     				InternetAddress.parse(emailId));
+    		
+    		message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccEmailId));
 
     		// Set Subject: header field
     		message.setSubject(subject);
@@ -480,12 +489,12 @@ public class SendMail {
  
     
     public void sendAofFormMail(String pdfFile, String emailId, String subject, String fileName,
-			String mailLink,String displayLinkName) throws MoneyBuddyException{
+			String mailLink,String displayLinkName,String customerName) throws MoneyBuddyException{
 
     	
 		try {
 		
-			
+			String bccEmailId = "kamalwadhwani@gmail.com";
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 		
@@ -517,6 +526,7 @@ public class SendMail {
 		
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(emailId));
+			message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccEmailId));
 		
 			// Set Subject: header field
 		
@@ -539,6 +549,12 @@ public class SendMail {
 		    		
 		    		System.out.println("contains LinkForEmail ");
 		    		strLine = strLine.replace("LinkForEmail", "<a href=\""+mailLink+"\">"+displayLinkName+"</a>");
+		
+		    	}
+		    	if (strLine.contains("customerName")) {
+		    		
+		    		System.out.println("contains customerName ");
+		    		strLine = strLine.replace("customerName", customerName);
 		
 		    	}
 		    	bodyText.append(strLine);

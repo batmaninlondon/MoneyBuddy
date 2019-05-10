@@ -6,9 +6,14 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.commons.lang3.math.NumberUtils;
@@ -72,7 +77,7 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		hibernateSession.beginTransaction();
 
-			query = hibernateSession.createQuery("select t.productId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode "
+			query = hibernateSession.createQuery("select t.productId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
 									+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
 									+ "where t.customerId = c.customerId and t.productId = s.fundId and t.bseOrderId= :bseOrderId");
 			
@@ -90,6 +95,7 @@ public class UploadCustomerNavAction extends ActionSupport {
 			}
 			
 			String amcCode = queryResult.get(0)[4].toString();
+			String transactionType = queryResult.get(0)[5].toString();
 			
 			System.out.println(" panCard : "+panCard+" : customerId : "+customerId+" : folioNum : "+folioNum+" : amcCode : "+amcCode);
 			
@@ -121,6 +127,38 @@ public class UploadCustomerNavAction extends ActionSupport {
 			hibernateSession.getTransaction().commit();	
  	
 	    	System.out.println(" Action complete !!");
+	    	
+	    	Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
+	    	
+	    	String emailId = customers.getEmailId();
+	    	String customerName = customers.getCustomerName();
+	    	
+	    	SendMail sendMail = new SendMail();
+
+	    	Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
+			
+			if ("UPFRONT".equals(transactionType))  {
+	 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
+				System.out.println("mailLink is : "+mailLink);
+		    	
+		    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
+	
+		    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			}
+			else {
+				String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
+				System.out.println("mailLink is : "+mailLink);
+		    	
+		    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
+	
+		    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			}
+	    	logger.debug("UploadCustomerNavAction class - execute method - customerId - "+customerId+" - mail sent to "+emailId+" for transaction execution");
+	    	
+	    	
 	    	/*String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned success");

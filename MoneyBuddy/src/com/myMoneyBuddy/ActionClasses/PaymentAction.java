@@ -64,6 +64,9 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     		
     		customerId = sessionMap.get("customerId").toString();
     		
+    		sessionMap.put("firstOrderFlag", getFirstOrderFlag());
+	    	logger.debug("PaymentAction class - execute method - customerId - "+customerId+" - stored firstOrderFlag in sessionMap");
+    		
     		QueryBankDetails queryBankDetails = new QueryBankDetails();
     		BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
     		

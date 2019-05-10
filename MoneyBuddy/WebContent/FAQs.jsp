@@ -134,9 +134,11 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            MoneyBuddy is an online wealth management platform, built in partnership with Bombay Stock Exchange (BSE).
+                                            MoneyBuddy is an online wealth management platform, built in partnership with Bombay Stock Exchange (BSE).  Our customers get to benefit from the trust worth advisory service of Mr. Kamal Wadhwani, a SEBI registered investment analyst.
                                             <br>
-                                            Along with providing our users a simple and convenient online platform for their investing needs, we help them generate superior risk adjusted returns through our well researched funds and with customised portfolio planning.
+                                            Kamal Wadhwani, CFA has an engineering degree from IIT Bombay. He started working as an international markets trader right after his engineering and has over 10 years of experience in the field of finance.
+                                            <br>
+                                            Walking the talk on our &quot;Honest Advice Commitment&quot;, we also help our customers earn more returns than other mutual fund platforms through investing in direct mutual funds.
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +153,50 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            Yes, MoneyBuddy is absolutely free platform for all mutual fund investors.  Though we may charge a fee for customised portfolio planning or other value added services. Additionally, we would like to disclose that we do get a small fee from the mutual fund companies.
+                                            Yes and No.  While moneyBuddy is an absolutely free platform for all mutual fund investors, our customers are expected to pay advisory fee of Mr. Kamal Wadhwani, a SEBI registered investment advisor.
+                                            <br/>The fee is charged at the end of each quarter and is calculated as per the following table
+                                            <br/><br/>
+                                            <table class="table table-bordered table-sm">
+                                            	<thead class="thead-light">
+													<tr>
+														<th class="text-center">Amount Invested</th>
+														<th class="text-center">Advisory Fee (% per year)</th>
+														<th class="text-center">Advisory Fee (% per Quarter)</th>
+													</tr>
+												</thead>
+												<tbody >
+													<tr>
+														<td class="text-center">1 lac- 10 lac</td>
+														<td class="text-center">1.2 %</td>
+														<td class="text-center">0.3 %</td>
+													</tr>
+													<tr>
+														<td class="text-center">10 lac-50 lac</td>
+														<td class="text-center">1 %</td>
+														<td class="text-center">0.25 %</td>
+													</tr>
+													<tr>
+														<td class="text-center">50 lac- 2 crore</td>
+														<td class="text-center">0.9 %</td>
+														<td class="text-center">0.225 %</td>
+													</tr>
+													<tr>
+														<td class="text-center">> 2 crore</td>
+														<td class="text-center">0.8 %</td>
+														<td class="text-center">0.2 %</td>
+													</tr>
+													<tr>
+														<td class="text-center">> 5 crore</td>
+														<td class="text-center">0.7 %</td>
+														<td class="text-center">0.175 %</td>
+													</tr>
+												</tbody>
+                                            
+                                            </table>
+                                            
+                                            PS: NRI&#39;s are charged 0.1% per year extra on top of the fee mentioned above
+                                            <br/><br/>
+                                            We would like to reiterate, that our customers get to earn upto 1% extra returns due to investing in direct mutual funds. Thus as compared with other so called &#34;free investment portals&#34;, most of our users end up getting more money then they pay in advisory fee.
                                         </div>
                                     </div>
                                 </div>
@@ -166,9 +211,8 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            The annual fee can varies from 0.15% of money invested to 1% of money invested.
-											<br>
-                                            Say if a user invests Rs. 100 through us, we may get any amount between 15 paisa to 1 rupee per year depending upon the mutual fund. Furthermore we are paid monthly, so we may get from 1.25 paisa to 8 paisa per month.
+                                            Zero, we do not get any commission or anything else from mutual funds companies. We are very proud of our &#34;Honest Advice Commitment&#34; and have deliberately chosen to forgo any commision that would make us compromise on our &#34;Honest Advice Commitment&#34;
+											
                                         </div>
                                     </div>
                                 </div>
@@ -183,13 +227,13 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            Our co-founder Mr. Kamal Wadhwani, CFA is the person responsible for mutual fund research. He is a signatory of CFA institute code of ethics and committed to ensuring unbiased fund selection. He focuses on following three pillars to ensure higher returns for our investors:
+                                            Our co-founder Mr. Kamal Wadhwani, CFA and a SEBI registered investment advisor, is the person responsible for mutual fund research. He is a signatory of CFA institute code of ethics and committed to ensuring unbiased fund selection. He focuses on following three pillars to ensure higher returns for our investors:
                                             <ol>
                                             	<li class="g-color--white-opacity">
                                             	<b>Large selection of funds as the starting points:</b> We have tied up with over 30 fund companies offering over 2,000 mutual fund schemes. This ensures we have access to all the funds to cherry pick the ones expected to perform better.
                                             	</li>
                                             	<li class="g-color--white-opacity">
-                                            	<b>Unbiased selection of funds:</b> Our voluntary adherence to &quot;CFA institute&apos;s code of ethics&quot; explicitly bars us from recommending funds just because they are offering us higher commissions or other incentives. Expected performance is the only criteria we look at before adding any funds to our recommended list.
+                                            	<b>Unbiased selection of funds:</b> We have deliberately decided to not take any commission from any mutual fund company. Thus Expected performance is the only criteria we look at before adding any funds to our recommended list.
                                             	</li>
                                             	<li class="g-color--white-opacity">
                                             	<b>Analysis of past performance:</b> We carefully look at and analyse past performance of all the funds as part of our research. Parameters such as volatility of returns and returns for various periods from past 3 months upto 10 years are looked at before adding any fund to our recommended list.
@@ -399,7 +443,7 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            Yes, We are an AMFI registered firm and work with Bombay stock exchange for transactions. This ensure your transactions are always processed in a safe and secure environment.
+                                            Yes, We work with reputed Bombay stock exchange to invest your money in a safe and secure environment
                                             <br>
                                             Additionally, we&apos;ve taken following measures for extra safety:
                                             <ol>
@@ -416,7 +460,7 @@
                                             	By deliberately limiting our role in handling client&apos;s funds, we have de risked client&apos;s investment from any unforeseen issues at our end.
                                             	</li>
                                             	<li class="g-color--white-opacity">
-                                            	Finally, while using internet banking, you are only allowed to pay via bank account which is registered with us. Say for example you have registered your HDFC account number ending with ***2345 with us, You&apos;ll need to enter user ID/password linked with ***2345 on the netbanking page. If you had mistakenly entered wrong account number on our website, you will not be able to make payment as you won&apos;t have the USER ID/password linked with that wrong account number.
+                                            	Finally, while using internet banking, you are only allowed to pay via bank account which is registered with us. Say for example you have registered your HDFC account number ending with ***2345 with us, You&apos;ll need to enter user ID/password linked with ***2345 on the netbanking page. If you had mistakenly entered wrong account number on our website, you will not be able to make payment as you won&apos;t have the USER ID/password linked with that wrong account number
                                             	</li>
                                             </ol>
                                         </div>
@@ -568,7 +612,7 @@
                                     </div>
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
-                                            We will be happy to help you transfer all your existing investments and SIPs to our platform in a simple and convenient way without any paperwork.  Please contact us, for a customised advice on this process.
+                                            We will be happy to help you transfer all your existing investments and SIPs to our platform in a simple, convenient and tax-efficient way. You will also get to earn higher returns with direct mutual funds and benefit from the customised advice of Mr. Kamal Wadhwani, a SEBI registered investment advisor.
                                         </div>
                                     </div>
                                 </div>

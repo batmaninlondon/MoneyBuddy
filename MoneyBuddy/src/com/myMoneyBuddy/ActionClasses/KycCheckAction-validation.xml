@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
         "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
-<validators>
-    <field name="customerName">
+<!-- <validators> -->
+   <!--  <field name="customerName">
         <field-validator type="requiredstring">
             <message>Customer Name can not be blank.</message>
         </field-validator>
-    </field>
-    <field name="addressLineOne">
+    </field> -->
+    <!-- <field name="addressLineOne">
         <field-validator type="requiredstring">
             <message>Address Line One can not be blank.</message>
         </field-validator>
-    </field>
-    <field name="residentialCity">
+    </field> -->
+    <!-- <field name="residentialCity">
         <field-validator type="requiredstring">
             <message>City can not be blank.</message>
         </field-validator>
@@ -21,8 +21,8 @@
         <field-validator type="requiredstring">
             <message>Residential Pin can not be blank.</message>
         </field-validator>
-    </field>
-    <field name="accountNumber">
+    </field> -->
+    <!-- <field name="accountNumber">
         <field-validator type="requiredstring">
             <message>Account Number can not be blank.</message>
         </field-validator>
@@ -47,6 +47,6 @@
           <param name="regexExpression">[a-zA-Z][a-zA-Z][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9][0-9][0-9]</param>  
           <message>Not a valid Ifsc Code.</message>  
         </field-validator>
-    </field>
+    </field> -->
     
-</validators>
+<!-- </validators> -->

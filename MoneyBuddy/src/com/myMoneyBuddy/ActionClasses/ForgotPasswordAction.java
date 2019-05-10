@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
@@ -74,7 +75,9 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    		return SUCCESS;
 	    	}
 	    		
-	    	customerId = customer.getCustomerFromEmailId(getEmailIdForgotPassword()).getCustomerId();
+	    	Customers customers = customer.getCustomerFromEmailId(getEmailIdForgotPassword());
+	    	customerId = customers.getCustomerId();
+	    	String customerName = customers.getCustomerName();
 	    	
 	    	sessionMap.put("emailId", getEmailIdForgotPassword());
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - stored emailId : "+getEmailIdForgotPassword()+" in sessionMap");
@@ -91,7 +94,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_FORGOT_PASSWORD_SUBJECT");
 
-	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset Password");
+	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset your password",customerName);
 	    	
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - mail sent to "+getEmailIdForgotPassword()+" to reset password");
 	    	

@@ -142,6 +142,8 @@
    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 </style> 
+
+
 </head>
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;" onload="setInitialUpfrontInvestment();">
@@ -207,13 +209,52 @@
         </header>
         
 <div class="row g-margin-t-90--xs g-text-right--xs ">   
-<s:form action="kycCheckAction" method="post" > 	
+<s:form action="kycCheckAction" method="post" id="kycCheckForm"> 	
 	<div id="msform" style="text-align: center;">
 		<!-- progressbar -->
+		
+		<s:if test="fieldErrors.containsKey('addressLineOne')">
+			<script type="text/javascript">
+			
+			if(animating) return false;
+		 	animating = true;
+		 	
+		 	current_fs = $(this).parent();
+		 	next_fs = $(this).parent().next();
+		
+	 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	 	
+	 	//show the next fieldset
+	 	next_fs.show(); 
+	 	//hide the current fieldset with style
+	 	current_fs.animate({opacity: 0}, {
+	 		step: function(now, mx) {
+	 			//as the opacity of current_fs reduces to 0 - stored in "now"
+	 			//1. scale current_fs down to 80%
+	 			scale = 1 - (1 - now) * 0.2;
+	 			//2. bring next_fs from the right(50%)
+	 			left = (now * 50)+"%";
+	 			//3. increase opacity of next_fs to 1 as it moves in
+	 			opacity = 1 - now;
+	 			current_fs.css({'transform': 'scale('+scale+')'});
+	 			next_fs.css({'left': left, 'opacity': opacity});
+	 		}, 
+	 		duration: 800, 
+	 		complete: function(){
+	 			current_fs.hide();
+	 			animating = false;
+	 		}, 
+	 		//this comes from the custom easing plugin
+	 		easing: 'easeInOutBack'
+	 	});
+			
+			
+			</script>
+		</s:if>
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
-			<li>Address Details</li>
-			<li>Payment Details</li>
+			<li >Address Details</li>
+			<li >Payment Details</li>
 		</ul>
 	<!-- fieldsets -->
 	<fieldset  style="background-color: #cecece !important; ">
@@ -223,8 +264,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Name</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="customerName" class="g-color--red" />
-		  		<s:textfield class="form-control" id="customer-name" placeholder="Your Full Name: As per Pan Card" name="customerName"/> 
+        		<%-- <s:fielderror fieldName="customerName" class="g-color--red" />
+		  		<s:textfield class="form-control" id="customer-name" placeholder="Your Full Name: As per Pan Card" name="customerName"/> --%> 
+		  		<input class="form-control" name="customerName"  id="customer-name" placeholder="Your Full Name: As per Pan Card" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -232,8 +274,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">PAN</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="panCard" class="g-color--red" />
-		  		<s:textfield class="form-control" id="pancard-number" placeholder="Pancard Number" name="panCard" />
+        		<%-- <s:fielderror fieldName="panCard" class="g-color--red" />
+		  		<s:textfield class="form-control" id="pancard-number" placeholder="Pancard Number" name="panCard" /> --%>
+		  		<input class="form-control" name="panCard"  id="pancard-number" placeholder="Pancard Number" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -241,7 +284,8 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="DD/MM/YYYY Format">
+        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="DD/MM/YYYY Format" required>
+        		
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -315,8 +359,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Name</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="nomineeName" class="g-color--red" />
-		  		<s:textfield class="form-control" id="nominee-name" placeholder="Nominee Name" name="nomineeName"/> 
+        		<%-- <s:fielderror fieldName="nomineeName" class="g-color--red" />
+		  		<s:textfield class="form-control" id="nominee-name" placeholder="Nominee Name" name="nomineeName"/>  --%>
+		  		<input class="form-control" name="nomineeName"  id="nominee-name" placeholder="Nominee Name" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -324,23 +369,27 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Relationship</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="nomineeRelationship" class="g-color--red" />
-		  		<s:textfield class="form-control" id="nominee-relationship" placeholder="Nominee Relationship" name="nomineeRelationship"/> 
+        		<%-- <s:fielderror fieldName="nomineeRelationship" class="g-color--red" />
+		  		<s:textfield class="form-control" id="nominee-relationship" placeholder="Nominee Relationship" name="nomineeRelationship"/> --%> 
+		  		<input class="form-control" name="nomineeRelationship"  id="nominee-relationship" placeholder="Nominee Relationship" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
         </div>
-        	<input type="button" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
+        	<input type="submit" id="nextBtn1" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
 	</fieldset>
-	<fieldset  style="background-color: #cecece !important;">
+	<fieldset  style="background-color: #cecece !important;" >
+
 		<div style="background-color: white; height:55vh;">
+
 		<br/>
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Address Line 1</div>
         	<div class="col-md-6 col-xs-6 ">
         		<s:fielderror fieldName="addressLineOne" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" /> 
+			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" requiredLabel="true"/> 
+			  	<!-- <input class="form-control" name="addressLineOne"  id="address-line-one" required /> -->
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -366,8 +415,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">City</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="residentialCity" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-city" placeholder="City" name="residentialCity" />
+        		<%-- <s:fielderror fieldName="residentialCity" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-city" placeholder="City" name="residentialCity" /> --%>
+			  	<input class="form-control"  id="residential-city" placeholder="City" name="residentialCity" required/>
 			  	<%-- <s:select class="form-control"  id="residential-city" 
 					list="#{'Agra':'Agra', 'Ahmedabad':'Ahmedabad', 'Ajmer':'Ajmer', 'Allahabad':'Allahabad', 
 					'Amritsar':'Amritsar', 'Anand':'Anand', 'Asansol':'Asansol', 'Aurangabad':'Aurangabad', 'Bangalore':'Bangalore', 
@@ -411,8 +461,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Country</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="residentialCountry" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-country" placeholder="Country" name="residentialCountry" value="India" /> 
+        		<%-- <s:fielderror fieldName="residentialCountry" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-country" placeholder="Country" name="residentialCountry" value="India" />  --%>
+			  	<input class="form-control"  id="residential-country" placeholder="Country" name="residentialCountry" value="India" required/>
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>	
@@ -420,8 +471,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 previous">Pin</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="residentialPin" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" /> 
+        		<%-- <s:fielderror fieldName="residentialPin" class="g-color--red" />
+			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" />  --%>
+			  	<input class="form-control"  id="residential-pin" pattern="[0-9]{6}" title="Enter valid 6 digit Pin" placeholder="Pin" name="residentialPin" required/>
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -432,7 +484,9 @@
 		
          </div>
 			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
-			<input type="button" name="next" class="next action-button" value="Next" style="width:20% ;float: right;"/>
+			
+			<input type="button" id="nextBtn2" name="next"  class="next action-button" value="Next" style="width:20% ;float: right;"/>
+			
 	</fieldset>
 	<fieldset  style="background-color: #cecece !important;">
 		<div style="background-color: white; height:55vh;">
@@ -497,7 +551,15 @@
 	</fieldset>
 </div>
 </s:form>
-</div>	  
+</div>
+
+
+<script>
+        errorCheck();
+</script>
+
+
+	  
 </body>
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
@@ -541,39 +603,96 @@
 		 var left, opacity, scale; //fieldset properties which we will animate
 		 var animating; //flag to prevent quick multi-click glitches
 
-		 $(".next").click(function(){
-		 	if(animating) return false;
-		 	animating = true;
+		 $("#nextBtn1").click(function(){
+				
+			var cusName = document.getElementById("customer-name").value;
+		 	var panNum = document.getElementById("pancard-number").value;
+		 	var dateOfBir = document.getElementById("date-of-birth").value;
+		 	var nomName = document.getElementById("nominee-name").value;
+		 	var nomRel = document.getElementById("nominee-relationship").value;
+
+		 	if ( cusName != "" && panNum != "" && dateOfBir != "" && nomName != "" && nomRel != "" )    {
+			 		
+		 		if(animating) return false;
+			 	animating = true;
+			 	
+			 	current_fs = $(this).parent();
+			 	next_fs = $(this).parent().next();
+			 					
+			 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			 	
+			 	//show the next fieldset
+			 	next_fs.show(); 
+			 	//hide the current fieldset with style
+			 	current_fs.animate({opacity: 0}, {
+			 		step: function(now, mx) {
+			 			//as the opacity of current_fs reduces to 0 - stored in "now"
+			 			//1. scale current_fs down to 80%
+			 			scale = 1 - (1 - now) * 0.2;
+			 			//2. bring next_fs from the right(50%)
+			 			left = (now * 50)+"%";
+			 			//3. increase opacity of next_fs to 1 as it moves in
+			 			opacity = 1 - now;
+			 			current_fs.css({'transform': 'scale('+scale+')'});
+			 			next_fs.css({'left': left, 'opacity': opacity});
+			 		}, 
+			 		duration: 800, 
+			 		complete: function(){
+			 			current_fs.hide();
+			 			animating = false;
+			 		}, 
+			 		//this comes from the custom easing plugin
+			 		easing: 'easeInOutBack'
+			 	});
+		 }
+
 		 	
-		 	current_fs = $(this).parent();
-		 	next_fs = $(this).parent().next();
+		 });
+		 
+		 $("#nextBtn2").click(function(){
+
+			var add1 = document.getElementById("address-line-one").value;
+		 	var city = document.getElementById("residential-city").value;
+		 	var country = document.getElementById("residential-country").value;
+		 	var pin = document.getElementById("residential-pin").value;
+
+		 	if ( add1 != "" && city != "" && country != "" && pin != "" )    {
+
+				//activate next step on progressbar using the index of next_fs
+				 if(animating) return false;
+				 	animating = true;
+				 	
+				 	current_fs = $(this).parent();
+				 	next_fs = $(this).parent().next();
+				
+			 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			 	
+			 	//show the next fieldset
+			 	next_fs.show(); 
+			 	//hide the current fieldset with style
+			 	current_fs.animate({opacity: 0}, {
+			 		step: function(now, mx) {
+			 			//as the opacity of current_fs reduces to 0 - stored in "now"
+			 			//1. scale current_fs down to 80%
+			 			scale = 1 - (1 - now) * 0.2;
+			 			//2. bring next_fs from the right(50%)
+			 			left = (now * 50)+"%";
+			 			//3. increase opacity of next_fs to 1 as it moves in
+			 			opacity = 1 - now;
+			 			current_fs.css({'transform': 'scale('+scale+')'});
+			 			next_fs.css({'left': left, 'opacity': opacity});
+			 		}, 
+			 		duration: 800, 
+			 		complete: function(){
+			 			current_fs.hide();
+			 			animating = false;
+			 		}, 
+			 		//this comes from the custom easing plugin
+			 		easing: 'easeInOutBack'
+			 	});
+			
+			 }
 		 	
-		 	//activate next step on progressbar using the index of next_fs
-		 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-		 	
-		 	//show the next fieldset
-		 	next_fs.show(); 
-		 	//hide the current fieldset with style
-		 	current_fs.animate({opacity: 0}, {
-		 		step: function(now, mx) {
-		 			//as the opacity of current_fs reduces to 0 - stored in "now"
-		 			//1. scale current_fs down to 80%
-		 			scale = 1 - (1 - now) * 0.2;
-		 			//2. bring next_fs from the right(50%)
-		 			left = (now * 50)+"%";
-		 			//3. increase opacity of next_fs to 1 as it moves in
-		 			opacity = 1 - now;
-		 			current_fs.css({'transform': 'scale('+scale+')'});
-		 			next_fs.css({'left': left, 'opacity': opacity});
-		 		}, 
-		 		duration: 800, 
-		 		complete: function(){
-		 			current_fs.hide();
-		 			animating = false;
-		 		}, 
-		 		//this comes from the custom easing plugin
-		 		easing: 'easeInOutBack'
-		 	});
 		 });
 
 		 $(".previous").click(function(){
@@ -611,11 +730,11 @@
 		 	});
 		 });
 
-		 $(".submit").click(function(){
+/* 		 $(".submit").click(function(){
 		 	//alert("add here");
 		 	checkKysStatus();
 		 	return false;
-		 })
+		 }) */
 		 </script>
 		 
 </html>

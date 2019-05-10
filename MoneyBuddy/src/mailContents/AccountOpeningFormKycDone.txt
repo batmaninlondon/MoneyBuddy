@@ -68,13 +68,14 @@
 	
 	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi customerName,</span>
 	<br />
-	<p>Congratulations, your recent MoneyBuddy transaction has been executed successfully.</p>
+	<p>Thanks a lot for trusting MoneyBuddy as your financial advisor.</p>
 	<!-- <br /> -->
-	<p>click here to access your latest portfolio:</p>
-	<center><b style="font-size:17px;color:#13b1cd;">LinkForEmail</b></center>
-	<p>PS: If you had invested in multiple funds together, some of your investments might still be under process thus not visible in your portfolio. Request you to kindly wait for a max of 2 working days to see your complete portfolio</p>
-	
+	<p>We seek your co-operation in completing the formalities as per government regulations.</p>
+	<p>You are requested to download the attached account opening form, sign at the bottom of the same and send it back to us.</p>
+	<p>We don’t require the hard copy, just a simple scan can be shared via email or WhatsApp.</p>
 	<br/>
+	Email: <b style="color:#13b1cd;">kamalwadhwani@gmail.com</b>&nbsp;&nbsp;&nbsp;&nbsp;WhatsApp: <b style="color:#13b1cd;">9971648736</b>
+	
 	<p style="border-top:1px solid #e4e4e4;"></p>
 	
 	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>

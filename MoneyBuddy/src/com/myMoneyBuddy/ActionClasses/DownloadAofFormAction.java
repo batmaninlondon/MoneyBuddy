@@ -54,6 +54,8 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
     		
     		String emailId = queryCustomer.getCustomerEmailId(customerId);
     		
+    		String customerName = queryCustomer.getCustomerNameFromId(customerId);
+    		
     		Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
@@ -64,75 +66,25 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 	    	
 	    	String subject = configProperties.getProperty("MAIL_AOF_FORM_SUBJECT");
 	    	
-	    	/*Path path = Paths.get(DownloadAofFormAction.class.getResource("/").toURI()).getParent().getParent().getParent();
-	    	
-	    	String pathName = path + "/MoneyBuddy/resources/AofForms/";
-	    	
-	    	System.out.println("PATH NAME IS : "+pathName);*/
 	    	
 	    	ClassLoader cl = getClass().getClassLoader();
-			
-			//String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
 			String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
 			
 			System.out.println("directoryNameeeee : "+directoryName);
-			/*System.out.println("directoryName : "+cl.getResource("./../AofForms").getPath().toString());*/
 			
 			logger.debug("DownloadAofFormAction class - execute method - directoryName - "+directoryName);
-			
-			
-			
-			/*File folder = new File(directoryName);
-			File[] listOfFiles = folder.listFiles();
-			
-			System.out.println("folder: "+folder );
-
-			for (int i = 0; i < listOfFiles.length; i++) {
-			  if (listOfFiles[i].isFile()) {
-			    System.out.println("File " + listOfFiles[i].getName());
-			    System.out.println("Path of File " + listOfFiles[i].getAbsolutePath());
-			  } else if (listOfFiles[i].isDirectory()) {
-			    System.out.println("Directory " + listOfFiles[i].getName());
-			    System.out.println("Path of Directory " + listOfFiles[i].getAbsolutePath());
-			  }
-			}*/
-			
-			
-			
-			
-			//String directoryName = "../../../resources/AofForms/";
-			
-			/*URL url = this.getClass().getResource("/Account_Opening_Form_1.pdf");
-			String absoluteDiskPath = url.getPath();*/
-			
-			//System.out.println("absoluteDiskPath : "+absoluteDiskPath);
-			
-			/*ServletContext context = getContext();
-			String fullPath = context.getRealPath("/WEB-INF/Account_Opening_Form_1.pdf");*/
-			//InputStream resourceContent = context.getResourceAsStream("/WEB-INF/Account_Opening_Form_1.pdf");
-			
-			
-			/*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-	    	 
-	    	File file = new File(classLoader.getResource("AofForms/Account_Opening_Form_1.pdf").getFile());
-		    	
-			 System.out.println("pdfFile : "+file.getPath().toString());
-			 
-			 String path = new File(classLoader.getResource("Account_Opening_Form_1.pdf").getPath()).toString();
-			 
-			 System.out.println(" Path is : "+path);*/
-	         
-			
-	    	//String directoryName = configProperties.getProperty("KYC_PDF_DIRECTORY");
-			
-			
-	    	
+				    	
 	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
 	    	System.out.println(" Aof Form name is : "+getAofForm());
 			//setAofForm("Account_Opening_Form_1.pdf");
        		SendMail sendMail = new SendMail();
-       		sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningForm.txt",mailLink,"");
+       		if ("Account_Opening_Form_1".equals(getAofForm()) || "Account_Opening_Form_3".equals(getAofForm())) {
+       			sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycDone.txt",mailLink,"",customerName);
+       		}
+       		else {
+       			sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycNotDone.txt",mailLink,"",customerName);
+       		}
        		
        		UpdateCustomer updateCustomer = new UpdateCustomer();
        		updateCustomer.updateAofFormStatus(customerId, "FORM_SENT");

@@ -93,7 +93,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_VERIFICATION_SUBJECT");
 	
-	    	sendMail.MailSending(getEmailIdRegister(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email");
+	    	sendMail.MailSending(getEmailIdRegister(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email","");
 	
 	    	System.out.println(" send email function completed from register user.");
 	    	
