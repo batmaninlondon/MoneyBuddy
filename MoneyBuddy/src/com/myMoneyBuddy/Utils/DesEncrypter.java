@@ -126,7 +126,7 @@ public class DesEncrypter  {
     	
         try{
         	System.out.println("str before replacement in decrypt : "+str);
-        	str = str.replaceAll("123456789", Pattern.quote("+"));	
+        	str = str.replaceAll("123456789", "+");	
         	System.out.println("str after replacement in decrypt : "+str);
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
             System.out.println("dec : "+dec.toString());
@@ -160,17 +160,17 @@ public class DesEncrypter  {
 
     public static void main(String args[]){
         try {
-        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("232abcd1234");
+        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("233abcd1234");
         	
         
         System.out.println(encrypted);
-        /*String decrypted = DesEncrypter.MONEYBUDDY.decrypt("W+td2LrmCk7qLtEZC1Ha0Q==");
+        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("W9uM3I123456789COOByU37Syu/CLQ==");
         System.out.println("decrypted: "+decrypted);
-        int len = "1".length();
+        int len = "233".length();
         
         String password = decrypted.substring(len);
         
-        System.out.println("password : "+password);*/
+        System.out.println("password : "+password);
         
         }
         catch (Exception e ) {
