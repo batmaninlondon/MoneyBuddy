@@ -22,13 +22,12 @@ public class InsertCustomerDetails {
 
 	Logger logger = Logger.getLogger(InsertCustomerDetails.class);
 
-    public void insertCustomer (String emailId,String mobileNumber, String password) throws MoneyBuddyException
+    public String insertCustomer (String emailId,String mobileNumber) throws MoneyBuddyException
     {
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		String customerId = null;
     	try {
     		
-    		System.out.println("password is :...................:"+password);
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - start");
     		
     		hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -38,7 +37,7 @@ public class InsertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,password,"N",null,"NC","N","N","CUSTOMER","N","N","N","NOT_GENERATED","CLIENT","NOT_ACTIVATED");
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,null,"N",null,"NC","N","N","CUSTOMER","N","N","N","NOT_GENERATED","CLIENT","NOT_ACTIVATED");
 
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();
@@ -66,7 +65,7 @@ public class InsertCustomerDetails {
     		System.out.println("insertCustomerDetails class : insertCustomer method : emailId : "+emailId);
     		System.out.println("insertCustomerDetails class : insertCustomer method : customerId : "+customerId);
 
-    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(customerId,password,null);
+    		CustomerPasswordsHistory tempUserPasswords = new CustomerPasswordsHistory(customerId,null,null);
     		hibernateSession.beginTransaction();
     		hibernateSession.save(tempUserPasswords);
 
@@ -83,6 +82,8 @@ public class InsertCustomerDetails {
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - new record inserted in CustomerLoginActivity table");
     		
     		logger.debug("InsertCustomerDetails class - insertCustomer method - customerId - "+customerId+" - end");
+    		
+    		return customerId;
 
     	}
     	catch ( HibernateException e ) {

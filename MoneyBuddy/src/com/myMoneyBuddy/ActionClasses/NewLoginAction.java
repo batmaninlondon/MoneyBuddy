@@ -67,8 +67,14 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	    
 	    		return INPUT;
 	    	}
-	    	if(!(new DesEncrypter()).decrypt(queryCustomer.getPassword(getEmailIdLogin())).equals(getPasswordLogin())) {
-	    		String pswd = new DesEncrypter().decrypt(queryCustomer.getPassword(getEmailIdLogin())+getEmailIdLogin());
+	    	
+	    		        
+	        String decrypted = DesEncrypter.MONEYBUDDY.decrypt(queryCustomer.getPassword(getEmailIdLogin()));
+	    	int len = customerId.length();
+	    	
+	    	String decryptedPswd = decrypted.substring(len);
+	    	if(! decryptedPswd.equals(getPasswordLogin())) {
+	    		String pswd = new DesEncrypter().decrypt(getEmailIdLogin());
 	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);
 	    		
 	    		System.out.println("incorrectPassword ");
@@ -143,7 +149,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored emailId in sessionMap");
 	    	
 	    	DesEncrypter desEncrypter = new DesEncrypter();
-	    	String hashedPassword = desEncrypter.encrypt(getPasswordLogin()+getEmailIdLogin());
+	    	String hashedPassword = desEncrypter.encrypt(getEmailIdLogin());
 
 	    	sessionMap.put("hashedPassword", hashedPassword);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored hashedPassword in sessionMap");

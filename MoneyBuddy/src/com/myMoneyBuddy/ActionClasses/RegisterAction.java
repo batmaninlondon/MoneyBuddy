@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerPassword;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.DesEncrypter;
@@ -72,11 +73,19 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	        	return SUCCESS;
 	    	}
 	    	
-	    	DesEncrypter desEncrypter = new DesEncrypter();
-	    	String hashedPassword = desEncrypter.encrypt(getPasswordRegister()+getEmailIdRegister());
-	
+	    	
+	    	
+	    	String customerId = newCustomer.insertCustomer(getEmailIdRegister(),getMobileNumberRegister());
+	    	
+	    	System.out.println("customerId+getPasswordRegister() : "+customerId+getPasswordRegister());
+	    	
+	    	String hashedPassword = DesEncrypter.MONEYBUDDY.encrypt(customerId+getPasswordRegister());
+	    	
 	    	System.out.println("hashedPassword : "+hashedPassword);
-	    	newCustomer.insertCustomer(getEmailIdRegister(),getMobileNumberRegister(),hashedPassword);
+	    	
+	    	UpdateCustomerPassword updateCustomerPassword = new UpdateCustomerPassword();
+	    	updateCustomerPassword.updatePassword(customerId, getEmailIdRegister(), getPasswordRegister());
+	    	
 	    	SendMail sendMail = new SendMail();
 	
 	    	Properties configProperties = new Properties();

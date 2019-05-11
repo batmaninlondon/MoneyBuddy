@@ -26,7 +26,7 @@ import javax.crypto.spec.PBEParameterSpec;
 import org.apache.log4j.Logger;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
-public class DesEncrypter {
+public class DesEncrypter  {
 
 	Logger logger = Logger.getLogger(DesEncrypter.class);
 	
@@ -38,15 +38,17 @@ public class DesEncrypter {
             (byte)0x56, (byte)0x35, (byte)0xE3, (byte)0x03
         };
 
-    int iterationCount = 3;
+    int iterationCount = 19;
+    
+    public static final DesEncrypter MONEYBUDDY = new DesEncrypter();
 
-    public DesEncrypter() throws MoneyBuddyException {
+    public DesEncrypter() {
 
     	logger.debug("DesEncrypter class - DesEncrypter method - start");
     	
         try{
 
-        	String passPhrase = "123456";
+        	String passPhrase = "MoneyBuddy";
             KeySpec keySpec = new PBEKeySpec(passPhrase.toCharArray(), salt, iterationCount);
             SecretKey key = SecretKeyFactory.getInstance("PBEWithMD5AndDES").generateSecret(keySpec);
 
@@ -65,12 +67,22 @@ public class DesEncrypter {
         {
         	logger.error("DesEncrypter class - DesEncrypter method - caught some Exception");
         	e.printStackTrace();
-			throw new MoneyBuddyException(e.getMessage(),e);
+			try {
+				throw new MoneyBuddyException(e.getMessage(),e);
+			} catch (MoneyBuddyException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         } 
         catch (Exception e ) {
         	logger.error("DesEncrypter class - DesEncrypter method - caught Exception");
 			e.printStackTrace();
-			throw new MoneyBuddyException(e.getMessage(),e);
+			try {
+				throw new MoneyBuddyException(e.getMessage(),e);
+			} catch (MoneyBuddyException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
         
     }
@@ -87,7 +99,9 @@ public class DesEncrypter {
             logger.debug("DesEncrypter class - encrypt method - end"); 
             
             String encryptStr = new sun.misc.BASE64Encoder().encode(enc);
+            System.out.println("str before replacement in encrypt : "+encryptStr);
             String newStr = encryptStr.replaceAll(Pattern.quote("+"), "123456789");
+            System.out.println("str before replacement in encrypt : "+newStr);
             		
             return newStr;
 
@@ -111,9 +125,13 @@ public class DesEncrypter {
     	logger.debug("DesEncrypter class - decrypt method - start");
     	
         try{
+        	System.out.println("str before replacement in decrypt : "+str);
         	str = str.replaceAll("123456789", Pattern.quote("+"));	
+        	System.out.println("str after replacement in decrypt : "+str);
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
+            System.out.println("dec : "+dec.toString());
             byte[] utf8 = dcipher.doFinal(dec);
+            System.out.println("utf8 : "+utf8.toString());
 
             logger.debug("DesEncrypter class - decrypt method - end");
             
@@ -140,5 +158,25 @@ public class DesEncrypter {
 		}
     }
 
+    public static void main(String args[]){
+        try {
+        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("232abcd1234");
+        	
+        
+        System.out.println(encrypted);
+        /*String decrypted = DesEncrypter.MONEYBUDDY.decrypt("W+td2LrmCk7qLtEZC1Ha0Q==");
+        System.out.println("decrypted: "+decrypted);
+        int len = "1".length();
+        
+        String password = decrypted.substring(len);
+        
+        System.out.println("password : "+password);*/
+        
+        }
+        catch (Exception e ) {
+        	
+			e.printStackTrace();
+		}
+      }
     
 }
