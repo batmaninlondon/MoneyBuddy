@@ -209,48 +209,10 @@
         </header>
         
 <div class="row g-margin-t-90--xs g-text-right--xs ">   
-<s:form action="kycCheckAction" method="post" id="kycCheckForm"> 	
+<s:form action="kycCheckAction" method="post" id="formKycCheckAction" > 	
 	<div id="msform" style="text-align: center;">
 		<!-- progressbar -->
 		
-		<s:if test="fieldErrors.containsKey('addressLineOne')">
-			<script type="text/javascript">
-			
-			if(animating) return false;
-		 	animating = true;
-		 	
-		 	current_fs = $(this).parent();
-		 	next_fs = $(this).parent().next();
-		
-	 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-	 	
-	 	//show the next fieldset
-	 	next_fs.show(); 
-	 	//hide the current fieldset with style
-	 	current_fs.animate({opacity: 0}, {
-	 		step: function(now, mx) {
-	 			//as the opacity of current_fs reduces to 0 - stored in "now"
-	 			//1. scale current_fs down to 80%
-	 			scale = 1 - (1 - now) * 0.2;
-	 			//2. bring next_fs from the right(50%)
-	 			left = (now * 50)+"%";
-	 			//3. increase opacity of next_fs to 1 as it moves in
-	 			opacity = 1 - now;
-	 			current_fs.css({'transform': 'scale('+scale+')'});
-	 			next_fs.css({'left': left, 'opacity': opacity});
-	 		}, 
-	 		duration: 800, 
-	 		complete: function(){
-	 			current_fs.hide();
-	 			animating = false;
-	 		}, 
-	 		//this comes from the custom easing plugin
-	 		easing: 'easeInOutBack'
-	 	});
-			
-			
-			</script>
-		</s:if>
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
 			<li >Address Details</li>
@@ -258,7 +220,8 @@
 		</ul>
 	<!-- fieldsets -->
 	<fieldset  style="background-color: #cecece !important; ">
-		<div style="background-color: white; height:55vh;">
+		<div style="background-color: white; height:60vh;">
+		<input class="form-control g-color--red text-center" id="errorMsg1" value=""  style="font-weight: bold; " readonly />
 		<br/>
 		<div class="row g-text-left--xs " >
         	<div class="col-md-1 col-xs-1 "></div>
@@ -266,7 +229,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="customerName" class="g-color--red" />
 		  		<s:textfield class="form-control" id="customer-name" placeholder="Your Full Name: As per Pan Card" name="customerName"/> --%> 
-		  		<input class="form-control" name="customerName"  id="customer-name" placeholder="Your Full Name: As per Pan Card" required />
+		  		<input class="form-control" name="customerName" id="customer-name" placeholder="Your Full Name: As per Pan Card" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -276,7 +239,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="panCard" class="g-color--red" />
 		  		<s:textfield class="form-control" id="pancard-number" placeholder="Pancard Number" name="panCard" /> --%>
-		  		<input class="form-control" name="panCard"  id="pancard-number" placeholder="Pancard Number" required />
+		  		<input class="form-control" name="panCard" pattern="^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$" id="pancard-number" placeholder="Pancard Number" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -284,7 +247,7 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" name="dateOfBirth" placeholder="DD/MM/YYYY Format" required>
+        		<input class="form-control datepicker" id="date-of-birth" pattern="^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$" name="dateOfBirth" placeholder="DD/MM/YYYY Format" required>
         		
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
@@ -361,7 +324,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="nomineeName" class="g-color--red" />
 		  		<s:textfield class="form-control" id="nominee-name" placeholder="Nominee Name" name="nomineeName"/>  --%>
-		  		<input class="form-control" name="nomineeName"  id="nominee-name" placeholder="Nominee Name" required />
+		  		<input class="form-control" name="nomineeName" id="nominee-name" placeholder="Nominee Name" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -371,25 +334,27 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="nomineeRelationship" class="g-color--red" />
 		  		<s:textfield class="form-control" id="nominee-relationship" placeholder="Nominee Relationship" name="nomineeRelationship"/> --%> 
-		  		<input class="form-control" name="nomineeRelationship"  id="nominee-relationship" placeholder="Nominee Relationship" required />
+		  		<input class="form-control" name="nomineeRelationship" id="nominee-relationship" placeholder="Nominee Relationship" required />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
         </div>
-        	<input type="submit" id="nextBtn1" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
+        	<input type="submit" id="nextBtn1" name="next" class="action-button " value="Next" style="width:20% ;float: right;"/>
 	</fieldset>
 	<fieldset  style="background-color: #cecece !important;" >
 
-		<div style="background-color: white; height:55vh;">
-
+		<div style="background-color: white; height:60vh;">
+				
+		<input class="form-control g-color--red text-center" id="errorMsg2" value=""  style="font-weight: bold; " readonly />
+			
 		<br/>
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Address Line 1</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="addressLineOne" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" requiredLabel="true"/> 
-			  	<!-- <input class="form-control" name="addressLineOne"  id="address-line-one" required /> -->
+        		<%-- <s:fielderror fieldName="addressLineOne" class="g-color--red" />
+			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" requiredLabel="true"/>  --%>
+			  	<input class="form-control" name="addressLineOne"  id="address-line-one" placeholder="Address Line 1"  required />
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -398,7 +363,8 @@
         	<div class="col-md-2 col-xs-6 ">Address Line 2</div>
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="addressLineTwo" class="g-color--red" /> --%>
-			  	<s:textfield class="form-control" id="address-line-two" placeholder="Address Line 2" name="addressLineTwo" /> 
+			  	<%-- <s:textfield class="form-control" id="address-line-two" placeholder="Address Line 2" name="addressLineTwo" />  --%>
+			  	<input class="form-control" name="addressLineTwo"  id="address-line-two" placeholder="Address Line 2" />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -407,7 +373,8 @@
         	<div class="col-md-2 col-xs-6 ">Address Line 3</div>
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="addressLineThree" class="g-color--red" /> --%>
-			  	<s:textfield class="form-control" id="address-line-three" placeholder="Address Line 3" name="addressLineThree" /> 
+			  	<%-- <s:textfield class="form-control" id="address-line-three" placeholder="Address Line 3" name="addressLineThree" />  --%>
+			  	<input class="form-control" name="addressLineThree"  id="address-line-three" placeholder="Address Line 3" />
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>	
@@ -473,7 +440,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="residentialPin" class="g-color--red" />
 			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" />  --%>
-			  	<input class="form-control"  id="residential-pin" pattern="[0-9]{6}" title="Enter valid 6 digit Pin" placeholder="Pin" name="residentialPin" required/>
+			  	<input class="form-control"  id="residential-pin" pattern="^[0-9]{6}$"  placeholder="Pin" name="residentialPin" required/>
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -485,11 +452,12 @@
          </div>
 			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
 			
-			<input type="button" id="nextBtn2" name="next"  class="next action-button" value="Next" style="width:20% ;float: right;"/>
+			<input type="submit" id="nextBtn2" name="next"  class="action-button" value="Next" style="width:20% ;float: right;"/>
 			
 	</fieldset>
 	<fieldset  style="background-color: #cecece !important;">
-		<div style="background-color: white; height:55vh;">
+		<div style="background-color: white; height:60vh;">
+		<input class="form-control g-color--red text-center" id="errorMsg3" value=""  style="font-weight: bold; " readonly />
 		<br/>
 		<div class="row g-text-left--xs g-margin-l-70--xs " >
         	<div class="col-md-1 col-xs-1 "></div>
@@ -521,8 +489,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Account Number</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="accountNumber" class="g-color--red" />
-			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" /> 
+        		<%-- <s:fielderror fieldName="accountNumber" class="g-color--red" />
+			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" />  --%>
+			  	<input class="form-control"  id="account-number" pattern="^[0-9]{12}$"  placeholder="Account Number" name="accountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -530,8 +499,9 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">Re-enter Account Number</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="reAccountNumber" class="g-color--red" />
-			  	<s:password class="form-control" id="re-account-number" placeholder="Account Number" name="reAccountNumber" /> 
+        		<%-- <s:fielderror fieldName="reAccountNumber" class="g-color--red" />
+			  	<s:password class="form-control" id="re-account-number" pattern="^[0-9]{12}$" placeholder="Account Number" name="reAccountNumber" />  --%>
+			  	<input class="form-control"  id="re-account-number" pattern="^[0-9]{12}$"  placeholder="Account Number" name="reAccountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -539,25 +509,22 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 ">IFSC Code</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<s:fielderror fieldName="ifscCode" class="g-color--red" />
-			  	<s:textfield class="form-control" id="ifsc-code" placeholder="IFSC Code" name="ifscCode" /> 
+        		<%-- <s:fielderror fieldName="ifscCode" class="g-color--red" />
+			  	<s:textfield class="form-control" id="ifsc-code" pattern="^[a-zA-Z]{4}[0-9]{7}$" placeholder="IFSC Code" name="ifscCode" /> --%>
+			  	<input class="form-control"  id="ifsc-code" pattern="^[a-zA-Z]{4}[0-9]{7}$"  placeholder="IFSC Code" name="ifscCode" required/> 
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
 		
 		</div>
 		<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;"/>
-		<s:submit class="next action-button" value="SUBMIT" style="width:20% ;float: right;"/>
+		<!-- <input type="submit" id="nextBtn3" class="next action-button" value="SUBMIT" style="width:20% ;float: right;"/> -->
+		
+		<s:submit class="action-button" value="SUBMIT" style="width:20% ;float: right;" id="submitBtn"/>
 	</fieldset>
 </div>
 </s:form>
 </div>
-
-
-<script>
-        errorCheck();
-</script>
-
 
 	  
 </body>
@@ -598,6 +565,8 @@
 		    	
 		 <script>
 		 
+		 
+		 
 		//jQuery time
 		 var current_fs, next_fs, previous_fs; //fieldsets
 		 var left, opacity, scale; //fieldset properties which we will animate
@@ -605,13 +574,43 @@
 
 		 $("#nextBtn1").click(function(){
 				
-			var cusName = document.getElementById("customer-name").value;
-		 	var panNum = document.getElementById("pancard-number").value;
-		 	var dateOfBir = document.getElementById("date-of-birth").value;
-		 	var nomName = document.getElementById("nominee-name").value;
-		 	var nomRel = document.getElementById("nominee-relationship").value;
+			var cusName = document.getElementById("customer-name");
+		 	var panNum = document.getElementById("pancard-number");
+		 	var dateOfBir = document.getElementById("date-of-birth");
+		 	var nomName = document.getElementById("nominee-name");
+		 	var nomRel = document.getElementById("nominee-relationship");
 
-		 	if ( cusName != "" && panNum != "" && dateOfBir != "" && nomName != "" && nomRel != "" )    {
+		 	var invalid =  (cusName.value == "") || (panNum.value == "") || (dateOfBir.value == "") ||
+				(nomName.value == "") || (nomRel.value == "") || (!new RegExp(panNum.getAttribute("pattern")).test(panNum.value)) ||
+				(!new RegExp(dateOfBir.getAttribute("pattern")).test(dateOfBir.value)) ;
+
+
+			if ( invalid )  {
+				if ( cusName.value == "" )  {
+					/* cusName.focus();
+					cusName.style.backgroundColor = "red"; */
+					document.getElementById("errorMsg1").value="Error: Please fill Name";
+				}
+				else if ( panNum.value == "" ) {
+					document.getElementById("errorMsg1").value="Error: Please fill Pan";
+				}
+				else if ( !new RegExp(panNum.getAttribute("pattern")).test(panNum.value)) {
+					document.getElementById("errorMsg1").value="Error: Please fill Valid Pan Num";
+				}
+				else if ( dateOfBir.value == "" ) {
+					document.getElementById("errorMsg1").value="Error: Please fill Date Of Birth";
+				}
+				else if ( !new RegExp(dateOfBir.getAttribute("pattern")).test(dateOfBir.value)) {
+					document.getElementById("errorMsg1").value="Error: Please fill Valid Date Of Birth";
+				}
+				else if ( nomName.value == "" ) {
+					document.getElementById("errorMsg1").value="Error: Please fill Nominee Name";
+				}
+				else if ( nomRel.value == "" ) {
+					document.getElementById("errorMsg1").value="Error: Please fill Nominee Relation";
+				}
+			}
+			else   {
 			 		
 		 		if(animating) return false;
 			 	animating = true;
@@ -651,13 +650,40 @@
 		 
 		 $("#nextBtn2").click(function(){
 
-			var add1 = document.getElementById("address-line-one").value;
-		 	var city = document.getElementById("residential-city").value;
-		 	var country = document.getElementById("residential-country").value;
-		 	var pin = document.getElementById("residential-pin").value;
+			var add1 = document.getElementById("address-line-one");
+		 	var city = document.getElementById("residential-city");
+		 	var country = document.getElementById("residential-country");
+		 	var pin = document.getElementById("residential-pin");
+		 	  
+		 	var invalid =  (add1.value == "") || (city.value == "") || (country.value == "") ||
+		 					(pin.value == "") || (!new RegExp(pin.getAttribute("pattern")).test(pin.value));
+		 	
+		 	
+		 	if ( invalid )  {
+		 		if ( add1.value == "" )  {
+		 			document.getElementById("errorMsg2").value="Error: Please fill Address";
+		 		}
+		 		else if ( city.value == "" ) {
+		 			document.getElementById("errorMsg2").value="Error: Please fill City";
+		 		}
+		 		else if ( country.value == "" ) {
+		 			document.getElementById("errorMsg2").value="Error: Please fill Country";
+		 		}
+		 		else if ( pin.value == "" ) {
+		 			document.getElementById("errorMsg2").value="Error: Please fill Pin";
+		 		}
+		 		else if ( !new RegExp(pin.getAttribute("pattern")).test(pin.value)) {
+		 			document.getElementById("errorMsg2").value="Error: Please fill Valid pin";
+		 		}
+		 	}
+		 	        
+		 	/* if ( add1.value != "" && city.value != "" && country.value != "" && pin.value != "" )    {
+		 		
+		 		var invalid =  new RegExp(pin.getAttribute("pattern")).test(pin.value); */
+		 		
+		 		else {
 
-		 	if ( add1 != "" && city != "" && country != "" && pin != "" )    {
-
+		 			document.getElementById("errorMsg2").value="";
 				//activate next step on progressbar using the index of next_fs
 				 if(animating) return false;
 				 	animating = true;
@@ -690,9 +716,50 @@
 			 		//this comes from the custom easing plugin
 			 		easing: 'easeInOutBack'
 			 	});
-			
+			 	return false;
+		 		}
+			/*  }
+		 	 */
+		 });
+		 
+		 $("#submitBtn").click(function(){
+			 var accNum = document.getElementById("account-number");
+			 var reAccNum = document.getElementById("re-account-number");
+			 var ifscCode = document.getElementById("ifsc-code");
+			 
+			 var invalid =  (accNum.value == "") || (!new RegExp(accNum.getAttribute("pattern")).test(accNum.value)) ||
+			 			(reAccNum.value == "") || (!new RegExp(reAccNum.getAttribute("pattern")).test(reAccNum.value)) ||
+			 			(ifscCode.value == "") || (!new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) ||
+			 			(!(accNum.value == reAccNum.value));
+			 
+			 if ( invalid )  {
+					if ( accNum.value == "" )  {
+						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
+					}
+					else if ( !new RegExp(accNum.getAttribute("pattern")).test(accNum.value)) {
+						document.getElementById("errorMsg3").value="Error: Please fill Valid Account Number";
+					}
+					else if ( reAccNum.value == "" )  {
+						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
+					}
+					else if ( !new RegExp(reAccNum.getAttribute("pattern")).test(reAccNum.value)) {
+						document.getElementById("errorMsg3").value="Error: Please fill Valid Account Number";
+					}
+					else if ( ifscCode.value == "" )  {
+						document.getElementById("errorMsg3").value="Error: Please fill IFSC Code";
+					}
+					else if ( !new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) {
+						document.getElementById("errorMsg3").value="Error: Please fill Valid IFSC Code";
+					}
+					else if ( !(accNum.value == reAccNum.value)) {
+						document.getElementById("errorMsg3").value="Error: Account number does not match";
+					}
 			 }
-		 	
+			 else {
+				 document.formKycCheckAction.submit(); 
+			 }
+			 
+			 
 		 });
 
 		 $(".previous").click(function(){
