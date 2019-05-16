@@ -56,7 +56,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public String execute() {
 
 		String customerId = sessionMap.get("customerId").toString();
+		
 		try {
+			
 		logger.debug("PortfolioAction class : execute method : start");
 
 		System.out.println(" calling portfolioAction class for : customerId : "+customerId);
