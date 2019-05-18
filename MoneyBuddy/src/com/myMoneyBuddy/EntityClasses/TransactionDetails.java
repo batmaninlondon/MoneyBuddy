@@ -84,6 +84,9 @@ public class TransactionDetails {
     @Column(name="TRANSACTION_FOLIO_NUM ")
     private String transactionFolioNum;
     
+    @Column(name="REMAINING_QUANTITY")
+    private String remainingQuantity;
+    
     public TransactionDetails() {
 
     }
@@ -91,7 +94,7 @@ public class TransactionDetails {
     public TransactionDetails(String transactionId, String bseOrderId, String bseRegistrationNumber, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionStatus,
 			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
-			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum) {
+			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
@@ -114,6 +117,7 @@ public class TransactionDetails {
 		this.updateDate = updateDate;
 		this.rtaFileGenerated = rtaFileGenerated;
 		this.transactionFolioNum = transactionFolioNum;
+		this.remainingQuantity = remainingQuantity;
 	}
 
 	public String getTransactionDetailId() {
@@ -289,112 +293,220 @@ public class TransactionDetails {
 		this.transactionFolioNum = transactionFolioNum;
 	}
 
+	public String getRemainingQuantity() {
+		return remainingQuantity;
+	}
+
+	public void setRemainingQuantity(String remainingQuantity) {
+		this.remainingQuantity = remainingQuantity;
+	}
 
 	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bseOrderId == null) ? 0 : bseOrderId.hashCode());
+		result = prime * result + ((bseRegistrationNumber == null) ? 0 : bseRegistrationNumber.hashCode());
+		result = prime * result + ((bseRemarks == null) ? 0 : bseRemarks.hashCode());
+		result = prime * result + ((bseSuccessFlag == null) ? 0 : bseSuccessFlag.hashCode());
+		result = prime * result + ((buySell == null) ? 0 : buySell.hashCode());
+		result = prime * result + ((buySellType == null) ? 0 : buySellType.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((remainingQuantity == null) ? 0 : remainingQuantity.hashCode());
+		result = prime * result + ((reverseFeed == null) ? 0 : reverseFeed.hashCode());
+		result = prime * result + ((rtaFileGenerated == null) ? 0 : rtaFileGenerated.hashCode());
+		result = prime * result + ((transactionAmount == null) ? 0 : transactionAmount.hashCode());
+		result = prime * result + ((transactionCode == null) ? 0 : transactionCode.hashCode());
+		result = prime * result + ((transactionDate == null) ? 0 : transactionDate.hashCode());
+		result = prime * result + ((transactionDetailId == null) ? 0 : transactionDetailId.hashCode());
+		result = prime * result + ((transactionFolioNum == null) ? 0 : transactionFolioNum.hashCode());
+		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
+		result = prime * result + ((transactionStatus == null) ? 0 : transactionStatus.hashCode());
+		result = prime * result + ((transactionType == null) ? 0 : transactionType.hashCode());
+		result = prime * result + ((uniqueReferenceNumber == null) ? 0 : uniqueReferenceNumber.hashCode());
+		result = prime * result + ((unitPrice == null) ? 0 : unitPrice.hashCode());
+		result = prime * result + ((updateDate == null) ? 0 : updateDate.hashCode());
+		return result;
+	}
 
-        final TransactionDetails other = (TransactionDetails) obj;
-        if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
-            return false;
-        }
-        if ((this.transactionId == null) ? (other.transactionId != null) : !this.transactionId.equals(other.transactionId)) {
-            return false;
-        }
-        if ((this.bseOrderId == null) ? (other.bseOrderId != null) : !this.bseOrderId.equals(other.bseOrderId)) {
-            return false;
-        }
-        if ((this.bseRegistrationNumber == null) ? (other.bseRegistrationNumber != null) : !this.bseRegistrationNumber.equals(other.bseRegistrationNumber)) {
-            return false;
-        }
-        if ((this.uniqueReferenceNumber == null) ? (other.uniqueReferenceNumber != null) : !this.uniqueReferenceNumber.equals(other.uniqueReferenceNumber)) {
-            return false;
-        }       
-        if ((this.customerId == null) ? (other.customerId != null) : !this.customerId.equals(other.customerId)) {
-            return false;
-        }
-        if ((this.transactionAmount == null) ? (other.transactionAmount != null) : !this.transactionAmount.equals(other.transactionAmount)) {
-            return false;
-        }
-        if ((this.transactionType == null) ? (other.transactionType != null) : !this.transactionType.equals(other.transactionType)) {
-            return false;
-        }
-        if ((this.transactionCode == null) ? (other.transactionCode != null) : !this.transactionCode.equals(other.transactionCode)) {
-            return false;
-        }
-        if ((this.buySell == null) ? (other.buySell != null) : !this.buySell.equals(other.buySell)) {
-            return false;
-        }
-        if ((this.buySellType == null) ? (other.buySellType != null) : !this.buySellType.equals(other.buySellType)) {
-            return false;
-        }
-        if ((this.transactionStatus == null) ? (other.transactionStatus != null) : !this.transactionStatus.equals(other.transactionStatus)) {
-            return false;
-        }
-        if ((this.bseRemarks == null) ? (other.bseRemarks != null) : !this.bseRemarks.equals(other.bseRemarks)) {
-            return false;
-        }
-        if ((this.bseSuccessFlag == null) ? (other.bseSuccessFlag != null) : !this.bseSuccessFlag.equals(other.bseSuccessFlag)) {
-            return false;
-        }
-        if ((this.reverseFeed == null) ? (other.reverseFeed != null) : !this.reverseFeed.equals(other.reverseFeed)) {
-            return false;
-        }
-        if ((this.productId == null) ? (other.productId != null) : !this.productId.equals(other.productId)) {
-            return false;
-        }
-        if ((this.quantity == null) ? (other.quantity != null) : !this.quantity.equals(other.quantity)) {
-            return false;
-        }
-        if ((this.unitPrice == null) ? (other.unitPrice != null) : !this.unitPrice.equals(other.unitPrice)) {
-            return false;
-        }
-        if ((this.transactionDate == null) ? (other.transactionDate != null) : !this.transactionDate.equals(other.transactionDate)) {
-            return false;
-        }
-        if ((this.updateDate == null) ? (other.updateDate != null) : !this.updateDate.equals(other.updateDate)) {
-            return false;
-        }
-        if ((this.rtaFileGenerated == null) ? (other.rtaFileGenerated != null) : !this.rtaFileGenerated.equals(other.rtaFileGenerated)) {
-            return false;
-        }
-        if ((this.transactionFolioNum == null) ? (other.transactionFolioNum != null) : !this.transactionFolioNum.equals(other.transactionFolioNum)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		TransactionDetails other = (TransactionDetails) obj;
+		if (bseOrderId == null) {
+			if (other.bseOrderId != null) {
+				return false;
+			}
+		} else if (!bseOrderId.equals(other.bseOrderId)) {
+			return false;
+		}
+		if (bseRegistrationNumber == null) {
+			if (other.bseRegistrationNumber != null) {
+				return false;
+			}
+		} else if (!bseRegistrationNumber.equals(other.bseRegistrationNumber)) {
+			return false;
+		}
+		if (bseRemarks == null) {
+			if (other.bseRemarks != null) {
+				return false;
+			}
+		} else if (!bseRemarks.equals(other.bseRemarks)) {
+			return false;
+		}
+		if (bseSuccessFlag == null) {
+			if (other.bseSuccessFlag != null) {
+				return false;
+			}
+		} else if (!bseSuccessFlag.equals(other.bseSuccessFlag)) {
+			return false;
+		}
+		if (buySell == null) {
+			if (other.buySell != null) {
+				return false;
+			}
+		} else if (!buySell.equals(other.buySell)) {
+			return false;
+		}
+		if (buySellType == null) {
+			if (other.buySellType != null) {
+				return false;
+			}
+		} else if (!buySellType.equals(other.buySellType)) {
+			return false;
+		}
+		if (customerId == null) {
+			if (other.customerId != null) {
+				return false;
+			}
+		} else if (!customerId.equals(other.customerId)) {
+			return false;
+		}
+		if (productId == null) {
+			if (other.productId != null) {
+				return false;
+			}
+		} else if (!productId.equals(other.productId)) {
+			return false;
+		}
+		if (quantity == null) {
+			if (other.quantity != null) {
+				return false;
+			}
+		} else if (!quantity.equals(other.quantity)) {
+			return false;
+		}
+		if (remainingQuantity == null) {
+			if (other.remainingQuantity != null) {
+				return false;
+			}
+		} else if (!remainingQuantity.equals(other.remainingQuantity)) {
+			return false;
+		}
+		if (reverseFeed == null) {
+			if (other.reverseFeed != null) {
+				return false;
+			}
+		} else if (!reverseFeed.equals(other.reverseFeed)) {
+			return false;
+		}
+		if (rtaFileGenerated == null) {
+			if (other.rtaFileGenerated != null) {
+				return false;
+			}
+		} else if (!rtaFileGenerated.equals(other.rtaFileGenerated)) {
+			return false;
+		}
+		if (transactionAmount == null) {
+			if (other.transactionAmount != null) {
+				return false;
+			}
+		} else if (!transactionAmount.equals(other.transactionAmount)) {
+			return false;
+		}
+		if (transactionCode == null) {
+			if (other.transactionCode != null) {
+				return false;
+			}
+		} else if (!transactionCode.equals(other.transactionCode)) {
+			return false;
+		}
+		if (transactionDate == null) {
+			if (other.transactionDate != null) {
+				return false;
+			}
+		} else if (!transactionDate.equals(other.transactionDate)) {
+			return false;
+		}
+		if (transactionDetailId == null) {
+			if (other.transactionDetailId != null) {
+				return false;
+			}
+		} else if (!transactionDetailId.equals(other.transactionDetailId)) {
+			return false;
+		}
+		if (transactionFolioNum == null) {
+			if (other.transactionFolioNum != null) {
+				return false;
+			}
+		} else if (!transactionFolioNum.equals(other.transactionFolioNum)) {
+			return false;
+		}
+		if (transactionId == null) {
+			if (other.transactionId != null) {
+				return false;
+			}
+		} else if (!transactionId.equals(other.transactionId)) {
+			return false;
+		}
+		if (transactionStatus == null) {
+			if (other.transactionStatus != null) {
+				return false;
+			}
+		} else if (!transactionStatus.equals(other.transactionStatus)) {
+			return false;
+		}
+		if (transactionType == null) {
+			if (other.transactionType != null) {
+				return false;
+			}
+		} else if (!transactionType.equals(other.transactionType)) {
+			return false;
+		}
+		if (uniqueReferenceNumber == null) {
+			if (other.uniqueReferenceNumber != null) {
+				return false;
+			}
+		} else if (!uniqueReferenceNumber.equals(other.uniqueReferenceNumber)) {
+			return false;
+		}
+		if (unitPrice == null) {
+			if (other.unitPrice != null) {
+				return false;
+			}
+		} else if (!unitPrice.equals(other.unitPrice)) {
+			return false;
+		}
+		if (updateDate == null) {
+			if (other.updateDate != null) {
+				return false;
+			}
+		} else if (!updateDate.equals(other.updateDate)) {
+			return false;
+		}
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
-        hash = 83 * hash + (this.transactionId != null ? this.transactionId.hashCode() : 0);
-        hash = 83 * hash + (this.bseOrderId != null ? this.bseOrderId.hashCode() : 0);
-        hash = 83 * hash + (this.bseRegistrationNumber != null ? this.bseRegistrationNumber.hashCode() : 0);
-        hash = 83 * hash + (this.uniqueReferenceNumber != null ? this.uniqueReferenceNumber.hashCode() : 0);
-        hash = 83 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
-        hash = 83 * hash + (this.transactionAmount != null ? this.transactionAmount.hashCode() : 0);
-        hash = 83 * hash + (this.transactionType != null ? this.transactionType.hashCode() : 0);
-        hash = 83 * hash + (this.transactionCode != null ? this.transactionCode.hashCode() : 0);
-        hash = 83 * hash + (this.buySell != null ? this.buySell.hashCode() : 0);
-        hash = 83 * hash + (this.buySellType != null ? this.buySellType.hashCode() : 0);
-        hash = 83 * hash + (this.transactionStatus != null ? this.transactionStatus.hashCode() : 0);
-        hash = 83 * hash + (this.bseRemarks != null ? this.bseRemarks.hashCode() : 0);
-        hash = 83 * hash + (this.bseSuccessFlag != null ? this.bseSuccessFlag.hashCode() : 0);
-        hash = 83 * hash + (this.reverseFeed != null ? this.reverseFeed.hashCode() : 0);
-        hash = 83 * hash + (this.productId != null ? this.productId.hashCode() : 0);
-        hash = 83 * hash + (this.quantity != null ? this.quantity.hashCode() : 0);
-        hash = 83 * hash + (this.unitPrice != null ? this.unitPrice.hashCode() : 0);
-        hash = 83 * hash + (this.transactionDate != null ? this.transactionDate.hashCode() : 0);
-        hash = 83 * hash + (this.updateDate != null ? this.updateDate.hashCode() : 0);
-        hash = 83 * hash + (this.rtaFileGenerated != null ? this.rtaFileGenerated.hashCode() : 0);
-        hash = 83 * hash + (this.transactionFolioNum != null ? this.transactionFolioNum.hashCode() : 0);
-        return hash;
-    }
+	
 
 }

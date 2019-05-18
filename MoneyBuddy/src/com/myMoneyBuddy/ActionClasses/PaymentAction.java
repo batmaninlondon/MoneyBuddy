@@ -52,7 +52,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 
 	public String execute()  {
 
-    	String CLIENT_HOLDING = "SI"; // Considering Single account
     	String customerId = null;
     	
     	try {
@@ -77,39 +76,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
     	
 	    	Trading trading = new Trading();
-	    	
-	    	String bseClientCreatedStatus = customer.getBseClientCreated();
-	    	
-	    	if ("N".equals(bseClientCreatedStatus))  {
-	    		
-	    		QueryCustomerDetails queryCustomerDetails = new QueryCustomerDetails();
-	    		CustomerDetails customerDetails = queryCustomerDetails.getCustomerDetails(customerId);
-	    		
-		    	String ucc = trading.createClient(CLIENT_HOLDING, customerDetails.getTaxStatus(), customerDetails.getOccupation(), customerDetails.getDateOfBirth(),
-		    			customerDetails.getGender(), "", bankDetails.getAccountType(), desEncrypter.decrypt(bankDetails.getAccountNumber()), bankDetails.getIfscCode(),
-		    			customerDetails.getAddressLineOne()+" "+customerDetails.getAddressLineTwo()+" "+customerDetails.getAddressLineThree(), customerDetails.getResidentialCity(), 
-		    			customerDetails.getResidentialState(), customerDetails.getResidentialPin(), customerDetails.getResidentialCountry(),
-					customerId, customer.getCustomerName(), customer.getEmailId(), customer.getPanCard(), customer.getMobileNumber());
-			
-		    	String[] uccSpilts = ucc.split("\\|");
-		    	
-		    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
-		    	
-		    	if(uccSpilts[0].equals("100") ) {
-		    		
-		    		if(uccSpilts[1].contains("SUCCESSFULLY") ) {
-			    		
-			    		UpdateCustomer updateCustomer = new UpdateCustomer();
-			    		updateCustomer.updateBseClientCreationStatus(customerId, "Y");
-			    		bseClientCreatedStatus = "Y";
-		    		}
-		    		
-		    	}
-	    	
-	    	}
-	    	  	
-		if("Y".equals(bseClientCreatedStatus)) {	
-			
+
 			String paymentUrl = null;
 			
 			CommonUtil commonUtil = new CommonUtil();
@@ -164,11 +131,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				setActionMsg("ActionMsg-allOrderFailed with BSE");
 				return "allOrderFailed";
 			}
-		}
-		else {
-			setActionMsg("ActionMsg-clientCreationFailed with BSE");
-    		return "clientCreationFailure";
-		}
 
 		} catch (MoneyBuddyException e) {	
     		logger.error("PaymentAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());

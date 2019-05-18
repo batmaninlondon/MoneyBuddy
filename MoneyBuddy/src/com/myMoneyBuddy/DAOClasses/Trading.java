@@ -407,7 +407,7 @@ public class Trading {
 				tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,customerCartList.get(i).getTransactionType(),
 						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
 						"1", null,null,"N",customerCartList.get(i).getProductId(), null,null,frmtdDateForDB, frmtdDateForDB,"N",
-						selFolioNum); 		
+						selFolioNum,null); 		
 
 				hibernateSession.save(tempTransactionDetail);
 
@@ -932,7 +932,7 @@ public class Trading {
 
 
 	public void executeRedemption(String customerId, String panCard, String fundId, Double amount, Double quantity, String allRedeem, String transactionCode,  
-			String transactionType, String buySell
+			String transactionType, String buySell, String folioNum
 			   ) throws MoneyBuddyException {
 
 
@@ -955,14 +955,7 @@ public class Trading {
 			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - start");
 			
 			System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
-			//System.out.println("Trading class : executeTade method : years : "+years);
-			
-			//orderDataModel = new LinkedList<OrderDataModel>();
 
-			/*for ( Double currentAmount : productDetailsMap.values())  {
-				System.out.println("currentAmount : "+currentAmount);
-				totalAmount = totalAmount + currentAmount;
-			}*/
 			totalAmount = amount;
 
 			Properties clientProperties = new Properties();
@@ -985,19 +978,19 @@ public class Trading {
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
 			WebServiceStarMFPaymentGateway webServiceStarMFPaymentGateway = new WebServiceStarMFPaymentGateway();		
-			IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
+			/*IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
 			String PASSWORD_STARMF;
 			Response passwordStarMFPaymentGateway;
-			String[] resultsStarMFPaymentGateway;
+			String[] resultsStarMFPaymentGateway;*/
 			String entryParam;
 			String[] resultsEntryParam = null;
 
-			boolean allOrderFailed = true ;
+			/*boolean allOrderFailed = true ;
 			String paymentUrl;
 			
 			ArrayOfstring orderNums = new ArrayOfstring();
 			
-			Double totalPaymentAmount = 0.0;
+			Double totalPaymentAmount = 0.0;*/
 
 			//String path = ServletActionContext.getServletContext().getRealPath("");
 			//System.out.println("Path : "+path);
@@ -1038,7 +1031,6 @@ public class Trading {
 			
 				String schemeCode = null;
 				String amcCode = null;
-				String folioNum = null;
 				String schemeType = null;
 				String category = null;
 				buySellType = "FRESH";
@@ -1070,41 +1062,7 @@ public class Trading {
 
 				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+fundId);
 
-				hibernateSession.beginTransaction();
 				
-				Object result = null;
-				query = hibernateSession.createQuery("select folioNum from FolioDetails where amcCode = :amcCode and customerId = :customerId and panCard = :panCard and generatedBy = :generatedBy ");
-				query.setParameter("amcCode", amcCode);
-				query.setParameter("customerId", customerId);
-				query.setParameter("panCard", panCard);
-				query.setParameter("generatedBy", "MoneyBuddy");
-				
-				result = query.uniqueResult();
-				hibernateSession.getTransaction().commit();
-				
-				if (result != null)  {
-					folioNum= result.toString();
-				}
-				else {
-					hibernateSession.beginTransaction();
-					query = hibernateSession.createQuery("select folioNum from FolioDetails where amcCode = :amcCode and customerId = :customerId and panCard = :panCard and generatedBy = :generatedBy ");
-					query.setParameter("amcCode", amcCode);
-					query.setParameter("customerId", customerId);
-					query.setParameter("panCard", panCard);
-					query.setParameter("generatedBy", "Others");
-					
-					result = query.uniqueResult();
-					hibernateSession.getTransaction().commit();
-					
-					if (result != null)  {
-						folioNum= result.toString();
-					}
-					
-				}
-				System.out.println("folioNum :  "+folioNum);
-				
-				
-
 				Double currentTransactionAmount = amount;
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
@@ -1130,7 +1088,7 @@ public class Trading {
 				
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null,null, customerId,transactionType,
 						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
-						"1", null,null,"N",fundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum); 		
+						"1", null,null,"N",fundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum,"0"); 		
 
 				hibernateSession.save(tempTransactionDetail);
 
@@ -1204,12 +1162,6 @@ public class Trading {
 
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from mfOrderEntry API ");
 				
-								
-				if (folioNum == null) {
-					folioNum = clientProperties.getProperty("FOLIO_NUMBER");
-					System.out.println("FOLIO_NUMBER fetched from client properties file ..........");
-				}
-					
 				
 				/*if ("Debt".equals(schemeType) && "Liquid".equals(category))   {
 					
@@ -1308,7 +1260,7 @@ public class Trading {
 				query.setParameter("bseSuccessFlag", resultsEntryParam[7].toString());
 				query.setParameter("transactionDetailId", transactionDetailId);
 				
-				result = query.executeUpdate();
+				Object result = query.executeUpdate();
 				hibernateSession.getTransaction().commit();
 				
 				

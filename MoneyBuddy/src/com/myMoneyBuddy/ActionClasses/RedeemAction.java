@@ -70,7 +70,12 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
 	    	Trading trading = new Trading();
 	    	
 	    	trading.executeRedemption(customerId, customer.getPanCard(), getFundId(), Double.valueOf(getRedeemAmount()), 
-	    					Double.valueOf(getRedeemQuantity()), allRedeem, "NEW", "UPFRONT", "SELL" );
+	    					Double.valueOf(getRedeemQuantity()), allRedeem, "NEW", "UPFRONT", "SELL", getFolioNumber() );
+	    	
+	    	if ("Y".equals(allRedeem))  {
+	    		
+	    		
+	    	}
 	    	
 	
     	    logger.debug("RedeemAction class - execute method - customerId - "+customerId+" - returned success");

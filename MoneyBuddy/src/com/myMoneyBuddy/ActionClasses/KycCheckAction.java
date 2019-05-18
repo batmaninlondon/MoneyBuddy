@@ -14,9 +14,12 @@ import javax.xml.ws.BindingProvider;
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
@@ -145,7 +148,32 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    	    logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - returned kycDone");
 		    	logger.debug("KycCheckAction class - execute method - customerId - "+customerId+" - end");
 		    	
+		    	String CLIENT_HOLDING = "SI"; // Considering Single account
 		    	
+		    	Trading trading = new Trading();
+	    		
+	    		QueryCustomer queryCustomer = new QueryCustomer();
+	    		String cusEmailId = queryCustomer.getCustomerEmailId(customerId);
+	    		String cusMobileNum = queryCustomer.getCustomerMobileNumber(cusEmailId);
+		    	String ucc = trading.createClient(CLIENT_HOLDING, getTaxStatus(), getOccupation(), getDateOfBirth(),
+		    			getGender(), "", getAccountType(), desEncrypter.decrypt(getAccountNumber()), getIfscCode(),
+		    			getAddressLineOne()+" "+getAddressLineTwo()+" "+getAddressLineThree(), getResidentialCity(), 
+		    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
+					customerId, getCustomerName(), cusEmailId, getPanCard(), cusMobileNum);
+			
+		    	String[] uccSpilts = ucc.split("\\|");
+		    	
+		    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+		    	
+		    	if(uccSpilts[0].equals("100") ) {
+		    		
+		    		if(uccSpilts[1].contains("SUCCESSFULLY") ) {
+			    		updateCustomer.updateBseClientCreationStatus(customerId, "Y");
+		    		}
+		    		
+		    	}
+	    	
+	    	
 	    		return "aofNotDone";
 	    	}
 	    	else {

@@ -286,7 +286,7 @@
             <result name="input">/WEB-INF/content/bankDetails.jsp</result>
             <result name="failedWithPaymentGateway">/WEB-INF/content/errorPage.jsp</result>
             <result name="allOrderFailed">/WEB-INF/content/errorPage.jsp</result>
-            <result name="clientCreationFailure">/WEB-INF/content/errorPage.jsp</result>
+            <!-- <result name="clientCreationFailure">/WEB-INF/content/errorPage.jsp</result> -->
             <!-- <result name="failedWithPaymentGateway" type="chain">
             	<param name="actionName">checkBankDetailsAction</param>
             	<param name="actionMsg">${actionMsg}</param>
