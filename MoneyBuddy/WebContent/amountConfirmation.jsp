@@ -141,7 +141,7 @@ input[type="range"] {
 }
 
 .buttonBlock {
-  background-color: #4CAF50;
+  background-color: #13b1cd !important;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -200,30 +200,30 @@ input[type="range"] {
 	
 	<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
 	
-	<div class="row g-margin-t-60--xs">
+	<div class="row g-margin-t-40--xs">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10   " >
 	    	<div class="profile">
-	    		<h3>Your investment choices</h3>
+	    		 <h3 class="g-font-size-32--xs g-font-size-24--md g-font-family--playfair g-letter-spacing--1  text-left font-weight-bold g-hor-divider__solid--white  ">Your investment choices</h3>
 	       	</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
 	</div>
 	
 	
-	<div class="row g-margin-t-20--xs ">
+	<%-- <div class="row g-margin-t-20--xs ">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10   " style="background-color:#efece3">
 	    	<div class="profile g-margin-t-5--xs g-margin-b-5--xs ">
 	  			<span class="g-color--black container " >Please ensure you have read the Key investor information document. 
 	  			Remember the value of investments, and any income from them, 
-	  			can go down as well as up and you may get back less than you invest</span>
+	  			can go down as well as up and you may get back less than you invest.</span>
 	       	</div>
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
-	</div>
+	</div> --%>
 	
-	<div class="row g-margin-t-60--xs g-margin-b-60--xs">
+	<div class="row g-margin-t-40--xs g-margin-b-20--xs">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10   " >
 					<s:form  action="editCartAction" method="post" name="formEditCart">
@@ -232,54 +232,40 @@ input[type="range"] {
 						<s:hidden id="updated-field" name="updatedField"></s:hidden> --%>
 				  		<s:hidden id="return-type" name="returnType"></s:hidden>
 				  	<table id="cartData" width="100%;" >
-						<thead class="table-head g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px #dbdbdb;">
+						<thead class="table-head g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<tr >
 								<th class="text-left col-md-5 " height="70"></th>
-								<th class="text-left col-md-2 ">Key investor information</th>
-								<th class="text-center col-md-2 ">Single payment</th>
 								<th class="text-left col-md-2 ">Investment Folio</th>
-								<th class="text-left col-md-2 ">SIP Tenure(years)</th>
-								<th class="text-left col-md-2 ">SIP debit date</th>
+								<th class="text-left col-md-2 ">Lumpsum Amount</th>
+								<th class="text-right col-md-2 ">SIP Amount</th>
+								<th class="text-left col-md-2 ">SIP Tenure (yrs)</th>
+								<th class="text-left col-md-2 ">SIP Debit Date</th>
 								<th class="text-center col-md-1 "></th>
-								<th class="text-center col-md-1 hidden"></th>
-								<th class="text-center col-md-1 hidden"></th>
+								<th class="text-center col-md-1 "></th>
+								<th class="text-center col-md-1 "></th>
+								
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<s:iterator value="#session.customerCartList" var="customerCartListElement" >
-								<tr class="">
+								<tr class="table-body g-font-size-14--xs " style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 								    <s:if test="productName.equals('Total')">
-								    	
-								    	<td class="text-center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.productName"/></b></td>
-								    	<td class="g-bg-color--gray-light"></td>
-								    	<td class="text-center g-font-size-14--xs g-bg-color--gray-light "><b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b></td>
-								    	
-								    	<td class="g-bg-color--gray-light"></td>
-								    	<td class="g-bg-color--gray-light"></td>
-								    	<td class="g-bg-color--gray-light"></td>
-								    	<td class="g-bg-color--gray-light"></td>
-								    	<td class="g-bg-color--gray-light"></td>
+								    	<th class="text-left col-md-5 g-bg-color--gray-light" height="70"></th>
+										<th class="text-right col-md-2 g-bg-color--gray-light "><s:property value="#customerCartListElement.productName"/></th>
+										<th class="text-right col-md-2 g-bg-color--gray-light "><b><span class="title  text-right" >&#8377; &ensp; </span><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b></th>
+										<th class="text-right col-md-2  g-bg-color--gray-light"></th>
+										<th class="text-left col-md-2  g-bg-color--gray-light"></th>
+										<th class="text-left col-md-2 g-bg-color--gray-light"></th>
+										<th class="text-center col-md-1 g-bg-color--gray-light"></th>
+										<th class="text-center col-md-1 g-bg-color--gray-light"></th>
+										<th class="text-center col-md-1 g-bg-color--gray-light"></th>
 								    </s:if>
 									<s:else>
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
 								    	<s:set var="folios" value="#customerCartListElement.folioNumList" />
 								    	<s:set var="selFolio" value="#customerCartListElement.folioNumber" />
-								    	<td class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
-								    	<td class="text-center col-md-2 ">
-											<a  href="<s:property value="#customerCartListElement.pdfFilePath"/>" >
-										 		<span class="g-font-size-20--xs g-font-size-15--xs fa fa-file-pdf-o g-color--primary"></span>
-									 		</a>
-										</td>
-										<td class="text-center col-md-2 "><p class="title  " >&#8377;
-											<input name="investmentAmtArr" type="number" id="upfrontInvestment" class="g-color--black" value=<s:property value="#customerCartListElement.amount"/>
-														min="1"  max="999999"  
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-														<%-- <input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-color--black" value=<s:property value="#customerCartListElement.amount"/>
-														min="1"  max="999999" onChange="editCart(<s:property value="selectedCartId" />,this.value,'AMOUNT')" 
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" > --%>
-										</p>
-										</td>
-										<td class="text-left col-md-2 ">
+								    	<td class="text-left" height="70" class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+								    	<td class="text-left col-md-2 ">
 											<%
 											 	
 												System.out.println("FolioNumList is : "+pageContext.getAttribute("folios"));
@@ -297,7 +283,7 @@ input[type="range"] {
 										    	
 										    	 /* if (a.length != 1)  { */
 									    		 %>
-												<select name="folioNumArr" class="" id="selectFolioNum" style="width:120px;" > 
+												<select name="folioNumArr" class="text-right" id="selectFolioNum" style="width:120px;" > 
 												    
 												    <% 
 												    
@@ -317,15 +303,38 @@ input[type="range"] {
 												</select>
 												
 										</td>
+								    	
+								    	
+								    	<td class="text-right col-md-2 ">
+											<%-- <a  href="<s:property value="#customerCartListElement.pdfFilePath"/>" >
+										 		<span class="g-font-size-20--xs g-font-size-15--xs fa fa-file-pdf-o g-color--primary"></span>
+									 		</a> --%>
+									 		<p class="title  " >&#8377;
+												<input name="sipAmtArr" type="number" id="sipInvestment" class="g-color--black text-right" value=<s:property value="#customerCartListElement.amount"/>
+														min="1"  max="999999"  
+														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+											</p>
+										</td>
+										<td class="text-right col-md-2 ">
+											<p class="title  text-right" >&#8377;
+												<input name="investmentAmtArr" type="number" id="upfrontInvestment" class="g-color--black text-right" value=<s:property value="#customerCartListElement.amount"/>
+														min="1"  max="999999"  
+														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+														<%-- <input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-color--black" value=<s:property value="#customerCartListElement.amount"/>
+														min="1"  max="999999" onChange="editCart(<s:property value="selectedCartId" />,this.value,'AMOUNT')" 
+														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" > --%>
+											</p>
+										</td>
+										
 										<s:if test="transactionType.equals('UPFRONT')">
 										<td class="text-left col-md-2 ">
-											<select name="sipTenureArr" class="hidden" id="sip-tenure" style="width:120px;" > 
+											<select name="sipTenureArr" class="hidden" id="sip-tenure" style="width:60px;" > 
 										        <option value="" >0</option>
 											</select>
 												
 										</td>
 										<td class="text-left col-md-2 ">
-											<select name="sipDateArr" class="hidden" id="sip-date"  style="width:120px;" > 
+											<select name="sipDateArr" class="hidden" id="sip-date"  style="width:60px;" > 
 										        <option value=""  >0</option>
 											</select>
 										</td>
@@ -338,9 +347,9 @@ input[type="range"] {
 										        <% 
 										        	String selSipTen= (String) pageContext.getAttribute("selSipTenure");
 										        	if ("99".equals(selSipTen)) {
-										        		selSipTen = "untilStopped";
+										        		selSipTen = "until Stopped";
 										        	}
-										        	String[] sipTen = {"1","2","5","10","untilStopped"};
+										        	String[] sipTen = {"1 yr","2 yr","5 yr","10 yr","Until Stopped"};
 										        	for (int i=0;i<sipTen.length;i++)  {
 										        		String tenure= (String)sipTen[i]; 
 										        		if (tenure.equals(selSipTen))
@@ -360,7 +369,7 @@ input[type="range"] {
 												
 										</td>
 										<td class="text-left col-md-2 ">
-											<select name="sipDateArr" class="" id="sip-date"  style="width:120px;" > 
+											<select name="sipDateArr" class="" id="sip-date"  style="width:100px;" > 
 										        <% 
 										        	String selSipDate= (String) pageContext.getAttribute("selSipDate");
 										        	String[] sipDates = {"1","5","10","20"};
@@ -399,24 +408,25 @@ input[type="range"] {
 										</td>
 										</s:else>
 										<td class="text-center col-md-1 ">
-											 
-											 	<a  href="javascript:deleteCartEntry(<s:property value="selectedCartId" />);" >
-											 		<span class="g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary"></span>
-										 		</a>
-							    				<%-- <button type="button" class="text-center g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Remove</button> --%>
-							    			
-										</td>
-										<td class="text-center col-md-1 ">
 											 <input class="hidden" name="cartIdArr"  value=<s:property value="#customerCartListElement.cartId"/> />
 										</td>
 										<td class="text-center col-md-1 ">
 											 <input class="hidden" name="productIdArr"  value=<s:property value="#customerCartListElement.productId"/> />
 										</td>
+										<td class="text-right col-md-1 ">
+											 
+											 	<a  href="javascript:deleteCartEntry(<s:property value="selectedCartId" />);" >
+											 		<span class="g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary text-right"></span>
+										 		</a>
+							    				<%-- <button type="button" class="text-center g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Remove</button> --%>
+							    			
+										</td>
+										
 
 								    </s:else>
 								</tr>
 							</s:iterator> 
-
+							
 						</tbody>
 					</table>
 					</s:form>
@@ -425,29 +435,29 @@ input[type="range"] {
 				  		<s:hidden id="cart-id-value" name="cartId"></s:hidden>
 	  				</s:form>
 	     </div>
+	     
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
-	
-	
-	
-	
-	    	<div class="row g-margin-b-150--xs">
-  				<div class="col-md-4"></div>
-  				<div class="col-md-3">
-  					<a href="javascript:editCart('FundExplorer');" class="btn btn-home g-color--white "   >+ Add more investments</a>
+	    	
+			
+			<div class="row g-margin-b-50--xs">
+  				<div class="col-md-1"></div>
+  				<div class="col-md-6 text-left">
+  					<a href="javascript:editCart('FundExplorer');" class=" buttonBlock g-color--white "  >+ Add more investments</a>
   				</div>
-				<div class="col-md-3">
+  				<div class="col-md-3"></div>
+				<div class="col-md-1 text-left">
 					<s:form action="redirectAction" method="post">
 		      			<s:if test="#session.customerCartList.size() == 1 ">
-		      				<button type="button"  class="btn btn-home g-color--white disabled"  >Next</button>
+		      				<button type="button"  class="btn buttonBlock g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
-		      				<s:submit class="btn btn-home g-color--white  " value="Next" />
+		      				<s:submit class="buttonBlock g-color--white text-left " value="Next" />
 		      			</s:else>
 		      		</s:form>
 	      		</div>
-	      		<div class="col-md-2"></div>
-	      		<!-- <div class="col-md-2"><a href="javascript:newUpdate();" class="btn btn-home g-color--white "   >Next</a></div> -->
+	      		<div class="col-md-1"></div>
+	      		
 			</div>
 
 	<%-- <div class="row" >

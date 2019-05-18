@@ -4,10 +4,13 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://aac9ppbotiomy3.cod5krwosqto.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://aac9ppbotiomy3.cod5krwosqto.ap-south-1.rds.amazonaws.com:3306/ebdb</property> -->
+		<property name="hibernate.connection.url">jdbc:mysql://aa18d9lw67l6l5i.cxc7qncio1aq.ap-south-1.rds.amazonaws.com:3306/ebdb</property>
 		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ebdb</property> -->
-		<property name="hibernate.connection.username">moneybuddy</property>
-		<property name="hibernate.connection.password">MonBudDB33</property>
+		<property name="hibernate.connection.username">moneybuddydb</property>
+		<property name="hibernate.connection.password">moneybuddyproddb</property>
+		<!-- <property name="hibernate.connection.username">moneybuddy</property>
+		<property name="hibernate.connection.password">MonBudDB33</property> -->
 		<property name="hibernate.show_sql">true</property>
 	
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>

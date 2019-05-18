@@ -251,7 +251,7 @@
              <div class="container ">
                <div class="g-text-center--xs g-margin-b-10--xs">
 					<br/><br/><br/><br/>
-                    <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
+                    <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard11</h3>
                 </div> 
                 <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
                     <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">

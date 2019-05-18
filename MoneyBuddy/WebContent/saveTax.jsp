@@ -72,6 +72,7 @@
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
@@ -85,14 +86,13 @@
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
-										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
-	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
-									      	</ul>
-	                                    
-	                                    </li>
+										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu">
+                                            	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link">FAQ</a></li>
+                                            	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link">Contact Us</a></li>
+                                        	</ul>
+                                    	</li>
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
@@ -126,7 +126,9 @@
 	                        <div class="counter text-center">
 	                            <ul id="countdown_dashboard">
 	                                    <div class="dash days_dash">
-	                                        <p class="title "><span class="g-color--white">Time left before tax filing</span></p>
+	                                        <p class="title "><span class="g-color--white">Use it or lose it</span></p>
+	                                         <p class=" g-display-block--xs g-font-size-14--xs  "><span class="g-color--white">Use your income tax allowance by 31st Mar'20, or lose it forever.</span></p>
+	                                         <br/>
 	                                    </div>
 	                                
                                     <li>
