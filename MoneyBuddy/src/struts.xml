@@ -131,6 +131,7 @@
     <package name="displayDashboardAction" namespace="/" extends="struts-default">
         <action name="displayDashboardAction" class="com.myMoneyBuddy.ActionClasses.DisplayDashboardAction">
             <!-- <result name="success" type="chain">portfolioAction</result> -->
+            <result name="emailIdNotExist">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="success">/WEB-INF/content/customerDashboardForAdmin.jsp</result>
             <result name="error">/WEB-INF/content/errorPage</result>
         </action>

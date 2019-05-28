@@ -107,6 +107,13 @@
 		            <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
 	          	</div>
 	          	<!-- <button type="button" class="g-bg-color--primary g-color--white"  >ViewCustomersDashboard</button> -->
+	          	<!-- <div class="row" >
+				<div class="col-md-3"></div>
+				<div class="col-md-5 "> -->
+						<p><s:actionmessage class="small-text"/> </p>
+				<!-- </div>
+				<div class="col-md-4"></div>
+			</div> -->
 	          	<s:submit class="btn btn-primary" value="ViewCustomersDashboard" style="padding:5px 15px 5px 15px;"/>
 	          	<%-- <a href="<s:url action="displayDashboardAction"/>">
 					

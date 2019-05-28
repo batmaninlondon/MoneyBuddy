@@ -20,6 +20,7 @@ public class DisplayDashboardAction extends ActionSupport implements SessionAwar
 	private SessionMap<String,Object> sessionMap;
 	//private InputStream stream;
 	private String emailIdDashboard;
+	private String errorMsg;
 
     public String execute() {
 
@@ -33,6 +34,12 @@ public class DisplayDashboardAction extends ActionSupport implements SessionAwar
 			
 			QueryCustomer queryCustomer = new QueryCustomer();
 			String customerId= Integer.toString(queryCustomer.getCustomerId(getEmailIdDashboard()));
+			
+			if ( "0".equals(customerId))  {
+				/*setErrorMsg("EmailId does not exists!! ");*/
+				addActionMessage("This email ID is not registered with MoneyBuddy");
+				return "emailIdNotExist" ;
+			}
 			sessionMap.put("customerId", customerId);
 			/*QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
@@ -72,6 +79,14 @@ public class DisplayDashboardAction extends ActionSupport implements SessionAwar
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;
     }
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
     
     
 /*	
