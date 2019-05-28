@@ -100,11 +100,11 @@ public class Trading {
 			occupation = query.uniqueResult().toString();
 			hibernateSession.getTransaction().commit();
 			
-			dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
-			System.out.println("dob : "+dob);
+			/*dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
+			System.out.println("dob : "+dob);*/
 			
 			String[] clientDetailsArray = {customerId,clientHolding,taxStatus,occupation,clientAppName1,clientProperties.getProperty("CLIENT_APPNAME2"),
-					clientProperties.getProperty("CLIENT_APPNAME3"),dob,clientGender,clientProperties.getProperty("CLIENT_GUARDIAN"),clientPan,
+					clientProperties.getProperty("CLIENT_APPNAME3"),clientDob,clientGender,clientProperties.getProperty("CLIENT_GUARDIAN"),clientPan,
 					clientProperties.getProperty("CLIENT_NOMINEE"),clientProperties.getProperty("CLIENT_NOMINEE_RELATION"),clientProperties.getProperty("CLIENT_GUARDIANPAN"),
 					clientProperties.getProperty("CLIENT_TYPE"),clientProperties.getProperty("CLIENT_DEFAULTDP"),clientProperties.getProperty("CLIENT_CDSLDPID"),
 					clientProperties.getProperty("CLIENT_CDSLCLTID"),clientProperties.getProperty("CLIENT_NSDLDPID"),clientProperties.getProperty("CLIENT_NSDLCLTID"),
@@ -400,6 +400,9 @@ public class Trading {
 					
 						buySellType = "ADDITIONAL";
 
+				}
+				else {
+					selFolioNum = null;
 				}
 				
 				hibernateSession.beginTransaction();

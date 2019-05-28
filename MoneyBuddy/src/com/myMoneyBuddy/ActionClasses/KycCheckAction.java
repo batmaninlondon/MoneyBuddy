@@ -156,7 +156,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    		String cusEmailId = queryCustomer.getCustomerEmailId(customerId);
 	    		String cusMobileNum = queryCustomer.getCustomerMobileNumber(cusEmailId);
 		    	String ucc = trading.createClient(CLIENT_HOLDING, getTaxStatus(), getOccupation(), getDateOfBirth(),
-		    			getGender(), "", getAccountType(), desEncrypter.decrypt(getAccountNumber()), getIfscCode(),
+		    			getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
 		    			getAddressLineOne()+" "+getAddressLineTwo()+" "+getAddressLineThree(), getResidentialCity(), 
 		    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
 					customerId, getCustomerName(), cusEmailId, getPanCard(), cusMobileNum);

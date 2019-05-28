@@ -37,9 +37,9 @@
 	function uploadCutsomerNav(el) 
 	{		
 		var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
-		var folioNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
-		var unitsPurchased = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
-		var navValue = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
+		var folioNum = $(el).closest("tr").find("td:eq(4) input[type='text']").val();
+		var unitsPurchased = $(el).closest("tr").find("td:eq(5) input[type='text']").val();
+		var navValue = $(el).closest("tr").find("td:eq(6) input[type='text']").val();
 		
 		//alert('unitsPurchased : '+unitsPurchased);
 		document.getElementById("action-bse-order-id").value = bseOrderId;
@@ -149,7 +149,8 @@
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
 			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
-									    	<b><s:property value="#pendingNavOrdersElement.bseOrderId"/></b>
+									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.bseOrderId"/>" readonly>
+									    	<%-- <b><s:property value="#pendingNavOrdersElement.bseOrderId"/></b> --%>
 									    </td>
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>

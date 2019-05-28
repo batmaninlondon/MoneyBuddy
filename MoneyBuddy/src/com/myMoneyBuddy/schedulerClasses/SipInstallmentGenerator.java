@@ -51,7 +51,6 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 				sipEndDate = dateFormat.parse(sipDetail.getSipEndDate());
 				System.out.println("sipEndDate : " + sipEndDate);
 		        
-
 		        if (currentDate.compareTo(sipEndDate) > 0) {
 		        	hibernateSession.beginTransaction();
 		        	query = hibernateSession.createQuery("update SipDetails set sipCompletionStatus='Y' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
