@@ -26,6 +26,7 @@
         <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
 
         <!-- Theme Styles -->
+        <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 

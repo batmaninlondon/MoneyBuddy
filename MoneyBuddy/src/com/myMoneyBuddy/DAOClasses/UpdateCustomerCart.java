@@ -75,22 +75,22 @@ public class UpdateCustomerCart {
 
 		try {
 			
-			if ("untilStopped".equals(sipTenure))  {
+			/*if ("untilStopped".equals(sipTenure))  {
 				sipTenure="99";
-			}
+			}*/
 			
 			hibernateSession.beginTransaction();
 			Query query ;
 			if (sipTenure == null || "".equals(sipTenure) )  {
 				System.out.println(" Inside NULL loop : value of sipTenure is :"+sipTenure+":");
 				query = hibernateSession.createQuery("select cartId, amount from CustomerCart where customerId=:customerId"
-						+ " and productId=:productId and folioNumber=:folioNumber and cartId != :cartId ");
+						+ " and productId=:productId and folioNumber=:folioNumber and cartId != :cartId  and transactionType='UPFRONT' ");
 			}
 			else {
 				System.out.println(" Inside NOT NULL loop : value of sipTenure is :"+sipTenure+":");
 				query = hibernateSession.createQuery("select cartId, amount from CustomerCart where customerId=:customerId"
 						+ " and productId=:productId and folioNumber=:folioNumber and sipDuration=:sipDuration "
-						+ " and sipDate=:sipDate and cartId != :cartId ");
+						+ " and sipDate=:sipDate and cartId != :cartId  and transactionType='SIP' ");
 				query.setParameter("sipDuration",sipTenure);
 				query.setParameter("sipDate",sipDate);
 			}
@@ -105,13 +105,16 @@ public class UpdateCustomerCart {
 			
 			if (it.hasNext())  {
 				Object[] row = (Object[]) it.next();
+				
+				System.out.println("sipTenure is : "+sipTenure);
 				hibernateSession.beginTransaction();
 				if (sipTenure == null || "".equals(sipTenure) )  {
-					query = hibernateSession.createQuery("update CustomerCart set amount = :amount, folioNumber=:folioNumber where cartId = :cartId");
+					query = hibernateSession.createQuery("update CustomerCart set amount = :amount, folioNumber=:folioNumber where cartId = :cartId"
+							+ " and transactionType='UPFRONT' ");
 				}
 				else {
 					query = hibernateSession.createQuery("update CustomerCart set amount = :amount, folioNumber=:folioNumber,"
-    						+ " sipDuration=:sipDuration, sipDate=:sipDate where cartId = :cartId");
+    						+ " sipDuration=:sipDuration, sipDate=:sipDate where cartId = :cartId and transactionType='SIP'");
     				query.setParameter("sipDuration",sipTenure);
     				query.setParameter("sipDate",sipDate);
 				}

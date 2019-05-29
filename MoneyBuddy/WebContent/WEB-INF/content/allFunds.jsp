@@ -28,6 +28,7 @@
         <link href="assets/css/bootstrap/font-awesome.min.css" rel="stylesheet"> -->
 
         <!-- Theme Styles -->
+        <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <!-- <link rel="stylesheet" type="text/css" href="css/cardio.css"> -->

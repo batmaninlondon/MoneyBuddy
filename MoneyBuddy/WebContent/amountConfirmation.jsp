@@ -346,20 +346,22 @@ input[type="range"] {
 											<select name="sipTenureArr" class="" id="sip-tenure" style="width:120px;" > 
 										        <% 
 										        	String selSipTen= (String) pageContext.getAttribute("selSipTenure");
-										        	if ("99".equals(selSipTen)) {
-										        		selSipTen = "until Stopped";
-										        	}
+										        	/* if ("99".equals(selSipTen)) {
+										        		selSipTen = "Until Stopped";
+										        	} */
 										        	String[] sipTen = {"1 yr","2 yr","5 yr","10 yr","Until Stopped"};
+										        	String[] sipTenVal = {"1","2","5","10","99"};
 										        	for (int i=0;i<sipTen.length;i++)  {
 										        		String tenure= (String)sipTen[i]; 
-										        		if (tenure.equals(selSipTen))
+										        		String tenureVal = (String)sipTenVal[i];
+										        		if (tenureVal.equals(selSipTen))
 										        		{
 										        %>
-										     		 		<option value="<%=tenure%>" selected="selected"><%=tenure%></option>
+										     		 		<option value="<%=tenureVal%>" selected="selected"><%=tenure%></option>
 								     		 	<%
 										        		} else {
 							        			%>
-										        			<option value="<%=tenure%>" ><%=tenure%></option>
+										        			<option value="<%=tenureVal%>" ><%=tenure%></option>
 							        			<%
 										        			
 										        		}
