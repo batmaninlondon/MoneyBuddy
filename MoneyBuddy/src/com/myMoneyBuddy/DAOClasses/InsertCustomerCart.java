@@ -47,13 +47,13 @@ public class InsertCustomerCart {
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))  {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),transactionType,null,null,null,"NEW",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),transactionType,null,null,null,"New",folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
 	    		else {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
 	    					selectedFundDetailsDataModel.getMinSipAmount(),transactionType,"99",null,
-	    					"1","NEW",folioNumList,frmtdDate,"Pending",rta,
+	    					"1","New",folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
 	   	        hibernateSession.save(tempCustomerCart);

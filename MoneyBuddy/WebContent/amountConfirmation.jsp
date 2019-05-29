@@ -447,14 +447,15 @@ input[type="range"] {
   				</div>
   				<div class="col-md-3"></div>
 				<div class="col-md-1 text-left">
-					<s:form action="redirectAction" method="post">
+					<%-- <s:form action="redirectAction" method="post"> --%>
 		      			<s:if test="#session.customerCartList.size() == 1 ">
 		      				<button type="button"  class="btn buttonBlock g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
-		      				<s:submit class="buttonBlock g-color--white text-left " value="Next" />
+		      				<a href="javascript:editCart('Redirect');" class=" buttonBlock g-color--white "  >Next</a>
+		      				<%-- <s:submit class="buttonBlock g-color--white text-left " value="Next" /> --%>
 		      			</s:else>
-		      		</s:form>
+		      		<%-- </s:form> --%>
 	      		</div>
 	      		<div class="col-md-1"></div>
 	      		

@@ -160,11 +160,11 @@ public class DesEncrypter  {
 
     public static void main(String args[]){
         try {
-        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("233abcd1234");
+        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("654321654321");
         	
         
         System.out.println(encrypted);
-        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("HlZZtqEVWl6W15jV8/E6FQ==");
+        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("Idv1f123456789EXNIEhG41DONrxaA==");
         System.out.println("decrypted: "+decrypted);
         int len = "233".length();
         

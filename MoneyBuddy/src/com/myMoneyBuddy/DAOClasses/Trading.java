@@ -396,7 +396,7 @@ public class Trading {
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
 
-				if ( !"New".equals(selFolioNum) )  {
+				if ( !"New".equalsIgnoreCase(selFolioNum) )  {
 					
 						buySellType = "ADDITIONAL";
 

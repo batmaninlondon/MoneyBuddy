@@ -84,8 +84,13 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 		    	sessionMap.put("customerCartList", customerCartList);
 		    	logger.debug("EditCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
     		}
+    		
+    		if ("FundExplorer".equals(getReturnType()))
 	
-	    	return SUCCESS;
+    			return SUCCESS;
+    		
+    		else 
+    			return "redirect";
 	    	
     	} 
     	catch ( Exception e )  {

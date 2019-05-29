@@ -239,6 +239,7 @@
         <action name="editCartAction" class="com.myMoneyBuddy.ActionClasses.EditCartAction">
             <!-- <result name="success">/amountConfirmation.jsp</result> -->
             <result name="success" type="chain">MFexplorer</result>
+            <result name="redirect" type="chain">redirectAction</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
