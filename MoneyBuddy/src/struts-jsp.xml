@@ -97,6 +97,16 @@
 	    	<result>/WEB-INF/content/uploadCustomerNav.jsp</result>
 		</action>
 	</package>
+	<package name="updateMandateDetails" namespace="/" extends="struts-default">
+	    <action name="updateMandateDetails">
+	    	<result>/WEB-INF/content/updateMandateDetails.jsp</result>
+		</action>
+	</package>
+	<package name="updateAofDetails" namespace="/" extends="struts-default">
+	    <action name="updateAofDetails">
+	    	<result>/WEB-INF/content/updateAofDetails.jsp</result>
+		</action>
+	</package>
 	<package name="adminDashboard" namespace="/" extends="struts-default">
 	    <action name="adminDashboard">
 	    	<result>/WEB-INF/content/adminDashboard.jsp</result>

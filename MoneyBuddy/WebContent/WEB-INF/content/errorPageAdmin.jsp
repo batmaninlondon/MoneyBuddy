@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
-<%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -19,39 +17,56 @@
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
-    
-    <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-    
-	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
-	<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
- 	
+	<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+	
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+        
+        
+ 	<script type="text/javascript"  src="assets/js/jquery.js"></script>
+    <script type="text/javascript"  src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/main.js"></script> -->
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
     <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 
-<style>
 
-hr { 
-  display: block;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: 200px;
-  margin-right: 100px;
-  border-style: inset;
-  border-width: 1px;
-} 
-
-</style>
-
+	<style>
+	    body, html {
+		    height: 90%;
+		    margin: 0;
+		}
+	
+		#errorPage #container{
+			/* The image used */
+		    background-image: url('images/errorPage/error2.jpg');
+		
+		    /* Full height */
+		    height: 100%; 
+		
+		    /* Center and scale the image nicely */
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+    
+	        /* height:  1000px;
+	        width:  1000px;
+	        background-image: url('images/errorPage/error1.jpg') */
+	    }
+	
+	</style>
 </head>
 
-<body class="homepage bg-warning">
+<body id="errorPage">
+
    <header id="header">
 
         <nav class="navbar navbar-inverse" role="banner">
@@ -75,69 +90,24 @@ hr {
         </nav><!--/nav-->
 		
     </header>
-	
-	<section id="one">
-	
-	<div class="row" style="margin-top:-60px;margin-bottom:50px;">
-		<h2 class="text-center" style="font-family:Aparajita;font-size:35px; "><b>Admin Dashboard</b></h2>
-		
-	</div>	
-	<p class="text-center"><b><s:actionmessage class="small-text text-center"/></b> </p>
-	<div class="row">
-		<div class="col-md-5"></div>
-		<div class="col-md-3">
-			<a href="<s:url action="pendingNavsAction"/>">
-				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UploadCustomerNav</button>
-			</a>
+    
+    <div id="container">
+    </div>
+    
+    <!-- <div class="error-bg"></div>
+    <section id="errorPage"> -->
+    
+    
+    
+    <!-- <img src="images/errorPage/error1.jpg" alt=""> -->
+    
+    <!-- <div class="row" style="margin-top:50px;">
+		<div class="center">
+			<h2 style="font-family:Aparajita;font-size:35px;"><b>CAUGHT ERROR</b></h2>
 		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-5"></div>
-		<div class="col-md-3">
-			<a href="<s:url action="pendingMandateAction"/>">
-				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UpdateCustomerMandate</button>
-			</a>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-5"></div>
-		<div class="col-md-3">
-			<a href="<s:url action="pendingAofAction"/>">
-				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UpdateCustomerAof</button>
-			</a>
-		</div>
-	</div>
-	<hr >
-	<div class="row">
-		<div class="col-md-2"></div>
-		<s:form  action="displayDashboardAction"  method="post" namespace="/">
-		<div class="col-md-3" >
-  			<s:textfield name="emailIdDashboard" class="form-control" placeholder="Enter Customer email Id"/>
-		</div>
-		<div class="col-md-3" >
-			
-          	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="ViewCustomersDashboard" style="padding:5px 15px 5px 15px;width:300px;"/>
-       	</div>
-		</s:form>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-2"></div>
-		<s:form  action="rejectedReverseFeedAction"  method="post" namespace="/">
-		<div class="col-md-3" >
-  			<s:textfield name="bseOrderIdDashboard" class="form-control" placeholder="Enter BSE Order Id"/>
-		</div>
-		<div class="col-md-3" >
-			
-          	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="UpdateRejectedTransaction" style="padding:5px 15px 5px 15px;width:300px;"/>
-       	</div>
-		</s:form>
-	</div>
-	<hr>
+	</div> -->	
 
-   </section>
+   <!-- </section> -->
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
             <div class="row">
@@ -157,13 +127,9 @@ hr {
     </footer>
 
 
-		<script type="text/javascript"  src="assets/js/jquery.js"></script>
-	    <script type="text/javascript"  src="assets/bootstrap/js/bootstrap.min.js"></script>
-	    <script type="text/javascript"  src="assets/js/jquery.prettyPhoto.js"></script>
-	    <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
-	    <script type="text/javascript" src="assets/js/main.js"></script>
-	    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<!-- <script type="text/javascript" src="assets/js/javaScript.js"></script> -->
 </body>
 </html>

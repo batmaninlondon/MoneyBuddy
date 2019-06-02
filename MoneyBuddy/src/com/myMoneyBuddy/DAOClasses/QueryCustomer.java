@@ -7,7 +7,14 @@ package com.myMoneyBuddy.DAOClasses;
 import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.PendingAofOrders;
+import com.myMoneyBuddy.ModelClasses.PendingMandateOrders;
+import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -151,6 +158,40 @@ public class QueryCustomer {
 		}
 		catch (Exception e ) {
 			logger.error("QueryCustomer class - getBseClientCreationStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
+	public String getUserTypeFromCustomerId(String customerId) throws MoneyBuddyException {
+		
+		logger.debug("QueryCustomer class - getUserTypeFromCustomerId method - customerId - "+customerId+" - start");
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+		try
+		{
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers)hibernateSession.get(Customers.class,customerId);
+			String userType = customer.getUserType();
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryCustomer class - getUserTypeFromCustomerId method - customerId - "+customerId+" - return userType ");
+			logger.debug("QueryCustomer class - getUserTypeFromCustomerId method - customerId - "+customerId+" - end");
+			
+			return userType;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getUserTypeFromCustomerId method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getUserTypeFromCustomerId method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -678,6 +719,115 @@ public class QueryCustomer {
 					hibernateSession.close();
 		}
 
+	}
+	
+	
+	public List<PendingMandateOrders> getPendingMandate() throws MoneyBuddyException {
+		
+		 
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		List<PendingMandateOrders> pendingMandateOrders = new LinkedList<PendingMandateOrders>();
+	
+		try
+		{
+			logger.debug("QueryCustomer class - getPendingMandate method - start");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select customerId, customerName, mandateCreationDate, mandateAmount "
+					+ " from Customers where mandateIdStatus='GENERATED'");
+			
+			List<Object[]> customersList = query.list();
+			String customerId = "";
+			String customerName = "";
+			String mandateCreationDate = "";
+			String mandateAmount = "";
+			
+			for ( int i = 0; i < customersList.size() ;i++ ) {
+				
+				customerId = customersList.get(i)[0].toString();
+				customerName = customersList.get(i)[1].toString();
+				mandateCreationDate = customersList.get(i)[2].toString();
+				mandateAmount = customersList.get(i)[3].toString();
+				
+				pendingMandateOrders.add( new PendingMandateOrders(customerId,customerName,mandateCreationDate,mandateAmount));
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			
+			logger.debug("QueryCustomer class - getPendingMandate method - return pendingMandateOrders for mandateIdStatus GENERATED ");
+			logger.debug("QueryCustomer class - getPendingMandate method - end");
+			
+			return pendingMandateOrders;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getPendingMandate method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getPendingMandate method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+
+	public List<PendingAofOrders> getPendingAof() throws MoneyBuddyException {
+		
+		 
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		List<PendingAofOrders> pendingAofOrders = new LinkedList<PendingAofOrders>();
+	
+		try
+		{
+			logger.debug("QueryCustomer class - getPendingAof method - start");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select customerId, customerName, aofCreationDate "
+					+ " from Customers where aofFormStatus='FORM_SENT'");
+			
+			List<Object[]> customersList = query.list();
+			String customerId = "";
+			String customerName = "";
+			String aofCreationDate = "";
+			
+			for ( int i = 0; i < customersList.size() ;i++ ) {
+				
+				customerId = customersList.get(i)[0].toString();
+				customerName = customersList.get(i)[1].toString();
+				aofCreationDate = customersList.get(i)[2].toString();
+				
+				pendingAofOrders.add( new PendingAofOrders(customerId,customerName,aofCreationDate));
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			
+			logger.debug("QueryCustomer class - getPendingAof method - return pendingAofOrders for aofFormStatus FORM_SENT ");
+			logger.debug("QueryCustomer class - getPendingAof method - end");
+			
+			return pendingAofOrders;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getPendingAof method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getPendingAof method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
 	}
 
 }

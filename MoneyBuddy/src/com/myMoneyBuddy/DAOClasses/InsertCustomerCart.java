@@ -47,12 +47,12 @@ public class InsertCustomerCart {
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))  {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),transactionType,null,null,null,"New",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),"0",transactionType,null,null,null,"New",folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
 	    		else {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinSipAmount(),transactionType,"99",null,
+	    					"0",selectedFundDetailsDataModel.getMinSipAmount(),transactionType,"99",null,
 	    					"1","New",folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
@@ -154,22 +154,29 @@ public class InsertCustomerCart {
     			Object result = query.uniqueResult();
     			
     			if (null == result) throw new MoneyBuddyException("amount not found, which productId exsited ");*/
+    			Double updatedAmount;
+    			if ("UPFRONT".equals(cartList.get(0).getTransactionType()))  {
+					updatedAmount = Double.parseDouble(cartList.get(0).getUpfrontAmount()) + Double.parseDouble(amount);
+					System.out.println("Existed amount : "+cartList.get(0).getUpfrontAmount()+" currentAmount: "+amount+" updated amount : "+updatedAmount);
+    			}
+    			else {
+    				updatedAmount = Double.parseDouble(cartList.get(0).getSipAmount()) + Double.parseDouble(amount);
+    				System.out.println("Existed amount : "+cartList.get(0).getSipAmount()+" currentAmount: "+amount+" updated amount : "+updatedAmount);
+    			}
     			
-    			Double updatedAmount = Double.parseDouble(cartList.get(0).getAmount()) + Double.parseDouble(amount);
     			
-    			System.out.println("Existed amount : "+cartList.get(0).getAmount()+" currentAmount: "+amount+" updated amount : "+updatedAmount);
     			/*hibernateSession.getTransaction().commit();*/
     			hibernateSession.beginTransaction();
     			
     			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNum+"  has to be updated for customerId : "+customerId+" and productId : "+productId);
     			
     			if ("UPFRONT".equals(transactionType))  {
-    				query = hibernateSession.createQuery("update CustomerCart set amount = :updatedAmount "
+    				query = hibernateSession.createQuery("update CustomerCart set upfrontAmount = :updatedAmount "
     					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber "
     					+ " and transactionType=:transactionType ");
     			}
     			else {
-    				query = hibernateSession.createQuery("update CustomerCart set amount = :updatedAmount "
+    				query = hibernateSession.createQuery("update CustomerCart set sipAmount = :updatedAmount "
         					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber "
         					+ " and transactionType=:transactionType and sipDuration=:sipDuration and sipPlan=:sipPlan and sipDate=:sipDate ");
 
@@ -202,7 +209,10 @@ public class InsertCustomerCart {
     			String pdfFilePath = queryPrimaryFundDetails.getPdfFilePath(productId);
         		
 	    		hibernateSession.beginTransaction();
-	   	        tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
+	    		if ("UPFRONT".equals(transactionType))
+	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
+	    		else
+	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);

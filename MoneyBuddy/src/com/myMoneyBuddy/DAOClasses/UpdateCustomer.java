@@ -7,6 +7,10 @@ package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -201,9 +205,14 @@ public class UpdateCustomer {
 
 		try {
 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String frmtdDateForDB = dateFormat.format(date);
+			
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("update Customers set aofFormStatus = :aofFormStatus where customerId = :customerId");
+			Query query = hibernateSession.createQuery("update Customers set aofFormStatus = :aofFormStatus, aofCreationDate = :aofCreationDate where customerId = :customerId");
 
+			query.setParameter("aofCreationDate", frmtdDateForDB);
 			query.setParameter("aofFormStatus", aofFormStatus);
 			query.setParameter("customerId", customerId);
 

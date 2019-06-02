@@ -20,14 +20,15 @@ import org.apache.struts2.interceptor.SessionAware;
 
 public class EditCartAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(CreateCartAction.class);
+	Logger logger = Logger.getLogger(EditCartAction.class);
 	private SessionMap<String,Object> sessionMap;
 /*
 	private String cartId;
 	private String upfrontInvestment;
 	private String folioNum;
 	private String updatedField;*/
-	private List<String> investmentAmtArr;
+	private List<String> upfrontAmtArr;
+	private List<String> sipAmtArr;
 	private List<String> folioNumArr;
 	private List<String> cartIdArr;
 	private List<String> productIdArr;
@@ -63,7 +64,7 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 	    			System.out.println(" Called EditCartAction class : value of sipDate : "+i+" is : "+sipDateArr.get(i));
 	    			/*System.out.println("upfrontCartIdArr [ "+i+" ] : value is : "+upfrontCartIdArr.get(i));*/
 	    			/*upfrontInvestment = Double.toString(Math.round( Double.parseDouble(upfrontAmtArr.get(i)) * 100.0 ) / 100.0);*/
-	    			updateCustomerCart.updateCustomerCartEntry(customerId, cartIdArr.get(i), productIdArr.get(i), investmentAmtArr.get(i), 
+	    			updateCustomerCart.updateCustomerCartEntry(customerId, cartIdArr.get(i), productIdArr.get(i), upfrontAmtArr.get(i), sipAmtArr.get(i),
 	    															sipTenureArr.get(i), sipDateArr.get(i), folioNumArr.get(i));
 	    		}
 	    		
@@ -144,12 +145,21 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 		return returnType;
 	}
 
-	public List<String> getInvestmentAmtArr() {
-		return investmentAmtArr;
+
+	public List<String> getUpfrontAmtArr() {
+		return upfrontAmtArr;
 	}
 
-	public void setInvestmentAmtArr(List<String> investmentAmtArr) {
-		this.investmentAmtArr = investmentAmtArr;
+	public void setUpfrontAmtArr(List<String> upfrontAmtArr) {
+		this.upfrontAmtArr = upfrontAmtArr;
+	}
+
+	public List<String> getSipAmtArr() {
+		return sipAmtArr;
+	}
+
+	public void setSipAmtArr(List<String> sipAmtArr) {
+		this.sipAmtArr = sipAmtArr;
 	}
 
 	public List<String> getFolioNumArr() {

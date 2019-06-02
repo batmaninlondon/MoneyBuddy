@@ -90,7 +90,8 @@
 										<thead class="table-head g-font-size-14--xs">
 											<tr>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">UpfrontAmount</th>
+												<th class="center col-md-3 g-bg-color--gray-light text-center">SipAmount</th>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
 											</tr>
 										</thead>
@@ -102,17 +103,34 @@
 														    	<b><s:property value="#customerCartListElement.productName"/></b>
 													    	</td>
 														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b>
+														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center"></td>
+													    	<td class="center g-font-size-14--xs text-center">
+													    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
+													    	</td>
+													    	<td class="center g-font-size-14--xs text-center">
+												    		</td>
 												    	</s:if>
 												    	<s:else>
 												    		<td class="center g-font-size-14--xs text-center">
 												    			<s:property value="#customerCartListElement.productName"/>
 											    			</td>
-														    <td class="center g-font-size-14--xs text-center">
-														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>
-													    	</td>
+											    			<s:if test="transactionType.equals('UPFRONT')">
+															    <td class="center g-font-size-14--xs text-center">
+															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
+														    	</td>
+														    	<td class="center g-font-size-14--xs text-center">
+														    		NA
+														    	</td>
+													    	</s:if>
+													    	<s:else>
+														    	<td class="center g-font-size-14--xs text-center">
+														    		NA
+														    	</td>
+														    	<td class="center g-font-size-14--xs text-center">
+															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
+														    	</td>
+													    	</s:else>
 													    	<td class="center g-font-size-14--xs text-center">
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>

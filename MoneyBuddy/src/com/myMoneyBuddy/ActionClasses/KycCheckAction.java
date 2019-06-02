@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.xml.ws.BindingProvider;
 
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
+import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
@@ -173,6 +174,24 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    		
 		    	}
 	    	
+		    	
+		    	// Generate Mandate Id block - START
+		    	
+		    	String mandateIdResponse = trading.generateMandateId(customerId, "I", getAccountNumber(), getAccountType(), getIfscCode());
+				
+				String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 
+		    	
+		    	System.out.println("mandateIdResponseSpilts[0] : "+mandateIdResponseSpilts[0]);
+		    	System.out.println("mandateIdResponseSpilts[1] : "+mandateIdResponseSpilts[1]);
+		    	System.out.println("mandateIdResponseSpilts[2] : "+mandateIdResponseSpilts[2]);
+		    	
+		    	String mandateId = mandateIdResponseSpilts[2];
+		    	
+		    	InsertCustomerDetails insertCustomerDetails = new InsertCustomerDetails();
+		    	insertCustomerDetails.updateMandateId(mandateId, customerId);
+		    	
+		    	// Generate Mandate Id block - END
+		    	
 	    	
 	    		return "aofNotDone";
 	    	}

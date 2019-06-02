@@ -8,26 +8,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
-
 public class UploadCustomerNavAction extends ActionSupport {
 	
 	Logger logger = Logger.getLogger(UploadCustomerNavAction.class);	
+    private String bseRegNum;
     private String bseOrderId;
+    private String transactionType;
     private String folioNum;
     private String navValue;
     private String unitsPurchased;
+    private String transactionDate;
     private HashMap<String,String>  pendingNavOrders ;
     
     //private InputStream stream;
@@ -38,51 +39,53 @@ public class UploadCustomerNavAction extends ActionSupport {
 		
     	try {
     		
-    		logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - start ");
+    		logger.debug("UploadCustomerNavAction class - execute method - bseRegNum - "+getBseRegNum()+" and bseOrderId - "+getBseOrderId()+" - start ");
 
     		System.out.println("UploadCustomerNavAction class : execute method : called ");
     		
-    		System.out.println("transactionFolioNum : "+getFolioNum()+" : unitPrice : "+getNavValue()+" : quantity : "+getUnitsPurchased()+" : bseOrderId : "+getBseOrderId());
-    		
-    		/*if (!NumberUtils.isNumber(getUnitsPurchased()))  {
-    			
-    			addActionMessage("Entered Units is not a number !! ");
-    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
-    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
-    			return INPUT;
-    		}
-
-    		if (!NumberUtils.isNumber(getNavValue()))  {
-    			
-    			addActionMessage("Entered Nav value is not a number !! ");
-    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
-    			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
-    			return INPUT;
-    		}*/
-    		
+    		System.out.println("transactionFolioNum : "+getFolioNum()+" : unitPrice : "+getNavValue()+" : quantity : "+getUnitsPurchased()+""
+    				+ " : bseOrderId : "+getBseOrderId()+" : bseRegNum : "+getBseRegNum()+" : transactionDate : "+getTransactionDate());
+    		   		
     		hibernateSession.beginTransaction();
     		
-    		Query query = hibernateSession.createQuery("select transactionAmount from TransactionDetails where bseOrderId = :bseOrderId ");
-    		query.setParameter("bseOrderId", getBseOrderId());
+    		Query query;
+    		if ("SIP".equals(getTransactionType()))  {
+
+        		query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseRegistrationNumber = :bseRegistrationNumber"
+        				+ " and transactionDate = :transactionDate ");
+        		query.setParameter("bseRegistrationNumber", getBseRegNum());
+        		query.setParameter("transactionDate", getTransactionDate());
+        		
+    		}
+    		else {
     		
-    		Double amount = Double.valueOf(query.uniqueResult().toString());
-    		
+    			query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseOrderId = :bseOrderId ");
+        		query.setParameter("bseOrderId", getBseOrderId());
+        		
+    		}
+        		
+    		List<Object[]> transactionDetailList = query.list();
+
+			String transactionDetailId = transactionDetailList.get(0)[0].toString();
+			Double transactionAmount = Double.valueOf(transactionDetailList.get(0)[1].toString());
+
     		hibernateSession.getTransaction().commit();
-    		
+
     		Double calculatedAmount = Double.valueOf(getNavValue()) * Double.valueOf(getUnitsPurchased());
 
     		System.out.println(" NAV value : "+getNavValue()+" : units : "+getUnitsPurchased());
     		
-    		System.out.println("calculated amount : "+calculatedAmount+" : amount : "+amount);
+    		System.out.println("calculated amount : "+calculatedAmount+" : transactionAmount : "+transactionAmount);
+
     		
     		hibernateSession.beginTransaction();
 
 			query = hibernateSession.createQuery("select t.productId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
 									+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
-									+ "where t.customerId = c.customerId and t.productId = s.fundId and t.bseOrderId= :bseOrderId");
+									+ "where t.customerId = c.customerId and t.productId = s.fundId and t.transactionDetailId= :transactionDetailId");
 			
 
-			query.setParameter("bseOrderId", getBseOrderId());
+			query.setParameter("transactionDetailId", transactionDetailId);
 			
 			List<Object[]> queryResult = query.list(); 
 			
@@ -114,20 +117,21 @@ public class UploadCustomerNavAction extends ActionSupport {
 
     		hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
-					+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus where bseOrderId = :bseOrderId");
+					+ "unitPrice = :unitPrice , quantity = :quantity , bseOrderId = :bseOrderId, transactionStatus = :transactionStatus , reverseFeed = :reverseFeed "
+					+ " where transactionDetailId = :transactionDetailId");
 
 			query.setParameter("transactionFolioNum", getFolioNum());
 			query.setParameter("unitPrice", getNavValue());
 			query.setParameter("quantity", getUnitsPurchased());
 			query.setParameter("bseOrderId", getBseOrderId());
+			query.setParameter("transactionDetailId", transactionDetailId);
 			query.setParameter("transactionStatus", "8");
+			query.setParameter("reverseFeed", "Y");
 			
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
 			hibernateSession.getTransaction().commit();	
- 	
-	    	System.out.println(" Action complete !!");
-	    	
+ 		    	
 	    	Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
 	    	
 	    	String emailId = customers.getEmailId();
@@ -191,6 +195,22 @@ public class UploadCustomerNavAction extends ActionSupport {
 		this.bseOrderId = bseOrderId;
 	}
 
+	public String getBseRegNum() {
+		return bseRegNum;
+	}
+
+	public void setBseRegNum(String bseRegNum) {
+		this.bseRegNum = bseRegNum;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
 	public String getFolioNum() {
 		return folioNum;
 	}
@@ -222,6 +242,16 @@ public class UploadCustomerNavAction extends ActionSupport {
 	public void setPendingNavOrders(HashMap<String, String> pendingNavOrders) {
 		this.pendingNavOrders = pendingNavOrders;
 	}
+
+	public String getTransactionDate() {
+		return transactionDate;
+	}
+
+	public void setTransactionDate(String transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+	
+	
 	
 /*
 

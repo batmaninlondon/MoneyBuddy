@@ -16,7 +16,7 @@
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
    
-   <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
+   	<link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     

@@ -37,7 +37,8 @@ public class InsertCustomerDetails {
     		Date date = new Date();
     		String frmtdDate = dateFormat.format(date);
 
-    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,null,"N",null,"NC","N","N","CUSTOMER","N","N","N","NOT_GENERATED","CLIENT","NOT_ACTIVATED");
+    		Customers tempCustomer = new Customers(emailId,null,mobileNumber,null,"N",null,"NC","N","N","CUSTOMER","N","N","N",null,"CLIENT",
+    				"NOT_ACTIVATED",null,null,null,"NOT_ACTIVATED");
 
     		hibernateSession.save(tempCustomer);
     		hibernateSession.getTransaction().commit();
@@ -161,12 +162,18 @@ public class InsertCustomerDetails {
 
 		try {
 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String frmtdDateForDB = dateFormat.format(date);
+			
 			hibernateSession.beginTransaction();
 
-			Query query = hibernateSession.createQuery("update Customers set isipMandateId = :isipMandateId where customerId = :customerId");
+			Query query = hibernateSession.createQuery("update Customers set isipMandateId = :isipMandateId, mandateCreationDate = :mandateCreationDate, "
+					+ " mandateIdStatus = :mandateIdStatus where customerId = :customerId");
 
 			query.setParameter("isipMandateId", mandateId);
-
+			query.setParameter("mandateCreationDate", frmtdDateForDB);
+			query.setParameter("mandateIdStatus", "GENERATED");
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();

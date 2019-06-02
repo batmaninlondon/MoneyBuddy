@@ -22,7 +22,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 public class SendThankYouMailAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(CreateCartAction.class);
+	Logger logger = Logger.getLogger(SendThankYouMailAction.class);
 	private SessionMap<String,Object> sessionMap;
 
     public String execute() {

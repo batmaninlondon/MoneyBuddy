@@ -109,14 +109,14 @@
 									    	<b><s:property value="#customerCartSipListElement.productName"/></b>
 									    </td>
 									    <td class="center g-font-size-14--xs text-center">
-									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.amount]})}"/>&nbsp;/month</b>
+									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.sipAmount]})}"/>&nbsp;/month</b>
 								    	</td>
 								    	<td></td>
 							    	</s:if>
 							    	<s:else>
 							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.productName"/></td>
 									    <td class="center g-font-size-14--xs text-center">
-									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.amount]})}"/>&nbsp;/month
+									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.sipAmount]})}"/>&nbsp;/month
 								    	</td>
 								    	<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.folioNumber"/></td>
 							    	</s:else>

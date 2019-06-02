@@ -30,8 +30,11 @@ public class CustomerCart {
     @Column (name="PRODUCT_NAME")
     private String productName;
     
-    @Column (name="AMOUNT")
-    private String amount;
+    @Column (name="UPFRONT_AMOUNT")
+    private String upfrontAmount;
+    
+    @Column (name="SIP_AMOUNT")
+    private String sipAmount;
     
     @Column (name="TRANSACTION_TYPE")
     private String transactionType;
@@ -67,14 +70,15 @@ public class CustomerCart {
         
     }
 
-	public CustomerCart( String customerId, String productId, String productName, String amount,
+	public CustomerCart( String customerId, String productId, String productName, String upfrontAmount, String sipAmount,
 			String transactionType, String sipDuration, String sipPlan, String sipDate,
 			String folioNumber, String folioNumList, String cartCreationDate, String status, String rta, String pdfFilePath) {
 		super();
 		this.customerId = customerId;
 		this.productId = productId;
 		this.productName = productName;
-		this.amount = amount;
+		this.upfrontAmount = upfrontAmount;
+		this.sipAmount = sipAmount;
 		this.transactionType = transactionType;
 		this.sipDuration = sipDuration;
 		this.sipPlan = sipPlan;
@@ -120,12 +124,21 @@ public class CustomerCart {
 		this.productName = productName;
 	}
 
-	public String getAmount() {
-		return amount;
+
+	public String getUpfrontAmount() {
+		return upfrontAmount;
 	}
 
-	public void setAmount(String amount) {
-		this.amount = amount;
+	public void setUpfrontAmount(String upfrontAmount) {
+		this.upfrontAmount = upfrontAmount;
+	}
+
+	public String getSipAmount() {
+		return sipAmount;
+	}
+
+	public void setSipAmount(String sipAmount) {
+		this.sipAmount = sipAmount;
 	}
 
 	public String getTransactionType() {
@@ -212,7 +225,8 @@ public class CustomerCart {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((upfrontAmount == null) ? 0 : upfrontAmount.hashCode());
+		result = prime * result + ((sipAmount == null) ? 0 : sipAmount.hashCode());
 		result = prime * result + ((cartCreationDate == null) ? 0 : cartCreationDate.hashCode());
 		result = prime * result + ((cartId == null) ? 0 : cartId.hashCode());
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
@@ -242,11 +256,18 @@ public class CustomerCart {
 			return false;
 		}
 		CustomerCart other = (CustomerCart) obj;
-		if (amount == null) {
-			if (other.amount != null) {
+		if (upfrontAmount == null) {
+			if (other.upfrontAmount != null) {
 				return false;
 			}
-		} else if (!amount.equals(other.amount)) {
+		} else if (!upfrontAmount.equals(other.upfrontAmount)) {
+			return false;
+		}
+		if (sipAmount == null) {
+			if (other.sipAmount != null) {
+				return false;
+			}
+		} else if (!sipAmount.equals(other.sipAmount)) {
 			return false;
 		}
 		if (cartCreationDate == null) {

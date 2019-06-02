@@ -19,7 +19,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 public class AddToCartAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(CreateCartAction.class);
+	Logger logger = Logger.getLogger(AddToCartAction.class);
 	private SessionMap<String,Object> sessionMap;
 	
 	private String transactionType;

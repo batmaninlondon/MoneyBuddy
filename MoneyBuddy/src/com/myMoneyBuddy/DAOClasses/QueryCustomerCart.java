@@ -33,14 +33,19 @@ public class QueryCustomerCart {
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
 			
-			Double totalAmount = 0.0;
+			Double totalUpfrontAmount = 0.0;
+			Double totalSipAmount = 0.0;
 			
 			for (int i = 0; i < customerCartList.size(); i++) {
 				CustomerCart customerCartListElement = customerCartList.get(i);
-				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
+				
+				if ("UPFRONT".equals(customerCartListElement.getTransactionType()))
+					totalUpfrontAmount += Double.parseDouble(customerCartListElement.getUpfrontAmount());
+				else
+					totalSipAmount += Double.parseDouble(customerCartListElement.getSipAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",totalUpfrontAmount.toString(),totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - end");
@@ -78,14 +83,14 @@ public class QueryCustomerCart {
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
 			
-			Double totalAmount = 0.0;
+			Double totalUpfrontAmount = 0.0;
 			
 			for (int i = 0; i < customerCartList.size(); i++) {
 				CustomerCart customerCartListElement = customerCartList.get(i);
-				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
+				totalUpfrontAmount += Double.parseDouble(customerCartListElement.getUpfrontAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",totalUpfrontAmount.toString(),"0",null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCartUpfront method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCartUpfront method - customerId - "+customerId+" - end");
@@ -123,14 +128,16 @@ public class QueryCustomerCart {
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
 			
-			Double totalAmount = 0.0;
+			Double totalSipAmount = 0.0;
 			
 			for (int i = 0; i < customerCartList.size(); i++) {
 				CustomerCart customerCartListElement = customerCartList.get(i);
-				totalAmount += Double.parseDouble(customerCartListElement.getAmount());
+				
+				totalSipAmount += Double.parseDouble(customerCartListElement.getSipAmount());
+				
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalAmount.toString(),null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total","0",totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCartSip method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCartSip method - customerId - "+customerId+" - end");

@@ -105,8 +105,14 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    			
 	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
-    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),transactionDetails.getTransactionType(),
+	    			if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),"0",transactionDetails.getTransactionType(),
     						null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
+	    			}
+	    			else {
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,"0",transactionDetails.getTransactionAmount(),transactionDetails.getTransactionType(),
+	    						null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
+	    			}
     				
 	    			sessionMap.put("customerCartList", customerCartList);
 			    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");    

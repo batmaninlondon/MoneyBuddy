@@ -99,6 +99,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	
 	    	if ("ADMIN".equals(customer.getUserType()))  {
+	    		sessionMap.put("customerId", customerId);
 	    		return "adminLogin";
 	    	}
 	    	//String custDetUploaded = customer.getCusDetailsUploaded();

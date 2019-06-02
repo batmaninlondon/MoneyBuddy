@@ -255,7 +255,8 @@ public class Trading {
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
-		Double totalAmount = 0.0;
+		Double totalUpfrontAmount = 0.0;
+		Double totalSipAmount = 0.0;
 		String buySellValue; 
 		String buySellType ;
 		String transactionDetailId;
@@ -356,6 +357,9 @@ public class Trading {
 				
 			for (int i = 0; i < customerCartList.size(); i++) {	
 				
+				String frmtdStartDateForSip = null;
+				String frmtdEndDateForSip = null;
+						
 				if (!"Total".equals(customerCartList.get(i).getProductName()))  {
 				String schemeCode = null;
 				String amcCode = null;
@@ -364,7 +368,10 @@ public class Trading {
 				buySellType = "FRESH";
 				String selFolioNum = customerCartList.get(i).getFolioNumber();
 				
-				totalAmount += Double.parseDouble(customerCartList.get(i).getAmount());
+				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))
+					totalUpfrontAmount += Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
+				else
+					totalSipAmount += Double.parseDouble(customerCartList.get(i).getSipAmount());
 
 				QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
 				SecondaryFundDetails secondaryFundDetails = querySecondaryFundDetails.getSecondaryFundDetails(customerCartList.get(i).getProductId());
@@ -391,9 +398,12 @@ public class Trading {
 
 				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+customerCartList.get(i).getProductId());
 
+				Double currentTransactionAmount ;
+				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))
+					currentTransactionAmount = Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
+				else 
+					currentTransactionAmount = Double.parseDouble(customerCartList.get(i).getSipAmount());
 				
-				Double currentTransactionAmount = Double.parseDouble(customerCartList.get(i).getAmount());
-
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
 
 				if ( !"New".equalsIgnoreCase(selFolioNum) )  {
@@ -410,7 +420,7 @@ public class Trading {
 				tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,customerCartList.get(i).getTransactionType(),
 						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
 						"1", null,null,"N",customerCartList.get(i).getProductId(), null,null,frmtdDateForDB, frmtdDateForDB,"N",
-						selFolioNum,null); 		
+						selFolioNum,null,"N"); 		
 
 				hibernateSession.save(tempTransactionDetail);
 
@@ -467,7 +477,7 @@ public class Trading {
 					}
 				}
 				else {
-					if ( Double.parseDouble(customerCartList.get(i).getAmount()) >= 200000.00 ) {
+					if ( Double.parseDouble(customerCartList.get(i).getUpfrontAmount()) >= 200000.00 ) {
 						schemeCode = schemeCode+"-L1" ;	
 					}
 				}
@@ -489,10 +499,10 @@ public class Trading {
 					
 					
 					System.out.println(" transactionDetailId : "+transactionDetailId+
-							" and amount : "+customerCartList.get(i).getAmount());
+							" and upfront amount : "+customerCartList.get(i).getUpfrontAmount());
 					entryParam = mfOrderEntry.orderEntryParam(transactionCode,transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
 							configProperties.getProperty("MEMBER_ID"),customerId,schemeCode,buySellValue,buySellType,
-							clientProperties.getProperty("DP_TXN"),customerCartList.get(i).getAmount(),clientProperties.getProperty("QTY"),
+							clientProperties.getProperty("DP_TXN"),customerCartList.get(i).getUpfrontAmount(),clientProperties.getProperty("QTY"),
 							clientProperties.getProperty("ALL_REDEEM"),selFolioNum,clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
 							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
@@ -536,29 +546,20 @@ public class Trading {
 				    	curSipEndDate = c.getTime();
 				    	
 				    }
-				    
-					
-					hibernateSession.beginTransaction();
-					
+				    					
 					System.out.println("customerId for SipDetails is : "+customerId);
 					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
 					System.out.println("sipDate for selSipDate is : "+customerCartList.get(i).getSipDate());
 					System.out.println("sipStartDate for SipDetails is : "+ sdf.format(curSipStartDate));
 					System.out.println("sipEndDate for SipDetails is : "+sdf.format(curSipEndDate));
 					
-					String frmtdStartDateForSip = sdf.format(curSipStartDate).substring(6,10)+
+					frmtdStartDateForSip = sdf.format(curSipStartDate).substring(6,10)+
 							"-"+sdf.format(curSipStartDate).substring(0,2)+
 							"-"+sdf.format(curSipStartDate).substring(3,5);
-					String frmtdEndDateForSip = sdf.format(curSipEndDate).substring(6,10)+
+					frmtdEndDateForSip = sdf.format(curSipEndDate).substring(6,10)+
 							"-"+sdf.format(curSipEndDate).substring(0,2)+
 							"-"+sdf.format(curSipEndDate).substring(3,5);
 					
-					tempSipDetail = new SipDetails(customerId, transactionDetailId,
-							customerCartList.get(i).getSipDate(), frmtdStartDateForSip, frmtdEndDateForSip,
-							customerCartList.get(i).getSipDuration(),"N","N");
-	
-					hibernateSession.save(tempSipDetail);
-					hibernateSession.getTransaction().commit();
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - inserted new row in SipDetails table");
 
 					String startDate = sdf.format(curSipStartDate).substring(3,5)+
@@ -571,7 +572,7 @@ public class Trading {
 					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, schemeCode, configProperties.getProperty("MEMBER_ID"),
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
-							customerCartList.get(i).getAmount(),Integer.toString(Integer.parseInt(customerCartList.get(i).getSipDuration())*12),clientProperties.getProperty("REMARKS"),
+							customerCartList.get(i).getSipAmount(),Integer.toString(Integer.parseInt(customerCartList.get(i).getSipDuration())*12),clientProperties.getProperty("REMARKS"),
 							selFolioNum,"Y",clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
 							clientProperties.getProperty("EUIN"),
 							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
@@ -598,7 +599,7 @@ public class Trading {
 				
 				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()) ) {
 					bseOrderId = resultsEntryParam[2].toString();
-					totalPaymentAmount += Double.parseDouble(customerCartList.get(i).getAmount());
+					totalPaymentAmount += Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
 					
 				}
 				else {
@@ -607,7 +608,8 @@ public class Trading {
 					
 					if ("Y".equals(firstOrderFlag)) {
 						
-						totalPaymentAmount += Double.parseDouble(customerCartList.get(i).getAmount());
+						totalPaymentAmount += Double.parseDouble(customerCartList.get(i).getSipAmount());
+						
 						anyPaymentToday = true;
 						WebServiceStarMF wbStarMF = new WebServiceStarMF();		
 						in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
@@ -683,7 +685,7 @@ public class Trading {
 					if (bseOrderId != null)  {
 						orderNums.getString().add(bseOrderId);
 						System.out.println(bseOrderId+" added in orderNums");
-						logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - amount - "+customerCartList.get(i).getAmount()+" for bseOrderId - "+bseOrderId+"added in orderNums hashMap for payment ");
+						logger.debug("Trading class - executeTrade method - customerId - "+customerId+" for bseOrderId - "+bseOrderId+"added in orderNums hashMap for payment ");
 					}
 
 					query.setParameter("transactionStatus", "3");
@@ -699,7 +701,18 @@ public class Trading {
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				hibernateSession.getTransaction().commit();
 				
+				hibernateSession.beginTransaction();
+				
+				tempSipDetail = new SipDetails(customerId, bseRegNum, transactionDetailId,
+						customerCartList.get(i).getSipDate(), frmtdStartDateForSip, frmtdEndDateForSip,
+						customerCartList.get(i).getSipDuration(),"N","Y");
+
+				hibernateSession.save(tempSipDetail);
+				hibernateSession.getTransaction().commit();
+				
 				}
+				
+				
 			}
 			
 			System.out.println("anyPaymentToday : "+anyPaymentToday+" and allOrderFailed : "+allOrderFailed);
@@ -872,7 +885,7 @@ public class Trading {
 					
 					hibernateSession.beginTransaction();
 					
-					query = hibernateSession.createQuery("select productId,transactionAmount,transactionDate,transactionStatus,transactionDetailId"
+					query = hibernateSession.createQuery("select productId,transactionAmount,transactionDate,transactionStatus,transactionDetailId,transactionType"
 											+ " from TransactionDetails where bseOrderId = :bseOrderId and customerId = :customerId ");
 					query.setParameter("bseOrderId", bseOrderId);
 					query.setParameter("customerId", customerId);
@@ -893,14 +906,20 @@ public class Trading {
 					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
 					
 					String userStatus = queryOrderStatus.getStatusDetail(transactionDetailQueryResult.get(0)[3].toString());
-					orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[4].toString(), schemeName, 
-											transactionDetailQueryResult.get(0)[1].toString(), transactionDetailQueryResult.get(0)[2].toString(),
+					
+					if ("UPFRONT".equals(transactionDetailQueryResult.get(0)[5].toString()))
+						orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[4].toString(), schemeName, 
+											transactionDetailQueryResult.get(0)[1].toString(),"0", transactionDetailQueryResult.get(0)[2].toString(),
 											userStatus ));
+					else 
+						orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[4].toString(), schemeName, 
+								"0", transactionDetailQueryResult.get(0)[1].toString(), transactionDetailQueryResult.get(0)[2].toString(),
+								userStatus ));
 					
 					
 				}
 				
-				orderDataModel.add(new OrderDataModel("", "Total", Double.toString(totalAmount), "",""));
+				orderDataModel.add(new OrderDataModel("", "Total", Double.toString(totalUpfrontAmount), Double.toString(totalSipAmount),  "",""));
 				
 				for ( int i =0;i<orderDataModel.size();i++)  {
 					
@@ -1091,7 +1110,7 @@ public class Trading {
 				
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null,null, customerId,transactionType,
 						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
-						"1", null,null,"N",fundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum,"0"); 		
+						"1", null,null,"N",fundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum,"0","N"); 		
 
 				hibernateSession.save(tempTransactionDetail);
 

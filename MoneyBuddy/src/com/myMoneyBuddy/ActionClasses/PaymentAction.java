@@ -22,6 +22,7 @@ import com.myMoneyBuddy.DAOClasses.QuerySipDetails;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerCart;
 import com.myMoneyBuddy.DAOClasses.GenerateAofForm;
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
@@ -87,7 +88,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 							
 			String mandateId = customer.getIsipMandateId();
 			
-			if ( "NOT_GENERATED".equals(mandateId))  {
+			/*if ( "NOT_GENERATED".equals(mandateId))  {
 									
 				String mandateIdResponse = trading.generateMandateId(customerId, "I", desEncrypter.decrypt(bankDetails.getAccountNumber()), bankDetails.getAccountType(), bankDetails.getIfscCode());
 				
@@ -101,7 +102,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 		    	
 		    	InsertCustomerDetails insertCustomerDetails = new InsertCustomerDetails();
 		    	insertCustomerDetails.updateMandateId(mandateId, customerId);
-			}
+			}*/
 	    	
 	    	System.out.println("mandateId : "+mandateId);
 			
@@ -122,6 +123,8 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					setActionMsg("ActionMsg-"+paymentUrl);
 					return "failedWithPaymentGateway";
 				}
+				UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
+				updateCustomerCart.emptyCustomerCart(customerId);
 				setPaymentUrl(paymentUrl);
 				return SUCCESS;
 				

@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
-      
+     
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -33,18 +33,8 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-       <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
-       
-         -->
-        <!-- data table CSS-->
         
-
-        <!-- Favicon -->
-        
-	    
 	   
-	   
-	
     </head>
     
          <style>
@@ -192,39 +182,25 @@
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
-                                <a href="adminDashboard" class="s-header-v2__logo-link">ADMIN Dashboard
-                                    <!-- <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo"> -->
+                                <a href="<s:url action="adminHome"/>" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
                                 </a>
                             </div>
                             <!-- End Logo -->
                         </div>
                         
-<%--                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="help" class="s-header-v2__nav-link">FAQs</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="contactUs" class="s-header-v2__nav-link">Contact Us</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
-										<%	} else 
-										 	{	%>
-													<li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                       					 <a href="bseDashboard" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
-                                    				</li>
-										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
+										
                                 </ul>
                             </div>
                             <!-- End Nav Menu -->
-                        </div> --%>
+                        </div>
                     </div>
                     <!-- End Navbar Row -->
                 </div>
@@ -238,192 +214,112 @@
         
         <div class="g-bg-color--dark">
            <!-- <div class="container g-padding-y-80--xs g-padding-y-125--sm"> -->
-             <div class="container ">
+             <div class="container"  >
                <div class="g-text-center--xs g-margin-b-10--xs">
 					<br/><br/><br/><br/>
-                    <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
-                </div> 
-                <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
-                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Invested Amount </h4>
-                             <div >
-                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
-                                <figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter"></figure>
-                            </div>
-                           
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Profit </h4>
-                             <div >
-                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
-                                <figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
-                            </div>
-                           
-                        </div>
-                    </div>
-                    
-                  <%--   <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Profit </h4>
-                             <div >
-                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#8377; </span>
-                                <figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
-                                 <!-- <div class="tooltipOuter">
-                                <div class="tooltipInner"></div>
-                                </div> -->
-                            
-                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;&nbsp;</span>
-                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp; </span>
-                            </div>
-                           
-                        </div>
-                    </div> --%>
-                    
-                    
-                    
-                </div>
+                    <h3 class="text-center  g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
+           		</div> 
+           		
+              		<div class="row g-bg-color--gray-light">
+              			<div class="card text-center ">
+            				<div class="card-header g-font-size-10--xs "></br>
+						    	<!-- <h5 class="card-title  bg-secondary g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold" >
+						    		Client Investment Summary
+					    		</h5> -->
+						  	</div>
+						  	
+						  	<div class="card-body text-center ">
+							    <div class="row">
+							    <div class="col-md-1"></div>
+							    <div class=" col-md-10">
+							     <table class="table-bordered " cellspacing="0" width="100%">
+										        <thead class="thead-light">
+										            <tr class="g-bg-color--white" >
+										                <th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Invested Amount</span></th>
+														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Profit</span></th>
+														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Current Value</span></th>
+														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Growth Rate</span></th>
+										            </tr>
+										        </thead>
+										         <tbody>
+										            <tr class="g-bg-color--white" >
+										                <td class="text-center" >
+										                	<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
+                                							<figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter"></figure>
+                            							</td>
+														<td class="text-center" >
+															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
+                                							<figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            							</td>
+														<td class="text-center" >
+															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
+                                							<figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            							</td>
+														<td class="text-center" >
+															<figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+                            								<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span>
+                            							</td>
+										            </tr>
+										        </tbody>
+										    </table>
+								    	</div>
+								    	<div class="col-md-1"></div>
+								    	</div>
+						  	</div>
+						  	<div class="card-footer g-font-size-10--xs "></br></div>
+              			
+              			</div>
+              		
+              		</div>
+              
+              		<div class="row g-bg-color--dark"></br></div>
+              
+              		<div class="row g-bg-color--gray-light">
+              		
+              			<div class="card text-center">
+						  <div class="card-header">
+						    <ul class="nav nav-pills nav-tabs card-header-pills">
+						      <li class="nav-item active">
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#portfolioSummaryPane">Portfolio Summary</a>
+						      </li>
+						      <li class="nav-item">
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane" >Active SIP's</a>
+						      </li>
+						      <li class="nav-item" >
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
+						      </li>
+						      <li class="nav-item" id="hideMe" >
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>
+						      </li>
+						    </ul>
+						  </div>
+						  <div class="tab-content">
+						  	<div id="portfolioSummaryPane" class="container tab-pane active">
+						  		<!--  Portfolio Summary Table Start -->
                 
-                <div id="tot-values" class="row" style="padding: 0px; margin: 0px;">
-                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Current Value </h4>
-                             <div >
-                                <span class="g-font-size-40--xs g-font-family--playfair g-color--primary" >Rs. </span>
-                                <figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
-                            </div>
-                           
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-bar-chart g-margin-b-30--xs font-weight-bold ">&nbsp;&nbsp;Growth Rate </h4>
-                             <div >
-                                <figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
-                            	<span class="g-font-size-40--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span>
-                            </div>
-                           
-                        </div>
-                    </div>
-                    
-                   <%--  <div class="col-md-6 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs" >
-                             <h4 class="g-font-size-18--xs g-color--white ti-pulse g-margin-b-30--xsfont-weight-bold g-margin-b-10--xs ">&nbsp;&nbsp;Growth Rate</h4>
-                             <div >
-                                
-                                <figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-40--xs g-font-family--brandonText g-color--primary js__counter" style="line-height: 1;"></figure>
-                                 
-                                 <div class="tooltipOuter">
-                                <div class="tooltipInner"></div>
-                                </div>
-                            
-                                 <span class=" icon-help g-font-size-15--xs g-font-family--playfair g-color--white" data-ui-tooltip="We use industry standard<br/>to calculate average return">&nbsp;&nbsp;</span>
-                                  <span class="g-font-size-30--xs g-font-family--playfair g-color--white">&nbsp;&nbsp; </span>
-                            </div>
-                           
-                        </div>
-                    </div> --%>
-                    
-                    
-                    
-                </div>
-                
-                
-                <%--  <h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--white text-left font-weight-bold g-hor-divider__solid--white  "></h3>
-                 <div class="row" >
-                     <div class="col-md-1 col-xs-0" >&nbsp;</div>
-                      <div class="col-md-4 col-xs-12 g-full-width--xs g-margin-b-30--xs g-margin-b-0--lg g-color--white">
-                        <div class="g-color--white g-text-center--xs ">
-                                 <ul class="list-inline ">
-                                <li class="g-color--white">
-                                    <a class="g-color--white" href="https://www.behance.net/keenthemes">
-                                        <i class="g-padding-r-5--xs ti-arrow-circle-up"></i>
-                                        <span class="font-weight-bold"><a href="<s:url action="MFexplorer"/>"><b><span class="g-color--primary">Topup</span></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    </a>
-                                </li>
-                                <li class="g-color--white">
-                                    <a class="g-color--white" href="https://twitter.com/keenthemes">
-                                        <i class="g-padding-r-5--xs ti-arrow-circle-down"></i>
-                                        <span class="font-weight-bold">Withdraw</span>
-                                     </a>
-                                </li>
-                    
-                                </ul>
-                                 
-                                 </div>
-                        </div>
-                    
-                        <div class="col-md-7 col-xs-0 g-full-width--xs g-">
-                        &nbsp;
-                        &nbsp;
-                        </div>
-                    
-                </div> --%>
-                  
-            </div>
-       
-        </div>
-        
-	
-       <!-- Counter -->
-       	<div class="js__parallax-window" style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"> 
-        <!-- <div style="background-color: #eeeeee"> -->
-             <div class="container ">
-               <div class="g-text-center--xs g-margin-b-10--xs">
-                </div> 
-                
-                
-                <!--  Portfolio Summary Chart Start-->
-                
-                <!-- <div  id="contents" class="row" style="padding: 0px; margin: 20px;" style=" height:70vh;">
-	              	<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
-	              		<div class="g-text-center--xs g-margin-b-10--xs">
-	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Summary Chart</h3>
-	                	</div>
-	                	<canvas id="canvas" style="position: relative; height:40vh;"></canvas>
-	                </div> 
-	                
-	                <div class="col-md-2 col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--lg ">
-                    </div>
-	                
-             		<div class="col-md-5 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" style=" height:70vh;">
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Investment Breakdown Chart </h3>
-                		</div> 
-			     		<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-							<canvas id="canvas1" style="position: relative; height:40vh;"></canvas>
-						</div> 
-	              	</div>
-	             </div> -->
-	                
-               
-               	<!--  Portfolio Summary Chart End -->
-                 </div>
-                
-               <!--  Portfolio Summary Table Start -->
-                
-                <div class="row" style="padding: 0px; margin: 20px;">
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Portfolio Details</h3>
+                    		<h3 class=" g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    			Portfolio Details
+                    		</h3>
                 		</div> 
-			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
+			         <div class="g-text-center--xs table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
 								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
-							        <thead>
+							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs ">Total units held</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Current Value</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs ">Profit</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Growth Rate<br/>(% per year)</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Invest More</span></th>
+							            	<th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Sl. no.</th>
+							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Fund Name</th>
+							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Folio Num</th>
+											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Invested Amount</th>
+											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Units held</th>
+											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Current Value</th>
+											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Profit</th>
+											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Returns (% per year)</th>
+											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Invest More</th> -->
+											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
+											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th> -->
 							            </tr>
 							        </thead>
 							    </table>
@@ -431,47 +327,25 @@
 	              		</div>
                 	</div>   
                 <!-- Portfolio Summary Table End -->
-                
-                 
-               <!--  Pending Order Table Start -->
-                
-                <div class="row" style="padding: 0px; margin: 20px;" id="pendingOrderTableRow">
+						  	
+						  	</div>
+						  	
+						  	<div id="activeSipPane" class="container tab-pane">
+						  		<!-- Sip Summary Table Start -->
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-20--xs">Pending Orders</h3>
+                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    			Active SIP's
+                   			</h3>
                 		</div> 
-			         <div class="g-text-center--xs g-padding-y-20--xs table-responsive">
-								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
-								<table id="pendingOrders" class="table-bordered" cellspacing="0" width="100%">
-							        <thead>
-							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
-							            </tr>
-							        </thead>
-							    </table>
-							</div> 
-	              		</div>
-                	</div>   
-                <!-- Pending Order Table End -->               
-
-                
-                <!-- Sip Summary Table Start -->
-                <div class="row" style="padding: 0px; margin: 20px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Active SIP's</h3>
-                		</div> 
-			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-						<table id="siptable" class="display" cellspacing="0" width="100%">
+			     	<div class=" g-text-center--xs table-responsive">
+						<table id="siptable" class="table-bordered" cellspacing="0" width="100%">
 							<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 								<tr class="g-bg-color--primary">
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Category</span></th>
 									<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">SIP Amount</span></th>
 									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Debit Date</span></th>
@@ -486,21 +360,42 @@
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
   					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
+				
+				<s:form  action="fetchAvailableStpFundsAction" method="post" name="formFetchAvailableStpFundsAction">
+  					<s:hidden id="fund-id-stp-value" name="stpFundId"></s:hidden>
+  					<s:hidden id="cur-amount-stp-value" name="stpAmount"></s:hidden>
+				</s:form>
+				
+				<s:form  action="redeemFundAction" method="post" name="formRedeemFundAction">
+  					<s:hidden id="fund-id-redeem-value" name="redeemFundId"></s:hidden>
+  					<s:hidden id="folio-num-redeem-value" name="folioNum"></s:hidden>
+  					<s:hidden id="total-amount-redeem-value" name="totalAmount"></s:hidden>
+  					<s:hidden id="total-quantity-redeem-value" name="totalQuantity"></s:hidden>
+				</s:form>
+				
+				
 	              <!-- Added Table for SIP - end  -->
-	              
-	              <!-- Transaction Hidtory Start -->
+						  	
+						  	</div>
+						  	
+						  	<div id="transactionHistoryPane" class="container tab-pane ">
+						  	
+						  		<!-- Transaction Hidtory Start -->
                 
-                <div class="row" style="padding: 0px; margin: 20px;">
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold g-hor-divider__solid--heading-light g-margin-t-20--xs ">Transaction History </h3>
+                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    			Transaction History 
+                    		</h3>
                 		</div> 
-			     	<div class=" g-text-center--xs g-padding-y-20--xs table-responsive">
-						<table id="transctionhistory" class="display" cellspacing="0" width="100%">
+			     	<div class=" g-text-center--xs  table-responsive">
+						<table id="transctionhistory" class="table-bordered" cellspacing="0" width="100%">
 								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
 									<tr class="g-bg-color--primary">
 										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
 										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
 										<th class="text-center sort-date" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Amount</span></th>
 										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
@@ -513,9 +408,66 @@
 	              	</div>
 	             </div>
                 <!-- Transaction History End -->
+						  	
+						  	</div>
+						  	
+						  	<div id="pendingOrdersPane" class="container tab-pane ">
+						  	
+						  	<!--  Pending Order Table Start -->
                 
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="pendingOrderTableRow">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    			Pending Orders
+                    		</h3>
+                		</div> 
+			         <div class="g-text-center--xs  table-responsive">
+								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
+								<table id="pendingOrders" class="table-bordered" cellspacing="0" width="100%">
+							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+							            <tr class="g-bg-color--primary" >
+							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
+											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
+							            </tr>
+							        </thead>
+							    </table>
+							</div> 
+	              		</div>
+                	</div>   
+                <!-- Pending Order Table End -->    
+						  	</div>
+						  	
+						  	
+						  	
+						  	
+						  </div>
+						  <!-- <div class="card-body">
+						    <h5 class="card-title">Special title treatment</h5>
+						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						  </div> -->
+						</div>
+              		
+              		
+              		
+              		</div>
+              
+               
+
+
+				
+                
+                  
             </div>
-        <!-- End Counter -->
+       
+        </div>
+        
+	
+       
      
 
 
@@ -586,13 +538,36 @@
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <!-- Vendor -->
-    
-		  
-		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
-		<script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
        <%--  <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
         <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script> --%>
+        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
+
+        <!-- General Components and Settings -->
+      	<script type="text/javascript" src="assets/js/global.min.js"></script>
+        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
+        
+        
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    	<script src="assets/js/jquery.isotope.min.js"></script>
+    	<script src="assets/js/main.js"></script>
+   	 	<script src="assets/js/wow.min.js"></script>
+   	 	
+   	 	<!-- Vendor -->
+    
+		  
+		<%-- <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		<script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
         <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
@@ -610,7 +585,7 @@
 	    <script src="assets/js/jquery.prettyPhoto.js"></script>
     	<script src="assets/js/jquery.isotope.min.js"></script>
     	<script src="assets/js/main.js"></script>
-   	 	<script src="assets/js/wow.min.js"></script>
+   	 	<script src="assets/js/wow.min.js"></script> --%>
    	 
    	 
 		    <!--========== Chart.js scripts ==========-->
@@ -623,11 +598,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
-		
-		
-		
-		
-		<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script> --%>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -637,7 +608,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/numeric-comma.js"></script>
-		
+		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		
 	 <script>
 		
@@ -645,6 +616,10 @@
 		    TUTORIAL_SAVVY.initChart()
 		} );
 		
+		var customerName;
+		var profitDir;
+		var profitValue;
+		var curDate;
 		var totalCurrAmt;
 		var totalGrwthAmt;
 		var totalInvAmt;
@@ -663,7 +638,6 @@
 				
 				  		/* Initalization render chart */
 				  		initChart : function(){
-				  			
 				  		TUTORIAL_SAVVY.loadData();
 				  		$("#tot-inv-amt").html(TUTORIAL_SAVVY.addCommas(totalInvAmt));
 				  		$("#tot-prof-amt").html(TUTORIAL_SAVVY.addCommas(totalProAmt));
@@ -696,7 +670,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType]);
 						});
 					  
 				  },
@@ -711,7 +685,7 @@
 				  createSipDataArray : function(sipData)
 				  {
 					  $.each(sipData,function(index,dataElement){
-						  sipDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.schemeType,dataElement.investedAmount,dataElement.nextSipDate]);
+						  sipDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.schemeType,dataElement.investedAmount,dataElement.nextSipDate]);
 						});
 					  
 				  },
@@ -719,7 +693,7 @@
 				  createTransctionhistoryDataArray : function(transctionhistoryData)
 				  {
 					  $.each(transctionhistoryData,function(index,dataElement){
-						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
+						  transctionhistoryDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.folioNumber,dataElement.transactionDate,dataElement.transactionAmount,dataElement.units,dataElement.navPurchased,dataElement.transactionType]);
 						});
 					  
 				  },
@@ -759,7 +733,7 @@
 					        	
 					        	{
 					        	extend: 'pdfHtml5',
-					        	text: '<i class="fa fa-file-pdf-o"></i> Download your SIP details in PDF format',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download your SIP details as PDF',
 					        	titleAttr: 'PDF',
 					        	title: 'Money Buddy - Account Statement',
 					        	exportOptions: {
@@ -824,9 +798,9 @@
 					  	        $("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
 					  	        return nRow;
 					  	    },
-					  		dom: 'lBfrtip',
+					  		dom: 'Bfrtlip',
 							"buttons": [
-								{
+								/* {
 					        	extend: 'excelHtml5',
 					        	text: '<i class="fa fa-file-excel-o"></i> Download Transaction details in Excel format',
 					        	titleAttr: 'Export to Excel',
@@ -834,10 +808,10 @@
 					        	exportOptions: {
 					        	columns: ':not(:last-child)',
 					        	}
-					        	},
+					        	}, */
 					        	{
 					        	extend: 'pdfHtml5',
-					        	text: '<i class="fa fa-file-pdf-o"></i> Download Transaction details in PDF format',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download Transaction details as PDF',
 					        	titleAttr: 'PDF',
 					        	title: 'Money Buddy - Account Statement',
 					        	exportOptions: {
@@ -866,6 +840,9 @@
 				  
 				  loadPortfoliodata : function()
 				  {
+					  var email='kamalwadhwani@gmail.com';
+					  var phoneNum='+91-9971648736';
+
 					 var table =  $('#portfoliosummary').DataTable( {
 						 
 					    	data: portfolioDataArray,
@@ -877,7 +854,10 @@
 					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
 					  		"columnDefs": [ 
 					  			{"className": "dt-center", "targets": "_all"},
-					  			{ "targets": -1, "data": null, "defaultContent": "<button>Top up!</button>" },
+					  			/* { "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" },
+					  			{ "targets": -2, "data": null, "defaultContent": "<button id='redeemButton'>Redeem</button>" }, */
+					  			/* { "targets": -3, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" }, */
+					  			/* { "targets": -1, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" }, */
 					  			{
 					  	            "searchable": false,
 					  	            "orderable": false,
@@ -894,25 +874,35 @@
 					  	        }
 					  	        ],
 					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-					  	    	  
+								
+
 					  	    	if ( aData[1] == "Total" ) {
 					  	    		
 					  	    	  	$('td:nth-child(2)', nRow).addClass('g-font-weight--700');
-					  	    	  	$('td:nth-child(3)', nRow).addClass('g-font-weight--700');
-					  	    		$('td:nth-child(5)', nRow).addClass('g-font-weight--700');
+					  	    	  	$('td:nth-child(4)', nRow).addClass('g-font-weight--700');
 					  	    		$('td:nth-child(6)', nRow).addClass('g-font-weight--700');
 					  	    		$('td:nth-child(7)', nRow).addClass('g-font-weight--700');
-					  	    		$('td:nth-child(8)', nRow).html(null);
-					  	    	  	return nRow;
+					  	    		$('td:nth-child(8)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(3)', nRow).html(null);
+					  	    		$('td:nth-child(5)', nRow).html(null);
+					  	    		$('td:nth-child(9)', nRow).html(null);/* 
+					  	    		$('td:nth-child(10)', nRow).html(null);
+					  	    		$('td:nth-child(11)', nRow).html(null); */
+					  	    	  	return nRow;	
 				  	    	  	}
 					  	    	else {
+					  	    		/* if ( aData[8] != "Debt" ) {
+						  	    		
+		  	    	  		    		$('td:nth-child(11)', nRow).html(null);
+						  	    	  
+					  	    	  	} */
 					  	        	$("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
 					  	        	return nRow;
 					  	      	}
 				  	    	},
 				  	    	
 				  	    	
-					  		dom: 'lBfrtip',
+					  		dom: 'Bfrtlip',
 					  		//buttons: [ 'print', 'excelHtml5', 'csvHtml5', 'pdfHtml5'],
 					  		/* "buttons": [
 					            {
@@ -952,9 +942,53 @@
 					        	extend: 'pdfHtml5',
 					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio in PDF',
 					        	titleAttr: 'PDF',
-					        	title: 'Money Buddy - Account Statement',
+					        	/* orientation: 'auto', */
+					        	/* pageSize: 'LETTER', */
+					        	title: 'Money Buddy Financial Services Private Limited',
+					        	messageTop: 'Investment statement of '+customerName+'\n\nGiven below is a quick summary of your investments with us',
+					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
 					        	exportOptions: {
-					        	columns: ':not(:last-child)',
+					        		columns: [ 1, 3, 4, 5, 7 ],
+					        	},
+					        	customize: function(doc){
+				        			doc.styles.title.alignment = 'center';
+				        			doc.styles.title.bold = true;
+				        			doc.styles.title.fontSize = '20';
+				        			doc.styles.message.alignment = 'center';
+				        			doc.styles.message.fontSize = '14';
+				        			doc.styles.tableHeader.fillColor = '#8DB3E2';
+				        			/* var cols = [];
+			                        cols[0] = {text: 'Athlete', alignment: 'right', margin:[15, 10, 10, 10] };
+			                        
+				        			doc['content']['1'].style = 'athleteTable'; */
+				        			/* doc['styles'] = {
+				                            tableHeader: {
+				                                bold: !0,
+				                                fontSize: 15,
+				                                color: 'black',
+				                                alignment: 'center',
+				                                border: '1px solid',
+				                                fillColor: '#8DB3E2'
+				                            },
+				                            athleteTable: {
+				                                //alignment: 'center'
+				                            },
+				                            column1: {
+				                                alignment: 'center'
+				                            },
+				                            column2: {
+				                                alignment: 'center'
+				                            },
+				                            title: {
+				                                fontSize: 18,
+				                                bold: true,
+				                                margin: [0, 0, 0, 10],
+				                                alignment: 'center'
+				                            }
+				                        }; */
+				        			/* doc.styles.table.body.border = '1px'; */
+				        			/* doc.styles.message.decoration='underline'; */
+				        			
 					        	},
 					        	},
 					        	/* {
@@ -986,14 +1020,31 @@
 					 
 					 
 				  
-					 $('#portfoliosummary tbody').on( 'click', 'button', function () {
+					 $('#portfoliosummary tbody').on('click','#topUpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
 					        var folioNum = data[2];
 					        buyFundHandler(fundId,folioNum);
 					    } ); 
 					  
-				
+					 $('#portfoliosummary tbody').on('click','#stpButton',function () {
+					        var data = table.row( $(this).parents('tr') ).data();
+					        var fundId = data[0];
+					        var amount = data[4];
+					        /* alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]); */
+					        stpFundHandler(fundId,amount);
+					    } );
+					 
+					 $('#portfoliosummary tbody').on('click','#redeemButton',function () {
+					        var data = table.row( $(this).parents('tr') ).data();
+					        var fundId = data[0];
+					        var folioNum = data[2];
+					        var totalAmount = data[5];
+					        var totalQuantity = data[3];
+					        //alert('fundId : '+fundId+' : folioNum : '+folioNum+' : totalAmount : '+totalAmount+' : totalQuantity : '+totalQuantity);
+					        redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity);
+					    } );
+
 				  },
 				  
 				  loadPendingOrdersData : function()
@@ -1019,13 +1070,13 @@
 					                 "targets": 'add-comma'
 					  	        }
 					  			],
-					  		dom: 'lBfrtip',
+					  		dom: 'Bfrtlip',
 							
 					  		"buttons": [
 					        	
 					        	{
 					        	extend: 'pdfHtml5',
-					        	text: '<i class="fa fa-file-pdf-o"></i> Download your Pending Orders in PDF format',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download your Pending Orders as PDF',
 					        	titleAttr: 'PDF',
 					        	title: 'Money Buddy - Account Statement',
 					        	exportOptions: {
@@ -1061,7 +1112,7 @@
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var transactionDetailId = data[0];
 					        //alert('transactionDetailId : '+transactionDetailId);
-					        window.location='checkBankDetailsAction?tranDetailId='+transactionDetailId; 
+					        window.location='redirectAction?tranDetailId='+transactionDetailId; 
 					        /* window.location='bankDetails.jsp?tranDetailId='+transactionDetailId; */
 					    } ); 
 					  
@@ -1069,20 +1120,24 @@
 				  },
 				  
 				  fnPendingOrdersRedraw: function () { 
+					  /*  $('#hideMe').addClass("hidden");
+					  $('#pendingOrderTableRow').addClass("hidden"); */ 
 					  
-					  $('#pendingOrderTableRow').addClass("hidden");
 			     },
 				  
 				  
 		  
 		  loadData : function(){
-			  
 				$.ajax({
 						async: false,
 						url: "portfolioAction",
 						dataType:"json",
 						success: function(jsonResponse){
 							
+							customerName = jsonResponse.customerName;
+							profitDir = jsonResponse.profitDir;
+							profitValue = jsonResponse.profitValue;
+							curDate = jsonResponse.curDate;
 							totalCurrAmt = jsonResponse.totalCurrentAmount;
 							totalGrwthAmt = jsonResponse.totalRateOfGrowth;
 							totalInvAmt = jsonResponse.totalInvestedAmount;
@@ -1237,12 +1292,12 @@
 		document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
-			       document.getElementById('contents').style.visibility="hidden";
+			       /* document.getElementById('contents').style.visibility="hidden"; */
 			  } else if (state == 'complete') {
 			      setTimeout(function(){
 			         document.getElementById('interactive');
 			         document.getElementById('load').style.visibility="hidden";
-			         document.getElementById('contents').style.visibility="visible";
+			         /* document.getElementById('contents').style.visibility="visible"; */
 			      },1000);
 			  }
 			}

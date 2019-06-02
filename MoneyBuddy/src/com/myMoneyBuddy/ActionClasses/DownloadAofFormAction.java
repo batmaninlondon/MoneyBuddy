@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.ActionClasses;
 
 import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
+import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
@@ -77,6 +78,8 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 				    	
 	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
 	    	System.out.println(" Aof Form name is : "+getAofForm());
+	    	
+	    	
 			//setAofForm("Account_Opening_Form_1.pdf");
        		SendMail sendMail = new SendMail();
        		if ("Account_Opening_Form_1".equals(getAofForm()) || "Account_Opening_Form_3".equals(getAofForm())) {

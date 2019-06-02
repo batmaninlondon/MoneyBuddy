@@ -4,17 +4,22 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
+import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class SipInstallmentGenerator implements org.quartz.Job{
 
 
-
+	Logger logger = Logger.getLogger(SipInstallmentGenerator.class);
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
@@ -64,8 +69,44 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 	
 		        } 
 		        else {
-		        	System.out.println("Trigger will be coming here soon .. ");
-		        	// TODO : We have to trigger an SIP transaction here ... waiting for the clarity on how to do this ..
+		        	//System.out.println("Trigger will be coming here soon .. ");
+		        	
+		        	hibernateSession.beginTransaction();
+					
+					query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
+					query.setParameter("transactionDetailId", sipDetail.getTransactionDetailId());
+					
+					TransactionDetails transactionDetails = (TransactionDetails) query.uniqueResult();
+					
+					hibernateSession.getTransaction().commit();
+					
+					hibernateSession.beginTransaction();
+					
+					query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+					
+					String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+					
+					
+					hibernateSession.getTransaction().commit();
+					
+					SimpleDateFormat dateFrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String frmtdDateForDB = dateFrmt.format(date);
+					
+					
+					System.out.println(" inserting a row for transaction Id : "+sipDetail.getTransactionDetailId());
+					hibernateSession.beginTransaction();
+					
+		        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,transactionDetails.getBseRegistrationNumber(),
+		        			null, sipDetail.getCustomerId(),"SIP" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),
+							"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getProductId(), 
+							null,null,frmtdDateForDB, frmtdDateForDB,"N",
+							transactionDetails.getTransactionFolioNum(),null,"N"); 		
+
+					hibernateSession.save(tempTransactionDetail);
+
+					logger.debug("SipInstallmentGenerator class - execute method - customerId - "+sipDetail.getCustomerId()+" - and transactionType - SIP - inserted new row in TransactionDetails table with transactionId - "+nextTransactionId);
+
+					hibernateSession.getTransaction().commit();
 		        }
 
 			}

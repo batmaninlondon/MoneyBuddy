@@ -119,21 +119,31 @@
 														    	<b><s:property value="#customerCartListElement.productName"/></b>
 													    	</td>
 														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b>
+														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center"></td>
+													    	<td class="center g-font-size-14--xs text-center">
+													    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
+													    	</td>
 												    	</s:if>
 												    	<s:else>
+												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
 												    		<td class="center g-font-size-14--xs text-center">
 												    			<s:property value="#customerCartListElement.productName"/>
 											    			</td>
-														    <td class="center g-font-size-14--xs text-center">
-														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/>
-													    	</td>
+											    			<s:if test="transactionType.equals('UPFRONT')">
+															    <td class="center g-font-size-14--xs text-center">
+															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
+														    	</td>
+													    	</s:if>
+													    	<s:else>
+														    	<td class="center g-font-size-14--xs text-center">
+															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
+														    	</td>
+													    	</s:else>
 													    	<td class="center g-font-size-14--xs text-center">
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>
-												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
+												    		
 												    		<%
 												    		String transType = (String) pageContext.getAttribute("transactionType"); 
 												    		if ("SIP".equals(transType))

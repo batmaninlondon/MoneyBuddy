@@ -41,7 +41,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private String totalInvestedAmount;
 	private String totalProfitAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
-	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();;
+	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
 	private List<SipDataModel> sipDataModel;
 	private String totalUpfrontInvestments;
 	private String totalSips;
@@ -56,15 +56,21 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public String execute() {
 
 		String customerId = sessionMap.get("customerId").toString();
-		
-		try {
+
+		try {	
 			
 		logger.debug("PortfolioAction class : execute method : start");
 
+		QueryCustomer queryCustomer = new QueryCustomer(); 
+		String userType = queryCustomer.getUserTypeFromCustomerId(customerId);
+		
+		if ("ADMIN".equals(userType))  {
+			customerId = sessionMap.get("customerIdFromAdmin").toString();
+    	}
+		
+		
 		System.out.println(" calling portfolioAction class for : customerId : "+customerId);
-		
-		QueryCustomer queryCustomer = new QueryCustomer();
-		
+				
 		setCustomerName(queryCustomer.getCustomerNameFromId(customerId));
 		
 		Date date = Calendar.getInstance().getTime();  

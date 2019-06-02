@@ -491,7 +491,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="accountNumber" class="g-color--red" />
 			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" />  --%>
-			  	<input class="form-control"  id="account-number" pattern="^[0-9]{12}$"  placeholder="Account Number" name="accountNumber" required/>
+			  	<input class="form-control"  id="account-number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="accountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>

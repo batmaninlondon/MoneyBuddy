@@ -467,7 +467,7 @@ public class QueryProducts {
 			List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
 			
             Query buyRecordsQuery, sellRecordsQuery;
-			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.schemeName , t.transactionAmount, t.transactionDate "
+			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.schemeName , t.transactionAmount, t.transactionDate, t.transactionType "
 										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='5' and t.productId = p.fundId");
 			
 			query.setParameter("customerId",customerId);
@@ -475,7 +475,10 @@ public class QueryProducts {
 			 for(Iterator it=query.iterate(); it.hasNext();){		      
 				 Object[] row = (Object[]) it.next();
 				 
-				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"Payment Awiated",row[4].toString().substring(0,10)));
+				 if ("UPFRONT".equals(row[5].toString()))
+					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"0","Payment Awiated",row[4].toString().substring(0,10),row[5].toString()));
+				 else 
+					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),"0",row[3].toString(),"Payment Awiated",row[4].toString().substring(0,10),row[5].toString()));
 			 }
 
 			 hibernateSession.getTransaction().commit();

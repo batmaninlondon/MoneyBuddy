@@ -21,7 +21,12 @@
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
+    
+    <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+    
 	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
@@ -37,15 +42,21 @@
 	function uploadCutsomerNav(el) 
 	{		
 		var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
-		var folioNum = $(el).closest("tr").find("td:eq(4) input[type='text']").val();
-		var unitsPurchased = $(el).closest("tr").find("td:eq(5) input[type='text']").val();
-		var navValue = $(el).closest("tr").find("td:eq(6) input[type='text']").val();
+		var bseRegNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
+		var transactionType = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
+		var folioNum = $(el).closest("tr").find("td:eq(6) input[type='text']").val();
+		var navValue = $(el).closest("tr").find("td:eq(7) input[type='text']").val();
+		var unitsPurchased = $(el).closest("tr").find("td:eq(8) input[type='text']").val();
+		var transactionDate = $(el).closest("tr").find("td:eq(9) input[type='text']").val();
 		
 		//alert('unitsPurchased : '+unitsPurchased);
 		document.getElementById("action-bse-order-id").value = bseOrderId;
+		document.getElementById("action-bse-reg-num").value = bseRegNum;
+		document.getElementById("action-transaction-type").value = transactionType;
+		document.getElementById("action-transaction-date").value = transactionDate;
 		document.getElementById("action-folio-number").value = folioNum;
-		document.getElementById("action-units-purchased").value = unitsPurchased;
 		document.getElementById("action-nav-value").value = navValue;
+		document.getElementById("action-units-purchased").value = unitsPurchased;
 		
 		document.formUploadNav.submit();
 		
@@ -56,62 +67,39 @@
 </head>
 
 <body class="homepage bg-warning" onload="setInitialUpfrontInvestment();">
-   <header id="header">
+
+	<header id="header">
 
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
+                    <div class="s-header-v2__logo">
+                        <a href="<s:url action="adminHome"/>" class="s-header-v2__logo-link">
+                            <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                            <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                        </a>
+                    </div>
                 </div>
 				
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
-										<%	} else 
-										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
-										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
-	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
-									      	</ul>
-	                                    
-	                                    </li>
+                <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
                                 </ul>
-                </div>
+                            </div>
             </div><!--/.container-->
         </nav><!--/nav-->
 		
     </header>
-	
+    
 	<section id="bankDetails">
 	
 	
 	<div id="upload-nav" class="">
 		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				<h2 style="font-family:Aparajita;font-size:35px;"><b>Upload NAV</b></h2>
-			</div>
-			<div class="col-md-3">
-			</div>
+			
+				<h2 class="text-center" style="font-family:Aparajita;font-size:35px; "><b>Upload NAV</b></h2>
+			
 		</div>	
 		
 		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
@@ -132,12 +120,14 @@
 						<thead class="table-head " style="font-size:17px;">
 							<tr>
 								<th class="center col-md-1 g-bg-color--gray-light">BseOrderId</th>
+								<th class="center col-md-1 g-bg-color--gray-light">BseRegNum</th>
+								<th class="center col-md-1 g-bg-color--gray-light">TrnsType</th>
 								<th class="center col-md-1 g-bg-color--gray-light">RTA</th>
 								<th class="center col-md-1 g-bg-color--gray-light">SchemeType</th>
 								<th class="center col-md-2 g-bg-color--gray-light">TransactionDate</th>
 								<th class="center col-md-2 g-bg-color--gray-light">FolioNum</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Units</th>
-								<th class="center col-md-2 g-bg-color--gray-light">NAV</th>	
+								<th class="center col-md-2 g-bg-color--gray-light">NAV</th>
+								<th class="center col-md-2 g-bg-color--gray-light">Units</th>	
 								<th class="center col-md-1 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
@@ -147,10 +137,23 @@
 								<s:iterator value="pendingNavOrders" var="pendingNavOrdersElement">
 									<tr>
 									    <td class="center g-font-size-14--xs">
-									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
-			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
-									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.bseOrderId"/>" readonly>
-									    	<%-- <b><s:property value="#pendingNavOrdersElement.bseOrderId"/></b> --%>
+									    	<s:if test="#pendingNavOrdersElement.bseOrderId == ''  || #pendingNavOrdersElement.bseOrderId == null ">
+  											  	<input class="form-control" id="folio-num" type="text" placeholder="Enter BSE Order Id" >
+											</s:if>
+									    	<s:else>
+									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.bseOrderId"/>" readonly>
+									    	</s:else>
+								    	</td>
+									    <td class="center g-font-size-14--xs">
+									    	<s:if test="#pendingNavOrdersElement.bseRegNum == ''  || #pendingNavOrdersElement.bseRegNum == null ">
+  											  	<input class="form-control" type="text" value ="NA" readonly>
+											</s:if>
+									    	<s:else>
+									    		<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.bseRegNum"/>" readonly>
+									    	</s:else>
+							    		</td>
+									    <td class="center g-font-size-14--xs">
+									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.transactionType"/>" readonly>
 									    </td>
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
@@ -165,7 +168,7 @@
 									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
 			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
-									    	<s:property value="#pendingNavOrdersElement.transactionDate"/>
+									    	<s:property value="#pendingNavOrdersElement.frmtTransactionDate"/>
 									    </td>
 									    
 									    <td class="center g-font-size-14--xs">
@@ -182,26 +185,30 @@
 									    	</s:else>
 									    </td>
 									    <td class="center g-font-size-14--xs">
+									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
+										  	<%-- <s:textfield class="form-control" id="nav-value" placeholder="Enter NAV" /> --%>
+									    	<input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" >
+									    </td>
+									    <td class="center g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="unitsPurchased" class="g-color--red" /> --%>
 										  	<%-- <s:textfield class="form-control" id="units-purchased" placeholder="Enter Units" /> --%>
 									    	<input class="form-control" id="units-purchased" type="text" placeholder="Enter Units" >
 									    	
 									    </td>
 									    <td class="center g-font-size-14--xs">
-									    	<%-- <s:fielderror fieldName="folioNum" class="g-color--red" /> --%>
-										  	<%-- <s:textfield class="form-control" id="nav-value" placeholder="Enter NAV" /> --%>
-									    	<input class="form-control" id="nav-value" type="text" placeholder="Enter NAV" >
-									    </td>
-									    <td class="center g-font-size-14--xs">
-									    	<s:submit class="btn btn-primary readmore submit-button-1" value="Upload NAV"  onCLick="uploadCutsomerNav(this)" />
+									    	<input class="form-control hidden" id="transaction-date" type="text" value ="<s:property value="#pendingNavOrdersElement.transactionDate"/>" >
+									    	<s:submit class="btn btn-home readmore submit-button-1" style="padding:5px 15px 5px 15px;" value="Upload NAV"  onCLick="uploadCutsomerNav(this)" />
 									    	<!-- <button type="button" class="btn btn-primary readmore submit-button-1" onClick="uploadCutsomerNav(this);">Upload NAV</button> -->
 									    </td>
 									</tr>
 								</s:iterator>
 								<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
+								<s:hidden id="action-bse-reg-num" name="bseRegNum"></s:hidden>
+								<s:hidden id="action-transaction-type" name="transactionType"></s:hidden>
+								<s:hidden id="action-transaction-date" name="transactionDate"></s:hidden>
 								<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
-								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
 								<s:hidden id="action-nav-value" name="navValue"></s:hidden>
+								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
 								</s:form>
 							 
 						</tbody>

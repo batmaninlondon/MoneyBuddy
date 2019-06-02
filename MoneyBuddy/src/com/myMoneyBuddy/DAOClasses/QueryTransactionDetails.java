@@ -4,20 +4,23 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.OrderDataModel;
-import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+
+import javax.persistence.NoResultException;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.TransactionDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryTransactionDetails {
 
@@ -79,6 +82,51 @@ public class QueryTransactionDetails {
 		}
 	}
 	
+	public TransactionDetails getTransactionDetailsFromBseOrderId(String bseOrderId) throws MoneyBuddyException {
+		
+		logger.debug("QueryTransactionDetails class - getFolioNumsList method - bseOrderId - "+bseOrderId+" - start");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try
+		{
+			TransactionDetails transactionDetails;
+			try {
+				hibernateSession.beginTransaction();
+				Query query = hibernateSession.createQuery("from TransactionDetails where bseOrderId = :bseOrderId");
+			
+				query.setParameter("bseOrderId",bseOrderId);
+				transactionDetails = (TransactionDetails) query.uniqueResult();
+	
+				hibernateSession.getTransaction().commit();
+			}
+			catch (NonUniqueResultException e)  {
+				return null;
+			}
+			catch (NoResultException e) {
+		        return null;
+		    }
+			
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - bseOrderId - "+bseOrderId+" - return TransactionDetails object");
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - bseOrderId - "+bseOrderId+" - end");
+			
+			return transactionDetails;
+		}
+		
+		catch ( HibernateException e ) {
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - bseOrderId - "+bseOrderId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - bseOrderId - "+bseOrderId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
 	
 	public TransactionDetails getTransactionDetails(String transactionDetailId) throws MoneyBuddyException {
 		
@@ -128,7 +176,7 @@ public class QueryTransactionDetails {
 		{
 			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.updateDate,t.transactionFolioNum"
+			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.transactionDate,t.transactionFolioNum,t.transactionType,t.bseRegistrationNumber"
 					+ " from TransactionDetails t, SecondaryFundDetails s, PrimaryFundDetails p "
 					+ "where t.transactionStatus='7' and t.productId=p.fundId and t.productId=s.fundId");
 			
@@ -136,8 +184,10 @@ public class QueryTransactionDetails {
 			String bseOrderId = "";
 			String rta = "";
 			String schemeType = "";
-			String updateDate = "";
+			String transactionDate = "";
+			String frmtTransactionDate = "";
 			String folioNum = "";
+			String bseRegNum;
 			for ( int i = 0; i < transactionDetailsList.size() ;i++ ) {
 				
 				if (null == transactionDetailsList.get(i)[0])
@@ -153,16 +203,28 @@ public class QueryTransactionDetails {
 				else
 					schemeType = transactionDetailsList.get(i)[2].toString();
 				if (null == transactionDetailsList.get(i)[3])
-					updateDate = "";
-				else
-					updateDate = transactionDetailsList.get(i)[3].toString();
+					transactionDate = "";
+				else  {
+					transactionDate = transactionDetailsList.get(i)[3].toString();
+					SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yyyy");
+					Date   date       = dateFormat1.parse ( transactionDate );    
+					//Date date = new Date();
+					frmtTransactionDate = dateFormat2.format( date );
+					
+				}
 				if (null == transactionDetailsList.get(i)[4])
 					folioNum = "";
 				else
 					folioNum = transactionDetailsList.get(i)[4].toString();
+				if (null == transactionDetailsList.get(i)[6])
+					bseRegNum = "";
+				else
+					bseRegNum = transactionDetailsList.get(i)[6].toString();
 				
 					
-				pendingNavOrders.add( new PendingNavOrders(bseOrderId,rta,schemeType,updateDate, folioNum));
+				pendingNavOrders.add( new PendingNavOrders(bseOrderId,bseRegNum,transactionDetailsList.get(i)[5].toString(),rta,schemeType,transactionDate,
+						frmtTransactionDate, folioNum));
 			}
 			
 			/*Iterator it = pendingNavOrders.entrySet().iterator();

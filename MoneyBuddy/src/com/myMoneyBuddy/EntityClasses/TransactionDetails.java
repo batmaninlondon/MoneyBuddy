@@ -87,14 +87,17 @@ public class TransactionDetails {
     @Column(name="REMAINING_QUANTITY")
     private String remainingQuantity;
     
+    @Column(name="REVERSAL_ORDER")
+    private String reversalOrder;
+    
     public TransactionDetails() {
 
     }
 
     public TransactionDetails(String transactionId, String bseOrderId, String bseRegistrationNumber, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionStatus,
-			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,
-			String unitPrice, String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity) {
+			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,String unitPrice, String transactionDate,
+			String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity, String reversalOrder) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
@@ -118,6 +121,7 @@ public class TransactionDetails {
 		this.rtaFileGenerated = rtaFileGenerated;
 		this.transactionFolioNum = transactionFolioNum;
 		this.remainingQuantity = remainingQuantity;
+		this.reversalOrder = reversalOrder;
 	}
 
 	public String getTransactionDetailId() {
@@ -301,6 +305,14 @@ public class TransactionDetails {
 		this.remainingQuantity = remainingQuantity;
 	}
 
+	public String getReversalOrder() {
+		return reversalOrder;
+	}
+
+	public void setReversalOrder(String reversalOrder) {
+		this.reversalOrder = reversalOrder;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -328,6 +340,7 @@ public class TransactionDetails {
 		result = prime * result + ((uniqueReferenceNumber == null) ? 0 : uniqueReferenceNumber.hashCode());
 		result = prime * result + ((unitPrice == null) ? 0 : unitPrice.hashCode());
 		result = prime * result + ((updateDate == null) ? 0 : updateDate.hashCode());
+		result = prime * result + ((reversalOrder == null) ? 0 : reversalOrder.hashCode());
 		return result;
 	}
 
@@ -502,6 +515,13 @@ public class TransactionDetails {
 				return false;
 			}
 		} else if (!updateDate.equals(other.updateDate)) {
+			return false;
+		}
+		if (reversalOrder == null) {
+			if (other.reversalOrder != null) {
+				return false;
+			}
+		} else if (!reversalOrder.equals(other.reversalOrder)) {
 			return false;
 		}
 		return true;

@@ -40,7 +40,7 @@ public class DisplayDashboardAction extends ActionSupport implements SessionAwar
 				addActionMessage("This email ID is not registered with MoneyBuddy");
 				return "emailIdNotExist" ;
 			}
-			sessionMap.put("customerId", customerId);
+			sessionMap.put("customerIdFromAdmin", customerId);
 			/*QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 			pendingNavOrders = queryTransactionDetails.getPendingNavsOrders();
 
