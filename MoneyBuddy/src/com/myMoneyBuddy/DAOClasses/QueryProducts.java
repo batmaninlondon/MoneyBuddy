@@ -556,8 +556,14 @@ public class QueryProducts {
 			/*for (SipDetails sipDetailsListElement : sipDetailsList)  {*/
 			
 			  for (Iterator sipDataIt=sipData.iterate(); sipDataIt.hasNext();)  {
+				  
+				 
 				
 				  Object[] sipDataRow = (Object[]) sipDataIt.next();
+				  
+				  System.out.println("sipStartDate : "+sipDataRow[7].toString()+" sip fund id : "+sipDataRow[1].toString()+" fur customerId : "+customerId);
+				  
+				  
 				//sipDate = sipDataRow[6].toString();
 				
 				/*CommonUtil commonUtil = new CommonUtil();

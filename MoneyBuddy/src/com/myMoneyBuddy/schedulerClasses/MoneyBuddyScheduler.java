@@ -43,7 +43,7 @@ public class MoneyBuddyScheduler {
 			Trigger readSpreadSheetTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 23 13 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 09 12 * * ?")) 
 					.build();
 			
 	
@@ -58,14 +58,14 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 58 13 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 10 12 * * ?")) 
 					.build();
 			
 	
 			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);
 			
 			
-			JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
+			/*JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
 					.withIdentity("SipInstallmentGeneratorJob", "Group").build();
 			
 			// This Trigger will work at 3 pm (15 hours) everyday
@@ -77,7 +77,7 @@ public class MoneyBuddyScheduler {
 					.build();
 			
 	
-			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
+			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);*/
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

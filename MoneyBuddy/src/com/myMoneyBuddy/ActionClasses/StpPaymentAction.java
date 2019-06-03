@@ -4,37 +4,13 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
-import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.DAOClasses.QuerySipDetails;
-import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
-import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
-import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.CustomerDetails;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.CommonUtil;
-import com.myMoneyBuddy.Utils.DesEncrypter;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 public class StpPaymentAction extends ActionSupport implements SessionAware {
 

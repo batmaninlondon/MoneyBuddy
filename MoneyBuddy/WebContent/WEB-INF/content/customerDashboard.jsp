@@ -353,8 +353,11 @@
 											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th> -->
 							            </tr>
+							            
 							        </thead>
 							    </table>
+							    
+							   
 							</div> 
 	              		</div>
                 	</div>   
@@ -372,18 +375,18 @@
                    			</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs table-responsive">
-						<table id="siptable" class="table-bordered" cellspacing="0" width="100%">
-							<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-								<tr class="g-bg-color--primary">
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Category</span></th>
-									<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">SIP Amount</span></th>
-									<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Debit Date</span></th>
-								</tr>
-							</thead>
-				   		</table>
+							<table id="sipTable" class="table-bordered" cellspacing="0" width="100%">
+						        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+						            <tr class="g-bg-color--primary">
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Category</span></th>
+										<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">SIP Amount</span></th>
+										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Sip Debit Date</span></th>
+									</tr>
+						        </thead>
+						    </table>
 						</div> 
 	              	</div>
 	             </div>
@@ -461,7 +464,8 @@
 							            <tr class="g-bg-color--primary" >
 							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Lumsum Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Sip Amount</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
@@ -710,7 +714,7 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.upfrontAmount,dataElement.sipAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
 						});  
 				  },
 				  
@@ -732,7 +736,7 @@
 				  
 				  loadSipdata : function()
 				  {
-					 var table =  $('#siptable').DataTable( {
+					 var table =  $('#sipTable').DataTable( {
 					    	data: sipDataArray,
 					    	"paging":   false,
 					        "ordering": false,

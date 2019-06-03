@@ -517,15 +517,19 @@ public class Trading {
 					CommonUtil commonUtil = new CommonUtil();
 					
 					if ( Integer.parseInt(customerCartList.get(i).getSipDate()) <=   (cal.get(Calendar.DATE)) ) {
+						System.out.println(" Inside if case of date compare .....");
 						sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(0) : commonUtil.theMonth(cal.get(Calendar.MONTH)+1));
 						sipEndMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
 					}
 					else {
+						System.out.println(" Inside else case of date compare .....");
 						sipStartMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
 						sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(11) : commonUtil.theMonth(cal.get(Calendar.MONTH)-1));
 					}
+					System.out.println(" sipStartMonth : "+sipStartMonth);
 					System.out.println(" sipEndMonth : "+sipEndMonth);
 					System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
+					System.out.println("customerCartList.get(i).getSipDuration() : "+customerCartList.get(i).getSipDuration());
 					String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(customerCartList.get(i).getSipDuration()));
 					String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
 					System.out.println(" sipEndYear : "+sipEndYear);
@@ -550,6 +554,7 @@ public class Trading {
 					System.out.println("customerId for SipDetails is : "+customerId);
 					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
 					System.out.println("sipDate for selSipDate is : "+customerCartList.get(i).getSipDate());
+					System.out.println("Integer.toString(cal.get(Calendar.MONTH)) : "+Integer.toString(cal.get(Calendar.MONTH)));
 					System.out.println("sipStartDate for SipDetails is : "+ sdf.format(curSipStartDate));
 					System.out.println("sipEndDate for SipDetails is : "+sdf.format(curSipEndDate));
 					
@@ -559,6 +564,9 @@ public class Trading {
 					frmtdEndDateForSip = sdf.format(curSipEndDate).substring(6,10)+
 							"-"+sdf.format(curSipEndDate).substring(0,2)+
 							"-"+sdf.format(curSipEndDate).substring(3,5);
+					
+					System.out.println(" frmtdStartDateForSip : "+frmtdStartDateForSip+" and frmtdEndDateForSip : "+frmtdEndDateForSip);
+					
 					
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - inserted new row in SipDetails table");
 

@@ -376,6 +376,9 @@ input[type="range"] {
 										</s:if>
 										<s:else>
 										<td class="text-center  ">
+										<select name="upfrontAmtArr" class="hidden" id="upfrontInvestment"  style="width:60px;" > 
+										        <option value=""  >0</option>
+											</select>
 									 		<p class="title  text-center" >
 												<b>NA</b>
 											</p>	
