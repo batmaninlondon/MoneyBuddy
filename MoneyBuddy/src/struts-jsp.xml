@@ -37,6 +37,11 @@
 	    	<result>/WEB-INF/content/orderInvoice.jsp</result>
 		</action>
 	</package>
+	<package name="logout" namespace="/" extends="struts-default">
+	    <action name="logout">
+	    	<result>/logout.jsp</result>
+		</action>
+	</package>
 	<package name="orderInvoiceSipFofN" namespace="/" extends="struts-default">
 	    <action name="orderInvoiceSipFofN">
 	    	<result>/WEB-INF/content/orderInvoiceSipFofN.jsp</result>

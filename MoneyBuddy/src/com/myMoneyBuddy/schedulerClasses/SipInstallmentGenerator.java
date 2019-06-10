@@ -26,6 +26,8 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		
 		try {
 			
+			System.out.println("SipInstallmentGenerator CLASS EXECUTION -------  START");
+			
 			hibernateSession.beginTransaction();
 			
 			Calendar cal = Calendar.getInstance();
@@ -111,7 +113,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 
 			}
 
-			
+			System.out.println("SipInstallmentGenerator CLASS EXECUTION -------  END");
 			
 	 
 		}

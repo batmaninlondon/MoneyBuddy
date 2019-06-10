@@ -8,8 +8,11 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.Map;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
+import com.myMoneyBuddy.DAOClasses.QueryBankName;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -22,6 +25,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 
 	/*private String transactionType;*/
 	private String tranDetailId;
+	private String displayBankName;
 	
     public String execute() {
     	
@@ -45,6 +49,17 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     			logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
 		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 		    	
+		    	QueryBankDetails queryBankDetails = new QueryBankDetails();
+		    	BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
+		    	String bankName = bankDetails.getBankName();
+		    	QueryBankName queryBankName = new QueryBankName();
+		    	DesEncrypter desEncrypter = new DesEncrypter();
+				String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
+				
+				setDisplayBankName(queryBankName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
+				
+				
+		    	
 				return "bankDetails";
     		}
     		else {
@@ -54,11 +69,11 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     				return "customerDetails";
     			}
     			else {
-    				if ("DONE".equals(customer.getKycStatus()))  {
+    				/*if ("DONE".equals(customer.getKycStatus()))  {*/
 						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
 				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 						return "aofNotDone";
-    				}
+    				/*}
     				else {
     					if ("Y".equals(customer.getAddCusDetailsUploaded()))  {
     						logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned downloadKycForm");
@@ -70,7 +85,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     				    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
     						return "addCustomerDetails";
     					}
-    				}
+    				}*/
     			}
     		}
 			
@@ -100,6 +115,14 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 
 	public String getTranDetailId() {
 		return tranDetailId;
+	}
+
+	public String getDisplayBankName() {
+		return displayBankName;
+	}
+
+	public void setDisplayBankName(String displayBankName) {
+		this.displayBankName = displayBankName;
 	}
 
 	public void setTranDetailId(String tranDetailId) {

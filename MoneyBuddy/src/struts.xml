@@ -62,8 +62,14 @@
     
     <package name="redeemAction" namespace="/" extends="struts-default">
         <action name="redeemAction" class="com.myMoneyBuddy.ActionClasses.RedeemAction">
-        	<result name="input">/WEB-INF/content/redeemConfirmation.jsp</result>
             <result name="success">/WEB-INF/content/orderInvoiceRedemption.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="addToRedemptionCartAction" namespace="/" extends="struts-default">
+        <action name="addToRedemptionCartAction" class="com.myMoneyBuddy.ActionClasses.AddToRedemptionCartAction">
+            <result name="success">/redemptionCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -110,6 +116,13 @@
             <result name="customerDetails">/WEB-INF/content/customerDetails.jsp</result>
             <result name="aofNotDone" type="chain">downloadAofFormAction</result>
             <result name="addCustomerDetails">/WEB-INF/content/additionalCustomerDetails.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+     <package name="redirectRedeemAction" namespace="/" extends="struts-default">
+        <action name="redirectRedeemAction" class="com.myMoneyBuddy.ActionClasses.RedirectRedeemAction">
+            <result name="orderInvoiceForRed">/WEB-INF/content/orderInvoiceForRed.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -254,6 +267,14 @@
             <!-- <result name="success">/amountConfirmation.jsp</result> -->
             <result name="success" type="chain">MFexplorer</result>
             <result name="redirect" type="chain">redirectAction</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="editRedemptionCartAction" namespace="/" extends="struts-default">
+        <action name="editRedemptionCartAction" class="com.myMoneyBuddy.ActionClasses.EditRedemptionCartAction">
+            <result name="success">/WEB-INF/content/customerDashboard.jsp</result>
+            <result name="redirectRedeem" type="chain">redirectRedeemAction</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>

@@ -160,7 +160,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    			getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
 		    			getAddressLineOne()+" "+getAddressLineTwo()+" "+getAddressLineThree(), getResidentialCity(), 
 		    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
-					customerId, getCustomerName(), cusEmailId, getPanCard(), cusMobileNum);
+					customerId, getCustomerName(), cusEmailId, getPanCard(), getNomineeName(),getNomineeRelationship(), cusMobileNum);
 			
 		    	String[] uccSpilts = ucc.split("\\|");
 		    	

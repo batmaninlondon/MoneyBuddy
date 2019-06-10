@@ -41,7 +41,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     		PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(getFundId());
     		HashMap<String,Double> productRatioList =  new HashMap<String,Double>();
     		    		
-	    	System.out.println("MIN LUMSUM PURCHASE AMOUNT ........ "+primaryFundDetails.getMinPurchaseAmount());
+	    	System.out.println("MIN LUMPSUM PURCHASE AMOUNT ........ "+primaryFundDetails.getMinPurchaseAmount());
 	    	sessionMap.put("minPurchaseAmount", primaryFundDetails.getMinPurchaseAmount());
 	    	logger.debug("BuyFundAction class - execute method - fetched minPurchaseAmount from primaryFundDetails and stored it in session");
 

@@ -501,7 +501,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="reAccountNumber" class="g-color--red" />
 			  	<s:password class="form-control" id="re-account-number" pattern="^[0-9]{12}$" placeholder="Account Number" name="reAccountNumber" />  --%>
-			  	<input class="form-control"  id="re-account-number" pattern="^[0-9]{12}$"  placeholder="Account Number" name="reAccountNumber" required/>
+			  	<input class="form-control"  id="re-account-number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="reAccountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -727,8 +727,7 @@
 			 var reAccNum = document.getElementById("re-account-number");
 			 var ifscCode = document.getElementById("ifsc-code");
 			 
-			 var invalid =  (accNum.value == "") || (!new RegExp(accNum.getAttribute("pattern")).test(accNum.value)) ||
-			 			(reAccNum.value == "") || (!new RegExp(reAccNum.getAttribute("pattern")).test(reAccNum.value)) ||
+			 var invalid =  (accNum.value == "") || (reAccNum.value == "") ||
 			 			(ifscCode.value == "") || (!new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) ||
 			 			(!(accNum.value == reAccNum.value));
 			 
@@ -736,14 +735,8 @@
 					if ( accNum.value == "" )  {
 						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
 					}
-					else if ( !new RegExp(accNum.getAttribute("pattern")).test(accNum.value)) {
-						document.getElementById("errorMsg3").value="Error: Please fill Valid Account Number";
-					}
 					else if ( reAccNum.value == "" )  {
 						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
-					}
-					else if ( !new RegExp(reAccNum.getAttribute("pattern")).test(reAccNum.value)) {
-						document.getElementById("errorMsg3").value="Error: Please fill Valid Account Number";
 					}
 					else if ( ifscCode.value == "" )  {
 						document.getElementById("errorMsg3").value="Error: Please fill IFSC Code";

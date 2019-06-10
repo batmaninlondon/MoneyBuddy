@@ -18,6 +18,7 @@ import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.DesEncrypter;
@@ -93,7 +94,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 					QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 					
-					String schemeName = queryPrimaryFundDetails.getSchemeName(transactionDetails.getProductId());
+					PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(transactionDetails.getProductId());
 					
 					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
 					
@@ -106,12 +107,14 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
 	    			if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
-	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,transactionDetails.getTransactionAmount(),"0",transactionDetails.getTransactionType(),
-    						null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),primaryFundDetails.getSchemeName(),
+	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),transactionDetails.getTransactionAmount(),"0",
+	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}
 	    			else {
-	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),schemeName,"0",transactionDetails.getTransactionAmount(),transactionDetails.getTransactionType(),
-	    						null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),primaryFundDetails.getSchemeName(),
+	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),"0",transactionDetails.getTransactionAmount(),
+	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}
     				
 	    			sessionMap.put("customerCartList", customerCartList);

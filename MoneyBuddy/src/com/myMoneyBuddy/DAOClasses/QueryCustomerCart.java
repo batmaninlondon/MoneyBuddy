@@ -28,7 +28,7 @@ public class QueryCustomerCart {
 			System.out.println("customerId is : "+customerId);
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId ");
+			Query query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId order by transactionType desc ");
 			query.setParameter("customerId", customerId);
 			hibernateSession.getTransaction().commit();
 			List<CustomerCart> customerCartList = query.list();
@@ -45,7 +45,7 @@ public class QueryCustomerCart {
 					totalSipAmount += Double.parseDouble(customerCartListElement.getSipAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalUpfrontAmount.toString(),totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",null,null,totalUpfrontAmount.toString(),totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCart method - customerId - "+customerId+" - end");
@@ -90,7 +90,7 @@ public class QueryCustomerCart {
 				totalUpfrontAmount += Double.parseDouble(customerCartListElement.getUpfrontAmount());
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total",totalUpfrontAmount.toString(),"0",null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",null,null,totalUpfrontAmount.toString(),"0",null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCartUpfront method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCartUpfront method - customerId - "+customerId+" - end");
@@ -137,7 +137,7 @@ public class QueryCustomerCart {
 				
 			}
 			
-			customerCartList.add(new CustomerCart(null,null,"Total","0",totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
+			customerCartList.add(new CustomerCart(null,null,"Total",null,null,"0",totalSipAmount.toString(),null,null,null,null,null,null,null,null,null,null));
 			
 			logger.debug("QueryCustomerCart class - getCustomerCartSip method - customerId - "+customerId+" - returns customerCartList of - "+(customerCartList.size()-1)+" records");
 			logger.debug("QueryCustomerCart class - getCustomerCartSip method - customerId - "+customerId+" - end");

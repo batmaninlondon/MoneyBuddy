@@ -15,42 +15,42 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class UpdateCustomerCart {
+public class UpdateCustomerRedemptionCart {
 	
-	Logger logger = Logger.getLogger(UpdateCustomerCart.class);
+	Logger logger = Logger.getLogger(UpdateCustomerRedemptionCart.class);
 
-	public void deleteCustomerCartEntry (String customerId, String cartId) throws MoneyBuddyException {
+	public void deleteCustomerRedCartEntry (String customerId, String redCartId) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - start");
+		logger.debug("UpdateCustomerRedemptionCart class - deleteCustomerRedCartEntry method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-		System.out.println("customerId : in deleteCustomerCartEntry : "+customerId);
-		System.out.println("cartId : in deleteCustomerCartEntry : "+cartId);
+		System.out.println("customerId : in deleteCustomerRedCartEntry : "+customerId);
+		System.out.println("redCartId : in deleteCustomerRedCartEntry : "+redCartId);
 
 		try {
 
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("delete from CustomerCart where cartId = :cartId and customerId = :customerId ");
+			Query query = hibernateSession.createQuery("delete from RedemptionCart where redCartId = :redCartId and customerId = :customerId ");
 
-			query.setParameter("cartId", cartId);
+			query.setParameter("redCartId", redCartId);
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - deleted a row from CustomerCart table for cartId : "+cartId);
+			logger.debug("UpdateCustomerRedemptionCart class - deleteCustomerRedCartEntry method - customerId - "+customerId+" - deleted a row from RedemptionCart table for redCartId : "+redCartId);
 
-			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - end");
+			logger.debug("UpdateCustomerRedemptionCart class - deleteCustomerRedCartEntry method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.error("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomerRedemptionCart class - deleteCustomerRedCartEntry method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomerRedemptionCart class - deleteCustomerRedCartEntry method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -61,36 +61,36 @@ public class UpdateCustomerCart {
 
 	}
 	
-	public void emptyCustomerCart (String customerId) throws MoneyBuddyException {
+	public void emptyCustomerRedCart (String customerId) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomerCart class - emptyCustomerCart method - customerId - "+customerId+" - start");
+		logger.debug("UpdateCustomerRedemptionCart class - emptyCustomerRedCart method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-		System.out.println("customerId : in emptyCustomerCart : "+customerId);
+		System.out.println("customerId : in emptyCustomerRedCart : "+customerId);
 
 		try {
 
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId ");
+			Query query = hibernateSession.createQuery("delete from RedemptionCart where customerId = :customerId ");
 
 			query.setParameter("customerId", customerId);
 
 			int result = query.executeUpdate();
 			hibernateSession.getTransaction().commit();
 
-			logger.debug("UpdateCustomerCart class - emptyCustomerCart method - customerId - "+customerId+" - deleted all rows from CustomerCart table ");
+			logger.debug("UpdateCustomerRedemptionCart class - emptyCustomerRedCart method - customerId - "+customerId+" - deleted all rows from RedemptionCart table ");
 
-			logger.debug("UpdateCustomerCart class - emptyCustomerCart method - customerId - "+customerId+" - end");
+			logger.debug("UpdateCustomerRedemptionCart class - emptyCustomerRedCart method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.error("UpdateCustomerCart class - emptyCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomerRedemptionCart class - emptyCustomerRedCart method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("UpdateCustomerCart class - emptyCustomerCart method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomerRedemptionCart class - emptyCustomerRedCart method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -101,30 +101,42 @@ public class UpdateCustomerCart {
 
 	}
 	
-	public void updateCustomerCartEntry (String customerId, String cartId, String productId, String upfrontAmount, String sipAmount,
-											String sipTenure, String sipDate, String folioNum) 
-														throws MoneyBuddyException {
+	public void updateCustomerRedCartEntry (String customerId, String redCartId, String amount, String units, String redemptionOption,
+											String redemptionType) throws MoneyBuddyException {
 
-		logger.debug("UpdateCustomerCart class - updateCustomerCartEntry method - customerId - "+customerId+" - start");
+		logger.debug("UpdateCustomerRedemptionCart class - updateCustomerRedCartEntry method - customerId - "+customerId+" - start");
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-		System.out.println("customerId : in updateCustomerCartEntry : "+customerId);
-		System.out.println("cartId : in updateCustomerCartEntry : "+cartId);
+		System.out.println("customerId : in updateCustomerRedCartEntry : "+customerId);
+		System.out.println("redCartId : in updateCustomerRedCartEntry : "+redCartId);
 
 		try {
 			
-			/*if ("untilStopped".equals(sipTenure))  {
-				sipTenure="99";
-			}*/
-			
+
 			hibernateSession.beginTransaction();
+		
+			Query query = hibernateSession.createQuery("update RedemptionCart set redAmount = :amount, redUnits = :units, redemptionOption = :redemptionOption, "
+					+ " redemptionType = :redemptionType where redCartId = :redCartId");
+			query.setParameter("amount", amount);
+			query.setParameter("units", units);
+			query.setParameter("redemptionOption", redemptionOption);
+			query.setParameter("redemptionType", redemptionType);
+			query.setParameter("redCartId", redCartId);
+			
+			query.executeUpdate();
+			hibernateSession.getTransaction().commit();
+		
+			
+			
+			
+/*			hibernateSession.beginTransaction();
 			Query query ;
 			if (sipTenure == null || "".equals(sipTenure) )  {
 				System.out.println(" Inside NULL loop : value of sipTenure is :"+sipTenure+":");
 				if (upfrontAmount == null || "".equals(upfrontAmount) )  
 					upfrontAmount = "0";
-				query = hibernateSession.createQuery("select cartId, upfrontAmount from CustomerCart where customerId=:customerId"
+				query = hibernateSession.createQuery("select redCartId, amount,unit from RedemptionCart where customerId=:customerId"
 						+ " and productId=:productId and folioNumber=:folioNumber and cartId != :cartId  and transactionType='UPFRONT' ");
 			}
 			else {
@@ -199,19 +211,19 @@ public class UpdateCustomerCart {
 				query.setParameter("cartId", cartId);
 				query.executeUpdate();
 				hibernateSession.getTransaction().commit();
-			}
+			}*/
 
 
-			logger.debug("UpdateCustomerCart class - updateCustomerCartEntry method - customerId - "+customerId+" - end");
+			logger.debug("UpdateCustomerRedemptionCart class - updateCustomerRedCartEntry method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {
-			logger.error("UpdateCustomerCart class - updateCustomerCartEntry method - customerId - "+customerId+" - Caught HibernateException");
+			logger.error("UpdateCustomerRedemptionCart class - updateCustomerRedCartEntry method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("UpdateCustomerCart class - updateCustomerCartEntry method - customerId - "+customerId+" - Caught Exception");
+			logger.error("UpdateCustomerRedemptionCart class - updateCustomerRedCartEntry method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

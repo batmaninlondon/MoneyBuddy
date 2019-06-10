@@ -350,8 +350,8 @@
 											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Profit</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Returns (% per year)</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Invest More</th>
-											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th> -->
+											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
+											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th> -->
 							            </tr>
 							            
 							        </thead>
@@ -401,7 +401,7 @@
   					<s:hidden id="cur-amount-stp-value" name="stpAmount"></s:hidden>
 				</s:form>
 				
-				<s:form  action="redeemFundAction" method="post" name="formRedeemFundAction">
+				<s:form  action="addToRedemptionCartAction" method="post" name="formAddToRedemptionCartAction">
   					<s:hidden id="fund-id-redeem-value" name="redeemFundId"></s:hidden>
   					<s:hidden id="folio-num-redeem-value" name="folioNum"></s:hidden>
   					<s:hidden id="total-amount-redeem-value" name="totalAmount"></s:hidden>
@@ -464,7 +464,7 @@
 							            <tr class="g-bg-color--primary" >
 							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Lumsum Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Lumpsum Amount</span></th>
 											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Sip Amount</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
@@ -890,8 +890,8 @@
 					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
 					  		"columnDefs": [ 
 					  			{"className": "dt-center", "targets": "_all"},
-					  			/* { "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" },
-					  			{ "targets": -2, "data": null, "defaultContent": "<button id='redeemButton'>Redeem</button>" }, */
+					  			/* { "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" }, */
+					  			{ "targets": -2, "data": null, "defaultContent": "<button id='redeemButton'>Redeem</button>" },
 					  			/* { "targets": -3, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" }, */
 					  			{ "targets": -1, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" },
 					  			{
@@ -921,9 +921,9 @@
 					  	    		$('td:nth-child(8)', nRow).addClass('g-font-weight--700');
 					  	    		$('td:nth-child(3)', nRow).html(null);
 					  	    		$('td:nth-child(5)', nRow).html(null);
-					  	    		$('td:nth-child(9)', nRow).html(null);/* 
+					  	    		$('td:nth-child(9)', nRow).html(null); 
 					  	    		$('td:nth-child(10)', nRow).html(null);
-					  	    		$('td:nth-child(11)', nRow).html(null); */
+					  	    		/* $('td:nth-child(11)', nRow).html(null); */
 					  	    	  	return nRow;	
 				  	    	  	}
 					  	    	else {
@@ -1076,7 +1076,7 @@
 					        var fundId = data[0];
 					        var folioNum = data[2];
 					        var totalAmount = data[5];
-					        var totalQuantity = data[3];
+					        var totalQuantity = data[4];
 					        //alert('fundId : '+fundId+' : folioNum : '+folioNum+' : totalAmount : '+totalAmount+' : totalQuantity : '+totalQuantity);
 					        redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity);
 					    } );

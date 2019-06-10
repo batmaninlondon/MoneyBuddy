@@ -35,6 +35,8 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 	private List<String> sipTenureArr;
 	private List<String> sipDateArr;
 	private String returnType;
+	private String anySipOrder;
+	private String anyUpfrontOrder;
 	
 
     public String execute() {
@@ -84,6 +86,21 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 	
 		    	sessionMap.put("customerCartList", customerCartList);
 		    	logger.debug("EditCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
+		    	
+		    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equals(o.getTransactionType())))
+		    		setAnyUpfrontOrder("TRUE");
+		    	else
+		    		setAnyUpfrontOrder("FALSE");
+				if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))
+					setAnySipOrder("TRUE");
+				else
+					setAnySipOrder("FALSE");
+				
+	    		System.out.println("anySipOrder : "+anySipOrder);
+	    		System.out.println("anyUpfrontOrder : "+anyUpfrontOrder);
+	    		sessionMap.put("anySipOrder", anySipOrder);
+	    		sessionMap.put("anyUpfrontOrder", anyUpfrontOrder);
+	    		
     		}
     		
     		if ("FundExplorer".equals(getReturnType()))
@@ -204,6 +221,22 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 
 	public void setSipDateArr(List<String> sipDateArr) {
 		this.sipDateArr = sipDateArr;
+	}
+
+	public String getAnySipOrder() {
+		return anySipOrder;
+	}
+
+	public void setAnySipOrder(String anySipOrder) {
+		this.anySipOrder = anySipOrder;
+	}
+
+	public String getAnyUpfrontOrder() {
+		return anyUpfrontOrder;
+	}
+
+	public void setAnyUpfrontOrder(String anyUpfrontOrder) {
+		this.anyUpfrontOrder = anyUpfrontOrder;
 	}
 
 

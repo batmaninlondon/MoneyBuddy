@@ -75,7 +75,7 @@
 	    	<div class="profile">
 	        	<div class="name">
 	                	<h3 class="title g-color--white">Thank you for investing with MoneyBuddy</h3>
-						<h6 style="color:white;">Your SIP investment details </h6>
+						<h6 style="color:white;">Your Investment details </h6>
 	            </div>
 	       	</div>
 	     </div>

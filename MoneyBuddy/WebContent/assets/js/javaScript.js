@@ -81,6 +81,14 @@
         	
 		}
 		
+		function editRedemptionCart(val)   {
+
+        	document.getElementById("return-type").value = val;
+        	
+        	document.formEditRedemptionCart.submit();
+        	
+		}
+		
 		function changeSliderValue(val)   {
 			
 			if (val == "" || val == null )   {
@@ -165,6 +173,11 @@
 				document.formPayment.submit();
 	    }
 		
+		function callRedemptionAction()  
+	    {
+				document.formRedemption.submit();
+	    }
+		
 		function redeem(fundId,schemeName,folioNumber,totalAmount,totalQuantity)  
 	    {
 				document.getElementById("redeem-fund-id").value = fundId;
@@ -240,7 +253,7 @@
 				document.getElementById("total-amount-redeem-value").value = totalAmount;
 				document.getElementById("total-quantity-redeem-value").value = totalQuantity;
 				
-				document.formRedeemFundAction.submit();
+				document.formAddToRedemptionCartAction.submit();
 	    }
 		
         function deleteCartEntry(cartId)  

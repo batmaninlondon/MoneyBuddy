@@ -51,9 +51,9 @@ public class Trading {
 
 	public String createClient(String clientHolding, String clientTaxStatus, String clientOccupationCode, String clientDob,
 			String clientGender, String clientGuardian, String clientAccType1, String clientAccNo1, String clientNeftIfscCode1,
-			String clientAdd, String clientCity, String clientState, String clientPinCode, String clientCountry,
-			String customerId, String clientAppName1, String clientEmail, String clientPan, String clientMobile) throws MoneyBuddyException {
-
+			String clientAdd, String clientCity, String clientState, String clientPinCode, String clientCountry, String customerId, 
+			String clientAppName1, String clientEmail, String clientPan, String clientNominee, String clientNomineeRelation, String clientMobile) throws MoneyBuddyException {
+		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
 		try {
@@ -70,7 +70,7 @@ public class Trading {
 			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
-
+ 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 			
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
@@ -105,7 +105,7 @@ public class Trading {
 			
 			String[] clientDetailsArray = {customerId,clientHolding,taxStatus,occupation,clientAppName1,clientProperties.getProperty("CLIENT_APPNAME2"),
 					clientProperties.getProperty("CLIENT_APPNAME3"),clientDob,clientGender,clientProperties.getProperty("CLIENT_GUARDIAN"),clientPan,
-					clientProperties.getProperty("CLIENT_NOMINEE"),clientProperties.getProperty("CLIENT_NOMINEE_RELATION"),clientProperties.getProperty("CLIENT_GUARDIANPAN"),
+					clientNominee,clientNomineeRelation,clientProperties.getProperty("CLIENT_GUARDIANPAN"),
 					clientProperties.getProperty("CLIENT_TYPE"),clientProperties.getProperty("CLIENT_DEFAULTDP"),clientProperties.getProperty("CLIENT_CDSLDPID"),
 					clientProperties.getProperty("CLIENT_CDSLCLTID"),clientProperties.getProperty("CLIENT_NSDLDPID"),clientProperties.getProperty("CLIENT_NSDLCLTID"),
 					clientAccType1,clientAccNo1,clientProperties.getProperty("CLIENT_MICRNO_1"),clientNeftIfscCode1,clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_1"),

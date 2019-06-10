@@ -30,6 +30,12 @@ public class CustomerCart {
     @Column (name="PRODUCT_NAME")
     private String productName;
     
+    @Column (name="MIN_UPFRONT_AMOUNT")
+    private String minUpfrontAmount;
+    
+    @Column (name="MIN_SIP_AMOUNT")
+    private String minSipAmount;
+    
     @Column (name="UPFRONT_AMOUNT")
     private String upfrontAmount;
     
@@ -70,13 +76,15 @@ public class CustomerCart {
         
     }
 
-	public CustomerCart( String customerId, String productId, String productName, String upfrontAmount, String sipAmount,
-			String transactionType, String sipDuration, String sipPlan, String sipDate,
+	public CustomerCart( String customerId, String productId, String productName, String minUpfrontAmount, String minSipAmount, String upfrontAmount, 
+			String sipAmount, String transactionType, String sipDuration, String sipPlan, String sipDate,
 			String folioNumber, String folioNumList, String cartCreationDate, String status, String rta, String pdfFilePath) {
 		super();
 		this.customerId = customerId;
 		this.productId = productId;
 		this.productName = productName;
+		this.minUpfrontAmount = minUpfrontAmount;
+		this.minSipAmount = minSipAmount;
 		this.upfrontAmount = upfrontAmount;
 		this.sipAmount = sipAmount;
 		this.transactionType = transactionType;
@@ -221,26 +229,44 @@ public class CustomerCart {
 		this.pdfFilePath = pdfFilePath;
 	}
 
+	public String getMinUpfrontAmount() {
+		return minUpfrontAmount;
+	}
+
+	public void setMinUpfrontAmount(String minUpfrontAmount) {
+		this.minUpfrontAmount = minUpfrontAmount;
+	}
+
+	public String getMinSipAmount() {
+		return minSipAmount;
+	}
+
+	public void setMinSipAmount(String minSipAmount) {
+		this.minSipAmount = minSipAmount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((upfrontAmount == null) ? 0 : upfrontAmount.hashCode());
-		result = prime * result + ((sipAmount == null) ? 0 : sipAmount.hashCode());
 		result = prime * result + ((cartCreationDate == null) ? 0 : cartCreationDate.hashCode());
 		result = prime * result + ((cartId == null) ? 0 : cartId.hashCode());
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((folioNumList == null) ? 0 : folioNumList.hashCode());
 		result = prime * result + ((folioNumber == null) ? 0 : folioNumber.hashCode());
+		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
+		result = prime * result + ((minUpfrontAmount == null) ? 0 : minUpfrontAmount.hashCode());
 		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + ((rta == null) ? 0 : rta.hashCode());
+		result = prime * result + ((sipAmount == null) ? 0 : sipAmount.hashCode());
 		result = prime * result + ((sipDate == null) ? 0 : sipDate.hashCode());
 		result = prime * result + ((sipDuration == null) ? 0 : sipDuration.hashCode());
 		result = prime * result + ((sipPlan == null) ? 0 : sipPlan.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((transactionType == null) ? 0 : transactionType.hashCode());
+		result = prime * result + ((upfrontAmount == null) ? 0 : upfrontAmount.hashCode());
 		return result;
 	}
 
@@ -256,20 +282,6 @@ public class CustomerCart {
 			return false;
 		}
 		CustomerCart other = (CustomerCart) obj;
-		if (upfrontAmount == null) {
-			if (other.upfrontAmount != null) {
-				return false;
-			}
-		} else if (!upfrontAmount.equals(other.upfrontAmount)) {
-			return false;
-		}
-		if (sipAmount == null) {
-			if (other.sipAmount != null) {
-				return false;
-			}
-		} else if (!sipAmount.equals(other.sipAmount)) {
-			return false;
-		}
 		if (cartCreationDate == null) {
 			if (other.cartCreationDate != null) {
 				return false;
@@ -305,6 +317,20 @@ public class CustomerCart {
 		} else if (!folioNumber.equals(other.folioNumber)) {
 			return false;
 		}
+		if (minSipAmount == null) {
+			if (other.minSipAmount != null) {
+				return false;
+			}
+		} else if (!minSipAmount.equals(other.minSipAmount)) {
+			return false;
+		}
+		if (minUpfrontAmount == null) {
+			if (other.minUpfrontAmount != null) {
+				return false;
+			}
+		} else if (!minUpfrontAmount.equals(other.minUpfrontAmount)) {
+			return false;
+		}
 		if (pdfFilePath == null) {
 			if (other.pdfFilePath != null) {
 				return false;
@@ -331,6 +357,13 @@ public class CustomerCart {
 				return false;
 			}
 		} else if (!rta.equals(other.rta)) {
+			return false;
+		}
+		if (sipAmount == null) {
+			if (other.sipAmount != null) {
+				return false;
+			}
+		} else if (!sipAmount.equals(other.sipAmount)) {
 			return false;
 		}
 		if (sipDate == null) {
@@ -368,7 +401,15 @@ public class CustomerCart {
 		} else if (!transactionType.equals(other.transactionType)) {
 			return false;
 		}
+		if (upfrontAmount == null) {
+			if (other.upfrontAmount != null) {
+				return false;
+			}
+		} else if (!upfrontAmount.equals(other.upfrontAmount)) {
+			return false;
+		}
 		return true;
 	}
 
+	
 }

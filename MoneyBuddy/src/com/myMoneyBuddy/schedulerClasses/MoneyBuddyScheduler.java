@@ -43,7 +43,7 @@ public class MoneyBuddyScheduler {
 			Trigger readSpreadSheetTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 09 12 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 33 16 * * ?")) 
 					.build();
 			
 	
@@ -58,7 +58,7 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 10 12 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 34 16 * * ?")) 
 					.build();
 			
 	

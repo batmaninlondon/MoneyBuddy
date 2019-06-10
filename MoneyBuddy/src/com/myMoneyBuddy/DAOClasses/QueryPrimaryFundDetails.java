@@ -383,6 +383,47 @@ public class QueryPrimaryFundDetails {
 
 	}
 	
+	public String getMinRedAmount(String fundId) throws MoneyBuddyException{
+
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		try
+		{
+			String minRedAmount = null;
+			logger.debug("QueryPrimaryFundDetails class - getMinRedAmount method - fundId - "+fundId+" - start");
+
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select minRedAmount from PrimaryFundDetails where fundId = :fundId ");
+			query.setParameter("fundId",fundId);
+			
+			if (query.list().size() != 0) {
+				minRedAmount = query.uniqueResult().toString();
+			}
+
+			hibernateSession.getTransaction().commit();
+			
+			logger.debug("QueryPrimaryFundDetails class - getMinRedAmount method - fundId - "+fundId+" - return minRedAmount - "+minRedAmount);
+			logger.debug("QueryPrimaryFundDetails class - getMinRedAmount method - fundId - "+fundId+" - end");
+			
+			return minRedAmount;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryPrimaryFundDetails class - getMinRedAmount method - fundId - "+fundId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryPrimaryFundDetails class - getMinRedAmount method - fundId - "+fundId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
 	public String getPdfFilePath(String fundId) throws MoneyBuddyException{
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();

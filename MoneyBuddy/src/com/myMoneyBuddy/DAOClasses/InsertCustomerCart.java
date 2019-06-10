@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -26,7 +27,7 @@ public class InsertCustomerCart {
 	public void insertRow (FundDetailsDataModel selectedFundDetailsDataModel, String customerId, String transactionType) throws MoneyBuddyException
     {
 
-    	logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - start");
+    	logger.debug("InsertCustomerCart class - insertRow method - customerId - "+customerId+" - start");
     	
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	CustomerCart tempCustomerCart = null;
@@ -44,37 +45,57 @@ public class InsertCustomerCart {
     			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
     			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, selectedFundDetailsDataModel.getFundId());
     			
+    			hibernateSession.beginTransaction();
+    			Query query = hibernateSession.createQuery("select transactionFolioNum from TransactionDetails "
+    					+ " where customerId = :customerId and productId = :productId and  transactionDate = "
+    					+ " (select max(transactionDate) from TransactionDetails where productId = :productId and transactionFolioNum is not null and "
+    					+ " transactionFolioNum != 'New')");
+    			
+    			query.setParameter("customerId", customerId);
+    			query.setParameter("productId", selectedFundDetailsDataModel.getFundId());
+    			 
+    			Object obj = query.uniqueResult();
+    			
+    			String selFolioNum = "New";
+    			
+    		    if (obj != null) {
+    		    	selFolioNum = obj.toString();
+    		    }
+    					 
+    			hibernateSession.getTransaction().commit();
+    			
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))  {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),"0",transactionType,null,null,null,"New",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,null,null,null,selFolioNum,folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
 	    		else {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					"0",selectedFundDetailsDataModel.getMinSipAmount(),transactionType,"99",null,
-	    					"1","New",folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,"99",null,
+	    					"1",selFolioNum,folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
+	    		
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);
 	   	        
 	   	        hibernateSession.getTransaction().commit();
-	   	        logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - new record inserted in CustomerCart table");
+	   	        logger.debug("InsertCustomerCart class - insertRow method - customerId - "+customerId+" - new record inserted in CustomerCart table");
    	        
 
     		
-    		logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - end");
+    		logger.debug("InsertCustomerCart class - insertRow method - customerId - "+customerId+" - end");
 
     	}
     	catch ( HibernateException e ) {
-    		logger.error("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught HibernateException");
+    		logger.error("InsertCustomerCart class - insertRow method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - Caught Exception");
+			logger.error("InsertCustomerCart class - insertRow method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -206,13 +227,18 @@ public class InsertCustomerCart {
     			
     			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
     			
-    			String pdfFilePath = queryPrimaryFundDetails.getPdfFilePath(productId);
+    			PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(productId);
         		
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))
-	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
+	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    					primaryFundDetails.getMinSipAmount(),amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,
+	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		else
-	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,null,cartCreationDate,status,rta,pdfFilePath);
+	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    					primaryFundDetails.getMinSipAmount(),"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,
+	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
+	    		
 	   	        hibernateSession.save(tempCustomerCart);
 	   	        hibernateSession.flush();
 	   	        hibernateSession.refresh(tempCustomerCart);

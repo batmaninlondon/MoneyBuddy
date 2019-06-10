@@ -46,8 +46,24 @@
 		
 		<script>
 		
+		
+		
+		function checkRadio(selection)  {
+			
+			if (selection == "Yes") 
+				var totalPayableAmount = parseInt(document.getElementById("totUpfrontAmt").innerHTML) +parseInt(document.getElementById("totSipAmt").innerHTML);
+			else 
+				var totalPayableAmount = parseInt(document.getElementById("totUpfrontAmt").innerHTML) ;
+			/* var totalUpfrontAmount = "${totalUpfrontAmount}"; */
+       	  	
+       	 	document.getElementById("payable-amount").innerHTML = totalPayableAmount;
+       	 
+		}
+		
 		$(document).ready(function() {
-		    $('#cartData').DataTable( {
+			
+			 
+			 $('#cartData').DataTable( {
 		        "paging":   false,
 		        "ordering": false,
 		        "info":     false,
@@ -57,6 +73,11 @@
 		        
 		        
 		    } );
+		    
+
+	       
+
+		    
 		} );
 		
 		</script>
@@ -100,12 +121,26 @@
 				<h3><b><u>Order Confirmation</u></b></h3>
 			</div>
 			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
-					<table id="cartData" class="table table-bordered stripe ">
+					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
+			  		<s:set var="anySip" value="#session.anySipOrder" />
+				  		<table id="cartData" class="table table-bordered stripe ">
 										<thead class="table-head g-font-size-14--xs">
 											<tr>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
 												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
+												<s:if test="'TRUE'.equals(#anyUpfront) ">
+													<th class="center col-md-3 g-bg-color--gray-light text-center">Lumpsum Amount<br/>(Rs.)</th>
+												</s:if>
+												<s:else>
+													<th class="center col-md-3 g-bg-color--gray-light text-center hidden">Lumpsum Amount<br/>(Rs.)</th>
+												</s:else>
+												<s:if test="'TRUE'.equals(#anySip) ">
+													<th class="center col-md-3 g-bg-color--gray-light text-center">SIP Amount<br/>(Rs/month)</th>
+												</s:if>
+												<s:else>
+													<th class="center col-md-3 g-bg-color--gray-light text-center hidden">SIP Amount<br/>(Rs/month)</th>
+												</s:else>
+												
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-14--xs">
@@ -115,34 +150,75 @@
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
 													    <s:if test="productName.equals('Total')">
+													    	
+													    	<p class="hidden" id="totUpfrontAmt"><s:property value="#customerCartListElement.upfrontAmount"/></p>
+													    	<p class="hidden" id="totSipAmt"><s:property value="#customerCartListElement.sipAmount"/></p>
+
 														    <td class="center g-font-size-14--xs text-center">
 														    	<b><s:property value="#customerCartListElement.productName"/></b>
 													    	</td>
-														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
-													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
-													    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
-													    	</td>
+													    	<td class="center g-font-size-14--xs text-center"></td>
+													    	<s:if test="'TRUE'.equals(#anyUpfront) ">
+															    <td class="center g-font-size-14--xs text-center">
+															    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
+														    	</td>
+													    	</s:if>
+													    	<s:else>
+														    	<td class="hidden center g-font-size-14--xs text-center">
+															    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
+														    	</td>
+													    	</s:else>
+													    	<s:if test="'TRUE'.equals(#anySip) ">
+														    	<td class="center g-font-size-14--xs text-center">
+														    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
+														    	</td>
+													    	</s:if>
+													    	<s:else>
+														    	<td class="hidden center g-font-size-14--xs text-center">
+														    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
+														    	</td>
+													    	</s:else>
 												    	</s:if>
 												    	<s:else>
 												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
 												    		<td class="center g-font-size-14--xs text-center">
 												    			<s:property value="#customerCartListElement.productName"/>
 											    			</td>
-											    			<s:if test="transactionType.equals('UPFRONT')">
-															    <td class="center g-font-size-14--xs text-center">
-															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
-														    	</td>
-													    	</s:if>
-													    	<s:else>
-														    	<td class="center g-font-size-14--xs text-center">
-															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
-														    	</td>
-													    	</s:else>
-													    	<td class="center g-font-size-14--xs text-center">
+											    			<td class="center g-font-size-14--xs text-center">
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>
+											    			<s:if test="('TRUE'.equals(#anyUpfront)) && ('TRUE'.equals(#anySip)) ">
+												    			<s:if test="transactionType.equals('UPFRONT')">
+																    <td class="center g-font-size-14--xs text-center">
+																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
+															    	</td>
+															    	<td class="center g-font-size-14--xs text-center">NA</td>
+														    	</s:if>
+														    	<s:else>
+															    	<td class="center g-font-size-14--xs text-center">NA</td>
+															    	<td class="center g-font-size-14--xs text-center">
+																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
+															    	</td>
+													    		</s:else>
+													    	</s:if>
+													    	<s:else>
+														    	<s:if test="'TRUE'.equals(#anyUpfront) ">
+														    		<td class="center g-font-size-14--xs text-center">
+																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
+															    	</td>
+															    	<td class="hidden center g-font-size-14--xs text-center"></td>
+																    	
+														    	</s:if>
+														    	<s:else>
+														    		<td class="center g-font-size-14--xs text-center hidden"></td>
+															    	<td class="center g-font-size-14--xs text-center">
+																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
+															    	</td>
+														    	</s:else>
+												    		</s:else>
+													    	
+													    	
+													    	
 												    		
 												    		<%
 												    		String transType = (String) pageContext.getAttribute("transactionType"); 
@@ -171,6 +247,27 @@
 		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
 			<div class="col-md-1 col-xs-1"></div>
 			<div class="col-md-8 col-xs-8">
+				<div class="row">
+					<div id="investment-options" class="col-md-3 g-margin-b-20--xs">
+						<b>Amount Payable Today</b>
+					</div>
+					<div class="col-md-2">
+						<b><span id="payable-amount"></span>&nbsp;&nbsp;Rs.</b>
+					</div>
+		        </div>
+ 			</div>
+					
+					
+		</div>
+		<div class="col-md-1 col-xs-1"></div>
+ 					
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
+			<div class="col-md-1 col-xs-1"></div>
+			<div class="col-md-8 col-xs-8">
 									
  					<%
  					if (anySipInvestment)  {
@@ -181,10 +278,10 @@
 							</div>
 		        	<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
 							<label class="radio-inline ">
-							  	<input type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked" >Today via netbanking
+							  	<input type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
 						  	</label>
 						  	<label class="radio-inline ">
-							  <input type="radio" id="f2" name="firstOrderFlag" value="N" >Next month via autodebit
+							  <input type="radio" id="f2" name="firstOrderFlag" value="N"  onclick="checkRadio('No');" >Next month via autodebit
 							</label>
 					  	<%-- <s:select class="form-control"  id="firstOrderFlag"
 								list="#{'Y':'Yes', 'N':'No'}" 
@@ -263,6 +360,12 @@
 	  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script>
+		
+		var totalPayableAmount = parseInt(document.getElementById("totUpfrontAmt").innerHTML) +parseInt(document.getElementById("totSipAmt").innerHTML);
+		document.getElementById("payable-amount").innerHTML = totalPayableAmount;
+		
+		</script>
 		
 </body>
 

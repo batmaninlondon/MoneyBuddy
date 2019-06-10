@@ -23,6 +23,8 @@ public class AddToCartAction extends ActionSupport  implements SessionAware{
 	private SessionMap<String,Object> sessionMap;
 	
 	private String transactionType;
+	private String anySipOrder;
+	private String anyUpfrontOrder;
 
     public String execute() {
     	
@@ -65,6 +67,20 @@ public class AddToCartAction extends ActionSupport  implements SessionAware{
 
 	    	sessionMap.put("customerCartList", customerCartList);
 	    	logger.debug("AddToCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
+	    	
+	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equals(o.getTransactionType())))
+	    		setAnyUpfrontOrder("TRUE");
+	    	else
+	    		setAnyUpfrontOrder("FALSE");
+			if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))
+				setAnySipOrder("TRUE");
+			else
+				setAnySipOrder("FALSE");
+			
+    		System.out.println("anySipOrder : "+anySipOrder);
+    		System.out.println("get anyUpfrontOrder : "+getAnyUpfrontOrder());
+    		sessionMap.put("anySipOrder", anySipOrder);
+    		sessionMap.put("anyUpfrontOrder", anyUpfrontOrder);
 	
 	    	return SUCCESS;
 	    	
@@ -89,6 +105,22 @@ public class AddToCartAction extends ActionSupport  implements SessionAware{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+	}
+
+	public String getAnySipOrder() {
+		return anySipOrder;
+	}
+
+	public void setAnySipOrder(String anySipOrder) {
+		this.anySipOrder = anySipOrder;
+	}
+
+	public String getAnyUpfrontOrder() {
+		return anyUpfrontOrder;
+	}
+
+	public void setAnyUpfrontOrder(String anyUpfrontOrder) {
+		this.anyUpfrontOrder = anyUpfrontOrder;
 	}
 
 }

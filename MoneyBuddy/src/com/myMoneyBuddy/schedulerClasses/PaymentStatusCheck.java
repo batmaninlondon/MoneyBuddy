@@ -13,9 +13,12 @@ public class PaymentStatusCheck implements org.quartz.Job{
 
 		try {
 			
+			System.out.println("PaymentStatusCheck CLASS EXECUTION -------  START");
+			
 			Trading trading = new Trading();
 			trading.checkPaymentStatus();
-		
+			
+			System.out.println("PaymentStatusCheck CLASS EXECUTION -------  END");
 
 		} 
 	 

@@ -29,10 +29,12 @@ public class ReadSpreadSheet implements org.quartz.Job {
 		
 		try {
     		
-    		String navFileName="C://xlsx/DailyNav.xls";
+    		System.out.println("ReadSpreadSheet CLASS EXECUTION -------  START");
+			String navFileName="C://xlsx/DailyNav.xls";
         
     		Vector navDataHolder=read(navFileName);
     		saveToDatabase(navDataHolder);
+    		System.out.println("ReadSpreadSheet CLASS EXECUTION -------  END");
 
         }
 		

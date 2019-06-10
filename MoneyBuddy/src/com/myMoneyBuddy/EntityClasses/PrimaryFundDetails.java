@@ -58,6 +58,9 @@ public class PrimaryFundDetails {
     @Column(name="MIN_PURCHASE_AMOUNT")
     private String minPurchaseAmount;
     
+    @Column(name="MIN_RED_AMOUNT")
+    private String minRedAmount;
+    
     @Column(name="MIN_SIP_DURATION")
     private String minSipDuration;
     
@@ -87,7 +90,7 @@ public class PrimaryFundDetails {
     }
     
 	public PrimaryFundDetails(String schemeName, String schemeType, String category, String startDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minPurchaseAmount, String minSipDuration, 
+			String risk, String returnsThreeYears, String minSipAmount, String minPurchaseAmount, String minRedAmount,String minSipDuration, 
 			String pdfFilePath, String mostPopularFund,String sipFlag, String stpFlag, String swpFlag, String switchFlag,String aum ) {
 		super();
 		this.schemeName = schemeName;
@@ -99,6 +102,7 @@ public class PrimaryFundDetails {
 		this.returnsThreeYears = returnsThreeYears;
 		this.minSipAmount = minSipAmount;
 		this.minPurchaseAmount = minPurchaseAmount;
+		this.minRedAmount = minRedAmount;
 		this.minSipDuration = minSipDuration;
 		this.pdfFilePath = pdfFilePath;
 		this.mostPopularFund = mostPopularFund;
@@ -300,109 +304,212 @@ public class PrimaryFundDetails {
 		this.aum = aum;
 	}
 
+	public String getMinRedAmount() {
+		return minRedAmount;
+	}
+
+	public void setMinRedAmount(String minRedAmount) {
+		this.minRedAmount = minRedAmount;
+	}
+
 	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aum == null) ? 0 : aum.hashCode());
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
+		result = prime * result + ((minPurchaseAmount == null) ? 0 : minPurchaseAmount.hashCode());
+		result = prime * result + ((minRedAmount == null) ? 0 : minRedAmount.hashCode());
+		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
+		result = prime * result + ((minSipDuration == null) ? 0 : minSipDuration.hashCode());
+		result = prime * result + ((mostPopularFund == null) ? 0 : mostPopularFund.hashCode());
+		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
+		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
+		result = prime * result + ((returnsFiveYears == null) ? 0 : returnsFiveYears.hashCode());
+		result = prime * result + ((returnsOneYear == null) ? 0 : returnsOneYear.hashCode());
+		result = prime * result + ((returnsSinceInception == null) ? 0 : returnsSinceInception.hashCode());
+		result = prime * result + ((returnsThreeYears == null) ? 0 : returnsThreeYears.hashCode());
+		result = prime * result + ((risk == null) ? 0 : risk.hashCode());
+		result = prime * result + ((schemeName == null) ? 0 : schemeName.hashCode());
+		result = prime * result + ((schemeType == null) ? 0 : schemeType.hashCode());
+		result = prime * result + ((sipFlag == null) ? 0 : sipFlag.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((stpFlag == null) ? 0 : stpFlag.hashCode());
+		result = prime * result + ((switchFlag == null) ? 0 : switchFlag.hashCode());
+		result = prime * result + ((swpFlag == null) ? 0 : swpFlag.hashCode());
+		return result;
+	}
 
-        final PrimaryFundDetails other = (PrimaryFundDetails) obj;
-        if ((this.fundId == null) ? (other.fundId != null) : !this.fundId.equals(other.fundId)) {
-            return false;
-        }
-        if ((this.schemeName == null) ? (other.schemeName != null) : !this.schemeName.equals(other.schemeName)) {
-            return false;
-        }
-        if ((this.schemeType == null) ? (other.schemeType != null) : !this.schemeType.equals(other.schemeType)) {
-            return false;
-        }
-        if ((this.category == null) ? (other.category != null) : !this.category.equals(other.category)) {
-            return false;
-        }
-        if ((this.startDate == null) ? (other.startDate != null) : !this.startDate.equals(other.startDate)) {
-            return false;
-        }
-        if ((this.rating == null) ? (other.rating != null) : !this.rating.equals(other.rating)) {
-            return false;
-        }
-        if ((this.risk == null) ? (other.risk != null) : !this.risk.equals(other.risk)) {
-            return false;
-        }
-        if ((this.returnsOneYear == null) ? (other.returnsOneYear != null) : !this.returnsOneYear.equals(other.returnsOneYear)) {
-            return false;
-        }
-        if ((this.returnsThreeYears == null) ? (other.returnsThreeYears != null) : !this.returnsThreeYears.equals(other.returnsThreeYears)) {
-            return false;
-        }
-        if ((this.returnsFiveYears == null) ? (other.returnsFiveYears != null) : !this.returnsFiveYears.equals(other.returnsFiveYears)) {
-            return false;
-        }
-        if ((this.returnsSinceInception == null) ? (other.returnsSinceInception != null) : !this.returnsSinceInception.equals(other.returnsSinceInception)) {
-            return false;
-        }
-        if ((this.minSipAmount == null) ? (other.minSipAmount != null) : !this.minSipAmount.equals(other.minSipAmount)) {
-            return false;
-        }
-        if ((this.minPurchaseAmount == null) ? (other.minPurchaseAmount != null) : !this.minPurchaseAmount.equals(other.minPurchaseAmount)) {
-            return false;
-        }
-        if ((this.minSipDuration == null) ? (other.minSipDuration != null) : !this.minSipDuration.equals(other.minSipDuration)) {
-            return false;
-        }
-        if ((this.pdfFilePath == null) ? (other.pdfFilePath != null) : !this.pdfFilePath.equals(other.pdfFilePath)) {
-            return false;
-        }
-        if ((this.mostPopularFund == null) ? (other.mostPopularFund != null) : !this.mostPopularFund.equals(other.mostPopularFund)) {
-            return false;
-        }
-        if ((this.sipFlag == null) ? (other.sipFlag != null) : !this.sipFlag.equals(other.sipFlag)) {
-            return false;
-        }
-        if ((this.stpFlag == null) ? (other.stpFlag != null) : !this.stpFlag.equals(other.stpFlag)) {
-            return false;
-        }
-        if ((this.swpFlag == null) ? (other.swpFlag != null) : !this.swpFlag.equals(other.swpFlag)) {
-            return false;
-        }
-        if ((this.switchFlag == null) ? (other.switchFlag != null) : !this.switchFlag.equals(other.switchFlag)) {
-            return false;
-        }
-        if ((this.aum == null) ? (other.aum != null) : !this.aum.equals(other.aum)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		PrimaryFundDetails other = (PrimaryFundDetails) obj;
+		if (aum == null) {
+			if (other.aum != null) {
+				return false;
+			}
+		} else if (!aum.equals(other.aum)) {
+			return false;
+		}
+		if (category == null) {
+			if (other.category != null) {
+				return false;
+			}
+		} else if (!category.equals(other.category)) {
+			return false;
+		}
+		if (fundId == null) {
+			if (other.fundId != null) {
+				return false;
+			}
+		} else if (!fundId.equals(other.fundId)) {
+			return false;
+		}
+		if (minPurchaseAmount == null) {
+			if (other.minPurchaseAmount != null) {
+				return false;
+			}
+		} else if (!minPurchaseAmount.equals(other.minPurchaseAmount)) {
+			return false;
+		}
+		if (minRedAmount == null) {
+			if (other.minRedAmount != null) {
+				return false;
+			}
+		} else if (!minRedAmount.equals(other.minRedAmount)) {
+			return false;
+		}
+		if (minSipAmount == null) {
+			if (other.minSipAmount != null) {
+				return false;
+			}
+		} else if (!minSipAmount.equals(other.minSipAmount)) {
+			return false;
+		}
+		if (minSipDuration == null) {
+			if (other.minSipDuration != null) {
+				return false;
+			}
+		} else if (!minSipDuration.equals(other.minSipDuration)) {
+			return false;
+		}
+		if (mostPopularFund == null) {
+			if (other.mostPopularFund != null) {
+				return false;
+			}
+		} else if (!mostPopularFund.equals(other.mostPopularFund)) {
+			return false;
+		}
+		if (pdfFilePath == null) {
+			if (other.pdfFilePath != null) {
+				return false;
+			}
+		} else if (!pdfFilePath.equals(other.pdfFilePath)) {
+			return false;
+		}
+		if (rating == null) {
+			if (other.rating != null) {
+				return false;
+			}
+		} else if (!rating.equals(other.rating)) {
+			return false;
+		}
+		if (returnsFiveYears == null) {
+			if (other.returnsFiveYears != null) {
+				return false;
+			}
+		} else if (!returnsFiveYears.equals(other.returnsFiveYears)) {
+			return false;
+		}
+		if (returnsOneYear == null) {
+			if (other.returnsOneYear != null) {
+				return false;
+			}
+		} else if (!returnsOneYear.equals(other.returnsOneYear)) {
+			return false;
+		}
+		if (returnsSinceInception == null) {
+			if (other.returnsSinceInception != null) {
+				return false;
+			}
+		} else if (!returnsSinceInception.equals(other.returnsSinceInception)) {
+			return false;
+		}
+		if (returnsThreeYears == null) {
+			if (other.returnsThreeYears != null) {
+				return false;
+			}
+		} else if (!returnsThreeYears.equals(other.returnsThreeYears)) {
+			return false;
+		}
+		if (risk == null) {
+			if (other.risk != null) {
+				return false;
+			}
+		} else if (!risk.equals(other.risk)) {
+			return false;
+		}
+		if (schemeName == null) {
+			if (other.schemeName != null) {
+				return false;
+			}
+		} else if (!schemeName.equals(other.schemeName)) {
+			return false;
+		}
+		if (schemeType == null) {
+			if (other.schemeType != null) {
+				return false;
+			}
+		} else if (!schemeType.equals(other.schemeType)) {
+			return false;
+		}
+		if (sipFlag == null) {
+			if (other.sipFlag != null) {
+				return false;
+			}
+		} else if (!sipFlag.equals(other.sipFlag)) {
+			return false;
+		}
+		if (startDate == null) {
+			if (other.startDate != null) {
+				return false;
+			}
+		} else if (!startDate.equals(other.startDate)) {
+			return false;
+		}
+		if (stpFlag == null) {
+			if (other.stpFlag != null) {
+				return false;
+			}
+		} else if (!stpFlag.equals(other.stpFlag)) {
+			return false;
+		}
+		if (switchFlag == null) {
+			if (other.switchFlag != null) {
+				return false;
+			}
+		} else if (!switchFlag.equals(other.switchFlag)) {
+			return false;
+		}
+		if (swpFlag == null) {
+			if (other.swpFlag != null) {
+				return false;
+			}
+		} else if (!swpFlag.equals(other.swpFlag)) {
+			return false;
+		}
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + (this.fundId != null ? this.fundId.hashCode() : 0);
-        hash = 83 * hash + (this.schemeName != null ? this.schemeName.hashCode() : 0);
-        hash = 83 * hash + (this.schemeType != null ? this.schemeType.hashCode() : 0);
-        hash = 83 * hash + (this.category != null ? this.category.hashCode() : 0);
-        hash = 83 * hash + (this.startDate != null ? this.startDate.hashCode() : 0);
-        hash = 83 * hash + (this.rating != null ? this.rating.hashCode() : 0);
-        hash = 83 * hash + (this.risk != null ? this.risk.hashCode() : 0);
-        hash = 83 * hash + (this.returnsOneYear != null ? this.returnsOneYear.hashCode() : 0);
-        hash = 83 * hash + (this.returnsThreeYears != null ? this.returnsThreeYears.hashCode() : 0);
-        hash = 83 * hash + (this.returnsFiveYears != null ? this.returnsFiveYears.hashCode() : 0);
-        hash = 83 * hash + (this.returnsSinceInception != null ? this.returnsSinceInception.hashCode() : 0);
-        hash = 83 * hash + (this.minSipAmount != null ? this.minSipAmount.hashCode() : 0);
-        hash = 83 * hash + (this.minPurchaseAmount != null ? this.minPurchaseAmount.hashCode() : 0);
-        hash = 83 * hash + (this.minSipDuration != null ? this.minSipDuration.hashCode() : 0);
-        hash = 83 * hash + (this.pdfFilePath != null ? this.pdfFilePath.hashCode() : 0);
-        hash = 83 * hash + (this.mostPopularFund != null ? this.mostPopularFund.hashCode() : 0);
-        hash = 83 * hash + (this.sipFlag != null ? this.sipFlag.hashCode() : 0);
-        hash = 83 * hash + (this.stpFlag != null ? this.stpFlag.hashCode() : 0);
-        hash = 83 * hash + (this.swpFlag != null ? this.swpFlag.hashCode() : 0);
-        hash = 83 * hash + (this.switchFlag != null ? this.switchFlag.hashCode() : 0);
-        hash = 83 * hash + (this.aum != null ? this.aum.hashCode() : 0);
-        return hash;
-    }
-    
-    
+	
 
 }
