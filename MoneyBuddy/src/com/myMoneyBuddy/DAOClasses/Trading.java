@@ -30,7 +30,6 @@ import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.MFOrderEntry;
 
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
-import com.myMoneyBuddy.ActionClasses.PaymentAction;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
@@ -374,7 +373,7 @@ public class Trading {
 					totalSipAmount += Double.parseDouble(customerCartList.get(i).getSipAmount());
 
 				QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
-				SecondaryFundDetails secondaryFundDetails = querySecondaryFundDetails.getSecondaryFundDetails(customerCartList.get(i).getProductId());
+				SecondaryFundDetails secondaryFundDetails = querySecondaryFundDetails.getSecondaryFundDetails(customerCartList.get(i).getFundId());
 				
 				List<Object[]> primaryFundDetailsResult;
 				
@@ -382,7 +381,7 @@ public class Trading {
 				
 				query = hibernateSession.createQuery("select schemeType,category "
 										+ " from PrimaryFundDetails where fundId = :fundId ");
-				query.setParameter("fundId", customerCartList.get(i).getProductId());
+				query.setParameter("fundId", customerCartList.get(i).getFundId());
 				
 				primaryFundDetailsResult = query.list();
 				
@@ -396,7 +395,7 @@ public class Trading {
 					amcCode = secondaryFundDetails.getAmcCode();
 				}
 
-				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+customerCartList.get(i).getProductId());
+				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+customerCartList.get(i).getFundId());
 
 				Double currentTransactionAmount ;
 				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))
@@ -419,7 +418,7 @@ public class Trading {
 				
 				tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,customerCartList.get(i).getTransactionType(),
 						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
-						"1", null,null,"N",customerCartList.get(i).getProductId(), null,null,frmtdDateForDB, frmtdDateForDB,"N",
+						"1", null,null,"N",customerCartList.get(i).getFundId(), null,null,frmtdDateForDB, frmtdDateForDB,"N",
 						selFolioNum,null,"N"); 		
 
 				hibernateSession.save(tempTransactionDetail);
@@ -431,10 +430,10 @@ public class Trading {
 				
 				hibernateSession.beginTransaction();
 				
-				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and transactionType = :transactionType and productId = :productId and folioNumber = :folioNumber ");
+				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and transactionType = :transactionType and fundId = :fundId and folioNumber = :folioNumber ");
 				query.setParameter("customerId", customerId);
 				query.setParameter("transactionType", customerCartList.get(i).getTransactionType());
-				query.setParameter("productId", customerCartList.get(i).getProductId());
+				query.setParameter("fundId", customerCartList.get(i).getFundId());
 				query.setParameter("folioNumber", selFolioNum);
 				
 				query.executeUpdate();
@@ -442,7 +441,7 @@ public class Trading {
 				hibernateSession.getTransaction().commit();
 
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+customerCartList.get(i).getTransactionType()+""
-						+ " - deleted row from CustomerCart table for productId - "+customerCartList.get(i).getProductId()+" and folioNumber - "+selFolioNum);
+						+ " - deleted row from CustomerCart table for fundId - "+customerCartList.get(i).getFundId()+" and folioNumber - "+selFolioNum);
 				
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
 				
@@ -893,7 +892,7 @@ public class Trading {
 					
 					hibernateSession.beginTransaction();
 					
-					query = hibernateSession.createQuery("select productId,transactionAmount,transactionDate,transactionStatus,transactionDetailId,transactionType"
+					query = hibernateSession.createQuery("select fundId,transactionAmount,transactionDate,transactionStatus,transactionDetailId,transactionType"
 											+ " from TransactionDetails where bseOrderId = :bseOrderId and customerId = :customerId ");
 					query.setParameter("bseOrderId", bseOrderId);
 					query.setParameter("customerId", customerId);
@@ -1008,57 +1007,31 @@ public class Trading {
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
 			WebServiceStarMFPaymentGateway webServiceStarMFPaymentGateway = new WebServiceStarMFPaymentGateway();		
-			/*IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
-			String PASSWORD_STARMF;
-			Response passwordStarMFPaymentGateway;
-			String[] resultsStarMFPaymentGateway;*/
 			String entryParam;
 			String[] resultsEntryParam = null;
 
-			/*boolean allOrderFailed = true ;
-			String paymentUrl;
-			
-			ArrayOfstring orderNums = new ArrayOfstring();
-			
-			Double totalPaymentAmount = 0.0;*/
-
-			//String path = ServletActionContext.getServletContext().getRealPath("");
-			//System.out.println("Path : "+path);
-			//System.out.println("Real Path : "+ ServletActionContext.getRequest().getSession().getServletContext().getRealPath("") );
-			
-			//String paymentUrlFile = ServletActionContext.getServletContext().getRealPath("")+"payment.html";
-			
-
-				
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for fresh order start");
-				//System.out.println("Inside if case : tranDetailId is "+tranDetailId);
-			
+				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = new Date();
 				String frmtdDateForDB = dateFormat.format(date);
 	
 				System.out.println("frmtdDateForDB : "+frmtdDateForDB);
 				
-				dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date dateForDbf = new Date();
-	
+				/*dateFormat = new SimpleDateFormat("yyyy-MM-dd");*/
 	
 				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				date = new Date();
-				String frmtdDate = dateFormat.format(date);
+				/*String frmtdDate = dateFormat.format(date);*/
 				
 				hibernateSession.beginTransaction();
 				
 				query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
 				
 				String transactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
-				
-				
+
 				hibernateSession.getTransaction().commit();
 
-				
-				
-			
 				String schemeCode = null;
 				String amcCode = null;
 				String schemeType = null;
@@ -1097,23 +1070,6 @@ public class Trading {
 
 				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
 
-				/*if ( "UPFRONT".equals(transactionType) )  {
-					hibernateSession.beginTransaction();
-					
-					query = hibernateSession.createQuery("select count(*) from TransactionDetails  where customerId= :customerId and productId= :productId and transactionType='UPFRONT' ");
-					query.setParameter("customerId", customerId);
-					query.setParameter("productId", currentProductId);
-					hibernateSession.getTransaction().commit();
-					
-					String count = query.uniqueResult().toString();
-					
-					if ( Integer.valueOf(count) != 0)  {
-						buySellType = "ADDITIONAL";
-						
-					}
-					
-				}*/
-				
 				hibernateSession.beginTransaction();
 				
 				tempTransactionDetail  = new TransactionDetails(transactionId, null,null,null, customerId,transactionType,
@@ -1126,63 +1082,8 @@ public class Trading {
 
 				hibernateSession.getTransaction().commit();
 				
-				/*hibernateSession.beginTransaction();
-				
-				query = hibernateSession.createQuery("delete from CustomerCart where customerId = :customerId and productId = :productId ");
-				query.setParameter("customerId", customerId);
-				query.setParameter("productId", currentProductId);
-				
-				query.executeUpdate();
-				
-				hibernateSession.getTransaction().commit();*/
-
-				//logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - deleted row from CustomerCart table for productId - "+currentProductId);
-				
 				transactionDetailId = tempTransactionDetail.getTransactionDetailId();
-				
-				//transactionDetailIdList.add(transactionDetailId);
 
-				/*if ("SIP".equals(transactionType ))  {
-					hibernateSession.beginTransaction();
-					
-					System.out.println("customerId for SipDetails is : "+customerId);
-					System.out.println("transactionDetailId for SipDetails is : "+transactionDetailId);
-					System.out.println("sipDate for SipDetails is : "+sipDate);
-					System.out.println("sipStartDate for SipDetails is : "+sipStartDate);
-					System.out.println("sipEndDate for SipDetails is : "+sipEndDate);
-					
-					String frmtdStartDateForSip = sipStartDate.substring(6,10)+"-"+sipStartDate.substring(0,2)+"-"+sipStartDate.substring(3,5);
-					String frmtdEndDateForSip = sipEndDate.substring(6,10)+"-"+sipEndDate.substring(0,2)+"-"+sipEndDate.substring(3,5);
-					
-					tempSipDetail = new SipDetails(customerId, transactionDetailId,
-							sipDate, frmtdStartDateForSip, frmtdEndDateForSip,Integer.toString(years),"N","N");
-	
-					hibernateSession.save(tempSipDetail);
-					hibernateSession.getTransaction().commit();
-					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - inserted new row in SipDetails table");
-				}*/
-				
-				// Commented dbf specific code - start 
-				
-				/*dateFormat = new SimpleDateFormat("HH:mm:ss");
-				Date CurrentTime = dateFormat.parse(dateFormat.format(new Date()));
-				
-				String closingTimeStr = configProperties.getProperty("CLOSING_TIME");
-				Date closingTime = dateFormat.parse(closingTimeStr);
-
-				String frmtdDateForDBF;
-				if (CurrentTime.after(closingTime))
-				{
-					dateForDbf = DateUtils.addDays(dateForDbf, 1);
-					frmtdDateForDBF = dateFormat.format(dateForDbf);
-				}
-				else
-				{
-					frmtdDateForDBF = dateFormat.format(dateForDbf);
-				}*/
-
-				// Commented dbf specific code - end
-				
 				passwordMFOrder = mfOrderEntry.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
 				resultsMFOrder = passwordMFOrder.split("\\|");
@@ -1191,26 +1092,7 @@ public class Trading {
 				PASSWORD_MFORDER = resultsMFOrder[1];
 
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from mfOrderEntry API ");
-				
-				
-				/*if ("Debt".equals(schemeType) && "Liquid".equals(category))   {
-					
-					SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-					Date oneFifteenPm = parser.parse("13:15");
-					Date threePm = parser.parse("15:00");
-					
-					
-					if (date.after(oneFifteenPm) && date.before(threePm)) {
-				    
-						schemeCode = schemeCode+"-L0" ;
-					}
-				}
-				else {
-					if ( productDetailsMap.get(currentProductId) >= 200000.00 ) {
-						schemeCode = schemeCode+"-L1" ;	
-					}
-				}*/
-				
+
 				System.out.println(" SCHEME CODE : "+schemeCode);
 				
 			
@@ -1242,32 +1124,6 @@ public class Trading {
 							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
 				
 					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - "+buySell+" -order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
-					
-
-				/*else {
-
-					System.out.println(" transactionDetailId : "+transactionDetailId+" and amount : "+Double.toString(productDetailsMap.get(currentProductId)));
-					System.out.println(" start Date  : "+frmtdDate );
-					System.out.println(" sip start Date  : "+sipStartDate );
-
-					String startDate = sipStartDate.substring(3,5)+"/"+sipStartDate.substring(0,2)+"/"+sipStartDate.substring(6,10);
-				
-					System.out.println(" startDate  : "+startDate );
-					System.out.println(" numOfInstallments  : "+Integer.toString(years*12) );
-					
-					entryParam = mfOrderEntry.xsipOrderEntryParam(transactionCode, transactionDetailId, schemeCode, configProperties.getProperty("MEMBER_ID"),
-							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
-							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
-							Double.toString(productDetailsMap.get(currentProductId)),Integer.toString(years*12),clientProperties.getProperty("REMARKS"),
-							folioNum,"Y",clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
-							clientProperties.getProperty("EUIN"),
-							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
-							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
-							clientProperties.getProperty("PARAM_3"));
-					
-					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - new Sip start order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
-					
-				}*/
 
 				resultsEntryParam = entryParam.split("\\|");
 
@@ -1283,9 +1139,9 @@ public class Trading {
 				query.setParameter("bseOrderId", resultsEntryParam[2].toString());
 				query.setParameter("uniqueReferenceNumber", transactionDetailId);
 				if ("0".equals(resultsEntryParam[7].toString()))
-					query.setParameter("transactionStatus", "8");
-				else 
 					query.setParameter("transactionStatus", "7");
+				else 
+					query.setParameter("transactionStatus", "2");
 				query.setParameter("bseRemarks", resultsEntryParam[6].toString());
 				query.setParameter("bseSuccessFlag", resultsEntryParam[7].toString());
 				query.setParameter("transactionDetailId", transactionDetailId);
@@ -1350,7 +1206,7 @@ public class Trading {
 
 		}*/
 		hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , productId , quantity, transactionAmount,customerId from TransactionDetails where transactionStatus='5'");
+			query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , fundId , quantity, transactionAmount,customerId from TransactionDetails where transactionStatus='5'");
 
 			transactionDetails = query.list();
 
@@ -1460,6 +1316,11 @@ public class Trading {
 							
 						}
 						else {
+							System.out.println("Payment Failed");
+							hibernateSession.beginTransaction();
+							hibernateSession.createQuery("update TransactionDetails set transactionStatus='6' where transactionDetailId='"+transactionDetail[1].toString()+"'").executeUpdate();
+							hibernateSession.getTransaction().commit();
+							
 							hibernateSession.beginTransaction();
 							Object result = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId='"+transactionDetail[4].toString()+"'").uniqueResult();
 							String schemeName = null;

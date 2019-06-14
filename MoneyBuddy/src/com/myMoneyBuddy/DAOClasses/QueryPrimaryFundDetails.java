@@ -4,13 +4,6 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,6 +14,11 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryPrimaryFundDetails {
 	

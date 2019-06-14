@@ -591,7 +591,7 @@ input[type="range"] {
 											 <input class="hidden" name="cartIdArr"  value=<s:property value="#customerCartListElement.cartId"/> />
 										</td>
 										<td class="text-center hidden ">
-											 <input class="hidden" name="productIdArr"  value=<s:property value="#customerCartListElement.productId"/> />
+											 <input class="hidden" name="fundIdArr"  value=<s:property value="#customerCartListElement.fundId"/> />
 										</td>
 										<td class="text-center  ">
 											 

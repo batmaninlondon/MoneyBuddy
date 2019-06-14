@@ -5,15 +5,15 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class UpdateCustomerCart {
 	
@@ -101,7 +101,7 @@ public class UpdateCustomerCart {
 
 	}
 	
-	public void updateCustomerCartEntry (String customerId, String cartId, String productId, String upfrontAmount, String sipAmount,
+	public void updateCustomerCartEntry (String customerId, String cartId, String fundId, String upfrontAmount, String sipAmount,
 											String sipTenure, String sipDate, String folioNum) 
 														throws MoneyBuddyException {
 
@@ -125,21 +125,21 @@ public class UpdateCustomerCart {
 				if (upfrontAmount == null || "".equals(upfrontAmount) )  
 					upfrontAmount = "0";
 				query = hibernateSession.createQuery("select cartId, upfrontAmount from CustomerCart where customerId=:customerId"
-						+ " and productId=:productId and folioNumber=:folioNumber and cartId != :cartId  and transactionType='UPFRONT' ");
+						+ " and fundId=:fundId and folioNumber=:folioNumber and cartId != :cartId  and transactionType='UPFRONT' ");
 			}
 			else {
 				System.out.println(" Inside NOT NULL loop : value of sipTenure is :"+sipTenure+":");
 				if (sipAmount == null || "".equals(sipAmount) )  
 					sipAmount = "0";
 				query = hibernateSession.createQuery("select cartId, sipAmount from CustomerCart where customerId=:customerId"
-						+ " and productId=:productId and folioNumber=:folioNumber and sipDuration=:sipDuration "
+						+ " and fundId=:fundId and folioNumber=:folioNumber and sipDuration=:sipDuration "
 						+ " and sipDate=:sipDate and cartId != :cartId  and transactionType='SIP' ");
 				query.setParameter("sipDuration",sipTenure);
 				query.setParameter("sipDate",sipDate);
 			}
 			
 			query.setParameter("customerId",customerId);
-			query.setParameter("productId",productId);
+			query.setParameter("fundId",fundId);
 			query.setParameter("folioNumber",folioNum);
 			query.setParameter("cartId",cartId);
 			

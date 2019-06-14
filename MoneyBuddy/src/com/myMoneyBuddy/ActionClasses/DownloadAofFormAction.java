@@ -5,30 +5,19 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
-import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
-import com.myMoneyBuddy.Utils.CommonUtil;
-import com.myMoneyBuddy.Utils.SendMail;
-import com.opensymphony.xwork2.ActionSupport;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.ServletContext;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.myMoneyBuddy.Utils.SendMail;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class DownloadAofFormAction extends ActionSupport implements SessionAware  {
 

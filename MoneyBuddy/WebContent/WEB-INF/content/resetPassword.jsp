@@ -18,6 +18,7 @@
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap/responsive.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	
     <!-- <link rel="shortcut icon" href="images/ico/favicon.ico"> -->
@@ -32,7 +33,7 @@
    <header id="header">
 
         <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
+            <div class="g-padding-l-80-md">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -43,7 +44,7 @@
                     <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
 				
-                <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                <div class="collapse navbar-collapse s-header-v2__navbar-collapse g-padding-l-80-md" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
@@ -56,7 +57,13 @@
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
+										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+															<li><a href="<s:url action="customerCartAction"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+															<li><a href="<s:url action="customerRedCartAction"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+														</ul>
+													</li>
 										 			 <li class="s-header-v2__nav-item"><a href="logOff" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">

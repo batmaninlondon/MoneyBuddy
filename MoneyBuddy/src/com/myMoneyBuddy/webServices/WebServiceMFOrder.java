@@ -1,7 +1,5 @@
 package com.myMoneyBuddy.webServices;
-import in.bsestarmf.GetPassword;
 
-import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -13,6 +11,8 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 
 import org.tempuri.MFOrderEntry;
+
+import in.bsestarmf.GetPassword;
 
 
 @WebServiceClient(name = "MFOrder", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://www.bsestarmf.in/MFOrderEntry/MFOrder.svc")

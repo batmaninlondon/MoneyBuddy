@@ -5,19 +5,18 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.Utils.CommonUtil;
-import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.commons.io.FileUtils;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.Utils.CommonUtil;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class DownloadDbfFileAction extends ActionSupport implements SessionAware  {
 

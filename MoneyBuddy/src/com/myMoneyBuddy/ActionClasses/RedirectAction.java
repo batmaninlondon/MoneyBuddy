@@ -7,6 +7,10 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryBankName;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
@@ -14,9 +18,6 @@ import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class RedirectAction extends ActionSupport  implements SessionAware{
 
@@ -46,7 +47,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
     		// System.out.println("kycStaus : "+customer.getKycStatus());
     		
     		if ("ACTIVATED".equals(customer.getAofFormStatus()))  {
-    			logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned bankDetails");
+    			logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - returned orderConfirmation");
 		    	logger.debug("RedirectAction class - execute method - customerId - "+customerId+" - end");
 		    	
 		    	QueryBankDetails queryBankDetails = new QueryBankDetails();
@@ -60,7 +61,7 @@ public class RedirectAction extends ActionSupport  implements SessionAware{
 				
 				
 		    	
-				return "bankDetails";
+				return "orderConfirmation";
     		}
     		else {
     			if ("N".equals(customer.getCusDetailsUploaded()))  {

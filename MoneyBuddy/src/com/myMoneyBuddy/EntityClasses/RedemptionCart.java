@@ -24,8 +24,8 @@ public class RedemptionCart {
     @Column(name="CUSTOMER_ID")
     private String customerId;
 
-    @Column (name="PRODUCT_ID")
-    private String productId;
+    @Column (name="FUND_ID")
+    private String fundId;
 
     @Column (name="PRODUCT_NAME")
     private String productName;
@@ -59,17 +59,20 @@ public class RedemptionCart {
     
     @Column(name="STATUS")
     private String status;
+    
+    @Column(name="LATEST_NAV")
+    private String latestNav;
 
     public RedemptionCart() {
         
     }
 
-	public RedemptionCart(String customerId, String productId, String productName, String minRedAmount, String redAmount, String redUnits,
+	public RedemptionCart(String customerId, String fundId, String productName, String minRedAmount, String redAmount, String redUnits,
 			String totalAmount, String totalUnits, String redemptionOption, String redemptionType, String folioNumber,
-			String redCartCreationDate, String status) {
+			String redCartCreationDate, String status, String latestNav ) {
 		super();
 		this.customerId = customerId;
-		this.productId = productId;
+		this.fundId = fundId;
 		this.productName = productName;
 		this.minRedAmount = minRedAmount;
 		this.redAmount = redAmount;
@@ -81,6 +84,7 @@ public class RedemptionCart {
 		this.folioNumber = folioNumber;
 		this.redCartCreationDate = redCartCreationDate;
 		this.status = status;
+		this.latestNav = latestNav;
 	}
 
 	public String getRedCartId() {
@@ -99,12 +103,12 @@ public class RedemptionCart {
 		this.customerId = customerId;
 	}
 
-	public String getProductId() {
-		return productId;
+	public String getFundId() {
+		return fundId;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setFundId(String fundId) {
+		this.fundId = fundId;
 	}
 
 	public String getProductName() {
@@ -195,14 +199,23 @@ public class RedemptionCart {
 		this.status = status;
 	}
 
+	public String getLatestNav() {
+		return latestNav;
+	}
+
+	public void setLatestNav(String latestNav) {
+		this.latestNav = latestNav;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((folioNumber == null) ? 0 : folioNumber.hashCode());
+		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
+		result = prime * result + ((latestNav == null) ? 0 : latestNav.hashCode());
 		result = prime * result + ((minRedAmount == null) ? 0 : minRedAmount.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + ((redAmount == null) ? 0 : redAmount.hashCode());
 		result = prime * result + ((redCartCreationDate == null) ? 0 : redCartCreationDate.hashCode());
@@ -242,18 +255,25 @@ public class RedemptionCart {
 		} else if (!folioNumber.equals(other.folioNumber)) {
 			return false;
 		}
+		if (fundId == null) {
+			if (other.fundId != null) {
+				return false;
+			}
+		} else if (!fundId.equals(other.fundId)) {
+			return false;
+		}
+		if (latestNav == null) {
+			if (other.latestNav != null) {
+				return false;
+			}
+		} else if (!latestNav.equals(other.latestNav)) {
+			return false;
+		}
 		if (minRedAmount == null) {
 			if (other.minRedAmount != null) {
 				return false;
 			}
 		} else if (!minRedAmount.equals(other.minRedAmount)) {
-			return false;
-		}
-		if (productId == null) {
-			if (other.productId != null) {
-				return false;
-			}
-		} else if (!productId.equals(other.productId)) {
 			return false;
 		}
 		if (productName == null) {
@@ -328,7 +348,5 @@ public class RedemptionCart {
 		}
 		return true;
 	}
-
-
 
 }

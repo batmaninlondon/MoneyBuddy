@@ -6,11 +6,9 @@
 package com.myMoneyBuddy.Utils;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -29,10 +27,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.log4j.Logger;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.PdfStamper;
+
 import com.myMoneyBuddy.ActionClasses.RegisterAction;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 

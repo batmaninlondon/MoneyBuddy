@@ -80,9 +80,9 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		hibernateSession.beginTransaction();
 
-			query = hibernateSession.createQuery("select t.productId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
+			query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
 									+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
-									+ "where t.customerId = c.customerId and t.productId = s.fundId and t.transactionDetailId= :transactionDetailId");
+									+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.transactionDetailId= :transactionDetailId");
 			
 
 			query.setParameter("transactionDetailId", transactionDetailId);

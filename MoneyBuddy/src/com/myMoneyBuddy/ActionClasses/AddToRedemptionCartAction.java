@@ -8,18 +8,15 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.InsertCustomerRedemptionCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
-import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.InsertCustomerRedemptionCart;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.EntityClasses.RedemptionCart;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class AddToRedemptionCartAction extends ActionSupport  implements SessionAware{
 

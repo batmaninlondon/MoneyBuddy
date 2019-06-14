@@ -5,20 +5,22 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.Utils.SendMail;
-import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.Utils.SendMail;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class PopulateBankDetailsAction extends ActionSupport implements SessionAware  {
 	

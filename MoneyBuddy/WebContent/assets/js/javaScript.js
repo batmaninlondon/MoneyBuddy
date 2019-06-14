@@ -261,6 +261,13 @@
 			document.getElementById("cart-id-value").value = cartId;
 			document.formDeleteCart.submit();
         }
+        
+        function deleteRedCartEntry(redCartId)  
+        {
+			document.getElementById("red-cart-id-value").value = redCartId;
+			document.formDeleteRedCart.submit();
+        }
+        
         function submitForgotPassword(googleResponse){
       	  
         	document.getElementById("google-response").value = googleResponse;

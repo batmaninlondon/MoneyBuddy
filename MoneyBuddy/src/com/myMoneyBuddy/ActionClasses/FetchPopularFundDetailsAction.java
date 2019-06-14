@@ -5,16 +5,13 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class FetchPopularFundDetailsAction extends ActionSupport   {
 

@@ -3,15 +3,12 @@ package com.myMoneyBuddy.Utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.InsertNavHistory;
 import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;

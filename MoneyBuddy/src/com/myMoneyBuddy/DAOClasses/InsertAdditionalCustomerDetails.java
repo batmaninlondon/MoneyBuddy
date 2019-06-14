@@ -5,19 +5,13 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertAdditionalCustomerDetails {
 

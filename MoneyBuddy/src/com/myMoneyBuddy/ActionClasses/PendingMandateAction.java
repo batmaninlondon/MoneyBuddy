@@ -5,18 +5,14 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.ModelClasses.PendingMandateOrders;
-import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import org.apache.log4j.Logger;
 
 public class PendingMandateAction extends ActionSupport implements Action  {
 

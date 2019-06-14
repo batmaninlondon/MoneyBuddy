@@ -5,16 +5,17 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.TransactionDetails;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertTransactionDetails {
 
@@ -46,7 +47,7 @@ public class InsertTransactionDetails {
     		TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, transactionDetails.getBseOrderId(),transactionDetails.getBseRegistrationNumber(),
     				null, transactionDetails.getCustomerId(),transactionDetails.getTransactionType(),transactionDetails.getTransactionCode(),
 					"SELL", "PARTIAL", transactionDetails.getTransactionAmount(),"8","Order rejected for BSE order id : "+transactionDetails.getBseOrderId(),
-					"0","Y",transactionDetails.getProductId(),transactionDetails.getQuantity(),transactionDetails.getUnitPrice(),frmtdDateForDB,
+					"0","Y",transactionDetails.getFundId(),transactionDetails.getQuantity(),transactionDetails.getUnitPrice(),frmtdDateForDB,
 					frmtdDateForDB,"N",transactionDetails.getTransactionFolioNum(),null,"Y"); 		
 
 			hibernateSession.save(tempTransactionDetail);

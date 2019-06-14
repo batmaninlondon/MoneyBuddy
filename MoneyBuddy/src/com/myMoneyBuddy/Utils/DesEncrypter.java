@@ -23,7 +23,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+
 import org.apache.log4j.Logger;
+
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class DesEncrypter  {

@@ -24,8 +24,8 @@ public class CustomerCart {
     @Column(name="CUSTOMER_ID")
     private String customerId;
 
-    @Column (name="PRODUCT_ID")
-    private String productId;
+    @Column (name="FUND_ID")
+    private String fundId;
 
     @Column (name="PRODUCT_NAME")
     private String productName;
@@ -76,12 +76,12 @@ public class CustomerCart {
         
     }
 
-	public CustomerCart( String customerId, String productId, String productName, String minUpfrontAmount, String minSipAmount, String upfrontAmount, 
+	public CustomerCart( String customerId, String fundId, String productName, String minUpfrontAmount, String minSipAmount, String upfrontAmount, 
 			String sipAmount, String transactionType, String sipDuration, String sipPlan, String sipDate,
 			String folioNumber, String folioNumList, String cartCreationDate, String status, String rta, String pdfFilePath) {
 		super();
 		this.customerId = customerId;
-		this.productId = productId;
+		this.fundId = fundId;
 		this.productName = productName;
 		this.minUpfrontAmount = minUpfrontAmount;
 		this.minSipAmount = minSipAmount;
@@ -116,12 +116,12 @@ public class CustomerCart {
 		this.customerId = customerId;
 	}
 
-	public String getProductId() {
-		return productId;
+	public String getFundId() {
+		return fundId;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setFundId(String fundId) {
+		this.fundId = fundId;
 	}
 
 	public String getProductName() {
@@ -257,7 +257,7 @@ public class CustomerCart {
 		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
 		result = prime * result + ((minUpfrontAmount == null) ? 0 : minUpfrontAmount.hashCode());
 		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + ((rta == null) ? 0 : rta.hashCode());
 		result = prime * result + ((sipAmount == null) ? 0 : sipAmount.hashCode());
@@ -338,11 +338,11 @@ public class CustomerCart {
 		} else if (!pdfFilePath.equals(other.pdfFilePath)) {
 			return false;
 		}
-		if (productId == null) {
-			if (other.productId != null) {
+		if (fundId == null) {
+			if (other.fundId != null) {
 				return false;
 			}
-		} else if (!productId.equals(other.productId)) {
+		} else if (!fundId.equals(other.fundId)) {
 			return false;
 		}
 		if (productName == null) {

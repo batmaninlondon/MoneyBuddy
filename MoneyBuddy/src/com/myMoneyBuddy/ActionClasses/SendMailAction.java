@@ -5,17 +5,13 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Map;
 import java.util.Properties;
+
+import org.apache.log4j.Logger;
 
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class SendMailAction extends ActionSupport {
 

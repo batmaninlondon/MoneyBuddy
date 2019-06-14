@@ -121,10 +121,11 @@
 													    	<td class="center g-font-size-14--xs text-center">
 												    		</td>
 													    	<td class="center g-font-size-14--xs text-center">
+														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
 												    		<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#redCartListElement.redAmount"/></b>
-												    		</td>	
+												    		</td>
+												    			
 													    </s:if>
 													    <s:else>
 													    	

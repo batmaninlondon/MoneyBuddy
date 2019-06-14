@@ -27,9 +27,9 @@
 	    	<result>/WEB-INF/content/selectedFundDetails.jsp</result>
 		</action>
 	</package>
-	<package name="amountConfirmation" namespace="/" extends="struts-default">
-	    <action name="amountConfirmation">
-	    	<result>/amountConfirmation.jsp</result>
+	<package name="customerCart" namespace="/" extends="struts-default">
+	    <action name="customerCart">
+	    	<result>/customerCart.jsp</result>
 		</action>
 	</package>
 	<package name="orderInvoice" namespace="/" extends="struts-default">
@@ -127,14 +127,14 @@
 	    	<result>/WEB-INF/content/customerDashboardForAdmin.jsp</result>
 		</action>
 	</package>	
-	<package name="customerCart" namespace="/" extends="struts-default">
-	    <action name="customerCart">
-	    	<result>/WEB-INF/content/customerCart.jsp</result>
+	<package name="customerCarts" namespace="/" extends="struts-default">
+	    <action name="customerCarts">
+	    	<result>/WEB-INF/content/customerCarts.jsp</result>
 		</action>
 	</package>
-	<package name="bankDetails" namespace="/" extends="struts-default">
-	    <action name="bankDetails">
-	    	<result>/WEB-INF/content/bankDetails.jsp</result>
+	<package name="orderConfirmation" namespace="/" extends="struts-default">
+	    <action name="orderConfirmation">
+	    	<result>/WEB-INF/content/orderConfirmation.jsp</result>
 		</action>
 	</package>
 	<package name="newUpfrontInvestment" namespace="/" extends="struts-default">

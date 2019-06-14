@@ -11,23 +11,20 @@ import java.util.Properties;
 
 import javax.xml.ws.BindingProvider;
 
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.myMoneyBuddy.DAOClasses.InsertBankDetails;
 import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
-import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class KycCheckAction extends ActionSupport  implements SessionAware{
 

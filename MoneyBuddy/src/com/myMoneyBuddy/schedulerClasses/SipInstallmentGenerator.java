@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -100,7 +99,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 					
 		        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,transactionDetails.getBseRegistrationNumber(),
 		        			null, sipDetail.getCustomerId(),"SIP" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),
-							"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getProductId(), 
+							"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getFundId(), 
 							null,null,frmtdDateForDB, frmtdDateForDB,"N",
 							transactionDetails.getTransactionFolioNum(),null,"N"); 		
 

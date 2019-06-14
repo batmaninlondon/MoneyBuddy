@@ -5,26 +5,20 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
+import com.myMoneyBuddy.DAOClasses.Trading;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
+import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.RedemptionCart;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class RedeemAction extends ActionSupport  implements SessionAware{
 
@@ -66,12 +60,13 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
 		    	}
 		    	Trading trading = new Trading();
 		    	
-		    	trading.executeRedemption(customerId, customer.getPanCard(), customerRedemptionCartList.get(i).getProductId(), Double.valueOf(customerRedemptionCartList.get(i).getRedAmount() ), 
+		    	trading.executeRedemption(customerId, customer.getPanCard(), customerRedemptionCartList.get(i).getFundId(), Double.valueOf(customerRedemptionCartList.get(i).getRedAmount() ), 
 		    					Double.valueOf(customerRedemptionCartList.get(i).getRedUnits()), allRedeem, "NEW", "UPFRONT", "SELL", customerRedemptionCartList.get(i).getFolioNumber() );
 	    	
 	    	}
 
-	    	
+	    	UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
+	    	updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
 	
     	    logger.debug("RedeemAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("RedeemAction class - execute method - customerId - "+customerId+" - end");

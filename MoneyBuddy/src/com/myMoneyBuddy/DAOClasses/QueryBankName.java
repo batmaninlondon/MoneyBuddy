@@ -2,7 +2,6 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.util.HashMap;
 
-import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class QueryBankName {

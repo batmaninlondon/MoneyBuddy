@@ -9,16 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.myMoneyBuddy.Utils.SendMail;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.Utils.SendMail;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class SendThankYouMailAction extends ActionSupport  implements SessionAware{
 

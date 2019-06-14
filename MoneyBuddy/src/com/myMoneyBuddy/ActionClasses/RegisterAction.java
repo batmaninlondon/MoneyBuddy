@@ -5,21 +5,21 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.Map;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerPassword;
-import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Map;
-import java.util.Properties;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class RegisterAction extends ActionSupport  implements SessionAware{
 

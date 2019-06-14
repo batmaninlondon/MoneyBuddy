@@ -26,22 +26,22 @@ public class QueryTransactionDetails {
 
 	Logger logger = Logger.getLogger(QueryTransactionDetails.class);
 
-	public String getFolioNumsList(String customerId, String productId) throws MoneyBuddyException {
+	public String getFolioNumsList(String customerId, String fundId) throws MoneyBuddyException {
 		
-		logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - start");
+		logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and fundId - "+fundId+" - start");
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
 		String folioNums = "";
 
 		try
 		{
-			System.out.println("customerId is : "+customerId+" and productId is : "+productId);
+			System.out.println("customerId is : "+customerId+" and fundId is : "+fundId);
 			hibernateSession.beginTransaction();
     		
     		Query query = hibernateSession.createQuery("select distinct(folioNum) from FolioDetails "
     				+ " where customerId = :customerId and  amcCode = (select amcCode from  SecondaryFundDetails where fundId = :fundId) ");
     		query.setParameter("customerId", customerId);
-    		query.setParameter("fundId", productId);
+    		query.setParameter("fundId", fundId);
     		List<String> folioNumList = query.list();
     		
     		System.out.println("folioNumList size : ........... "+folioNumList.size());
@@ -61,18 +61,18 @@ public class QueryTransactionDetails {
     		
     		hibernateSession.getTransaction().commit();
 			
-			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - return FolioNums List");
-			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - end");
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and fundId - "+fundId+" - return FolioNums List");
+			logger.debug("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and fundId - "+fundId+" - end");
 			
 			return folioNums;
 		}
 		catch ( HibernateException e ) {
-			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - Caught HibernateException");
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and fundId - "+fundId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and productId - "+productId+" - Caught Exception");
+			logger.error("QueryTransactionDetails class - getFolioNumsList method - customerId - "+customerId+" and fundId - "+fundId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -178,7 +178,7 @@ public class QueryTransactionDetails {
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.transactionDate,t.transactionFolioNum,t.transactionType,t.bseRegistrationNumber"
 					+ " from TransactionDetails t, SecondaryFundDetails s, PrimaryFundDetails p "
-					+ "where t.transactionStatus='7' and t.productId=p.fundId and t.productId=s.fundId");
+					+ "where t.transactionStatus='7' and t.fundId=p.fundId and t.fundId=s.fundId");
 			
 			List<Object[]> transactionDetailsList = query.list();
 			String bseOrderId = "";

@@ -5,16 +5,15 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Map;
-import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
-import com.myMoneyBuddy.DAOClasses.InsertAdditionalCustomerDetails;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
-import com.opensymphony.xwork2.ActionSupport;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.InsertAdditionalCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class PrepareKycFormAction extends ActionSupport  implements SessionAware{
 

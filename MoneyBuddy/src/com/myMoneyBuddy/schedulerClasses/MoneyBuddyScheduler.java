@@ -10,8 +10,6 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-import com.myMoneyBuddy.schedulerClasses.ReadSpreadSheet;
-
 public class MoneyBuddyScheduler {
 
 	private static Scheduler scheduler;
@@ -43,7 +41,7 @@ public class MoneyBuddyScheduler {
 			Trigger readSpreadSheetTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 33 16 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 45 10 * * ?")) 
 					.build();
 			
 	
@@ -58,7 +56,7 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 34 16 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 46 10 * * ?")) 
 					.build();
 			
 	

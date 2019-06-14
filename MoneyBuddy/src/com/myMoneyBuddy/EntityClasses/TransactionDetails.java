@@ -63,8 +63,8 @@ public class TransactionDetails {
     @Column(name="REVERSE_FEED")
     private String reverseFeed;
     
-    @Column(name="PRODUCT_ID")
-    private String productId;
+    @Column(name="FUND_ID")
+    private String fundId;
 
     @Column(name="QUANTITY")
     private String quantity;
@@ -96,7 +96,7 @@ public class TransactionDetails {
 
     public TransactionDetails(String transactionId, String bseOrderId, String bseRegistrationNumber, String uniqueReferenceNumber, String customerId, String transactionType,
 			String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionStatus,
-			String bseRemarks, String bseSuccessFlag, String reverseFeed, String productId, String quantity,String unitPrice, String transactionDate,
+			String bseRemarks, String bseSuccessFlag, String reverseFeed, String fundId, String quantity,String unitPrice, String transactionDate,
 			String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity, String reversalOrder) {
 		super();
 		this.transactionId = transactionId;
@@ -113,7 +113,7 @@ public class TransactionDetails {
 		this.bseRemarks = bseRemarks;
 		this.bseSuccessFlag = bseSuccessFlag;
 		this.reverseFeed = reverseFeed;
-		this.productId = productId;
+		this.fundId = fundId;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.transactionDate = transactionDate;
@@ -241,12 +241,12 @@ public class TransactionDetails {
 		this.reverseFeed = reverseFeed;
 	}
 
-	public String getProductId() {
-		return productId;
+	public String getFundId() {
+		return fundId;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setFundId(String fundId) {
+		this.fundId = fundId;
 	}
 
 	public String getQuantity() {
@@ -324,7 +324,7 @@ public class TransactionDetails {
 		result = prime * result + ((buySell == null) ? 0 : buySell.hashCode());
 		result = prime * result + ((buySellType == null) ? 0 : buySellType.hashCode());
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((remainingQuantity == null) ? 0 : remainingQuantity.hashCode());
 		result = prime * result + ((reverseFeed == null) ? 0 : reverseFeed.hashCode());
@@ -405,11 +405,11 @@ public class TransactionDetails {
 		} else if (!customerId.equals(other.customerId)) {
 			return false;
 		}
-		if (productId == null) {
-			if (other.productId != null) {
+		if (fundId == null) {
+			if (other.fundId != null) {
 				return false;
 			}
-		} else if (!productId.equals(other.productId)) {
+		} else if (!fundId.equals(other.fundId)) {
 			return false;
 		}
 		if (quantity == null) {

@@ -5,19 +5,18 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class FileUploadStatusChangeAction extends ActionSupport implements SessionAware  {
 

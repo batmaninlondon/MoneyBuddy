@@ -7,12 +7,14 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.List;
 import java.util.Map;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.opensymphony.xwork2.ActionSupport;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class CustomerCartAction extends ActionSupport  implements SessionAware{
 

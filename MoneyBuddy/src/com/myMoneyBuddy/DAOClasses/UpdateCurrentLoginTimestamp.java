@@ -5,14 +5,16 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class UpdateCurrentLoginTimestamp {
 	

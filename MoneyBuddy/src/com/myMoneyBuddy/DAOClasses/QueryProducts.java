@@ -4,17 +4,6 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
-import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.Utils.CommonUtil;
-
-import java.nio.file.SecureDirectoryStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,10 +15,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
+import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
+import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
+import com.myMoneyBuddy.ModelClasses.SipDataModel;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryProducts {
 	
@@ -50,7 +47,7 @@ public class QueryProducts {
 			
 			hibernateSession.beginTransaction();
 			
-			totalUpfrontInvestments = hibernateSession.createQuery("select count(distinct(productId)) from TransactionDetails   where transactionType='UPFRONT' and customerId='"+customerId+"' ").uniqueResult().toString();
+			totalUpfrontInvestments = hibernateSession.createQuery("select count(distinct(fundId)) from TransactionDetails   where transactionType='UPFRONT' and customerId='"+customerId+"' ").uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
 
@@ -90,7 +87,7 @@ public class QueryProducts {
 			
 			hibernateSession.beginTransaction();
 			
-			totalSips = hibernateSession.createQuery("select count(distinct(productId)) from TransactionDetails   where transactionType='SIP' and customerId='"+customerId+"' ").uniqueResult().toString();
+			totalSips = hibernateSession.createQuery("select count(distinct(fundId)) from TransactionDetails   where transactionType='SIP' and customerId='"+customerId+"' ").uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
 
@@ -224,7 +221,7 @@ public class QueryProducts {
 			
             Query buyRecordsQuery, buySellRecordsQuery;
           
-			Query query = hibernateSession.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.productId and y.customerId = :customerId and y.transactionStatus = '8' ");
+			Query query = hibernateSession.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.fundId and y.customerId = :customerId and y.transactionStatus = '8' ");
 			
 			query.setParameter("customerId",customerId);
 	           
@@ -237,18 +234,18 @@ public class QueryProducts {
 
 				query = hibernateSession.createQuery("select t.transactionFolioNum,  p.schemeName,p.schemeType, n.navValue, min(t.transactionDate ),t.transactionDetailId "
 						+ " from PrimaryFundDetails p, NavHistory n, TransactionDetails t "
-						+ " where p.fundId = :productId and p.fundId=t.productId and t.customerId= :customerId and t.transactionStatus='8' "
-						+ "and n.navDate = (select max(navDate) from NavHistory where n.fundId = :productId) group by t.transactionFolioNum ");
+						+ " where p.fundId = :fundId and p.fundId=t.fundId and t.customerId= :customerId and t.transactionStatus='8' "
+						+ "and n.navDate = (select max(navDate) from NavHistory where n.fundId = :fundId) group by t.transactionFolioNum ");
 				
 				/*query = hibernateSession.createQuery("select t.transactionFolioNum,  p.schemeName,p.schemeType, n.navValue, min(t.transactionDate ),t.transactionDetailId "
 						+ " from PrimaryFundDetails p, NavHistory n, TransactionDetails t "
-						+ " where p.fundId = :productId and p.fundId=t.productId and t.customerId= :customerId and t.transactionStatus='8' "
-						+ "and n.navDate = (select max(navDate) from NavHistory where n.fundId = :productId) group by t.transactionFolioNum ");*/
+						+ " where p.fundId = :fundId and p.fundId=t.fundId and t.customerId= :customerId and t.transactionStatus='8' "
+						+ "and n.navDate = (select max(navDate) from NavHistory where n.fundId = :fundId) group by t.transactionFolioNum ");*/
 				
 				
 				 
 				query.setParameter("customerId",customerId);
-				query.setParameter("productId", rowFunds[0].toString());
+				query.setParameter("fundId", rowFunds[0].toString());
 				
 				for(Iterator queryIt=query.iterate(); queryIt.hasNext();){
 
@@ -284,7 +281,7 @@ public class QueryProducts {
 				     // TRY TO MERGE FOUR QUERIES IN ONE - END
 				     				         
 				     buySellRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate, buySell "
-				     		+ " from TransactionDetails where productId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and unitPrice is not null ");
+				     		+ " from TransactionDetails where fundId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and unitPrice is not null ");
 				       
 				     java.util.List buySellList = buySellRecordsQuery.list();
 				     
@@ -315,7 +312,7 @@ public class QueryProducts {
 				       
 				     //System.out.println("Total sold units : "+soldUnit);
 				   /*  System.out.println(" called query 3 for BUY records !! ");  
-				     buyRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where productId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and buySell='BUY' and unitPrice is not null ");
+				     buyRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate from TransactionDetails where fundId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and buySell='BUY' and unitPrice is not null ");
 				       
 				     */
 				     
@@ -467,8 +464,8 @@ public class QueryProducts {
 			List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
 			
             Query buyRecordsQuery, sellRecordsQuery;
-			Query query = hibernateSession.createQuery("select t.productId, t.transactionDetailId, p.schemeName , t.transactionAmount, t.transactionDate, t.transactionType "
-										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='5' and t.productId = p.fundId");
+			Query query = hibernateSession.createQuery("select t.fundId, t.transactionDetailId, p.schemeName , t.transactionAmount, t.transactionDate, t.transactionType "
+										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='5' and t.fundId = p.fundId");
 			
 			query.setParameter("customerId",customerId);
 	           
@@ -534,7 +531,7 @@ public class QueryProducts {
 			Query sipData = hibernateSession.createQuery("select t.transactionDetailId, p.fundId, p.schemeName, p.schemeType,"
 					+ "t.transactionAmount,t.transactionFolioNum, s.sipDate,s.sipStartDate "
 					+ "from TransactionDetails t, PrimaryFundDetails p, SipDetails s "
-					+ "where t.customerId= :customerId and t.productId = p.fundId and t.transactionType='SIP' "
+					+ "where t.customerId= :customerId and t.fundId = p.fundId and t.transactionType='SIP' "
 					+ "and t.transactionDetailId=s.transactionDetailId and s.customerId=t.customerId and s.sipEndDate > curdate()");
 
 			sipData.setParameter("customerId",customerId);
@@ -556,50 +553,13 @@ public class QueryProducts {
 			/*for (SipDetails sipDetailsListElement : sipDetailsList)  {*/
 			
 			  for (Iterator sipDataIt=sipData.iterate(); sipDataIt.hasNext();)  {
-				  
-				 
 				
-				  Object[] sipDataRow = (Object[]) sipDataIt.next();
-				  
-				  System.out.println("sipStartDate : "+sipDataRow[7].toString()+" sip fund id : "+sipDataRow[1].toString()+" fur customerId : "+customerId);
-				  
-				  
-				//sipDate = sipDataRow[6].toString();
-				
-				/*CommonUtil commonUtil = new CommonUtil();
-				if (Integer.parseInt(sipDate) < currentDate)  {
-					if (currentMonth == 11)  {
-						nextSipMonth = "01";
-						nextSipYear = Integer.toString(currentYear + 1);
-						nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
-					}
-					else {
-						nextSipMonth = commonUtil.theMonth(cal.get(Calendar.MONTH)+1);
-						nextSipYear = Integer.toString(currentYear);
-						nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
-					}
-				}
-				else {
-					nextSipMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
-					nextSipYear = Integer.toString(currentYear);
-					nextSipDate = nextSipYear+"-"+nextSipMonth+"-"+sipDate;
-					
-				}*/
-				
-
-				/*hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("select f.fundId,f.schemeName,f.schemeType,t.transactionAmount,t.transactionFolioNum from TransactionDetails t, PrimaryFundDetails f where t.transactionDetailId= :transactionDetailId and t.productId = f.fundId ");
-				query.setParameter("transactionDetailId", sipDetailsListElement.getTransactionDetailId());
-							
-				rows = query.list();
-				hibernateSession.getTransaction().commit();*/
-				
+				Object[] sipDataRow = (Object[]) sipDataIt.next();
 				String folioNum = null;
 				if (null != sipDataRow[5])  
 					folioNum = sipDataRow[5].toString();
 				else 
 					folioNum="";
-				
 				
 				sipDataModel.add(new SipDataModel(sipDataRow[7].toString(),sipDataRow[1].toString(),sipDataRow[2].toString(),folioNum,sipDataRow[3].toString(),
 									sipDataRow[4].toString(),sipDataRow[6].toString()));
@@ -645,16 +605,16 @@ public class QueryProducts {
 		
 			hibernateSession.beginTransaction();
 
-			/*Query query = hibernateSession.createQuery("select distinct(productId) from TransactionDetails  where customerId = :customerId ");*/
+			/*Query query = hibernateSession.createQuery("select distinct(fundId) from TransactionDetails  where customerId = :customerId ");*/
 			
 			Query allFundsData = hibernateSession.createQuery("select distinct p.schemeName, t.transactionDetailId, t.transactionType, t.buySell,"
 					+ " t.buySellType, t.transactionAmount, t.quantity, t.unitPrice, t.transactionDate, t.transactionFolioNum "
 					+ " from TransactionDetails t, PrimaryFundDetails p "
-					+ "  where t.productId=p.fundId and t.customerId = :customerId and t.unitPrice is not null");
+					+ "  where t.fundId=p.fundId and t.customerId = :customerId and t.unitPrice is not null");
 			
 			allFundsData.setParameter("customerId",customerId);
 			/*
-			List<String> productIdList = query.list();*/
+			List<String> fundIdList = query.list();*/
 			hibernateSession.getTransaction().commit();
 			
 			int i = 0;
@@ -666,16 +626,16 @@ public class QueryProducts {
 				Object[] allFundsDataRow = (Object[]) allFundsDataIt.next();
 			
 						
-			/*for (String productId : productIdList)  {*/
-				/*System.out.println("getAllFundsInvestmentDetailsData : productId : "+productId);*/
+			/*for (String fundId : fundIdList)  {*/
+				/*System.out.println("getAllFundsInvestmentDetailsData : fundId : "+fundId);*/
 				
 				/*hibernateSession.beginTransaction();
 				query = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId = :fundId");
-				String schemeName = query.setParameter("fundId",productId).uniqueResult().toString();*/
+				String schemeName = query.setParameter("fundId",fundId).uniqueResult().toString();*/
 				
 				
 				/*query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId,transactionAmount,buySellType,transactionFolioNum"
-								+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
+								+ " from TransactionDetails where fundId='"+fundId+"' and customerId='"+customerId+"' and unitPrice is not null");
 				       */
 				String quantity;
 				/*for (Iterator it=query.iterate(); it.hasNext();)  {*/
@@ -786,12 +746,12 @@ public class QueryProducts {
 		
 		Object result = hibernateSession.createQuery("select fundId from PrimaryFundDetails  where schemeName='"+schemeName+"'").uniqueResult();
 
-		String productId = null;
+		String fundId = null;
 		if (result != null)
-			productId = result.toString();
-		System.out.println("getInvestmentDetailsData : productId : "+productId);
+			fundId = result.toString();
+		System.out.println("getInvestmentDetailsData : fundId : "+fundId);
 		Query query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId,transactionAmount,buySellType,transactionFolioNum"
-				+ " from TransactionDetails where productId='"+productId+"' and customerId='"+customerId+"' and unitPrice is not null");
+				+ " from TransactionDetails where fundId='"+fundId+"' and customerId='"+customerId+"' and unitPrice is not null");
 		       
 		String quantity;
 		for (Iterator it=query.iterate(); it.hasNext();)  {

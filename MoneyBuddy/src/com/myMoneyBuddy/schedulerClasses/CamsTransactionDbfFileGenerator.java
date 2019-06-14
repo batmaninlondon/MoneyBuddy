@@ -6,11 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFWriter;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -33,7 +35,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 			DbfFileStatusDetails tempDbfFileStatusDetails;
 			hibernateSession.beginTransaction();
 		   
-		   Query query =  hibernateSession.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and productId in (select productId from SecondaryFundDetails where rta = :rta)");
+		   Query query =  hibernateSession.createQuery("from TransactionDetails where rtaFileGenerated = :rtaFileGenerated and transactionStatus = :transactionStatus and fundId in (select fundId from SecondaryFundDetails where rta = :rta)");
 		   query.setParameter("rta", "CAMS");
 		   query.setParameter("transactionStatus", "COMPLETE");
 		   query.setParameter("rtaFileGenerated", "N");
@@ -758,8 +760,8 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 			    		
 			    		hibernateSession.beginTransaction();
 						
-						query = hibernateSession.createQuery("from SecondaryFundDetails where productId = :productId");
-						query.setParameter("productId", transactionDetail.getProductId());	
+						query = hibernateSession.createQuery("from SecondaryFundDetails where fundId = :fundId");
+						query.setParameter("fundId", transactionDetail.getFundId());	
 						SecondaryFundDetails secondaryFundDetails =  (SecondaryFundDetails) query.uniqueResult();
 						hibernateSession.getTransaction().commit();
 						
@@ -793,7 +795,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						
 						hibernateSession.beginTransaction();
 						query = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId = :fundId");
-						query.setParameter("fundId", transactionDetail.getProductId());		
+						query.setParameter("fundId", transactionDetail.getFundId());		
 						result = query.uniqueResult();
 						schemeName = result.toString();
 						

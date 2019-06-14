@@ -8,18 +8,14 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomerCart;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
+import com.myMoneyBuddy.EntityClasses.RedemptionCart;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class EditRedemptionCartAction extends ActionSupport  implements SessionAware{
 
@@ -30,7 +26,7 @@ public class EditRedemptionCartAction extends ActionSupport  implements SessionA
 	private List<String> redTypeArr;
 	private List<String> folioNumArr;
 	private List<String> redCartIdArr;
-	private List<String> productIdArr;
+	private List<String> fundIdArr;
 	private List<String> amountArr;
 	private List<String> unitsArr;
 	private List<String> totalAmountArr;
@@ -49,31 +45,13 @@ public class EditRedemptionCartAction extends ActionSupport  implements SessionA
     		UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
     		
     		if (redCartIdArr != null)  {
+    			
+    			System.out.println("redCartIdArr.size() : "+redCartIdArr.size());
+    			
 	    		for (int i=0;i<redCartIdArr.size();i++)  {
+	    			System.out.println("unitsArr.get("+i+") : "+unitsArr.get(i)+" and redTypeArr.get("+i+") : "+redTypeArr.get(i)+" and amountArr.get("+i+") : "+amountArr.get(i));
 	    			
-	    			String amount = "0";
-	    			String units = "0";
-	    			String redOption = "Select";
-	    			String redType = "Select";
-	    			
-	    			if ("Full".equals(redOptionArr.get(i)))  {
-	    				amount = totalAmountArr.get(i);
-	    				units = totalUnitsArr.get(i);
-	    				redOption = "Full";
-	    			}
-	    			else if ("Partial".equals(redOptionArr.get(i)))  {
-	    				redOption="Partial";
-	    				if ("Amount".equals(redTypeArr.get(i))) {
-	    					redType="Amount";
-	    					amount = amountArr.get(i);
-	    				}
-	    				else if ("Units".equals(redTypeArr.get(i))) {
-	    					redType="Units";
-	    					units = unitsArr.get(i);
-	    				}
-	    			}
-	    			
-	    			updateCustomerRedemptionCart.updateCustomerRedCartEntry(customerId, redCartIdArr.get(i),amount, units,redOption, redType);
+	    			updateCustomerRedemptionCart.updateCustomerRedCartEntry(customerId, redCartIdArr.get(i),amountArr.get(i), unitsArr.get(i),redOptionArr.get(i), redTypeArr.get(i));
 	    		
 	    		}
 	    		
@@ -87,7 +65,7 @@ public class EditRedemptionCartAction extends ActionSupport  implements SessionA
 	    		
     		}
     		
-    		if ("OrderInvoice".equals(getReturnType()))
+    		if ("orderConfirmation".equals(getReturnType()))
 	
     			return "redirectRedeem";
     		
@@ -143,12 +121,12 @@ public class EditRedemptionCartAction extends ActionSupport  implements SessionA
 		this.redCartIdArr = redCartIdArr;
 	}
 
-	public List<String> getProductIdArr() {
-		return productIdArr;
+	public List<String> getFundIdArr() {
+		return fundIdArr;
 	}
 
-	public void setProductIdArr(List<String> productIdArr) {
-		this.productIdArr = productIdArr;
+	public void setFundIdArr(List<String> fundIdArr) {
+		this.fundIdArr = fundIdArr;
 	}
 
 	public List<String> getAmountArr() {

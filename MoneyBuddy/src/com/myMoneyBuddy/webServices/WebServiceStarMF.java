@@ -1,9 +1,5 @@
 package com.myMoneyBuddy.webServices;
-import com.bsestarmf._2016._01.GetPassword;
 
-import in.bsestarmf._2016._01.IStarMFWebService;
-
-import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -14,9 +10,9 @@ import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 
-//import org.tempuri.IStarMFWebService;
+import com.bsestarmf._2016._01.GetPassword;
 
-import org.tempuri.StarMFWebService;
+import in.bsestarmf._2016._01.IStarMFWebService;
 
 
 @WebServiceClient(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/", wsdlLocation = "http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl")

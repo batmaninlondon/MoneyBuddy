@@ -4,21 +4,21 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.log4j.Logger;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class NewLoginAction extends ActionSupport implements SessionAware {
 	
@@ -74,8 +74,8 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	String decryptedPswd = decrypted.substring(len);
 	    	if(! decryptedPswd.equals(getPasswordLogin())) {
-	    		String pswd = new DesEncrypter().decrypt(getEmailIdLogin());
-	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);
+	    		/*String pswd = new DesEncrypter().decrypt(getEmailIdLogin());
+	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);*/
 	    		
 	    		System.out.println("incorrectPassword ");
 	    		/*str = "incorrectPassword";

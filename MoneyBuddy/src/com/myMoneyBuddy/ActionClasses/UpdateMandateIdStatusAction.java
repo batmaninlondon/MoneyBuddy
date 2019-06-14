@@ -4,19 +4,11 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateMandateIdStatusAction extends ActionSupport {

@@ -1,7 +1,5 @@
 package com.myMoneyBuddy.webServices;
-import com.bsestarmf._2016._01.GetPassword;
 
-import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -14,7 +12,7 @@ import javax.xml.ws.WebServiceFeature;
 
 import org.tempuri.IStarMFPaymentGatewayService;
 
-import org.tempuri.StarMFPaymentGatewayService;
+import com.bsestarmf._2016._01.GetPassword;
 
 
 @WebServiceClient(name = "StarMFPaymentGatewayService", targetNamespace = "http://tempuri.org/", wsdlLocation = "https://www.bsestarmf.in/StarMFPaymentGatewayService/StarMFPaymentGatewayService.svc?singleWsdl")

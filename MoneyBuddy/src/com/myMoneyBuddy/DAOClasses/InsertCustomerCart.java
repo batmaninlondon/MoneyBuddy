@@ -5,19 +5,20 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 public class InsertCustomerCart {
 
@@ -47,12 +48,12 @@ public class InsertCustomerCart {
     			
     			hibernateSession.beginTransaction();
     			Query query = hibernateSession.createQuery("select transactionFolioNum from TransactionDetails "
-    					+ " where customerId = :customerId and productId = :productId and  transactionDate = "
-    					+ " (select max(transactionDate) from TransactionDetails where productId = :productId and transactionFolioNum is not null and "
+    					+ " where customerId = :customerId and fundId = :fundId and  transactionDate = "
+    					+ " (select max(transactionDate) from TransactionDetails where fundId = :fundId and transactionFolioNum is not null and "
     					+ " transactionFolioNum != 'New')");
     			
     			query.setParameter("customerId", customerId);
-    			query.setParameter("productId", selectedFundDetailsDataModel.getFundId());
+    			query.setParameter("fundId", selectedFundDetailsDataModel.getFundId());
     			 
     			Object obj = query.uniqueResult();
     			
@@ -107,7 +108,7 @@ public class InsertCustomerCart {
     }
 	
 	
-	public void addCustomerCart (String customerId, String productId, String productName, String amount,
+	public void addCustomerCart (String customerId, String fundId, String productName, String amount,
     		String transactionType, String sipDuration, String sipPlan, String sipDate, String folioNum,
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
@@ -124,13 +125,13 @@ public class InsertCustomerCart {
     		
     		if ("UPFRONT".equals(transactionType))  {
 
-    		query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and productId = :productId "
+    		query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and fundId = :fundId "
     				+ " and folioNumber = :folioNumber and transactionType = :transactionType ");
     		
     		
     		}
     		else {
-    			query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and productId = :productId "
+    			query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and fundId = :fundId "
         				+ " and folioNumber = :folioNumber and transactionType = :transactionType and sipDuration = :sipDuration and sipPlan = :sipPlan and sipDate = :sipDate ");
         		
         		query.setParameter("sipDuration", sipDuration);
@@ -139,7 +140,7 @@ public class InsertCustomerCart {
     		}
     		
     		query.setParameter("customerId", customerId);
-    		query.setParameter("productId", productId);
+    		query.setParameter("fundId", fundId);
     		query.setParameter("folioNumber", folioNum);
     		query.setParameter("transactionType", transactionType);
     		
@@ -149,9 +150,9 @@ public class InsertCustomerCart {
     		
     		
     		/*hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select distinct(folioNumber) from CustomerCart where customerId = :customerId and productId = :productId ");
+			query = hibernateSession.createQuery("select distinct(folioNumber) from CustomerCart where customerId = :customerId and fundId = :fundId ");
 			query.setParameter("customerId", customerId);
-			query.setParameter("productId", productId);
+			query.setParameter("fundId", fundId);
 			
 			List<String> folioList = query.list();
 			
@@ -165,16 +166,16 @@ public class InsertCustomerCart {
     			
     			
     			
-    			System.out.println(productId+" exist in customerCart");
+    			System.out.println(fundId+" exist in customerCart");
     			/*hibernateSession.beginTransaction();
-    			query = hibernateSession.createQuery("select amount from CustomerCart where customerId = :customerId and productId = :productId  and folioNumber = :folioNumber");
+    			query = hibernateSession.createQuery("select amount from CustomerCart where customerId = :customerId and fundId = :fundId  and folioNumber = :folioNumber");
     			query.setParameter("customerId", customerId);
-    			query.setParameter("productId", productId);
+    			query.setParameter("fundId", fundId);
     			query.setParameter("folioNumber", folioNum);
     			
     			Object result = query.uniqueResult();
     			
-    			if (null == result) throw new MoneyBuddyException("amount not found, which productId exsited ");*/
+    			if (null == result) throw new MoneyBuddyException("amount not found, which fundId exsited ");*/
     			Double updatedAmount;
     			if ("UPFRONT".equals(cartList.get(0).getTransactionType()))  {
 					updatedAmount = Double.parseDouble(cartList.get(0).getUpfrontAmount()) + Double.parseDouble(amount);
@@ -189,16 +190,16 @@ public class InsertCustomerCart {
     			/*hibernateSession.getTransaction().commit();*/
     			hibernateSession.beginTransaction();
     			
-    			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNum+"  has to be updated for customerId : "+customerId+" and productId : "+productId);
+    			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNum+"  has to be updated for customerId : "+customerId+" and fundId : "+fundId);
     			
     			if ("UPFRONT".equals(transactionType))  {
     				query = hibernateSession.createQuery("update CustomerCart set upfrontAmount = :updatedAmount "
-    					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber "
+    					+ " where customerId = :customerId and fundId = :fundId and folioNumber = :folioNumber "
     					+ " and transactionType=:transactionType ");
     			}
     			else {
     				query = hibernateSession.createQuery("update CustomerCart set sipAmount = :updatedAmount "
-        					+ " where customerId = :customerId and productId = :productId and folioNumber = :folioNumber "
+        					+ " where customerId = :customerId and fundId = :fundId and folioNumber = :folioNumber "
         					+ " and transactionType=:transactionType and sipDuration=:sipDuration and sipPlan=:sipPlan and sipDate=:sipDate ");
 
         			query.setParameter("sipDuration", sipDuration);
@@ -210,32 +211,32 @@ public class InsertCustomerCart {
     			query.setParameter("transactionType", transactionType);
     			query.setParameter("folioNumber", folioNum);
     			query.setParameter("customerId", customerId);
-    			query.setParameter("productId", productId);
+    			query.setParameter("fundId", fundId);
     			
     			query.executeUpdate();
     			
     			hibernateSession.getTransaction().commit();
-    			logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - record updated in CustomerCart table for productId - "+productId);
+    			logger.debug("InsertCustomerCart class - addCustomerCart method - customerId - "+customerId+" - record updated in CustomerCart table for fundId - "+fundId);
     			
     		}
     		else {
-    			System.out.println(productId+" does not exist in customerCart");
+    			System.out.println(fundId+" does not exist in customerCart");
     			
     			QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
     			
-    			String rta = querySecondaryFundDetails.getRta(productId);
+    			String rta = querySecondaryFundDetails.getRta(fundId);
     			
     			QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
     			
-    			PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(productId);
+    			PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(fundId);
         		
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))
-	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,productName,primaryFundDetails.getMinPurchaseAmount(),
 	    					primaryFundDetails.getMinSipAmount(),amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		else
-	    			tempCustomerCart = new CustomerCart(customerId,productId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,productName,primaryFundDetails.getMinPurchaseAmount(),
 	    					primaryFundDetails.getMinSipAmount(),"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		

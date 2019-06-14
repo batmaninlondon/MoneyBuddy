@@ -8,15 +8,14 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.List;
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomerCart;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerCart;
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class EditCartAction extends ActionSupport  implements SessionAware{
 
@@ -31,7 +30,7 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 	private List<String> sipAmtArr;
 	private List<String> folioNumArr;
 	private List<String> cartIdArr;
-	private List<String> productIdArr;
+	private List<String> fundIdArr;
 	private List<String> sipTenureArr;
 	private List<String> sipDateArr;
 	private String returnType;
@@ -66,7 +65,7 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 	    			System.out.println(" Called EditCartAction class : value of sipDate : "+i+" is : "+sipDateArr.get(i));
 	    			/*System.out.println("upfrontCartIdArr [ "+i+" ] : value is : "+upfrontCartIdArr.get(i));*/
 	    			/*upfrontInvestment = Double.toString(Math.round( Double.parseDouble(upfrontAmtArr.get(i)) * 100.0 ) / 100.0);*/
-	    			updateCustomerCart.updateCustomerCartEntry(customerId, cartIdArr.get(i), productIdArr.get(i), upfrontAmtArr.get(i), sipAmtArr.get(i),
+	    			updateCustomerCart.updateCustomerCartEntry(customerId, cartIdArr.get(i), fundIdArr.get(i), upfrontAmtArr.get(i), sipAmtArr.get(i),
 	    															sipTenureArr.get(i), sipDateArr.get(i), folioNumArr.get(i));
 	    		}
 	    		
@@ -195,12 +194,12 @@ public class EditCartAction extends ActionSupport  implements SessionAware{
 		this.cartIdArr = cartIdArr;
 	}
 
-	public List<String> getProductIdArr() {
-		return productIdArr;
+	public List<String> getFundIdArr() {
+		return fundIdArr;
 	}
 
-	public void setProductIdArr(List<String> productIdArr) {
-		this.productIdArr = productIdArr;
+	public void setFundIdArr(List<String> fundIdArr) {
+		this.fundIdArr = fundIdArr;
 	}
 
 	public void setReturnType(String returnType) {

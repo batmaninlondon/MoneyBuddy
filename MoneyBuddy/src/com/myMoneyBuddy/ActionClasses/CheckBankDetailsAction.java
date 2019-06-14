@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import org.apache.log4j.Logger;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
 import com.myMoneyBuddy.DAOClasses.QueryBankName;
@@ -22,12 +24,7 @@ import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.DesEncrypter;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 public class CheckBankDetailsAction extends ActionSupport  implements SessionAware{
 
@@ -94,7 +91,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 					QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 					
-					PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(transactionDetails.getProductId());
+					PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(transactionDetails.getFundId());
 					
 					QueryOrderStatus queryOrderStatus = new QueryOrderStatus();
 					
@@ -102,17 +99,17 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 					
 					QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
 	    			
-	    			String rta = querySecondaryFundDetails.getRta(transactionDetails.getProductId());
+	    			String rta = querySecondaryFundDetails.getRta(transactionDetails.getFundId());
 	    			
 	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
 	    			if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
-	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),primaryFundDetails.getSchemeName(),
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getFundId(),primaryFundDetails.getSchemeName(),
 	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),transactionDetails.getTransactionAmount(),"0",
 	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}
 	    			else {
-	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getProductId(),primaryFundDetails.getSchemeName(),
+	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getFundId(),primaryFundDetails.getSchemeName(),
 	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),"0",transactionDetails.getTransactionAmount(),
 	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}

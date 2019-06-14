@@ -5,14 +5,14 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.opensymphony.xwork2.ActionSupport;
-
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class DisplayDashboardAction extends ActionSupport implements SessionAware  {
 

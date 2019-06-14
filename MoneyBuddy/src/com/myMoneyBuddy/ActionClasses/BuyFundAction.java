@@ -5,22 +5,20 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
-import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
+import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class BuyFundAction extends ActionSupport implements SessionAware  {
 
@@ -92,7 +90,7 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
 	    	sessionMap.put("productRatioList", productRatioList);
 	    	logger.debug("BuyFundAction class - execute method - stored productRatioList in sessionMap");
 	    	
-	    	System.out.println("productId : "+getFundId());
+	    	System.out.println("fundId : "+getFundId());
 
 	    	selectedFundDetailsDataModel = queryPrimaryFundDetails.getSelectedFundDetailsData(getFundId());
 			setSelectedFundDetailsDataModel(selectedFundDetailsDataModel);

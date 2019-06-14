@@ -5,20 +5,17 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.UpdateOldPassword;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.DAOClasses.UpdateCustomerPassword;
-import com.opensymphony.xwork2.ActionSupport;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerPassword;
+import com.myMoneyBuddy.DAOClasses.UpdateOldPassword;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class ResetPasswordAction extends ActionSupport implements SessionAware {
 	

@@ -5,9 +5,10 @@
 
 package com.myMoneyBuddy.GAT;
 
-import java.io.ByteArrayInputStream;
 import java.util.HashMap;
+
 import org.apache.log4j.Logger;
+
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 

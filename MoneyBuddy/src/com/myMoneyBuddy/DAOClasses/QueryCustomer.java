@@ -4,22 +4,20 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import com.myMoneyBuddy.EntityClasses.CustomerPasswordsHistory;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.PendingAofOrders;
 import com.myMoneyBuddy.ModelClasses.PendingMandateOrders;
-import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
 import com.myMoneyBuddy.Utils.HibernateUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 public class QueryCustomer {
 

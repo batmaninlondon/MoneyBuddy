@@ -5,27 +5,25 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
-import com.myMoneyBuddy.Utils.HibernateUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.RedemptionCart;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertCustomerRedemptionCart {
 
 	Logger logger = Logger.getLogger(InsertCustomerRedemptionCart.class);
 	
 	
-	public void insertRow (String customerId, String productId, String productName,String minRedAmount, String totalAmount, String totalUnits,
+	public void insertRow (String customerId, String fundId, String productName,String minRedAmount, String totalAmount, String totalUnits,
 			String redemptionOption, String redemptionType, String folioNumber ) throws MoneyBuddyException
     {
 
@@ -39,9 +37,15 @@ public class InsertCustomerRedemptionCart {
     			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     			Date date = new Date();
     			String frmtdDate = dateFormat.format(date);
+    			
+    			hibernateSession.beginTransaction();
+    			String latestNavValue = hibernateSession.createQuery("select navValue from NavHistory where fundId='"+fundId+"' and NAV_DATE = "
+    					+ " (select max(navDate) from NavHistory where fundId='"+fundId+"')").uniqueResult().toString();
+    			hibernateSession.getTransaction().commit();
     			    			
 	    		hibernateSession.beginTransaction();
-	    		tempRedemptionCart = new RedemptionCart(customerId,productId,productName,minRedAmount,"0","0",totalAmount,totalUnits,redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending");
+	    		tempRedemptionCart = new RedemptionCart(customerId,fundId,productName,minRedAmount,"0","0",totalAmount,totalUnits,
+	    				redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending",latestNavValue);
 	    		
 	    		
 	   	        hibernateSession.save(tempRedemptionCart);
@@ -74,7 +78,7 @@ public class InsertCustomerRedemptionCart {
     }
 	
 	
-	public void addCustomerRedemptionCart (String customerId, String productId, String productName, String minRedAmount, String redAmount, String redUnits,
+	public void addCustomerRedemptionCart (String customerId, String fundId, String productName, String minRedAmount, String redAmount, String redUnits,
 			String totalRedAmount, String totalRedUnits, String redemptionOption, String redemptionType, String folioNumber) throws MoneyBuddyException
     {
 
@@ -88,12 +92,12 @@ public class InsertCustomerRedemptionCart {
     		hibernateSession.beginTransaction();
     		
 
-    		query = hibernateSession.createQuery("from RedemptionCart where customerId = :customerId and productId = :productId "
+    		query = hibernateSession.createQuery("from RedemptionCart where customerId = :customerId and fundId = :fundId "
     				+ " and folioNumber = :folioNumber ");
     		
     		
     		query.setParameter("customerId", customerId);
-    		query.setParameter("productId", productId);
+    		query.setParameter("fundId", fundId);
     		query.setParameter("folioNumber", folioNumber);
     		
     		List<RedemptionCart> cartList = query.list();
@@ -103,7 +107,7 @@ public class InsertCustomerRedemptionCart {
     		
     		if ( cartList.size() != 0)  {
 
-    			System.out.println(productId+" exist in customerCart");
+    			System.out.println(fundId+" exist in customerCart");
     			
     			Double updatedAmount;
     			
@@ -112,10 +116,10 @@ public class InsertCustomerRedemptionCart {
    
     			hibernateSession.beginTransaction();
     			
-    			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNumber+"  has to be updated for customerId : "+customerId+" and productId : "+productId);
+    			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNumber+"  has to be updated for customerId : "+customerId+" and fundId : "+fundId);
     			
 				query = hibernateSession.createQuery("update RedemptionCart set redAmount = :redAmount, redUnits = :redUnits, redemptionOption = :redemptionOption, "
-						+ " redemptionType = :redemptionType where customerId = :customerId and productId = :productId and folioNumber = :folioNumber ");
+						+ " redemptionType = :redemptionType where customerId = :customerId and fundId = :fundId and folioNumber = :folioNumber ");
 			
     			query.setParameter("redAmount", redAmount);
     			query.setParameter("redUnits", redUnits);
@@ -123,22 +127,29 @@ public class InsertCustomerRedemptionCart {
     			query.setParameter("redemptionType", redemptionType);
     			query.setParameter("folioNumber", folioNumber);
     			query.setParameter("customerId", customerId);
-    			query.setParameter("productId", productId);
+    			query.setParameter("fundId", fundId);
     			
     			query.executeUpdate();
     			
     			hibernateSession.getTransaction().commit();
-    			logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - record updated in CustomerCart table for productId - "+productId);
+    			logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - record updated in CustomerCart table for fundId - "+fundId);
     			
     		}
     		else {
-    			System.out.println(productId+" does not exist in customerCart");
+    			System.out.println(fundId+" does not exist in customerCart");
     			
     			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     			Date date = new Date();
     			String frmtdDate = dateFormat.format(date);
     			
-    			tempRedemptionCart = new RedemptionCart(customerId,productId,productName,minRedAmount,redAmount,redUnits,totalRedAmount,totalRedUnits,redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending");
+    			hibernateSession.beginTransaction();
+    			String latestNavValue = hibernateSession.createQuery("select navValue from NavHistory where fundId='"+fundId+"' and NAV_DATE = "
+    					+ " (select max(navDate) from NavHistory where fundId='"+fundId+"')").uniqueResult().toString();
+    			hibernateSession.getTransaction().commit();
+    			
+    			
+    			tempRedemptionCart = new RedemptionCart(customerId,fundId,productName,minRedAmount,redAmount,redUnits,totalRedAmount,
+    					totalRedUnits,redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending",latestNavValue);
 	    	
 	    		
 	   	        hibernateSession.save(tempRedemptionCart);

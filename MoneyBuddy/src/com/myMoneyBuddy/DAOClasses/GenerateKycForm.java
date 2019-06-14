@@ -5,27 +5,26 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.myMoneyBuddy.ActionClasses.RegisterAction;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Properties;
-import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 public class GenerateKycForm {
 

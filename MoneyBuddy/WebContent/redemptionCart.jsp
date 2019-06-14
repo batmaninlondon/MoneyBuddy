@@ -178,7 +178,7 @@ input[type="range"] {
     
     function redOptionChng(el)  {
     	
-    	var theTbl = document.getElementById("redCartData");
+    	var theTbl = document.getElementById("redCartData"), sumAmountVal = 0.0;
     	var rowNum = el.parentNode.parentNode.rowIndex;
     	var r = theTbl.rows[rowNum];
     	var selects = r.getElementsByTagName("select");
@@ -197,15 +197,34 @@ input[type="range"] {
 			selects[1].disabled = true;
    			inputs[0].disabled = true;
    			inputs[1].disabled = true;	
-   			inputs[0].value = inputs[3].value;
-   			inputs[1].value = inputs[4].value;
+   			inputs[0].value = inputs[5].value;
+   			inputs[1].value = inputs[6].value;
+   			inputs[2].value = inputs[0].value;
+   			inputs[3].value = inputs[1].value;
+   			
    		}
    		else {
 
-   			inputs[0].value = "0";
-   			inputs[1].value = "0";
+   			inputs[0].value = "";
+   			inputs[1].value = "";
+   			inputs[0].placeholder = "Enter Amount";
+   			inputs[1].placeholder = "Enter Units";
    			selects[1].disabled = false;
    		}
+   		
+   		for(var i = 1; i < theTbl.rows.length-1; i++)
+	        {
+	        	r = theTbl.rows[i];
+	   			inputs = r.getElementsByTagName("input");
+	   				if (!(inputs[0].value == ""|| inputs[0].value ==  null))  {
+	   					sumAmountVal = sumAmountVal + parseFloat(inputs[0].value);
+	   					
+	        		}
+			}
+   		
+   			sumAmountVal = Math.round(sumAmountVal * 10000.0) / 10000.0;
+	        theTbl.rows[theTbl.rows.length-1].cells[4].innerHTML = sumAmountVal;
+	        
     }
     
     function redTypeChng(el)  {
@@ -213,21 +232,164 @@ input[type="range"] {
     	var r = theTbl.rows[el.parentNode.parentNode.rowIndex];
     	var selects = r.getElementsByTagName("select");
 		var inputs = r.getElementsByTagName("input");
-			
+		selects[2].value = selects[1].value;
+		
    		if (selects[1].value == "Select"){ 
+   			inputs[0].value = "";
+   			inputs[1].value = "";
+   			inputs[0].placeholder = "Enter Amount";
+   			inputs[1].placeholder = "Enter Units";
    			inputs[0].disabled = true;
    			inputs[1].disabled = true;	
    		}
    		else if (selects[1].value == "Amount"){  
-   			inputs[1].value = "0";
+   			inputs[1].value = "";
+   			inputs[1].placeholder = "Enter Units";
    			inputs[0].disabled = false;
    			inputs[1].disabled = true;	
    		}
    		else {
-   			inputs[0].value = "0";
+   			inputs[0].value = "";
+   			inputs[0].placeholder = "Enter Amount";
    			inputs[0].disabled = true;
    			inputs[1].disabled = false;
    		}
+   		
+   		for(var i = 1; i < theTbl.rows.length-1; i++)
+	        {
+	        	r = theTbl.rows[i];
+	   			inputs = r.getElementsByTagName("input");
+	   				if (!(inputs[0].value == ""|| inputs[0].value ==  null))  {
+	   					sumAmountVal = sumAmountVal + parseFloat(inputs[0].value);
+	   					
+	        		}
+	   				
+   				
+			}
+   		sumAmountVal = Math.round(sumAmountVal * 10000.0) / 10000.0;
+        theTbl.rows[theTbl.rows.length-1].cells[4].innerHTML = sumAmountVal;
+	        
+    }
+    
+    
+	function checkAmountVal(minVal,maxVal, el)   {
+
+		var amount = $(el).val();
+		amount = Math.round(amount * 10000.0) / 10000.0;
+		$(el).val(amount);
+		
+		var theTbl = document.getElementById("redCartData"), sumAmountVal = 0.0;
+        var r = theTbl.rows[el.parentNode.parentNode.parentNode.rowIndex];
+        var inputs = r.getElementsByTagName("input");
+        inputs[2].value = amount;
+        var unit = amount / inputs[7].value;
+        
+        if (amount < minVal){
+     	    alert('min value for the amount for this row is : '+minVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+     	    $(el).val(minVal);
+     	   inputs[2].value = minVal;
+     	  unit = minVal / inputs[7].value;
+     	  }
+    	 else if (amount > maxVal){
+    		alert('max value for the amount for this row is : '+maxVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+      	    $(el).val(maxVal);
+      	  inputs[2].value = maxVal;
+      		unit = maxVal / inputs[7].value;
+      	  }
+		
+        unit = Math.round(unit * 10000.0) / 10000.0;
+        
+        inputs[1].value = unit;
+        inputs[3].value = unit;
+               
+        
+        for(var i = 1; i < theTbl.rows.length-1; i++)
+        {
+        	r = theTbl.rows[i];
+   			inputs = r.getElementsByTagName("input");
+   				if (!(inputs[0].value == ""|| inputs[0].value ==  null))  {
+   					sumAmountVal = sumAmountVal + parseFloat(inputs[0].value);
+   					
+        		}
+		}
+        sumAmountVal = Math.round(sumAmountVal * 10000.0) / 10000.0;
+        theTbl.rows[theTbl.rows.length-1].cells[4].innerHTML = sumAmountVal;
+        
+    	
+    }
+    
+    function checkUnitVal(minVal,maxVal, el)   {
+    	
+    	var unit = $(el).val();
+    	unit = Math.round(unit * 10000.0) / 10000.0;
+		$(el).val(unit);
+    	
+    	var theTbl = document.getElementById("redCartData"), sumAmountVal = 0.0;
+        var r = theTbl.rows[el.parentNode.parentNode.parentNode.rowIndex];
+        var inputs = r.getElementsByTagName("input");
+        inputs[3].value = unit;
+        var amount = unit * inputs[7].value;
+
+        if ($(el).val() < minVal){
+     	    alert('min value for the units for this row is : '+minVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+     	    $(el).val(minVal);
+     	   inputs[3].value = minVal;
+     	  amount = minVal * inputs[7].value;
+     	   
+     	  }
+    	 else if ($(el).val() > maxVal){
+    		alert('max value for the units for this row is : '+maxVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+      	    $(el).val(maxVal);
+      	  inputs[3].value = maxVal;
+      	amount = maxVal * inputs[7].value;
+      	  }
+        
+        amount = Math.round(amount * 10000.0) / 10000.0;
+        
+        inputs[0].value = amount;
+        inputs[2].value = amount;
+        
+        for(var i = 1; i < theTbl.rows.length-1; i++)
+        {
+        	r = theTbl.rows[i];
+   			inputs = r.getElementsByTagName("input");
+   				if (!(inputs[0].value == ""|| inputs[0].value ==  null))  {
+   					sumAmountVal = sumAmountVal + parseFloat(inputs[0].value);
+   					
+        		}
+		}
+        sumAmountVal = Math.round(sumAmountVal * 10000.0) / 10000.0;
+        theTbl.rows[theTbl.rows.length-1].cells[4].innerHTML = sumAmountVal;
+   	
+   }
+    
+    function checkAmountAndUnits()  {
+    	
+    	
+   		var theTbl = document.getElementById('redCartData');
+   		
+   		for (var i=1; i<theTbl.rows.length-1; i++)  {
+   			
+   			var r = theTbl.rows[i];
+   			var selects = r.getElementsByTagName("select");
+   			var inputs = r.getElementsByTagName("input");
+   			
+   			if (selects[1].value == "Amount"){  
+	   			if (inputs[0].value == ""|| inputs[0].value ==  null)  {
+	   	        	alert('value of amount can not be blank \n at Row '+i);
+	   	        	return false;
+	   			}
+   			}
+   			else if (selects[1].value == "Units"){  
+	   			if (inputs[1].value == ""|| inputs[1].value ==  null)  {
+	   	        	alert('value of units can not be blank \n at Row '+i);
+	   	        	return false;
+	   			}
+   			}
+   		}
+
+   		editRedemptionCart('orderConfirmation');
+
     }
     
     </script>
@@ -349,7 +511,7 @@ input[type="range"] {
 												
 										</td>
 										<td class="text-center  ">
-											<select name="redTypeArr" id="red-type"  style="width:70px;" disabled onchange="redTypeChng(this);" > 
+											<select  style="width:70px;" disabled onchange="redTypeChng(this);" > 
 										        <% 
 										        	String selRedType= (String) pageContext.getAttribute("selRedType");
 										        	String[] redTypes = {"Select","Amount","Units"};
@@ -371,18 +533,45 @@ input[type="range"] {
 										     		 }
 									     		 %>
 											</select>
+											<select name="redTypeArr" class="hidden" id="red-type"  style="width:60px;" > 
+										        <option value="Select"  >Select</option>
+										        <option value="Amount"  >Amount</option>
+										        <option value="Units"  >Units</option>
+											</select>
 												
 										</td>
 								    	<td class="text-center ">
 									 		<p class="title " >
-									 			<input name="amountArr" type="number" id="amt" class="g-color--black "
-													value=<s:property value="#redCartListElement.redAmount"/> style="width:80px;" disabled>
+									 			
+									 			<s:if test="redAmount == 0 ">
+										 			<input  type="number" id="amt" class="g-color--black "
+														onblur="checkAmountVal(<s:property value="#redCartListElement.minRedAmount"/>,<s:property value="#redCartListElement.totalAmount"/>,this);"
+														placeholder="Enter Amount" style="width:110px;" disabled step=".01">
+												</s:if>
+												<s:else>
+													<input  type="number" id="amt" class="g-color--black "
+														value=<s:property value="#redCartListElement.redAmount"/> 
+														onblur="checkAmountVal(<s:property value="#redCartListElement.minRedAmount"/>,<s:property value="#redCartListElement.totalAmount"/>,this);"
+														style="width:110px;" disabled step=".01">
+												</s:else>
 											</p>	
 										</td>
 										<td class="text-center ">
 									 		<p class="title " >
-									 			<input name="unitsArr" type="number" id="unit" class="g-color--black "
-														value=<s:property value="#redCartListElement.redUnits"/> style="width:80px;" disabled>
+									 			<s:if test="redUnits == 0 ">
+										 			<input  type="number" id="unit" class="g-color--black "
+										 				onblur="checkUnitVal(0,<s:property value="#redCartListElement.totalUnits"/>,this);"
+														placeholder="Enter Units"	style="width:110px;" disabled>
+												</s:if>
+												<s:else>
+													<input  type="number" id="unit" class="g-color--black "
+									 					onblur="checkUnitVal(0,<s:property value="#redCartListElement.totalUnits"/>,this);"
+														value=<s:property value="#redCartListElement.redUnits"/> style="width:110px;" disabled>
+												</s:else>
+												<input name="amountArr" type="number" id="amt" class="g-color--black hidden"
+														value=<s:property value="#redCartListElement.redAmount"/> >
+												<input name="unitsArr" type="number" id="unit_to_send" class="g-color--black hidden "
+														value=<s:property value="#redCartListElement.redUnits"/> >
 											</p>	
 										</td>
 										<td class="text-center  hidden">
@@ -394,11 +583,14 @@ input[type="range"] {
 										<td class="text-center  hidden">
 											 <input class="hidden" name="totalUnitsArr"  value=<s:property value="#redCartListElement.totalUnits"/> />
 										</td>
+										<td class="text-center hidden ">
+											 <input class="hidden" name="latestNavArr"  value=<s:property value="#redCartListElement.latestNav"/> />
+										</td>
 										<td class="text-center  hidden">
 											 <input class="hidden" name="redCartIdArr"  value=<s:property value="#redCartListElement.redCartId"/> />
 										</td>
 										<td class="text-center hidden ">
-											 <input class="hidden" name="productIdArr"  value=<s:property value="#redCartListElement.productId"/> />
+											 <input class="hidden" name="fundIdArr"  value=<s:property value="#redCartListElement.fundId"/> />
 										</td>
 										<td class="text-center hidden ">
 											 <input class="hidden" name="folioNumArr"  value=<s:property value="#redCartListElement.folioNumber"/> />
@@ -418,8 +610,8 @@ input[type="range"] {
 					</table>
 					</s:form>
 					
-					<s:form  action="deleteCartEntryAction" method="post" name="formDeleteCart">
-				  		<s:hidden id="cart-id-value" name="cartId"></s:hidden>
+					<s:form  action="deleteRedCartEntryAction" method="post" name="formDeleteRedCart">
+				  		<s:hidden id="red-cart-id-value" name="redCartId"></s:hidden>
 	  				</s:form>
 	     </div>
 	     
@@ -439,7 +631,7 @@ input[type="range"] {
 		      				<button type="button"  class="btn buttonBlock g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
-		      				<a href="javascript:editRedemptionCart('OrderInvoice');" class=" buttonBlock g-color--white "  >Next</a>
+		      				<a href="javascript:checkAmountAndUnits();" class=" buttonBlock g-color--white "  >Next</a>
 		      			</s:else>
 		      		<%-- </s:form> --%>
 	      		</div>
@@ -484,10 +676,12 @@ input[type="range"] {
    				
    				selects[1].disabled = false;
    			}
+   			selects[2].value = selects[1].value;
    			
    		}
 
-		
+   		
+   		
 		</script>
 		
 

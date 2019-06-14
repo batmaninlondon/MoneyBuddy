@@ -7,16 +7,15 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 
-import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
-import com.myMoneyBuddy.DAOClasses.QueryBankName;
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.Utils.DesEncrypter;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
+import com.myMoneyBuddy.DAOClasses.QueryBankName;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
+import com.myMoneyBuddy.Utils.DesEncrypter;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class RedirectRedeemAction extends ActionSupport  implements SessionAware{
 
@@ -46,10 +45,10 @@ public class RedirectRedeemAction extends ActionSupport  implements SessionAware
 			
 			setDisplayBankName(queryBankName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
 			
-			logger.debug("RedirectRedeemAction class - execute method - customerId - "+customerId+" - returned orderInvoiceForRed");
+			logger.debug("RedirectRedeemAction class - execute method - customerId - "+customerId+" - returned orderConfirmationForRed");
 	    	logger.debug("RedirectRedeemAction class - execute method - customerId - "+customerId+" - end");
 	    	
-			return "orderInvoiceForRed";
+			return "orderConfirmationForRed";
 			
     	} 
     	catch ( Exception e )  {

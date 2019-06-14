@@ -1113,7 +1113,7 @@
 					        var transactionDetailId = data[0];
 					        //alert('transactionDetailId : '+transactionDetailId);
 					        window.location='redirectAction?tranDetailId='+transactionDetailId; 
-					        /* window.location='bankDetails.jsp?tranDetailId='+transactionDetailId; */
+					        /* window.location='orderConfirmation.jsp?tranDetailId='+transactionDetailId; */
 					    } ); 
 					  
 				

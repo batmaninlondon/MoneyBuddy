@@ -5,30 +5,19 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSocketFactory;
-import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
-
-import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
-import com.ndml.kra.pan.webservice.service.GetPasscode;
-import com.ndml.kra.pan.webservice.service.GetPasscodeResponse;
-import com.ndml.kra.pan.webservice.service.ObjectFactory;
-import com.ndml.kra.pan.webservice.service.PANServiceImpl;
-import com.ndml.kra.pan.webservice.service.PANServiceImplService;
-import com.opensymphony.xwork2.ActionSupport;
-import com.sun.mail.iap.Protocol;
-/*import com.sun.net.ssl.HttpsURLConnection;*/
-
-import in.bsestarmf._2016._01.GetPasswordResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
+import com.ndml.kra.pan.webservice.service.PANServiceImpl;
+import com.ndml.kra.pan.webservice.service.PANServiceImplService;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class PanCardVerificationAction extends ActionSupport  implements SessionAware{
 

@@ -4,15 +4,16 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.HibernateUtil;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryCustomerCart {
 
@@ -208,7 +209,7 @@ public class QueryCustomerCart {
 
 	}
 	
-	public boolean existsFund(String customerId, String productId, String transactionType) throws MoneyBuddyException {
+	public boolean existsFund(String customerId, String fundId, String transactionType) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class - existsFund method - customerId - "+customerId+" - start");
 		
@@ -220,16 +221,16 @@ public class QueryCustomerCart {
 			hibernateSession.beginTransaction();
     		
     		Query query = hibernateSession.createQuery("select count(*) from CustomerCart where customerId=:customerId and "
-    				+ "productId=:productId and transactionType=:transactionType");
+    				+ "fundId=:fundId and transactionType=:transactionType");
     		query.setParameter("customerId", customerId);
-    		query.setParameter("productId", productId);
+    		query.setParameter("fundId", fundId);
     		query.setParameter("transactionType", transactionType);
     		String count = query.uniqueResult().toString();
     		
     		hibernateSession.getTransaction().commit();
     		
     		System.out.println("transactionType is in existsFund : "+transactionType+" and customerId : "+
-    				customerId+"and productId : "+productId+" and count is : "+count);
+    				customerId+"and fundId : "+fundId+" and count is : "+count);
     		
     		if ("0".equals(count))  {
     			System.out.println("QueryCustomer class - existsFund method - customerId - "+customerId+" - fund does not exists returns false");
@@ -310,7 +311,7 @@ public class QueryCustomerCart {
 
 	}
 	
-	public boolean existsSimilarRow(String customerId, String productId, String transactionType) throws MoneyBuddyException {
+	public boolean existsSimilarRow(String customerId, String fundId, String transactionType) throws MoneyBuddyException {
 		
 		logger.debug("QueryCustomer class - existsSimilarRow method - customerId - "+customerId+" - start");
 		
@@ -323,14 +324,14 @@ public class QueryCustomerCart {
 			Query query;
 			if ( "UPFRONT".equals(transactionType))  {
 				query = hibernateSession.createQuery("select count(*) from CustomerCart where customerId=:customerId"
-    				+ " and productId=:productId and transactionType=:transactionType and folioNumber='New'");
+    				+ " and fundId=:fundId and transactionType=:transactionType and folioNumber='New'");
 			}
 			else {
 				query = hibernateSession.createQuery("select count(*) from CustomerCart where customerId=:customerId"
-	    				+ " and productId=:productId and transactionType=:transactionType and folioNumber='New' and sipDuration='99' and sipDate='1' ");
+	    				+ " and fundId=:fundId and transactionType=:transactionType and folioNumber='New' and sipDuration='99' and sipDate='1' ");
 			}
     		query.setParameter("customerId", customerId);
-    		query.setParameter("productId", productId);
+    		query.setParameter("fundId", fundId);
     		query.setParameter("transactionType", transactionType);
     		String count = query.uniqueResult().toString();
     		

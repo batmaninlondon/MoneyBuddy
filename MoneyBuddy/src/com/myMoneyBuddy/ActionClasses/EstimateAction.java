@@ -5,13 +5,6 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.CommonUtil;
-import com.opensymphony.xwork2.ActionSupport;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -19,9 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
+import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.opensymphony.xwork2.ActionSupport;
 
 public class EstimateAction extends ActionSupport implements SessionAware  {
 
