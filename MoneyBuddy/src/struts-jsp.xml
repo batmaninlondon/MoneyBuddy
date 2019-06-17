@@ -225,11 +225,6 @@
 		</action>
 	</package>
 	
-	<package name="logOff" namespace="/" extends="struts-default">
-	    <action name="logOff">
-	    	<result>/WEB-INF/content/logOff.jsp</result>
-		</action>
-	</package>
 	<package name="welcome" namespace="/" extends="struts-default">
 	    <action name="welcome">
 	    	<result>/welcome.jsp</result>

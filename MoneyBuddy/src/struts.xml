@@ -148,6 +148,13 @@
         </action>
     </package>
     
+    <package name="logOffAction" namespace="/" extends="struts-default">
+        <action name="logOffAction" class="com.myMoneyBuddy.ActionClasses.LogOffAction">
+            <result name="success">/welcome.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
+        </action>
+    </package>
+    
     <package name="pendingMandateAction" namespace="/" extends="struts-default">
         <action name="pendingMandateAction" class="com.myMoneyBuddy.ActionClasses.PendingMandateAction">
             <result name="success">/WEB-INF/content/updateMandateDetails.jsp</result>

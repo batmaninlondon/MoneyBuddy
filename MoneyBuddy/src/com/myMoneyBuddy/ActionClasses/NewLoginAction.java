@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -105,6 +106,8 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	//String custDetUploaded = customer.getCusDetailsUploaded();
 	    	//String addCustDetUploaded = customer.getAddCusDetailsUploaded();
 	    
+	    	UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
+    		updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
 	    	
 	    	sessionMap.put("customerId", customerId);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerId in sessionMap");

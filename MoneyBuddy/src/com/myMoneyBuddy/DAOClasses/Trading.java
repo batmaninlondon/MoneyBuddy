@@ -981,9 +981,9 @@ public class Trading {
 
 		try {
 			
-			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - start");
 			
-			System.out.println("Trading class : executeTade method : transactionType : "+transactionType);
+			System.out.println("Trading class - executeRedemption method - amount - "+amount);
+			logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - start");
 
 			totalAmount = amount;
 
@@ -992,14 +992,14 @@ public class Trading {
 
 			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
 			
-			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Loaded clientProperties file.");
+			logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - Loaded clientProperties file.");
 			
 			Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
 
-			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Loaded configProperties file.");
+			logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
 			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
@@ -1010,7 +1010,7 @@ public class Trading {
 			String entryParam;
 			String[] resultsEntryParam = null;
 
-				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - flow for fresh order start");
+				logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - flow for redemption order start");
 				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = new Date();
@@ -1068,7 +1068,7 @@ public class Trading {
 				
 				Double currentTransactionAmount = amount;
 
-				System.out.println("Trading class : executeTrade method : currentTransactionAmount : "+currentTransactionAmount);
+				System.out.println("Trading class : executeRedemption method : currentTransactionAmount : "+currentTransactionAmount);
 
 				hibernateSession.beginTransaction();
 				
@@ -1078,7 +1078,7 @@ public class Trading {
 
 				hibernateSession.save(tempTransactionDetail);
 
-				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - inserted new row in TransactionDetails table with transactionId - "+transactionId);
+				logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - inserted new row in TransactionDetails table with transactionId - "+transactionId);
 
 				hibernateSession.getTransaction().commit();
 				
@@ -1091,7 +1091,7 @@ public class Trading {
 
 				PASSWORD_MFORDER = resultsMFOrder[1];
 
-				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - fetched encrypted password from mfOrderEntry API ");
+				logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - fetched encrypted password from mfOrderEntry API ");
 
 				System.out.println(" SCHEME CODE : "+schemeCode);
 				
@@ -1123,7 +1123,7 @@ public class Trading {
 							clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
 							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
 				
-					logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - "+buySell+" -order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
+					logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" redemption order for schemeCode - "+schemeCode+" - placed to BSE for transactionDetailId - "+transactionDetailId);
 
 				resultsEntryParam = entryParam.split("\\|");
 
@@ -1150,14 +1150,14 @@ public class Trading {
 				hibernateSession.getTransaction().commit();
 				
 				
-			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - end");
+			logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - end");
 
 		} catch (NumberFormatException | HibernateException e) {
-			logger.error("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Caught some Exception");
+			logger.error("Trading class - executeRedemption method - customerId - "+customerId+" - Caught some Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		} catch (Exception e) {
-			logger.error("Trading class - executeTrade method - customerId - "+customerId+" - and transactionType - "+transactionType+" - Caught Exception");
+			logger.error("Trading class - executeRedemption method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(), e);
 		}

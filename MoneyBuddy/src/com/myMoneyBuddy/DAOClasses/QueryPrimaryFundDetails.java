@@ -83,8 +83,8 @@ public class QueryPrimaryFundDetails {
 						fundDetailsListElement.getCategory(),fundDetailsListElement.getStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
 						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinPurchaseAmount(),
-						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
-						fundDetailsListElement.getStpFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
+						fundDetailsListElement.getMinStpAmount(),fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
+						fundDetailsListElement.getStpWithdrawalFlag(),fundDetailsListElement.getStpPurchaseFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
 			}
 
 			hibernateSession.getTransaction().commit();
@@ -141,8 +141,8 @@ public class QueryPrimaryFundDetails {
 						fundDetailsListElement.getCategory(),fundDetailsListElement.getStartDate(),fundDetailsListElement.getRating(),fundDetailsListElement.getRisk(),
 						fundDetailsListElement.getReturnsOneYear(),fundDetailsListElement.getReturnsThreeYears(),fundDetailsListElement.getReturnsFiveYears(),
 						fundDetailsListElement.getReturnsSinceInception(),fundDetailsListElement.getMinSipAmount(),fundDetailsListElement.getMinPurchaseAmount(),
-						fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
-						fundDetailsListElement.getStpFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
+						fundDetailsListElement.getMinStpAmount(),fundDetailsListElement.getMinSipDuration(),fundDetailsListElement.getPdfFilePath(),fundDetailsListElement.getSipFlag(),
+						fundDetailsListElement.getStpWithdrawalFlag(),fundDetailsListElement.getStpPurchaseFlag(),fundDetailsListElement.getSwpFlag(),fundDetailsListElement.getSwitchFlag()));
 			}
 
 			hibernateSession.getTransaction().commit();
@@ -199,8 +199,8 @@ public class QueryPrimaryFundDetails {
 						primaryFundDetailsList.get(0).getCategory(),primaryFundDetailsList.get(0).getStartDate(),primaryFundDetailsList.get(0).getRating(),primaryFundDetailsList.get(0).getRisk(),
 						primaryFundDetailsList.get(0).getReturnsOneYear(),primaryFundDetailsList.get(0).getReturnsThreeYears(),primaryFundDetailsList.get(0).getReturnsFiveYears(),
 						primaryFundDetailsList.get(0).getReturnsSinceInception(),primaryFundDetailsList.get(0).getMinSipAmount(),primaryFundDetailsList.get(0).getMinPurchaseAmount(),
-						primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getPdfFilePath(),primaryFundDetailsList.get(0).getSipFlag(),
-						primaryFundDetailsList.get(0).getStpFlag(),primaryFundDetailsList.get(0).getSwpFlag(),primaryFundDetailsList.get(0).getSwitchFlag());
+						primaryFundDetailsList.get(0).getMinStpAmount(),primaryFundDetailsList.get(0).getMinSipDuration(),primaryFundDetailsList.get(0).getPdfFilePath(),primaryFundDetailsList.get(0).getSipFlag(),
+						primaryFundDetailsList.get(0).getStpWithdrawalFlag(),primaryFundDetailsList.get(0).getStpPurchaseFlag(),primaryFundDetailsList.get(0).getSwpFlag(),primaryFundDetailsList.get(0).getSwitchFlag());
 			}
 			else {
 				System.out.println("primaryFundDetailsList is null !!!! ");

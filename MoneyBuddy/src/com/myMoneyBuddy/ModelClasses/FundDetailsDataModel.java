@@ -17,10 +17,12 @@ public class FundDetailsDataModel implements Serializable{
 	private String returnsSinceInception;
 	private String minSipAmount;
 	private String minPurchaseAmount;
+	private String minStpAmount;
 	private String minSipDuration;
 	private String pdfFilePath;
 	private String sipFlag;
-	private String stpFlag;
+	private String stpWithdrawalFlag;
+	private String stpPurchaseFlag;
 	private String swpFlag;
 	private String switchFlag;
 	
@@ -29,11 +31,11 @@ public class FundDetailsDataModel implements Serializable{
 
 	}
 
-
 	public FundDetailsDataModel(String fundId, String schemeName, String schemeType, String category, String startDate,
-			String rating, String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears, 
-			String returnsSinceInception, String minSipAmount, String minPurchaseAmount,
-			String minSipDuration, String pdfFilePath, String sipFlag, String stpFlag, String swpFlag, String switchFlag ) {
+			String rating, String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears,
+			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String minStpAmount,
+			String minSipDuration, String pdfFilePath, String sipFlag, String stpWithdrawalFlag, String stpPurchaseFlag,
+			String swpFlag, String switchFlag) {
 		super();
 		this.fundId = fundId;
 		this.schemeName = schemeName;
@@ -48,14 +50,15 @@ public class FundDetailsDataModel implements Serializable{
 		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
 		this.minPurchaseAmount = minPurchaseAmount;
+		this.minStpAmount = minStpAmount;
 		this.minSipDuration = minSipDuration;
 		this.pdfFilePath = pdfFilePath;
 		this.sipFlag = sipFlag;
-		this.stpFlag = stpFlag;
+		this.stpWithdrawalFlag = stpWithdrawalFlag;
+		this.stpPurchaseFlag = stpPurchaseFlag;
 		this.swpFlag = swpFlag;
 		this.switchFlag = switchFlag;
 	}
-
 
 	public String getFundId() {
 		return fundId;
@@ -217,14 +220,33 @@ public class FundDetailsDataModel implements Serializable{
 		this.sipFlag = sipFlag;
 	}
 
-
-	public String getStpFlag() {
-		return stpFlag;
+	public String getMinStpAmount() {
+		return minStpAmount;
 	}
 
 
-	public void setStpFlag(String stpFlag) {
-		this.stpFlag = stpFlag;
+	public void setMinStpAmount(String minStpAmount) {
+		this.minStpAmount = minStpAmount;
+	}
+
+
+	public String getStpWithdrawalFlag() {
+		return stpWithdrawalFlag;
+	}
+
+
+	public void setStpWithdrawalFlag(String stpWithdrawalFlag) {
+		this.stpWithdrawalFlag = stpWithdrawalFlag;
+	}
+
+
+	public String getStpPurchaseFlag() {
+		return stpPurchaseFlag;
+	}
+
+
+	public void setStpPurchaseFlag(String stpPurchaseFlag) {
+		this.stpPurchaseFlag = stpPurchaseFlag;
 	}
 
 

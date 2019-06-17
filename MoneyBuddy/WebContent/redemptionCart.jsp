@@ -441,6 +441,7 @@ input[type="range"] {
 
 					<s:form  action="editRedemptionCartAction" method="post" name="formEditRedemptionCart">
 				  		<s:hidden id="return-type" name="returnType"></s:hidden>
+				  		
 				  	<table id="redCartData" width="100%;" >
 						
 						<thead class="table-head g-font-size-14--xs g-bg-color--gray-light" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
@@ -627,7 +628,7 @@ input[type="range"] {
   				<div class="col-md-3"></div>
 				<div class="col-md-1 text-left">
 					<%-- <s:form action="redirectAction" method="post"> --%>
-		      			<s:if test="#session.customerCartList.size() == 1 ">
+		      			<s:if test="#session.customerRedemptionCartList.size() == 1 ">
 		      				<button type="button"  class="btn buttonBlock g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
@@ -635,6 +636,16 @@ input[type="range"] {
 		      			</s:else>
 		      		<%-- </s:form> --%>
 	      		</div>
+	      		<div class="col-md-1"></div>
+	      		
+			</div>
+			
+			
+			<div class="row g-margin-b-50--xs">
+  				<div class="col-md-1"></div>
+  				<div class="col-md-10 text-left">
+  					<p> Disclaimer: The amounts/units displayed are based on the last NAV declared. Actual amounts/units may vary based on the NAV applicable for the redemption.  </p>
+  				</div>
 	      		<div class="col-md-1"></div>
 	      		
 			</div>

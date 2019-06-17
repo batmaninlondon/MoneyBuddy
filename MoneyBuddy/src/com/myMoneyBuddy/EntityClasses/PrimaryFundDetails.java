@@ -61,6 +61,9 @@ public class PrimaryFundDetails {
     @Column(name="MIN_RED_AMOUNT")
     private String minRedAmount;
     
+    @Column(name="MIN_STP_AMOUNT")
+    private String minStpAmount;
+    
     @Column(name="MIN_SIP_DURATION")
     private String minSipDuration;
     
@@ -73,8 +76,11 @@ public class PrimaryFundDetails {
     @Column(name="SIP_FLAG")
     private String sipFlag;
     
-    @Column(name="STP_FLAG")
-    private String stpFlag;
+    @Column(name="STP_WITHDRAWAL_FLAG")
+    private String stpWithdrawalFlag;
+    
+    @Column(name="STP_PURCHASE_FLAG")
+    private String stpPurchaseFlag;
     
     @Column(name="SWP_FLAG")
     private String swpFlag;
@@ -88,10 +94,13 @@ public class PrimaryFundDetails {
     public PrimaryFundDetails() {
 
     }
-    
+
+
 	public PrimaryFundDetails(String schemeName, String schemeType, String category, String startDate, String rating,
-			String risk, String returnsThreeYears, String minSipAmount, String minPurchaseAmount, String minRedAmount,String minSipDuration, 
-			String pdfFilePath, String mostPopularFund,String sipFlag, String stpFlag, String swpFlag, String switchFlag,String aum ) {
+			String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears,
+			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String minRedAmount,
+			String minStpAmount, String minSipDuration, String pdfFilePath, String mostPopularFund, String sipFlag,
+			String stpWithdrawalFlag, String stpPurchaseFlag, String swpFlag, String switchFlag, String aum) {
 		super();
 		this.schemeName = schemeName;
 		this.schemeType = schemeType;
@@ -99,19 +108,25 @@ public class PrimaryFundDetails {
 		this.startDate = startDate;
 		this.rating = rating;
 		this.risk = risk;
+		this.returnsOneYear = returnsOneYear;
 		this.returnsThreeYears = returnsThreeYears;
+		this.returnsFiveYears = returnsFiveYears;
+		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
 		this.minPurchaseAmount = minPurchaseAmount;
 		this.minRedAmount = minRedAmount;
+		this.minStpAmount = minStpAmount;
 		this.minSipDuration = minSipDuration;
 		this.pdfFilePath = pdfFilePath;
 		this.mostPopularFund = mostPopularFund;
 		this.sipFlag = sipFlag;
-		this.stpFlag = stpFlag;
+		this.stpWithdrawalFlag = stpWithdrawalFlag;
+		this.stpPurchaseFlag = stpPurchaseFlag;
 		this.swpFlag = swpFlag;
 		this.switchFlag = switchFlag;
 		this.aum = aum;
 	}
+
 
 	public String getFundId() {
 		return fundId;
@@ -272,12 +287,28 @@ public class PrimaryFundDetails {
 		this.sipFlag = sipFlag;
 	}
 
-	public String getStpFlag() {
-		return stpFlag;
+	public String getMinStpAmount() {
+		return minStpAmount;
 	}
 
-	public void setStpFlag(String stpFlag) {
-		this.stpFlag = stpFlag;
+	public void setMinStpAmount(String minStpAmount) {
+		this.minStpAmount = minStpAmount;
+	}
+
+	public String getStpWithdrawalFlag() {
+		return stpWithdrawalFlag;
+	}
+
+	public void setStpWithdrawalFlag(String stpWithdrawalFlag) {
+		this.stpWithdrawalFlag = stpWithdrawalFlag;
+	}
+
+	public String getStpPurchaseFlag() {
+		return stpPurchaseFlag;
+	}
+
+	public void setStpPurchaseFlag(String stpPurchaseFlag) {
+		this.stpPurchaseFlag = stpPurchaseFlag;
 	}
 
 	public String getSwpFlag() {
@@ -312,6 +343,7 @@ public class PrimaryFundDetails {
 		this.minRedAmount = minRedAmount;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -323,6 +355,7 @@ public class PrimaryFundDetails {
 		result = prime * result + ((minRedAmount == null) ? 0 : minRedAmount.hashCode());
 		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
 		result = prime * result + ((minSipDuration == null) ? 0 : minSipDuration.hashCode());
+		result = prime * result + ((minStpAmount == null) ? 0 : minStpAmount.hashCode());
 		result = prime * result + ((mostPopularFund == null) ? 0 : mostPopularFund.hashCode());
 		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
@@ -335,11 +368,13 @@ public class PrimaryFundDetails {
 		result = prime * result + ((schemeType == null) ? 0 : schemeType.hashCode());
 		result = prime * result + ((sipFlag == null) ? 0 : sipFlag.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((stpFlag == null) ? 0 : stpFlag.hashCode());
+		result = prime * result + ((stpPurchaseFlag == null) ? 0 : stpPurchaseFlag.hashCode());
+		result = prime * result + ((stpWithdrawalFlag == null) ? 0 : stpWithdrawalFlag.hashCode());
 		result = prime * result + ((switchFlag == null) ? 0 : switchFlag.hashCode());
 		result = prime * result + ((swpFlag == null) ? 0 : swpFlag.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -400,6 +435,13 @@ public class PrimaryFundDetails {
 				return false;
 			}
 		} else if (!minSipDuration.equals(other.minSipDuration)) {
+			return false;
+		}
+		if (minStpAmount == null) {
+			if (other.minStpAmount != null) {
+				return false;
+			}
+		} else if (!minStpAmount.equals(other.minStpAmount)) {
 			return false;
 		}
 		if (mostPopularFund == null) {
@@ -486,11 +528,18 @@ public class PrimaryFundDetails {
 		} else if (!startDate.equals(other.startDate)) {
 			return false;
 		}
-		if (stpFlag == null) {
-			if (other.stpFlag != null) {
+		if (stpPurchaseFlag == null) {
+			if (other.stpPurchaseFlag != null) {
 				return false;
 			}
-		} else if (!stpFlag.equals(other.stpFlag)) {
+		} else if (!stpPurchaseFlag.equals(other.stpPurchaseFlag)) {
+			return false;
+		}
+		if (stpWithdrawalFlag == null) {
+			if (other.stpWithdrawalFlag != null) {
+				return false;
+			}
+		} else if (!stpWithdrawalFlag.equals(other.stpWithdrawalFlag)) {
 			return false;
 		}
 		if (switchFlag == null) {
@@ -509,7 +558,5 @@ public class PrimaryFundDetails {
 		}
 		return true;
 	}
-
-	
 
 }
