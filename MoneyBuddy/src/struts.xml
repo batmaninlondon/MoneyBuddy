@@ -199,6 +199,7 @@
     
     <package name="displayCustomerAqbAction" namespace="/" extends="struts-default">
         <action name="displayCustomerAqbAction" class="com.myMoneyBuddy.ActionClasses.DisplayCustomerAqbAction">
+        	<result name="emailIdNotExist">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="success">/aqbDisplay.jsp</result>
             <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
         </action>
