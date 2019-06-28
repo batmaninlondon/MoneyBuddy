@@ -36,14 +36,7 @@ public class QueryCustomerRedemptionCart {
 			
 			Double totalRedAmount = 0.0;
 			Double totalRedUnits = 0.0;
-			
-			hibernateSession.beginTransaction();
-			
-			query = hibernateSession.createQuery("from RedemptionCart where customerId = :customerId ");
-			query.setParameter("customerId", customerId);
-			hibernateSession.getTransaction().commit();
-			redemptionCartList = query.list();
-			
+				
 			for (int i = 0; i < redemptionCartList.size(); i++) {
 				RedemptionCart redCartListElement = redemptionCartList.get(i);
 				

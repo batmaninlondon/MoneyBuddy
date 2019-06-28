@@ -46,9 +46,9 @@
         </action>
     </package>
     
-    <package name="fetchAvailableStpFundsAction" namespace="/" extends="struts-default">
-        <action name="fetchAvailableStpFundsAction" class="com.myMoneyBuddy.ActionClasses.FetchAvailableStpFundsAction">
-            <result name="success">/WEB-INF/content/stpConfirmation.jsp</result>
+    <package name="addToStpCartAction" namespace="/" extends="struts-default">
+        <action name="addToStpCartAction" class="com.myMoneyBuddy.ActionClasses.AddToStpCartAction">
+            <result name="success">/stpCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -63,6 +63,13 @@
     <package name="redeemAction" namespace="/" extends="struts-default">
         <action name="redeemAction" class="com.myMoneyBuddy.ActionClasses.RedeemAction">
             <result name="success">/WEB-INF/content/orderInvoiceRedemption.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="stpAction" namespace="/" extends="struts-default">
+        <action name="stpAction" class="com.myMoneyBuddy.ActionClasses.StpAction">
+            <result name="success">/WEB-INF/content/orderInvoiceStp.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -92,6 +99,13 @@
     <package name="customerRedCartAction" namespace="/" extends="struts-default">
         <action name="customerRedCartAction" class="com.myMoneyBuddy.ActionClasses.CustomerRedCartAction">
             <result name="success">/redemptionCart.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="customerStpCartAction" namespace="/" extends="struts-default">
+        <action name="customerStpCartAction" class="com.myMoneyBuddy.ActionClasses.CustomerStpCartAction">
+            <result name="success">/stpCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
@@ -134,6 +148,13 @@
         </action>
     </package>
     
+    <package name="redirectStpAction" namespace="/" extends="struts-default">
+        <action name="redirectStpAction" class="com.myMoneyBuddy.ActionClasses.RedirectStpAction">
+            <result name="orderConfirmationForStp">/WEB-INF/content/orderConfirmationForStp.jsp</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
    	<package name="buyFundAction" namespace="/" extends="struts-default">
         <action name="buyFundAction" class="com.myMoneyBuddy.ActionClasses.BuyFundAction">
             <result name="success">/WEB-INF/content/selectedFundDetails.jsp</result>
@@ -165,6 +186,20 @@
     <package name="pendingAofAction" namespace="/" extends="struts-default">
         <action name="pendingAofAction" class="com.myMoneyBuddy.ActionClasses.PendingAofAction">
             <result name="success">/WEB-INF/content/updateAofDetails.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
+        </action>
+    </package>
+    
+    <package name="displayAllAqbAction" namespace="/" extends="struts-default">
+        <action name="displayAllAqbAction" class="com.myMoneyBuddy.ActionClasses.DisplayAllAqbAction">
+            <result name="success">/aqbDisplay.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
+        </action>
+    </package>
+    
+    <package name="displayCustomerAqbAction" namespace="/" extends="struts-default">
+        <action name="displayCustomerAqbAction" class="com.myMoneyBuddy.ActionClasses.DisplayCustomerAqbAction">
+            <result name="success">/aqbDisplay.jsp</result>
             <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
         </action>
     </package>
@@ -293,6 +328,14 @@
         </action>
     </package>
     
+    <package name="editStpCartAction" namespace="/" extends="struts-default">
+        <action name="editStpCartAction" class="com.myMoneyBuddy.ActionClasses.EditStpCartAction">
+            <result name="success">/WEB-INF/content/customerDashboard.jsp</result>
+            <result name="redirectStp" type="chain">redirectStpAction</result>
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
     <package name="deleteCartEntryAction" namespace="/" extends="struts-default">
         <action name="deleteCartEntryAction" class="com.myMoneyBuddy.ActionClasses.DeleteCartEntryAction">
             <result name="success">/customerCart.jsp</result>
@@ -305,6 +348,13 @@
         <action name="deleteRedCartEntryAction" class="com.myMoneyBuddy.ActionClasses.DeleteRedCartEntryAction">
             <result name="success">/redemptionCart.jsp</result>
             <!-- <result name="SIP">/WEB-INF/content/customerSipCart.jsp</result> -->
+            <result name="error">/WEB-INF/content/errorPage.jsp</result>
+        </action>
+    </package>
+    
+    <package name="deleteStpCartEntryAction" namespace="/" extends="struts-default">
+        <action name="deleteStpCartEntryAction" class="com.myMoneyBuddy.ActionClasses.DeleteStpCartEntryAction">
+            <result name="success">/stpCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>

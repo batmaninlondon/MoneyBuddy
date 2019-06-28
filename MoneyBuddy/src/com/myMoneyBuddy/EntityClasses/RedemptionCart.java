@@ -27,8 +27,8 @@ public class RedemptionCart {
     @Column (name="FUND_ID")
     private String fundId;
 
-    @Column (name="PRODUCT_NAME")
-    private String productName;
+    @Column (name="SCHEME_NAME")
+    private String schemeName;
     
     @Column (name="MIN_RED_AMOUNT")
     private String minRedAmount;
@@ -67,13 +67,13 @@ public class RedemptionCart {
         
     }
 
-	public RedemptionCart(String customerId, String fundId, String productName, String minRedAmount, String redAmount, String redUnits,
+	public RedemptionCart(String customerId, String fundId, String schemeName, String minRedAmount, String redAmount, String redUnits,
 			String totalAmount, String totalUnits, String redemptionOption, String redemptionType, String folioNumber,
 			String redCartCreationDate, String status, String latestNav ) {
 		super();
 		this.customerId = customerId;
 		this.fundId = fundId;
-		this.productName = productName;
+		this.schemeName = schemeName;
 		this.minRedAmount = minRedAmount;
 		this.redAmount = redAmount;
 		this.redUnits = redUnits;
@@ -111,12 +111,12 @@ public class RedemptionCart {
 		this.fundId = fundId;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getSchemeName() {
+		return schemeName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 
 	public String getMinRedAmount() {
@@ -216,7 +216,7 @@ public class RedemptionCart {
 		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
 		result = prime * result + ((latestNav == null) ? 0 : latestNav.hashCode());
 		result = prime * result + ((minRedAmount == null) ? 0 : minRedAmount.hashCode());
-		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((schemeName == null) ? 0 : schemeName.hashCode());
 		result = prime * result + ((redAmount == null) ? 0 : redAmount.hashCode());
 		result = prime * result + ((redCartCreationDate == null) ? 0 : redCartCreationDate.hashCode());
 		result = prime * result + ((redCartId == null) ? 0 : redCartId.hashCode());
@@ -276,11 +276,11 @@ public class RedemptionCart {
 		} else if (!minRedAmount.equals(other.minRedAmount)) {
 			return false;
 		}
-		if (productName == null) {
-			if (other.productName != null) {
+		if (schemeName == null) {
+			if (other.schemeName != null) {
 				return false;
 			}
-		} else if (!productName.equals(other.productName)) {
+		} else if (!schemeName.equals(other.schemeName)) {
 			return false;
 		}
 		if (redAmount == null) {

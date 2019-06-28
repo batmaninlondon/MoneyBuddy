@@ -357,7 +357,7 @@
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Returns (% per year)</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Invest More</th>
 											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
-											<!-- <th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th> -->
+											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th>
 							            </tr>
 							            
 							        </thead>
@@ -402,8 +402,9 @@
   					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
 				
-				<s:form  action="fetchAvailableStpFundsAction" method="post" name="formFetchAvailableStpFundsAction">
+				<s:form  action="addToStpCartAction" method="post" name="formAddToStpCartAction">
   					<s:hidden id="fund-id-stp-value" name="stpFundId"></s:hidden>
+  					<s:hidden id="folio-num-stp-value" name="stpFolioNum"></s:hidden>
   					<s:hidden id="cur-amount-stp-value" name="stpAmount"></s:hidden>
 				</s:form>
 				
@@ -712,7 +713,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType,dataElement.stpWithdrawalFlag]);
 						});
 					  
 				  },
@@ -896,10 +897,10 @@
 					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
 					  		"columnDefs": [ 
 					  			{"className": "dt-center", "targets": "_all"},
-					  			/* { "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" }, */
+					  			{ "targets": -1, "data": null, "defaultContent": "<button id='stpButton'>STP</button>" },
 					  			{ "targets": -2, "data": null, "defaultContent": "<button id='redeemButton'>Redeem</button>" },
 					  			/* { "targets": -3, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" }, */
-					  			{ "targets": -1, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" },
+					  			{ "targets": -3, "data": null, "defaultContent": "<button id='topUpButton'>TopUp!</button>" },
 					  			{
 					  	            "searchable": false,
 					  	            "orderable": false,
@@ -929,18 +930,18 @@
 					  	    		$('td:nth-child(5)', nRow).html(null);
 					  	    		$('td:nth-child(9)', nRow).html(null); 
 					  	    		$('td:nth-child(10)', nRow).html(null);
-					  	    		/* $('td:nth-child(11)', nRow).html(null); */
+					  	    		$('td:nth-child(11)', nRow).html(null);
 					  	    	  	return nRow;	
 				  	    	  	}
 					  	    	else {
-					  	    		/* if ( aData[8] != "Debt" ) {
-						  	    		
-		  	    	  		    		$('td:nth-child(11)', nRow).html(null);
-						  	    	  
-					  	    	  	} */
+					  	    		
 					  	        	$("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
+					  	    	  	if ( aData[9] == "N" ) {
+						  	    		$('td:nth-child(11)', nRow).html(null);
+						  	    	}
 					  	        	return nRow;
 					  	      	}
+					  	    	
 				  	    	},
 				  	    	
 				  	    	
@@ -1072,9 +1073,9 @@
 					 $('#portfoliosummary tbody').on('click','#stpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
-					        var amount = data[4];
-					        /* alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]); */
-					        stpFundHandler(fundId,amount);
+					        var folioNum = data[2];
+					        var amount = data[5];
+					        stpFundHandler(fundId,folioNum,amount);
 					    } );
 					 
 					 $('#portfoliosummary tbody').on('click','#redeemButton',function () {

@@ -93,8 +93,8 @@
 						<tbody class="table-body g-font-size-14--xs">
 							<s:iterator value="#session.customerCartUpfrontList" var="customerCartListElement">
 								<tr>
-								    <s:if test="productName.equals('Total')">
-								    	<td class="text-center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.productName"/></b></td>
+								    <s:if test="schemeName.equals('Total')">
+								    	<td class="text-center g-font-size-14--xs g-bg-color--gray-light"><b><s:property value="#customerCartListElement.schemeName"/></b></td>
 								    	<td class="text-center g-font-size-14--xs g-bg-color--gray-light "><b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></b></td>
 								    	<s:if test="'FALSE'.equals(#allFolio) ">
 								    		<td class="g-bg-color--gray-light"></td>
@@ -104,7 +104,7 @@
 									<s:else>
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
 								    	<s:set var="folios" value="#customerCartListElement.folioNumber" />
-								    	<td class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+								    	<td class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.schemeName"/></td>
 								    	<td class="text-center g-font-size-14--xs "><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.amount]})}"/></td>
 								    	<s:if test="'FALSE'.equals(#allFolio) ">
 									    	<td class="text-center g-font-size-14--xs ">

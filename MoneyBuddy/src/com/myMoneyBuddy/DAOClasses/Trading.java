@@ -34,6 +34,7 @@ import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
+import com.myMoneyBuddy.EntityClasses.StpDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
@@ -359,7 +360,7 @@ public class Trading {
 				String frmtdStartDateForSip = null;
 				String frmtdEndDateForSip = null;
 						
-				if (!"Total".equals(customerCartList.get(i).getProductName()))  {
+				if (!"Total".equals(customerCartList.get(i).getSchemeName()))  {
 				String schemeCode = null;
 				String amcCode = null;
 				String schemeType = null;
@@ -708,14 +709,17 @@ public class Trading {
 				System.out.println(updateResult + " rows updated in transactionDetails table ");
 				hibernateSession.getTransaction().commit();
 				
-				hibernateSession.beginTransaction();
-				
-				tempSipDetail = new SipDetails(customerId, bseRegNum, transactionDetailId,
-						customerCartList.get(i).getSipDate(), frmtdStartDateForSip, frmtdEndDateForSip,
-						customerCartList.get(i).getSipDuration(),"N","Y");
-
-				hibernateSession.save(tempSipDetail);
-				hibernateSession.getTransaction().commit();
+				if ( resultsEntryParam[7].equals("0") ) {
+					
+					hibernateSession.beginTransaction();
+					
+					tempSipDetail = new SipDetails(customerId, bseRegNum, transactionDetailId,
+							customerCartList.get(i).getSipDate(), frmtdStartDateForSip, frmtdEndDateForSip,
+							customerCartList.get(i).getSipDuration(),"N","Y");
+	
+					hibernateSession.save(tempSipDetail);
+					hibernateSession.getTransaction().commit();
+				}
 				
 				}
 				
@@ -959,7 +963,7 @@ public class Trading {
 
 	}
 
-
+	
 	public void executeRedemption(String customerId, String panCard, String fundId, Double amount, Double quantity, String allRedeem, String transactionCode,  
 			String transactionType, String buySell, String folioNum
 			   ) throws MoneyBuddyException {
@@ -1168,6 +1172,179 @@ public class Trading {
 
 	}
 
+
+	
+	public void executeStp(String customerId, String withdrawalFundId, String stpFolioNum, String purchaseFundId, String stpAmount, String stpDuration,  
+								String stpDate, String stpCartId ) throws MoneyBuddyException {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		TransactionDetails tempTransactionDetail;
+		
+		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+		in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+		String PASSWORD_STARMF;
+		String passwordStarMF;
+		String[] resultsStarMF;
+		StpDetails tempStpDetails;
+		String stpDetails;
+
+		try {
+			
+			logger.debug("Trading class - executeStp method - customerId - "+customerId+" - start");
+			
+			hibernateSession.beginTransaction();
+			
+			Query query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+			
+			String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			
+			
+			hibernateSession.getTransaction().commit();
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String frmtdDateForDB = dateFormat.format(date);
+			
+			hibernateSession.beginTransaction();
+			
+			tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,"STP",
+					"NEW","BUY", "FRESH", stpAmount,
+					"1", null,null,"N",withdrawalFundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",
+					stpFolioNum,null,"N"); 		
+
+			hibernateSession.save(tempTransactionDetail);
+
+			hibernateSession.getTransaction().commit();
+			
+			hibernateSession.beginTransaction();
+			
+			query = hibernateSession.createQuery("delete from StpCart where stpCartId = :stpCartId ");
+			query.setParameter("stpCartId", stpCartId);
+			
+			query.executeUpdate();
+			
+			hibernateSession.getTransaction().commit();
+
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+
+			
+			CommonUtil commonUtil = new CommonUtil();
+	    	Map<Date,Date> stpDateAndDuration = commonUtil.getStpDates(stpDate, stpDuration);
+	    	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	    	
+	    	Date curStpStartDate = (Date) stpDateAndDuration.keySet().toArray()[0];
+	    	Date curStpEndDate = stpDateAndDuration.get(stpDateAndDuration.keySet().toArray()[0]);
+	    	
+	    	String frmtdStartDateForStp = sdf.format(curStpStartDate).substring(6,10)+
+					"-"+sdf.format(curStpStartDate).substring(0,2)+
+					"-"+sdf.format(curStpStartDate).substring(3,5);
+			String frmtdEndDateForStp = sdf.format(curStpEndDate).substring(6,10)+
+					"-"+sdf.format(curStpEndDate).substring(0,2)+
+					"-"+sdf.format(curStpEndDate).substring(3,5);
+			
+			System.out.println(" frmtdStartDateForStp : "+frmtdStartDateForStp+" and frmtdEndDateForStp : "+frmtdEndDateForStp);
+			
+			
+			String startDate = sdf.format(curStpStartDate).substring(3,5)+
+					"/"+sdf.format(curStpStartDate).substring(0,2)+
+					"/"+sdf.format(curStpStartDate).substring(6,10);
+			
+	    	String numOfInstallment = Integer.toString(Integer.parseInt(stpDuration)*12) ;
+			
+			QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
+			String withdrawalFundName = querySecondaryFundDetails.getSchemeCode(withdrawalFundId);
+			String purchaseFundName = querySecondaryFundDetails.getSchemeCode(purchaseFundId);
+
+			String[] stpDetailsArray = {customerId,withdrawalFundName,purchaseFundName,"Fresh","P",stpFolioNum,nextTransactionId,startDate,"Monthly",
+					numOfInstallment,stpAmount,"N","","Y",configProperties.getProperty("EUIN"),"STP Initiated",""};
+			stpDetails = String.join("|",stpDetailsArray);
+
+
+			passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+			resultsStarMF = passwordStarMF.split("\\|");
+
+			PASSWORD_STARMF = resultsStarMF[1];
+
+			String stpResponse = iStarMFWebService.mfapi("07",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,stpDetails);
+
+			System.out.println("stpResponse : "+stpResponse);
+
+			String[] resultsStpResponse = stpResponse.split("\\|");
+			
+			for ( int i =0 ; i< resultsStpResponse.length ; i++)   {
+				
+				System.out.println("resultsStpResponse["+i+"] : "+resultsStpResponse[i]);
+			}
+			
+			String transactionDetailId = tempTransactionDetail.getTransactionDetailId();
+			
+			
+			hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("update TransactionDetails set bseRegistrationNumber = :bseRegistrationNumber , "
+																+ "transactionStatus =:transactionStatus ,"
+																+ " bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " "
+																		+ " where transactionDetailId = :transactionDetailId");
+			
+			String bseRegNum = "";
+			if ( resultsStpResponse[0].equals("101") ) {
+				query.setParameter("transactionStatus", "2");
+				query.setParameter("bseSuccessFlag", "1");
+				logger.debug("Trading class - executeStp method - customerId - "+customerId+" - order failed with BSE for transactionDetailId - "+transactionDetailId);
+			}
+			else  
+			{
+				bseRegNum = resultsStpResponse[2];
+				query.setParameter("transactionStatus", "3");
+				query.setParameter("bseSuccessFlag", "0");
+				logger.debug("Trading class - executeStp method - customerId - "+customerId+" - order successfully placed to BSE for transactionDetailId - "+transactionDetailId);
+			}
+
+			query.setParameter("bseRegistrationNumber", bseRegNum);
+			query.setParameter("bseRemarks", resultsStpResponse[1]);
+			query.setParameter("transactionDetailId", transactionDetailId);
+			int updateResult = query.executeUpdate();
+			
+			hibernateSession.getTransaction().commit();
+			
+			if ( resultsStpResponse[0].equals("100") )  {
+			
+				hibernateSession.beginTransaction();
+			
+				tempStpDetails = new StpDetails(transactionDetailId,customerId, bseRegNum, stpDate,
+					frmtdStartDateForStp, frmtdEndDateForStp, stpDuration,"N",withdrawalFundId,purchaseFundId,stpAmount);
+
+				hibernateSession.save(tempStpDetails);
+				hibernateSession.getTransaction().commit();
+			}
+			
+		
+			logger.debug("Trading class - executeStp method - customerId - "+customerId+" - end");
+		
+		} catch (NumberFormatException | HibernateException e) {
+			logger.error("Trading class - executeStp method - customerId - "+customerId+" - Caught some Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.error("Trading class - executeStp method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+
+	}
+	
+	
+	
+	
 	public void checkPaymentStatus() throws MoneyBuddyException {
 		
 	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();

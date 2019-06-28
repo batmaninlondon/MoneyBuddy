@@ -237,6 +237,12 @@
 		</action>
 	</package>
 	
+	<package name="aqbDisplay" namespace="/" extends="struts-default">
+	    <action name="aqbDisplay">
+	    	<result>/aqbDisplay.jsp</result>
+		</action>
+	</package>
+	
 	<package name="terms" namespace="/" extends="struts-default">
 	    <action name="terms">
 	    	<result>/terms.jsp</result>

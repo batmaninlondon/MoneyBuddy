@@ -114,9 +114,9 @@
 										<tbody class="table-body g-font-size-14--xs">
 												<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement">
 													<tr>
-													    <s:if test="productName.equals('Total')">
+													    <s:if test="schemeName.equals('Total')">
 													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#redCartListElement.productName"/></b>
+														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
 													    	<td class="center g-font-size-14--xs text-center">
 												    		</td>
@@ -130,7 +130,7 @@
 													    <s:else>
 													    	
 													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#redCartListElement.productName"/></b>
+														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
 													    	<td class="center g-font-size-14--xs text-center">
 														    	<b><s:property value="#redCartListElement.redemptionOption"/></b>

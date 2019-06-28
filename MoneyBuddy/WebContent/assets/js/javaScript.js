@@ -89,6 +89,14 @@
         	
 		}
 		
+		function editStpCart(val)   {
+
+        	document.getElementById("return-type").value = val;
+        	
+        	document.formEditStpCart.submit();
+        	
+		}
+		
 		function changeSliderValue(val)   {
 			
 			if (val == "" || val == null )   {
@@ -177,6 +185,10 @@
 	    {
 				document.formRedemption.submit();
 	    }
+		function callStpAction()  
+	    {
+				document.formStp.submit();
+	    }
 		
 		function redeem(fundId,schemeName,folioNumber,totalAmount,totalQuantity)  
 	    {
@@ -239,11 +251,13 @@
 				document.formBuyFundAction.submit();
 	    }
 		
-		function stpFundHandler(fundId,amount)  
+		function stpFundHandler(fundId,folioNum,amount)  
 	    {
 				document.getElementById("fund-id-stp-value").value = fundId;
+				document.getElementById("folio-num-stp-value").value = folioNum;
 				document.getElementById("cur-amount-stp-value").value = amount;
-				document.formFetchAvailableStpFundsAction.submit();
+				
+				document.formAddToStpCartAction.submit();
 	    }
 		
 		function redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity)  
@@ -260,6 +274,12 @@
         {
 			document.getElementById("cart-id-value").value = cartId;
 			document.formDeleteCart.submit();
+        }
+        
+        function deleteStpCartEntry(stpCartId)  
+        {
+			document.getElementById("stp-cart-id-value").value = stpCartId;
+			document.formDeleteStpCart.submit();
         }
         
         function deleteRedCartEntry(redCartId)  

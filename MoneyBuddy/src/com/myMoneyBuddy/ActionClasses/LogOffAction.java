@@ -5,18 +5,14 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerStpCart;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LogOffAction extends ActionSupport  implements SessionAware{
@@ -35,6 +31,9 @@ public class LogOffAction extends ActionSupport  implements SessionAware{
     		
     		UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
     		updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
+    		
+    		UpdateCustomerStpCart  updateCustomerStpCart = new UpdateCustomerStpCart();
+    		updateCustomerStpCart.emptyCustomerStpCart(customerId);
     		
     		sessionMap.invalidate();
     		

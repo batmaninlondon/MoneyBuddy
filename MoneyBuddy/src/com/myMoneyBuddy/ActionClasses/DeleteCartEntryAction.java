@@ -79,12 +79,12 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	System.out.println("customerCartList size : "+customerCartList.size());
 	    	
 	    	for (int j = 0; j < customerCartList.size(); j++)  {
-	    		System.out.println("customerCartList.get(j).getProductName() : "+customerCartList.get(j).getProductName());
+	    		System.out.println("customerCartList.get(j).getSchemeName() : "+customerCartList.get(j).getSchemeName());
 	    	}
 	    	System.out.println();
 	    	while (customerCartList.get(i) != null)  {
 	    		
-	    		if ("Total".equals(customerCartList.get(i).getProductName()))  {
+	    		if ("Total".equals(customerCartList.get(i).getSchemeName()))  {
 	    			totalAmount = Double.parseDouble(customerCartList.get(i).getAmount());
 	    			customerCartList.remove(i);
 	    			break;
@@ -99,9 +99,9 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	
 	    	System.out.println(" cartId : "+getCartId());
 	    	while (customerCartList.get(i) != null)  {
-	    		System.out.println("customerCartList product name : "+customerCartList.get(i).getProductName());
+	    		System.out.println("customerCartList product name : "+customerCartList.get(i).getSchemeName());
 	    		if (getCartId().equals(customerCartList.get(i).getCartId()))  {
-	    			System.out.println("customerCartList cartId removing : "+customerCartList.get(i).getProductName());
+	    			System.out.println("customerCartList cartId removing : "+customerCartList.get(i).getSchemeName());
 	    			totalAmount -= Double.parseDouble(customerCartList.get(i).getAmount());
 	    			customerCartList.remove(i);
 	    			

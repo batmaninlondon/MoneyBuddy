@@ -23,7 +23,7 @@ public class InsertCustomerRedemptionCart {
 	Logger logger = Logger.getLogger(InsertCustomerRedemptionCart.class);
 	
 	
-	public void insertRow (String customerId, String fundId, String productName,String minRedAmount, String totalAmount, String totalUnits,
+	public void insertRow (String customerId, String fundId, String schemeName,String minRedAmount, String totalAmount, String totalUnits,
 			String redemptionOption, String redemptionType, String folioNumber ) throws MoneyBuddyException
     {
 
@@ -44,7 +44,7 @@ public class InsertCustomerRedemptionCart {
     			hibernateSession.getTransaction().commit();
     			    			
 	    		hibernateSession.beginTransaction();
-	    		tempRedemptionCart = new RedemptionCart(customerId,fundId,productName,minRedAmount,"0","0",totalAmount,totalUnits,
+	    		tempRedemptionCart = new RedemptionCart(customerId,fundId,schemeName,minRedAmount,"0","0",totalAmount,totalUnits,
 	    				redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending",latestNavValue);
 	    		
 	    		
@@ -78,7 +78,7 @@ public class InsertCustomerRedemptionCart {
     }
 	
 	
-	public void addCustomerRedemptionCart (String customerId, String fundId, String productName, String minRedAmount, String redAmount, String redUnits,
+	public void addCustomerRedemptionCart (String customerId, String fundId, String schemeName, String minRedAmount, String redAmount, String redUnits,
 			String totalRedAmount, String totalRedUnits, String redemptionOption, String redemptionType, String folioNumber) throws MoneyBuddyException
     {
 
@@ -148,7 +148,7 @@ public class InsertCustomerRedemptionCart {
     			hibernateSession.getTransaction().commit();
     			
     			
-    			tempRedemptionCart = new RedemptionCart(customerId,fundId,productName,minRedAmount,redAmount,redUnits,totalRedAmount,
+    			tempRedemptionCart = new RedemptionCart(customerId,fundId,schemeName,minRedAmount,redAmount,redUnits,totalRedAmount,
     					totalRedUnits,redemptionOption,redemptionType,folioNumber,frmtdDate,"Pending",latestNavValue);
 	    	
 	    		

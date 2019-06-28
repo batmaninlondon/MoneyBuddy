@@ -234,4 +234,46 @@ public class QuerySecondaryFundDetails {
 					hibernateSession.close();
 		}
 	}
+	
+	public String getSchemeCode(String fundId)  throws MoneyBuddyException {
+		
+		logger.debug("QuerySecondaryFundDetails class - getSchemeCode method - start");
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try {
+			String schemeCode = null;
+			
+			hibernateSession.beginTransaction();
+    		
+    		Query query = hibernateSession.createQuery("select schemeCode from SecondaryFundDetails where fundId = :fundId ");
+    		query.setParameter("fundId", fundId);
+    		
+    		schemeCode = query.uniqueResult().toString();
+    		
+    		System.out.println(" schemeCode for fundId : "+fundId+" is : "+schemeCode);
+    		
+    		hibernateSession.getTransaction().commit();
+    		
+    		logger.debug("QuerySecondaryFundDetails class - getSchemeCode method - returning schemeCode : "+schemeCode+" for fundId : "+fundId);
+    		
+			logger.debug("QuerySecondaryFundDetails class - getSchemeCode method - end");
+			
+			return schemeCode;
+			
+		}
+		catch ( HibernateException e ) {
+			logger.error("QuerySecondaryFundDetails class - getSchemeCode method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QuerySecondaryFundDetails class - getSchemeCode method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
 }

@@ -100,9 +100,11 @@ public class SendMail {
     		// Create a default MimeMessage object.
     		Message message = new MimeMessage(session);
 
+    		System.out.println(" going to send mail from : "+configProperties.getProperty("GMAIL_USERNAME"));
+    		System.out.println(" going to send mail from pswd : "+configProperties.getProperty("GMAIL_PASSWORD"));
     		// Set From: header field of the header.
     		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
-    		message.setFrom(new InternetAddress("admin@moneybuddy.co.in"));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
 
     		// Set To: header field of the header.
 

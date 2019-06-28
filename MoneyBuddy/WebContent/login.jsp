@@ -71,21 +71,21 @@
 
         //Render the recaptchaRegister on the element with ID "recaptcha-register"
         recaptchaRegister = grecaptcha.render('recaptcha-register', {
-          'sitekey' : '<%=siteKey%>', //Replace this with your Site key
+          'sitekey' : '<%=siteKey%>',
           'size' : 'invisible',
           'callback' : submitRegister
         });
         
         //Render the recaptchaForgotPswd on the element with ID "recaptcha-forgot-pswd"
         recaptchaForgotPswd = grecaptcha.render('recaptcha-forgot-pswd', {
-        	'sitekey' : '<%=siteKey%>', //Replace this with your Site key
+        	'sitekey' : '<%=siteKey%>',
             'size' : 'invisible',
             'callback' : submitForgotPassword
         });
         
       //Render the recaptchaLogin on the element with ID "recaptcha-login"
         recaptchaLogin = grecaptcha.render('recaptcha-login', {
-            'sitekey' : '<%=siteKey%>', //Replace this with your Site key
+            'sitekey' : '<%=siteKey%>',
             'size' : 'invisible',
             'callback' : submitLogin
           });
@@ -227,8 +227,8 @@
   	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
           <div>
           	
-        	<%-- <s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="Sign In"  /> --%>
-        	<s:submit  class="button button-block" value="Sign In"  />
+        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="Sign In"  />
+        	<%-- <s:submit  class="button button-block" value="Sign In"  /> --%>
         	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
         	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
            </div>

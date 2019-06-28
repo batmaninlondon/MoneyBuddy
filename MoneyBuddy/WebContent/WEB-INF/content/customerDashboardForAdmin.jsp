@@ -356,7 +356,7 @@
 	              	</div>
 	             </div>
 	              
-        		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+        		<%-- <s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
   					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
@@ -371,7 +371,7 @@
   					<s:hidden id="folio-num-redeem-value" name="folioNum"></s:hidden>
   					<s:hidden id="total-amount-redeem-value" name="totalAmount"></s:hidden>
   					<s:hidden id="total-quantity-redeem-value" name="totalQuantity"></s:hidden>
-				</s:form>
+				</s:form> --%>
 				
 				
 	              <!-- Added Table for SIP - end  -->
@@ -442,35 +442,13 @@
                 <!-- Pending Order Table End -->    
 						  	</div>
 						  	
-						  	
-						  	
-						  	
 						  </div>
-						  <!-- <div class="card-body">
-						    <h5 class="card-title">Special title treatment</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						  </div> -->
-						</div>
-              		
-              		
-              		
+						</div>	
               		</div>
-              
-               
-
-
-				
-                
-                  
+  
             </div>
        
         </div>
-        
-	
-       
-     
-
-
 
         <!--========== FOOTER ==========-->
           <footer class="g-bg-color--dark">
@@ -1030,9 +1008,10 @@
 					 $('#portfoliosummary tbody').on('click','#stpButton',function () {
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
+					        var folioNum = data[2];
 					        var amount = data[4];
 					        /* alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]); */
-					        stpFundHandler(fundId,amount);
+					        stpFundHandler(fundId,folioNum,amount);
 					    } );
 					 
 					 $('#portfoliosummary tbody').on('click','#redeemButton',function () {

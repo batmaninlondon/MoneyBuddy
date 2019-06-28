@@ -86,7 +86,7 @@ public class CreateCartAction extends ActionSupport  implements SessionAware{
 	   	    	
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(getTotalInvestment()) ) /100);
-	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getProductName(pair.getKey().toString()),amount.toString(),
+	   	        insertCustomerCart.addCustomerCart(customerId,pair.getKey().toString(),queryProduct.getSchemeName(pair.getKey().toString()),amount.toString(),
 	   	        		transactionType,sipDuration,sipPlan,sipDate,folioNum,frmtdDate,"Pending");
 	   	        
 	   	    }

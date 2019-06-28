@@ -178,7 +178,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 	   	        Map.Entry pair = (Map.Entry)it.next();
 	   	        Double amount = ((   Double.valueOf(pair.getValue().toString()) * Double.valueOf(totalInvestment) ) /100);
 
-	   	        productList.put(queryProduct.getProductName(pair.getKey().toString()), amount);
+	   	        productList.put(queryProduct.getSchemeName(pair.getKey().toString()), amount);
  
 	   	    }
 	   	    it = productList.entrySet().iterator();

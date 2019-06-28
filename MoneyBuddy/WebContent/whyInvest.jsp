@@ -61,6 +61,7 @@
 														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 															<li><a href="<s:url action="customerCartAction"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 															<li><a href="<s:url action="customerRedCartAction"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+															
 														</ul>
 													</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>

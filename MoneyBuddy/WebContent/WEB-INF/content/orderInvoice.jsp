@@ -98,9 +98,9 @@
 										<tbody class="table-body g-font-size-14--xs">
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
-													    <s:if test="productName.equals('Total')">
+													    <s:if test="schemeName.equals('Total')">
 														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#customerCartListElement.productName"/></b>
+														    	<b><s:property value="#customerCartListElement.schemeName"/></b>
 													    	</td>
 														    <td class="center g-font-size-14--xs text-center">
 														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
@@ -113,7 +113,7 @@
 												    	</s:if>
 												    	<s:else>
 												    		<td class="center g-font-size-14--xs text-center">
-												    			<s:property value="#customerCartListElement.productName"/>
+												    			<s:property value="#customerCartListElement.schemeName"/>
 											    			</td>
 											    			<s:if test="transactionType.equals('UPFRONT')">
 															    <td class="center g-font-size-14--xs text-center">

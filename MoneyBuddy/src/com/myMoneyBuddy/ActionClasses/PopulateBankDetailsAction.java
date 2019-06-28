@@ -45,9 +45,7 @@ public class PopulateBankDetailsAction extends ActionSupport implements SessionA
     	System.out.println("reAccountNumber : "+getReAccountNumber());
     	System.out.println("ifscCode : "+getIfscCode());
     	try {
- 
-    		//QueryCustomerPortfolio customerPortfolio = new QueryCustomerPortfolio();
-    		
+     		
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
 			String frmtdDateForDB = dateFormat.format(date);

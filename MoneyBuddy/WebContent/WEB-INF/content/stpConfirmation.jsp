@@ -99,14 +99,7 @@
   		<div class="col-md-1 col-xs-1" ></div>
   	</div>
   	
-  	<s:form  action="newEstimateAction" method="post" name="formEstimate">
-  		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
-		<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
-		<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
-		<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
-		<s:hidden id="transaction-type-value" name="transactionType"></s:hidden>
-  	</s:form>
-  	
+ 	
   	<div class="row "  >
 		<div class="col-md-1 col-xs-1" > </div>
 		<div class="col-md-10 col-xs-10  g-bg-color--white ">

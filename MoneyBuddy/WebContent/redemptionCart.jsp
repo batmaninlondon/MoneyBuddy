@@ -465,7 +465,7 @@ input[type="range"] {
 						<tbody class="table-body g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement" >
 								<tr class="table-body g-font-size-14--xs " style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-								    <s:if test="productName.equals('Total')">
+								    <s:if test="schemeName.equals('Total')">
 								    	<td class="text-center col-md-3 g-bg-color--gray-light" height="40">Total Amount</td>
 								    	<td class="text-center col-md-1 g-bg-color--gray-light"></td>
 										<td class="text-center col-md-1 g-bg-color--gray-light "></td>
@@ -484,7 +484,7 @@ input[type="range"] {
 										<s:set var="selectedRedCartId" value="#redCartListElement.redCartId" />
 								    	<s:set var="selRedOption" value="#redCartListElement.redemptionOption" />
 								    	<s:set var="selRedType" value="#redCartListElement.redemptionType" />
-								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#redCartListElement.productName"/></td>
+								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#redCartListElement.schemeName"/></td>
 								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#redCartListElement.folioNumber"/></td>
 								    	<td class="text-center  ">
 											<select name="redOptionArr" class="" id="red-option"  style="width:70px;" onchange="redOptionChng(this);" > 
@@ -644,7 +644,7 @@ input[type="range"] {
 			<div class="row g-margin-b-50--xs">
   				<div class="col-md-1"></div>
   				<div class="col-md-10 text-left">
-  					<p> Disclaimer: The amounts/units displayed are based on the last NAV declared. Actual amounts/units may vary based on the NAV applicable for the redemption.  </p>
+  					<p> Disclaimer: The amounts/units displayed are based on the last NAV declared. Actual values may vary.  </p>
   				</div>
 	      		<div class="col-md-1"></div>
 	      		

@@ -108,7 +108,7 @@ public class InsertCustomerCart {
     }
 	
 	
-	public void addCustomerCart (String customerId, String fundId, String productName, String amount,
+	public void addCustomerCart (String customerId, String fundId, String schemeName, String amount,
     		String transactionType, String sipDuration, String sipPlan, String sipDate, String folioNum,
 			String cartCreationDate, String status) throws MoneyBuddyException
     {
@@ -232,11 +232,11 @@ public class InsertCustomerCart {
         		
 	    		hibernateSession.beginTransaction();
 	    		if ("UPFRONT".equals(transactionType))
-	    			tempCustomerCart = new CustomerCart(customerId,fundId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),
 	    					primaryFundDetails.getMinSipAmount(),amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		else
-	    			tempCustomerCart = new CustomerCart(customerId,fundId,productName,primaryFundDetails.getMinPurchaseAmount(),
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),
 	    					primaryFundDetails.getMinSipAmount(),"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		

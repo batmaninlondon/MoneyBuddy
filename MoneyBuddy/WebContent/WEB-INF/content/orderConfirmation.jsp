@@ -149,13 +149,13 @@
 												%>
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
-													    <s:if test="productName.equals('Total')">
+													    <s:if test="schemeName.equals('Total')">
 													    	
 													    	<p class="hidden" id="totUpfrontAmt"><s:property value="#customerCartListElement.upfrontAmount"/></p>
 													    	<p class="hidden" id="totSipAmt"><s:property value="#customerCartListElement.sipAmount"/></p>
 
 														    <td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#customerCartListElement.productName"/></b>
+														    	<b><s:property value="#customerCartListElement.schemeName"/></b>
 													    	</td>
 													    	<td class="center g-font-size-14--xs text-center"></td>
 													    	<s:if test="'TRUE'.equals(#anyUpfront) ">
@@ -182,7 +182,7 @@
 												    	<s:else>
 												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
 												    		<td class="center g-font-size-14--xs text-center">
-												    			<s:property value="#customerCartListElement.productName"/>
+												    			<s:property value="#customerCartListElement.schemeName"/>
 											    			</td>
 											    			<td class="center g-font-size-14--xs text-center">
 													    		<s:property value="#customerCartListElement.transactionType"/>

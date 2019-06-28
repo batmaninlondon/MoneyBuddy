@@ -14,6 +14,7 @@ import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
+import com.myMoneyBuddy.DAOClasses.UpdateCustomerStpCart;
 import com.myMoneyBuddy.DAOClasses.UpdateLoginTimestamp;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -47,17 +48,15 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	
 	    	MbUtil mbUtil = new MbUtil();
-	    	/*if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponseLogin()))
 	    	{
 	    		System.out.println("Looks like you are a robot...... ");
-	    		String strMsg = "Lookslikeyouarearobot";
-	    	    stream = new ByteArrayInputStream(strMsg.getBytes());
 	    		addActionMessage("Looks like you are a robot.");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned Lookslikeyouarearobot");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 	    	    
 	    	    return INPUT;
-	    	}*/
+	    	}
 	    	if (customer == null) {
 	    		System.out.println("Emaid id not valid ");
 	    		/*str = "emailIdDoesNotExists";
@@ -109,6 +108,9 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
     		updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
 	    	
+    		UpdateCustomerStpCart  updateCustomerStpCart = new UpdateCustomerStpCart();
+    		updateCustomerStpCart.emptyCustomerStpCart(customerId);
+    		
 	    	sessionMap.put("customerId", customerId);
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerId in sessionMap");
 	    	

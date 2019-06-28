@@ -109,6 +109,15 @@ hr {
 			</a>
 		</div>
 	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-5"></div>
+		<div class="col-md-3">
+			<a href="<s:url action="displayAllAqbAction"/>">
+				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">ViewAllCustomersAqb</button>
+			</a>
+		</div>
+	</div>
 	<hr >
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -119,6 +128,19 @@ hr {
 		<div class="col-md-3" >
 			
           	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="ViewCustomersDashboard" style="padding:5px 15px 5px 15px;width:300px;"/>
+       	</div>
+		</s:form>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<s:form  action="displayCustomerAqbAction"  method="post" namespace="/">
+		<div class="col-md-3" >
+  			<s:textfield name="emailIdAqb" class="form-control" placeholder="Enter Customer email Id"/>
+		</div>
+		<div class="col-md-3" >
+			
+          	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="ViewCustomersAqb" style="padding:5px 15px 5px 15px;width:300px;"/>
        	</div>
 		</s:form>
 	</div>

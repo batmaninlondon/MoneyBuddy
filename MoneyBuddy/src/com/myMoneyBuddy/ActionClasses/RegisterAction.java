@@ -63,15 +63,15 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	        	return SUCCESS;
 	    	}
 	    	
-	    	if (customer.existsMobileNumber(getMobileNumberRegister())) {
+	    	/*if (customer.existsMobileNumber(getMobileNumberRegister())) {
 	    		System.out.println("RegisterAction class : execute method : MobileNumberAlreadyExists");
-	    		/*String str = "MobileNumberAlreadyExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());*/
+	    		String str = "MobileNumberAlreadyExists";
+	    	    stream = new ByteArrayInputStream(str.getBytes());
 	    		addActionMessage("This mobile number is already registered with MoneyBuddy.");
 	    	    logger.debug("RegisterAction class - execute method - returned MobileNumberAlreadyExists");
 	    	    
 	        	return SUCCESS;
-	    	}
+	    	}*/
 	    	
 	    	
 	    	

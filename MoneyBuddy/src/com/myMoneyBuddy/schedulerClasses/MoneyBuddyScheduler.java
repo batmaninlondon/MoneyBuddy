@@ -33,7 +33,34 @@ public class MoneyBuddyScheduler {
 		
 			scheduler.start();
 			
-			JobDetail readSpreadSheetJob = JobBuilder.newJob(ReadSpreadSheet.class)
+			/*JobDetail dailyInvestmentGeneratorJob = JobBuilder.newJob(DailyInvestmentGenerator.class)
+					.withIdentity("ReadSpreadSheetJob", "Group").build();
+			
+			// This Trigger will work at 9 pm (21 hours) everyday
+			
+			Trigger dailyInvestmentGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("DailyInvestmentGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 54 12 * * ?")) 
+					.build();
+			
+			scheduler.scheduleJob(dailyInvestmentGeneratorJob, dailyInvestmentGeneratorTrigger);*/
+			
+			JobDetail aqbCalculatorJob = JobBuilder.newJob(AqbCalculator.class)
+					.withIdentity("AqbCalculatorJob", "Group").build();
+			
+			// This Trigger will work at 9 pm (21 hours) everyday
+			
+			Trigger aqbCalculatorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("AqbCalculatorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 56 13 28 6 ?")) 
+					.build();
+			
+			scheduler.scheduleJob(aqbCalculatorJob, aqbCalculatorTrigger);
+			
+			
+			/*JobDetail readSpreadSheetJob = JobBuilder.newJob(ReadSpreadSheet.class)
 					.withIdentity("ReadSpreadSheetJob", "Group").build();
 			
 			// This Trigger will work at 9 pm (21 hours) everyday
@@ -41,14 +68,14 @@ public class MoneyBuddyScheduler {
 			Trigger readSpreadSheetTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 33 11 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 43 13 * * ?")) 
 					.build();
 			
 	
-			scheduler.scheduleJob(readSpreadSheetJob, readSpreadSheetTrigger);
+			scheduler.scheduleJob(readSpreadSheetJob, readSpreadSheetTrigger);*/
 			
 			
-			JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
+			/*JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
 					.withIdentity("PaymentStatusCheckJob", "Group").build();
 			
 			// This Trigger will work at 3 pm (15 hours) everyday
@@ -56,11 +83,11 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 34 11 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 13 12 * * ?")) 
 					.build();
 			
 	
-			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);
+			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);*/
 			
 			
 			/*JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
@@ -76,6 +103,21 @@ public class MoneyBuddyScheduler {
 			
 	
 			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);*/
+			
+			
+			/*JobDetail stpInstallmentGeneratorJob = JobBuilder.newJob(StpInstallmentGenerator.class)
+					.withIdentity("StpInstallmentGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 3 pm (15 hours) everyday
+			
+			Trigger stpInstallmentGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("StpInstallmentGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 32 13 * * ?")) 
+					.build();
+			
+	
+			scheduler.scheduleJob(stpInstallmentGeneratorJob, stpInstallmentGeneratorTrigger);*/
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

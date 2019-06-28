@@ -339,7 +339,7 @@ input[type="range"] {
 						<tbody class="table-body g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<s:iterator value="#session.customerCartList" var="customerCartListElement" >
 								<tr class="table-body g-font-size-14--xs " style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-								    <s:if test="productName.equals('Total')">
+								    <s:if test="schemeName.equals('Total')">
 								    	<th class="text-center col-md-3 g-bg-color--gray-light" height="40">Total</th>
 								    	<th class="text-center col-md-1 g-bg-color--gray-light"></th>
 										<th class="text-center col-md-1 g-bg-color--gray-light "></th>
@@ -367,7 +367,7 @@ input[type="range"] {
 								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
 								    	<s:set var="folios" value="#customerCartListElement.folioNumList" />
 								    	<s:set var="selFolio" value="#customerCartListElement.folioNumber" />
-								    	<td class="text-left" height="70" class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.productName"/></td>
+								    	<td class="text-left" height="70" class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.schemeName"/></td>
 								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#customerCartListElement.transactionType"/></td>
 								    	<td class="text-center  ">
 											<%

@@ -104,9 +104,9 @@
 						<tbody class="table-body g-font-size-14--xs">
 							<s:iterator value="#session.customerCartSipList" var="customerCartSipListElement">
 								<tr>
-									<s:if test="productName.equals('Total')">
+									<s:if test="schemeName.equals('Total')">
 									    <td class="center g-font-size-14--xs text-center">
-									    	<b><s:property value="#customerCartSipListElement.productName"/></b>
+									    	<b><s:property value="#customerCartSipListElement.schemeName"/></b>
 									    </td>
 									    <td class="center g-font-size-14--xs text-center">
 									    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.sipAmount]})}"/>&nbsp;/month</b>
@@ -114,7 +114,7 @@
 								    	<td></td>
 							    	</s:if>
 							    	<s:else>
-							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.productName"/></td>
+							    		<td class="center g-font-size-14--xs text-center"><s:property value="#customerCartSipListElement.schemeName"/></td>
 									    <td class="center g-font-size-14--xs text-center">
 									    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartSipListElement.sipAmount]})}"/>&nbsp;/month
 								    	</td>
