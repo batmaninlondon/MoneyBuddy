@@ -12,9 +12,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomerRedemptionCart;
 import com.myMoneyBuddy.DAOClasses.QueryStpCart;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
 import com.myMoneyBuddy.EntityClasses.StpCart;
 import com.opensymphony.xwork2.ActionSupport;
 

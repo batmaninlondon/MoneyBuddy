@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class PendingNavOrders implements Serializable{
 
+	private String customerId;
 	private String bseOrderId;
 	private String bseRegNum;
 	private String transactionType;
@@ -19,9 +20,10 @@ public class PendingNavOrders implements Serializable{
 	}
 
 
-	public PendingNavOrders(String bseOrderId, String bseRegNum, String transactionType, String rta, String schemeType, String transactionDate,
+	public PendingNavOrders(String customerId, String bseOrderId, String bseRegNum, String transactionType, String rta, String schemeType, String transactionDate,
 			String frmtTransactionDate, String transactionFolioNum) {
 		super();
+		this.customerId = customerId;
 		this.bseOrderId = bseOrderId;
 		this.bseRegNum = bseRegNum;
 		this.transactionType = transactionType;
@@ -35,6 +37,16 @@ public class PendingNavOrders implements Serializable{
 
 	public String getBseOrderId() {
 		return bseOrderId;
+	}
+
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 

@@ -71,7 +71,8 @@
                     </button>
                     <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
-				
+				<div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
                 <div class="collapse navbar-collapse navbar-right g-padding-l-80-md">
                     <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
@@ -83,8 +84,8 @@
 										 			<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
 				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
 				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+				                                    		<!-- <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li> -->
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
 													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
 													      </ul>
 				                                    
@@ -103,8 +104,8 @@
 										 			 <li id="dropdown-selected" class=" btn-group s-header-v2__nav-item dropdown">
 				                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >List <span class="caret"></span></a>
 				                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-				                                    		<li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li>
-													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="blog">Blog</a></li>
+				                                    		<!-- <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="aboutUs">About Us</a></li> -->
+													        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
 													        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
 													      </ul>
 				                                    
@@ -463,7 +464,7 @@
                 <div class="col-sm-6">
                     <ul class="pull-right">
                         <li><a href="welcome">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
+                        <!-- <li><a href="aboutUs">About Us</a></li> -->
                         <li><a href="help">Contact Us</a></li>
                         <li><a href="register">Sign Up</a></li>
                     </ul>

@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.Map" %>
+<%@ page language="java" import="java.util.LinkedHashMap" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -28,6 +32,7 @@
         <!-- Favicon -->
        <!--  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
+
     </head>
     <!-- End Head -->
 
@@ -118,127 +123,74 @@
 	                    		
 	                    		<div class="g-color--text g-font-family--playfair g-letter-spacing--1" style=" text-align: justify; height : 500px; overflow : auto;" >
 	                    			
-	                    			<ul>
-	                    			<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>Brief Overview</b>
-		                    			</p>
-		                    			<p>
-		                    			Your privacy is very important to us. So we've developed a Privacy Policy that covers how we collect, use, disclose, and store your personal information. Please take a moment to read through this policy and let us know if you have any questions.
-										</p>
-										<p>
-										By visiting <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> or by interacting with MoneyBuddy Financial Services Pvt. Ltd. in any other way, you are accepting this policy. 
-										</p>
-									</li>
-                    				<li>
-                    					<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-		                    				<b>What data we collect and Why?</b>
-	                    				</p>
-	                    				<p>
-		                    			We would like to reiterate that MoneyBuddy is a company involved in the business of providing financial services and products to its customer. 
-										</p>
-										<p>
-										We are not in the business of hoarding and selling or renting user data to any third party. Thus any data we ask you for or collect is for either of the two reasons only: 
-										</p>
-										<ol >
-											<li>
-												Information is needed for processing your mutual fund investments:
-												<ol>
-													<li type="a">This include information like your name, date or birth, address, Pan card, bank account details etc.</li>
-												</ol>
-											</li>
-											<li>
-												Information is needed for improving your investing experience:
-												<ol>
-													<li type="a">This includes information like your age, gender, life stage, IP address, details of purchase/ redemptions of mutual funds  etc.</li>
-												</ol>
-											</li>
-										</ol>
-									</li>
-									<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>What do we do with your data?</b>
-		                    			</p>
-		                    			<p>
-		                    			We need your PAN card number to check your KYC status as per the SEBI guidelines. Your PAN card number is shared with NSDL KRA (<a href="https://kra.ndml.in"><u>https://kra.ndml.in</u></a>) for this purpose. NSDL is one of the five organizations approved by SEBI for verifying KYC status of the user.
-										</p>
-										<p>
-										We share your personal information like name, pan card number, email ID, phone number, bank details, KYC status etc with Bombay Stock Exchange (BSE) for processing your mutual fund investments. This information is mandatory as per the SEBI regulations and also enhances the safety and security of your investment.  
-										</p>
-										<p>
-										We share your personal information with all the mutual fund companies where you chose to invest in. This is necessary as they store your investments directly under your name using these details. Moreover these details are mandatory as per the SEBI regulation.
-										</p>
-										<p>
-										We use Amazon Web Services (AWS) servers to host all user data. AWS data centers undergo annual certifications to ensure they meet the highest standards of physical and virtual security. 
-										</p>
-										<p>
-										We store details of all your investments, redemptions, SIPs etc to help you visualise all your investments in one place and place withdrawal or any other request wrt your investments.
-										</p>
-										<p>
-										Along with above mentioned situations, we use your data for various other uses such as helping you chose funds as per your needs, computing your tax burden, improve your user experience by storing cookies etc.
-										</p>
-										<p>
-										Finally, we would like to reiterate that we do not sell, distribute or lease your personal information to third parties unless we are required to share such information under the terms and conditions of the products and services you avail, or we are required to do so by law.
-										</p>
-									</li>
-									<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>Security of your data</b>
-		                    			</p>
-		                    			<p>
-		                    			We are fully committed to ensuring the safety and security of your data. We follow a three stage strategy to achieve that goal.
-										</p>
-										<ol>
-											<li>
-												By collecting the least amount of data/ information needed for a smooth investing experience
-											</li>
-											<li>
-												By using bank grade security/ encryptions to store all your data
-											</li>
-											<li>
-												By not sharing your data with any third party unless mandated by law or the terms and conditions of product that you have invested in
-											</li>
-										</ol>
-									</li>
-									<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>Correcting your personal information</b>
-		                    			</p>
-		                    			<p>
-		                    			We encourage you to verify all your personal information carefully. Providing and ensuring correct information is used for processing your investments is your responsibility. Please contact us immediately if you notice any incorrect information or would like to change any information that we have in store.
-										</p>
-									</li>
-									<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>Links to other websites</b>
-		                    			</p>
-		                    			<p>
-		                    			Our website may have links to other websites of interest. Once you use any such link to leave our website, we will not have any control or responsibility for any information that you may share with such websites.
-										</p>
-									</li>
-									<li>
-			                    		<p class="g-font-size-17--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs">
-			                    			<b>Questions on our Privacy Policy?</b>
-		                    			</p>
-		                    			<p>
-		                    			Please contact us immediately, If you have any questions or concerns on how we use your data.
-										</p>
-										<p>
-										<b><u>Please Note:</u></b> Our Privacy Policy is subject to change without further notice. Users are requested to refer to the latest version available on our website for up to date information.
-										</p>
-									</li>
-                    			</ul>
+	                    			<p class="g-font-size-17--xs g-font-size-20--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-center font-weight-bold   g-margin-t-20--xs">
+		                    			<b>We request you to kindly visit the AMC website to read the latest scheme related documents</b>
+	                    			</p>
+	                    			<br/>
+	                    			<table  class="table table-bordered" style="width:90%" align="center">
+	                    				<thead>
+	                    					<tr>
+		                    					<th class="text-center col-md-1" scope="col">Sl .No.</th>
+		                    					<th class="text-center col-md-5" scope="col">Asset Management Company ( AMC) name</th>
+		                    					<th class="text-center col-md-6" scope="col">Funds Document</th>
+	                    					</tr>
+	                    				</thead>
+	                    				<tbody>
+	                    				<%
+								           
+								            Map<String, String> fundData = new LinkedHashMap<String, String>();
+								            fundData.put("Axis Asset Management Company Ltd.", "https://www.axismf.com/Downloads.aspx");
+								            fundData.put("Baroda Pioneer Asset Management Company Limited", "http://www.barodapioneer.in/Downloads/Pages/application-form.aspx");
+								            fundData.put("BOI AXA Investment Managers Private Limited", "https://www.boiaxamf.com/regulatory-reports");
+								            fundData.put("Birla Sunlife Asset Management Company Limited", "https://mutualfund.adityabirlacapital.com/resources/forms");
+								            fundData.put("BNP Paribas Asset Management India Pvt. Ltd.", "https://www.bnpparibasmf.in/downloads");
+								            fundData.put("Canara Robeco Asset Management Company Limited", "http://old.canararobeco.com/forms-downloads/pages/SID-Scheme-Information-Document.aspx");
+								            fundData.put("DSP BlackRock Investment Managers Private Limited", "https://www.dspblackrock.com/investor-centre/download");
+								            fundData.put("Edelweiss Asset Management Limited", "http://www.edelweissmf.com/Download/Forms.aspx");
+								            fundData.put("Franklin Templeton Asset Management (India) Private Limited", "https://www.franklintempletonindia.com/investor/resources");
+								            fundData.put("HDFC Asset Management Company Limited", "http://www.hdfcfund.com/Downloads/");
+								            fundData.put("HSBC Global Asset Management (India) Private Limited", "http://www.assetmanagement.hsbc.com/in/mutual-funds/downloads");
+								            fundData.put("ICICI Prudential Asset Management Company Limited", "https://www.icicipruamc.com/Downloads.aspx");
+								            fundData.put("IDBI Asset Management Ltd.", "https://www.idbimutual.co.in/Downloads/KIM-Plus-Application-Form");
+								            fundData.put("IDFC Asset Management Company Private Limited", "https://www.idfcmf.com/download-centre.aspx?tab=sid");
+								            fundData.put("India Infoline Asset Management Co. Ltd.", "http://www.iiflmf.com/downloads/information-documents");
+								            fundData.put("Indiabulls Asset Management Company Limited", "http://www.indiabullsamc.com/kim-forms/");
+								            fundData.put("JM Financial Asset Management Private Limited", "http://www.jmfinancialmf.com/Downloads/Addenda.aspx?SubReportID=538A8B27-62B1-4CFE-BFF2-65DDFF0D4627");
+								            fundData.put("Kotak Mahindra Asset Management Company Limited", "https://assetmanagement.kotak.com/scheme-information-document");
+								            fundData.put("L&T Investment Management Limited", "https://www.ltfs.com/companies/lnt-investment-management/downloads.html");
+								            fundData.put("LIC Nomura Mutual Fund Asset Management Company Limited", "http://www.licmf.com/downloads/sid_sai");
+								            fundData.put("Mirae Asset Global Investment Management (India) Private Limited", "https://www.miraeassetmf.co.in/downloads/forms");
+								            fundData.put("Motilal Oswal Asset Management Company Limited", "https://www.motilaloswalmf.com/downloads/mutual-fund");
+								            fundData.put("Essel Finance AMC Limited", "https://mutualfund.esselfinance.com/dnd_applicationform.php");
+								            fundData.put("PPFAS Asset Management Pvt. Ltd.", "https://amc.ppfas.com/downloads/index.php");
+								            fundData.put("DHFL Pramerica Asset Managers Pvt. Ltd", "http://www.dhflpramericamf.com/forms-and-updates");
+								            fundData.put("Principal Pnb Asset Management Company Private Limited", "https://www.principalindia.com/downloads-funds.aspx");
+								            fundData.put("Quantum Asset Management Company Private Limited", "https://www.quantumamc.com/Downloads.aspx");
+								            fundData.put("Reliance Capital Asset Management Limited", "https://www.reliancemutual.com/investor-services/downloads/scheme-information-document/");
+								            fundData.put("Invesco Asset Management (India) Private Limited", "https://invescomutualfund.com/literature-and-form?tab=Scheme");
+								            fundData.put("SBI Funds Management Private Limited", "https://www.sbimf.com/en-us/forms");
+								            fundData.put("Shriram Asset Management Company Limited", "http://www.shriramamc.com/AmcDownloads.aspx");
+								            fundData.put("Sundaram Asset Management Company", "https://www.sundarammutual.com/Statutory%20Disclosures");
+								            fundData.put("Tata Asset Management Limited", "http://www.tatamutualfund.com/downloads/scheme-information-document");
+								            fundData.put("Taurus Asset Management Company Limited", "https://www.taurusmutualfund.com/Download/FMP.html");
+								            fundData.put("UTI Asset Management Company Private Limited", "https://www.utimf.com/forms-and-downloads/");
+								         
+								            
+								            request.setAttribute("myMap", fundData);
+								        %>
+	                    				<s:iterator value="%{#request.myMap}" status="status">
+										    <tr>
+	                    						<th class="text-center" scope="row"><s:property value="#status.index+1"></s:property></th	>
+	                    						<td class="text-center" ><s:property value="key"></s:property></td>
+	                    						<td class="text-center" ><a href="<s:property value="value"></s:property>">Link to read documents</a></td>
+	                    					</tr>
+                    					</s:iterator>
+	                    				</tbody>
 	                    			
+	                    			</table>
+		                    			
 	                    			
-	                    			
-	                    			
-	                    			
-	                    			
-	                    			
-	                    			
-	                    			
-	                    			
-	                    			
+
 	                    			
 	                    		</div>
 	                    		

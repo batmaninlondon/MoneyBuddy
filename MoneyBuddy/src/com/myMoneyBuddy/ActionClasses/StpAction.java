@@ -34,6 +34,7 @@ public class StpAction extends ActionSupport  implements SessionAware{
     		
     		QueryStpCart queryStpCart = new QueryStpCart();
     		List<StpCart> customerStpCartList = queryStpCart.getCustomerStpCart(customerId);
+    		sessionMap.put("customerStpCartList", customerStpCartList);
     		
     		QueryCustomer queryCustomer = new QueryCustomer();
 	    	

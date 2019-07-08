@@ -164,17 +164,18 @@
                             </div>
                             <!-- End Logo -->
                         </div>
-                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
@@ -215,7 +216,7 @@
             <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
             <br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Top Performing Mutual Funds</h1>
+                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Top Performing Direct Mutual Funds</h1>
                      <p class="g-font-size-15--xs g-font-size-30--sm g-font-size-30--md">Fully online investing</p>
                      <input class="form-control" id="myInput" type="text" oninput="showSearch(this.value)" placeholder="Search by entering fund name or category">
 				  <br>
@@ -364,6 +365,7 @@
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
             </div>

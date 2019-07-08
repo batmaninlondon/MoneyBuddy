@@ -44,14 +44,15 @@
                     </button>
                     <a class="navbar-brand" href="welcome"><img src="images/logo.png" alt="logo"></a>
                 </div>
-				
+				<div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
                 <div class="collapse navbar-collapse s-header-v2__navbar-collapse g-padding-l-80-md" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>

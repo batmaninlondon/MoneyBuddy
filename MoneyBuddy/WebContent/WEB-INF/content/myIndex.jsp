@@ -202,17 +202,18 @@
                             </div>
                             <!-- End Logo -->
                         </div>
-                        
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right " >
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
@@ -694,7 +695,7 @@
                     </div>
                     <div class="col-md-4 col-md-offset-1">
                         <p class="g-font-size-16--xs">We aim high at being focused on building relationships with our clients and community. </p>
-                        <p class="g-font-size-16--xs">With more than 40 years of total experience in financial investments, consulting and technology, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
+                        <p class="g-font-size-16--xs">With 10 years of experience in investment, trading and wealth management, we deliver results to help grow your money. Our comprehensive one stop shops for all your funds needs allow you to do what you do best and leave your financial planning with us.</p>
                     	<div class="row ">
                         <ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Wealth Management</li>
@@ -703,7 +704,7 @@
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Financial Planning</li>
                         </ul>
                   		<ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
-                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>No Fee</li>
+                            <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Direct Plans</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Any time, any where</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Proven Track Record</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Mobile, web and more</li>
@@ -930,6 +931,7 @@
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -942,6 +944,7 @@
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
+                    	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
             </div>

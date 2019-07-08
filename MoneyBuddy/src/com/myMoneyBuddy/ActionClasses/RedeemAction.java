@@ -45,6 +45,7 @@ public class RedeemAction extends ActionSupport  implements SessionAware{
     		
     		QueryCustomerRedemptionCart queryCustomerRedemptionCart = new QueryCustomerRedemptionCart();
     		List<RedemptionCart> customerRedemptionCartList = queryCustomerRedemptionCart.getCustomerRedemptionCart(customerId);
+    		sessionMap.put("customerRedemptionCartList", customerRedemptionCartList);
     		
     		QueryCustomer queryCustomer = new QueryCustomer();
 	    	

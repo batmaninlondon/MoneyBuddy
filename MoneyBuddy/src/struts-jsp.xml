@@ -230,6 +230,12 @@
 	    	<result>/welcome.jsp</result>
 		</action>
 	</package>
+
+	<package name="MFDocuments" namespace="/" extends="struts-default">
+	    <action name="MFDocuments">
+	    	<result>/MFDocuments.jsp</result>
+		</action>
+	</package>
 	
 	<package name="policy" namespace="/" extends="struts-default">
 	    <action name="privacyPolicy">

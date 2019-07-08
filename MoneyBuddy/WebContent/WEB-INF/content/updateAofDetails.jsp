@@ -170,7 +170,7 @@
                 <div class="col-sm-6">
                     <ul class="pull-right">
                         <li><a href="welcome">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
+                        <!-- <li><a href="aboutUs">About Us</a></li> -->
                         <li><a href="help">Contact Us</a></li>
                         <li><a href="register">Sign Up</a></li>
                     </ul>

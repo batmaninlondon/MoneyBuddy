@@ -68,8 +68,8 @@
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="fetchFundDetailsAction"/>" class="s-header-v2__nav-link">Funds</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About US</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
                                     <li class=" s-header-v2__nav-item s-header-v2__dropdown-on-hover">
                                         <a href="help" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs<span class="g-font-size-10--xs g-margin-l-5--xs "></span></a>
                                     </li>
@@ -411,6 +411,7 @@
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+                    	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
             </div>

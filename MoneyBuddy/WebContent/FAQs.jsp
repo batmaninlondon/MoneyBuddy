@@ -61,17 +61,18 @@
                             </div>
                             <!-- End Logo -->
                         </div>
-                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="blog" class="s-header-v2__nav-link">Blog</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
@@ -161,48 +162,8 @@
                                     <div class="cbp-caption-activeWrap">
                                         <div class="g-color--white-opacity">
                                             Yes and No.  While moneyBuddy is an absolutely free platform for all mutual fund investors, our customers are expected to pay advisory fee of Mr. Kamal Wadhwani, a SEBI registered investment advisor.
-                                            <br/>The fee is charged at the end of each quarter and is calculated as per the following table
-                                            <br/><br/>
-                                            <table class="table table-bordered table-sm">
-                                            	<thead class="thead-light">
-													<tr>
-														<th class="text-center">Amount Invested</th>
-														<th class="text-center">Advisory Fee (% per year)</th>
-														<th class="text-center">Advisory Fee (% per Quarter)</th>
-													</tr>
-												</thead>
-												<tbody >
-													<tr>
-														<td class="text-center">1 lac- 10 lac</td>
-														<td class="text-center">1.2 %</td>
-														<td class="text-center">0.3 %</td>
-													</tr>
-													<tr>
-														<td class="text-center">10 lac-50 lac</td>
-														<td class="text-center">1 %</td>
-														<td class="text-center">0.25 %</td>
-													</tr>
-													<tr>
-														<td class="text-center">50 lac- 2 crore</td>
-														<td class="text-center">0.9 %</td>
-														<td class="text-center">0.225 %</td>
-													</tr>
-													<tr>
-														<td class="text-center">> 2 crore</td>
-														<td class="text-center">0.8 %</td>
-														<td class="text-center">0.2 %</td>
-													</tr>
-													<tr>
-														<td class="text-center">> 5 crore</td>
-														<td class="text-center">0.7 %</td>
-														<td class="text-center">0.175 %</td>
-													</tr>
-												</tbody>
-                                            
-                                            </table>
-                                            
-                                            PS: NRI&#39;s are charged 0.1% per year extra on top of the fee mentioned above
-                                            <br/><br/>
+                                            <br/>The fee is charged at the end of each quarter.
+                                            <br/>
                                             We would like to reiterate, that our customers get to earn upto 1% extra returns due to investing in direct mutual funds. Thus as compared with other so called &#34;free investment portals&#34;, most of our users end up getting more money then they pay in advisory fee.
                                         </div>
                                     </div>
@@ -689,6 +650,7 @@
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
 						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+                    	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
             </div>

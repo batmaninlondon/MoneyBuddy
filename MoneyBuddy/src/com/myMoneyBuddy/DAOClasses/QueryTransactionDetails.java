@@ -176,7 +176,8 @@ public class QueryTransactionDetails {
 		{
 			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.transactionDate,t.transactionFolioNum,t.transactionType,t.bseRegistrationNumber"
+			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.transactionDate,t.transactionFolioNum,"
+					+ "t.transactionType,t.bseRegistrationNumber,t.customerId"
 					+ " from TransactionDetails t, SecondaryFundDetails s, PrimaryFundDetails p "
 					+ "where t.transactionStatus='7' and t.fundId=p.fundId and t.fundId=s.fundId");
 			
@@ -223,7 +224,7 @@ public class QueryTransactionDetails {
 					bseRegNum = transactionDetailsList.get(i)[6].toString();
 				
 					
-				pendingNavOrders.add( new PendingNavOrders(bseOrderId,bseRegNum,transactionDetailsList.get(i)[5].toString(),rta,schemeType,transactionDate,
+				pendingNavOrders.add( new PendingNavOrders(transactionDetailsList.get(i)[7].toString(),bseOrderId,bseRegNum,transactionDetailsList.get(i)[5].toString(),rta,schemeType,transactionDate,
 						frmtTransactionDate, folioNum));
 			}
 			

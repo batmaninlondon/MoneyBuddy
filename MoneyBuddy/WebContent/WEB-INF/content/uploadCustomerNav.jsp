@@ -14,9 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Investment Details Page | Money Buddy</title>
     <!-- core CSS -->
+    <link href="assets/css/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->
  	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
+  		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
     <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
     <link href="assets/prettyPhoto.css" rel="stylesheet">
     <link href="assets/css/bootstrap/main.css" rel="stylesheet">
@@ -114,20 +117,21 @@
 		
 		
 		<div class="row" >
-			<div class="col-md-1"></div>
-			<div class="col-md-10">
-				<table id="cartData" class="table table-bordered stripe ">
+			<!-- <div class="col-md-1"></div> -->
+			<div class="col-md-12 text-center">
+				<table id="navtable" class="table table-bordered stripe " style="width:95%" align="center">
 						<thead class="table-head " style="font-size:17px;">
 							<tr>
+								<th class="center col-md-1 g-bg-color--gray-light">CustomerId</th>
 								<th class="center col-md-1 g-bg-color--gray-light">BseOrderId</th>
 								<th class="center col-md-1 g-bg-color--gray-light">BseRegNum</th>
 								<th class="center col-md-1 g-bg-color--gray-light">TrnsType</th>
 								<th class="center col-md-1 g-bg-color--gray-light">RTA</th>
 								<th class="center col-md-1 g-bg-color--gray-light">SchemeType</th>
-								<th class="center col-md-2 g-bg-color--gray-light">TransactionDate</th>
+								<th class="center col-md-1 g-bg-color--gray-light">TransactionDate</th>
 								<th class="center col-md-2 g-bg-color--gray-light">FolioNum</th>
-								<th class="center col-md-2 g-bg-color--gray-light">NAV</th>
-								<th class="center col-md-2 g-bg-color--gray-light">Units</th>	
+								<th class="center col-md-1 g-bg-color--gray-light">NAV</th>
+								<th class="center col-md-1 g-bg-color--gray-light">Units</th>	
 								<th class="center col-md-1 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
@@ -136,6 +140,9 @@
 							<s:form  action="uploadCustomerNavAction" method="post" name="formUploadNav" namespace="/" >
 								<s:iterator value="pendingNavOrders" var="pendingNavOrdersElement">
 									<tr>
+									    <td>
+									    	<s:property value="#pendingNavOrdersElement.customerId"/>
+								    	</td>
 									    <td class="center g-font-size-14--xs">
 									    	<s:if test="#pendingNavOrdersElement.bseOrderId == ''  || #pendingNavOrdersElement.bseOrderId == null ">
   											  	<input class="form-control" id="folio-num" type="text" placeholder="Enter BSE Order Id" >
@@ -214,7 +221,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-1"></div>
+				<!-- <div class="col-md-1"></div> -->
 		</div>
 
 		<div class="row" style="margin-top:20px;">
@@ -246,7 +253,7 @@
                 <div class="col-sm-6">
                     <ul class="pull-right">
                         <li><a href="welcome">Home</a></li>
-                        <li><a href="aboutUs">About Us</a></li>
+                        <!-- <li><a href="aboutUs">About Us</a></li> -->
                         <li><a href="help">Contact Us</a></li>
                         <li><a href="register">Sign Up</a></li>
                     </ul>
@@ -263,6 +270,60 @@
 	    <script type="text/javascript" src="assets/js/main.js"></script>
 	    <script type="text/javascript" src="assets/js/wow.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
+		
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/numeric-comma.js"></script>
+		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+		
+		<script>
+		
+		$(document).ready(function() {
+		    TUTORIAL_SAVVY.initChart()
+		} );
+		
+		var TUTORIAL_SAVVY ={
+				
+		  		/* Initalization render chart */
+		  		initChart : function(){
+		  		TUTORIAL_SAVVY.loadNavdata();
+		  		},
+		  		
+		  		
+		  		loadNavdata : function()
+				  {
+					 var table =  $('#navtable').DataTable( {
+					    	
+						 "ordering": true,
+						 "paging": false,
+						 "searching": false,
+						 "info":false,
+						 
+						 "columnDefs": [
+							    {"orderable": false, "targets": 1},
+							    {"orderable": false, "targets": 2},
+							    {"orderable": false, "targets": 3},
+							    {"orderable": false, "targets": 7},
+							    {"orderable": false, "targets": 8},
+							   	{"orderable": false, "targets": 9},
+							    {"orderable": false, "targets": 10}
+						    	
+							  ]
+					  	     							
+					    } ); 
+
+				  },
+				  
+		  		
+		};
+		
+		</script>
+		
+		
+		
+		
 </body>
 </html>

@@ -269,7 +269,7 @@
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
 			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="privacyPolicy">Privacy Policy</a></span>
-			<p class=" g-font-size-8--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and AMFI registered </p>
+			<p class=" g-font-size-8--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and SEBI registered </p>
           	               
           </s:form>
     </div>
