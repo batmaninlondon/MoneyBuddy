@@ -14,18 +14,18 @@
 	<!-- <constant name="struts.action.excludePattern" value="REST"/> -->	
 	<!-- <constant name="struts.action.extension" value="html"/> -->
 	<constant name="struts.ui.theme" value="simple" />
-	<!-- <constant name="struts.action.extension" value="" /> -->
+	<constant name="struts.action.extension" value="," />
 	<include file="struts-jsp.xml"></include>
 	
-    <package name="registerAction" namespace="/" extends="struts-default">
-        <action name="registerAction" class="com.myMoneyBuddy.ActionClasses.RegisterAction">
+    <package name="register" namespace="/" extends="struts-default">
+        <action name="register" class="com.myMoneyBuddy.ActionClasses.RegisterAction">
             <result name="success">/login.jsp</result>
             <result name="input">/login.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
-    <package name="forgottenPasswordAction" namespace="/" extends="struts-default">
-        <action name="forgottenPasswordAction" class="com.myMoneyBuddy.ActionClasses.ForgotPasswordAction">
+    <package name="forgotPassword" namespace="/" extends="struts-default">
+        <action name="forgotPassword" class="com.myMoneyBuddy.ActionClasses.ForgotPasswordAction">
             <result name="success">/login.jsp</result>
             <result name="input">/login.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
@@ -47,12 +47,13 @@
     </package>
     
     <package name="addToStpCartAction" namespace="/" extends="struts-default">
-        <action name="addToStpCartAction" class="com.myMoneyBuddy.ActionClasses.AddToStpCartAction">
+        <action name="stpCart" class="com.myMoneyBuddy.ActionClasses.AddToStpCartAction">
             <result name="success">/stpCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
     
+    <!-- following action class is not being used as of now -->
     <package name="redeemFundAction" namespace="/" extends="struts-default">
         <action name="redeemFundAction" class="com.myMoneyBuddy.ActionClasses.RedeemFundAction">
             <result name="success">/WEB-INF/content/redeemConfirmation.jsp</result>
@@ -61,26 +62,28 @@
     </package>
     
     <package name="redeemAction" namespace="/" extends="struts-default">
-        <action name="redeemAction" class="com.myMoneyBuddy.ActionClasses.RedeemAction">
+        <action name="redeem" class="com.myMoneyBuddy.ActionClasses.RedeemAction">
             <result name="success">/WEB-INF/content/orderInvoiceRedemption.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
     
     <package name="stpAction" namespace="/" extends="struts-default">
-        <action name="stpAction" class="com.myMoneyBuddy.ActionClasses.StpAction">
+        <action name="stp" class="com.myMoneyBuddy.ActionClasses.StpAction">
             <result name="success">/WEB-INF/content/orderInvoiceStp.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
     
     <package name="addToRedemptionCartAction" namespace="/" extends="struts-default">
-        <action name="addToRedemptionCartAction" class="com.myMoneyBuddy.ActionClasses.AddToRedemptionCartAction">
+        <action name="AddToRedCart" class="com.myMoneyBuddy.ActionClasses.AddToRedemptionCartAction">
             <result name="success">/redemptionCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
-     
+    
+    
+    <!-- following action class is not being used as of now -->  
     <package name="createCartAction" namespace="/" extends="struts-default">
         <action name="createCartAction" class="com.myMoneyBuddy.ActionClasses.CreateCartAction">
             <result name="UPFRONT">/WEB-INF/content/customerCarts.jsp</result>
@@ -90,14 +93,14 @@
     </package>
     
    	<package name="customerCartAction" namespace="/" extends="struts-default">
-        <action name="customerCartAction" class="com.myMoneyBuddy.ActionClasses.CustomerCartAction">
+        <action name="Cart" class="com.myMoneyBuddy.ActionClasses.CustomerCartAction">
             <result name="success">/customerCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
     </package>
     
     <package name="customerRedCartAction" namespace="/" extends="struts-default">
-        <action name="customerRedCartAction" class="com.myMoneyBuddy.ActionClasses.CustomerRedCartAction">
+        <action name="RedCart" class="com.myMoneyBuddy.ActionClasses.CustomerRedCartAction">
             <result name="success">/redemptionCart.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>
         </action>
@@ -169,8 +172,8 @@
         </action>
     </package>
     
-    <package name="logOffAction" namespace="/" extends="struts-default">
-        <action name="logOffAction" class="com.myMoneyBuddy.ActionClasses.LogOffAction">
+    <package name="logOutAction" namespace="/" extends="struts-default">
+        <action name="logOut" class="com.myMoneyBuddy.ActionClasses.LogOutAction">
             <result name="success">/welcome.jsp</result>
             <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
         </action>
@@ -210,6 +213,21 @@
             <!-- <result name="success" type="chain">portfolioAction</result> -->
             <result name="emailIdNotExist">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="success">/WEB-INF/content/customerDashboardForAdmin.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin</result>
+        </action>
+    </package>
+    
+    <package name="existingOldFundDataAction" namespace="/" extends="struts-default">
+        <action name="existingOldFundData" class="com.myMoneyBuddy.ActionClasses.ExistingOldFundDataAction">
+            <result name="emailIdNotExist">/WEB-INF/content/adminDashboard.jsp</result>
+            <result name="success">/WEB-INF/content/oldPortfolioRecord.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin</result>
+        </action>
+    </package>
+    
+    <package name="addOldPortfoioRecordAction" namespace="/" extends="struts-default">
+        <action name="addOldPortfoioRecord" class="com.myMoneyBuddy.ActionClasses.AddOldPortfoioRecordAction">
+            <result name="success">/WEB-INF/content/adminDashboard.jsp</result>
             <result name="error">/WEB-INF/content/errorPageAdmin</result>
         </action>
     </package>
@@ -297,6 +315,7 @@
         </action>
     </package>
     
+    <!-- following action class is not being used as of now --> 
    	<package name="newEstimateAction" namespace="/" extends="struts-default">
         <action name="newEstimateAction" class="com.myMoneyBuddy.ActionClasses.EstimateAction">
             <result name="UPFRONT" type="chain">createCartAction</result>
@@ -391,7 +410,7 @@
         <action name="paymentAction" class="com.myMoneyBuddy.ActionClasses.PaymentAction">
             <param name="tranDetailId">${tranDetailId}</param>
             <result name="success">/WEB-INF/content/payment.jsp</result>
-            <result name="sipOrderFofN">/logout.jsp</result>
+            <result name="sipOrderFofN">/thankYou.jsp</result>
             <!-- <result name="sipOrderFofY">/orderInvoiceSipFofY.jsp</result> -->
             <result name="input">/WEB-INF/content/orderConfirmation.jsp</result>
             <result name="failedWithPaymentGateway">/WEB-INF/content/errorPage.jsp</result>
@@ -421,10 +440,10 @@
         <action name="newLoginAction" class="com.myMoneyBuddy.ActionClasses.NewLoginAction">
             <result name="success">/welcome.jsp</result>
             <result name="aofFormSent" type="chain">downloadAofFormAction</result>
-            <result name="customerCartExists" type="chain">customerCartAction</result>
+            <result name="customerCartExists" type="chain">Cart</result>
             <result name="haveInvestment">/WEB-INF/content/customerDashboard.jsp</result>
             <result name="adminLogin">/WEB-INF/content/adminDashboard.jsp</result>
-            <result name="fundSelected" type="chain">addToCartAction</result>
+            <!-- <result name="fundSelected" type="chain">addToCartAction</result> -->
             <result name="input">/login.jsp</result>
             <result name="error">/WEB-INF/content/errorPage.jsp</result>		
         </action>

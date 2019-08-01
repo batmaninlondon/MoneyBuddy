@@ -731,7 +731,7 @@ public class QueryCustomer {
 		{
 			logger.debug("QueryCustomer class - getPendingMandate method - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select customerId, customerName, mandateCreationDate, mandateAmount "
+			Query query = hibernateSession.createQuery("select customerId, customerName, mandateCreationDate, mandateAmount, isipMandateId "
 					+ " from Customers where mandateIdStatus='GENERATED'");
 			
 			List<Object[]> customersList = query.list();
@@ -739,6 +739,7 @@ public class QueryCustomer {
 			String customerName = "";
 			String mandateCreationDate = "";
 			String mandateAmount = "";
+			String mandateId = "";
 			
 			for ( int i = 0; i < customersList.size() ;i++ ) {
 				
@@ -746,8 +747,9 @@ public class QueryCustomer {
 				customerName = customersList.get(i)[1].toString();
 				mandateCreationDate = customersList.get(i)[2].toString();
 				mandateAmount = customersList.get(i)[3].toString();
+				mandateId = customersList.get(i)[4].toString();
 				
-				pendingMandateOrders.add( new PendingMandateOrders(customerId,customerName,mandateCreationDate,mandateAmount));
+				pendingMandateOrders.add( new PendingMandateOrders(customerId,customerName,mandateId,mandateCreationDate,mandateAmount));
 				
 			}
 			
@@ -828,4 +830,44 @@ public class QueryCustomer {
 		}
 	}
 
+	public String getEmailId (String hashedPassword) throws MoneyBuddyException {
+
+    	logger.debug("QueryCustomer class - getEmailId method - start");
+    	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try {
+			
+			hibernateSession.beginTransaction();
+			Object result = hibernateSession.createQuery("select emailId from Customers where password = '"+hashedPassword+"'").uniqueResult();
+			hibernateSession.getTransaction().commit();
+			String emailId ;
+			if (result != null) {
+				System.out.println("HI there "+result.toString());
+				emailId  = result.toString();
+			}
+			else {
+				emailId = "NotExist";
+			}
+			System.out.println("Value of emailId is : "+emailId);
+    		
+			logger.debug("QueryCustomer class - getEmailId method - end");
+			
+			return emailId;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryCustomer class - getEmailId method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryCustomer class - getEmailId method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
 }

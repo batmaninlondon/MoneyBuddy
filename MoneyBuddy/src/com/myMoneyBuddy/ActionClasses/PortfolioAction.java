@@ -17,12 +17,15 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
+import com.myMoneyBuddy.ModelClasses.OldPortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
 import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
+import com.myMoneyBuddy.ModelClasses.StpDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PortfolioAction extends ActionSupport implements SessionAware{
@@ -40,7 +43,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private String totalProfitAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
 	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
+	private List<OldPortfolioDataModel> oldPortfolioDataModel = new LinkedList<OldPortfolioDataModel>();
 	private List<SipDataModel> sipDataModel;
+	private List<StpDataModel> stpDataModel;
 	private String totalUpfrontInvestments;
 	private String totalSips;
 	private String totalTransactions;
@@ -96,13 +101,23 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			}
 		}
 		
+		QueryOldPortfolioRecords queryOldPortfolioRecords = new QueryOldPortfolioRecords();
 		
-
+		String totalOldRecords = queryOldPortfolioRecords.getTotalOldRecords(customerId);
+		
+		if ( !"0".equals(totalOldRecords) )  {
+		
+			oldPortfolioDataModel = queryOldPortfolioRecords.getOldRecordsData(customerId);
+		}
+		
 		//sessionMap.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
 		
 		sipDataModel = queryProducts.getSipData(customerId);
 		setSipDataModel(sipDataModel);
+		
+		stpDataModel = queryProducts.getStpData(customerId);
+		setStpDataModel(stpDataModel);
 
 		/*sessionMap.put("sipDataModel", sipDataModel);
 		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+sessionMap.getClass().getName());
@@ -177,6 +192,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setSipDataModel(List<SipDataModel> sipDataModel) {
 		this.sipDataModel = sipDataModel;
+	}
+
+
+	public List<StpDataModel> getStpDataModel() {
+		return stpDataModel;
+	}
+
+
+	public void setStpDataModel(List<StpDataModel> stpDataModel) {
+		this.stpDataModel = stpDataModel;
 	}
 
 
@@ -352,6 +377,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setTotalPendingOrders(String totalPendingOrders) {
 		this.totalPendingOrders = totalPendingOrders;
+	}
+
+
+	public List<OldPortfolioDataModel> getOldPortfolioDataModel() {
+		return oldPortfolioDataModel;
+	}
+
+
+	public void setOldPortfolioDataModel(List<OldPortfolioDataModel> oldPortfolioDataModel) {
+		this.oldPortfolioDataModel = oldPortfolioDataModel;
 	}
 
 

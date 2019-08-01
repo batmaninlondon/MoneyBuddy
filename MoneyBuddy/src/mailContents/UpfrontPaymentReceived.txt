@@ -68,7 +68,7 @@
 	
 	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi customerName,</span>
 	<br />
-	<p>Congratulations on putting your money to work. We’ve received your payment and your investment is under process now.</p>
+	<p>Congratulations on putting your money to work. We have received your payment and your investment is under process now.</p>
 	<!-- <br /> -->
 	<p>This will take a maximum of 3 working days and we will get back to you as soon as your investment has been completed.</p>
 	<br/>

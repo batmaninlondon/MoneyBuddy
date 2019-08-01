@@ -30,7 +30,10 @@ import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.MFOrderEntry;
 
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
+import com.myMoneyBuddy.EntityClasses.CustomerDetails;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
@@ -152,6 +155,174 @@ public class Trading {
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - end");
 			
 			return ucc;
+
+		}catch (IOException e) {
+			logger.error("Trading class - createClient method - customerId - "+customerId+" - Caught IOException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.error("Trading class - createClient method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+	
+	public void fatcaUpload(String customerId) throws MoneyBuddyException {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		try {
+			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - start");
+			hibernateSession.beginTransaction();
+			Customers customer = (Customers) hibernateSession.get(Customers.class, customerId);
+    		CustomerDetails customerDetail = (CustomerDetails) hibernateSession.get(CustomerDetails.class, customerId);
+    		System.out.println("state :"+customerDetail.getResidentialState());
+    		hibernateSession.getTransaction().commit();  
+    		
+			Properties clientProperties = new Properties();
+			String clientPropFilePath = "../../../config/client.properties";
+
+			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
+			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded clientProperties file.");
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+ 
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
+			
+			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			
+			String fatcaDetails;
+
+			
+			// Savita Wadhwani - Self Comment - Start 
+			// Check if we can get rid of re-writing same query again and agian 
+			
+			//Query query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
+			//query.setParameter("fieldValue", clientTaxStatus);
+			
+			//taxStatus = query.uniqueResult().toString();
+			
+			/*query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", clientState);
+			
+			state = query.uniqueResult().toString();
+			
+			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
+			query.setParameter("fieldValue", clientOccupationCode);
+			
+			occupation = query.uniqueResult().toString();*/
+			//hibernateSession.getTransaction().commit();
+			
+			/*dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
+			System.out.println("dob : "+dob);*/
+			
+			
+			
+			String workingAs = "08";
+			String occupationCode = "08";
+			String occupationType = "O";
+			String occupation = customerDetail.getOccupation();
+			
+			switch (occupation)  {
+			
+			case "PriSecJob":
+			case "PubSecJob":
+			case "GovSer":
+				workingAs = "01";
+				occupationType = "S";
+				break;
+			case "Business":
+			case "Professional":
+				workingAs = "02";
+				occupationType = "B";
+				break;
+			
+			}
+			
+			switch (occupation)  {
+			
+			case "PriSecJob":
+				occupationCode = "41";
+				break;
+			case "PubSecJob":
+				occupationCode = "42";
+				break;
+			case "GovSer":
+				occupationCode = "44";
+				break;
+			case "Business":
+				occupationCode = "01";
+				break;
+			case "Professional":
+				occupationCode = "03";
+				break;
+			case "Retired":
+				occupationCode = "05";
+				break;
+			case "Student":
+				occupationCode = "07";
+				break;
+			case "HouseWife":
+				occupationCode = "06";
+				break;
+			
+			}
+			
+			Date date = new Date();
+			String logName = new SimpleDateFormat("dd/MM/yyyy").format(date);
+			
+			// Details to be asked from user - START
+			/*String placeOfBirth = "Kanpur";
+			String CountryOfBirth = "IN";
+			String taxResidence = "IN";
+			String appIncome = "32";
+			String politicallyExposed = "N";*/
+			// Details to be asked from user - END
+			
+			String[] fatcaUploadArray = {customer.getPanCard(),"",customer.getCustomerName(),customerDetail.getDateOfBirth(),"","","01","E","1",
+					customerDetail.getPlaceOfBirth(),customerDetail.getCountryOfBirth(),customerDetail.getTaxResidency(),customer.getPanCard(),
+					"C","","","","","","","","","",workingAs,"",customerDetail.getIncomeSlab(),"","",customerDetail.getPoliticallyExposed(),
+					occupationCode,occupationType,"","","","","","","","","","","B","N","","","","","","","","","","","","","","","","","","","",
+					"","","","","","","","N","","N",logName,"",""  };
+
+			fatcaDetails = String.join("|",fatcaUploadArray);
+
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array created ");
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array - "+fatcaDetails);
+			System.out.println("clientDetails : "+fatcaDetails);
+
+			String getPasswordResp = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+			String[] resultsStarMF = getPasswordResp.split("\\|");
+
+			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+			}
+
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - fetched encrypted password from iStarMFWebService API ");
+			
+			String passwordStartMf = resultsStarMF[1];
+
+			String ucc = iStarMFWebService.mfapi("01",configProperties.getProperty("USER_ID"),passwordStartMf,fatcaDetails);
+
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - client created through iStarMFWebService API on BSE");
+			
+			System.out.println("iStarMFWebService - mfapi response ucc : "+ucc);
+
+			logger.debug("Trading class - createClient method - customerId - "+customerId+" - end");
+			
 
 		}catch (IOException e) {
 			logger.error("Trading class - createClient method - customerId - "+customerId+" - Caught IOException");
@@ -322,9 +493,13 @@ public class Trading {
 				
 				hibernateSession.beginTransaction();
 				
-				query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+				String nextTransactionId = "1";
 				
-				String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+				Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+				
+				if ( trxnIdresult != null )  {
+					nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
+				}
 				
 				
 				hibernateSession.getTransaction().commit();
@@ -1195,9 +1370,13 @@ public class Trading {
 			
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+			String nextTransactionId = "1";
 			
-			String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+			
+			if ( trxnIdresult != null )  {
+				nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
+			}
 			
 			
 			hibernateSession.getTransaction().commit();
@@ -1219,7 +1398,7 @@ public class Trading {
 			
 			hibernateSession.beginTransaction();
 			
-			query = hibernateSession.createQuery("delete from StpCart where stpCartId = :stpCartId ");
+			Query query = hibernateSession.createQuery("delete from StpCart where stpCartId = :stpCartId ");
 			query.setParameter("stpCartId", stpCartId);
 			
 			query.executeUpdate();

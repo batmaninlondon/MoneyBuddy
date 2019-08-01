@@ -26,6 +26,7 @@ import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.log4j.Logger;
 
+import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class DesEncrypter  {
@@ -162,17 +163,17 @@ public class DesEncrypter  {
 
     public static void main(String args[]){
         try {
-        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("654321654321");
+        	/*String encrypted = DesEncrypter.MONEYBUDDY.encrypt(" 0157000100131441");
         	
         
-        System.out.println(encrypted);
-        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("Idv1f123456789EXNIEhG41DONrxaA==");
-        System.out.println("decrypted: "+decrypted);
-        int len = "233".length();
+        System.out.println("encrypted :"+encrypted+":");*/
+        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("y6FdbSOgezNSURVpnHHyWQ==");
+        System.out.println("decrypted :"+decrypted+":");
+       // int len = "233".length();
         
-        String password = decrypted.substring(len);
+       // String password = decrypted.substring(len);
         
-        System.out.println("password : "+password);
+       // System.out.println("password : "+password);
         
         }
         catch (Exception e ) {

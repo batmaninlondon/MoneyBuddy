@@ -83,9 +83,13 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 					
 					hibernateSession.beginTransaction();
 					
-					query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+					String nextTransactionId = "1";
 					
-					String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+					Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+					
+					if ( trxnIdresult != null )  {
+						nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
+					}
 					
 					
 					hibernateSession.getTransaction().commit();

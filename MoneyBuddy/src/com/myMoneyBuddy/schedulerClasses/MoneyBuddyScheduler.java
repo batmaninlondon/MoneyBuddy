@@ -33,6 +33,21 @@ public class MoneyBuddyScheduler {
 		
 			scheduler.start();
 			
+			JobDetail computeOldPortfolioJob = JobBuilder.newJob(ComputeOldPortfolio.class)
+					.withIdentity("ComputeOldPortfolioJob", "Group").build();
+			
+			// This Trigger will work at 9 pm (21 hours) everyday
+			
+			Trigger computeOldPortfolioTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("ComputeOldPortfolioTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 43 15 * * ?")) 
+					.build();
+			
+	
+			scheduler.scheduleJob(computeOldPortfolioJob, computeOldPortfolioTrigger);
+			
+			
 			/*JobDetail dailyInvestmentGeneratorJob = JobBuilder.newJob(DailyInvestmentGenerator.class)
 					.withIdentity("ReadSpreadSheetJob", "Group").build();
 			
@@ -59,22 +74,7 @@ public class MoneyBuddyScheduler {
 			
 			scheduler.scheduleJob(aqbCalculatorJob, aqbCalculatorTrigger);*/
 			
-			
-			JobDetail readSpreadSheetJob = JobBuilder.newJob(ReadSpreadSheet.class)
-					.withIdentity("ReadSpreadSheetJob", "Group").build();
-			
-			// This Trigger will work at 9 pm (21 hours) everyday
-			
-			Trigger readSpreadSheetTrigger = TriggerBuilder
-					.newTrigger()
-					.withIdentity("ReadSpreadSheetTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 22 10 * * ?")) 
-					.build();
-			
-	
-			scheduler.scheduleJob(readSpreadSheetJob, readSpreadSheetTrigger);
-			
-			
+						
 			/*JobDetail paymentStatusCheckJob = JobBuilder.newJob(PaymentStatusCheck.class)
 					.withIdentity("PaymentStatusCheckJob", "Group").build();
 			

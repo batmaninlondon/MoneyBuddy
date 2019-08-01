@@ -27,6 +27,9 @@ public class CustomersAqb {
     @Column(name="AQB")
     private String aqb;
     
+    @Column(name="QUATERLY_FEES")
+    private String quaterlyFess;
+    
     @Column(name="QUARTER_OF_YEAR")
     private String quarterOfYear;
 
@@ -34,10 +37,11 @@ public class CustomersAqb {
         
     }
 
-	public CustomersAqb(String customerId, String aqb, String quarterOfYear) {
+	public CustomersAqb(String customerId, String aqb, String quaterlyFess, String quarterOfYear) {
 		super();
 		this.customerId = customerId;
 		this.aqb = aqb;
+		this.quaterlyFess = quaterlyFess;
 		this.quarterOfYear = quarterOfYear;
 	}
 
@@ -65,6 +69,14 @@ public class CustomersAqb {
 		this.aqb = aqb;
 	}
 
+	public String getQuaterlyFess() {
+		return quaterlyFess;
+	}
+
+	public void setQuaterlyFess(String quaterlyFess) {
+		this.quaterlyFess = quaterlyFess;
+	}
+
 	public String getQuarterOfYear() {
 		return quarterOfYear;
 	}
@@ -81,6 +93,7 @@ public class CustomersAqb {
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((customersAqbId == null) ? 0 : customersAqbId.hashCode());
 		result = prime * result + ((quarterOfYear == null) ? 0 : quarterOfYear.hashCode());
+		result = prime * result + ((quaterlyFess == null) ? 0 : quaterlyFess.hashCode());
 		return result;
 	}
 
@@ -124,8 +137,16 @@ public class CustomersAqb {
 		} else if (!quarterOfYear.equals(other.quarterOfYear)) {
 			return false;
 		}
+		if (quaterlyFess == null) {
+			if (other.quaterlyFess != null) {
+				return false;
+			}
+		} else if (!quaterlyFess.equals(other.quaterlyFess)) {
+			return false;
+		}
 		return true;
 	}
+
 
 	
 }

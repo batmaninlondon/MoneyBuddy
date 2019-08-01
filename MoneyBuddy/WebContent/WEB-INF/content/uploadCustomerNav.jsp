@@ -1,10 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%>
-	
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html >
 <html lang="en">
 <head>
@@ -44,15 +38,27 @@
 
 	function uploadCutsomerNav(el) 
 	{		
-		var bseOrderId = $(el).closest("tr").find("td:eq(0) input[type='text']").val();
-		var bseRegNum = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
-		var transactionType = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
-		var folioNum = $(el).closest("tr").find("td:eq(6) input[type='text']").val();
-		var navValue = $(el).closest("tr").find("td:eq(7) input[type='text']").val();
-		var unitsPurchased = $(el).closest("tr").find("td:eq(8) input[type='text']").val();
-		var transactionDate = $(el).closest("tr").find("td:eq(9) input[type='text']").val();
+		var bseOrderId = $(el).closest("tr").find("td:eq(1) input[type='text']").val();
+		var bseRegNum = $(el).closest("tr").find("td:eq(2) input[type='text']").val();
+		var transactionType = $(el).closest("tr").find("td:eq(3) input[type='text']").val();
+		var folioNum = $(el).closest("tr").find("td:eq(7) input[type='text']").val();
+		var navValue = $(el).closest("tr").find("td:eq(8) input[type='text']").val();
+		var unitsPurchased = $(el).closest("tr").find("td:eq(9) input[type='text']").val();
+		var transactionDate = $(el).closest("tr").find("td:eq(10) input[type='text']").val();
 		
-		//alert('unitsPurchased : '+unitsPurchased);
+		if ("" == folioNum) {
+			alert('folioNum can not be blank');
+			return false
+		}
+		else if ("" == navValue) {
+			alert('navValue can not be blank');
+			return false
+		}
+		else if ("" == unitsPurchased) {
+			alert('unitsPurchased can not be blank');
+			return false
+		}
+		
 		document.getElementById("action-bse-order-id").value = bseOrderId;
 		document.getElementById("action-bse-reg-num").value = bseRegNum;
 		document.getElementById("action-transaction-type").value = transactionType;
@@ -63,8 +69,21 @@
 		
 		document.formUploadNav.submit();
 		
+		
+		
 	}
 
+</script>
+
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
 
 </head>
@@ -87,7 +106,7 @@
                 <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
                                 </ul>
                             </div>
             </div><!--/.container-->
@@ -137,7 +156,7 @@
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
 							<%-- <s:set var="pendingNavOrders" <s:property value="pendingNavOrders"/> /> --%>
-							<s:form  action="uploadCustomerNavAction" method="post" name="formUploadNav" namespace="/" >
+							
 								<s:iterator value="pendingNavOrders" var="pendingNavOrdersElement">
 									<tr>
 									    <td>
@@ -209,17 +228,19 @@
 									    </td>
 									</tr>
 								</s:iterator>
-								<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
-								<s:hidden id="action-bse-reg-num" name="bseRegNum"></s:hidden>
-								<s:hidden id="action-transaction-type" name="transactionType"></s:hidden>
-								<s:hidden id="action-transaction-date" name="transactionDate"></s:hidden>
-								<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
-								<s:hidden id="action-nav-value" name="navValue"></s:hidden>
-								<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
-								</s:form>
+								
 							 
 						</tbody>
 					</table>
+					<s:form  action="uploadCustomerNavAction" method="post" name="formUploadNav" >
+						<s:hidden id="action-bse-order-id" name="bseOrderId"></s:hidden>
+						<s:hidden id="action-bse-reg-num" name="bseRegNum"></s:hidden>
+						<s:hidden id="action-transaction-type" name="transactionType"></s:hidden>
+						<s:hidden id="action-transaction-date" name="transactionDate"></s:hidden>
+						<s:hidden id="action-folio-number" name="folioNum"></s:hidden>
+						<s:hidden id="action-nav-value" name="navValue"></s:hidden>
+						<s:hidden id="action-units-purchased" name="unitsPurchased"></s:hidden>
+					</s:form>
 				</div>
 				<!-- <div class="col-md-1"></div> -->
 		</div>

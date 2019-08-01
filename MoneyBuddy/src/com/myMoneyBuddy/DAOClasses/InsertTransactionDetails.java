@@ -35,10 +35,14 @@ public class InsertTransactionDetails {
 			String frmtdDateForDB = dateFormat.format(date);
 			
 			hibernateSession.beginTransaction();
+						
+			String nextTransactionId = "1";
 			
-			Query query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+			Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
 			
-			String nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			if ( trxnIdresult != null )  {
+				nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
+			}
 
 			hibernateSession.getTransaction().commit();
 			

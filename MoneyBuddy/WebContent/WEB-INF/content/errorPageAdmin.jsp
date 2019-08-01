@@ -47,7 +47,7 @@
 	
 		#errorPage #container{
 			/* The image used */
-		    background-image: url('images/errorPage/error2.jpg');
+		    /* background-image: url('images/errorPage/error2.jpg'); */
 		
 		    /* Full height */
 		    height: 100%; 
@@ -61,8 +61,33 @@
 	        width:  1000px;
 	        background-image: url('images/errorPage/error1.jpg') */
 	    }
-	
+	    
+		.center-div
+		{
+		     position: absolute;
+		     margin: auto;
+		     top: 0;
+		     right: 0;
+		     bottom: 0;
+		     left: 0;
+		     width: 500px;
+		     height: 100px;
+		}
+
 	</style>
+	
+	<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
 </head>
 
 <body id="errorPage">
@@ -72,60 +97,44 @@
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
                 <div class="navbar-header">
-                    <div class="s-header-v2__logo">
-                        <a href="<s:url action="adminHome"/>" class="s-header-v2__logo-link">
-                            <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                            <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
-                        </a>
-                    </div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="welcome"><img src="img/logo.png" alt="logo"></a>
                 </div>
 				
-                <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
-                                </ul>
-                            </div>
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="s-header-v2__nav">
+                        <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
+                    </ul>
+                </div>
             </div><!--/.container-->
         </nav><!--/nav-->
 		
     </header>
     
     <div id="container">
+    
+    	<div class="center-div">
+    	
+    		<p class="text-center g-font-size-20--xs">
+    			<b>Oops!</b>
+   			</p>
+   			<p class="text-center g-font-size-20--xs">
+   				It's not you. It's us. Give it another try, please.
+   			</p>
+   			<br/>
+   			<div class="text-center">
+   				<a href="welcome" role="button" class=" btn btn-default ">Try Again</a>
+			</div>
+			
+    	</div>
     </div>
-    
-    <!-- <div class="error-bg"></div>
-    <section id="errorPage"> -->
-    
-    
-    
-    <!-- <img src="images/errorPage/error1.jpg" alt=""> -->
-    
-    <!-- <div class="row" style="margin-top:50px;">
-		<div class="center">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>CAUGHT ERROR</b></h2>
-		</div>
-	</div> -->	
 
-   <!-- </section> -->
-      <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 <a target="_blank" href="https://moneybuddy.co.in/" title="MoneyBuddy">MoneyBuddy</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
-                            </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+      
 
 
 		<script type="text/javascript" src="assets/js/jquery.js"></script>

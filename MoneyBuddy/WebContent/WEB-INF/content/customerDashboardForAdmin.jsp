@@ -34,6 +34,16 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         
+        <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 	   
     </head>
     
@@ -195,7 +205,7 @@
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										
                                 </ul>
                             </div>
@@ -288,8 +298,11 @@
 						      <li class="nav-item" >
 						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
 						      </li>
-						      <li class="nav-item" id="hideMe" >
+						      <li class="nav-item" id="hide-pending-orders" >
 						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>
+						      </li>
+						      <li class="nav-item" id="hide-old-portfolio" >
+						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#olfPortfolioPane">Old Portfolio</a>
 						      </li>
 						    </ul>
 						  </div>
@@ -415,7 +428,7 @@
 						  	
 						  	<!--  Pending Order Table Start -->
                 
-                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="pendingOrderTableRow">
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="pending-orders-row">
              		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
                     		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
@@ -429,10 +442,11 @@
 							            <tr class="g-bg-color--primary" >
 							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Transaction Id</span></th>
 							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Lumpsum Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Sip Amount</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
 											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th>
+											<%-- <th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th> --%>
 							            </tr>
 							        </thead>
 							    </table>
@@ -440,7 +454,42 @@
 	              		</div>
                 	</div>   
                 <!-- Pending Order Table End -->    
-						  	</div>
+			  	</div>
+			  	
+			  	<div id="olfPortfolioPane" class="container tab-pane ">
+						  	
+			  	<!--  Old Portfolio Table Start -->
+                
+                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="old-portfolio-row">
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             			<div class="g-text-center--xs g-margin-b-10--xs">
+                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    			Old Portfolio
+                    		</h3>
+                		</div> 
+			         <div class="g-text-center--xs  table-responsive">
+								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
+								<table id="oldPortfolio" class="table-bordered" cellspacing="0" width="100%">
+							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
+							            <tr class="g-bg-color--primary" >
+							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl.no.</span></th>
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
+							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Units held</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Current Value</span></th>
+											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Profit</span></th>
+							            </tr>
+							        </thead>
+							    </table>
+							</div> 
+	              		</div>
+                	</div>   
+                <!-- Old Portfolio Table End -->    
+			  	</div>
+						  	
+						  	
+						  	
 						  	
 						  </div>
 						</div>	
@@ -474,7 +523,7 @@
                         </div>
                         <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms.jsp">Terms &amp; Conditions</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                             </ul>
                         </div>
@@ -605,11 +654,13 @@
 		var totalProAmt;
 		var portfolioData;	
 		var pendingOrderData;
+		var oldPortfolioData;
 		var sipData;
 		/* var investmentDetailData; */
 		var allFundsInvestmentDetailsData;
 		var portfolioDataArray = [];
 		var pendingOrderDataArray = [];
+		var oldPortfolioDataArray = [];
 		var sipDataArray = [];
 		var transctionhistoryDataArray = [];
 		
@@ -624,6 +675,7 @@
 				  		$("#tot-grwth-amt").html(totalGrwthAmt);
 				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
 				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
+				  		TUTORIAL_SAVVY.createOldPortfolioDataArray(oldPortfolioData);
 				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
 				  		TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData);
 				  		
@@ -633,6 +685,7 @@
 					    //DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
 					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata();
 					    pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData();
+					    pendingOrdersTable   = TUTORIAL_SAVVY.loadOldPortfolioData();
 					    sipTable   			= TUTORIAL_SAVVY.loadSipdata();
 					    transctionhistoryTable = TUTORIAL_SAVVY.loadTransctionhistoryData();
 
@@ -649,7 +702,7 @@
 				  createPortfolioDataArray : function(portfolioData)
 				  {
 					  $.each(portfolioData,function(index,dataElement){
-						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType]);
+						  portfolioDataArray.push([dataElement.fundId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.units,dataElement.currentAmount,dataElement.profit,dataElement.rateOfGrowth,dataElement.schemeType,dataElement.stpWithdrawalFlag]);
 						});
 					  
 				  },
@@ -657,7 +710,14 @@
 				  createPendingOrderDataArray : function(pendingOrderData)
 				  {
 					  $.each(pendingOrderData,function(index,dataElement){
-						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.investedAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						  pendingOrderDataArray.push([dataElement.transactionId,dataElement.schemeName,dataElement.upfrontAmount,dataElement.sipAmount,dataElement.transactionStatus,dataElement.transactionStartDate]);
+						});  
+				  },
+				  
+				  createOldPortfolioDataArray : function(oldPortfolioData)
+				  {
+					  $.each(oldPortfolioData,function(index,dataElement){
+						  oldPortfolioDataArray.push([dataElement.customerId,dataElement.schemeName,dataElement.folioNumber,dataElement.investedAmount,dataElement.unitsHeld,dataElement.currentValue,dataElement.profit]);
 						});  
 				  },
 				  
@@ -1010,8 +1070,7 @@
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
 					        var folioNum = data[2];
-					        var amount = data[4];
-					        /* alert('fundId : '+fundId+' : amount : '+amount+' data[2] : '+data[2]); */
+					        var amount = data[5];
 					        stpFundHandler(fundId,folioNum,amount);
 					    } );
 					 
@@ -1020,7 +1079,7 @@
 					        var fundId = data[0];
 					        var folioNum = data[2];
 					        var totalAmount = data[5];
-					        var totalQuantity = data[3];
+					        var totalQuantity = data[4];
 					        //alert('fundId : '+fundId+' : folioNum : '+folioNum+' : totalAmount : '+totalAmount+' : totalQuantity : '+totalQuantity);
 					        redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity);
 					    } );
@@ -1039,7 +1098,7 @@
 					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
 					  		"columnDefs": [
 					  			{"className": "dt-center", "targets": "_all"},
-					  			{ "targets": -1, "data": null, "defaultContent": "<button>Pay Now!</button>" },
+					  			/* { "targets": -1, "data": null, "defaultContent": "<button>Pay Now!</button>" }, */
 					  			{
 					  	        	 "mRender": function ( data, type, row ) {
 					  	        		var parts = data.toString().split(".");
@@ -1067,7 +1126,7 @@
 					        	
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": TUTORIAL_SAVVY.fnPendingOrdersRedraw(),
+							            "zeroRecords": "Nothing found - sorry",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -1093,20 +1152,181 @@
 					        var transactionDetailId = data[0];
 					        //alert('transactionDetailId : '+transactionDetailId);
 					        window.location='redirectAction?tranDetailId='+transactionDetailId; 
-					        /* window.location='orderConfirmation.jsp?tranDetailId='+transactionDetailId; */
+					        /* window.location='orderConfirmation?tranDetailId='+transactionDetailId; */
 					    } ); 
 					  
 				
 				  },
 				  
 				  fnPendingOrdersRedraw: function () { 
-					  /*  $('#hideMe').addClass("hidden");
-					  $('#pendingOrderTableRow').addClass("hidden"); */ 
+					  $('#hide-pending-orders').addClass("hidden");
+					  $('#pending-orders-row').addClass("hidden");
 					  
 			     },
 				  
-				  
+			     loadOldPortfolioData : function()
+				  {
+
+					 var table =  $('#oldPortfolio').DataTable( {
+						 
+					    	data: oldPortfolioDataArray,
+					    	"paging":   false,
+					        "ordering": false,
+					        "info":     false,
+					        "searching": false,
+					        "responsive": true,
+					        /* "lengthMenu": [ [5,  10, 25, 50, -1], [5, 10, 25, 50, "All"] ], */
+					  		"columnDefs": [ 
+					  			{"className": "dt-center", "targets": "_all"},
+					  			{
+					  	            "searchable": false,
+					  	            "orderable": false,
+					  	            "targets": 0
+					  	        },
+					  	        {
+					  	        	 "mRender": function ( data, type, row ) {
+					  	        		var parts = data.toString().split(".");
+					  	        		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");	
+					  	        		return parts.join(".");
+					  	        		
+					                 },
+					                 "targets": 'add-comma'
+					  	        }
+					  	        ],
+					  	      "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+								
+
+					  	    	if ( aData[1] == "Total" ) {
+					  	    		
+					  	    	  	$('td:nth-child(2)', nRow).addClass('g-font-weight--700');
+					  	    	  	$('td:nth-child(4)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(6)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(7)', nRow).addClass('g-font-weight--700');
+					  	    		$('td:nth-child(3)', nRow).html(null);
+					  	    		$('td:nth-child(5)', nRow).html(null);
+					  	    	  	return nRow;	
+				  	    	  	}
+					  	    	else {
+					  	    		
+					  	        	$("td:nth-child(1)", nRow).html(iDisplayIndex + 1);
+					  	        	return nRow;
+					  	      	}
+					  	    	
+				  	    	},
+				  	    	
+					  		dom: 'Bfrtlip',					        
+					        
+					  		"buttons": [
+					        	/* {
+					        	extend: 'excelHtml5',
+					        	text: '<i class="fa fa-file-excel-o"></i> Excel',
+					        	titleAttr: 'Export to Excel',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	}
+					        	},
+					        	{
+					        	extend: 'csvHtml5',
+					        	text: '<i class="fa fa-file-text-o"></i> CSV',
+					        	titleAttr: 'CSV',
+					        	title: 'Money Buddy - Account Statement',
+					        	exportOptions: {
+					        	columns: ':not(:last-child)',
+					        	}
+					        	}, */
+					        	{
+					        	extend: 'pdfHtml5',
+					        	text: '<i class="fa fa-file-pdf-o"></i> Download Portfolio in PDF',
+					        	titleAttr: 'PDF',
+					        	/* orientation: 'auto', */
+					        	/* pageSize: 'LETTER', */
+					        	title: 'Money Buddy Financial Services Private Limited',
+					        	messageTop: 'Investment statement of '+customerName+'\n\nGiven below is a quick summary of your investments with us',
+					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
+					        	exportOptions: {
+					        		columns: [ 1, 3, 4, 5, 7 ],
+					        	},
+					        	customize: function(doc){
+				        			doc.styles.title.alignment = 'center';
+				        			doc.styles.title.bold = true;
+				        			doc.styles.title.fontSize = '20';
+				        			doc.styles.message.alignment = 'center';
+				        			doc.styles.message.fontSize = '14';
+				        			doc.styles.tableHeader.fillColor = '#8DB3E2';
+				        			/* var cols = [];
+			                        cols[0] = {text: 'Athlete', alignment: 'right', margin:[15, 10, 10, 10] };
+			                        
+				        			doc['content']['1'].style = 'athleteTable'; */
+				        			/* doc['styles'] = {
+				                            tableHeader: {
+				                                bold: !0,
+				                                fontSize: 15,
+				                                color: 'black',
+				                                alignment: 'center',
+				                                border: '1px solid',
+				                                fillColor: '#8DB3E2'
+				                            },
+				                            athleteTable: {
+				                                //alignment: 'center'
+				                            },
+				                            column1: {
+				                                alignment: 'center'
+				                            },
+				                            column2: {
+				                                alignment: 'center'
+				                            },
+				                            title: {
+				                                fontSize: 18,
+				                                bold: true,
+				                                margin: [0, 0, 0, 10],
+				                                alignment: 'center'
+				                            }
+				                        }; */
+				        			/* doc.styles.table.body.border = '1px'; */
+				        			/* doc.styles.message.decoration='underline'; */
+				        			
+					        	},
+					        	},
+					        	/* {
+					        	extend: 'print',
+					        	exportOptions: {
+					        	columns: ':visible'
+					        	},
+					        	customize: function(win) {
+					        	$(win.document.body).find( 'table' ).find('td:last-child, th:last-child').remove();
+					        	}
+					        	}, */	
+					        	],
+					        
+							"language": {
+							            "lengthMenu": "Display _MENU_ records per page",
+							            "zeroRecords": "Nothing found - sorry",
+							            "info": "Showing page _PAGE_ of _PAGES_",
+							            "infoEmpty": "No records available",
+							            "infoFiltered": "(filtered from _MAX_ total records)"
+				        				},
+				       		createdRow: function (row, data, index) {
+				       						$(row).addClass("g-font-size-12--xs g-text-right--xs");
+				        			        var totalRecords= data.length;
+				        			        $('td', row).eq(totalRecords).addClass('g-text-center--xs');
+				        			        $('td', row).eq(0).addClass('g-text-left--xs');
+				        			    },
+				       	 //render: $.fn.table.render.number( ',', '.', 2, '$' )
+					    } ); 
+					 
+
+				  },
+			     
 		  
+				  fnOldPortfolioRedraw: function () { 
+					 $('#hide-old-portfolio').addClass("hidden");
+					  $('#old-portfolio-row').addClass("hidden");
+					  
+			     },
+			     
+			     
+			     
 		  loadData : function(){
 				$.ajax({
 						async: false,
@@ -1124,6 +1344,7 @@
 							totalProAmt = jsonResponse.totalProfitAmount;
 							portfolioData  = jsonResponse.portfolioDataModel;
 							pendingOrderData = jsonResponse.pendingOrderDataModel;
+							oldPortfolioData = jsonResponse.oldPortfolioDataModel;
 							sipData = jsonResponse.sipDataModel;
 							/* investmentDetailData = jsonResponse.investmentDetailsDataModel; */
 							allFundsInvestmentDetailsData = jsonResponse.allFundsInvestmentDetailsDataModel;

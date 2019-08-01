@@ -20,7 +20,8 @@ public class UpdateCustomerDetails {
 	public void updateCustomerDetails (String customerId, String dateOfBirth, String addressLineOne, String addressLineTwo,
 				String addressLineThree, String residentialCity, String residentialState, String residentialCountry,
 				String residentialPin, String taxStatus, String gender, String occupation, String nomineeName, 
-				String nomineeRelationship ) throws MoneyBuddyException {
+				String nomineeRelationship, String placeOfBirth, String countryOfBirth, String taxResidency, String incomeSlab, 
+				String politicallyExposed) throws MoneyBuddyException {
 
 		logger.debug("UpdateCustomerDetails class - updateCustomerDetails method - customerId - "+customerId+" - start");
 		
@@ -31,8 +32,8 @@ public class UpdateCustomerDetails {
 			hibernateSession.beginTransaction();
 
 			CustomerDetails tempCustomerDetails  = new CustomerDetails(customerId, gender, occupation, dateOfBirth, addressLineOne,
-					addressLineTwo, addressLineThree, residentialCity, residentialState,
-					residentialPin, residentialCountry, taxStatus, nomineeName, nomineeRelationship); 		
+					addressLineTwo, addressLineThree, residentialCity, residentialState, residentialPin, residentialCountry, taxStatus, 
+					nomineeName, nomineeRelationship,placeOfBirth,countryOfBirth,taxResidency,incomeSlab,politicallyExposed); 		
 
 			hibernateSession.saveOrUpdate(tempCustomerDetails);
 			

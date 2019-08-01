@@ -54,6 +54,17 @@
 
 </script>
 
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
 </head>
 
 <body class="homepage bg-warning" >
@@ -74,7 +85,7 @@
                 <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
                                 </ul>
                             </div>
             </div><!--/.container-->
@@ -109,11 +120,12 @@
 				<table id="cartData" class="table table-bordered stripe ">
 						<thead class="table-head " style="font-size:17px;">
 							<tr>
-								<th class="center col-md-1 g-bg-color--gray-light">CustomerId</th>
-								<th class="center col-md-1 g-bg-color--gray-light">CustomerName</th>
-								<th class="center col-md-1 g-bg-color--gray-light">MandateCreationDate</th>
-								<th class="center col-md-1 g-bg-color--gray-light">MandateAmount</th>
-								<th class="center col-md-1 g-bg-color--gray-light"></th>
+								<th class="center col-md-2 g-bg-color--gray-light">CustomerId</th>
+								<th class="center col-md-2 g-bg-color--gray-light">CustomerName</th>
+								<th class="center col-md-2 g-bg-color--gray-light">MandateId</th>
+								<th class="center col-md-2 g-bg-color--gray-light">MandateCreationDate</th>
+								<th class="center col-md-2 g-bg-color--gray-light">MandateAmount</th>
+								<th class="center col-md-2 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
@@ -126,6 +138,9 @@
 								    	</td>
 									    <td class="center g-font-size-14--xs">
 									    	<input class="form-control" type="text" value ="<s:property value="#pendingMandateOrdersElement.customerName"/>" readonly>
+							    		</td>
+							    		<td class="center g-font-size-14--xs">
+									    	<input class="form-control" type="text" value ="<s:property value="#pendingMandateOrdersElement.mandateId"/>" readonly>
 							    		</td>
 									    <td class="center g-font-size-14--xs">
 									    	<input class="form-control" type="text" value ="<s:property value="#pendingMandateOrdersElement.mandateCreationDate"/>" readonly>

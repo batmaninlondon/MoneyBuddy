@@ -171,10 +171,11 @@ public class InsertCustomerDetails {
 			hibernateSession.beginTransaction();
 
 			Query query = hibernateSession.createQuery("update Customers set isipMandateId = :isipMandateId, mandateCreationDate = :mandateCreationDate, "
-					+ " mandateIdStatus = :mandateIdStatus where customerId = :customerId");
+					+ " mandateIdStatus = :mandateIdStatus, mandateAmount = :mandateAmount where customerId = :customerId");
 
 			query.setParameter("isipMandateId", mandateId);
 			query.setParameter("mandateCreationDate", frmtdDateForDB);
+			query.setParameter("mandateAmount", "120000");
 			query.setParameter("mandateIdStatus", "GENERATED");
 			query.setParameter("customerId", customerId);
 

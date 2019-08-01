@@ -48,7 +48,16 @@ hr {
 } 
 
 </style>
-
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 </head>
 
 <body class="homepage bg-warning">
@@ -68,7 +77,7 @@ hr {
                 <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item col-sm-push-7"><a href="<s:url action="adminHome"/>" class="s-header-v2__nav-link">Home</a></li>
-                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+                                    <li class="s-header-v2__nav-item col-sm-push-8"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
                                 </ul>
                             </div>
             </div><!--/.container-->
@@ -82,7 +91,7 @@ hr {
 		<h2 class="text-center" style="font-family:Aparajita;font-size:35px; "><b>Admin Dashboard</b></h2>
 		
 	</div>	
-	<p class="text-center"><b><s:actionmessage class="small-text text-center"/></b> </p>
+	<p class="text-center " style="color:red;font-size:50px;" ><b><s:actionmessage class="text-center"/></b> </p>
 	<div class="row">
 		<div class="col-md-5"></div>
 		<div class="col-md-3">
@@ -108,6 +117,19 @@ hr {
 				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UpdateCustomerAof</button>
 			</a>
 		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<s:form  action="existingOldFundData"  method="post" namespace="/">
+		<div class="col-md-3" >
+  			<s:textfield name="emailIdOldPortfolio" class="form-control" placeholder="Enter Email Id"/>
+		</div>
+		<div class="col-md-3" >
+			
+          	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="InsertOldPortfolioRecord" style="padding:5px 15px 5px 15px;width:300px;"/>
+       	</div>
+		</s:form>
 	</div>
 	<hr>
 	<div class="row">

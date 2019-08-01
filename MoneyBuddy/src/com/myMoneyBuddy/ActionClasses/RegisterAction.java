@@ -96,7 +96,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 			String mailLink = configProperties.getProperty("MAIL_VERIFICATION_LINK");
 			System.out.println("mailLink is : "+mailLink);
 			
-	    	String link = mailLink+"?hashedPassword="+hashedPassword;
+	    	String link = mailLink+"?Hp="+hashedPassword;
 	    	
 	    	System.out.println("link is : "+link);
 	    	

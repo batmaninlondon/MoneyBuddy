@@ -58,7 +58,7 @@ public class AqbCalculator implements org.quartz.Job{
 			switch (yesterdayMonth)   {
 			
 				case "02":
-					numOfTotalDays = 91;
+					numOfTotalDays = 90;
 					startDate=yesterdayYear+"-01-01";
 					endDate = yesterdayYear+"-03-31";
 					quarterOfYear="1-"+yesterdayYear;
@@ -86,10 +86,11 @@ public class AqbCalculator implements org.quartz.Job{
 			
 			Double totalQuaterlyInvestment = 0.0;
 			Double aqb = 0.0;
-			
+			Double quaterlyFee = 0.0;
 			for (String customer : customersList)  {
 				
 				aqb = 0.0;
+				quaterlyFee = 0.0;
 				
 				hibernateSession.beginTransaction();
 				
@@ -102,13 +103,13 @@ public class AqbCalculator implements org.quartz.Job{
 				if (result != null) {
 					totalQuaterlyInvestment = Double.parseDouble(result.toString());
 					aqb = totalQuaterlyInvestment/numOfTotalDays;
-					aqb = (aqb*0.25)/100;
+					quaterlyFee = (aqb*0.25)/100;
 					
 				}
 				
 				hibernateSession.beginTransaction();
 				
-				tempCustomersAqb  = new CustomersAqb(customer,String.format("%.2f",aqb),quarterOfYear); 		
+				tempCustomersAqb  = new CustomersAqb(customer,String.format("%.2f",aqb),String.format("%.2f",quaterlyFee),quarterOfYear); 		
 
 				hibernateSession.save(tempCustomersAqb);
 

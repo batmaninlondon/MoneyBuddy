@@ -30,6 +30,35 @@ public class QuartzSchedulerListener implements ServletContextListener {
 		
 		{
 			
+			// Scheduler to fetch daily NAV and update Old Portfolio data
+			
+			JobDetail computeOldPortfolioJob = JobBuilder.newJob(ComputeOldPortfolio.class)
+					.withIdentity("ComputeOldPortfolioJob", "Group").build();
+			
+			// This Trigger will work at 4:30 pm (London time) everyday
+			
+			Trigger computeOldPortfolioTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("ComputeOldPortfolioTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 02 * * ?")) 
+					.build();
+			
+			
+			
+			// Scheduler to fetch daily NAV data
+			
+			JobDetail fetchDailyNavJob = JobBuilder.newJob(FetchDailyNav.class)
+					.withIdentity("FetchDailyNavJob", "Group").build();
+			
+			// This Trigger will work at 4:30 pm (London time) everyday
+			
+			Trigger fetchDailyNavTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("FetchDailyNavTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 02 * * ?")) 
+					.build();
+			
+			
 			// Scheduler to generate the automatic order for SIP
 			
 			JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
@@ -140,7 +169,13 @@ public class QuartzSchedulerListener implements ServletContextListener {
     			new StdSchedulerFactory().getScheduler();
         	scheduler.start();
         	
-        	// Execute sip installment job to generate the automatic order for SIP
+        	
+        	// Execute fetch NAV and update Old Portfolio data job to fetch and update old portfolio data as per current NAV into our database
+        	scheduler.scheduleJob(computeOldPortfolioJob, computeOldPortfolioTrigger);
+        	// Execute fetch NAV data job to fetch and store daily NAV into our database
+			scheduler.scheduleJob(fetchDailyNavJob, fetchDailyNavTrigger);
+			
+			// Execute sip installment job to generate the automatic order for SIP
         	scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
         	
         	// Execute stp installment job to generate the automatic order for STP

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
+import com.myMoneyBuddy.DAOClasses.GenerateAofForm;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.Utils.SendMail;
@@ -49,7 +49,7 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
     		Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 
-			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));
+			configProperties.load(DownloadAofFormAction.class.getResourceAsStream(configPropFilePath));
 			
            String mailLink = configProperties.getProperty("MAIL_AOF_FORM_LINK");
 			System.out.println("mailLink is : "+mailLink);
@@ -65,17 +65,22 @@ public class DownloadAofFormAction extends ActionSupport implements SessionAware
 			
 			logger.debug("DownloadAofFormAction class - execute method - directoryName - "+directoryName);
 				    	
-	    	setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
+	    	//setAofForm(queryCustomer.getAoFFormName(customerId)+".pdf");
+	    	setAofForm("AoF_Form_"+customerId+".pdf");
+	    	
 	    	System.out.println(" Aof Form name is : "+getAofForm());
 	    	
-	    	
-			//setAofForm("Account_Opening_Form_1.pdf");
+	    	GenerateAofForm generateAofForm = new GenerateAofForm();
+	    	generateAofForm.generateAofForm(customerId);
+			
        		SendMail sendMail = new SendMail();
        		if ("Account_Opening_Form_1".equals(getAofForm()) || "Account_Opening_Form_3".equals(getAofForm())) {
-       			sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycDone.txt",mailLink,"",customerName);
+       			//sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycDone.txt",mailLink,"",customerName);
+       			sendMail.sendAofFormMail("/"+directoryName+"AoF_Form_"+customerId+".pdf", emailId,subject,"AccountOpeningFormKycDone.txt",mailLink,"",customerName);
        		}
        		else {
-       			sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycNotDone.txt",mailLink,"",customerName);
+       			//sendMail.sendAofFormMail("/"+directoryName+getAofForm(), emailId,subject,"AccountOpeningFormKycNotDone.txt",mailLink,"",customerName);
+       			sendMail.sendAofFormMail("/"+directoryName+"AoF_Form_"+customerId+".pdf", emailId,subject,"AccountOpeningFormKycNotDone.txt",mailLink,"",customerName);
        		}
        		
        		UpdateCustomer updateCustomer = new UpdateCustomer();

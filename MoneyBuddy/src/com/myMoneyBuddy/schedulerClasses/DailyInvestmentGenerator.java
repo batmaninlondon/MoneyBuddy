@@ -47,15 +47,15 @@ public class DailyInvestmentGenerator implements org.quartz.Job{
 			
 			QueryProducts queryProducts = new QueryProducts();
 			
-			String totalInvestment = "";
+			String totalCurrentAmount = "";
 			for (String customer : customersList)  {
  
 				System.out.println("Customer Id is : "+customer);
-				totalInvestment = queryProducts.getTotalInvestment(customer);
+				totalCurrentAmount = queryProducts.getTotalCurrentAmount(customer);
 				
 				hibernateSession.beginTransaction();
 				
-				tempDailyInvestments  = new DailyInvestments(customer,totalInvestment,yesterdayDate); 		
+				tempDailyInvestments  = new DailyInvestments(customer,totalCurrentAmount,yesterdayDate); 		
 
 				hibernateSession.save(tempDailyInvestments);
 

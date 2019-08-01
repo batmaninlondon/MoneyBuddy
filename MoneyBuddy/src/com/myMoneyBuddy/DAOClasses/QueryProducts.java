@@ -5,6 +5,8 @@
 package com.myMoneyBuddy.DAOClasses;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
 import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
 import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
+import com.myMoneyBuddy.ModelClasses.StpDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryProducts {
@@ -128,7 +131,7 @@ public class QueryProducts {
 			
 			hibernateSession.beginTransaction();
 			
-			totalPendingTransactions = hibernateSession.createQuery("select count(*) from TransactionDetails   where transactionStatus='5' and customerId='"+customerId+"' ").uniqueResult().toString();
+			totalPendingTransactions = hibernateSession.createQuery("select count(*) from TransactionDetails   where transactionStatus='7' and customerId='"+customerId+"' ").uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
 
@@ -387,9 +390,30 @@ public class QueryProducts {
 			totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
 			totalXirr = totalXirr*100;
 			
-			System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
+			System.out.println("TOTAL XIRR 1 : "+ totalXirr);
+			String totXirr ;
+			/*System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
 			
-			portfolioDataModel.add(new PortfolioDataModel("","Total","","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),String.format("%.2f",totalXirr),"","","N"));
+			String totXirr = String.format("%.2f", totalXirr);*/
+			if (( (new Double(Double.NaN)).equals(totalXirr )) || totalXirr <= 0.0 )  {
+				System.out.println(" totalXirr is NaN yippi ");
+				totXirr = "NA"; 
+			}
+			else {
+				
+				if (String.valueOf(totalXirr).toLowerCase().contains("e")) {
+			       
+					totXirr = Double.toString(totalXirr).replace("e", "0");
+			    } else
+			    	totXirr =  String.valueOf(totalXirr);
+				
+				
+				totXirr = String.format("%.2f", Double.parseDouble(totXirr));
+				System.out.println(" totalXirr is not NaN yippi");
+			}
+			
+			
+			portfolioDataModel.add(new PortfolioDataModel("","Total","","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),totXirr,"","","N"));
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return portfolioDataModel of "+portfolioDataModel.size()+ " record");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");
@@ -419,7 +443,7 @@ public class QueryProducts {
 
 	}
 	
-	public String getTotalInvestment(String customerId) throws MoneyBuddyException {
+	public String getTotalCurrentAmount(String customerId) throws MoneyBuddyException {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		double soldUnit = 0.0;
@@ -430,8 +454,8 @@ public class QueryProducts {
 			
 			hibernateSession.beginTransaction();
 			
-			List<String>  investedAmountList = new LinkedList<String>();
-			//List<String>  currentAmountList = new LinkedList<String>();
+			//List<String>  investedAmountList = new LinkedList<String>();
+			List<String>  currentAmountList = new LinkedList<String>();
 			
             Query buySellRecordsQuery;
           
@@ -457,12 +481,12 @@ public class QueryProducts {
 
 					Object[] queryRow = (Object[]) queryIt.next();			
 										
-					double investedAmount = 0.0;
-					//double availableUnits = 0.0;
-					//double currentAmount = 0.0;
-				     //String currentNavValue = null;
+					//double investedAmount = 0.0;
+					double availableUnits = 0.0;
+					double currentAmount = 0.0;
+				     String currentNavValue = null;
 				     
-			     	//currentNavValue = queryRow[3].toString();
+			     	currentNavValue = queryRow[3].toString();
 				     				         
 			     	buySellRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate, buySell "
 				     		+ " from TransactionDetails where fundId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and unitPrice is not null ");
@@ -487,8 +511,8 @@ public class QueryProducts {
 					    	 if (soldUnit != 0 )   {
 							    	   
 					    		 if (Double.parseDouble(buySellRecordRow[2].toString()) > soldUnit)  {
-					    			 //availableUnits += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit);
-					    			 investedAmount += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buySellRecordRow[3].toString()));
+					    			 availableUnits += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit);
+					    			 //investedAmount += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buySellRecordRow[3].toString()));
 					    			 soldUnit = 0;	   
 					    		 }
 					    		 else {
@@ -497,40 +521,40 @@ public class QueryProducts {
 					    	 }
 						       
 					    	 else {
-					    		 //availableUnits +=  Double.valueOf(buySellRecordRow[2].toString());
-					    		 investedAmount += (Double.parseDouble(buySellRecordRow[1].toString()));
+					    		 availableUnits +=  Double.valueOf(buySellRecordRow[2].toString());
+					    		 //investedAmount += (Double.parseDouble(buySellRecordRow[1].toString()));
 					    	 }
 					    	 
 				    	}
 			     	}
 				       
-				     //currentAmount = availableUnits* Double.parseDouble(currentNavValue);
+				     currentAmount = availableUnits* Double.parseDouble(currentNavValue);
 				     
-				     investedAmountList.add(String.format("%.2f",investedAmount));
-				     //currentAmountList.add(String.format("%.2f",currentAmount));
+				     //investedAmountList.add(String.format("%.2f",investedAmount));
+				     currentAmountList.add(String.format("%.2f",currentAmount));
 	
 				}
 			}
 
 			
-			Double totalInvestedAmount = 0.0;
-			//Double totalCurrentAmount = 0.0;
-			for ( String investedAmountListElement : investedAmountList )  {
+			//Double totalInvestedAmount = 0.0;
+			Double totalCurrentAmount = 0.0;
+			/*for ( String investedAmountListElement : investedAmountList )  {
 					
 					
 				totalInvestedAmount = totalInvestedAmount + Double.parseDouble(investedAmountListElement);
-			}
-			/*for ( String currentAmountListElement : currentAmountList )  {
+			}*/
+			for ( String currentAmountListElement : currentAmountList )  {
 				
 				totalCurrentAmount = totalCurrentAmount + Double.parseDouble(currentAmountListElement);
-			}*/
+			}
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return totalInvestedAmount");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");
 				
-			return String.format("%.2f",totalInvestedAmount);
+			//return String.format("%.2f",totalInvestedAmount);
 			
-			//return String.format("%.2f",totalCurrentAmount);
+			return String.format("%.2f",totalCurrentAmount);
 		}
 		catch (NumberFormatException e)
 		{
@@ -578,9 +602,9 @@ public class QueryProducts {
 				 Object[] row = (Object[]) it.next();
 				 
 				 if ("UPFRONT".equals(row[5].toString()))
-					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"0","NAV Awiated",row[4].toString().substring(0,10),row[5].toString()));
+					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"0","Under process",row[4].toString().substring(0,10),row[5].toString()));
 				 else 
-					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),"0",row[3].toString(),"NAV Awiated",row[4].toString().substring(0,10),row[5].toString()));
+					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),"0",row[3].toString(),"Under process",row[4].toString().substring(0,10),row[5].toString()));
 			 }
 
 			 hibernateSession.getTransaction().commit();
@@ -688,6 +712,80 @@ public class QueryProducts {
 		}
 		catch (Exception e ) {
 			logger.error("QueryProducts class - getSipData method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+	}
+	
+	
+	public List<StpDataModel> getStpData(String customerId) throws MoneyBuddyException {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	       
+		try
+		{
+			logger.debug("QueryProducts class - getStpData method - customerId - "+customerId+" - start");
+		
+			hibernateSession.beginTransaction();
+
+			List<StpDataModel> stpDataModel = new LinkedList<StpDataModel>();
+
+			//Query query = hibernateSession.createQuery("from SipDetails where customerId = :customerId and sipEndDate  > curdate()");
+			
+			Query stpData = hibernateSession.createQuery("select t.transactionDetailId, s.purchaseFundId, " + 
+					"(select schemeName from PrimaryFundDetails where fundId=s.withdrawalFundId ), " + 
+					"(select schemeName from PrimaryFundDetails where fundId=s.purchaseFundId ) , " + 
+					"t.transactionAmount,t.transactionFolioNum, s.stpDate,s.stpStartDate " + 
+					"from TransactionDetails t,  StpDetails s " + 
+					"where t.customerId= :customerId and t.transactionType='STP' " + 
+					"and t.transactionDetailId=s.transactionDetailId and s.customerId=t.customerId and s.stpEndDate > curdate()");
+
+			stpData.setParameter("customerId",customerId);
+			
+			/*List<SipDetails> sipDetailsList = query.list();*/
+			
+			hibernateSession.getTransaction().commit();
+			
+			  for (Iterator stpDataIt=stpData.iterate(); stpDataIt.hasNext();)  {
+				
+				Object[] stpDataRow = (Object[]) stpDataIt.next();
+				String folioNum = null;
+				if (null != stpDataRow[5])  
+					folioNum = stpDataRow[5].toString();
+				else 
+					folioNum="";
+				
+				System.out.println("Withdrawal fund name : "+stpDataRow[2].toString());
+				System.out.println("Purchase fund name : "+stpDataRow[3].toString());
+				
+				stpDataModel.add(new StpDataModel(stpDataRow[7].toString(),stpDataRow[1].toString(),stpDataRow[2].toString(),stpDataRow[3].toString(),
+							 folioNum,stpDataRow[4].toString(),stpDataRow[6].toString()));
+			}
+			  
+			
+			logger.debug("QueryProducts class - getStpData method - customerId - "+customerId+" - return stpDataModel containing "+stpDataModel.size()+" records");
+			logger.debug("QueryProducts class - getStpData method - customerId - "+customerId+" - end");
+			
+			return stpDataModel;
+		}
+		catch (NumberFormatException e)
+		{
+			logger.error("QueryProducts class - getStpData method - customerId - "+customerId+" - Caught NumberFormatException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryProducts class - getStpData method - customerId - "+customerId+" - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryProducts class - getStpData method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -1019,7 +1117,7 @@ public class QueryProducts {
 	        err = Math.abs(x1 - x0);
 	        x0 = x1;
 	    }
-	
+	    
 	    return x0;
 	}	
 	

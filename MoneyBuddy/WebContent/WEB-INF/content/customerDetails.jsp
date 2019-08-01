@@ -94,7 +94,7 @@
 	color: white;
 	text-transform: uppercase;
 	font-size: 9px;
-	width: 33.33%;
+	width: 25%;
 	float: left;
 	position: relative;
 }
@@ -143,6 +143,16 @@
 }
 </style> 
 
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 
 </head>
 
@@ -163,7 +173,7 @@
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
                             <!-- Logo -->
                             <div class="s-header-v2__logo">
-                                <a href="welcome.jsp" class="s-header-v2__logo-link">
+                                <a href="welcome" class="s-header-v2__logo-link">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
                                 </a>
@@ -171,31 +181,31 @@
                             <!-- End Logo -->
                         </div>
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees.jsp" class="s-header-v2__nav-link">Fees</a></li> -->
+                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
-															<li><a href="<s:url action="customerCartAction"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
-															<li><a href="<s:url action="customerRedCartAction"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
 														</ul>
 													</li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
                                         	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
@@ -223,6 +233,7 @@
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
 			<li >Address Details</li>
+			<li >FATCA Details</li>
 			<li >Payment Details</li>
 		</ul>
 	<!-- fieldsets -->
@@ -254,7 +265,8 @@
         	<div class="col-md-1 col-xs-1 "></div>
         	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>
         	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" pattern="^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$" name="dateOfBirth" placeholder="DD/MM/YYYY Format" required>
+        		<input class="form-control datepicker" id="date-of-birth" pattern="^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$" name="dateOfBirth" 
+        						 placeholder="DD/MM/YYYY Format" required>
         		
         	</div>
         	<div class="col-md-3 col-xs-3 "></div>
@@ -433,7 +445,7 @@
         </div>	
 		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs" >
         	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Country</div>
+        	<div class="col-md-2 col-xs-2 ">Country</div>
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="residentialCountry" class="g-color--red" />
 			  	<s:textfield class="form-control" id="residential-country" placeholder="Country" name="residentialCountry" value="India" />  --%>
@@ -443,7 +455,7 @@
         </div>	
 		<div class="row g-text-left--xs g-margin-l-70--xs" >
         	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 previous">Pin</div>
+        	<div class="col-md-2 col-xs-2 previous">Pin</div>
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="residentialPin" class="g-color--red" />
 			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" />  --%>
@@ -462,9 +474,75 @@
 			<input type="submit" id="nextBtn2" name="next"  class="action-button" value="Next" style="width:20% ;float: right;"/>
 			
 	</fieldset>
+	<fieldset  style="background-color: #cecece !important;" >
+
+		<div style="background-color: white; height:60vh;">
+				
+		<input class="form-control g-color--red text-center" id="errorMsg3" value=""  style="font-weight: bold; " readonly />
+			
+		<br/>
+		<div class="row g-text-left--xs g-margin-l-90--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 ">Place (City) of Birth</div>
+        	<div class="col-md-6 col-xs-6 ">
+			  	<input class="form-control" name="placeOfBirth"  id="place-of-birth" placeholder="Place (City) of Birth"  required />
+			</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-90--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 ">Country of Birth</div>
+        	<div class="col-md-6 col-xs-6 ">
+				<s:select class="form-control"  id="country-of-birth"
+					list="#{'IN':'India', 'ZZ':'Other'}" 
+					name="countryOfBirth" 
+					value="IN" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 ">Tax Residency</div>
+        	<div class="col-md-6 col-xs-6 ">
+				<s:select class="form-control"  id="tax-residency"
+					list="#{'IN':'India', 'ZZ':'Other'}" 
+					name="taxResidency" 
+					value="IN" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 ">Income slab</div>
+        	<div class="col-md-6 col-xs-6 ">
+				<s:select class="form-control"  id="income-slab"
+					list="#{'31':'Below 1 Lac','32':'1 Lac - 5 Lac','33':'5 Lac - 10 Lac','34':'10 Lac - 25 Lac','35':'25 Lac - 1 Cr','36':'Above 1 Cr' }" 
+					name="incomeSlab" 
+					value="33" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-1 "></div>
+        	<div class="col-md-2 col-xs-2 ">Are you Politically Exposed Person?</div>
+        	<div class="col-md-6 col-xs-6 ">
+				<s:select class="form-control"  id="politically-exposed"
+					list="#{'N':'No','Y':'Yes', 'R':'Related to PEP'}" 
+					name="politicallyExposed" 
+					value="N" />
+        	</div>
+        	<div class="col-md-3 col-xs-3 "></div>
+        </div>
+		
+         </div>
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
+			
+			<input type="submit" id="nextBtn3" name="next"  class="action-button" value="Next" style="width:20% ;float: right;"/>
+			
+	</fieldset>
 	<fieldset  style="background-color: #cecece !important;">
 		<div style="background-color: white; height:60vh;">
-		<input class="form-control g-color--red text-center" id="errorMsg3" value=""  style="font-weight: bold; " readonly />
+		<input class="form-control g-color--red text-center" id="errorMsg4" value=""  style="font-weight: bold; " readonly />
 		<br/>
 		<div class="row g-text-left--xs g-margin-l-70--xs " >
         	<div class="col-md-1 col-xs-1 "></div>
@@ -498,7 +576,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="accountNumber" class="g-color--red" />
 			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" />  --%>
-			  	<input class="form-control"  id="account-number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="accountNumber" required/>
+			  	<input class="form-control"  id="account-number"  onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="accountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -508,7 +586,7 @@
         	<div class="col-md-6 col-xs-6 ">
         		<%-- <s:fielderror fieldName="reAccountNumber" class="g-color--red" />
 			  	<s:password class="form-control" id="re-account-number" pattern="^[0-9]{12}$" placeholder="Account Number" name="reAccountNumber" />  --%>
-			  	<input class="form-control"  id="re-account-number" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="reAccountNumber" required/>
+			  	<input class="form-control"  id="re-account-number" onpaste="return false" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="reAccountNumber" required/>
 			</div>
         	<div class="col-md-3 col-xs-3 "></div>
         </div>
@@ -586,10 +664,20 @@
 		 	var dateOfBir = document.getElementById("date-of-birth");
 		 	var nomName = document.getElementById("nominee-name");
 		 	var nomRel = document.getElementById("nominee-relationship");
-
+		 	
+		 	var DOB = dateOfBir.value;
+		 	DOB = DOB.substr(6)+"-"+DOB.substr(3,2)+"-"+DOB.substr(0,2);
+			var today = new Date();
+		    var birthDate = new Date(DOB);
+		    
+		    var age = today.getFullYear() - birthDate.getFullYear();
+		    var m = today.getMonth() - birthDate.getMonth();
+		    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+		        age--;
+		    } 
 		 	var invalid =  (cusName.value == "") || (panNum.value == "") || (dateOfBir.value == "") ||
 				(nomName.value == "") || (nomRel.value == "") || (!new RegExp(panNum.getAttribute("pattern")).test(panNum.value)) ||
-				(!new RegExp(dateOfBir.getAttribute("pattern")).test(dateOfBir.value)) ;
+				(!new RegExp(dateOfBir.getAttribute("pattern")).test(dateOfBir.value)) || (age < 18) ;
 
 
 			if ( invalid )  {
@@ -602,13 +690,16 @@
 					document.getElementById("errorMsg1").value="Error: Please fill Pan";
 				}
 				else if ( !new RegExp(panNum.getAttribute("pattern")).test(panNum.value)) {
-					document.getElementById("errorMsg1").value="Error: Please fill Valid Pan Num";
+					document.getElementById("errorMsg1").value="Error: Please fill Valid Pan Num (without spaces)";
 				}
 				else if ( dateOfBir.value == "" ) {
-					document.getElementById("errorMsg1").value="Error: Please fill Date Of Birth";
+					document.getElementById("errorMsg1").value="Error: Please fill Date Of Birth ";
+				}
+				else if ( age < 18) {
+					document.getElementById("errorMsg1").value="Error: Age shall be 18+";
 				}
 				else if ( !new RegExp(dateOfBir.getAttribute("pattern")).test(dateOfBir.value)) {
-					document.getElementById("errorMsg1").value="Error: Please fill Valid Date Of Birth";
+					document.getElementById("errorMsg1").value="Error: Please fill Valid Date Of Birth (without spaces)";
 				}
 				else if ( nomName.value == "" ) {
 					document.getElementById("errorMsg1").value="Error: Please fill Nominee Name";
@@ -680,7 +771,7 @@
 		 			document.getElementById("errorMsg2").value="Error: Please fill Pin";
 		 		}
 		 		else if ( !new RegExp(pin.getAttribute("pattern")).test(pin.value)) {
-		 			document.getElementById("errorMsg2").value="Error: Please fill Valid pin";
+		 			document.getElementById("errorMsg2").value="Error: Please fill Valid pin (without spaces)";
 		 		}
 		 	}
 		 	        
@@ -729,6 +820,59 @@
 		 	 */
 		 });
 		 
+		 $("#nextBtn3").click(function(){
+
+				var placeOfBirth = document.getElementById("place-of-birth");
+			 	  
+			 	var invalid =  (placeOfBirth.value == "") ;
+			 	
+			 	
+			 	if ( invalid )  {
+			 		if ( placeOfBirth.value == "" )  {
+			 			document.getElementById("errorMsg3").value="Error: Please fill Place of Birth";
+			 		}
+			 	}
+			 	else {
+
+			 		document.getElementById("errorMsg3").value="";
+					//activate next step on progressbar using the index of next_fs
+					 if(animating) return false;
+					 	animating = true;
+					 	
+					 	current_fs = $(this).parent();
+					 	next_fs = $(this).parent().next();
+					
+				 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+				 	
+				 	//show the next fieldset
+				 	next_fs.show(); 
+				 	//hide the current fieldset with style
+				 	current_fs.animate({opacity: 0}, {
+				 		step: function(now, mx) {
+				 			//as the opacity of current_fs reduces to 0 - stored in "now"
+				 			//1. scale current_fs down to 80%
+				 			scale = 1 - (1 - now) * 0.2;
+				 			//2. bring next_fs from the right(50%)
+				 			left = (now * 50)+"%";
+				 			//3. increase opacity of next_fs to 1 as it moves in
+				 			opacity = 1 - now;
+				 			current_fs.css({'transform': 'scale('+scale+')'});
+				 			next_fs.css({'left': left, 'opacity': opacity});
+				 		}, 
+				 		duration: 800, 
+				 		complete: function(){
+				 			current_fs.hide();
+				 			animating = false;
+				 		}, 
+				 		//this comes from the custom easing plugin
+				 		easing: 'easeInOutBack'
+				 	});
+				 	return false;
+			 		}
+				/*  }
+			 	 */
+			 });
+		 
 		 $("#submitBtn").click(function(){
 			 var accNum = document.getElementById("account-number");
 			 var reAccNum = document.getElementById("re-account-number");
@@ -740,19 +884,19 @@
 			 
 			 if ( invalid )  {
 					if ( accNum.value == "" )  {
-						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
+						document.getElementById("errorMsg4").value="Error: Please fill Account Number";
 					}
 					else if ( reAccNum.value == "" )  {
-						document.getElementById("errorMsg3").value="Error: Please fill Account Number";
-					}
-					else if ( ifscCode.value == "" )  {
-						document.getElementById("errorMsg3").value="Error: Please fill IFSC Code";
-					}
-					else if ( !new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) {
-						document.getElementById("errorMsg3").value="Error: Please fill Valid IFSC Code";
+						document.getElementById("errorMsg4").value="Error: Please fill Account Number";
 					}
 					else if ( !(accNum.value == reAccNum.value)) {
-						document.getElementById("errorMsg3").value="Error: Account number does not match";
+						document.getElementById("errorMsg4").value="Error: Account number does not match( make sure there are no spaces)";
+					}
+					else if ( ifscCode.value == "" )  {
+						document.getElementById("errorMsg4").value="Error: Please fill IFSC Code";
+					}
+					else if ( !new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) {
+						document.getElementById("errorMsg4").value="Error: Please fill Valid IFSC Code";
 					}
 			 }
 			 else {

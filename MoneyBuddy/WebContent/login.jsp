@@ -110,6 +110,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
   
 </head>
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;" >
@@ -235,7 +245,7 @@
           </s:form>
     </div>
     <div id="signup" class="container tab-pane fade"><br>
-               <s:form  action="registerAction" method="post" name="formRegister" namespace="/" >
+               <s:form  action="register" method="post" name="formRegister" namespace="/" >
           <div id="registration-email-id"  class="field-wrap">
           	<p id="registerMessage"></p>
             <%-- <label> 
@@ -287,7 +297,7 @@
         <div class="modal-body">
           <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
        
-        <s:form  action="forgottenPasswordAction" method="post" name="formForgotPassword">
+        <s:form  action="forgotPassword" method="post" name="formForgotPassword">
 
 			<div class="row" >
 				<div class="col-md-3"></div>

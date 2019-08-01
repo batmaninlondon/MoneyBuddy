@@ -39,6 +39,18 @@
         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
 
 
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
     </head>
 
 <body >
@@ -100,13 +112,13 @@
   		<div class="col-md-1 col-xs-1" ></div>
   	</div>
   	
-  	<s:form  action="newEstimateAction" method="post" name="formEstimate">
+<%--   	<s:form  action="newEstimateAction" method="post" name="formEstimate">
   		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
 		<s:hidden id="sip-amount-value" name="sipAmount"></s:hidden>
 		<s:hidden id="sip-duration-value" name="sipDuration"></s:hidden>
 		<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
 		<s:hidden id="transaction-type-value" name="transactionType"></s:hidden>
-  	</s:form>
+  	</s:form> --%>
   	
   	<div class="row "  >
 		<div class="col-md-1 col-xs-1" > </div>
@@ -127,7 +139,7 @@
 							<div class="col-md-5"></div>
 						</div> --%>
 						
-						<s:form  action="redeemAction" method="post" name="formRedeem">
+						<s:form  action="redeem" method="post" name="formRedeem">
 						
 						 <div class="row g-text-left--xs" >
 				        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">How much do you want to redeem</div>

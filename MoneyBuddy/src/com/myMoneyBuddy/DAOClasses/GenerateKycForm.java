@@ -19,10 +19,13 @@ import org.hibernate.Session;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.codec.Base64.InputStream;
 import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
+import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 

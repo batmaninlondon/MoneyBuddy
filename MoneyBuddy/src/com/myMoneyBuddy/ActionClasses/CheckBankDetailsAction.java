@@ -13,7 +13,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
-import com.myMoneyBuddy.DAOClasses.QueryBankName;
+import com.myMoneyBuddy.DAOClasses.QueryDisplayName;
 import com.myMoneyBuddy.DAOClasses.QueryOrderStatus;
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
@@ -137,11 +137,11 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    	QueryBankDetails queryBankDetails = new QueryBankDetails();
 	    	BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
 	    	String bankName = bankDetails.getBankName();
-	    	QueryBankName queryBankName = new QueryBankName();
+	    	QueryDisplayName queryDisplayName = new QueryDisplayName();
 	    	DesEncrypter desEncrypter = new DesEncrypter();
 			String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
 			
-			setDisplayBankName(queryBankName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
+			setDisplayBankName(queryDisplayName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
 			
 			System.out.println("DISPLAY BANK NAME IS : "+getDisplayBankName());
 	    	

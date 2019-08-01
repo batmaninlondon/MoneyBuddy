@@ -9,21 +9,45 @@
 <title>User Verification Page</title>
 <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="assets/stylesheet.css" />
+
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
 </head>
 <body>
 
 	<%
 	    //URL url = new URL(request.getRequestURL());
 	    //if (request.getAttribute("hash")!=null) {
-	    String hashedPassword = (String)request.getParameter("hashedPassword");
+	    String hashedPassword = (String)request.getParameter("Hp");
 	    System.out.println("hello from  jsp : value of hashedPassword : "+hashedPassword);
 	    InsertCustomerDetails customer = new InsertCustomerDetails();
 	    String emailId = customer.updateVerificationStatusAndGetEmail(hashedPassword);
+
+			if ( !"NotExist".equals(emailId))  {
+		
 	    //}
 	    request.getSession().setAttribute("name", emailId);
 	    String redirectURL = "login";
 	    response.sendRedirect(redirectURL);
-	%>
+	    }
+	
+	else {
+										
+									
+                %>
+                	<h3 class="text-center g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs"><b>Link has expired</b></h3>
+                	<%
+									}
+                	%>
 
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>

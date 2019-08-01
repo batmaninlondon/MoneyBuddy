@@ -14,6 +14,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
@@ -78,9 +79,18 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	customerId = customers.getCustomerId();
 	    	String customerName = customers.getCustomerName();
 	    	
+	    	if (customerName == null  ) 
+	    		customerName = "";
+	    	
 	    	sessionMap.put("emailId", getEmailIdForgotPassword());
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - stored emailId : "+getEmailIdForgotPassword()+" in sessionMap");
 
+	    	QueryCustomer queryCustomer = new QueryCustomer();
+	    	
+	    	String hashedPassword = queryCustomer.getHashedPassword(emailIdForgotPassword);
+	    	
+	    	System.out.println("hashedPassword : "+hashedPassword);
+	    	
 	    	SendMail sendMail = new SendMail();
 
 	    	Properties configProperties = new Properties();
@@ -90,10 +100,14 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 			
 			String mailLink = configProperties.getProperty("MAIL_FORGOT_PASSWORD_LINK");
 			System.out.println("mailLink is : "+mailLink);
+			
+			String link = mailLink+"?Hp="+hashedPassword;
+	    	
+	    	System.out.println("link is : "+link);
 	    	
 	    	String subject = configProperties.getProperty("MAIL_FORGOT_PASSWORD_SUBJECT");
 
-	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",mailLink,"Reset your password",customerName);
+	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",link,"Reset your password",customerName);
 	    	
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - mail sent to "+getEmailIdForgotPassword()+" to reset password");
 	    	

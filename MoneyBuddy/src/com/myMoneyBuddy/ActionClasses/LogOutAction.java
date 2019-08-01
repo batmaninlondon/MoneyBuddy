@@ -15,9 +15,9 @@ import com.myMoneyBuddy.DAOClasses.UpdateCustomerRedemptionCart;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerStpCart;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LogOffAction extends ActionSupport  implements SessionAware{
+public class LogOutAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(LogOffAction.class);
+	Logger logger = Logger.getLogger(LogOutAction.class);
 	private SessionMap<String,Object> sessionMap;
 
     public String execute() {
@@ -25,27 +25,32 @@ public class LogOffAction extends ActionSupport  implements SessionAware{
     	String customerId = null;
     	
     	try {
-    		logger.debug("LogOffAction class - execute method - start ");
+    		logger.debug("LogOutAction class - execute method - start ");
     		
+    		if (!sessionMap.isEmpty() )   {
     		customerId = sessionMap.get("customerId").toString();
+    		
+    		if ( customerId != null ) {
     		
     		UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
     		updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
     		
     		UpdateCustomerStpCart  updateCustomerStpCart = new UpdateCustomerStpCart();
     		updateCustomerStpCart.emptyCustomerStpCart(customerId);
+    		}
+    		}
     		
     		sessionMap.invalidate();
     		
-    		logger.debug("LogOffAction class - execute method - end ");
+    		logger.debug("LogOutAction class - execute method - end ");
     		
 	    	return SUCCESS;
 	    	
     	} 
     	catch ( Exception e )  {
-    		logger.error("LogOffAction class - execute method - customerId - "+customerId+" - Caught Exception");
+    		logger.error("LogOutAction class - execute method - customerId - "+customerId+" - Caught Exception");
     		e.printStackTrace();
-    	    logger.error("LogOffAction class - execute method - customerId - "+customerId+" - returned error");
+    	    logger.error("LogOutAction class - execute method - customerId - "+customerId+" - returned error");
     	    
     		return ERROR;
     	}

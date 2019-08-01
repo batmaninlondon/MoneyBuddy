@@ -28,6 +28,19 @@
         <!-- Favicon -->
        <!--  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
+        
+        <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
     </head>
     <!-- End Head -->
 
@@ -60,7 +73,7 @@
                             <!-- End Logo -->
                         </div>
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
@@ -72,18 +85,18 @@
                                     <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
-															<li><a href="<s:url action="customerCartAction"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
-															<li><a href="<s:url action="customerRedCartAction"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
 														</ul>
 													</li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
 	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
@@ -124,10 +137,10 @@
 			                    			<b>Brief Overview</b>
 		                    			</p>
 		                    			<p>
-		                    			Your privacy is very important to us. So we've developed a Privacy Policy that covers how we collect, use, disclose, and store your personal information. Please take a moment to read through this policy and let us know if you have any questions.
+		                    			Your privacy is very important to us. So we've developed a well defined Privacy Policy that covers how we collect, use, disclose, and store your personal information. Please take a moment to read through this policy and let us know if you have any questions.
 										</p>
 										<p>
-										By visiting <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> or by interacting with MoneyBuddy Financial Services Pvt. Ltd. in any other way, you are accepting this policy. 
+										By visiting <a href="www.MoneyBuddy.co.in"><u>www.MoneyBuddy.co.in</u></a> operated by Mr. Kamal Wadhwani, SEBI registered investment advisor ( registration number INA000013581 ) or by working with his advisory service in any other way, you are accepting this policy. 
 										</p>
 									</li>
                     				<li>
@@ -135,7 +148,7 @@
 		                    				<b>What data we collect and Why?</b>
 	                    				</p>
 	                    				<p>
-		                    			We would like to reiterate that MoneyBuddy is a company involved in the business of providing financial services and products to its customer. 
+		                    			We would like to reiterate that MoneyBuddy and it&apos;s affiliated entities are involved in the business of providing financial services and products to its customers. 
 										</p>
 										<p>
 										We are not in the business of hoarding and selling or renting user data to any third party. Thus any data we ask you for or collect is for either of the two reasons only: 
@@ -144,13 +157,13 @@
 											<li>
 												Information is needed for processing your mutual fund investments:
 												<ol>
-													<li type="a">This include information like your name, date or birth, address, Pan card, bank account details etc.</li>
+													<li type="a">This includes information like your name, date or birth, address, Pan card, bank account details etc</li>
 												</ol>
 											</li>
 											<li>
 												Information is needed for improving your investing experience:
 												<ol>
-													<li type="a">This includes information like your age, gender, life stage, IP address, details of purchase/ redemptions of mutual funds  etc.</li>
+													<li type="a">This includes information like your age, gender, life stage, IP address, details of purchase/ redemptions of mutual funds  etc</li>
 												</ol>
 											</li>
 										</ol>
@@ -160,7 +173,7 @@
 			                    			<b>What do we do with your data?</b>
 		                    			</p>
 		                    			<p>
-		                    			We need your PAN card number to check your KYC status as per the SEBI guidelines. Your PAN card number is shared with NSDL KRA (<a href="https://kra.ndml.in"><u>https://kra.ndml.in</u></a>) for this purpose. NSDL is one of the five organizations approved by SEBI for verifying KYC status of the user.
+		                    			We need your PAN card number to check your KYC status as per the SEBI guidelines. Your PAN card number is shared with NSDL KRA (<a href="https://kra.ndml.in">https://kra.ndml.in</a>) for this purpose. NSDL is one of the five organizations approved by SEBI for verifying KYC status of the user. 
 										</p>
 										<p>
 										We share your personal information like name, pan card number, email ID, phone number, bank details, KYC status etc with Bombay Stock Exchange (BSE) for processing your mutual fund investments. This information is mandatory as per the SEBI regulations and also enhances the safety and security of your investment.  
@@ -175,7 +188,7 @@
 										We store details of all your investments, redemptions, SIPs etc to help you visualise all your investments in one place and place withdrawal or any other request wrt your investments.
 										</p>
 										<p>
-										Along with above mentioned situations, we use your data for various other uses such as helping you chose funds as per your needs, computing your tax burden, improve your user experience by storing cookies etc.
+										Along with the above-mentioned situations, we use your data for various other uses such as helping you chose funds as per your needs, computing your tax burden, improve your user experience by storing cookies etc.
 										</p>
 										<p>
 										Finally, we would like to reiterate that we do not sell, distribute or lease your personal information to third parties unless we are required to share such information under the terms and conditions of the products and services you avail, or we are required to do so by law.
@@ -186,14 +199,14 @@
 			                    			<b>Security of your data</b>
 		                    			</p>
 		                    			<p>
-		                    			We are fully committed to ensuring the safety and security of your data. We follow a three stage strategy to achieve that goal.
+		                    			We are fully committed to ensuring the safety and security of your data. We follow a three-stage strategy to achieve that goal.
 										</p>
 										<ol>
-											<li>
+											<li >
 												By collecting the least amount of data/ information needed for a smooth investing experience
 											</li>
 											<li>
-												By using bank grade security/ encryptions to store all your data
+												By using bank-grade security/ encryptions to store all your data
 											</li>
 											<li>
 												By not sharing your data with any third party unless mandated by law or the terms and conditions of product that you have invested in

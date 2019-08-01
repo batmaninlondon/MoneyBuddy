@@ -47,7 +47,7 @@
 	
 		#errorPage #container{
 			/* The image used */
-		    background-image: url('images/errorPage/error2.jpg');
+		    /* background-image: url('images/errorPage/error2.jpg'); */
 		
 		    /* Full height */
 		    height: 100%; 
@@ -61,8 +61,33 @@
 	        width:  1000px;
 	        background-image: url('images/errorPage/error1.jpg') */
 	    }
-	
+	    
+		.center-div
+		{
+		     position: absolute;
+		     margin: auto;
+		     top: 0;
+		     right: 0;
+		     bottom: 0;
+		     left: 0;
+		     width: 500px;
+		     height: 100px;
+		}
+
 	</style>
+	
+	<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
 </head>
 
 <body id="errorPage">
@@ -84,27 +109,6 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
-                                    <%-- <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
-							         	<%  if(session.getAttribute("customerId") == null)
-										 	{   %> 
-													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/Register</a></li>
-										<%	} else 
-										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="customerCartAction"/>" class="s-header-v2__nav-link">Cart</a></li>
-										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOffAction"/>" class="s-header-v2__nav-link">Log Out</a></li>
-										<%	}	%>  
-										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
-	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
-	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
-										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
-										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
-									      	</ul>
-	                                    
-	                                    </li> --%>
                                 </ul>
                 </div>
             </div><!--/.container-->
@@ -113,22 +117,23 @@
     </header>
     
     <div id="container">
+    
+    	<div class="center-div">
+    	
+    		<p class="text-center g-font-size-20--xs">
+    			<b>Oops!</b>
+   			</p>
+   			<p class="text-center g-font-size-20--xs">
+   				It's not you. It's us. Give it another try, please.
+   			</p>
+   			<br/>
+   			<div class="text-center">
+   				<a href="welcome" role="button" class=" btn btn-default ">Try Again</a>
+			</div>
+			
+    	</div>
     </div>
-    
-    <!-- <div class="error-bg"></div>
-    <section id="errorPage"> -->
-    
-    
-    
-    <!-- <img src="images/errorPage/error1.jpg" alt=""> -->
-    
-    <!-- <div class="row" style="margin-top:50px;">
-		<div class="center">
-			<h2 style="font-family:Aparajita;font-size:35px;"><b>CAUGHT ERROR</b></h2>
-		</div>
-	</div> -->	
 
-   <!-- </section> -->
       <footer id="footer" class="midnight-blue navbar navbar-fixed-bottom" >
         <div class="container">
             <div class="row">

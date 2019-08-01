@@ -6,6 +6,7 @@ public class PendingMandateOrders implements Serializable{
 
 	private String customerId;
 	private String customerName;
+	private String mandateId;
 	private String mandateCreationDate;
 	private String mandateAmount;
 	
@@ -15,11 +16,12 @@ public class PendingMandateOrders implements Serializable{
 	}
 
 
-	public PendingMandateOrders(String customerId, String customerName, String mandateCreationDate,
+	public PendingMandateOrders(String customerId, String customerName, String mandateId, String mandateCreationDate,
 			String mandateAmount) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
+		this.mandateId = mandateId;
 		this.mandateCreationDate = mandateCreationDate;
 		this.mandateAmount = mandateAmount;
 	}
@@ -42,6 +44,16 @@ public class PendingMandateOrders implements Serializable{
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+
+
+	public String getMandateId() {
+		return mandateId;
+	}
+
+
+	public void setMandateId(String mandateId) {
+		this.mandateId = mandateId;
 	}
 
 

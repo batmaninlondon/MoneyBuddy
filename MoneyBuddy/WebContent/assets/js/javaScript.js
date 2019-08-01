@@ -233,8 +233,9 @@
 		function activatePayNowButton()
 		{
 			var iAccept = document.getElementById("iAccept").checked;
+			var mfDocuments = document.getElementById("mfDocuments").checked;
 			
-			if (iAccept)  {
+			if (iAccept && mfDocuments)  {
 				
 				$("#pay-now-button").removeClass('disabled');
 			}
@@ -327,7 +328,7 @@
                     	var OnetimeInvestment = "TRUE";
                     	document.getElementById("transaction-type").value = "UPFRONT";
                     	if (cusId == "customerIdNull") {
-                    		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
+                    		window.location='login?OnetimeInvestment='+OnetimeInvestment;
                     	} 
                     	else {
                     		document.formAddToCart.submit();
@@ -342,7 +343,7 @@
                     	var OnetimeInvestment = "FALSE";
                     	document.getElementById("transaction-type").value = "SIP";
                     	if (cusId == "customerIdNull") {
-                    		window.location='login.jsp?OnetimeInvestment='+OnetimeInvestment;
+                    		window.location='login?OnetimeInvestment='+OnetimeInvestment;
                     	} 
                     	else {
                     		document.formAddToCart.submit();

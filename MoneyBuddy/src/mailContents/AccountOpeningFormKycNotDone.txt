@@ -71,7 +71,7 @@
 	<p>Thanks a lot for trusting MoneyBuddy as your financial advisor.</p>
 	<!-- <br /> -->
 	<p>We seek your co-operation in completing the formalities as per government regulations.</p>
-	<p>You are requested to download the attached account opening form, fill up the same and send it back to us along with supporting documents.</p>
+	<p>You are requested to download the attached account opening form, fill up the same and send it back to us</p>
 	
 	<br/>
 	Email: <b style="color:#13b1cd;">kamalwadhwani@gmail.com</b>&nbsp;&nbsp;&nbsp;&nbsp;WhatsApp: <b style="color:#13b1cd;">9971648736</b>

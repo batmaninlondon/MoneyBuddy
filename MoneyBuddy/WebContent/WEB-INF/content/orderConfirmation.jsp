@@ -83,13 +83,25 @@
 		</script>
 
 	
+	<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
     </head>
 
 
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
    <div class="container ">
-   		<a href="welcome.jsp" class="s-header-v2__logo-link">
+   		<a href="welcome" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
 		</a>
@@ -311,27 +323,25 @@
 		<div class="col-md-1 col-xs-1"></div>
 		
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
-			<!-- <div class="col-md-6 col-xs-6"></div>
-			<div class="col-md-6 col-xs-6">
-				<div class="g-text-right--xs g-margin-r-30--xs ">
-					<a href="terms" style="color:black;">I agree to MoneyBuddy's Terms & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></a><br>
-				</div>
-						
-			</div> -->
-
+			
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
 	</div>
 	<div class="row g-margin-t-40--xs">
 		<div class="text-center">
-			<a href="terms" >I agree to MoneyBuddy's Terms & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" /></a><br>
+			<a href="MFDocuments" >I/We have read the scheme related document  <input id="mfDocuments" type="checkbox" onchange="activatePayNowButton();" checked/></a>
+		</div>
+	</div>
+	<div class="row g-margin-t-20--xs">
+		<div class="text-center">
+			<a href="terms" >I/We agree to MoneyBuddy's Terms</a><a href="privacyPolicy" > & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" checked/></a><br>
 		</div>
 	</div>
 	
 	<div class="row g-margin-t-o-20--xs">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="button"  id="pay-now-button" class="text-center disabled btn btn-home g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<s:property value="tranDetailId"/>');" >Invest Now</button>
+			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<s:property value="tranDetailId"/>');" >Invest Now</button>
 		</div>
 		<div class="col-md-5">
 		</div>

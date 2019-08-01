@@ -80,7 +80,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		System.out.println("incorrectPassword ");
 	    		/*str = "incorrectPassword";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage("Invalid Password, Please enter correct password");
+	    		addActionMessage("Incorrect Password, Please enter correct password");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned incorrectPassword");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 		    	
@@ -167,7 +167,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	//System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
 	    	
 	    	//System.out.println("Value of session variale OnetimeInvestment : "+ sessionMap.get("OnetimeInvestment"));
-	    	if ("TRUE".equals(sessionMap.get("fundSelected"))) {
+	    	/*if ("TRUE".equals(sessionMap.get("fundSelected"))) {*/
 
 /*	    		if ("TRUE".equals(sessionMap.get("OnetimeInvestment"))) {
 	    			System.out.println("fundOnetimeSelected");
@@ -200,8 +200,8 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		else {
 	    			System.out.println("sessionMap.get FolioNumList :"+sessionMap.get("FolioNumList").toString()+":");
 	    		}*/
-	    		return "fundSelected";
-	    	}
+	    		/*return "fundSelected";
+	    	}*/
 	    	
 	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
 	    	

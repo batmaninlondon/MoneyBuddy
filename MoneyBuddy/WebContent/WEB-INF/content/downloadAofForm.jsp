@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
     <head>
@@ -22,47 +20,138 @@
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
         <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+        
+        <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1416665,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
 
     </head>
     <!-- End Head -->
 
     <!-- Body -->
-   <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
-   <div class="container ">
-   		<a href="welcome.jsp" class="s-header-v2__logo-link">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
-		</a>
-	</div>
-	<div class="row">
+    <body>
+		<div id="load" class="load"></div>
+	<div id="content">
+    <!--========== HEADER ==========-->
+        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="g-padding-l-80-md g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="welcome" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
+										<%	} else 
+										 	{	%>
+										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+														</ul>
+													</li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+										<li id="dropdown-selector" class=" btn-group s-header-v2__nav-item dropdown">
+	                                        <a href="#" class="s-header-v2__nav-link -is-active dropdown-toggle" data-toggle="dropdown" role="button" >Help<span class="caret"></span></a>
+	                                    	<ul  id="dropdown-selection" class="dropdown-menu g-margin-t-o-30--xs " role="menu">
+										        <li><a class="dropdown-item s-header-v2__nav-link  g-color--white" href="FAQs">FAQs</a></li>
+										        <li><a class="dropdown-item s-header-v2__nav-link g-color--white" href="contactUs">Contact Us</a></li>
+									      	</ul>
+	                                    
+	                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+
+        <!--========== PROMO BLOCK ==========-->
+        <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;"> -->
+         <div class="g-bg-color--dark">
+         
+            <div class=" g-text-center--xs g-padding-y-80--xs g-margin-l-50--lg g-margin-r-50--lg">
+            <br/><br/>
+
+	<!-- <div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:70px;">
 	     </div>
 	     <div class="col-md-1 col-xs-1"></div>
-	</div>
+	</div> -->
 
+	<div class="row">
+		<div class="col-md-1 col-xs-1"></div>
+		
+		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+
+	     </div>
+	     <div class="col-md-1 col-xs-1"></div>
+	</div>
+	
+	
 	<div class="row g-height-auto--lg" >
 		<div class="col-md-1 col-xs-1" ></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--white " >
 		
 			
-			<div class="row g-margin-t-15--xs">
-				<div class="col-md-2"></div>
-				<div class="col-md-10">
-					<h4 class="title ">Dear <s:property value="#session.customerName" />,</h4>
+			<div class="text-center row g-margin-t-15--xs">
+				<div>
+					<h4 class="title text-center ">Dear <s:property value="#session.customerName" />,</h4>
 				</div>
 			</div>
 			<br/>
-				
-			<div class="row text-center g-margin-t-15--xs">
-				<h4 class="title g-margin-l-120--md g-margin-l-20--xs text-center">To ensure the safety of your investments, we require two-step verification</h4>
-			</div>
+			
 			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
 					
 			</div>
 			
 				
-				<h5 class="text-center"> Kindly download your Account Opening Form for the same</h5>
+				<p class="text-center g-font-size-20--xs"> Kindly download your Account Opening Form</p>
 				<br/>
 				<div class="row g-margin-t-o-20--xs">
 					<div class="col-md-5"></div>
@@ -77,17 +166,16 @@
 				</div> 
 				<br/>
 				<br/>
-				<h5 class="text-center"> Please verify your details and email signed form to admin@MoneyBuddy.co.in</h5>
+				<p class="text-center g-font-size-20--xs"> Please verify your details & Email the signed form to admin@MoneyBuddy.co.in</p>
 				<br/>
-				<h5 class="text-center"> PS: This is a one time process, required as per the govt. regulations</h5>
+				<p class="text-center g-font-size-20--xs"> <b>PS:</b> This is a One time process to comply with SEBI regulations</p>
 				
 			<br/>
 	     </div>
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
 	
-
-	<div class="row">
+		<div class="row">
 		<div class="col-md-1 col-xs-1"></div>
 		
 		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
@@ -96,7 +184,98 @@
 	     <div class="col-md-1 col-xs-1"></div>
 	</div>
 	
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
+	
+            </div>
+        </div>
+        
+        <!--========== END PROMO BLOCK ==========-->
+
+        <!--========== END PAGE CONTENT ==========-->
+
+        <!--========== FOOTER ==========-->
+        <footer class="g-bg-color--dark">
+            <!-- Links -->
+            <div class="g-hor-divider__dashed--white-opacity-lightest">
+                <div class="container g-padding-y-80--xs">
+                    <div class="row">
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.linkedin.com/in/money-buddy-94a73814a/">Linkedin</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
+                            <p class="g-color--white-opacity">
+                            No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
+                        </div>
+                    </div>
+                    <div class="row  g-font-size-12--xs">
+                    <br/>
+                    	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+                    	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
+                    </div>
+                </div>
+            </div>
+            <!-- End Links -->
+
+            <!-- Copyright -->
+            <div class="container g-padding-y-50--xs">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="index.html">
+                            <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
+                        </a>
+                    </div>
+                     <div class="col-sm-6 g-text-right--xs">
+                    &copy; 2019 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                </div>
+                </div>
+            </div>
+            <!-- End Copyright -->
+        </footer>
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+
+       
+	</div>
+    </body>
+     <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+        <!-- Vendor -->
+        <script>
+         document.onreadystatechange = function () {
+			  var state = document.readyState
+			  if (state == 'interactive') {
+			       document.getElementById('contents').style.visibility="hidden";
+			  } else if (state == 'complete') {
+			      setTimeout(function(){
+			         document.getElementById('interactive');
+			         document.getElementById('load').style.visibility="hidden";
+			         document.getElementById('contents').style.visibility="visible";
+			      },1000);
+			  }
+			}
+         </script>
+         		<script type="text/javascript" src="assets/js/javaScript.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>
 	 	<script src="assets/js/jquery.js"></script>
@@ -111,7 +290,22 @@
 	  	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-		
-</body>
+    
+    	<%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
+        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script>
+        <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script> --%>
+        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
+
+        <!-- General Components and Settings -->
+        <%-- <script type="text/javascript" src="js/global.min.js"></script>
+        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="js/components/scrollbar.min.js"></script>
+        <script type="text/javascript" src="js/components/faq.min.js"></script> --%>
+        <!--========== END JAVASCRIPTS ==========-->
     <!-- End Body -->
 </html>

@@ -12,7 +12,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
-import com.myMoneyBuddy.DAOClasses.QueryBankName;
+import com.myMoneyBuddy.DAOClasses.QueryDisplayName;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,11 +39,11 @@ public class RedirectStpAction extends ActionSupport  implements SessionAware{
 	    	QueryBankDetails queryBankDetails = new QueryBankDetails();
 	    	BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
 	    	String bankName = bankDetails.getBankName();
-	    	QueryBankName queryBankName = new QueryBankName();
+	    	QueryDisplayName queryDisplayName = new QueryDisplayName();
 	    	DesEncrypter desEncrypter = new DesEncrypter();
 			String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
 			
-			setDisplayBankName(queryBankName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
+			setDisplayBankName(queryDisplayName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
 			
 			logger.debug("RedirectStpAction class - execute method - customerId - "+customerId+" - returned orderConfirmationForStp");
 	    	logger.debug("RedirectStpAction class - execute method - customerId - "+customerId+" - end");

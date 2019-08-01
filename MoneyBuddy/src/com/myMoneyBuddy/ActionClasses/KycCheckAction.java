@@ -48,6 +48,12 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     private String residentialPin;
     private String residentialCountry;
     
+    private String placeOfBirth;
+	private String countryOfBirth;
+	private String taxResidency;
+	private String incomeSlab;
+    private String politicallyExposed;
+    
     private String bankName;
     private String accountType;
 	private String accountNumber;
@@ -130,8 +136,8 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			    	
 			UpdateCustomerDetails updateCustomerDetails = new UpdateCustomerDetails();
 			updateCustomerDetails.updateCustomerDetails(customerId, frmtdDateForDB, getAddressLineOne(), getAddressLineTwo(), getAddressLineThree(), 
-					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(),
-					getOccupation(),getNomineeName(), getNomineeRelationship());
+					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(), getOccupation(),
+					getNomineeName(), getNomineeRelationship(),getPlaceOfBirth(),getCountryOfBirth(),getTaxResidency(),getIncomeSlab(),getPoliticallyExposed());
 	    	
 			UpdateCustomer updateCustomer = new UpdateCustomer();	
 			updateCustomer.updateCustomerData(customerId, getPanCard(), kycStatus,getCustomerName(), "Y");
@@ -170,6 +176,8 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    		}
 		    		
 		    	}
+		    	
+		    	trading.fatcaUpload(customerId);
 	    	
 		    	
 		    	// Generate Mandate Id block - START
@@ -387,6 +395,56 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
+	}
+
+
+	public String getPlaceOfBirth() {
+		return placeOfBirth;
+	}
+
+
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth = placeOfBirth;
+	}
+
+
+	public String getCountryOfBirth() {
+		return countryOfBirth;
+	}
+
+
+	public void setCountryOfBirth(String countryOfBirth) {
+		this.countryOfBirth = countryOfBirth;
+	}
+
+
+	public String getTaxResidency() {
+		return taxResidency;
+	}
+
+
+	public void setTaxResidency(String taxResidency) {
+		this.taxResidency = taxResidency;
+	}
+
+
+	public String getIncomeSlab() {
+		return incomeSlab;
+	}
+
+
+	public void setIncomeSlab(String incomeSlab) {
+		this.incomeSlab = incomeSlab;
+	}
+
+
+	public String getPoliticallyExposed() {
+		return politicallyExposed;
+	}
+
+
+	public void setPoliticallyExposed(String politicallyExposed) {
+		this.politicallyExposed = politicallyExposed;
 	}
 
 
