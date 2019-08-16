@@ -302,12 +302,7 @@
             	
               };
               
-              function submitRegister(googleResponse){
-              	
-                	document.getElementById("google-response-register").value = googleResponse;
-                	document.formRegister.submit();
-                	
-               };
+             
               
                function submitLogin(googleResponse){
               	 
@@ -335,6 +330,18 @@
                     	}
                     	
                     }
+                    
+                    function submitRegister(googleResponse){
+                    	
+                  	  
+                    	document.getElementById("google-response-register").value = googleResponse;
+                    	document.formRegister.submit();
+                    	
+                    	/* document.formRegister.submit(); */
+                    	
+                  	 
+                    	
+                   };
                     
                     function callSIPInvestment()  
                     {

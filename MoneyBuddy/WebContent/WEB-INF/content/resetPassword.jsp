@@ -32,6 +32,40 @@
         r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    
+    
+    function showAlert()   {
+    	
+    	var newPswd = document.getElementById("new-password");
+		 var confirmPswd = document.getElementById("confirm-password");
+		 
+		 var invalid =  (newPswd.value == "") ||
+		 			(!new RegExp(newPswd.getAttribute("pattern")).test(newPswd.value)) ||
+		 			(!(newPswd.value == confirmPswd.value));
+		 
+		 if ( invalid )  {
+				if ( newPswd.value == "" )  {
+					alert('Password can not be blankk ');
+					return false;
+				}
+				else if ( !new RegExp(newPswd.getAttribute("pattern")).test(newPswd.value)) {
+					alert('Password must contain at least 8 characters ');
+					return false;
+				}
+				else if ( !(newPswd.value == confirmPswd.value)) {
+					alert('Passwords must match.');
+					return false;
+				}
+		 }
+		 else {
+			 alert('Your password has been successfully reset ! ');
+			 document.getElementById("new-pswd").value = newPswd.value;
+
+			 document.formResetPassword.submit(); 
+		 }
+		 
+		 
+    }
 </script>
 
 
@@ -81,7 +115,6 @@
 								    System.out.println("hello from  jsp : value of hashedPassword : "+hashedPassword);
 								    QueryCustomer queryCustomer = new QueryCustomer();
 								    String emailId = queryCustomer.getEmailId(hashedPassword);
-								    
 								%>	
 								<%
 									if ( !"NotExist".equals(emailId))  {
@@ -89,36 +122,36 @@
 								<h3 class="text-center g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--dark text-left font-weight-bold   g-margin-t-20--xs"><b>Reset Password</b></h3>
 	                    		<div class="g-color--text g-font-family--playfair g-letter-spacing--1" style=" text-align: justify; height : 300px; overflow : auto;" >
 	                    		
-                <s:form  action="resetPasswordAction" method="post" >
+                
+                <s:form  action="resetPasswordAction" method="post" name="formResetPassword" namespace="/">
 				<s:set var="cusEmailId" ><%=emailId%></s:set>
 				<s:set var="cusPswd" ><%=hashedPassword%></s:set>
 				<s:hidden id="email-id" name="emailId" value="%{#cusEmailId}" />
 				<s:hidden id="hashed-password" name="hashedPassword" value="%{#cusPswd}" />
-                
+				<s:hidden id="new-pswd" name="newPassword" />
+                </s:form>
                 <div id="reset-password-form" class="center-block g-width-500--sm g-width-550--md" >
 					<div class="g-margin-b-20--xs">
 						<s:actionmessage class="small-text"/> 
                         
                     </div>
                     <div class="g-margin-t-100--xs">
-                        <s:fielderror fieldName="newPassword" class="g-color--red" />
-			  			<s:password class="form-control " name="newPassword" placeholder="* Password" /> 
+			  			<s:password class="form-control " id="new-password" pattern=".{8}$" placeholder="* Password" /> 
                     </div>
                     <div class="g-margin-t-10--xs">
-                    	<s:fielderror fieldName="confirmPassword" class="g-color--red" />
-			  			<s:password class="form-control" name="confirmPassword" placeholder="* Confirm Password" />
+			  			<s:password class="form-control" id="confirm-password" placeholder="* Confirm Password" />
                     </div>
                     <br/>
                     
                     <div class="g-text-center--xs">
-                    	<s:submit class="text-uppercase btn btn-home g-margin-b-20--xs" value="RESET PASSWORD"  />
+                    	<s:submit class="text-uppercase btn btn-home g-margin-b-20--xs" onClick="showAlert();" value="RESET PASSWORD"  />
                         
                     </div>
                     
                    
                 </div>
                 
-                </s:form>
+                
                 
                 <%
 									}

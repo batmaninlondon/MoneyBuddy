@@ -289,7 +289,7 @@
 										                <th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Invested Amount</span></th>
 														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Profit</span></th>
 														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Current Value</span></th>
-														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Growth Rate</span></th>
+														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Growth Rate (%)</span></th>
 										            </tr>
 										        </thead>
 										         <tbody>
@@ -308,7 +308,7 @@
                             							</td>
 														<td class="text-center" >
 															<figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
-                            								<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span>
+                            								<%-- <span class="g-font-size-30--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span> --%>
                             							</td>
 										            </tr>
 										        </tbody>
@@ -416,7 +416,7 @@
 	              	</div>
 	             </div>
 	              
-        		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
+        		<%-- <s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
   					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
@@ -432,7 +432,7 @@
   					<s:hidden id="folio-num-redeem-value" name="folioNum"></s:hidden>
   					<s:hidden id="total-amount-redeem-value" name="totalAmount"></s:hidden>
   					<s:hidden id="total-quantity-redeem-value" name="totalQuantity"></s:hidden>
-				</s:form>
+				</s:form> --%>
 				
 				
 	              <!-- Added Table for SIP - end  -->
@@ -791,6 +791,7 @@
 				  		$("#tot-prof-amt").html(TUTORIAL_SAVVY.addCommas(totalProAmt));
 				  		$("#tot-cur-amt").html(TUTORIAL_SAVVY.addCommas(totalCurrAmt));
 				  		$("#tot-grwth-amt").html(totalGrwthAmt);
+				  		
 				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
 				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
 				  		TUTORIAL_SAVVY.createOldPortfolioDataArray(oldPortfolioData);
@@ -1253,6 +1254,7 @@
 					        var data = table.row( $(this).parents('tr') ).data();
 					        var fundId = data[0];
 					        var folioNum = data[2];
+					        
 					        buyFundHandler(fundId,folioNum);
 					    } ); 
 					  

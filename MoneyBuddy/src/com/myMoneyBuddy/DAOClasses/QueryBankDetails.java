@@ -61,7 +61,7 @@ public class QueryBankDetails {
 
 	}
 	
-/*	public boolean existsBankDetails(String customerId) throws MoneyBuddyException {
+	public boolean existsBankDetails(String customerId) throws MoneyBuddyException {
 		
 		logger.debug("QueryBankDetails class - existsBankDetails method - customerId - "+customerId+" - start");
 		
@@ -102,7 +102,7 @@ public class QueryBankDetails {
 					hibernateSession.close();
 		}
 
-	}*/
+	}
 
 	public boolean sameBankDetailsExists(String customerId,String bankName, String accountType, 
 						String accountNumber, String ifscCode) throws MoneyBuddyException {

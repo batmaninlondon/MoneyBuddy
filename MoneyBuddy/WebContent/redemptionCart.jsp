@@ -374,7 +374,19 @@ input[type="range"] {
    			var selects = r.getElementsByTagName("select");
    			var inputs = r.getElementsByTagName("input");
    			
-   			if (selects[1].value == "Amount"){  
+   			if (selects[0].value == "Select"){  
+	   			
+	   	        	alert('Please select Full or Partial in Redemption Option  \n at Row'+i);
+	   	        	return false;
+	   			
+   			}
+   			else if (selects[0].value == "Partial" && selects[1].value == "Select"){  
+	   			
+	   	        	alert('Please select Amount or Units in Redemption Type  \n at Row '+i);
+	   	        	return false;
+	   			
+   			}
+   			else if (selects[1].value == "Amount"){  
 	   			if (inputs[0].value == ""|| inputs[0].value ==  null)  {
 	   	        	alert('value of amount can not be blank \n at Row '+i);
 	   	        	return false;

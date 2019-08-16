@@ -35,6 +35,8 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     		
     		logger.debug("BuyFundAction class - execute method - start ");
     		
+    		System.out.println(" calling BuyFundAction ! ");
+    		
     		QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
     		PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(getFundId());
     		HashMap<String,Double> productRatioList =  new HashMap<String,Double>();

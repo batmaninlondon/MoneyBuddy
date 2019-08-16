@@ -340,6 +340,27 @@ public class QueryProducts {
 				     xirr = Newtons_method(0.1, amounts, dates);
 				     xirr = xirr*100;
 				     
+					String frmtXirr ;
+						/*System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
+						
+						String totXirr = String.format("%.2f", totalXirr);*/
+						if (( (new Double(Double.NaN)).equals(xirr )) || xirr <= 0.0 )  {
+							
+							frmtXirr = "NA"; 
+						}
+						else {
+							
+							if (String.valueOf(xirr).toLowerCase().contains("e")) {
+						       
+								frmtXirr = Double.toString(xirr).replace("e", "0");
+								frmtXirr = Double.toString(xirr).replace("E", "0");
+						    } else
+						    	frmtXirr =  String.valueOf(xirr);
+							
+							
+							frmtXirr = String.format("%.2f", Double.parseDouble(frmtXirr));
+						}
+				     
 				     String stpAllowed = "Y";
 				     if ("Y".equals(queryRow[6].toString()))   {
 				    	 
@@ -366,7 +387,7 @@ public class QueryProducts {
 					
 				     portfolioDataModel.add(new PortfolioDataModel(rowFunds[0].toString(),schemeName,queryRow[0].toString(),
 				    		  String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),
-				    		  String.format("%.2f",(currentAmount-investedAmount)),String.format("%.2f",xirr),transactionStartDate,schemeType,
+				    		  String.format("%.2f",(currentAmount-investedAmount)),frmtXirr,transactionStartDate,schemeType,
 				    		  stpAllowed));
 	
 				}
@@ -396,7 +417,7 @@ public class QueryProducts {
 			
 			String totXirr = String.format("%.2f", totalXirr);*/
 			if (( (new Double(Double.NaN)).equals(totalXirr )) || totalXirr <= 0.0 )  {
-				System.out.println(" totalXirr is NaN yippi ");
+				
 				totXirr = "NA"; 
 			}
 			else {
@@ -404,12 +425,12 @@ public class QueryProducts {
 				if (String.valueOf(totalXirr).toLowerCase().contains("e")) {
 			       
 					totXirr = Double.toString(totalXirr).replace("e", "0");
+					totXirr = Double.toString(totalXirr).replace("E", "0");
 			    } else
 			    	totXirr =  String.valueOf(totalXirr);
 				
 				
 				totXirr = String.format("%.2f", Double.parseDouble(totXirr));
-				System.out.println(" totalXirr is not NaN yippi");
 			}
 			
 			

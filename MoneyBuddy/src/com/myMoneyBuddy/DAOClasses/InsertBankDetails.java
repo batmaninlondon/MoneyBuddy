@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.myMoneyBuddy.EntityClasses.BankDetails;
@@ -35,7 +36,28 @@ public class InsertBankDetails {
 			Date date = new Date();
 			String frmtdDateForDB = dateFormat.format(date);
 			
+			QueryBankDetails queryBankDetails = new QueryBankDetails();
+			if (queryBankDetails.existsBankDetails(customerId))  {
+			
+				hibernateSession.beginTransaction();
+				
+				Query query = hibernateSession.createQuery("update BankDetails set bankName = :bankName, accountType = :accountType,"
+						+ " accountNumber = :accountNumber, ifscCode = :ifscCode, updateDate = :updateDate where customerId = :customerId");
+
+				query.setParameter("bankName", bankName);
+				query.setParameter("accountType", accountType);
+				query.setParameter("accountNumber", accountNumber);
+				query.setParameter("ifscCode", ifscCode);
+				query.setParameter("updateDate", frmtdDateForDB);
+				query.setParameter("customerId", customerId);
+
+				int result = query.executeUpdate();
+				hibernateSession.getTransaction().commit();
+				
+			}
+			else {
 			hibernateSession.beginTransaction();
+			
 			
 			BankDetails tempBankDetails = new BankDetails(customerId, bankName, accountType,
 					accountNumber, ifscCode, frmtdDateForDB);
@@ -43,6 +65,7 @@ public class InsertBankDetails {
 			hibernateSession.save(tempBankDetails);
 
 			hibernateSession.getTransaction().commit();
+			}
     		
 			logger.debug("InsertBankDetails class - insertBankDetail method - customerId - "+customerId+" - new record inserted in BankDetails table");
     		

@@ -97,9 +97,12 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					mandateId,getTranDetailId(), sessionMap);
 	    	
 	    	System.out.println("paymentUrl : "+paymentUrl);
-
-			if (null == paymentUrl)
+	    	UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
+			if (null == paymentUrl)  {
+				
+				updateCustomerCart.emptyCustomerCart(customerId);
 	    		return "sipOrderFofN";
+			}
 			
 			if ( !paymentUrl.equals("NotSet")) {
 			
@@ -107,7 +110,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 					setActionMsg("ActionMsg-"+paymentUrl);
 					return "failedWithPaymentGateway";
 				}
-				UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
+				
 				updateCustomerCart.emptyCustomerCart(customerId);
 				setPaymentUrl(paymentUrl);
 				return SUCCESS;

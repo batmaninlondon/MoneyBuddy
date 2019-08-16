@@ -164,6 +164,56 @@ public class QueryTransactionDetails {
 					hibernateSession.close();
 		}
 	}
+	public List<String> getPendingBseOrderId() throws MoneyBuddyException {
+		
+		 
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		List<String> bseOrderIdList = new LinkedList<String>();
+	
+		try
+		{
+			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - start");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select bseOrderId from TransactionDetails where transactionStatus='7' ");
+			
+			List<String> list = query.list();
+			
+			
+			for ( int i = 0; i < list.size() ;i++ ) {
+				
+				String bseOrderId = "";
+				if (!(null == list.get(i)))  {
+					bseOrderId = list.get(i).toString();
+					bseOrderIdList.add(bseOrderId);
+				}
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			
+			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - return pendingNavOrders containg bseOrderId and folioNum records for transactionStatus 7 ");
+			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - end");
+			
+			return bseOrderIdList;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryTransactionDetails class - getPendingBseOrderId method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryTransactionDetails class - getPendingBseOrderId method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+
 	
 	public List<PendingNavOrders> getPendingNavsOrders() throws MoneyBuddyException {
 		

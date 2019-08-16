@@ -137,6 +137,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
 		
+		System.out.println(" VALUE OF totalRateOfGrowth :"+totalRateOfGrowth+":");
+		System.out.println(" VALUE OF getTotalRateOfGrowth :"+getTotalRateOfGrowth()+":");
+		
 		/*sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
 		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+sessionMap.getClass().getName());
 		*/

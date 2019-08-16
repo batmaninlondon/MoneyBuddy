@@ -514,6 +514,7 @@
 	              
         		<s:form  action="buyFundAction" method="post" name="formBuyFundAction">
   					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
+  					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
 				</s:form>
 				
 				<s:form  action="fetchAvailableStpFundsAction" method="post" name="formFetchAvailableStpFundsAction">

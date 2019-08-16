@@ -39,6 +39,7 @@ public class SendMail {
     public void MailSending(String emailId, String subject, String mailType,String fileName,
     		String mailLink,String displayLinkName, String customerName) throws MoneyBuddyException {
     	
+    	
     	logger.debug("sendMail class : MailSending method : start");
     	logger.debug(mailType+" has been sent to "+emailId);
     	

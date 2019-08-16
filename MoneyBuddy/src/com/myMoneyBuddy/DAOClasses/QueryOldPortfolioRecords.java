@@ -37,7 +37,7 @@ public class QueryOldPortfolioRecords {
 			System.out.println("fetchIsin : schemeName :"+schemeName+":");
 			hibernateSession.beginTransaction();
 			String selIsin = hibernateSession.createQuery("select distinct(isin) from OldPortfolioRecords "
-					+ " where customerId = '"+customerId+"' and schemeName = '"+schemeName+"' ").uniqueResult().toString();
+					+ " where schemeName = '"+schemeName+"' ").uniqueResult().toString();
 			hibernateSession.getTransaction().commit();
 			
 

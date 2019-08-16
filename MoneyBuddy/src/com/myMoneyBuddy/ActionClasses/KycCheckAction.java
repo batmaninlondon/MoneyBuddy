@@ -182,6 +182,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    	
 		    	// Generate Mandate Id block - START
 		    	
+		    	if ( queryCustomer.getIsipMandateId(customerId)  == null )  {
 		    	String mandateIdResponse = trading.generateMandateId(customerId, "I", getAccountNumber(), getAccountType(), getIfscCode());
 				
 				String[] mandateIdResponseSpilts = mandateIdResponse.split("\\|"); 
@@ -194,7 +195,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    	
 		    	InsertCustomerDetails insertCustomerDetails = new InsertCustomerDetails();
 		    	insertCustomerDetails.updateMandateId(mandateId, customerId);
-		    	
+		    	}
 		    	// Generate Mandate Id block - END
 		    	
 	    	

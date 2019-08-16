@@ -199,12 +199,18 @@ textarea {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
+  
+
 }
+
 .button:hover, .button:focus {
   background: #4ee0e4;
   color: #555;
    cursor:pointer;
 }
+/* .button[disabled]:hover, .button[disabled]:focus {
+  background: #ff8040;  
+} */
 
 .button-block {
   display: block;

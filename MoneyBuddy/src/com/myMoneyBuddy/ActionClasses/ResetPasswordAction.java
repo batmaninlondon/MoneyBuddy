@@ -23,7 +23,6 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
     private String emailId;
     private String hashedPassword;
     private String newPassword;
-    private String confirmPassword;
     private SessionMap<String,Object> sessionMap;
     //private InputStream stream;
 
@@ -51,7 +50,9 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
 		    if(sessionMap!=null){  
 	            sessionMap.invalidate();  
 	        } 
-	
+		    
+		    
+		    sessionMap.put("name", emailId);
 	    	/*String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("ResetPasswordAction class - execute method - customerId - "+customerId+" - returned success");
@@ -92,14 +93,6 @@ public class ResetPasswordAction extends ActionSupport implements SessionAware {
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getNewPassword() {
