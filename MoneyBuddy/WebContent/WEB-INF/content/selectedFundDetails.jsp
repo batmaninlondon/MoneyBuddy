@@ -1,29 +1,122 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%-- <%@ page language="java"
-	import="com.myMoneyBuddy.GAT.PredictedValueCalculation"%> --%>
-<%@taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html >
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Fund Details | Money Buddy</title>
-    <!-- core CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
-	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
- 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-   <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
-   	<link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
-    
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-    
-    
-    <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-    
+    pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<html lang="en" class="no-js">
+    <!-- Begin Head -->
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>MoneyBuddy-Top Performing Mutual Funds</title>
+		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+	
+        <!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+
+        <!-- Theme Styles -->
+        <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+ 	
+  
+  <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+  
+  
+ <script>
+		
+</script>
+
+
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1418 .add-to-cart {
+  position: absolute;
+  height:50px;
+  top: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+ // background-color: #409ad5;
+   background-color: black;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.snip1418 figcaption {
+//  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+
+</style>
+
 <!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
 <script>
     (function(h,o,t,j,a,r){
@@ -35,12 +128,14 @@
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
-</head>
 
-<body >
-	<div id="load" class="load"></div>
-	<div id="content">
-	<!--========== HEADER ==========-->
+
+    </head>
+    <!-- End Head -->
+
+    <!-- Body -->
+    <body >
+<!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -68,7 +163,7 @@
                         
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
                             <!-- Collect the nav links, forms, and other content for toggling -->
-                           <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
@@ -83,12 +178,12 @@
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
-														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
-															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
-															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
-														</ul>
-													</li>
+			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        	</ul>
+			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
@@ -109,8 +204,9 @@
             <!-- End Navbar -->
         </header>
         <!--========== END HEADER ==========-->
-		<%-- <%session.setAttribute("fundSelected", "TRUE");%> --%>
-		<div class="g-bg-color--dark">
+
+        <!--========== PAGE CONTENT ==========-->
+<div class="g-bg-color--dark">
             <div class="container g-padding-y-45--xs">
             </div>
         </div>
@@ -131,25 +227,25 @@
 				%>
         	</div> 
         	<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
-        	<div class=" g-bg-color--primary-white  " >
+        	<div  >
 		 		<div class="container ">
 			 		<div class="row  ">
 					 		<div class="col-md-12 col-xs-12 g-text-center--sm ">
 					 			<input type="hidden" id="fundId" value="<s:property value="#fundDetails.fundId"/>" />
-					 		 	<h1 class="g-font-size-22--xs g-font-size-35--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
+					 		 	<h1 class="text-center g-font-size-14--xs g-font-size-22--lg  g-margin-t-20--xs g-color--primary "><b><s:property value="#fundDetails.schemeName"/></b></h1>
 				            </div>
 		            </div> 
-		            <br><br>
+		            <br>
 		            <div class="row ">
 					 		<div class="col-md-8 col-xs-12  g-margin-b-25--xs">
 					 		 	<table id="portfoliosummary" class="display" >
 										        <tbody>
 										         <tr  >
-										                <td colspan="2" ><span class=" g-color--primary "><b>Fund Details</b></span></td>
+										                <td colspan="2" ><span class=" g-color--primary g-font-size-12--xs g-font-size-16--lg "><b>Fund Details</b></span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" >
-										                	<span class=" g-font-size-14--xs g-font-size-5--xs">
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td>
+										                	<span>
 											                	<s:if test="#fundDetails.rating.equals('5'.toString())">
 															        <span class="fa fa-star g-color--primary"></span>
 																	<span class="fa fa-star g-color--primary"></span>
@@ -187,19 +283,19 @@
 																</s:if>
 															</span>
 										                </td>
-														<td class="" ><span class=" g-font-size-14--xs"><b>Risk :</b> <s:property value="#fundDetails.risk"/></span></td>
+														<td><span><b>Risk :</b> <s:property value="#fundDetails.risk"/></span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>Scheme Type :</b> <s:property value="#fundDetails.schemeType"/></span></td>
-														<td class="" ><span class=" g-font-size-14--xs"><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span><b>Scheme Type :</b> <s:property value="#fundDetails.schemeType"/></span></td>
+														<td><span><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><b>AUM :</b> &#8377; 4,039.34 Cr </span></td>
-										                 <td class="" ><span class=" g-font-size-14--xs"><b>Inception Date:</b> <s:property value="#fundDetails.startDate" /></span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span><b>AUM :</b> &#8377; 4,039.34 Cr </span></td>
+										                <td><span><b>Inception Date:</b> <s:property value="#fundDetails.startDate" /></span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td ><span class=" g-font-size-14--xs g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minSipAmount]})}"/><small> /month</small></span></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-3--xs "><b>Min Onetime Investment :</b> &#8377; <s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minPurchaseAmount]})}"/></span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td ><span class="g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minSipAmount]})}"/><small> /month</small></span></td>
+										                <td><span><b>Min Onetime Investment :</b> &#8377; <s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minPurchaseAmount]})}"/></span></td>
 										            </tr>
 										        </tbody>
 								</table>
@@ -211,7 +307,7 @@
                 				<table id="portfoliosummary" class="display" >
 										        <tbody>
 										            <tr  >
-										                <td colspan="2" ><span class=" g-color--primary "><b>Past Returns (% per year)</b></span></td>
+										                <td colspan="2" ><span class=" g-color--primary  g-font-size-12--xs g-font-size-16--lg "><b>Past Returns (% per year)</b></span></td>
 										            </tr>
 										            
 										            <%-- <tr >
@@ -222,25 +318,25 @@
 										                <td class="" >&nbsp;</td>
 										                 <td class="" ></td>
 										            </tr> --%>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 1 Year 	 </span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span> 1 Year 	 </span></td>
 										                <td></td>
-														<td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsOneYear"/>&nbsp;&nbsp;%</span></td>
+														<td><span><s:property value="#fundDetails.returnsOneYear"/>&nbsp;&nbsp;%</span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> 3 Year </span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span> 3 Year </span></td>
 										                <td></td>
-										                 <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsThreeYears" />&nbsp;&nbsp;%</span></td>
+										                 <td><span><s:property value="#fundDetails.returnsThreeYears" />&nbsp;&nbsp;%</span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs"> 5 Year</span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span> 5 Year</span></td>
 										                <td></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"> <s:property value="#fundDetails.returnsFiveYears" />&nbsp;&nbsp;%</span></td>
+										                <td><span> <s:property value="#fundDetails.returnsFiveYears" />&nbsp;&nbsp;%</span></td>
 										            </tr>
-										            <tr style=" border-bottom: solid 0.5px gray;">
-										                <td class="" ><span class=" g-font-size-14--xs"> Since Inception</span></td>
+										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
+										                <td><span> Since Inception</span></td>
 										                <td></td>
-										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><s:property value="#fundDetails.returnsSinceInception" />&nbsp;&nbsp;%</span></td>
+										                <td><span><s:property value="#fundDetails.returnsSinceInception" />&nbsp;&nbsp;%</span></td>
 										            </tr>
 										        </tbody>
 										    </table>
@@ -263,12 +359,12 @@
 									<s:hidden id="sip-date-value" name="sipDate"></s:hidden>
 									<s:hidden id="transaction-type-value" name="transactionType" value="UPFRONT"></s:hidden>
 							  	</s:form> --%>
-							  	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
+							  	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs g-font-size-14--xs g-font-size-18--lg" >Invest Lumpsum</a>
 		                    </div>
 		                    
 		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
 			             		<div class="col-md-2 col-xs-5 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
-			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs" style="width:150px;">Start SIP</a>
+			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs g-font-size-14--xs g-font-size-18--lg">Start SIP</a>
 			                    </div>
 		                    </s:if>
 		                    <div class="col-md-2 col-xs-1">
@@ -287,40 +383,14 @@
 	                	  <iframe class="g-height-400--xs g-height-600--lg" src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%;" ></iframe>
 	               </div> 
 	               
-	               <!-- <div class="g-box-shadow__dark-lightest-v4">
-	                	<div class="row " >
-		             		<div class="col-md-12 col-xs-12 g-full-width--xs  g-bg-color--white " >
-		             			<div class="g-text-center--xs g-margin-b-10--xs g-margin-t-40--xs">
-		                			<ul class="nav nav-tabs">
-		    							<li><a data-toggle="tab" href="#funddetails">Fund Details</a></li>
-		    							<li class="active"><a data-toggle="tab" href="#pastreturns" >Past Returns</a></li>
-		 							</ul>
-		                		</div> 
-			              		</div>
-	                	</div>   
-	                	<div class="row" >
-	             			<div class="col-md-12 col-xs-12 g-full-width--xs g-bg-color--white " >
-	             				<div class="g-text-center--xs g-margin-b-10--xs g-margin-t-40--xs">
-	                				<div class="tab-content">
-	   		 							<div id="funddetails" class="tab-pane fade">
-	   		 								<iframe src="img/riskometer/4373-A-fact-sheet.pdf" style="width:100%; height:500px;" frameborder="0"></iframe>
-	   								 	</div>
-	   								 	<div id="pastreturns" class="tab-pane fade in active ">
-	    									<div class="row g-margin-t-50--xs"><img src="img/riskometer/Low.jpg" height="150"/></div>
-	    								</div>
-	  								</div>
-	                			</div> 
-		              		</div>
-	                	</div>  
-	               </div>  -->
 	           	   <br/><br/><br/>
 	            </div>
 		    </div>
 		<!-- <input type="hidden" id="transactionType" value="UPFRONT" />	 -->
-</div>
 
+        
         <!--========== FOOTER ==========-->
-<footer class="g-bg-color--dark">
+        <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
                 <div class="container g-padding-y-40--xs">
@@ -380,16 +450,9 @@
             </div>
             <!-- End Copyright -->
         </footer>
-        
-        
-        
-       
-      </body>
         <!--========== END FOOTER ==========-->
 
-</body>
-
-		 <!-- Back To Top -->
+        <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
 
@@ -405,11 +468,19 @@
 	    <script src="assets/js/jquery.isotope.min.js"></script>
 	    <script src="assets/js/main.js"></script>
 	    <script src="assets/js/wow.min.js"></script>
-    	
-    	
-        <script>
+	    
+        <!--========== END JAVASCRIPTS ==========-->
+        
+ <script>
          document.onreadystatechange = function () {
-			  var state = document.readyState
+        	/*  $(myInput).keyup(function() {
+		 		    var value = $(this).val().toLowerCase();
+		 		    $("#myDiv1 div").filter(function() {
+		 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		 		    });
+		 		  }); */
+        	 
+        	 var state = document.readyState
 			  if (state == 'interactive') {
 			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
@@ -419,23 +490,15 @@
 			         document.getElementById('contents').style.visibility="visible";
 			      },1000);
 			  }
+			  
+			 
 			}
+         
+        /*  $(document).ready(function(){
+ 			
+ 		}); */
+         
          </script>
-        <!--========== END JAVASCRIPTS ==========-->
-        
-        <!--========== Commented JAVASCRIPTS ==========-->
-        
-       <%--  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> 
-		<script src="assets/js/jquery.prettyPhoto.js"></script>
-    	<script src="assets/js/jquery.isotope.min.js"></script>
-    	<script src="assets/js/main.js"></script>
-    	<script src="assets/js/wow.min.js"></script> 
-    	<script src="assets/js/jquery.prettyPhoto.js"></script>
-    	<script src="assets/js/jquery.isotope.min.js"></script>
-    	<script src="assets/js/main.js"></script>
-    	<script src="assets/js/wow.min.js"></script> 
-        <script type="text/javascript" src="js/global.min.js"></script> 
-        <script src="assets/js/bootstrap/bootstrap.min.js"></script> --%>
-
+    </body>
+    <!-- End Body -->
 </html>

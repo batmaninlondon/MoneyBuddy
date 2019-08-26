@@ -10,11 +10,14 @@
 	    <!-- core CSS -->
 	    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-	 	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" >
+	 	<!-- <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/font-awesome.min.css" > -->
+	 	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 	    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/animate.min.css">
+	   <link type="text/css" rel="stylesheet" href="assets/css/themify/themify.css"/>
 	   
 	    <link type="text/css" rel="stylesheet" href="assets/css/global/global.css"/>
 	    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+	    <link type="text/css" rel="stylesheet" href="assets/css/style2.css"/>
 	    
     
         <!-- CSS -->
@@ -26,7 +29,7 @@
         
        
         <!-- Vendor Styles -->
-        <link type="text/css" rel="stylesheet" href="assets/css/themify/themify.css"/>
+        
         <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
@@ -56,7 +59,7 @@
 	<div id="load" class="load"></div>
 	<div id="content">
     <!--========== HEADER ==========-->
-                       <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+                <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
                 <div class="g-padding-l-40-md g-padding-l-80-lg g-display-table--lg">
@@ -70,33 +73,26 @@
                         </div>
 
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
-                            
+                            <!-- Logo -->
                             <div class="s-header-v2__logo">
                                 <a href="welcome" class="s-header-v2__logo-link">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
                                     <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
                                 </a>
                             </div>
+                            <!-- End Logo -->
                         </div>
-                        <!-- <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div> -->
-                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right  " style="float:left;" >
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right " >
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav ">
-                                    <!-- <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li> -->
-                                    <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
-                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu"  style="min-width: 60px;">
-                                            	<li><a href="welcome" class="s-header-v2__dropdown-menu-link">Home</a></li>
-                                            	<li><a href="saveTax" class="s-header-v2__dropdown-menu-link">Save Tax</a></li>
-                                            	<li><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__dropdown-menu-link">Blog</a></li>
-                                        	</ul>
-                                   	</li>
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
-                                    <!-- <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
-                                    <!-- <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
 										 	{   %> 
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
@@ -350,6 +346,8 @@
          </script>
          
         <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+        <script type="text/javascript" src="assets/js/javaScript.js"></script>
         <script type="text/javascript" src="assets/js/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.back-to-top.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.scrollbar.min.js"></script>
@@ -364,7 +362,7 @@
 
         <!-- General Components and Settings -->
         <script type="text/javascript" src="assets/js/global.min.js"></script>
-        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+        
         <script type="text/javascript" src="assets/js/components/scrollbar.min.js"></script>
         <script type="text/javascript" src="assets/js/swiper.min.js"></script>
         
@@ -375,7 +373,7 @@
         <script type="text/javascript" src="assets/js/wow.min.js"></script>
         <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
         <script type="text/javascript" src="assets/js/main2.js"></script>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
+        
         <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
 </html>

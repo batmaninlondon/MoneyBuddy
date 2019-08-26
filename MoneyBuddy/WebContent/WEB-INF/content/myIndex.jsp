@@ -270,8 +270,9 @@
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/970x970/04.jpg');">
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
-                            <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Give your money<br>A chance to grow</h1>
-                             <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Tired of Poor returns on your investments? Let us match you to a portfolio with better growth potential</h2>
+                            <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Give your money A chance to grow</h1>
+                             <br>
+                             <h2 class=" g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >Tired of Poor returns on your investments? Let us match you to a portfolio with better growth potential</h2>
                         </div>
 						<div class="g-text-center--xs">
                        		<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -287,8 +288,9 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
-                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Your money with our support<br></h1>
-                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >We will support you in growing your wealth, so that you can focus on enjoying your life</h2>
+                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Your money with our support<br></h1>
+                                <br>
+                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >We will support you in growing your wealth, so that you can focus on enjoying your life</h2>
                             </div>
                             <div class="g-text-center--xs">
                             	<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -304,8 +306,9 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
-                                <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">Make your dreams a reality</h1>
-                                <h2 class="g-font-size-10--xs g-font-size-10--sm g-font-size-15--md g-color--white" >Disciplined Investing Made easy with our fully online SIP platform</h2>
+                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Make your dreams a reality</h1>
+                                <br>
+                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >Disciplined Investing Made easy with our fully online SIP platform</h2>
                             </div>
                             <div class="g-text-center--xs">
                        			<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">

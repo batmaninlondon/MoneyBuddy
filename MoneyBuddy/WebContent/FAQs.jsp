@@ -1,5 +1,7 @@
-<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
     <head>
@@ -7,32 +9,117 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>MoneyBuddy-FAQs</title>
-
-        <!-- Web Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-        <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
+        <title>MoneyBuddy-Top Performing Mutual Funds</title>
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		<link type="text/css" rel="stylesheet" href="assets/css/cubeportfolio/cubeportfolio.min.css" />
-		
-        <!-- Vendor Styles -->
-        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
-        <!-- <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/> -->
-        <!-- <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
-        <!-- <link href="vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/> -->
+		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+	
+        <!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
 
         <!-- Theme Styles -->
         <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+ 	
+  
+  <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+  
+  
+ <script>
+		
+</script>
 
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-        
-        <script>
+
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1418 .add-to-cart {
+  position: absolute;
+  height:50px;
+  top: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+ // background-color: #409ad5;
+   background-color: black;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.snip1418 figcaption {
+//  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+
+</style>
+
+<!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
+<script>
     (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:1416665,hjsv:6};
@@ -48,10 +135,8 @@
     <!-- End Head -->
 
     <!-- Body -->
-    <body>
-		<div id="load" class="load"></div>
-	<div id="content">
-    <!--========== HEADER ==========-->
+    <body >
+<!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -94,12 +179,12 @@
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
-														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
-															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
-															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
-														</ul>
-													</li>
+			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        	</ul>
+			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
@@ -121,7 +206,8 @@
         </header>
         <!--========== END HEADER ==========-->
 
-        <!--========== PROMO BLOCK ==========-->
+        <!--========== PAGE CONTENT ==========-->
+ <!--========== PROMO BLOCK ==========-->
         <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;"> -->
          <div class="g-bg-color--dark">
             <div class="g-container--md g-text-center--xs   ">
@@ -139,10 +225,6 @@
         <!-- Accordion -->
         <div class="s-faq g-bg-color--primary" style=" text-align: justify; height : 600px; overflow : auto;">
             <div class="container g-padding-y-25--xs">
-            	<!-- <div class="row" >
-            		<h2 class="g-font-size-40--xs g-font-size-40--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs g-text-center--xs"><b>FAQs</b></h2>
-            		<p class="text-uppercase g-font-size-17--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-text-center--xs"><u>Your Questions. Answered.</u></p>
-            	</div> -->
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="cbp cbp-l-grid-faq js__grid-faq">
@@ -605,27 +687,9 @@
             </div>
         </div>
         <!-- End Accordion -->
-
-        <!-- Subscribe -->
-       <!--  <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
-            <div class="g-margin-b-60--xs">
-                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Subscribe</p>
-                <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1">Join Over 1000+ People</h2>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                    <div class="input-group">
-                        <input type="email" class="form-control s-form-v5__input g-radius--left-50" name="email" placeholder="Enter your email">
-                        <span class="input-group-btn">
-                            <button type="submit" class="s-btn s-btn-icon--md s-btn-icon--dark-brd s-btn--dark-brd g-radius--right-50"><i class="ti-arrow-right"></i></button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End Subscribe -->
+        
         <!--========== END PAGE CONTENT ==========-->
-
+        
         <!--========== FOOTER ==========-->
         <footer class="g-bg-color--dark">
             <!-- Links -->
@@ -692,14 +756,33 @@
         <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
-       
-	</div>
-    </body>
-     <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <!-- Vendor -->
-        <script>
+
+       <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
+	    
+	    <script src="assets/js/jquery.js"></script>
+	    
+	    <script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/index.js"></script>
+		<script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+		<script type="text/javascript" src="assets/js/components/faq.min.js"></script>
+        
+ <script>
          document.onreadystatechange = function () {
-			  var state = document.readyState
+        	/*  $(myInput).keyup(function() {
+		 		    var value = $(this).val().toLowerCase();
+		 		    $("#myDiv1 div").filter(function() {
+		 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		 		    });
+		 		  }); */
+        	 
+        	 var state = document.readyState
 			  if (state == 'interactive') {
 			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
@@ -709,37 +792,15 @@
 			         document.getElementById('contents').style.visibility="visible";
 			      },1000);
 			  }
+			  
+			 
 			}
-         </script>
          
-         <script type="text/javascript" src="assets/js/javaScript.js"></script>
-		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
-		<script src="assets/js/jquery.js"></script>
-	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/js/sly.min.js"></script>
-	    <script src="assets/js/jquery.prettyPhoto.js"></script>
-	    <script src="assets/js/jquery.isotope.min.js"></script>
-	    <script src="assets/js/main.js"></script>
-	    <script src="assets/js/wow.min.js"></script>
-	    <script src="assets/js/index.js"></script>
-    
-    
-        <%--  <script type="text/javascript" src="vendor/jquery.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
-        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script> --%>
-        <%-- <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script> --%>
-        <%-- <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script> --%>
-       <%--  <script type="text/javascript" src="vendor/jquery.parallax.min.js"></script> --%>
-        <%-- <script type="text/javascript" src="vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script> --%>
-        <script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
-
-        <!-- General Components and Settings -->
-        <%-- <script type="text/javascript" src="js/global.min.js"></script>
-        <script type="text/javascript" src="js/components/header-sticky.min.js"></script>
-        <script type="text/javascript" src="js/components/scrollbar.min.js"></script> --%>
-        <script type="text/javascript" src="assets/js/components/faq.min.js"></script>
-        <!--========== END JAVASCRIPTS ==========-->
+        /*  $(document).ready(function(){
+ 			
+ 		}); */
+         
+         </script>
+    </body>
     <!-- End Body -->
 </html>

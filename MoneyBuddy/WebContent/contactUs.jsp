@@ -1,10 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page language="java" import="java.util.Properties" %>
-<%@ page language="java" import="java.io.FileInputStream" %>
-<%@ page language="java" import="java.io.File" %>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
     <head>
@@ -12,64 +9,116 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>MoneyBuddy - Contact Us</title>
-       
-
-        <!-- Web Fonts -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet"> -->
-
+        <title>MoneyBuddy-Top Performing Mutual Funds</title>
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-		
-        <!-- Vendor Styles -->
-       <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/> -->
+		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
+	
+        <!-- Web Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
 
         <!-- Theme Styles -->
         <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-		<link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+ 	
+  
+  <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+  
+  
+ <script>
 		
-		
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-        
-        <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
-    <script>
-    
-    <%
-    
-    ServletContext sc=request.getServletContext();
-    String path=sc.getRealPath("/properties/jspConfig.properties");
-    FileInputStream fis = new FileInputStream(new File(path));
-    
-    Properties configProperties = new Properties();
+</script>
 
-	configProperties.load(fis);
-	
-	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
-    
-    %>
-    
-      var recaptchaContactUs;
-      
-      var myCallBack = function() {
-        //Render the recaptchaContactUs on the element with ID "recaptcha-contact-us"
-        recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
-          'sitekey' : '<%=siteKey%>', //Replace this with your Site key
-          'size' : 'invisible',
-          'callback' : submitContactUsMail
-        });
-        
-      };       
-        
-    </script>
-    
-    
-    <script>
+
+<style>
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1418 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1418 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1418 .add-to-cart {
+  position: absolute;
+  height:50px;
+  top: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0;
+ // background-color: #409ad5;
+   background-color: black;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.snip1418 figcaption {
+//  padding: 20px;
+}
+.snip1418 h3,
+.snip1418 p {
+  margin: 0;
+}
+.snip1418 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1418 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.snip1418 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.snip1418:hover .add-to-cart,
+.snip1418.hover .add-to-cart {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+.snip1418:hover .add-to-cart i,
+.snip1418.hover .add-to-cart i {
+  background-color: #2980b9;
+}
+
+</style>
+
+<!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
+<script>
     (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:1416665,hjsv:6};
@@ -85,11 +134,8 @@
     <!-- End Head -->
 
     <!-- Body -->
-    <body>
-
-       <div id="load" class="load"></div>
-	<div id="content">
-    <!--========== HEADER ==========-->
+    <body >
+<!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
@@ -132,12 +178,12 @@
 										 	{	%>
 										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
-														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
-															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
-															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
-														</ul>
-													</li>
+			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        	</ul>
+			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
@@ -158,9 +204,10 @@
             <!-- End Navbar -->
         </header>
         <!--========== END HEADER ==========-->
-        
 
-		<div class="g-bg-color--dark">
+        <!--========== PAGE CONTENT ==========-->
+
+<div class="g-bg-color--dark">
             <div class="g-container--md g-text-center--xs ">
             <br/><br/><br/><br/>
                 <div class="g-margin-b-10--xs">
@@ -246,13 +293,13 @@
                 
             </div>
             <img class="s-mockup-v2" src="img/mockups/pencil-01.png" alt="Mockup Image">
-        </div>
+            	</div>
+
         <!-- End Feedback Form -->
         <!--========== END PAGE CONTENT ==========-->
-
+        
         <!--========== FOOTER ==========-->
-        <!--========== FOOTER ==========-->
-                <footer class="g-bg-color--dark">
+        <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
                 <div class="container g-padding-y-40--xs">
@@ -313,18 +360,34 @@
             <!-- End Copyright -->
         </footer>
         <!--========== END FOOTER ==========-->
-        <!--========== END FOOTER ==========-->
 
         <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
+
+       <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
+	    
+	    <script src="assets/js/jquery.js"></script>
+	    
+	    <script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
         
-	</div>
-    </body>
-    <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-        <script>
+ <script>
          document.onreadystatechange = function () {
-			  var state = document.readyState
+        	/*  $(myInput).keyup(function() {
+		 		    var value = $(this).val().toLowerCase();
+		 		    $("#myDiv1 div").filter(function() {
+		 		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		 		    });
+		 		  }); */
+        	 
+        	 var state = document.readyState
 			  if (state == 'interactive') {
 			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
@@ -334,25 +397,15 @@
 			         document.getElementById('contents').style.visibility="visible";
 			      },1000);
 			  }
+			  
+			 
 			}
+         
+        /*  $(document).ready(function(){
+ 			
+ 		}); */
+         
          </script>
-         <!-- Vendor -->
-        <%-- <script type="text/javascript" src="vendor/jquery.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.migrate.min.js"></script>
-        <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.smooth-scroll.min.js"></script>
-        <script type="text/javascript" src="vendor/jquery.back-to-top.min.js"></script>
-        <script type="text/javascript" src="vendor/scrollbar/jquery.scrollbar.min.js"></script> --%>
-        <script type="text/javascript" src="assets/js/javaScript.js"></script>
-
-		<script src="assets/js/jquery.js"></script>
-    	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <!-- General Components and Settings -->
-        <%-- <script type="text/javascript" src="js/global.min.js"></script> --%>
-        <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
-        <%-- <script type="text/javascript" src="js/components/scrollbar.min.js"></script> --%>
-        
-        
-        <!--========== END JAVASCRIPTS ==========-->
+    </body>
     <!-- End Body -->
 </html>
