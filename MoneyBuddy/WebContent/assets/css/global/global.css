@@ -1396,6 +1396,30 @@
   }
 }
 
+@media (max-width: 33.9em) {
+  .g-full-width--sm {
+    width: 100%;
+  }
+}
+
+@media (max-width: 33.9em) {
+  .g-full-width-offset-0--sm {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 33.9em) {
+  .g-full-width--md {
+    width: 100%;
+  }
+}
+
+@media (max-width: 33.9em) {
+  .g-full-width-offset-0--md {
+    margin-left: 0;
+  }
+}
+
 /*----------------------------------
   Container
 ------------------------------------*/

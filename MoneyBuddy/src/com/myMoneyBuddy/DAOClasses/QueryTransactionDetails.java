@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.util.SystemOutLogger;
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
@@ -164,28 +165,50 @@ public class QueryTransactionDetails {
 					hibernateSession.close();
 		}
 	}
-	public List<String> getPendingBseOrderId() throws MoneyBuddyException {
+	
+	
+	public List<String> getPendingBseOrdIdAndRegNum() throws MoneyBuddyException {
 		
 		 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 		
-		List<String> bseOrderIdList = new LinkedList<String>();
+		List<String> bseOrdIdAndRegNumList = new LinkedList<String>();
 	
 		try
 		{
-			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - start");
+			logger.debug("QueryTransactionDetails class - getPendingBseOrdIdAndRegNum method - start");
 			hibernateSession.beginTransaction();
-			Query query = hibernateSession.createQuery("select bseOrderId from TransactionDetails where transactionStatus='7' ");
+			Query query = hibernateSession.createQuery("select bseOrderId from TransactionDetails where transactionStatus='7' and transactionType='UPFRONT' ");
 			
-			List<String> list = query.list();
+			List<String> bseOrderIdLlist = query.list();
 			
 			
-			for ( int i = 0; i < list.size() ;i++ ) {
+			for ( int i = 0; i < bseOrderIdLlist.size() ;i++ ) {
 				
 				String bseOrderId = "";
-				if (!(null == list.get(i)))  {
-					bseOrderId = list.get(i).toString();
-					bseOrderIdList.add(bseOrderId);
+				if (!(null == bseOrderIdLlist.get(i)))  {
+					bseOrderId = bseOrderIdLlist.get(i).toString();
+					System.out.println(" Added new bseOrderId : "+bseOrderId+" to the bseOrdIdAndRegNumList");
+					bseOrdIdAndRegNumList.add(bseOrderId);
+				}
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("select bseRegistrationNumber from TransactionDetails where transactionStatus='7' and transactionType='SIP' ");
+			
+			List<String> bseRegNumList = query.list();
+			
+			
+			for ( int i = 0; i < bseRegNumList.size() ;i++ ) {
+				
+				String bseRegNum = "";
+				if (!(null == bseRegNumList.get(i)))  {
+					bseRegNum = bseRegNumList.get(i).toString();
+					System.out.println(" Added new bseRegNum : "+bseRegNum+" to the bseOrdIdAndRegNumList");
+					bseOrdIdAndRegNumList.add(bseRegNum);
 				}
 				
 			}
@@ -193,18 +216,18 @@ public class QueryTransactionDetails {
 			hibernateSession.getTransaction().commit();
 			
 			
-			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - return pendingNavOrders containg bseOrderId and folioNum records for transactionStatus 7 ");
-			logger.debug("QueryTransactionDetails class - getPendingBseOrderId method - end");
+			logger.debug("QueryTransactionDetails class - getPendingBseOrdIdAndRegNum method - return pendingNavOrders containg bseOrderId and folioNum records for transactionStatus 7 ");
+			logger.debug("QueryTransactionDetails class - getPendingBseOrdIdAndRegNum method - end");
 			
-			return bseOrderIdList;
+			return bseOrdIdAndRegNumList;
 		}
 		catch ( HibernateException e ) {
-			logger.error("QueryTransactionDetails class - getPendingBseOrderId method - Caught HibernateException");
+			logger.error("QueryTransactionDetails class - getPendingBseOrdIdAndRegNum method - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("QueryTransactionDetails class - getPendingBseOrderId method - Caught Exception");
+			logger.error("QueryTransactionDetails class - getPendingBseOrdIdAndRegNum method - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -214,6 +237,75 @@ public class QueryTransactionDetails {
 		}
 	}
 
+	
+	public List<String> getAllBseOrdIdAndRegNum() throws MoneyBuddyException {
+		
+		 
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		List<String> allBseOrdIdAndRegNumList = new LinkedList<String>();
+	
+		try
+		{
+			logger.debug("QueryTransactionDetails class - getAllBseOrdIdAndRegNum method - start");
+			hibernateSession.beginTransaction();
+			Query query = hibernateSession.createQuery("select bseOrderId from TransactionDetails where transactionType='UPFRONT' ");
+			
+			List<String> bseOrderIdLlist = query.list();
+			
+			
+			for ( int i = 0; i < bseOrderIdLlist.size() ;i++ ) {
+				
+				String bseOrderId = "";
+				if (!(null == bseOrderIdLlist.get(i)))  {
+					bseOrderId = bseOrderIdLlist.get(i).toString();
+					allBseOrdIdAndRegNumList.add(bseOrderId);
+				}
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			hibernateSession.beginTransaction();
+			query = hibernateSession.createQuery("select bseRegistrationNumber from TransactionDetails where transactionType='SIP' ");
+			
+			List<String> bseRegNumList = query.list();
+			
+			
+			for ( int i = 0; i < bseRegNumList.size() ;i++ ) {
+				
+				String bseRegNum = "";
+				if (!(null == bseRegNumList.get(i)))  {
+					bseRegNum = bseRegNumList.get(i).toString();
+					allBseOrdIdAndRegNumList.add(bseRegNum);
+				}
+				
+			}
+			
+			hibernateSession.getTransaction().commit();
+			
+			
+			logger.debug("QueryTransactionDetails class - getAllBseOrdIdAndRegNum method - return pendingNavOrders containg bseOrderId and folioNum records for transactionStatus 7 ");
+			logger.debug("QueryTransactionDetails class - getAllBseOrdIdAndRegNum method - end");
+			
+			return allBseOrdIdAndRegNumList;
+		}
+		catch ( HibernateException e ) {
+			logger.error("QueryTransactionDetails class - getAllBseOrdIdAndRegNum method - Caught HibernateException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			logger.error("QueryTransactionDetails class - getAllBseOrdIdAndRegNum method - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+	}
+	
 	
 	public List<PendingNavOrders> getPendingNavsOrders() throws MoneyBuddyException {
 		

@@ -450,68 +450,68 @@ input[type="range"] {
 	<s:set var="fundDetails" value="#session.selectedFundDetailsDataModel" />
 	
 	<div class="row ">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10   " >
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10   " >
 	    	<div class="profile">
-	    		 <h3 class="g-font-size-32--xs g-font-size-24--md g-font-family--playfair g-letter-spacing--1  text-center font-weight-bold g-hor-divider__solid--white  "><b>Redemption Cart</b></h3>
+	    		 <h3 class="g-font-size-20--xs g-font-size-24--lg g-font-family--playfair g-letter-spacing--1  text-center font-weight-bold g-hor-divider__solid--white  "><b>Redemption Cart</b></h3>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 		
-	<div class="row g-margin-t-40--xs g-margin-b-20--xs">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10   " >
+	<div class="row g-margin-t-40--xs g-margin-b-0--xs g-margin-b-20--lg g-margin-l-5--xs g-margin-l-0--lg g-margin-r-5--xs g-margin-r-0--lg">
+		<div class="col-lg-1 col-xs-0"></div>
+		<div class="col-lg-10 col-xs-12" >
 
 					<s:form  action="editRedemptionCartAction" method="post" name="formEditRedemptionCart">
 				  		<s:hidden id="return-type" name="returnType"></s:hidden>
 				  		
 				  	<table id="redCartData" width="100%;" >
 						
-						<thead class="table-head g-font-size-14--xs g-bg-color--gray-light" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-							<tr class="g-bg-color--gray-light">
-								<th class="text-center col-md-3 g-bg-color--gray-light" height="70">Fund Name</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light">Folio No.</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light">Redemption Option</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light">Redemption Type</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light">Amount</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light">Units</th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light hidden"></th>
-								<th class="text-center col-md-1 g-bg-color--gray-light"></th>
+						<thead class="table-head g-font-size-10--xs g-font-size-14--lg g-bg-color--gray-light text-center" height="70" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
+							<tr>
+								<th class="col-xs-3 text-center">Fund Name</th>
+								<th class="col-xs-1 text-center">Folio No.</th>
+								<th class="col-xs-1 text-center">Redemption Option</th>
+								<th class="col-xs-1 text-center">Redemption Type</th>
+								<th class="col-xs-1 text-center">Amount</th>
+								<th class="col-xs-1 text-center">Units</th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center hidden"></th>
+								<th class="col-xs-1 text-center"></th>
 								
 							</tr>
 						</thead>
-						<tbody class="table-body g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
+						<tbody class="table-body  g-font-size-10--xs g-font-size-14--lg  text-center" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement" >
-								<tr class="table-body g-font-size-14--xs " style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
+								<tr >
 								    <s:if test="schemeName.equals('Total')">
-								    	<td class="text-center col-md-3 g-bg-color--gray-light" height="40">Total Amount</td>
-								    	<td class="text-center col-md-1 g-bg-color--gray-light"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light "></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light "></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light "><s:property value="#redCartListElement.redAmount"/></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light "></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light hidden"></td>
-										<td class="text-center col-md-1 g-bg-color--gray-light "></td>
+								    	<td class="col-xs-3 g-bg-color--gray-light" height="40">Total Amount</td>
+								    	<td class="col-xs-1 g-bg-color--gray-light"></td>
+										<td class="col-xs-1 g-bg-color--gray-light"></td>
+										<td class="col-xs-1 g-bg-color--gray-light"></td>
+										<td class="col-xs-1 g-bg-color--gray-light"><s:property value="#redCartListElement.redAmount"/></td>
+										<td class="col-xs-1 g-bg-color--gray-light"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light hidden"></td>
+										<td class="col-xs-1 g-bg-color--gray-light"></td>
 								    </s:if>
 									<s:else>
 										<s:set var="selectedRedCartId" value="#redCartListElement.redCartId" />
 								    	<s:set var="selRedOption" value="#redCartListElement.redemptionOption" />
 								    	<s:set var="selRedType" value="#redCartListElement.redemptionType" />
-								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#redCartListElement.schemeName"/></td>
-								    	<td class="text-center" height="70" class="text-center g-font-size-14--xs"><s:property value="#redCartListElement.folioNumber"/></td>
-								    	<td class="text-center  ">
-											<select name="redOptionArr" class="" id="red-option"  style="width:70px;" onchange="redOptionChng(this);" > 
+								    	<td class="text-left" height="70"><s:property value="#redCartListElement.schemeName"/></td>
+								    	<td><s:property value="#redCartListElement.folioNumber"/></td>
+								    	<td>
+											<select name="redOptionArr" class="g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="red-option" onchange="redOptionChng(this);" > 
 										        <% 
 										        	String selRedOption= (String) pageContext.getAttribute("selRedOption");
 										        	String[] redOptions = {"Select","Full","Partial"};
@@ -535,8 +535,8 @@ input[type="range"] {
 											</select>
 												
 										</td>
-										<td class="text-center  ">
-											<select  style="width:70px;" disabled onchange="redTypeChng(this);" > 
+										<td>
+											<select class="g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" disabled onchange="redTypeChng(this);" > 
 										        <% 
 										        	String selRedType= (String) pageContext.getAttribute("selRedType");
 										        	String[] redTypes = {"Select","Amount","Units"};
@@ -558,69 +558,69 @@ input[type="range"] {
 										     		 }
 									     		 %>
 											</select>
-											<select name="redTypeArr" class="hidden" id="red-type"  style="width:60px;" > 
+											<select name="redTypeArr" class="hidden" id="red-type" > 
 										        <option value="Select"  >Select</option>
 										        <option value="Amount"  >Amount</option>
 										        <option value="Units"  >Units</option>
 											</select>
 												
 										</td>
-								    	<td class="text-center ">
+								    	<td>
 									 		<p class="title " >
 									 			
 									 			<s:if test="redAmount == 0 ">
-										 			<input  type="number" id="amt" class="g-color--black "
+										 			<input  type="number" id="amt" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg"
 														onblur="checkAmountVal(<s:property value="#redCartListElement.minRedAmount"/>,<s:property value="#redCartListElement.totalAmount"/>,this);"
-														placeholder="Enter Amount" style="width:110px;" disabled step=".01">
+														placeholder="Enter Amount" disabled step=".01">
 												</s:if>
 												<s:else>
-													<input  type="number" id="amt" class="g-color--black "
+													<input  type="number" id="amt" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg"
 														value=<s:property value="#redCartListElement.redAmount"/> 
 														onblur="checkAmountVal(<s:property value="#redCartListElement.minRedAmount"/>,<s:property value="#redCartListElement.totalAmount"/>,this);"
-														style="width:110px;" disabled step=".01">
+														disabled step=".01">
 												</s:else>
 											</p>	
 										</td>
-										<td class="text-center ">
+										<td>
 									 		<p class="title " >
 									 			<s:if test="redUnits == 0 ">
-										 			<input  type="number" id="unit" class="g-color--black "
+										 			<input  type="number" id="unit" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg"
 										 				onblur="checkUnitVal(0,<s:property value="#redCartListElement.totalUnits"/>,this);"
-														placeholder="Enter Units"	style="width:110px;" disabled>
+														placeholder="Enter Units" disabled>
 												</s:if>
 												<s:else>
-													<input  type="number" id="unit" class="g-color--black "
+													<input  type="number" id="unit" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg"
 									 					onblur="checkUnitVal(0,<s:property value="#redCartListElement.totalUnits"/>,this);"
-														value=<s:property value="#redCartListElement.redUnits"/> style="width:110px;" disabled>
+														value=<s:property value="#redCartListElement.redUnits"/> disabled>
 												</s:else>
-												<input name="amountArr" type="number" id="amt" class="g-color--black hidden"
+												<input name="amountArr" type="number" id="amt" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg hidden"
 														value=<s:property value="#redCartListElement.redAmount"/> >
-												<input name="unitsArr" type="number" id="unit_to_send" class="g-color--black hidden "
+												<input name="unitsArr" type="number" id="unit_to_send" class="g-color--black g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg hidden "
 														value=<s:property value="#redCartListElement.redUnits"/> >
 											</p>	
 										</td>
-										<td class="text-center  hidden">
+										<td class="hidden">
 											 <input class="hidden" name="minRedAmountArr"  value=<s:property value="#redCartListElement.minRedAmount"/> />
 										</td>
-										<td class="text-center  hidden">
+										<td class="hidden">
 											 <input class="hidden" name="totalAmountArr"  value=<s:property value="#redCartListElement.totalAmount"/> />
 										</td>
-										<td class="text-center  hidden">
+										<td class="hidden">
 											 <input class="hidden" name="totalUnitsArr"  value=<s:property value="#redCartListElement.totalUnits"/> />
 										</td>
-										<td class="text-center hidden ">
+										<td class="hidden ">
 											 <input class="hidden" name="latestNavArr"  value=<s:property value="#redCartListElement.latestNav"/> />
 										</td>
-										<td class="text-center  hidden">
+										<td class="hidden">
 											 <input class="hidden" name="redCartIdArr"  value=<s:property value="#redCartListElement.redCartId"/> />
 										</td>
-										<td class="text-center hidden ">
+										<td class="hidden ">
 											 <input class="hidden" name="fundIdArr"  value=<s:property value="#redCartListElement.fundId"/> />
 										</td>
-										<td class="text-center hidden ">
+										<td class="hidden ">
 											 <input class="hidden" name="folioNumArr"  value=<s:property value="#redCartListElement.folioNumber"/> />
 										</td>
-										<td class="text-center  ">
+										<td>
 										 	<a  href="javascript:deleteRedCartEntry(<s:property value="selectedRedCartId" />);" >
 										 		<span class="g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary text-right"></span>
 									 		</a>
@@ -640,37 +640,37 @@ input[type="range"] {
 	  				</s:form>
 	     </div>
 	     
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-lg-1 col-xs-0" ></div>
 	</div>
 	    	
 			
 			<div class="row g-margin-b-50--xs">
-  				<div class="col-md-1"></div>
-  				<div class="col-md-6 text-left">
-  					<a href="javascript:editRedemptionCart('Dashboard');" class=" buttonBlock g-color--white "  >+ Add another fund</a>
+  				<div class="col-md-1 col-xs-1"></div>
+  				<div class="col-md-6 col-xs-6  text-left">
+  					<a href="javascript:editRedemptionCart('Dashboard');" class=" btn btn-home g-color--white "  >+ Add another fund</a>
   				</div>
-  				<div class="col-md-3"></div>
-				<div class="col-md-1 text-left">
+  				<div class="col-md-3 col-xs-1"></div>
+				<div class="col-md-1 col-xs-4  text-left">
 					<%-- <s:form action="redirectAction" method="post"> --%>
 		      			<s:if test="#session.customerRedemptionCartList.size() == 1 ">
-		      				<button type="button"  class="btn buttonBlock g-color--white disabled"  >Next</button>
+		      				<button type="button"  class="btn btn-home g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
-		      				<a href="javascript:checkAmountAndUnits();" class=" buttonBlock g-color--white "  >Next</a>
+		      				<a href="javascript:checkAmountAndUnits();" class=" btn btn-home g-color--white "  >Next</a>
 		      			</s:else>
 		      		<%-- </s:form> --%>
 	      		</div>
-	      		<div class="col-md-1"></div>
+	      		<div class="col-md-1 col-xs-0"></div>
 	      		
 			</div>
 			
 			
 			<div class="row g-margin-b-50--xs">
-  				<div class="col-md-1"></div>
-  				<div class="col-md-10 text-left">
-  					<p> Disclaimer: The amounts/units displayed are based on the last NAV declared. Actual values may vary.  </p>
+  				<div class="col-lg-1 col-xs-0"></div>
+  				<div class="col-lg-10 col-xs-12 text-left">
+  					<p class="g-font-size-12--xs g-font-size-14--lg" > Disclaimer: The amounts/units displayed are based on the last NAV declared. Actual values may vary.  </p>
   				</div>
-	      		<div class="col-md-1"></div>
+	      		<div class="col-lg-1 col-xs-0"></div>
 	      		
 			</div>
 

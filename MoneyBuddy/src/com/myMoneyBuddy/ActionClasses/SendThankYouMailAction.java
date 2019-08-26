@@ -55,7 +55,7 @@ public class SendThankYouMailAction extends ActionSupport  implements SessionAwa
 			String configPropFilePath = "../../../config/config.properties";
 
 			configProperties.load(GenerateKycForm.class.getResourceAsStream(configPropFilePath));
-			String mailLink = null;
+			/*String mailLink = null;
 			String subject = null;
 			SendMail sendMail = new SendMail();
 			if (anySipOrder)  {
@@ -78,7 +78,7 @@ public class SendThankYouMailAction extends ActionSupport  implements SessionAwa
 				System.out.println("mailLink is : "+mailLink);
 				subject = configProperties.getProperty("MAIL_UPFRONT_REGISTERED_SUBJECT");
 				sendMail.MailSending(emailId,subject,"UpfrontRegisteredMail","UpfrontPaymentReceived.txt",mailLink,"",customerName);
-			}
+			}*/
 
 	    	logger.debug("SendThankYouMailAction class - execute method - customerId - "+customerId+" - end"); 
 	

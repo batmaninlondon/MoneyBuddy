@@ -87,82 +87,78 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:90px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10 g-height-70--xs g-height-80--lg  g-bg-color--dark ">
 	    	<div class="profile">
 	        	<div class="name pagination">
-	                	<s:set var="disBankName" value="displayBankName" />
-	                	<h3 class="title g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b>
-	                	
-	                	
-						<!-- <h3></h3> -->
-						<%-- <h6 style="color:white;"><s:property value="#session.customerMobileNumber" /></h6> --%>
-	            </div>
+                	<s:set var="disBankName" value="displayBankName" />
+                	<h3 class="title g-font-size-15--xs g-font-size-20--lg  g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b></h3>
+               	</div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<s:form  action="stp" method="post" name="formStp">
 	
 	
 	<div class="row g-height-auto--lg" >
-		<div class="col-md-1 col-xs-1" ></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+		<div class="col-xs-1" ></div>
+		<div class="col-xs-10  g-bg-color--white " >
 			<div class="row text-center g-margin-t-15--xs">
-				<h3><b><u>Order Confirmation</u></b></h3>
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b><u>Order Confirmation</u></b></h3>
 			</div>
-			<div id="customer-stp-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+			<div id="customer-stp-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--lg g-margin-l-100--lg">
 					
 				  		<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name A</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Folio Num</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund NameB</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Tenure</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Debit Date</th>
+												<th class="col-xs-2">Fund Name A</th>
+												<th class="col-xs-2">Folio Num</th>
+												<th class="col-xs-2">Fund NameB</th>
+												<th class="col-xs-2">Amount</th>
+												<th class="col-xs-2">Tenure</th>
+												<th class="col-xs-2">Debit Date</th>
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body g-font-size-12--xs g-font-size-14--lg center text-center">
 												<s:iterator value="#session.customerStpCartList" var="stpCartListElement">
 													<tr>
 													    <s:if test="schemeName.equals('Total')">
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
+													    	<td>
+														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#redCartListElement.stpAmount"/></b>
+													    	<td>
+														    	<s:property value="#redCartListElement.stpAmount"/>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
 													    </s:if>
 													    <s:else>
 													    	
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
+													    	<td>
+														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.folioNumber"/></b>
+													    	<td>
+														    	<s:property value="#stpCartListElement.folioNumber"/>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.purchaseFundSchemeName"/></b>
+													    	<td>
+														    	<s:property value="#stpCartListElement.purchaseFundSchemeName"/>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.stpAmount"/></b>
+												    		<td>
+														    	<s:property value="#stpCartListElement.stpAmount"/>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.stpDuration"/></b>
+													    	<td>
+														    	<s:property value="#stpCartListElement.stpDuration"/>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
-														    	<b><s:property value="#stpCartListElement.stpDate"/></b>
+												    		<td>
+														    	<s:property value="#stpCartListElement.stpDate"/>
 												    		</td>
 												    	</s:else>
 													</tr>
@@ -171,29 +167,24 @@
 										</tbody>
 									</table>
 			</div>
-			
-			<%-- <div class="row text-center g-margin-t-10--xs">
-				<s:set var="disBankName" value="displayBankName" />
-				<h3><b>Paying via:&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="#disBankName"/></b></h3>
-			</div> --%>
 			<br/>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
 	
 	<div class="row" >
-		<div class="col-md-6 col-xs-4">
+		<div class="col-xs-4">
 			<s:actionmessage class="small-text g-color--red"/> 
 		</div>
-		<div class="col-md-6 col-xs-6"></div>
+		<div class="col-xs-6"></div>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-xs-1"></div>
 		
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
 
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	<div class="row g-margin-t-40--xs">
 		<div class="text-center">
@@ -207,11 +198,11 @@
 	</div>
 	
 	<div class="row g-margin-t-o-20--xs">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
+		<div class="col-sm-5 col-xs-4"></div>
+		<div class="col-sm-2 col-xs-4">
 			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="callStpAction();" >Continue</button>
 		</div>
-		<div class="col-md-5">
+		<div class="col-sm-5 col-xs-4">
 		</div>
 	</div>
 	

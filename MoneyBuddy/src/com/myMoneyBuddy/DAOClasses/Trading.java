@@ -888,7 +888,7 @@ public class Trading {
 					
 					hibernateSession.beginTransaction();
 					
-					tempSipDetail = new SipDetails(customerId, bseRegNum, transactionDetailId,
+					tempSipDetail = new SipDetails(customerId, bseRegNum, transactionDetailId,customerCartList.get(i).getSipAmount(),
 							customerCartList.get(i).getSipDate(), frmtdStartDateForSip, frmtdEndDateForSip,
 							customerCartList.get(i).getSipDuration(),"N","Y");
 	

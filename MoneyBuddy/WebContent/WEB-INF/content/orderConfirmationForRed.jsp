@@ -87,12 +87,12 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:90px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10 g-height-70--xs g-height-80--lg  g-bg-color--dark " >
 	    	<div class="profile">
 	        	<div class="name pagination">
 	                	<s:set var="disBankName" value="displayBankName" />
-	                	<h3 class="title g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b>
+	                	<h3 class="title g-font-size-15--xs g-font-size-20--lg  g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b></h3>
 	                	
 	                	
 						<!-- <h3></h3> -->
@@ -100,58 +100,58 @@
 	            </div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<s:form  action="redeem" method="post" name="formRedemption">
 	
 	
-	<div class="row g-height-auto--lg" >
+	<div class="row g-height-auto--lg g-height-auto--xs" >
 		<div class="col-md-1 col-xs-1" ></div>
 		<div class="col-md-10 col-xs-10  g-bg-color--white " >
 			<div class="row text-center g-margin-t-15--xs">
-				<h3><b><u>Order Confirmation</u></b></h3>
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b><u>Order Confirmation</u></b></h3>
 			</div>
-			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--lg g-margin-l-100--lg">
 					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
 			  		<s:set var="anySip" value="#session.anySipOrder" />
 				  		<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Redemption Type</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Units</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount*</th>
+												<th class="col-xs-3">Fund Name</th>
+												<th class="col-xs-3">Redemption Type</th>
+												<th class="col-xs-3">Units</th>
+												<th class="col-xs-3">Amount*</th>
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body  g-font-size-12--xs g-font-size-14--lg center text-center">
 												<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement">
 													<tr>
 													    <s:if test="schemeName.equals('Total')">
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
 												    			
 													    </s:if>
 													    <s:else>
 													    	
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redemptionOption"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 														    	<b><s:property value="#redCartListElement.redUnits"/></b>
 												    		</td>
 													    		
@@ -169,43 +169,38 @@
 			</div> --%>
 			<br/>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
-	
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
-			<div class="col-md-1 col-xs-1"></div>
-			<div class="col-md-8 col-xs-8">
-				<div class="row">
-					<div id="investment-options" class="col-md-3 g-margin-b-20--xs">
+		<div class="col-xs-1"></div>
+		
+		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
+			<div class="row g-font-size-10--xs g-font-size-14--lg">
+					<div class="col-md-1 col-xs-0"></div>
+					<div id="investment-options" class="col-md-3 col-xs-5 ">
 						<b>Money will be creadited to </b>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3 col-xs-7">
 						<b><s:property value="#disBankName"/></b>
 					</div>
-		        </div>
- 			</div>
-					
-					
-		</div>
-		<div class="col-md-1 col-xs-1"></div>
- 					
+	        </div>
+	     </div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<div class="row" >
-		<div class="col-md-6 col-xs-4">
+		<div class="col-xs-4">
 			<s:actionmessage class="small-text g-color--red"/> 
 		</div>
-		<div class="col-md-6 col-xs-6"></div>
+		<div class="col-xs-6"></div>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-xs-1"></div>
 		
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
 
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	<div class="row g-margin-t-40--xs">
 		<div class="text-center">
@@ -219,11 +214,11 @@
 	</div>
 	
 	<div class="row g-margin-t-o-20--xs">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="callRedemptionAction();" >Redeem Now</button>
+		<div class="col-sm-5 col-xs-4"></div>
+		<div class="col-sm-2 col-xs-4">
+			<button type="button"  id="pay-now-button" class="g-display-table--xs text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="callRedemptionAction();" >Redeem Now</button>
 		</div>
-		<div class="col-md-5">
+		<div class="col-sm-5 col-xs-4">
 		</div>
 	</div>
 	

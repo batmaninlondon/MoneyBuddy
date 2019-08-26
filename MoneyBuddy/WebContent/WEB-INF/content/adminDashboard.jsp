@@ -95,6 +95,15 @@ hr {
 	<div class="row">
 		<div class="col-md-5"></div>
 		<div class="col-md-3">
+			<a href="<s:url action="BusinessDashboard"/>">
+				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">BusinessDashboard</button>
+			</a>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-5"></div>
+		<div class="col-md-3">
 			<a href="<s:url action="pendingNavsAction"/>">
 				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UploadCustomerNav</button>
 			</a>

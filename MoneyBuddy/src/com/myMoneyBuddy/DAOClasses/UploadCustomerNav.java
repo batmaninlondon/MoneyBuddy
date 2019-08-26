@@ -25,7 +25,7 @@ public class UploadCustomerNav {
 	
 	Logger logger = Logger.getLogger(UploadCustomerNav.class);
 
-	public void uploadCusNav ( String bseOrderId,String folNum,String navValue, String units) throws MoneyBuddyException {
+	public void uploadCusNav ( String bseOrderId, String bseRegNum, String folNum,String navValue, String units) throws MoneyBuddyException {
 
 		logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - start");
 		
@@ -33,13 +33,21 @@ public class UploadCustomerNav {
 		
 		try {
 		hibernateSession.beginTransaction();
-
-		Query query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType,t.transactionDetailId "
-								+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
-								+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.bseOrderId= :bseOrderId");
+		Query query ;
 		
-
-		query.setParameter("bseOrderId", bseOrderId);
+		
+		query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType,t.transactionDetailId "
+								+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
+								+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.bseOrderId= :bseOrderId and t.bseRegistrationNumber= :bseRegistrationNumber ");
+		
+		if ("0".equals(bseRegNum))  {
+			query.setParameter("bseOrderId", bseOrderId);
+			query.setParameter("bseRegistrationNumber", null);
+		}
+		else {
+			query.setParameter("bseOrderId", null);
+			query.setParameter("bseRegistrationNumber", bseRegNum);
+		}
 		
 		List<Object[]> queryResult = query.list(); 
 		
@@ -71,13 +79,13 @@ public class UploadCustomerNav {
 
 		hibernateSession.beginTransaction();
 		query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
-				+ "unitPrice = :unitPrice , quantity = :quantity , bseOrderId = :bseOrderId, transactionStatus = :transactionStatus , reverseFeed = :reverseFeed "
+				+ "unitPrice = :unitPrice , quantity = :quantity , transactionStatus = :transactionStatus , "
+				+ " reverseFeed = :reverseFeed "
 				+ " where transactionDetailId = :transactionDetailId");
 
 		query.setParameter("transactionFolioNum", folNum);
 		query.setParameter("unitPrice", navValue);
 		query.setParameter("quantity", units);
-		query.setParameter("bseOrderId", bseOrderId);
 		query.setParameter("transactionDetailId", transactionDetailId);
 		query.setParameter("transactionStatus", "8");
 		query.setParameter("reverseFeed", "Y");

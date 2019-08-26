@@ -86,73 +86,71 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:90px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10  g-height-50--xs g-height-80--lg g-bg-color--dark ">
 	    	<div class="profile text-center">
 	        	<div class="name pagination text-center">
-	                	<h3 class="title g-color--white text-center">Thank you for STP </h3>
+	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white">Thank you for STP </h3>
+	                	<h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your STP details </h6>
 	            </div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<div class="row g-height-auto--lg" >
-		<div class="col-md-1 col-xs-1" ></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " >
-			<div class="row text-center g-margin-t-15--xs">
-				<h3><b><u>STP Order Details</u></b></h3>
-			</div>
-			<div id="customer-stp-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+		<div class="col-xs-1" ></div>
+		<div class="col-xs-10  g-bg-color--white " >
+			<div id="customer-stp-cart-list" class="g-margin-t-20--xs g-margin-b-30--lg g-margin-t-10--lg g-margin-r-100--lg g-margin-l-100--lg">
 					
 				  		<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg center text-center g-bg-color--gray-light">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name A</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Folio Num</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund NameB</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Tenure</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Debit Date</th>
+												<th class="col-xs-2">Fund Name A</th>
+												<th class="col-xs-2">Folio Num</th>
+												<th class="col-xs-2">Fund NameB</th>
+												<th class="col-xs-2">Amount</th>
+												<th class="col-xs-2">Tenure</th>
+												<th class="col-xs-2">Debit Date</th>
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerStpCartList" var="stpCartListElement">
 													<tr>
 													    <s:if test="schemeName.equals('Total')">
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.stpAmount"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
 													    </s:if>
 													    <s:else>
 													    	
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#stpCartListElement.folioNumber"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#stpCartListElement.purchaseFundSchemeName"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 														    	<b><s:property value="#stpCartListElement.stpAmount"/></b>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#stpCartListElement.stpDuration"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 														    	<b><s:property value="#stpCartListElement.stpDate"/></b>
 												    		</td>
 												    	</s:else>
@@ -165,16 +163,16 @@
 			
 			<br/>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
 	
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-xs-1"></div>
 		
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
 
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	

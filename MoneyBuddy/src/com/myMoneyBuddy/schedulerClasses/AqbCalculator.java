@@ -3,7 +3,6 @@ package com.myMoneyBuddy.schedulerClasses;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -14,9 +13,6 @@ import org.quartz.JobExecutionException;
 
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.EntityClasses.CustomersAqb;
-import com.myMoneyBuddy.EntityClasses.DailyInvestments;
-import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class AqbCalculator implements org.quartz.Job{

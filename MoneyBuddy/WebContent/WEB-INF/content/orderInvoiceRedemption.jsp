@@ -86,64 +86,64 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:90px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10 g-height-50--xs g-height-80--lg g-bg-color--dark ">
 	    	<div class="profile text-center">
 	        	<div class="name pagination text-center">
-	                	<h3 class="title g-color--white text-center">Thank you for Redemption</h3>
-	                	
+	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white text-center">Thank you for Redemption</h3>
+	                	<h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your Redemption details </h6>
 	            </div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 
 	<div class="row g-height-auto--lg" >
-		<div class="col-md-1 col-xs-1" ></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+		<div class="col-xs-1" ></div>
+		<div class="col-xs-10  g-bg-color--white " >
 			<div class="row text-center g-margin-t-15--xs">
 				<h3><b><u>Redemption Order Details</u></b></h3>
 			</div>
-			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+			<div id="customer-cart-list" class=" g-margin-b-30--lg g-margin-t-20--xs g-margin-t-10--lg g-margin-r-100--lg g-margin-l-100--lg">
 					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
 			  		<s:set var="anySip" value="#session.anySipOrder" />
 				  		<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Redemption Type</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Units</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Amount*</th>
+												<th class="col-xs-3">Fund Name</th>
+												<th class="col-xs-3">Redemption Type</th>
+												<th class="col-xs-3">Units</th>
+												<th class="col-xs-3">Amount*</th>
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body  g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement">
 													<tr>
 													    <s:if test="schemeName.equals('Total')">
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 												    		</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    		</td>
 												    			
 													    </s:if>
 													    <s:else>
 													    	
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redemptionOption"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 														    	<b><s:property value="#redCartListElement.redUnits"/></b>
 												    		</td>
 													    		
@@ -157,7 +157,7 @@
 			
 			<br/>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
 
 	

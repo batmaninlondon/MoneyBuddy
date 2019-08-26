@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-   
+   <link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
    	<link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+    
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     
     
     <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+    
 <!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
 <script>
     (function(h,o,t,j,a,r){
@@ -134,20 +136,8 @@
 			 		<div class="row  ">
 					 		<div class="col-md-12 col-xs-12 g-text-center--sm ">
 					 			<input type="hidden" id="fundId" value="<s:property value="#fundDetails.fundId"/>" />
-					 		 	<h1 class="g-font-size-35--xs g-font-size-35--sm g-font-size-35--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
+					 		 	<h1 class="g-font-size-22--xs g-font-size-35--lg  g-margin-t-20--xs"><s:property value="#fundDetails.schemeName"/></h1>
 				            </div>
-		            		<%-- <div class="col-md-1 col-xs-6  g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
-		                     	<a  href="javascript:callOneTimeInvestment()" class="btn btn-home g-padding-x-10--xs"  style="width:150px;">Invest Lumpsum</a>
-		                    </div>
-		                    <div class="col-md-1  g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
-		                    </div>
-		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
-			             		<div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
-			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs" style="width:150px;">Start SIP</a>
-			                    </div>
-		                    </s:if>
-		                    <div class="col-md-1 col-xs-6 g-hor-centered-row__col g-margin-t-10--xs g-margin-b-0--lg ">
-		                    </div> --%>
 		            </div> 
 		            <br><br>
 		            <div class="row ">
@@ -261,9 +251,9 @@
                    		<s:hidden id="transaction-type" name="transactionType"></s:hidden>
                 	 </s:form>
                       <div class="row ">
-		            	<div class="col-md-4 ">
+		            	<div class="col-xs-1 col-md-4 ">
 		                    </div>
-		                    <div class="col-md-2 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+		                    <div class="col-xs-5 col-md-2 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
 		                     	<%-- <s:form  action="newEstimateAction" method="post" name="formEstimate">
 							  		<s:hidden id="select-folio-num-value" name="selectFolioNum"></s:hidden>
 							  		<s:hidden id="upfront-investment-value" name="upfrontInvestment"></s:hidden>
@@ -277,11 +267,11 @@
 		                    </div>
 		                    
 		                    <s:if test="#fundDetails.sipFlag.equals('Y'.toString())">
-			             		<div class="col-md-2 col-xs-6 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
+			             		<div class="col-md-2 col-xs-5 g-hor-centered-row__col g-margin-t-15--xs g-margin-b-0--lg ">
 			                   		<a  href="javascript:callSIPInvestment()" class="btn btn-home g-padding-x-10--xs" style="width:150px;">Start SIP</a>
 			                    </div>
 		                    </s:if>
-		                    <div class="col-md-4 ">
+		                    <div class="col-md-2 col-xs-1">
 		                    </div>
 		            </div>
 				</div>
@@ -294,7 +284,7 @@
 	               <div class="g-text-center--xs ">
 	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Additional Fund Details</b></h3>
 	                	</div>
-	                	  <iframe src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%; height:800px;" ></iframe>
+	                	  <iframe class="g-height-400--xs g-height-600--lg" src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%;" ></iframe>
 	               </div> 
 	               
 	               <!-- <div class="g-box-shadow__dark-lightest-v4">
@@ -330,20 +320,20 @@
 </div>
 
         <!--========== FOOTER ==========-->
-        <footer class="g-bg-color--dark">
+<footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
+                <div class="container g-padding-y-40--xs">
                     <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs ">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
@@ -351,22 +341,24 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-60--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
+                        <div class=" col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="text-center g-font-size-18--xs g-color--primary g-margin-l-o-25--xs">MoneyBuddy</h3>
+                            <br/>
+                            <p class="g-color--primary">
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
-                    <div class="row  g-font-size-12--xs">
+                    <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
                     	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
@@ -374,14 +366,14 @@
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
+            <div class="container g-padding-y-10--xs">
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="index.html">
                             <img class="g-width-100--xs g-height-auto--xs" src="img/logo-white.png" alt="MoneyBuddy Logo">
                         </a>
                     </div>
-                     <div class="col-sm-6 g-text-right--xs">
+                     <div class="col-sm-6 g-text-right--xs g-color--white">
                     &copy; 2019 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
@@ -397,14 +389,23 @@
 
 </body>
 
-		<!-- Back To Top -->
+		 <!-- Back To Top -->
         <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
 
+
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
-		
-		<script type="text/javascript" src="assets/js/javaScript.js"></script>
- 		<script src="assets/js/jquery.js"></script>
-    	<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
+	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
+	    
+	    <script src="assets/js/jquery.js"></script>
+	    
+	    <script src="assets/js/sly.min.js"></script>
+	    <script src="assets/js/jquery.prettyPhoto.js"></script>
+	    <script src="assets/js/jquery.isotope.min.js"></script>
+	    <script src="assets/js/main.js"></script>
+	    <script src="assets/js/wow.min.js"></script>
+    	
     	
         <script>
          document.onreadystatechange = function () {

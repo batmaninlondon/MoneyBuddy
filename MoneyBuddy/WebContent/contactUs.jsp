@@ -20,6 +20,7 @@
 
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+		
         <!-- Vendor Styles -->
        <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
@@ -29,7 +30,9 @@
         <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-
+		<link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+		
+		
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
@@ -174,21 +177,21 @@
                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Contact Us</p>
                 </div> -->
                 <div class="row g-row-col--5 g-margin-b-20--xs">
-                    <div class="col-xs-4 g-full-width--xs g-margin-b-50--xs g-margin-b-0--sm">
+                    <div class="col-xs-6 col-md-4 ">
                         <div class="g-text-center--xs">
-                            <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-email"></i>
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Email</h4>
-                        	<p style="color: white;"><b><a href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
+                            <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-email"></i>
+                            <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Email</h4>
+                        	<p style="color: white;"><b><a  class="g-font-size-14--xs g-font-size-18--md" href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
                         </div>
                     </div>
-                    <div class="col-xs-4 g-full-width--xs">
+                    <div class="col-xs-6 col-md-4 ">
                         <div class="g-text-center--xs">
-                            <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-headphone-alt"></i>
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">Call / whats app </h4>
-                            <p style="color: white;"><b>+91 9971648736</b></p>
+                            <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-headphone-alt"></i>
+                            <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Call / whats app </h4>
+                            <p  class="g-font-size-14--xs g-font-size-18--md" style="color: white;"><b>+91 9971648736</b></p>
                         </div>
                     </div>
-                     <div class="col-xs-4 g-full-width--xs g-margin-b-50--xs g-margin-b-0--sm">
+                     <div class="col-xs-4  g-margin-b-50--xs g-margin-b-0--sm hidden-xs hidden-sm">
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-files"></i>
                             <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">FAQs</h4>
@@ -249,20 +252,20 @@
 
         <!--========== FOOTER ==========-->
         <!--========== FOOTER ==========-->
-        <footer class="g-bg-color--dark">
+                <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
+                <div class="container g-padding-y-40--xs">
                     <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs ">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
@@ -270,22 +273,24 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-60--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
+                        <div class=" col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="text-center g-font-size-18--xs g-color--primary g-margin-l-o-25--xs">MoneyBuddy</h3>
+                            <br/>
+                            <p class="g-color--primary">
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
                     <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
                     	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
@@ -293,7 +298,7 @@
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
+            <div class="container g-padding-y-10--xs">
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="index.html">
@@ -346,6 +351,8 @@
         <%-- <script type="text/javascript" src="js/global.min.js"></script> --%>
         <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
         <%-- <script type="text/javascript" src="js/components/scrollbar.min.js"></script> --%>
+        
+        
         <!--========== END JAVASCRIPTS ==========-->
     <!-- End Body -->
 </html>

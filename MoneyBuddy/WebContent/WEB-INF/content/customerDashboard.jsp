@@ -33,6 +33,7 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
        <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
        
          -->
@@ -268,10 +269,10 @@
              <div class="container"  >
                <div class="g-text-center--xs g-margin-b-10--xs">
 					<br/><br/><br/><br/>
-                    <h3 class="text-center  g-font-size-32--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold g-hor-divider__solid--white  ">Dashboard</h3>
+                    <h3 class="text-center  g-font-size-20--xs g-font-size-32--lg g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold g-hor-divider__solid--white  ">Dashboard : <s:property value="#session.customerName" /></h3>
            		</div> 
            		
-              		<div class="row g-bg-color--gray-light">
+              		<div class="row g-bg-color--gray-light g-margin-l-5--xs g-margin-l-0--lg g-margin-r-5--xs g-margin-r-0--lg">
               			<div class="card text-center ">
             				<div class="card-header g-font-size-10--xs "></br>
 						    	<!-- <h5 class="card-title  bg-secondary g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold" >
@@ -281,40 +282,40 @@
 						  	
 						  	<div class="card-body text-center ">
 							    <div class="row">
-							    <div class="col-md-1"></div>
-							    <div class=" col-md-10">
+							    <div class="col-xs-1"></div>
+							    <div class=" col-xs-10">
 							     <table class="table-bordered " cellspacing="0" width="100%">
 										        <thead class="thead-light">
-										            <tr class="g-bg-color--white" >
-										                <th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Invested Amount</span></th>
-														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Profit</span></th>
-														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Current Value</span></th>
-														<th class="text-center" ><span class="g-font-size-20--xs g-font-family--playfair">Growth Rate (%)</span></th>
+										            <tr class="g-bg-color--white g-font-size-12--xs g-font-size-20--lg g-font-family--playfair" >
+										                <th class="text-center" ><span>Invested Amount</span></th>
+														<th class="text-center" ><span>Profit</span></th>
+														<th class="text-center" ><span>Current Value</span></th>
+														<th class="text-center" ><span>Growth Rate (%)</span></th>
 										            </tr>
 										        </thead>
 										         <tbody>
-										            <tr class="g-bg-color--white" >
+										            <tr class="g-bg-color--white g-font-size-12--xs g-font-size-20--lg g-color--primary " >
 										                <td class="text-center" >
-										                	<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
-                                							<figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter"></figure>
+										                	<span class="g-font-family--playfair" >&#8377;&nbsp; </span>
+                                							<figure id="tot-inv-amt" class="g-display-inline-block--xs g-font-family--brandonText js__counter"></figure>
                             							</td>
 														<td class="text-center" >
-															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
-                                							<figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+															<span class="g-font-family--playfair" >&#8377;&nbsp; </span>
+                                							<figure id="tot-prof-amt" class="g-display-inline-block--xs g-font-family--brandonText js__counter" ></figure>
                             							</td>
 														<td class="text-center" >
-															<span class="g-font-size-30--xs g-font-family--playfair g-color--primary" >&#8377;&nbsp; </span>
-                                							<figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+															<span class=" g-font-family--playfair" >&#8377;&nbsp; </span>
+                                							<figure id="tot-cur-amt" class="g-display-inline-block--xs g-font-family--brandonText js__counter" ></figure>
                             							</td>
 														<td class="text-center" >
-															<figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-size-30--xs g-font-family--brandonText g-color--primary js__counter" ></figure>
+															<figure id="tot-grwth-amt" class="g-display-inline-block--xs g-font-family--brandonText js__counter" ></figure>
                             								<%-- <span class="g-font-size-30--xs g-font-family--playfair g-color--primary" style="line-height: 1;">&#37; </span> --%>
                             							</td>
 										            </tr>
 										        </tbody>
 										    </table>
 								    	</div>
-								    	<div class="col-md-1"></div>
+								    	<div class="col-xs-1"></div>
 								    	</div>
 						  	</div>
 						  	<div class="card-footer g-font-size-10--xs "></br></div>
@@ -331,22 +332,22 @@
 						  <div class="card-header">
 						    <ul class="nav nav-pills nav-tabs card-header-pills">
 						      <li class="nav-item active">
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#portfolioSummaryPane">Portfolio Summary</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#portfolioSummaryPane">Portfolio Summary</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane" >Active SIP's</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane" >Active SIP's</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeStpPane" >Active STP's</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeStpPane" >Active STP's</a>
 						      </li>
 						      <li class="nav-item" >
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
 						      </li>
 						      <li class="nav-item" id="hide-pending-orders" >
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>
 						      </li>
 						      <li class="nav-item" id="hide-old-portfolio" >
-						        <a class="nav-link g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#olfPortfolioPane">Old Portfolio</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#olfPortfolioPane">Old Portfolio</a>
 						      </li>
 						    </ul>
 						  </div>
@@ -355,28 +356,28 @@
 						  		<!--  Portfolio Summary Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class=" g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class=" g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Portfolio Details
                     		</h3>
                 		</div> 
 			         <div class="g-text-center--xs table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
 								<table id="portfoliosummary" class="table-bordered" cellspacing="0" width="100%">
-							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Sl. no.</th>
-							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Fund Name</th>
-							                <th class="text-center g-color--white g-font-size-14--xs " style="padding: 0px;">Folio Num</th>
-											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Invested Amount</th>
-											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Units held</th>
-											<th class="text-center add-comma g-color--white g-font-size-14--xs" style="padding: 0px;">Current Value</th>
-											<th class="text-center add-comma g-color--white g-font-size-14--xs " style="padding: 0px;">Profit</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Returns (% per year)</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Invest More</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">Redeem</th>
-											<th class="text-center g-color--white g-font-size-14--xs" style="padding: 0px;">STP</th>
+							        <thead class="text-center">
+							            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white" >
+							            	<th class="text-center " style="padding: 0px;">Sl. no.</th>
+							                <th class="text-center " style="padding: 0px;">Fund Name</th>
+							                <th class="text-center " style="padding: 0px;">Folio Num</th>
+											<th class="text-center add-comma " style="padding: 0px;">Invested Amount</th>
+											<th class="text-center add-comma " style="padding: 0px;">Units held</th>
+											<th class="text-center add-comma " style="padding: 0px;">Current Value</th>
+											<th class="text-center add-comma " style="padding: 0px;">Profit</th>
+											<th class="text-center " style="padding: 0px;">Returns (% per year)</th>
+											<th class="text-center " style="padding: 0px;">Invest More</th>
+											<th class="text-center " style="padding: 0px;">Redeem</th>
+											<th class="text-center " style="padding: 0px;">STP</th>
 							            </tr>
 							            
 							        </thead>
@@ -393,22 +394,22 @@
 						  	<div id="activeSipPane" class="container tab-pane">
 						  		<!-- Sip Summary Table Start -->
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Active SIP's
                    			</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs table-responsive">
 							<table id="sipTable" class="table-bordered" cellspacing="0" width="100%">
-						        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-						            <tr class="g-bg-color--primary">
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Fund Category</span></th>
-										<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">SIP Amount</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">SIP Debit Date</span></th>
+						        <thead class="text-center">
+						            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white">
+										<th class="text-center " style="padding: 0px;">Sl. no.</th>
+										<th class="text-center"  style="padding: 0px;">Fund Name</th>
+										<th class="text-center"  style="padding: 0px;">Folio Num</th>
+										<th class="text-center"  style="padding: 0px;">Fund Category</th>
+										<th class="text-center add-comma"  style="padding: 0px;">SIP Amount</th>
+										<th class="text-center"  style="padding: 0px;">SIP Debit Date</th>
 									</tr>
 						        </thead>
 						    </table>
@@ -442,22 +443,22 @@
 						  	<div id="activeStpPane" class="container tab-pane">
 						  		<!-- Stp Summary Table Start -->
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Active STP's
                    			</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs table-responsive">
 							<table id="stpTable" class="table-bordered" cellspacing="0" width="100%">
-						        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-						            <tr class="g-bg-color--primary">
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">STP from</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">STP to</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
-										<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">STP Amount</span></th>
-										<th class="text-center" ><span class="g-color--white g-font-size-14--xs">STP Debit Date</span></th>
+						        <thead class="text-center">
+						            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white">
+										<th class="text-center" style="padding: 0px;">Sl. no.</th>
+										<th class="text-center" style="padding: 0px;">STP from</th>
+										<th class="text-center" style="padding: 0px;">STP to</th>
+										<th class="text-center" style="padding: 0px;">Folio Num</th>
+										<th class="text-center add-comma" style="padding: 0px;">STP Amount</th>
+										<th class="text-center" style="padding: 0px;">STP Debit Date</th>
 									</tr>
 						        </thead>
 						    </table>
@@ -493,24 +494,24 @@
 						  		<!-- Transaction Hidtory Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Transaction History 
                     		</h3>
                 		</div> 
 			     	<div class=" g-text-center--xs  table-responsive">
 						<table id="transctionhistory" class="table-bordered" cellspacing="0" width="100%">
-								<thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-									<tr class="g-bg-color--primary">
-										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl. no.</span></th>
-										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
-										<th class="text-center sort-date" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
-										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Amount</span></th>
-										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">Units</span></th>
-										<th class="text-center no-sort add-comma" ><span class="g-color--white g-font-size-14--xs">NAV</span></th>
-										<th class="text-center no-sort" ><span class="g-color--white g-font-size-14--xs">Transaction Type</span></th>
+								<thead class="text-center">
+									<tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white">
+										<th class="text-center no-sort" style="padding: 0px;">Sl. no.</th>
+										<th class="text-center no-sort" style="padding: 0px;">Fund Name</th>
+										<th class="text-center no-sort" style="padding: 0px;">Folio Num</th>
+										<th class="text-center sort-date" style="padding: 0px;">Transaction Date</th>
+										<th class="text-center no-sort add-comma" style="padding: 0px;">Amount</th>
+										<th class="text-center no-sort add-comma" style="padding: 0px;">Units</th>
+										<th class="text-center no-sort add-comma" style="padding: 0px;">NAV</th>
+										<th class="text-center no-sort" style="padding: 0px;">Transaction Type</th>
 									</tr>
 								</thead>
 				   			</table>
@@ -526,24 +527,24 @@
 						  	<!--  Pending Order Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="pending-orders-row">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Pending Orders
                     		</h3>
                 		</div> 
 			         <div class="g-text-center--xs  table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
 								<table id="pendingOrders" class="table-bordered" cellspacing="0" width="100%">
-							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl.no.</span></th>
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Lumpsum Amount</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Sip Amount</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Status</span></th>
-											<th class="text-center" ><span class="g-color--white g-font-size-14--xs">Transaction Date</span></th>
-											<%-- <th class="text-center" ><span class="g-color--white g-font-size-14--xs">Pay</span></th> --%>
+							        <thead class="text-center">
+							            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white" >
+							            	<th class="text-center" style="padding: 0px;">Sl.no.</th>
+							                <th class="text-center" style="padding: 0px;">Fund Name</th>
+											<th class="text-center add-comma" style="padding: 0px;">Lumpsum Amount</th>
+											<th class="text-center add-comma" style="padding: 0px;">Sip Amount</th>
+											<th class="text-center" style="padding: 0px;">Transaction Status</th>
+											<th class="text-center" style="padding: 0px;">Transaction Date</th>
+											<%-- <th class="text-center" style="padding: 0px;">Pay</th> --%>
 							            </tr>
 							        </thead>
 							    </table>
@@ -558,24 +559,24 @@
 			  	<!--  Old Portfolio Table Start -->
                 
                 <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;" id="old-portfolio-row">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-margin-b-10--lg  g-bg-color--white g-box-shadow__dark-lightest-v4" >
+             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
              			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
                     			Old Portfolio
                     		</h3>
                 		</div> 
 			         <div class="g-text-center--xs  table-responsive">
 								<!-- <table id="portfoliosummary" cellpadding="0" cellspacing="0" border="0" class="display"></table> -->
 								<table id="oldPortfolio" class="table-bordered" cellspacing="0" width="100%">
-							        <thead class="text-center g-font-size-5--xs g-font-size-10--sm g-font-size-10--md ">
-							            <tr class="g-bg-color--primary" >
-							            	<th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Sl.no.</span></th>
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Fund Name</span></th>
-							                <th class="text-center" ><span class="g-color--white g-font-size-14--xs g-font-size-5--xs">Folio Num</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Invested Amount</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Units held</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Current Value</span></th>
-											<th class="text-center add-comma" ><span class="g-color--white g-font-size-14--xs">Profit</span></th>
+							        <thead class="text-center">
+							            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white" >
+							            	<th class="text-center" style="padding: 0px;">Sl.no.</th>
+							                <th class="text-center" style="padding: 0px;">Fund Name</th>
+							                <th class="text-center" style="padding: 0px;">Folio Num</th>
+											<th class="text-center add-comma" style="padding: 0px;">Invested Amount</th>
+											<th class="text-center add-comma" style="padding: 0px;">Units held</th>
+											<th class="text-center add-comma" style="padding: 0px;">Current Value</th>
+											<th class="text-center add-comma" style="padding: 0px;">Profit</th>
 							            </tr>
 							        </thead>
 							    </table>
@@ -616,20 +617,20 @@
 
 
         <!--========== FOOTER ==========-->
-          <footer class="g-bg-color--dark">
+        <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
+                <div class="container g-padding-y-40--xs">
                     <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs ">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
@@ -637,22 +638,24 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-60--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
+                        <div class=" col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="text-center g-font-size-18--xs g-color--primary g-margin-l-o-25--xs">MoneyBuddy</h3>
+                            <br/>
+                            <p class="g-color--primary">
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
                     <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
                     	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
@@ -660,7 +663,7 @@
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
+            <div class="container g-padding-y-10--xs">
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="index.html">
@@ -913,7 +916,7 @@
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "No ongoing SIPs, start one today",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -976,7 +979,7 @@
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "No ongoing STPs, start one today",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -1052,7 +1055,7 @@
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "Start saving for your goals",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -1174,7 +1177,7 @@
 					        	titleAttr: 'PDF',
 					        	/* orientation: 'auto', */
 					        	/* pageSize: 'LETTER', */
-					        	title: 'Money Buddy Financial Services Private Limited',
+					        	title: 'MoneyBuddy, Advisory by Kamal Wadhwani,  CFA. SEBI Registered Advisory INA000013581',
 					        	messageTop: 'Investment statement of '+customerName+'\n\nGiven below is a quick summary of your investments with us',
 					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
 					        	exportOptions: {
@@ -1234,7 +1237,7 @@
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "Start saving for your goals",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -1326,7 +1329,7 @@
 					        	
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "All orders have been executed successfully",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"
@@ -1441,7 +1444,7 @@
 					        	titleAttr: 'PDF',
 					        	/* orientation: 'auto', */
 					        	/* pageSize: 'LETTER', */
-					        	title: 'Money Buddy Financial Services Private Limited',
+					        	title: 'MoneyBuddy, Advisory by Kamal Wadhwani,  CFA. SEBI Registered Advisory INA000013581',
 					        	messageTop: 'Investment statement of '+customerName+'\n\nGiven below is a quick summary of your investments with us',
 					        	messageBottom: '\n\nCurrent value of your investments: Rs. '+totalCurrAmt+'\n\nYour investments have grown at a rate of : '+profitValue+' % per year',
 					        	exportOptions: {
@@ -1501,7 +1504,7 @@
 					        
 							"language": {
 							            "lengthMenu": "Display _MENU_ records per page",
-							            "zeroRecords": "Nothing found - sorry",
+							            "zeroRecords": "You can also track your old investments with us",
 							            "info": "Showing page _PAGE_ of _PAGES_",
 							            "infoEmpty": "No records available",
 							            "infoFiltered": "(filtered from _MAX_ total records)"

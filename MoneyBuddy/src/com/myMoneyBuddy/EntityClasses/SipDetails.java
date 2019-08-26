@@ -23,6 +23,9 @@ public class SipDetails {
     
     @Column(name="BSE_REG_NUM")
     private String bseRegNum;
+    
+    @Column(name="SIP_AMOUNT")
+    private String sipAmount;
 
     @Column (name="SIP_DATE")
     private String sipDate;
@@ -47,12 +50,13 @@ public class SipDetails {
         
     }
 
-	public SipDetails(String customerId, String bseRegNum, String transactionDetailId, String sipDate, String sipStartDate,  String sipEndDate, String sipDuration, 
+	public SipDetails(String customerId, String bseRegNum, String transactionDetailId, String sipAmount, String sipDate, String sipStartDate,  String sipEndDate, String sipDuration, 
 				String sipCompletionStatus, String sipFormSubmission) {
 		super();
 		this.customerId = customerId;
 		this.bseRegNum = bseRegNum;
 		this.transactionDetailId = transactionDetailId;
+		this.sipAmount = sipAmount;
 		this.sipStartDate = sipStartDate;
 		this.sipDate = sipDate;
 		this.sipEndDate = sipEndDate;
@@ -76,6 +80,14 @@ public class SipDetails {
 
 	public void setBseRegNum(String bseRegNum) {
 		this.bseRegNum = bseRegNum;
+	}
+
+	public String getSipAmount() {
+		return sipAmount;
+	}
+
+	public void setSipAmount(String sipAmount) {
+		this.sipAmount = sipAmount;
 	}
 
 	public String getTransactionDetailId() {
@@ -152,6 +164,9 @@ public class SipDetails {
         if ((this.transactionDetailId == null) ? (other.transactionDetailId != null) : !this.transactionDetailId.equals(other.transactionDetailId)) {
             return false;
         }
+        if ((this.sipAmount == null) ? (other.sipAmount != null) : !this.sipAmount.equals(other.sipAmount)) {
+            return false;
+        }
         if ((this.sipDate == null) ? (other.sipDate != null) : !this.sipDate.equals(other.sipDate)) {
             return false;
         }
@@ -180,6 +195,7 @@ public class SipDetails {
         hash = 79 * hash + (this.customerId != null ? this.customerId.hashCode() : 0);
         hash = 79 * hash + (this.bseRegNum != null ? this.bseRegNum.hashCode() : 0);
         hash = 79 * hash + (this.transactionDetailId != null ? this.transactionDetailId.hashCode() : 0);
+        hash = 79 * hash + (this.sipAmount != null ? this.sipAmount.hashCode() : 0);
         hash = 79 * hash + (this.sipDate != null ? this.sipDate.hashCode() : 0);
         hash = 79 * hash + (this.sipStartDate != null ? this.sipStartDate.hashCode() : 0);
         hash = 79 * hash + (this.sipEndDate != null ? this.sipEndDate.hashCode() : 0);

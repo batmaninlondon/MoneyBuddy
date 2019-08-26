@@ -26,6 +26,7 @@
         <link href="assets/css/themify/themify.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
 
         <!-- Favicon -->
         <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -126,8 +127,8 @@
             <div class="g-container--md g-text-center--xs   ">
             <br/><br/><br/>
                 <div class="g-margin-b-10--xs   ">
-                    <h2 class="g-font-size-40--xs g-font-size-40--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-t-30--xs g-margin-b-10--xs"><b>FAQs</b></h2>
-                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-20--xs">Your Questions. Answered.</p>
+                    <h2 class="g-font-size-20--xs g-font-size-40--lg g-color--white g-letter-spacing--1 g-margin-t-30--xs g-margin-b-0--xs g-margin-b-10--lg"><b>FAQs</b></h2>
+                    <p class="text-uppercase g-font-size-12--xs g-font-size-14--lg g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-20--xs">Your Questions. Answered.</p>
                 </div>
             </div>
         </div>
@@ -151,9 +152,9 @@
                                        <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h2 class="s-faq-grid__title">What is MoneyBuddy?</h2>
+                                        <h2 class="s-faq-grid__title g-font-size-12--xs g-font-size-16--lg">What is MoneyBuddy?</h2>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             MoneyBuddy is an online wealth management platform, built in partnership with Bombay Stock Exchange (BSE).  Our customers get to benefit from the trust worth advisory service of Mr. Kamal Wadhwani, a SEBI registered investment analyst.
                                             <br>
@@ -170,9 +171,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h3 class="s-faq-grid__title">Is MoneyBuddy free?</h3>
+                                        <h3 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Is MoneyBuddy free?</h3>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Yes and No.  While moneyBuddy is an absolutely free platform for all mutual fund investors, our customers are expected to pay advisory fee of Mr. Kamal Wadhwani, a SEBI registered investment advisor.
                                             <br/>The fee is charged at the end of each quarter.
@@ -188,9 +189,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">How much fee do you get from mutual fund companies?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">How much fee do you get from mutual fund companies?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Zero, we do not get any commission or anything else from mutual funds companies. We are very proud of our &#34;Honest Advice Commitment&#34; and have deliberately chosen to forgo any commision that would make us compromise on our &#34;Honest Advice Commitment&#34;
 											
@@ -204,19 +205,19 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">How do we select top performing mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">How do we select top performing mutual funds?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Our co-founder Mr. Kamal Wadhwani, CFA and a SEBI registered investment advisor, is the person responsible for mutual fund research. He is a signatory of CFA institute code of ethics and committed to ensuring unbiased fund selection. He focuses on following three pillars to ensure higher returns for our investors:
-                                            <ol>
-                                            	<li class="g-color--white-opacity">
+                                            <ol class=" g-font-size-10--xs g-font-size-14--lg">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	<b>Large selection of funds as the starting points:</b> We have tied up with over 30 fund companies offering over 2,000 mutual fund schemes. This ensures we have access to all the funds to cherry pick the ones expected to perform better.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	<b>Unbiased selection of funds:</b> We have deliberately decided to not take any commission from any mutual fund company. Thus Expected performance is the only criteria we look at before adding any funds to our recommended list.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	<b>Analysis of past performance:</b> We carefully look at and analyse past performance of all the funds as part of our research. Parameters such as volatility of returns and returns for various periods from past 3 months upto 10 years are looked at before adding any fund to our recommended list.
                                             	</li>
                                             </ol>
@@ -230,9 +231,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Do I need a Demat account to purchase mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Do I need a Demat account to purchase mutual funds?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             No, you don&apos;t need to open a demat account for purchasing mutual funds. Just click on the following link to open your MoneyBuddy account and start investing online.
                                             <br>
@@ -247,9 +248,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Can I add nominee to my investments?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Can I add nominee to my investments?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Yes, we do offer the facility to add a nominee to all your investments. Furthermore, you can also change nominee name at a later date if needed.
                                         </div>
@@ -262,9 +263,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Can NRI&apos;s invest through MoneyBuddy?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Can NRI&apos;s invest through MoneyBuddy?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Yes, we welcome NRIs looking to benefit from India&apos;s economy growth rate. We offer them the flexibility to invest lumpsum in one go or invest via regular monthly SIPs. While the investment process for NRIs is also fully online, we recommend NRI investors to first contact us, for customised advise as per their country/ immigration status. 
                                         </div>
@@ -277,9 +278,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What are mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What are mutual funds?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Mutual funds are SEBI registered entities, which are granted government permission to collect money from different investors and hire experts to invest that money on behalf of their investors. 
                                         </div>
@@ -292,18 +293,18 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What are the risks associated with mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What are the risks associated with mutual funds?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Mutual funds invest your money in markets and thus money invested with mutual funds can increase or decrease depending upon market conditions.
                                             <br>
                                             However different mutual funds invest in different ways and not all mutual funds give negative returns when stock markets does badly. Following two examples will help you understand different types of funds:
                                             <ol type="a">
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	In the year 2008 low risk (Liquid mf) gave returns of 8 % and gold mutual funds were up by 25% when most equity mutual funds were down by around 30%
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	While in the year 2014 low risk (Liquid mf) gave returns of 8 % and gold mutual funds were down by 25% when most equity mutual funds were up around 30%
                                             	</li>
                                             </ol> 
@@ -317,9 +318,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Is there any lock-in on my money?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Is there any lock-in on my money?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             MoneyBuddy doesn&apos;t put any restrictions and you are allowed to withdraw your money just a day after investing.
                                             <br>
@@ -336,9 +337,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What is Systematic Investment Plan (SIP)</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What is Systematic Investment Plan (SIP)</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             SIP is an innovative way of purchasing mutual funds. With SIP, You can invest a fixed amount every month on a specific date in a fund or multiple funds of your choice.
                                             <br>
@@ -353,9 +354,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What if I miss my Systematic Investment Plan (SIP) payment?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What if I miss my Systematic Investment Plan (SIP) payment?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             We understand sometimes there can be other more pressing expenses. Thus there is no penalty on missing your SIP payment. Moreover unlike EMI&apos;s you&apos;ll not have to pay double amount in the following month either. 
                                         </div>
@@ -368,9 +369,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">How do I withdraw my SIP investments?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">How do I withdraw my SIP investments?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             SIP investments can be withdrawn like a regular investment, Just go to your MoneyBuddy dashboard and click on withdraw button. 
                                         </div>
@@ -388,9 +389,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What is Know Your Customer (KYC)</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What is Know Your Customer (KYC)</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             KYC is a government mandated formality for investing in mutual funds. All a user need is a PAN card and an address proof ( aadhar card or any other address proof is okay) along with a passport size photo to complete his KYC.
                                         </div>
@@ -403,9 +404,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Do I need to do KYC before investing through MoneyBuddy?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Do I need to do KYC before investing through MoneyBuddy?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             KYC is only applicable to investors who&apos;ve never bought a mutual fund before. So if you have a demat account or have invested in mutual funds in the past, you won&apos;t need to do KYC again.
                                             <br>
@@ -420,27 +421,27 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Is my money safe?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Is my money safe?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Yes, We work with reputed Bombay stock exchange to invest your money in a safe and secure environment
                                             <br>
                                             Additionally, we&apos;ve taken following measures for extra safety:
                                             <ol>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	Your investments are held directly under your name and are always linked to your bank account. They are independent of MoneyBuddy and can be withdrawn by directly calling the mutual fund company even if we were to ever stop functioning.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	When you invest, money is directly transferred from your bank account to the bank account of &quot;Indian Clearing Corporation Limited&quot;.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	When you place a withdrawal request on our platform, mutual fund company directly transfers your money to your bank account.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	By deliberately limiting our role in handling client&apos;s funds, we have de risked client&apos;s investment from any unforeseen issues at our end.
                                             	</li>
-                                            	<li class="g-color--white-opacity">
+                                            	<li class="g-color--white-opacity  g-font-size-10--xs g-font-size-14--lg">
                                             	Finally, while using internet banking, you are only allowed to pay via bank account which is registered with us. Say for example you have registered your HDFC account number ending with ***2345 with us, You&apos;ll need to enter user ID/password linked with ***2345 on the netbanking page. If you had mistakenly entered wrong account number on our website, you will not be able to make payment as you won&apos;t have the USER ID/password linked with that wrong account number
                                             	</li>
                                             </ol>
@@ -454,9 +455,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">Is my data safe?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Is my data safe?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             We at MoneyBuddy are fully committed to never share or rent your data to any third party or company unless mandated by the law.
                                             <br>
@@ -471,9 +472,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">I wish to change the bank account linked to my MoneyBuddy account</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">I wish to change the bank account linked to my MoneyBuddy account</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             We request you to contact us, for the same.
                                             <br>
@@ -488,9 +489,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What are liquid mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What are liquid mutual funds?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Liquid Mutual funds are used for returning higher return on your surplus cash without getting stuck with lock-in like bank FDs.
                                             <br>
@@ -507,9 +508,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">I wish to change the date of my existing SIP</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">I wish to change the date of my existing SIP</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Please contact us, and we will be happy to do the needful.
                                         </div>
@@ -522,9 +523,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What is Net Asset Value (NAV)?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What is Net Asset Value (NAV)?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             NAV is the price of one unit of a mutual fund. It changes on a daily basis, it can either go up or go down depending upon fund&apos;s  performance on that day.
                                             <br>
@@ -539,9 +540,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">What is a unit?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">What is a unit?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             While NAV reflects the price of mutual fund, units signifies the quantity of your mutual funds.
                                             <br>
@@ -557,9 +558,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">I do not have access to internet banking, can I invest?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">I do not have access to internet banking, can I invest?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             Yes, we are very happy to work with investors who don&apos;t have or don&apos;t want to use internet banking for whatever reasons. They can invest lumpsum or start SIP and use our online platform to track or redeem their investments.
                                             <br>
@@ -574,9 +575,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">I have never invested in mutual funds earlier, what should I do?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">I have never invested in mutual funds earlier, what should I do?</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             We welcome you to make your first mutual fund investment for as low as Rs. 1000 through our fully online platform.  Please contact us, if you want us to guide you on your first investment.
                                         </div>
@@ -589,9 +590,9 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title">I like MoneyBuddy, but I am already investing in mutual funds from some other place.</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">I like MoneyBuddy, but I am already investing in mutual funds from some other place.</h4>
                                     </div>
-                                    <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
                                             We will be happy to help you transfer all your existing investments and SIPs to our platform in a simple, convenient and tax-efficient way. You will also get to earn higher returns with direct mutual funds and benefit from the customised advice of Mr. Kamal Wadhwani, a SEBI registered investment advisor.
                                         </div>
@@ -629,17 +630,17 @@
         <footer class="g-bg-color--dark">
             <!-- Links -->
             <div class="g-hor-divider__dashed--white-opacity-lightest">
-                <div class="container g-padding-y-80--xs">
+                <div class="container g-padding-y-40--xs">
                     <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs ">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
@@ -647,22 +648,24 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-60--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
+                        <div class=" col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="text-center g-font-size-18--xs g-color--primary g-margin-l-o-25--xs">MoneyBuddy</h3>
+                            <br/>
+                            <p class="g-color--primary">
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>
                     <div class="row  g-font-size-12--xs g-color--white">
                     <br/>
                     	 Mutual fund investments are subject to market risks. Please read the scheme information and other related documents carefully before investing.
-						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs.
+						<br/>Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, investment goal and time frame associated with the investment before choosing a fund or designing a suitable portfolio.
                     	<br/>MoneyBuddy is the trade name used by Kamal Wadhwani to run his advisory business. SEBI Regn No: INA000013581
                     </div>
                 </div>
@@ -670,7 +673,7 @@
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="container g-padding-y-50--xs">
+            <div class="container g-padding-y-10--xs">
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="index.html">

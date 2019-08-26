@@ -83,68 +83,68 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:100px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10  g-height-50--xs g-height-80--lg g-bg-color--dark ">
 	    	<div class="profile">
 	        	<div class="name">
-	                	<h3 class="title g-color--white">Thank you for investing with MoneyBuddy</h3>
-						<h6 style="color:white;">Your Investment details </h6>
+	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white">Thank you for investing with MoneyBuddy</h3>
+						<h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your Investment details </h6>
 	            </div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	<div class="row g-height-auto--lg" >
-		<div class="col-md-1 col-xs-1" ></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+		<div class="col-xs-1" ></div>
+		<div class="col-xs-10  g-bg-color--white " >
 		<%-- <p>MIn SIP amount <s:property value="#session.minSipAmount"/></p> --%>
-			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-30--xs g-margin-r-100--xs g-margin-l-100--xs">
+			<div id="customer-cart-list" class=" g-margin-t-20--xs g-margin-b-30--lg  g-margin-t-30--lg g-margin-r-100--lg g-margin-l-100--lg">
 					<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg center text-center g-bg-color--gray-light">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">UpfrontAmount</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">SipAmount</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
+												<th class="col-xs-3">Fund Name</th>
+												<th class="col-xs-3">UpfrontAmount</th>
+												<th class="col-xs-3">SipAmount</th>
+												<th class="col-xs-3">Transaction Type</th>
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
 													<tr>
 													    <s:if test="schemeName.equals('Total')">
-														    <td class="center g-font-size-14--xs text-center">
+														    <td>
 														    	<b><s:property value="#customerCartListElement.schemeName"/></b>
 													    	</td>
-														    <td class="center g-font-size-14--xs text-center">
+														    <td>
 														    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 													    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 												    		</td>
 												    	</s:if>
 												    	<s:else>
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    			<s:property value="#customerCartListElement.schemeName"/>
 											    			</td>
 											    			<s:if test="transactionType.equals('UPFRONT')">
-															    <td class="center g-font-size-14--xs text-center">
+															    <td>
 															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
 														    	</td>
-														    	<td class="center g-font-size-14--xs text-center">
+														    	<td>
 														    		NA
 														    	</td>
 													    	</s:if>
 													    	<s:else>
-														    	<td class="center g-font-size-14--xs text-center">
+														    	<td>
 														    		NA
 														    	</td>
-														    	<td class="center g-font-size-14--xs text-center">
+														    	<td>
 															    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
 														    	</td>
 													    	</s:else>
-													    	<td class="center g-font-size-14--xs text-center">
+													    	<td>
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>
 												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
@@ -157,7 +157,7 @@
 									</table>
 			</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>

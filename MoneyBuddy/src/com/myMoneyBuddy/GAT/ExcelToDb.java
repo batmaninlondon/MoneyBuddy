@@ -25,6 +25,7 @@ import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UploadCustomerNav;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 
 public class ExcelToDb {
     public static void main( String [] args ) {
@@ -109,6 +110,10 @@ public class ExcelToDb {
         String folioNum="";
         String bseOrderId="";
         String Bytes="";
+        String bseRegNum = "";
+        
+        List<String> ExtraBseOrderId = new ArrayList<String>();
+        List<String> ExtraBseRegNum = new ArrayList<String>();
         /*System.out.println(dataHolder);*/
 
         Workbook workbook;
@@ -121,14 +126,30 @@ public class ExcelToDb {
         
         Iterator<Row> rowIterator = sheet.rowIterator();
         QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
-        List<String> bseOrderIdList = queryTransactionDetails.getPendingBseOrderId();
+        List<String> bseOrdIdAndRegNumList = queryTransactionDetails.getPendingBseOrdIdAndRegNum();
+        List<String> allBseOrdIdAndRegNumList = queryTransactionDetails.getAllBseOrdIdAndRegNum();
+        
+        for ( int i = 0 ; i < bseOrdIdAndRegNumList.size();i++)  {
+        	System.out.println("bseOrdIdAndRegNumList.get("+i+") : "+bseOrdIdAndRegNumList.get(i));
+        }
+        
+        boolean extraBseOrderIdExists = false;
+        boolean extraBseRegNumExists = false;
+        
+        
+        if (rowIterator.hasNext())
+        	rowIterator.next();
         
         while (rowIterator.hasNext()) {
+        	
             Row row = rowIterator.next();
 
             // Now let's iterate over the columns of the current row
             Iterator<Cell> cellIterator = row.cellIterator();
             boolean bseOrderIdExists = false;
+            boolean bseRegNumExists = false;
+           
+            
             while (cellIterator.hasNext()) {
             	
                 Cell cell = cellIterator.next();
@@ -139,49 +160,90 @@ public class ExcelToDb {
                 if ( cell.getColumnIndex() == 1 ) {
                 	/*System.out.println("cell.getColumnIndex() : "+cell.getColumnIndex()+" and cellValue : "+cellValue);*/
                 	bseOrderId = cellValue;
-                	if (bseOrderIdList.contains(bseOrderId))  {
-                		bseOrderIdExists = true;
-                		
-                		
-                		System.out.println("Contains bseOrderId : "+bseOrderId );
-                		
-                		
+                	if (! "0".equals(bseOrderId))  {
+	                	if (bseOrdIdAndRegNumList.contains(bseOrderId))  {
+	                		bseOrderIdExists = true;
+	                		
+	                		
+	                		System.out.println("Contains bseOrderId : "+bseOrderId );
+	                		
+	                		
+	                	}
+	                	
+	                	if (! allBseOrdIdAndRegNumList.contains(bseOrderId))
+	                	{
+	                		 extraBseOrderIdExists = true;
+	                		 ExtraBseOrderId.add(bseOrderId);
+	                     	System.out.println("Does not Contains bseOrderId : "+bseOrderId );
+	                     }
                 	}
-                	 else {
-                     	System.out.println("Does not Contains bseOrderId : "+bseOrderId );
-                     }
                 }
                
                 else if ( cell.getColumnIndex() == 12 ) { 
-                	/*System.out.print("cell.getColumnIndex() : "+cell.getColumnIndex()+" and cellValue : "+cellValue);*/
                 	folioNum = cellValue;
                 }
                 else if ( cell.getColumnIndex() == 18 ) { 
-                	/*System.out.print("cell.getColumnIndex() : "+cell.getColumnIndex()+" and cellValue : "+cellValue);*/
                 	allottedNav = cellValue;
                 }
                 else if ( cell.getColumnIndex() == 19 ) {
-                	/*System.out.print("cell.getColumnIndex() : "+cell.getColumnIndex()+" and cellValue : "+cellValue);*/
                 	allottedUnits = cellValue;
                 }
                 
+                else if ( cell.getColumnIndex() == 26 ) {
+                	bseRegNum = cellValue;
+                	if (! "0".equals(bseRegNum))  {
+	                	if (bseOrdIdAndRegNumList.contains(bseRegNum))  {
+	                		bseRegNumExists = true;
+	                		
+	                		
+	                		System.out.println("Contains bseRegNum : "+bseRegNum );
+	                		
+	                		
+	                	}
+	                	if (! allBseOrdIdAndRegNumList.contains(bseRegNum)) {
+	                		 extraBseRegNumExists = true;
+	                		 ExtraBseRegNum.add(bseRegNum);
+	                     	System.out.println("Does not Contains bseRegNum : "+bseRegNum );
+	                     }
+                	}
+                }
                 
-               
                 
                /* if ( cell.getColumnIndex() == 1 || cell.getColumnIndex() == 12 || cell.getColumnIndex() == 18 || cell.getColumnIndex() == 19)  
                 System.out.print(cellValue + "\t");*/
             }
-            if (bseOrderIdExists)  {
+            /*if (bseOrderIdExists || bseRegNumExists)  {
+            	
             	
             		
             		System.out.println("bseOrderId : "+bseOrderId+" and folioNum : "+folioNum+
             				" and allottedNav : "+allottedNav+"allottedUnits : "+allottedUnits);
             	UploadCustomerNav UploadCustomerNav = new UploadCustomerNav();
-        		UploadCustomerNav.uploadCusNav(bseOrderId, folioNum, allottedNav, allottedUnits);
+        		UploadCustomerNav.uploadCusNav(bseOrderId, bseRegNum, folioNum, allottedNav, allottedUnits);
             	
-            }
+            }*/
             
             System.out.println();
+        }
+        
+        if (extraBseOrderIdExists || extraBseRegNumExists)  {
+        	
+        	String bseOrderIds="";
+        	String bseRegNums="";
+        	
+        	for ( int i=0;i<ExtraBseOrderId.size();i++)  {
+        		
+        		bseOrderIds += ExtraBseOrderId.get(i)+",";
+        		System.out.println(" update bseOrderIds  : "+bseOrderIds);
+        	}
+        	
+        	for ( int i=0;i<ExtraBseRegNum.size();i++)  {
+        		bseRegNums += ExtraBseRegNum.get(i)+",";
+        		System.out.println(" update bseRegNums  : "+bseRegNums);
+        	}
+        	
+        	SendMail sendMail = new SendMail();
+        	sendMail.FaultyIdMailSending(bseOrderIds, bseRegNums);
         }
         
 		} catch (InvalidFormatException e) {

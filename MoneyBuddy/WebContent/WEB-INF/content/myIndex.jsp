@@ -193,7 +193,7 @@
                <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
             <nav class="s-header-v2__navbar">
-                <div class="g-padding-l-80-md g-display-table--lg">
+                <div class="g-padding-l-40-md g-padding-l-80-lg g-display-table--lg">
                     <!-- Navbar Row -->
                     <div class="s-header-v2__navbar-row">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -697,10 +697,10 @@
                 <div class="row">
                     <div class="col-md-4 g-margin-t-15--xs ">
                         <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".1s">
-                            <h1 class="text-center g-font-size-30--xs g-font-size-40--sm g-font-size-50--md  g-color--primary g-font-weight--700">Why</h1>
+                            <h1 class="text-center g-font-size-20--xs g-font-size-30--sm g-font-size-50--lg  g-color--primary g-font-weight--700 g-margin-t-o-60--xs  g-margin-t-o-0--lg">Why</h1>
                         </div>
                         <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s">
-                            <h1 class="g-font-size-30--xs g-font-size-40--sm g-font-size-50--md  g-color--primary g-font-weight--700">MoneyBuddy</h1>
+                            <h1 class="text-center g-font-size-20--xs g-font-size-30--sm g-font-size-50--lg  g-color--primary g-font-weight--700 g-margin-t-o-30--xs g-margin-t-o-10--sm g-margin-t-o-0--lg">MoneyBuddy</h1>
                         </div>
                     </div>
                     <div class="col-md-4 col-md-offset-1">
@@ -713,7 +713,7 @@
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Portfolio Tracking</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Financial Planning</li>
                         </ul>
-                  		<ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+                  		<ul class="list-unstyled col-xs-6 g-full-width--xs g-ul-li-tb-5--xs g-margin-t-o-20--xs g-margin-t-o-0--sm g-margin-b-20--xs g-margin-b-0--sm">
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Direct Plans</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Any time, any where</li>
                             <li class="g-font-size-12--xs"><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Proven Track Record</li>
@@ -721,11 +721,12 @@
                         </ul> 
                     </div>
                     </div>
+                     <div class="  hidden-xs hidden-sm  hidden-md  col-md-3 g-promo-section__img-right--lg g-bg-position--center g-height-100-percent--lg js__fullwidth-img">
+		                <img class="img-responsive" src="img/970x970/03.jpg" alt="Image">
+		            </div>
                 </div>
             </div>
-            <div class="col-sm-3 g-promo-section__img-right--lg g-bg-position--center g-height-100-percent--md js__fullwidth-img">
-                <img class="img-responsive" src="img/970x970/03.jpg" alt="Image">
-            </div>
+           
         </div>
         <!-- End Culture -->
 
@@ -734,35 +735,27 @@
         
         <!-- Counter -->
         <div class="js__parallax-window" style="background: url(img/1920x1080/06.jpg) 50% 0 no-repeat fixed;">
-            <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+            <div class="container g-padding-y-20--xs g-padding-y-125--md">
                 <div class="row">
-                    <div class="col-md-4 col-xs-4 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
-                        <div class="g-text-center--xs">
+                    <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md g-margin-b-10--xs g-margin-b-0--md">
+                        <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Top Performing Funds</b></h1>
+                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Top Performing Funds</b></h1>
                             </div>
-                           <!--  <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Mutual Funds</h4> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-4 g-full-width--xs">
-                        <div class="g-text-center--xs">
+                    <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md">
+                        <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Full Liquidity</b></h1>
-                                <%-- <span class="g-font-size-40--xs g-color--white">+</span> --%>
+                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Full Liquidity</b></h1>
                             </div>
-                            <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Yrs experience</h4> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-4 g-full-width--xs">
-                        <div class="g-text-center--xs">
+                    <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md">
+                        <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-40--xs g-color--white "><b>Ethical investing</b></h1>
-                                <%-- <span class="g-font-size-40--xs g-color--white">x</span> --%>
+                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Ethical investing</b></h1>
                             </div>
-                            <!-- <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-                            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4> -->
                         </div>
                     </div>
                 </div>
@@ -811,8 +804,10 @@
                         <div class="input-group">
                         	<s:form  action="saveSubscriberAction" class="g-recaptcha" method="post" name="formSubscriber" namespace="/">
 	                        	<s:hidden id="google-response-subscriber" name="googleResponse"></s:hidden>
+	                        	<div class="text-center">
 	                        	<s:fielderror fieldName="emailId" class="g-color--red" />
-			  					<s:textfield class="form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Email Address" name="emailId" /> 
+			  					<s:textfield class=" form-control s-form-v1__input g-radius--left-50 g-radius--right-50" id="subscriber-email-id" placeholder="Email Address" name="emailId" />
+			  					</div> 
 			  					<!-- <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email" id="subscriber-email-id" placeholder="Enter your email"> -->	
 	                            <%-- <span class="input-group-btn " > --%>
                             	<s:submit id="recaptcha-subscriber" class="btn btn-home g-color--white g-recaptcha  " value="Submit"></s:submit>
@@ -921,15 +916,15 @@
             <div class="g-hor-divider__dashed--white-opacity-lightest">
                 <div class="container g-padding-y-40--xs">
                     <div class="row">
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-                            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                            <ul class="list-unstyled g-ul-li-tb-5--xs ">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="welcome">Home</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="saveTax">Save Tax</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="<s:url action="MFexplorer"/>">Funds Explorer</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="contactUs">Contact Us</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://twitter.com/MoneyBuddyIndia">Twitter</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.facebook.com/MoneyBuddyIndia">Facebook</a></li>
@@ -937,16 +932,17 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://www.YouTube.com/MoneyBuddy">YouTube</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-2 g-margin-b-40--xs g-margin-b-0--md">
+                        <div class="col-xs-4 col-sm-2 g-margin-b-60--xs g-margin-b-0--md">
                             <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-                             <h3 class="g-font-size-18--xs g-color--white">MoneyBuddy</h3>
-                            <p class="g-color--white-opacity">
+                        <div class=" col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
+                             <h3 class="text-center g-font-size-18--xs g-color--primary g-margin-l-o-25--xs">MoneyBuddy</h3>
+                            <br/>
+                            <p class="g-color--primary">
                             No complicated jargon, no daunting fees, just straightforward, effortless investing.</p>
                         </div>
                     </div>

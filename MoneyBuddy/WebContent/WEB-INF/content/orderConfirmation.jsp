@@ -107,12 +107,12 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--dark " style="height:90px;">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10 g-height-70--xs g-height-80--lg  g-bg-color--dark " >
 	    	<div class="profile">
 	        	<div class="name pagination">
 	                	<s:set var="disBankName" value="displayBankName" />
-	                	<h3 class="title g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b>
+	                	<h3 class="title g-font-size-15--xs g-font-size-20--lg g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b>
 	                	<br/>Paying via:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#disBankName"/></b></h3>
 	                	
 						<!-- <h3></h3> -->
@@ -120,42 +120,42 @@
 	            </div>
 	       	</div>
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<s:form  action="paymentAction" method="post" name="formPayment">
 	
 	
-	<div class="row g-height-auto--lg" >
-		<div class="col-md-1 col-xs-1" ></div>
-		<div class="col-md-10 col-xs-10  g-bg-color--white " >
+	<div class="row g-height-auto--lg g-height-auto--xs" >
+		<div class="col-xs-1" ></div>
+		<div class="col-xs-10  g-bg-color--white " >
 			<div class="row text-center g-margin-t-15--xs">
-				<h3><b><u>Order Confirmation</u></b></h3>
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b><u>Order Confirmation</u></b></h3>
 			</div>
-			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--xs g-margin-l-100--xs">
+			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--lg g-margin-l-100--lg">
 					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
 			  		<s:set var="anySip" value="#session.anySipOrder" />
 				  		<table id="cartData" class="table table-bordered stripe ">
-										<thead class="table-head g-font-size-14--xs">
+										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Fund Name</th>
-												<th class="center col-md-3 g-bg-color--gray-light text-center">Transaction Type</th>
+												<th class="col-xs-3">Fund Name</th>
+												<th class="col-xs-3">Transaction Type</th>
 												<s:if test="'TRUE'.equals(#anyUpfront) ">
-													<th class="center col-md-3 g-bg-color--gray-light text-center">Lumpsum Amount<br/>(Rs.)</th>
+													<th class="col-xs-3">Lumpsum Amount<br/>(Rs.)</th>
 												</s:if>
 												<s:else>
-													<th class="center col-md-3 g-bg-color--gray-light text-center hidden">Lumpsum Amount<br/>(Rs.)</th>
+													<th class="col-xs-3 hidden">Lumpsum Amount<br/>(Rs.)</th>
 												</s:else>
 												<s:if test="'TRUE'.equals(#anySip) ">
-													<th class="center col-md-3 g-bg-color--gray-light text-center">SIP Amount<br/>(Rs/month)</th>
+													<th class="col-xs-3">SIP Amount<br/>(Rs/month)</th>
 												</s:if>
 												<s:else>
-													<th class="center col-md-3 g-bg-color--gray-light text-center hidden">SIP Amount<br/>(Rs/month)</th>
+													<th class="col-xs-3 hidden">SIP Amount<br/>(Rs/month)</th>
 												</s:else>
 												
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-14--xs">
+										<tbody class="table-body g-font-size-12--xs g-font-size-14--lg center text-center">
 												<%
 													boolean anySipInvestment = false;
 												%>
@@ -166,64 +166,64 @@
 													    	<p class="hidden" id="totUpfrontAmt"><s:property value="#customerCartListElement.upfrontAmount"/></p>
 													    	<p class="hidden" id="totSipAmt"><s:property value="#customerCartListElement.sipAmount"/></p>
 
-														    <td class="center g-font-size-14--xs text-center">
+														    <td>
 														    	<b><s:property value="#customerCartListElement.schemeName"/></b>
 													    	</td>
-													    	<td class="center g-font-size-14--xs text-center"></td>
+													    	<td></td>
 													    	<s:if test="'TRUE'.equals(#anyUpfront) ">
-															    <td class="center g-font-size-14--xs text-center">
+															    <td>
 															    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
 														    	</td>
 													    	</s:if>
 													    	<s:else>
-														    	<td class="hidden center g-font-size-14--xs text-center">
+														    	<td class="hidden">
 															    	<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b>
 														    	</td>
 													    	</s:else>
 													    	<s:if test="'TRUE'.equals(#anySip) ">
-														    	<td class="center g-font-size-14--xs text-center">
+														    	<td>
 														    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
 														    	</td>
 													    	</s:if>
 													    	<s:else>
-														    	<td class="hidden center g-font-size-14--xs text-center">
+														    	<td class="hidden">
 														    		<b><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b>
 														    	</td>
 													    	</s:else>
 												    	</s:if>
 												    	<s:else>
 												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
-												    		<td class="center g-font-size-14--xs text-center">
+												    		<td>
 												    			<s:property value="#customerCartListElement.schemeName"/>
 											    			</td>
-											    			<td class="center g-font-size-14--xs text-center">
+											    			<td>
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>
 											    			<s:if test="('TRUE'.equals(#anyUpfront)) && ('TRUE'.equals(#anySip)) ">
 												    			<s:if test="transactionType.equals('UPFRONT')">
-																    <td class="center g-font-size-14--xs text-center">
+																   <td>
 																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
 															    	</td>
-															    	<td class="center g-font-size-14--xs text-center">NA</td>
+															    	<td>NA</td>
 														    	</s:if>
 														    	<s:else>
-															    	<td class="center g-font-size-14--xs text-center">NA</td>
-															    	<td class="center g-font-size-14--xs text-center">
+															    	<td>NA</td>
+															    	<td>
 																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
 															    	</td>
 													    		</s:else>
 													    	</s:if>
 													    	<s:else>
 														    	<s:if test="'TRUE'.equals(#anyUpfront) ">
-														    		<td class="center g-font-size-14--xs text-center">
+														    		<td>
 																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/>
 															    	</td>
-															    	<td class="hidden center g-font-size-14--xs text-center"></td>
+															    	<td class="hidden"></td>
 																    	
 														    	</s:if>
 														    	<s:else>
-														    		<td class="center g-font-size-14--xs text-center hidden"></td>
-															    	<td class="center g-font-size-14--xs text-center">
+														    		<td class="hidden"></td>
+															    	<td>
 																    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/>
 															    	</td>
 														    	</s:else>
@@ -251,81 +251,70 @@
 			</div> --%>
 			<br/>
 	     </div>
-	     <div class="col-md-1 col-xs-1" ></div>
+	     <div class="col-xs-1" ></div>
 	</div>
-	
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
-			<div class="col-md-1 col-xs-1"></div>
-			<div class="col-md-8 col-xs-8">
-				<div class="row">
-					<div id="investment-options" class="col-md-3 g-margin-b-20--xs">
+		<div class="col-xs-1"></div>
+		
+		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
+			<div class="row g-font-size-10--xs g-font-size-14--lg">
+					<div class="col-md-1 col-xs-0"></div>
+					<div id="investment-options" class="col-md-3 col-xs-4 ">
 						<b>Amount Payable Today</b>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3 col-xs-3">
 						<b><span id="payable-amount"></span>&nbsp;&nbsp;Rs.</b>
 					</div>
 		        </div>
- 			</div>
-					
-					
-		</div>
-		<div class="col-md-1 col-xs-1"></div>
- 					
+	     </div>
+	     <div class="col-xs-1"></div>
 	</div>
 	
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
-		<div class="col-md-10 cold-xs-10 g-bg-color--white ">
-			<div class="col-md-1 col-xs-1"></div>
-			<div class="col-md-8 col-xs-8">
-									
- 					<%
+		<div class="col-xs-1"></div>
+		
+		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
+			<%
  					if (anySipInvestment)  {
  					%>
- 					<div class="row">
- 						<div id="investment-options" class="col-md-3 g-margin-b-5--xs">
- 							<b>First SIP payment</b>
-							</div>
-		        	<div id="investment-options" class="col-md-5 g-margin-b-5--xs">
+ 					<div class="row g-font-size-10--xs g-font-size-14--lg">
+					<div class="col-md-1 col-xs-0"></div>
+					<div id="investment-options" class="col-md-3 col-xs-4 ">
+						<b>First SIP payment</b>
+					</div>
+					<div class="col-md-8 col-xs-8">
+						<div id="investment-options" class=" g-margin-b-5--xs">
 							<label class="radio-inline ">
-							  	<input type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
+							  	<input class="g-font-size-8--xs g-font-size-14--lg" type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
 						  	</label>
 						  	<label class="radio-inline ">
-							  <input type="radio" id="f2" name="firstOrderFlag" value="N"  onclick="checkRadio('No');" >Next month via autodebit
+							  <input class="g-font-size-8--xs g-font-size-14--lg" type="radio" id="f2" name="firstOrderFlag" value="N"  onclick="checkRadio('No');" >Next month via autodebit
 							</label>
-					  	<%-- <s:select class="form-control"  id="firstOrderFlag"
-								list="#{'Y':'Yes', 'N':'No'}" 
-								name="firstOrderFlag" 
-								value="Y" /> --%>
-		        	</div>
-					<div id="investment-options" class="col-md-2 g-margin-b-50--xs">
+		        		</div>
 					</div>
- 					</div>
- 					<%
+		        </div>
+		        <%
  					}
  					%>
-					</div>
-					
-					
-					</div>
-					<div class="col-md-1 col-xs-1"></div>
- 					
+	     </div>
+	     <div class="col-xs-1"></div>
 	</div>
+	
+	
+	
 	<div class="row" >
-		<div class="col-md-6 col-xs-4">
+		<div class="col-xs-4">
 			<s:actionmessage class="small-text g-color--red"/> 
 		</div>
-		<div class="col-md-6 col-xs-6"></div>
+		<div class="col-xs-6"></div>
 	</div>
 	<div class="row">
-		<div class="col-md-1 col-xs-1"></div>
+		<div class="col-xs-1"></div>
 		
-		<div class="col-md-10 col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
 			
 	     </div>
-	     <div class="col-md-1 col-xs-1"></div>
+	     <div class="col-xs-1"></div>
 	</div>
 	<div class="row g-margin-t-40--xs">
 		<div class="text-center">
@@ -339,11 +328,11 @@
 	</div>
 	
 	<div class="row g-margin-t-o-20--xs">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<s:property value="tranDetailId"/>');" >Invest Now</button>
+		<div class="col-sm-5 col-xs-4"></div>
+		<div class="col-sm-2 col-xs-4">
+			<button type="button"  id="pay-now-button" class="g-display-table--xs btn btn-home g-color--white g-margin-t-15--xs " onClick="populateBankDetails('<s:property value="tranDetailId"/>');" >Invest Now</button>
 		</div>
-		<div class="col-md-5">
+		<div class="col-sm-5 col-xs-4">
 		</div>
 	</div>
 	

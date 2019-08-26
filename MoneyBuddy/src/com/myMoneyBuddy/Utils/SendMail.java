@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -100,9 +103,6 @@ public class SendMail {
 
     		// Create a default MimeMessage object.
     		Message message = new MimeMessage(session);
-
-    		System.out.println(" going to send mail from : "+configProperties.getProperty("GMAIL_USERNAME"));
-    		System.out.println(" going to send mail from pswd : "+configProperties.getProperty("GMAIL_PASSWORD"));
     		// Set From: header field of the header.
     		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
     		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
@@ -141,6 +141,96 @@ public class SendMail {
    	
         catch (Exception e ) {
         	logger.error("sendMail class : MailSending method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+    }
+    
+    
+    
+    public void FaultyIdMailSending(String bseOrderIds, String bseRegNums) throws MoneyBuddyException {
+    	
+    	System.out.println("sendMail class : FaultyIdMailSending method : start");
+    	logger.debug("sendMail class : FaultyIdMailSending method : start");
+    	
+    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    	Date date = new Date();
+    	String todayDate = dateFormat.format(date);
+    	
+    	
+    	String bccEmailId = "savita.wadhwani@gmail.com";
+    	String subject = "faulty Bse OrderIds and Bse RegNums for Date - "+todayDate;
+    	try {  
+    		
+        	StringBuilder bodyText = new StringBuilder();
+        	bodyText.append("<p>Date : "+todayDate+"</p>" );
+        	if (! "".equals(bseOrderIds))
+        		bodyText.append("<p>bseOrderIds : "+bseOrderIds.substring(0,bseOrderIds.length()-1)+"</p>");
+        	if (! "".equals(bseRegNums))
+        		bodyText.append("<p>BseRegNums : "+bseRegNums.substring(0,bseRegNums.length()-1)+"</p>");
+
+    	Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
+
+		configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+		
+		//System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
+    	
+    	Properties props = new Properties();
+    	props.put("mail.smtp.auth", "true");
+    	props.put("mail.smtp.starttls.enable", "true");
+    	props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+    	props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
+
+    	System.out.println(" GMAIL PORT IS :  "+configProperties.getProperty("GMAIL_PORT"));
+    	// Get the Session object.
+
+    	Session session = Session.getInstance(props,
+    			new javax.mail.Authenticator() {
+    		protected PasswordAuthentication getPasswordAuthentication() {
+    			return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
+    		}
+    	});
+
+    		// Create a default MimeMessage object.
+    		Message message = new MimeMessage(session);
+    		// Set From: header field of the header.
+    		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+
+    		// Set To: header field of the header.
+
+    		message.setRecipients(Message.RecipientType.TO,
+    				InternetAddress.parse("kamalwadhwani@gmail.com"));
+    		
+    		message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccEmailId));
+
+    		// Set Subject: header field
+    		message.setSubject(subject);
+
+    		message.setContent(bodyText.toString(), "text/html; charset=utf-8");
+
+    		// Send message
+    		
+    		Transport.send(message);
+    		
+    		logger.debug("sendMail class : FaultyIdMailSending method : end");
+    		System.out.println("sendMail class : FaultyIdMailSending method : end");
+
+    	} 
+    	catch (IOException e) {
+    		logger.error("sendMail class : FaultyIdMailSending method : Caught Exception");
+    		e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+    	}
+    	catch (MessagingException e) {
+    		logger.error("sendMail class : FaultyIdMailSending method : Caught Exception");
+    		e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+    	}
+   	
+        catch (Exception e ) {
+        	logger.error("sendMail class : FaultyIdMailSending method : Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

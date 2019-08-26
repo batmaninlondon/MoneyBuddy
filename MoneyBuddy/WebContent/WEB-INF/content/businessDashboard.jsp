@@ -180,105 +180,137 @@ input[type="range"] {
 		
     </header>
     
-	<section id="bankDetails">
+	<section id="businessDashboardSection">
 	
 	
-	<div id="upload-nav" class="">
-		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
-			
-				<h2 class="text-center" style="font-family:Aparajita;font-size:35px; "><b>Upload NAV</b></h2>
-			
-		</div>	
-		
-		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				<s:actionmessage class="small-text g-color--red"/> 
-			</div>
-			<div class="col-md-3">
-			</div>
-		</div>
-		
+	<div id="business-dashboard" class="">
+
 	<div class="row g-margin-t-40--xs g-margin-b-20--xs">
 		<div class="col-md-1 col-xs-1"></div>
 		<div class="col-md-10 col-xs-10   " >
 
-					<s:form  action="editStpCartAction" method="post" name="formEditStpCart">
-				  		<s:hidden id="return-type" name="returnType"></s:hidden>
-				  	<table id="stpCartData" width="100%;" >
+				  	<table id="businessDashboardData" width="100%;" class="table table-bordered" >
 						
 						<thead class="table-head g-font-size-14--xs g-bg-color--gray-light" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<tr class="g-bg-color--gray-light">
-								<th class="text-center col-md-3 g-bg-color--gray-light" height="70">CustomerId</th>
-								<th class="text-center col-md-3 g-bg-color--gray-light">Quarter</th>
-								<th class="text-center col-md-3 g-bg-color--gray-light">Year</th>
-								<th class="text-center col-md-3 g-bg-color--gray-light">Aqb Amount</th>
-								
+								<th class="text-center col-md-9 g-bg-color--gray-light" height="10"></th>
+								<th class="text-center col-md-3 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
-						<tbody class="table-body g-font-size-14--xs" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-							<%-- <s:iterator value="#session.customerStpCartList" var="customerStpCartListElement" > --%>
-							<s:iterator value="aqbDataModelList" var="aqbDataModelElement">
-								<tr class="table-body g-font-size-14--xs " style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-								    	<td height="70" class="text-center g-font-size-14--xs" 	>
-								    		<s:property value="#aqbDataModelElement.customerId"/>
-							    		</td>
-							    		<td height="70" class="text-center g-font-size-14--xs" 	>
-							    			<s:if test="quarter == 1">
-								    			<s:property value="#aqbDataModelElement.quarter"/> (Jan-Mar)
-								    		</s:if>
-								    		<s:elseif test="quarter == 2">
-								    			<s:property value="#aqbDataModelElement.quarter"/> (Apr-June)
-							    			</s:elseif>
-							    			<s:elseif test="quarter == 3">
-								    			<s:property value="#aqbDataModelElement.quarter"/> (July-Sep)
-							    			</s:elseif>
-							    			<s:else >
-								    			<s:property value="#aqbDataModelElement.quarter"/> (Oct-Dec)
-							    			</s:else>
-							    		</td>
-							    		<td height="70" class="text-center g-font-size-14--xs" 	>
-								    		<s:property value="#aqbDataModelElement.year"/>
-							    		</td>
-							    		<td height="70" class="text-center g-font-size-14--xs" 	>
-								    		<s:property value="#aqbDataModelElement.aqbAmount"/>
-							    		</td>
-								</tr>
-							</s:iterator> 
+						<tbody class="table-body " style=" border: solid 0.5px #dbdbdb;">
+							<tr class="table-body  ">
+							    	<td  class="text-center g-font-size-16--xs" 	>
+							    		Total no of Signups
+						    		</td>
+						    		<td  class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.signUps"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of AoFs downloaded/created
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.aofCreation"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of active accounts ( account verified)
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.verfiedAccounts"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of active accounts ( aof activated)
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.activatedAccounts"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Gross value of money invested
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.investedAmount"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Gross current value of total investments
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.currentAmount"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of SIPs registered
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.sipRegistered"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of clients running SIPs
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.numOfSipClients"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Gross cumulative monthly value of all the running SIPs
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.monthlyRunningSipValue"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of STPs registered
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.stpRegistered"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Total no of clients running STPs
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.numOfStpClients"/>
+						    		</td>
+							</tr>
+							<tr class="table-body  " >
+							    	<td class="text-center g-font-size-16--xs" 	>
+							    		Gross cumulative monthly value of all the running SIPs
+						    		</td>
+						    		<td class="text-center g-font-size-16--xs" 	>
+							    		<s:property value="businessDashboardData.monthlyRunningStpValue"/>
+						    		</td>
+							</tr>	
 							
 						</tbody>
+						<tfoot class="table-head g-font-size-14--xs g-bg-color--gray-light" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
+							<tr class="g-bg-color--gray-light">
+								<th class="text-center col-md-9 g-bg-color--gray-light" height="10"></th>
+								<th class="text-center col-md-3 g-bg-color--gray-light"></th>
+							</tr>
+						</tfoot>
 					</table>
-					</s:form>
-					
-					<s:form  action="deleteStpCartEntryAction" method="post" name="formDeleteStpCart">
-				  		<s:hidden id="stp-cart-id-value" name="stpCartId"></s:hidden>
-	  				</s:form>
 	     </div>
 	     
 	     <div class="col-md-1 col-xs-1" ></div>
 	</div>
+	</div>
+	</section>
 	    	
-			
-			<div class="row g-margin-b-50--xs">
-  				<div class="col-md-1"></div>
-  				<div class="col-md-6 text-left">
-  					<a href="javascript:editStpCart('Dashboard');" class=" btn btn-home g-color--white "  >+ Add another fund</a>
-  				</div>
-  				<div class="col-md-3"></div>
-				<div class="col-md-1 text-left">
-					<%-- <s:form action="redirectAction" method="post"> --%>
-		      			<s:if test="#session.customerStpCartList.size() == 1 ">
-		      				<button type="button"  class="btn btn-home g-color--white disabled"  >Next</button>
-		      			</s:if>
-		      			<s:else>
-		      				<a href="javascript:checkAmounts();" class=" btn btn-home g-color--white "  >Next</a>
-		      				<%-- <s:submit class="buttonBlock g-color--white text-left " value="Next" /> --%>
-		      			</s:else>
-		      		<%-- </s:form> --%>
-	      		</div>
-	      		<div class="col-md-1"></div>
-	      		
-			</div>
+
 
   
   		<script type="text/javascript" src="assets/js/javaScript.js"></script>

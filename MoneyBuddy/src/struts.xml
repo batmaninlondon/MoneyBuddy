@@ -172,6 +172,13 @@
         </action>
     </package>
     
+    <package name="businessDashboardAction" namespace="/" extends="struts-default">
+        <action name="BusinessDashboard" class="com.myMoneyBuddy.ActionClasses.BusinessDashboardAction">
+            <result name="success">/WEB-INF/content/businessDashboard.jsp</result>
+            <result name="error">/WEB-INF/content/errorPageAdmin.jsp</result>
+        </action>
+    </package>
+    
     <package name="logOutAction" namespace="/" extends="struts-default">
         <action name="logOut" class="com.myMoneyBuddy.ActionClasses.LogOutAction">
             <result name="success">/welcome.jsp</result>
