@@ -102,8 +102,8 @@
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
    <div class="container ">
    		<a href="welcome" class="s-header-v2__logo-link">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="Dublin Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="MoneyBuddy Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="MoneyBuddy Logo">
 		</a>
 	</div>
 	<div class="row">
@@ -259,10 +259,10 @@
 		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
 			<div class="row g-font-size-10--xs g-font-size-14--lg">
 					<div class="col-md-1 col-xs-0"></div>
-					<div id="investment-options" class="col-md-3 col-xs-4 ">
+					<div id="investment-options" class="col-md-3 col-xs-6 ">
 						<b>Amount Payable Today</b>
 					</div>
-					<div class="col-md-3 col-xs-3">
+					<div class="col-md-3 col-xs-6">
 						<b><span id="payable-amount"></span>&nbsp;&nbsp;Rs.</b>
 					</div>
 		        </div>
@@ -279,10 +279,10 @@
  					%>
  					<div class="row g-font-size-10--xs g-font-size-14--lg">
 					<div class="col-md-1 col-xs-0"></div>
-					<div id="investment-options" class="col-md-3 col-xs-4 ">
+					<div id="investment-options" class="col-md-3 col-xs-5 ">
 						<b>First SIP payment</b>
 					</div>
-					<div class="col-md-8 col-xs-8">
+					<div class="col-md-8 col-xs-7">
 						<div id="investment-options" class=" g-margin-b-5--xs">
 							<label class="radio-inline ">
 							  	<input class="g-font-size-8--xs g-font-size-14--lg" type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
@@ -335,7 +335,8 @@
 		<div class="col-sm-5 col-xs-4">
 		</div>
 	</div>
-	
+	<br/>
+	<br/>
 	<s:hidden id="tran-detail-id-value" name="tranDetailId"></s:hidden>
 	</s:form>
 	

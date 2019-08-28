@@ -163,8 +163,8 @@ input[type="range"] {
                 <div class="navbar-header">
                     <div class="s-header-v2__logo">
                         <a href="<s:url action="adminHome"/>" class="s-header-v2__logo-link">
-                            <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="Dublin Logo">
-                            <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="Dublin Logo">
+                            <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="MoneyBuddy Logo">
+                            <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="MoneyBuddy Logo">
                         </a>
                     </div>
                 </div>
