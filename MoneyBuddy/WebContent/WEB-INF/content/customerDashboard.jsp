@@ -49,16 +49,7 @@
 	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 	    
 	   
-	   <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
+
 
 
     </head>
@@ -268,13 +259,14 @@
            <!-- <div class="container g-padding-y-80--xs g-padding-y-125--sm"> -->
              <div class="container"  >
                <div class="g-text-center--xs g-margin-b-10--xs">
-					<br/><br/><br/><br/>
-                    <h3 class="text-center  g-font-size-20--xs g-font-size-32--lg g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold g-hor-divider__solid--white  ">Dashboard : <s:property value="#session.customerName" /></h3>
+					<br/><br/><br/><br/><br/>
+                    <h3 class="text-center  g-font-size-16--xs g-font-size-32--lg g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold g-hor-divider__solid--white  ">Dashboard : <s:property value="#session.customerName" /></h3>
+           			<br/>
            		</div> 
            		
               		<div class="row g-bg-color--gray-light g-margin-l-5--xs g-margin-l-0--lg g-margin-r-5--xs g-margin-r-0--lg">
               			<div class="card text-center ">
-            				<div class="card-header g-font-size-10--xs "></br>
+            				<div class="card-header g-font-size-10--xs "><br/>
 						    	<!-- <h5 class="card-title  bg-secondary g-font-size-26--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold" >
 						    		Client Investment Summary
 					    		</h5> -->
@@ -282,11 +274,11 @@
 						  	
 						  	<div class="card-body text-center ">
 							    <div class="row">
-							    <div class="col-xs-1"></div>
-							    <div class=" col-xs-10">
+							    <div class="col-xs-0 col-lg-1"></div>
+							    <div class=" col-xs-12 col-lg-10">
 							     <table class="table-bordered " cellspacing="0" width="100%">
 										        <thead class="thead-light">
-										            <tr class="g-bg-color--white g-font-size-12--xs g-font-size-20--lg g-font-family--playfair" >
+										            <tr class="g-bg-color--white g-font-size-10--xs g-font-size-20--lg g-font-family--playfair" >
 										                <th class="text-center" ><span>Invested Amount</span></th>
 														<th class="text-center" ><span>Profit</span></th>
 														<th class="text-center" ><span>Current Value</span></th>
@@ -315,7 +307,7 @@
 										        </tbody>
 										    </table>
 								    	</div>
-								    	<div class="col-xs-1"></div>
+								    	<div class="col-xs-0 col-lg-1"></div>
 								    	</div>
 						  	</div>
 						  	<div class="card-footer g-font-size-10--xs "></br></div>

@@ -141,16 +141,7 @@ input[type="range"] {
 
 </style>    
     
-    <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
+
 
     </head>
 
@@ -288,7 +279,7 @@ input[type="range"] {
 							</tr>
 							<tr class="table-body  " >
 							    	<td class="text-center g-font-size-16--xs" 	>
-							    		Gross cumulative monthly value of all the running SIPs
+							    		Gross cumulative monthly value of all the running STPs
 						    		</td>
 						    		<td class="text-center g-font-size-16--xs" 	>
 							    		<s:property value="businessDashboardData.monthlyRunningStpValue"/>

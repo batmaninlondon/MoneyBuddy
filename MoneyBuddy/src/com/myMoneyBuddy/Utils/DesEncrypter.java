@@ -167,7 +167,7 @@ public class DesEncrypter  {
         	
         
         System.out.println("encrypted :"+encrypted+":");*/
-        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("y6FdbSOgezNSURVpnHHyWQ==");
+        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("fuufcbrCMX1YYQ8gXVR6ww==");
         System.out.println("decrypted :"+decrypted+":");
        // int len = "233".length();
         

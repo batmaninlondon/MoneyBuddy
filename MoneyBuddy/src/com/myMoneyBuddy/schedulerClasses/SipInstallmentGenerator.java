@@ -49,7 +49,8 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 			
 	        Date currentDate = dateFormat.parse(modifiedDate);
 	        Date sipEndDate;
-
+	        Date sipStartDate;
+	        
 	        System.out.println("currentDate : " +currentDate);
 			
 			for (SipDetails sipDetail : sipDetailsList)  {
@@ -71,6 +72,9 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        } 
 		        else {
 		        	//System.out.println("Trigger will be coming here soon .. ");
+		        	
+		        	sipStartDate = dateFormat.parse(sipDetail.getSipStartDate());
+					System.out.println("sipStartDate : " + sipStartDate);
 		        	
 		        	hibernateSession.beginTransaction();
 					

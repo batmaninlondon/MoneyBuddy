@@ -117,17 +117,7 @@
 
 </style>
 
-<!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
+
 
 
     </head>
@@ -211,7 +201,7 @@
             <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
             <br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Top Performing Direct Mutual Funds</h1>
+                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs g-line-height--sm">Top Performing Direct Mutual Funds</h1>
                      <p class="g-font-size-15--xs g-font-size-20--sm g-font-size-30--lg g-margin-b-10--xs">Fully online investing</p>
                      <input class="form-control" id="myInput" type="text" oninput="showSearch(this.value)" placeholder="Search by entering fund name or category">
 				  <br>
@@ -224,19 +214,19 @@
 		<div id="content">
 			<div id="myDiv2" class="row  g-padding-y-40--sm g-container--md  ">
 				<s:iterator value="fundDetailsDataModel" var="fundDetailsDataModelElement">
-						<div id="myDiv3" class="col-xs-6 col-md-4  g-bg-color--white">
+						<div id="myDiv3" class="col-xs-12 col-md-4  g-bg-color--white">
 							<div  class="  g-line-height--normal  ">
 							<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
-								<figure class="snip1418   swiper-slide " style="width:100%;height:292px;"  onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
-									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+								<figure class="snip1418   swiper-slide  g-height-250--xs g-height-300--lg " style="width:100%"  onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
+									<span class="add-to-cart  g-font-size-10--xs g-font-size-12--lg ">Select this fund</span>
 				  					<figcaption >
-				    					<article class=" panel panel-heading g-bg-color--primary" style="height:140px;" >
-				    						<p class="g-color--white  g-font-size-16--xs " style="font-weight: bold; "><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
-				    						 <p class="g-color--white  g-font-size-12--xs" ><b>Scheme Type:</b> <s:property value="#fundDetailsDataModelElement.schemeType"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" ><b>Category:</b> <s:property value="#fundDetailsDataModelElement.category"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" ><b>Inception Date:</b> <s:property value="#fundDetailsDataModelElement.startDate"/></p>
+				    					<article class=" panel panel-heading g-bg-color--primary g-height-100--xs g-height-150--lg" >
+				    						<p class="g-color--white g-line-height--sm  g-font-size-12--xs g-font-size-16--lg " style="font-weight: bold; "><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
+				    						 <p class="g-color--white g-margin-t-20--xs g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Scheme Type:</b> <s:property value="#fundDetailsDataModelElement.schemeType"/></p>
+				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Category:</b> <s:property value="#fundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Inception Date:</b> <s:property value="#fundDetailsDataModelElement.startDate"/></p>
 				    					</article>
-				    					<article class="g-margin-l-20--xs g-margin-t-20--xs" style="height:110px;"> 
+				    					<article class="g-margin-l-20--xs g-margin-t-20--xs" > 
 									        <s:if test="#fundDetailsDataModelElement.rating.equals('5'.toString())">
 										        <i class="fa fa-star g-color--primary"></i>
 												<span class="fa fa-star g-color--primary"></span>

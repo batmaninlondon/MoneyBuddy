@@ -21,6 +21,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
 		<!-- <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/> -->
+		<!-- <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/> -->
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 	
         <!-- Vendor Styles -->
@@ -110,17 +111,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
-  <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-  
+ 
 </head>
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;" >
 	<div id="load" class="load"></div>
@@ -184,14 +175,14 @@
 				    	System.out.println("In login jsp : OnetimeInvestment set to FALSE ."); */
 				    }
 				%>
-          <h1>Welcome Back!</h1>
+          <h1 class="g-font-size-15--xs g-font-size-30--lg g-margin-t-o-10--xs g-margin-t-o-0--lg ">Welcome Back!</h1>
           <p id="loginMessage"></p>
          <!--  <div> -->
           
-          <div class="field-wrap">
-            <label id="email-id-label">
+          <div class="field-wrap   g-margin-t-o-10--xs g-margin-t-o-0--lg">
+            <%-- <label id="email-id-label">
               Email Address<span class="req">*</span>
-            </label>
+            </label> --%>
             <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
             <%
             String userNa = (String) request.getSession().getAttribute("name");
@@ -202,7 +193,7 @@
 				
 			%>
 			<s:set var="uName" ><%=userNa %></s:set>
-  			<s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" 
+  			<s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address" 
   					 value="%{#uName}" />
             
             <%
@@ -210,7 +201,7 @@
 			else 
 			{
             %>
-            <s:textfield class="form-control s-form-v3__inpu" name="emailIdLogin" placeholder="Email Address" />
+            <s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address" />
             <%
             }
             %>
@@ -218,16 +209,16 @@
            <!--  <input id="email-id" type="text" class="form-control" name="emailId" placeholder="Email" style="width:600px;"> -->
           </div>
           
-          <div class="field-wrap">
-            <label>
+          <div class="field-wrap g-margin-t-o-10--xs g-margin-t-o-0--lg">
+            <%-- <label>
               Password<span class="req">*</span>
-            </label>
+            </label> --%>
             <s:fielderror fieldName="passwordLogin" class="g-color--red" />
-  			<s:password class="form-control s-form-v3__inpu" name="passwordLogin" placeholder="Password" />
+  			<s:password class="form-control" name="passwordLogin" placeholder="Password" />
             <!-- <input  id="password" type="password" required autocomplete="off"/> -->
           </div>
           
-          <p class="forgot"><button type="button" class=" g-bg-color--primary g-color--white"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
+          <p class="forgot"><button type="button" class=" g-bg-color--primary g-color--white g-font-size-10--xs g-font-size-15--lg"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
           <div class="container">
 
   <!-- Modal -->
@@ -237,7 +228,7 @@
   	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
           <div>
           	
-        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block" value="Sign In"  />
+        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block g-font-size-20--xs g-font-size-30--lg" value="Sign In"  />
         	<%-- <s:submit  class="button button-block" value="Sign In"  /> --%>
         	<%-- <s:submit class="button button-block" value="SIGN IN"  /> --%>
         	<!-- <button id="recaptcha-login" type="button" class="g-recaptcha button button-block"  >SIGN IN</button> -->
@@ -246,40 +237,40 @@
     </div>
     <div id="signup" class="container tab-pane fade"><br>
                <s:form  action="register" method="post" name="formRegister" namespace="/" >
-          <div id="registration-email-id"  class="field-wrap">
+          <div id="registration-email-id"  class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
           	<p id="registerMessage"></p>
             <%-- <label> 
             	Email Address<span class="req">*</span>  
             </label> --%>
            	<s:fielderror fieldName="emailIdRegister" class="g-color--red" />
-  			<s:textfield name="emailIdRegister"  autocomplete="false" placeholder="Email Address"/>
+  			<s:textfield class="form-control"  name="emailIdRegister"  autocomplete="false" placeholder="Email Address"/>
             <!-- <input id="email-id1" type="email"required autocomplete="off"/> -->
           </div>
           
-          <div id="registration-mobile-number" class="field-wrap">
+          <div id="registration-mobile-number" class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <%-- <label>
               Mobile Number<span class="req">*</span>
             </label> --%>
             <s:fielderror fieldName="mobileNumberRegister" class="g-color--red" />
-  			<s:textfield name="mobileNumberRegister" autocomplete="off" placeholder="Mobile Number"/>
+  			<s:textfield class="form-control"  name="mobileNumberRegister" autocomplete="off" placeholder="Mobile Number"/>
             <!-- <input id="mobile-number"  type="password"required autocomplete="off"/> -->
           </div>
-           <div id="registration-password" class="field-wrap ">
+           <div id="registration-password" class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <%-- <label>
               Create Password<span class="req">*</span>
             </label> --%>
             <s:fielderror fieldName="passwordRegister" class="g-color--red" />
-  			<s:password name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
+  			<s:password class="form-control"  name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
             <!-- <input id="password1"  type="password"required autocomplete="off"/> -->
           </div>
           <s:hidden id="google-response-register" name="googleResponseRegister"></s:hidden>
           <!-- <p id="registration-text" class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-35--xs"></p> -->
           <!-- <button type="submit" class="button button-block" onClick="register();">Get Started</button> -->
-          <s:submit id="recaptcha-register" class="g-recaptcha button button-block" value="Create Account"  />
+          <s:submit id="recaptcha-register" class="g-recaptcha button button-block  g-font-size-20--xs g-font-size-30--lg" value="Create Account"  />
           <!-- <button id="recaptcha-register" type="button" class="g-recaptcha button button-block" >Continue</button> -->
 			<!-- <button type="button"  class="button button-block" onClick="register();">Continue</button>  -->       
-			<br/><span class=" g-font-size-8--xs g-color--white-opacity-light"><span class="">By continuing you agree to our </span> <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-15--xs g-color--primary" href="privacyPolicy">Privacy Policy</a></span>
-			<p class=" g-font-size-8--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and SEBI registered </p>
+			<br/><p class="text-center"><span class=" g-font-size-12--xs g-font-size-15--lg  g-color--white-opacity-light">By continuing you agree to our <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-12--xs g-font-size-15--lg g-color--primary" href="privacyPolicy">Privacy Policy</a></span></p>
+			<p class=" g-font-size-10--xs g-font-size-12--lg g-margin-t-o-10--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and SEBI registered </p>
           	               
           </s:form>
     </div>
@@ -290,12 +281,12 @@
         <div class="modal-header">
           
           
-          <h4 class="modal-title">Reset Password</h4>
+          <h4 class="modal-title g-font-size-15--xs g-font-size-20--lg">Reset Password</h4>
           <p id="forgotPwdMessage"></p>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p class="g-color--black"  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
+          <p class="g-color--black g-font-size-10--xs g-font-size-15--lg "  style="color: #000000">Enter the email address associated with your account, and we&#39;ll email you a link to reset your password.</p>
        
         <s:form  action="forgotPassword" method="post" name="formForgotPassword">
 
@@ -306,11 +297,11 @@
 				</div>
 				<div class="col-md-4"></div>
 			</div>
-			<div class="row input-group form-group">
+			<div class="row input-group form-group ">
 				<div class="col-md-1"></div>
     			<div class="col-md-10">
 	    			<s:fielderror fieldName="emailIdForgotPassword" class="g-color--red" />
-		  			<s:textfield class="form-control" placeholder="Enter Email Id" name="emailIdForgotPassword" /> 
+		  			<s:textfield class="form-control" placeholder="Email Id" name="emailIdForgotPassword" /> 
 		  			<s:hidden id="google-response-forgot-pswd" name="googleResponseFrgtPswd"></s:hidden>
 	  			</div>
 	  			<div class="col-md-1">
@@ -320,15 +311,16 @@
 	
 			
         	<div class="row ">
-				<div class="col-md-5 g-color--primary">
-					<i class="  glyphicon glyphicon-chevron-left"></i><a  data-dismiss="modal">Back to Login</a>
+				<div style="width:5%"></div>
+				<div class="  g-color--primary" style="width:40%">
+					<a class="g-font-size-11--xs g-font-size-14--lg " href="login">Back to Login</a>
 				</div>
-				<div class="col-md-3">
-				</div>
-				<div class="col-md-4">
-					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha g-font-size-14--xs button button-block" value="Send Reset Link"  />
+				<div style="width:5%"></div>
+				<div class="" style="width:45%">
+					<s:submit id="recaptcha-forgot-pswd" class="g-recaptcha  g-font-size-11--xs g-font-size-14--lg button button-block" value="Send Reset Link"  />
 					<!-- <button id="recaptcha-forgot-pswd" type="button" class="g-recaptcha g-bg-color--primary g-color--white"   >Send Reset Link</button> -->
 				</div>
+				<div style="width:5%"></div>
 			</div>
 			
 			</s:form>
@@ -339,10 +331,6 @@
       </div>
     </div>
     
-    <!-- <div id="menu2" class="container tab-pane fade"><br>
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div> -->
   </div>
   </div>
   </div>

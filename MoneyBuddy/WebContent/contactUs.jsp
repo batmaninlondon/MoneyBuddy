@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" import="java.util.Properties" %>
+<%@ page language="java" import="java.io.FileInputStream" %>
+<%@ page language="java" import="java.io.File" %>
 <html lang="en" class="no-js">
     <!-- Begin Head -->
     <head>
@@ -25,11 +28,40 @@
  	
   
   <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
   
-  
- <script>
-		
-</script>
+<script>
+    
+    <%
+    
+    ServletContext sc=request.getServletContext();
+    String path=sc.getRealPath("/properties/jspConfig.properties");
+    FileInputStream fis = new FileInputStream(new File(path));
+    
+    Properties configProperties = new Properties();
+
+	configProperties.load(fis);
+	
+	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
+	
+	System.out.println("siteKey is : "+siteKey);
+    
+    %>
+    
+      var recaptchaContactUs;
+      
+      var myCallBack = function() {
+
+        //Render the recaptchaContactUs on the element with ID "recaptcha-contact-us"
+        recaptchaContactUs = grecaptcha.render('recaptcha-contact-us', {
+          'sitekey' : '<%=siteKey%>',
+          'size' : 'invisible',
+          'callback' : submitContactUsMail
+        });
+
+      };
+     
+    </script>
 
 
 <style>
@@ -117,19 +149,6 @@
 
 </style>
 
-<!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-
-
     </head>
     <!-- End Head -->
 
@@ -188,7 +207,7 @@
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
                                         	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
-                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu">
+                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu g-margin-t-o-30--xs">
                                             	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link">FAQ</a></li>
                                             	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link">Contact Us</a></li>
                                         	</ul>
@@ -211,7 +230,8 @@
             <div class="g-container--md g-text-center--xs ">
             <br/><br/><br/><br/>
                 <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Contact Us</h1>
+                    <h2 class="g-font-size-20--xs g-font-size-40--lg g-color--white g-letter-spacing--1 g-margin-t-10--xs g-margin-b-0--xs g-margin-b-10--lg"><b>Contact Us</b></h2>
+                    <!-- <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1 g-margin-b-10--xs">Contact Us</h1> -->
                 </div>
             </div>
         </div>
@@ -228,14 +248,14 @@
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-email"></i>
                             <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Email</h4>
-                        	<p style="color: white;"><b><a  class="g-font-size-14--xs g-font-size-18--md" href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
+                        	<p style="color: white;"><b><a  class="g-font-size-12--xs g-font-size-18--md" href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
                         </div>
                     </div>
                     <div class="col-xs-6 col-md-4 ">
                         <div class="g-text-center--xs">
                             <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-headphone-alt"></i>
                             <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Call / whats app </h4>
-                            <p  class="g-font-size-14--xs g-font-size-18--md" style="color: white;"><b>+91 9971648736</b></p>
+                            <p  class="g-font-size-12--xs g-font-size-18--md" style="color: white;"><b>+91 9971648736</b></p>
                         </div>
                     </div>
                      <div class="col-xs-4  g-margin-b-50--xs g-margin-b-0--sm hidden-xs hidden-sm">
@@ -247,7 +267,7 @@
                     </div>
                 </div>
                 
-                <s:form  action="sendMailAction" class="g-recaptcha" method="post" name="formContactUsMail" namespace="/" >
+                <s:form  action="sendMailAction"  method="post" name="formContactUsMail" namespace="/" >
                 
                 <div id="contact-us-form" class="center-block g-width-500--sm g-width-550--md" >
 					<div class="g-margin-b-20--xs">
@@ -276,7 +296,7 @@
 			  			<s:textfield class="form-control s-form-v3__input" name="senderMessage" placeholder="* Your message" />
                         <!-- <textarea class="form-control s-form-v3__input" id="sender-message" rows="5" placeholder="* Your message"></textarea> -->
                     </div>
-                    <s:hidden id="google-response-coontact-us" name="googleResponse"></s:hidden>
+                    <s:hidden id="google-response-coontact-us" name="googleResponseContactUs"></s:hidden>
                     
                     <div class="g-text-center--xs">
                     	<s:submit id="recaptcha-contact-us"  class="g-recaptcha text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs g-margin-b-20--xs" value="Submit"  />

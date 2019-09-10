@@ -406,16 +406,6 @@ input[type="range"] {
     
     </script>
     
-    <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
 
 
     </head>
@@ -459,14 +449,14 @@ input[type="range"] {
 	     <div class="col-xs-1"></div>
 	</div>
 		
-	<div class="row g-margin-t-40--xs g-margin-b-0--xs g-margin-b-20--lg g-margin-l-5--xs g-margin-l-0--lg g-margin-r-5--xs g-margin-r-0--lg">
+	<div class="row g-margin-t-40--xs g-margin-b-0--xs g-margin-b-20--lg g-margin-l-5--xs g-margin-l-0--lg g-margin-r-10--xs g-margin-r-0--lg">
 		<div class="col-lg-1 col-xs-0"></div>
-		<div class="col-lg-10 col-xs-12" >
+		<div class="col-lg-10 col-xs-12 table-responsive" >
 
 					<s:form  action="editRedemptionCartAction" method="post" name="formEditRedemptionCart">
 				  		<s:hidden id="return-type" name="returnType"></s:hidden>
 				  		
-				  	<table id="redCartData" width="100%;" >
+				  	<table id="redCartData" class="g-width-100-percent--xs g-margin-l-5--xs g-margin-l-0--lg g-margin-r-5--xs g-margin-r-0--lg" >
 						
 						<thead class="table-head g-font-size-10--xs g-font-size-14--lg g-bg-color--gray-light text-center" height="70" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
 							<tr>

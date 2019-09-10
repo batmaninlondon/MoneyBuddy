@@ -83,17 +83,6 @@
 		</script>
 
 	
-	<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-
 
     </head>
 
@@ -108,7 +97,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-10 g-height-70--xs g-height-80--lg  g-bg-color--dark " >
+		<div class="col-xs-10 g-height-70--xs g-height-80--lg g-margin-t-o-20--xs g-margin-t-o-0--lg g-bg-color--dark " >
 	    	<div class="profile">
 	        	<div class="name pagination">
 	                	<s:set var="disBankName" value="displayBankName" />
@@ -129,22 +118,22 @@
 	<div class="row g-height-auto--lg g-height-auto--xs" >
 		<div class="col-xs-1" ></div>
 		<div class="col-xs-10  g-bg-color--white " >
-			<div class="row text-center g-margin-t-15--xs">
+			<div class="row text-center g-margin-t-5--xs">
 				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b><u>Order Confirmation</u></b></h3>
 			</div>
-			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--lg g-margin-l-100--lg">
+			<div id="customer-cart-list" class=" g-margin-b-30--xs g-margin-t-5--xs g-margin-r-100--lg g-margin-l-100--lg">
 					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
 			  		<s:set var="anySip" value="#session.anySipOrder" />
 				  		<table id="cartData" class="table table-bordered stripe ">
 										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="col-xs-3">Fund Name</th>
-												<th class="col-xs-3">Transaction Type</th>
+												<th class="col-xs-4">Fund Name</th>
+												<th class="col-xs-2">Transaction Type</th>
 												<s:if test="'TRUE'.equals(#anyUpfront) ">
-													<th class="col-xs-3">Lumpsum Amount<br/>(Rs.)</th>
+													<th class="col-xs-3">Lumpsum Amount (Rs.)</th>
 												</s:if>
 												<s:else>
-													<th class="col-xs-3 hidden">Lumpsum Amount<br/>(Rs.)</th>
+													<th class="col-xs-3 hidden">Lumpsum Amount (Rs.)</th>
 												</s:else>
 												<s:if test="'TRUE'.equals(#anySip) ">
 													<th class="col-xs-3">SIP Amount<br/>(Rs/month)</th>
@@ -256,7 +245,7 @@
 	<div class="row">
 		<div class="col-xs-1"></div>
 		
-		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
+		<div class="col-xs-10  g-bg-color--white g-margin-t-o-20--xs g-margin-t-o-20--lg " >
 			<div class="row g-font-size-10--xs g-font-size-14--lg">
 					<div class="col-md-1 col-xs-0"></div>
 					<div id="investment-options" class="col-md-3 col-xs-6 ">
@@ -266,39 +255,44 @@
 						<b><span id="payable-amount"></span>&nbsp;&nbsp;Rs.</b>
 					</div>
 		        </div>
+		        <br/>
 	     </div>
 	     <div class="col-xs-1"></div>
 	</div>
-	
+	<%
+		if (anySipInvestment)  {
+	%>
 	<div class="row">
 		<div class="col-xs-1"></div>
 		
-		<div class="col-xs-10  g-bg-color--white" style="height:40px;">
-			<%
- 					if (anySipInvestment)  {
- 					%>
- 					<div class="row g-font-size-10--xs g-font-size-14--lg">
+		<div class="col-xs-10  g-bg-color--white">
+			
+				<div class="row g-font-size-10--xs g-font-size-14--lg">
 					<div class="col-md-1 col-xs-0"></div>
-					<div id="investment-options" class="col-md-3 col-xs-5 ">
+					<div id="investment-options" class="col-md-3 col-xs-12 ">
 						<b>First SIP payment</b>
 					</div>
-					<div class="col-md-8 col-xs-7">
+					<div class="col-md-0 col-xs-0"></div>
+					<div class="col-md-8 col-xs-12">
 						<div id="investment-options" class=" g-margin-b-5--xs">
 							<label class="radio-inline ">
-							  	<input class="g-font-size-8--xs g-font-size-14--lg" type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
+							  	<input class="g-font-size-10--xs g-font-size-14--lg" type="radio" id="f1" name="firstOrderFlag" value="Y" checked="checked"  onclick="checkRadio('Yes');" >Today via netbanking
 						  	</label>
 						  	<label class="radio-inline ">
-							  <input class="g-font-size-8--xs g-font-size-14--lg" type="radio" id="f2" name="firstOrderFlag" value="N"  onclick="checkRadio('No');" >Next month via autodebit
+							  <input class="g-font-size-10--xs g-font-size-14--lg" type="radio" id="f2" name="firstOrderFlag" value="N"  onclick="checkRadio('No');" >Next month autodebit
 							</label>
 		        		</div>
 					</div>
+					
 		        </div>
-		        <%
- 					}
- 					%>
+		        <br/>
+		       
 	     </div>
 	     <div class="col-xs-1"></div>
 	</div>
+	<%
+		}
+	%>
 	
 	
 	
@@ -311,17 +305,17 @@
 	<div class="row">
 		<div class="col-xs-1"></div>
 		
-		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
+		<div class="col-xs-10  g-bg-color--gray-lighter g-height-15--xs g-height-35--lg " >
 			
 	     </div>
 	     <div class="col-xs-1"></div>
 	</div>
-	<div class="row g-margin-t-40--xs">
+	<div class="row g-margin-t-10--xs g-margin-t-40--lg ">
 		<div class="text-center">
 			<a href="MFDocuments" >I/We have read the scheme related document  <input id="mfDocuments" type="checkbox" onchange="activatePayNowButton();" checked/></a>
-		</div>
+		</div>	
 	</div>
-	<div class="row g-margin-t-20--xs">
+	<div class="row g-margin-t-5--xs g-margin-t-20--lg ">
 		<div class="text-center">
 			<a href="terms" >I/We agree to MoneyBuddy's Terms</a><a href="privacyPolicy" > & Privacy Policy  <input id="iAccept" type="checkbox" onchange="activatePayNowButton();" checked/></a><br>
 		</div>

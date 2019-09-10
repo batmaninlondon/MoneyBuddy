@@ -60,31 +60,20 @@
 		
 		</script>
 		
-		<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-
 
     </head>
 
-<body style="background-color:#cecece">
+<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
     
    <div class="container ">
    		<a href="welcome" class="s-header-v2__logo-link">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo.png" alt="MoneyBuddy Logo">
-		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="MoneyBuddy Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="MoneyBuddy Logo">
+		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="MoneyBuddy Logo">
 		</a>
 	</div>
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-10  g-height-50--xs g-height-80--lg g-bg-color--dark ">
+		<div class="col-xs-10  g-height-70--xs g-height-80--lg g-bg-color--dark ">
 	    	<div class="profile">
 	        	<div class="name">
 	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white">Thank you for investing with MoneyBuddy</h3>
@@ -99,7 +88,7 @@
 		<div class="col-xs-10  g-bg-color--white " >
 		<%-- <p>MIn SIP amount <s:property value="#session.minSipAmount"/></p> --%>
 			<div id="customer-cart-list" class=" g-margin-t-20--xs g-margin-b-30--lg  g-margin-t-30--lg g-margin-r-100--lg g-margin-l-100--lg">
-					<table id="cartData" class="table table-bordered stripe ">
+					<table id="cartData" class="table table-bordered stripe">
 										<thead class="table-head g-font-size-12--xs g-font-size-14--lg center text-center g-bg-color--gray-light">
 											<tr>
 												<th class="col-xs-3">Fund Name</th>
@@ -110,8 +99,9 @@
 										</thead>
 										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerCartList" var="customerCartListElement">
-													<tr>
+													
 													    <s:if test="schemeName.equals('Total')">
+													    <tr class=" g-bg-color--gray-light">
 														    <td>
 														    	<b><s:property value="#customerCartListElement.schemeName"/></b>
 													    	</td>
@@ -123,8 +113,10 @@
 													    	</td>
 													    	<td>
 												    		</td>
+												    		</tr>
 												    	</s:if>
 												    	<s:else>
+												    	<tr>
 												    		<td>
 												    			<s:property value="#customerCartListElement.schemeName"/>
 											    			</td>
@@ -148,9 +140,9 @@
 													    		<s:property value="#customerCartListElement.transactionType"/>
 												    		</td>
 												    		<s:set var="transactionType" value="#customerCartListElement.transactionType" />
-												    		
+												    		</tr>
 												    	</s:else>
-													</tr>
+													
 												</s:iterator>
 											 
 										</tbody>

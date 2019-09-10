@@ -20,7 +20,7 @@ public class SendMailAction extends ActionSupport {
 	private String senderEmailId;
 	private String senderMobileNum;
 	private String senderMessage;
-	private String googleResponse;
+	private String googleResponseContactUs;
 
     //private InputStream stream;
 
@@ -30,10 +30,10 @@ public class SendMailAction extends ActionSupport {
     		
     		logger.debug("SendMailAction class - execute method - start");
 	    	System.out.println(" SendMailAction execute method Called !!");
-	    	System.out.println("googleResponse : "+getGoogleResponse());
+	    	System.out.println("googleResponse : "+getGoogleResponseContactUs());
 	    	
 	    	MbUtil mbUtil = new MbUtil();
-	    	if(!mbUtil.isCaptchaValid(getGoogleResponse()))
+	    	if(!mbUtil.isCaptchaValid(getGoogleResponseContactUs()))
 	    	{
 	    		/*String str = "Lookslikeyouarearobot";
 	    	    stream = new ByteArrayInputStream(str.getBytes());*/
@@ -114,13 +114,14 @@ public class SendMailAction extends ActionSupport {
 		this.senderMessage = senderMessage;
 	}
 
-	public String getGoogleResponse() {
-		return googleResponse;
+	public String getGoogleResponseContactUs() {
+		return googleResponseContactUs;
 	}
 
-	public void setGoogleResponse(String googleResponse) {
-		this.googleResponse = googleResponse;
+	public void setGoogleResponseContactUs(String googleResponseContactUs) {
+		this.googleResponseContactUs = googleResponseContactUs;
 	}
+
 
 	/*public InputStream getStream() {
 		return stream;

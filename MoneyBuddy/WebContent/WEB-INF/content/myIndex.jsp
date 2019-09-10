@@ -264,15 +264,15 @@
     	
     	
         <!--========== SWIPER SLIDER ==========-->
-        <div class="s-swiper js__swiper-one-item">
+        <div class="s-swiper js__swiper-one-item g-margin-t-o-20--xs g-margin-t-o-0--lg">
             <!-- Swiper Wrapper -->
             <div class="swiper-wrapper">
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/970x970/04.jpg');">
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
-                            <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Give your money A chance to grow</h1>
+                            <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height--sm">Give your money A chance to grow</h1>
                              <br>
-                             <h2 class=" g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >Tired of Poor returns on your investments? Let us match you to a portfolio with better growth potential</h2>
+                             <h2 class=" g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height--lg" >Tired of Poor returns on your investments? Let us match you to a portfolio with better growth potential</h2>
                         </div>
 						<div class="g-text-center--xs">
                        		<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -288,9 +288,9 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
-                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Your money with our support<br></h1>
+                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height--sm">Your money with our support<br></h1>
                                 <br>
-                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >We will support you in growing your wealth, so that you can focus on enjoying your life</h2>
+                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height--lg" >We will support you in growing your wealth, so that you can focus on enjoying your life</h2>
                             </div>
                             <div class="g-text-center--xs">
                             	<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -306,9 +306,9 @@
                     <div class="container g-text-center--xs g-ver-center--xs">
                         <div class="g-margin-b-30--xs">
                             <div class="g-margin-b-30--xs">
-                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height">Make your dreams a reality</h1>
+                                <h1 class="g-font-size-26--xs g-font-size-55--lg g-color--white g-line-height--sm">Make your dreams a reality</h1>
                                 <br>
-                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height" >Disciplined Investing Made easy with our fully online SIP platform</h2>
+                                <h2 class="g-font-size-10--xs g-font-size-15--lg g-color--white g-line-height--lg" >Disciplined Investing Made easy with our fully online SIP platform</h2>
                             </div>
                             <div class="g-text-center--xs">
                        			<div class="wow fadeInDown g-margin-t-o-30--xs" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -327,9 +327,9 @@
             <a href="javascript:void(0);" class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
             <!-- End Arrows -->
             
-            <a href="#whyMoneyBuddySection"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs" >
-                <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
-                <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
+            <a href="#whyMoneyBuddySection"  class="s-scroll-to-section-v1--bc g-margin-b-15--xs text-uppercase g-font-size-14--xs g-font-size-18--lg g-color--white g-letter-spacing--3" >
+                <span class="g-font-size-14--xs g-font-size-18--lg g-color--white ti-angle-double-down"></span>
+                <br/>Learn More
             </a>
         </div>
         <!--========== END SWIPER SLIDER ==========-->
@@ -344,17 +344,17 @@
                 <!-- Wrapper -->
                 <div class="swiper-wrapper g-margin-b-3s0--xs">
                 	<s:iterator value="popularFundDetailsDataModel" var="popularFundDetailsDataModelElement">
-                	<div id="myDiv3" class="col-md-4  g-bg-color--white   swiper-slide">
+                	<div id="myDiv3" class="col-xs-12 col-lg-3  g-bg-color--white   swiper-slide">
 							<div  class="  g-line-height--normal  ">
 								<s:set var="selectedFundId" value="#popularFundDetailsDataModelElement.fundId" />
-								<figure class="snip1418   swiper-slide" onClick="buyFundHandler(<s:property value="selectedFundId" />);" style="height:250px;">
-									<span id="myDiv5" class="add-to-cart"><span>Select this fund</span></span>
+								<figure class="snip1418   swiper-slide  g-height-250--xs g-height-300--lg" onClick="buyFundHandler(<s:property value="selectedFundId" />);">
+									<span class="add-to-cart g-font-size-10--xs g-font-size-12--lg ">Select this fund</span>
 				  					<figcaption>
-				    					<article class="panel  panel-heading g-bg-color--primary" style="height:120px;" >
-				    						<p class="g-color--white  g-font-size-16--xs g-margin-b-40--xs" style="font-weight: bold; height:40px;"><s:property value="#popularFundDetailsDataModelElement.schemeName"/></p>
-				    						<br/>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.schemeType"/>. <s:property value="#popularFundDetailsDataModelElement.category"/></p>
-				    						<p class="g-color--white  g-font-size-12--xs" style="font-weight: bold;"><s:property value="#popularFundDetailsDataModelElement.startDate"/></p> 
+				    					<article class=" panel panel-heading g-bg-color--primary g-height-100--xs g-height-150--lg" >
+				    						<p class="g-color--white g-line-height--sm  g-font-size-12--xs g-font-size-16--lg " style="font-weight: bold; "><s:property value="#popularFundDetailsDataModelElement.schemeName"/></p>
+				    						 <p class="g-color--white g-margin-t-20--xs g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Scheme Type:</b> <s:property value="#popularFundDetailsDataModelElement.schemeType"/></p>
+				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Category:</b> <s:property value="#popularFundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Inception Date:</b> <s:property value="#popularFundDetailsDataModelElement.startDate"/></p>
 				    					</article>
 				    					<article class="g-margin-l-20--xs "> 
 									        <s:if test="#popularFundDetailsDataModelElement.rating.equals('5'.toString())">
@@ -743,21 +743,21 @@
                     <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md g-margin-b-10--xs g-margin-b-0--md">
                         <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Top Performing Funds</b></h1>
+                                <h1 class="g-display-inline-block--xs g-font-size-26--xs g-font-size-40--md g-color--white "><b>Top Performing Funds</b></h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md">
                         <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Full Liquidity</b></h1>
+                                <h1 class="g-display-inline-block--xs g-font-size-26--xs g-font-size-40--md g-color--white "><b>Full Liquidity</b></h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 g-full-width--xs g-full-width--sm g-full-width--md">
                         <div class="g-text-center--xs g-text-center--sm">
                             <div class="g-margin-b-10--xs">
-                                <h1 class="g-display-inline-block--xs g-font-size-30--xs g-font-size-40--md g-color--white "><b>Ethical investing</b></h1>
+                                <h1 class="g-display-inline-block--xs g-font-size-26--xs g-font-size-40--md g-color--white "><b>Ethical investing</b></h1>
                             </div>
                         </div>
                     </div>
@@ -770,7 +770,7 @@
 	   		<div class="container ">
 	            <div class="center wow fadeInDown g-margin-t-50--xs g-margin-b-50--xs ">
 	            	<h2 class="g-color--white g-text-center--xs">Our Partners</h2>
-	                <p class="g-color--white g-text-center--xs">We use funds from leading providers to build your portfolio</p>
+	                <p class="g-color--white g-text-center--xs g-font-size-12--xs g-font-size-16--lg ">We use funds from leading providers to build your portfolio</p>
 	            	<marquee behavior="scroll" direction="left" >
 	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 						<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  

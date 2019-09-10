@@ -1242,7 +1242,7 @@
   line-height: 1.2;
 }
 
-.g-line-height {
+.g-line-height--md {
   line-height: 1.4;
 }
 
@@ -1868,6 +1868,9 @@
   }
   .g-width-200--lg {
     width: 12.5rem;
+  }
+  .g-width-220--lg {
+    width: 13.5rem;
   }
   .g-width-250--lg {
     width: 15.625rem;

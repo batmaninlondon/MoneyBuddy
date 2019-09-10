@@ -91,23 +91,23 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 	    	System.out.println("mandateId : "+mandateId);
 	    	
 	    	
-	    	/*paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),customerCartList,
+	    	paymentUrl = trading.executeTrade(customerId, customer.getPanCard(),customerCartList,
 					"NEW","BUY",desEncrypter.decrypt(bankDetails.getAccountNumber()),bankDetails.getBankName(),bankDetails.getIfscCode(),
 					commonUtil.getBankMode(bankDetails.getBankName()),getFirstOrderFlag(),
 					mandateId,getTranDetailId(), sessionMap);
 	    	
-	    	System.out.println("paymentUrl : "+paymentUrl);*/
+	    	System.out.println("paymentUrl : "+paymentUrl);
 	    	
-	    	paymentUrl = null ;
+	    	
 	    	
 	    	UpdateCustomerCart updateCustomerCart = new UpdateCustomerCart();
-			/*if (null == paymentUrl)  {*/
+			if (null == paymentUrl)  {
 				
 				updateCustomerCart.emptyCustomerCart(customerId);
 	    		return "sipOrderFofN";
-			/*}*/
+			}
 			
-			/*if ( !paymentUrl.equals("NotSet")) {
+			if ( !paymentUrl.equals("NotSet")) {
 			
 				if (!paymentUrl.contains("<html>"))  {
 					setActionMsg("ActionMsg-"+paymentUrl);
@@ -123,7 +123,7 @@ public class PaymentAction extends ActionSupport implements SessionAware {
 				
 				setActionMsg("ActionMsg-allOrderFailed with BSE");
 				return "allOrderFailed";
-			}*/
+			}
 
 		} catch (MoneyBuddyException e) {	
     		logger.error("PaymentAction class : execute method : Caught MoneyBuddyException for session id : "+sessionMap.getClass().getName());

@@ -64,17 +64,6 @@
 		
 		</script>
 	
-	<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-
 
     </head>
 
@@ -87,7 +76,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-10  g-height-50--xs g-height-80--lg g-bg-color--dark ">
+		<div class="col-xs-10  g-height-70--xs g-height-80--lg g-bg-color--dark ">
 	    	<div class="profile text-center">
 	        	<div class="name pagination text-center">
 	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white">Thank you for STP </h3>
@@ -116,8 +105,9 @@
 										</thead>
 										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerStpCartList" var="stpCartListElement">
-													<tr>
+													
 													    <s:if test="schemeName.equals('Total')">
+													    	<tr class=" g-bg-color--gray-light">
 													    	<td>
 														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
 													    	</td>
@@ -132,9 +122,10 @@
 												    		</td>
 												    		<td>
 												    		</td>
+												    		</tr>
 													    </s:if>
 													    <s:else>
-													    	
+													    	<tr>
 													    	<td>
 														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
 													    	</td>
@@ -153,8 +144,9 @@
 												    		<td>
 														    	<b><s:property value="#stpCartListElement.stpDate"/></b>
 												    		</td>
+												    		</tr>
 												    	</s:else>
-													</tr>
+													
 												</s:iterator>
 											 
 										</tbody>
