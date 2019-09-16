@@ -63,7 +63,7 @@ public class SendThankYouMailAction extends ActionSupport  implements SessionAwa
 				if ("Y".equals(firstOrderFlag)) {
 					mailLink = configProperties.getProperty("MAIL_SIP_REGISTERED_Y_LINK");
 					System.out.println("mailLink is : "+mailLink);
-					subject = configProperties.getProperty("MAIL_SIP_REGISTERED_y_SUBJECT");
+					subject = configProperties.getProperty("MAIL_SIP_REGISTERED_Y_SUBJECT");
 					sendMail.MailSending(emailId,subject,"SipRegisteredYesCaseMail","SipRegisteredY.txt",mailLink,"",customerName);
 				}
 				else {

@@ -76,6 +76,9 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        	sipStartDate = dateFormat.parse(sipDetail.getSipStartDate());
 					System.out.println("sipStartDate : " + sipStartDate);
 		        	
+					if (currentDate.compareTo(sipStartDate) > 0) {
+						
+					
 		        	hibernateSession.beginTransaction();
 					
 					query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
@@ -116,6 +119,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 					logger.debug("SipInstallmentGenerator class - execute method - customerId - "+sipDetail.getCustomerId()+" - and transactionType - SIP - inserted new row in TransactionDetails table with transactionId - "+nextTransactionId);
 
 					hibernateSession.getTransaction().commit();
+					}
 		        }
 
 			}
