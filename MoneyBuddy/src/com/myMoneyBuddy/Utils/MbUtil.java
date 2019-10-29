@@ -28,7 +28,6 @@ public class MbUtil {
 
 				configProperties.load(MbUtil.class.getResourceAsStream(configPropFilePath));
 				
-				
 		        String url = "https://www.google.com/recaptcha/api/siteverify?"
 		                + "secret=" + configProperties.getProperty("RECAPTHA_SECRET_KEY")
 		                + "&response=" + googleResponse;

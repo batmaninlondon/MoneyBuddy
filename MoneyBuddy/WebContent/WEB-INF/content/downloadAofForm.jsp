@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy-Top Performing Mutual Funds</title>
+		<meta http-equiv="Cache-control" content="max-age=2592000, public">
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -29,7 +30,7 @@
 
     <!-- Body -->
     <body>
-		<div id="load" class="load"></div>
+		<!-- <div id="load" class="load"></div> -->
 	<div id="content">
     <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -256,7 +257,7 @@
     </body>
      <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script>
+        <%-- <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -269,7 +270,7 @@
 			      },1000);
 			  }
 			}
-         </script>
+         </script> --%>
          		<script type="text/javascript" src="assets/js/javaScript.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script>

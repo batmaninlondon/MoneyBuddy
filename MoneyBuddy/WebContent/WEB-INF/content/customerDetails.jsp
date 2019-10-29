@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
-
+		<meta http-equiv="Cache-control" content="max-age=2592000, public">
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
@@ -543,7 +543,7 @@
 					list="#{'ICI':'ICICI Bank', 'SBI':'SBI Bank', 'HDF':'HDFC Bank', 
 			        '162':'KOTAK Bank', 'UTI':'Axis Bank', 'PNB':'Punjab National Bank', 'SIB':'South Indian Bank', 
 			        'SCB':'Standard Chartered Bank', 'UBI':'Union Bank Of India', 'UNI':'United Bank Of India', 
-			        'YBK':'Yes Bank Ltd', 'RBL':'Ratnakar Bank', 'DCB':'DCB'}" 
+			        'YBK':'Yes Bank Ltd', 'RBL':'Ratnakar Bank', 'DCB':'DCB','DEN':'DENA Bank'}" 
 					name="bankName" 
 					value="ICI" />
         	</div>

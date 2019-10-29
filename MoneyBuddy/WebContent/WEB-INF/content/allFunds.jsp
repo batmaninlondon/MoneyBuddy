@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy-Top Performing Mutual Funds</title>
+		<meta http-equiv="Cache-control" content="max-age=2592000, public">
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
 		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 		<link href="assets/bootstrap/css/animate.min.css" rel="stylesheet">
@@ -210,7 +211,7 @@
         </div>
         
     <div id="myDiv1" class="g-bg-color--white  " >
-    <div id="load" class="load"></div>
+    <!-- <div id="load" class="load"></div> -->
 		<div id="content">
 			<div id="myDiv2" class="row  g-padding-y-40--sm g-container--md  ">
 				<s:iterator value="fundDetailsDataModel" var="fundDetailsDataModelElement">
@@ -425,7 +426,7 @@
         <script type="text/javascript" src="js/components/wow.min.js"></script> --%>
         <!--========== END JAVASCRIPTS ==========-->
         
- <script>
+<%--  <script>
          document.onreadystatechange = function () {
         	/*  $(myInput).keyup(function() {
 		 		    var value = $(this).val().toLowerCase();
@@ -452,7 +453,7 @@
  			
  		}); */
          
-         </script>
+         </script> --%>
     </body>
     <!-- End Body -->
 </html>

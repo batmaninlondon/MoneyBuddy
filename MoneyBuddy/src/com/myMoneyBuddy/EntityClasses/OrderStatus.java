@@ -75,7 +75,7 @@ public class OrderStatus {
         if ((this.statusDetail == null) ? (other.statusDetail != null) : !this.statusDetail.equals(other.statusDetail)) {
             return false;
         }
-        if ((this.orderStatus == null) ? (other.orderStatus != null) : !this.orderStatus.equals(other.orderStatus)) {
+        if ((this.userStatus == null) ? (other.userStatus != null) : !this.userStatus.equals(other.userStatus)) {
             return false;
         }
         return true;
@@ -86,10 +86,12 @@ public class OrderStatus {
         int hash = 7;
         hash = 79 * hash + (this.orderStatus != null ? this.orderStatus.hashCode() : 0);
         hash = 79 * hash + (this.statusDetail != null ? this.statusDetail.hashCode() : 0);
-        hash = 79 * hash + (this.orderStatus != null ? this.orderStatus.hashCode() : 0);
+        hash = 79 * hash + (this.userStatus != null ? this.userStatus.hashCode() : 0);
         return hash;
     }
 
-
+    public String toString()  {
+    	return "OrderStatus [orderStatus="+orderStatus+", statusDetail="+statusDetail+",userStatus="+userStatus+"]";
+    }
 
 }

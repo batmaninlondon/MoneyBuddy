@@ -41,9 +41,13 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     		logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - start");
     		QueryCustomer queryCustomer = new QueryCustomer(); 
     		Customers customer = queryCustomer.getCustomerFromEmailId(getEmailIdLogin());
+    		
+    		
+    		
     		if (customer != null ) {
     			customerId = customer.getCustomerId();
     			System.out.println("customerId : "+customerId);
+    			
     		}
 	    	
 	    	
@@ -99,6 +103,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	
 	    	if ("ADMIN".equals(customer.getUserType()))  {
+	    		
 	    		sessionMap.put("customerId", customerId);
 	    		return "adminLogin";
 	    	}

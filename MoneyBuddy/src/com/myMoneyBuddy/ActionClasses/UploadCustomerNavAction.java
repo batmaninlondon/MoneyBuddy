@@ -131,38 +131,56 @@ public class UploadCustomerNavAction extends ActionSupport {
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
 			hibernateSession.getTransaction().commit();	
- 		    	
-	    	Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
-	    	
-	    	String emailId = customers.getEmailId();
-	    	String customerName = customers.getCustomerName();
-	    	
-	    	SendMail sendMail = new SendMail();
-
-	    	Properties configProperties = new Properties();
-			String configPropFilePath = "../../../config/config.properties";
-
-			configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
 			
-			if ("UPFRONT".equals(transactionType))  {
-	 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
-				System.out.println("mailLink is : "+mailLink);
+			hibernateSession.beginTransaction();
+			
+			query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionDetailId = :transactionDetailId");
+			query.setParameter("transactionDetailId", transactionDetailId );
+			String transactionId = query.uniqueResult().toString();
+		
+			hibernateSession.getTransaction().commit();
+ 		    
+			hibernateSession.beginTransaction();
+			
+			query = hibernateSession.createQuery("select count(*) from TransactionDetails where transactionId = :transactionId and transactionStatus != '8'");
+			query.setParameter("transactionId", transactionId );
+			String count = query.uniqueResult().toString();
+			
+			if ("0".equals(count))  {
+					
+				hibernateSession.getTransaction().commit();
+				
+		    	Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
 		    	
-		    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
-	
-		    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
-			}
-			else {
-				String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
-				System.out.println("mailLink is : "+mailLink);
+		    	String emailId = customers.getEmailId();
+		    	String customerName = customers.getCustomerName();
 		    	
-		    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
+		    	SendMail sendMail = new SendMail();
 	
-		    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+		    	Properties configProperties = new Properties();
+				String configPropFilePath = "../../../config/config.properties";
+	
+				configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
+				
+				if ("UPFRONT".equals(transactionType))  {
+		 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
+					System.out.println("mailLink is : "+mailLink);
+			    	
+			    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
+		
+			    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+				}
+				else {
+					String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
+					System.out.println("mailLink is : "+mailLink);
+			    	
+			    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
+		
+			    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+				}
+		    	logger.debug("UploadCustomerNavAction class - execute method - customerId - "+customerId+" - mail sent to "+emailId+" for transaction execution");
+		    	
 			}
-	    	logger.debug("UploadCustomerNavAction class - execute method - customerId - "+customerId+" - mail sent to "+emailId+" for transaction execution");
-	    	
-	    	
 	    	/*String str = "success";
 		    stream = new ByteArrayInputStream(str.getBytes());*/
 		    logger.debug("UploadCustomerNavAction class - execute method - bseOrderId - "+getBseOrderId()+" - returned success");

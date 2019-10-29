@@ -248,16 +248,73 @@
     </package>   
             
     <package name="portfolioAction" extends="json-default">
-              <action name="portfolioAction" class="com.myMoneyBuddy.ActionClasses.PortfolioAction">
-              	 <!-- <result name="success">/bseDashboard.jsp</result>
-                     <result name="error">/newErrorPage.jsp</result> -->
-                      <result type="json">
-                      	<param name="inputName">stream</param>
-                         <param name="excludeNullProperties">true</param>
-                        <param name="noCache">true</param>
-                     </result>
-              </action>
-      </package> 
+    	<action name="portfolioAction" class="com.myMoneyBuddy.ActionClasses.PortfolioAction" >
+       	 <!-- <result name="success">/bseDashboard.jsp</result>
+              <result name="error">/newErrorPage.jsp</result> -->
+               <result type="json">
+               	<param name="inputName">stream</param>
+                  <param name="excludeNullProperties">true</param>
+                 <param name="noCache">true</param>
+              </result>
+    	</action>
+       <!--  <action name="getSipDataAction"  method="getActiveSipData" class="com.myMoneyBuddy.ActionClasses.PortfolioAction">
+          	 <result type="json">
+               	<param name="inputName">stream</param>
+                  <param name="excludeNullProperties">true</param>
+                 <param name="noCache">true</param>
+              </result>
+		</action> -->
+    </package>
+    
+    <package name="portfolioSipDataAction" extends="json-default">
+    	<action name="portfolioSipDataAction" class="com.myMoneyBuddy.ActionClasses.PortfolioSipDataAction">
+        	<result type="json">
+               	<param name="inputName">stream</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+        	</result>
+    	</action>
+    </package>
+    
+    <package name="portfolioStpDataAction" extends="json-default">
+    	<action name="portfolioStpDataAction" class="com.myMoneyBuddy.ActionClasses.PortfolioStpDataAction">
+        	<result type="json">
+               	<param name="inputName">stream</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+        	</result>
+    	</action>
+    </package>
+    
+    <package name="portfolioHistoryDataAction" extends="json-default">
+    	<action name="portfolioHistoryDataAction" class="com.myMoneyBuddy.ActionClasses.PortfolioHistoryDataAction">
+        	<result type="json">
+               	<param name="inputName">stream</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+        	</result>
+    	</action>
+    </package>
+    
+    <package name="portfolioPendingDataAction" extends="json-default">
+    	<action name="portfolioPendingDataAction" class="com.myMoneyBuddy.ActionClasses.PortfolioPendingDataAction">
+        	<result type="json">
+               	<param name="inputName">stream</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+        	</result>
+    	</action>
+    </package>
+    
+    <package name="oldPortfolioDataAction" extends="json-default">
+    	<action name="oldPortfolioDataAction" class="com.myMoneyBuddy.ActionClasses.OldPortfolioDataAction">
+        	<result type="json">
+               	<param name="inputName">stream</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+        	</result>
+    	</action>
+    </package> 
     
     <package name="ResetPasswordAction" namespace="" extends="struts-default">
         <action name="resetPasswordAction" class="com.myMoneyBuddy.ActionClasses.ResetPasswordAction">

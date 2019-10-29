@@ -19,6 +19,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
 import com.myMoneyBuddy.ModelClasses.OldPortfolioDataModel;
@@ -42,22 +43,23 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	private String totalInvestedAmount;
 	private String totalProfitAmount;
 	private List<PortfolioDataModel> portfolioDataModel;
-	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();
-	private List<OldPortfolioDataModel> oldPortfolioDataModel = new LinkedList<OldPortfolioDataModel>();
-	private List<SipDataModel> sipDataModel;
-	private List<StpDataModel> stpDataModel;
-	private String totalUpfrontInvestments;
-	private String totalSips;
-	private String totalTransactions;
-	private String totalPendingOrders;
+	/*private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();*/
+	/*private List<OldPortfolioDataModel> oldPortfolioDataModel = new LinkedList<OldPortfolioDataModel>();*/
+	/*private List<SipDataModel> sipDataModel;*/
+	/*private List<StpDataModel> stpDataModel;*/
+	/*private String totalUpfrontInvestments;
+	private String totalSips;*/
+	/*private String totalTransactions;*/
+	/*private String totalPendingOrders;*/
 
 	//private HashMap<String,List<InvestmentDetailsDataModel>> investmentDetailsDataModelList = new HashMap<String,List<InvestmentDetailsDataModel>>();
 	
 	//private List<InvestmentDetailsDataModel> investmentDetailsDataModel;
-	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;
+	/*private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;*/
 
 	public String execute() {
 
+		
 		String customerId = sessionMap.get("customerId").toString();
 
 		try {	
@@ -65,33 +67,36 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		logger.debug("PortfolioAction class : execute method : start");
 
 		QueryCustomer queryCustomer = new QueryCustomer(); 
-		String userType = queryCustomer.getUserTypeFromCustomerId(customerId);
+		Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+		String userType = customer.getUserType();
 		
 		if ("ADMIN".equals(userType))  {
 			customerId = sessionMap.get("customerIdFromAdmin").toString();
     	}
 		
 		
-		System.out.println(" calling portfolioAction class for : customerId : "+customerId);
+		//System.out.println(" calling portfolioAction class for : customerId : "+customerId);
 				
-		setCustomerName(queryCustomer.getCustomerNameFromId(customerId));
+		setCustomerName(customer.getCustomerName());
 		
-		Date date = Calendar.getInstance().getTime();  
+		/*Date date = Calendar.getInstance().getTime();  
 		DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");  
-		setCurDate(dateFormat.format(date));  
+		setCurDate(dateFormat.format(date));  */
 		
 		QueryProducts queryProducts = new QueryProducts();
 
 		portfolioDataModel = queryProducts.getPortfolioData(customerId);
 		setPortfolioDataModel(portfolioDataModel);
 		
-		setTotalPendingOrders(queryProducts.getTotalPendingTransactions(customerId));
+		/*setTotalPendingOrders(queryProducts.getTotalPendingTransactions(customerId));
 		
 		if (!getTotalPendingOrders().equals("0"))
 			pendingOrderDataModel = queryProducts.getPendingOrderData(customerId);
-		setPendingOrderDataModel(pendingOrderDataModel);
+		setPendingOrderDataModel(pendingOrderDataModel);*/
 
-		for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
+		
+		
+		/*for (PortfolioDataModel portfolioDataModelElement : portfolioDataModel){
 			if ("Total".equals(portfolioDataModelElement.getSchemeName())) {
 				setTotalCurrentAmount(portfolioDataModelElement.getCurrentAmount());
 				setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
@@ -99,25 +104,35 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 				setTotalProfitAmount(portfolioDataModelElement.getProfit());
 				
 			}
-		}
+		}*/
 		
-		QueryOldPortfolioRecords queryOldPortfolioRecords = new QueryOldPortfolioRecords();
+		PortfolioDataModel portfolioDataModelElement = portfolioDataModel.get(portfolioDataModel.size()-1);
+				if ("Total".equals(portfolioDataModelElement.getSchemeName())) {
+					setTotalCurrentAmount(portfolioDataModelElement.getCurrentAmount());
+					setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
+					setTotalInvestedAmount(portfolioDataModelElement.getInvestedAmount());
+					setTotalProfitAmount(portfolioDataModelElement.getProfit());
+					
+				}
 		
-		String totalOldRecords = queryOldPortfolioRecords.getTotalOldRecords(customerId);
+		
+		//QueryOldPortfolioRecords queryOldPortfolioRecords = new QueryOldPortfolioRecords();
+		
+		/*String totalOldRecords = queryOldPortfolioRecords.getTotalOldRecords(customerId);
 		
 		if ( !"0".equals(totalOldRecords) )  {
 		
 			oldPortfolioDataModel = queryOldPortfolioRecords.getOldRecordsData(customerId);
-		}
+		}*/
 		
 		//sessionMap.put("portfolioDataModel", portfolioDataModel);
 		logger.debug("PortfolioAction class : execute method : stored portfolioDataModel in session id : "+sessionMap.getClass().getName());
 		
-		sipDataModel = queryProducts.getSipData(customerId);
-		setSipDataModel(sipDataModel);
+		//sipDataModel = queryProducts.getSipData(customerId);
+		//setSipDataModel(sipDataModel);
 		
-		stpDataModel = queryProducts.getStpData(customerId);
-		setStpDataModel(stpDataModel);
+		/*stpDataModel = queryProducts.getStpData(customerId);
+		setStpDataModel(stpDataModel);*/
 
 		/*sessionMap.put("sipDataModel", sipDataModel);
 		logger.debug("PortfolioAction class : execute method : stored sipDataModel in session id : "+sessionMap.getClass().getName());
@@ -132,13 +147,13 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			
 		}*/
 				
-		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(customerId);
+/*		allFundsInvestmentDetailsDataModel = queryProducts.getAllFundsInvestmentDetailsData(customerId);
 		setAllFundsInvestmentDetailsDataModel(allFundsInvestmentDetailsDataModel);
 		
-		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());
+		System.out.println("Size of allFundsInvestmentDetailsDataModel : "+allFundsInvestmentDetailsDataModel.size());*/
 		
-		System.out.println(" VALUE OF totalRateOfGrowth :"+totalRateOfGrowth+":");
-		System.out.println(" VALUE OF getTotalRateOfGrowth :"+getTotalRateOfGrowth()+":");
+		/*System.out.println(" VALUE OF totalRateOfGrowth :"+totalRateOfGrowth+":");
+		System.out.println(" VALUE OF getTotalRateOfGrowth :"+getTotalRateOfGrowth()+":");*/
 		
 		/*sessionMap.put("allFundsInvestmentDetailsDataModel", allFundsInvestmentDetailsDataModel);
 		logger.debug("PortfolioAction class : execute method : stored allFundsInvestmentDetailsDataModel in session id : "+sessionMap.getClass().getName());
@@ -188,7 +203,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public List<SipDataModel> getSipDataModel() {
+/*	public List<SipDataModel> getSipDataModel() {
 		return sipDataModel;
 	}
 
@@ -196,16 +211,16 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	public void setSipDataModel(List<SipDataModel> sipDataModel) {
 		this.sipDataModel = sipDataModel;
 	}
+*/
 
-
-	public List<StpDataModel> getStpDataModel() {
+/*	public List<StpDataModel> getStpDataModel() {
 		return stpDataModel;
 	}
 
 
 	public void setStpDataModel(List<StpDataModel> stpDataModel) {
 		this.stpDataModel = stpDataModel;
-	}
+	}*/
 
 
 	public List<PortfolioDataModel> getPortfolioDataModel() {
@@ -243,24 +258,24 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	}*/
 
 
-	public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsDataModel() {
+/*	public List<InvestmentDetailsDataModel> getAllFundsInvestmentDetailsDataModel() {
 		return allFundsInvestmentDetailsDataModel;
 	}
 
 
 	public void setAllFundsInvestmentDetailsDataModel(List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel) {
 		this.allFundsInvestmentDetailsDataModel = allFundsInvestmentDetailsDataModel;
-	}
+	}*/
 
 
-	public List<PendingOrderDataModel> getPendingOrderDataModel() {
+/*	public List<PendingOrderDataModel> getPendingOrderDataModel() {
 		return pendingOrderDataModel;
 	}
 
 
 	public void setPendingOrderDataModel(List<PendingOrderDataModel> pendingOrderDataModel) {
 		this.pendingOrderDataModel = pendingOrderDataModel;
-	}
+	}*/
 
 
 	public String getTotalRateOfGrowth() {
@@ -343,7 +358,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public String getTotalUpfrontInvestments() {
+/*	public String getTotalUpfrontInvestments() {
 		return totalUpfrontInvestments;
 	}
 
@@ -370,9 +385,9 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setTotalTransactions(String totalTransactions) {
 		this.totalTransactions = totalTransactions;
-	}
+	}*/
 
-
+/*
 	public String getTotalPendingOrders() {
 		return totalPendingOrders;
 	}
@@ -380,17 +395,17 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 	public void setTotalPendingOrders(String totalPendingOrders) {
 		this.totalPendingOrders = totalPendingOrders;
-	}
+	}*/
 
 
-	public List<OldPortfolioDataModel> getOldPortfolioDataModel() {
+	/*public List<OldPortfolioDataModel> getOldPortfolioDataModel() {
 		return oldPortfolioDataModel;
 	}
 
 
 	public void setOldPortfolioDataModel(List<OldPortfolioDataModel> oldPortfolioDataModel) {
 		this.oldPortfolioDataModel = oldPortfolioDataModel;
-	}
+	}*/
 
 
 }

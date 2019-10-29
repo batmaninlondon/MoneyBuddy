@@ -33,7 +33,7 @@ public class MoneyBuddyScheduler {
 		
 			scheduler.start();
 			
-			JobDetail computeOldPortfolioJob = JobBuilder.newJob(ComputeOldPortfolio.class)
+			/*JobDetail computeOldPortfolioJob = JobBuilder.newJob(ComputeOldPortfolio.class)
 					.withIdentity("ComputeOldPortfolioJob", "Group").build();
 			
 			// This Trigger will work at 9 pm (21 hours) everyday
@@ -45,7 +45,7 @@ public class MoneyBuddyScheduler {
 					.build();
 			
 	
-			scheduler.scheduleJob(computeOldPortfolioJob, computeOldPortfolioTrigger);
+			scheduler.scheduleJob(computeOldPortfolioJob, computeOldPortfolioTrigger);*/
 			
 			
 			/*JobDetail dailyInvestmentGeneratorJob = JobBuilder.newJob(DailyInvestmentGenerator.class)
@@ -83,14 +83,14 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 13 12 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 03 12 * * ?")) 
 					.build();
 			
 	
 			scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);*/
 			
 			
-			/*JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
+			JobDetail sipInstallmentGeneratorJob = JobBuilder.newJob(SipInstallmentGenerator.class)
 					.withIdentity("SipInstallmentGeneratorJob", "Group").build();
 			
 			// This Trigger will work at 3 pm (15 hours) everyday
@@ -98,11 +98,11 @@ public class MoneyBuddyScheduler {
 			Trigger sipInstallmentGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("SipInstallmentGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 25 13 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 28 14 * * ?")) 
 					.build();
 			
 	
-			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);*/
+			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
 			
 			
 			/*JobDetail stpInstallmentGeneratorJob = JobBuilder.newJob(StpInstallmentGenerator.class)

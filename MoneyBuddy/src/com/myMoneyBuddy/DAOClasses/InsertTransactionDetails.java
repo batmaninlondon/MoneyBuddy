@@ -37,13 +37,14 @@ public class InsertTransactionDetails {
 			hibernateSession.beginTransaction();
 						
 			String nextTransactionId = "1";
+						
+			Query query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+					+ " order by transactionDetailId desc ");
 			
-			Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+			query.setMaxResults(1);
 			
-			if ( trxnIdresult != null )  {
-				nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
-			}
-
+			nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			
 			hibernateSession.getTransaction().commit();
 			
 			hibernateSession.beginTransaction();

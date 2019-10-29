@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
-     
+     	<meta http-equiv="Cache-control" content="max-age=2592000, public">
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -163,7 +163,7 @@
 
     <!-- Body -->
     <body>
-    <div id="load" class="load"></div>
+    <!-- <div id="load" class="load"></div> -->
 
         <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -1460,18 +1460,18 @@
 		};
 		
 		
-		document.onreadystatechange = function () {
+		/* document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
-			       /* document.getElementById('contents').style.visibility="hidden"; */
+			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
 			      setTimeout(function(){
 			         document.getElementById('interactive');
 			         document.getElementById('load').style.visibility="hidden";
-			         /* document.getElementById('contents').style.visibility="visible"; */
+			         document.getElementById('contents').style.visibility="visible";
 			      },1000);
 			  }
-			}
+			} */
 		</script>
         
 

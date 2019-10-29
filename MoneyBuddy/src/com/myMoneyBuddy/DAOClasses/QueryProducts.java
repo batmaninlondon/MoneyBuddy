@@ -224,26 +224,34 @@ public class QueryProducts {
 			
             Query buyRecordsQuery, buySellRecordsQuery, stpPuchaseFundsQuery;
           
-			Query query = hibernateSession.createQuery("select distinct(x.fundId), x.schemeCode from SecondaryFundDetails x, TransactionDetails y where x.fundId = y.fundId and y.customerId = :customerId and y.transactionStatus = '8' ");
+			Query query = hibernateSession.createQuery("select x.fundId, y.transactionFolioNum, x.schemeCode "
+					+ " from SecondaryFundDetails x, TransactionDetails y " + 
+					" where x.fundId = y.fundId and y.customerId = :customerId and y.transactionStatus = '8' group by x.fundId, y.transactionFolioNum ");
 			
 			query.setParameter("customerId",customerId);
-	           
+	          
+			Double totalInvestedAmount = 0.0;
+			Double totalCurrentAmount = 0.0;
+			
+			String stpWithdrawalFlag = "Y";
 			for(Iterator itFunds=query.iterate(); itFunds.hasNext();)	{
 				
 				Object[] rowFunds = (Object[]) itFunds.next();
 
-				query = hibernateSession.createQuery("select t.transactionFolioNum,  p.schemeName,p.schemeType, n.navValue, min(t.transactionDate ),t.transactionDetailId,"
+				/*query = hibernateSession.createQuery("select t.transactionFolioNum,  p.schemeName,p.schemeType, "
+						+ "(select navValue from NavHistory where fundId = :fundId order by navHistoryId desc limit 1),"
+						+ " min(t.transactionDate ),t.transactionDetailId,"
 						+ " p.stpWithdrawalFlag "
-						+ " from PrimaryFundDetails p, NavHistory n, TransactionDetails t , SecondaryFundDetails s "
-						+ " where p.fundId = :fundId and p.fundId=t.fundId and s.fundId=p.fundId and t.customerId= :customerId and t.transactionStatus='8' "
-						+ "and n.navDate = (select max(navDate) from NavHistory where n.fundId = :fundId) group by t.transactionFolioNum ");
+						+ " from PrimaryFundDetails p, TransactionDetails t  "
+						+ " where p.fundId = :fundId and p.fundId=t.fundId and t.customerId= :customerId and t.transactionStatus='8' "
+						+ " group by t.transactionFolioNum ");
 				
 				query.setParameter("customerId",customerId);
 				query.setParameter("fundId", rowFunds[0].toString());
 				
-				for(Iterator queryIt=query.iterate(); queryIt.hasNext();){
+				for(Iterator queryIt=query.iterate(); queryIt.hasNext();){*/
 
-					Object[] queryRow = (Object[]) queryIt.next();			
+					/*Object[] queryRow = (Object[]) queryIt.next();	*/		
 										
 					double investedAmount = 0.0;
 					double availableUnits = 0.0;
@@ -257,28 +265,45 @@ public class QueryProducts {
 				     
 				     String schemeName = null;
 				     String schemeType = null;
-				     String currentNavValue = null;
-				     String transactionStartDate = null;
+				    // String currentNavValue = null;
+				     //String transactionStartDate = null;
 				     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 				     Date date;
 				    	 
-			    	schemeName = queryRow[1].toString();
-			     	schemeType = queryRow[2].toString();
-			     	currentNavValue = queryRow[3].toString();
-			     	transactionStartDate = queryRow[4].toString();
+			    	
+			     	/*transactionStartDate = queryRow[4].toString();
      
 			     	date = (Date)formatter.parse(transactionStartDate);
-			     	transactionStartDate = newFormat.format(date);
-				     				         
-			     	buySellRecordsQuery = hibernateSession.createQuery("select transactionDetailId, transactionAmount, quantity, unitPrice, transactionDate, buySell "
-				     		+ " from TransactionDetails where fundId='"+rowFunds[0]+"' and customerId='"+customerId+"' and transactionFolioNum ='"+queryRow[0].toString()+"' and unitPrice is not null ");
-				       
+			     	transactionStartDate = newFormat.format(date);*/
+				     	
+				     query = hibernateSession.createQuery("select navValue from NavHistory where fundId = :fundId order by navHistoryId desc ");
+						query.setParameter("fundId",rowFunds[0].toString());
+						query.setMaxResults(1);
+						String currentNavValue = query.uniqueResult().toString();
+				     
+						System.out.println("currentNavValue : "+currentNavValue);
+						
+			     	buySellRecordsQuery = hibernateSession.createQuery("select t.transactionDetailId, t.transactionAmount, t.quantity, t.unitPrice,"
+			     			+ " t.transactionDate, t.buySell , t.transactionFolioNum,  p.schemeName,p.schemeType, p.stpWithdrawalFlag " + 
+			     			" from TransactionDetails t, PrimaryFundDetails p " + 
+			     			" where p.fundId=t.fundId and p.fundId= :fundId and t.customerId= :customerId and t.transactionFolioNum = :transactionFolioNum " + 
+			     			" and t.unitPrice is not null and t.transactionStatus='8'" );
+				      
+			     	buySellRecordsQuery.setParameter("customerId",customerId);
+			     	buySellRecordsQuery.setParameter("fundId",rowFunds[0].toString());
+			     	buySellRecordsQuery.setParameter("transactionFolioNum", rowFunds[1].toString());
+			     	
 			     	java.util.List buySellList = buySellRecordsQuery.list();
 				     
 			     	for (Iterator buySellIt=buySellList.iterator(); buySellIt.hasNext();)  {
-				    	   
+				     	
 				    	 Object[] buySellRecordRow = (Object[]) buySellIt.next();
-					       
+				    	 
+				    	 schemeName = buySellRecordRow[7].toString();
+				     	schemeType = buySellRecordRow[8].toString();
+				     	//currentNavValue = buySellRecordRow[10].toString();
+				     	stpWithdrawalFlag = buySellRecordRow[9].toString();
+				     	
 				    	 if ("SELL".equals(buySellRecordRow[5].toString()))  {
 					    	 soldUnit += Double.parseDouble(buySellRecordRow[2].toString());
 					    	 oldstring = buySellRecordRow[4].toString().substring(0, 10);
@@ -362,12 +387,12 @@ public class QueryProducts {
 						}
 				     
 				     String stpAllowed = "Y";
-				     if ("Y".equals(queryRow[6].toString()))   {
+				     if ("Y".equals(stpWithdrawalFlag))   {
 				    	 
 				    	 QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
 				    	 String availableFundsList = queryPrimaryFundDetails.getAvailableStpFundsList(rowFunds[0].toString());
 				    	 
-				    	 System.out.println("availableFundsList :"+availableFundsList+": for fund id : "+rowFunds[0].toString());
+				    	 //System.out.println("availableFundsList :"+availableFundsList+": for fund id : "+rowFunds[0].toString());
 				    	 if ("".equals(availableFundsList))  {
 				    		 stpAllowed = "N";
 				    	 }
@@ -385,25 +410,27 @@ public class QueryProducts {
 				    	 stpAllowed = "N";
 				     }
 					
-				     portfolioDataModel.add(new PortfolioDataModel(rowFunds[0].toString(),schemeName,queryRow[0].toString(),
+				     portfolioDataModel.add(new PortfolioDataModel(rowFunds[0].toString(),schemeName,rowFunds[1].toString(),
 				    		  String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),
-				    		  String.format("%.2f",(currentAmount-investedAmount)),frmtXirr,transactionStartDate,schemeType,
+				    		  String.format("%.2f",(currentAmount-investedAmount)),frmtXirr,schemeType,
 				    		  stpAllowed));
+				     totalInvestedAmount +=  investedAmount;
+						totalCurrentAmount +=  currentAmount;
 	
-				}
+				/*}*/
 			}
 
 			
-			Double totalInvestedAmount = 0.0;
-			Double totalCurrentAmount = 0.0;
-			for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
+			totalInvestedAmount = Double.parseDouble(String.format("%.4f", totalInvestedAmount));
+			totalCurrentAmount = Double.parseDouble(String.format("%.4f", totalCurrentAmount));
+			/*for ( PortfolioDataModel portfolioDataModelElement : portfolioDataModel )  {
 					
 					
 				totalInvestedAmount = totalInvestedAmount + Double.parseDouble(portfolioDataModelElement.getInvestedAmount());
 				totalCurrentAmount = totalCurrentAmount + Double.parseDouble(portfolioDataModelElement.getCurrentAmount());
-			}
+			}*/
 				
-			Double TotalrateOfGrowth = ((totalCurrentAmount - totalInvestedAmount)/totalInvestedAmount)*100;
+			//Double TotalrateOfGrowth = ((totalCurrentAmount - totalInvestedAmount)/totalInvestedAmount)*100;
 
 			totalAmounts.add(totalCurrentAmount*-1);
 			totalDates.add(strToDate(newFormat.format(todayDate)));
@@ -411,7 +438,7 @@ public class QueryProducts {
 			totalXirr = Newtons_method(0.1, totalAmounts, totalDates);
 			totalXirr = totalXirr*100;
 			
-			System.out.println("TOTAL XIRR 1 : "+ totalXirr);
+			//System.out.println("TOTAL XIRR 1 : "+ totalXirr);
 			String totXirr ;
 			/*System.out.println("TOTAL XIRR : "+ String.format("%.2f", totalXirr));
 			
@@ -434,7 +461,7 @@ public class QueryProducts {
 			}
 			
 			
-			portfolioDataModel.add(new PortfolioDataModel("","Total","","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),totXirr,"","","N"));
+			portfolioDataModel.add(new PortfolioDataModel("","Total","","",String.format("%.2f",totalInvestedAmount),String.format("%.2f",totalCurrentAmount),String.format("%.2f",(totalCurrentAmount-totalInvestedAmount)),totXirr,"","N"));
 
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - return portfolioDataModel of "+portfolioDataModel.size()+ " record");
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - end");
@@ -672,6 +699,7 @@ public class QueryProducts {
 		{
 			logger.debug("QueryProducts class - getSipData method - customerId - "+customerId+" - start");
 		
+			System.out.println(" Called getSipData ...........................................................................................");
 			hibernateSession.beginTransaction();
 
 			List<SipDataModel> sipDataModel = new LinkedList<SipDataModel>();

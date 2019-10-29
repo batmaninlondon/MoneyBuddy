@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Privacy Policy</title>
-
+		<meta http-equiv="Cache-control" content="max-age=2592000, public">
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"> -->
@@ -35,7 +35,7 @@
 
     <!-- Body -->
     <body>
-		<div id="load" class="load"></div>
+		<!-- <div id="load" class="load"></div> -->
 	<div id="content">
     <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -333,7 +333,7 @@
     </body>
      <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script>
+        <%-- <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -346,7 +346,7 @@
 			      },1000);
 			  }
 			}
-         </script>
+         </script> --%>
          <script type="text/javascript" src="assets/js/javaScript.js"></script>
 		<script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 		<script src="assets/js/jquery.js"></script>

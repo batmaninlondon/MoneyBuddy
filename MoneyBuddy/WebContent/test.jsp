@@ -68,19 +68,18 @@
 	
 	<span style="font-family:Trebuchet MS, Verdana, Arial; font-size:20px; font-weight:bold;">Hi customerName,</span>
 	<br />
-	<p>Your account has been activated, click on the below link to register your SIPs or invest lump-sum in top performing mutual funds</p>
+	<p>Congratulations, your recent MoneyBuddy transaction has been executed successfully.</p>
 	<!-- <br /> -->
-	<br/>
+	<p>click here to Log in and access your latest portfolio:</p>
 	<center><b style="font-size:17px;color:#13b1cd;">LinkForEmail</b></center>
-	<!-- <br/> -->
+	<p>PS: If you had invested in multiple funds together, some of your investments might still be under process thus not visible in your portfolio. Request you to kindly wait for a max of 2 working days to see your complete portfolio</p>
+	
 	<br/>
-	
-	
 	<p style="border-top:1px solid #e4e4e4;"></p>
 	
-	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Confused about which fund to invest in OR have any other questions?</div>
+	<div style="font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;">Have Any Questions?</div>
 	<img src="images/penpaper.gif" align="right" style="padding-left:10px; padding-top:10px; padding-bottom:10px;" alt=""/>
-	<p>Reply to this <b><u>Email</u></b> or Whatsapp/Call/SMS us at <b><u>+91-9971648736</u></b></p>
+	<p>Reply to this <b style="color:#13b1cd;"><u>Email</u></b> or Whatsapp/Call/SMS us at <b style="color:#13b1cd;"><u>+91-9971648736</u></b></p>
 	
 	<!-- <p style="border-top:1px solid #e4e4e4;"></p> -->
    	<br/>

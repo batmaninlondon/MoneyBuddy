@@ -12,7 +12,7 @@ public class PortfolioDataModel implements Serializable{
 	private String currentAmount;
 	private String profit;
 	private String rateOfGrowth;
-	private String transactionStartDate;
+	/*private String transactionStartDate;*/
 	private String schemeType;
 	private String stpWithdrawalFlag;
 	
@@ -23,7 +23,7 @@ public class PortfolioDataModel implements Serializable{
 
 
 	public PortfolioDataModel(String fundId, String schemeName, String folioNumber, String units, String investedAmount, String currentAmount,
-			String profit, String rateOfGrowth, String transactionStartDate, String schemeType, String stpWithdrawalFlag) {
+			String profit, String rateOfGrowth, String schemeType, String stpWithdrawalFlag) {
 		super();
 		this.fundId = fundId;
 		this.schemeName = schemeName;
@@ -33,7 +33,6 @@ public class PortfolioDataModel implements Serializable{
 		this.currentAmount = currentAmount;
 		this.profit = profit;
 		this.rateOfGrowth = rateOfGrowth;
-		this.transactionStartDate = transactionStartDate;
 		this.schemeType = schemeType;
 		this.stpWithdrawalFlag = stpWithdrawalFlag;
 	}
@@ -116,16 +115,6 @@ public class PortfolioDataModel implements Serializable{
 
 	public void setRateOfGrowth(String rateOfGrowth) {
 		this.rateOfGrowth = rateOfGrowth;
-	}
-
-
-	public String getTransactionStartDate() {
-		return transactionStartDate;
-	}
-
-
-	public void setTransactionStartDate(String transactionStartDate) {
-		this.transactionStartDate = transactionStartDate;
 	}
 
 

@@ -44,8 +44,8 @@ public class CommonUtil {
 			case "UTI" :
 			case "YBK" :
 			case "162" :
-				bankMode="DIRECT";break;
 			case "HDF" :
+				bankMode="DIRECT";break;
 			case "DCB" :
 			case "PNB" :
 			case "SIB" :
@@ -53,6 +53,7 @@ public class CommonUtil {
 			case "UBI" :
 			case "UNI" :
 			case "RBL" :
+			case "DEN" :
 				bankMode="NODAL";break;
 			default : 
 				bankMode="INVALID";

@@ -84,11 +84,12 @@ public class StpInstallmentGenerator implements org.quartz.Job{
 					
 					String nextTransactionId = "1";
 					
-					Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+					query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+							+ " order by transactionDetailId desc ");
 					
-					if ( trxnIdresult != null )  {
-						nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
-					}
+					query.setMaxResults(1);
+					
+					nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
 					
 					
 					hibernateSession.getTransaction().commit();
@@ -109,8 +110,11 @@ public class StpInstallmentGenerator implements org.quartz.Job{
 					hibernateSession.getTransaction().commit();
 					
 					hibernateSession.beginTransaction();
+										
+					query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+							+ " order by transactionDetailId desc ");
 					
-					query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+					query.setMaxResults(1);
 					
 					nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
 					

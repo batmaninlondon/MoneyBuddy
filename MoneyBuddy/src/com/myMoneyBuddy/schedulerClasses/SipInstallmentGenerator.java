@@ -78,47 +78,64 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        	
 					if (currentDate.compareTo(sipStartDate) > 0) {
 						
-					
-		        	hibernateSession.beginTransaction();
-					
-					query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
-					query.setParameter("transactionDetailId", sipDetail.getTransactionDetailId());
-					
-					TransactionDetails transactionDetails = (TransactionDetails) query.uniqueResult();
-					
-					hibernateSession.getTransaction().commit();
-					
-					hibernateSession.beginTransaction();
-					
-					String nextTransactionId = "1";
-					
-					Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
-					
-					if ( trxnIdresult != null )  {
-						nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
-					}
-					
-					
-					hibernateSession.getTransaction().commit();
-					
-					SimpleDateFormat dateFrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String frmtdDateForDB = dateFrmt.format(date);
-					
-					
-					System.out.println(" inserting a row for transaction Id : "+sipDetail.getTransactionDetailId());
-					hibernateSession.beginTransaction();
-					
-		        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,transactionDetails.getBseRegistrationNumber(),
-		        			null, sipDetail.getCustomerId(),"SIP" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),
-							"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getFundId(), 
-							null,null,frmtdDateForDB, frmtdDateForDB,"N",
-							transactionDetails.getTransactionFolioNum(),null,"N"); 		
-
-					hibernateSession.save(tempTransactionDetail);
-
-					logger.debug("SipInstallmentGenerator class - execute method - customerId - "+sipDetail.getCustomerId()+" - and transactionType - SIP - inserted new row in TransactionDetails table with transactionId - "+nextTransactionId);
-
-					hibernateSession.getTransaction().commit();
+			        	hibernateSession.beginTransaction();
+						
+						query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
+						query.setParameter("transactionDetailId", sipDetail.getTransactionDetailId());
+						
+						TransactionDetails transactionDetails = (TransactionDetails) query.uniqueResult();
+						
+						hibernateSession.getTransaction().commit();
+						
+						hibernateSession.beginTransaction();
+						
+						String nextTransactionId = "1";
+						
+						query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails where transactionId like '"+transactionDetails.getTransactionId()+"%' ");
+											
+						String transactionId = query.uniqueResult().toString();
+						
+						hibernateSession.getTransaction().commit();
+						
+						
+						hibernateSession.beginTransaction();
+						
+						
+						query = hibernateSession.createQuery("select max(transactionDate) from TransactionDetails where  transactionId = :transactionId ");
+						query.setParameter("transactionId", transactionId);
+											
+						String transactionDate = query.uniqueResult().toString().substring(0,10);
+						
+						hibernateSession.getTransaction().commit();
+						
+						SimpleDateFormat dateFrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String frmtdDateForDB = dateFrmt.format(date);
+						
+						if ( frmtdDateForDB.substring(0,10).equals(transactionDate))   {
+							nextTransactionId = transactionId;
+						}
+						else {
+							if ( transactionId.split("-").length == 1 )
+								nextTransactionId = transactionId+"-1";
+							else 
+								nextTransactionId = transactionId.split("-")[0]+"-"+(Integer.parseInt(transactionId.split("-")[1])+1);
+								
+						}
+						
+						System.out.println(" inserting a row for transaction Id : "+sipDetail.getTransactionDetailId());
+						hibernateSession.beginTransaction();
+						
+			        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,transactionDetails.getBseRegistrationNumber(),
+			        			null, sipDetail.getCustomerId(),"SIP" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),
+								"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getFundId(), 
+								null,null,frmtdDateForDB, frmtdDateForDB,"N",
+								transactionDetails.getTransactionFolioNum(),null,"N"); 		
+	
+						hibernateSession.save(tempTransactionDetail);
+	
+						logger.debug("SipInstallmentGenerator class - execute method - customerId - "+sipDetail.getCustomerId()+" - and transactionType - SIP - inserted new row in TransactionDetails table with transactionId - "+nextTransactionId);
+	
+						hibernateSession.getTransaction().commit();
 					}
 		        }
 

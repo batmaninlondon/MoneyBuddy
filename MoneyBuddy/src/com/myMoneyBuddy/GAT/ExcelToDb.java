@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,8 +22,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.myMoneyBuddy.ActionClasses.ForgotPasswordAction;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.DAOClasses.UploadCustomerNav;
+import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
@@ -39,11 +44,13 @@ public class ExcelToDb {
     		saveToDatabase(navDataHolder);
     		System.out.println("ReadSpreadSheet CLASS EXECUTION -------  END");*/
     		
-    		String fileName="C://xlsx/5678.xls";
+    		System.out.println(" ExcelToDb Start ...........");
+    		
+    		String fileName="C://xlsx/11Oct.xls";
         
     		Vector dataHolder=read(fileName);
     		saveToDatabase(dataHolder);
-        
+    		System.out.println(" ExcelToDb End ...........");
         
         	/*File karvyFile = new File(karvyFileName);
         	karvyFile.delete();
@@ -111,6 +118,8 @@ public class ExcelToDb {
         String bseOrderId="";
         String Bytes="";
         String bseRegNum = "";
+        String trnDate = "";
+        String trnType = "";
         
         List<String> ExtraBseOrderId = new ArrayList<String>();
         List<String> ExtraBseRegNum = new ArrayList<String>();
@@ -118,7 +127,7 @@ public class ExcelToDb {
 
         Workbook workbook;
 		try {
-			workbook = WorkbookFactory.create(new File("C://xlsx/5678.xls"));
+			workbook = WorkbookFactory.create(new File("C://xlsx/4Oct.xls"));
 		
         Sheet sheet = workbook.getSheetAt(0);
         DataFormatter dataFormatter = new DataFormatter();
@@ -156,8 +165,11 @@ public class ExcelToDb {
                 
                 String cellValue = dataFormatter.formatCellValue(cell);
                 
+                if ( cell.getColumnIndex() == 0 ) { 
+                	trnDate = cellValue;
+                }
                 
-                if ( cell.getColumnIndex() == 1 ) {
+                else if ( cell.getColumnIndex() == 1 ) {
                 	/*System.out.println("cell.getColumnIndex() : "+cell.getColumnIndex()+" and cellValue : "+cellValue);*/
                 	bseOrderId = cellValue;
                 	if (! "0".equals(bseOrderId))  {
@@ -192,6 +204,7 @@ public class ExcelToDb {
                 else if ( cell.getColumnIndex() == 26 ) {
                 	bseRegNum = cellValue;
                 	if (! "0".equals(bseRegNum))  {
+                		trnType="SIP";
 	                	if (bseOrdIdAndRegNumList.contains(bseRegNum))  {
 	                		bseRegNumExists = true;
 	                		
@@ -206,22 +219,26 @@ public class ExcelToDb {
 	                     	System.out.println("Does not Contains bseRegNum : "+bseRegNum );
 	                     }
                 	}
+                	else {
+                		trnType="UPFRONT";
+                		
+                	}
                 }
                 
                 
                /* if ( cell.getColumnIndex() == 1 || cell.getColumnIndex() == 12 || cell.getColumnIndex() == 18 || cell.getColumnIndex() == 19)  
                 System.out.print(cellValue + "\t");*/
             }
-            /*if (bseOrderIdExists || bseRegNumExists)  {
+            if (bseOrderIdExists || bseRegNumExists)  {
             	
             	
             		
-            		System.out.println("bseOrderId : "+bseOrderId+" and folioNum : "+folioNum+
+            		System.out.println("bseOrderId : "+bseOrderId+" and bseRegNum : "+bseRegNum+" and folioNum : "+folioNum+
             				" and allottedNav : "+allottedNav+"allottedUnits : "+allottedUnits);
             	UploadCustomerNav UploadCustomerNav = new UploadCustomerNav();
         		UploadCustomerNav.uploadCusNav(bseOrderId, bseRegNum, folioNum, allottedNav, allottedUnits);
             	
-            }*/
+            }
             
             System.out.println();
         }
@@ -319,4 +336,162 @@ public class ExcelToDb {
         }
             return flag;
     }
-    }
+
+
+/*    public static void populateUnitPriceAndNav (String transactionFolioNum, String navValue, String unitsPurchased, 
+    					String bseOrderId, String bseRegNum, String transactionDate, String transactnType)  {
+	
+	
+
+	
+	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+	
+	try {
+		
+		
+
+		System.out.println("UploadCustomerNavAction class : execute method : called ");
+		
+		System.out.println("transactionFolioNum : "+transactionFolioNum+" : unitPrice : "+navValue+" : quantity : "+unitsPurchased+""
+				+ " : bseOrderId : "+bseOrderId+" : bseRegNum : "+bseRegNum+" : transactionDate : "+transactionDate);
+		   		
+		hibernateSession.beginTransaction();
+		
+		Query query;
+		if ("SIP".equals(transactnType))  {
+
+    		query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseRegistrationNumber = :bseRegistrationNumber"
+    				+ " and transactionDate = :transactionDate ");
+    		query.setParameter("bseRegistrationNumber", bseRegNum);
+    		query.setParameter("transactionDate", transactionDate);
+    		
+		}
+		else {
+		
+			query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseOrderId = :bseOrderId ");
+    		query.setParameter("bseOrderId", bseOrderId);
+    		
+		}
+    		
+		List<Object[]> transactionDetailList = query.list();
+
+		String transactionDetailId = transactionDetailList.get(0)[0].toString();
+		Double transactionAmount = Double.valueOf(transactionDetailList.get(0)[1].toString());
+
+		hibernateSession.getTransaction().commit();
+
+		Double calculatedAmount = Double.valueOf(navValue) * Double.valueOf(unitsPurchased);
+
+		System.out.println(" NAV value : "+navValue+" : units : "+unitsPurchased);
+		
+		System.out.println("calculated amount : "+calculatedAmount+" : transactionAmount : "+transactionAmount);
+
+		
+		hibernateSession.beginTransaction();
+
+		query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
+								+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
+								+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.transactionDetailId= :transactionDetailId");
+		
+
+		query.setParameter("transactionDetailId", transactionDetailId);
+		
+		List<Object[]> queryResult = query.list(); 
+		
+		String fundId = queryResult.get(0)[0].toString();
+		String panCard = queryResult.get(0)[1].toString();
+		String customerId = queryResult.get(0)[2].toString();
+		String folioNum = null;
+		if (queryResult.get(0)[3] != null )  {
+			folioNum = queryResult.get(0)[3].toString();	
+		}
+		
+		String amcCode = queryResult.get(0)[4].toString();
+		String transactionType = queryResult.get(0)[5].toString();
+		
+		System.out.println(" panCard : "+panCard+" : customerId : "+customerId+" : folioNum : "+folioNum+" : amcCode : "+amcCode);
+		
+		hibernateSession.getTransaction().commit();
+		
+		if ("".equals(folioNum) || folioNum == null)  {
+			
+			hibernateSession.beginTransaction();
+
+			FolioDetails tempFolioDetails = new FolioDetails( transactionFolioNum, customerId, panCard,fundId,amcCode,"MoneyBuddy");
+			hibernateSession.save(tempFolioDetails);
+			
+			hibernateSession.getTransaction().commit();
+
+		}
+
+		hibernateSession.beginTransaction();
+		query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
+				+ "unitPrice = :unitPrice , quantity = :quantity , bseOrderId = :bseOrderId, transactionStatus = :transactionStatus , reverseFeed = :reverseFeed "
+				+ " where transactionDetailId = :transactionDetailId");
+
+		query.setParameter("transactionFolioNum", transactionFolioNum);
+		query.setParameter("unitPrice", navValue);
+		query.setParameter("quantity", unitsPurchased);
+		query.setParameter("bseOrderId", bseOrderId);
+		query.setParameter("transactionDetailId", transactionDetailId);
+		query.setParameter("transactionStatus", "8");
+		query.setParameter("reverseFeed", "Y");
+		
+		int updateResult = query.executeUpdate();
+		System.out.println(updateResult + " rows updated in transactionDetails table ");
+		hibernateSession.getTransaction().commit();	
+		    	
+    	Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
+    	
+    	String emailId = customers.getEmailId();
+    	String customerName = customers.getCustomerName();
+    	
+    	SendMail sendMail = new SendMail();
+
+    	Properties configProperties = new Properties();
+		String configPropFilePath = "../../../config/config.properties";
+
+		configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
+		
+		if ("UPFRONT".equals(transactionType))  {
+ 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
+
+	    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+		}
+		else {
+			String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
+
+	    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+		}
+    	
+    	
+    	
+    	String str = "success";
+	    stream = new ByteArrayInputStream(str.getBytes());
+    	
+    	
+	}
+	catch (Exception e) {	
+		
+		e.printStackTrace();
+		
+		String str = "error";
+	    stream = new ByteArrayInputStream(str.getBytes());
+	    
+	    
+	}
+	finally {
+		if(hibernateSession !=null )
+				hibernateSession.close();
+	}
+
+	
+    }*/
+}
+

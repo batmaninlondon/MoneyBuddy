@@ -11,6 +11,7 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Investment Details Page | Money Buddy</title>
+    <meta http-equiv="Cache-control" content="max-age=2592000, public">
     <!-- core CSS -->
 	<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
  	<!-- <link rel="stylesheet" href="assets/MoneyBuddyStyles.css" /> -->

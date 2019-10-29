@@ -495,11 +495,12 @@ public class Trading {
 				
 				String nextTransactionId = "1";
 				
-				Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+				query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+						+ " order by transactionDetailId desc ");
 				
-				if ( trxnIdresult != null )  {
-					nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
-				}
+				query.setMaxResults(1);
+				
+				nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
 				
 				
 				hibernateSession.getTransaction().commit();
@@ -680,7 +681,7 @@ public class Trading {
 							clientProperties.getProperty("DP_TXN"),customerCartList.get(i).getUpfrontAmount(),clientProperties.getProperty("QTY"),
 							clientProperties.getProperty("ALL_REDEEM"),selFolioNum,clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
-							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
+							configProperties.getProperty("EUIN"),configProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),clientProperties.getProperty("DPC"),
 							clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
 							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
 				
@@ -756,9 +757,9 @@ public class Trading {
 							customerId, configProperties.getProperty("USER_ID"), clientProperties.getProperty("INTERNAL_REF_NUM"), clientProperties.getProperty("TRANSMODE"), 
 							clientProperties.getProperty("DP_TXN"), startDate,clientProperties.getProperty("FREQUENCY_TYPE"),clientProperties.getProperty("FREQUENCY_ALLOWED"),
 							customerCartList.get(i).getSipAmount(),Integer.toString(Integer.parseInt(customerCartList.get(i).getSipDuration())*12),clientProperties.getProperty("REMARKS"),
-							selFolioNum,"Y",clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
-							clientProperties.getProperty("EUIN"),
-							clientProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
+							selFolioNum,firstOrderFlag,clientProperties.getProperty("BROKERAGE"),"",clientProperties.getProperty("SUB_BR_CODE"),
+							configProperties.getProperty("EUIN"),
+							configProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("DPC"),clientProperties.getProperty("REGID"),clientProperties.getProperty("IP_ADDRESS"),
 							PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),mandateId,
 							clientProperties.getProperty("PARAM_3"));
 					
@@ -939,7 +940,7 @@ public class Trading {
 					System.out.println("oredrNums : "+it.next().toString());
 				}*/
 				
-				System.out.println("accountNum : "+accountNum+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
+				System.out.println("accountNum : "+ accountNum.substring(accountNum.length() - 4 )+" : ifsc : "+ifsc+" : bankId : "+bankId+" : bankMode : "+bankMode);
 				DesEncrypter desEncrypter = new DesEncrypter();
 				RequestParam requestParam = new RequestParam();
 				requestParam.setAccNo(objFact.createRequestParamAccNo( accountNum));
@@ -962,7 +963,7 @@ public class Trading {
 				requestParam.setOrders(objFact.createRequestParamOrders(orderNums));
 				requestParam.setTotalAmount(objFact.createRequestParamTotalAmount(Double.toString(totalPaymentAmount)));
 
-				System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());
+				/*System.out.println("requestParam : getAccNo : "+requestParam.getAccNo().getValue());*/
 				Response paymentGateway = iStarMFPaymentGatewayService.paymentGatewayAPI(requestParam);
 
 				logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - payment for totalAmount - "+Double.toString(totalPaymentAmount)+"initiated");
@@ -1205,9 +1206,13 @@ public class Trading {
 				
 				hibernateSession.beginTransaction();
 				
-				query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails");
+				query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%'"
+						+ " order by transactionDetailId desc ");
+				
+				query.setMaxResults(1);
 				
 				String transactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+				
 
 				hibernateSession.getTransaction().commit();
 
@@ -1298,7 +1303,7 @@ public class Trading {
 							clientProperties.getProperty("DP_TXN"),amt,quan,
 							allRedeem,folioNum,clientProperties.getProperty("REMARKS"),
 							clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("REF_NO"),clientProperties.getProperty("SUB_BR_CODE"),
-							clientProperties.getProperty("EUIN"),clientProperties.getProperty("EUIN_FLAG"),"Y",clientProperties.getProperty("DPC"),
+							configProperties.getProperty("EUIN"),configProperties.getProperty("EUIN_FLAG"),"Y",clientProperties.getProperty("DPC"),
 							clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
 							clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
 				
@@ -1371,12 +1376,13 @@ public class Trading {
 			hibernateSession.beginTransaction();
 			
 			String nextTransactionId = "1";
+						
+			Query query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+					+ " order by transactionDetailId desc ");
 			
-			Object trxnIdresult = hibernateSession.createQuery("select max(transactionId) from TransactionDetails").uniqueResult();
+			query.setMaxResults(1);
 			
-			if ( trxnIdresult != null )  {
-				nextTransactionId = Integer.toString(Integer.parseInt(trxnIdresult.toString())+1);
-			}
+			nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
 			
 			
 			hibernateSession.getTransaction().commit();
@@ -1398,7 +1404,7 @@ public class Trading {
 			
 			hibernateSession.beginTransaction();
 			
-			Query query = hibernateSession.createQuery("delete from StpCart where stpCartId = :stpCartId ");
+			query = hibernateSession.createQuery("delete from StpCart where stpCartId = :stpCartId ");
 			query.setParameter("stpCartId", stpCartId);
 			
 			query.executeUpdate();
@@ -1438,8 +1444,9 @@ public class Trading {
 			String withdrawalFundName = querySecondaryFundDetails.getSchemeCode(withdrawalFundId);
 			String purchaseFundName = querySecondaryFundDetails.getSchemeCode(purchaseFundId);
 
+			String firstOrderTofday = "N";
 			String[] stpDetailsArray = {customerId,withdrawalFundName,purchaseFundName,"Fresh","P",stpFolioNum,nextTransactionId,startDate,"Monthly",
-					numOfInstallment,stpAmount,"N","","Y",configProperties.getProperty("EUIN"),"STP Initiated",""};
+					numOfInstallment,stpAmount,firstOrderTofday,"",configProperties.getProperty("EUIN_FLAG"),configProperties.getProperty("EUIN"),"STP Initiated",""};
 			stpDetails = String.join("|",stpDetailsArray);
 
 
@@ -1562,7 +1569,8 @@ public class Trading {
 
 		}*/
 		hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , fundId , quantity, transactionAmount,customerId from TransactionDetails where transactionStatus='5'");
+			query = hibernateSession.createQuery("select transactionId, transactionDetailId, transactionDate, bseOrderId , fundId , quantity,"
+					+ " transactionAmount,customerId from TransactionDetails where transactionStatus='5'");
 
 			transactionDetails = query.list();
 
@@ -1585,8 +1593,8 @@ public class Trading {
 				String frmtdDate = dateFormat.format(date);
 				Date todayDate = dateFormat.parse(frmtdDate);
 
-				boolean lessThanToday = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
-				System.out.println("lessThanToday is : "+lessThanToday+" for transactionDetailId : "+transactionDetail[1]);
+				//boolean lessThanToday = Math.abs(todayDate.getTime() - startDate.getTime()) > MILLIS_PER_DAY;
+				//System.out.println("lessThanToday is : "+lessThanToday+" for transactionDetailId : "+transactionDetail[1]);
 
 				/*if (lessThanToday)  {
 

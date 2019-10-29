@@ -79,7 +79,7 @@ public class QueryBussinessData {
 			hibernateSession.getTransaction().commit();
 			
 			hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select count(*) from SipDetails  group by customerId ");
+			query = hibernateSession.createQuery("select count(distinct s.customerId) from SipDetails s ");
 			
 			String numOfSipClients = query.uniqueResult().toString();
 			

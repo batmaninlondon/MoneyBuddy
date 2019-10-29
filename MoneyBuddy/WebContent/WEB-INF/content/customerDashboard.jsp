@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
-     
+     	<meta http-equiv="Cache-control" content="max-age=2592000, public">
 
         <!-- Web Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
@@ -34,26 +34,17 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/> 
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-       <!--  <link href="css/global/nmoneybuddy.css" rel="stylesheet" type="text/css"/>
-       
-         -->
-        <!-- data table CSS-->
-        
 
         <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
+        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> -->
 	    
 	   
 
 
 
     </head>
-    
+
+  
          <style>
 	    
 	    
@@ -327,19 +318,19 @@
 						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#portfolioSummaryPane">Portfolio Summary</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeSipPane" >Active SIP's</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" id="activeSipTable" href="#activeSipPane" >Active SIP's</a>
 						      </li>
 						      <li class="nav-item">
-						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#activeStpPane" >Active STP's</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" id="activeStpTable" href="#activeStpPane" >Active STP's</a>
 						      </li>
 						      <li class="nav-item" >
-						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#transactionHistoryPane" >Transaction History</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" id="tranHistoryTable" href="#transactionHistoryPane" >Transaction History</a>
 						      </li>
 						      <li class="nav-item" id="hide-pending-orders" >
-						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#pendingOrdersPane">Pending Orders</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" id="pendingOrderTable" href="#pendingOrdersPane">Pending Orders</a>
 						      </li>
 						      <li class="nav-item" id="hide-old-portfolio" >
-						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" href="#olfPortfolioPane">Old Portfolio</a>
+						        <a class="nav-link g-font-size-12--xs g-font-size-16--lg g-color--primary font-weight-bold g-box-shadow__dark-lightest-v4" data-toggle="pill" id="oldPortTable" href="#olfPortfolioPane">Old Portfolio</a>
 						      </li>
 						    </ul>
 						  </div>
@@ -383,54 +374,34 @@
 						  	
 						  	</div>
 						  	
-						  	<div id="activeSipPane" class="container tab-pane">
-						  		<!-- Sip Summary Table Start -->
-                <div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
-             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
-             			<div class="g-text-center--xs g-margin-b-10--xs">
-                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
-                    			Active SIP's
-                   			</h3>
-                		</div> 
-			     	<div class=" g-text-center--xs table-responsive">
-							<table id="sipTable" class="table-bordered" cellspacing="0" width="100%">
-						        <thead class="text-center">
-						            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white">
-										<th class="text-center " style="padding: 0px;">Sl. no.</th>
-										<th class="text-center"  style="padding: 0px;">Fund Name</th>
-										<th class="text-center"  style="padding: 0px;">Folio Num</th>
-										<th class="text-center"  style="padding: 0px;">Fund Category</th>
-										<th class="text-center add-comma"  style="padding: 0px;">SIP Amount</th>
-										<th class="text-center"  style="padding: 0px;">SIP Debit Date</th>
-									</tr>
-						        </thead>
-						    </table>
-						</div> 
-	              	</div>
-	             </div>
-	              
-        		<%-- <s:form  action="buyFundAction" method="post" name="formBuyFundAction">
-  					<s:hidden id="fund-id-value" name="fundId"></s:hidden>
-  					<s:hidden id="folio-num-value" name="folioNum"></s:hidden>
-				</s:form>
-				
-				<s:form  action="stpCart" method="post" name="formAddToStpCartAction">
-  					<s:hidden id="fund-id-stp-value" name="stpFundId"></s:hidden>
-  					<s:hidden id="folio-num-stp-value" name="stpFolioNum"></s:hidden>
-  					<s:hidden id="cur-amount-stp-value" name="stpAmount"></s:hidden>
-				</s:form>
-				
-				<s:form  action="AddToRedCart" method="post" name="formAddToRedemptionCartAction">
-  					<s:hidden id="fund-id-redeem-value" name="redeemFundId"></s:hidden>
-  					<s:hidden id="folio-num-redeem-value" name="folioNum"></s:hidden>
-  					<s:hidden id="total-amount-redeem-value" name="totalAmount"></s:hidden>
-  					<s:hidden id="total-quantity-redeem-value" name="totalQuantity"></s:hidden>
-				</s:form> --%>
-				
-				
-	              <!-- Added Table for SIP - end  -->
+			  	<div id="activeSipPane" class="container tab-pane">
+			  		<!-- Sip Summary Table Start -->
+			  		
+                	<div class="row" style="padding: 0px; margin: 20px 2px 20px 2px;">
+	             		<div class="col-md-12 col-xs-12 g-full-width--xs g-margin-b-10--xs g-bg-color--white g-box-shadow__dark-lightest-v4" >
+	             			<div class="g-text-center--xs g-margin-b-10--xs">
+	                    		<h3 class="g-font-size-16--xs g-font-size-26--md g-font-family--playfair g-letter-spacing--1 g-color--primary font-weight-bold">
+	                    			Active SIP's
+	                   			</h3>
+	                		</div> 
+					     	<div class=" g-text-center--xs table-responsive">
+								<table id="sipTable" class="table-bordered" cellspacing="0" width="100%">
+							        <thead class="text-center">
+							            <tr class="g-bg-color--primary g-font-size-10--xs g-font-size-14--lg g-color--white">
+											<th class="text-center " style="padding: 0px;">Sl. no.</th>
+											<th class="text-center"  style="padding: 0px;">Fund Name</th>
+											<th class="text-center"  style="padding: 0px;">Folio Num</th>
+											<th class="text-center"  style="padding: 0px;">Fund Category</th>
+											<th class="text-center add-comma"  style="padding: 0px;">SIP Amount</th>
+											<th class="text-center"  style="padding: 0px;">SIP Debit Date</th>
+										</tr>
+							        </thead>
+							    </table>
+							</div> 
+		              	</div>
+	             	</div>
 						  	
-						  	</div>
+			  	</div>
 						  	
 						  	<div id="activeStpPane" class="container tab-pane">
 						  		<!-- Stp Summary Table Start -->
@@ -754,7 +725,29 @@
 	 <script>
 		
 		$(document).ready(function() {
-		    TUTORIAL_SAVVY.initChart()
+		    TUTORIAL_SAVVY.initChart();
+
+		    $('#activeSipTable').click(function(){
+		    	TUTORIAL_SAVVY.initSip();
+		    	
+		    });
+		    $('#activeStpTable').click(function(){
+		    	TUTORIAL_SAVVY.initStp();
+		    	
+		    });
+		    $('#tranHistoryTable').click(function(){
+		    	TUTORIAL_SAVVY.initHistory();
+		    	
+		    });
+		    $('#pendingOrderTable').click(function(){
+		    	TUTORIAL_SAVVY.initPending();
+		    	
+		    });
+		    $('#oldPortTable').click(function(){
+		    	TUTORIAL_SAVVY.initOldData();
+		    	
+		    });
+			
 		} );
 		
 		var customerName;
@@ -790,24 +783,54 @@
 				  		$("#tot-grwth-amt").html(totalGrwthAmt);
 				  		
 				  		TUTORIAL_SAVVY.createPortfolioDataArray(portfolioData);
-				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
-				  		TUTORIAL_SAVVY.createOldPortfolioDataArray(oldPortfolioData);
-				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
-				  		TUTORIAL_SAVVY.createStpDataArray(stpData);
-				  		TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData);
+				  		/* TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData); */
+				  		/* TUTORIAL_SAVVY.createOldPortfolioDataArray(oldPortfolioData); */
+				  		/* TUTORIAL_SAVVY.createSipDataArray(sipData); */
+				  		/* TUTORIAL_SAVVY.createStpDataArray(stpData); */
+				  		/* TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData); */
 				  		
 						//barChartData 		= TUTORIAL_SAVVY.createBarChartData(portfolioDataArray);
 					    //BarChartObj 		= TUTORIAL_SAVVY.renderBarChart(barChartData);
 					    //DoughnutChartData 	= TUTORIAL_SAVVY.createDoughnutChartData(portfolioDataArray);
 					    //DoughnutChartObj 	= TUTORIAL_SAVVY.renderDoughnutChart(DoughnutChartData);
 					    portfolioTable   	= TUTORIAL_SAVVY.loadPortfoliodata();
-					    pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData();
-					    pendingOrdersTable   = TUTORIAL_SAVVY.loadOldPortfolioData();
-					    sipTable   			= TUTORIAL_SAVVY.loadSipdata();
-					    stpTable   			= TUTORIAL_SAVVY.loadStpdata();
-					    transctionhistoryTable = TUTORIAL_SAVVY.loadTransctionhistoryData();
+					    /* pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData(); */
+					    /* pendingOrdersTable   = TUTORIAL_SAVVY.loadOldPortfolioData(); */
+					    /* sipTable   			= TUTORIAL_SAVVY.loadSipdata(); */
+					    /* stpTable   			= TUTORIAL_SAVVY.loadStpdata(); */
+					    /* transctionhistoryTable = TUTORIAL_SAVVY.loadTransctionhistoryData(); */
 
 				  },
+				  
+				  	initSip : function() {
+				  		TUTORIAL_SAVVY.loadActiveSipData();
+				  		TUTORIAL_SAVVY.createSipDataArray(sipData);
+				  		sipTable  = TUTORIAL_SAVVY.loadSipdata();
+				  	},
+				  	
+				  	initStp : function() {
+				  		TUTORIAL_SAVVY.loadActiveStpData();
+				  		TUTORIAL_SAVVY.createStpDataArray(stpData);
+				  		stpTable = TUTORIAL_SAVVY.loadStpdata();
+				  	},
+				  	
+				  	initHistory : function() {
+				  		TUTORIAL_SAVVY.loadTranHistoryData();
+				  		TUTORIAL_SAVVY.createTransctionhistoryDataArray(allFundsInvestmentDetailsData);
+				  		transctionhistoryTable = TUTORIAL_SAVVY.loadTransctionhistoryData();
+				  	},
+				  	
+				  	initPending : function() {
+				  		TUTORIAL_SAVVY.loadPendingData();
+				  		TUTORIAL_SAVVY.createPendingOrderDataArray(pendingOrderData);
+				  		pendingOrdersTable   = TUTORIAL_SAVVY.loadPendingOrdersData();
+				  	},
+				  	
+				  	initOldData : function() {
+				  		TUTORIAL_SAVVY.loadOldData();
+				  		TUTORIAL_SAVVY.createOldPortfolioDataArray(oldPortfolioData);
+				  		pendingOrdersTable   = TUTORIAL_SAVVY.loadOldPortfolioData();
+				  	},
 				  
 				  addCommas : function ( num ) {
 	  	        		var parts = num.toString().split(".");
@@ -867,6 +890,7 @@
 				  {
 					 var table =  $('#sipTable').DataTable( {
 					    	data: sipDataArray,
+					    	retrieve: true,
 					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
@@ -930,6 +954,7 @@
 				  {
 					 var table =  $('#stpTable').DataTable( {
 					    	data: stpDataArray,
+					    	retrieve: true,
 					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
@@ -997,6 +1022,7 @@
 						 
 						 
 					    	data: transctionhistoryDataArray,
+					    	retrieve: true,
 					    	"paging":   true,
 					        "ordering": true,
 					        "info":     false,
@@ -1073,6 +1099,7 @@
 					 var table =  $('#portfoliosummary').DataTable( {
 						 
 					    	data: portfolioDataArray,
+					    	retrieve: true,
 					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
@@ -1279,6 +1306,7 @@
 				  {
 					 var table =  $('#pendingOrders').DataTable( {
 					    	data: pendingOrderDataArray,
+					    	retrieve: true,
 					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
@@ -1367,6 +1395,7 @@
 					 var table =  $('#oldPortfolio').DataTable( {
 						 
 					    	data: oldPortfolioDataArray,
+					    	retrieve: true,
 					    	"paging":   false,
 					        "ordering": false,
 					        "info":     false,
@@ -1540,11 +1569,59 @@
 							totalInvAmt = jsonResponse.totalInvestedAmount;
 							totalProAmt = jsonResponse.totalProfitAmount;
 							portfolioData  = jsonResponse.portfolioDataModel;
-							pendingOrderData = jsonResponse.pendingOrderDataModel;
-							oldPortfolioData = jsonResponse.oldPortfolioDataModel;
-							sipData = jsonResponse.sipDataModel;
+							/* pendingOrderData = jsonResponse.pendingOrderDataModel;
+							oldPortfolioData = jsonResponse.oldPortfolioDataModel; */
+							/* sipData = jsonResponse.sipDataModel; */
 							stpData = jsonResponse.stpDataModel;
 							/* investmentDetailData = jsonResponse.investmentDetailsDataModel; */
+							/* allFundsInvestmentDetailsData = jsonResponse.allFundsInvestmentDetailsDataModel; */
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
+				});
+				
+		  },
+		  
+		  loadActiveSipData : function(){
+				$.ajax({
+						async: false,
+						url: "portfolioSipDataAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							
+							sipData = jsonResponse.sipDataModel;
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
+				});
+				
+		  },
+		  
+		  loadActiveStpData : function(){
+				$.ajax({
+						async: false,
+						url: "portfolioStpDataAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							
+							stpData = jsonResponse.stpDataModel;
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
+				});
+				
+		  },
+		  
+		  loadTranHistoryData : function(){
+				$.ajax({
+						async: false,
+						url: "portfolioHistoryDataAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							
 							allFundsInvestmentDetailsData = jsonResponse.allFundsInvestmentDetailsDataModel;
 						},
 						error : function()  {
@@ -1554,7 +1631,37 @@
 				
 		  },
 		  
+		  loadPendingData : function(){
+				$.ajax({
+						async: false,
+						url: "portfolioPendingDataAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							
+							pendingOrderData = jsonResponse.pendingOrderDataModel;
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
+				});
+				
+		  },
 		  
+		  loadOldData : function(){
+				$.ajax({
+						async: false,
+						url: "oldPortfolioDataAction",
+						dataType:"json",
+						success: function(jsonResponse){
+							
+							oldPortfolioData = jsonResponse.oldPortfolioDataModel;
+						},
+						error : function()  {
+				        	window.location='errorPage';
+				        }
+				});
+				
+		  },
 		  
 		  /*Crate the custom Object with the data*/
 		  createBarChartData : function(jsonData)
@@ -1691,12 +1798,12 @@
 		document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
-			       /* document.getElementById('contents').style.visibility="hidden"; */
+			       document.getElementById('contents').style.visibility="hidden";
 			  } else if (state == 'complete') {
 			      setTimeout(function(){
 			         document.getElementById('interactive');
 			         document.getElementById('load').style.visibility="hidden";
-			         /* document.getElementById('contents').style.visibility="visible"; */
+			         document.getElementById('contents').style.visibility="visible"; 
 			      },1000);
 			  }
 			}

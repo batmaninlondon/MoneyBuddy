@@ -20,6 +20,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Home</title>
         <meta name="keywords" content="HTML5 Theme" />
+        <meta http-equiv="Cache-control" content="max-age=2592000, public">
         <meta name="description" content="MoneyBuddy - Effortless Investing">
         <meta name="author" content=moneybuddy.in>
 
@@ -187,7 +188,7 @@
 
     <!-- Body -->
     <body >
-    <div id="load" class="load"></div>
+    <!-- <div id="load" class="load"></div> -->
 	<div id="content" >
 <!--========== HEADER ==========-->
                <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -1019,7 +1020,7 @@
        
 	</div>
     </body>
-      <script>
+      <%-- <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -1033,7 +1034,7 @@
 			  }
 			}
          
-         </script>
+         </script> --%>
          
 <%--      <script>
        function onSubmit(token) {

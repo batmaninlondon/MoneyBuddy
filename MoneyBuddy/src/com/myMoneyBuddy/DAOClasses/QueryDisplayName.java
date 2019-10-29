@@ -24,6 +24,7 @@ public class QueryDisplayName {
 		bankNames.put("YBK","YBT");
 		bankNames.put("RBL","RB");
 		bankNames.put("DCB","DCB");
+		bankNames.put("DEN","DEN");
 		
 		String displayBankName = bankNames.get(bankName);
 		System.out.println("displayBankName is displayBankName is : "+displayBankName);

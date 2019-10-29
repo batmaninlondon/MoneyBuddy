@@ -36,20 +36,30 @@ public class UploadCustomerNav {
 		Query query ;
 		
 		
-		query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType,t.transactionDetailId "
-								+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
-								+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.bseOrderId= :bseOrderId and t.bseRegistrationNumber= :bseRegistrationNumber ");
+		
 		
 		if ("0".equals(bseRegNum))  {
+			
+			query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType,t.transactionDetailId "
+					+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
+					+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.bseOrderId= :bseOrderId ");
+			
+			System.out.println(" bseRegNum is 0 "+bseRegNum);
 			query.setParameter("bseOrderId", bseOrderId);
-			query.setParameter("bseRegistrationNumber", null);
 		}
 		else {
-			query.setParameter("bseOrderId", null);
+			
+			System.out.println(" bseOrderId is :  "+bseOrderId+" and bseRegNumis :  "+bseRegNum);
+			query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType,t.transactionDetailId "
+					+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
+					+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.bseRegistrationNumber= :bseRegistrationNumber ");
+			
 			query.setParameter("bseRegistrationNumber", bseRegNum);
 		}
 		
 		List<Object[]> queryResult = query.list(); 
+		
+		System.out.println(" queryResult size is "+queryResult.size());
 		
 		String fundId = queryResult.get(0)[0].toString();
 		String panCard = queryResult.get(0)[1].toString();
@@ -94,36 +104,54 @@ public class UploadCustomerNav {
 		System.out.println(updateResult + " rows updated in transactionDetails table ");
 		hibernateSession.getTransaction().commit();	
 		
-		Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
-    	
-    	String emailId = customers.getEmailId();
-    	String customerName = customers.getCustomerName();
-    	
-    	SendMail sendMail = new SendMail();
-
-    	Properties configProperties = new Properties();
-		String configPropFilePath = "../../../config/config.properties";
-
-		configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
+		hibernateSession.beginTransaction();
 		
-		if ("UPFRONT".equals(transactionType))  {
- 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
-			System.out.println("mailLink is : "+mailLink);
+		query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionDetailId = :transactionDetailId");
+		query.setParameter("transactionDetailId", transactionDetailId );
+		String transactionId = query.uniqueResult().toString();
+	
+		hibernateSession.getTransaction().commit();
+		    
+		hibernateSession.beginTransaction();
+		
+		query = hibernateSession.createQuery("select count(*) from TransactionDetails where transactionId = :transactionId and transactionStatus != '8'");
+		query.setParameter("transactionId", transactionId );
+		String count = query.uniqueResult().toString();
+		
+		if ("0".equals(count))  {
+			
+		
+			Customers customers = new QueryCustomer().getCustomerFromCustomerId(customerId);
 	    	
-	    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
-
-	    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
-		}
-		else {
-			String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
-			System.out.println("mailLink is : "+mailLink);
+	    	String emailId = customers.getEmailId();
+	    	String customerName = customers.getCustomerName();
 	    	
-	    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
-
-	    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+	    	SendMail sendMail = new SendMail();
+	
+	    	Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+	
+			configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
+			
+			if ("UPFRONT".equals(transactionType))  {
+	 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
+				System.out.println("mailLink is : "+mailLink);
+		    	
+		    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
+	
+		    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			}
+			else {
+				String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
+				System.out.println("mailLink is : "+mailLink);
+		    	
+		    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
+	
+		    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			}
+	
+				logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - end");
 		}
-
-			logger.debug("UpdateCustomerCart class - deleteCustomerCartEntry method - customerId - "+customerId+" - end");
 
 		}
 		catch ( HibernateException e ) {

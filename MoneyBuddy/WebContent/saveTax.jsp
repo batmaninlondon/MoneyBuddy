@@ -7,6 +7,7 @@
 	    <meta name="description" content=""/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 	    <title>Save Tax | Money Buddy</title>
+	    <meta http-equiv="Cache-control" content="max-age=2592000, public">
 	    <!-- core CSS -->
 	    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" >
 		<link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
@@ -45,7 +46,7 @@
     </head>
 
     <body>
-	<div id="load" class="load"></div>
+	<!-- <div id="load" class="load"></div> -->
 	<div id="content">
     <!--========== HEADER ==========-->
                 <header class="navbar-fixed-top s-header-v2 js__header-sticky">
@@ -321,7 +322,7 @@
 
         <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
         <!-- Vendor -->
-        <script>
+        <%-- <script>
          document.onreadystatechange = function () {
 			  var state = document.readyState
 			  if (state == 'interactive') {
@@ -334,7 +335,7 @@
 			      },1000);
 			  }
 			}
-         </script>
+         </script> --%>
          
         <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>

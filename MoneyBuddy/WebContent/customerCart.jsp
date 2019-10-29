@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
-
+		<meta http-equiv="Cache-control" content="max-age=2592000, public">
         <!-- <link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
