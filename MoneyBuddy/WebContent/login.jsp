@@ -42,12 +42,18 @@
 	String siteKey = configProperties.getProperty("RECAPTHA_SITE_KEY");
 	
 	System.out.println("siteKey is : "+siteKey);
+	
+	String signInKey = configProperties.getProperty("GOOGLE_SIGN_IN_KEY");
+	
+	System.out.println("signInKey is : "+signInKey);
     
     %>
     
       var recaptchaRegister;
       var recaptchaForgotPswd;
       var recaptchaLogin;
+      var recaptchaGoogleLogin;
+      var recaptchaGoogleRegister;
       
       var myCallBack = function() {
 
@@ -71,6 +77,23 @@
             'size' : 'invisible',
             'callback' : submitLogin
           });
+      
+        //Render the recaptchaLogin on the element with ID "recaptcha-login"
+        recaptchaGoogleLogin = grecaptcha.render('recaptcha-google-login', {
+	                'sitekey' : '<%=siteKey%>',
+	                'size' : 'invisible',
+	                'callback' : verifyCallbackLogin
+	              });
+        
+        recaptchaGoogleRegister = grecaptcha.render('recaptcha-google-register', {
+            'sitekey' : '<%=siteKey%>',
+            'size' : 'invisible',
+            'callback' : verifyCallbackRegister
+          });
+        
+        document.getElementById('recaptcha-google-login').click();
+        document.getElementById('recaptcha-google-register').click();
+        
       };
      
     </script>
@@ -78,15 +101,156 @@
   <title>Login/SignUp</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Google Sign In Code Integration - Begin -->
+  
+  <meta name="google-signin-client_id" content="<%=signInKey%>">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  <!-- Google Sign In Code Integration - End -->
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style4.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> --%>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  
  
+ <script type="text/javascript">
+ 
+ var clickedLogin=false;//Global Variable
+ var clickedRegister=false;//Global Variable
+ var tokenResLogin="notSet";//Global Variable 
+ var tokenResRegister="notSet";//Global Variable 
+ 
+ function verifyCallbackLogin( googleResponse ) {
+	 tokenResLogin = googleResponse;
+    
+};
+
+function verifyCallbackRegister( googleResponse ) {
+	tokenResRegister = googleResponse;
+   
+};
+
+
+ function ClickLogin()
+ {
+	 this.clickedLogin=true;
+	 
+ }
+ 
+ function ClickRegister()
+ {
+	 this.clickedRegister=true;
+	 
+ }
+            function init() {
+            	
+            	/* alert("init callled !! "); */
+            	
+            	/* document.getElementById('recaptcha-google-login').click();
+        		
+        		alert("onSignIn : tokenRes is : "+tokenRes); */
+            	
+            	/* document.getElementById('recaptcha-google-login').click(); */
+            	
+            	/* alert( " button clicked from inside the init call !!! "); */
+            	
+            	
+               /*  gapi.load('auth2', function() {
+                    auth2 = gapi.auth2.init({
+                        client_id: '1430357134-g37k6g153rvmu7mlkib4erd0tv3edfmb.apps.googleusercontent.com',
+                        fetch_basic_profile: false,
+                        scope: 'profile'
+                    }); */
+                    
+                    /* gapi.signin2.render("g-signin-btn", {
+                            scope: 'email',
+                            width: 200,
+                            height: 50,
+                            longtitle: false,
+                            theme: 'dark',
+                            onfailure: null
+                        }); */
+              /*   }); */
+                
+                
+            }
+            function onSignInLogin(googleUser) {
+            	
+            	if (clickedLogin) {
+            	var profile = googleUser.getBasicProfile();
+          		
+          		document.getElementById("email-id-login-1").value = profile.getEmail();
+       		  	document.getElementById("google-login-1").value = "GoogleLogin";
+       		 	document.getElementById("google-response-login-1").value = tokenResLogin; 
+     		  	document.formGoogleLogin.submit();
+            	}
+     		  
+            }
+            
+			function onSignInRegister(googleUser) {
+            	
+            	if (clickedRegister) {
+            	
+            	var profile = googleUser.getBasicProfile();
+          		
+          		document.getElementById("registration-email-id-1").value = profile.getEmail();
+       		  	document.getElementById("google-register-1").value = "GoogleLogin";
+       		 	document.getElementById("google-response-register-1").value = tokenResRegister; 
+     		  
+     		  	document.formGoogleRegister.submit();
+            	}
+     		  
+            }
+            
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log("on sign out");
+                    setMessage("User signed out");
+                    setProfileImage(null);
+                });
+            }
+            function disconnect() {
+                console.log("on disconnect");
+                var auth2 = gapi.auth2.getAuthInstance();
+                if (!auth2.isSignedIn.get()) {
+                    setMessage("Not signed in, cannot disconnect");
+                    return;
+                }
+                auth2.disconnect();
+                setProfileImage(null);
+                setMessage("Disconnected");
+            }
+            function setMessage(message) {
+                document.getElementById("message").value = message;
+            }
+            function setProfileImage(srcUrl) {
+                var element = document.getElementById("profileImage");
+                if (srcUrl == null) {
+                    element.style.display = "none";
+                    element.src = "";
+                } else {
+                    element.style.display = "block";
+                    element.src = srcUrl;
+                }
+            }
+        </script>
+ 
+ <style>
+ 
+.g-signin2{
+  width: 100%;
+}
+
+.g-signin2 > div{
+  margin: 0 auto;
+}
+    
+  </style>
 </head>
-<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;" >
+<body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;"  onload="init()" >
 	<!-- <div id="load" class="load"></div> -->
 	<div id="content">
 	
@@ -99,13 +263,14 @@
 	
 
 	<!--========== PROMO BLOCK ==========-->
-		<div class="g-fullheight--xs g-bg-position--center swiper-slide " >
+			
+			<div class="g-fullheight--xs g-bg-position--center swiper-slide " >
 		
 		<div class="row" >
 				<div class="col-md-3"></div>
 				<div class="col-md-5 g-color--white text-center g-font-size-24--xs g-font-family--playfair g-margin-l-60--md">
 					
-						<s:iterator value="actionMessages">
+					<s:iterator value="actionMessages">
             				<span class="actionMessage">
                 				<s:property />
             				</span>
@@ -144,13 +309,19 @@
 				    	<%
 				    }
 				%>
-          <h1 class="g-font-size-15--xs g-font-size-30--lg g-margin-t-o-10--xs g-margin-t-o-0--lg ">Welcome Back!</h1>
-          <p id="loginMessage"></p>
+			<!-- <div class="g-signin2 " data-onsuccess="onSignIn"  data-width="530" data-height="40" data-longtitle="true">
+			</div> -->
+			 <!-- <div id="g-signin-btn" onclick="ClickLogin()" class="g-recaptcha" ></div> --> 
+			<!-- <div id="g-signin-btn" onclick="ClickLogin()" id="recaptcha-login" class="g-recaptcha button button-block g-font-size-20--xs g-font-size-30--lg"></div> -->
+          <!-- <h1 class="g-font-size-15--xs g-font-size-30--lg g-margin-t-o-10--xs g-margin-t-o-0--lg ">Welcome Back!</h1> -->
+         
+			
+			<p id="loginMessage" ></p>
          <!--  <div> -->
           
           <div class="field-wrap   g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <s:fielderror fieldName="emailIdLogin" class="g-color--red" />
-            <%
+             <%
             String userNa = (String) request.getSession().getAttribute("name");
             System.out.println(" userNa: "+userNa);
             
@@ -159,7 +330,7 @@
 				
 			%>
 			<s:set var="uName" ><%=userNa %></s:set>
-  			<s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address" 
+  			<s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address"
   					 value="%{#uName}" />
             
             <%
@@ -167,7 +338,7 @@
 			else 
 			{
             %>
-            <s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address" />
+            <s:textfield class="form-control" name="emailIdLogin" placeholder="Email Address"  id="email-id-login"/>
             <%
             }
             %>
@@ -175,7 +346,7 @@
           
           <div class="field-wrap g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <s:fielderror fieldName="passwordLogin" class="g-color--red" />
-  			<s:password class="form-control" name="passwordLogin" placeholder="Password" />
+  			<s:password class="form-control" name="passwordLogin" placeholder="Password"  id="password-login"/>
           </div>
           
           <p class="forgot"><button type="button" class=" g-bg-color--primary g-color--white g-font-size-10--xs g-font-size-15--lg"  data-toggle="modal" data-target="#myModal">Forgot Password?</button></p>
@@ -186,11 +357,39 @@
   </div>
   
   	<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
+  	<s:hidden id="google-login" name="googleLogin"></s:hidden>
           <div>
           	
         	<s:submit id="recaptcha-login" class="g-recaptcha button button-block g-font-size-20--xs g-font-size-30--lg" value="Sign In"  />
            </div>
+          <%--  <s:hidden id="email-id-login" name="emailIdLogin"></s:hidden>
+  				<s:hidden id="google-response-login" name="googleResponseLogin"></s:hidden>
+  				<s:hidden id="google-login" name="googleLogin"></s:hidden>
+  				<div>
+          	
+        	<s:submit id="recaptcha-login" class="g-recaptcha button button-block g-font-size-20--xs g-font-size-30--lg" value="Sign In"  />
+           </div> --%>
           </s:form>
+          
+          
+          <s:form  action="newLoginAction" method="post" name="formGoogleLogin" namespace="/"  autocomplete="off"   >
+           		
+           		<s:hidden id="email-id-login-1" name="emailIdLogin"></s:hidden>
+  				<s:hidden id="google-response-login-1" name="googleResponseLogin"></s:hidden>
+  				<s:hidden id="google-login-1" name="googleLogin"></s:hidden>
+  				<br/>
+  				<div  class="g-signin2 "   data-onsuccess="onSignInLogin" data-width="300"
+  					data-height="40" data-longtitle="false" data-theme="dark"   onclick="ClickLogin()">
+  				<!-- <div id="g-signin-btn" onclick="ClickLogin()"  > -->
+  				</div>
+  				<div class="hidden">
+           		<s:submit class="g-recaptcha " id="recaptcha-google-login" style="display:none;"  />
+           		</div>
+           		
+           </s:form>
+           
+           
+           
     </div>
     <div id="signup" class="container tab-pane fade"><br>
                <s:form  action="register" method="post" name="formRegister" namespace="/" >
@@ -200,10 +399,10 @@
   			<s:textfield class="form-control"  name="emailIdRegister"  autocomplete="false" placeholder="Email Address"/>
           </div>
           
-          <div id="registration-mobile-number" class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
+         <%--  <div id="registration-mobile-number" class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <s:fielderror fieldName="mobileNumberRegister" class="g-color--red" />
   			<s:textfield class="form-control"  name="mobileNumberRegister" autocomplete="off" placeholder="Mobile Number"/>
-          </div>
+          </div> --%>
            <div id="registration-password" class="field-wrap  g-margin-t-o-10--xs g-margin-t-o-0--lg">
             <s:fielderror fieldName="passwordRegister" class="g-color--red" />
   			<s:password class="form-control"  name="passwordRegister" autocomplete="off" placeholder="Create Password"/>
@@ -212,10 +411,30 @@
           
           <s:submit id="recaptcha-register" class="g-recaptcha button button-block  g-font-size-20--xs g-font-size-30--lg" value="Create Account"  />
           
-			<br/><p class="text-center"><span class=" g-font-size-12--xs g-font-size-15--lg  g-color--white-opacity-light">By continuing you agree to our <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-12--xs g-font-size-15--lg g-color--primary" href="privacyPolicy">Privacy Policy</a></span></p>
-			<p class=" g-font-size-10--xs g-font-size-12--lg g-margin-t-o-10--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and SEBI registered </p>
-          	               
+			              
           </s:form>
+          
+          <s:form  action="newLoginAction" method="post" name="formGoogleRegister" namespace="/"  autocomplete="off"   >
+           		
+           		<s:hidden id="registration-email-id-1" name="emailIdLogin"></s:hidden>
+  				<s:hidden id="google-response-register-1" name="googleResponseLogin"></s:hidden>
+  				<s:hidden id="google-register-1" name="googleLogin"></s:hidden>
+  				<br/>
+  				<div  class="g-signin2 "   data-onsuccess="onSignInRegister" data-width="300"
+  					data-height="40" data-longtitle="false" data-theme="dark"   onclick="ClickRegister()">
+  				<!-- <div id="g-signin-btn" onclick="ClickLogin()"  > -->
+  				</div>
+  				<div class="hidden">
+           		<s:submit class="g-recaptcha " id="recaptcha-google-register" style="display:none;"  />
+           		</div>
+           		
+           </s:form>
+           
+           <br/><p class="text-center"><span class=" g-font-size-12--xs g-font-size-15--lg  g-color--white-opacity-light">By continuing you agree to our <a class=" g-color--primary" href="terms">Terms &amp; Conditions</a> & <a class="g-font-size-12--xs g-font-size-15--lg g-color--primary" href="privacyPolicy">Privacy Policy</a></span></p>
+			<p class=" g-font-size-10--xs g-font-size-12--lg g-margin-t-o-10--xs g-color--white-opacity-light text-center"> <i class="  glyphicon glyphicon-lock"></i> &nbsp;Secure and SEBI registered </p>
+          	 
+           
+           
     </div>
     
               <div class="modal fade" id="myModal" >

@@ -21,6 +21,7 @@ import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomer;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerDetails;
+import com.myMoneyBuddy.DAOClasses.UpdateNriCustomerDetails;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.ndml.kra.pan.webservice.service.PANServiceImpl;
 import com.ndml.kra.pan.webservice.service.PANServiceImplService;
@@ -33,6 +34,7 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	
 	private String panCard;
 	private String customerName;
+	private String mobileNumber;
 	private String gender;
 	private String occupation;
 	private String dateOfBirth;
@@ -48,11 +50,21 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
     private String residentialPin;
     private String residentialCountry;
     
+    private String addressLineOneNri;
+	private String addressLineTwoNri;
+	private String addressLineThreeNri;
+	private String residentialCityNri;
+    private String residentialStateNri;
+    private String residentialPinNri;
+    private String residentialCountryNri;
+	private String mobileNumberNri;
+    
     private String placeOfBirth;
 	private String countryOfBirth;
 	private String taxResidency;
 	private String incomeSlab;
     private String politicallyExposed;
+    private String taxIdentificationNumber;
     
     private String bankName;
     private String accountType;
@@ -122,8 +134,9 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 			
 			// KYC API CALL - END
 			
+			InsertCustomerDetails insertCustomerDetails = new InsertCustomerDetails();
+			insertCustomerDetails.updateMobileNum(getMobileNumber(), customerId);
 			
-	    	
 	    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 		    String dob = getDateOfBirth().substring(6)+"-"+getDateOfBirth().substring(3,5)+"-"+getDateOfBirth().substring(0,2);
@@ -139,6 +152,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 					getResidentialCity(), getResidentialState(), getResidentialCountry(), getResidentialPin(), getTaxStatus(), getGender(), getOccupation(),
 					getNomineeName(), getNomineeRelationship(),getPlaceOfBirth(),getCountryOfBirth(),getTaxResidency(),getIncomeSlab(),getPoliticallyExposed());
 	    	
+			if ( !"Individual".equalsIgnoreCase(getTaxStatus()))   {
+			UpdateNriCustomerDetails updateNriCustomerDetails = new UpdateNriCustomerDetails();
+			updateNriCustomerDetails.updateNriCustomerDetails(customerId, getMobileNumberNri(), getAddressLineOneNri(), getAddressLineTwoNri(),
+					getAddressLineThreeNri(),getResidentialCityNri(), getResidentialStateNri(), getResidentialCountryNri(), getResidentialPinNri(),
+					getTaxIdentificationNumber());
+			}
+	    	
+			
 			UpdateCustomer updateCustomer = new UpdateCustomer();	
 			updateCustomer.updateCustomerData(customerId, getPanCard(), kycStatus,getCustomerName(), "Y");
 	    	 
@@ -158,13 +179,24 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	    		
 	    		QueryCustomer queryCustomer = new QueryCustomer();
 	    		String cusEmailId = queryCustomer.getCustomerEmailId(customerId);
-	    		String cusMobileNum = queryCustomer.getCustomerMobileNumber(cusEmailId);
-		    	String ucc = trading.createClient(CLIENT_HOLDING, getTaxStatus(), getOccupation(), getDateOfBirth(),
-		    			getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
-		    			getAddressLineOne()+" "+getAddressLineTwo()+" "+getAddressLineThree(), getResidentialCity(), 
-		    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
-					customerId, getCustomerName(), cusEmailId, getPanCard(), getNomineeName(),getNomineeRelationship(), cusMobileNum);
-			
+	    		String ucc = "";
+	    		if ( "Individual".equalsIgnoreCase(getTaxStatus()))   {
+					ucc = trading.createClient(CLIENT_HOLDING, getTaxStatus(), getOccupation(), getDateOfBirth(),
+			    			getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
+			    			getAddressLineOne(),getAddressLineTwo(),getAddressLineThree(), getResidentialCity(), 
+			    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
+			    			customerId, getCustomerName(), cusEmailId, getPanCard(), getNomineeName(),getNomineeRelationship(), getMobileNumber(),
+			    			"","","","","","","","");
+	    		}
+	    		else {
+    				ucc = trading.createClient(CLIENT_HOLDING, getTaxStatus(), getOccupation(), getDateOfBirth(),
+			    			getGender(), "", getAccountType(), getAccountNumber(), getIfscCode(),
+			    			getAddressLineOne(),getAddressLineTwo(),getAddressLineThree(), getResidentialCity(), 
+			    			getResidentialState(), getResidentialPin(), getResidentialCountry(),
+							customerId, getCustomerName(), cusEmailId, getPanCard(), getNomineeName(),getNomineeRelationship(), getMobileNumber(),
+							getAddressLineOneNri(),getAddressLineTwoNri(),getAddressLineThreeNri(),getResidentialCityNri(),getResidentialStateNri(),
+							getResidentialPinNri(),getResidentialCountryNri(),getMobileNumberNri());
+	    		}
 		    	String[] uccSpilts = ucc.split("\\|");
 		    	
 		    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
@@ -174,10 +206,19 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    		if(uccSpilts[1].contains("SUCCESSFULLY") ) {
 			    		updateCustomer.updateBseClientCreationStatus(customerId, "Y");
 		    		}
+		    		else {
+		    			return ERROR;
+		    		}
 		    		
 		    	}
+		    	else {
+	    			return ERROR;
+	    		}
 		    	
-		    	trading.fatcaUpload(customerId);
+		    	boolean fatcaCreated = trading.fatcaUpload(customerId);
+		    	
+		    	if ( !fatcaCreated)
+		    		return ERROR;
 	    	
 		    	
 		    	// Generate Mandate Id block - START
@@ -191,10 +232,14 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 		    	System.out.println("mandateIdResponseSpilts[1] : "+mandateIdResponseSpilts[1]);
 		    	System.out.println("mandateIdResponseSpilts[2] : "+mandateIdResponseSpilts[2]);
 		    	
-		    	String mandateId = mandateIdResponseSpilts[2];
+		    	if(mandateIdResponseSpilts[0].equals("100") ) {
+			    	String mandateId = mandateIdResponseSpilts[2];
+			    	
+			    	insertCustomerDetails.updateMandateId(mandateId, customerId);
+		    	}
+		    	else 
+		    		return ERROR;
 		    	
-		    	InsertCustomerDetails insertCustomerDetails = new InsertCustomerDetails();
-		    	insertCustomerDetails.updateMandateId(mandateId, customerId);
 		    	}
 		    	// Generate Mandate Id block - END
 		    	
@@ -240,6 +285,15 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
 
 	public String getGender() {
 		return gender;
@@ -446,6 +500,96 @@ public class KycCheckAction extends ActionSupport  implements SessionAware{
 
 	public void setPoliticallyExposed(String politicallyExposed) {
 		this.politicallyExposed = politicallyExposed;
+	}
+
+
+	public String getAddressLineOneNri() {
+		return addressLineOneNri;
+	}
+
+
+	public void setAddressLineOneNri(String addressLineOneNri) {
+		this.addressLineOneNri = addressLineOneNri;
+	}
+
+
+	public String getAddressLineTwoNri() {
+		return addressLineTwoNri;
+	}
+
+
+	public void setAddressLineTwoNri(String addressLineTwoNri) {
+		this.addressLineTwoNri = addressLineTwoNri;
+	}
+
+
+	public String getAddressLineThreeNri() {
+		return addressLineThreeNri;
+	}
+
+
+	public void setAddressLineThreeNri(String addressLineThreeNri) {
+		this.addressLineThreeNri = addressLineThreeNri;
+	}
+
+
+	public String getResidentialCityNri() {
+		return residentialCityNri;
+	}
+
+
+	public void setResidentialCityNri(String residentialCityNri) {
+		this.residentialCityNri = residentialCityNri;
+	}
+
+
+	public String getResidentialStateNri() {
+		return residentialStateNri;
+	}
+
+
+	public void setResidentialStateNri(String residentialStateNri) {
+		this.residentialStateNri = residentialStateNri;
+	}
+
+
+	public String getResidentialPinNri() {
+		return residentialPinNri;
+	}
+
+
+	public void setResidentialPinNri(String residentialPinNri) {
+		this.residentialPinNri = residentialPinNri;
+	}
+
+
+	public String getResidentialCountryNri() {
+		return residentialCountryNri;
+	}
+
+
+	public void setResidentialCountryNri(String residentialCountryNri) {
+		this.residentialCountryNri = residentialCountryNri;
+	}
+
+
+	public String getMobileNumberNri() {
+		return mobileNumberNri;
+	}
+
+
+	public void setMobileNumberNri(String mobileNumberNri) {
+		this.mobileNumberNri = mobileNumberNri;
+	}
+
+
+	public String getTaxIdentificationNumber() {
+		return taxIdentificationNumber;
+	}
+
+
+	public void setTaxIdentificationNumber(String taxIdentificationNumber) {
+		this.taxIdentificationNumber = taxIdentificationNumber;
 	}
 
 

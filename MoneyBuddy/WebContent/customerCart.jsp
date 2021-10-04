@@ -10,7 +10,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>MoneyBuddy - Top Performing Mutual Funds</title>
 		<meta http-equiv="Cache-control" content="max-age=2592000, public">
-        <!-- <link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -40,11 +40,6 @@
 		<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen">
 		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> --%>
         
-        
-
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> -->
-        <!-- <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
         <!-- <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
         
         
@@ -156,6 +151,52 @@ input[type="range"] {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+	    /*custom font*/
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.snip1419 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+}
+.snip1419 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.snip1419 figcaption {
+  padding: 20px;
+}
+.snip1419 h3,
+.snip1419 p {
+  margin: 0;
+}
+.snip1419 h3 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.snip1419 p {
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: 400;
+} 
+
     </style>	
     
     
@@ -176,19 +217,26 @@ input[type="range"] {
     
     <script>
     
-    function checkUpfrontVal(minVal,maxVal, el)   {
+    function checkUpfrontVal(minVal,maxVal,multiplier, el)   {
     	
-    	
-        
-        
         if ($(el).val() < minVal){
-     	    alert('min value for the fund is : '+minVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+     	    alert('min value for this fund is : '+minVal);
      	    $(el).val(minVal);
      	  }
     	 else if ($(el).val() > maxVal){
-    		alert('max value for the fund is : '+maxVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
-      	    $(el).val(maxVal);
+    		alert('max value for this fund is : '+(maxVal - (maxVal%multiplier)));
+      	    $(el).val(maxVal - (maxVal%multiplier));
       	  }
+    	 else {
+    		 
+    		 var remainder = ($(el).val()) % multiplier;
+    		 
+    		 if (remainder != 0 )  {
+    			 alert (' Value has to be in the multiplier of '+multiplier+', hence changing the value to the possible multipler value ')
+    			 $(el).val(($(el).val())-remainder);
+    		 }
+     		 
+       	  }
 		
         var theTbl = document.getElementById("cartData"), sumUpfrontVal = 0;
         
@@ -212,11 +260,11 @@ input[type="range"] {
 		
         
    	 	if ($(el).val() < minVal){
-   			alert('min value for the fund is : '+minVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+   			alert('min value for this fund is : '+minVal);
     	    $(el).val(minVal);
     	  }
    	 	else if ($(el).val() > maxVal){
-   			alert('max value for the fund is : '+maxVal+'\n at Row '+ el.parentNode.parentNode.parentNode.rowIndex);
+   			alert('max value for this fund is : '+maxVal);
      	    $(el).val(maxVal);
      	  }
    	 	
@@ -238,19 +286,36 @@ input[type="range"] {
     
     function checkAmounts()  {
     	
+    	var tables = document.getElementsByTagName('table');
     	
+		for (var i=0; i<tables.length; i++)  {
+			var theTbl = tables[i];
+			
+   			var r = theTbl.rows[0];
+   			var inputs = r.getElementsByTagName("input");
+   			
+   			if (inputs[0].value == ""|| inputs[0].value ==  null)  {
+   	        	alert('value of amount can not be blank \n at Row '+(i+1));
+   	        	return false;
+   			}
+   		}
+
+/* 
+var table = tables[tables.length - 1];
+        
    		var theTbl = document.getElementById('cartData');
    		
+   		alert("theTbl.rows.length : "+theTbl.rows.length);
    		for (var i=1; i<theTbl.rows.length-1; i++)  {
    			
    			var r = theTbl.rows[i];
    			var inputs = r.getElementsByTagName("input");
-   			
+   			alert("inputs[0].value : "+inputs[0].value);
    			if (inputs[0].value == ""|| inputs[0].value ==  null)  {
    	        	alert('value of amount can not be blank \n at Row '+i);
    	        	return false;
    			}
-   		}
+   		} */
 
    		editCart('Redirect');
 
@@ -294,13 +359,15 @@ input[type="range"] {
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10   " >
 	    	<div class="profile">
-	    		 <h3 class="g-font-size-20--xs g-font-size-24--lg g-font-family--playfair g-letter-spacing--1  text-center font-weight-bold g-hor-divider__solid--white  "><b>Investment Cart</b></h3>
+	    		 <h3 class="g-font-size-20--xs g-font-size-24--lg g-font-family--playfair g-letter-spacing--1  text-center font-weight-bold g-hor-divider__solid--white  ">
+	    		 	<b><u>Investment Cart</u></b>
+    		 	</h3>
 	       	</div>
 	     </div>
 	     <div class="col-xs-1"></div>
 	</div>
 		
-	<div class="row g-margin-t-40--xs g-margin-b-0--xs g-margin-b-20--lg g-margin-l-5--xs g-margin-l-0--lg g-margin-r-10--xs g-margin-r-0--lg">
+	<div class="row g-margin-t-10--xs g-margin-b-0--xs g-margin-b-20--lg g-margin-l-5--xs g-margin-l-0--lg g-margin-r-10--xs g-margin-r-0--lg">
 		<div class="col-lg-1 col-xs-0"></div>
 		<div class="col-lg-10 col-xs-12 table-responsive " >
 
@@ -308,308 +375,256 @@ input[type="range"] {
 				  		<s:hidden id="return-type" name="returnType"></s:hidden>
 				  		<s:set var="anyUpfront" value="anyUpfrontOrder" />
 				  		<s:set var="anySip" value="anySipOrder" />
-				  	<table id="cartData" class="g-width-100-percent--xs " >
-						
-						<thead class="table-head g-font-size-10--xs g-font-size-14--lg g-bg-color--gray-light text-center" height="70" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-							<tr >
-								<th class="col-xs-3 text-center">Fund Name</th>
-								<th class="col-xs-1 text-center">Txn Type</th>
-								<th class="col-xs-1 text-center">Folio No.</th>
-								<s:if test="'TRUE'.equals(#anyUpfront) ">
-									<th class="col-xs-2 text-center">Lumpsum Amount<br/>(Rs.)</th>
-								</s:if>
-								<s:else>
-									<th class="col-xs-0 text-center hidden">Lumpsum Amount<br/>(Rs.)</th>
-								</s:else>
-								<s:if test="'TRUE'.equals(#anySip) ">
-									<th class="col-xs-2 text-center">SIP Amount<br/>(Rs/month)</th>
-									<th class="col-xs-1 text-center">SIP Tenure<br/>(in years)</th>
-									<th class="col-xs-1 text-center">SIP Debit Date</th>
-								</s:if>
-								<s:else>
-									<th class="col-xs-1 text-center hidden">SIP Amount<br/>(Rs/month)</th>
-									<th class="col-xs-1 text-center hidden">SIP Tenure<br/>(in years)</th>
-									<th class="col-xs-1 text-center hidden">SIP Debit Date</th>
-								</s:else>
-								<th class="col-xs-0 text-center hidden "></th>
-								<th class="col-xs-0 text-center hidden"></th>
-								<th class="col-xs-1 text-center"></th>
-								
-							</tr>
-						</thead>
-						<tbody class="table-body g-font-size-10--xs g-font-size-14--lg  text-center" style=" border-bottom: solid 0.5px #dbdbdb;border-top: solid 0.5px gray;">
-							<s:iterator value="#session.customerCartList" var="customerCartListElement" >
-								<tr >
-								    <s:if test="schemeName.equals('Total')">
-								    	<th class="col-xs-3 g-bg-color--gray-light" height="40">Total</th>
-								    	<th class="col-xs-1 g-bg-color--gray-light"></th>
-										<th class="col-xs-1 g-bg-color--gray-light"></th>
-										<s:if test="'TRUE'.equals(#anyUpfront) ">
-											<th class="col-xs-2 g-bg-color--gray-light"><b><span class="title " >&#8377; &ensp; </span><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.upfrontAmount]})}"/></b></th>
-										</s:if>
-										<s:else>
-											<th class="col-xs-0 g-bg-color--gray-light hidden"></th>
-										</s:else>
-										<s:if test="'TRUE'.equals(#anySip) ">
-											<th class="col-xs-2 g-bg-color--gray-light"><b><span class="title " >&#8377; &ensp; </span><s:property value="%{getText('{0,number,#,##0}',{#attr[#customerCartListElement.sipAmount]})}"/></b></th>
-											<th class="col-xs-1 g-bg-color--gray-light"></th>
-											<th class="col-xs-1 g-bg-color--gray-light"></th>
-										</s:if>
-										<s:else>
-											<th class="col-xs-1 g-bg-color--gray-light hidden"></th>
-											<th class="col-xs-1 g-bg-color--gray-light hidden"></th>
-											<th class="col-xs-1 g-bg-color--gray-light hidden"></th>
-										</s:else>
-										<th class="col-xs-0 g-bg-color--gray-light hidden"></th>
-										<th class="col-xs-0 g-bg-color--gray-light hidden"></th>
-										<th class="col-xs-1 g-bg-color--gray-light"></th>
-								    </s:if>
-									<s:else>
-								    	<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
-								    	<s:set var="folios" value="#customerCartListElement.folioNumList" />
-								    	<s:set var="selFolio" value="#customerCartListElement.folioNumber" />
-								    	<td class="text-left"height="70" ><s:property value="#customerCartListElement.schemeName"/></td>
-								    	<td><s:property value="#customerCartListElement.transactionType"/></td>
-								    	<td>
-											<%
-											 	
-												System.out.println("FolioNumList is : "+pageContext.getAttribute("folios"));
-										    	String arr1= (String) pageContext.getAttribute("folios"); 
-										    	String selFol= (String) pageContext.getAttribute("selFolio"); 
-										    	System.out.println("arr1 : "+arr1);
-										    	
-										    	if ( arr1 == null)  {
-										    		arr1 = "New";
-										    	}
-										    		String[] a = arr1.split(":");
-										    	
-										    		System.out.println("a length : "+a.length);
-										    	
-										    	
-										    	 /* if (a.length != 1)  { */
-									    		 %>
-												<select name="folioNumArr" class="text-center g-width-60--xs g-width-90--lg" id="selectFolioNum"  > 
-												    
-												    <% 
-												    
-												    if (a.length != 0)
-												    {
-												    	for(int i=0;i<a.length;i++){ 
-												        String fol= (String)a[i]; 
-												        if (fol.equals(selFol))   {%> 
-												        <option value="<%=fol%>" selected="selected" > <%=fol%> 
-												        </option>
-												        <%}
-												        else {
-												        %>
-												        <option value="<%=fol%>" > <%=fol%> 
-												        </option>
-												        <%}}}%> 
-												</select>
-												
-										</td>
-								    	
-										<s:if test="transactionType.equals('UPFRONT')">
-										
-										<td>
-									 		<p class="title " >
-												<s:if test="upfrontAmount == 0 ">
-													<input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg "
-														placeholder="Amount"
-														onblur="checkUpfrontVal(<s:property value="#customerCartListElement.minUpfrontAmount"/>,999999,this);"
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-												</s:if>
-												<s:else>
-													<input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg"
-														value=<s:property value="#customerCartListElement.upfrontAmount"/>
-														onblur="checkUpfrontVal(<s:property value="#customerCartListElement.minUpfrontAmount"/>,999999,this);"
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-												</s:else>
-												
-											</p>	
-										</td>
-										<s:if test="'TRUE'.equals(#anySip) ">
-										<td>
-											<select name="sipAmtArr" class="hidden g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="sipInvestment"   > 
-										        <option value=""  >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-										</td>
-										<td>
-											<select name="sipTenureArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-tenure" > 
-										        <option value="" >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-												
-										</td>
-										<td>
-											<select name="sipDateArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-date" > 
-										        <option value=""  >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-										</td>
-										</s:if>
-										<s:else>
-										<td class="hidden ">
-											<select name="sipAmtArr" class="hidden g-font-size-10--xs g-width-60--xs g-width-90--lg" id="sipInvestment" > 
-										        <option value=""  >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-										</td>
-										<td class="hidden ">
-											<select name="sipTenureArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-tenure" > 
-										        <option value="" >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-												
-										</td>
-										<td class="hidden ">
-											<select name="sipDateArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-date" > 
-										        <option value=""  >0</option>
-											</select>
-											<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-												<b>NA</b>
-											</p>
-										</td>
-										
-										</s:else>
-										</s:if>
-										<s:else>
-										<s:if test="'TRUE'.equals(#anyUpfront) ">
-											<td>
-											<select name="upfrontAmtArr" class="hidden g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="upfrontInvestment" > 
-											        <option value=""  >0</option>
-												</select>
-										 		<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-													<b>NA</b>
-												</p>	
-											</td>
-										</s:if>
-										<s:else>
-											<td class="hidden">
-											<select name="upfrontAmtArr" class="hidden g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="upfrontInvestment" > 
-											        <option value=""  >0</option>
-												</select>
-										 		<p class="title g-font-size-10--xs g-font-size-14--lg text-center" >
-													<b>NA</b>
-												</p>	
-											</td>
-										</s:else>
-										<td>
-											<p class="title  " >
-												<s:if test="sipAmount == 0 ">
-													<input name="sipAmtArr" type="number" id="sipInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg" placeholder="Amount"
-														onblur="checkSipVal(<s:property value="#customerCartListElement.minSipAmount"/>,999999,this);"
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-												</s:if>
-												<s:else>
-													<input name="sipAmtArr" type="number" id="sipInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg" value=<s:property value="#customerCartListElement.sipAmount"/>
-														onblur="checkSipVal(<s:property value="#customerCartListElement.minSipAmount"/>,999999,this);"
-														onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
-												</s:else>
-											</p>
-										</td>
-										<s:set var="selSipTenure" value="#customerCartListElement.sipDuration" />
-										<s:set var="selSipDate" value="#customerCartListElement.sipDate" />
-										<td>
-											<select name="sipTenureArr" class="g-width-60--xs g-width-90--lg" id="sip-tenure" > 
-										        <% 
-										        	String selSipTen= (String) pageContext.getAttribute("selSipTenure");
-										        	/* if ("99".equals(selSipTen)) {
-										        		selSipTen = "Until Stopped";
-										        	} */
-										        	String[] sipTen = {"1 yr","2 yr","5 yr","10 yr","Until Stopped"};
-										        	String[] sipTenVal = {"1","2","5","10","99"};
-										        	for (int i=0;i<sipTen.length;i++)  {
-										        		String tenure= (String)sipTen[i]; 
-										        		String tenureVal = (String)sipTenVal[i];
-										        		if (tenureVal.equals(selSipTen))
-										        		{
-										        %>
-										     		 		<option value="<%=tenureVal%>" selected="selected"><%=tenure%></option>
-								     		 	<%
-										        		} else {
-							        			%>
-										        			<option value="<%=tenureVal%>" ><%=tenure%></option>
-							        			<%
-										        			
-										        		}
-										     		 }
-									     		 %>
-											</select>
-												
-										</td>
-										<td>
-											<select name="sipDateArr" class="g-width-40--xs g-width-90--lg" id="sip-date" > 
-										        <% 
-										        	String selSipDate= (String) pageContext.getAttribute("selSipDate");
-										        	String[] sipDates = {"1","5","10","20"};
-										        	for (int i=0;i<sipDates.length;i++)  {
-										        		String dat= (String)sipDates[i]; 
-										        		if ("1".equals(dat))  {
-										        			if (dat.equals(selSipDate))
-											        		{
-						        				%>
-										        				<option value="<%=dat%>" selected="selected"><%=dat%><sup>st</sup></option>
-						        				<%
-											        		}
-										        			else {
-						        				%>
-										        				<option value="<%=dat%>" ><%=dat%><sup>st</sup></option>
-						        				<%
-										        			}
-										        		}
-										        		else {
-											        		if (dat.equals(selSipDate))
-											        		{
-										        %>
-											     		 		<option value="<%=dat%>" selected="selected"><%=dat%><sup>th</sup></option>
-								     		 	<%
-											        		} else {
-							        			%>
-											        			<option value="<%=dat%>" ><%=dat%><sup>th</sup></option>
-							        			<%
-											        			
-											        		}
-										        		}
-										     		 }
-									     		 %>
-											</select>
-												
-										</td>
-										</s:else>
-										<td class="hidden">
-											 <input class="hidden" name="cartIdArr"  value=<s:property value="#customerCartListElement.cartId"/> />
-										</td>
-										<td class="hidden ">
-											 <input class="hidden" name="fundIdArr"  value=<s:property value="#customerCartListElement.fundId"/> />
-										</td>
-										<td>
-											 
-											 	<a  href="javascript:deleteCartEntry(<s:property value="selectedCartId" />);" >
-											 		<span class="g-font-size-20--lg g-font-size-15--xs fa fa-trash-o g-color--primary text-right"></span>
-										 		</a>
-							    				<%-- <button type="button" class="text-center g-font-size-20--xs g-font-size-15--xs fa fa-trash-o g-color--primary" onClick="deleteCartEntry(<s:property value="selectedCartId" />);" >Remove</button> --%>
-							    			
-										</td>
-										
-
-								    </s:else>
-								</tr>
-							</s:iterator> 
+				  	
+				  		
+				  		
+				  		
+				  		
+				  		<s:iterator value="#session.customerCartList" var="customerCartListElement" >
+						<s:if test="schemeName.equals('Total')">
+						</s:if>
+						<s:else>
+						<div class="col-xs-12 col-lg-6   g-bg-color--white">
+							<div  class="  g-line-height--normal  ">
+							<s:set var="selectedFundId" value="#sipDataModelElement.fundId" />
+								<s:set var="selectedCartId" value="#customerCartListElement.cartId" />
+						    	<s:set var="folios" value="#customerCartListElement.folioNumList" />
+						    	<s:set var="selFolio" value="#customerCartListElement.folioNumber" />
 							
-						</tbody>
-					</table>
+								<figure class="snip1419 g-height-130--xs g-height-150--lg  " style="width:100%"   >
+									
+				  					<!-- <figcaption > -->
+				    					<article class=" panel panel-info panel-heading  g-height-60--xs " >
+				    						<p class="g-color--black g-line-height--sm  g-font-size-12--xs g-font-size-16--lg " style="font-weight: bold; ">
+				    						<s:property value="#customerCartListElement.schemeName"/>
+				    						&nbsp;&nbsp;&nbsp;&nbsp;
+											
+				    						</p>
+				    						
+											 <p class="g-color--black g-line-height--lg  g-font-size-10--xs g-font-size-12--lg " >
+											 	<s:property value="#customerCartListElement.transactionType"/>
+											 	<div class="g-margin-t-o-20--xs" style="text-align:right">
+										       		<a  href="javascript:deleteCartEntry(<s:property value="selectedCartId" />);"  >
+										 				<span class="g-font-size-20--lg g-font-size-15--xs fa fa-trash-o g-color--primary "></span>
+									 				</a>
+											 	</div>
+										 	</p>
+										 	
+				    						
+				    					</article>
+				    					<article class="g-margin-l-20--md " > 
+									        <table id="cartData"  class="table-borderless g-margin-t-o-10--xs"  width="100%" style="border-collapse: separate;border-spacing: .5em;">
+										       <%--  <thead>
+										            <tr class="g-bg-color--white g-font-family--playfair text-center " >
+										                <th class="text-center" ><span class=" g-font-size-12--xs g-font-size-16--md">Folio Num</span></th>
+														<th class="text-center" ><span class=" g-font-size-12--xs g-font-size-16--md">Amount</span></th>
+														<s:if test="transactionType.equals('SIP')">
+															<th class="text-center" ><span class=" g-font-size-12--xs g-font-size-16--md">Tenure</span></th>
+															<th class="text-center" ><span class=" g-font-size-12--xs g-font-size-16--md">Debit Date</span></th>
+														</s:if>
+														<s:else>
+															<th class="col-xs-0 text-center hidden "></th>
+															<th class="col-xs-0 text-center hidden "></th>
+														</s:else>
+														<th class="col-xs-0 text-center hidden "></th>
+														<th class="col-xs-0 text-center hidden"></th>
+														<th class="col-xs-0 text-center hidden"></th>
+										            </tr>
+										        </thead> --%>
+										         <tbody>
+										            <tr class="g-font-family--playfair g-bg-color--white g-font-size-12--xs g-font-size-16--lg text-center" >
+										                <td class="text-center " ><span class=" ">
+									                		<%
+											 	
+															System.out.println("FolioNumList is : "+pageContext.getAttribute("folios"));
+													    	String arr1= (String) pageContext.getAttribute("folios"); 
+													    	String selFol= (String) pageContext.getAttribute("selFolio"); 
+													    	System.out.println("arr1 : "+arr1);
+													    	
+													    	if ( arr1 == null)  {
+													    		arr1 = "New";
+													    	}
+													    		String[] a = arr1.split(":");
+													    	
+													    		System.out.println("a length : "+a.length);
+													    	
+													    	
+													    	 /* if (a.length != 1)  { */
+												    		 %>
+															<select name="folioNumArr" class="text-center g-width-90--xs g-width-100--lg" id="selectFolioNum"  > 
+															    
+															    <% 
+															    
+															    if (a.length != 0)
+															    {
+															    	for(int i=0;i<a.length;i++){ 
+															        String fol= (String)a[i]; 
+															        if (fol.equals(selFol))   {%> 
+															        <option value="<%=fol%>" selected="selected" >Folio: <%=fol%> 
+															        </option>
+															        <%}
+															        else {
+															        %>
+															        <option value="<%=fol%>" > Folio: <%=fol%> 
+															        </option>
+															        <%}}}%> 
+															</select>
+									                		</span>
+								                		</td>
+								                		<s:if test="transactionType.equals('UPFRONT')">
+														<td class="text-center" ><span >
+															<s:if test="upfrontAmount == 0 ">
+																Amount: <input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg "
+																	placeholder="Amount"
+																	onblur="checkUpfrontVal(<s:property value="#customerCartListElement.minUpfrontAmount"/>,999999,<s:property value="#customerCartListElement.upfrontMultiplier"/>,this);"
+																	onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+															</s:if>
+															<s:else>
+																Amount: <input name="upfrontAmtArr" type="number" id="upfrontInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg"
+																	value=<s:property value="#customerCartListElement.upfrontAmount"/>
+																	onblur="checkUpfrontVal(<s:property value="#customerCartListElement.minUpfrontAmount"/>,999999,<s:property value="#customerCartListElement.upfrontMultiplier"/>,this);"
+																	onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+															</s:else>
+															<select name="sipAmtArr" class="hidden g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="sipInvestment"   > 
+														        <option value=""  >0</option>
+															</select>		
+														</span>
+														</td>
+														
+														</s:if>
+														<s:else>
+														<td class="text-center" ><span >
+															<s:if test="sipAmount == 0 ">
+																Amount: <input name="sipAmtArr" type="number" id="sipInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg" 
+																	placeholder="Amount"
+																	onblur="checkSipVal(<s:property value="#customerCartListElement.minSipAmount"/>,999999,this);"
+																	onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+															</s:if>
+															<s:else>
+																Amount: <input name="sipAmtArr" type="number" id="sipInvestment" class="g-font-size-10--xs g-font-size-14--lg g-color--black g-width-60--xs g-width-90--lg" value=<s:property value="#customerCartListElement.sipAmount"/>
+																	onblur="checkSipVal(<s:property value="#customerCartListElement.minSipAmount"/>,999999,this);"
+																	onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" >
+															</s:else>
+															<select name="upfrontAmtArr" class="hidden g-font-size-10--xs g-font-size-14--lg g-width-60--xs g-width-90--lg" id="upfrontInvestment" > 
+											        			<option value=""  >0</option>
+															</select>
+															
+															</span>
+														</td>
+														</s:else>
+														</tr>
+														<tr 
+														class=" g-font-family--playfair g-bg-color--white g-font-size-12--xs g-font-size-16--lg text-center" 
+														style="padding-top: 25px">
+														<s:if test="transactionType.equals('SIP')">
+														<s:set var="selSipTenure" value="#customerCartListElement.sipDuration" />
+														<s:set var="selSipDate" value="#customerCartListElement.sipDate" />
+														<td>
+														<select name="sipDateArr" class="g-width-90--xs g-width-100--lg" id="sip-date" > 
+													        <% 
+													        	String selSipDate= (String) pageContext.getAttribute("selSipDate");
+													        	String[] sipDates = {"1","5","10","15","20","25"};
+													        	for (int i=0;i<sipDates.length;i++)  {
+													        		String dat= (String)sipDates[i]; 
+													        		if ("1".equals(dat))  {
+													        			if (dat.equals(selSipDate))
+														        		{
+									        				%>
+													        				<option value="<%=dat%>" selected="selected">Date: <%=dat%><sup>st</sup></option>
+									        				<%
+														        		}
+													        			else {
+									        				%>
+													        				<option value="<%=dat%>" >Date: <%=dat%><sup>st</sup></option>
+									        				<%
+													        			}
+													        		}
+													        		else {
+														        		if (dat.equals(selSipDate))
+														        		{
+													        %>
+														     		 		<option value="<%=dat%>" selected="selected">Date: <%=dat%><sup>th</sup></option>
+											     		 	<%
+														        		} else {
+										        			%>
+														        			<option value="<%=dat%>" >Date: <%=dat%><sup>th</sup></option>
+										        			<%
+														        			
+														        		}
+													        		}
+													     		 }
+												     		 %>
+														</select>
+														</td>
+														<td>
+															<select name="sipTenureArr" class="g-width-110--xs g-width-120--lg" id="sip-tenure" > 
+														        <% 
+														        	String selSipTen= (String) pageContext.getAttribute("selSipTenure");
+														        	/* if ("99".equals(selSipTen)) {
+														        		selSipTen = "Until Stopped";
+														        	} */
+														        	String[] sipTen = {"1 yr","2 yr","5 yr","10 yr","Until Stopped"};
+														        	String[] sipTenVal = {"1","2","5","10","99"};
+														        	for (int i=0;i<sipTen.length;i++)  {
+														        		String tenure= (String)sipTen[i]; 
+														        		String tenureVal = (String)sipTenVal[i];
+														        		if (tenureVal.equals(selSipTen))
+														        		{
+														        %>
+														     		 		<option value="<%=tenureVal%>" selected="selected">Tenure: <%=tenure%></option>
+												     		 	<%
+														        		} else {
+											        			%>
+														        			<option value="<%=tenureVal%>" >Tenure: <%=tenure%></option>
+											        			<%
+														        			
+														        		}
+														     		 }
+													     		 %>
+															</select>
+														</td>
+														
+														
+														</s:if>
+														<s:else>
+															<td class="hidden ">
+																<select name="sipTenureArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-tenure" > 
+															        <option value="" >0</option>
+																</select>																	
+															</td>
+															<td class="hidden ">
+																<select name="sipDateArr" class="hidden g-width-60--xs g-width-90--lg" id="sip-date" > 
+															        <option value=""  >0</option>
+																</select>
+															</td>
+														</s:else>
+														</tr>
+														<tr>
+														<td class="hidden">
+															 <input class="hidden" name="cartIdArr"  value=<s:property value="#customerCartListElement.cartId"/> />
+														</td>
+														<td class="hidden ">
+															 <input class="hidden" name="fundIdArr"  value=<s:property value="#customerCartListElement.fundId"/> />
+														</td>
+														<td class="hidden ">
+															<select name="tranTypeArr" class="hidden g-width-60--xs g-width-90--lg" id="tran-type" > 
+														        <option value=""  >0</option>
+															</select>
+														</td>
+													
+										            </tr>
+										        </tbody>
+										    </table>
+									       	</article>
+									       	
+				  				 
+								</figure>
+								
+							</div>
+						</div>
+						</s:else>
+			</s:iterator> 
+				  		
 					</s:form>
 					
 					<s:form  action="deleteCartEntryAction" method="post" name="formDeleteCart">
@@ -624,16 +639,16 @@ input[type="range"] {
 			<div class="row g-margin-b-50--xs">
   				<div class="col-md-1 col-xs-1"></div>
   				<div class="col-md-6 col-xs-6 text-left">
-  					<a href="javascript:editCart('FundExplorer');" class=" btn btn-home g-color--white "  >+ Add another fund</a>
+  					<a href="javascript:editCart('FundExplorer');" class=" btn btn-home g-color--white g-font-size-14--xs g-font-size-18--lg"  >+ Add another fund</a>
   				</div>
   				<div class="col-md-3 col-xs-1"></div>
 				<div class="col-md-1 col-xs-4 text-left">
 					<%-- <s:form action="redirectAction" method="post"> --%>
 		      			<s:if test="#session.customerCartList.size() == 1 ">
-		      				<button type="button"  class="btn btn-home g-color--white disabled"  >Next</button>
+		      				<button type="button"  class="btn btn-home g-color--white disabled g-font-size-14--xs g-font-size-18--lg"  >Next</button>
 		      			</s:if>
 		      			<s:else>
-		      				<a href="javascript:checkAmounts();" class=" btn btn-home g-color--white "  >Next</a>
+		      				<a href="javascript:checkAmounts();" class=" btn btn-home g-color--white g-font-size-14--xs g-font-size-18--lg"  >Next</a>
 		      				<%-- <s:submit class="buttonBlock g-color--white text-left " value="Next" /> --%>
 		      			</s:else>
 		      		<%-- </s:form> --%>

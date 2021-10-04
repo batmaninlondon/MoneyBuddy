@@ -202,6 +202,7 @@ input[type="range"] {
 								<th class="text-center col-md-3 g-bg-color--gray-light">Quarter</th>
 								<th class="text-center col-md-3 g-bg-color--gray-light">Year</th>
 								<th class="text-center col-md-3 g-bg-color--gray-light">Aqb Amount</th>
+								<th class="text-center col-md-3 g-bg-color--gray-light">Quaterly Fee</th>
 								
 							</tr>
 						</thead>
@@ -232,6 +233,9 @@ input[type="range"] {
 							    		<td height="70" class="text-center g-font-size-14--xs" 	>
 								    		<s:property value="#aqbDataModelElement.aqbAmount"/>
 							    		</td>
+							    		<td height="70" class="text-center g-font-size-14--xs" 	>
+								    		<s:property value="#aqbDataModelElement.qurterlyFee"/>
+							    		</td>
 								</tr>
 							</s:iterator> 
 							
@@ -248,26 +252,26 @@ input[type="range"] {
 	</div>
 	    	
 			
-			<div class="row g-margin-b-50--xs">
+		<%-- 	<div class="row g-margin-b-50--xs">
   				<div class="col-md-1"></div>
   				<div class="col-md-6 text-left">
   					<a href="javascript:editStpCart('Dashboard');" class=" btn btn-home g-color--white "  >+ Add another fund</a>
   				</div>
   				<div class="col-md-3"></div>
 				<div class="col-md-1 text-left">
-					<%-- <s:form action="redirectAction" method="post"> --%>
+					<s:form action="redirectAction" method="post">
 		      			<s:if test="#session.customerStpCartList.size() == 1 ">
 		      				<button type="button"  class="btn btn-home g-color--white disabled"  >Next</button>
 		      			</s:if>
 		      			<s:else>
 		      				<a href="javascript:checkAmounts();" class=" btn btn-home g-color--white "  >Next</a>
-		      				<%-- <s:submit class="buttonBlock g-color--white text-left " value="Next" /> --%>
+		      				<s:submit class="buttonBlock g-color--white text-left " value="Next" />
 		      			</s:else>
-		      		<%-- </s:form> --%>
+		      		</s:form>
 	      		</div>
 	      		<div class="col-md-1"></div>
 	      		
-			</div>
+			</div> --%>
 
   
   		<script type="text/javascript" src="assets/js/javaScript.js"></script>

@@ -32,18 +32,7 @@
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style2.css" rel="stylesheet" type="text/css"/>
        <!--  <link href="css/material-kit.css" rel="stylesheet"/> -->
-        
-        
-        
 
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
-        
-        
-        
-		
 		<script>
 
 		
@@ -77,10 +66,10 @@
 	<div class="row">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10  g-height-70--xs g-height-80--lg g-bg-color--dark ">
-	    	<div class="profile text-center">
-	        	<div class="name pagination text-center">
-	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white">Thank you for STP </h3>
-	                	<h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your STP details </h6>
+	    	<div class="profile">
+	        	<div class="name">
+	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white  text-center  g-ver-center--xs ">Thank you for STP </h3>
+	                	<!-- <h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your STP details </h6> -->
 	            </div>
 	       	</div>
 	     </div>
@@ -90,24 +79,27 @@
 	<div class="row g-height-auto--lg" >
 		<div class="col-xs-1" ></div>
 		<div class="col-xs-10  g-bg-color--white " >
+			<div class="row text-center g-margin-t-5--xs g-margin-b-15--lg">
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b>STP Confirmation</b></h3>
+			</div>
 			<div id="customer-stp-cart-list" class="g-margin-t-20--xs g-margin-b-30--lg g-margin-t-10--lg g-margin-r-100--lg g-margin-l-100--lg">
 					
 				  		<table id="cartData" class="table table-bordered stripe ">
 										<thead class="table-head g-font-size-12--xs g-font-size-14--lg center text-center g-bg-color--gray-light">
 											<tr>
-												<th class="col-xs-2">Fund Name A</th>
-												<th class="col-xs-2">Folio Num</th>
-												<th class="col-xs-2">Fund NameB</th>
-												<th class="col-xs-2">Amount</th>
-												<th class="col-xs-2">Tenure</th>
-												<th class="col-xs-2">Debit Date</th>
+												<th class="col-xs-8 text-center">Fund Name</th>
+												<!-- <th class="col-xs-2">Folio Num</th> -->
+												<!-- <th class="col-xs-2 text-center">Target Fund</th> -->
+												<th class="col-xs-4 text-center">Details</th>
+												<!-- <th class="col-xs-2">Tenure</th> -->
+												<!-- <th class="col-xs-2 text-center">Debit Date</th> -->
 											</tr>
 										</thead>
 										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerStpCartList" var="stpCartListElement">
 													
-													    <s:if test="schemeName.equals('Total')">
-													    	<tr class=" g-bg-color--gray-light">
+													    <s:if test="withdrawalSchemeName.equals('Total')">
+													    	<%-- <tr class=" g-bg-color--gray-light">
 													    	<td>
 														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
 													    	</td>
@@ -122,27 +114,49 @@
 												    		</td>
 												    		<td>
 												    		</td>
-												    		</tr>
+												    		</tr> --%>
 													    </s:if>
 													    <s:else>
 													    	<tr>
 													    	<td>
-														    	<b><s:property value="#stpCartListElement.withdrawalSchemeName"/></b>
+														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
+														    	<p class="text-center"><b>&#9660;</b></p>
+														    	<s:property value="#stpCartListElement.purchaseFundSchemeName"/>
 													    	</td>
-													    	<td>
-														    	<b><s:property value="#stpCartListElement.folioNumber"/></b>
-													    	</td>
-													    	<td>
-														    	<b><s:property value="#stpCartListElement.purchaseFundSchemeName"/></b>
-												    		</td>
-												    		<td>
-														    	<b><s:property value="#stpCartListElement.stpAmount"/></b>
-												    		</td>
-													    	<td>
-														    	<b><s:property value="#stpCartListElement.stpDuration"/></b>
-												    		</td>
-												    		<td>
-														    	<b><s:property value="#stpCartListElement.stpDate"/></b>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
+													    	</td> --%>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.folioNumber"/>
+													    	</td> --%>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.purchaseFundSchemeName"/>
+												    		</td> --%>
+												    		<%-- <td>
+														    	<s:property value="%{getText('{0,number,#,##0}',{#attr[#stpCartListElement.stpAmount]})}"/>
+												    		</td> --%>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.stpDuration"/>
+												    		</td> --%>
+												    		<%-- <td>	
+												    			<s:if test="stpDate ==1 ">
+														    		<s:property value="#stpCartListElement.stpDate"/><sup>st</sup>
+														    	</s:if>
+														    	<s:else>
+														    		<s:property value="#stpCartListElement.stpDate"/><sup>th</sup>
+													    		</s:else>
+												    		</td> --%>
+												    		<td style="vertical-align: middle;">
+														    	Amount: Rs. <s:property value="%{getText('{0,number,#,##0}',{#attr[#stpCartListElement.stpAmount]})}"/>
+														    	<br/>
+											    				<%-- Duration: <s:property value="#stpCartListElement.stpDuration"/> years	
+														    	<br/> --%>
+														    	<s:if test="stpDate ==1 ">
+														    		Date: <s:property value="#stpCartListElement.stpDate"/><sup>st</sup>
+														    	</s:if>
+														    	<s:else>
+														    		Date: <s:property value="#stpCartListElement.stpDate"/><sup>th</sup>
+													    		</s:else>
 												    		</td>
 												    		</tr>
 												    	</s:else>
@@ -157,15 +171,24 @@
 	     </div>
 	     <div class="col-xs-1" ></div>
 	</div>
-	
-	<div class="row">
+	<div class="row g-margin-t-o-20--xs">
+		<div class=" col-xs-12 text-center">
+		<a class="btn btn-home " href="<s:url action="Dashboard"/>" >Dashboard</a>&nbsp;&nbsp;
+		<a class="btn btn-home " href="<s:url action="logOut"/>" >Log Out</a>
+			<!-- <button type="button"  id="pay-now-button" class="g-display-table--xs btn btn-home g-color--white g-margin-t-15--xs " onClick=href="<s:url action="Dashboard"/>" >Invest Now</button> -->
+		</div>
+	</div>
+<br/>
+	<br/>
+		
+<!-- 	<div class="row">
 		<div class="col-xs-1"></div>
 		
 		<div class="col-xs-10  g-bg-color--gray-lighter " style="height:40px;">
 
 	     </div>
 	     <div class="col-xs-1"></div>
-	</div>
+	</div> -->
 	
 	
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>

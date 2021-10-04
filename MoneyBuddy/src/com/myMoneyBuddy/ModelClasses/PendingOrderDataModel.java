@@ -7,8 +7,7 @@ public class PendingOrderDataModel implements Serializable{
 	private String fundId;
 	private String transactionId;
 	private String schemeName;
-	private String upfrontAmount;
-	private String sipAmount;
+	private String amount;
 	private String transactionStatus;
 	private String transactionStartDate;
 	private String transactionType;
@@ -18,14 +17,13 @@ public class PendingOrderDataModel implements Serializable{
 
 	}
 
-	public PendingOrderDataModel(String fundId, String transactionId, String schemeName, String upfrontAmount, String sipAmount,
+	public PendingOrderDataModel(String fundId, String transactionId, String schemeName, String amount, 
 			String transactionStatus, String transactionStartDate, String transactionType) {
 		super();
 		this.fundId = fundId;
 		this.transactionId = transactionId;
 		this.schemeName = schemeName;
-		this.upfrontAmount = upfrontAmount;
-		this.sipAmount = sipAmount;
+		this.amount = amount;
 		this.transactionStatus = transactionStatus;
 		this.transactionStartDate = transactionStartDate;
 		this.transactionType = transactionType;
@@ -60,20 +58,12 @@ public class PendingOrderDataModel implements Serializable{
 		this.schemeName = schemeName;
 	}
 
-	public String getUpfrontAmount() {
-		return upfrontAmount;
+	public String getAmount() {
+		return amount;
 	}
 
-	public void setUpfrontAmount(String upfrontAmount) {
-		this.upfrontAmount = upfrontAmount;
-	}
-
-	public String getSipAmount() {
-		return sipAmount;
-	}
-
-	public void setSipAmount(String sipAmount) {
-		this.sipAmount = sipAmount;
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
 
 	public String getTransactionType() {

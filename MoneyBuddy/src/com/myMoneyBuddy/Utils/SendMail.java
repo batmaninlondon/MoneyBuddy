@@ -6,6 +6,7 @@
 package com.myMoneyBuddy.Utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,8 +40,8 @@ public class SendMail {
 
 	Logger logger = Logger.getLogger(SendMail.class);   
 
-    public void MailSending(String emailId, String subject, String mailType,String fileName,
-    		String mailLink,String displayLinkName, String customerName) throws MoneyBuddyException {
+	public void MailSending(String emailId, String subject, String mailType,String fileName,
+    		String mailLink,String displayLinkName, String customerName, String dataTable) throws MoneyBuddyException {
     	
     	
     	logger.debug("sendMail class : MailSending method : start");
@@ -76,6 +77,13 @@ public class SendMail {
 		    		strLine = strLine.replace("customerName", customerName);
 		
 		    	}
+            	if (strLine.contains("DATATABLE")) {
+		    		
+		    		System.out.println("contains DATATABLE ");
+		    		strLine = strLine.replace("DATATABLE", dataTable);
+		
+		    	}
+            	
             	bodyText.append(strLine);
             }
     	Properties configProperties = new Properties();
@@ -105,7 +113,7 @@ public class SendMail {
     		Message message = new MimeMessage(session);
     		// Set From: header field of the header.
     		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
-    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
 
     		// Set To: header field of the header.
 
@@ -120,8 +128,6 @@ public class SendMail {
     		message.setContent(bodyText.toString(), "text/html; charset=utf-8");
 
     		// Send message
-    		
-    		System.out.println("sendMail class : emailId : "+emailId);
     		
     		Transport.send(message);
     		
@@ -196,7 +202,8 @@ public class SendMail {
     		Message message = new MimeMessage(session);
     		// Set From: header field of the header.
     		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
-    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
 
     		// Set To: header field of the header.
 
@@ -236,8 +243,8 @@ public class SendMail {
 		}
     }
 
-    //public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{
-    	/*
+    /*public void sendMailwithAttachement(HashMap<String,String> fundDetails, String pdfName, String emailId) throws MoneyBuddyException{
+    	
            PdfReader reader;
 		try {
 			reader = new PdfReader("D://DelMe/"+pdfName+".pdf");
@@ -323,23 +330,18 @@ public class SendMail {
 
        		BodyPart messageBodyPart1 = new MimeBodyPart();     
             messageBodyPart1.setText("Please find attached pdf, which has your investment details."); 
-            System.out.println("Hi There 3 ");
 
             //4) create new MimeBodyPart object and set DataHandler object to this object        
             MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
             String filename = "D://DelMe/investment_details.pdf";//change accordingly
-            System.out.println("Hi There 4 ");
             DataSource source = new FileDataSource(filename);    
             messageBodyPart2.setDataHandler(new DataHandler(source));    
             messageBodyPart2.setFileName("investment_details");    
-            System.out.println("Hi There 5 ");
 
             //5) create Multipart object and add MimeBodyPart objects to this object        
             Multipart multipart = new MimeMultipart();    
             multipart.addBodyPart(messageBodyPart1);     
             multipart.addBodyPart(messageBodyPart2); 
-            
-            System.out.println("Hi There 6 ");
     		//message.setContent(bodyText.toString(), "text/html; charset=utf-8");
 
             message.setContent(multipart );  
@@ -369,7 +371,134 @@ public class SendMail {
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 
-    *///}
+    }*/
+    
+    public void sendMailwithAttachement(String fileName) throws MoneyBuddyException{
+    	
+		try {
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(SendMail.class.getResourceAsStream(configPropFilePath));
+			
+			//System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
+	    	
+	    	Properties props = new Properties();
+	    	props.put("mail.smtp.auth", "true");
+	    	props.put("mail.smtp.starttls.enable", "true");
+	    	props.put("mail.smtp.host", configProperties.getProperty("GMAIL_HOST"));
+	    	props.put("mail.smtp.port", configProperties.getProperty("GMAIL_PORT"));
+
+    	// Get the Session object.
+
+	    	Session session = Session.getInstance(props,
+	    			new javax.mail.Authenticator() {
+	    		protected PasswordAuthentication getPasswordAuthentication() {
+	    			return new PasswordAuthentication(configProperties.getProperty("GMAIL_USERNAME"), configProperties.getProperty("GMAIL_PASSWORD"));
+	    		}
+	    	});
+
+
+    		// Create a default MimeMessage object.
+    		Message message = new MimeMessage(session);
+
+    		// Set From: header field of the header.
+    		
+    		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
+
+    		// Set To: header field of the header.
+
+    		message.setRecipients(Message.RecipientType.TO,
+    				InternetAddress.parse("kamalwadhwani@gmail.com"));
+    		
+    		String bccEmailId = "savita.wadhwani@gmail.com";
+    		//message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccEmailId));
+    		
+    		/*message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccEmailId));*/
+    		// Set To: header field of the header.
+
+
+    		// Set Subject: header field
+    		String subject ="Customers Investment Details";
+    		message.setSubject(subject);
+
+    		
+
+    		BodyPart messageBodyPart1 = new MimeBodyPart();     
+         messageBodyPart1.setText("Please find attached xls, which has our customer investment details"); 
+
+         //4) create new MimeBodyPart object and set DataHandler object to this object        
+         MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
+         /*String filename = "ClientRecords.xlsx";//change accordingly
+*/         
+         /*ClassLoader cl = getClass().getClassLoader();
+			
+         System.out.println(" cl :::::: "+cl);
+         
+			String directoryName = cl.getResource("./../../assets/ClientRecord").getPath().substring(1);
+
+ 		System.out.println("directoryName is : "+directoryName);
+ 		
+ 		String filePath = directoryName+"ClientRecords.xlsx";
+ 		
+ 		System.out.println("filePath is : "+filePath);*/
+ 		
+ 		File f1 = new File(fileName); 
+ 		
+         //ClassLoader cl = getClass().getClassLoader();
+         /*String kycDirectoryName = cl.getResource("./../../../WebContent/").getPath().substring(1);*/
+         /*File file = new File(cl.getResource("./docs/doc.pdf").getFile());*/
+         
+         /*System.out.println(" cl :::::: "+cl+" and kycDirectoryName :::: "+kycDirectoryName);*/
+         
+      /*   String filename = "/home/manisha/file.txt";
+         DataSource source = new FileDataSource(filename);
+         messageBodyPart.setDataHandler(new DataHandler(source));*/
+         String sourceFileName = fileName;//change accordingly
+		 
+		 DataSource source = new FileDataSource(sourceFileName);    
+		 messageBodyPart2.setDataHandler(new DataHandler(source));    
+		 /*messageBodyPart2.setFileName("AccountOpeningForm.pdf");*/
+		 
+		 
+         /*System.out.println(" File name is : "+fileName);
+         DataSource source = new FileDataSource("/"+fileName);    
+         messageBodyPart2.setDataHandler(new DataHandler(source));    */
+         messageBodyPart2.setFileName("clientRecords.xlsX");
+
+         //5) create Multipart object and add MimeBodyPart objects to this object        
+         Multipart multipart = new MimeMultipart();    
+         multipart.addBodyPart(messageBodyPart1);     
+         multipart.addBodyPart(messageBodyPart2); 
+         
+ 		//message.setContent(bodyText.toString(), "text/html; charset=utf-8");
+
+         message.setContent(multipart ); 
+         
+    		// Send message
+    		Transport.send(message);
+        
+        
+		} catch (IOException e) {
+			logger.error("sendMail class : MailSending method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		} 
+ 	catch (MessagingException e) {
+ 		logger.error("sendMail class : MailSending method : Caught Exception");
+ 		e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+ 	}
+	
+     catch (Exception e ) {
+     	logger.error("sendMail class : MailSending method : Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+
+ }
     
     public void sendKycFormMail(String pdfFile, String emailId, String subject, String fileName,
     				String mailLink,String displayLinkName) throws MoneyBuddyException{
@@ -402,7 +531,8 @@ public class SendMail {
     		Message message = new MimeMessage(session);
 
     		// Set From: header field of the header.
-    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+    		message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
 
     		// Set To: header field of the header.
 
@@ -508,7 +638,8 @@ public class SendMail {
 			Message message = new MimeMessage(session);
 		
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+			//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
 		
 			// Set To: header field of the header.
 		
@@ -608,7 +739,8 @@ public class SendMail {
 			Message message = new MimeMessage(session);
 		
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+			//message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME")));
+			message.setFrom(new InternetAddress(configProperties.getProperty("GMAIL_USERNAME"),configProperties.getProperty("GMAIL_NAME")));
 		
 			// Set To: header field of the header.
 		

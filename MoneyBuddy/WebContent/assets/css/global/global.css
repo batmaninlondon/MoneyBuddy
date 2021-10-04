@@ -1,87 +1,6 @@
 /*----------------------------------
   Mutual Fun - Select this fund
 ------------------------------------*/
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-.snip1418 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  text-align: left;
-  color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 20em;
-  perspective: 20em;
-}
-.snip1418 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.snip1418 .add-to-cart {
-  position: absolute;
-  height:50px;
-  top: 0;
-  right: 0;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0;
- // background-color: #409ad5;
-   background-color: black;
-  -webkit-transform: rotateX(-90deg);
-  transform: rotateX(-90deg);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.snip1418 figcaption {
-//  padding: 20px;
-}
-.snip1418 h3,
-.snip1418 p {
-  margin: 0;
-}
-.snip1418 h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.snip1418 p {
-  font-size: 0.7em;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-.snip1418 a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.snip1418:hover .add-to-cart,
-.snip1418.hover .add-to-cart {
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.snip1418:hover .add-to-cart i,
-.snip1418.hover .add-to-cart i {
-  background-color: #2980b9;
-}
 
 .button2:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -1433,8 +1352,8 @@
 
 /* Small container */
 .g-container--sm {
-  padding-right: .9375rem;
-  padding-left: .9375rem;
+  padding-right: .g375rem;
+  padding-left: .6375rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -1967,6 +1886,18 @@
 
 .g-height-100--xs {
   height: 6.25rem;
+}
+
+.g-height-120--xs {
+  height: 7.25rem;
+}
+
+.g-height-130--xs {
+  height: 8.25rem;
+}
+
+.g-height-140--xs {
+  height: 8.7rem;
 }
 
 .g-height-150--xs {
@@ -7437,6 +7368,12 @@
 .g-bg-color--primary {
   background-color: #13b1cd !important;
 }
+
+
+.g-bg-color--primary-light {
+  background-color: #bde8f0 !important;
+}
+
 
 .g-bg-color--black {
   background-color: #000000!important;

@@ -12,8 +12,10 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OldPortfolioDataModel;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
@@ -32,6 +34,13 @@ public class OldPortfolioDataAction extends ActionSupport implements SessionAwar
 		String customerId = sessionMap.get("customerId").toString();
 		QueryOldPortfolioRecords queryOldPortfolioRecords = new QueryOldPortfolioRecords();
 		try {
+			QueryCustomer queryCustomer = new QueryCustomer(); 
+			Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+			String userType = customer.getUserType();
+			
+			if ("ADMIN".equals(userType))  {
+				customerId = sessionMap.get("customerIdFromAdmin").toString();
+	    	}
 			String totalOldRecords = queryOldPortfolioRecords.getTotalOldRecords(customerId);
 			
 			if ( !"0".equals(totalOldRecords) )  {

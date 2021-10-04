@@ -57,12 +57,18 @@ public class PrimaryFundDetails {
     
     @Column(name="MIN_PURCHASE_AMOUNT")
     private String minPurchaseAmount;
+     
+    @Column(name="UPFRONT_MULTIPLIER")
+    private String upfrontMultiplier;
     
     @Column(name="MIN_RED_AMOUNT")
     private String minRedAmount;
     
     @Column(name="MIN_STP_AMOUNT")
     private String minStpAmount;
+    
+    @Column(name="MIN_SWITCH_AMOUNT")
+    private String minSwitchAmount;
     
     @Column(name="MIN_SIP_DURATION")
     private String minSipDuration;
@@ -82,6 +88,12 @@ public class PrimaryFundDetails {
     @Column(name="STP_PURCHASE_FLAG")
     private String stpPurchaseFlag;
     
+    @Column(name="SWITCH_WITHDRAWAL_FLAG")
+    private String switchWithdrawalFlag;
+    
+    @Column(name="SWITCH_PURCHASE_FLAG")
+    private String switchPurchaseFlag;
+    
     @Column(name="SWP_FLAG")
     private String swpFlag;
     
@@ -98,9 +110,9 @@ public class PrimaryFundDetails {
 
 	public PrimaryFundDetails(String schemeName, String schemeType, String category, String startDate, String rating,
 			String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears,
-			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String minRedAmount,
-			String minStpAmount, String minSipDuration, String pdfFilePath, String mostPopularFund, String sipFlag,
-			String stpWithdrawalFlag, String stpPurchaseFlag, String swpFlag, String switchFlag, String aum) {
+			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String upfrontMultiplier, String minRedAmount,
+			String minStpAmount, String minSwitchAmount, String minSipDuration, String pdfFilePath, String mostPopularFund, String sipFlag,
+			String stpWithdrawalFlag, String stpPurchaseFlag,String switchWithdrawalFlag, String switchPurchaseFlag, String swpFlag, String switchFlag, String aum) {
 		super();
 		this.schemeName = schemeName;
 		this.schemeType = schemeType;
@@ -114,17 +126,22 @@ public class PrimaryFundDetails {
 		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
 		this.minPurchaseAmount = minPurchaseAmount;
+		this.upfrontMultiplier = upfrontMultiplier;
 		this.minRedAmount = minRedAmount;
 		this.minStpAmount = minStpAmount;
+		this.minSwitchAmount = minSwitchAmount;
 		this.minSipDuration = minSipDuration;
 		this.pdfFilePath = pdfFilePath;
 		this.mostPopularFund = mostPopularFund;
 		this.sipFlag = sipFlag;
 		this.stpWithdrawalFlag = stpWithdrawalFlag;
 		this.stpPurchaseFlag = stpPurchaseFlag;
+		this.switchWithdrawalFlag = switchWithdrawalFlag;
+		this.switchPurchaseFlag = switchPurchaseFlag;
 		this.swpFlag = swpFlag;
 		this.switchFlag = switchFlag;
 		this.aum = aum;
+		
 	}
 
 
@@ -343,6 +360,45 @@ public class PrimaryFundDetails {
 		this.minRedAmount = minRedAmount;
 	}
 
+	public String getUpfrontMultiplier() {
+		return upfrontMultiplier;
+	}
+
+
+	public void setUpfrontMultiplier(String upfrontMultiplier) {
+		this.upfrontMultiplier = upfrontMultiplier;
+	}
+
+
+	public String getMinSwitchAmount() {
+		return minSwitchAmount;
+	}
+
+
+	public void setMinSwitchAmount(String minSwitchAmount) {
+		this.minSwitchAmount = minSwitchAmount;
+	}
+
+
+	public String getSwitchWithdrawalFlag() {
+		return switchWithdrawalFlag;
+	}
+
+
+	public void setSwitchWithdrawalFlag(String switchWithdrawalFlag) {
+		this.switchWithdrawalFlag = switchWithdrawalFlag;
+	}
+
+
+	public String getSwitchPurchaseFlag() {
+		return switchPurchaseFlag;
+	}
+
+
+	public void setSwitchPurchaseFlag(String switchPurchaseFlag) {
+		this.switchPurchaseFlag = switchPurchaseFlag;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -352,10 +408,12 @@ public class PrimaryFundDetails {
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
 		result = prime * result + ((minPurchaseAmount == null) ? 0 : minPurchaseAmount.hashCode());
+		result = prime * result + ((upfrontMultiplier == null) ? 0 : upfrontMultiplier.hashCode());
 		result = prime * result + ((minRedAmount == null) ? 0 : minRedAmount.hashCode());
 		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
 		result = prime * result + ((minSipDuration == null) ? 0 : minSipDuration.hashCode());
 		result = prime * result + ((minStpAmount == null) ? 0 : minStpAmount.hashCode());
+		result = prime * result + ((minSwitchAmount == null) ? 0 : minSwitchAmount.hashCode());
 		result = prime * result + ((mostPopularFund == null) ? 0 : mostPopularFund.hashCode());
 		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
@@ -370,6 +428,8 @@ public class PrimaryFundDetails {
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((stpPurchaseFlag == null) ? 0 : stpPurchaseFlag.hashCode());
 		result = prime * result + ((stpWithdrawalFlag == null) ? 0 : stpWithdrawalFlag.hashCode());
+		result = prime * result + ((switchPurchaseFlag == null) ? 0 : switchPurchaseFlag.hashCode());
+		result = prime * result + ((switchWithdrawalFlag == null) ? 0 : switchWithdrawalFlag.hashCode());
 		result = prime * result + ((switchFlag == null) ? 0 : switchFlag.hashCode());
 		result = prime * result + ((swpFlag == null) ? 0 : swpFlag.hashCode());
 		return result;
@@ -416,6 +476,13 @@ public class PrimaryFundDetails {
 		} else if (!minPurchaseAmount.equals(other.minPurchaseAmount)) {
 			return false;
 		}
+		if (upfrontMultiplier == null) {
+			if (other.upfrontMultiplier != null) {
+				return false;
+			}
+		} else if (!upfrontMultiplier.equals(other.upfrontMultiplier)) {
+			return false;
+		}
 		if (minRedAmount == null) {
 			if (other.minRedAmount != null) {
 				return false;
@@ -442,6 +509,13 @@ public class PrimaryFundDetails {
 				return false;
 			}
 		} else if (!minStpAmount.equals(other.minStpAmount)) {
+			return false;
+		}
+		if (minSwitchAmount == null) {
+			if (other.minSwitchAmount != null) {
+				return false;
+			}
+		} else if (!minSwitchAmount.equals(other.minSwitchAmount)) {
 			return false;
 		}
 		if (mostPopularFund == null) {
@@ -542,6 +616,20 @@ public class PrimaryFundDetails {
 		} else if (!stpWithdrawalFlag.equals(other.stpWithdrawalFlag)) {
 			return false;
 		}
+		if (switchPurchaseFlag == null) {
+			if (other.switchPurchaseFlag != null) {
+				return false;
+			}
+		} else if (!switchPurchaseFlag.equals(other.switchPurchaseFlag)) {
+			return false;
+		}
+		if (switchWithdrawalFlag == null) {
+			if (other.switchWithdrawalFlag != null) {
+				return false;
+			}
+		} else if (!switchWithdrawalFlag.equals(other.switchWithdrawalFlag)) {
+			return false;
+		}
 		if (switchFlag == null) {
 			if (other.switchFlag != null) {
 				return false;
@@ -556,6 +644,7 @@ public class PrimaryFundDetails {
 		} else if (!swpFlag.equals(other.swpFlag)) {
 			return false;
 		}
+		
 		return true;
 	}
 

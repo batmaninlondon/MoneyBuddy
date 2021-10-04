@@ -4,6 +4,8 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +18,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.ObjectFactory;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.PasswordRequest;
 import org.datacontract.schemas._2004._07.starmfpaymentgatewayservice.RequestParam;
@@ -34,19 +40,23 @@ import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.NriCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.PaymentDetails;
 import com.myMoneyBuddy.EntityClasses.SecondaryFundDetails;
 import com.myMoneyBuddy.EntityClasses.SipDetails;
 import com.myMoneyBuddy.EntityClasses.StpDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+import com.myMoneyBuddy.ModelClasses.ClientData;
 import com.myMoneyBuddy.ModelClasses.OrderDataModel;
 import com.myMoneyBuddy.Utils.CommonUtil;
 import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.HibernateUtil;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
+import com.sun.xml.internal.ws.api.client.SelectOptimalEncodingFeature;
 
 public class Trading {
 
@@ -54,8 +64,10 @@ public class Trading {
 
 	public String createClient(String clientHolding, String clientTaxStatus, String clientOccupationCode, String clientDob,
 			String clientGender, String clientGuardian, String clientAccType1, String clientAccNo1, String clientNeftIfscCode1,
-			String clientAdd, String clientCity, String clientState, String clientPinCode, String clientCountry, String customerId, 
-			String clientAppName1, String clientEmail, String clientPan, String clientNominee, String clientNomineeRelation, String clientMobile) throws MoneyBuddyException {
+			String clientAdd1,String clientAdd2,String clientAdd3, String clientCity, String clientState, String clientPinCode, String clientCountry, String customerId, 
+			String clientAppName1, String clientEmail, String clientPan, String clientNominee, String clientNomineeRelation, String clientMobile,
+			String clientNriAdd1,String clientNriAdd2,String clientNriAdd3, String clientNriCity, String clientNriState, String clientNriPinCode, 
+			String clientNriCountry, String mobileNumberNri) throws MoneyBuddyException {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
@@ -79,7 +91,7 @@ public class Trading {
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
 			
 			String taxStatus,state,occupation,dob,clientDetails,getPasswordResp,passwordStartMf,ucc;
 
@@ -119,13 +131,11 @@ public class Trading {
 					clientProperties.getProperty("CLIENT_MICRNO_4"),clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_4"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_4"),
 					clientProperties.getProperty("CLIENT_ACCTYPE_5"),clientProperties.getProperty("CLIENT_ACCNO_5"),clientProperties.getProperty("CLIENT_MICRNO_5"),
 					clientProperties.getProperty("CLIENT_NEFT_IFSCCODE_5"),clientProperties.getProperty("CLIENT_DEFAULT_BANK_FLAG_5"),clientProperties.getProperty("CLIENT_CHEQUENAME_5"),
-					clientAdd,clientProperties.getProperty("CLIENT_ADD_2"),clientProperties.getProperty("CLIENT_ADD_3"),clientCity,state,clientPinCode,clientCountry,
+					clientAdd1,clientAdd2,clientAdd3,clientCity,state,clientPinCode,clientCountry,
 					clientProperties.getProperty("CLIENT_RESIPHONE"),clientProperties.getProperty("CLIENT_RESIFAX"),clientProperties.getProperty("CLIENT_OFFICEPHONE"),
 					clientProperties.getProperty("CLIENT_OFFICEFAX"),clientEmail,clientProperties.getProperty("CLIENT_COMMMODE"),clientProperties.getProperty("CLIENT_DIVPAYMODE"), 
 					clientProperties.getProperty("CLIENT_PAN_2"),clientProperties.getProperty("CLIENT_PAN_3"),clientProperties.getProperty("CLIENT_MAPIN_NO"),
-					clientProperties.getProperty("CLIENT_CM_FORADD_1"),clientProperties.getProperty("CLIENT_CM_FORADD_2"),clientProperties.getProperty("CLIENT_CM_FORADD_3"),
-					clientProperties.getProperty("CLIENT_CM_FORCITY"),clientProperties.getProperty("CLIENT_CM_FORPINCODE"),clientProperties.getProperty("CLIENT_CM_FORSTATE"),
-					clientProperties.getProperty("CLIENT_CM_FORCOUNTRY"),clientProperties.getProperty("CLIENT_CM_FORRESIPHONE"),clientProperties.getProperty("CLIENT_CM_FORRESIFAX"),
+					clientNriAdd1,clientNriAdd2,clientNriAdd3,clientNriCity,clientNriPinCode,clientNriState,clientNriCountry,mobileNumberNri,clientProperties.getProperty("CLIENT_CM_FORRESIFAX"),
 					clientProperties.getProperty("CLIENT_CM_FOROFFPHONE"),clientProperties.getProperty("CLIENT_CM_FOROFFFAX"),clientMobile};
 
 			clientDetails = String.join("|",clientDetailsArray);
@@ -173,7 +183,7 @@ public class Trading {
 	}
 	
 	
-	public void fatcaUpload(String customerId) throws MoneyBuddyException {
+	public boolean fatcaUpload(String customerId) throws MoneyBuddyException {
 		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
@@ -201,50 +211,44 @@ public class Trading {
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
 			
 			String fatcaDetails;
-
-			
-			// Savita Wadhwani - Self Comment - Start 
-			// Check if we can get rid of re-writing same query again and agian 
-			
-			//Query query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'taxstatus' and fieldValue = :fieldValue ");
-			//query.setParameter("fieldValue", clientTaxStatus);
-			
-			//taxStatus = query.uniqueResult().toString();
-			
-			/*query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'state' and fieldValue = :fieldValue ");
-			query.setParameter("fieldValue", clientState);
-			
-			state = query.uniqueResult().toString();
-			
-			query = hibernateSession.createQuery("select bseCode from RtaSpecificCodes where fieldType = 'Occupation' and fieldValue = :fieldValue ");
-			query.setParameter("fieldValue", clientOccupationCode);
-			
-			occupation = query.uniqueResult().toString();*/
-			//hibernateSession.getTransaction().commit();
-			
-			/*dob = clientDob.substring(8,10)+"/"+clientDob.substring(5,7)+"/"+clientDob.substring(0,4);
-			System.out.println("dob : "+dob);*/
-			
-			
 			
 			String workingAs = "08";
 			String occupationCode = "08";
 			String occupationType = "O";
 			String occupation = customerDetail.getOccupation();
+			String taxStatus = customerDetail.getTaxStatus();
+			String taxIdentificationNumber = "";
+			String taxStaus = "";
+			String identificationType = "";
+			
+			if ( "Individual".equalsIgnoreCase(taxStatus))  {
+				taxStaus = "01";
+				identificationType = "C";
+				taxIdentificationNumber = customer.getPanCard();
+			}
+			else {
+				NriCustomerDetails customerNriDetail = (NriCustomerDetails) hibernateSession.get(NriCustomerDetails.class, customerId);
+				taxIdentificationNumber = customerNriDetail.getTaxIdentificationNumber();
+				identificationType = "T";
+				if ("NriNre".equalsIgnoreCase(taxStatus))  
+					taxStaus = "21";
+				else
+					taxStaus = "24";
+			}
 			
 			switch (occupation)  {
 			
 			case "PriSecJob":
 			case "PubSecJob":
 			case "GovSer":
+			case "Professional":
 				workingAs = "01";
 				occupationType = "S";
 				break;
 			case "Business":
-			case "Professional":
 				workingAs = "02";
 				occupationType = "B";
 				break;
@@ -283,17 +287,9 @@ public class Trading {
 			Date date = new Date();
 			String logName = new SimpleDateFormat("dd/MM/yyyy").format(date);
 			
-			// Details to be asked from user - START
-			/*String placeOfBirth = "Kanpur";
-			String CountryOfBirth = "IN";
-			String taxResidence = "IN";
-			String appIncome = "32";
-			String politicallyExposed = "N";*/
-			// Details to be asked from user - END
-			
-			String[] fatcaUploadArray = {customer.getPanCard(),"",customer.getCustomerName(),customerDetail.getDateOfBirth(),"","","01","E","1",
-					customerDetail.getPlaceOfBirth(),customerDetail.getCountryOfBirth(),customerDetail.getTaxResidency(),customer.getPanCard(),
-					"C","","","","","","","","","",workingAs,"",customerDetail.getIncomeSlab(),"","",customerDetail.getPoliticallyExposed(),
+			String[] fatcaUploadArray = {customer.getPanCard(),"",customer.getCustomerName(),customerDetail.getDateOfBirth(),"","",taxStaus,"E","1",
+					customerDetail.getPlaceOfBirth(),customerDetail.getCountryOfBirth(),customerDetail.getTaxResidency(),taxIdentificationNumber,
+					identificationType,"","","","","","","","","",workingAs,"",customerDetail.getIncomeSlab(),"","",customerDetail.getPoliticallyExposed(),
 					occupationCode,occupationType,"","","","","","","","","","","B","N","","","","","","","","","","","","","","","","","","","",
 					"","","","","","","","N","","N",logName,"",""  };
 
@@ -301,7 +297,7 @@ public class Trading {
 
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array created ");
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - cleint details array - "+fatcaDetails);
-			System.out.println("clientDetails : "+fatcaDetails);
+			System.out.println("fatcaDetails : "+fatcaDetails);
 
 			String getPasswordResp = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
 
@@ -322,6 +318,24 @@ public class Trading {
 			System.out.println("iStarMFWebService - mfapi response ucc : "+ucc);
 
 			logger.debug("Trading class - createClient method - customerId - "+customerId+" - end");
+			
+			String[] uccSpilts = ucc.split("\\|");
+	    	
+	    	System.out.println("uccSpilts[0] : "+uccSpilts[0]);
+	    	
+	    	if(uccSpilts[0].equals("100") ) {
+	    		
+	    		if(uccSpilts[1].contains("SUCCESSFULLY") ) {
+		    		return true;
+	    		}
+	    		else {
+	    			return false;
+	    		}
+	    		
+	    	}
+	    	else {
+    			return false;
+    		}
 			
 
 		}catch (IOException e) {
@@ -357,10 +371,10 @@ public class Trading {
 			String PASSWORD_STARMF;
 
 			/*StarMFWebService starMFWebService= new StarMFWebService();
-			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = starMFWebService.getWSHttpBindingIStarMFWebService();*/
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = starMFWebService.getWSHttpBindingIStarMFWebService1();*/
 			
 			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
 
 			Date date = new Date();
 			String mandateIdStartDate= new SimpleDateFormat("dd/MM/yyyy").format(date);
@@ -418,6 +432,63 @@ public class Trading {
 		}
 
 	}
+	
+	public String mandateStatus(String customerId, String mandateId) throws MoneyBuddyException {
+
+		try {
+		
+			logger.debug("Trading class - mandateStatus method - customerId - "+customerId+" - start");
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+			
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			logger.debug("Trading class - mandateStatus method - customerId - "+customerId+" - Loaded configProperties file.");
+			
+			String PASSWORD_STARMF;
+			
+			WebServiceStarMF wbStarMF = new WebServiceStarMF();		
+			in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
+			
+			System.out.println("customerId : "+customerId+" and mandateId : "+mandateId);
+			String[] mandateStatusArray = {configProperties.getProperty("MEMBER_ID"),customerId,mandateId};
+			
+			String mandateStatusDetails = String.join("|",mandateStatusArray);
+			
+			String passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+			
+			String[] resultsStarMF = passwordStarMF.split("\\|");
+			
+			for (int i = 0 ; i <resultsStarMF.length ; i++ )   {
+				System.out.println("resultsStarMF : "+i+" : " +resultsStarMF[i]);
+			}
+			
+			logger.debug("Trading class - mandateStatus method - customerId - "+customerId+" - fetched encrypted password from iStarMFWebService API ");
+			System.out.println("passwordStarMF : "+passwordStarMF);
+			
+			PASSWORD_STARMF = resultsStarMF[1];
+			
+			String mandateStatusResponse = iStarMFWebService.mfapi("14",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,mandateStatusDetails);
+			
+			System.out.println("mandateStatusResponse : "+mandateStatusResponse);
+			logger.debug("Trading class - mandateStatus method - customerId - "+customerId+" - mandateId - "+mandateId+" - mandateStatusResponse - "+mandateStatusResponse);
+			
+			logger.debug("Trading class - mandateStatus method - customerId - "+customerId+" - end");
+			
+			return mandateStatusResponse;
+		
+		}catch (IOException e) {
+			logger.error("Trading class - mandateStatus method - customerId - "+customerId+" - Caught IOException");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.error("Trading class - mandateStatus method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+	
+	}
 
 	public String executeTrade(String customerId, String panCard, List<CustomerCart> customerCartList,
 			String transactionCode, String buySell, String accountNum, String bankId, String ifsc, String bankMode, 
@@ -458,12 +529,12 @@ public class Trading {
 			logger.debug("Trading class - executeTrade method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
-			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
+			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry1();
 			String passwordMFOrder;
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
 			WebServiceStarMFPaymentGateway webServiceStarMFPaymentGateway = new WebServiceStarMFPaymentGateway();		
-			IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService();
+			IStarMFPaymentGatewayService iStarMFPaymentGatewayService = webServiceStarMFPaymentGateway.getWSHttpBindingIStarMFPaymentGatewayService1();
 			String PASSWORD_STARMF;
 			Response passwordStarMFPaymentGateway;
 			String[] resultsStarMFPaymentGateway;
@@ -544,7 +615,7 @@ public class Trading {
 				buySellType = "FRESH";
 				String selFolioNum = customerCartList.get(i).getFolioNumber();
 				
-				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))
+				if ("UPFRONT".equalsIgnoreCase(customerCartList.get(i).getTransactionType()))
 					totalUpfrontAmount += Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
 				else
 					totalSipAmount += Double.parseDouble(customerCartList.get(i).getSipAmount());
@@ -575,7 +646,7 @@ public class Trading {
 				System.out.println(" schemeCode :  "+schemeCode +" for fund Id : "+customerCartList.get(i).getFundId());
 
 				Double currentTransactionAmount ;
-				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))
+				if ("UPFRONT".equalsIgnoreCase(customerCartList.get(i).getTransactionType()))
 					currentTransactionAmount = Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
 				else 
 					currentTransactionAmount = Double.parseDouble(customerCartList.get(i).getSipAmount());
@@ -594,7 +665,7 @@ public class Trading {
 				hibernateSession.beginTransaction();
 				
 				tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,customerCartList.get(i).getTransactionType(),
-						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
+						"NA","NA",transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),"NA",
 						"1", null,null,"N",customerCartList.get(i).getFundId(), null,null,frmtdDateForDB, frmtdDateForDB,"N",
 						selFolioNum,null,"N"); 		
 
@@ -640,14 +711,14 @@ public class Trading {
 				}
 					
 				
-				if ("Debt".equals(schemeType) && "Liquid".equals(category))   {
+				if ("LIQUID".equalsIgnoreCase(schemeType) && "Liquid".equalsIgnoreCase(category))   {
 					
 					SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-					Date oneFifteenPm = parser.parse("13:15");
+					Date oneThirtyPm = parser.parse("13:30");
 					Date threePm = parser.parse("15:00");
 					
 					
-					if (date.after(oneFifteenPm) && date.before(threePm)) {
+					if (date.before(oneThirtyPm) || date.after(threePm)) {
 				    
 						schemeCode = schemeCode+"-L0" ;
 					}
@@ -660,7 +731,7 @@ public class Trading {
 				
 				System.out.println(" SCHEME CODE : "+schemeCode);
 				
-				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()))  {
+				if ("UPFRONT".equalsIgnoreCase(customerCartList.get(i).getTransactionType()))  {
 					
 					anyPaymentToday = true;
 
@@ -691,31 +762,49 @@ public class Trading {
 				else {
 
 					CommonUtil commonUtil = new CommonUtil();
-					
+					String sipStartYear ;
+					String sipEndYear ;
 					if ( Integer.parseInt(customerCartList.get(i).getSipDate()) <=   (cal.get(Calendar.DATE)) ) {
-						System.out.println(" Inside if case of date compare .....");
+						System.out.println(" Inside if case of SIP date compare .....");
 						sipStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(0) : commonUtil.theMonth(cal.get(Calendar.MONTH)+1));
 						sipEndMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
+						sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+						sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(customerCartList.get(i).getSipDuration()));
 					}
 					else {
-						System.out.println(" Inside else case of date compare .....");
+						System.out.println(" Inside else case of SIP date compare .....");
 						sipStartMonth = commonUtil.theMonth(cal.get(Calendar.MONTH));
 						sipEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? commonUtil.theMonth(11) : commonUtil.theMonth(cal.get(Calendar.MONTH)-1));
+						sipStartYear = Integer.toString(cal.get(Calendar.YEAR));
+						sipEndYear = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)-1) : Integer.toString(cal.get(Calendar.YEAR)));
+						sipEndYear = Integer.toString((Integer.parseInt(sipEndYear)+Integer.parseInt(customerCartList.get(i).getSipDuration())));
 					}
 					System.out.println(" sipStartMonth : "+sipStartMonth);
 					System.out.println(" sipEndMonth : "+sipEndMonth);
 					System.out.println(" date.getYear() : "+cal.get(Calendar.YEAR));
 					System.out.println("customerCartList.get(i).getSipDuration() : "+customerCartList.get(i).getSipDuration());
-					String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(customerCartList.get(i).getSipDuration()));
-					String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+					
+					
+					// A BUg MIGHT BE THERE - START 
+					
+					/*String sipEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(customerCartList.get(i).getSipDuration()));*/
+					/*String sipStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));*/
+					
+					/*String sipStartYear = Integer.toString(cal.get(Calendar.YEAR));*/
+					// A BUg MIGHT BE THERE - END 
+					
+					System.out.println(" sipStartYear : "+sipStartYear);
 					System.out.println(" sipEndYear : "+sipEndYear);
 					
-					String sipStartDate = sipStartMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipStartYear;
-					String sipEndDate = sipEndMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipEndYear;
+					String sipStartDate = sipStartMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipStartYear; // 01/5/2020 // 12/10/2020 // MM/DD/YYYY
+					String sipEndDate = sipEndMonth+"/"+customerCartList.get(i).getSipDate()+"/"+sipEndYear; 
 					
-				    Date curSipStartDate = sdf.parse(sipStartDate);
+				    Date curSipStartDate = sdf.parse(sipStartDate); // 01/5/2020 // 12/10/2020
 				    Date curSipEndDate = sdf.parse(sipEndDate);
 				    
+				    
+				    
+				    System.out.println("minSipStartDate : "+minSipStartDate+" and curSipStartDate : "+curSipStartDate);
 				    if (minSipStartDate.after(curSipStartDate)) {
 				    	c.setTime(curSipStartDate);
 				    	c.add(Calendar.MONTH,+1);
@@ -781,7 +870,7 @@ public class Trading {
 																	+ " bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " "
 																			+ " where transactionDetailId = :transactionDetailId");
 				
-				if ("UPFRONT".equals(customerCartList.get(i).getTransactionType()) ) {
+				if ("UPFRONT".equalsIgnoreCase(customerCartList.get(i).getTransactionType()) ) {
 					bseOrderId = resultsEntryParam[2].toString();
 					totalPaymentAmount += Double.parseDouble(customerCartList.get(i).getUpfrontAmount());
 					
@@ -796,7 +885,7 @@ public class Trading {
 						
 						anyPaymentToday = true;
 						WebServiceStarMF wbStarMF = new WebServiceStarMF();		
-						in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+						in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
 						
 						ChildOrderRequest childOrderRequest = new ChildOrderRequest();
 						
@@ -903,11 +992,84 @@ public class Trading {
 			}
 			
 			System.out.println("anyPaymentToday : "+anyPaymentToday+" and allOrderFailed : "+allOrderFailed);
+			
+			if (!allOrderFailed || !anyPaymentToday) {
+				
+				if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))  {
+					
+					Double totalAmount = 0.0;
+					String dataTable = "";
+					String htmlTableStart = "<table style=\"border-collapse:collapse; text-align:center;width:100%\" >";
+					String htmlTableEnd = "</table>";
+					String htmlHeaderRowStart = "<tr style =\"background-color:#13b1cd; color:#ffffff;\">";
+					String htmlHeaderRowEnd = "</tr>";
+					String htmlTrStart = "<tr style =\"color:#555555;\">";
+					String htmlTrEnd = "</tr>";
+					String htmlTdStart = "<td style=\" border-color:#13b1cd; border-style:solid; border-width:thin; padding: 5px;\">";
+					String htmlTdEnd = "</td>";
+
+					dataTable += htmlTableStart;
+					dataTable += htmlHeaderRowStart;
+					dataTable += htmlTdStart + "Fund Name " + htmlTdEnd;
+					dataTable += htmlTdStart + "Details " + htmlTdEnd;
+					dataTable += htmlHeaderRowEnd;
+					
+					String debitDate="";
+					for ( CustomerCart customerCart : customerCartList)   {
+						
+						
+						if ( "SIP".equalsIgnoreCase(customerCart.getTransactionType()) )  {
+							if (!"Total".equalsIgnoreCase(customerCart.getSchemeName()))   {
+								if ("1".equals(customerCart.getSipDate()))   
+								debitDate=customerCart.getSipDate()+"<sup>st</sup>";
+								else 
+									debitDate=customerCart.getSipDate()+"<sup>th</sup>";
+								dataTable += htmlTrStart;
+								dataTable += htmlTdStart + customerCart.getSchemeName() + htmlTdEnd;
+								dataTable += htmlTdStart 
+										+ "Amount: "+customerCart.getSipAmount() 
+										+ "<br/>Debit Date: "+debitDate
+										+ htmlTdEnd;
+								dataTable += htmlTrEnd; 
+								totalAmount += Double.parseDouble(customerCart.getSipAmount());
+							}
+						}
+					}
+					/*dataTable += htmlTrStart;
+					dataTable += htmlTdStart + "<b>" + "Total" + "</b>" + htmlTdEnd;
+					dataTable += htmlTdStart + "<b>" + totalAmount + "</b>" + htmlTdEnd;
+					dataTable += htmlTrEnd; */
+	    		         		 
+					dataTable += htmlTableEnd;
+					
+					
+					String mailLink = null;
+					String subject = null;
+					SendMail sendMail = new SendMail();
+				
+					mailLink = configProperties.getProperty("MAIL_SIP_REGISTERED_N_LINK");
+					System.out.println("mailLink is : "+mailLink);
+					subject = configProperties.getProperty("MAIL_SIP_REGISTERED_N_SUBJECT");
+					QueryCustomer queryCustomer = new QueryCustomer();
+					sendMail.MailSending(queryCustomer.getCustomerEmailId(customerId),subject,"SipRegisteredNoCaseMail","SipRegisteredN.txt",mailLink,"",queryCustomer.getCustomerNameFromId(customerId),dataTable);
+				
+				}
+							
+				
+			}
+			
 			if (!anyPaymentToday)  {
 				return null;
 			}
 			
 			if (!allOrderFailed) {
+				
+				
+				if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))  {
+					
+				}
+					
+				
 
 				PasswordRequest passwordRequest = new PasswordRequest();
 				ObjectFactory objFact = ObjectFactory.class.newInstance();
@@ -1094,7 +1256,7 @@ public class Trading {
 					
 					String userStatus = queryOrderStatus.getStatusDetail(transactionDetailQueryResult.get(0)[3].toString());
 					
-					if ("UPFRONT".equals(transactionDetailQueryResult.get(0)[5].toString()))
+					if ("UPFRONT".equalsIgnoreCase(transactionDetailQueryResult.get(0)[5].toString()))
 						orderDataModel.add(new OrderDataModel(transactionDetailQueryResult.get(0)[4].toString(), schemeName, 
 											transactionDetailQueryResult.get(0)[1].toString(),"0", transactionDetailQueryResult.get(0)[2].toString(),
 											userStatus ));
@@ -1141,7 +1303,7 @@ public class Trading {
 
 	
 	public void executeRedemption(String customerId, String panCard, String fundId, Double amount, Double quantity, String allRedeem, String transactionCode,  
-			String transactionType, String buySell, String folioNum
+			String transactionType, String selOption, String selType, String buySell, String folioNum
 			   ) throws MoneyBuddyException {
 
 
@@ -1182,7 +1344,7 @@ public class Trading {
 			logger.debug("Trading class - executeRedemption method - customerId - "+customerId+" - Loaded configProperties file.");
 			
 			WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
-			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry();
+			MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry1();
 			String passwordMFOrder;
 			String[] resultsMFOrder;
 			String PASSWORD_MFORDER;
@@ -1221,6 +1383,7 @@ public class Trading {
 				String schemeType = null;
 				String category = null;
 				buySellType = "FRESH";
+				String redeemType = "FULL";
 				
 				System.out.println("fundId : "+fundId);
 
@@ -1256,8 +1419,8 @@ public class Trading {
 
 				hibernateSession.beginTransaction();
 				
-				tempTransactionDetail  = new TransactionDetails(transactionId, null,null,null, customerId,transactionType,
-						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),
+				tempTransactionDetail  = new TransactionDetails(transactionId, null,null,null, customerId,transactionType,selOption, selType,
+						transactionCode,buySell, buySellType, Double.toString(currentTransactionAmount),Double.toString(quantity),
 						"1", null,null,"N",fundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",folioNum,"0","N"); 		
 
 				hibernateSession.save(tempTransactionDetail);
@@ -1282,6 +1445,7 @@ public class Trading {
 			
 					
 					if (!"Y".equals(allRedeem))  {
+						redeemType = "PARTIAL";
 						if ( amount == 0 ) {
 							quan = Double.toString(quantity);
 							amt = "";
@@ -1318,10 +1482,11 @@ public class Trading {
 				hibernateSession.beginTransaction();
 				query = hibernateSession.createQuery("update TransactionDetails set bseOrderId = :bseOrderId , "
 																	+ "uniqueReferenceNumber = :uniqueReferenceNumber, transactionStatus =:transactionStatus ,"
-																	+ " bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag " + " "
+																	+ " bseRemarks = :bseRemarks , bseSuccessFlag = :bseSuccessFlag, buySellType = :buySellType " 
 																			+ " where transactionDetailId = :transactionDetailId");
 				query.setParameter("bseOrderId", resultsEntryParam[2].toString());
 				query.setParameter("uniqueReferenceNumber", transactionDetailId);
+				query.setParameter("buySellType", redeemType);
 				if ("0".equals(resultsEntryParam[7].toString()))
 					query.setParameter("transactionStatus", "7");
 				else 
@@ -1362,7 +1527,7 @@ public class Trading {
 		TransactionDetails tempTransactionDetail;
 		
 		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
-		in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+		in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
 		String PASSWORD_STARMF;
 		String passwordStarMF;
 		String[] resultsStarMF;
@@ -1393,8 +1558,8 @@ public class Trading {
 			
 			hibernateSession.beginTransaction();
 			
-			tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,"STP",
-					"NEW","BUY", "FRESH", stpAmount,
+			tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,null, customerId,"STP","NA","NA",
+					"NEW","BUY", "FRESH", stpAmount,"NA",
 					"1", null,null,"N",withdrawalFundId, null,null,frmtdDateForDB, frmtdDateForDB,"N",
 					stpFolioNum,null,"N"); 		
 
@@ -1528,7 +1693,252 @@ public class Trading {
 
 	}
 	
+
+	public void executeSwitch(String customerId, String selOPtion, String selType, String withdrawalFundId, String switchFolioNum, String purchaseFundId, String switchAmount, 
+					String switchUnit, String switchOption, String switchType, String switchCartId) throws MoneyBuddyException {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+		
+		TransactionDetails tempTransactionDetail;
+		
+		WebServiceMFOrder wbMFOrder = new WebServiceMFOrder();	
+		MFOrderEntry mfOrderEntry = wbMFOrder.getWSHttpBindingMFOrderEntry1();
+		String PASSWORD_MFORDER;
+		String passwordMFOrder;
+		String[] resultsMFOrder;
+		String entryParam;
+		String[] resultsEntryParam = null;
+
+		try {
+			
+			logger.debug("Trading class - executeSwitch method - customerId - "+customerId+" - start");
+			
+			QuerySecondaryFundDetails querySecondaryFundDetails = new QuerySecondaryFundDetails();
+			String withdrawalSchemeCode = querySecondaryFundDetails.getSchemeCode(withdrawalFundId);
+			String purchaseSchemeCode = querySecondaryFundDetails.getSchemeCode(purchaseFundId);
+
+			hibernateSession.beginTransaction();
+			
+			String nextTransactionId = "1";
+						
+			Query query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+					+ " order by transactionDetailId desc ");
+			
+			query.setMaxResults(1);
+			
+			nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+			
+			
+			hibernateSession.getTransaction().commit();
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String frmtdDateForDB = dateFormat.format(date);
+			
+			hibernateSession.beginTransaction();
+			
+			tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,
+       			null, customerId,"SWITCH",selOPtion,selType ,"NEW","BUY", "ADDITIONAL", switchAmount,switchUnit,
+					"7", "AUTO PURCHASE OF FUND ID : "+purchaseFundId,
+					"0","N",purchaseFundId,null,null,frmtdDateForDB, frmtdDateForDB,"N",
+					switchFolioNum,null,"N"); 		
+
+			hibernateSession.save(tempTransactionDetail);
+			hibernateSession.getTransaction().commit();
+			
+			String transactionDetailIdForBuy = tempTransactionDetail.getTransactionDetailId();
+			
+			hibernateSession.beginTransaction();
+			
+       	 	tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,null,
+       			null, customerId,"SWITCH" ,selOPtion,selType ,"NEW","SELL", "ADDITIONAL", switchAmount,switchUnit,
+					"7", "AUTO WITHDRAWAL OF FUND ID : "+withdrawalFundId,
+					"0","N",withdrawalFundId,null,null,frmtdDateForDB, frmtdDateForDB,"N",
+					switchFolioNum,null,"N"); 		
+
+			hibernateSession.save(tempTransactionDetail);
+			hibernateSession.getTransaction().commit();
+			
+			
+			String transactionDetailId = tempTransactionDetail.getTransactionDetailId();
+			
+			
+			
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			Properties clientProperties = new Properties();
+			String clientPropFilePath = "../../../config/client.properties";
+
+			clientProperties.load(Trading.class.getResourceAsStream(clientPropFilePath));
+			
+			passwordMFOrder = mfOrderEntry.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+			resultsMFOrder = passwordMFOrder.split("\\|");
+
+
+			PASSWORD_MFORDER = resultsMFOrder[1];
+			
+			String allUnitFlag;
+			if ( "FULL".equals(switchOption))   {
+			 switchAmount = "";
+			 switchUnit = "";
+			 allUnitFlag="Y";
+			}
+			else {
+				allUnitFlag="N";
+				if ("Amount".equals(switchType))   {
+					switchUnit = "";
+				}
+				else {
+					switchAmount = "";
+				}
+			}
+			
+			
+			entryParam = mfOrderEntry.switchOrderEntryParam ("NEW",transactionDetailId,clientProperties.getProperty("ORDER_ID"),configProperties.getProperty("USER_ID"),
+						configProperties.getProperty("MEMBER_ID"),customerId,withdrawalSchemeCode,purchaseSchemeCode,"SO","FRESH",
+						clientProperties.getProperty("DP_TXN"),switchAmount,switchUnit, allUnitFlag,switchFolioNum,clientProperties.getProperty("REMARKS"),
+						clientProperties.getProperty("KYC_STATUS"),clientProperties.getProperty("SUB_BR_CODE"),
+						configProperties.getProperty("EUIN"),configProperties.getProperty("EUIN_FLAG"),clientProperties.getProperty("MIN_REDEEM"),
+						clientProperties.getProperty("IP_ADDRESS"),PASSWORD_MFORDER,configProperties.getProperty("PASS_KEY"),clientProperties.getProperty("PARAM_1"),
+						clientProperties.getProperty("PARAM_2"),clientProperties.getProperty("PARAM_3"));
+						
+			resultsEntryParam = entryParam.split("\\|");
+
+			for (int j = 0 ; j <resultsEntryParam.length ; j++ )   {
+				System.out.println("resultsEntryParam : "+j+" : " +resultsEntryParam[j]);
+			}
+
+			if ("0".equals(resultsEntryParam[7]))   {
+				
+				System.out.println("\nselOption : "+switchOption+"\nselType : "+switchType+"\nbseOrderId : "+resultsEntryParam[2]+""
+						+ "\ntransactionUnit : "+switchUnit+"\ntransactionDetailId : "+transactionDetailId+"\ntransactionDetailIdForBuy : "+transactionDetailIdForBuy);
+				// update changes - start 
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("update TransactionDetails set selOption = :selOption, selType=:selType, bseOrderId = :bseOrderId, "
+						+ " transactionUnit=:transactionUnit where transactionDetailId = :transactionDetailId");
+				
+				query.setParameter("selOption",switchOption);
+				query.setParameter("selType",switchType);
+				query.setParameter("bseOrderId",resultsEntryParam[2]);
+				query.setParameter("transactionUnit", "".equals(switchUnit)?"NA":switchUnit);
+				query.setParameter("transactionDetailId", transactionDetailId);
+				
+				query.executeUpdate();
+				
+				hibernateSession.getTransaction().commit();
+				
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("update TransactionDetails set selOption = :selOption, selType=:selType, bseOrderId = :bseOrderId, "
+						+ " transactionUnit=:transactionUnit where transactionDetailId = :transactionDetailId");
+				
+				query.setParameter("selOption",switchOption);
+				query.setParameter("selType",switchType);
+				query.setParameter("bseOrderId",Integer.toString((Integer.parseInt(resultsEntryParam[2])+1)));
+				query.setParameter("transactionUnit", "".equals(switchUnit)?"NA":switchUnit);
+				query.setParameter("transactionDetailId", transactionDetailIdForBuy);
+				
+				query.executeUpdate();
+				
+				hibernateSession.getTransaction().commit();
+				
+				// update changes - end
+				
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("delete from SwitchCart where switchCartId = :switchCartId ");
+				query.setParameter("switchCartId", switchCartId);
+				
+				query.executeUpdate();
+				
+				hibernateSession.getTransaction().commit();
+			}
+
+		
+			logger.debug("Trading class - executeStp method - customerId - "+customerId+" - end");
+		
+		} catch (NumberFormatException | HibernateException e) {
+			logger.error("Trading class - executeStp method - customerId - "+customerId+" - Caught some Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		} catch (Exception e) {
+			logger.error("Trading class - executeStp method - customerId - "+customerId+" - Caught Exception");
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(), e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+
+
+	}
 	
+	
+	public void paymentLink() throws MoneyBuddyException   {
+		
+		WebServiceStarMF wbStarMF = new WebServiceStarMF();	
+		in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
+		String PASSWORD_STARMF;
+		String passwordStarMF;
+		String[] resultsStarMF;
+
+		String paymentStatusDetails;
+		
+		
+		try {
+			
+			System.out.println("paymentLink  called - START ");
+			
+			Properties configProperties = new Properties();
+			String configPropFilePath = "../../../config/config.properties";
+
+			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			
+			String[] paymentStatusDetailsArray = {configProperties.getProperty("MEMBER_ID"),"201",configProperties.getProperty("LOGOUT_URL_UPFRONT")};
+			paymentStatusDetails = String.join("|",paymentStatusDetailsArray);
+
+
+			passwordStarMF = iStarMFWebService.getPassword(configProperties.getProperty("USER_ID"),configProperties.getProperty("MEMBER_ID"),configProperties.getProperty("PASSWORD"),configProperties.getProperty("PASS_KEY"));
+
+			resultsStarMF = passwordStarMF.split("\\|");
+
+			PASSWORD_STARMF = resultsStarMF[1];
+
+			System.out.println(" The details array that we are sending to BSE is : "+paymentStatusDetails);
+			String paymentStatusResponse = iStarMFWebService.mfapi("03",configProperties.getProperty("USER_ID"),PASSWORD_STARMF,paymentStatusDetails);
+
+			System.out.println("paymentStatusResponse : "+paymentStatusResponse);
+
+			String[] resultsPaymentStatusResponse = paymentStatusResponse.split("\\|");
+			
+			for ( String abc : resultsPaymentStatusResponse)   {
+				System.out.println("Value of abc : "+abc);
+			}
+			
+			System.out.println("paymentLink  called - END ");
+		
+		
+	} catch (NumberFormatException | HibernateException e) {
+		logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
+		e.printStackTrace();
+		throw new MoneyBuddyException(e.getMessage(), e);
+	} catch (Exception e) {
+		logger.error("Trading class : checkPaymentStatus method : Caught exception  ");
+		e.printStackTrace();
+		throw new MoneyBuddyException(e.getMessage(), e);
+	}
+	finally {
+		/*if(hibernateSession !=null )
+				hibernateSession.close();*/
+	}
+	}
 	
 	
 	public void checkPaymentStatus() throws MoneyBuddyException {
@@ -1541,9 +1951,16 @@ public class Trading {
 	HashMap<String,String> successfulPayment = new HashMap<String, String>();
 	HashMap<String,String> pendingPayment = new HashMap<String, String>();
 
+	System.out.println("Trading class : checkPaymentStatus method - Hi There 1 ");
 	
 	WebServiceStarMF wbStarMF = new WebServiceStarMF();	
-	in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFService();
+	
+	System.out.println("Trading class : checkPaymentStatus method - Hi There 2 ");
+	
+	in.bsestarmf._2016._01.IStarMFWebService iStarMFWebService = wbStarMF.getWSHttpBindingIStarMFWebService1();
+	
+	System.out.println("Trading class : checkPaymentStatus method - Hi There 3 ");
+	
 	String PASSWORD_STARMF;
 	String passwordStarMF;
 	String[] resultsStarMF;
@@ -1679,6 +2096,10 @@ public class Trading {
 							successfulPayment.put(schemeName, transactionDetail[6].toString());
 							
 						}
+						else if (resultsPaymentStatusResponse[1].contains("NODAL") || resultsPaymentStatusResponse[1].contains("AWAITING"))  {
+							System.out.println(resultsPaymentStatusResponse[1]);
+							
+						}
 						else {
 							System.out.println("Payment Failed");
 							hibernateSession.beginTransaction();
@@ -1756,6 +2177,201 @@ public class Trading {
 	finally {
 		if(hibernateSession !=null )
 				hibernateSession.close();
-	}}
+	}
+	}
+	
+	
+	public void clientRecords() throws MoneyBuddyException, FileNotFoundException, IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Client Records");
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+
+		List<ClientData> clientDataList = new LinkedList<ClientData>();
+		 String[][] bookData = new String[100][30] ;
+		 
+		try
+		{
+			hibernateSession.beginTransaction();
+			
+			Query query = hibernateSession.createQuery("select distinct(amcCode) from SecondaryFundDetails order by amcCode asc ");
+			
+			List<String> amcList = query.list();
+			
+			hibernateSession.getTransaction().commit();
+			
+			bookData[0][0]="CustomerID";
+			bookData[0][1]="CustomerName";
+			bookData[0][2]="TotalAmount";
+			bookData[0][3]="TotalSIPAmount";
+			int j = 4;
+			
+			for ( String amc : amcList )   {
+				bookData[0][j++]=amc;
+			}
+				
+			Double[] totalRecord = new Double[amcList.size()+2];
+			
+			for ( int i=0 ;  i < totalRecord.length ; i++)
+				totalRecord[i] = 0.0;
+			
+			
+			hibernateSession.beginTransaction();
+			
+			query = hibernateSession.createQuery("select c.customerId,c.customerName , sum(t.unitPrice*t.quantity) from Customers c, TransactionDetails t " + 
+					"where t.transactionStatus = '8' and c.customerId=t.customerId group by t.customerId ");
+			
+			List<Object[]> customersList = query.list();
+			String customerId = "";
+			String customerName = "";
+			String totalAmount = "";
+			hibernateSession.getTransaction().commit();
+			
+			String amount = "";
+			for ( int i = 0; i < customersList.size() ;i++ ) {
+				
+				customerId = customersList.get(i)[0].toString();
+				customerName = customersList.get(i)[1].toString();
+				totalAmount = customersList.get(i)[2].toString();
+				if (totalAmount != null)
+					totalAmount = String.format("%.2f",Double.parseDouble(totalAmount));
+				else 
+					totalAmount = "0.0";
+				
+				totalRecord[0] += Double.parseDouble(totalAmount);
+				 
+				bookData[(i+1)][0]=customerId;
+				bookData[(i+1)][1]=customerName;
+				bookData[(i+1)][2]=totalAmount;
+				
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createQuery("select sum(sipAmount) from SipDetails "
+						+ " where sipCompletionStatus='N' and customerId = :customerId and sipDate is not null ");
+				
+				query.setParameter("customerId", customerId );
+					
+				Object result = query.uniqueResult();
+				
+				if (result != null)
+					bookData[(i+1)][3] = result.toString();
+				else 
+					bookData[(i+1)][3] = "0.0";
+				
+				totalRecord[1] += Double.parseDouble(bookData[(i+1)][3].toString());
+				
+				hibernateSession.getTransaction().commit();
+								
+				hibernateSession.beginTransaction();
+				
+				query = hibernateSession.createSQLQuery("select sum(t.UNIT_PRICE*t.QUANTITY) from "
+						+ " ( select * from TRANSACTION_DETAILS where CUSTOMER_ID= :customerId and TRANSACTION_STATUS='8' ) t "
+						+ " RIGHT JOIN SECONDARY_FUND_DETAILS s ON  t.FUND_ID=s.FUND_ID "
+						+ " group by s.AMC_CODE order by s.AMC_CODE asc");
+				
+				query.setParameter("customerId", customerId );
+					
+				List<String> amountsList = query.list();
+				
+				hibernateSession.getTransaction().commit();
+				
+				for ( int k = 0; k < amountsList.size() ;k++ ) {
+					
+					if (null != amountsList.get(k))  
+						amount = String.format("%.2f",amountsList.get(k));
+					else 
+						amount="0.0";
+					
+					bookData[(i+1)][(k+4)]=amount;
+					totalRecord[k+2] += Double.parseDouble(amount);
+					
+				}
+			}
+			
+			int total = customersList.size()+1;
+			bookData[total][1] = "TOTAL";
+			
+			
+			for ( int i = 0; i < totalRecord.length ;i++ ) {
+				bookData[total][(i+2)]= String.format("%.2f",totalRecord[i]); 
+			}
+			
+			
+	
+		}
+		catch ( HibernateException e ) {
+			
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		catch (Exception e ) {
+			
+			e.printStackTrace();
+			throw new MoneyBuddyException(e.getMessage(),e);
+		}
+		finally {
+			if(hibernateSession !=null )
+					hibernateSession.close();
+		}
+		
+		
+		int rowCount = 0;
+         
+        for (String[] aBook : bookData) {
+            Row row = sheet.createRow(++rowCount);
+             
+            int columnCount = 0;
+             
+            for (String field : aBook) {
+                Cell cell = row.createCell(++columnCount);
+                if ( field != null)  {
+                if (  isInteger(field)) {
+                	cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+                    cell.setCellValue(Double.parseDouble(field));
+                } else  {
+                	cell.setCellValue((String) field);
+                }
+                }
+                
+            }
+            
+            
+             
+        }
+        
+		 
+        ClassLoader cl = getClass().getClassLoader();
+		
+		/*String directoryName = cl.getResource("./../../assets/ClientRecord").getPath().substring(1);*/
+        String directoryName = cl.getResource("./../../assets/AofForms").getPath().substring(1);
+		
+		System.out.println("directoryNameeeee : "+directoryName);
+		
+		//String directoryName = cl.getResource("./../../assets/ClientRecord").getPath().substring(1);
+
+		System.out.println("directoryName is : "+directoryName);
+		
+		String fileName = directoryName+"ClientRecords.xlsx";
+		
+		System.out.println("fileName is : "+fileName);
+		
+         
+        try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
+            workbook.write(outputStream);
+        }
+        
+       /* SendMail sendMail = new SendMail();
+        sendMail.sendMailwithAttachement();*/
+        
+        
+	}
+	
+	public static boolean isInteger(Object field) {
+	    try { 
+	        java.lang.Float.parseFloat(field.toString()); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    }
+	    return true;
+	}
 
 }

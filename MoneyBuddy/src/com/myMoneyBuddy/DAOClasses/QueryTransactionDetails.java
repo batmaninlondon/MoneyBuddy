@@ -40,7 +40,8 @@ public class QueryTransactionDetails {
 			hibernateSession.beginTransaction();
     		
     		Query query = hibernateSession.createQuery("select distinct(folioNum) from FolioDetails "
-    				+ " where customerId = :customerId and  amcCode = (select amcCode from  SecondaryFundDetails where fundId = :fundId) ");
+    				+ " where customerId = :customerId and  amcCode = (select amcCode from  SecondaryFundDetails where fundId = :fundId)"
+    				+ " order by folioDetailsId desc ");
     		query.setParameter("customerId", customerId);
     		query.setParameter("fundId", fundId);
     		List<String> folioNumList = query.list();
@@ -319,7 +320,7 @@ public class QueryTransactionDetails {
 			logger.debug("QueryTransactionDetails class - getPendingNavsOrders method - start");
 			hibernateSession.beginTransaction();
 			Query query = hibernateSession.createQuery("select t.bseOrderId,s.rta,p.schemeType,t.transactionDate,t.transactionFolioNum,"
-					+ "t.transactionType,t.bseRegistrationNumber,t.customerId"
+					+ "t.transactionType,t.bseRegistrationNumber,t.customerId,t.buySell"
 					+ " from TransactionDetails t, SecondaryFundDetails s, PrimaryFundDetails p "
 					+ "where t.transactionStatus='7' and t.fundId=p.fundId and t.fundId=s.fundId");
 			
@@ -331,6 +332,7 @@ public class QueryTransactionDetails {
 			String frmtTransactionDate = "";
 			String folioNum = "";
 			String bseRegNum;
+			String tranType="";
 			for ( int i = 0; i < transactionDetailsList.size() ;i++ ) {
 				
 				if (null == transactionDetailsList.get(i)[0])
@@ -356,6 +358,7 @@ public class QueryTransactionDetails {
 					frmtTransactionDate = dateFormat2.format( date );
 					
 				}
+				
 				if (null == transactionDetailsList.get(i)[4])
 					folioNum = "";
 				else
@@ -365,8 +368,28 @@ public class QueryTransactionDetails {
 				else
 					bseRegNum = transactionDetailsList.get(i)[6].toString();
 				
-					
-				pendingNavOrders.add( new PendingNavOrders(transactionDetailsList.get(i)[7].toString(),bseOrderId,bseRegNum,transactionDetailsList.get(i)[5].toString(),rta,schemeType,transactionDate,
+				System.out.println("bseRegNum : "+bseRegNum+" and transactionDetailsList.get(i)[4] : "+transactionDetailsList.get(i)[4]);	
+				
+				if ("STP".equals(transactionDetailsList.get(i)[5].toString()))
+				{
+					tranType = transactionDetailsList.get(i)[5].toString()+"-"+transactionDetailsList.get(i)[8].toString();
+				}
+				else if ("SWITCH".equals(transactionDetailsList.get(i)[5].toString()))
+				{
+					String buySellType ="";
+					if ( "BUY".equalsIgnoreCase(transactionDetailsList.get(i)[8].toString()))  {
+						buySellType = "IN";
+					}
+					else 
+						buySellType = "OUT";
+					tranType = transactionDetailsList.get(i)[5].toString()+"-"+buySellType;
+				}
+				else {
+					tranType = transactionDetailsList.get(i)[5].toString();
+				}
+				
+				pendingNavOrders.add( new PendingNavOrders(transactionDetailsList.get(i)[7].toString(),bseOrderId,bseRegNum,
+						tranType,rta,schemeType,transactionDate,
 						frmtTransactionDate, folioNum));
 			}
 			

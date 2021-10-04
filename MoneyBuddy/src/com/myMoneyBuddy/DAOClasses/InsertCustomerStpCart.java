@@ -78,12 +78,12 @@ public class InsertCustomerStpCart {
 
     }
 	
-	
+	/*
 	public void addCustomerStpCart (String customerId, String fundId, String schemeName, String minRedAmount, String redAmount, String redUnits,
 			String totalRedAmount, String totalRedUnits, String redemptionOption, String redemptionType, String folioNumber) throws MoneyBuddyException
     {
 
-    	logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - start");
+    	logger.debug("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - start");
     	
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
     	RedemptionCart tempRedemptionCart = null;
@@ -133,7 +133,7 @@ public class InsertCustomerStpCart {
     			query.executeUpdate();
     			
     			hibernateSession.getTransaction().commit();
-    			logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - record updated in CustomerCart table for fundId - "+fundId);
+    			logger.debug("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - record updated in CustomerCart table for fundId - "+fundId);
     			
     		}
     		else {
@@ -158,20 +158,20 @@ public class InsertCustomerStpCart {
 	   	        hibernateSession.refresh(tempRedemptionCart);
 	   	        
 	   	        hibernateSession.getTransaction().commit();
-	   	        logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - new record inserted in CustomerCart table");
+	   	        logger.debug("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - new record inserted in CustomerCart table");
    	        
     		}
     		
-    		logger.debug("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - end");
+    		logger.debug("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - end");
 
     	}
     	catch ( HibernateException e ) {
-    		logger.error("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - Caught HibernateException");
+    		logger.error("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("InsertCustomerRedemptionCart class - addCustomerRedemptionCart method - customerId - "+customerId+" - Caught Exception");
+			logger.error("InsertCustomerStpCart class - addCustomerStpCart method - customerId - "+customerId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
@@ -181,7 +181,7 @@ public class InsertCustomerStpCart {
 		}
 
     }
- 
+ */
 }
 
 

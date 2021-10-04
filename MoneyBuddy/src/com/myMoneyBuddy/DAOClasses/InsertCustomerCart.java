@@ -45,7 +45,7 @@ public class InsertCustomerCart {
     			
     			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
     			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, selectedFundDetailsDataModel.getFundId());
-    			
+/*    			
     			hibernateSession.beginTransaction();
     			Query query = hibernateSession.createQuery("select transactionFolioNum from TransactionDetails "
     					+ " where customerId = :customerId and fundId = :fundId and  transactionDate = "
@@ -55,25 +55,34 @@ public class InsertCustomerCart {
     			query.setParameter("customerId", customerId);
     			query.setParameter("fundId", selectedFundDetailsDataModel.getFundId());
     			 
-    			Object obj = query.uniqueResult();
+    			Object obj = query.uniqueResult();*/
     			
+    			System.out.println("LETS SET SEL FOLIO NUMBER AS : "+folioNumList);
     			String selFolioNum = "New";
+    			int iend = folioNumList.indexOf(":"); 
+    			if (iend != -1) 
+    			{
+    				selFolioNum= folioNumList.substring(0 , iend); //this will give abc
+    			}
     			
-    		    if (obj != null) {
+    			
+    			
+    			
+    		   /* if (obj != null) {
     		    	selFolioNum = obj.toString();
     		    }
     					 
-    			hibernateSession.getTransaction().commit();
+    			hibernateSession.getTransaction().commit();*/
     			
 	    		hibernateSession.beginTransaction();
-	    		if ("UPFRONT".equals(transactionType))  {
+	    		if ("UPFRONT".equalsIgnoreCase(transactionType))  {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,null,null,null,selFolioNum,folioNumList,frmtdDate,"Pending",rta,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getUpfrontMultiplier(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,null,null,null,selFolioNum,folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
 	    		else {
 	    			tempCustomerCart = new CustomerCart(customerId,selectedFundDetailsDataModel.getFundId(),selectedFundDetailsDataModel.getSchemeName(),
-	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,"99",null,
+	    					selectedFundDetailsDataModel.getMinPurchaseAmount(),selectedFundDetailsDataModel.getUpfrontMultiplier(),selectedFundDetailsDataModel.getMinSipAmount(),"0","0",transactionType,"99",null,
 	    					"1",selFolioNum,folioNumList,frmtdDate,"Pending",rta,
 	    					selectedFundDetailsDataModel.getPdfFilePath());
 	    		}
@@ -123,7 +132,7 @@ public class InsertCustomerCart {
     		System.out.println("InsertCustomerCart class - addCustomerCart method - sipDuration : "+sipDuration+" and sipDate : "+sipDate);
     		hibernateSession.beginTransaction();
     		
-    		if ("UPFRONT".equals(transactionType))  {
+    		if ("UPFRONT".equalsIgnoreCase(transactionType))  {
 
     		query = hibernateSession.createQuery("from CustomerCart where customerId = :customerId and fundId = :fundId "
     				+ " and folioNumber = :folioNumber and transactionType = :transactionType ");
@@ -177,7 +186,7 @@ public class InsertCustomerCart {
     			
     			if (null == result) throw new MoneyBuddyException("amount not found, which fundId exsited ");*/
     			Double updatedAmount;
-    			if ("UPFRONT".equals(cartList.get(0).getTransactionType()))  {
+    			if ("UPFRONT".equalsIgnoreCase(cartList.get(0).getTransactionType()))  {
 					updatedAmount = Double.parseDouble(cartList.get(0).getUpfrontAmount()) + Double.parseDouble(amount);
 					System.out.println("Existed amount : "+cartList.get(0).getUpfrontAmount()+" currentAmount: "+amount+" updated amount : "+updatedAmount);
     			}
@@ -192,7 +201,7 @@ public class InsertCustomerCart {
     			
     			System.out.println(" amount : "+updatedAmount+" and folioNumber : "+folioNum+"  has to be updated for customerId : "+customerId+" and fundId : "+fundId);
     			
-    			if ("UPFRONT".equals(transactionType))  {
+    			if ("UPFRONT".equalsIgnoreCase(transactionType))  {
     				query = hibernateSession.createQuery("update CustomerCart set upfrontAmount = :updatedAmount "
     					+ " where customerId = :customerId and fundId = :fundId and folioNumber = :folioNumber "
     					+ " and transactionType=:transactionType ");
@@ -231,12 +240,12 @@ public class InsertCustomerCart {
     			PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(fundId);
         		
 	    		hibernateSession.beginTransaction();
-	    		if ("UPFRONT".equals(transactionType))
-	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),
+	    		if ("UPFRONT".equalsIgnoreCase(transactionType))
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getUpfrontMultiplier(),
 	    					primaryFundDetails.getMinSipAmount(),amount,"0",transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		else
-	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),
+	    			tempCustomerCart = new CustomerCart(customerId,fundId,schemeName,primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getUpfrontMultiplier(),
 	    					primaryFundDetails.getMinSipAmount(),"0",amount,transactionType,sipDuration,sipPlan,sipDate,folioNum,
 	    					null,cartCreationDate,status,rta,primaryFundDetails.getPdfFilePath());
 	    		

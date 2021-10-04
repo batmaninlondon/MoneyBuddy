@@ -28,8 +28,8 @@ public class ActiveSipAction extends ActionSupport implements SessionAware{
 	public String execute() {
 
 		String customerId = sessionMap.get("customerId").toString();
+		
 		try {
-		logger.debug("PortfolioAction class : execute method : start");
 		
 		QueryProducts queryProducts = new QueryProducts();
 		
@@ -42,11 +42,7 @@ public class ActiveSipAction extends ActionSupport implements SessionAware{
 			sessionMap.put("totalSips", getTotalSips());
 		}
 		
-		
-		
-				
-		logger.debug("PortfolioAction class : execute method : end");
-    	
+		    	
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	

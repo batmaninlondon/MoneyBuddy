@@ -48,7 +48,7 @@ public class DisplayCustomerAqbAction extends ActionSupport implements SessionAw
 			String customerId= Integer.toString(queryCustomer.getCustomerId(getEmailIdAqb()));
 			
 			if ( "0".equals(customerId))  {
-				/*setErrorMsg("EmailId does not exists!! ");*/
+				setErrorMsg("EmailId does not exists!! ");
 				addActionMessage("This email ID is not registered with MoneyBuddy");
 				return "emailIdNotExist" ;
 			}
@@ -70,7 +70,7 @@ public class DisplayCustomerAqbAction extends ActionSupport implements SessionAw
 				
 				quarter = customersAqbElement.getQuarterOfYear().substring(0, 1);
 				year = customersAqbElement.getQuarterOfYear().substring(2);
-				aqbDataModelList.add(new AqbDataModel(customerId,quarter,year,customersAqbElement.getAqb()));
+				aqbDataModelList.add(new AqbDataModel(customerId,quarter,year,customersAqbElement.getAqb(),customersAqbElement.getQuaterlyFess()));
 				
 			}
 

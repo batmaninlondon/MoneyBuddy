@@ -41,7 +41,6 @@ public class PaymentAction extends ActionSupport implements SessionAware {
     	
     	try {
 
-    		System.out.println(" HI THERE FROM PAYMENT ACTION !!!! ");
     		if (null == getFirstOrderFlag())
     			setFirstOrderFlag("N");
     		System.out.println("firstOrderFlag : "+getFirstOrderFlag());

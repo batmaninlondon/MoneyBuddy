@@ -33,6 +33,9 @@ public class CustomerCart {
     @Column (name="MIN_UPFRONT_AMOUNT")
     private String minUpfrontAmount;
     
+    @Column (name="UPFRONT_MULTIPLIER")
+    private String upfrontMultiplier;
+    
     @Column (name="MIN_SIP_AMOUNT")
     private String minSipAmount;
     
@@ -76,7 +79,7 @@ public class CustomerCart {
         
     }
 
-	public CustomerCart( String customerId, String fundId, String schemeName, String minUpfrontAmount, String minSipAmount, String upfrontAmount, 
+	public CustomerCart( String customerId, String fundId, String schemeName, String minUpfrontAmount, String upfrontMultiplier, String minSipAmount, String upfrontAmount, 
 			String sipAmount, String transactionType, String sipDuration, String sipPlan, String sipDate,
 			String folioNumber, String folioNumList, String cartCreationDate, String status, String rta, String pdfFilePath) {
 		super();
@@ -84,6 +87,7 @@ public class CustomerCart {
 		this.fundId = fundId;
 		this.schemeName = schemeName;
 		this.minUpfrontAmount = minUpfrontAmount;
+		this.upfrontMultiplier = upfrontMultiplier;
 		this.minSipAmount = minSipAmount;
 		this.upfrontAmount = upfrontAmount;
 		this.sipAmount = sipAmount;
@@ -236,6 +240,14 @@ public class CustomerCart {
 		this.minUpfrontAmount = minUpfrontAmount;
 	}
 
+	public String getUpfrontMultiplier() {
+		return upfrontMultiplier;
+	}
+
+	public void setUpfrontMultiplier(String upfrontMultiplier) {
+		this.upfrontMultiplier = upfrontMultiplier;
+	}
+
 	public String getMinSipAmount() {
 		return minSipAmount;
 	}
@@ -255,6 +267,7 @@ public class CustomerCart {
 		result = prime * result + ((folioNumber == null) ? 0 : folioNumber.hashCode());
 		result = prime * result + ((minSipAmount == null) ? 0 : minSipAmount.hashCode());
 		result = prime * result + ((minUpfrontAmount == null) ? 0 : minUpfrontAmount.hashCode());
+		result = prime * result + ((upfrontMultiplier == null) ? 0 : upfrontMultiplier.hashCode());
 		result = prime * result + ((pdfFilePath == null) ? 0 : pdfFilePath.hashCode());
 		result = prime * result + ((fundId == null) ? 0 : fundId.hashCode());
 		result = prime * result + ((schemeName == null) ? 0 : schemeName.hashCode());
@@ -328,6 +341,13 @@ public class CustomerCart {
 				return false;
 			}
 		} else if (!minUpfrontAmount.equals(other.minUpfrontAmount)) {
+			return false;
+		}
+		if (upfrontMultiplier == null) {
+			if (other.upfrontMultiplier != null) {
+				return false;
+			}
+		} else if (!upfrontMultiplier.equals(other.upfrontMultiplier)) {
 			return false;
 		}
 		if (pdfFilePath == null) {

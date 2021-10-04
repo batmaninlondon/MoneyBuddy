@@ -32,18 +32,7 @@
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style2.css" rel="stylesheet" type="text/css"/>
        <!--  <link href="css/material-kit.css" rel="stylesheet"/> -->
-        
-        
-        
-
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
-        
-        
-        
-		
+	
 		<script>
 
 		
@@ -68,19 +57,99 @@
     </head>
 
 <body style="background: url(img/1920x1080/01.jpg) 50% 0 no-repeat fixed;">
-   <div class="container ">
+	  <!--========== HEADER ==========-->
+  <div class="g-bg-color--dark">
+            <div class="container g-padding-y-45--xs">
+        <header class="navbar-fixed-top s-header-v2 js__header-sticky">
+            <!-- Navbar -->
+            <nav class="s-header-v2__navbar">
+                <div class="g-padding-l-80-md g-display-table--lg">
+                    <!-- Navbar Row -->
+                    <div class="s-header-v2__navbar-row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="s-header-v2__navbar-col">
+                            <button type="button" class="collapsed s-header-v2__toggle" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                                <span class="s-header-v2__toggle-icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180">
+                            <!-- Logo -->
+                            <div class="s-header-v2__logo">
+                                <a href="welcome" class="s-header-v2__logo-link">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="MoneyBuddy Logo">
+                                    <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo.png" alt="MoneyBuddy Logo">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                        </div>
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col-width--180"></div>
+                        
+                        <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right g-padding-l-80-md">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
+                                <ul class="s-header-v2__nav">
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
+                                    <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
+							         	<%  if(session.getAttribute("customerId") == null)
+										 	{   %> 
+													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
+										<%	} else 
+										 	{	%>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
+			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
+			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
+			                                        	</ul>
+			                                    	</li>
+										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
+										<%	}	%>  
+										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu">
+                                            	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link">FAQ</a></li>
+                                            	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link">Contact Us</a></li>
+                                        	</ul>
+                                    	</li>
+                                </ul>
+                            </div>
+                            <!-- End Nav Menu -->
+                        </div>
+                    </div>
+                    <!-- End Navbar Row -->
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        </div>
+        </div>
+        <!--========== END HEADER ==========-->
+        
+            
+        <div class="container g-padding-y-20--xs">
+            </div>
+   <!-- <div class="container ">
    		<a href="welcome" class="s-header-v2__logo-link">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--default" src="img/logo-white.png" alt="MoneyBuddy Logo">
 		   <img class="s-header-v2__logo-img s-header-v2__logo-img--shrink" src="img/logo-white.png" alt="MoneyBuddy Logo">
 		</a>
-	</div>
+	</div> -->
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-10 g-height-70--xs g-height-80--lg  g-bg-color--dark ">
+		<div class="col-xs-10 g-height-40--xs g-height-60--lg  g-bg-color--dark " >
 	    	<div class="profile">
-	        	<div class="name pagination">
-                	<s:set var="disBankName" value="displayBankName" />
-                	<h3 class="title g-font-size-15--xs g-font-size-20--lg  g-color--white">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b></h3>
+	        	<div class="name ">
+                	
+                	<h3 class="title g-font-size-15--xs g-font-size-20--lg  g-color--white g-margin-t-o-10--xs g-margin-t-o-0--lg text-center  g-ver-center--xs">Investor Name:&nbsp;&nbsp;&nbsp;&nbsp;<b><s:property value="#session.customerName" /></b></h3>
+               		<s:set var="disBankName" value="displayBankName" />
                	</div>
 	       	</div>
 	     </div>
@@ -93,61 +162,71 @@
 	<div class="row g-height-auto--lg" >
 		<div class="col-xs-1" ></div>
 		<div class="col-xs-10  g-bg-color--white " >
-			<div class="row text-center g-margin-t-15--xs">
-				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b><u>Order Confirmation</u></b></h3>
+			<div class="row text-center g-margin-t-5--xs g-margin-b-15--lg">
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b>Order Confirmation</b></h3>
 			</div>
 			<div id="customer-stp-cart-list" class=" g-margin-b-30--xs g-margin-t-10--xs g-margin-r-100--lg g-margin-l-100--lg">
 					
 				  		<table id="cartData" class="table table-bordered stripe ">
 										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="col-xs-2">Fund Name A</th>
-												<th class="col-xs-2">Folio Num</th>
-												<th class="col-xs-2">Fund NameB</th>
-												<th class="col-xs-2">Amount</th>
-												<th class="col-xs-2">Tenure</th>
-												<th class="col-xs-2">Debit Date</th>
+												<th class="col-xs-8 text-center">Fund Name</th>
+												<!-- <th class="col-xs-2">Folio Num</th> -->
+												<!-- <th class="col-xs-2">Purchase Fund Name</th> -->
+												<th class="col-xs-4 text-center">Details</th>
+												<!-- <th class="col-xs-2">Tenure</th>
+												<th class="col-xs-2">Debit Date</th> -->
 											</tr>
 										</thead>
-										<tbody class="table-body g-font-size-12--xs g-font-size-14--lg center text-center">
+										<tbody class="table-body g-font-size-10--xs g-font-size-14--lg center text-center">
 												<s:iterator value="#session.customerStpCartList" var="stpCartListElement">
 													<tr>
-													    <s:if test="schemeName.equals('Total')">
-													    	<td>
-														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
-													    	</td>
-													    	<td>
+													    <s:if test="withdrawalSchemeName.equals('Total')">
+													    	<!-- <td>
+													    	</td> -->
+													    	<!-- <td>
 												    		</td>
 												    		<td>
-												    		</td>
-													    	<td>
-														    	<s:property value="#redCartListElement.stpAmount"/>
+												    		</td> -->
+													    	<%-- <td>
+														    	Total Amount: <s:property value="#stpCartListElement.stpAmount"/> Rs.
+												    		</td> --%>
+												    		<!-- <td>
 												    		</td>
 												    		<td>
-												    		</td>
-												    		<td>
-												    		</td>
+												    		</td> -->
 													    </s:if>
 													    <s:else>
 													    	
 													    	<td>
 														    	<s:property value="#stpCartListElement.withdrawalSchemeName"/>
-													    	</td>
-													    	<td>
-														    	<s:property value="#stpCartListElement.folioNumber"/>
-													    	</td>
-													    	<td>
+														    	<p class="text-center"><b>&#9660;</b></p>
 														    	<s:property value="#stpCartListElement.purchaseFundSchemeName"/>
+													    	</td>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.folioNumber"/>
+													    	</td> --%>
+													    	<%-- <td>
+														    	<s:property value="#stpCartListElement.purchaseFundSchemeName"/>
+												    		</td> --%>
+												    		<td style="vertical-align: middle;">
+														    	Amount: Rs. <s:property value="%{getText('{0,number,#,##0}',{#attr[#stpCartListElement.stpAmount]})}"/>
+														    	<br/>
+											    				<%-- Duration: <s:property value="#stpCartListElement.stpDuration"/> years	
+														    	<br/> --%>
+														    	<s:if test="stpDate ==1 ">
+														    		Date: <s:property value="#stpCartListElement.stpDate"/><sup>st</sup>
+														    	</s:if>
+														    	<s:else>
+														    		Date: <s:property value="#stpCartListElement.stpDate"/><sup>th</sup>
+													    		</s:else>
 												    		</td>
-												    		<td>
-														    	<s:property value="#stpCartListElement.stpAmount"/>
-												    		</td>
-													    	<td>
+													    	<%-- <td>
 														    	<s:property value="#stpCartListElement.stpDuration"/>
 												    		</td>
 												    		<td>
 														    	<s:property value="#stpCartListElement.stpDate"/>
-												    		</td>
+												    		</td> --%>
 												    	</s:else>
 													</tr>
 												</s:iterator>
@@ -160,12 +239,12 @@
 	     <div class="col-xs-1" ></div>
 	</div>
 	
-	<div class="row" >
+	<%-- <div class="row" >
 		<div class="col-xs-4">
 			<s:actionmessage class="small-text g-color--red"/> 
 		</div>
 		<div class="col-xs-6"></div>
-	</div>
+	</div> --%>
 	<div class="row">
 		<div class="col-xs-1"></div>
 		
@@ -185,15 +264,16 @@
 		</div>
 	</div>
 	
-	<div class="row g-margin-t-o-20--xs">
-		<div class="col-sm-5 col-xs-4"></div>
-		<div class="col-sm-2 col-xs-4">
-			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="callStpAction();" >Continue</button>
+	<div class="row g-margin-t-o-20--xs text-center">
+		<!-- <div class="col-sm-5 col-xs-4"></div> -->
+		<div class="col-sm-12 col-xs-12 ">
+			<button type="button"  id="pay-now-button" class="text-center btn btn-home g-color--white g-margin-t-15--xs " onClick="callStpAction();" >Confirm</button>
 		</div>
-		<div class="col-sm-5 col-xs-4">
-		</div>
+		<!-- <div class="col-sm-5 col-xs-4">
+		</div> -->
 	</div>
-	
+	<br/>
+	<br/>
 	</s:form>
 	
 	

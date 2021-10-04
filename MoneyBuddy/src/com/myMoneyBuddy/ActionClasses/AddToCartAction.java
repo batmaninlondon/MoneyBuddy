@@ -41,7 +41,7 @@ public class AddToCartAction extends ActionSupport  implements SessionAware{
     		
     		FundDetailsDataModel selectedFundDetailsDataModel = (FundDetailsDataModel) sessionMap.get("selectedFundDetailsDataModel");
     		
-    		if ("UPFRONT".equals(getTransactionType()))  {
+    		if ("UPFRONT".equalsIgnoreCase(getTransactionType()))  {
     			
     			if (!queryCustomerCart.existsFund(customerId, selectedFundDetailsDataModel.getFundId(), "UPFRONT"))  {
     				insertCustomerCart.insertRow(selectedFundDetailsDataModel, customerId, transactionType);
@@ -69,11 +69,11 @@ public class AddToCartAction extends ActionSupport  implements SessionAware{
 	    	sessionMap.put("customerCartList", customerCartList);
 	    	logger.debug("AddToCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
 	    	
-	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equals(o.getTransactionType())))
+	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equalsIgnoreCase(o.getTransactionType())))
 	    		setAnyUpfrontOrder("TRUE");
 	    	else
 	    		setAnyUpfrontOrder("FALSE");
-			if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))
+			if (customerCartList.stream().anyMatch(o -> "SIP".equalsIgnoreCase(o.getTransactionType())))
 				setAnySipOrder("TRUE");
 			else
 				setAnySipOrder("FALSE");

@@ -24,6 +24,11 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
+        <!-- <meta name="google-signin-client_id" content="1430357134-g37k6g153rvmu7mlkib4erd0tv3edfmb.apps.googleusercontent.com"> -->
+  <%-- <script src="https://apis.google.com/js/platform.js" async defer></script> --%>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> --%>
+  
  	
   
   <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
@@ -37,95 +42,99 @@
 <style>
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-.snip1418 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  text-align: left;
-  color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 20em;
-  perspective: 20em;
-}
-.snip1418 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
 
-.snip1418 .add-to-cart {
-  position: absolute;
-  height:50px;
-  top: 0;
-  right: 0;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0;
- // background-color: #409ad5;
-   background-color: black;
-  -webkit-transform: rotateX(-90deg);
-  transform: rotateX(-90deg);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.snip1418 figcaption {
-//  padding: 20px;
-}
-.snip1418 h3,
-.snip1418 p {
-  margin: 0;
-}
-.snip1418 h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.snip1418 p {
-  font-size: 0.7em;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-.snip1418 a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.snip1418:hover .add-to-cart,
-.snip1418.hover .add-to-cart {
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.snip1418:hover .add-to-cart i,
-.snip1418.hover .add-to-cart i {
-  background-color: #2980b9;
-}
 
 </style>
-
-
+ <%-- <script type="text/javascript">
+ var clicked=false;//Global Variable
+ function ClickLogin()
+ {
+     clicked=true;
+ }
+            function init() {
+            	
+                gapi.load('auth2', function() {
+                    auth2 = gapi.auth2.init({
+                        client_id: '1430357134-g37k6g153rvmu7mlkib4erd0tv3edfmb.apps.googleusercontent.com',
+                        fetch_basic_profile: false,
+                        scope: 'profile'
+                    });
+                    
+                    gapi.signin2.render("g-signin-btn", {
+                            scope: 'email',
+                            width: 200,
+                            height: 50,
+                            longtitle: false,
+                            theme: 'dark',
+                            onsuccess: onSignIn,
+                            onfailure: null
+                        });
+                });
+            }
+            function onSignIn(googleUser) {
+            	
+            	alert('Onsign called ');
+                    
+                
+      		  var profile = googleUser.getBasicProfile();
+      		  /* console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      		  console.log('Name: ' + profile.getName());
+      		  console.log('Image URL: ' + profile.getImageUrl());
+      		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present. */
+      		  document.getElementById("email-id-login").value = profile.getEmail();
+      		  document.getElementById("google-login").value = "GoogleLogin";
+      		  
+      		  document.formLogin.submit();
+                
+                /* console.log("on sign in, granted scopes: " + googleUser.getGrantedScopes());
+                console.log("ID token: " + googleUser.getAuthResponse().id_token);
+                var profile = googleUser.getBasicProfile();
+                var message = 'ID: ' + profile.getId() + "\n" 
+                    + 'Name: ' + profile.getName() + "\n"
+                    + 'Image URL: ' + profile.getImageUrl() + "\n"
+                    + 'Email: ' + profile.getEmail();
+                document.getElementById("message").value = message;
+                setProfileImage(profile.getImageUrl()); */
+            }
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log("on sign out");
+                    setMessage("User signed out");
+                    setProfileImage(null);
+                });
+            }
+            function disconnect() {
+                console.log("on disconnect");
+                var auth2 = gapi.auth2.getAuthInstance();
+                if (!auth2.isSignedIn.get()) {
+                    setMessage("Not signed in, cannot disconnect");
+                    return;
+                }
+                auth2.disconnect();
+                setProfileImage(null);
+                setMessage("Disconnected");
+            }
+            function setMessage(message) {
+                document.getElementById("message").value = message;
+            }
+            function setProfileImage(srcUrl) {
+                var element = document.getElementById("profileImage");
+                if (srcUrl == null) {
+                    element.style.display = "none";
+                    element.src = "";
+                } else {
+                    element.style.display = "block";
+                    element.src = srcUrl;
+                }
+            }
+        </script> --%>
 
     </head>
     <!-- End Head -->
 
     <!-- Body -->
-    <body >
+    <body onload="init()" >
 <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
@@ -167,20 +176,22 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
                                         	<ul class="dropdown-menu s-header-v2__dropdown-menu">
-                                            	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link">FAQ</a></li>
+                                            	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link -is-active">FAQ</a></li>
                                             	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link">Contact Us</a></li>
                                         	</ul>
                                     	</li>
@@ -202,6 +213,14 @@
          <div class="g-bg-color--dark">
             <div class="g-container--md g-text-center--xs   ">
             <br/><br/><br/>
+            <!-- <div class="g-signin2 " data-onsuccess="onSignIn"  data-width="530" data-height="40" data-longtitle="true"> -->
+            <!-- <div class="g-signin2 " onclick="ClickLogin()" data-onsuccess="onSignIn"  data-width="530" data-height="40" data-longtitle="true"> -->
+             <!-- <div id="g-signin-btn" ></div> -->
+            
+            <%-- <s:form  action="newLoginAction" method="post" name="formLogin" namespace="/" autocomplete="off"  >
+            <s:hidden id="email-id-login" name="emailIdLogin"></s:hidden>
+            <s:hidden id="google-login" name="googleLogin"></s:hidden>
+            </s:form> --%>
                 <div class="g-margin-b-10--xs   ">
                     <h2 class="g-font-size-20--xs g-font-size-40--lg g-color--white g-letter-spacing--1 g-margin-t-30--xs g-margin-b-0--xs g-margin-b-10--lg"><b>FAQs</b></h2>
                     <p class="text-uppercase g-font-size-12--xs g-font-size-14--lg g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-20--xs">Your Questions. Answered.</p>
@@ -303,7 +322,7 @@
                                         <svg width="19" height="19" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#fff" d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
                                         </svg>
-                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Do I need a Demat account to purchase mutual funds?</h4>
+                                        <h4 class="s-faq-grid__title  g-font-size-12--xs g-font-size-16--lg">Do I need a Demat account to purchase mutual fund?</h4>
                                     </div>
                                     <div class="cbp-caption-activeWrap g-font-size-10--xs g-font-size-14--lg">
                                         <div class="g-color--white-opacity">
@@ -708,7 +727,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -737,7 +756,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>
@@ -750,6 +769,7 @@
 
 
        <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+       
 	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	    <script type="text/javascript" src="assets/js/header-sticky.min.js"></script>
 	    <script type="text/javascript" src="assets/js/javaScript.js"></script>
@@ -764,7 +784,7 @@
 		<script src="assets/js/index.js"></script>
 		<script type="text/javascript" src="assets/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
 		<script type="text/javascript" src="assets/js/components/faq.min.js"></script>
-        
+
  <%-- <script>
          document.onreadystatechange = function () {
         	/*  $(myInput).keyup(function() {

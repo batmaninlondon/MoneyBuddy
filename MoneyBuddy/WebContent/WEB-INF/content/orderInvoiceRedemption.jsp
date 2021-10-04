@@ -32,18 +32,7 @@
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style2.css" rel="stylesheet" type="text/css"/>
        <!--  <link href="css/material-kit.css" rel="stylesheet"/> -->
-        
-        
-        
 
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
-        
-        
-        
-		
 		<script>
 
 		
@@ -78,10 +67,9 @@
 	<div class="row">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10 g-height-70--xs g-height-80--lg g-bg-color--dark ">
-	    	<div class="profile text-center">
-	        	<div class="name pagination text-center">
-	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white text-center">Thank you for Redemption</h3>
-	                	<h6 class="g-font-size-12--xs g-font-size-16--lg g-color--white">Your Redemption details </h6>
+	    	<div class="profile ">
+	        	<div class="name ">
+	                	<h3 class="title g-font-size-14--xs g-font-size-24--lg g-color--white text-center  g-ver-center--xs ">Thank you for Redemption</h3>
 	            </div>
 	       	</div>
 	     </div>
@@ -91,8 +79,8 @@
 	<div class="row g-height-auto--lg" >
 		<div class="col-xs-1" ></div>
 		<div class="col-xs-10  g-bg-color--white " >
-			<div class="row text-center g-margin-t-15--xs">
-				<h3><b><u>Redemption Order Details</u></b></h3>
+			<div class="row text-center g-margin-t-5--xs g-margin-b-15--lg">
+				<h3 class=" g-font-size-15--xs g-font-size-22--lg "><b>Redemption Confirmation</b></h3>
 			</div>
 			<div id="customer-cart-list" class=" g-margin-b-30--lg g-margin-t-20--xs g-margin-t-10--lg g-margin-r-100--lg g-margin-l-100--lg">
 					<s:set var="anyUpfront" value="#session.anyUpfrontOrder" />
@@ -100,17 +88,17 @@
 				  		<table id="cartData" class="table table-bordered stripe ">
 										<thead class="table-head g-font-size-12--xs g-font-size-14--lg g-bg-color--gray-light center text-center">
 											<tr>
-												<th class="col-xs-3">Fund Name</th>
-												<th class="col-xs-3">Redemption Type</th>
+												<th class="col-xs-3 text-center">Fund Name</th>
+												<th class="col-xs-3 text-center">Details</th><!-- 
 												<th class="col-xs-3">Units</th>
-												<th class="col-xs-3">Amount*</th>
+												<th class="col-xs-3">Amount*</th> -->
 											</tr>
 										</thead>
 										<tbody class="table-body  g-font-size-10--xs g-font-size-14--lg center  text-center">
 												<s:iterator value="#session.customerRedemptionCartList" var="redCartListElement">
 													
 													    <s:if test="schemeName.equals('Total')">
-													    <tr class=" g-bg-color--gray-light">
+													    <%-- <tr class=" g-bg-color--gray-light">
 													    	<td>
 														    	<b><s:property value="#redCartListElement.schemeName"/></b>
 													    	</td>
@@ -121,22 +109,34 @@
 												    		</td>
 												    		<td>
 												    		</td>
-												    		</tr>	
+												    		</tr>	 --%>
 													    </s:if>
 													    <s:else>
 													    	<tr>
 													    	<td>
-														    	<b><s:property value="#redCartListElement.schemeName"/></b>
+														    	<s:property value="#redCartListElement.schemeName"/>
 													    	</td>
 													    	<td>
-														    	<b><s:property value="#redCartListElement.redemptionOption"/></b>
+													    		<s:if test="redemptionOption.equals('Full')">
+													    			All units
+												    			</s:if>
+												    			<s:else>
+												    				<s:if test="redemptionType.equals('Amount')">
+												    					Amount: Rs. <s:property value="%{getText('{0,number,#,##0}',{#attr[#redCartListElement.redAmount]})}"/>
+												    				</s:if>
+												    				<s:else>
+												    					Units: <s:property value="#redCartListElement.redUnits"/>
+												    				</s:else>
+											    				</s:else>
+												    				
+														    	<%-- <b><s:property value="#redCartListElement.redemptionOption"/></b> --%>
 													    	</td>
-													    	<td>
+													    	<%-- <td>
 														    	<b><s:property value="#redCartListElement.redAmount"/></b>
 												    		</td>
 												    		<td>
 														    	<b><s:property value="#redCartListElement.redUnits"/></b>
-												    		</td>
+												    		</td> --%>
 													    	</tr>	
 												    	</s:else>
 													
@@ -150,7 +150,15 @@
 	     </div>
 	     <div class="col-xs-1" ></div>
 	</div>
-
+	<div class="row g-margin-t-o-20--xs">
+		<div class=" col-xs-12 text-center">
+		<a class="btn btn-home " href="<s:url action="Dashboard"/>" >Dashboard</a>&nbsp;&nbsp;
+		<a class="btn btn-home " href="<s:url action="logOut"/>" >Log Out</a>
+			<!-- <button type="button"  id="pay-now-button" class="g-display-table--xs btn btn-home g-color--white g-margin-t-15--xs " onClick=href="<s:url action="Dashboard"/>" >Invest Now</button> -->
+		</div>
+	</div>
+<br/>
+	<br/>
 	
 	
 		<script type="text/javascript" src="assets/js/javaScript.js"></script>

@@ -28,12 +28,6 @@
 	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
- 	
-    <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 
 <script>
 
@@ -115,6 +109,7 @@
 			
 		</div>	
 		
+		
 		<div class="row" style="margin-top:-60px;margin-bottom:50px;">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
@@ -135,14 +130,14 @@
 								<th class="center col-md-1 g-bg-color--gray-light">CustomerId</th>
 								<th class="center col-md-1 g-bg-color--gray-light">BseOrderId</th>
 								<th class="center col-md-1 g-bg-color--gray-light">BseRegNum</th>
-								<th class="center col-md-1 g-bg-color--gray-light">TrnsType</th>
-								<th class="center col-md-1 g-bg-color--gray-light">RTA</th>
-								<th class="center col-md-1 g-bg-color--gray-light">SchemeType</th>
+								<th class="center col-md-2 g-bg-color--gray-light">TrnsType</th>
+								<th class="center col-md-1 g-bg-color--gray-light hidden">RTA</th>
+								<th class="center col-md-1 g-bg-color--gray-light hidden">SchemeType</th>
 								<th class="center col-md-1 g-bg-color--gray-light">TransactionDate</th>
 								<th class="center col-md-2 g-bg-color--gray-light">FolioNum</th>
 								<th class="center col-md-1 g-bg-color--gray-light">NAV</th>
 								<th class="center col-md-1 g-bg-color--gray-light">Units</th>	
-								<th class="center col-md-1 g-bg-color--gray-light"></th>
+								<th class="center col-md-2 g-bg-color--gray-light"></th>
 							</tr>
 						</thead>
 						<tbody class="table-body g-font-size-14--xs">
@@ -172,12 +167,12 @@
 									    <td class="center g-font-size-14--xs">
 									    	<input class="form-control" type="text" value ="<s:property value="#pendingNavOrdersElement.transactionType"/>" readonly>
 									    </td>
-									    <td class="center g-font-size-14--xs">
+									    <td class="center hidden g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
 			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
 									    	<s:property value="#pendingNavOrdersElement.rta"/>
 									    </td>
-									    <td class="center g-font-size-14--xs">
+									    <td class="center hidden g-font-size-14--xs">
 									    	<%-- <s:fielderror fieldName="emailId" class="g-color--red" /> --%>
 			  								<%-- <s:textfield class="form-control" id="bse-order-id" readonly ><s:property value="#pendingNavOrdersElement.key"/></s:textfield> --%>
 									    	<s:property value="#pendingNavOrdersElement.schemeType"/>
@@ -283,7 +278,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -312,7 +307,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

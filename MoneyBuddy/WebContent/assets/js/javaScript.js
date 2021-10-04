@@ -97,6 +97,14 @@
         	
 		}
 		
+		function editSwitchCart(val)   {
+
+        	document.getElementById("return-type").value = val;
+        	
+        	document.formEditSwitchCart.submit();
+        	
+		}
+		
 		function changeSliderValue(val)   {
 			
 			if (val == "" || val == null )   {
@@ -190,6 +198,11 @@
 				document.formStp.submit();
 	    }
 		
+		function callSwitchAction()  
+	    {
+				document.formSwitch.submit();
+	    }
+		
 		function redeem(fundId,schemeName,folioNumber,totalAmount,totalQuantity)  
 	    {
 				document.getElementById("redeem-fund-id").value = fundId;
@@ -245,6 +258,25 @@
 			
 		}
 		
+		/*function onSignIn(googleUser) {
+			alert('Onsign called ');
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		  document.getElementById("email-id-login").value = profile.getEmail();
+		  document.getElementById("google-login").value = "GoogleLogin";
+		  
+		  document.formLogin.submit();
+		}*/
+		
+		/*function myFunction() {
+			gapi.auth2.getAuthInstance().disconnect();
+			location.reload();
+			<button onClick="myFunction()">SignOut</button>
+		}*/
+		
 		function buyFundHandler(fundId,folioNum)  
 	    {
 				document.getElementById("fund-id-value").value = fundId;
@@ -259,6 +291,16 @@
 				document.getElementById("cur-amount-stp-value").value = amount;
 				
 				document.formAddToStpCartAction.submit();
+	    }
+		function switchFundHandler(fundId,folioNum,totalAmount,totalQuantity)  
+	    {
+			/*alert ( ' inside switchFundHandler .... : totalQuantity : '+totalQuantity);*/
+				document.getElementById("fund-id-switch-value").value = fundId;
+				document.getElementById("folio-num-switch-value").value = folioNum;
+				document.getElementById("total-amount-switch-value").value = totalAmount;
+				document.getElementById("total-quantity-switch-value").value = totalQuantity;
+				
+				document.formAddToSwitchCartAction.submit();
 	    }
 		
 		function redeemFundHandler(fundId,folioNum,totalAmount,totalQuantity)  
@@ -281,6 +323,12 @@
         {
 			document.getElementById("stp-cart-id-value").value = stpCartId;
 			document.formDeleteStpCart.submit();
+        }
+        
+        function deleteSwitchCartEntry(switchCartId)  
+        {
+			document.getElementById("switch-cart-id-value").value = switchCartId;
+			document.formDeleteSwitchCart.submit();
         }
         
         function deleteRedCartEntry(redCartId)  
@@ -315,6 +363,8 @@
                   	document.getElementById("google-response-subscriber").value = googleResponse;
                   	
                   	document.formSubscriber.submit();
+                  	
+                  	return false;
                 };
                     
                     function callOneTimeInvestment()  
@@ -362,7 +412,6 @@
                     function submitContactUsMail(googleResponse){                    	
                   	  
                     	document.getElementById("google-response-coontact-us").value = googleResponse;
-                    	
                     	document.formContactUsMail.submit();
                       };
                       

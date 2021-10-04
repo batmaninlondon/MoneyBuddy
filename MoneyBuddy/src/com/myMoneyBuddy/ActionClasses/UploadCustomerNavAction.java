@@ -4,6 +4,9 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -49,17 +52,56 @@ public class UploadCustomerNavAction extends ActionSupport {
     		hibernateSession.beginTransaction();
     		
     		Query query;
+    		String buySellSwitch="";
     		if ("SIP".equals(getTransactionType()))  {
 
-        		query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseRegistrationNumber = :bseRegistrationNumber"
+        		query = hibernateSession.createQuery("select transactionDetailId, transactionAmount, transactionId, transactionUnit, selOption, selType "
+        				+ " from TransactionDetails where bseRegistrationNumber = :bseRegistrationNumber"
         				+ " and transactionDate = :transactionDate ");
         		query.setParameter("bseRegistrationNumber", getBseRegNum());
         		query.setParameter("transactionDate", getTransactionDate());
         		
     		}
+    		else if (getTransactionType().contains("STP"))  {
+    			
+    			//String tranType = getTransactionType().substring(0,3);
+    			String buySell = getTransactionType().substring(4,getTransactionType().length());
+    			
+        		query = hibernateSession.createQuery("select transactionDetailId, transactionAmount, transactionId, transactionUnit, selOption, selType "
+        				+ " from TransactionDetails where bseRegistrationNumber = :bseRegistrationNumber"
+        				+ " and transactionDate = :transactionDate and buySell = :buySell ");
+        		query.setParameter("bseRegistrationNumber", getBseRegNum());
+        		query.setParameter("transactionDate", getTransactionDate());
+        		query.setParameter("buySell", buySell);
+        		
+        		
+    		}
+    		else if (getTransactionType().contains("SWITCH"))  {
+    			
+    			//String tranType = getTransactionType().substring(0,3);
+    			String buySellType = getTransactionType().substring(7,getTransactionType().length());
+    			System.out.println(" buySellType IS ........................................ "+buySellType);
+    			if ("IN".equalsIgnoreCase(buySellType))  {
+    				buySellSwitch = "BUY";
+    			}
+    			else {
+    				buySellSwitch = "SELL";
+    			}
+    			System.out.println(" buySellSwitch IS ........................................ "+buySellSwitch);
+    			
+        		query = hibernateSession.createQuery("select transactionDetailId, transactionAmount, transactionId, transactionUnit, selOption, selType "
+        				+ " from TransactionDetails where transactionFolioNum = :transactionFolioNum"
+        				+ " and transactionDate = :transactionDate and buySell = :buySell ");
+        		query.setParameter("transactionFolioNum", getFolioNum());
+        		query.setParameter("transactionDate", getTransactionDate());
+        		query.setParameter("buySell", buySellSwitch);
+        		
+        		
+    		}
     		else {
     		
-    			query = hibernateSession.createQuery("select transactionDetailId,transactionAmount from TransactionDetails where bseOrderId = :bseOrderId ");
+    			query = hibernateSession.createQuery("select transactionDetailId, transactionAmount, transactionId, transactionUnit, selOption, selType "
+    					+ " from TransactionDetails where bseOrderId = :bseOrderId ");
         		query.setParameter("bseOrderId", getBseOrderId());
         		
     		}
@@ -67,9 +109,143 @@ public class UploadCustomerNavAction extends ActionSupport {
     		List<Object[]> transactionDetailList = query.list();
 
 			String transactionDetailId = transactionDetailList.get(0)[0].toString();
+			
 			Double transactionAmount = Double.valueOf(transactionDetailList.get(0)[1].toString());
+			String transactionIdSwitch = transactionDetailList.get(0)[2].toString();
+			String transactionUnit = transactionDetailList.get(0)[3].toString();
+			String selOption = transactionDetailList.get(0)[4].toString();
+			String selType = transactionDetailList.get(0)[5].toString();
+			
+			System.out.println("transactionDetailId is : "+transactionDetailId);
 
     		hibernateSession.getTransaction().commit();
+    		
+    		//boolean executeCode = true;
+    		Double expectedAmount = transactionAmount;
+    		Double onePercentage = expectedAmount/100;
+    		//Double fivePercentage = onePercentage * 5;
+    		Double actualAmount = Double.parseDouble(getUnitsPurchased()) * Double.parseDouble(getNavValue());
+    		
+    		System.out.println("expectedAmount : "+expectedAmount);
+    		System.out.println("onePercentage : "+onePercentage);
+    		System.out.println("actualAmount : "+actualAmount);
+    		System.out.println(" transactionType: "+transactionType);
+    		System.out.println(" buySellSwitch : "+buySellSwitch);
+    		System.out.println(" selOption : "+selOption);
+    		
+    		    		
+    		String transactionStatus ="";
+    		String transactionSwitchAmount = "";
+    		if ( getTransactionType().contains("SWITCH") && "BUY".equalsIgnoreCase(buySellSwitch)   )   {
+    			hibernateSession.beginTransaction();
+    			query = hibernateSession.createQuery("select transactionStatus,transactionAmount from TransactionDetails"
+    											+ " where transactionId = :transactionId and buySell='SELL' ");
+    			query.setParameter("transactionId",transactionIdSwitch);
+    			
+    			List<Object[]> queryRes = query.list(); 
+    			
+    			if (queryRes.size() != 0) {
+    				transactionStatus = queryRes.get(0)[0].toString();
+    				transactionSwitchAmount = queryRes.get(0)[1].toString();
+    			}
+
+    			hibernateSession.getTransaction().commit();
+    			if (!"8".equalsIgnoreCase(transactionStatus))   {
+    				addActionMessage(" UPLOAD THE SWITCH OUT FOR THIS TRANSACTION FIRST  !!!!! ");
+    				return INPUT;
+    				
+    			}
+    			else  {
+    				
+    				Double expectedSwitchAmount = Double.parseDouble(transactionSwitchAmount);
+    				Double oneSwitchPercentage = expectedSwitchAmount/100;
+    				
+    				if ((actualAmount < (expectedSwitchAmount - oneSwitchPercentage)) || (actualAmount > (expectedSwitchAmount + oneSwitchPercentage)))   {
+    					/*addActionMessage(" email Id does not exists! ");*/
+    					/*return "amountDoesNotMatch";*/
+    					//executeCode = false;
+    					addActionMessage("  AMOUNT DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    				
+    			}
+    		}
+    				
+    		else if ( "REDEMPTION".equalsIgnoreCase(transactionType) )   {
+    			if ("FULL".equalsIgnoreCase(selOption))   {
+    				if (Double.parseDouble(transactionUnit) != Double.parseDouble(getUnitsPurchased()))  {
+    					//executeCode = false;
+    					addActionMessage(" UNITS DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    			else if ("AMOUNT".equalsIgnoreCase(selType))  {
+    				
+    				
+    				if ((actualAmount < (expectedAmount - onePercentage)) || (actualAmount > (expectedAmount + onePercentage)))   {
+    					/*addActionMessage(" email Id does not exists! ");*/
+    					/*return "amountDoesNotMatch";*/
+    					//executeCode = false;
+    					addActionMessage(" AMOUNT DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    			else {
+    				if (Double.parseDouble(transactionUnit) != Double.parseDouble(getUnitsPurchased()))  {
+    					//executeCode = false;
+    					addActionMessage(" UNITS DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    		}
+    		else if ( getTransactionType().contains("SWITCH") && "SELL".equalsIgnoreCase(buySellSwitch)   )   {
+    			if ("FULL".equalsIgnoreCase(selOption))   {
+    				if (Double.parseDouble(transactionUnit) != Double.parseDouble(getUnitsPurchased()))  {
+    					//executeCode = false;
+    					addActionMessage(" UNITS DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    			else if ("AMOUNT".equalsIgnoreCase(selType))  {
+    				
+    				
+    				if ((actualAmount < (expectedAmount - onePercentage)) || (actualAmount > (expectedAmount + onePercentage)))   {
+    					/*addActionMessage(" email Id does not exists! ");*/
+    					/*return "amountDoesNotMatch";*/
+    					//executeCode = false;
+    					addActionMessage(" AMOUNT DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    			else {
+    				if (Double.parseDouble(transactionUnit) != Double.parseDouble(getUnitsPurchased()))  {
+    					//executeCode = false;
+    					addActionMessage(" UNITS DOES NOT MATCH !!!!! ");
+    					return INPUT;
+    				}
+    			}
+    		}
+    		else {
+    			
+    			if (!("SIP".equalsIgnoreCase(getTransactionType()) && "NA".equalsIgnoreCase(getBseOrderId()))) {
+    			
+	    			if ((actualAmount < (expectedAmount - onePercentage)) || (actualAmount > (expectedAmount + onePercentage)))   {
+	    				/*addActionMessage(" email Id does not exists! ");*/
+	    				/*return "amountDoesNotMatch";*/
+	    				//executeCode = false;
+	    				addActionMessage(" AMOUNT DOES NOT MATCH !!!!! ");
+	    				return INPUT;
+	    			}
+    			}
+    		}
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
 
     		Double calculatedAmount = Double.valueOf(getNavValue()) * Double.valueOf(getUnitsPurchased());
 
@@ -80,7 +256,8 @@ public class UploadCustomerNavAction extends ActionSupport {
     		
     		hibernateSession.beginTransaction();
 
-			query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,s.amcCode,t.transactionType "
+			query = hibernateSession.createQuery("select t.fundId, c.panCard, t.customerId, t.transactionFolioNum,"
+									+ "s.amcCode,t.transactionType, t.buySell "
 									+ "from Customers c, TransactionDetails t, SecondaryFundDetails s "
 									+ "where t.customerId = c.customerId and t.fundId = s.fundId and t.transactionDetailId= :transactionDetailId");
 			
@@ -115,9 +292,20 @@ public class UploadCustomerNavAction extends ActionSupport {
 	
 			}
 
+			Calendar today = Calendar.getInstance();
+			today.add(Calendar.DATE, -1);
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date(today.getTimeInMillis());
+			String frmtdDateForDB = dateFormat.format(date);
+			
+			System.out.println("frmtdDateForDB : "+frmtdDateForDB);
+			
     		hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("update TransactionDetails set transactionFolioNum = :transactionFolioNum , "
-					+ "unitPrice = :unitPrice , quantity = :quantity , bseOrderId = :bseOrderId, transactionStatus = :transactionStatus , reverseFeed = :reverseFeed "
+					+ "unitPrice = :unitPrice , quantity = :quantity , transactionAmount = :transactionAmount, bseOrderId = :bseOrderId, transactionStatus = :transactionStatus ,"
+					+ " reverseFeed = :reverseFeed, updateDate = :updateDate, transactionType = :transactionType, "
+					+ " buySell = :buySell  "
 					+ " where transactionDetailId = :transactionDetailId");
 
 			query.setParameter("transactionFolioNum", getFolioNum());
@@ -125,8 +313,22 @@ public class UploadCustomerNavAction extends ActionSupport {
 			query.setParameter("quantity", getUnitsPurchased());
 			query.setParameter("bseOrderId", getBseOrderId());
 			query.setParameter("transactionDetailId", transactionDetailId);
+			query.setParameter("transactionAmount", Double.toString(actualAmount));
 			query.setParameter("transactionStatus", "8");
 			query.setParameter("reverseFeed", "Y");
+			query.setParameter("updateDate", frmtdDateForDB);
+			if ("SIP".equalsIgnoreCase(getTransactionType()) && "NA".equalsIgnoreCase(getBseOrderId())) {
+				System.out.println(" Inside IF ");
+				query.setParameter("transactionType", "SIPMissed");
+				query.setParameter("buySell", "SIPMissed");
+			}
+			else {
+				System.out.println(" Inside ELSE ");
+				query.setParameter("transactionType", getTransactionType());
+				query.setParameter("buySell", queryResult.get(0)[6].toString());
+			}
+			
+			System.out.println("transactionDetailId : "+transactionDetailId);
 			
 			int updateResult = query.executeUpdate();
 			System.out.println(updateResult + " rows updated in transactionDetails table ");
@@ -162,22 +364,48 @@ public class UploadCustomerNavAction extends ActionSupport {
 	
 				configProperties.load(ForgotPasswordAction.class.getResourceAsStream(configPropFilePath));
 				
-				if ("UPFRONT".equals(transactionType))  {
+				if ("UPFRONT".equalsIgnoreCase(transactionType))  {
 		 			String mailLink = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_LINK");
 					System.out.println("mailLink is : "+mailLink);
 			    	
 			    	String subject = configProperties.getProperty("MAIL_UPFRONT_TRANSACTION_EXECUTED_SUBJECT");
 		
-			    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			    	//sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName,"");
 				}
-				else {
+				else if ("SIP".equalsIgnoreCase(transactionType) && !("NA".equalsIgnoreCase(getBseOrderId()))){
 					String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
 					System.out.println("mailLink is : "+mailLink);
 			    	
 			    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
 		
-			    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+			    	//sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName,"");
 				}
+				else if ("REDEMPTION".equalsIgnoreCase(transactionType)){
+					String mailLink = configProperties.getProperty("MAIL_REDEMPTION_TRANSACTION_EXECUTED_LINK");
+					System.out.println("mailLink is : "+mailLink);
+			    	
+			    	String subject = configProperties.getProperty("MAIL_REDEMPTION_TRANSACTION_EXECUTED_SUBJECT");
+		
+			    	//sendMail.MailSending(emailId,subject,"RedemptionTransactionExecutedMail","RedemptionTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName,"");
+				}
+				else if ("STP".equalsIgnoreCase(transactionType)){
+					String mailLink = configProperties.getProperty("MAIL_STP_TRANSACTION_EXECUTED_LINK");
+					System.out.println("mailLink is : "+mailLink);
+			    	
+			    	String subject = configProperties.getProperty("MAIL_STP_TRANSACTION_EXECUTED_SUBJECT");
+		
+			    	//sendMail.MailSending(emailId,subject,"StpTransactionExecutedMail","StpTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName,"");
+				}
+				
+				else if ("SWITCH".equalsIgnoreCase(transactionType)){
+					String mailLink = configProperties.getProperty("MAIL_SWITCH_TRANSACTION_EXECUTED_LINK");
+					System.out.println("mailLink is : "+mailLink);
+			    	
+			    	String subject = configProperties.getProperty("MAIL_SWITCH_TRANSACTION_EXECUTED_SUBJECT");
+		
+			    	//sendMail.MailSending(emailId,subject,"SwitchTransactionExecutedMail","SwitchTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName,"");
+				}
+				
 		    	logger.debug("UploadCustomerNavAction class - execute method - customerId - "+customerId+" - mail sent to "+emailId+" for transaction execution");
 		    	
 			}

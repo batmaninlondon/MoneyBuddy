@@ -33,11 +33,6 @@
     <script type="text/javascript" src="assets/js/jquery.isotope.min.js"></script>
     <!-- <script type="text/javascript" src="assets/js/main.js"></script> -->
     <script type="text/javascript" src="assets/js/wow.min.js"></script>
-    <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 
 
 	<style>
@@ -151,7 +146,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -180,7 +175,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

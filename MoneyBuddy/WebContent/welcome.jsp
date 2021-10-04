@@ -4,13 +4,13 @@
 <!DOCTYPE html >
 <html lang="en">
 <head>	
-
+<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> -->
+<!-- <link rel="shortcut icon" href="favicon.ico"> -->
 
 </head>
 
-<body >
+<body>
 		
-		<%-- <jsp:forward page="/fundDetails.action" /> --%>
 		<s:action name="fetchPopularFundDetailsAction" namespace="/" executeResult="true" />
 </body>
    

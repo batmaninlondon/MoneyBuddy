@@ -21,7 +21,7 @@
              <message>Password must contain at least ${minLength} characters</message>
         </field-validator>
     </field>
-    <field name="mobileNumberRegister">
+   <!--  <field name="mobileNumberRegister">
         <field-validator type="requiredstring">
             <message>Mobile Number can't be blank.</message>
         </field-validator>
@@ -30,7 +30,7 @@
           <param name="regexExpression">[0-9]{10,10}</param>  
           <message>Not a valid Mobile Number.</message>  
         </field-validator>
-    </field>
+    </field> -->
     
    
 </validators>

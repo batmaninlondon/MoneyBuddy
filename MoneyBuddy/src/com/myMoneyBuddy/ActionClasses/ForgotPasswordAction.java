@@ -107,7 +107,7 @@ public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_FORGOT_PASSWORD_SUBJECT");
 
-	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",link,"Reset your password",customerName);
+	    	sendMail.MailSending(getEmailIdForgotPassword(),subject,"ForgotPasswordMail","ForgotPasswordMail.txt",link,"Reset your password",customerName,"");
 	    	
 	    	logger.debug("ForgotPasswordAction class - execute method - customerId - "+customerId+" - mail sent to "+getEmailIdForgotPassword()+" to reset password");
 	    	

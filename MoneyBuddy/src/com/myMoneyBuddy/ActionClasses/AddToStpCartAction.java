@@ -28,15 +28,12 @@ public class AddToStpCartAction extends ActionSupport  implements SessionAware{
 	
 	
     public String execute() {
-  	
+
     	String customerId = null;
     	
     	try {
     		
     		customerId = sessionMap.get("customerId").toString();
-    		
-    		logger.debug("AddToStpCartAction class - execute method - start");
-			System.out.println("Calling AddToStpCartAction class - start ");
 			
 			QueryStpCart queryStpCart = new QueryStpCart();	
 			InsertCustomerStpCart insertCustomerStpCart = new InsertCustomerStpCart();

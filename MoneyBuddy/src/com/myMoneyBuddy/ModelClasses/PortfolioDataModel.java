@@ -137,4 +137,13 @@ public class PortfolioDataModel implements Serializable{
 		this.stpWithdrawalFlag = stpWithdrawalFlag;
 	}
 
+
+	@Override
+	public String toString() {
+		return "\nPortfolioDataModel [fundId=" + fundId + ", schemeName=" + schemeName + ", folioNumber=" + folioNumber
+				+ ", units=" + units + ", investedAmount=" + investedAmount + ", currentAmount=" + currentAmount
+				+ ", profit=" + profit + ", rateOfGrowth=" + rateOfGrowth + ", schemeType=" + schemeType
+				+ ", stpWithdrawalFlag=" + stpWithdrawalFlag + "]";
+	}
+
 }

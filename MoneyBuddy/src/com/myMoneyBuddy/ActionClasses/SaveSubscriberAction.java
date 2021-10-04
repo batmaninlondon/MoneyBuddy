@@ -77,7 +77,7 @@ public class SaveSubscriberAction extends ActionSupport {
 		    	
 		    	String subject = configProperties.getProperty("MAIL_SUBSCRIPTION_SUBJECT");
 	
-		    	sendMail.MailSending(getEmailId(),subject,"SubscriptionMail","SubscriptionMail.txt",mailLink,"Wealth creation with MoneyBuddy","");
+		    	sendMail.MailSending(getEmailId(),subject,"SubscriptionMail","SubscriptionMail.txt",mailLink,"Wealth creation with MoneyBuddy","","");
 				
 				System.out.println("str set to subscribedSuccessfully ");
 				//String str = "subscribedSuccessfully";

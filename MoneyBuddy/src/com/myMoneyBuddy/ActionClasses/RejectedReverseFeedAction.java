@@ -5,11 +5,15 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.InsertTransactionDetails;
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -31,7 +35,24 @@ public class RejectedReverseFeedAction extends ActionSupport implements Action  
 				return SUCCESS ;
 			}
 			InsertTransactionDetails insertTransactionDetails = new InsertTransactionDetails();
-			insertTransactionDetails.insertRejectedTransactionDetails(transactionDetails);
+			insertTransactionDetails.insertRejectedTransactionDetails(transactionDetails.getTransactionDetailId());
+			
+			SendMail sendMail = new SendMail();
+
+	    	Properties configProperties = new Properties();
+	    	String configPropFilePath = "../../../config/config.properties";
+
+	    	configProperties.load(RedeemAction.class.getResourceAsStream(configPropFilePath));
+
+	    	String mailLink = configProperties.getProperty("MAIL_SIP_REJECTED_LINK");
+	    	System.out.println("mailLink is : "+mailLink);
+
+	    	QueryCustomer queryCustomer = new QueryCustomer();
+	    	
+	    	String subject = configProperties.getProperty("MAIL_SIP_REJECTED_SUBJECT");
+
+	    	sendMail.MailSending(queryCustomer.getCustomerEmailId(transactionDetails.getCustomerId()),subject,"SipRejectedMail","SipRejected.txt",mailLink,"",queryCustomer.getCustomerNameFromId(transactionDetails.getCustomerId()),"");
+	    	
 			
 			System.out.println("Returning success !! ");
 			logger.debug("PendingNavsAction class - execute method - end ");

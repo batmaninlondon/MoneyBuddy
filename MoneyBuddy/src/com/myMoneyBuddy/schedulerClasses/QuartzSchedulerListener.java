@@ -30,12 +30,12 @@ public class QuartzSchedulerListener implements ServletContextListener {
 		
 		{
 			
-			// Scheduler to fetch daily NAV and update Old Portfolio data
+			// Scheduler to fetch daily NAV and update Non MoneyBuddy data
 			
 			JobDetail computeOldPortfolioJob = JobBuilder.newJob(ComputeOldPortfolio.class)
 					.withIdentity("ComputeOldPortfolioJob", "Group").build();
 			
-			// This Trigger will work at 4:30 pm (London time) everyday
+			// This Trigger will work at 2:00 am (London time) everyday
 			
 			Trigger computeOldPortfolioTrigger = TriggerBuilder
 					.newTrigger()
@@ -50,7 +50,7 @@ public class QuartzSchedulerListener implements ServletContextListener {
 			JobDetail fetchDailyNavJob = JobBuilder.newJob(FetchDailyNav.class)
 					.withIdentity("FetchDailyNavJob", "Group").build();
 			
-			// This Trigger will work at 4:30 pm (London time) everyday
+			// This Trigger will work at 2:00 am (London time) everyday
 			
 			Trigger fetchDailyNavTrigger = TriggerBuilder
 					.newTrigger()
@@ -99,6 +99,19 @@ public class QuartzSchedulerListener implements ServletContextListener {
 					.withSchedule(CronScheduleBuilder.cronSchedule("0 30 09 * * ?")) 
 					.build();
 			
+			// Scheduler for payment staus check to display the order in Admin, for which the payment has been received
+			
+			JobDetail clientRecordsGeneratorJob = JobBuilder.newJob(ClientRecordsGenerator.class)
+					.withIdentity("ClientRecordsGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 9:30 am (London time) everyday
+			
+			Trigger clientRecordsGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("ClientRecordsGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 46 13 * * ?")) 
+					.build();
+			
 			// Scheduler for daily aqb calculation
 			
 			JobDetail dailyInvestmentGeneratorJob = JobBuilder.newJob(DailyInvestmentGenerator.class)
@@ -119,10 +132,15 @@ public class QuartzSchedulerListener implements ServletContextListener {
 			
 			// This Trigger will work at 11 am (London time) on every 1st Apr
 			
-			Trigger aqbCalculatorFirstQuarterTrigger = TriggerBuilder
+			/*Trigger aqbCalculatorFirstQuarterTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("AqbCalculatorFirstQuarterTrigger", "Group")
 					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 4 ?")) 
+					.build();*/
+			Trigger aqbCalculatorFirstQuarterTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("AqbCalculatorFirstQuarterTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 2 ?")) 
 					.build();
 			
 			// Scheduler for calculating all customers aqb for quarter 2 ( Apr-June)
@@ -132,10 +150,16 @@ public class QuartzSchedulerListener implements ServletContextListener {
 			
 			// This Trigger will work at 11 am (London time) on every 1st July
 			
-			Trigger aqbCalculatorSecondQuarterTrigger = TriggerBuilder
+			/*Trigger aqbCalculatorSecondQuarterTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("AqbCalculatorSecondQuarterTrigger", "Group")
 					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 7 ?")) 
+					.build();*/
+			
+			Trigger aqbCalculatorSecondQuarterTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("AqbCalculatorSecondQuarterTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 3 ?")) 
 					.build();
 			
 			// Scheduler for calculating all customers aqb for quarter 3 ( July-Sep)
@@ -148,7 +172,7 @@ public class QuartzSchedulerListener implements ServletContextListener {
 			Trigger aqbCalculatorThirdQuarterTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("AqbCalculatorThirdQuarterTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 4 ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 10 ?")) 
 					.build();
 			
 			// Scheduler for calculating all customers aqb for quarter 4 ( Oct-Dec)
@@ -161,7 +185,7 @@ public class QuartzSchedulerListener implements ServletContextListener {
 			Trigger aqbCalculatorFourthQuarterTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("AqbCalculatorFourthQuarterTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 4 ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 00 11 1 1 ?")) 
 					.build();
 			
 			//Execute the job.
@@ -170,7 +194,7 @@ public class QuartzSchedulerListener implements ServletContextListener {
         	scheduler.start();
         	
         	
-        	// Execute fetch NAV and update Old Portfolio data job to fetch and update old portfolio data as per current NAV into our database
+        	// Execute fetch NAV and update Non MoneyBuddy data job to fetch and update old portfolio data as per current NAV into our database
         	scheduler.scheduleJob(computeOldPortfolioJob, computeOldPortfolioTrigger);
         	// Execute fetch NAV data job to fetch and store daily NAV into our database
 			scheduler.scheduleJob(fetchDailyNavJob, fetchDailyNavTrigger);
@@ -183,6 +207,9 @@ public class QuartzSchedulerListener implements ServletContextListener {
         	
         	// Execute payment staus check to display the order in Admin, for which the payment has been received
         	scheduler.scheduleJob(paymentStatusCheckJob, paymentStatusCheckTrigger);
+        	
+        	// Execute payment staus check to display the order in Admin, for which the payment has been received
+        	scheduler.scheduleJob(clientRecordsGeneratorJob, clientRecordsGeneratorTrigger);
         	
         	// Execute daily aqb calculation
         	scheduler.scheduleJob(dailyInvestmentGeneratorJob, dailyInvestmentGeneratorTrigger);

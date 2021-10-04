@@ -26,15 +26,7 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-		    
+        <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
 	    
 <style>
 /*form styles*/
@@ -94,7 +86,7 @@
 	color: white;
 	text-transform: uppercase;
 	font-size: 9px;
-	width: 25%;
+	width: 20%;
 	float: left;
 	position: relative;
 }
@@ -188,12 +180,14 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 														<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 														<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 															<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 															<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+															<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+															<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 														</ul>
 													</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -223,61 +217,70 @@
 		
 		<ul  id="progressbar" class="form1" >
 			<li class="active">Basic Details</li>
-			<li >Address Details</li>
+			<li >Address</li>
+			<li class="hidden" id="nri-address-tab">Address-Nri</li>
 			<li >FATCA Details</li>
-			<li >Payment Details</li>
+			<li >Payment</li>
 		</ul>
 	<!-- fieldsets -->
-	<fieldset  style="background-color: #cecece !important; ">
-		<div style="background-color: white; height:60vh;">
+	<fieldset  style="background-color: #cecece !important; " id="basic-details-tab">
+		<div style="background-color: white; " class="g-height-450--xs">
 		<input class="form-control g-color--red text-center" id="errorMsg1" value=""  style="font-weight: bold; " readonly />
-		<br/>
-		<div class="row g-text-left--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Name</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="customerName" class="g-color--red" />
-		  		<s:textfield class="form-control" id="customer-name" placeholder="Your Full Name: As per Pan Card" name="customerName"/> --%> 
-		  		<input class="form-control" name="customerName" id="customer-name" placeholder="Your Full Name: As per Pan Card" required />
+		
+		<div class="row g-text-left--xs g-margin-t-10--lg" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">Name</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+		  			name="customerName" id="customer-name" placeholder="Your Full Name: As per Pan Card" required />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">PAN</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="panCard" class="g-color--red" />
-		  		<s:textfield class="form-control" id="pancard-number" placeholder="Pancard Number" name="panCard" /> --%>
-		  		<input class="form-control" name="panCard" pattern="^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$" id="pancard-number" placeholder="Pancard Number" required />
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">Mobile</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+		  			name="mobileNumber" id="mobile-number" placeholder="10 digit Indian Mobile no" required />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">PAN</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+		  			name="panCard" pattern="^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$" id="pancard-number" placeholder="Pancard Number" required   />
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Date of Birth</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<input class="form-control datepicker" id="date-of-birth" pattern="^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$" name="dateOfBirth" 
-        						 placeholder="DD/MM/YYYY Format" required>
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">Date of Birth</div>
+        	<div class="col-lg-6 col-xs-8 ">
+        		<input class="form-control datepicker g-font-size-10--xs g-font-size-14--lg "
+        			id="date-of-birth" pattern="^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$" name="dateOfBirth" 
+        						 placeholder="DD/MM/YYYY Format" required  >
         		
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">Gender</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="gender"
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Gender</div>
+        	<div class="col-lg-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg "  id="gender"
 					list="#{'M':'Male', 'F':'Female'}" 
 					name="gender" 
-					value="M" />
+					value="F" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">Working as</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<s:select class="form-control"  id="occupation" 
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Working as</div>
+        	<div class="col-lg-6 col-xs-8 ">
+        		<s:select class="form-control g-font-size-10--xs g-font-size-14--lg "  id="occupation" 
 					list="#{'PriSecJob':'Private Sector job', 'PubSecJob':'Public Sector job', 'GovSer':'Government Service',
 					'Business':'Business', 'Professional':'Professional', 
 					'Retired':'Retired', 'Student':'Student', 
@@ -285,141 +288,87 @@
 					name="occupation" 
 					value="PriSecJob" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs">You are</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="tax-status"
+        <div class="row g-text-left--xs g-margin-t-10--lg" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">You are</div>
+        	<div class="col-lg-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg "  id="tax-status"
 					list="#{'Individual':'Resident Individual', 'NriNre':'NRI with NRE a/c', 'NriNro':'NRI with NRO a/c'}" 
 					name="taxStatus" 
 					value="Individual" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <%-- <div class="row g-text-left--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 g-text-left--xs  g-margin-l-90--xs">You are </div>
-        	<!-- <div class="col-md-8 col-xs-8 "> -->
-				<form  class="col-md-8 col-xs-8 ">
-				  	<label class="radio-inline ">
-					  	<input type="radio" id="y1" name="taxStatus" value="Individual" checked="checked" >Resident Individual
-				  	</label>
-				  	<label class="radio-inline ">
-					  <input type="radio" id="y2" name="taxStatus" value="NriNre" > NRI with NRE a/c
-					</label>
-					<!-- <label class="radio-inline ">
-					  <input type="radio" id="y2" name="taxStatus" value="NriNro" > NRI with NRO a/c
-					</label> -->
-			  	</form>
-				  	<s:select class="form-control"  id="tax-status" 
-					list="#{'Individual':'Individual', 'OnBeOfMinor':'On Behalf Of Minor', 'Huf':'HUF', 'Company':'Company',
-					'AopBoi':'AOP/BOI', 'Partnership':'Partnership', 'BodyCorporate':'Body Corporate', 'Trust':'Trust',
-					'Society':'Society', 'NriNre':'NRI - Repatriable(NRE)', 'OverCorpoBody':'Oversea Corporate Body', 'ForeInstiInvest':'Foreign Institutional Investor',
-					'OverCorpoBodyOthers':'Oversea Corporate Body - Others', 'ProviFundEpf':'Provident Fund - EPF', 'SuperAnnuFund':'Super Annuation Fund', 'GratuityFund':'Gratuity Fund',
-					'BankFinanInsti':'Bank/Finanacial Institution', 'SolePropri':'Sole Proprietorship', 'PensionFund':'Pension Fund', 'NriNro':'NRI - Repatriable(NRO)',
-					'NriMinorNre':'NRI - Minor (NRE)', 'NriHufNro':'NRI-HUF(NRO)', 'NriThruNroAc':'NRI Through NRO A/c', 'GloDevelopNet':'Global Development Network',
-					'NriHufNre':'NRI-HUF(NRE)', 'LimLiaParter':'Limited Liability Partnership', 'PubLimCompany':'Public Limited Company', 'PriLimCompany':'Private Limited Company',
-					'UnlisCompany':'Unlisted Company', 'OciRepatri':'OCI - Repatriation', 'OciNonRepatri':'OCI - Non Repatriation', 'Pio':'Person of Indian Origin [PIO]',
-					'Ngo':'Non-Government Organisation [NGO]', 'Others':'Others' }" 
-					name="taxStatus" 
-					value="Individual" />
-        	<!-- </div> -->
-        	<div class="col-md-1 col-xs-1 "></div>
-        </div> --%>
         <div class="row g-text-left--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Name</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="nomineeName" class="g-color--red" />
-		  		<s:textfield class="form-control" id="nominee-name" placeholder="Nominee Name" name="nomineeName"/>  --%>
-		  		<input class="form-control" name="nomineeName" id="nominee-name" placeholder="Nominee Name" required />
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Nominee Name</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+		  			name="nomineeName" id="nominee-name" placeholder="Nominee Name" required />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 g-margin-l-90--xs ">Nominee Relationship</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="nomineeRelationship" class="g-color--red" />
-		  		<s:textfield class="form-control" id="nominee-relationship" placeholder="Nominee Relationship" name="nomineeRelationship"/> --%> 
-		  		<input class="form-control" name="nomineeRelationship" id="nominee-relationship" placeholder="Nominee Relationship" required />
+        <div class="row g-text-left--xs  " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Relationship</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+		  			name="nomineeRelationship" id="nominee-relationship" placeholder="Nominee Relationship" required  />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
         </div>
-        	<input type="submit" id="nextBtn1" name="next" class="action-button " value="Next" style="width:20% ;float: right;"/>
+        	<input type="submit" id="nextBtn1" name="next" class="action-button " value="Next" style="width:23% ;float: right;"/>
 	</fieldset>
-	<fieldset  style="background-color: #cecece !important;" >
+	<fieldset  style="background-color: #cecece !important;" id="address-details-tab" >
 
-		<div style="background-color: white; height:60vh;">
+		<div style="background-color: white; "  class="g-height-450--xs">
 				
 		<input class="form-control g-color--red text-center" id="errorMsg2" value=""  style="font-weight: bold; " readonly />
-			
-		<br/>
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Address Line 1</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="addressLineOne" class="g-color--red" />
-			  	<s:textfield class="form-control" id="address-line-one" placeholder="Address Line 1" name="addressLineOne" requiredLabel="true"/>  --%>
-			  	<input class="form-control" name="addressLineOne"  id="address-line-one" placeholder="Address Line 1"  required />
+		
+		<div class="row g-text-left--xs g-margin-t-30--xs" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 1</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		name="addressLineOne"  id="address-line-one" placeholder="Address Line 1"  required  />
 			</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Address Line 2</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="addressLineTwo" class="g-color--red" /> --%>
-			  	<%-- <s:textfield class="form-control" id="address-line-two" placeholder="Address Line 2" name="addressLineTwo" />  --%>
-			  	<input class="form-control" name="addressLineTwo"  id="address-line-two" placeholder="Address Line 2" />
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 2</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+			  		name="addressLineTwo"  id="address-line-two" placeholder="Address Line 2"  required />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Address Line 3</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="addressLineThree" class="g-color--red" /> --%>
-			  	<%-- <s:textfield class="form-control" id="address-line-three" placeholder="Address Line 3" name="addressLineThree" />  --%>
-			  	<input class="form-control" name="addressLineThree"  id="address-line-three" placeholder="Address Line 3" />
+		<div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 3</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		name="addressLineThree"  id="address-line-three" placeholder="Address Line 3"   />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>	
-        <div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">City</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="residentialCity" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-city" placeholder="City" name="residentialCity" /> --%>
-			  	<input class="form-control"  id="residential-city" placeholder="City" name="residentialCity" required/>
-			  	<%-- <s:select class="form-control"  id="residential-city" 
-					list="#{'Agra':'Agra', 'Ahmedabad':'Ahmedabad', 'Ajmer':'Ajmer', 'Allahabad':'Allahabad', 
-					'Amritsar':'Amritsar', 'Anand':'Anand', 'Asansol':'Asansol', 'Aurangabad':'Aurangabad', 'Bangalore':'Bangalore', 
-					'Baroda':'Baroda', 'Bharuch':'Bharuch', 'Bhavnagar':'Bhavnagar', 'Bhopal':'Bhopal', 'Bhubaneswar':'Bhubaneswar', 
-					'Calicut':'Calicut', 'Chandigarh':'Chandigarh', 'Chennai':'Chennai', 'Coimbatore':'Coimbatore', 'Dehradun':'Dehradun', 
-					'Dharwad':'Dharwad', 'Dubai':'Dubai<', 'Durgapur':'Durgapur', 'Erode':'Erode', 'Guntur':'Guntur', 
-					'Guwahati':'Guwahati', 'Hubli':'Hubli', 'Hyderabad':'Hyderabad', 'Indore':'Indore', 'Jaipur':'Jaipur', 
-					'Jalandhar':'Jalandhar', 'Jalgaon':'Jalgaon', 'Jamnagar':'Jamnagar', 'Jamshedpur':'Jamshedpur', 'Jodpur':'Jodpur', 
-					'Kanpur':'Kanpur', 'Karaikudi':'Karaikudi', 'Kochi':'Kochi', 'Kolkata':'Kolkata', 'Kota':'Kota', 'Kottayam':'Kottayam', 
-					'Lucknow':'Lucknow', 'Ludhiana':'Ludhiana', 'Mangalore':'Mangalore', 'Meerut':'Meerut', 'Moradabad':'Moradabad', 
-					'Mumbai':'Mumbai', 'Mysore':'Mysore<', 'Nagpur':'Nagpur', 'Nasik':'Nasik', 'NewDelhi':'New Delhi', 'Panjim':'Panjim', 
-					'Patna':'Patna', 'Pondicherry':'Pondicherry', 'Pune':'Pune', 'Raipur':'Raipur', 'Rajahmundry':'Rajahmundry', 
-					'Rajkot':'Rajkot', 'Ranchi':'Ranchi', 'Salem':'Salem', 'Siliguri':'Siliguri', 'Surat':'Surat', 'Tirunelveli':'Tirunelveli', 
-					'Tirupur':'Tirupur', 'Trichy':'Trichy', 'Trivandrum':'Trivandrum', 'Udaipur':'Udaipur', 'Varanasi':'Varanasi', 
-					'Vashi':'Vashi', 'Vijayawada':'Vijayawada', 'Others':'Others' }" 
-					name="residentialCity" 
-					value="Agra" /> --%>
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">City</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+			  		id="residential-city" placeholder="City" name="residentialCity" required  />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">State</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<s:select class="form-control"  id="residential-state"
+		<div class="row g-text-left--xs  " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">State</div>
+        	<div class="col-lg-6 col-xs-8 ">
+        		<s:select class="form-control g-font-size-10--xs g-font-size-14--lg "  id="residential-state"
 					list="#{'AndamanAndNicobar':'Andaman & Nicobar', 'ArunachalPradesh':'Arunachal Pradesh', 'AndhraPradesh':'Andhra Pradesh', 
 			        'Assam':'Assam', 'Bihar':'Bihar', 'Chandigarh':'Chandigarh', 'Chhattisgarh':'Chhattisgarh', 'GOA':'GOA', 'Gujarat':'Gujarat', 
 			        'Haryana':'Haryana', 'HimachalPradesh':'Himachal Pradesh', 'JammuAndKashmir':'Jammu & Kashmir', 'Jharkhand':'Jharkhand', 
@@ -432,171 +381,261 @@
 					name="residentialState" 
 					value="AndamanAndNicobar" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Country</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="residentialCountry" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-country" placeholder="Country" name="residentialCountry" value="India" />  --%>
-			  	<input class="form-control"  id="residential-country" placeholder="Country" name="residentialCountry" value="India" required/>
+		<div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Country</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "  id="residential-country" placeholder="Country" 
+			  			name="residentialCountry" value="India" required/>
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 previous">Pin</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="residentialPin" class="g-color--red" />
-			  	<s:textfield class="form-control" id="residential-pin" placeholder="Pin" name="residentialPin" />  --%>
-			  	<input class="form-control"  id="residential-pin" pattern="^[0-9]{6}$"  placeholder="Pin" name="residentialPin" required/>
+		<div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Pin</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		id="residential-pin" pattern="^[0-9]{6}$"  placeholder="Pin" name="residentialPin" required  />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-40--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-11 col-xs-11"><b><u>* Address proof not required</u></b></div>
+        <div class="row g-text-left--xs g-margin-t-20--xs" >
+        	<div class="col-lg-1 col-xs-1 "></div>
+        	<div class="col-lg-11 col-xs-11 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"><b><u>* Address proof not required</u></b></div>
         </div>
 		
          </div>
-			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:23% ;float: left;" />
 			
-			<input type="submit" id="nextBtn2" name="next"  class="action-button" value="Next" style="width:20% ;float: right;"/>
+			<input type="submit" id="nextBtn2" name="next"  class="action-button" value="Next" style="width:23% ;float: right;"/>
 			
 	</fieldset>
-	<fieldset  style="background-color: #cecece !important;" >
+	
+		<fieldset  style="background-color: #cecece !important;" id="address-nri-details-tab" >
 
-		<div style="background-color: white; height:60vh;">
+		<div style="background-color: white; "  class="g-height-450--xs">
 				
 		<input class="form-control g-color--red text-center" id="errorMsg3" value=""  style="font-weight: bold; " readonly />
-			
-		<br/>
-		<div class="row g-text-left--xs g-margin-l-90--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Place (City) of Birth</div>
-        	<div class="col-md-6 col-xs-6 ">
-			  	<input class="form-control" name="placeOfBirth"  id="place-of-birth" placeholder="Place (City) of Birth"  required />
+		
+		<div class="row g-text-left--xs g-margin-t-30--xs" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 1</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		name="addressLineOneNri"  id="address-line-one-nri" placeholder="Address Line 1"  required />
 			</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-lg-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-90--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Country of Birth</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="country-of-birth"
-					list="#{'IN':'India', 'ZZ':'Other'}" 
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 2</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+			  		name="addressLineTwoNri"  id="address-line-two-nri" placeholder="Address Line 2" required />
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>
+		<div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg"> Line 3</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		name="addressLineThreeNri"  id="address-line-three-nri" placeholder="Address Line 3" />
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>	
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">City</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+			  		id="residential-city-nri" placeholder="City" name="residentialCityNri" required/>
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">State</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg " 
+			  		id="residential-state-nri" placeholder="State" name="residentialStateNri" required/>
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>	
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Country</div>
+        	<div class="col-lg-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg "  id="residential-country-nri"
+					list="#{'014':'Australia', '229':'United Kingdom', '230':'United States of America'}" 
+					name="residentialCountryNri" 
+					value="Individual" />
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>	
+		<div class="row g-text-left--xs g-margin-t-10--lg" >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Pin</div>
+        	<div class="col-lg-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+			  		id="residential-pin-nri"  placeholder="Pin" name="residentialPinNri" required/>
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>
+        <div class="row g-text-left--xs " >
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-lg-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">Phone</div>
+        	<div class="col-lg-6 col-xs-8 ">
+		  		<input class="form-control g-font-size-10--xs g-font-size-14--lg "
+		  			name="mobileNumberNri" id="mobile-number-nri" placeholder="Mobile no" required />
+        	</div>
+        	<div class="col-lg-3 col-xs-1 "></div>
+        </div>
+		
+         </div>
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:23% ;float: left;" />
+			
+			<input type="submit" id="nextBtn3" name="next"  class="action-button" value="Next" style="width:23% ;float: right;"/>
+			
+	</fieldset>
+	
+	<fieldset  style="background-color: #cecece !important;" id="fatca-details-tab" >
+
+		<div style="background-color: white;" class="g-height-450--xs">
+				
+		<input class="form-control g-color--red text-center" id="errorMsg4" value=""  style="font-weight: bold; " readonly />
+			
+		<div class="row g-text-left--xs g-margin-t-30--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">City of Birth</div>
+        	<div class="col-md-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg" name="placeOfBirth"  
+			  			id="place-of-birth" placeholder="Place (City) of Birth"  required  />
+			</div>
+        	<div class="col-md-3 col-xs-1 "></div>
+        </div>
+        <div class="row g-text-left--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Country of Birth</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="country-of-birth"
+					list="#{'IN':'India','AU':'Australia', 'GB':'United Kingdom', 'US':'United States',  'ZZ':'Other'}" 
 					name="countryOfBirth" 
 					value="IN" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Tax Residency</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="tax-residency"
-					list="#{'IN':'India', 'ZZ':'Other'}" 
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Tax Residency</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="tax-residency"
+					list="#{'IN':'India','AU':'Australia', 'GB':'United Kingdom', 'US':'United States',  'ZZ':'Other'}" 
 					name="taxResidency" 
 					value="IN" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Income slab</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="income-slab"
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Income slab</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="income-slab"
 					list="#{'31':'Below 1 Lac','32':'1 Lac - 5 Lac','33':'5 Lac - 10 Lac','34':'10 Lac - 25 Lac','35':'25 Lac - 1 Cr','36':'Above 1 Cr' }" 
 					name="incomeSlab" 
 					value="33" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-90--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-2 ">Are you Politically Exposed Person?</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="politically-exposed"
+        <div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Politically Exposed?</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="politically-exposed"
 					list="#{'N':'No','Y':'Yes', 'R':'Related to PEP'}" 
 					name="politicallyExposed" 
 					value="N" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
+        </div>
+        <div class="row g-text-left--xs g-margin-t-10--xs hidden" id="tax-identification-number-row">
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Tax Identification no</div>
+        	<div class="col-md-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg" name="taxIdentificationNumber"  
+			  			id="tax-identification-number" placeholder="Of your residential country"  required  />
+			</div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
 		
          </div>
-			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:23% ;float: left;" />
 			
-			<input type="submit" id="nextBtn3" name="next"  class="action-button" value="Next" style="width:20% ;float: right;"/>
+			<input type="submit" id="nextBtn4" name="next"  class="action-button" value="Next" style="width:23% ;float: right;"/>
 			
 	</fieldset>
-	<fieldset  style="background-color: #cecece !important;">
-		<div style="background-color: white; height:60vh;">
-		<input class="form-control g-color--red text-center" id="errorMsg4" value=""  style="font-weight: bold; " readonly />
-		<br/>
-		<div class="row g-text-left--xs g-margin-l-70--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Bank Name</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<s:select class="form-control"  id="bank-name"
+	<fieldset  style="background-color: #cecece !important;" id="payment-details-tab" >
+		<div style="background-color: white;" class="g-height-450--xs">
+		<input class="form-control g-color--red text-center" id="errorMsg5" value=""  style="font-weight: bold; " readonly />
+		
+		<div class="row g-text-left--xs g-margin-t-30--xs " >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Bank Name</div>
+        	<div class="col-md-6 col-xs-8 ">
+        		<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="bank-name"
 					list="#{'ICI':'ICICI Bank', 'SBI':'SBI Bank', 'HDF':'HDFC Bank', 
 			        '162':'KOTAK Bank', 'UTI':'Axis Bank', 'PNB':'Punjab National Bank', 'SIB':'South Indian Bank', 
 			        'SCB':'Standard Chartered Bank', 'UBI':'Union Bank Of India', 'UNI':'United Bank Of India', 
-			        'YBK':'Yes Bank Ltd', 'RBL':'Ratnakar Bank', 'DCB':'DCB','DEN':'DENA Bank'}" 
+			        'YBK':'Yes Bank Ltd', 'RBL':'Ratnakar Bank', 'DCB':'DCB','DEN':'DENA Bank','BBR':'Bank of Baroda',
+			        'IDS':'IndusInd Bank','IDB':'IDBI Bank','CNB':'Canara Bank'}" 
 					name="bankName" 
 					value="ICI" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs " >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Account Type</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<s:select class="form-control"  id="account-type"
+		<div class="row g-text-left--xs g-margin-t-10--xs " >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Account Type</div>
+        	<div class="col-md-6 col-xs-8 ">
+        		<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="account-type"
 					list="#{'SB':'Saving', 'CB':'Current', 'NE':'NRE', 
 			        'NO':'NRO'}" 
 					name="accountType" 
 					value="SB" />
         	</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>	
-		<div class="row g-text-left--xs g-margin-l-70--xs g-margin-t-10--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Account Number</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="accountNumber" class="g-color--red" />
-			  	<s:textfield class="form-control" id="account-number" placeholder="Account Number" name="accountNumber" />  --%>
-			  	<input class="form-control"  id="account-number"  onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="accountNumber" required/>
+		<div class="row g-text-left--xs g-margin-t-10--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Account Number</div>
+        	<div class="col-md-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg"  id="account-number"  onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="accountNumber" required/>
 			</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
-		<div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">Re-enter Account Number</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="reAccountNumber" class="g-color--red" />
-			  	<s:password class="form-control" id="re-account-number" pattern="^[0-9]{12}$" placeholder="Account Number" name="reAccountNumber" />  --%>
-			  	<input class="form-control"  id="re-account-number" onpaste="return false" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="reAccountNumber" required/>
+		<div class="row g-text-left--xs" >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Re-enter Account Number</div>
+        	<div class="col-md-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg"  id="re-account-number" onpaste="return false" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"  placeholder="Account Number" name="reAccountNumber" required/>
 			</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
-        <div class="row g-text-left--xs g-margin-l-70--xs" >
-        	<div class="col-md-1 col-xs-1 "></div>
-        	<div class="col-md-2 col-xs-6 ">IFSC Code</div>
-        	<div class="col-md-6 col-xs-6 ">
-        		<%-- <s:fielderror fieldName="ifscCode" class="g-color--red" />
-			  	<s:textfield class="form-control" id="ifsc-code" pattern="^[a-zA-Z]{4}[0-9]{7}$" placeholder="IFSC Code" name="ifscCode" /> --%>
-			  	<input class="form-control"  id="ifsc-code" pattern="^[a-zA-Z]{4}[0-9]{7}$"  placeholder="IFSC Code" name="ifscCode" required/> 
+        <div class="row g-text-left--xs " >
+        	<div class="col-md-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">IFSC Code</div>
+        	<div class="col-md-6 col-xs-8 ">
+			  	<input class="form-control g-font-size-10--xs g-font-size-14--lg"  id="ifsc-code" placeholder="IFSC Code" name="ifscCode" required/> 
 			</div>
-        	<div class="col-md-3 col-xs-3 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
 		
 		</div>
-		<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;"/>
-		<!-- <input type="submit" id="nextBtn3" class="next action-button" value="SUBMIT" style="width:20% ;float: right;"/> -->
+		<input type="button" name="previous" class="previous action-button" value="Previous" style="width:23% ;float: left;"/>
 		
-		<s:submit class="action-button" value="SUBMIT" style="width:20% ;float: right;" id="submitBtn"/>
+		<s:submit class="action-button" value="SUBMIT" style="width:23% ;float: right;" id="submitBtn"/>
 	</fieldset>
 </div>
 </s:form>
@@ -647,6 +686,7 @@
 		 var current_fs, next_fs, previous_fs; //fieldsets
 		 var left, opacity, scale; //fieldset properties which we will animate
 		 var animating; //flag to prevent quick multi-click glitches
+		 var nri = false;
 
 		 $("#nextBtn1").click(function(){
 				
@@ -655,6 +695,17 @@
 		 	var dateOfBir = document.getElementById("date-of-birth");
 		 	var nomName = document.getElementById("nominee-name");
 		 	var nomRel = document.getElementById("nominee-relationship");
+		 	var taxStatus = document.getElementById("tax-status");
+		 	
+		 	if ( taxStatus.value == "Individual" )  {
+		 		$("#nri-address-tab").addClass('hidden');	
+		 		$("#tax-identification-number-row").addClass('hidden');	
+		 	}
+		 	else {
+		 		nri = true;
+		 		$("#nri-address-tab").removeClass('hidden');
+		 		$("#tax-identification-number-row").removeClass('hidden');
+		 	}
 		 	
 		 	var DOB = dateOfBir.value;
 		 	DOB = DOB.substr(6)+"-"+DOB.substr(3,2)+"-"+DOB.substr(0,2);
@@ -774,11 +825,24 @@
 
 		 			document.getElementById("errorMsg2").value="";
 				//activate next step on progressbar using the index of next_fs
+				
+				
+				
 				 if(animating) return false;
 				 	animating = true;
 				 	
-				 	current_fs = $(this).parent();
-				 	next_fs = $(this).parent().next();
+				 	if ( nri == false )  {
+				 		
+				 		
+					 	current_fs = $(this).parent();
+					 	next_fs = $(this).parent().next().next();
+				 	}
+				 	else {
+				 		
+				 		
+				 		current_fs = $(this).parent();
+					 	next_fs = $(this).parent().next();
+				 	}
 				
 			 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 			 	
@@ -813,19 +877,106 @@
 		 
 		 $("#nextBtn3").click(function(){
 
-				var placeOfBirth = document.getElementById("place-of-birth");
+				var add1Nri = document.getElementById("address-line-one-nri");
+			 	var cityNri = document.getElementById("residential-city-nri");
+			 	var stateNri = document.getElementById("residential-state-nri");
+			 	var pinNri = document.getElementById("residential-pin-nri");
+			 	var mobileNri = document.getElementById("mobile-number-nri");
 			 	  
-			 	var invalid =  (placeOfBirth.value == "") ;
+			 	var invalid =  (add1Nri.value == "") || (cityNri.value == "") || (stateNri.value == "") || (pinNri.value == "") ||
+			 					(mobileNri.value == "") ;
+			 	
+			 	
+			 	if ( invalid )  {
+			 		if ( add1Nri.value == "" )  {
+			 			document.getElementById("errorMsg3").value="Error: Please fill Address";
+			 		}
+			 		else if ( cityNri.value == "" ) {
+			 			document.getElementById("errorMsg3").value="Error: Please fill City";
+			 		}
+			 		else if ( stateNri.value == "" ) {
+			 			document.getElementById("errorMsg3").value="Error: Please fill Country";
+			 		}
+			 		else if ( pinNri.value == "" ) {
+			 			document.getElementById("errorMsg3").value="Error: Please fill Pin";
+			 		}
+			 		else if ( mobileNri.value == "" ) {
+			 			document.getElementById("errorMsg3").value="Error: Please fill Mobile Number";
+			 		}
+			 	}
+			 	        
+			 	/* if ( add1.value != "" && city.value != "" && country.value != "" && pin.value != "" )    {
+			 		
+			 		var invalid =  new RegExp(pin.getAttribute("pattern")).test(pin.value); */
+			 		
+			 		else {
+
+			 			document.getElementById("errorMsg3").value="";
+					//activate next step on progressbar using the index of next_fs
+					 if(animating) return false;
+					 	animating = true;
+					 	
+					 	current_fs = $(this).parent();
+					 	next_fs = $(this).parent().next();
+					
+				 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+				 	
+				 	//show the next fieldset
+				 	next_fs.show(); 
+				 	//hide the current fieldset with style
+				 	current_fs.animate({opacity: 0}, {
+				 		step: function(now, mx) {
+				 			//as the opacity of current_fs reduces to 0 - stored in "now"
+				 			//1. scale current_fs down to 80%
+				 			scale = 1 - (1 - now) * 0.2;
+				 			//2. bring next_fs from the right(50%)
+				 			left = (now * 50)+"%";
+				 			//3. increase opacity of next_fs to 1 as it moves in
+				 			opacity = 1 - now;
+				 			current_fs.css({'transform': 'scale('+scale+')'});
+				 			next_fs.css({'left': left, 'opacity': opacity});
+				 		}, 
+				 		duration: 800, 
+				 		complete: function(){
+				 			current_fs.hide();
+				 			animating = false;
+				 		}, 
+				 		//this comes from the custom easing plugin
+				 		easing: 'easeInOutBack'
+				 	});
+				 	return false;
+			 		}
+				/*  }
+			 	 */
+			 });
+		 
+		 $("#nextBtn4").click(function(){
+
+				var placeOfBirth = document.getElementById("place-of-birth");
+				var invalid = "";
+				
+				if ( nri == true )  {
+					var taxIdentificationNum = document.getElementById("tax-identification-number");
+					var invalid =  (placeOfBirth.value == "") || (taxIdentificationNum.value == "") ;
+				}
+				else {
+					var invalid =  (placeOfBirth.value == "") ;
+				}
+			 	  
+			 	
 			 	
 			 	
 			 	if ( invalid )  {
 			 		if ( placeOfBirth.value == "" )  {
-			 			document.getElementById("errorMsg3").value="Error: Please fill Place of Birth";
+			 			document.getElementById("errorMsg4").value="Error: Please fill Place of Birth";
+			 		}
+			 		else if ( taxIdentificationNum.value == "" )  {
+			 			document.getElementById("errorMsg4").value="Error: Please fill Tax Identification Number";
 			 		}
 			 	}
 			 	else {
 
-			 		document.getElementById("errorMsg3").value="";
+			 		document.getElementById("errorMsg4").value="";
 					//activate next step on progressbar using the index of next_fs
 					 if(animating) return false;
 					 	animating = true;
@@ -870,24 +1021,20 @@
 			 var ifscCode = document.getElementById("ifsc-code");
 			 
 			 var invalid =  (accNum.value == "") || (reAccNum.value == "") ||
-			 			(ifscCode.value == "") || (!new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) ||
-			 			(!(accNum.value == reAccNum.value));
+			 			(ifscCode.value == "") || (!(accNum.value == reAccNum.value));
 			 
 			 if ( invalid )  {
 					if ( accNum.value == "" )  {
-						document.getElementById("errorMsg4").value="Error: Please fill Account Number";
+						document.getElementById("errorMsg5").value="Error: Please fill Account Number";
 					}
 					else if ( reAccNum.value == "" )  {
-						document.getElementById("errorMsg4").value="Error: Please fill Account Number";
+						document.getElementById("errorMsg5").value="Error: Please fill Account Number";
 					}
 					else if ( !(accNum.value == reAccNum.value)) {
-						document.getElementById("errorMsg4").value="Error: Account number does not match( make sure there are no spaces)";
+						document.getElementById("errorMsg5").value="Error: Account number does not match( make sure there are no spaces)";
 					}
 					else if ( ifscCode.value == "" )  {
-						document.getElementById("errorMsg4").value="Error: Please fill IFSC Code";
-					}
-					else if ( !new RegExp(ifscCode.getAttribute("pattern")).test(ifscCode.value)) {
-						document.getElementById("errorMsg4").value="Error: Please fill Valid IFSC Code";
+						document.getElementById("errorMsg5").value="Error: Please fill IFSC Code";
 					}
 			 }
 			 else {
@@ -898,11 +1045,17 @@
 		 });
 
 		 $(".previous").click(function(){
+			 
+			 
 		 	if(animating) return false;
 		 	animating = true;
 		 	
 		 	current_fs = $(this).parent();
 		 	previous_fs = $(this).parent().prev();
+		 	
+		 	if ($("#nri-address-tab").hasClass("hidden") && ( current_fs.attr('id') == "fatca-details-tab"))   {
+		 		previous_fs = $(this).parent().prev().prev();
+		 	}
 		 	
 		 	//de-activate current step on progressbar
 		 	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");

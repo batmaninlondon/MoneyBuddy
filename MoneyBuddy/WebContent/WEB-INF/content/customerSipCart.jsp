@@ -30,13 +30,6 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
 		<link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-		
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> -->
-
-
 
     </head>
 

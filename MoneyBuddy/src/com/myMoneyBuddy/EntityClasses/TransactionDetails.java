@@ -39,6 +39,12 @@ public class TransactionDetails {
     @Column(name="TRANSACTION_TYPE")
     private String transactionType;
     
+    @Column(name="SEL_OPTION")
+    private String selOption;
+    
+    @Column(name="SEL_TYPE")
+    private String selType;
+    
     @Column(name="TRANSACTION_CODE")
     private String transactionCode;
     
@@ -50,6 +56,9 @@ public class TransactionDetails {
     
     @Column(name="TRANSACTION_AMOUNT")
     private String transactionAmount;
+    
+    @Column(name="TRANSACTION_UNIT")
+    private String transactionUnit;
 
     @Column(name="TRANSACTION_STATUS")
     private String transactionStatus;
@@ -95,9 +104,9 @@ public class TransactionDetails {
     }
 
     public TransactionDetails(String transactionId, String bseOrderId, String bseRegistrationNumber, String uniqueReferenceNumber, String customerId, String transactionType,
-			String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionStatus,
-			String bseRemarks, String bseSuccessFlag, String reverseFeed, String fundId, String quantity,String unitPrice, String transactionDate,
-			String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity, String reversalOrder) {
+    		String selOption, String selType, String transactionCode, String buySell, String buySellType, String transactionAmount, String transactionUnit, 
+    		String transactionStatus, String bseRemarks, String bseSuccessFlag, String reverseFeed, String fundId, String quantity,String unitPrice, 
+    		String transactionDate, String updateDate, String rtaFileGenerated, String transactionFolioNum, String remainingQuantity, String reversalOrder) {
 		super();
 		this.transactionId = transactionId;
 		this.bseOrderId = bseOrderId;
@@ -105,10 +114,13 @@ public class TransactionDetails {
 		this.uniqueReferenceNumber = uniqueReferenceNumber;
 		this.customerId = customerId;
 		this.transactionType = transactionType;
+		this.selOption = selOption;
+		this.selType = selType;
 		this.transactionCode = transactionCode;
 		this.buySell = buySell;
 		this.buySellType = buySellType;
 		this.transactionAmount = transactionAmount;
+		this.transactionUnit = transactionUnit;
 		this.transactionStatus = transactionStatus;
 		this.bseRemarks = bseRemarks;
 		this.bseSuccessFlag = bseSuccessFlag;
@@ -180,6 +192,22 @@ public class TransactionDetails {
 		this.transactionType = transactionType;
 	}
 
+	public String getSelOption() {
+		return selOption;
+	}
+
+	public void setSelOption(String selOption) {
+		this.selOption = selOption;
+	}
+
+	public String getSelType() {
+		return selType;
+	}
+
+	public void setSelType(String selType) {
+		this.selType = selType;
+	}
+
 	public String getTransactionCode() {
 		return transactionCode;
 	}
@@ -207,6 +235,14 @@ public class TransactionDetails {
 
 	public void setTransactionAmount(String transactionAmount) {
 		this.transactionAmount = transactionAmount;
+	}
+
+	public String getTransactionUnit() {
+		return transactionUnit;
+	}
+
+	public void setTransactionUnit(String transactionUnit) {
+		this.transactionUnit = transactionUnit;
 	}
 
 	public String getTransactionStatus() {
@@ -330,6 +366,7 @@ public class TransactionDetails {
 		result = prime * result + ((reverseFeed == null) ? 0 : reverseFeed.hashCode());
 		result = prime * result + ((rtaFileGenerated == null) ? 0 : rtaFileGenerated.hashCode());
 		result = prime * result + ((transactionAmount == null) ? 0 : transactionAmount.hashCode());
+		result = prime * result + ((transactionUnit == null) ? 0 : transactionUnit.hashCode());
 		result = prime * result + ((transactionCode == null) ? 0 : transactionCode.hashCode());
 		result = prime * result + ((transactionDate == null) ? 0 : transactionDate.hashCode());
 		result = prime * result + ((transactionDetailId == null) ? 0 : transactionDetailId.hashCode());
@@ -337,6 +374,8 @@ public class TransactionDetails {
 		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
 		result = prime * result + ((transactionStatus == null) ? 0 : transactionStatus.hashCode());
 		result = prime * result + ((transactionType == null) ? 0 : transactionType.hashCode());
+		result = prime * result + ((selOption == null) ? 0 : selOption.hashCode());
+		result = prime * result + ((selType == null) ? 0 : selType.hashCode());
 		result = prime * result + ((uniqueReferenceNumber == null) ? 0 : uniqueReferenceNumber.hashCode());
 		result = prime * result + ((unitPrice == null) ? 0 : unitPrice.hashCode());
 		result = prime * result + ((updateDate == null) ? 0 : updateDate.hashCode());
@@ -447,6 +486,13 @@ public class TransactionDetails {
 		} else if (!transactionAmount.equals(other.transactionAmount)) {
 			return false;
 		}
+		if (transactionUnit == null) {
+			if (other.transactionUnit != null) {
+				return false;
+			}
+		} else if (!transactionUnit.equals(other.transactionUnit)) {
+			return false;
+		}
 		if (transactionCode == null) {
 			if (other.transactionCode != null) {
 				return false;
@@ -494,6 +540,20 @@ public class TransactionDetails {
 				return false;
 			}
 		} else if (!transactionType.equals(other.transactionType)) {
+			return false;
+		}
+		if (selOption == null) {
+			if (other.selOption != null) {
+				return false;
+			}
+		} else if (!selOption.equals(other.selOption)) {
+			return false;
+		}
+		if (selType == null) {
+			if (other.selType != null) {
+				return false;
+			}
+		} else if (!selType.equals(other.selType)) {
 			return false;
 		}
 		if (uniqueReferenceNumber == null) {

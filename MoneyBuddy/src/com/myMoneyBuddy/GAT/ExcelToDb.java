@@ -46,7 +46,7 @@ public class ExcelToDb {
     		
     		System.out.println(" ExcelToDb Start ...........");
     		
-    		String fileName="C://xlsx/11Oct.xls";
+    		String fileName="C://xlsx/6Jan.xls";
         
     		Vector dataHolder=read(fileName);
     		saveToDatabase(dataHolder);
@@ -127,7 +127,7 @@ public class ExcelToDb {
 
         Workbook workbook;
 		try {
-			workbook = WorkbookFactory.create(new File("C://xlsx/4Oct.xls"));
+			workbook = WorkbookFactory.create(new File("C://xlsx/6Jan.xls"));
 		
         Sheet sheet = workbook.getSheetAt(0);
         DataFormatter dataFormatter = new DataFormatter();
@@ -461,13 +461,29 @@ public class ExcelToDb {
 
 	    	sendMail.MailSending(emailId,subject,"UpfrontTransactionExecutedMail","UpfrontTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
 		}
-		else {
+		else if ("SIP".equalsIgnoreCase(transactionType)){
 			String mailLink = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_LINK");
 			System.out.println("mailLink is : "+mailLink);
 	    	
 	    	String subject = configProperties.getProperty("MAIL_SIP_TRANSACTION_EXECUTED_SUBJECT");
 
-	    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecutedMail.txt",mailLink,"LoginToMoneyBuddy",customerName);
+	    	sendMail.MailSending(emailId,subject,"SipTransactionExecutedMail","SipTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName);
+		}
+		else if ("REDEMPTION".equalsIgnoreCase(transactionType)){
+			String mailLink = configProperties.getProperty("MAIL_REDEMPTION_TRANSACTION_EXECUTED_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_REDEMPTION_TRANSACTION_EXECUTED_SUBJECT");
+
+	    	sendMail.MailSending(emailId,subject,"RedemptionTransactionExecutedMail","RedemptionTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName);
+		}
+		else if ("STP".equalsIgnoreCase(transactionType)){
+			String mailLink = configProperties.getProperty("MAIL_STP_TRANSACTION_EXECUTED_LINK");
+			System.out.println("mailLink is : "+mailLink);
+	    	
+	    	String subject = configProperties.getProperty("MAIL_STP_TRANSACTION_EXECUTED_SUBJECT");
+
+	    	sendMail.MailSending(emailId,subject,"StpTransactionExecutedMail","StpTransactionExecuted.txt",mailLink,"LoginToMoneyBuddy",customerName);
 		}
     	
     	

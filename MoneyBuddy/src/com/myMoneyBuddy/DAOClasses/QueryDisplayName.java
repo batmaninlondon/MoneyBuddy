@@ -11,20 +11,24 @@ public class QueryDisplayName {
 		System.out.println("bankName is displayBankName is : "+bankName);
 		HashMap<String,String> bankNames = new HashMap<String,String>();
 		
-		bankNames.put("ICI","ICICI");
-		bankNames.put("SBI","SBI");
-		bankNames.put("HDF","HDFC");
-		bankNames.put("162","KOTAK");
-		bankNames.put("UTI","AXIS");
-		bankNames.put("PNB","PNB");
-		bankNames.put("SIB","SIB");
-		bankNames.put("SCB","SCB");
-		bankNames.put("UBI","UBI");
-		bankNames.put("UNI","UBI");
-		bankNames.put("YBK","YBT");
-		bankNames.put("RBL","RB");
-		bankNames.put("DCB","DCB");
-		bankNames.put("DEN","DEN");
+		bankNames.put("ICI","ICICI Bank");
+		bankNames.put("SBI","SBI Bank");
+		bankNames.put("HDF","HDFC Bank");
+		bankNames.put("162","KOTAK Bank");
+		bankNames.put("UTI","AXIS Bank");
+		bankNames.put("PNB","PNB Bank");
+		bankNames.put("SIB","South India Bank");
+		bankNames.put("SCB","Standard Chartered Bank");
+		bankNames.put("UBI","Union Bank of India");
+		bankNames.put("UNI","United Bank of India");
+		bankNames.put("YBK","Yes Bank Ltd");
+		bankNames.put("RBL","RBL Bank");
+		bankNames.put("DCB","DCB Bank");
+		bankNames.put("DEN","DENA Bank");
+		bankNames.put("BBR","Bank of Baroda");
+		bankNames.put("IDS","IndusInd Bank");
+		bankNames.put("IDB","IDBI Bank");
+		bankNames.put("CNB","Canara Bank");
 		
 		String displayBankName = bankNames.get(bankName);
 		System.out.println("displayBankName is displayBankName is : "+displayBankName);

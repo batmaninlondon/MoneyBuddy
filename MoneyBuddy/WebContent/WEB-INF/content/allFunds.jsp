@@ -44,7 +44,7 @@
   margin: 10px 1%;
   text-align: left;
   color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   font-size: 16px;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -71,7 +71,7 @@
   text-transform: uppercase;
   font-size: 0.9em;
   opacity: 0;
- // background-color: #409ad5;
+ /*  background-color: #409ad5; */
    background-color: black;
   -webkit-transform: rotateX(-90deg);
   transform: rotateX(-90deg);
@@ -129,7 +129,7 @@
 <!--========== HEADER ==========-->
         <header class="navbar-fixed-top s-header-v2 js__header-sticky">
             <!-- Navbar -->
-            <nav class="s-header-v2__navbar">
+            <nav class="s-header-v2__navbar ">
                 <div class="g-padding-l-80-md g-display-table--lg">
                     <!-- Navbar Row -->
                     <div class="s-header-v2__navbar-row">
@@ -159,7 +159,7 @@
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
-                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link -is-active">Funds Explorer</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
 							         	<%  if(session.getAttribute("customerId") == null)
@@ -167,12 +167,14 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -199,12 +201,14 @@
         <!--========== PAGE CONTENT ==========-->
        
        <div class="g-bg-color--dark">
-            <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
+            <div class=" g-text-center--xs g-margin-t-30--xs g-margin-t-0--md g-padding-y-30--md">
             <br/><br/><br/>
-                <div class="g-margin-b-10--xs">
-                    <h1 class="g-font-size-20--xs g-font-size-30--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs g-line-height--sm">Top Performing Direct Mutual Funds</h1>
-                     <p class="g-font-size-15--xs g-font-size-20--sm g-font-size-30--lg g-margin-b-10--xs">Fully online investing</p>
-                     <input class="form-control" id="myInput" type="text" oninput="showSearch(this.value)" placeholder="Search by entering fund name or category">
+                <div class="g-margin-b-10--md">
+                    <h1 class="g-font-size-20--xs g-font-size-20--sm g-font-size-40--md g-color--white g-letter-spacing--1 g-margin-b-10--xs g-line-height--sm">Top Performing Direct Mutual Funds</h1>
+                     <!-- <p class="g-font-size-15--xs g-font-size-20--sm g-font-size-30--lg g-margin-b-10--xs">Fully online investing</p> -->
+                     <div class="g-container--md">
+	                     <input class="form-control" id="myInput" type="text" oninput="showSearch(this.value)" placeholder="Search by entering fund name or category">
+	                 </div>
 				  <br>
 				</div>
             </div>
@@ -213,19 +217,19 @@
     <div id="myDiv1" class="g-bg-color--white  " >
     <!-- <div id="load" class="load"></div> -->
 		<div id="content">
-			<div id="myDiv2" class="row  g-padding-y-40--sm g-container--md  ">
+			<div id="myDiv2" class="row  g-padding-y-40--sm g-padding-r-150--md g-padding-l-150-md g-padding-r-20--xs g-padding-l-20--xs">
 				<s:iterator value="fundDetailsDataModel" var="fundDetailsDataModelElement">
 						<div id="myDiv3" class="col-xs-12 col-md-4  g-bg-color--white">
 							<div  class="  g-line-height--normal  ">
 							<s:set var="selectedFundId" value="#fundDetailsDataModelElement.fundId" />
-								<figure class="snip1418   swiper-slide  g-height-250--xs g-height-300--lg " style="width:100%"  onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
+								<figure class="snip1418   swiper-slide  g-height-200--xs g-height-200--lg " style="width:100%"  onClick="buyFundHandler(<s:property value="selectedFundId" />);" >
 									<span class="add-to-cart  g-font-size-10--xs g-font-size-12--lg ">Select this fund</span>
 				  					<figcaption >
-				    					<article class=" panel panel-heading g-bg-color--primary g-height-100--xs g-height-150--lg" >
-				    						<p class="g-color--white g-line-height--sm  g-font-size-12--xs g-font-size-16--lg " style="font-weight: bold; "><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
-				    						 <p class="g-color--white g-margin-t-20--xs g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Scheme Type:</b> <s:property value="#fundDetailsDataModelElement.schemeType"/></p>
-				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Category:</b> <s:property value="#fundDetailsDataModelElement.category"/></p>
-				    						<p class="g-color--white  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Inception Date:</b> <s:property value="#fundDetailsDataModelElement.startDate"/></p>
+				    					<article class=" panel panel-info panel-heading g-height-80--xs g-height-90--lg" >
+				    						<p class="g-color--black g-line-height--sm  g-font-size-12--xs g-font-size-16--lg " style="font-weight: bold; "><s:property value="#fundDetailsDataModelElement.schemeName"/></p>
+				    						 <p class="g-color--black g-margin-t-20--xs g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Scheme Type:</b> <s:property value="#fundDetailsDataModelElement.schemeType"/>
+				    						<b>&nbsp;&nbsp;&nbsp;&nbsp;Category:</b> <s:property value="#fundDetailsDataModelElement.category"/></p>
+				    						<p class="g-color--black  g-line-height--lg  g-font-size-10--xs g-font-size-12--lg" ><b>Inception Date:</b> <s:property value="#fundDetailsDataModelElement.startDate"/></p>
 				    					</article>
 				    					<article class="g-margin-l-20--xs g-margin-t-20--xs" > 
 									        <s:if test="#fundDetailsDataModelElement.rating.equals('5'.toString())">
@@ -263,13 +267,14 @@
 												<span class="fa fa-star "></span>
 												<span class="fa fa-star"></span>
 											</s:if>
-									        <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article>
-									        <table class="table-bordered" cellspacing="0" width="80%">
+											<br/><br/>
+									        <!-- <article class="g-margin-t-10--xs g-margin-b-10--xs">  Past returns:</article> -->
+									        <table class="table-borderless " cellspacing="0" width="90%">
 										        <thead>
 										            <tr class="g-bg-color--white" >
-										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr</span></th>
-														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr</span></th>
-														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr</span></th>
+										                <th class="text-center" ><span class=" g-font-size-14--xs g-font-size-5--xs">1 yr returns</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">3 yr returns</span></th>
+														<th class="text-center" ><span class=" g-font-size-14--xs">5 yr returns</span></th>
 										            </tr>
 										        </thead>
 										         <tbody>
@@ -341,7 +346,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -370,7 +375,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

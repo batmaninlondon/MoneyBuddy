@@ -313,7 +313,7 @@ a:active {
     service start
 --*/
 .service {
-  text-align: center; }
+  text-align: left; }
   .service .block {
     margin-bottom: 50px; }
     .service .block i {

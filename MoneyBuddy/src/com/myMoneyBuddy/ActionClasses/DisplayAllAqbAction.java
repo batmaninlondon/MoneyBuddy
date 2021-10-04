@@ -53,7 +53,7 @@ public class DisplayAllAqbAction extends ActionSupport implements SessionAware  
 			for ( CustomersAqb customersAqbElement :  customersAqbList)  {
 				quarter = customersAqbElement.getQuarterOfYear().substring(0, 1);
 				year = customersAqbElement.getQuarterOfYear().substring(2);
-				aqbDataModelList.add(new AqbDataModel(customersAqbElement.getCustomerId(),quarter,year,customersAqbElement.getAqb()));
+				aqbDataModelList.add(new AqbDataModel(customersAqbElement.getCustomerId(),quarter,year,customersAqbElement.getAqb(),customersAqbElement.getQuaterlyFess()));
 				
 			}
 			

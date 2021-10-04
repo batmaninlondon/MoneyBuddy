@@ -40,13 +40,9 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/style2.css">
-
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-        
-        <%-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> --%>
-        
+		<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"> -->
+		<!-- <link rel="shortcut icon" href="#"> -->
+		
 	<script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
 <style>
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
@@ -128,6 +124,7 @@
 .snip1418.hover .add-to-cart i {
   background-color: #2980b9;
 }
+
 </style>
 
     <script>
@@ -169,20 +166,10 @@
       
       };
   
+     
+      
     </script>
 
-<!-- Hotjar Tracking Code for www.moneybuddy.co.in -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1416665,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-        
     </head>
     <!-- End Head -->
 
@@ -218,10 +205,10 @@
                         <div class="s-header-v2__navbar-col s-header-v2__navbar-col--right " >
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse s-header-v2__navbar-collapse" id="nav-collapse">
-                                <ul class="s-header-v2__nav">
-                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
+                                <ul class="s-header-v2__nav" >
+                                    <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link -is-active">Home</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link" >Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
@@ -230,7 +217,8 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<!-- <li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li> -->
 										 			 <%-- <li class="s-header-v2__nav-item"><a href="<s:url action="Cart"/>" class="s-header-v2__nav-link">Cart</a></li> --%>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
@@ -238,6 +226,7 @@
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
 			                                            	<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                            	<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -683,7 +672,7 @@
         </div> -->
         <!-- End Process -->
         <!-- Parallax -->
-        <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed ;">
+        <!-- <div class="js__parallax-window" style="background: url(img/1920x1080/031.jpg) 50% 0 no-repeat fixed ;">
             <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
                 <div class="g-margin-b-80--xs">
                     <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--primary " style="text-transform:none;">
@@ -692,7 +681,7 @@
                 </div>
                 <a  href="saveTax" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50 g-padding-x-70--xs">Learn More</a>
             </div>
-        </div>
+        </div> -->
         <!-- End Parallax -->
 
         <!-- Culture -->
@@ -772,6 +761,7 @@
 	            <div class="center wow fadeInDown g-margin-t-50--xs g-margin-b-50--xs ">
 	            	<h2 class="g-color--white g-text-center--xs">Our Partners</h2>
 	                <p class="g-color--white g-text-center--xs g-font-size-12--xs g-font-size-16--lg ">We use funds from leading providers to build your portfolio</p>
+	            	<br/>
 	            	<marquee behavior="scroll" direction="left" >
 	 					<img src="images/partners/birla.jpg"  height="42" alt="Birla">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 						<img src="images/partners/kotak.jpg"  height="42" alt="Kotak">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
@@ -942,6 +932,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                                 
                             </ul>
                         </div>
@@ -971,7 +962,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

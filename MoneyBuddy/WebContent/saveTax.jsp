@@ -34,14 +34,6 @@
         <link type="text/css" rel="stylesheet" href="assets/css/scrollbar.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/css/swiper.min.css"/>
         <link type="text/css" rel="stylesheet" href="assets/cubeportfolio/css/cubeportfolio.min.css" />
-        
-
-        <!-- Theme Styles -->
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-
-
 
     </head>
 
@@ -79,7 +71,7 @@
                                 <ul class="s-header-v2__nav">
                                     <li class="s-header-v2__nav-item"><a href="welcome" class="s-header-v2__nav-link">Home</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="Fees" class="s-header-v2__nav-link">Fees</a></li> -->
-                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link">Save Tax</a></li>
+                                    <li class="s-header-v2__nav-item"><a href="saveTax" class="s-header-v2__nav-link -is-active">Save Tax</a></li>
                                     <li class="s-header-v2__nav-item"><a href="<s:url action="MFexplorer"/>" class="s-header-v2__nav-link">Funds Explorer</a></li>
                                     <!-- <li class="s-header-v2__nav-item"><a href="aboutUs" class="s-header-v2__nav-link">About Us</a></li> -->
                                     <li class="s-header-v2__nav-item"><a href="https://medium.com/@moneybuddyIndia" class="s-header-v2__nav-link">Blog</a></li>
@@ -88,7 +80,7 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <%-- <li class="s-header-v2__nav-item"><a href="<s:url action="Cart"/>" class="s-header-v2__nav-link">Cart</a></li> --%>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
@@ -96,6 +88,7 @@
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
 			                                            	<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                            	<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -127,7 +120,7 @@
 	        		<div class="block ">
 	                        <p class="wow fadeInDown g-color--primary" data-wow-delay="0.3s" data-wow-duration=".2s" ><b>ENJOY TAX-EFFICIENT SAVINGS</b></p><br/>
 	                        <p class="wow fadeInDown g-font-size-14--xs g-font-size-20--md" data-wow-delay="0.5s" data-wow-duration=".5s">Did you Know? ELSS funds are the best way to create wealth and save income tax; Invest upto  
-	                        <span class="g-color--primary g-font-size-16--xsg-font-size-24--md"> <b>Rs. 150,000</b></span> 
+	                        <span class="g-color--primary g-font-size-16--xs g-font-size-24--md"> <b>Rs. 150,000</b></span> 
 	                         in our top performing ELSS funds and save tax upto 
 	                        <span class="g-color--primary g-font-size-16--xs g-font-size-24--md"> <b>Rs. 46,350</b></span> </p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
@@ -141,7 +134,7 @@
 	                            
                                    <div class="dash days_dash">
                                        <p class="title "><span class="g-color--white">Use it or lose it</span></p>
-                                        <p class="  g-font-size-14--xs  "><span class="g-color--white">Use your income tax allowance by 31st Mar'20, or lose it forever.</span></p>
+                                        <p class="  g-font-size-14--xs  "><span class="g-color--white">Use your income tax allowance by 31st March 2020, or lose it forever.</span></p>
                                         <br/>
                                    </div>
 	                                <ul id="countdown_dashboard">
@@ -196,11 +189,11 @@
                             </div>
                             <div data-filter=".service" class="s-tab__filter-v1 g-font-family--playfair cbp-filter-item">
                                 <span class="text-uppercase g-display-block--xs g-font-size-18--xs g-font-size-24--md g-color--primary">02</span>
-                                <p class="g-font-size-18--xs g-font-size-24--md g-color--primary">Lock in period of 3 yrs vs 15 yrs for PPF</p>
+                                <p class="g-font-size-18--xs g-font-size-24--md g-color--primary">Lock in period of 3 years vs 15 years for PPF</p>
                             </div>
                             <div data-filter=".pages" class="s-tab__filter-v1 g-font-family--playfair cbp-filter-item">
                                 <span class="text-uppercase g-display-block--xs g-font-size-18--xs g-font-size-24--md g-color--primary">03</span>
-                               <p class="g-font-size-18--xs g-font-size-24--md g-color--primary">Avg 3 yr returns of 15% vs 8.5% for PPF</p>
+                               <p class="g-font-size-18--xs g-font-size-24--md g-color--primary">Avg 3 year returns of 15% vs 8.5% for PPF</p>
                             </div>
                         </div>
                     </div>
@@ -216,24 +209,27 @@
                                     <!-- <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Save tax upto Rs. 46,350</p> -->
                                     <h2 class="g-font-size-18--xs g-font-size-32--md g-font-family--playfair">Save tax upto Rs. 46,350</h2>
                                 </div>
-                                <p class="g-font-size-14--xs g-font-size-16--md">With MoneyBuddy, You can invest in ELSS funds online and submit receipt to your office next day itself, this will help reduce your TDS burden and your cash in hand will increase.</p><br/>
-                                <p class="g-font-size-14--xs g-font-size-16--md">If you've missed your office deadline, you should still invest in ELSS funds before 31st Mar'19.. You can submit the investment proof while filiing income tax in June'19 and claim the refund for excess tax paid.</p>
+                                <p class="g-font-size-14--xs g-font-size-16--md">With MoneyBuddy, You can invest in ELSS funds online and submit receipt to your office next day itself, this will help reduce your TDS burden and your cash in hand will increase.</p>
+                                <br/>
+                                <p class="g-font-size-14--xs g-font-size-16--md">If you've missed your office deadline, you should still invest in ELSS funds before 31st March 2020. You can submit the investment proof while filing income tax in June 2020 and claim the refund for excess tax paid.</p>
                             </div>
                             <div class="s-tab__grid-v1-item cbp-item service">  
                                 <div class="g-margin-b-20--xs">
-                                    <%-- <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-                                    <span style="text-align: left;">Lock in period of 3 yrs vs 15 yrs for PPF</span></p> --%>
-                                    <h2 class="g-font-size-18--xs g-font-size-32--md g-font-family--playfair">Lock in period of 3 yrs vs 15 yrs for PPF</h2>
+                                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
+                                    <%-- <span style="text-align: left;">Lock in period of 3 yrs vs 15 yrs for PPF</span></p> --%>
+                                    <h2 class="g-font-size-18--xs g-font-size-32--md g-font-family--playfair text-left">Lock in period of 3 years vs 15 years for PPF</h2>
                                 </div>
-                                <p class="g-font-size-14--xs g-font-size-16--md">Pertaining to the performance of the mutual funds, good mutual fund portfolios are constructed for long term investments, however, they are not bound with the lock in periods. But in case of ELSS, the funds are locked in for at least 3 years.</p>
-                                <p class="g-font-size-14--xs g-font-size-16--md">Which means, in ELSS fund you are obligated to stay invested for 3 years or more to exempt from taxes applicable on returns. This forcefully embeds a good habit to stay invested for a longer period.</p>
+                                <p class="g-font-size-14--xs g-font-size-16--md text-left">Pertaining to the performance of the mutual funds, good mutual fund portfolios are constructed for long term investments, however, they are not bound with the lock in periods. But in case of ELSS, the funds are locked in for at least 3 years.</p>
+                                <br/>
+                                <p class="g-font-size-14--xs g-font-size-16--md text-left">Which means, in ELSS fund you are obligated to stay invested for 3 years or more to exempt from taxes applicable on returns. This forcefully embeds a good habit to stay invested for a longer period.</p>
                             </div>
                             <div class="s-tab__grid-v1-item cbp-item pages">
                                 <div class="g-margin-b-20--xs">
                                     <!-- <p class="text-left g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Avg 3 yr returns of 15% vs 8.5% for PPF</p> -->
-                                    <h2 class="g-font-size-18--xs g-font-size-32--md g-font-family--playfair">Avg 3 yr returns of 15% vs 8.5% for PPF</h2>
+                                    <h2 class="g-font-size-18--xs g-font-size-32--md g-font-family--playfair">Avg 3 year returns of 15% vs 8.5% for PPF</h2>
                                 </div>
                                 <p class="g-font-size-14--xs g-font-size-16--md">Although, the lock in period for ELSS is 3 years, you can allow the continuous growth of your fund for longer or redeem after 3 years. Inherently, equity investments are subject to market risk. </p>
+                                <br/>
                                 <p class="g-font-size-14--xs g-font-size-16--md">But since these funds invest your money in equity, you possess chances of higher returns with tax exemption.</p>
                             </div>
                         </div> 
@@ -272,7 +268,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -301,7 +297,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

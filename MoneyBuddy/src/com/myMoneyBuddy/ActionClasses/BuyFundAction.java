@@ -19,6 +19,7 @@ import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
 public class BuyFundAction extends ActionSupport implements SessionAware  {
 
@@ -32,10 +33,6 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     public String execute() {
 
     	try {
-    		
-    		logger.debug("BuyFundAction class - execute method - start ");
-    		
-    		System.out.println(" calling BuyFundAction ! ");
     		
     		QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
     		PrimaryFundDetails primaryFundDetails = queryPrimaryFundDetails.getPrimaryFundDetail(getFundId());
@@ -105,7 +102,6 @@ public class BuyFundAction extends ActionSupport implements SessionAware  {
     	    stream = new ByteArrayInputStream(str.getBytes());
     	    
     	    logger.debug("BuyFundAction class - execute method - returned success");
-	    	logger.debug("BuyFundAction class - execute method - end");
 	    	
 			return SUCCESS;
 			

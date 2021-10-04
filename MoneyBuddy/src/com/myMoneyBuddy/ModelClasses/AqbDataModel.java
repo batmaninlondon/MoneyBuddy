@@ -8,6 +8,7 @@ public class AqbDataModel implements Serializable{
 	private String quarter;
 	private String year;
 	private String aqbAmount;
+	private String qurterlyFee;
 	
 	
 	public AqbDataModel() {
@@ -15,12 +16,13 @@ public class AqbDataModel implements Serializable{
 	}
 
 
-	public AqbDataModel(String customerId, String quarter, String year, String aqbAmount) {
+	public AqbDataModel(String customerId, String quarter, String year, String aqbAmount, String qurterlyFee) {
 		super();
 		this.customerId = customerId;
 		this.quarter = quarter;
 		this.year = year;
 		this.aqbAmount = aqbAmount;
+		this.qurterlyFee = qurterlyFee;
 	}
 
 
@@ -61,6 +63,16 @@ public class AqbDataModel implements Serializable{
 
 	public void setAqbAmount(String aqbAmount) {
 		this.aqbAmount = aqbAmount;
+	}
+
+
+	public String getQurterlyFee() {
+		return qurterlyFee;
+	}
+
+
+	public void setQurterlyFee(String qurterlyFee) {
+		this.qurterlyFee = qurterlyFee;
 	}
 
 	

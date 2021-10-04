@@ -23,6 +23,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.myMoneyBuddy.EntityClasses.StpDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
 import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
@@ -131,7 +132,7 @@ public class QueryProducts {
 			
 			hibernateSession.beginTransaction();
 			
-			totalPendingTransactions = hibernateSession.createQuery("select count(*) from TransactionDetails   where transactionStatus='7' and customerId='"+customerId+"' ").uniqueResult().toString();
+			totalPendingTransactions = hibernateSession.createQuery("select count(*) from TransactionDetails   where transactionStatus in ('7') and customerId='"+customerId+"' ").uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
 
@@ -204,13 +205,22 @@ public class QueryProducts {
 
 	public List<PortfolioDataModel> getPortfolioData(String customerId) throws MoneyBuddyException {
 		
+		
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
-		double soldUnit = 0.0;
+		/*double soldUnit = 0.0;
+		
+		 if (soldUnit != 0 )   {
+    		 System.out.println("Inside the loop of IF - sold unit ARE NOT zero ");
+		    	   
+		 }
+		 else {
+			 System.out.println("Inside the loop of ELSE - sold unit ARE  zero ");
+		 }*/
 		
 		double totalXirr = 0.0;
 		List<Double> totalAmounts = new ArrayList<Double>();
 	    List<Date> totalDates = new ArrayList<Date>();
-	       
+	    	       
 		try
 		{
 			logger.debug("QueryProducts class - getPortfolioData method - customerId - "+customerId+" - start");
@@ -222,7 +232,7 @@ public class QueryProducts {
 
 			List<PortfolioDataModel> portfolioDataModel = new LinkedList<PortfolioDataModel>();
 			
-            Query buyRecordsQuery, buySellRecordsQuery, stpPuchaseFundsQuery;
+            Query  buySellRecordsQuery;
           
 			Query query = hibernateSession.createQuery("select x.fundId, y.transactionFolioNum, x.schemeCode "
 					+ " from SecondaryFundDetails x, TransactionDetails y " + 
@@ -235,6 +245,15 @@ public class QueryProducts {
 			
 			String stpWithdrawalFlag = "Y";
 			for(Iterator itFunds=query.iterate(); itFunds.hasNext();)	{
+				double soldUnit = 0.0;
+				/*
+				 if (soldUnit != 0 )   {
+		    		 System.out.println("Inside the loop of IF - sold unit ARE NOT zero ");
+				    	   
+				 }
+				 else {
+					 System.out.println("Inside the loop of ELSE - sold unit ARE  zero ");
+				 }*/
 				
 				Object[] rowFunds = (Object[]) itFunds.next();
 
@@ -281,10 +300,10 @@ public class QueryProducts {
 						query.setMaxResults(1);
 						String currentNavValue = query.uniqueResult().toString();
 				     
-						System.out.println("currentNavValue : "+currentNavValue);
+						System.out.println("currentNavValue : "+currentNavValue+" for fund is : "+rowFunds[0].toString());
 						
 			     	buySellRecordsQuery = hibernateSession.createQuery("select t.transactionDetailId, t.transactionAmount, t.quantity, t.unitPrice,"
-			     			+ " t.transactionDate, t.buySell , t.transactionFolioNum,  p.schemeName,p.schemeType, p.stpWithdrawalFlag " + 
+			     			+ " t.updateDate, t.buySell , t.transactionFolioNum,  p.schemeName,p.schemeType, p.stpWithdrawalFlag " + 
 			     			" from TransactionDetails t, PrimaryFundDetails p " + 
 			     			" where p.fundId=t.fundId and p.fundId= :fundId and t.customerId= :customerId and t.transactionFolioNum = :transactionFolioNum " + 
 			     			" and t.unitPrice is not null and t.transactionStatus='8'" );
@@ -297,6 +316,8 @@ public class QueryProducts {
 				     
 			     	for (Iterator buySellIt=buySellList.iterator(); buySellIt.hasNext();)  {
 				     	
+			     		
+			     		
 				    	 Object[] buySellRecordRow = (Object[]) buySellIt.next();
 				    	 
 				    	 schemeName = buySellRecordRow[7].toString();
@@ -305,16 +326,17 @@ public class QueryProducts {
 				     	stpWithdrawalFlag = buySellRecordRow[9].toString();
 				     	
 				    	 if ("SELL".equals(buySellRecordRow[5].toString()))  {
+				    		 System.out.println("Inside the loop of SELL for fund id : "+rowFunds[0].toString()+" for buy");
 					    	 soldUnit += Double.parseDouble(buySellRecordRow[2].toString());
 					    	 oldstring = buySellRecordRow[4].toString().substring(0, 10);
 		
 					    	 date = (Date)formatter.parse(oldstring);
-					    	 String transactionDate = newFormat.format(date);
+					    	 String updateDate = newFormat.format(date);
 					    	 
-					    	 dates.add(strToDate(transactionDate));
+					    	 dates.add(strToDate(updateDate));
 					    	 amounts.add(Double.parseDouble(buySellRecordRow[1].toString())*-1);
 					           
-					    	 totalDates.add(strToDate(transactionDate));
+					    	 totalDates.add(strToDate(updateDate));
 					    	 totalAmounts.add(Double.parseDouble(buySellRecordRow[1].toString())*-1);
 					         
 				    	 }
@@ -326,12 +348,17 @@ public class QueryProducts {
 					       
 				    	if ("BUY".equals(buySellRecordRow[5].toString()))  {
 					       
+				    		 System.out.println("Inside the loop of BUY for fund id : "+rowFunds[0].toString()+" for buy");
+				    		
 					    	 if (soldUnit != 0 )   {
+					    		 System.out.println("Inside the loop of BUY sold unit ARE NOT zero : for fund id : "+rowFunds[0].toString()+" for buy");
 							    	   
 					    		 if (Double.parseDouble(buySellRecordRow[2].toString()) > soldUnit)  {
 					    			 availableUnits += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit);
 					    			 investedAmount += (Double.parseDouble(buySellRecordRow[2].toString()) - soldUnit)* (Double.parseDouble(buySellRecordRow[3].toString()));
-					    			 soldUnit = 0;	   
+					    			 soldUnit = 0;	
+					    			 System.out.println("availableUnits : "+availableUnits+" are for fund id : "+rowFunds[0].toString()+" for sell");
+						    		 System.out.println("investedAmount : "+investedAmount+" are for fund id : "+rowFunds[0].toString()+" for sell");
 					    		 }
 					    		 else {
 					    			 soldUnit -= Double.parseDouble(buySellRecordRow[2].toString());	   
@@ -339,29 +366,42 @@ public class QueryProducts {
 					    	 }
 						       
 					    	 else {
+					    		 System.out.println("Inside the loop of BUY sold unit ARE  zero : for fund id : "+rowFunds[0].toString()+" for buy");
 					    		 availableUnits +=  Double.valueOf(buySellRecordRow[2].toString());
 					    		 investedAmount += (Double.parseDouble(buySellRecordRow[1].toString()));
+					    		 System.out.println("availableUnits : "+availableUnits+" are for fund id : "+rowFunds[0].toString()+" for buy");
+					    		 System.out.println("investedAmount : "+investedAmount+" are for fund id : "+rowFunds[0].toString()+" for buy");
 					    	 }
 						       
 					    	 oldstring = buySellRecordRow[4].toString().substring(0, 10);
 		 
 					    	 date = (Date)formatter.parse(oldstring);
 							       	
-					    	 String transactionDate = newFormat.format(date);
+					    	 String updateDate = newFormat.format(date);
 							       	
-					    	 dates.add(strToDate(transactionDate));
+					    	 dates.add(strToDate(updateDate));
 					    	 amounts.add(Double.parseDouble(buySellRecordRow[1].toString()));
 						      
-					    	 totalDates.add(strToDate(transactionDate));
+					    	 totalDates.add(strToDate(updateDate));
 					    	 totalAmounts.add(Double.parseDouble(buySellRecordRow[1].toString()));
 					    	 
 				    	}
 			     	}
 				       
+			     	System.out.println(" fund id is : "+rowFunds[0].toString());
 				     currentAmount = availableUnits* Double.parseDouble(currentNavValue);
-				     amounts.add(currentAmount*-1);
+				     
+				     amounts.add(Math.round((currentAmount*-1) * 100.0) / 100.0);
+				     /*amounts.add(currentAmount*-1);*/
 				     dates.add(strToDate(newFormat.format(todayDate)));
 			         
+				     for ( Double amount : amounts)  {
+				    	 System.out.println(amount);
+				     }
+				     for ( Date d : dates)  {
+				    	 System.out.println(d);
+				     }
+				     
 				     xirr = Newtons_method(0.1, amounts, dates);
 				     xirr = xirr*100;
 				     
@@ -409,13 +449,19 @@ public class QueryProducts {
 				     else {
 				    	 stpAllowed = "N";
 				     }
-					
-				     portfolioDataModel.add(new PortfolioDataModel(rowFunds[0].toString(),schemeName,rowFunds[1].toString(),
-				    		  String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),
-				    		  String.format("%.2f",(currentAmount-investedAmount)),frmtXirr,schemeType,
-				    		  stpAllowed));
-				     totalInvestedAmount +=  investedAmount;
-						totalCurrentAmount +=  currentAmount;
+				     
+				     System.out.println("availableUnits : "+availableUnits+" and currentAmount : "+currentAmount+" for fund id : "+rowFunds[0].toString());
+				     final double THRESHOLD = .0001;
+				     final double zeroVal = 0.0;
+				     if ( Math.abs(availableUnits - zeroVal) >= THRESHOLD)  {
+				    	 System.out.println("availableUnits and zeroVal are not equal using threshold");
+					     portfolioDataModel.add(new PortfolioDataModel(rowFunds[0].toString(),schemeName,rowFunds[1].toString(),
+					    		  String.format("%.4f", availableUnits),String.format("%.2f",investedAmount),String.format("%.2f",currentAmount),
+					    		  String.format("%.2f",(currentAmount-investedAmount)),frmtXirr,schemeType,
+					    		  stpAllowed));
+					     totalInvestedAmount +=  investedAmount;
+					     totalCurrentAmount +=  currentAmount;
+				     }
 	
 				/*}*/
 			}
@@ -642,20 +688,20 @@ public class QueryProducts {
 			
             Query buyRecordsQuery, sellRecordsQuery;
 			Query query = hibernateSession.createQuery("select t.fundId, t.transactionDetailId, p.schemeName , t.transactionAmount, t.transactionDate, t.transactionType "
-										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus='7' and t.fundId = p.fundId");
+										+ "from TransactionDetails t , PrimaryFundDetails p where t.customerId = :customerId and t.transactionStatus in ('5','7') and t.fundId = p.fundId");
 			
 			query.setParameter("customerId",customerId);
 	           
 			 for(Iterator it=query.iterate(); it.hasNext();){		      
 				 Object[] row = (Object[]) it.next();
+
+				 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"Under process",row[4].toString().substring(0,10),row[5].toString()));
 				 
-				 if ("UPFRONT".equals(row[5].toString()))
-					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),row[3].toString(),"0","Under process",row[4].toString().substring(0,10),row[5].toString()));
-				 else 
-					 pendingOrderDataModel.add(new PendingOrderDataModel(row[0].toString(),row[1].toString(),row[2].toString(),"0",row[3].toString(),"Under process",row[4].toString().substring(0,10),row[5].toString()));
-			 }
+				}
 
 			 hibernateSession.getTransaction().commit();
+			 
+			 System.out.println("SAVITA WADHWANI : pendingOrderDataModel.size() : "+pendingOrderDataModel.size());
 			 
 			/* for ( int i =0;i<pendingOrderDataModel.size();i++)  {
 					
@@ -710,7 +756,8 @@ public class QueryProducts {
 					+ "t.transactionAmount,t.transactionFolioNum, s.sipDate,s.sipStartDate "
 					+ "from TransactionDetails t, PrimaryFundDetails p, SipDetails s "
 					+ "where t.customerId= :customerId and t.fundId = p.fundId and t.transactionType='SIP' "
-					+ "and t.transactionDetailId=s.transactionDetailId and s.customerId=t.customerId and s.sipEndDate > curdate()");
+					+ "and t.transactionDetailId=s.transactionDetailId and s.customerId=t.customerId "
+					+ " and s.sipCompletionStatus = 'N' and s.sipEndDate > curdate()");
 
 			sipData.setParameter("customerId",customerId);
 			
@@ -856,17 +903,13 @@ public class QueryProducts {
 			System.out.println("getInvestmentDetailsData : customerId : "+customerId);
 		
 			hibernateSession.beginTransaction();
-
-			/*Query query = hibernateSession.createQuery("select distinct(fundId) from TransactionDetails  where customerId = :customerId ");*/
 			
 			Query allFundsData = hibernateSession.createQuery("select distinct p.schemeName, t.transactionDetailId, t.transactionType, t.buySell,"
-					+ " t.buySellType, t.transactionAmount, t.quantity, t.unitPrice, t.transactionDate, t.transactionFolioNum "
+					+ " t.buySellType, t.transactionAmount, t.quantity, t.unitPrice, t.transactionDate, t.transactionFolioNum, t.transactionStatus "
 					+ " from TransactionDetails t, PrimaryFundDetails p "
-					+ "  where t.fundId=p.fundId and t.customerId = :customerId and t.unitPrice is not null");
+					+ "  where t.fundId=p.fundId and t.customerId = :customerId and  t.transactionStatus in ('5','6','8')   order by t.transactionDate desc");
 			
 			allFundsData.setParameter("customerId",customerId);
-			/*
-			List<String> fundIdList = query.list();*/
 			hibernateSession.getTransaction().commit();
 			
 			int i = 0;
@@ -875,62 +918,63 @@ public class QueryProducts {
 			
 			for (Iterator allFundsDataIt=allFundsData.iterate(); allFundsDataIt.hasNext();)  {
 		
+				
 				Object[] allFundsDataRow = (Object[]) allFundsDataIt.next();
 			
-						
-			/*for (String fundId : fundIdList)  {*/
-				/*System.out.println("getAllFundsInvestmentDetailsData : fundId : "+fundId);*/
-				
-				/*hibernateSession.beginTransaction();
-				query = hibernateSession.createQuery("select schemeName from PrimaryFundDetails where fundId = :fundId");
-				String schemeName = query.setParameter("fundId",fundId).uniqueResult().toString();*/
-				
-				
-				/*query = hibernateSession.createQuery("select transactionDate,quantity,unitPrice,transactionType,buySell,transactionDetailId,transactionAmount,buySellType,transactionFolioNum"
-								+ " from TransactionDetails where fundId='"+fundId+"' and customerId='"+customerId+"' and unitPrice is not null");
-				       */
-				String quantity;
-				/*for (Iterator it=query.iterate(); it.hasNext();)  {*/
+				String quantity = "";
+				String amount = "0.0";
 				    i++;
-				    
-				    
-					//TransactionDetails transactionDetailsRow = (TransactionDetails) allFundsDataRow[1];
+				    if (allFundsDataRow[6] != null)  
+						if ( ("SELL").equals(allFundsDataRow[3].toString()) ) 
+							quantity = "-"+allFundsDataRow[6].toString();
+						
+						else 
+							quantity = allFundsDataRow[6].toString();
 					
-					if ( ("SELL").equals(allFundsDataRow[3].toString()) ) {
-						quantity = "-"+allFundsDataRow[6].toString();
-					}
-					else {
-						quantity = allFundsDataRow[6].toString();
-					}
-
-					
-					//String pattern = "HH:mm:ss";
-					
+				    if (allFundsDataRow[5] != null)  
+				    	amount = allFundsDataRow[5].toString();
 					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(allFundsDataRow[8].toString().substring(0,10));  
 					
 					
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 					String date = simpleDateFormat.format(date1);
 					
+					System.out.println("DATE : "+date);
+					
 					String investmentType = allFundsDataRow[2].toString();
 					String buySell = allFundsDataRow[3].toString();
 					String buySellType = allFundsDataRow[4].toString();
 					String transactionType = null;
+					String transactionStatus = allFundsDataRow[10].toString();
 					
-					if ("UPFRONT".equals(investmentType) && "BUY".equals(buySell) &&  "FRESH".equals(buySellType))  
+					if ("6".equals(transactionStatus))
+						transactionType = "Payment not received";
+					else if ("UPFRONT".equalsIgnoreCase(investmentType) && "BUY".equals(buySell) &&  "FRESH".equals(buySellType))  
 						transactionType = "New Investment";
-					else if ("UPFRONT".equals(investmentType) && "BUY".equals(buySell) &&  "ADDITIONAL".equals(buySellType))
+					else if ("UPFRONT".equalsIgnoreCase(investmentType) && "BUY".equals(buySell) &&  "ADDITIONAL".equals(buySellType))
 						transactionType = "Additional Investments";
-					else if ("UPFRONT".equals(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
+					else if ("UPFRONT".equalsIgnoreCase(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
 						transactionType = "Partial Redemption";
-					else if ("UPFRONT".equals(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
+					else if ("UPFRONT".equalsIgnoreCase(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
 						transactionType = "Full Redemption";
+					else if ("REDEMPTION".equals(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
+						transactionType = "Full Redemption";
+					else if ("REDEMPTION".equals(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
+						transactionType = "Partial Redemption";
 					else if ("SIP".equals(investmentType) && "BUY".equals(buySell) )
+						transactionType = "SIP Investment";
+					else if ("SIP".equals(investmentType) && "SELL".equals(buySell) )
 						transactionType = "SIP Investment";
 					else if ("STP".equals(investmentType) && "BUY".equals(buySell) )
 						transactionType = "STP Investment";
 					else if ("STP".equals(investmentType) && "SELL".equals(buySell) )
 						transactionType = "STP Redemption";
+					else if ("SWITCH".equals(investmentType) && "BUY".equals(buySell) )
+						transactionType = "SWITCH Investment";
+					else if ("SWITCH".equals(investmentType) && "SELL".equals(buySell) )
+						transactionType = "SWITCH Redemption";
+					else if ("SIPMissed".equals(investmentType) && "SIPMissed".equals(buySell) )
+						transactionType = "SIP Missed";
 					
 					String folioNum = null;
 					
@@ -938,9 +982,16 @@ public class QueryProducts {
 						folioNum = allFundsDataRow[9].toString();
 					else 
 						folioNum=""; 
-						
+					
+					String units = "";
+					System.out.println("Scheme NAME : "+allFundsDataRow[0].toString()+" and allFundsDataRow[7] :"+allFundsDataRow[7]+":");
+					if (allFundsDataRow[7] != null)  {
+						units = allFundsDataRow[7].toString();
+						System.out.println(" Inside if block for Scheme NAME : "+allFundsDataRow[0].toString());
+					}
+					
 					allFundsInvestmentDetailsDataModel.add(new InvestmentDetailsDataModel(allFundsDataRow[1].toString(),allFundsDataRow[0].toString(),folioNum,
-							date,allFundsDataRow[5].toString(),quantity,allFundsDataRow[7].toString(),transactionType ));
+							date,amount,quantity,units,transactionType ));
 					
 				/*}*/
 				/*hibernateSession.getTransaction().commit();*/
@@ -1027,20 +1078,32 @@ public class QueryProducts {
 			String buySellType = transactionDetailsRow[7].toString();
 			String transactionType = null;
 			
-			if ("UPFRONT".equals(investmentType) && "BUY".equals(buySell) &&  "FRESH".equals(buySellType))  
+			if ("UPFRONT".equalsIgnoreCase(investmentType) && "BUY".equals(buySell) &&  "FRESH".equals(buySellType))  
 				transactionType = "New Investment";
-			else if ("UPFRONT".equals(investmentType) && "BUY".equals(buySell) &&  "ADDITIONAL".equals(buySellType))
+			else if ("UPFRONT".equalsIgnoreCase(investmentType) && "BUY".equals(buySell) &&  "ADDITIONAL".equals(buySellType))
 				transactionType = "Additional Investments";
-			else if ("UPFRONT".equals(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
+			else if ("UPFRONT".equalsIgnoreCase(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
 				transactionType = "Partial Redemption";
-			else if ("UPFRONT".equals(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
+			else if ("UPFRONT".equalsIgnoreCase(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
 				transactionType = "Full Redemption";
+			else if ("REDEMPTION".equals(investmentType) && "SELL".equals(buySell) &&  "FULL".equals(buySellType))
+				transactionType = "Full Redemption";
+			else if ("REDEMPTION".equals(investmentType) && "SELL".equals(buySell) &&  "PARTIAL".equals(buySellType))
+				transactionType = "Partial Redemption";
 			else if ("SIP".equals(investmentType) && "BUY".equals(buySell) )
+				transactionType = "SIP Investment";
+			else if ("SIP".equals(investmentType) && "SELL".equals(buySell) )
 				transactionType = "SIP Investment";
 			else if ("STP".equals(investmentType) && "BUY".equals(buySell) )
 				transactionType = "STP Investment";
 			else if ("STP".equals(investmentType) && "SELL".equals(buySell) )
 				transactionType = "STP Redemption";
+			else if ("SWITCH".equals(investmentType) && "BUY".equals(buySell) )
+				transactionType = "SWITCH Investment";
+			else if ("SWITCH".equals(investmentType) && "SELL".equals(buySell) )
+				transactionType = "SWITCH Redemption";
+			else if ("SIPMissed".equals(investmentType) && "SIPMissed".equals(buySell) )
+				transactionType = "SIP Missed";
 				
 			
 			investmentDetailsDataModel.add(new InvestmentDetailsDataModel(transactionDetailsRow[5].toString(),schemeName,transactionDetailsRow[8].toString(),date,transactionDetailsRow[6].toString(),quantity,transactionDetailsRow[2].toString(),transactionType ));
@@ -1121,6 +1184,122 @@ public class QueryProducts {
 		}
 	}
 
+	public double getCurrentAmtForFund(String customerId, String fundId, String folioNum) throws MoneyBuddyException   {
+		
+		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
+								
+			double availableUnits = 0.0;
+			double currentAmount = 0.0;
+			double soldUnit = 0.0;
+			
+		     String stpWithdrawalFlag = null;
+		     
+		     try {
+		     Query query = hibernateSession.createQuery("select navValue from NavHistory where fundId = :fundId order by navHistoryId desc ");
+				query.setParameter("fundId",fundId);
+				query.setMaxResults(1);
+				String currentNavValue = query.uniqueResult().toString();
+		     
+				System.out.println("currentNavValue : "+currentNavValue);
+				
+	     	Query buySellRecordsQuery = hibernateSession.createQuery("select quantity , buySell " + 
+	     			" from TransactionDetails  " + 
+	     			" where fundId= :fundId and customerId= :customerId and transactionFolioNum = :transactionFolioNum " + 
+	     			" and unitPrice is not null and transactionStatus='8'" );
+		      
+	     	buySellRecordsQuery.setParameter("customerId",customerId);
+	     	buySellRecordsQuery.setParameter("fundId",fundId);
+	     	buySellRecordsQuery.setParameter("transactionFolioNum", folioNum);
+	     	
+	     	java.util.List buySellList = buySellRecordsQuery.list();
+		     
+	     	for (Iterator buySellIt=buySellList.iterator(); buySellIt.hasNext();)  {
+		     	
+		    	 Object[] buySellRecordRow = (Object[]) buySellIt.next();
+		     	
+		    	 if ("SELL".equals(buySellRecordRow[1].toString()))  {
+			    	 soldUnit += Double.parseDouble(buySellRecordRow[0].toString());
+			         
+		    	 }
+	     	}
+		     
+	     	for (Iterator buySellIt=buySellList.iterator(); buySellIt.hasNext();)  {
+		    	   
+		    	 Object[] buySellRecordRow = (Object[]) buySellIt.next();
+			       
+		    	if ("BUY".equals(buySellRecordRow[1].toString()))  {
+			       
+			    	 if (soldUnit != 0 )   {
+					    	   
+			    		 if (Double.parseDouble(buySellRecordRow[0].toString()) > soldUnit)  {
+			    			 availableUnits += (Double.parseDouble(buySellRecordRow[0].toString()) - soldUnit);
+			    			 soldUnit = 0;	   
+			    		 }
+			    		 else {
+			    			 soldUnit -= Double.parseDouble(buySellRecordRow[0].toString());	   
+			    		 }
+			    	 }
+				       
+			    	 else {
+			    		 availableUnits +=  Double.valueOf(buySellRecordRow[0].toString());
+			    	 }
+			    	 
+		    	}
+	     	}
+		       
+		     currentAmount = availableUnits* Double.parseDouble(currentNavValue);
+		     
+		     return currentAmount;
+		     
+			     /*String stpAllowed = "Y";
+			     if ("Y".equals(stpWithdrawalFlag))   {
+			    	 
+			    	 QueryPrimaryFundDetails queryPrimaryFundDetails = new QueryPrimaryFundDetails();
+			    	 String availableFundsList = queryPrimaryFundDetails.getAvailableStpFundsList(fundId);
+			    	 
+			    	 if ("".equals(availableFundsList))  {
+			    		 stpAllowed = "N";
+			    	 }
+			    	 
+			    	 if ( "Y".equals(stpAllowed))   {
+			    		 String minStpAmount = queryPrimaryFundDetails.getMinStpAmount(fundId);
+			    		 
+			    		 if (Double.parseDouble(minStpAmount) > currentAmount)   {
+			    			 stpAllowed = "N";
+			    		 }
+			    	 }
+			    	 
+			     }
+			     else {
+			    	 stpAllowed = "N";
+			     }*/
+		     
+		     }
+				catch (NumberFormatException e)
+				{
+					logger.error("QueryProducts class - getSchemeName method - fundId - "+fundId+" - Caught NumberFormatException ");
+					e.printStackTrace();
+					throw new MoneyBuddyException(e.getMessage(),e);
+				}
+				catch ( HibernateException e ) {
+					logger.error("QueryProducts class - getSchemeName method - fundId - "+fundId+" - Caught HibernateException ");
+					e.printStackTrace();
+					throw new MoneyBuddyException(e.getMessage(),e);
+				}
+				catch (Exception e ) {
+					logger.error("QueryProducts class - getSchemeName method - fundId - "+fundId+" - Caught Exception ");
+					e.printStackTrace();
+					throw new MoneyBuddyException(e.getMessage(),e);
+				}
+				finally {
+					if(hibernateSession !=null )
+							hibernateSession.close();
+				}
+
+	
+		     
+		     
+	}
 
 	public double dateDiff(Date d1, Date d2){
 	    long day = 24*60*60*1000;

@@ -5,8 +5,10 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -17,7 +19,9 @@ import com.myMoneyBuddy.DAOClasses.QueryStpCart;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerStpCart;
 import com.myMoneyBuddy.EntityClasses.Customers;
+import com.myMoneyBuddy.EntityClasses.RedemptionCart;
 import com.myMoneyBuddy.EntityClasses.StpCart;
+import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class StpAction extends ActionSupport  implements SessionAware{
@@ -53,6 +57,73 @@ public class StpAction extends ActionSupport  implements SessionAware{
 		    	
 	    	}
 
+	    	SendMail sendMail = new SendMail();
+
+	    	NumberFormat myFormat = NumberFormat.getIntegerInstance();
+	        myFormat.setGroupingUsed(true);
+	        
+	    	Double totalAmount = 0.0;
+			String dataTable = "";
+			String htmlTableStart = "<table style=\"border-collapse:collapse; text-align:center;width:100%\" >";
+			String htmlTableEnd = "</table>";
+			String htmlHeaderRowStart = "<tr style =\"background-color:#13b1cd; color:#ffffff;\">";
+			String htmlHeaderRowEnd = "</tr>";
+			String htmlTrStart = "<tr style =\"color:#555555;\">";
+			String htmlTrEnd = "</tr>";
+			String htmlTdStart = "<td style=\" border-color:#13b1cd; border-style:solid; border-width:thin; padding: 5px;\">";
+			String htmlTdEnd = "</td>";
+
+			dataTable += htmlTableStart;
+			dataTable += htmlHeaderRowStart;
+			dataTable += htmlTdStart + "Fund Name " + htmlTdEnd;
+			dataTable += htmlTdStart + "Details " + htmlTdEnd;
+			dataTable += htmlHeaderRowEnd;
+			
+			String stpDate="";
+			for ( StpCart stpCart : customerStpCartList)   {
+					if (!"Total".equalsIgnoreCase(stpCart.getWithdrawalSchemeName()))  {
+						if ("1".equals(stpCart.getStpDate()))  {
+							stpDate = stpCart.getStpDate()+"<sup>st</sup>";
+						}
+						else {
+							stpDate = stpCart.getStpDate()+"<sup>th</sup>";
+						}
+						
+					dataTable += htmlTrStart;
+					dataTable += htmlTdStart 
+							+ stpCart.getWithdrawalSchemeName() +"<p class=\"text-center\"><b>&#9660;</b></p>"+ stpCart.getPurchaseFundSchemeName()
+							+ htmlTdEnd;
+					//dataTable += htmlTdStart + stpCart.getPurchaseFundSchemeName() + htmlTdEnd;
+					dataTable += htmlTdStart 
+								+ "Amount: Rs." + 	myFormat.format((int) Double.parseDouble(stpCart.getStpAmount()))
+								+ "<br/>Date: " + stpDate 
+								+ htmlTdEnd;
+					dataTable += htmlTrEnd; 
+					//totalAmount += Double.parseDouble(stpCart.getStpAmount());
+					}
+				
+			}
+			/*dataTable += htmlTrStart;
+			//dataTable += htmlTdStart + "" + htmlTdEnd;
+			dataTable += htmlTdStart + "<b>" + "Total" + "</b>" + htmlTdEnd;
+			dataTable += htmlTdStart + "<b>" + totalAmount + "</b>" + htmlTdEnd;
+			dataTable += htmlTrEnd; */
+		         		 
+			dataTable += htmlTableEnd;
+			
+	    	Properties configProperties = new Properties();
+	    	String configPropFilePath = "../../../config/config.properties";
+
+	    	configProperties.load(RedeemAction.class.getResourceAsStream(configPropFilePath));
+
+	    	String mailLink = configProperties.getProperty("MAIL_STP_REGISTERED_LINK");
+	    	System.out.println("mailLink is : "+mailLink);
+
+	    	String subject = configProperties.getProperty("MAIL_STP_REGISTERED_SUBJECT");
+
+	    	sendMail.MailSending(customer.getEmailId(),subject,"StpRegisteredMail","StpRegistered.txt",mailLink,"",customer.getCustomerName(),dataTable);
+	    	
+	    	
 	    	UpdateCustomerStpCart updateCustomerStpCart = new UpdateCustomerStpCart();
 	    	updateCustomerStpCart.emptyCustomerStpCart(customerId);
 	

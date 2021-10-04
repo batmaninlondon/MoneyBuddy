@@ -1,1 +1,10 @@
-/build/
+.project
+.settings
+target
+bin
+.classpath
+build
+.DS_Store
+config.properties
+jspConfig.properties
+hibernate.cfg.xml

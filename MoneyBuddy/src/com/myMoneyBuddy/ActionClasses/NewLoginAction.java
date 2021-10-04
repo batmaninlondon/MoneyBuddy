@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.myMoneyBuddy.DAOClasses.InsertCustomerDetails;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
@@ -30,13 +31,16 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
     private String passwordLogin;
     private String googleResponseLogin;
     private String transactionType;
+    private String googleLogin;
     //private InputStream stream;
 
     public String execute() {
 
     	String customerId = null;
     	try {
-    		System.out.println("transactionType in NewLoginAction is : "+getTransactionType());
+    		
+    		System.out.println("googleLogin in NewLoginAction is : "+getGoogleLogin());
+    		/*System.out.println("passwordLogin in NewLoginAction is : "+getPasswordLogin());*/
     		System.out.println("googleResponse : "+getGoogleResponseLogin());
     		logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - start");
     		QueryCustomer queryCustomer = new QueryCustomer(); 
@@ -61,39 +65,52 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	    
 	    	    return INPUT;
 	    	}
+	    	
 	    	if (customer == null) {
-	    		System.out.println("Emaid id not valid ");
-	    		/*str = "emailIdDoesNotExists";
-	    	    stream = new ByteArrayInputStream(str.getBytes());*/
-	    		addActionMessage("This email ID is not registered, please sign up to use MoneyBuddy");
-	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned emailIdDoesNotExists");
-		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
-	    	    
-	    		return INPUT;
+	    		if ("GoogleLogin".equals(getGoogleLogin()))   {
+	    			InsertCustomerDetails newCustomer = new InsertCustomerDetails();
+	    			customerId = newCustomer.insertCustomer(getEmailIdLogin());
+	    			newCustomer.updateVerificationStatus(customerId);
+	    			customer = queryCustomer.getCustomerFromEmailId(getEmailIdLogin());
+	    		}
+	    		
+	    		else {
+		    		System.out.println("Emaid id not valid ");
+		    		addActionMessage("This email ID is not registered, please sign up to use MoneyBuddy");
+		    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned emailIdDoesNotExists");
+			    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
+		    	    
+		    		return INPUT;
+	    		}
 	    	}
 	    	
-	    		        
+	    	if (!"GoogleLogin".equals(getGoogleLogin()))  {
+	    	
+	    	  
+	    	if (null == queryCustomer.getPassword(getEmailIdLogin()))  {
+	    		System.out.println("null password  ");
+	    		addActionMessage("Incorrect Password, Please enter correct password");
+	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned incorrectPassword");
+		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
+		    	
+	    		return INPUT;
+	    	}
 	        String decrypted = DesEncrypter.MONEYBUDDY.decrypt(queryCustomer.getPassword(getEmailIdLogin()));
 	    	int len = customerId.length();
 	    	
 	    	String decryptedPswd = decrypted.substring(len);
 	    	if(! decryptedPswd.equals(getPasswordLogin())) {
-	    		/*String pswd = new DesEncrypter().decrypt(getEmailIdLogin());
-	    		System.out.println("VALUE OF PASSWORD IS : "+pswd);*/
 	    		
 	    		System.out.println("incorrectPassword ");
-	    		/*str = "incorrectPassword";
-	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    		addActionMessage("Incorrect Password, Please enter correct password");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned incorrectPassword");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 		    	
 	    		return INPUT;
 	        }
+	    	}
 	    	if (customer.getVerificationStatus().equalsIgnoreCase("N"))  {
 	    		System.out.println("Verification not done for this email id ");
-	    		/*str = "verificationNotDone";
-	    	    stream = new ByteArrayInputStream(str.getBytes());*/
 	    		addActionMessage("Verification pending for this Email Id.");
 	    	    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned verificationNotDone");
 		    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
@@ -107,8 +124,6 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		sessionMap.put("customerId", customerId);
 	    		return "adminLogin";
 	    	}
-	    	//String custDetUploaded = customer.getCusDetailsUploaded();
-	    	//String addCustDetUploaded = customer.getAddCusDetailsUploaded();
 	    
 	    	UpdateCustomerRedemptionCart updateCustomerRedemptionCart = new UpdateCustomerRedemptionCart();
     		updateCustomerRedemptionCart.emptyCustomerRedCart(customerId);
@@ -125,32 +140,6 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	
 	    	sessionMap.put("customerMobileNumber", customer.getMobileNumber());
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored customerMobileNumber in sessionMap");
-	    	
-	    	/*sessionMap.put("panCard", customer.getPanCard());
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored panCard in sessionMap");*/
-	    	
-	    	/*sessionMap.put("kycStatus", customer.getKycStatus());
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored kycStatus in sessionMap");
-	    	*/
-	    	/*if (custDetUploaded == null || "N".equals(custDetUploaded))  
-	    		custDetUploaded = "N";
-	    	else 
-	    		custDetUploaded = "Y";
-	    	
-	    	sessionMap.put("custDetUploaded", custDetUploaded);
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored custDetUploaded in sessionMap");
-	    	*/
-	    	/*if (addCustDetUploaded == null || "N".equals(addCustDetUploaded))  
-	    		addCustDetUploaded = "N";
-	    	else 
-	    		addCustDetUploaded = "Y";
-	    		
-	    	sessionMap.put("addCustDetUploaded", addCustDetUploaded);
-	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - stored addCustDetUploaded in sessionMap");*/
-	    	
-	    	//System.out.println("kycStaus in session : "+sessionMap.get("kycStatus"));
-	    	/*System.out.println("custDetUploaded in session : "+sessionMap.get("custDetUploaded"));*/
-	    	/*System.out.println("addCustDetUploaded in session : "+sessionMap.get("addCustDetUploaded"));*/
 
 	    	UpdateLoginTimestamp lastLogin = new UpdateLoginTimestamp();
 	    	lastLogin.updateLoginTimestamp(customerId);
@@ -169,45 +158,6 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    		return "aofFormSent";
 	    	}
 	    	
-	    	//System.out.println("value of fundSelected from seesion : "+sessionMap.get("fundSelected"));
-	    	
-	    	//System.out.println("Value of session variale OnetimeInvestment : "+ sessionMap.get("OnetimeInvestment"));
-	    	/*if ("TRUE".equals(sessionMap.get("fundSelected"))) {*/
-
-/*	    		if ("TRUE".equals(sessionMap.get("OnetimeInvestment"))) {
-	    			System.out.println("fundOnetimeSelected");
-		    		str = "fundOnetimeSelected";
-		    		stream = new ByteArrayInputStream(str.getBytes());
-		    		logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned fundOnetimeSelected");
-			    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
-			    	
-			    	return "fundOnetimeSelected";
-		    	}
-	    		else {
-	    			System.out.println("fundSIPSelected ... ");
-	    			str = "fundSIPSelected";
-		    		stream = new ByteArrayInputStream(str.getBytes());
-		    		logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned fundSIPSelected");
-			    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
-			    	
-			    	return "fundSIPSelected";
-	    		}*/
-	    		
-	    		
-	    		/*if (sessionMap.get("FolioNumList") == null || "undefined".equals(sessionMap.get("FolioNumList")))  {
-	    			System.out.println("sessionMap.get FolioNumList is NULL");
-	    			FundDetailsDataModel fundDetailsDataModel =  (FundDetailsDataModel)sessionMap.get("selectedFundDetailsDataModel");
-	    			
-	    			QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
-	    			String folioNumList = queryTransactionDetails.getFolioNumsList(customerId, fundDetailsDataModel.getFundId());
-	    			sessionMap.put("FolioNumList", folioNumList);
-	    		}
-	    		else {
-	    			System.out.println("sessionMap.get FolioNumList :"+sessionMap.get("FolioNumList").toString()+":");
-	    		}*/
-	    		/*return "fundSelected";
-	    	}*/
-	    	
 	    	QueryCustomerCart queryCustomerCart = new QueryCustomerCart();
 	    	
 	    	if (queryCustomerCart.cartExists(customerId)) {
@@ -219,8 +169,7 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 	    	if (queryTransactionDetails.haveInvestments(customerId))  {
 	    		return "haveInvestment";
 	    	}
-	    	/*str = "success";
-		    stream = new ByteArrayInputStream(str.getBytes());*/
+	    	
 		    logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - returned success");
 	    	logger.debug("NewLoginAction class - execute method - customerId - "+customerId+" - end");
 	    	
@@ -281,13 +230,12 @@ public class NewLoginAction extends ActionSupport implements SessionAware {
 		this.transactionType = transactionType;
 	}
 
-/*	public InputStream getStream() {
-		return stream;
+	public String getGoogleLogin() {
+		return googleLogin;
 	}
 
-	public void setStream(InputStream stream) {
-		this.stream = stream;
-	}*/
-	
+	public void setGoogleLogin(String googleLogin) {
+		this.googleLogin = googleLogin;
+	}	
 
 }

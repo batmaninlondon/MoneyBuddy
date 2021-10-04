@@ -30,12 +30,6 @@
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/material-kit.css" rel="stylesheet"/>
 
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-        
-        <%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
-
     </head>
 
 <body style="background-color:#cecece">

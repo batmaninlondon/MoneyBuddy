@@ -906,10 +906,10 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[56] = ""; 
 						rowData[57] = transactionDate; 
 						rowData[58] = transactionDetail.getTransactionDetailId(); 
-						rowData[59] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? "Normal" : "S");
+						rowData[59] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? "Normal" : "S");
 						        
-						rowData[60] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : transactionDetail.getTransactionDetailId());
-						rowData[61] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : transactionDate);
+						rowData[60] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : transactionDetail.getTransactionDetailId());
+						rowData[61] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : transactionDate);
 						rowData[62] = null; 
 						rowData[63] = null; 
 						rowData[64] = "Y"; 
@@ -949,11 +949,11 @@ public class KarvyTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[95] = null; 
 						rowData[96] = null; 
 						rowData[97] = null; 
-						rowData[98] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : "2017/11/25");
-						rowData[99] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : "2019/11/25"); 
+						rowData[98] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : "2017/11/25");
+						rowData[99] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : "2019/11/25"); 
 	
-						rowData[100] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : "M"); 
-						rowData[101] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : transactionDetail.getTransactionAmount());
+						rowData[100] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : "M"); 
+						rowData[101] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : transactionDetail.getTransactionAmount());
 						rowData[102] = (("NonResInd".equals(additionalDetails.getStatus())) ? customerDetail.getAddressLineOne() : null);  
 						rowData[103] = (("NonResInd".equals(additionalDetails.getStatus())) ? customerDetail.getAddressLineTwo() : null); 
 						rowData[104] = (("NonResInd".equals(additionalDetails.getStatus())) ? customerDetail.getAddressLineThree() : null);

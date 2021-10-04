@@ -115,8 +115,23 @@ public class GenerateAofForm {
             form.setField("PinCode", customerDetail.getResidentialPin());
             form.setField("State", customerDetail.getResidentialState());  
             form.setField("Country", customerDetail.getResidentialCountry());  
-            form.setField("BankName", queryDisplayName.displayBankName(bankDetails.getBankName()));  
-            form.setField("TypeSBorCurrent", bankDetails.getAccountType());  
+            form.setField("BankName", queryDisplayName.displayBankName(bankDetails.getBankName())); 
+            String accType = null;
+            if ("SB".equals(bankDetails.getAccountType()))
+            	accType = "Saving";
+            else if ("CB".equals(bankDetails.getAccountType()))
+            	accType="Current";
+            else if ("NE".equals(bankDetails.getAccountType()))
+            	accType = "NRE";
+            else 
+            	accType="NRO";
+            
+            form.setField("TypeSBorCurrent", accType);  
+            
+            /*
+             * 'SB':'Saving', 'CB':'Current', 'NE':'NRE', 
+			        'NO':'NRO'
+             */
             form.setField("AccountNumber", desEncrypter.decrypt(bankDetails.getAccountNumber()));  
             form.setField("IFSCCode", bankDetails.getIfscCode());  
             form.setField("NomineesName", customerDetail.getNomineeName().toUpperCase());  

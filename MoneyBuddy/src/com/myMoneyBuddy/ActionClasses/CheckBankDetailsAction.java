@@ -58,9 +58,6 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
     			throw new MoneyBuddyException("customerId is not set ");
     		}
     		
-    		logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - start ");
-    		
-	    	System.out.println(" CheckBankDetailsAction execute method Called !!");
 	    	System.out.println("tranDetailId : "+getTranDetailId());
 	    	
 	    	
@@ -84,7 +81,7 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    		QueryTransactionDetails queryTransactionDetails = new QueryTransactionDetails();
 				TransactionDetails transactionDetails =  queryTransactionDetails.getTransactionDetails(getTranDetailId());
 				
-				if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
+				if ("UPFRONT".equalsIgnoreCase(transactionDetails.getTransactionType()))  {
 				
 					sessionMap.put("transactionType", "UPFRONT");
 					logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - stored transactionType set as UPFRONT in sessionMap");
@@ -103,14 +100,14 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 	    			
 	    			List<CustomerCart> customerCartList = new ArrayList<CustomerCart> ();
 			    	
-	    			if ("UPFRONT".equals(transactionDetails.getTransactionType()))  {
+	    			if ("UPFRONT".equalsIgnoreCase(transactionDetails.getTransactionType()))  {
 	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getFundId(),primaryFundDetails.getSchemeName(),
-	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),transactionDetails.getTransactionAmount(),"0",
+	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getUpfrontMultiplier(),primaryFundDetails.getMinSipAmount(),transactionDetails.getTransactionAmount(),"0",
 	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}
 	    			else {
 	    				customerCartList.add(new CustomerCart(customerId,transactionDetails.getFundId(),primaryFundDetails.getSchemeName(),
-	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getMinSipAmount(),"0",transactionDetails.getTransactionAmount(),
+	    						primaryFundDetails.getMinPurchaseAmount(),primaryFundDetails.getUpfrontMultiplier(),primaryFundDetails.getMinSipAmount(),"0",transactionDetails.getTransactionAmount(),
 	    						transactionDetails.getTransactionType(),null,null,null,transactionDetails.getTransactionFolioNum(),null,null,userStatus,rta,null));
 	    			}
     				
@@ -144,99 +141,10 @@ public class CheckBankDetailsAction extends ActionSupport  implements SessionAwa
 			setDisplayBankName(queryDisplayName.displayBankName(bankName)+"********"+accNum.substring(accNum.length()-4));
 			
 			System.out.println("DISPLAY BANK NAME IS : "+getDisplayBankName());
-	    	
-	    	
-	    		/*QueryBankDetails queryBankDetails = new QueryBankDetails();
-	    		
-	    		boolean bankDetailsExists = queryBankDetails.existsBankDetails(customerId);
-	    		
-	    		if (bankDetailsExists)  {
-	    			
-	    			BankDetails bankDetails = queryBankDetails.fetchBankDetails(customerId);
-	    			
-	    			String bankName = bankDetails.getBankName();
-	    			
-	    			switch (bankName)  {
-	    				case "ICI" :
-	    					displayBankName = "ICICI Bank";
-	    					break;
-	    				case "SBI" :
-	    					displayBankName = "SBI Bank";
-	    					break;
-	    				case "HDF" :
-	    					displayBankName = "HDFC Bank";
-	    					break;
-	    				case "162" :
-	    					displayBankName = "KOTAK Bank";
-	    					break;
-	    				case "UTI" :
-	    					displayBankName = "Axis Bank";
-	    					break;
-	    				case "PNB" :
-	    					displayBankName = "Punjab National Bank";
-	    					break;
-	    				case "SIB" :
-	    					displayBankName = "South Indian Bank";
-	    					break;
-	    				case "SCB" :
-	    					displayBankName = "Standard Chartered Bank";
-	    					break;
-	    				case "UBI" :
-	    					displayBankName = "Union Bank Of India";
-	    					break;
-	    				case "UNI" :
-	    					displayBankName = "United Bank Of India";
-	    					break;
-	    				case "YBK" :
-	    					displayBankName = "Yes Bank Ltd";
-	    					break;
-	    				case "RBL" :
-	    					displayBankName = "Ratnakar Bank";
-	    					break;
-	    				case "DCB" :
-	    					displayBankName = "DCB";
-	    					break;
-	    			
-	    			}
-	    			
-	    			String accType = bankDetails.getAccountType();
-	    			
-	    			switch (accType)  {
-	    				case "CB" :
-	    					displayAccType = "Current Account";
-	    					break;
-	    				case "SB" :
-	    					displayAccType = "Saving Account";
-	    					break;
-	    				case "NE" :
-	    					displayAccType = "NRI - Repatriable (NRE)";
-	    					break;
-	    				default :
-	    					displayAccType = "NRI - Repatriable (NRO)";
-	    					break;
-	    			
-	    			}
-	    			
-	    			DesEncrypter desEncrypter = new DesEncrypter();
-	    			System.out.println("Acc num m: "+bankDetails.getAccountNumber());
-	    			String accNum = desEncrypter.decrypt(bankDetails.getAccountNumber());
-	    							
-	    			setSelectedBankName(bankDetails.getBankName());
-	    			setDisplayBankName(displayBankName);
-	    			setSelectedAccType(bankDetails.getAccountType());
-	    			setDisplayAccType(displayAccType);
-	    			setSelectedAccNum(accNum);
-	    			setSelectedIfscCode(bankDetails.getIfscCode());
-	    			
-	    			setRespMsg("bankDetailsExists");
-	    		}*/
-	    		
-	    	   
-		    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - end");
 
-		    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - respMsg set to - "+getRespMsg());
+	    	logger.debug("CheckBankDetailsAction class - execute method - customerId - "+customerId+" - respMsg set to - "+getRespMsg());
 		    	
-	    		return SUCCESS;
+    		return SUCCESS;
 
 
     	}

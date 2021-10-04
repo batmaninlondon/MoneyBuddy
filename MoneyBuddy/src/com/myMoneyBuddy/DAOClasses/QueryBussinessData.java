@@ -88,7 +88,12 @@ public class QueryBussinessData {
 			hibernateSession.beginTransaction();
 			query = hibernateSession.createQuery("select sum( sipAmount) from SipDetails  where sipCompletionStatus='N' ");
 			
-			String monthlyRunningSipValue = query.uniqueResult().toString();
+			String monthlyRunningSipValue = "0";
+			 if (null != query.list().get(0))  
+			 {
+				 monthlyRunningSipValue = query.uniqueResult().toString();
+			 }
+			 
 			monthlyRunningSipValue = String.format("%.2f", Double.parseDouble(monthlyRunningSipValue));
 			
 			hibernateSession.getTransaction().commit();
@@ -101,16 +106,20 @@ public class QueryBussinessData {
 			hibernateSession.getTransaction().commit();
 			
 			hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select count(*) from StpDetails  group by customerId ");
+			query = hibernateSession.createQuery("select count(distinct s.customerId) from StpDetails s  ");
 			
 			String numOfStpClients = query.uniqueResult().toString();
 			
 			hibernateSession.getTransaction().commit();
 			
 			hibernateSession.beginTransaction();
-			query = hibernateSession.createQuery("select sum( stpAmount) from StpDetails  where stpCompletionStatus='N' ");
-			
-			String monthlyRunningStpValue = query.uniqueResult().toString();
+			query = hibernateSession.createQuery("select sum( stpAmount) from StpDetails  where stpCompletionStatus in ('N','MAIL_SENT') ");
+			 
+			 String monthlyRunningStpValue = "0";
+			 if (null != query.list().get(0))  
+			 {
+				 monthlyRunningStpValue = query.uniqueResult().toString();
+			 }
 			monthlyRunningStpValue = String.format("%.2f", Double.parseDouble(monthlyRunningStpValue));
 			
 			hibernateSession.getTransaction().commit();

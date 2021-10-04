@@ -71,7 +71,7 @@ public class UpdateAofFormStatusAction extends ActionSupport {
     			    	    	
     	    	String subject = configProperties.getProperty("MAIL_ACCOUNT_ACTIVATED_SUBJECT");
     	
-    	    	sendMail.MailSending(emailId,subject,"Account Activation Email","AccountActivated.txt",mailLink,"Invest Now",cutomerName);
+    	    	sendMail.MailSending(emailId,subject,"Account Activation Email","AccountActivated.txt",mailLink,"Invest Now",cutomerName,"");
     	
     	    	System.out.println(" send email function completed from account activation for customerId : "+customerId);
     	    	

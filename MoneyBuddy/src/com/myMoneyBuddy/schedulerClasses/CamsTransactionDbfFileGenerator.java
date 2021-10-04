@@ -916,7 +916,7 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[64] = null; 
 						rowData[65] = null; 
 						rowData[66] = null; 
-						rowData[67] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? null : "25"); 
+						rowData[67] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? null : "25"); 
 						rowData[68] = null;
 						rowData[69] = null; 
 						        
@@ -947,9 +947,9 @@ public class CamsTransactionDbfFileGenerator implements org.quartz.Job{
 						rowData[92] = null; 
 						rowData[93] = null; 
 						rowData[94] = null; 
-						rowData[95] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? "N" : null); 
-						rowData[96] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? "Y" : null); 
-						rowData[97] = (("UPFRONT".equals(transactionDetail.getTransactionType())) ? "Y" : null); 
+						rowData[95] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? "N" : null); 
+						rowData[96] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? "Y" : null); 
+						rowData[97] = (("UPFRONT".equalsIgnoreCase(transactionDetail.getTransactionType())) ? "Y" : null); 
 						rowData[98] = null;
 						rowData[99] = null; 
 	

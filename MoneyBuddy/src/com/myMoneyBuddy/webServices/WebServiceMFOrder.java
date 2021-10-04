@@ -15,7 +15,7 @@ import org.tempuri.MFOrderEntry;
 import in.bsestarmf.GetPassword;
 
 
-@WebServiceClient(name = "MFOrder", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://www.bsestarmf.in/MFOrderEntry/MFOrder.svc")
+@WebServiceClient(name = "MFOrder", targetNamespace = "http://tempuri.org/", wsdlLocation = "https://www.bsestarmf.in/MFOrderEntry/MFOrder.svc")
 public class WebServiceMFOrder extends Service{
 
 	protected WebServiceMFOrder(URL wsdlDocumentLocation, QName serviceName) {
@@ -32,7 +32,7 @@ public class WebServiceMFOrder extends Service{
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://www.bsestarmf.in/MFOrderEntry/MFOrder.svc");
+            url = new URL("https://www.bsestarmf.in/MFOrderEntry/MFOrder.svc");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -82,6 +82,32 @@ public class WebServiceMFOrder extends Service{
     public MFOrderEntry getWSHttpBindingMFOrderEntry(WebServiceFeature... features) {
     	System.out.println("Inside getWSHttpBindingMFOrderEntry : start ");
         return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_MFOrderEntry"), MFOrderEntry.class, new javax.xml.ws.soap.AddressingFeature());
+        
+    }
+    
+    
+
+    /**
+     * 
+     * @return
+     *     returns MFOrderEntry
+     */
+    @WebEndpoint(name = "WSHttpBinding_MFOrderEntry1")
+    public MFOrderEntry getWSHttpBindingMFOrderEntry1() {
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_MFOrderEntry1"), MFOrderEntry.class, new javax.xml.ws.soap.AddressingFeature());
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns MFOrderEntry
+     */
+    @WebEndpoint(name = "WSHttpBinding_MFOrderEntry1")
+    public MFOrderEntry getWSHttpBindingMFOrderEntry1(WebServiceFeature... features) {
+    	System.out.println("Inside getWSHttpBindingMFOrderEntry1 : start ");
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_MFOrderEntry1"), MFOrderEntry.class, new javax.xml.ws.soap.AddressingFeature());
         
     }
     

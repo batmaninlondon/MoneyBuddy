@@ -28,93 +28,9 @@
   <script type="text/javascript" src="assets/js/jquery-latest.js"></script>
   
   
- <script>
-		
-</script>
-
-
 <style>
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-.snip1418 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  text-align: left;
-  color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 20em;
-  perspective: 20em;
-}
-.snip1418 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.snip1418 .add-to-cart {
-  position: absolute;
-  height:50px;
-  top: 0;
-  right: 0;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0;
- // background-color: #409ad5;
-   background-color: black;
-  -webkit-transform: rotateX(-90deg);
-  transform: rotateX(-90deg);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.snip1418 figcaption {
-//  padding: 20px;
-}
-.snip1418 h3,
-.snip1418 p {
-  margin: 0;
-}
-.snip1418 h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.snip1418 p {
-  font-size: 0.7em;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-.snip1418 a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.snip1418:hover .add-to-cart,
-.snip1418.hover .add-to-cart {
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.snip1418:hover .add-to-cart i,
-.snip1418.hover .add-to-cart i {
-  background-color: #2980b9;
-}
 
 </style>
 
@@ -165,12 +81,14 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -279,12 +197,12 @@
 														<td><span><b>Category :</b> <s:property value="#fundDetails.category"/></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
-										                <td><span><b>AUM :</b> &#8377; 4,039.34 Cr </span></td>
+										                <td><span><b>AUM :</b> Rs. 4,039.34 Cr </span></td>
 										                <td><span><b>Inception Date:</b> <s:property value="#fundDetails.startDate" /></span></td>
 										            </tr>
 										            <tr style=" border-bottom: solid 0.5px gray;" class="g-font-size-14--lg g-font-size-10--xs">
-										                <td ><span class="g-margin-r-60--xs"><b>Min SIP Investment :</b> &#8377;<s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minSipAmount]})}"/><small> /month</small></span></td>
-										                <td><span><b>Min Onetime Investment :</b> &#8377; <s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minPurchaseAmount]})}"/></span></td>
+										                <td ><span class="g-margin-r-60--xs"><b>Min SIP Investment :</b> Rs.<s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minSipAmount]})}"/><small> /month</small></span></td>
+										                <td><span><b>Min Onetime Investment :</b> Rs. <s:property value="%{getText('{0,number,#,##0}',{#attr[#fundDetails.minPurchaseAmount]})}"/></span></td>
 										            </tr>
 										        </tbody>
 								</table>
@@ -301,7 +219,7 @@
 										            
 										            <%-- <tr >
 										                <td class="" ><span class=" g-font-size-14--xs g-font-size-5--xs"><input id="range" type="range" min="<s:property value="#fundDetails.minSipAmount"/>" max="150000" step="500" value="<s:property value="#fundDetails.minSipAmount"/>" onchange="showPredictedSipValues(this.value)" style=" width: 100px;"/> </span></td>
-														<td class="" >&#8377;<span id="investmentAmount" class=" g-font-size-14--xs"> </span></td>
+														<td class="" >Rs.<span id="investmentAmount" class=" g-font-size-14--xs"> </span></td>
 										            </tr>
 										              <tr style=" border-bottom: solid 0.5px gray;">
 										                <td class="" >&nbsp;</td>
@@ -367,8 +285,13 @@
             	<div class="container ">
 	               <div class="">
 	               <div class="g-text-center--xs ">
-	                    	<h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Additional Fund Details</b></h3>
+	                    	<!-- <h3 class="g-font-size-20--xs g-font-size-32--md g-font-family--playfair g-letter-spacing--1 g-color--primary text-left font-weight-bold g-hor-divider__solid--heading-light  g-margin-t-40--xs"><b>Additional Fund Details</b></h3> -->
+	                		
+	                		<!-- document.getElementById(objFRM).href = local_src; -->
 	                	</div>
+	                	<%-- <link rel="import" href="<s:property value="#fundDetails.pdfFilePath" />"> --%>
+	                		<%-- <embed src="<s:property value="#fundDetails.pdfFilePath" />"  /> --%>
+	                		<br/>
 	                	  <iframe class="g-height-500--xs g-height-600--lg" src="<s:property value="#fundDetails.pdfFilePath" />" style="width:100%;" ></iframe>
 	               </div> 
 	               
@@ -406,7 +329,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -435,7 +358,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

@@ -160,7 +160,7 @@ public class QueryOldPortfolioRecords {
 			hibernateSession.getTransaction().commit();
 
 
-			System.out.println(" Total Old Portfolio Records are : "+totalOldRecords);
+			System.out.println(" Total Non MoneyBuddy Records are : "+totalOldRecords);
 				
 			logger.debug("QueryOldPortfolioRecords class - getTotalOldRecords method - customerId - "+customerId+" - return totalOldRecords - "+totalOldRecords);
 			logger.debug("QueryOldPortfolioRecords class - getTotalOldRecords method - customerId - "+customerId+" - end");

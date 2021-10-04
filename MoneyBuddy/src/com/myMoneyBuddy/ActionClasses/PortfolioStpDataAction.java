@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.myMoneyBuddy.ModelClasses.StpDataModel;
@@ -30,6 +32,13 @@ public class PortfolioStpDataAction extends ActionSupport implements SessionAwar
 		String customerId = sessionMap.get("customerId").toString();
 		QueryProducts queryProducts = new QueryProducts();
 		try {
+			QueryCustomer queryCustomer = new QueryCustomer(); 
+			Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+			String userType = customer.getUserType();
+			
+			if ("ADMIN".equals(userType))  {
+				customerId = sessionMap.get("customerIdFromAdmin").toString();
+	    	}
 			stpDataModel = queryProducts.getStpData(customerId);
 			setStpDataModel(stpDataModel);
 			return SUCCESS;

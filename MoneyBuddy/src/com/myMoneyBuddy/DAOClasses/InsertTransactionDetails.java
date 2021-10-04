@@ -21,10 +21,10 @@ public class InsertTransactionDetails {
 
 	Logger logger = Logger.getLogger(InsertTransactionDetails.class);
 	
-    public void insertRejectedTransactionDetails (TransactionDetails transactionDetails ) throws MoneyBuddyException
+    public void insertRejectedTransactionDetails (String transactionDetailId ) throws MoneyBuddyException
     {
 
-    	logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - customerId - "+transactionDetails.getCustomerId()+" - start");
+    	logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - transactionDetailId - "+transactionDetailId+" - start");
     	
     	Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();
 
@@ -35,8 +35,22 @@ public class InsertTransactionDetails {
 			String frmtdDateForDB = dateFormat.format(date);
 			
 			hibernateSession.beginTransaction();
+			
+			Query query = hibernateSession.createQuery("update TransactionDetails set transactionType = :transactionType , buySell = :buySell,"
+					+ " transactionAmount = :transactionAmount, quantity = :quantity, unitPrice = :unitPrice "
+					+ " where transactionDetailId = :transactionDetailId");
+			
+			query.setParameter("transactionType", "SIPMissed");
+			query.setParameter("buySell", "SIPMissed");
+			query.setParameter("transactionAmount", null);
+			query.setParameter("quantity", null);
+			query.setParameter("unitPrice", null);
+
+			query.setParameter("transactionDetailId", transactionDetailId);
+
+			int result = query.executeUpdate();
 						
-			String nextTransactionId = "1";
+			/*String nextTransactionId = "1";
 						
 			Query query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
 					+ " order by transactionDetailId desc ");
@@ -55,22 +69,22 @@ public class InsertTransactionDetails {
 					"0","Y",transactionDetails.getFundId(),transactionDetails.getQuantity(),transactionDetails.getUnitPrice(),frmtdDateForDB,
 					frmtdDateForDB,"N",transactionDetails.getTransactionFolioNum(),null,"Y"); 		
 
-			hibernateSession.save(tempTransactionDetail);
+			hibernateSession.save(tempTransactionDetail);*/
 
 			hibernateSession.getTransaction().commit();
     		
-			logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - customerId - "+transactionDetails.getCustomerId()+" - new record inserted in TransactionDetails table");
+			logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - transactionDetailId - "+transactionDetailId+" - new record inserted in TransactionDetails table");
     		
-    		logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - customerId - "+transactionDetails.getCustomerId()+" - end");
+    		logger.debug("InsertTransactionDetails class - insertRejectedTransactionDetails method - transactionDetailId - "+transactionDetailId+" - end");
 
     	}
     	catch ( HibernateException e ) {
-    		logger.error("InsertTransactionDetails class - insertRejectedTransactionDetails method - customerId - "+transactionDetails.getCustomerId()+" - Caught HibernateException");
+    		logger.error("InsertTransactionDetails class - insertRejectedTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught HibernateException");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}
 		catch (Exception e ) {
-			logger.error("InsertTransactionDetails class - insertRejectedTransactionDetails method - customerId - "+transactionDetails.getCustomerId()+" - Caught Exception");
+			logger.error("InsertTransactionDetails class - insertRejectedTransactionDetails method - transactionDetailId - "+transactionDetailId+" - Caught Exception");
 			e.printStackTrace();
 			throw new MoneyBuddyException(e.getMessage(),e);
 		}

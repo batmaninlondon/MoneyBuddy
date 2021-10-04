@@ -53,25 +53,25 @@ public class AqbCalculator implements org.quartz.Job{
 			
 			switch (yesterdayMonth)   {
 			
-				case "02":
+				case "03":
 					numOfTotalDays = 90;
 					startDate=yesterdayYear+"-01-01";
 					endDate = yesterdayYear+"-03-31";
 					quarterOfYear="1-"+yesterdayYear;
 					break;
-				case "05":
+				case "06":
 					numOfTotalDays = 91;
 					startDate=yesterdayYear+"-04-01";
 					endDate = yesterdayYear+"-06-30";
 					quarterOfYear="2-"+yesterdayYear;
 					break;
-				case "08":
+				case "09":
 					numOfTotalDays = 92;
 					startDate=yesterdayYear+"-07-01";
 					endDate = yesterdayYear+"-09-30";
 					quarterOfYear="3-"+yesterdayYear;
 					break;
-				case "11":
+				case "12":
 					numOfTotalDays = 92;
 					startDate=yesterdayYear+"-10-01";
 					endDate = yesterdayYear+"-12-31";

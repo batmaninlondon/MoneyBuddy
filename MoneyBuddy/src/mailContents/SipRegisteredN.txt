@@ -70,6 +70,7 @@
 	<br />
 	<p>Congratulations, your SIP has been successfully registered and we are super happy to see you become a disciplined investor.</p>
 	<!-- <br /> -->
+	DATATABLE
 	<p>As a final step, you will need to register BSE as a payee in your internet banking to set up auto-debit of your future SIP installments. We will reach out to you soon to guide you on this process.</p>
 	<br/>
 	

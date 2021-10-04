@@ -87,6 +87,28 @@ public class WebServiceStarMFPaymentGateway extends Service{
     
     /**
      * 
+     * @return
+     *     returns IStarMFPaymentGatewayService
+     */
+    @WebEndpoint(name = "WSHttpBinding_IStarMFPaymentGatewayService1")
+    public IStarMFPaymentGatewayService getWSHttpBindingIStarMFPaymentGatewayService1() {
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_IStarMFPaymentGatewayService1"), IStarMFPaymentGatewayService.class, new javax.xml.ws.soap.AddressingFeature());
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns IStarMFPaymentGatewayService
+     */
+    @WebEndpoint(name = "WSHttpBinding_IStarMFPaymentGatewayService1")
+    public IStarMFPaymentGatewayService getWSHttpBindingIStarMFPaymentGatewayService1(WebServiceFeature... features) {
+        return super.getPort(new QName("http://tempuri.org/", "WSHttpBinding_IStarMFPaymentGatewayService1"), IStarMFPaymentGatewayService.class,  new javax.xml.ws.soap.AddressingFeature());
+    }
+    
+    /**
+     * 
      * @returns
      *     returns RelevancePortType
      */

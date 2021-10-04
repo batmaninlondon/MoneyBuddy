@@ -88,7 +88,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 			logger.debug("EstimateAction class - execute method - stored sipDate : "+getSipDate()+" in sessionMap");
 			
 			//Double totalInvestment= 0.0;
-			if ("UPFRONT".equals(getTransactionType())) {
+			if ("UPFRONT".equalsIgnoreCase(getTransactionType())) {
 				System.out.println("EstimateAction class : execute method : Inside UPFRONT loop .... ");
 				totalInvestment = Double.toString(Double.parseDouble(getUpfrontInvestment())) ;
 

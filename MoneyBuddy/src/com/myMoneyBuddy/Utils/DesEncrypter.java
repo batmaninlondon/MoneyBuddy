@@ -26,8 +26,9 @@ import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.log4j.Logger;
 
-import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
+
+//import java.util.Base64; 
 
 public class DesEncrypter  {
 
@@ -102,6 +103,9 @@ public class DesEncrypter  {
             logger.debug("DesEncrypter class - encrypt method - end"); 
             
             String encryptStr = new sun.misc.BASE64Encoder().encode(enc);
+            /*Base64.Encoder encoder = Base64.getEncoder();  
+            String encryptStr =  encoder.encode(enc).toString();  */
+            
             System.out.println("str before replacement in encrypt : "+encryptStr);
             String newStr = encryptStr.replaceAll(Pattern.quote("+"), "123456789");
             System.out.println("str before replacement in encrypt : "+newStr);
@@ -132,6 +136,9 @@ public class DesEncrypter  {
         	str = str.replaceAll("123456789", "+");	
         	System.out.println("str after replacement in decrypt : "+str);
             byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
+        	/*Base64.Decoder decoder = Base64.getDecoder();
+        	byte[] dec  =  decoder.decode(str) ;*/
+        	
             System.out.println("dec : "+dec.toString());
             byte[] utf8 = dcipher.doFinal(dec);
             System.out.println("utf8 : "+utf8.toString());
@@ -163,17 +170,16 @@ public class DesEncrypter  {
 
     public static void main(String args[]){
         try {
-        	/*String encrypted = DesEncrypter.MONEYBUDDY.encrypt(" 0157000100131441");
-        	
-        
-        System.out.println("encrypted :"+encrypted+":");*/
-        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("qhsrxeQ8fCGRJEUN9m1Nsw==");
-        System.out.println("decrypted :"+decrypted+":");
-       // int len = "233".length();
-        
-       // String password = decrypted.substring(len);
-        
-       // System.out.println("password : "+password);
+        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("241Prem@4321");
+	        System.out.println("encrypted :"+encrypted);
+	        
+	        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("gpj6mWsW8QoAwWPf4JjIxw==");
+	        System.out.println("decrypted :"+decrypted+":");
+	       // int len = "233".length();
+	        
+	       // String password = decrypted.substring(len);
+	        
+	       // System.out.println("password : "+password);
         
         }
         catch (Exception e ) {

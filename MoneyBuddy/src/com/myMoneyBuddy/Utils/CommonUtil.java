@@ -30,6 +30,7 @@ public class CommonUtil {
 	}
 	
 	public String theMonth(int month){
+		
 	    String[] monthNames = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 	    return monthNames[month];
 	}
@@ -45,6 +46,7 @@ public class CommonUtil {
 			case "YBK" :
 			case "162" :
 			case "HDF" :
+			case "IDB" :
 				bankMode="DIRECT";break;
 			case "DCB" :
 			case "PNB" :
@@ -54,6 +56,9 @@ public class CommonUtil {
 			case "UNI" :
 			case "RBL" :
 			case "DEN" :
+			case "BBR" :
+			case "IDS" :
+			case "CNB" :
 				bankMode="NODAL";break;
 			default : 
 				bankMode="INVALID";
@@ -67,17 +72,17 @@ public class CommonUtil {
 		
 		try {
 			
-			Date currentDate = new Date();
 			Calendar c = Calendar.getInstance();
-	        c.setTime(currentDate);
 			
 	        Properties configProperties = new Properties();
 			String configPropFilePath = "../../../config/config.properties";
 	
-			configProperties.load(Trading.class.getResourceAsStream(configPropFilePath));
+			configProperties.load(CommonUtil.class.getResourceAsStream(configPropFilePath));
 			
 			String stpBufferDays = configProperties.getProperty("STP_BUFFER_DAYS");
 			c.add(Calendar.DATE, Integer.parseInt(stpBufferDays));
+			
+			System.out.println("stpBufferDays : "+stpBufferDays);			
 	
 			Date minStpStartDate = c.getTime();
 				
@@ -85,23 +90,37 @@ public class CommonUtil {
 		    
 		    minStpStartDate = sdf.parse(sdf.format(minStpStartDate));
 		    
+		    System.out.println("minStpStartDate : "+minStpStartDate);
+		    
 		    Calendar cal = Calendar.getInstance();
-			
+		    			
 			String stpStartMonth="";
 			String stpEndMonth="";
 			
-			if ( Integer.parseInt(stpDate) <=   (cal.get(Calendar.DATE)) ) {
-					stpStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
-					stpEndMonth = theMonth(cal.get(Calendar.MONTH));
-				}
-				else {
-					stpStartMonth = theMonth(cal.get(Calendar.MONTH));
-					stpEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(11) : theMonth(cal.get(Calendar.MONTH)-1));
-				}
-				
-				String stpEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(stpDuration));
-				String stpStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
-				
+			cal.add(cal.DATE, Integer.parseInt(stpBufferDays));
+			
+			System.out.println(" Modified date after adding buffer days is : "+cal.getTime());
+			
+			String stpStartYear ;
+			String stpEndYear ;
+			
+			if ( Integer.parseInt(stpDate)  <=   (cal.get(Calendar.DATE)) ) {
+				System.out.println(" Inside if case of STP date compare .....");
+				stpStartMonth = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(0) : theMonth(cal.get(Calendar.MONTH)+1));
+				stpEndMonth = theMonth(cal.get(Calendar.MONTH));
+				stpStartYear = (("11".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)+1) : Integer.toString(cal.get(Calendar.YEAR)));
+				stpEndYear = Integer.toString(cal.get(Calendar.YEAR)+Integer.parseInt(stpDuration));
+			}
+			else {
+				System.out.println(" Inside else case of STP date compare .....");
+				stpStartMonth = theMonth(cal.get(Calendar.MONTH));
+				stpEndMonth = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? theMonth(11) : theMonth(cal.get(Calendar.MONTH)-1));
+				stpStartYear = Integer.toString(cal.get(Calendar.YEAR));
+				stpEndYear = (("0".equals(Integer.toString(cal.get(Calendar.MONTH)))) ? Integer.toString(cal.get(Calendar.YEAR)-1) : Integer.toString(cal.get(Calendar.YEAR)));
+				stpEndYear = Integer.toString((Integer.parseInt(stpEndYear)+Integer.parseInt(stpDuration)));
+			}
+
+				System.out.println("stpEndYear : "+stpEndYear + " and stpStartYear : "+stpStartYear);
 				String stpStartDate = stpStartMonth+"/"+stpDate+"/"+stpStartYear;
 				String stpEndDate = stpEndMonth+"/"+stpDate+"/"+stpEndYear;
 				
@@ -120,7 +139,7 @@ public class CommonUtil {
 			    	
 			    }
 
-				
+				System.out.println("curStpStartDate : "+curStpStartDate+" and curStpEndDate : "+curStpEndDate);
 				
 				stpDetails.put(curStpStartDate, curStpEndDate);
 				

@@ -5,19 +5,14 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.myMoneyBuddy.DAOClasses.InsertCustomerCart;
 import com.myMoneyBuddy.DAOClasses.InsertOldPortfolioRecords;
-import com.myMoneyBuddy.DAOClasses.QueryCustomerCart;
 import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddOldPortfoioRecordAction extends ActionSupport  implements SessionAware{
@@ -40,9 +35,6 @@ public class AddOldPortfoioRecordAction extends ActionSupport  implements Sessio
     	try {
     		
     		customerId = customerIdOldPortfolio;
-    		//customerId = sessionMap.get("customerId").toString();
-    		
-    		System.out.println(" AddOldPortfoioRecordAction : customerId :"+customerId+":");
     		InsertOldPortfolioRecords insertOldPortfolioRecords = new InsertOldPortfolioRecords();
     		
     		String selSchemeName = schemeName;

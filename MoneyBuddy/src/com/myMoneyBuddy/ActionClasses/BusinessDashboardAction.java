@@ -16,19 +16,17 @@ public class BusinessDashboardAction extends ActionSupport implements Action  {
 
 	Logger logger = Logger.getLogger(BusinessDashboardAction.class);
 	
+	private String errorMsg;
 	private BusinessDashboardDataModel businessDashboardData;
 
     public String execute() {
 
     	try {
-    		logger.debug("BusinessDashboardAction class - execute method - start ");
-			System.out.println("Calling BusinessDashboardAction class - start ");
 			
 			QueryBussinessData queryBussinessData = new QueryBussinessData();
 			businessDashboardData = queryBussinessData.getBusinessData();
 			
 			System.out.println("Returning success from BusinessDashboardAction !! ");
-			logger.debug("BusinessDashboardAction class - execute method - end ");
 			
 			return SUCCESS;
 		} 
@@ -48,6 +46,14 @@ public class BusinessDashboardAction extends ActionSupport implements Action  {
 
 	public void setBusinessDashboardData(BusinessDashboardDataModel businessDashboardData) {
 		this.businessDashboardData = businessDashboardData;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 }

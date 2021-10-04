@@ -68,85 +68,7 @@
 <style>
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-.snip1418 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 10px 1%;
-  text-align: left;
-  color: #000000;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 20em;
-  perspective: 20em;
-}
-.snip1418 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
 
-.snip1418 .add-to-cart {
-  position: absolute;
-  height:50px;
-  top: 0;
-  right: 0;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0;
- // background-color: #409ad5;
-   background-color: black;
-  -webkit-transform: rotateX(-90deg);
-  transform: rotateX(-90deg);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.snip1418 figcaption {
-//  padding: 20px;
-}
-.snip1418 h3,
-.snip1418 p {
-  margin: 0;
-}
-.snip1418 h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.snip1418 p {
-  font-size: 0.7em;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-.snip1418 a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.snip1418:hover .add-to-cart,
-.snip1418.hover .add-to-cart {
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.snip1418:hover .add-to-cart i,
-.snip1418.hover .add-to-cart i {
-  background-color: #2980b9;
-}
 
 </style>
 
@@ -196,21 +118,23 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
 										<%	}	%>  
 										<li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
-                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link -is-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
                                         	<ul class="dropdown-menu s-header-v2__dropdown-menu g-margin-t-o-30--xs">
                                             	<li><a href="FAQs" class="s-header-v2__dropdown-menu-link">FAQ</a></li>
-                                            	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link">Contact Us</a></li>
+                                            	<li><a href="contactUs" class="s-header-v2__dropdown-menu-link -is-active">Contact Us</a></li>
                                         	</ul>
                                     	</li>
                                 </ul>
@@ -245,25 +169,34 @@
                     <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">Contact Us</p>
                 </div> -->
                 <div class="row g-row-col--5 g-margin-b-20--xs">
-                    <div class="col-xs-6 col-md-4 ">
+                    <div class="col-xs-4 col-md-4 ">
                         <div class="g-text-center--xs">
-                            <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-email"></i>
-                            <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Email</h4>
-                        	<p style="color: white;"><b><a  class="g-font-size-12--xs g-font-size-18--md" href="mailto:ContactUs@MoneyBuddy.co.in?Subject=Tell%20me%20more" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p>
+                            <p style="color: white;"><b>
+                            <a  class="g-font-size-10--xs g-font-size-18--md" href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=ContactUs@MoneyBuddy.co.in" target="_top" style="color: white;">
+                            	<i class="g-display-block--xs g-font-size-16--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-email"></i>
+                            </a></b>
+                            </p>
+                            
+                            <h4 class="g-font-size-12--xs g-font-size-18--md g-color--white g-margin-b-5--md">Email</h4>
+                        	<!-- <p style="color: white;"><b><a  class="g-font-size-10--xs g-font-size-18--md" href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=savita.wadhwani@gmail.com&subject=MISSED%20CALL%20EZTRADER&body=Hello%2C%0A%0AI%20tried%20contacting%20you%20today%20but%20you%20seem%20to%20have%20missed%20my%20call.%20%0A%0APlease%20return%20my%20call%20as%20soon%20as%20you%E2%80%99re%20available.%20%0A%0AIn%20any%20case%2C%20I%20will%20try%20ringing%20you%20at%20a%20later%20time.%0A%0A%0ATy%2C%0A%0A%0A%0A" target="_top" style="color: white;">ContactUs@MoneyBuddy.co.in</a></b></p> -->
                         </div>
                     </div>
-                    <div class="col-xs-6 col-md-4 ">
+                    <div class="col-xs-4 col-md-4 ">
                         <div class="g-text-center--xs">
-                            <i class="g-display-block--xs g-font-size-30--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-headphone-alt"></i>
-                            <h4 class="g-font-size-14--xs g-font-size-18--md g-color--white g-margin-b-5--xs">Call / whats app </h4>
-                            <p  class="g-font-size-12--xs g-font-size-18--md" style="color: white;"><b>+91 9971648736</b></p>
+                            <i class="g-display-block--xs g-font-size-16--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-headphone-alt"></i>
+                            <h4 class="g-font-size-12--xs g-font-size-18--md g-color--white g-margin-b-5--md">Call / whats app </h4>
+                            <p  class="g-font-size-10--xs g-font-size-18--md" style="color: white;"><b>+91 9971648736</b></p>
                         </div>
                     </div>
-                     <div class="col-xs-4  g-margin-b-50--xs g-margin-b-0--sm hidden-xs hidden-sm">
+                     <div class="col-xs-4 col-md-4 g-margin-b-50--xs g-margin-b-0--sm  ">
                         <div class="g-text-center--xs">
-                            <i class="g-display-block--xs g-font-size-40--xs g-color--white-opacity g-margin-b-30--xs ti-files"></i>
-                            <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">FAQs</h4>
-                            <p class="g-color--white-opacity"> <a href="FAQs"><b><span style="color: white;"> Click Here</span></b></a></p>
+                            <p class="g-color--white-opacity"> <a class="g-font-size-10--xs g-font-size-18--md" href="FAQs"><b>
+                            <span style="color: white;">
+                             	<i class="g-display-block--xs g-font-size-16--xs g-font-size-40--md g-color--white-opacity g-margin-b-10--xs g-margin-b-30--md ti-files"></i>
+                            </span></b></a></p>
+                            
+                            <h4 class="g-font-size-12--xs g-font-size-18--md g-color--white g-margin-b-5--md">FAQs</h4>
+                            
                         </div>
                     </div>
                 </div>
@@ -347,7 +280,7 @@
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="terms">Terms &amp; Conditions</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="privacyPolicy">Privacy Policy</a></li>
                                 <li><a class="g-font-size-15--xs g-color--white-opacity" href="MFDocuments">MFDocuments</a></li>
-                                
+                                <li><a class="g-font-size-15--xs g-color--white-opacity" href="https://medium.com/@moneybuddyIndia">Blog</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-md-4 col-lg-offset-2 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
@@ -376,7 +309,7 @@
                         </a>
                     </div>
                      <div class="col-xs-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="welcome" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

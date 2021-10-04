@@ -83,7 +83,7 @@ public class MoneyBuddyScheduler {
 			Trigger paymentStatusCheckTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("PaymentStatusCheckTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 03 12 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 52 13 * * ?")) 
 					.build();
 			
 	
@@ -98,12 +98,26 @@ public class MoneyBuddyScheduler {
 			Trigger sipInstallmentGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("SipInstallmentGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 28 14 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 04 15 * * ?")) 
 					.build();
 			
 	
 			scheduler.scheduleJob(sipInstallmentGeneratorJob, sipInstallmentGeneratorTrigger);
 			
+			// Scheduler to fetch daily NAV data
+			
+			/*JobDetail fetchDailyNavJob = JobBuilder.newJob(FetchDailyNav.class)
+					.withIdentity("FetchDailyNavJob", "Group").build();
+			
+			// This Trigger will work at 2:00 am (London time) everyday
+			
+			Trigger fetchDailyNavTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("FetchDailyNavTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 22 19 * * ?")) 
+					.build();
+						
+			scheduler.scheduleJob(fetchDailyNavJob, fetchDailyNavTrigger);*/
 			
 			/*JobDetail stpInstallmentGeneratorJob = JobBuilder.newJob(StpInstallmentGenerator.class)
 					.withIdentity("StpInstallmentGeneratorJob", "Group").build();
@@ -113,11 +127,58 @@ public class MoneyBuddyScheduler {
 			Trigger stpInstallmentGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("StpInstallmentGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 32 13 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 30 16 * * ?")) 
 					.build();
 			
 	
 			scheduler.scheduleJob(stpInstallmentGeneratorJob, stpInstallmentGeneratorTrigger);*/
+			
+			
+			/*JobDetail sipAutoDebitMailsJob = JobBuilder.newJob(SipAutoDebitMails.class)
+					.withIdentity("SipAutoDebitMailsJob", "Group").build();
+			
+			// This Trigger will work at 3 pm (15 hours) everyday
+			
+			Trigger sipAutoDebitMailsTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("SipAutoDebitMailsTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 47 12 * * ?")) 
+					.build();
+			
+	
+			scheduler.scheduleJob(sipAutoDebitMailsJob, sipAutoDebitMailsTrigger);*/
+			
+			/*JobDetail stpAutoDebitMailsJob = JobBuilder.newJob(StpAutoDebitMails.class)
+					.withIdentity("StpAutoDebitMailsJob", "Group").build();
+			
+			// This Trigger will work at 3 pm (15 hours) everyday
+			
+			Trigger stpAutoDebitMailsTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("StpAutoDebitMailsTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 12 14 * * ?")) 
+					.build();
+			
+	
+			scheduler.scheduleJob(stpAutoDebitMailsJob, stpAutoDebitMailsTrigger);*/
+			
+			// Scheduler for payment staus check to display the order in Admin, for which the payment has been received
+			
+			/*JobDetail clientRecordsGeneratorJob = JobBuilder.newJob(ClientRecordsGenerator.class)
+					.withIdentity("ClientRecordsGeneratorJob", "Group").build();
+			
+			// This Trigger will work at 9:30 am (London time) everyday
+			
+			Trigger clientRecordsGeneratorTrigger = TriggerBuilder
+					.newTrigger()
+					.withIdentity("ClientRecordsGeneratorTrigger", "Group")
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 46 16 * * ?")) 
+					.build();
+						
+			// Execute payment staus check to display the order in Admin, for which the payment has been received
+        	scheduler.scheduleJob(clientRecordsGeneratorJob, clientRecordsGeneratorTrigger);*/
+			
+			
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

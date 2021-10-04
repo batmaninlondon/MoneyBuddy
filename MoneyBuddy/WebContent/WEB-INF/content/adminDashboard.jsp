@@ -29,12 +29,6 @@
 	<%-- <script type="text/javascript" src="assets/js/javaScript.js"></script> --%>
 	<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script>window.Modernizr || document.write('<script src="assets/js/vendor/modernizr.min.js"><\/script>');</script> --%>
- 	
-    <!-- <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
 
 <style>
 
@@ -105,6 +99,15 @@ hr {
 	<div class="row">
 		<div class="col-md-5"></div>
 		<div class="col-md-3">
+			<a href="<s:url action="clientRecordsAction"/>">
+				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">ClientRecords</button>
+			</a>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-5"></div>
+		<div class="col-md-3">
 			<a href="<s:url action="pendingMandateAction"/>">
 				<button type="button"  class="btn btn-home g-margin-t-15--xs " style="padding:5px 15px 5px 15px;width:300px;">UpdateCustomerMandate</button>
 			</a>
@@ -167,7 +170,7 @@ hr {
        	</div>
 		</s:form>
 	</div>
-	<hr>
+	<%-- <hr>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<s:form  action="rejectedReverseFeedAction"  method="post" namespace="/">
@@ -179,7 +182,7 @@ hr {
           	<s:submit class="btn btn-home g-margin-t-o-5--sm" value="UpdateRejectedTransaction" style="padding:5px 15px 5px 15px;width:300px;"/>
        	</div>
 		</s:form>
-	</div>
+	</div> --%>
 	<hr>
 
    </section>
@@ -214,7 +217,7 @@ hr {
                         </a>
                     </div>
                      <div class="col-sm-6 g-text-right--xs g-color--white">
-                    &copy; 2019 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
+                    &copy; 2020 <a href="#" title="MoneyBuddy">Moneybuddy</a>. All Rights Reserved.
                 </div>
                 </div>
             </div>

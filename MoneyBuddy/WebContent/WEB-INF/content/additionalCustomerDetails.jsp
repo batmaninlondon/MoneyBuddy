@@ -28,16 +28,7 @@
         <!-- Theme Styles -->
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/global/global.css" rel="stylesheet" type="text/css"/>
-
-        <!-- Favicon -->
-        <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-		    
-	    
+ 
 <style>
 /*form styles*/
 #msform {
@@ -187,12 +178,14 @@
 													<li class="s-header-v2__nav-item"><a href="login" class="s-header-v2__nav-link">Login/SignUp</a></li>
 										<%	} else 
 										 	{	%>
-										 			<li class="s-header-v2__nav-item"><a href="customerDashboard" class="s-header-v2__nav-link">Dashboard</a></li>
+										 			<li class="s-header-v2__nav-item"><a href="<s:url action="Dashboard"/>" class="s-header-v2__nav-link">Dashboard</a></li>
 										 			 <li id="dropdown-selector" class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
 			                                        	<a href="javascript:void(0);" class="dropdown-toggle s-header-v2__nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart<span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
 			                                        	<ul class="dropdown-menu s-header-v2__dropdown-menu" style="min-width: 60px;">
 			                                            	<li><a href="<s:url action="Cart"/>" class="s-header-v2__dropdown-menu-link">Investment Cart</a></li>
 			                                            	<li><a href="<s:url action="RedCart"/>" class="s-header-v2__dropdown-menu-link">Redemption Cart</a></li>
+			                                        		<li><a href="<s:url action="customerStpCartAction"/>" class="s-header-v2__dropdown-menu-link">Stp Cart</a></li>
+			                                        		<li><a href="<s:url action="customerSwitchCartAction"/>" class="s-header-v2__dropdown-menu-link">Switch Cart</a></li>
 			                                        	</ul>
 			                                    	</li>
 										 			 <li class="s-header-v2__nav-item"><a href="<s:url action="logOut"/>" class="s-header-v2__nav-link">Log Out</a></li>
@@ -226,79 +219,83 @@
 		</ul>
 	<!-- fieldsets -->
 	<fieldset  style="background-color: #cecece !important; ">
-		<div style="background-color: white; height:55vh;">
-		<br/>
-		<div class="row g-text-left--xs " >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs ">Father's Name</div>
-        	<div class="col-md-6 col-xs-6 ">
+		<div style="background-color: white;"  class="g-height-450--xs">
+		<div class="row g-text-left--xs g-margin-t-30--lg" >
+			<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg ">Father's Name</div>
+        	<div class="col-md-6 col-xs-8 ">
         		<s:fielderror fieldName="fatherName" class="g-color--red" />
-			  	<s:textfield class="form-control" id="father-name" placeholder="Enter Father's Name" name="fatherName" />
+			  	<s:textfield class="form-control g-font-size-10--xs g-font-size-14--lg" id="father-name" placeholder="Enter Father's Name" name="fatherName" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Marital Status</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="marital-status"  
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Marital Status</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="marital-status"  
 					list="#{'Married':'Married', 'Single':'Single'}" 
 					name="maritalStatus" 
 					value="Married" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Nationality</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="nationality" 
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Nationality</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="nationality" 
 					list="#{'Indian':'Indian', 'Other':'Other'}" 
 					name="nationality" 
 					value="Indian" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
         </div>
-        	<input type="button" name="next" class=" next action-button " value="Next" style="width:20% ;float: right;"/>
+        	<input type="button" name="next" class=" next action-button " value="Next" style="width:23% ;float: right;"/>
 	</fieldset>
 	<fieldset  style="background-color: #cecece !important;">
-		<div style="background-color: white; height:55vh;">
-		<br/>
-		<div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Status</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="status" 
+		<div style="background-color: white;"  class="g-height-450--xs">
+		
+		<div class="row g-text-left--xs g-margin-t-30--lg" >
+			<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Status</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="status" 
 					list="#{'LivInInd':'Living in India', 'NonResInd':'Non Resident Indian (NRI)', 'ForNat':'Foreign National'}" 
 					name="status" 
 					value="LivInInd" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Gross Annual Income</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="gross-annual-income"  
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Gross Annual Income</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="gross-annual-income"  
 					list="#{'LesThaOneLak':'less than 1 lakh', 'OneToFivLak':'1 to 5 lakhs', 'FivToTenLak':'5 to 10 lakhs',
 					'TenToTweFivLak':'10 to 25 lakhs','MorThaTweFivLak':'More Than 25 lakhs' }" 
 					name="grossAnnualIncome" 
 					value="LesThaOneLak" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
         <div class="row g-text-left--xs" >
-        	<div class="col-md-2 col-xs-6 g-margin-l-70--xs">Politically Exposed Person</div>
-        	<div class="col-md-6 col-xs-6 ">
-				<s:select class="form-control"  id="politically-exposed" 
+        	<div class="col-lg-1 col-xs-0 "></div>
+        	<div class="col-md-2 col-xs-3 g-margin-l-10--xs g-margin-l-90--lg g-font-size-12--xs g-font-size-16--lg">Politically Exposed?</div>
+        	<div class="col-md-6 col-xs-8 ">
+				<s:select class="form-control g-font-size-10--xs g-font-size-14--lg"  id="politically-exposed" 
 					list="#{'No':'No', 'PoliticExposed':'Politically Exposed Person', 
 					'RelToPoliticExposed':'Related to a Politically Exposed Person' }" 
 					name="politicallyExposed" 
 					value="No" />
         	</div>
-        	<div class="col-md-6 col-xs-6 "></div>
+        	<div class="col-md-3 col-xs-1 "></div>
         </div>
 		
          </div>
-			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:20% ;float: left;" />
-			<!-- <input type="button" name="next" class="next action-button" value="Next" style="width:20% ;float: right;"/> -->
-			<s:submit class="next action-button" value="Continue" style="width:20% ;float: right;"/>
+			<input type="button" name="previous" class="previous action-button" value="Previous" style="width:23% ;float: left;" />
+			<s:submit class="next action-button" value="Continue" style="width:23% ;float: right;"/>
 	</fieldset>
 </div>
 </s:form>

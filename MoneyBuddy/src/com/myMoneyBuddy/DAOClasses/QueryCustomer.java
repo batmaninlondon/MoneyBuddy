@@ -470,14 +470,11 @@ public class QueryCustomer {
 		{
 			
 			hibernateSession.beginTransaction();
-			System.out.println("HI there  + emailID : "+emailId);
 			result = hibernateSession.createQuery("select customerId from Customers where emailId = '"+emailId+"'").uniqueResult();
 			hibernateSession.getTransaction().commit();
 
-			if (result != null) {
-				System.out.println("HI there "+result.toString());
+			if (result != null) 
 				customerId = Integer.parseInt(result.toString());
-			}
 				
 			logger.debug("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - return customerId - "+customerId);
 			logger.debug("QueryCustomer class - getCustomerId method - emailId - "+emailId+" - end");
@@ -841,10 +838,8 @@ public class QueryCustomer {
 			Object result = hibernateSession.createQuery("select emailId from Customers where password = '"+hashedPassword+"'").uniqueResult();
 			hibernateSession.getTransaction().commit();
 			String emailId ;
-			if (result != null) {
-				System.out.println("HI there "+result.toString());
+			if (result != null) 
 				emailId  = result.toString();
-			}
 			else {
 				emailId = "NotExist";
 			}

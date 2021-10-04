@@ -15,7 +15,7 @@ import com.bsestarmf._2016._01.GetPassword;
 import in.bsestarmf._2016._01.IStarMFWebService;
 
 
-@WebServiceClient(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/", wsdlLocation = "http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl")
+@WebServiceClient(name = "IStarMFWebService", targetNamespace = "http://www.bsestarmf.in/2016/01/", wsdlLocation = "https://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl")
 public class WebServiceStarMF extends Service{
 
 	protected WebServiceStarMF(URL wsdlDocumentLocation, QName serviceName) {
@@ -32,7 +32,7 @@ public class WebServiceStarMF extends Service{
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl");
+            url = new URL("https://www.bsestarmf.in/StarMFWebService/StarMFWebService.svc?singleWsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -95,6 +95,31 @@ public class WebServiceStarMF extends Service{
         return super.getPort(new QName("http://www.bsestarmf.in/2016/01//IStarMFWebService/getPassword", "GetPassword"), GetPassword.class, new javax.xml.ws.soap.AddressingFeature());
     }
 
+    
+
+    /**
+     * 
+     * @return
+     *     returns IStarMFWebService
+     */
+    @WebEndpoint(name = "WSHttpBinding_IStarMFWebService1")
+    public IStarMFWebService getWSHttpBindingIStarMFWebService1() {
+        return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService1"), IStarMFWebService.class,new javax.xml.ws.soap.AddressingFeature());
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns IStarMFWebService
+     */
+    @WebEndpoint(name = "WSHttpBinding_IStarMFWebService1")
+    public IStarMFWebService getWSHttpBindingIStarMFWebService1(WebServiceFeature... features) {
+        return super.getPort(new QName("http://www.bsestarmf.in/2016/01/", "WSHttpBinding_IStarMFWebService1"), IStarMFWebService.class, new javax.xml.ws.soap.AddressingFeature());
+    }
+    
+    
     
     private static URL __getWsdlLocation() {
         if (MFORDER_EXCEPTION!= null) {

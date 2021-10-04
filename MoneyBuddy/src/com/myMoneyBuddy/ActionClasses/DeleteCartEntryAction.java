@@ -50,11 +50,11 @@ public class DeleteCartEntryAction extends ActionSupport  implements SessionAwar
 	    	sessionMap.put("customerCartList", customerCartList);
 	    	logger.debug("DeleteCartEntryAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap"); 
 	    	
-	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equals(o.getTransactionType())))
+	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equalsIgnoreCase(o.getTransactionType())))
 	    		setAnyUpfrontOrder("TRUE");
 	    	else
 	    		setAnyUpfrontOrder("FALSE");
-			if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))
+			if (customerCartList.stream().anyMatch(o -> "SIP".equalsIgnoreCase(o.getTransactionType())))
 				setAnySipOrder("TRUE");
 			else
 				setAnySipOrder("FALSE");

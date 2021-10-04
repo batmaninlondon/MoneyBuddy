@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="emailIdLogin">
+        <field-validator type="requiredstring">
+            <message>Email Id can not be blank.</message>
+        </field-validator>
+        
+        <field-validator type="email">
+            <message>Not a valid Email Id.</message>
+        </field-validator>
+    </field>  
+    <field name="passwordLogin">
+        <field-validator type="requiredstring">
+            <message>Password can't be blank.</message>
+        </field-validator>
+    </field>  
+   
+</validators>

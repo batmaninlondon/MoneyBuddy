@@ -17,6 +17,7 @@ public class FundDetailsDataModel implements Serializable{
 	private String returnsSinceInception;
 	private String minSipAmount;
 	private String minPurchaseAmount;
+	private String upfrontMultiplier;
 	private String minStpAmount;
 	private String minSipDuration;
 	private String pdfFilePath;
@@ -33,7 +34,7 @@ public class FundDetailsDataModel implements Serializable{
 
 	public FundDetailsDataModel(String fundId, String schemeName, String schemeType, String category, String startDate,
 			String rating, String risk, String returnsOneYear, String returnsThreeYears, String returnsFiveYears,
-			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String minStpAmount,
+			String returnsSinceInception, String minSipAmount, String minPurchaseAmount, String upfrontMultiplier, String minStpAmount,
 			String minSipDuration, String pdfFilePath, String sipFlag, String stpWithdrawalFlag, String stpPurchaseFlag,
 			String swpFlag, String switchFlag) {
 		super();
@@ -50,6 +51,7 @@ public class FundDetailsDataModel implements Serializable{
 		this.returnsSinceInception = returnsSinceInception;
 		this.minSipAmount = minSipAmount;
 		this.minPurchaseAmount = minPurchaseAmount;
+		this.upfrontMultiplier = upfrontMultiplier;
 		this.minStpAmount = minStpAmount;
 		this.minSipDuration = minSipDuration;
 		this.pdfFilePath = pdfFilePath;
@@ -190,6 +192,14 @@ public class FundDetailsDataModel implements Serializable{
 		this.minPurchaseAmount = minPurchaseAmount;
 	}
 
+
+	public String getUpfrontMultiplier() {
+		return upfrontMultiplier;
+	}
+
+	public void setUpfrontMultiplier(String upfrontMultiplier) {
+		this.upfrontMultiplier = upfrontMultiplier;
+	}
 
 	public String getMinSipDuration() {
 		return minSipDuration;

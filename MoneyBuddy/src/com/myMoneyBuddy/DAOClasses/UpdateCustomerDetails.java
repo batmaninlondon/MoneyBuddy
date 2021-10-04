@@ -36,30 +36,6 @@ public class UpdateCustomerDetails {
 					nomineeName, nomineeRelationship,placeOfBirth,countryOfBirth,taxResidency,incomeSlab,politicallyExposed); 		
 
 			hibernateSession.saveOrUpdate(tempCustomerDetails);
-			
-			
-			/*Query query = hibernateSession.createQuery("update CustomerDetails set dateOfBirth = :dateOfBirth ,"
-					+ " addressLineOne = :addressLineOne , addressLineTwo = :addressLineTwo , addressLineThree = :addressLineThree , "
-					+ "residentialCity = :residentialCity , residentialState = :residentialState , residentialCountry = :residentialCountry , "
-					+ "residentialPin = :residentialPin , taxStatus = :taxStatus , gender = :gender , occupation = :occupation  "
-					+ " where customerId = :customerId");
-
-			query.setParameter("dateOfBirth", dateOfBirth);
-			query.setParameter("addressLineOne", addressLineOne);
-			query.setParameter("addressLineTwo", addressLineTwo);
-			query.setParameter("addressLineThree", addressLineThree);
-			query.setParameter("residentialCity", residentialCity);
-			query.setParameter("residentialState", residentialState);
-			query.setParameter("residentialCountry", residentialCountry);
-			query.setParameter("residentialPin", residentialPin);
-			query.setParameter("taxStatus", taxStatus);
-			query.setParameter("gender", gender);
-			query.setParameter("occupation", occupation);
-
-
-			query.setParameter("customerId", customerId);
-			
-			int result = query.executeUpdate();*/
 			hibernateSession.getTransaction().commit();
 
 			logger.debug("UpdateCustomerDetails class - updateCustomerDetails method - customerId - "+customerId+" - updated CustomerDetails record ");

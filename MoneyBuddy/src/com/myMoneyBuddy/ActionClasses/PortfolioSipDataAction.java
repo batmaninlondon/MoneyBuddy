@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
+import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,8 +29,16 @@ public class PortfolioSipDataAction extends ActionSupport implements SessionAwar
 	public String execute()   {
 		System.out.println(" Called getActiveSipData  ...........................................................................................");
 		String customerId = sessionMap.get("customerId").toString();
+		
 		QueryProducts queryProducts = new QueryProducts();
 		try {
+			QueryCustomer queryCustomer = new QueryCustomer(); 
+			Customers customer = queryCustomer.getCustomerFromCustomerId(customerId);
+			String userType = customer.getUserType();
+			
+			if ("ADMIN".equals(userType))  {
+				customerId = sessionMap.get("customerIdFromAdmin").toString();
+	    	}
 			sipDataModel = queryProducts.getSipData(customerId);
 			setSipDataModel(sipDataModel);
 			return SUCCESS;

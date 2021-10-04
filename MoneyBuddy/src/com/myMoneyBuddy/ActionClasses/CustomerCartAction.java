@@ -41,11 +41,11 @@ public class CustomerCartAction extends ActionSupport  implements SessionAware{
 	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - stored customerCartList in sessionMap");   
 	    	logger.debug("CustomerCartAction class - execute method - customerId - "+customerId+" - end");
 			
-	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equals(o.getTransactionType())))
+	    	if (customerCartList.stream().anyMatch(o -> "UPFRONT".equalsIgnoreCase(o.getTransactionType())))
 	    		setAnyUpfrontOrder("TRUE");
 	    	else
 	    		setAnyUpfrontOrder("FALSE");
-			if (customerCartList.stream().anyMatch(o -> "SIP".equals(o.getTransactionType())))
+			if (customerCartList.stream().anyMatch(o -> "SIP".equalsIgnoreCase(o.getTransactionType())))
 				setAnySipOrder("TRUE");
 			else
 				setAnySipOrder("FALSE");

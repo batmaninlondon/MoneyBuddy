@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -31,6 +32,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 			
 			Calendar cal = Calendar.getInstance();
 			String todayDate = Integer.toString(cal.get(Calendar.DATE));
+			//String todayDate="10";
 			
 			System.out.println("todayDate : "+todayDate);
 			
@@ -47,18 +49,26 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 			Date date = new Date();
 			String modifiedDate = dateFormat.format(date);
 			
+			
+			System.out.println("sipDetailsList size : "+sipDetailsList.size());
+			System.out.println("modifiedDate : "+modifiedDate);
 	        Date currentDate = dateFormat.parse(modifiedDate);
 	        Date sipEndDate;
 	        Date sipStartDate;
 	        
 	        System.out.println("currentDate : " +currentDate);
+	        
+	        String folioNum = null;
 			
 			for (SipDetails sipDetail : sipDetailsList)  {
+				
+				folioNum = null;
  
 				sipEndDate = dateFormat.parse(sipDetail.getSipEndDate());
 				System.out.println("sipEndDate : " + sipEndDate);
 		        
 		        if (currentDate.compareTo(sipEndDate) > 0) {
+		        	
 		        	hibernateSession.beginTransaction();
 		        	query = hibernateSession.createQuery("update SipDetails set sipCompletionStatus='Y' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
 		        	query.setParameter("customerId", sipDetail.getCustomerId());
@@ -76,7 +86,7 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 		        	sipStartDate = dateFormat.parse(sipDetail.getSipStartDate());
 					System.out.println("sipStartDate : " + sipStartDate);
 		        	
-					if (currentDate.compareTo(sipStartDate) > 0) {
+					if (currentDate.compareTo(sipStartDate) >= 0) {
 						
 			        	hibernateSession.beginTransaction();
 						
@@ -90,12 +100,29 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 						hibernateSession.beginTransaction();
 						
 						String nextTransactionId = "1";
+						 
+						String sql = "select "
+								+ "max(CONVERT(SUBSTRING(TRANSACTION_ID,"+(transactionDetails.getTransactionId().length()+2)+"),UNSIGNED INTEGER)) AS num "
+								+ "from TRANSACTION_DETAILS "
+								+ "where TRANSACTION_ID like '"+transactionDetails.getTransactionId()+"-%' ";
 						
-						query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails where transactionId like '"+transactionDetails.getTransactionId()+"%' ");
-											
-						String transactionId = query.uniqueResult().toString();
+						SQLQuery sqlQuery = hibernateSession.createSQLQuery(sql);
+					
+						Object result = sqlQuery.uniqueResult();
+						
+						int transactionIdSplit = 0;
+						if (result != null)
+							transactionIdSplit = Integer.parseInt(sqlQuery.uniqueResult().toString());
+						
+						String transactionId;
 						
 						hibernateSession.getTransaction().commit();
+						
+						if (transactionIdSplit == 0) {
+							transactionId = transactionDetails.getTransactionId();
+						}
+						else 
+							transactionId = transactionDetails.getTransactionId()+'-'+transactionIdSplit;
 						
 						
 						hibernateSession.beginTransaction();
@@ -112,24 +139,45 @@ public class SipInstallmentGenerator implements org.quartz.Job{
 						String frmtdDateForDB = dateFrmt.format(date);
 						
 						if ( frmtdDateForDB.substring(0,10).equals(transactionDate))   {
-							nextTransactionId = transactionId;
+							nextTransactionId = transactionDetails.getTransactionId()+"-"+
+											(transactionIdSplit+1);
 						}
 						else {
 							if ( transactionId.split("-").length == 1 )
 								nextTransactionId = transactionId+"-1";
 							else 
-								nextTransactionId = transactionId.split("-")[0]+"-"+(Integer.parseInt(transactionId.split("-")[1])+1);
-								
+								//nextTransactionId = transactionId.split("-")[0]+"-"+(Integer.parseInt(transactionId.split("-")[1])+1);
+								nextTransactionId = transactionDetails.getTransactionId()+"-"+
+														(transactionIdSplit+1);
 						}
+												
+						hibernateSession.beginTransaction();
+												
+						query = hibernateSession.createQuery("select distinct (transactionFolioNum) from TransactionDetails "
+																+ "where transactionType ='SIP' and transactionId like '"+transactionDetails.getTransactionId()+"%' and fundId = :fundId and bseRegistrationNumber = :bseRegistrationNumber ");
+						
+						query.setParameter("fundId", transactionDetails.getFundId());
+						query.setParameter("bseRegistrationNumber", transactionDetails.getBseRegistrationNumber());
+						
+						List<String >  folioNumList = query.list();
+						
+						for ( String fol : folioNumList)   {
+							if ( null != fol)   {
+								folioNum = fol;
+								
+							}
+						}
+						
+						hibernateSession.getTransaction().commit();
 						
 						System.out.println(" inserting a row for transaction Id : "+sipDetail.getTransactionDetailId());
 						hibernateSession.beginTransaction();
 						
 			        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,transactionDetails.getBseRegistrationNumber(),
-			        			null, sipDetail.getCustomerId(),"SIP" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),
+			        			null, sipDetail.getCustomerId(),"SIP","NA","NA" ,"AUTODEBIT","BUY", "ADDITIONAL", transactionDetails.getTransactionAmount(),transactionDetails.getTransactionUnit(),
 								"7", "AUTO DEBIT FOR BSE Reg Num : "+transactionDetails.getBseRegistrationNumber(),"0","N",transactionDetails.getFundId(), 
 								null,null,frmtdDateForDB, frmtdDateForDB,"N",
-								transactionDetails.getTransactionFolioNum(),null,"N"); 		
+								folioNum,null,"N"); 		
 	
 						hibernateSession.save(tempTransactionDetail);
 	

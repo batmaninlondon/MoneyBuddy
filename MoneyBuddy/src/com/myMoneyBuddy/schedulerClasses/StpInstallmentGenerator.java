@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.EntityClasses.StpDetails;
 import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -31,13 +32,13 @@ public class StpInstallmentGenerator implements org.quartz.Job{
 			
 			Calendar cal = Calendar.getInstance();
 			String todayDate = Integer.toString(cal.get(Calendar.DATE));
+			//String todayDate = "10";
 			
 			System.out.println("todayDate : "+todayDate);
 			
-			Query query = hibernateSession.createQuery("from StpDetails where stpDate = :stpDate and stpCompletionStatus = :stpCompletionStatus ");
+			Query query = hibernateSession.createQuery("from StpDetails where stpDate = :stpDate and stpCompletionStatus  in ('N','MAIL_SENT') ");
 
 			query.setParameter("stpDate", todayDate);
-			query.setParameter("stpCompletionStatus", "N");
 			
 			List<StpDetails> stpDetailsList = query.list();
 			hibernateSession.getTransaction().commit();
@@ -48,11 +49,16 @@ public class StpInstallmentGenerator implements org.quartz.Job{
 			
 	        Date currentDate = dateFormat.parse(modifiedDate);
 	        Date stpEndDate;
+	        Date stpStartDate;
 
 	        System.out.println("currentDate : " +currentDate);
 			
+	        String folioNum = null;
+	        
 			for (StpDetails stpDetail : stpDetailsList)  {
  
+				folioNum = null;
+				
 				stpEndDate = dateFormat.parse(stpDetail.getStpEndDate());
 				System.out.println("stpEndDate : " + stpEndDate);
 		        
@@ -71,69 +77,165 @@ public class StpInstallmentGenerator implements org.quartz.Job{
 		        else {
 		        	//System.out.println("Trigger will be coming here soon .. ");
 		        	
-		        	hibernateSession.beginTransaction();
-					
-					query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
-					query.setParameter("transactionDetailId", stpDetail.getTransactionDetailId());
-					
-					TransactionDetails transactionDetails = (TransactionDetails) query.uniqueResult();
-					
-					hibernateSession.getTransaction().commit();
-					
-					hibernateSession.beginTransaction();
-					
-					String nextTransactionId = "1";
-					
-					query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
-							+ " order by transactionDetailId desc ");
-					
-					query.setMaxResults(1);
-					
-					nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+		        	stpStartDate = dateFormat.parse(stpDetail.getStpStartDate());
+					System.out.println("sipStartDate : " + stpStartDate);
 					
 					
-					hibernateSession.getTransaction().commit();
-					
-					SimpleDateFormat dateFrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String frmtdDateForDB = dateFrmt.format(date);
-					
-					
-					hibernateSession.beginTransaction();
-					
-		        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,stpDetail.getBseRegNum(),
-		        			null, stpDetail.getCustomerId(),"STP" ,"WITHDRAWAL","SELL", "ADDITIONAL", stpDetail.getStpAmount(),
-							"7", "AUTO WITHDRAWAL OF FUND ID : "+stpDetail.getWithdrawalFundId()+" FOR BSE Reg Num : "+stpDetail.getBseRegNum(),
-							"0","N",stpDetail.getWithdrawalFundId(),null,null,frmtdDateForDB, frmtdDateForDB,"N",
-							transactionDetails.getTransactionFolioNum(),null,"N"); 		
-
-					hibernateSession.save(tempTransactionDetail);
-					hibernateSession.getTransaction().commit();
-					
-					hibernateSession.beginTransaction();
+					if (currentDate.compareTo(stpStartDate) >= 0) {
+						
+			        	hibernateSession.beginTransaction();
+						
+						query = hibernateSession.createQuery(" from TransactionDetails where transactionDetailId = :transactionDetailId ");
+						query.setParameter("transactionDetailId", stpDetail.getTransactionDetailId());
+						
+						TransactionDetails transactionDetails = (TransactionDetails) query.uniqueResult();
+						
+						hibernateSession.getTransaction().commit();
+						
+						QueryProducts queryProducts = new QueryProducts();
+						double curAmount = queryProducts.getCurrentAmtForFund(stpDetail.getCustomerId(), stpDetail.getWithdrawalFundId(), transactionDetails.getTransactionFolioNum());
+						
+						if ("MAIL_SENT".equals(stpDetail.getStpCompletionStatus()))   {
+							if ( curAmount == 0.0 )   {
+								// Cancel This STP
+								// Send Mail to the user stating that the STP has been cancelled 
+								
+								hibernateSession.beginTransaction();
+					        	query = hibernateSession.createQuery("update StpDetails set stpCompletionStatus='CANCELLED' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
+					        	query.setParameter("customerId", stpDetail.getCustomerId());
+					        	query.setParameter("transactionDetailId", stpDetail.getTransactionDetailId());
+					        	
+					        	int updateResult = query.executeUpdate();
+								System.out.println(updateResult + " rows updated in StpDetails table ");
+								
+								hibernateSession.getTransaction().commit();
+								
+							}
+						}
+						else {
+											
+							hibernateSession.beginTransaction();
+				        	query = hibernateSession.createQuery("update StpDetails set stpCompletionStatus='N' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
+				        	query.setParameter("customerId", stpDetail.getCustomerId());
+				        	query.setParameter("transactionDetailId", stpDetail.getTransactionDetailId());
+				        	
+				        	int updateResult = query.executeUpdate();
+							System.out.println(updateResult + " rows updated in StpDetails table ");
+							
+							hibernateSession.getTransaction().commit();
+						
+				        	/*if ( curAmount <= Double.parseDouble(stpDetail.getStpAmount()))   {
+				        		hibernateSession.beginTransaction();
+					        	query = hibernateSession.createQuery("update StpDetails set stpCompletionStatus='MAIL_SENT' where customerId= :customerId and transactionDetailId = :transactionDetailId ");
+					        	query.setParameter("customerId", stpDetail.getCustomerId());
+					        	query.setParameter("transactionDetailId", stpDetail.getTransactionDetailId());
+					        	
+					        	updateResult = query.executeUpdate();
+								System.out.println(updateResult + " rows updated in StpDetails table ");
+								
+								hibernateSession.getTransaction().commit();
+				        		
+				        		// Send a mail to the user , stating the withdrawal fund balance is low..
+				        	}*/
+				        	
+							
+							hibernateSession.beginTransaction();
+							
+							String nextTransactionId = "1";
+							
+							query = hibernateSession.createQuery("select max(transactionId) from TransactionDetails where transactionId like '"+transactionDetails.getTransactionId()+"%' ");
 										
-					query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
-							+ " order by transactionDetailId desc ");
-					
-					query.setMaxResults(1);
-					
-					nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
-					
-					hibernateSession.getTransaction().commit();
-					
-					hibernateSession.beginTransaction();
-					
-		        	tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,stpDetail.getBseRegNum(),
-		        			null, stpDetail.getCustomerId(),"STP" ,"PURCHASE","BUY", "ADDITIONAL", stpDetail.getStpAmount(),
-							"7", "AUTO PURCHASE OF FUND ID : "+stpDetail.getPurchaseFundId()+" FOR BSE Reg Num : "+stpDetail.getBseRegNum(),
-							"0","N",stpDetail.getPurchaseFundId(),null,null,frmtdDateForDB, frmtdDateForDB,"N",
-							transactionDetails.getTransactionFolioNum(),null,"N"); 		
-
-					hibernateSession.save(tempTransactionDetail);
-					hibernateSession.getTransaction().commit();
-					
-					logger.debug("StpInstallmentGenerator class - execute method - customerId - "+stpDetail.getCustomerId()+" - and transactionType - STP - inserted 2 new rows in TransactionDetails table ");
-
-					
+							String transactionId = query.uniqueResult().toString();
+							
+							hibernateSession.getTransaction().commit();
+							
+							hibernateSession.beginTransaction();
+							
+							
+							query = hibernateSession.createQuery("select max(transactionDate) from TransactionDetails where  transactionId = :transactionId ");
+							query.setParameter("transactionId", transactionId);
+												
+							String transactionDate = query.uniqueResult().toString().substring(0,10);
+							
+							hibernateSession.getTransaction().commit();
+							
+							SimpleDateFormat dateFrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							String frmtdDateForDB = dateFrmt.format(date);
+							
+							if ( frmtdDateForDB.substring(0,10).equals(transactionDate))   {
+								nextTransactionId = transactionId;
+							}
+							else {
+								if ( transactionId.split("-").length == 1 )
+									nextTransactionId = transactionId+"-1";
+								else 
+									nextTransactionId = transactionId.split("-")[0]+"-"+(Integer.parseInt(transactionId.split("-")[1])+1);
+									
+							}
+							
+		
+							
+							hibernateSession.beginTransaction();
+							
+							query = hibernateSession.createQuery("select distinct (transactionFolioNum) from TransactionDetails "
+																	+ "where transactionType ='STP' and transactionId like '"+transactionDetails.getTransactionId()+"%' and fundId = :fundId ");
+							
+							query.setParameter("fundId", transactionDetails.getFundId());
+							
+							List<String >  folioNumList = query.list();
+							
+							for ( String fol : folioNumList)   {
+								if ( null != fol)   {
+									folioNum = fol;
+									
+								}
+							}
+							
+							hibernateSession.getTransaction().commit();
+							
+							System.out.println(" inserting a row for transaction Id : "+stpDetail.getTransactionDetailId());
+							
+							
+							
+							
+							hibernateSession.beginTransaction();
+							
+				        	TransactionDetails tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,stpDetail.getBseRegNum(),
+				        			null, stpDetail.getCustomerId(),"STP",transactionDetails.getSelOption(), transactionDetails.getSelType() ,
+				        			"NEW","SELL", "ADDITIONAL", stpDetail.getStpAmount(),"NA",
+									"7", "AUTO WITHDRAWAL OF FUND ID : "+stpDetail.getWithdrawalFundId()+" FOR BSE Reg Num : "+stpDetail.getBseRegNum(),
+									"0","N",stpDetail.getWithdrawalFundId(),null,null,frmtdDateForDB, frmtdDateForDB,"N",
+									folioNum,null,"N"); 		
+		
+							hibernateSession.save(tempTransactionDetail);
+							hibernateSession.getTransaction().commit();
+							
+							/*hibernateSession.beginTransaction();
+												
+							query = hibernateSession.createQuery("select transactionId from TransactionDetails where transactionId not like '%-%' "
+									+ " order by transactionDetailId desc ");
+							
+							query.setMaxResults(1);
+							
+							nextTransactionId = Integer.toString(Integer.parseInt(query.uniqueResult().toString())+1);
+							
+							hibernateSession.getTransaction().commit();*/
+							
+							hibernateSession.beginTransaction();
+							
+				        	tempTransactionDetail  = new TransactionDetails(nextTransactionId, null,stpDetail.getBseRegNum(),
+				        			null, stpDetail.getCustomerId(),"STP", transactionDetails.getSelOption(), transactionDetails.getSelType() ,
+				        			"NEW","BUY", "ADDITIONAL", stpDetail.getStpAmount(),"NA",
+									"7", "AUTO PURCHASE OF FUND ID : "+stpDetail.getPurchaseFundId()+" FOR BSE Reg Num : "+stpDetail.getBseRegNum(),
+									"0","N",stpDetail.getPurchaseFundId(),null,null,frmtdDateForDB, frmtdDateForDB,"N",
+									folioNum,null,"N"); 		
+		
+							hibernateSession.save(tempTransactionDetail);
+							hibernateSession.getTransaction().commit();
+							
+							logger.debug("StpInstallmentGenerator class - execute method - customerId - "+stpDetail.getCustomerId()+" - and transactionType - STP - inserted 2 new rows in TransactionDetails table ");
+						}
+					}
 		        }
 
 			}

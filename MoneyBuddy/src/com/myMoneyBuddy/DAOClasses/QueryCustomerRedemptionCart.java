@@ -41,7 +41,11 @@ public class QueryCustomerRedemptionCart {
 				RedemptionCart redCartListElement = redemptionCartList.get(i);
 				
 				totalRedAmount += Double.parseDouble(redCartListElement.getRedAmount());
+				System.out.println("totalRedAmount : "+totalRedAmount);
 				totalRedUnits += Double.parseDouble(redCartListElement.getRedUnits());
+				
+				totalRedAmount = Math.round(totalRedAmount * 10000.0) / 10000.0;
+				totalRedUnits = Math.round(totalRedUnits * 10000.0) / 10000.0;
 			}
 			
 			redemptionCartList.add(new RedemptionCart(null,null,"Total",null,totalRedAmount.toString(),totalRedUnits.toString(),null,null,null,null,null,null,null,null));

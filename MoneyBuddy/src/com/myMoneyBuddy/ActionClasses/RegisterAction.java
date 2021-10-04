@@ -27,8 +27,9 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	private SessionMap<String,Object> sessionMap;
     private String passwordRegister;
     private String emailIdRegister;
-    private String mobileNumberRegister;
-    private String googleResponseRegister;    
+    /*private String mobileNumberRegister;*/
+    private String googleResponseRegister;  
+    private String googleRegister;
     //private InputStream stream;
 
     public String execute() {
@@ -63,6 +64,8 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	        	return SUCCESS;
 	    	}
 	    	
+	    	
+	    	
 	    	/*if (customer.existsMobileNumber(getMobileNumberRegister())) {
 	    		System.out.println("RegisterAction class : execute method : MobileNumberAlreadyExists");
 	    		String str = "MobileNumberAlreadyExists";
@@ -75,7 +78,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    	
 	    	
 	    	
-	    	String customerId = newCustomer.insertCustomer(getEmailIdRegister(),getMobileNumberRegister());
+	    	String customerId = newCustomer.insertCustomer(getEmailIdRegister());
 	    	
 	    	System.out.println("customerId+getPasswordRegister() : "+customerId+getPasswordRegister());
 	    	
@@ -102,7 +105,7 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	    	
 	    	String subject = configProperties.getProperty("MAIL_VERIFICATION_SUBJECT");
 	
-	    	sendMail.MailSending(getEmailIdRegister(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email","");
+	    	sendMail.MailSending(getEmailIdRegister(),subject,"VerificationMail","VerificationMail.txt",link,"Verify Email","","");
 	
 	    	System.out.println(" send email function completed from register user.");
 	    	
@@ -160,14 +163,14 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 	public void setEmailIdRegister(String emailIdRegister) {
 		this.emailIdRegister = emailIdRegister;
 	}
-
+/*
 	public String getMobileNumberRegister() {
 		return mobileNumberRegister;
 	}
 
 	public void setMobileNumberRegister(String mobileNumberRegister) {
 		this.mobileNumberRegister = mobileNumberRegister;
-	}
+	}*/
 
 	public String getGoogleResponseRegister() {
 		return googleResponseRegister;
@@ -175,6 +178,14 @@ public class RegisterAction extends ActionSupport  implements SessionAware{
 
 	public void setGoogleResponseRegister(String googleResponseRegister) {
 		this.googleResponseRegister = googleResponseRegister;
+	}
+
+	public String getGoogleRegister() {
+		return googleRegister;
+	}
+
+	public void setGoogleRegister(String googleRegister) {
+		this.googleRegister = googleRegister;
 	}
 
 

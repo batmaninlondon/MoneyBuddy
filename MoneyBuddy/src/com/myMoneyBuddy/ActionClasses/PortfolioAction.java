@@ -61,6 +61,8 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 
 		
 		String customerId = sessionMap.get("customerId").toString();
+		
+		System.out.println(" customerId : "+customerId);
 
 		try {	
 			
@@ -74,7 +76,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 			customerId = sessionMap.get("customerIdFromAdmin").toString();
     	}
 		
-		
+		System.out.println(" customerId : "+customerId);
 		//System.out.println(" calling portfolioAction class for : customerId : "+customerId);
 				
 		setCustomerName(customer.getCustomerName());
@@ -86,7 +88,7 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		QueryProducts queryProducts = new QueryProducts();
 
 		portfolioDataModel = queryProducts.getPortfolioData(customerId);
-		setPortfolioDataModel(portfolioDataModel);
+		
 		
 		/*setTotalPendingOrders(queryProducts.getTotalPendingTransactions(customerId));
 		
@@ -112,10 +114,11 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 					setTotalRateOfGrowth(portfolioDataModelElement.getRateOfGrowth());
 					setTotalInvestedAmount(portfolioDataModelElement.getInvestedAmount());
 					setTotalProfitAmount(portfolioDataModelElement.getProfit());
+					portfolioDataModel.remove(portfolioDataModelElement);
 					
 				}
 		
-		
+				setPortfolioDataModel(portfolioDataModel);
 		//QueryOldPortfolioRecords queryOldPortfolioRecords = new QueryOldPortfolioRecords();
 		
 		/*String totalOldRecords = queryOldPortfolioRecords.getTotalOldRecords(customerId);
@@ -186,6 +189,10 @@ public class PortfolioAction extends ActionSupport implements SessionAware{
 		
 		logger.debug("PortfolioAction class : execute method : end");
     	
+		if ("ADMIN".equals(userType))  {
+			return "ADMIN";
+    	}
+		
 		return SUCCESS;
 		}
 		catch (MoneyBuddyException e) {	
