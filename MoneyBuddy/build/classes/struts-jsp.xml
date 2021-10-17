@@ -22,19 +22,29 @@
 	    	<result>/WEB-INF/content/ongoingSips.jsp</result>
 		</action>
 	</package>
+	<package name="Fees" namespace="/" extends="struts-default">
+	    <action name="Fees">
+	    	<result>/WEB-INF/content/Fees.jsp</result>
+		</action>
+	</package>
 	<package name="selectedFundDetails" namespace="/" extends="struts-default">
 	    <action name="selectedFundDetails">
 	    	<result>/WEB-INF/content/selectedFundDetails.jsp</result>
 		</action>
 	</package>
-	<package name="amountConfirmation" namespace="/" extends="struts-default">
-	    <action name="amountConfirmation">
-	    	<result>/amountConfirmation.jsp</result>
+	<package name="customerCart" namespace="/" extends="struts-default">
+	    <action name="customerCart">
+	    	<result>/customerCart.jsp</result>
 		</action>
 	</package>
 	<package name="orderInvoice" namespace="/" extends="struts-default">
 	    <action name="orderInvoice">
 	    	<result>/WEB-INF/content/orderInvoice.jsp</result>
+		</action>
+	</package>
+	<package name="thankYou" namespace="/" extends="struts-default">
+	    <action name="thankYou">
+	    	<result>/thankYou.jsp</result>
 		</action>
 	</package>
 	<package name="orderInvoiceSipFofN" namespace="/" extends="struts-default">
@@ -97,6 +107,16 @@
 	    	<result>/WEB-INF/content/uploadCustomerNav.jsp</result>
 		</action>
 	</package>
+	<package name="updateMandateDetails" namespace="/" extends="struts-default">
+	    <action name="updateMandateDetails">
+	    	<result>/WEB-INF/content/updateMandateDetails.jsp</result>
+		</action>
+	</package>
+	<package name="updateAofDetails" namespace="/" extends="struts-default">
+	    <action name="updateAofDetails">
+	    	<result>/WEB-INF/content/updateAofDetails.jsp</result>
+		</action>
+	</package>
 	<package name="adminDashboard" namespace="/" extends="struts-default">
 	    <action name="adminDashboard">
 	    	<result>/WEB-INF/content/adminDashboard.jsp</result>
@@ -112,14 +132,14 @@
 	    	<result>/WEB-INF/content/customerDashboardForAdmin.jsp</result>
 		</action>
 	</package>	
-	<package name="customerCart" namespace="/" extends="struts-default">
-	    <action name="customerCart">
-	    	<result>/WEB-INF/content/customerCart.jsp</result>
+	<package name="customerCarts" namespace="/" extends="struts-default">
+	    <action name="customerCarts">
+	    	<result>/WEB-INF/content/customerCarts.jsp</result>
 		</action>
 	</package>
-	<package name="bankDetails" namespace="/" extends="struts-default">
-	    <action name="bankDetails">
-	    	<result>/WEB-INF/content/bankDetails.jsp</result>
+	<package name="orderConfirmation" namespace="/" extends="struts-default">
+	    <action name="orderConfirmation">
+	    	<result>/WEB-INF/content/orderConfirmation.jsp</result>
 		</action>
 	</package>
 	<package name="newUpfrontInvestment" namespace="/" extends="struts-default">
@@ -210,14 +230,15 @@
 		</action>
 	</package>
 	
-	<package name="logOff" namespace="/" extends="struts-default">
-	    <action name="logOff">
-	    	<result>/WEB-INF/content/logOff.jsp</result>
-		</action>
-	</package>
 	<package name="welcome" namespace="/" extends="struts-default">
 	    <action name="welcome">
 	    	<result>/welcome.jsp</result>
+		</action>
+	</package>
+
+	<package name="MFDocuments" namespace="/" extends="struts-default">
+	    <action name="MFDocuments">
+	    	<result>/MFDocuments.jsp</result>
 		</action>
 	</package>
 	
@@ -227,17 +248,23 @@
 		</action>
 	</package>
 	
+	<package name="aqbDisplay" namespace="/" extends="struts-default">
+	    <action name="aqbDisplay">
+	    	<result>/aqbDisplay.jsp</result>
+		</action>
+	</package>
+	
 	<package name="terms" namespace="/" extends="struts-default">
 	    <action name="terms">
 	    	<result>/terms.jsp</result>
 		</action>
 	</package>
 	
-	<!-- <package name="myIndex" namespace="/" extends="struts-default">
+	<package name="myIndex" namespace="/" extends="struts-default">
 	    <action name="myIndex">
 	    	<result>/WEB-INF/content/myIndex.jsp</result>
 		</action>
-	</package> -->
+	</package>
 	
 	<package name="newErrorPage" namespace="/" extends="struts-default">
 	    <action name="newErrorPage">
@@ -249,11 +276,6 @@
 	    	<result>/WEB-INF/content/paymentFailure.jsp</result>
 		</action>
 	</package>
-	<package name="register" namespace="/" extends="struts-default">
-	    <action name="register">
-	    	<result>/WEB-INF/content/register.jsp</result>
-		</action>
-	</package>
 	<package name="resetPassword" namespace="/" extends="struts-default">
 	    <action name="resetPassword">
 	    	<result>/WEB-INF/content/resetPassword.jsp</result>
@@ -262,12 +284,6 @@
 	<package name="saveTax" namespace="/" extends="struts-default">
 	    <action name="saveTax">
 	    	<result>/saveTax.jsp</result>
-		</action>
-	</package>
-	
-	<package name="thankYou" namespace="/" extends="struts-default">
-	    <action name="thankYou">
-	    	<result>/WEB-INF/content/thankYou.jsp</result>
 		</action>
 	</package>
 	
