@@ -8,7 +8,8 @@ package com.myMoneyBuddy.ActionClasses;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.ModelClasses.PendingNavOrders;
@@ -17,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PendingNavsAction extends ActionSupport implements Action  {
 
-	Logger logger = Logger.getLogger(PendingNavsAction.class);
+	Logger logger = LogManager.getLogger(PendingNavsAction.class);
 	private InputStream stream;
 	//private HashMap<String,String>  pendingNavOrders ;
 	private List<PendingNavOrders> pendingNavOrders;

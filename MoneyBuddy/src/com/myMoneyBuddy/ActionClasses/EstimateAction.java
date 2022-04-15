@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -26,7 +27,7 @@ public class EstimateAction extends ActionSupport implements SessionAware  {
 
 	
 	
-	Logger logger = Logger.getLogger(EstimateAction.class);
+	Logger logger = LogManager.getLogger(EstimateAction.class);
 	private SessionMap<String,Object> sessionMap;
 	
 	private String selectFolioNum;

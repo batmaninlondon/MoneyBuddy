@@ -10,7 +10,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,11 +20,10 @@ import com.myMoneyBuddy.DAOClasses.QueryTransactionDetails;
 import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 public class BuyFundAction extends ActionSupport implements SessionAware  {
 
-	Logger logger = Logger.getLogger(BuyFundAction.class);
+	Logger logger = LogManager.getLogger(BuyFundAction.class);
 	private SessionMap<String,Object> sessionMap;
 	private InputStream stream;
 	private String fundId;

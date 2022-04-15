@@ -8,7 +8,8 @@ package com.myMoneyBuddy.DAOClasses;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertCustomerDetails {
 
-	Logger logger = Logger.getLogger(InsertCustomerDetails.class);
+	Logger logger = LogManager.getLogger(InsertCustomerDetails.class);
 
     public String insertCustomer (String emailId) throws MoneyBuddyException
     {

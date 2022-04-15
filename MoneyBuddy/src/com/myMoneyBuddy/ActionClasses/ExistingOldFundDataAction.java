@@ -8,7 +8,8 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ExistingOldFundDataAction extends ActionSupport   {
 
-	Logger logger = Logger.getLogger(ExistingOldFundDataAction.class);
+	Logger logger = LogManager.getLogger(ExistingOldFundDataAction.class);
 	List<String> availableSchemeNames = new ArrayList<String>();
 	private String emailIdOldPortfolio;
 	private String customerIdOldPortfolio;

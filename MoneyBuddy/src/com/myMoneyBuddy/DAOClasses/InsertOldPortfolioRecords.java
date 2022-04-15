@@ -7,23 +7,19 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.OldPortfolioRecords;
-import com.myMoneyBuddy.EntityClasses.PrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertOldPortfolioRecords {
 
-	Logger logger = Logger.getLogger(InsertOldPortfolioRecords.class);
+	Logger logger = LogManager.getLogger(InsertOldPortfolioRecords.class);
 	
 	
 	public void insertRow ( String customerId, String schemeName, String isin, String investedValue, String units, String folioNumber, String currentValue) 

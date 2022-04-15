@@ -7,23 +7,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.SipDetails;
-import com.myMoneyBuddy.EntityClasses.TransactionDetails;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 
 public class StpAutoDebitMails implements org.quartz.Job{
 
 
-	Logger logger = Logger.getLogger(StpAutoDebitMails.class);
+	Logger logger = LogManager.getLogger(StpAutoDebitMails.class);
 	public void execute(JobExecutionContext cntxt) throws JobExecutionException {
 
 		Session hibernateSession = HibernateUtil.getSessionAnnotationFactory().openSession();

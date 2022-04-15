@@ -8,7 +8,8 @@ package com.myMoneyBuddy.DAOClasses;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class UpdateCurrentLoginTimestamp {
 	
-	Logger logger = Logger.getLogger(UpdateCurrentLoginTimestamp.class);
+	Logger logger = LogManager.getLogger(UpdateCurrentLoginTimestamp.class);
 
 	public void updateCurrentLoginTimestamp (String customerId) throws MoneyBuddyException {
 

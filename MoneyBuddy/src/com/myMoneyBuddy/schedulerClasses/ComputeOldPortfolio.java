@@ -5,9 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -16,9 +14,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
-import com.myMoneyBuddy.DAOClasses.QuerySecondaryFundDetails;
-import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.NavHistory;
 import com.myMoneyBuddy.EntityClasses.OldPortfolioRecords;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 

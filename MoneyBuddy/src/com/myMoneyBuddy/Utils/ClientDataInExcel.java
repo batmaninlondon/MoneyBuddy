@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.HibernateException;
@@ -16,7 +15,6 @@ import org.hibernate.Session;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.ClientData;
-import com.myMoneyBuddy.ModelClasses.PendingMandateOrders;
 
 public class ClientDataInExcel {
 	

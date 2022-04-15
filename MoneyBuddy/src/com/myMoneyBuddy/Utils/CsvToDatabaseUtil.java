@@ -5,7 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -15,7 +16,7 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class CsvToDatabaseUtil {
 	
-	Logger logger = Logger.getLogger(CsvToDatabaseUtil.class);
+	Logger logger = LogManager.getLogger(CsvToDatabaseUtil.class);
 	
 	public void navEnteries()  throws MoneyBuddyException {
 		

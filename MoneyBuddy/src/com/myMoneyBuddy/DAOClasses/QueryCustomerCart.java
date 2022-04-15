@@ -6,21 +6,19 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
-import com.myMoneyBuddy.EntityClasses.FolioDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryCustomerCart {
 
-	Logger logger = Logger.getLogger(QueryCustomerCart.class);
+	Logger logger = LogManager.getLogger(QueryCustomerCart.class);
 		
 	public List<CustomerCart> getCustomerCart(String customerId) throws MoneyBuddyException {
 		

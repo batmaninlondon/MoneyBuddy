@@ -7,7 +7,8 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
@@ -15,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SendMailAction extends ActionSupport {
 
-	Logger logger = Logger.getLogger(SendMailAction.class);
+	Logger logger = LogManager.getLogger(SendMailAction.class);
 	private String senderName;
 	private String senderEmailId;
 	private String senderMobileNum;

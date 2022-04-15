@@ -4,7 +4,8 @@
  */
 package com.myMoneyBuddy.DAOClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -14,7 +15,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryCustomerDetails {
 
-	Logger logger = Logger.getLogger(QueryCustomerDetails.class);
+	Logger logger = LogManager.getLogger(QueryCustomerDetails.class);
 		
 	public CustomerDetails getCustomerDetails(String customerId) throws MoneyBuddyException {
 			

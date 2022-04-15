@@ -7,7 +7,8 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.ModelClasses.FundDetailsDataModel;
@@ -15,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class FetchPopularFundDetailsAction extends ActionSupport   {
 
-	Logger logger = Logger.getLogger(FetchPopularFundDetailsAction.class);
+	Logger logger = LogManager.getLogger(FetchPopularFundDetailsAction.class);
 	private List<FundDetailsDataModel> popularFundDetailsDataModel;
 	
     public String execute() {

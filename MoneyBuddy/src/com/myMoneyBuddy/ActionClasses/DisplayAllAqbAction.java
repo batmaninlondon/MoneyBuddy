@@ -5,20 +5,17 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.EntityClasses.CustomersAqb;
 import com.myMoneyBuddy.ModelClasses.AqbDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
@@ -26,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class DisplayAllAqbAction extends ActionSupport implements SessionAware  {
 
-	Logger logger = Logger.getLogger(DisplayAllAqbAction.class);
+	Logger logger = LogManager.getLogger(DisplayAllAqbAction.class);
 	private SessionMap<String,Object> sessionMap;
 	private String errorMsg;
 	private List<AqbDataModel> aqbDataModelList = new LinkedList<AqbDataModel>();

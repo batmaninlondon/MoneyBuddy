@@ -7,7 +7,8 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -17,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LogOutAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(LogOutAction.class);
+	Logger logger = LogManager.getLogger(LogOutAction.class);
 	private SessionMap<String,Object> sessionMap;
 
     public String execute() {

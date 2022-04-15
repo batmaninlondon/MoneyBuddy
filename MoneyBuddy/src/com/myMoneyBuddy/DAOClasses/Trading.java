@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -36,7 +37,6 @@ import org.tempuri.IStarMFPaymentGatewayService;
 import org.tempuri.MFOrderEntry;
 
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
-import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerCart;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -56,11 +56,10 @@ import com.myMoneyBuddy.Utils.SendMail;
 import com.myMoneyBuddy.webServices.WebServiceMFOrder;
 import com.myMoneyBuddy.webServices.WebServiceStarMF;
 import com.myMoneyBuddy.webServices.WebServiceStarMFPaymentGateway;
-import com.sun.xml.internal.ws.api.client.SelectOptimalEncodingFeature;
 
 public class Trading {
 
-	Logger logger = Logger.getLogger(Trading.class);
+	Logger logger = LogManager.getLogger(Trading.class);
 
 	public String createClient(String clientHolding, String clientTaxStatus, String clientOccupationCode, String clientDob,
 			String clientGender, String clientGuardian, String clientAccType1, String clientAccNo1, String clientNeftIfscCode1,

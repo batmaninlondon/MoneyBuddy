@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -17,12 +18,11 @@ import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PortfolioPendingDataAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(PortfolioPendingDataAction.class);
+	Logger logger = LogManager.getLogger(PortfolioPendingDataAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private List<PendingOrderDataModel> pendingOrderDataModel = new LinkedList<PendingOrderDataModel>();

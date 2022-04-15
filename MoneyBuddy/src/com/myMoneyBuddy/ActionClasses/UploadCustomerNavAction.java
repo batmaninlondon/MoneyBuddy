@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -24,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UploadCustomerNavAction extends ActionSupport {
 	
-	Logger logger = Logger.getLogger(UploadCustomerNavAction.class);	
+	Logger logger = LogManager.getLogger(UploadCustomerNavAction.class);	
     private String bseRegNum;
     private String bseOrderId;
     private String transactionType;

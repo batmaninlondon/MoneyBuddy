@@ -7,7 +7,8 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,7 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class RedirectRedeemAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(RedirectRedeemAction.class);
+	Logger logger = LogManager.getLogger(RedirectRedeemAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private String displayBankName;

@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
@@ -24,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PopulateBankDetailsAction extends ActionSupport implements SessionAware  {
 	
-	Logger logger = Logger.getLogger(PopulateBankDetailsAction.class);
+	Logger logger = LogManager.getLogger(PopulateBankDetailsAction.class);
 	private SessionMap<String,Object> sessionMap;
 	private InputStream stream;
 	private String bankName;

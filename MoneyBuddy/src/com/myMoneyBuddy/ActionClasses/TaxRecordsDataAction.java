@@ -9,25 +9,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.myMoneyBuddy.ModelClasses.TaxRecordsDataModel;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TaxRecordsDataAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(TaxRecordsDataAction.class);
+	Logger logger = LogManager.getLogger(TaxRecordsDataAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private List<InvestmentDetailsDataModel> allFundsInvestmentDetailsDataModel;

@@ -5,7 +5,8 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -15,7 +16,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertAdditionalCustomerDetails {
 
-	Logger logger = Logger.getLogger(InsertAdditionalCustomerDetails.class);
+	Logger logger = LogManager.getLogger(InsertAdditionalCustomerDetails.class);
 	
     public void insertAddCusDetails (String customerId, String fatherName, String maritalStatus, String nationality,
 			String status, String grossAnnualIncome, String politicallyExposed) throws MoneyBuddyException

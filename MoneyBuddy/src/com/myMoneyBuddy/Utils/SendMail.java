@@ -30,7 +30,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.ActionClasses.RegisterAction;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
@@ -38,7 +39,7 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class SendMail {
 
-	Logger logger = Logger.getLogger(SendMail.class);   
+	Logger logger = LogManager.getLogger(SendMail.class);   
 
 	public void MailSending(String emailId, String subject, String mailType,String fileName,
     		String mailLink,String displayLinkName, String customerName, String dataTable) throws MoneyBuddyException {

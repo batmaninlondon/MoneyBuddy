@@ -24,7 +24,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
@@ -32,7 +33,7 @@ import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class DesEncrypter  {
 
-	Logger logger = Logger.getLogger(DesEncrypter.class);
+	Logger logger = LogManager.getLogger(DesEncrypter.class);
 	
 	Cipher ecipher;
     Cipher dcipher;
@@ -170,10 +171,10 @@ public class DesEncrypter  {
 
     public static void main(String args[]){
         try {
-        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("241Prem@4321");
+        	String encrypted = DesEncrypter.MONEYBUDDY.encrypt("293abcd@1234");
 	        System.out.println("encrypted :"+encrypted);
 	        
-	        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("gpj6mWsW8QoAwWPf4JjIxw==");
+	        String decrypted = DesEncrypter.MONEYBUDDY.decrypt("7wcfs2QrUF406fePJcwWEQ==");
 	        System.out.println("decrypted :"+decrypted+":");
 	       // int len = "233".length();
 	        

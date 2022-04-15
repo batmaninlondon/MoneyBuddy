@@ -11,8 +11,6 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 
-import com.myMoneyBuddy.DAOClasses.Trading;
-
 public class CommonUtil {
 
 	

@@ -11,8 +11,8 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
-import org.apache.log4j.Logger;
-import org.apache.poi.util.SystemOutLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
@@ -25,7 +25,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class QueryTransactionDetails {
 
-	Logger logger = Logger.getLogger(QueryTransactionDetails.class);
+	Logger logger = LogManager.getLogger(QueryTransactionDetails.class);
 
 	public String getFolioNumsList(String customerId, String fundId) throws MoneyBuddyException {
 		

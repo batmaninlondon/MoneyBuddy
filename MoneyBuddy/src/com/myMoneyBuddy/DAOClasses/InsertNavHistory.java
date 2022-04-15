@@ -8,7 +8,8 @@ package com.myMoneyBuddy.DAOClasses;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -18,7 +19,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertNavHistory {
 	
-	Logger logger = Logger.getLogger(InsertNavHistory.class);
+	Logger logger = LogManager.getLogger(InsertNavHistory.class);
 
 	public void insertNewNav (String fundId, String navValue) throws MoneyBuddyException {
 

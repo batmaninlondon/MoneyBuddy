@@ -7,21 +7,21 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.Utils.DesEncrypter;
 import com.myMoneyBuddy.Utils.MbUtil;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ForgotPasswordAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(ForgotPasswordAction.class);
+	Logger logger = LogManager.getLogger(ForgotPasswordAction.class);
 	private SessionMap<String,Object> sessionMap;
     private String emailIdForgotPassword;
     private String googleResponseFrgtPswd;

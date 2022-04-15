@@ -5,7 +5,8 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.QueryBussinessData;
 import com.myMoneyBuddy.ModelClasses.BusinessDashboardDataModel;
@@ -14,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class BusinessDashboardAction extends ActionSupport implements Action  {
 
-	Logger logger = Logger.getLogger(BusinessDashboardAction.class);
+	Logger logger = LogManager.getLogger(BusinessDashboardAction.class);
 	
 	private String errorMsg;
 	private BusinessDashboardDataModel businessDashboardData;

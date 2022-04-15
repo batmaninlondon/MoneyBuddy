@@ -5,7 +5,8 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +16,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class UpdateUserVerification {
 
-	Logger logger = Logger.getLogger(UpdateUserVerification.class);
+	Logger logger = LogManager.getLogger(UpdateUserVerification.class);
 	
 	public void userVerification (String hashedPassword) throws MoneyBuddyException {
 

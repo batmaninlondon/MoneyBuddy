@@ -5,7 +5,8 @@
 
 package com.myMoneyBuddy.DAOClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +16,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class UpdateCustomerStpCart {
 	
-	Logger logger = Logger.getLogger(UpdateCustomerStpCart.class);
+	Logger logger = LogManager.getLogger(UpdateCustomerStpCart.class);
 
 	public void deleteCustomerStpCartEntry (String customerId, String stpCartId) throws MoneyBuddyException {
 

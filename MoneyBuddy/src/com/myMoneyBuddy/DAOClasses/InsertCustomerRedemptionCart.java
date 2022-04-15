@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,7 +21,7 @@ import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertCustomerRedemptionCart {
 
-	Logger logger = Logger.getLogger(InsertCustomerRedemptionCart.class);
+	Logger logger = LogManager.getLogger(InsertCustomerRedemptionCart.class);
 	
 	
 	public void insertRow (String customerId, String fundId, String schemeName,String minRedAmount, String totalAmount, String totalUnits,

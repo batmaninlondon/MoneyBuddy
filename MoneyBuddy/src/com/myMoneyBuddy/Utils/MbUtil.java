@@ -8,14 +8,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class MbUtil {
 	
-	Logger logger = Logger.getLogger(MbUtil.class);
+	Logger logger = LogManager.getLogger(MbUtil.class);
 	
 	 public boolean isCaptchaValid(String googleResponse) throws MoneyBuddyException
 	    {

@@ -98,7 +98,7 @@ public class MoneyBuddyScheduler {
 			Trigger sipInstallmentGeneratorTrigger = TriggerBuilder
 					.newTrigger()
 					.withIdentity("SipInstallmentGeneratorTrigger", "Group")
-					.withSchedule(CronScheduleBuilder.cronSchedule("0 04 15 * * ?")) 
+					.withSchedule(CronScheduleBuilder.cronSchedule("0 50 17 * * ?")) 
 					.build();
 			
 	

@@ -7,11 +7,12 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +20,6 @@ import org.hibernate.Session;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.myMoneyBuddy.EntityClasses.AdditionalCustomerDetails;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.CustomerDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
@@ -30,7 +30,7 @@ import com.myMoneyBuddy.Utils.SendMail;
 
 public class GenerateAofForm {
 
-	Logger logger = Logger.getLogger(GenerateAofForm.class);
+	Logger logger = LogManager.getLogger(GenerateAofForm.class);
 	
     public void generateAofForm (String customerId) throws MoneyBuddyException
     {

@@ -1,12 +1,5 @@
 package com.myMoneyBuddy.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-
-import com.myMoneyBuddy.DAOClasses.Trading;
-import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-
 public class DelMeToo  {
 
 	public static void main(String args[])  {

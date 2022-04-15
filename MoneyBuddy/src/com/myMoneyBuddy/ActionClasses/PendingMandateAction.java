@@ -7,9 +7,9 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.myMoneyBuddy.DAOClasses.GenerateKycForm;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.ModelClasses.PendingMandateOrders;
 import com.opensymphony.xwork2.Action;
@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PendingMandateAction extends ActionSupport implements Action  {
 
-	Logger logger = Logger.getLogger(PendingMandateAction.class);
+	Logger logger = LogManager.getLogger(PendingMandateAction.class);
 	
 	private List<PendingMandateOrders> pendingMandateOrders;
 

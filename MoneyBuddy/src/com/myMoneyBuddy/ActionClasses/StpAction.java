@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,14 +20,13 @@ import com.myMoneyBuddy.DAOClasses.QueryStpCart;
 import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.DAOClasses.UpdateCustomerStpCart;
 import com.myMoneyBuddy.EntityClasses.Customers;
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
 import com.myMoneyBuddy.EntityClasses.StpCart;
 import com.myMoneyBuddy.Utils.SendMail;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class StpAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(StpAction.class);
+	Logger logger = LogManager.getLogger(StpAction.class);
 	private SessionMap<String,Object> sessionMap;
 
     public String execute() {

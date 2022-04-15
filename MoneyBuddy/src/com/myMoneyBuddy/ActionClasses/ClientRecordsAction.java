@@ -9,7 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,8 +21,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
-import com.myMoneyBuddy.DAOClasses.Trading;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.ClientData;
 import com.myMoneyBuddy.ModelClasses.SipDataModel;
@@ -31,7 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ClientRecordsAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(ClientRecordsAction.class);
+	Logger logger = LogManager.getLogger(ClientRecordsAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private List<SipDataModel> sipDataModel = new LinkedList<SipDataModel>();

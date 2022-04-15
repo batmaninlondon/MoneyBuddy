@@ -8,7 +8,8 @@ package com.myMoneyBuddy.ActionClasses;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -18,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CustomerStpCartAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(CustomerStpCartAction.class);
+	Logger logger = LogManager.getLogger(CustomerStpCartAction.class);
 	private SessionMap<String,Object> sessionMap;
 
     public String execute() {

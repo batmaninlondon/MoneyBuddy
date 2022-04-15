@@ -12,7 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -26,7 +27,7 @@ import com.myMoneyBuddy.Utils.SendMail;
 
 public class UploadCustomerNav {
 	
-	Logger logger = Logger.getLogger(UploadCustomerNav.class);
+	Logger logger = LogManager.getLogger(UploadCustomerNav.class);
 
 	public void uploadCusNav ( String bseOrderId, String bseRegNum, String folNum,String navValue, String units) throws MoneyBuddyException {
 

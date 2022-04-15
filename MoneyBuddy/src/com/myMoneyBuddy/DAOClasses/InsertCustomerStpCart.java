@@ -7,21 +7,19 @@ package com.myMoneyBuddy.DAOClasses;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.myMoneyBuddy.EntityClasses.RedemptionCart;
 import com.myMoneyBuddy.EntityClasses.StpCart;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.Utils.HibernateUtil;
 
 public class InsertCustomerStpCart {
 
-	Logger logger = Logger.getLogger(InsertCustomerStpCart.class);
+	Logger logger = LogManager.getLogger(InsertCustomerStpCart.class);
 	
 	
 	public void insertRow (String customerId, String withdrawalFundId,  String folioNumber, String totalWithdrawalAmount) throws MoneyBuddyException

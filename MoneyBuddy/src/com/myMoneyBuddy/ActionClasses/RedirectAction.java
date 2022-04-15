@@ -7,13 +7,14 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryBankDetails;
-import com.myMoneyBuddy.DAOClasses.QueryDisplayName;
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
+import com.myMoneyBuddy.DAOClasses.QueryDisplayName;
 import com.myMoneyBuddy.EntityClasses.BankDetails;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.Utils.DesEncrypter;
@@ -21,7 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class RedirectAction extends ActionSupport  implements SessionAware{
 
-	Logger logger = Logger.getLogger(RedirectAction.class);
+	Logger logger = LogManager.getLogger(RedirectAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	/*private String transactionType;*/

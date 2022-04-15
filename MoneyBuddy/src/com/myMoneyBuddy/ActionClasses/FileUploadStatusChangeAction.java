@@ -9,7 +9,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
@@ -20,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class FileUploadStatusChangeAction extends ActionSupport implements SessionAware  {
 
-	Logger logger = Logger.getLogger(FileUploadStatusChangeAction.class);
+	Logger logger = LogManager.getLogger(FileUploadStatusChangeAction.class);
 	private SessionMap<String,Object> sessionMap;
 	private String date;
 	private String rta;

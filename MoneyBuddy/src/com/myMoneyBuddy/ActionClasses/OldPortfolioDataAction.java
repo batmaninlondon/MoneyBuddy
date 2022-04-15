@@ -8,22 +8,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
 import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
-import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 import com.myMoneyBuddy.ModelClasses.OldPortfolioDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class OldPortfolioDataAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(OldPortfolioDataAction.class);
+	Logger logger = LogManager.getLogger(OldPortfolioDataAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private List<OldPortfolioDataModel> oldPortfolioDataModel = new LinkedList<OldPortfolioDataModel>();

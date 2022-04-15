@@ -12,7 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
@@ -25,7 +26,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PopulateAdminDashboardDataAction extends ActionSupport implements SessionAware  {
 
-	Logger logger = Logger.getLogger(PopulateAdminDashboardDataAction.class);
+	Logger logger = LogManager.getLogger(PopulateAdminDashboardDataAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private InputStream stream;

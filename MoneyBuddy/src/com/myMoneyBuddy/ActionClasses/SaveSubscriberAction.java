@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 import com.myMoneyBuddy.EntityClasses.Subscriber;
@@ -20,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SaveSubscriberAction extends ActionSupport {
 	
-	Logger logger = Logger.getLogger(SaveSubscriberAction.class);	
+	Logger logger = LogManager.getLogger(SaveSubscriberAction.class);	
 	private String emailId;
 	private String googleResponse;
    // private InputStream stream;

@@ -5,14 +5,15 @@
 
 package com.myMoneyBuddy.ActionClasses;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RedeemFundAction extends ActionSupport  {
 
-	Logger logger = Logger.getLogger(RedeemFundAction.class);
+	Logger logger = LogManager.getLogger(RedeemFundAction.class);
 	private String redeemFundId;
 	private String redeemSchemeName;
 	private String folioNum;

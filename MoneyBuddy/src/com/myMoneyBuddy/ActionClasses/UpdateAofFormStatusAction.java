@@ -6,7 +6,8 @@ package com.myMoneyBuddy.ActionClasses;
 
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateAofFormStatusAction extends ActionSupport {
 	
-	Logger logger = Logger.getLogger(UpdateAofFormStatusAction.class);	
+	Logger logger = LogManager.getLogger(UpdateAofFormStatusAction.class);	
     
     private String customerId;
    

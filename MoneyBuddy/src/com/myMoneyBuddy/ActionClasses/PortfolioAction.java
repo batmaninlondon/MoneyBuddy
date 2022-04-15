@@ -4,34 +4,24 @@
  */
 package com.myMoneyBuddy.ActionClasses;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.myMoneyBuddy.DAOClasses.QueryCustomer;
-import com.myMoneyBuddy.DAOClasses.QueryOldPortfolioRecords;
 import com.myMoneyBuddy.DAOClasses.QueryProducts;
 import com.myMoneyBuddy.EntityClasses.Customers;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
-import com.myMoneyBuddy.ModelClasses.InvestmentDetailsDataModel;
-import com.myMoneyBuddy.ModelClasses.OldPortfolioDataModel;
-import com.myMoneyBuddy.ModelClasses.PendingOrderDataModel;
 import com.myMoneyBuddy.ModelClasses.PortfolioDataModel;
-import com.myMoneyBuddy.ModelClasses.SipDataModel;
-import com.myMoneyBuddy.ModelClasses.StpDataModel;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PortfolioAction extends ActionSupport implements SessionAware{
 	
-	Logger logger = Logger.getLogger(PortfolioAction.class);
+	Logger logger = LogManager.getLogger(PortfolioAction.class);
 	private SessionMap<String,Object> sessionMap;
 
 	private String customerName;

@@ -7,14 +7,15 @@ package com.myMoneyBuddy.GAT;
 
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.myMoneyBuddy.DAOClasses.QueryPrimaryFundDetails;
 import com.myMoneyBuddy.ExceptionClasses.MoneyBuddyException;
 
 public class PredictedValueCalculation {
 	
-	Logger logger = Logger.getLogger(PredictedValueCalculation.class);
+	Logger logger = LogManager.getLogger(PredictedValueCalculation.class);
 	
 	public HashMap<Integer,Double> predictedSipOfOneFundList(double sip, String fundId) throws MoneyBuddyException {
 
